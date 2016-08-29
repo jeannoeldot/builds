@@ -1,0 +1,26 @@
+# Maintainer: graysky <graysky AT archlinux DOT us>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname='profile-cleaner'
+pkgver=2.30
+pkgrel=1
+pkgdesc='Reduces profile size by cleaning their sqlite databases.'
+arch=('any')
+url='https://github.com/graysky2/profile-cleaner'
+license=('MIT')
+depends=('bash' 'bc' 'coreutils' 'findutils' 'grep' 'ncurses' 'parallel' 'sed'
+'sqlite')
+source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz")
+install=readme.install
+sha256sums=('110bb2015f1a00905050dfad970b52b3e44dee768bcd16b4629b825aab6bb700')
+
+build() {
+	cd "$pkgname-$pkgver"
+	make
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	make DESTDIR="$pkgdir" install
+	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

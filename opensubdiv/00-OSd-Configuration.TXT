@@ -1,0 +1,303 @@
+
+TEST AVEC GCC 5.3.0-6 AUR ET CUDA 7.5
+=====================================
+-- The C compiler identification is GNU 5.3.0
+-- The CXX compiler identification is GNU 5.3.0
+-- Check for working C compiler: /usr/bin/gcc-5
+-- Check for working C compiler: /usr/bin/gcc-5 -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/g++-5
+-- Check for working CXX compiler: /usr/bin/g++-5 -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiling OpenSubdiv version v3_0_5
+-- Using cmake version 3.5.2
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp  
+-- Found TBB: /usr/include (found suitable version "4.4", minimum required is "4.0") 
+-- Found OpenGL: /usr/lib64/libGL.so  
+-- Found OpenCL: /usr/lib64/libOpenCL.so (found suitable version "2.1", minimum required is "1.1") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /opt/cuda (found suitable version "7.5", minimum required is "4.0") 
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found X11: /usr/lib64/libX11.so
+-- Found GLFW: /usr/include (found suitable version "3.1.2", minimum required is "3.0.0") 
+-- Found GLEW: /usr/include  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/build/src/OpenSubdiv-3_0_5/build
+
+
+
+4 EME TEST CHROOT EN USER + makedepends=(... 'mesa')
+====================================================
+-- The C compiler identification is GNU 5.2.0
+-- The CXX compiler identification is GNU 5.2.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiling OpenSubdiv version v3_0_2
+-- Using cmake version 3.3.0
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp  
+-- Found TBB: /usr/include (found suitable version "4.3", minimum required is "4.0") 
+-- Found OpenGL: /usr/lib64/libGL.so  
+-- Found OpenCL: /usr/lib64/libOpenCL.so (Required is at least version "1.1") 
+-- Looking for include file pthread.h
+-- Looking for include file pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /opt/cuda (found suitable version "7.0", minimum required is "4.0") 
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found X11: /usr/lib64/libX11.so
+-- Found GLFW: /usr/include (found suitable version "3.1.1", minimum required is "3.0.0") 
+-- Found GLEW: /usr/include  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/opensubdiv/src/OpenSubdiv-3_0_2/build
+
+
+3 EME TEST CHROOT EN USER
+=========================
+-- The C compiler identification is GNU 5.2.0
+-- The CXX compiler identification is GNU 5.2.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiling OpenSubdiv version v3_0_2
+-- Using cmake version 3.3.0
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp  
+-- Found TBB: /usr/include (found suitable version "4.3", minimum required is "4.0") 
+-- Could NOT find OpenGL (missing:  OPENGL_INCLUDE_DIR) 
+-- Found OpenCL: /usr/lib64/libOpenCL.so (Required is at least version "1.1") 
+-- Looking for include file pthread.h
+-- Looking for include file pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /opt/cuda (found suitable version "7.0", minimum required is "4.0") 
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found X11: /usr/lib64/libX11.so
+-- Found GLFW: /usr/include (found suitable version "3.1.1", minimum required is "3.0.0") 
+CMake Warning at CMakeLists.txt:431 (message):
+  OpenGL 4.2 was not found : support for GLSL transform feedback kernels will
+  be disabled in Osd.  If you have an OpenGL SDK installed (version 4.2 or
+  above), please refer to the FindOpenGL.cmake shared module in your cmake
+  installation.
+
+
+CMake Warning at CMakeLists.txt:446 (message):
+  OpenGL 4.3 was not found : support for GLSL compute shader kernels will be
+  disabled in Osd.  If you have an OpenGL SDK installed (version 4.3 or
+  above), please refer to the FindOpenGL.cmake shared module in your cmake
+  installation.
+
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/opensubdiv/src/OpenSubdiv-3_0_2/build
+
+
+2 EME TEST
+==========
+-- The C compiler identification is GNU 5.2.0
+-- The CXX compiler identification is GNU 5.2.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiling OpenSubdiv version v3_0_2
+-- Using cmake version 3.3.0
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp  
+-- Found TBB: /usr/include (found suitable version "4.3", minimum required is "4.0") 
+-- Found OpenGL: /usr/lib64/libGL.so  
+-- Found OpenCL: /usr/lib64/libOpenCL.so (Required is at least version "1.1") 
+-- Looking for include file pthread.h
+-- Looking for include file pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /opt/cuda (found suitable version "7.0", minimum required is "4.0") 
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found X11: /usr/lib64/libX11.so
+-- Found GLFW: /usr/include (found suitable version "3.1.1", minimum required is "3.0.0") 
+-- Found GLEW: /usr/include  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/build/src/OpenSubdiv-3_0_2/build
+
+
+1 ER TEST
+=========
+-- The C compiler identification is GNU 5.2.0
+-- The CXX compiler identification is GNU 5.2.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiling OpenSubdiv version v3_0_2
+-- Using cmake version 3.3.0
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp  
+-- Found TBB: /usr/include (found suitable version "4.3", minimum required is "4.0") 
+-- Found OpenGL: /usr/lib64/libGL.so  
+-- Found OpenCL: /usr/lib64/libOpenCL.so (Required is at least version "1.1") 
+-- Looking for include file pthread.h
+-- Looking for include file pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /opt/cuda (found suitable version "7.0", minimum required is "4.0") 
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found X11: /usr/lib64/libX11.so
+-- Could NOT find GLFW (missing:  GLFW_INCLUDE_DIR GLFW_LIBRARIES) (Required is at least version "3.0.0")
+-- Found GLEW: /usr/include  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/build/src/OpenSubdiv-3_0_2/build

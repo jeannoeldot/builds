@@ -1,0 +1,173 @@
+# Le répertoire
+cd $HOME/05-builds/jndqrami-qt5
+
+!!!!! Vérifier VERSION : 
+https://github.com/jeannoeldot/jndqrami-qt5/releases
+==> VERSION = 0.2.1
+
+1) ARCHIVE TAR.GZ
+=================================
+wget https://github.com/jeannoeldot/jndqrami-qt5/archive/v0.2.1.tar.gz
+
+ls
+
+sha256sum v0.2.1.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=jndqrami-qt5
+pkgver=0.2.1
+pkgrel=3
+pkgrel=4    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install + deps
+
+depends=(... 'desktop-file-utils')
+
+provides=('jndqrami')
+conflicts=('jndqrami')
+
+source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+sha256sums=('... ...')
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 v0.2.1.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+==========================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/jndqrami-qt5/PKGBUILD . \
+&& cp -v $HOME/05-builds/jndqrami-qt5/v0.2.1.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/jndqrami-qt5 \
+&& cp -v /tmp/build/jndqrami-qt5-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/jndqrami-qt5 && rm -rf /tmp/build
+
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+===================================================
+!!! EN USER
+# REP_TMP_CHROOT_REPO="/tmp/chrootrepo"
+
+$ mkpkg-chroot-repo
+
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
+!!! TESTS
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs -q qt
+
+
+$ rm -rf /tmp/chrootrepo
+
+3-3) MAKEPKG en USER
+=====================
+
+cd $HOME/05-builds/jndqrami-qt5
+
+$ rm -f *~
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap jndqrami-qt5-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/jndqrami-qt5-*-x86_64.pkg.tar.*
+
+$ cp -v jndqrami-qt5-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/jndqrami-qt5-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v jndqrami-qt5-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i v0.2.1.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# pacman -Syu
+OU
+# pacman -Syu jndqrami-qt5
+
+
+
+TEST SIGNATURE
+===============
+# Supprime le précédent dans  $HOME/00-repos-dot-repo-al
+rm -vf $HOME/00-repos-dot-repo-al/jndqrami-qt5-*-x86_64.pkg.tar.*
+
+mv -v jndqrami-qt5-*-x86_64.pkg.tar.* $HOME/00-repos-dot-repo-al/
+
+cd && maj-repohostinger
+sync
+
+==============================================================================
+ANCIEN
+
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 jndqrami-qt5.install
+&& cp -v $HOME/05-builds/jndqrami-qt5/jndqrami-qt5.install . \
+
+
+$ head -n 4 $HOME/01-dev/00-qtcreator/00-progs-qt5/jndqrami/constantes.h
+ ==> const QString VERSION_PROG = "0.2.1";
+
+1) FAIRE ARCHIVE TAR.GZ
+=================================
+
+cd $HOME/01-dev/00-qtcreator/00-progs-qt5/
+
+rm -i jndqrami-qt5-*.tar.gz
+tar -cvzf v0.2.1.tar.gz --exclude=jndqrami.pro.user* jndqrami
+
+1-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/jndqrami-qt5
+
+mv -v $HOME/01-dev/00-qtcreator/00-progs-qt5/jndqrami-qt5-*.tar.gz .
+sync
+

@@ -1,0 +1,74 @@
+# Le répertoire
+cd $HOME/05-builds/jndtest-install
+
+
+tar -cvzf jndtest-install-0.1.tar.gz jndtest-install
+ls
+md5sum jndtest-install-0.1.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+
+
+3) MAKEPKG
+============
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap jndtest-install-*-any.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+
+rm -f *~
+
+rm -rf src pkg
+
+# Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+mv $HOME/00-repolocal/jndtest-install-*-any.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+mv jndtest-install-*-any.pkg.tar.* $HOME/00-repolocal/
+cd
+maj-repolocal
+
+EN ROOT
+========
+# pacman -Syu
+
+
+3) MAKEPKG en CHROOT
+====================
+cd $HOME/05-builds/jndtest-install
+$ ./build.sh
+
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+# cd
+# cd $HOME/05-builds/jndqrami
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+# chown jnd:jnd jndtest-install-0.1.tar.gz
+# mv ../0-chroot/rw/pkgdest/jndtest-install-*-any.pkg.tar.gz .
+
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

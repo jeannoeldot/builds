@@ -1,0 +1,27 @@
+Dans le dossier :
+
+cd 05-builds/0-Plasmoids/jnd-sysinfos
+
+zip -r jnd-sysinfos-0.8.3.skz *
+
+mv jnd-sysinfos-0.8.3.skz ../
+
+
+zip -r jnd-sysinfos-0.8.2.skz *
+
+mv jnd-sysinfos-0.8.2.skz ../
+
+
+zip -r jnd-sysinfos-01.skz *
+
+mv jnd-sysinfos-01.skz ../
+
+zip -r jnd-sysinfos-02.skz *
+
+mv jnd-sysinfos-02.skz ../
+----------------------------------------------
+cd 05-builds/0-Plasmoids/jnd-oxygen
+
+zip -r jnd-oxygen-01.skz *
+
+zip -r jnd-oxygen-02.skz *

@@ -1,0 +1,62 @@
+# $Id$
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Maintainer: Sven-Hendrik Haase <sh@lutzhaase.com>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openimageio-git
+pkgver=1.7.2.20160311
+pkgrel=1
+pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
+arch=('i686' 'x86_64')
+url="http://www.openimageio.org/"
+license=('custom')
+depends=('openexr' 'boost-libs' 'jasper' 'glew' 'libtiff' 'opencolorio' 'intel-tbb'
+         'openjpeg' 'libraw'
+         'ffmpeg'
+         'opencv' 'openssl'
+         'nvidia-libgl'
+)
+makedepends=('cmake' 'qt4' 'python2' 'boost' 'mesa')
+optdepends=('qt4: iv image viewer'
+            'python2: bindings support')
+provides=('openimageio')
+conflicts=('openimageio')
+source=("$pkgname-$pkgver.tar.gz"
+)
+sha256sums=('c3f75712f2e59e075a901826cbc195aa12cc26ab5aefb9629e691f63115b3adc'
+)
+
+_gitname="oiio"
+
+build() {
+  cd "${_gitname}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DPYLIB_INSTALL_DIR=lib/python2.7/site-packages \
+      -DSTOP_ON_WARNING=OFF \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DUSE_OPENSSL=ON \
+      -DUSE_PTEX=OFF \
+      -DPYTHON_VERSION=2.7 \
+      -DPYTHON3_VERSION=3.5 \
+      -DUSE_NUKE=OFF \
+      -DUSE_SIMD=sse4.2 \
+      -DUSE_CCACHE=OFF \
+      ..
+  make
+}
+
+package() {
+  cd "${_gitname}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  # license
+  cd ..
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

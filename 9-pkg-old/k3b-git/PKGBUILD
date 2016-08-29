@@ -1,0 +1,54 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=k3b-git
+pkgver=2.0.80.20110131
+pkgrel=1
+pkgdesc="K3b - The CD Kreator - git Version for kde4."
+arch=('i686' 'x86_64')
+url="http://www.k3b.org/"
+license=('GPL')
+
+depends=('kdebase-runtime' 'kdemultimedia-kioslave' 'hicolor-icon-theme' 'shared-mime-info' 'libxft'
+         'libdvdread' 'taglib' 'libsamplerate' 'musicbrainz'
+         'ffmpeg' 'flac' 'libmad' 'libmpcdec'  'lame' 'libvorbis'
+         'cdrdao' 'cdrkit' 'cdparanoia' 'normalize' 'sox' 'vcdimager' 'transcode' 'dvd+rw-tools'
+)
+
+makedepends=('pkgconfig' 'automoc4' 'cmake' 'gettext' 'doxygen')
+
+optdepends=('emovix: for bootable multimedia cd/dvd support')
+
+provides=('k3b')
+conflicts=('k3b' 'k3b-svn')
+install=k3b-git.install
+
+source=($pkgname-$pkgver.tar.gz
+#	k3b-fix-crash-with-qt-4.7.0.patch
+)
+md5sums=('5d3ffd943bcff55fb48527e691df40cf'
+#	 '8a0ddf7b5c40c51a86dab3a41927e873'
+)
+
+options=(!libtool)
+_gitname="k3b"
+
+build() {
+#	cd $srcdir/$_gitname
+#	patch -Np1 -i ${srcdir}/k3b-fix-crash-with-qt-4.7.0.patch
+
+	cd $srcdir
+	mkdir build
+	cd build
+	cmake ../${_gitname} \
+		-DK3B_BUILD_API_DOCS=ON \
+		-DCMAKE_BUILD_TYPE=RELEASE \
+		-DCMAKE_SKIP_RPATH=ON \
+		-DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,--no-undefined -Wl,--as-needed' \
+		-DCMAKE_INSTALL_PREFIX=/usr
+	make
+}
+
+package() {
+	  cd $srcdir/build
+	  make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,25 @@
+# Maintainer: Carl Mueller arch at carlm e4ward com
+
+pkgname=yawp-weather-plasmoid
+pkgver=0.1.65
+pkgrel=2
+pkgdesc="Colorful weather plasmoid for KDE4"
+arch=('i686' 'x86_64')
+url="http://www.kde-look.org/content/show.php/yaWP+(Yet+Another+Weather+Plasmoid)?content=94106"
+depends=('kdebase-workspace')
+makedepends=('cmake' 'make' 'automoc4')
+source=(http://www.jcell.co.za/yawp-$pkgver.tar.gz)
+install=${pkgname}.install
+license=('GPL')
+md5sums=('54a624c1787af14e215f38d1c181d400')
+
+build() {
+  cd $srcdir/yawp-$pkgver
+  sed -i 's/find_package(Plasma REQUIRED)//' CMakeLists.txt
+  sed -i 's/${PLASMA_LIBS}/${KDE4_PLASMA_LIBS}/' CMakeLists.txt
+  mkdir build
+  cd build
+  cmake -DCMAKE_INSTALL_PREFIX='/usr' .. || return 1
+  make || return 1
+  make DESTDIR=$pkgdir install || return 1
+}

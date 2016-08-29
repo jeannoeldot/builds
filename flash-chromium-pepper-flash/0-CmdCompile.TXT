@@ -1,0 +1,169 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/flash-chromium-pepper-flash
+
+0) SAUVEGARDER PKGBUILD PRÉCÉDENT
+=================================
+cp -v PKGBUILD PKGBUILD.22.0.0.209-1
+
+
+1) SOURCES
+==============
+
+1-1) Download snapshot
+----------------------
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/chromium-pepper-flash.tar.gz
+
+tar -xzf chromium-pepper-flash.tar.gz
+
+cd $HOME/05-builds/flash-chromium-pepper-flash
+
+mv -vf /tmp/0-AUR/chromium-pepper-flash/PKGBUILD .
+
+1-2) Download source
+----------------------
+wget https://www.google.com/intl/en/chrome/browser/privacy/eula_text.html
+mv -v eula_text.html chromium-pepper-flash-license.html
+
+!!! VOIR NOUVEAU PKGBUILD
+wget https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome-stable-52.0.2743.116-1.x86_64.rpm
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=chromium-pepper-flash
+_verbld=52.0.2743.116-1
+pkgver=22.0.0.192
+pkgrel=1
+
+!!! A Supprimer : epoch=1
+
+!!! source=("......")
+
+
+sha256sum chromium-pepper-flash-license.html
+
+sha256sum google-chrome-stable-52.0.2743.116-1.x86_64.rpm
+
+sha256sums=(...
+         ...
+)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users    52959 10 déc.  00:34 chromium-pepper-flash-license.html
+-rw-r--r--  1 jnd users 46878086 28 avril 19:32 google-chrome-stable-52.0.2743.116-1.x86_64.rpm
+-rw-r--r--  1 jnd users     1249 29 avril 01:30 PKGBUILD
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/flash-chromium-pepper-flash/PKGBUILD . \
+&& cp -v $HOME/05-builds/flash-chromium-pepper-flash/chromium-pepper-flash-license.html . \
+&& cp -v $HOME/05-builds/flash-chromium-pepper-flash/google-chrome-stable-52.0.2743.116-1.x86_64.rpm . \
+&& makepkg -s \
+&& cd $HOME/05-builds/flash-chromium-pepper-flash \
+&& cp -v /tmp/build/chromium-pepper-flash-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/flash-chromium-pepper-flash && rm -rf /tmp/build
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd $HOME/05-builds/flash-chromium-pepper-flash
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+
+# Verifications...
+
+namcap chromium-pepper-flash-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/chromium-pepper-flash-*-x86_64.pkg.tar.*
+
+$ cp -v chromium-pepper-flash-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/chromium-pepper-flash-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+!!! OU
+# Supprime le précédent dans  $HOME/00-repolocal
+rm -i $HOME/00-repolocal/chromium-pepper-flash-*-x86_64.pkg.tar.*
+
+
+$ mv -v chromium-pepper-flash-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i google-chrome-stable-52.0.2743.116-1.x86_64.rpm
+$ rm -i chromium-pepper-flash-license.html
+$ rm -rf /tmp/0-AUR
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+VOIR $HOME/05-builds/flash-freshplayerplugin/0-CmdCompile.TXT
+=================================================================
+  5) INSTALLATION
+  ===============
+
+!!! EN ROOT
+
+# pacman -R chromium-pepper-flash
+
+# rm -i /var/cache/pacman/pkg/chromium-pepper-flash-*-x86_64.pkg.tar.*
+
+
+
+================================================================
+ANCIENS
+========
+
+cd 0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/chromium-pepper-flash.tar.gz
+
+tar -xzf chromium-pepper-flash.tar.gz
+
+cd ..
+
+mv -vf 0-AUR/chromium-pepper-flash/PKGBUILD .
+
+
+$ rm -f 0-AUR/chromium-pepper-flash.tar.gz
+$ rm -rf 0-AUR/chromium-pepper-flash

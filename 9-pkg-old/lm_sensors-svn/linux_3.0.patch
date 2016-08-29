@@ -1,0 +1,12 @@
+diff -aur lm_sensors/prog/detect/sensors-detect lm_sensors.new/prog/detect/sensors-detect
+--- lm_sensors/prog/detect/sensors-detect	2013-11-14 19:58:10.506707164 +0100
++++ lm_sensors.new/prog/detect/sensors-detect	2013-11-14 20:07:09.468529886 +0100
+@@ -2669,7 +2669,7 @@
+ sub initialize_kernel_version
+ {
+ 	chomp($kernel_version = `uname -r`);
+-	$kernel_version =~ /(\d+)\.(\d+)\.(\d+)(.*)/;
++	$kernel_version =~ /(\d+)\.(\d+)(.*)/;
+ 	@kernel_version = ($1, $2, $3, $4);
+ 	chomp($kernel_arch = `uname -m`);
+ 

@@ -1,0 +1,11 @@
+<?xml version="1.1.5" encoding="UTF-8"?>
+<!DOCTYPE superkaramba_theme>
+<superkaramba_theme>
+	<themefile>sysinfos.theme</themefile>
+	<name>System-Infos</name>
+	<icon>sysinfos.png</icon>
+	<description>System Monitor for plasma on kde 4.x</description>
+	<author>Vina Petre Jan - AKA - Ghost Kilah</author>
+	<version>0.8.3</version>
+	<license>GPL</license>
+</superkaramba_theme>

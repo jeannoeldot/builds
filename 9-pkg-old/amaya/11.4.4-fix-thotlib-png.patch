@@ -1,0 +1,110 @@
+diff -aur Amaya11.4.4/Amaya/thotlib/image/pnghandler.c Amaya11.4.4.new/Amaya/thotlib/image/pnghandler.c
+--- Amaya11.4.4/Amaya/thotlib/image/pnghandler.c	2009-09-09 11:55:42.000000000 +0200
++++ Amaya11.4.4.new/Amaya/thotlib/image/pnghandler.c	2013-09-15 09:10:31.406326602 +0200
+@@ -10,9 +10,11 @@
+  *          R. Guetari (W3C/INRIA) - Initial Windows version
+  */
+ 
++#include <string.h>
++#include "zlib.h"
++#include "png.h"
+ #include "thot_gui.h"
+ #include "thot_sys.h"
+-#include "png.h"
+ #include "constmedia.h"
+ #include "typemedia.h"
+ #include "picture.h"
+@@ -128,13 +130,13 @@
+   png_byte      **ppbRowPointers;
+   unsigned char  *pixels;
+   unsigned int    i, j, passes;
+-  unsigned long   lw, lh;
++  png_uint_32     lw, lh;
+   int             iBitDepth, iColorType;
+   double          dGamma;
+ 
+     /* Checks the eight byte PNG signature*/
+     fread (pbSig, 1, 8, pfFile);
+-    if (!png_check_sig (pbSig, 8))
++    if (png_sig_cmp (pbSig, 0, 8))
+         return NULL;	
+     /* create the two png(-info) structures*/
+     png_ptr = png_create_read_struct (PNG_LIBPNG_VER_STRING, 
+@@ -149,7 +151,7 @@
+         png_destroy_read_struct (&png_ptr, NULL, NULL);
+         return NULL;
+       }   
+-    if (setjmp (png_ptr->jmpbuf))
++    if (setjmp(png_jmpbuf(png_ptr)))
+       {
+         /* Free all of the memory associated with the png_ptr and info_ptr */
+         png_destroy_read_struct (&png_ptr, &info_ptr, (png_infopp)NULL);
+@@ -169,13 +171,13 @@
+       png_set_strip_16 (png_ptr);
+     /* Grayscale =>RGB or RGBA */
+     if (iColorType == PNG_COLOR_TYPE_GRAY || iColorType == PNG_COLOR_TYPE_GRAY_ALPHA)
+-      png_set_gray_to_rgb (png_ptr);
++      png_set_expand_gray_1_2_4_to_8(png_ptr);
+     /* Palette indexed colors to RGB */
+     if (iColorType == PNG_COLOR_TYPE_PALETTE)
+       png_set_palette_to_rgb (png_ptr);
+     /* 8 bits / channel is needed */
+     if (iColorType == PNG_COLOR_TYPE_GRAY && iBitDepth < 8) 
+-      png_set_gray_1_2_4_to_8(png_ptr);
++      png_set_expand_gray_1_2_4_to_8(png_ptr);
+     /* all transparency type : 1 color, indexed => alpha channel*/
+     if (png_get_valid (png_ptr, info_ptr,PNG_INFO_tRNS)) 
+       png_set_tRNS_to_alpha (png_ptr);
+@@ -208,12 +210,12 @@
+     /* Opengl Texture inversion */   
+     for (i = 0; i < lh; i++)
+       ppbRowPointers[i] = pixels + ((lh - (i+1)) * ulRowBytes * sizeof(png_byte));    
+-    png_start_read_image (png_ptr); 
++    /*png_start_read_image (png_ptr);*/
+     /* depending on interlacing, reading the data*/
+     for (i = 0; i < passes; i++)
+       for (j = 0; j < lh; j++)
+         png_read_row (png_ptr, ppbRowPointers[j], NULL);
+-    png_read_end(png_ptr, NULL);
++    png_read_end(png_ptr, info_ptr);
+     TtaFreeMemory (ppbRowPointers);
+     ppbRowPointers = NULL; 
+     /* clean up after the read, and free any memory allocated */
+@@ -306,7 +308,7 @@
+   pixels = NULL;
+   isgrey = FALSE;
+   cr = cg = cb = 0;
+-  if (setjmp (png_ptr->jmpbuf))
++  if (setjmp(png_jmpbuf(png_ptr)))
+     {
+       /* Free all of the memory associated with the png_ptr and info_ptr */
+       png_destroy_read_struct (&png_ptr, &info_ptr, (png_infopp)NULL);
+@@ -458,8 +460,8 @@
+   else
+     png_error (png_ptr, "Unknown PNG color type ");
+   
+-  /*png_read_update_info (png_ptr, info_ptr);*/
+-  png_start_read_image (png_ptr);
++  png_read_update_info (png_ptr, info_ptr);
++  /*png_start_read_image (png_ptr);*/
+   for (i = 0; i < passes; i++)
+     for (j = 0; j < *height; j++)
+       png_read_row (png_ptr, NULL, row_pointers[j]);
+@@ -822,7 +824,7 @@
+    TtaReadClose (fp);
+    if (ret != 8)
+       return FALSE;
+-   ret = png_check_sig ((png_byte*)buf, 8);
++   ret = !png_sig_cmp ((png_byte*)buf, 0, 8);
+    if (ret) return (TRUE);
+    return(FALSE);
+ }
+@@ -858,7 +860,7 @@
+       png_destroy_write_struct(&png, (png_infopp) NULL);
+       return FALSE;
+     }
+-  if (setjmp(png->jmpbuf)) 
++  if (setjmp(png_jmpbuf(png)))
+     {
+         png_destroy_write_struct(&png, &pngInfo);
+         TtaWriteClose (pngFile);

@@ -1,0 +1,84 @@
+# Maintainer: Lukas Jirkovsky <l.jirkovsky@gmail.com>
+# Contributor: Mikael Eriksson (miffe)
+pkgname=blender-svn
+pkgver=30426
+pkgrel=1
+pkgdesc="SVN version of Blender (called bf-blender)"
+arch=('i686' 'x86_64')
+url="http://blender.org/"
+depends=('libpng' 'libgl' 'mesa' 'openexr' 'gettext' 'python3' 'desktop-file-utils' 'libsamplerate'
+         'hicolor-icon-theme' 'ffmpeg' 'fftw' 'lcms')
+makedepends=('python' 'subversion' 'yasm')
+provides=('blender')
+conflicts=('blender')
+license=('GPL')
+install=blender.install
+source=(blender.desktop blender.config fix_data_path.diff)
+md5sums=('e9c26e370839fd902eb76c98fe3b9589'
+         '1bd89ac58c102a06c1889aa42d0c9260'
+         '6c3f07868109af10ca8f5fc97dcbb530')
+
+_svntrunk="https://svn.blender.org/svnroot/bf-blender/trunk/blender"
+_svnmod="blender"
+
+build() {
+  # get the sources
+  cd "$srcdir"
+  msg "Connecting to Blender SVN server......."
+  if [ -d $_svnmod/.svn ]; then
+  	cd $_svnmod && svn up -r $pkgver
+  else
+  	svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+  msg "SVN checkout done or server timeout"
+
+  msg "Starting make..."
+  cd "$srcdir"/$_svnmod
+
+  ##########
+  # tweak scons config script
+  # first translate CFLAGS and CXXFLAGS for use
+  cp "$srcdir"/blender.config user-config.py
+  _CFLAGS=`echo $CFLAGS | sed -e "s/\ -O.//" -e "s/^/'/" -e "s/\ /','/g" -e "s/$/'/"`
+  _CXXFLAGS=`echo $CXXFLAGS | sed -e "s/\ -O.//" -e "s/^/'/" -e "s/\ /','/g" -e "s/$/'/"`
+  _NUMJOBS=`echo -n $MAKEFLAGS | sed 's/.*-j\([1-9][0-9]*\).*/\1/g'`
+  _NUMJOBS=`[ $_NUMJOBS ] && echo -n $_NUMJOBS || echo -n 1`
+  sed "s|^REL_CFLAGS\ =\ \['.*'\]|REL_CFLAGS\ =\ \['`echo -n $CFLAGS | sed 's/.*\(-O[s,0-4]\).*/\1/g'`'\]|" -i user-config.py
+  sed "s|^REL_CCFLAGS\ =\ \['.*'\]|REL_CCFLAGS\ =\ \['`echo -n $CXXFLAGS | sed 's/.*\(-O[s,0-4]\).*/\1/g'`'\]|" -i user-config.py
+  sed "s|^CCFLAGS\ =\ \[|CCFLAGS\ =\ \[$_CFLAGS,|" -i user-config.py
+  sed "s|^CXXFLAGS\ =\ \[|CXXFLAGS\ =\ \[$_CXXFLAGS,|" -i user-config.py
+  sed "s|^BF_NUMJOBS\ =\ [1-9][0-9]*|BF_NUMJOBS\ =\ $_NUMJOBS|" -i user-config.py
+  unset _CFLAGS
+  unset _CXXFLAGS
+
+  # correct the BLENDERPATH variable
+  # see http://wiki.blender.org/index.php/Dev:2.5/Source/Installation/Unix_FHS
+  #patch -Np0 < "$srcdir"/use_usr.diff || true
+  # WARNING: fixes to get FHS compliance working
+  sed -i 's|/usr/local|/usr|' intern/ghost/intern/GHOST_SystemX11.cpp
+  sed -i 's|2\.52|2\.5|' build_files/scons/tools/btools.py
+  patch -Np0 < "$srcdir"/fix_data_path.diff || true
+  ##########
+  python scons/scons.py
+  ##########
+  # now compile some plugins
+  cp -rf "$srcdir"/install/linux2/share/blender/*/plugins/* \
+    "$srcdir"/$_svnmod/source/blender/blenpluginapi/
+  cd "$srcdir"/$_svnmod/source/blender/blenpluginapi
+  chmod 755 bmake
+  make
+}
+
+package() {
+  install -d -m755 "$pkgdir"/usr
+  cp -a "$srcdir"/install/linux2/* "$pkgdir"/usr/
+
+  install -d -m755 "$pkgdir"/usr/share/blender/*/plugins/{sequence,texture}
+  cp "$srcdir"/$_svnmod/source/blender/blenpluginapi/sequence/*.so \
+    "$pkgdir"/usr/share/blender/*/plugins/sequence/
+  cp "$srcdir"/$_svnmod/source/blender/blenpluginapi/texture/*.so \
+    "$pkgdir"/usr/share/blender/*/plugins/texture/
+
+  install -D -m644 "$srcdir"/blender.desktop \
+    "$pkgdir"/usr/share/applications/blender.desktop
+}

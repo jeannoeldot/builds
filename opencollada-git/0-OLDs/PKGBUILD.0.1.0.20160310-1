@@ -1,0 +1,44 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=opencollada-git
+pkgver=0.1.0.20160310
+pkgrel=1
+pkgdesc="Stream based reader and writer library for COLLADA files"
+arch=('i686' 'x86_64')
+url="https://github.com/KhronosGroup/OpenCOLLADA"
+license=('GPL')
+depends=('libxml2' 'pcre')
+makedepends=('cmake')
+provides=('opencollada')
+conflicts=('opencollada')
+source=("$pkgname-$pkgver.tar.gz"
+        'opencollada.conf'
+)
+sha256sums=('d17454703385d10da512fc7e487709f3cad932fa30ff0ae0eeefa5a02265c8fc'
+            '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
+)
+
+_gitname="opencollada"
+
+build() {
+  cd "${_gitname}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DUSE_STATIC=OFF \
+    -DUSE_SHARED=ON \
+     .. 
+  make
+}
+
+package() {
+  cd "${_gitname}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  install -Dm644 "${srcdir}"/opencollada.conf "${pkgdir}"/etc/ld.so.conf.d/opencollada.conf
+}

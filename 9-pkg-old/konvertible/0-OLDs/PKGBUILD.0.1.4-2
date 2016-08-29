@@ -1,0 +1,32 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=konvertible
+pkgver=0.1.4
+pkgrel=2
+pkgdesc="A program to convert audio files to other audio formats using ffmpeg."
+arch=('i686' 'x86_64')
+url="http://kde-apps.org/content/show.php/Konvertible?content=116892"
+license=('GPL')
+depends=('kdelibs' 'ffmpeg' 'hicolor-icon-theme')
+makedepends=('pkgconfig' 'automoc4' 'cmake')
+install=konvertible.install
+
+source=(http://kde-apps.org/CONTENT/content-files/116892-$pkgname-$pkgver.tar.bz2)
+md5sums=('9df0308062fb8da21920ad2300bcc283')
+
+build() {
+      cd  $srcdir/$pkgname-$pkgver
+      mkdir build
+      cd build
+      cmake .. \
+	      -DCMAKE_BUILD_TYPE=RELEASE \
+	      -DCMAKE_SKIP_RPATH=ON \
+	      -DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,--no-undefined -Wl,--as-needed' \
+	      -DCMAKE_INSTALL_PREFIX=/usr || return 1
+      make || return 1
+}
+
+package() {
+      cd $srcdir/$pkgname-$pkgver/build
+      make DESTDIR=$pkgdir install || return 1
+}

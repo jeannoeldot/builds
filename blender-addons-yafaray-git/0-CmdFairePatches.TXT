@@ -1,0 +1,235 @@
+FAIRE PATCHS
+====================================
+cd $HOME/05-builds/blender-addons-yafaray-git
+
+mkdir /tmp/srcp
+
+cp -v blender-addons-yafaray-git-3.0.2.20160803.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf blender-addons-yafaray-git-3.0.2.20160803.tar.gz
+
+cd $HOME/05-builds/blender-addons-yafaray-git
+
+
+1) MODIFIER YafaRay/src/yafraycore/imagefilm.cc
+===============================================
+
+cd /tmp/srcp
+
+cp -R YafaRay YafaRay.new
+
+cd YafaRay.new/src/yafraycore
+kwrite imagefilm.cc
+
+MODIFIER LIGNE 1006 :
+	int x_max = std::min(x + bitmap->width, dpimage->getWidth());
+DEVIENT :
+	int x_max = std::min(static_cast<int>(x + bitmap->width), dpimage->getWidth());
+
+
+MODIFIER LIGNE 1007 :
+	int y_max = std::min(y + bitmap->rows, dpimage->getHeight());
+DEVIENT :
+	int y_max = std::min(static_cast<int>(y + bitmap->rows), dpimage->getHeight());
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagefilm.cc~
+rm -f imagefilm.cc~
+
+cd ../../..
+
+diff -aur YafaRay YafaRay.new
+diff -aur YafaRay YafaRay.new > fix-ERROR-no-matching-function-for-call-to-min-unsigned-int-int.patch
+
+rm -rf YafaRay.new
+
+cd $HOME/05-builds/blender-addons-yafaray-git
+
+mv -vf /tmp/srcp/fix-ERROR-no-matching-function-for-call-to-min-unsigned-int-int.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+
+===============================================================================
+!!! ANCIEN !!!
+
+1) MODIFIER YafaRay/Blender-Exporter/__init__.py
+===================================================
+
+cd /tmp/srcp
+
+cp -R YafaRay YafaRay.new
+
+cd YafaRay.new/Blender-Exporter
+kwrite __init__.py
+
+MODIFIER LIGNES 73 et 76 :
+    if sys.maxsize == 2**63 - 1:    # Linux 64bit system
+        dllArray = ['libHalf.so.6.0.0', 'libIex.so.6.0.0', 'libImath.so.6.0.0', 'libIlmThread.so.6.0.0', 'libIlmImf.so.6.0.0', 'libpython3.4m.so.1.0', 'libjpeg.so.62.0.0', 'libz.so.1.2.3.4', 'libpng12.so.0.44.0', 'libtiff.so.4.3.3', 'libfreetype.so.6.6.0', 'libyafaraycore.so', 'libyafarayplugin.so']
+
+    else:   # Linux 32bit system
+        dllArray = ['libHalf.so.6.0.0', 'libIex.so.6.0.0', 'libImath.so.6.0.0', 'libIlmThread.so.6.0.0', 'libIlmImf.so.6.0.0', 'libpython3.4m.so.1.0', 'libjpeg.so.62.0.0', 'libz.so.1.2.3.4', 'libpng12.so.0.44.0', 'libtiff.so.4.3.3', 'libfreetype.so.6.6.0', 'libyafaraycore.so', 'libyafarayplugin.so']
+DEVIENNENT :
+        dllArray = ['libyafaraycore.so', 'libyafarayplugin.so']
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier __init__.py~
+rm -f __init__.py~
+
+cd ../..
+
+diff -aur YafaRay YafaRay.new
+diff -aur YafaRay YafaRay.new > fix-ERROR-Failed-to-load-library.patch
+
+rm -rf YafaRay.new
+
+cd $HOME/05-builds/blender-addons-yafaray-git
+
+mv -vf /tmp/srcp/fix-ERROR-Failed-to-load-library.patch .
+
+
+mkdir srcp
+cp -R YafaRay srcp/YafaRay
+
+
+1) MODIFIER YafaRay/src/yafraycore/imagefilm.cc	 (POUR VERSION)
+=================================================================
+cd srcp
+cp -R YafaRay YafaRay.new
+
+cd YafaRay.new/src/yafraycore
+kwrite imagefilm.cc
+
+MODIFIER LIGNE 693 :	ss << "YafaRay (" << version << ")";
+		EN :	ss << "YafaRay (0.1.2-Beta2)";
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagefilm.cc~
+rm -f imagefilm.cc~
+
+cd ../../..
+
+diff -aur YafaRay YafaRay.new
+diff -aur YafaRay YafaRay.new > git-fix-version.patch
+
+rm -rf YafaRay.new
+
+cd ..
+mv srcp/git-fix-version.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+1) MODIFIER YafaRay/tools/writeconfig.py
+=========================================================
+cd srcp
+cp -R YafaRay YafaRay.new
+
+cd YafaRay.new/tools
+kwrite writeconfig.py
+
+ AJOUTER LIGNE 31 :
+	config.write("#define yendl std::endl\n")
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier writeconfig.py~
+rm -f writeconfig.py~
+
+cd ../..
+
+diff -aur YafaRay YafaRay.new
+diff -aur YafaRay YafaRay.new > git-fix-yendl.patch
+
+rm -rf YafaRay.new
+
+cd ..
+mv srcp/git-fix-yendl.patch git-fix-yendl.patch
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+2) MODIFIER YafaRay/include/utilities/loadMemPNG.h
+====================================================
+cd srcp
+cp -R YafaRay YafaRay.new
+
+cd YafaRay.new/include/utilities
+kwrite loadMemPNG.h
+
+ ligne 83 :    if(png_check_sig(pngSignature, 8)) return true;
+ devient : NON     if(png_sig_cmp(pngSignature, 0, 8) == 0) return true;
+ OU
+ devient : OK     if(png_sig_cmp(pngSignature, 0, 8)) return true;
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier loadMemPNG.h~
+rm -f loadMemPNG.h~
+cd ../../..
+diff -aur YafaRay YafaRay.new
+diff -aur YafaRay YafaRay.new > fix-libpng14.patch
+
+rm -rf YafaRay.new
+
+cd ..
+mv srcp/fix-libpng14.patch fix-libpng14.patch
+
+
+diff -aur yafaray.pristine yafaray.new
+diff -aur yafaray.pristine yafaray.new > no-progressbar-fix-saveas.patch
+OU :
+diff -aur yafaray.pristine yafaray.new > fix-saveas.patch
+
+
+===============================================================================
+!!! INUTILE !!! 
+	// create the progressbar and hide it
+ ligne 106	/*	progressbar = new QProgressBar(m_ui->centralwidget);
+ ligne 113	m_ui->gridLayout->addWidget(progressbar,2,0,1,5);	*/
+
+
+2) MODIFIER yafaray/src/interface/xmlinterface.cc
+====================================================
+http://www.yafaray.org/community/forum/viewtopic.php?f=16&t=2305
+atti : [patch] minor XML creation bug
+CORRIGE REVISION 346
+
+cd srcp
+cp -R yafaray yafaray.new
+cd yafaray.new/src/interface
+kwrite xmlinterface.cc
+
+LIGNES 185  186  187 + "\
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier xmlinterface.cc~
+rm -f xmlinterface.cc~
+cd ../../..
+diff -aur yafaray.pristine yafaray.new
+diff -aur yafaray.pristine yafaray.new > fix-xmlinterface.patch
+
+rm -rf yafaray.new
+
+cd ..
+mv srcp/fix-xmlinterface.patch fix-xmlinterface.patch
+md5sum fix-xmlinterface.patch
+
+
+1-1) MODIFIER yafaray/tools/writeconfig.py  
+====================================================
+!!! VOIR PKGBUILD
+ligne 88 :
+REMPLACER : if rev == 'exported' or rev == '': rev = "N/A"
+
+PAR :       if rev == 'exported' or rev == '': rev = "345M"   !!! ATTENTION !!!
+
+Lignes 102 et 103 :
+rev_file.write("#define LIBPATH \"%s\"\n"%( env.subst('/usr/lib') ) )
+rev_file.write("#define Y_PLUGINPATH \"%s\"\n#endif\n"%( env.subst('/usr/lib/yafaray') ) )
+
+ENREGISTRER & EFFACER fichier writeconfig.py~
+

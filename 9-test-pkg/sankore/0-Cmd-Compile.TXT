@@ -1,0 +1,103 @@
+0) REPERTOIRE
+==============
+cd /home/jnd/05-builds/sankore
+
+
+1) FABRIQUER TAR.GZ
+====================
+ 1-1) sankore-git
+--------------
+
+git clone https://github.com/Sankore/Sankore-3.1.git Sankore
+
+git clone https://github.com/Sankore/Sankore-ThirdParty.git Sankore-ThirdParty
+
+
+1-5) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+!!!!!!
+Lire N° de Révision -> pkgver=2.0.80.20110131
+
+pkgver=
+pkgrel=
+
+source=(sankore-git-2.0.80.20110131.tar.gz
+	xxx.patch
+)
+md5sums=(123456789
+	 123456789
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/sankore-git
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+# cd /home/jnd/05-builds/sankore-git
+
+# ls -l
+# chown jnd:jnd sankore-git-*-x86_64-*.log
+# chown jnd:jnd sankore-git-*-x86_64.pkg.tar.*
+# chown jnd:jnd namcap.log
+# ls -l
+
+4) MAKEPKG en USER
+===================
+!!! EN USER
+
+makepkg -s
+
+OU : makepkg -f
+
+!!! EN USER
+
+rm -rf pkg src
+rm -f *~
+
+namcap sankore-git-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/sankore-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv sankore-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+
+# pacman -Syu
+
+# pacman -Syu sankore-git
+
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R sankore-git
+# rm /var/cache/pacman/pkg/sankore-git-*
+# pacman -S sankore-git
+

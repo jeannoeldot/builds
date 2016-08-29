@@ -1,0 +1,1008 @@
+diff -aur mozilla-release/browser/app/profile/firefox.js mozilla-release.new/browser/app/profile/firefox.js
+--- mozilla-release/browser/app/profile/firefox.js	2012-02-08 15:16:11.000000000 +0100
++++ mozilla-release.new/browser/app/profile/firefox.js	2012-02-12 19:59:26.716965507 +0100
+@@ -215,6 +215,7 @@
+ pref("extensions.dss.enabled", false);          // Dynamic Skin Switching                                               
+ pref("extensions.dss.switchPending", false);    // Non-dynamic switch pending after next
+                                                 // restart.
++pref("extensions.closeOnEscape", false); // allow the escape key to close the add-ons manager if it is standalone
+ 
+ pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.name", "chrome://browser/locale/browser.properties");
+ pref("extensions.{972ce4c6-7e08-4474-a285-3208198ce6fd}.description", "chrome://browser/locale/browser.properties");
+diff -aur mozilla-release/caps/src/nsScriptSecurityManager.cpp mozilla-release.new/caps/src/nsScriptSecurityManager.cpp
+--- mozilla-release/caps/src/nsScriptSecurityManager.cpp	2012-02-08 15:16:12.000000000 +0100
++++ mozilla-release.new/caps/src/nsScriptSecurityManager.cpp	2012-02-12 20:03:15.713637126 +0100
+@@ -1507,6 +1507,7 @@
+                              &hasFlags);
+     NS_ENSURE_SUCCESS(rv, rv);
+     if (hasFlags) {
++	return NS_OK;
+         if (aFlags & nsIScriptSecurityManager::ALLOW_CHROME) {
+             if (!targetScheme.EqualsLiteral("chrome")) {
+                 // for now don't change behavior for resource: or moz-icon:
+@@ -1546,6 +1547,7 @@
+                              &hasFlags);
+     NS_ENSURE_SUCCESS(rv, rv);
+     if (hasFlags) {
++	return NS_OK;
+         // resource: and chrome: are equivalent, securitywise
+         // That's bogus!!  Fix this.  But watch out for
+         // the view-source stylesheet?
+diff -aur mozilla-release/content/base/public/nsIDocumentEncoder.idl mozilla-release.new/content/base/public/nsIDocumentEncoder.idl
+--- mozilla-release/content/base/public/nsIDocumentEncoder.idl	2012-02-08 15:16:12.000000000 +0100
++++ mozilla-release.new/content/base/public/nsIDocumentEncoder.idl	2012-02-12 20:07:28.303642590 +0100
+@@ -68,7 +68,7 @@
+   nsIDOMNode fixupNode(in nsIDOMNode aNode, out boolean aSerializeCloneKids);
+ };
+ 
+-[scriptable, uuid(7222bdf1-c2b9-41f1-a40a-a3d65283a95b)]
++[scriptable, uuid(30a3161c-09e0-425e-84e6-ff952c0fd859)]
+ interface nsIDocumentEncoder : nsISupports
+ {
+   // Output methods flag bits. There are a frightening number of these,
+@@ -236,6 +236,11 @@
+    */
+   const unsigned long OutputFormatDelSp  = (1 << 20);
+  
++ /**
++   * Output all non-ascii characters as numeric entities
++   */
++  const unsigned long OutputEncodeCharacterEntities = (1 << 21);
++
+   /**
+    * Initialize with a pointer to the document and the mime type.
+    * @param aDocument Document to encode.
+diff -aur mozilla-release/content/base/src/nsCopySupport.cpp mozilla-release.new/content/base/src/nsCopySupport.cpp
+--- mozilla-release/content/base/src/nsCopySupport.cpp	2012-02-08 15:16:12.000000000 +0100
++++ mozilla-release.new/content/base/src/nsCopySupport.cpp	2012-02-12 20:09:26.230311808 +0100
+@@ -438,7 +438,7 @@
+   // copy it properly (all the copy code for non-plaintext assumes using HTML
+   // serializers and parsers is OK, and those mess up XHTML).
+   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(aDoc);
+-  if (!(htmlDoc && aDoc->IsHTML()))
++  if (!htmlDoc)
+     *aIsPlainTextContext = true;
+ 
+   return NS_OK;
+diff -aur mozilla-release/content/base/src/nsDocumentEncoder.cpp mozilla-release.new/content/base/src/nsDocumentEncoder.cpp
+--- mozilla-release/content/base/src/nsDocumentEncoder.cpp	2012-02-08 15:16:12.000000000 +0100
++++ mozilla-release.new/content/base/src/nsDocumentEncoder.cpp	2012-02-12 20:10:40.963646757 +0100
+@@ -1332,7 +1332,7 @@
+   
+   // also consider ourselves in a text widget if we can't find an html document
+   nsCOMPtr<nsIHTMLDocument> htmlDoc = do_QueryInterface(mDocument);
+-  if (!(htmlDoc && mDocument->IsHTML()))
++  if (!htmlDoc)
+     mIsTextWidget = true;
+   
+   // normalize selection if we are not in a widget
+diff -aur mozilla-release/content/base/src/nsHTMLContentSerializer.cpp mozilla-release.new/content/base/src/nsHTMLContentSerializer.cpp
+--- mozilla-release/content/base/src/nsHTMLContentSerializer.cpp	2012-02-08 15:16:12.000000000 +0100
++++ mozilla-release.new/content/base/src/nsHTMLContentSerializer.cpp	2012-02-12 20:15:55.450320226 +0100
+@@ -270,14 +270,15 @@
+ 
+   bool lineBreakBeforeOpen = LineBreakBeforeOpen(ns, name);
+ 
+-  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
++  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
+     if (mColPos && lineBreakBeforeOpen) {
+       AppendNewLineToString(aStr);
++      mMayIgnoreLineBreakSequence = PR_FALSE;
+     }
+     else {
+       MaybeAddNewlineForRootNode(aStr);
+     }
+-    if (!mColPos) {
++    if (!mColPos && !mDoRaw) {
+       AppendIndentation(aStr);
+     }
+     else if (mAddSpace) {
+@@ -545,7 +546,8 @@
+   bool nonBasicEntities =
+     !!(mFlags & (nsIDocumentEncoder::OutputEncodeLatin1Entities |
+                  nsIDocumentEncoder::OutputEncodeHTMLEntities   |
+-                 nsIDocumentEncoder::OutputEncodeW3CEntities));
++                 nsIDocumentEncoder::OutputEncodeW3CEntities    |
++                 nsIDocumentEncoder::OutputEncodeCharacterEntities));
+ 
+   if (!nonBasicEntities &&
+       (mFlags & (nsIDocumentEncoder::OutputEncodeBasicEntities))) {
+@@ -601,7 +603,13 @@
+       // needs to be replaced
+       for (; c < fragmentEnd; c++, advanceLength++) {
+         PRUnichar val = *c;
+-        if (val <= kValNBSP && entityTable[val]) {
++        if ((val == kValNBSP || val > 127) &&
++            (mFlags & nsIDocumentEncoder::OutputEncodeCharacterEntities)) {
++          nsAutoString entityValue(PRUnichar('#'));
++          entityValue.AppendInt(val);
++          entityText = ToNewCString(entityValue);
++          break;
++        } else if (val <= kValNBSP && entityTable[val]) {
+           fullConstEntityText = entityTable[val];
+           break;
+         } else if (val > 127 &&
+diff -aur mozilla-release/content/base/src/nsXHTMLContentSerializer.cpp mozilla-release.new/content/base/src/nsXHTMLContentSerializer.cpp
+--- mozilla-release/content/base/src/nsXHTMLContentSerializer.cpp	2012-02-08 15:16:13.000000000 +0100
++++ mozilla-release.new/content/base/src/nsXHTMLContentSerializer.cpp	2012-02-12 20:22:33.766995509 +0100
+@@ -100,14 +100,6 @@
+                               const char* aCharSet, bool aIsCopying,
+                               bool aRewriteEncodingDeclaration)
+ {
+-  // The previous version of the HTML serializer did implicit wrapping
+-  // when there is no flags, so we keep wrapping in order to keep
+-  // compatibility with the existing calling code
+-  // XXXLJ perhaps should we remove this default settings later ?
+-  if (aFlags & nsIDocumentEncoder::OutputFormatted ) {
+-      aFlags = aFlags | nsIDocumentEncoder::OutputWrap;
+-  }
+-
+   nsresult rv;
+   rv = nsXMLContentSerializer::Init(aFlags, aWrapColumn, aCharSet, aIsCopying, aRewriteEncodingDeclaration);
+   NS_ENSURE_SUCCESS(rv, rv);
+@@ -767,7 +759,16 @@
+       aName == nsGkAtoms::select ||
+       aName == nsGkAtoms::option ||
+       aName == nsGkAtoms::script ||
+-      aName == nsGkAtoms::html) {
++      aName == nsGkAtoms::html ||
++      aName == nsGkAtoms::head ||
++      //aName == nsGkAtoms::body ||
++      aName == nsGkAtoms::table ||
++      aName == nsGkAtoms::caption ||
++      aName == nsGkAtoms::tbody ||
++      aName == nsGkAtoms::thead ||
++      aName == nsGkAtoms::tfoot ||
++      aName == nsGkAtoms::tr ||
++      aName == nsGkAtoms::td) {
+     return true;
+   }
+   else {
+@@ -794,7 +795,7 @@
+ 
+   if ((aName == nsGkAtoms::html) ||
+       (aName == nsGkAtoms::head) ||
+-      (aName == nsGkAtoms::body) ||
++      //(aName == nsGkAtoms::body) ||
+       (aName == nsGkAtoms::ul) ||
+       (aName == nsGkAtoms::ol) ||
+       (aName == nsGkAtoms::dl) ||
+@@ -831,7 +832,10 @@
+       (aName == nsGkAtoms::dl) ||
+       (aName == nsGkAtoms::select) ||
+       (aName == nsGkAtoms::table) ||
+-      (aName == nsGkAtoms::tbody)) {
++      (aName == nsGkAtoms::tbody) ||
++      (aName == nsGkAtoms::thead) ||
++      (aName == nsGkAtoms::tfoot) ||
++      (aName == nsGkAtoms::tr)) {
+     return true;
+   }
+   return false;
+@@ -896,6 +900,8 @@
+       name == nsGkAtoms::noframes
+       ) {
+     mPreLevel++;
++    if (name != nsGkAtoms::pre)
++      ++mDisableEntityEncoding;
+   }
+ }
+ 
+@@ -914,6 +920,8 @@
+       name == nsGkAtoms::noframes
+     ) {
+     --mPreLevel;
++    if (name != nsGkAtoms::pre)
++      --mDisableEntityEncoding;
+   }
+ }
+ 
+diff -aur mozilla-release/content/base/src/nsXMLContentSerializer.cpp mozilla-release.new/content/base/src/nsXMLContentSerializer.cpp
+--- mozilla-release/content/base/src/nsXMLContentSerializer.cpp	2012-02-08 15:16:13.000000000 +0100
++++ mozilla-release.new/content/base/src/nsXMLContentSerializer.cpp	2012-02-12 20:49:04.667029921 +0100
+@@ -649,7 +649,25 @@
+   bool rawAppend = mDoRaw && aDoEscapeEntities;
+   nsAString& attrString = (rawAppend) ? aStr : attrString_;
+ 
+-  attrString.Append(PRUnichar(' '));
++  if (mColPos + 1 >= mMaxColumn && !mDoRaw) {
++    if (mPreLevel > 0) {
++      AppendToStringConvertLF(mLineBreak, aStr);
++    }
++    else if (mDoFormat) {
++      AppendToStringFormatedWrapped(mLineBreak, aStr);
++      AppendIndentation(aStr);
++    }
++    else if (mDoWrap) {
++      AppendToStringWrapped(mLineBreak, aStr);
++      AppendIndentation(aStr);
++    }
++    else {
++      AppendToStringConvertLF(mLineBreak, aStr);
++    }
++  }
++  else
++    attrString.Append(PRUnichar(' '));
++
+   if (!aPrefix.IsEmpty()) {
+     attrString.Append(aPrefix);
+     attrString.Append(PRUnichar(':'));
+@@ -723,18 +741,20 @@
+     attrString.Append(sValue);
+     attrString.Append(cDelimiter);
+   }
+-  if (mPreLevel > 0 || mDoRaw) {
+-    AppendToStringConvertLF(attrString, aStr);
+-  }
+-  else if (mDoFormat) {
+-    AppendToStringFormatedWrapped(attrString, aStr);
+-  }
+-  else if (mDoWrap) {
+-    AppendToStringWrapped(attrString, aStr);
+-  }
+-  else {
+-    AppendToStringConvertLF(attrString, aStr);
+-  }
++  AppendToStringConvertLF(attrString, aStr);
++  // XXX
++  // if (mPreLevel > 0 || mDoRaw) {
++  //   AppendToStringConvertLF(attrString, aStr);
++  // }
++  // else if (mDoFormat) {
++  //   AppendToStringFormatedWrapped(attrString, aStr);
++  // }
++  // else if (mDoWrap) {
++  //   AppendToStringWrapped(attrString, aStr);
++  // }
++  // else {
++  //   AppendToStringConvertLF(attrString, aStr);
++  // }
+ }
+ 
+ PRUint32 
+@@ -939,7 +959,7 @@
+   nsIAtom *name = content->Tag();
+   bool lineBreakBeforeOpen = LineBreakBeforeOpen(content->GetNameSpaceID(), name);
+ 
+-  if ((mDoFormat || forceFormat) && !mPreLevel && !mDoRaw) {
++  if (((mDoFormat || forceFormat) && !mPreLevel) || mDoRaw) {
+     if (mColPos && lineBreakBeforeOpen) {
+       AppendNewLineToString(aStr);
+     }
+@@ -970,6 +990,11 @@
+   addNSAttr = ConfirmPrefix(tagPrefix, tagNamespaceURI, aOriginalElement,
+                             false);
+ 
++  if (!mNameSpaceStack.Length()
++      && tagNamespaceURI.EqualsLiteral("http://www.w3.org/1999/xhtml")
++      && !tagLocalName.EqualsLiteral("html"))
++    addNSAttr = PR_FALSE;
++
+   // Serialize the qualified name of the element
+   AppendToString(kLessThan, aStr);
+   if (!tagPrefix.IsEmpty()) {
+@@ -1186,6 +1211,23 @@
+     return;
+   }
+   mColPos += aStr.Length();
++  nsASingleFragmentString::const_char_iterator pos, end, sequenceStart;
++
++  aStr.BeginReading(pos);
++  aStr.EndReading(end);
++  bool foundCR = PR_FALSE;
++  bool foundOtherThanCROrBlank = PR_FALSE;
++  while (pos < end) {
++    if (*pos == '\n' || *pos == '\r')
++      foundCR = PR_TRUE;
++    else if (*pos != ' ' && *pos != '\t')
++      foundOtherThanCROrBlank = PR_TRUE;
++    pos++;
++  }
++
++  if (foundCR && !foundOtherThanCROrBlank) {
++    mMayIgnoreLineBreakSequence = PR_TRUE;
++  }
+   aOutputStr.Append(aStr);
+ }
+ 
+@@ -1296,6 +1338,10 @@
+ void
+ nsXMLContentSerializer::AppendNewLineToString(nsAString& aStr)
+ {
++  if (!mPreLevel && mMayIgnoreLineBreakSequence) {
++    mMayIgnoreLineBreakSequence = PR_FALSE;
++    return;
++  }
+   AppendToString(mLineBreak, aStr);
+   mMayIgnoreLineBreakSequence = true;
+   mColPos = 0;
+@@ -1465,6 +1511,7 @@
+       // Since we only saw linebreaks, but no spaces or tabs,
+       // let's write a linebreak now.
+       AppendNewLineToString(aOutputStr);
++      mMayIgnoreLineBreakSequence = PR_TRUE;
+     }
+   }
+ }
+@@ -1591,9 +1638,29 @@
+             aOutputStr.Append(PRUnichar(' '));
+             mAddSpace = false;
+           }
++          bool CRDone = PR_FALSE;
++          if (wrapPosition) {
++            CRDone = (*(aSequenceStart + wrapPosition - 1) == '\n');
++          }
+           aOutputStr.Append(aSequenceStart, wrapPosition);
+ 
+-          AppendNewLineToString(aOutputStr);
++          if (CRDone) {
++            // we found a wrapping spot but there is a newline
++            // char right before that point... So we don't need another CR.
++            mMayIgnoreLineBreakSequence = PR_TRUE;
++            mColPos = 0;
++            mAddSpace = PR_FALSE;
++            mIsIndentationAddedOnCurrentLine = PR_FALSE;
++          }
++          else {
++            AppendNewLineToString(aOutputStr);
++          }
++
++          if (mDoFormat) {
++            AppendIndentation(aOutputStr);
++          }
++
++          mMayIgnoreLineBreakSequence = PR_TRUE;
+           aPos = aSequenceStart + wrapPosition;
+           aMayIgnoreStartOfLineWhitespaceSequence = true;
+         }
+diff -aur mozilla-release/content/xbl/src/nsXBLContentSink.cpp mozilla-release.new/content/xbl/src/nsXBLContentSink.cpp
+--- mozilla-release/content/xbl/src/nsXBLContentSink.cpp	2012-02-08 15:16:14.000000000 +0100
++++ mozilla-release.new/content/xbl/src/nsXBLContentSink.cpp	2012-02-12 20:52:30.007034363 +0100
+@@ -206,6 +206,8 @@
+ nsXBLContentSink::ReportError(const PRUnichar* aErrorText, 
+                               const PRUnichar* aSourceText,
+                               nsIScriptError *aError,
++                              PRUint32 aLineNumber,
++                              PRUint32 aColNumber,
+                               bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+@@ -231,6 +233,8 @@
+   return nsXMLContentSink::ReportError(aErrorText, 
+                                        aSourceText, 
+                                        aError,
++                                       aLineNumber,
++                                       aColNumber,
+                                        _retval);
+ }
+ 
+diff -aur mozilla-release/content/xbl/src/nsXBLContentSink.h mozilla-release.new/content/xbl/src/nsXBLContentSink.h
+--- mozilla-release/content/xbl/src/nsXBLContentSink.h	2012-02-08 15:16:14.000000000 +0100
++++ mozilla-release.new/content/xbl/src/nsXBLContentSink.h	2012-02-12 20:53:55.033702869 +0100
+@@ -153,6 +153,8 @@
+   NS_IMETHOD ReportError(const PRUnichar* aErrorText,
+                          const PRUnichar* aSourceText,
+                          nsIScriptError *aError,
++                         PRUint32 aLineNumber,
++                         PRUint32 aColNumber,
+                          bool *_retval);
+ 
+ protected:
+diff -aur mozilla-release/content/xml/document/src/nsXMLContentSink.cpp mozilla-release.new/content/xml/document/src/nsXMLContentSink.cpp
+--- mozilla-release/content/xml/document/src/nsXMLContentSink.cpp	2012-02-08 15:16:14.000000000 +0100
++++ mozilla-release.new/content/xml/document/src/nsXMLContentSink.cpp	2012-02-12 20:57:58.120374793 +0100
+@@ -1406,6 +1406,8 @@
+ nsXMLContentSink::ReportError(const PRUnichar* aErrorText, 
+                               const PRUnichar* aSourceText,
+                               nsIScriptError *aError,
++                              PRUint32 aLineNumber,
++                              PRUint32 aColNumber,
+                               bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+@@ -1457,7 +1459,15 @@
+                                    NS_LITERAL_STRING("href=\"chrome://global/locale/intl.css\" type=\"text/css\"").get());
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+-  const PRUnichar* noAtts[] = { 0, 0 };
++  nsAutoString lineString, colString;
++  lineString.AppendInt(aLineNumber);
++  colString.AppendInt(aColNumber);
++  const PRUnichar* noAtts[] = { NS_LITERAL_STRING("line").get(),
++                                lineString.get(),
++                                NS_LITERAL_STRING("col").get(),
++                                colString.get(),
++                                0,
++                                0 };
+ 
+   NS_NAMED_LITERAL_STRING(errorNs,
+                           "http://www.mozilla.org/newlayout/xml/parsererror.xml");
+@@ -1466,7 +1476,7 @@
+   parsererror.Append((PRUnichar)0xFFFF);
+   parsererror.AppendLiteral("parsererror");
+   
+-  rv = HandleStartElement(parsererror.get(), noAtts, 0, -1, (PRUint32)-1,
++  rv = HandleStartElement(parsererror.get(), noAtts, 2, -1, (PRUint32)-1,
+                           false);
+   NS_ENSURE_SUCCESS(rv, rv);
+ 
+diff -aur mozilla-release/content/xslt/src/xslt/txMozillaStylesheetCompiler.cpp mozilla-release.new/content/xslt/src/xslt/txMozillaStylesheetCompiler.cpp
+--- mozilla-release/content/xslt/src/xslt/txMozillaStylesheetCompiler.cpp	2012-02-08 15:16:14.000000000 +0100
++++ mozilla-release.new/content/xslt/src/xslt/txMozillaStylesheetCompiler.cpp	2012-02-12 20:59:21.520376597 +0100
+@@ -234,6 +234,8 @@
+ txStylesheetSink::ReportError(const PRUnichar *aErrorText,
+                               const PRUnichar *aSourceText,
+                               nsIScriptError *aError,
++                              PRUint32 aLineNumber,
++                              PRUint32 aColNumber,
+                               bool *_retval)
+ {
+     NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff -aur mozilla-release/content/xul/document/src/nsXULContentSink.cpp mozilla-release.new/content/xul/document/src/nsXULContentSink.cpp
+--- mozilla-release/content/xul/document/src/nsXULContentSink.cpp	2012-02-08 15:16:14.000000000 +0100
++++ mozilla-release.new/content/xul/document/src/nsXULContentSink.cpp	2012-02-12 21:00:48.433711811 +0100
+@@ -727,6 +727,8 @@
+ XULContentSinkImpl::ReportError(const PRUnichar* aErrorText, 
+                                 const PRUnichar* aSourceText,
+                                 nsIScriptError *aError,
++                                PRUint32 aLineNumber,
++                                PRUint32 aColNumber,
+                                 bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff -aur mozilla-release/editor/libeditor/html/nsHTMLDataTransfer.cpp mozilla-release.new/editor/libeditor/html/nsHTMLDataTransfer.cpp
+--- mozilla-release/editor/libeditor/html/nsHTMLDataTransfer.cpp	2012-02-08 15:16:18.000000000 +0100
++++ mozilla-release.new/editor/libeditor/html/nsHTMLDataTransfer.cpp	2012-02-12 21:08:32.513721849 +0100
+@@ -1379,13 +1379,42 @@
+         textDataObj->GetData(text);
+         NS_ASSERTION(text.Length() <= (len/2), "Invalid length!");
+         stuffToPaste.Assign(text.get(), len / 2);
++
++        // Find where the <body> tag starts.
++        nsReadingIterator<PRUnichar> beginbody;
++        nsReadingIterator<PRUnichar> endbody;
++        stuffToPaste.BeginReading(beginbody);
++        stuffToPaste.EndReading(endbody);
++        bool foundbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING("<body"),
++                                                         beginbody, endbody);
++        nsAutoString realStuffToPaste;
++        if (foundbody) {
++          nsReadingIterator<PRUnichar> endstartbody;
++          stuffToPaste.EndReading(endstartbody);
++          bool foundstartbody = CaseInsensitiveFindInReadable(NS_LITERAL_STRING(">"),
++                                                                endbody, endstartbody);
++          if (!foundstartbody)
++            return NS_ERROR_FAILURE;
++
++          nsReadingIterator<PRUnichar> beginclosebody;
++          nsReadingIterator<PRUnichar> endclosebody;
++          stuffToPaste.BeginReading(beginclosebody);
++          stuffToPaste.EndReading(endclosebody);
++
++          // Find the index before "</body>"
++          bool foundclosehead = CaseInsensitiveFindInReadable(
++                   NS_LITERAL_STRING("</body>"), beginclosebody, endclosebody);
++          realStuffToPaste.Assign(Substring(endstartbody, beginclosebody));
++        }
++        else
++          realStuffToPaste.Assign(stuffToPaste);
+         nsAutoEditBatch beginBatching(this);
+-        rv = DoInsertHTMLWithContext(stuffToPaste,
++        rv = DoInsertHTMLWithContext(realStuffToPaste,
+                                      aContextStr, aInfoStr, flavor,
+                                      aSourceDoc,
+                                      aDestinationNode, aDestOffset,
+                                      aDoDeleteSelection,
+-                                     isSafe);
++                                     true);
+       }
+     }
+     else if (0 == nsCRT::strcmp(bestFlavor, kUnicodeMime) ||
+diff -aur mozilla-release/editor/libeditor/html/nsHTMLEditor.cpp mozilla-release.new/editor/libeditor/html/nsHTMLEditor.cpp
+--- mozilla-release/editor/libeditor/html/nsHTMLEditor.cpp	2012-02-08 15:16:18.000000000 +0100
++++ mozilla-release.new/editor/libeditor/html/nsHTMLEditor.cpp	2012-02-12 21:59:35.147121430 +0100
+@@ -318,7 +318,8 @@
+ 
+     if (!IsInteractionAllowed()) {
+       // ignore any errors from this in case the file is missing
+-      AddOverrideStyleSheet(NS_LITERAL_STRING("resource://gre/res/EditorOverride.css"));
++      // BlueGriffon uses its own EditorOverride.css
++      //AddOverrideStyleSheet(NS_LITERAL_STRING("resource://gre/res/EditorOverride.css"));
+     }
+ 
+     nsCOMPtr<nsISelection>selection;
+@@ -2317,7 +2318,21 @@
+   if (bCollapsed || IsTextNode(parent))
+   {
+     // we want to look at the parent and ancestors
+-    nodeToExamine = parent;
++    if (IsTextNode(parent)) {
++      nsCOMPtr<nsIDOMCharacterData> nodeAsText = do_QueryInterface(parent);
++      PRUint32 textLen;
++      nodeAsText->GetLength(&textLen);
++      if (textLen == offset) {
++        nsCOMPtr<nsIDOMNode> nextSibling;
++        res = parent->GetNextSibling(getter_AddRefs(nextSibling));
++        NS_ENSURE_SUCCESS(res, res);
++        nodeToExamine = nextSibling;
++      }
++      else
++        nodeToExamine = parent;
++    }
++    else
++      nodeToExamine = parent;
+   }
+   else
+   {
+@@ -3240,11 +3255,8 @@
+     res = newElement->SetAttribute(NS_LITERAL_STRING("cellspacing"),NS_LITERAL_STRING("2"));
+     NS_ENSURE_SUCCESS(res, res);
+     res = newElement->SetAttribute(NS_LITERAL_STRING("border"),NS_LITERAL_STRING("1"));
+-  } else if (TagName.EqualsLiteral("td"))
+-  {
+-    res = SetAttributeOrEquivalent(newElement, NS_LITERAL_STRING("valign"),
+-                                   NS_LITERAL_STRING("top"), true);
+   }
++
+   // ADD OTHER TAGS HERE
+ 
+   if (NS_SUCCEEDED(res))
+diff -aur mozilla-release/editor/libeditor/html/nsHTMLEditRules.cpp mozilla-release.new/editor/libeditor/html/nsHTMLEditRules.cpp
+--- mozilla-release/editor/libeditor/html/nsHTMLEditRules.cpp	2012-02-08 15:16:18.000000000 +0100
++++ mozilla-release.new/editor/libeditor/html/nsHTMLEditRules.cpp	2012-02-12 21:50:28.123776264 +0100
+@@ -463,8 +463,9 @@
+     }
+ 
+     // clean up any empty nodes in the selection
+-    res = RemoveEmptyNodes();
+-    NS_ENSURE_SUCCESS(res, res);
++    // BLUEGRIFFON, fix for bug 261
++    //res = RemoveEmptyNodes();
++    //NS_ENSURE_SUCCESS(res, res);
+ 
+     // attempt to transform any unneeded nbsp's into spaces after doing various operations
+     if ((action == nsEditor::kOpInsertText) || 
+@@ -1400,39 +1401,8 @@
+     // it is to search for both tabs and newlines.
+     if (isPRE || IsPlaintextEditor())
+     {
+-      while (unicodeBuf && (pos != -1) && (pos < (PRInt32)(*inString).Length()))
+-      {
+-        PRInt32 oldPos = pos;
+-        PRInt32 subStrLen;
+-        pos = tString.FindChar(nsCRT::LF, oldPos);
+-
+-        if (pos != -1) 
+-        {
+-          subStrLen = pos - oldPos;
+-          // if first char is newline, then use just it
+-          if (subStrLen == 0)
+-            subStrLen = 1;
+-        }
+-        else
+-        {
+-          subStrLen = tString.Length() - oldPos;
+-          pos = tString.Length();
+-        }
+-
+-        nsDependentSubstring subStr(tString, oldPos, subStrLen);
+-        
+-        // is it a return?
+-        if (subStr.Equals(newlineStr))
+-        {
+-          res = mHTMLEditor->CreateBRImpl(address_of(curNode), &curOffset, address_of(unused), nsIEditor::eNone);
+-          pos++;
+-        }
+-        else
+-        {
+-          res = mHTMLEditor->InsertTextImpl(subStr, address_of(curNode), &curOffset, doc);
+-        }
+-        NS_ENSURE_SUCCESS(res, res);
+-      }
++      res = mHTMLEditor->InsertTextImpl(tString, address_of(curNode), &curOffset, doc);
++      NS_ENSURE_SUCCESS(res, res);
+     }
+     else
+     {
+diff -aur mozilla-release/gfx/src/nsColor.cpp mozilla-release.new/gfx/src/nsColor.cpp
+--- mozilla-release/gfx/src/nsColor.cpp	2012-02-08 15:16:21.000000000 +0100
++++ mozilla-release.new/gfx/src/nsColor.cpp	2012-02-12 22:01:26.380457169 +0100
+@@ -249,6 +249,27 @@
+   return false;
+ }
+ 
++NS_GFX_(bool) NS_RGBToColorName(nscolor aColor, nsAString& aResult)
++{
++  PRUint8 a = NS_GET_A(aColor);
++  if (a < 255)
++    return false;
++  PRUint8 r = NS_GET_R(aColor);
++  PRUint8 g = NS_GET_G(aColor);
++  PRUint8 b = NS_GET_B(aColor);
++  PRUint32 colorIndex;
++  for (colorIndex = 0; colorIndex < eColorName_COUNT; colorIndex++) {
++    nscolor matchingColor = kColors[colorIndex];
++    if (NS_GET_R(matchingColor) == r
++        && NS_GET_G(matchingColor) == g
++        && NS_GET_B(matchingColor) == b) {
++      aResult.AppendASCII(kColorNames[colorIndex]);
++      return true;
++    }
++  }
++  return false;
++}
++
+ // Macro to blend two colors
+ //
+ // equivalent to target = (bg*(255-fgalpha) + fg*fgalpha)/255
+diff -aur mozilla-release/gfx/src/nsColor.h mozilla-release.new/gfx/src/nsColor.h
+--- mozilla-release/gfx/src/nsColor.h	2012-02-08 15:16:21.000000000 +0100
++++ mozilla-release.new/gfx/src/nsColor.h	2012-02-12 22:03:01.040459216 +0100
+@@ -98,6 +98,10 @@
+ // otherwise return false.
+ NS_GFX_(bool) NS_ColorNameToRGB(const nsAString& aBuf, nscolor* aResult);
+ 
++// Translate a color to a color name. Return true if it parses ok,
++// otherwise return false.
++NS_GFX_(bool) NS_RGBToColorName(nscolor aColor, nsAString& aResult);
++
+ // function to convert from HSL color space to RGB color space
+ // the float parameters are all expected to be in the range 0-1
+ NS_GFX_(nscolor) NS_HSL2RGB(float h, float s, float l);
+diff -aur mozilla-release/layout/style/Loader.cpp mozilla-release.new/layout/style/Loader.cpp
+--- mozilla-release/layout/style/Loader.cpp	2012-02-08 15:16:34.000000000 +0100
++++ mozilla-release.new/layout/style/Loader.cpp	2012-02-12 22:04:45.197128136 +0100
+@@ -1125,7 +1125,8 @@
+     }
+ #endif
+ 
+-    if (!sheet) {
++    //XXX BlueGriffon force reload of stylesheets each time we need them
++    if (false /*!sheet*/) {
+       // Then our per-document complete sheets.
+       URIAndPrincipalHashKey key(aURI, aLoaderPrincipal);
+ 
+diff -aur mozilla-release/layout/style/nsCSSValue.cpp mozilla-release.new/layout/style/nsCSSValue.cpp
+--- mozilla-release/layout/style/nsCSSValue.cpp	2012-02-08 15:16:34.000000000 +0100
++++ mozilla-release.new/layout/style/nsCSSValue.cpp	2012-02-12 22:15:10.443808327 +0100
+@@ -46,6 +46,7 @@
+ #include "nsStyleUtil.h"
+ #include "CSSCalc.h"
+ #include "nsNetUtil.h"
++#include "nsIPrefService.h"
+ 
+ namespace css = mozilla::css;
+ 
+@@ -896,31 +897,73 @@
+     }
+   }
+   else if (eCSSUnit_Color == unit) {
++    bool outputCssNames = false;
++    nsresult rv;
++    nsCOMPtr<nsIPrefBranch> prefBranch = do_GetService(NS_PREFSERVICE_CONTRACTID, &rv);
++    if (NS_SUCCEEDED(rv) && prefBranch)
++      prefBranch->GetBoolPref("bluegriffon.css.colors.names.enabled", &outputCssNames);
++
+     nscolor color = GetColorValue();
+-    if (color == NS_RGBA(0, 0, 0, 0)) {
+-      // Use the strictest match for 'transparent' so we do correct
+-      // round-tripping of all other rgba() values.
+-      aResult.AppendLiteral("transparent");
+-    } else {
+-      PRUint8 a = NS_GET_A(color);
+-      if (a < 255) {
+-        aResult.AppendLiteral("rgba(");
++    bool foundName = false;
++    if (outputCssNames) {
++      nsAutoString nameColorStr;
++      foundName = NS_RGBToColorName(color, nameColorStr);
++      aResult.Append(nameColorStr);
++    }
++    if (!foundName) {
++      if (color == NS_RGBA(0, 0, 0, 0)) {
++        // Use the strictest match for 'transparent' so we do correct
++        // round-tripping of all other rgba() values.
++        aResult.AppendLiteral("transparent");
+       } else {
+-        aResult.AppendLiteral("rgb(");
+-      }
++        PRUint8 a = NS_GET_A(color);
++        PRInt32 radix = 10;
++        nsXPIDLCString colorOutputType;
++        prefBranch->GetCharPref("bluegriffon.css.colors.type", getter_Copies(colorOutputType));
++        if (a < 255) {
++          aResult.AppendLiteral("rgba(");
++        } else {
++          if (!PL_strcmp(colorOutputType, "hex")) {
++            radix = 16;
++            aResult.AppendLiteral("#");
++          }
++          else
++            aResult.AppendLiteral("rgb(");
++        }
+ 
+-      NS_NAMED_LITERAL_STRING(comma, ", ");
++        if (16 == radix) {
++          nsAutoString rStr, gStr, bStr;
++          rStr.Truncate();
++          gStr.Truncate();
++          bStr.Truncate();
++          rStr.AppendInt(NS_GET_R(color), radix);
++          gStr.AppendInt(NS_GET_G(color), radix);
++          bStr.AppendInt(NS_GET_B(color), radix);
++          if (1 == rStr.Length())
++            aResult.AppendLiteral("0");
++          aResult.Append(rStr);
++          if (1 == gStr.Length())
++            aResult.AppendLiteral("0");
++          aResult.Append(gStr);
++         if (1 == bStr.Length())
++            aResult.AppendLiteral("0");
++          aResult.Append(bStr);
++        }
++        else {
++          NS_NAMED_LITERAL_STRING(comma, ", ");
+ 
+-      aResult.AppendInt(NS_GET_R(color), 10);
+-      aResult.Append(comma);
+-      aResult.AppendInt(NS_GET_G(color), 10);
+-      aResult.Append(comma);
+-      aResult.AppendInt(NS_GET_B(color), 10);
+-      if (a < 255) {
+-        aResult.Append(comma);
+-        aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++          aResult.AppendInt(NS_GET_R(color), radix);
++          aResult.Append(comma);
++          aResult.AppendInt(NS_GET_G(color), radix);
++          aResult.Append(comma);
++          aResult.AppendInt(NS_GET_B(color), radix);
++          if (a < 255) {
++            aResult.Append(comma);
++            aResult.AppendFloat(nsStyleUtil::ColorComponentToFloat(a));
++          }
++          aResult.Append(PRUnichar(')'));
++        }
+       }
+-      aResult.Append(PRUnichar(')'));
+     }
+   }
+   else if (eCSSUnit_URL == unit || eCSSUnit_Image == unit) {
+diff -aur mozilla-release/parser/htmlparser/public/nsIExpatSink.idl mozilla-release.new/parser/htmlparser/public/nsIExpatSink.idl
+--- mozilla-release/parser/htmlparser/public/nsIExpatSink.idl	2012-02-08 15:16:38.000000000 +0100
++++ mozilla-release.new/parser/htmlparser/public/nsIExpatSink.idl	2012-02-12 22:17:31.130478038 +0100
+@@ -44,7 +44,7 @@
+  * by any sink that handles some sort of XML dialect.
+  */
+ 
+-[scriptable, uuid(f61c56b5-ea5b-42b4-ad3c-17416e72e238)]
++[scriptable, uuid(2FFE2C0A-C27C-45FA-8BA4-E504D92A920F)]
+ interface nsIExpatSink : nsISupports 
+ {
+   /**
+@@ -141,5 +141,7 @@
+    */
+   boolean ReportError(in wstring aErrorText,
+                       in wstring aSourceText,
+-                      in nsIScriptError aError);
++                      in nsIScriptError aError,
++                      in unsigned long aLineNumber,
++                      in unsigned long aColNumber);
+ }; 
+diff -aur mozilla-release/parser/htmlparser/src/nsExpatDriver.cpp mozilla-release.new/parser/htmlparser/src/nsExpatDriver.cpp
+--- mozilla-release/parser/htmlparser/src/nsExpatDriver.cpp	2012-02-08 15:16:38.000000000 +0100
++++ mozilla-release.new/parser/htmlparser/src/nsExpatDriver.cpp	2012-02-12 22:18:55.843813204 +0100
+@@ -962,7 +962,9 @@
+   if (mSink && shouldReportError) {
+     rv = mSink->ReportError(errorText.get(), 
+                             sourceText.get(), 
+-                            serr, 
++                            serr,
++                            lineNumber,
++                            colNumber,
+                             &shouldReportError);
+     if (NS_FAILED(rv)) {
+       shouldReportError = true;
+diff -aur mozilla-release/parser/xml/src/nsSAXXMLReader.cpp mozilla-release.new/parser/xml/src/nsSAXXMLReader.cpp
+--- mozilla-release/parser/xml/src/nsSAXXMLReader.cpp	2012-02-08 15:16:38.000000000 +0100
++++ mozilla-release.new/parser/xml/src/nsSAXXMLReader.cpp	2012-02-12 22:20:28.157148533 +0100
+@@ -335,6 +335,8 @@
+ nsSAXXMLReader::ReportError(const PRUnichar* aErrorText,
+                             const PRUnichar* aSourceText,
+                             nsIScriptError *aError,
++                            PRUint32 aLineNumber,
++                            PRUint32 aColNumber,
+                             bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff -aur mozilla-release/rdf/base/src/nsRDFContentSink.cpp mozilla-release.new/rdf/base/src/nsRDFContentSink.cpp
+--- mozilla-release/rdf/base/src/nsRDFContentSink.cpp	2012-02-08 15:16:38.000000000 +0100
++++ mozilla-release.new/rdf/base/src/nsRDFContentSink.cpp	2012-02-12 22:21:48.563816939 +0100
+@@ -579,6 +579,8 @@
+ RDFContentSinkImpl::ReportError(const PRUnichar* aErrorText, 
+                                 const PRUnichar* aSourceText,
+                                 nsIScriptError *aError,
++                                PRUint32 aLineNumber,
++                                PRUint32 aColNumber,
+                                 bool *_retval)
+ {
+   NS_PRECONDITION(aError && aSourceText && aErrorText, "Check arguments!!!");
+diff -aur mozilla-release/toolkit/content/widgets/menu.xml mozilla-release.new/toolkit/content/widgets/menu.xml
+--- mozilla-release/toolkit/content/widgets/menu.xml	2012-02-08 15:16:43.000000000 +0100
++++ mozilla-release.new/toolkit/content/widgets/menu.xml	2012-02-12 22:24:01.940486491 +0100
+@@ -224,6 +224,15 @@
+     </content>
+   </binding>
+ 
++  <binding id="menuitem-non-iconic-accel" extends="chrome://global/content/bindings/menu.xml#menuitem">
++    <content>
++      <xul:label class="menu-iconic-text" flex="1" xbl:inherits="value=label,accesskey,crop" crop="right"/>
++      <xul:hbox class="menu-accel-container" anonid="accel">
++        <xul:label class="menu-iconic-accel" xbl:inherits="value=acceltext"/>
++      </xul:hbox>
++    </content>
++  </binding>
++
+   <binding id="menuitem-iconic-noaccel" extends="chrome://global/content/bindings/menu.xml#menuitem">
+     <content>
+       <xul:hbox class="menu-iconic-left" align="center" pack="center"
+diff -aur mozilla-release/toolkit/content/xul.css mozilla-release.new/toolkit/content/xul.css
+--- mozilla-release/toolkit/content/xul.css	2012-02-08 15:16:43.000000000 +0100
++++ mozilla-release.new/toolkit/content/xul.css	2012-02-12 22:26:00.543822389 +0100
+@@ -351,6 +351,10 @@
+   -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-iconic");
+ }
+ 
++menuitem.menuitem-non-iconic-accel {
++  -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-non-iconic-accel");
++}
++
+ menuitem[description] {
+   -moz-binding: url("chrome://global/content/bindings/menu.xml#menuitem-iconic-desc-noaccel");
+ }
+diff -aur mozilla-release/toolkit/mozapps/extensions/content/extensions.js mozilla-release.new/toolkit/mozapps/extensions/content/extensions.js
+--- mozilla-release/toolkit/mozapps/extensions/content/extensions.js	2012-02-08 15:16:44.000000000 +0100
++++ mozilla-release.new/toolkit/mozapps/extensions/content/extensions.js	2012-02-12 22:32:49.973831246 +0100
+@@ -59,6 +59,7 @@
+ const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
+ const PREF_UI_TYPE_HIDDEN = "extensions.ui.%TYPE%.hidden";
+ const PREF_UI_LASTCATEGORY = "extensions.ui.lastCategory";
++const PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE = "extensions.closeOnEscape";
+ 
+ const BRANCH_REGEXP = /^([^\.]+\.[0-9]+[a-z]*).*/gi;
+ 
+@@ -122,6 +123,18 @@
+     return;
+   }
+   document.removeEventListener("load", initialize, true);
++
++  // should we allow the window to close when the user hits the ESC key?
++  let closeOnEscape = false; // default for Firefox 4+
++  try {
++    closeOnEscape = Services.prefs.getBoolPref(PREF_CLOSE_ADDONS_MANAGER_ON_ESCAPE);
++  } catch(e) { }
++  if (!closeOnEscape) {
++    let escapeKeyElt = document.getElementById("escapeKey");
++    if (escapeKeyElt)
++      escapeKeyElt.setAttribute("disabled", "true");
++  }
++
+   gViewController.initialize();
+   gCategories.initialize();
+   gHeader.initialize();
+@@ -2463,7 +2476,7 @@
+ 
+     for (let i = 0; i < this._listBox.itemCount; i++) {
+       let item = this._listBox.childNodes[i];
+-      if (item[prop] == aObj) {
++      if (prop in item && item[prop] == aObj) {
+         this._listBox.removeChild(item);
+         this.showEmptyNotice(this._listBox.itemCount == 0);
+         return;
+diff -aur mozilla-release/toolkit/mozapps/extensions/content/extensions.xul mozilla-release.new/toolkit/mozapps/extensions/content/extensions.xul
+--- mozilla-release/toolkit/mozapps/extensions/content/extensions.xul	2012-02-08 15:16:44.000000000 +0100
++++ mozilla-release.new/toolkit/mozapps/extensions/content/extensions.xul	2012-02-12 22:33:53.020499276 +0100
+@@ -65,6 +65,10 @@
+   <script type="application/javascript"
+           src="chrome://global/content/contentAreaUtils.js"/>
+ 
++  <keyset>
++    <key id="escapeKey" keycode="VK_ESCAPE" oncommand="window.close()"/>
++  </keyset>
++
+   <popupset>
+     <!-- menu for an addon item -->
+     <menupopup id="addonitem-popup">
+diff -aur mozilla-release/toolkit/mozapps/handling/nsContentDispatchChooser.js mozilla-release.new/toolkit/mozapps/handling/nsContentDispatchChooser.js
+--- mozilla-release/toolkit/mozapps/handling/nsContentDispatchChooser.js	2012-02-08 15:16:44.000000000 +0100
++++ mozilla-release.new/toolkit/mozapps/handling/nsContentDispatchChooser.js	2012-02-12 22:36:13.540502316 +0100
+@@ -101,12 +101,44 @@
+     params.appendElement(aURI, false);
+     params.appendElement(aWindowContext, false);
+     
++    // if a modal window is already shown, we need to open the app chooser
++    // as a modal window otherwise it will be unresponsive; bug 687423
++    var wm = Cc["@mozilla.org/appshell/window-mediator;1"].
++               getService(Ci.nsIWindowMediator);
++    var enumerator = wm.getXULWindowEnumerator(null);
++    var inModalState = false;
++    while (!inModalState && enumerator.hasMoreElements()) {
++      var win = enumerator.getNext();
++      var windowDocShell = win.QueryInterface(Ci.nsIXULWindow).docShell;
++  
++      var containedDocShells = windowDocShell.getDocShellEnumerator(
++                                        Ci.nsIDocShellTreeItem.typeChrome,
++                                        Ci.nsIDocShell.ENUMERATE_FORWARDS);
++
++      while (!inModalState && containedDocShells.hasMoreElements()) {
++        // Get the corresponding document for this docshell
++        var childDocShell = containedDocShells.getNext();
++
++        // We don't want it if it's not done loading.
++        if (childDocShell.busyFlags != Ci.nsIDocShell.BUSY_FLAGS_NONE)
++          continue;
++
++        // Ensure that we are only returning true if it is indeed modal
++        var chrome = win.QueryInterface(Ci.nsIInterfaceRequestor).
++                         getInterface(Ci.nsIWebBrowserChrome);
++        if (chrome.isWindowModal()) {
++          inModalState = true;
++        }
++      }
++    }
++
+     var ww = Cc["@mozilla.org/embedcomp/window-watcher;1"].
+              getService(Ci.nsIWindowWatcher);
+     ww.openWindow(window,
+                   CONTENT_HANDLING_URL,
+                   null,
+-                  "chrome,dialog=yes,resizable,centerscreen",
++                  "chrome,dialog=yes,resizable,centerscreen"
++                    + (inModalState ? ",modal" : ""),
+                   params);
+   },
+ 
+diff -aur mozilla-release/widget/src/cocoa/nsMenuItemX.mm mozilla-release.new/widget/src/cocoa/nsMenuItemX.mm
+--- mozilla-release/widget/src/cocoa/nsMenuItemX.mm	2012-02-08 15:16:49.000000000 +0100
++++ mozilla-release.new/widget/src/cocoa/nsMenuItemX.mm	2012-02-12 22:38:44.877172256 +0100
+@@ -282,6 +282,29 @@
+       PRUint8 modifiers = nsMenuUtilsX::GeckoModifiersForNodeAttribute(modifiersStr);
+ 
+       unsigned int macModifiers = nsMenuUtilsX::MacModifiersForGeckoModifiers(modifiers);
++      // If we're empty, try the keyCode instead.
++      if (keyChar.Equals(NS_LITERAL_STRING(" ")) || keyChar.IsEmpty()) {
++
++        keyContent->GetAttr(kNameSpaceID_None, nsGkAtoms::keycode, keyChar);
++
++        if (keyChar.Equals(NS_LITERAL_STRING("VK_F2"))) {
++          unichar ch[1];
++          ch[0] = NSF2FunctionKey;
++          macModifiers |= NSFunctionKeyMask;
++          [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
++          [mNativeMenuItem setKeyEquivalent:[NSString stringWithCharacters:ch length:1]];
++          return;
++        }
++        else if (keyChar.Equals(NS_LITERAL_STRING("VK_F4"))) {
++          unichar ch[1];
++          ch[0] = NSF4FunctionKey;
++          macModifiers |= NSFunctionKeyMask;
++          [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
++          [mNativeMenuItem setKeyEquivalent:[NSString stringWithCharacters:ch length:1]];
++          return;
++        }
++      }
++
+       [mNativeMenuItem setKeyEquivalentModifierMask:macModifiers];
+ 
+       NSString *keyEquivalent = [[NSString stringWithCharacters:(unichar*)keyChar.get()
+diff -aur mozilla-release/widget/src/gtk2/nsWindow.cpp mozilla-release.new/widget/src/gtk2/nsWindow.cpp
+--- mozilla-release/widget/src/gtk2/nsWindow.cpp	2012-02-08 15:16:49.000000000 +0100
++++ mozilla-release.new/widget/src/gtk2/nsWindow.cpp	2012-02-12 22:42:36.723843935 +0100
+@@ -4027,6 +4027,8 @@
+                 gdk_window_add_filter(gtk_widget_get_window(mShell),
+                                       popup_take_focus_filter, NULL); 
+ #endif
++                // XXX BlueGriffon ugly hack to work around bug 662770
++                gtk_window_set_modal(GTK_WINDOW(mShell), TRUE);
+             }
+ 
+             GdkWindowTypeHint gtkTypeHint;

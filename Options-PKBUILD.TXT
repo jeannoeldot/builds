@@ -1,0 +1,64 @@
+#########################################################################
+# ARCHITECTURE, COMPILE FLAGS
+#########################################################################
+#
+CARCH="x86_64"
+CHOST="x86_64-unknown-linux-gnu"
+
+#-- Exclusive: will only run on -march=x86-64 
+# -march (or -mcpu) builds exclusively for an architecture
+# -mtune optimizes for an architecture, but builds for whole processor family
+CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe"
+CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe"
+#-- Make Flags: change this for DistCC/SMP systems
+#MAKEFLAGS="-j2"
+
+options (array)
+           This array allows you to override some of makepkg’s default behavior when
+           building packages. To set an option, just include the option name in the
+           options array. To reverse the default behavior, place an “!” at the front of
+           the option. Only specify the options you specifically want to override, the
+           rest will be taken from linkman:makepkg.conf[5].  NOTE: force is a special
+           option only used in a linkman:PKGBUILD[5], do not use it unless you know
+           what you are doing.
+
+           strip
+               Strip symbols from binaries and libraries. If you frequently use a
+               debugger on programs or libraries, it may be helpful to disable this
+               option.
+
+           docs
+               Save doc and info directories. If you wish to delete doc and info
+               directories, specify !docs in the array.
+
+           libtool
+               Leave libtool (.la) files in packages. Specify !libtool to remove them.
+
+           emptydirs
+               Leave empty directories in packages.
+
+           zipman
+               Compress man pages with gzip.
+
+           ccache
+               Allow the use of ccache during build. More useful in its negative form
+               !ccache with select packages that have problems building with ccache.
+
+           distcc
+               Allow the use of distcc during build. More useful in its negative form
+               !distcc with select packages that have problems building with distcc.
+
+           makeflags
+               Allow the use of user-specific makeflags during build as specified in
+               linkman:makepkg.conf[5]. More useful in its negative form !makeflags
+               with select packages that have problems building with custom makeflags
+               such as -j2 (or higher).
+
+           force
+               Force the package to be upgraded by a pacman system upgrade operation,
+               even if the version number would normally not trigger such an upgrade.
+               This is useful when the version numbering scheme of a package changes
+               (or is alphanumeric). See linkman:pacman[8] for more infomation on
+               version comparisons.
+
+

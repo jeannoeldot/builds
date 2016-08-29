@@ -1,0 +1,110 @@
+<sect1 id="audiocdcdreating">
+	<title
+>Guide de démarrage : Graver un CD audio en 4 étapes </title>
+	<para
+>Ce guide de démarrage vous présente comment créer un CD audio à l'aide de &k3b;. Pour suivre ce guide vous avez besoin d'une version opérationnelle de &k3b; et d'un dossier contenant des fichiers audio. </para>
+	<sect2>
+		<title
+>Étape 1</title>
+		<para
+>Lorsque vous démarrez &k3b; vous devriez voir quelque chose comme ceci. <screenshot>
+				<screeninfo
+>Ici vous pouvez sélectionner l'un des quatre types de projets proposés par &k3b;</screeninfo>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="select_project.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase
+>Capture d'écran</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+		</para>
+	</sect2>
+	<sect2>
+		<title
+>Étape 2</title>
+		<para
+>Maintenant cliquez sur "Nouveau projet de CD audio" <screenshot>
+				<screeninfo
+>C'est une boîte de dialogue dans laquelle vous pouvez sélectionner les fichiers que vous voulez graver sur un CD</screeninfo>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="select_audiofiles.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase
+>Capture d'écran</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+		</para>
+		<para
+>Les fichiers que vous voyez dans la partie supérieur de &k3b; peuvent être glissés à l'aide de la souris vers la partie inférieure. Une autre méthode est de faire un clique du bouton droit de la souris sur un fichier et de sélectionner <action
+>Ajouter au projet</action
+>. Pour modifier l'ordre des pistes audio vous pouvez simplement déplacer les pistes à l'aide du bouton gauche de la souris. Les propriétés des pistes peuvent être modifiées en cliquant du &BDS; et en choisissant <action
+>Propriétés</action
+>. Dès que vous êtes satisfait de l'arrangement des pistes cliquez sur <action
+>Graver</action
+> dans le coin en bas à droite. </para>
+		<note>
+			<para
+>Lorsque vous gravez un CD audio depuis des <acronym
+>MP3</acronym
+>, ou d'autres formats de compression audio avec perte, souvenez vous que si vous encodez de nouveau ce CD en <acronym
+>MP3</acronym
+> vous obtiendrez une qualité moindre peut importe le taux d'échantillonnage choisi. Pour vérifier si un CD audio a été gravé depuis un format avec perte vous pouvez essayer <ulink url="http://true-audio.com/analyzer.project"
+>auCDtect</ulink
+>. </para>
+		</note>
+	</sect2>
+	<sect2>
+		<title
+>Étape 3</title>
+		<screenshot>
+			<screeninfo
+>C'est une boîte de dialogue dans laquelle vous pouvez décider de la configuration pour votre CD.</screeninfo>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="burndialog_audio.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase
+>Capture d'écran</phrase>
+				</textobject>
+			</mediaobject>
+		</screenshot>
+		<para
+>Dans cette boîte de dialogue vous pouvez modifier les paramètres de la gravure. Les paramètres par défaut de &k3b; sont certainement suffisant pour vous. Dans le coin supérieur droit vous pouvez contrôler la vitesse. Comme dernière étape avant la gravure vous pouvez donner au CD un titre en choisissant <guibutton
+>CD-Text</guibutton
+> et en sélectionnant <guilabel
+>Graver le CD-Text</guilabel
+>. Les deux qui sont les plus importants pour vous sont probablement le <guilabel
+>Titre</guilabel
+> et l'<guilabel
+>Auteur</guilabel
+>. Dès que vous êtes satisfait cliquez sur <guibutton
+>Graver</guibutton
+>. </para>
+	</sect2>
+	<sect2>
+		<title
+>Étape 4</title>
+		<para>
+			<screenshot>
+				<screeninfo
+>Dans cette boîte dialogue vous pouvez suivre l'état d'avancement de votre gravure</screeninfo>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="burndialog_progress.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase
+>Capture d'écran</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+Dans cette boîte de dialogue vous n'avez rien à faire. Attendez simplement que votre ordinateur est terminé la session. </para>
+	</sect2>
+</sect1>

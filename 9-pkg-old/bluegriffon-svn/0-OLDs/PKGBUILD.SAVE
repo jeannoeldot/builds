@@ -1,0 +1,41 @@
+package() {
+	cd "$srcdir"/mozilla-central
+
+#	make -j1 DESTDIR="$pkgdir" -C ff-pgo install
+	make DESTDIR="$pkgdir" -C ff-pgo install
+
+	install -Dm644 "$srcdir/mozilla-central/other-licenses/branding/firefox/mozicon128.png" \
+		"$pkgdir/usr/share/pixmaps/firefox.png"
+	install -Dm644 "$srcdir/firefox.desktop" \
+		"$pkgdir/usr/share/applications/firefox.desktop"
+	install -Dm644 "$srcdir/firefox-safe.desktop" \
+		"$pkgdir/usr/share/applications/firefox-safe.desktop"
+
+#Install fr.xpi
+	cd ${srcdir}
+	install -m755 -d ${pkgdir}/usr/lib/firefox-$_ffver/extensions/langpack-fr@firefox.mozilla.org
+	cp -R chrome ${pkgdir}/usr/lib/firefox-$_ffver/extensions/langpack-fr@firefox.mozilla.org
+	install -D -m644 chrome.manifest ${pkgdir}/usr/lib/firefox-$_ffver/extensions/langpack-fr@firefox.mozilla.org/
+	install -D -m644 install.rdf ${pkgdir}/usr/lib/firefox-$_ffver/extensions/langpack-fr@firefox.mozilla.org/
+
+	install -D -m644 firefox-default-prefs.js ${pkgdir}/usr/lib/firefox-$_ffver/defaults/pref/all-arch.js
+
+#  sed -e "s:general.useragent.locale\", \"en-US\":general.useragent.locale\", \"fr\":" \
+#    -i ${pkgdir}/usr/lib/firefox-$_ffver/defaults/pref/firefox.js \
+#    -i ${pkgdir}/usr/lib/firefox-$_ffver/defaults/pref/firefox-l10n.js
+
+# System extensions
+
+# Use the system hunspell dictionaries
+	#Remove included dictionaries, add symlink to system myspell path.
+	#Note: this will cause file conflicts when users have installed dictionaries in the old location
+	rm -rf "${pkgdir}/usr/lib/firefox-${_ffver}/dictionaries"
+	ln -sf /usr/share/myspell/dicts "${pkgdir}/usr/lib/firefox-${_ffver}/dictionaries"
+
+# ghost files
+
+	# Remove devel stuff.
+	rm -rf "$pkgdir/usr/include/"
+	rm -rf "$pkgdir/usr/lib/firefox-devel-$_ffver/"
+	rm -rf "$pkgdir/usr/share/idl/"
+}

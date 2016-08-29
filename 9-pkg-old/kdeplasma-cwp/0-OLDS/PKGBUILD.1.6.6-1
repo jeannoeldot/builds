@@ -1,0 +1,41 @@
+# Contributor: Carl Mueller  archlinux at carlm e4ward com
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=kdeplasma-cwp
+pkgver=1.6.6
+pkgrel=1
+pkgdesc="Customizable weather plasmoid for KDE4"
+arch=('i686' 'x86_64')
+url="http://www.kde-look.org/content/show.php/Customizable+Weather+Plasmoid?content=98925"
+license=('GPL')
+depends=('kdelibs' 'kdebase-runtime' 'kdebase-workspace')
+makedepends=('cmake' 'automoc4')
+source=(http://www.kde-look.org/CONTENT/content-files/98925-cwp-$pkgver.tar.bz2
+	fix-day-name-fr-temp-low-high.patch
+	fix-error-locale.patch
+)
+md5sums=('f42649f8ed201df44a21dbf887b8abad'
+	 '20805de9ca6c046f361f0516eacf46cf'
+	 '6162ab8e5f8a6367e25f64cf3de593ee'
+)
+build() {
+  cd "$srcdir/cwp-$pkgver"
+
+  # fix noms jours en FR et temp low / high
+  patch -Np1 -i "${srcdir}"/fix-day-name-fr-temp-low-high.patch
+
+  # fix error running command on input data:  "/bin/sh: warning: setlocale: LC_ALL: cannot change locale (utf-8)"
+  patch -Np1 -i "${srcdir}"/fix-error-locale.patch
+
+  mkdir build
+  cd build
+  cmake .. \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
+  make
+}
+
+package() {
+  cd "$srcdir/cwp-$pkgver/build"
+  make DESTDIR="$pkgdir/" install
+}

@@ -1,0 +1,12 @@
+diff -aur mozilla-1.9.1.pristine/browser/app/profile/firefox.js mozilla-1.9.1.new/browser/app/profile/firefox.js
+--- mozilla-1.9.1.pristine/browser/app/profile/firefox.js	2009-09-14 09:08:22.874815551 +0200
++++ mozilla-1.9.1.new/browser/app/profile/firefox.js	2009-09-14 09:12:16.461028393 +0200
+@@ -442,6 +442,8 @@
+ pref("font.language.group", "chrome://global/locale/intl.properties");
+ pref("intl.menuitems.alwaysappendaccesskeys","chrome://global/locale/intl.properties");
+ pref("intl.menuitems.insertseparatorbeforeaccesskeys","chrome://global/locale/intl.properties");
++// Use LANG environment variable to choose locale
++pref("intl.locale.matchOS", true);
+ 
+ // simple gestures support
+ pref("browser.gesture.swipe.left", "Browser:BackOrBackDuplicate");

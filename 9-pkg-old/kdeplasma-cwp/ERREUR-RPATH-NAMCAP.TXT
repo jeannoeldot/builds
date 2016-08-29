@@ -1,0 +1,7 @@
+jnd kdeplasma-cwp $ namcap kdeplasma-cwp-*-x86_64.pkg.tar.*
+kdeplasma-cwp W: Dependency included and not needed ('kdebase-runtime')
+kdeplasma-cwp W: Dependency included and not needed ('kdebase-workspace')
+
+jnd 00-repolocal $ namcap customizable-weather-plasmoid-0.9.9-2-x86_64.pkg.tar.gz
+customizable-weather-plasmoid W: Dependency included and not needed (kdebase-runtime)
+customizable-weather-plasmoid W: Dependency included and not needed (kdebase-workspace)

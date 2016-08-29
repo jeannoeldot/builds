@@ -1,0 +1,42 @@
+
+VOIR MAJ 4.9.0-5
+
+[gcc 4.9.0-4] Graphite loop optimizations unimplemented
+
+$ gcc -Q -O2 --help=optimizers
+The following options control optimizations:
+...
+  -fgraphite-identity                   [disabled]
+...
+  -floop-block                          [disabled]
+  -floop-interchange                    [disabled]
+  -floop-nest-optimize                  [disabled]
+  -floop-parallelize-all                [disabled]
+  -floop-strip-mine                     [disabled]
+...
+
+And compiling the git version of blender with these options, here is the error obtained:
+...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/blender-git/src/blender-build
+Scanning dependencies of target datatoc
+Scanning dependencies of target datatoc_icon
+[  0%] [  0%] Building C object source/blender/datatoc/CMakeFiles/datatoc_icon.dir/datatoc_icon.c.o
+Building C object source/blender/datatoc/CMakeFiles/datatoc.dir/datatoc.c.o
+/build/blender-git/src/blender/source/blender/datatoc/datatoc.c:1:0: sorry, unimplemented: Graphite loop optimizations cannot be used (-fgraphite, -fgraphite-identity, -floop-block, -floop-interchange, -floop-strip-mine, -floop-parallelize-all, and -ftree-loop-linear)
+ /*
+ ^
+/build/blender-git/src/blender/source/blender/datatoc/datatoc_icon.c:1:0: sorry, unimplemented: Graphite loop optimizations cannot be used (-fgraphite, -fgraphite-identity, -floop-block, -floop-interchange, -floop-strip-mine, -floop-parallelize-all, and -ftree-loop-linear)
+ /*
+ ^
+source/blender/datatoc/CMakeFiles/datatoc.dir/build.make:54: recipe for target 'source/blender/datatoc/CMakeFiles/datatoc.dir/datatoc.c.o' failed
+make[2]: *** [source/blender/datatoc/CMakeFiles/datatoc.dir/datatoc.c.o] Error 1
+CMakeFiles/Makefile2:213: recipe for target 'source/blender/datatoc/CMakeFiles/datatoc.dir/all' failed
+make[1]: *** [source/blender/datatoc/CMakeFiles/datatoc.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+...
+
+Arch: x86_64
+Linux: 3.14.6-1
+gcc 4.9.0-4

@@ -1,0 +1,53 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/yamp-weather-plasmoid
+
+
+1) FAIRE PATCH
+==========================
+
+cd src
+
+cp -R yawp-0.1.65 yawp-0.1.65.pristine
+
+cp -R yawp-0.1.65 yawp-0.1.65.new
+
+Faire modifications dans yawp-0.1.65.new
+
+diff -aur yawp-0.1.65.pristine yawp-0.1.65.new
+
+diff -aur yawp-0.1.65.pristine yawp-0.1.65.new > position-H-L-temp.patch
+
+!!! Vérifier patch !!!
+
+cd ..
+
+ls
+
+mv src/position-H-L-temp.patch position-H-L-temp.patch
+
+md5sum position-H-L-temp.patch
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+
+
+3) MAKEPKG
+============
+
+makepkg -s
+
+makepkg -f
+
+
+#La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

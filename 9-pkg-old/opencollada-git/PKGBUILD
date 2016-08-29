@@ -1,0 +1,50 @@
+# Maintainer: Liganic <liganic-aur@gmx.net>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=opencollada-git
+pkgver=20130401
+pkgrel=1
+pkgdesc="Stream based reader and writer library for COLLADA files"
+arch=(x86_64)
+url="https://github.com/KhronosGroup/OpenCOLLADA"
+license=('GPL')
+depends=('libxml2' 'pcre')
+makedepends=('ruby' 'cmake')
+provides=('opencollada')
+conflicts=('opencollada')
+install=opencollada.install
+source=("$pkgname-$pkgver.tar.gz"
+        "opencollada.conf"
+)
+md5sums=('60f1235455608fb03bf5a34cb44e758f'
+         '0d0ffa4d2f3b4558e11bf0e9b166972e'
+)
+
+_real_name="opencollada"
+
+build() {
+  cd ${srcdir}/${_real_name}
+
+  mkdir ${srcdir}/${_real_name}-build
+  cd ${srcdir}/${_real_name}-build
+  cmake	-DCMAKE_BUILD_TYPE=RELEASE \
+	-DCMAKE_SKIP_RPATH=ON \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+        -DUSE_STATIC=OFF \
+	-DUSE_SHARED=ON \
+	${srcdir}/${_real_name}
+  make ${MAKEFLAGS}
+}
+
+package() {
+  cd ${srcdir}/${_real_name}-build
+  make DESTDIR=${pkgdir} install
+
+  # add opencollada library path to ld.so.conf
+  install -Dm644 "$srcdir/${_real_name}.conf" "$pkgdir/etc/ld.so.conf.d/${_real_name}.conf"
+
+  # Binary
+  install -Dm755 bin/OpenCOLLADAValidator ${pkgdir}/usr/bin/OpenCOLLADAValidator
+}
+
+# vim:set ts=2 sw=2 et:

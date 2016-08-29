@@ -1,0 +1,95 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/bluegriffon-ubuntu
+
+
+URL:
+========
+http://bluegriffon.org/
+http://bluegriffon.org/pages/Download
+
+wget http://bluegriffon.org/freshmeat/1.7/bluegriffon-1.7.Ubuntu13.04-x86_64.tar.bz2
+
+MD5SUM : c4676b0794c4456aa1a5ccff5ca13c74  bluegriffon-1.7.Ubuntu13.04-x86_64.tar.bz2
+
+ls
+
+md5sum bluegriffon-1.7.Ubuntu13.04-x86_64.tar.bz2
+
+md5sum bluegriffon.desktop
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+pkgver=1.7
+pkgrel=1
+
+
+source=("http://bluegriffon.org/freshmeat/${pkgver}/bluegriffon-${pkgver}.Ubuntu13.04-$CARCH.tar.bz2"
+        'bluegriffon.desktop'
+)
+
+md5sums=('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+         'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+         'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+...
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/bluegriffon-ubuntu -n
+
+3) MAKEPKG en USER
+====================
+!!! EN USER
+cd /home/jnd/05-builds/bluegriffon-ubuntu
+makepkg -s
+
+makepkg -f
+
+voir : makepkg -R   , --repackage
+           Repackage contents of the package without rebuilding the package. This is useful if you forgot a depend or install
+           file in your PKGBUILD and the build itself will not change.
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+
+# Verifications...
+
+namcap bluegriffon-*-x86_64.pkg.tar.* > namcap.log
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/bluegriffon-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv bluegriffon-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -Syu bluegriffon
+!!! OU
+# pacman -R bluegriffon
+
+!!! EN USER
+rm -R ~/.disruptive\ innovations\ sarl/
+
+# pacman -S bluegriffon
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+============================================================
+ANCIENS
+========
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/bluegriffon-ubuntu
+

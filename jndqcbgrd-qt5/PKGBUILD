@@ -1,0 +1,27 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=jndqcbgrd-qt5
+pkgver=0.1.9
+pkgrel=1
+pkgdesc="Gestion Revenu Dépenses"
+arch=('i686' 'x86_64')
+url="https://github.com/jeannoeldot/jndqcbgrd-qt5"
+license=('GPL3')
+depends=('qt5-base' 'qt5-translations' 'ttf-linux-libertine' 'desktop-file-utils')
+makedepends=('qt5-base' 'qt5-translations' 'ttf-linux-libertine')
+provides=('jndqcbgrd')
+conflicts=('jndqcbgrd')
+source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+sha256sums=('ca7d38b720cfa316aa7bfe3509533222f10bc73288cdc308fd4c05a96adb4571')
+
+build() {
+      cd "${srcdir}/${pkgname}-${pkgver}"
+
+      qmake-qt5
+      make ${MAKEFLAGS}
+}
+
+package() {
+      cd "${srcdir}/${pkgname}-${pkgver}"
+      make INSTALL_ROOT="${pkgdir}" install
+}

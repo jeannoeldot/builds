@@ -1,0 +1,41 @@
+# QDevelop: Installer: Arch
+# Contributor: Chris Giles <Chris.G.27 (at) Gmail.com>
+# Original Maintainers and Contributors:
+# Contributor: Shaika-Dzari < shaikadzari at gmail dot com>
+# Zhukov Pavel <gelios@gmail.com>
+# Benjamin Kircher <benjamin.kircher@gmail.com>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=qdevelop
+pkgver=0.27.4
+pkgrel=5
+pkgdesc="A free and cross-platform IDE for Qt4"
+arch=('i686' 'x86_64')
+url="http://${pkgname}.org/"
+license='GPL2'
+depends=('qt')
+makedepends=('unzip')
+install=qdevelop.install
+source=(http://${pkgname}.org/public/release/${pkgname}-${pkgver}.tar.gz
+        'qdevelop.desktop')
+md5sums=('0ea8b3b2ed15bfa275d5c03f40cb871b'
+         'ade6437139807ca68c758c10913d6594')
+
+build() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+
+  # Init
+  #sed -i -e "s/free(allinherits)/delete [] allinherits/" src/QIComplete/tree.cpp || return 1
+
+  qmake || return 1
+  make || return 1
+}
+
+package() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+  make INSTALL_ROOT=${pkgdir} install || return 1
+
+  # Desktop
+  install -D ${srcdir}/${pkgname}.desktop ${pkgdir}/usr/share/applications/${pkgname}.desktop || return 1
+  install -D resources/images/logo.png ${pkgdir}/usr/share/pixmaps/${pkgname}.png || return 1
+}

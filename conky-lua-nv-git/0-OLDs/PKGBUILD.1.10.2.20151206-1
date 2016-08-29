@@ -1,0 +1,73 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=conky-lua-nv-git
+pkgver=1.10.2.20151206
+pkgrel=1
+pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
+arch=('i686' 'x86_64')
+url="https://github.com/brndnmtthws/conky"
+license=('GPL3' 'BSD')
+replaces=('torsmo' 'conky')
+conflicts=('conky' 'conky-lua')
+provides=('conky' 'conky-lua')
+depends=('alsa-lib' 'libxml2' 'curl' 'cairo' 'wireless_tools'
+		'libxft' 'glib2' 'libxdamage' 'imlib2' 'lua51' 'librsvg' 'tolua++'
+		'libxinerama'
+)
+makedepends=('docbook2x' 'libxnvctrl' 'perl-xml-libxml'
+             'docbook-xml' 'docbook-xsl' 'cmake' 'git'
+)
+optdepends=('nvidia: for GT4xx and newer GPUs',
+			'nvidia-340xx: for G8x, G9x, GT2xx GPUS',
+			'nvidia-304xx: for GeForce 6/7 GPUs'
+)
+source=($pkgname-$pkgver.tar.gz
+        'ascii.patch'
+        'fix-build.patch'
+)
+sha1sums=('eb885dc66725a08e3dee3b8f08d23cbf9e491a7b'
+          '8151366a12d7719fdb681d62907812cba90364d0'
+          '97f0d711dc65e3cdf0f1d05a288f0bfa62c9af10'
+)
+options=('!strip' 'debug')
+install=('conky-lua-nv-git.install')
+
+_gitname="conky"
+
+prepare() {
+  cd "${srcdir}/${_gitname}"
+  patch -Np1 -i "${srcdir}/ascii.patch"
+  patch -Np1 -i "${srcdir}/fix-build.patch"
+}
+
+build() {
+  cd "${srcdir}/${_gitname}"
+
+  cmake \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D MAINTAINER_MODE=ON \
+    -D BUILD_CURL=ON \
+    -D BUILD_LUA_RSVG=ON \
+    -D BUILD_LUA_CAIRO=ON \
+    -D BUILD_LUA_IMLIB2=ON \
+    -D BUILD_IMLIB2=ON \
+    -D BUILD_RSS=ON \
+    -D BUILD_WEATHER_METAR=ON \
+    -D BUILD_WEATHER_XOAP=ON \
+    -D BUILD_WLAN=ON \
+    -D BUILD_NVIDIA=ON \
+    -D BUILD_XDBE=ON \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    .
+
+  make
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+  make DESTDIR="${pkgdir}" install
+  install -D -m644 COPYING "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  install -D -m644 LICENSE.BSD "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE.BSD
+  install -D -m644 extras/vim/syntax/conkyrc.vim "${pkgdir}"/usr/share/vim/vimfiles/syntax/conkyrc.vim
+  install -D -m644 extras/vim/ftdetect/conkyrc.vim "${pkgdir}"/usr/share/vim/vimfiles/ftdetect/conkyrc.vim
+}

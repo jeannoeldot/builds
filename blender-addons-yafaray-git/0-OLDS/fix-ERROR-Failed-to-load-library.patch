@@ -1,0 +1,16 @@
+diff -aur YafaRay/Blender-Exporter/__init__.py YafaRay.new/Blender-Exporter/__init__.py
+--- YafaRay/Blender-Exporter/__init__.py	2016-01-01 16:09:46.000000000 +0100
++++ YafaRay.new/Blender-Exporter/__init__.py	2016-01-01 16:16:37.881053852 +0100
+@@ -70,10 +70,10 @@
+     dllArray = ['libyafaraycore.dylib', 'libyafarayplugin.dylib']
+ else:
+     if sys.maxsize == 2**63 - 1:    # Linux 64bit system
+-        dllArray = ['libHalf.so.6.0.0', 'libIex.so.6.0.0', 'libImath.so.6.0.0', 'libIlmThread.so.6.0.0', 'libIlmImf.so.6.0.0', 'libpython3.4m.so.1.0', 'libjpeg.so.62.0.0', 'libz.so.1.2.3.4', 'libpng12.so.0.44.0', 'libtiff.so.4.3.3', 'libfreetype.so.6.6.0', 'libyafaraycore.so', 'libyafarayplugin.so']
++        dllArray = ['libyafaraycore.so', 'libyafarayplugin.so']
+ 
+     else:   # Linux 32bit system
+-        dllArray = ['libHalf.so.6.0.0', 'libIex.so.6.0.0', 'libImath.so.6.0.0', 'libIlmThread.so.6.0.0', 'libIlmImf.so.6.0.0', 'libpython3.4m.so.1.0', 'libjpeg.so.62.0.0', 'libz.so.1.2.3.4', 'libpng12.so.0.44.0', 'libtiff.so.4.3.3', 'libfreetype.so.6.6.0', 'libyafaraycore.so', 'libyafarayplugin.so']
++        dllArray = ['libyafaraycore.so', 'libyafarayplugin.so']
+ 
+ for dll in dllArray:
+     try:

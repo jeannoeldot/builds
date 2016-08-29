@@ -1,0 +1,146 @@
+# Le répertoire
+cd /home/jnd/05-builds/gcc47-isl
+
+1) SOURCES
+===========
+1-1) Download snapshot
+----------------------
+cd 0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/isl.tar.gz
+
+tar -xzf isl.tar.gz
+
+cd ..
+
+mv -vf 0-AUR/isl/PKGBUILD .
+
+1-2) Download source
+----------------------
+wget http://isl.gforge.inria.fr/isl-0.15.tar.xz
+
+sha256sum isl-0.15.tar.xz
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=isl
+pkgver=0.15
+pkgrel=1
+
+source=(isl-0.15.tar.xz
+)
+sha256sums=('104a608839771d809558f5fd7533ca1a3b8ee5a667c5dcd9dc3499bf0a1522d5'
+)
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 82935453 10 déc.  15:17 isl-0.15.tar.xz
+-rw-r--r--  1 jnd users     3774 10 déc.  15:50 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-2) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/gcc47-isl/{PKGBUILD,isl-0.15.tar.xz} . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/gcc47-isl \
+&& cp -v /tmp/build/isl-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/gcc47-isl && rm -rf /tmp/build
+
+
+3-3) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-4) MAKEPKG en USER sur SSD
+============================
+
+cd /home/jnd/05-builds/gcc47-isl
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap isl-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/isl-*-x86_64.pkg.tar.*
+
+$ cp -v isl-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /home/jnd/00-repolocal
+---------------------------------------------------------------
+$ mv -v /home/jnd/00-repolocal/isl-*-x86_64.pkg.tar.* \
+/home/jnd/00-repolocal/pkg-OLD/
+
+$ mv -v isl-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i isl-0.15.tar.xz
+$ rm -f 0-AUR/isl.tar.gz
+$ rm -rf 0-AUR/isl
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!! PAS D'INSTALLATION : POUR COMPILER CLOOG GCC47 ET  AMAYA
+
+
+=========================================================================================
+ANCIEN
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

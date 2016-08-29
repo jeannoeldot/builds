@@ -1,0 +1,200 @@
+diff -aur osl/CMakeLists.txt osl.new/CMakeLists.txt
+--- osl/CMakeLists.txt	2015-06-28 09:03:27.000000000 +0200
++++ osl.new/CMakeLists.txt	2015-06-28 09:09:59.978384538 +0200
+@@ -186,6 +186,7 @@
+     set (USE_LLVM_BITCODE ON CACHE BOOL "Generated embedded LLVM bitcode")
+ endif ()
+ set (USE_PARTIO ON CACHE BOOL "Use Partio if found")
++set (USE_MCJIT OFF CACHE BOOL "Use LLVM MCJIT (if no, then use old JIT)")
+ set (USE_FAST_MATH ON CACHE BOOL "Use fast math approximations (if no, then use system math library)")
+ set (OSL_BUILD_CPP11 OFF CACHE BOOL "Compile in C++11 mode")
+ set (OSL_BUILD_LIBCPLUSPLUS OFF CACHE BOOL "Compile with clang libc++")
+@@ -201,6 +202,10 @@
+     add_definitions ("-DUSE_EXTERNAL_PUGIXML")
+ endif ()
+ 
++if (USE_MCJIT)
++    add_definitions ("-DUSE_MCJIT=1")
++endif ()
++
+ if (USE_FAST_MATH)
+ 	add_definitions ("-DOSL_FAST_MATH=1")
+ else ()
+diff -aur osl/Makefile osl.new/Makefile
+--- osl/Makefile	2015-06-28 09:03:27.000000000 +0200
++++ osl.new/Makefile	2015-06-28 09:15:58.921361852 +0200
+@@ -131,6 +131,10 @@
+ MY_CMAKE_FLAGS += -DUSE_EXTERNAL_PUGIXML:BOOL=${USE_EXTERNAL_PUGIXML} -DPUGIXML_HOME=${PUGIXML_HOME}
+ endif
+ 
++ifneq (${USE_MCJIT},)
++MY_CMAKE_FLAGS += -DUSE_MCJIT:BOOL=${USE_MCJIT}
++endif
++
+ ifdef DEBUG
+ MY_CMAKE_FLAGS += -DCMAKE_BUILD_TYPE:STRING=Debug
+ endif
+@@ -326,6 +330,7 @@
+ 	@echo "      LLVM_NAMESPACE=xx        Specify custom LLVM namespace"
+ 	@echo "      LLVM_STATIC=1            Use static LLVM libraries"
+ 	@echo "      USE_LLVM_BITCODE=0       Don't generate embedded LLVM bitcode"
++	@echo "      USE_MCJIT=1              Use LLVM MCJIT (default: use old JIT)"
+ 	@echo "  OSL build-time options:"
+ 	@echo "      NAMESPACE=name           Wrap OSL APIs in another namespace"
+ 	@echo "      USE_FAST_MATH=1          Use faster, but less accurate math (set to 0 for libm defaults)"
+diff -aur osl/src/cmake/externalpackages.cmake osl.new/src/cmake/externalpackages.cmake
+--- osl/src/cmake/externalpackages.cmake	2015-06-28 09:03:27.000000000 +0200
++++ osl.new/src/cmake/externalpackages.cmake	2015-06-28 09:21:09.441689266 +0200
+@@ -200,9 +200,13 @@
+     message (STATUS "LLVM dir      = ${LLVM_DIRECTORY}")
+ endif ()
+ 
+-find_library ( LLVM_MCJIT_LIBRARY
++if (USE_MCJIT)
++    find_library ( LLVM_MCJIT_LIBRARY
+                    NAMES LLVMMCJIT
+                    PATHS ${LLVM_LIB_DIR})
++else ()
++    set (LLVM_MCJIT_LIBRARY "")
++endif ()
+ 
+ if (NOT LLVM_FIND_QUIETLY)
+     message (STATUS "LLVM includes = ${LLVM_INCLUDES}")
+@@ -225,9 +229,10 @@
+     # if static LLVM libraries were requested, use llvm-config to generate
+     # the list of what libraries we need, and substitute that in the right
+     # way for LLVM_LIBRARY.
+-    execute_process (COMMAND ${LLVM_CONFIG} --libfiles
++    execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
+                      OUTPUT_VARIABLE LLVM_LIBRARY
+                      OUTPUT_STRIP_TRAILING_WHITESPACE)
++    string (REPLACE "\n" " " LLVM_LIBRARY ${LLVM_LIBRARY})
+     string (REPLACE " " ";" LLVM_LIBRARY ${LLVM_LIBRARY})
+   endif ()
+   if (NOT LLVM_FIND_QUIETLY)
+diff -aur osl/src/liboslexec/llvm_util.cpp osl.new/src/liboslexec/llvm_util.cpp
+--- osl/src/liboslexec/llvm_util.cpp	2015-06-28 09:03:27.000000000 +0200
++++ osl.new/src/liboslexec/llvm_util.cpp	2015-06-28 09:33:53.562700115 +0200
+@@ -33,16 +33,7 @@
+ #include "OSL/llvm_util.h"
+ 
+ #ifndef USE_MCJIT
+-  // MCJIT first appeared with LLVM 3.3
+-# define USE_MCJIT (OSL_LLVM_VERSION>=33)
+-#endif
+-
+-// MCJIT is mandatory for LLVM 3.6 and beyond, no more old JIT
+-#define MCJIT_REQUIRED (USE_MCJIT >= 2 || OSL_LLVM_VERSION >= 36)
+-
+-#if MCJIT_REQUIRED
+-# undef USE_MCJIT
+-# define USE_MCJIT 2
++#define USE_MCJIT 0
+ #endif
+ 
+ #if OSL_LLVM_VERSION >= 33
+@@ -58,11 +49,11 @@
+ # if OSL_LLVM_VERSION >= 35
+ #   include <llvm/Linker/Linker.h>
+ #   include <llvm/Support/FileSystem.h>
++#   include <llvm/Support/ErrorOr.h>
+ # else
+ #   include <llvm/Linker.h>
+ # endif
+ # if OSL_LLVM_VERSION >= 34
+-#   include <llvm/Support/ErrorOr.h>
+ #   include <llvm/IR/LegacyPassManager.h>
+ # else
+ #   include <llvm/PassManager.h>
+@@ -95,8 +86,10 @@
+ #include <llvm/ExecutionEngine/GenericValue.h>
+ #if USE_MCJIT
+ # include <llvm/ExecutionEngine/MCJIT.h>
++# include <llvm/ExecutionEngine/JIT.h>
++#else
++# include <llvm/ExecutionEngine/JIT.h>
+ #endif
+-#include <llvm/ExecutionEngine/JIT.h>
+ #include <llvm/ExecutionEngine/JITMemoryManager.h>
+ #include <llvm/Support/raw_ostream.h>
+ #include <llvm/Support/TargetSelect.h>
+@@ -307,7 +300,7 @@
+ 
+ 
+ LLVM_Util::LLVM_Util (int debuglevel)
+-    : m_debug(debuglevel), m_mcjit(MCJIT_REQUIRED), m_thread(NULL),
++    : m_debug(debuglevel), m_thread(NULL),
+       m_llvm_context(NULL), m_llvm_module(NULL),
+       m_builder(NULL), m_llvm_jitmm(NULL),
+       m_current_function(NULL),
+@@ -438,25 +431,19 @@
+     if (err)
+         err->clear();
+ 
+-#if OSL_LLVM_VERSION >= 36
+-    llvm::MemoryBufferRef buf =
+-        llvm::MemoryBufferRef(llvm::StringRef(bitcode, size), name));
+-#else /* LLVM 3.5 or earlier */
+     llvm::MemoryBuffer* buf =
+         llvm::MemoryBuffer::getMemBuffer (llvm::StringRef(bitcode, size), name);
+-#endif
+ 
+     // Load the LLVM bitcode and parse it into a Module
+     llvm::Module *m = NULL;
+ 
+ #if USE_MCJIT /* Parse the whole thing now */
+-    if (mcjit() || MCJIT_REQUIRED) {
+-        // FIXME!! Using MCJIT should not require unconditionally parsing
+-        // the bitcode. But for now, when using getLazyBitcodeModule to
+-        // lazily deserialize the bitcode, MCJIT is unable to find the
+-        // called functions due to disagreement about whether a leading "_"
+-        // is part of the symbol name.
+-  #if OSL_LLVM_VERSION >= 35
++    // FIXME!! Using MCJIT should not require unconditionally parsing the
++    // bitcode. But for now, when using getLazyBitcodeModule to lazily
++    // deserialize the bitcode, MCJIT is unable to find the called functions
++    // due to disagreement about whether a leading "_" is part of the symbol
++    // name.
++  #if !defined(LLVM_3_2) && !defined(LLVM_3_3) && !defined(LLVM_3_4) // LLVM 3.5+
+         llvm::ErrorOr<llvm::Module *> ModuleOrErr = llvm::parseBitcodeFile (buf, context());
+         if (std::error_code EC = ModuleOrErr.getError())
+             if (err)
+@@ -465,22 +452,16 @@
+   #else
+         m = llvm::ParseBitcodeFile (buf, context(), err);
+   #endif
+-  #if OSL_LLVM_VERSION < 36
+-        delete buf;
+-  #endif
+-    }
+-    else
+-#endif
+-    {
+-        // Create a lazily deserialized IR module
+-        // This can only be done for old JIT
++    delete buf;
++#else
++    // Create a lazily deserialized IR module
+ # if OSL_LLVM_VERSION >= 35
+-        m = llvm::getLazyBitcodeModule (buf, context()).get();
++    m = llvm::getLazyBitcodeModule (buf, context()).get();
+ # else
+-        m = llvm::getLazyBitcodeModule (buf, context(), err);
++    m = llvm::getLazyBitcodeModule (buf, context(), err);
++    // don't delete buf, the module has taken ownership of it
+ # endif
+-        // don't delete buf, the module has taken ownership of it
+-    }
++#endif
+ 
+     // Debugging: print all functions in the module
+     // for (llvm::Module::iterator i = m->begin(); i != m->end(); ++i)
+@@ -522,7 +503,7 @@
+                             .setErrorStr(err)
+                             .setJITMemoryManager(jitmm())
+                             .setOptLevel(llvm::CodeGenOpt::Default)
+-                            .setUseMCJIT(mcjit() || MCJIT_REQUIRED)
++                            .setUseMCJIT(USE_MCJIT)
+                             .create();
+ #else
+     m_llvm_exec = llvm::ExecutionEngine::createJIT (module(), err,

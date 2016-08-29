@@ -1,0 +1,137 @@
+1) Faire rep en USER
+====================
+cd /home/jnd/05-builds
+mkdir 0-chroot
+
+2-a) Suppression
+=================
+$ su -
+mot de passe
+# cd
+# cd /home/jnd/05-builds
+# cd 0-chroot
+# ls
+=> copy  root
+# rm -rf *
+# cd ..
+
+2-b) Mettre en place le chroot
+============================
+$ su -
+mot de passe
+# cd
+# pacman -S aufs2 aufs2-util
+# cd /home/jnd/05-builds
+
+# mkarchroot -C /etc/pacman.conf -M /etc/makepkg.conf 0-chroot/root base base-devel sudo namcap
+
+:: Synchronizing package databases...                                                                                                       
+ core                                                      102.1K  479.7K/s 00:00:00 [################################################] 100%
+ extra                                                    1179.6K  587.9K/s 00:00:02 [################################################] 100%
+ community                                                1013.7K  585.5K/s 00:00:02 [################################################] 100%
+ multilib                                                   68.4K  435.7K/s 00:00:00 [################################################] 100%
+ repolocal                                                   4.5K  266.6K/s 00:00:00 [################################################] 100%
+ archlinuxfr                                                28.0K  302.8K/s 00:00:00 [################################################] 100%
+:: There are 56 members in group base:                                                                                                      
+:: Repository core                                                                                                                          
+   1) bash  2) bzip2  3) coreutils  4) cronie  5) cryptsetup  6) device-mapper  7) dhcpcd  8) diffutils  9) e2fsprogs  10) file             
+   11) filesystem  12) findutils  13) gawk  14) gcc-libs  15) gettext  16) glibc  17) grep  18) grub  19) gzip  20) heirloom-mailx          
+   21) inetutils  22) initscripts  23) iputils  24) jfsutils  25) less  26) licenses  27) linux  28) logrotate  29) lvm2  30) man-db        
+   31) man-pages  32) mdadm  33) nano  34) pacman  35) pciutils  36) pcmciautils  37) perl  38) ppp  39) procps  40) psmisc                 
+   41) reiserfsprogs  42) sed  43) shadow  44) sysfsutils  45) syslog-ng  46) sysvinit  47) tar  48) texinfo  49) udev  50) usbutils        
+   51) util-linux  52) vi  53) wget  54) which  55) wpa_supplicant  56) xfsprogs                                                            
+                                                                                                                                            
+Enter a selection (default=all):                                                                                                            
+:: There are 12 members in group base-devel:                                                                                                
+:: Repository core                                                                                                                          
+   1) autoconf  2) automake  3) binutils  4) bison  5) fakeroot  6) flex  7) gcc  8) libtool  9) m4  10) make  11) patch  12) pkg-config    
+                                                                                                                                            
+Enter a selection (default=all):                                                                                                            
+resolving dependencies...                                                                                                                   
+looking for inter-conflicts...                                                                                                              
+                                                                                                                                            
+Targets (125): linux-api-headers-3.1.6-1  tzdata-2011n-1  glibc-2.15-3  ncurses-5.9-2  readline-6.2.002-1  bash-4.2.020-1  bzip2-1.0.6-3    
+               gcc-libs-4.6.2-5  db-5.3.15-1  zlib-1.2.5-4  cracklib-2.8.18-2  libgssglue-0.3-1  libtirpc-0.2.2-2  pam-1.1.5-2              
+               attr-2.4.46-1  acl-2.2.51-1  shadow-4.1.4.3-5  gmp-5.0.2-3  libcap-2.22-2  coreutils-8.15-1  run-parts-4.0.4-1               
+               cronie-1.4.8-1  iana-etc-2.30-2  filesystem-2011.12-2  util-linux-2.20.1-2  libusb-1.0.8-2  libusb-compat-0.1.3-2            
+               pcre-8.21-1  libffi-3.0.10-1  glib2-2.30.2-1  module-init-tools-3.16-3  pciutils-3.1.8-1  udev-175-1                         
+               device-mapper-2.02.88-1  libgpg-error-1.10-1  libgcrypt-1.5.0-1  popt-1.16-4  cryptsetup-1.4.1-1  dhcpcd-5.2.12-4            
+               diffutils-3.2-1  e2fsprogs-1.41.14-2  file-5.10-1  findutils-4.4.2-4  gawk-4.0.0-2  gettext-0.18.1.1-4  grep-2.10-1          
+               sed-4.2.1-4  grub-0.97-21  gzip-1.4-4  gdbm-1.10-1  perl-5.14.2-6  openssl-1.0.0.f-1  libsasl-2.1.23-9  libfetch-2.33-3      
+               libldap-2.4.28-2  keyutils-1.5.5-1  krb5-1.9.2-2  heirloom-mailx-12.5-3  inetutils-1.9-1  iproute2-3.2.0-1  kbd-1.15.3-2     
+               sysvinit-2.88-3  initscripts-2012.01.2-1  sysfsutils-2.1.0-7  iputils-20101006-2  jfsutils-1.1.15-3  less-444-2              
+               licenses-2.9-1  linux-firmware-20111101-1  mkinitcpio-busybox-1.19.2-1  xz-5.0.3-1  expat-2.0.1-7  libarchive-2.8.5-2        
+               mkinitcpio-0.8.0-3  linux-3.1.9-1  logrotate-3.8.1-1  lvm2-2.02.88-1  texinfo-4.13a-7  groff-1.21-2  libpipeline-1.2.0-2     
+               man-db-2.6.0.2-3  man-pages-3.35-1  mdadm-3.2.2-4  nano-2.2.6-2  pacman-mirrorlist-20111026-1  pacman-3.5.4-4                
+               pcmciautils-018-1  libnl-1.1-3  libpcap-1.2.1-1  ppp-2.4.5-3  procps-3.2.8-4  psmisc-22.14-1  reiserfsprogs-3.6.21-4         
+               eventlog-0.2.12-3  syslog-ng-3.3.3-1  tar-1.26-2  usbutils-004-1  vi-1:050325-2  wget-1.13.4-1  which-2.20-5                 
+               dbus-core-1.4.16-1  wpa_supplicant-0.7.3-4  xfsprogs-3.1.7-1  m4-1.4.16-2  autoconf-2.68-2  automake-1.11.2-1                
+               binutils-2.22-4  bison-2.5-3  fakeroot-1.18.2-1  flex-2.5.35-5  mpfr-3.1.0.p3-1  libmpc-0.9-2  isl-0.07-1  cloog-0.16.3-1    
+               ppl-0.11.2-2  gcc-4.6.2-5  libltdl-2.4.2-2  libtool-2.4.2-2  make-3.82-4  patch-2.6.1-3  pkg-config-0.26-2  sudo-1.8.3.p1-1  
+               python-3.2.2-2  pyalpm-0.4.3-1  namcap-3.1-1                                                                                 
+                                                                                                                                            
+Total Download Size:    0.45 MB                                                                                                             
+Total Installed Size:   591.76 MB                                                                                                           
+
+Proceed with installation? [Y/n]                                                                                                            
+:: Retrieving packages from core...                                                                                                         .....
+
+.....
+
+Generating locales...                                                                                                                       
+  de_DE.UTF-8... done                                                                                                                       
+  en_US.UTF-8... done                                                                                                                       
+Generation complete.                                                                                                                        
+
+# cd 0-chroot/root/etc/pacman.d
+# cp mirrorlist mirrorlist.backup.moi
+# nano mirrorlist
+ => enlever Server inutiles
+OU
+# cd
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/mirrorlist /home/jnd/05-builds/0-chroot/root/etc/pacman.d/mirrorlist
+
+# cd /home/jnd/05-builds/0-chroot/root/etc
+# nano pacman.conf
+ => mettre #[repolocal] et #Server = file:///home/jnd/00-repolocal
+ => creer repo local AVANT core, extra, ...
+[local]
+Server = file:///repo
+OU
+# cd
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/pacman.conf /home/jnd/05-builds/0-chroot/root/etc/pacman.conf
+
+!!! NE FONCTIONNE PAS !!!
+# cd /home/jnd/05-builds/0-chroot/root/etc
+# nano makepkg.conf
+ => #PKGDEST=/home/packages
+ => PKGDEST=/home/jnd/05-builds/0-pkg-dest
+OU
+!!! PLUS NECESSAIRE !!!
+# cd
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/makepkg.conf /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf
+
+
+!!! A NE FAIRE QUE LA 1 ERE FOIS
+# cd
+# cd /home/jnd/05-builds/0-chroot/root
+# mkdir repo
+# chmod 777 repo
+COPIER FICHIERS
+# cd
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/repo/*.pkg.tar.* /home/jnd/05-builds/0-chroot/root/repo/
+
+!!! EN USER !!!
+$ cd
+$ maj-repochroot.sh
+
+ => Mise a Jour
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+--------------------------------------------------------------------
+
+!!! SI PROBLEME
+====================
+
+# killall -9 makechrootpkg
+

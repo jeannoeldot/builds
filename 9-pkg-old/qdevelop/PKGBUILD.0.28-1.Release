@@ -1,0 +1,46 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=qdevelop
+pkgver=0.28
+pkgrel=1
+pkgdesc="A free and cross-platform IDE for Qt4"
+arch=('i686' 'x86_64')
+url="http://biord-software.org/fr/qdevelop/"
+license='GPL'
+depends=('qt')
+makedepends=('unzip' 'cmake')
+optdepends=('ctags: for code completion and class browser'
+            'gdb: for debugging functionalities'
+)
+install=qdevelop.install
+source=("http://biord-software.org/downloads/${pkgname}-v${pkgver}.tar.gz"
+	"qt47.patch"
+	)
+md5sums=('24e64bd80dd7407a885acd639b59a740'
+	 'dc14b87a849b71ae3ac476e49c7d87e9'
+	)
+
+build() {
+  cd ${srcdir}/${pkgname}-v${pkgver}
+  patch -p1 -i "${srcdir}"/qt47.patch
+  mkdir build
+  cd build
+  cmake .. \
+	-DCMAKE_BUILD_TYPE=RELEASE \
+	-DAUTOPLUGINS=1 \
+	-DCMAKE_SKIP_RPATH=ON \
+	-DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,--hash-style=gnu' \
+	-DCMAKE_INSTALL_PREFIX=/usr
+
+  make
+}
+
+package() {
+  cd ${srcdir}/${pkgname}-v${pkgver}/build
+  make DESTDIR=${pkgdir} install
+
+  # Desktop
+  cd ${srcdir}/${pkgname}-v${pkgver}
+  install -D ${pkgname}.desktop ${pkgdir}/usr/share/applications/${pkgname}.desktop
+  install -D resources/images/logo.png ${pkgdir}/usr/share/pixmaps/${pkgname}.png
+}

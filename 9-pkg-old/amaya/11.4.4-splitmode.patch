@@ -1,0 +1,12 @@
+diff -aur Amaya11.4.4/Amaya/thotlib/dialogue/AmayaPage.cpp Amaya11.4.4.new/Amaya/thotlib/dialogue/AmayaPage.cpp
+--- Amaya11.4.4/Amaya/thotlib/dialogue/AmayaPage.cpp	2009-09-09 12:11:03.000000000 +0200
++++ Amaya11.4.4.new/Amaya/thotlib/dialogue/AmayaPage.cpp	2012-02-13 08:27:56.543474591 +0100
+@@ -383,7 +383,7 @@
+ 					    /*| wxSP_PERMIT_UNSPLIT*/
+ #endif /* 0 */
+ 					    );
+-  SetSplitMode(0); // undefined
++  SetSplitMode(wxSPLIT_VERTICAL); // undefined not allowed
+   p_sizerTop2->Add( m_pSplitterWindow, 1, wxEXPAND, 0 );
+ 
+ 

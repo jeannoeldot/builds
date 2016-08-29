@@ -1,0 +1,28 @@
+=====================================================================
+TEST : COMPILE DS TMP ( RAMFS )
+=====================================================================
+
+!!! EN USER
+==============
+
+$ cd /home/jnd/05-builds/blender-svn
+
+$ rm -f *~
+
+
+$ cd
+
+$ mkdir /tmp/00-jnd-builds
+
+$ cp /home/jnd/05-builds/blender-svn/* /tmp/00-jnd-builds/
+
+$ cd /tmp/00-jnd-builds
+
+$ makepkg -s
+
+$ mv -v *-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+$ cd
+
+$ rm -rf /tmp/00-jnd-build
+

@@ -1,0 +1,73 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+pkgname=blender-svn
+pkgver=2.66.55866
+pkgrel=1
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('i686' 'x86_64')
+url="http://blender.org/"
+depends=('libjpeg' 'libpng' 'openjpeg' 'libtiff' 'openexr' 
+	 'libgl' 'mesa' 'python'
+	 'libsamplerate' 'ffmpeg' 'fftw' 'freeglut'
+         'openal' 'freetype2' 'sdl' 'libsndfile' 'jack'
+         'eigen' 'glew'
+	 'libxi' 'libxmu'
+	 'gettext' 'desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils' 'boost-libs'
+         'opencolorio'
+         'opencollada-git'
+)
+makedepends=('cmake' 'boost' 'mesa')
+provides=('blender')
+license=('GPL')
+install=blender.install
+source=($pkgname-$pkgver.tar.gz
+)
+md5sums=('e0cd843877ddc34393de9614859a5b69'
+)
+
+_svnmod="blender"
+_slot="2.66"
+
+build() {
+  cd ${srcdir}/${_svnmod}
+
+  # compile blender
+  mkdir ${srcdir}/${_svnmod}-build
+  cd ${srcdir}/${_svnmod}-build
+  cmake	-DCMAKE_BUILD_TYPE=RELEASE \
+	-DCMAKE_SKIP_RPATH=ON \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DWITH_GAMEENGINE=OFF \
+	-DWITH_MOD_OCEANSIM=ON \
+	-DWITH_CODEC_FFMPEG=ON \
+	-DWITH_CODEC_SNDFILE=ON \
+	-DWITH_OPENCOLLADA=ON \
+	-DWITH_JACK=ON \
+	-DWITH_INPUT_NDOF=OFF \
+	-DWITH_CYCLES=OFF \
+        -DWITH_INSTALL_PORTABLE=OFF \
+	-DWITH_PYTHON_INSTALL=OFF \
+        -DWITH_PYTHON_INSTALL_NUMPY=OFF \
+	-DPYTHON_VERSION=3.3 \
+	-DPYTHON_LIBPATH=/usr/lib \
+	-DPYTHON_LIBRARY=python3.3m \
+	-DPYTHON_INCLUDE_DIRS=/usr/include/python3.3m \
+	${srcdir}/${_svnmod}
+  make ${MAKEFLAGS}
+
+}
+
+package() {
+  # Blender
+  cd ${srcdir}/${_svnmod}-build
+  make DESTDIR=${pkgdir} install
+
+  # voir Extra
+  python -m compileall "${pkgdir}/usr/share/blender"
+
+  # FIX: making all python scripts readable only by group 'users',
+  #      so nobody can modify scripts apart root user, but python
+  #      cache (*.pyc) can be written and shared across the users.
+  #chown root:users -R "${D}/usr/share/${PN}/${SLOT}/scripts"
+  #chmod 750 -R "${D}/usr/share/${PN}/${SLOT}/scripts"
+
+}

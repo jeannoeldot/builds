@@ -1,0 +1,20 @@
+
+
+
+
+Linking CXX executable ../bin/OpenCOLLADAValidator                                                                                       
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_SetUserData'         
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_GetCurrentLineNumber'
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_ParserFree'
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_SetElementHandler'
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_GetCurrentColumnNumber'
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_SetCharacterDataHandler'
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_StopParser'
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_ParserCreate'
+/home/jnd/05-builds/opencollada-svn/src/opencollada-build/lib/libGeneratedSaxParser.so: undefined reference to `XML_Parse'
+collect2: ld a retourné 1 code d'état d'exécution
+make[2]: *** [bin/OpenCOLLADAValidator] Erreur 1
+make[1]: *** [COLLADAValidator/CMakeFiles/OpenCOLLADAValidator.dir/all] Erreur 2
+make: *** [all] Erreur 2
+==> ERREUR: Une erreur s'est produite dans build().
+    Abandon...

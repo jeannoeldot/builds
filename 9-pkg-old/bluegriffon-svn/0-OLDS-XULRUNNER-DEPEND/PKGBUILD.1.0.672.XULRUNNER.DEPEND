@@ -1,0 +1,98 @@
+# Maintainer: JND
+
+pkgname=bluegriffon-svn
+pkgver=1.0.672
+pkgrel=1
+_bgname=bluegriffon
+_bgver=1.0
+_ffver=4.0.1
+_mozver=2.0
+_xulver=2.0.1
+_xuldirver=2.0
+_xulrunner_dir=xulrunner-${_xuldirver}
+_xulrunner_devel_dir=xulrunner-devel-${_xuldirver}
+_xulbin=xulrunner
+_grecnf=2.0.1.system
+
+pkgdesc="New WYSIWYG content editor for the Web powered by Gecko"
+url="http://bluegriffon.org/"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+depends=("xulrunner=${_xulver}" 'desktop-file-utils' 'hicolor-icon-theme'
+)
+makedepends=('zip' 'pkg-config' 'diffutils' 'python2' 'wireless_tools' 'yasm' 'mesa'
+)
+
+provides=("bluegriffon")
+conflicts=("bluegriffon")
+
+install=bluegriffon.install
+
+#"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/${_ffver}-candidates/${_build}/source/firefox-${_ffver}.source.tar.bz2"
+
+source=("ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/source/firefox-${_ffver}.source.tar.bz2"
+	"${pkgname}-${pkgver}.tar.bz2"
+        'mozconfig'
+        'bluegriffon.desktop'
+	'bluegriffon.sh.in'
+)
+md5sums=('9abda7d23151e97913c8555a64c13f34'
+         '1e0361c526c2493212b5c1e52c7a905d'
+         'cd38531e370d4dbabc6d9edd8f083c72'
+         '044abfeea6a59f084d5d2fbc89368f8b'
+         'c6e5b919ae7ba1012c7d7f0314d2b2e8'
+)
+
+
+build() {
+	cd "${srcdir}"/mozilla-${_mozver}
+
+	tar xjf "${srcdir}/${pkgname}-${pkgver}.tar.bz2"
+
+#	voir http://bluegriffon.org/pages/Build-BlueGriffon
+	patch -p 1 < bluegriffon/config/content.patch
+
+	cat "${srcdir}"/mozconfig | sed -e "s,XULRUNNER_DEVEL_DIRECTORY,${_xulrunner_devel_dir},g" \
+	> .mozconfig
+
+	export CFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	export CXXFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	export LDFLAGS="-Wl,-rpath,/usr/lib/${_bgname}"
+	export PYTHON=python2
+
+	make -f client.mk build MOZ_MAKE_FLAGS="$MAKEFLAGS"
+}
+package() {
+	cd "${srcdir}"/mozilla-${_mozver}
+
+# No Make install for now :(
+#	make DESTDIR="$pkgdir/" -C bg-trunk install
+
+	install -d -m 755 ${pkgdir}/usr/bin
+	install -d -m 755 ${pkgdir}/usr/lib/${_bgname}
+	install -d -m 755 ${pkgdir}/usr/share/applications
+
+#	VOIR : https://github.com/remicollet/remirepo/blob/master/bluegriffon/bluegriffon.spec
+	cd bg-trunk
+	tar --create --file - --dereference --directory=dist/bin --exclude xulrunner . \
+	| tar --extract --file - --directory ${pkgdir}/usr/lib/${_bgname}
+
+# Launcher
+	cat ${srcdir}/bluegriffon.sh.in | sed -e "s,XULRUNNER_DIRECTORY,${_xulrunner_dir},g" \
+					| sed -e "s,XULRUNNER_BIN,${_xulbin},g" \
+					| sed -e "s,GRE_CONFIG,${_grecnf},g"  \
+	> ${pkgdir}/usr/bin/${_bgname}
+	chmod 755 ${pkgdir}/usr/bin/${_bgname}
+
+	cd "${srcdir}"/mozilla-${_mozver}
+
+# 	Icons
+	install -D -m 644 ${_bgname}/app/icons/default16.png "$pkgdir/usr/share/icons/hicolor/16x16/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/default32.png "$pkgdir/usr/share/icons/hicolor/32x32/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/default48.png "$pkgdir/usr/share/icons/hicolor/48x48/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/default50.png "$pkgdir/usr/share/icons/hicolor/64x64/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/bluegriffon128.png "$pkgdir/usr/share/icons/hicolor/128x128/apps/${_bgname}.png"
+
+#	Desktop
+	install -D -m 644 "${srcdir}/${_bgname}.desktop" "$pkgdir/usr/share/applications/${_bgname}.desktop"
+}

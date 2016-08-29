@@ -1,0 +1,144 @@
+# Le répertoire
+cd /home/jnd/05-builds/firefox
+
+1) FAIRE PATCH
+===============
+voir CmdFairePatches.TXT
+
+2) MODIFIER LE PKGBUILD
+========================
+pkgver=3.6.10
+
+pkgrel=
+
+source=(... ...)
+
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.10/source/firefox-3.6.10.source.tar.bz2
+
+md5sum firefox-3.6.10.source.tar.bz2
+md5sum mozconfig
+md5sum 3.6-mozilla-lang.patch
+md5sum 3.6-mozilla-ldflags.patch
+md5sum 3.6-system-hunspell-corrections.patch
+md5sum 3.6-mozilla-ps-pdf-simplify-operators.patch
+md5sum 3.6-xulrunner-png14.patch
+md5sum 3.6-xulrunner-xpctools.patch
+md5sum 3.6-enable-x86_64-tracemonkey.patch
+md5sums=(... ...)
+
+XPI  FR
+=========
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.10/linux-i686/xpi/fr.xpi
+
+md5sum fr.xpi
+
+md5sums=(... ...)
+
+3) MAKEPKG en CHROOT
+====================
+!!! EN ROOT
+::Mise a Jour
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+::Build
+# cd
+# cd /home/jnd/05-builds/firefox
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+
+!!! PAS OBLIGATOIRE
+# mv ../0-chroot/copy/pkgdest/namcap.log .
+
+# ls -l
+# chown jnd:jnd firefox-safe.desktop firefox.desktop mozconfig
+# chown jnd:jnd 3.6-mozilla-lang.patch 3.6-mozilla-ldflags.patch
+# chown jnd:jnd 3.6-system-hunspell-corrections.patch 3.6-mozilla-ps-pdf-simplify-operators.patch
+# chown jnd:jnd 3.6-xulrunner-png14.patch
+# chown jnd:jnd 3.6-enable-x86_64-tracemonkey.patch
+# chown jnd:jnd firefox-3.6.10.source.tar.bz2 fr.xpi
+# chown jnd:jnd namcap.log
+# chown jnd:jnd firefox-*-x86_64.pkg.tar.*
+# ls -l
+
+!!! NON # chown jnd:jnd fix-mozilla-launcher.patch fix-script-firefox.patch
+!!! NON # chown jnd:jnd  3.6-client-mk-autoconf213.patch
+!!! NON # chown jnd:jnd 3.6-xulrunner-xpctools.patch
+
+!!! NON # mv ../0-chroot/rw/pkgdest/firefox-*-x86_64.pkg.tar.* .
+
+3) MAKEPKG en USER
+====================
+
+makepkg -s
+
+makepkg -f
+
+========================================================================================
+# Verifications...
+==================
+
+namcap
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+rm -rf pkg src
+rm -rf srcp
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/firefox-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv firefox-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+
+SI PROBLEMES
+================
+
+# pacman -R firefox
+# rm -f /var/cache/pacman/pkg/firefox-*
+
+
+:: AUTOCONT 2.13 (DANS EXTRA)
+==============================
+!!! EN USER
+!!! SI PAS DEJA FAIT
+cd
+cp /home/jnd/05-builds/autoconf-compat/autoconf-compat-* /home/jnd/05-builds/0-chroot/root/repo
+
+cd /home/jnd/05-builds/0-chroot/root/repo
+ls
+rm -f local.db.tar.gz
+repo-add local.db.tar.gz *-x86_64.pkg.tar.gz
+OU
+maj-repochroot.sh
+
+=============================================================
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5rc2/source/firefox-3.5rc2-source.tar.bz2
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5rc3/source/firefox-3.5rc3-source.tar.bz2
+md5sum firefox-3.5rc2-source.tar.bz2
+md5sum firefox-3.5rc3-source.tar.bz2
+
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5rc2/linux-i686/xpi/fr.xpi
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5rc3/linux-i686/xpi/fr.xpi
+

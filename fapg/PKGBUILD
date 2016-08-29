@@ -1,0 +1,24 @@
+# Contributor: JND <jeannoeldot@club-internet.fr>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+pkgname=fapg
+pkgver=0.41
+pkgrel=3
+pkgdesc="Generate list of audio files (WAV, MP3, Ogg, etc) in various formats (M3U, PLS, HTML, etc)."
+arch=('i686' 'x86_64')
+url="http://royale.zerezo.com/fapg/"
+license=('GPL')
+depends=('glibc')
+#install="$pkgname.install"
+source=("http://royale.zerezo.com/fapg/fapg-0.41.tar.gz")
+md5sums=('64be7045dfc0874a831e7d5fb5c435a4')
+
+build() {
+	cd $srcdir/$pkgname-$pkgver
+	./configure --disable-xspf --prefix=/usr
+	make
+}
+
+package() {
+	cd $srcdir/$pkgname-$pkgver
+	make DESTDIR=$pkgdir install
+}

@@ -1,0 +1,59 @@
+# Based on official Arch package by Jason Chu <jason@archlinux.org>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=jre
+pkgver=6u12
+pkgrel=1
+pkgdesc="Sun's Java Runtime Environment"
+arch=(i686 x86_64)
+  [ "$CARCH" = "i686" ]   && ARCH=i586
+  [ "$CARCH" = "x86_64" ] && ARCH=amd64
+url="http://java.sun.com"
+depends=('glibc' 'libstdc++5')
+install=jre.install
+source=(http://download.java.net/dlj/binaries/jdk-$pkgver-dlj-linux-${ARCH}.bin
+        https://jdk-distros.dev.java.net/source/browse/*checkout*/jdk-distros/trunk/utils/construct.sh
+        jre.profile)
+[ "$CARCH" = "i686" ]   && md5sums=('560a51cfeecc4918d01ca29abc858d52'
+                                    '94065b612df0046d9ae758943f9f6a75'
+                                    '50b4f5ac4129097461d246645d73a622')
+[ "$CARCH" = "x86_64" ] && md5sums=('9dce878be77b4a93337fa85b40b29069'
+                                    '94065b612df0046d9ae758943f9f6a75'
+                                    '50b4f5ac4129097461d246645d73a622')
+replaces=('j2re')
+conflicts=('j2re' 'java-runtime' 'jre')
+provides=('j2re' 'java-runtime' 'jre' 'jre=6u12')
+license=('custom')
+
+build() {
+  cd $startdir/src
+
+  mkdir unbundle-jdk
+  cd unbundle-jdk
+
+  sh ../jdk-$pkgver-dlj-linux-${ARCH}.bin --accept-license
+
+  cd ..
+
+  sh construct.sh unbundle-jdk linux-jdk linux-jre
+
+  mkdir -p $startdir/pkg/opt/java
+  mv linux-jdk/jre $startdir/pkg/opt/java
+
+  install -D -m755 $startdir/src/${pkgname/_beta}.profile $startdir/pkg/etc/profile.d/${pkgname/_beta}.sh
+
+  if [ "$CARCH" = "i686" ]; then
+    mkdir -p $startdir/pkg/usr/lib/mozilla/plugins
+    ln -s /opt/java/jre/plugin/i386/ns7/libjavaplugin_oji.so $startdir/pkg/usr/lib/mozilla/plugins
+  fi
+
+  if [ "$CARCH" = "x86_64" ]; then
+    mkdir -p $startdir/pkg/usr/lib/mozilla/plugins
+    ln -s /opt/java/jre/lib/amd64/libnpjp2.so $startdir/pkg/usr/lib/mozilla/plugins
+  fi
+
+  mkdir -p $startdir/pkg/usr/share/licenses/jre
+  cp $startdir/pkg/opt/java/jre/COPYRIGHT $startdir/pkg/usr/share/licenses/jre
+  cp $startdir/pkg/opt/java/jre/LICENSE $startdir/pkg/usr/share/licenses/jre
+  cp $startdir/pkg/opt/java/jre/THIRDPARTYLICENSEREADME.txt $startdir/pkg/usr/share/licenses/jre
+}

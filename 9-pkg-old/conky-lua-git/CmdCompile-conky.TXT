@@ -1,0 +1,118 @@
+#Le répertoire
+
+cd /home/jnd/05-builds/conky-lua-git
+
+
+rm -rf conky
+git clone git://git.omp.am/conky.git
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+=============================================
+http://git.omp.am/?p=conky.git;a=summary
+
+last changeThu, 1 Nov 2012 14:04:08 +0000
+20121101
+
+tar -cvzf conky-lua-git-20121101.tar.gz conky
+
+1-2) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=20121101
+pkgrel=
+source=(conky-lua-git-20121101.tar.gz
+        xxx.patch
+        yyy.patch
+)
+
+
+md5sum conky-lua-git-20121101.tar.gz
+
+
+
+md5sums=(1111111111
+         2222222222
+         3333333333
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+!!! EN USER
+
+rm -f /home/jnd/05-builds/0-copie-fichiers-chroot/repo/toluapp-*-x86_64.pkg.tar.*
+cp -v /home/jnd/00-repolocal/toluapp-*-x86_64.pkg.tar.* /home/jnd/05-builds/0-copie-fichiers-chroot/repo/
+
+
+!!! EN ROOT
+
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/conky-lua-git -n
+
+3) MAKEPKG en USER
+=====================
+cd /home/jnd/05-builds/conky-lua-git
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/conky-lua-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv conky-lua-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal
+
+# Nettoyage fichiers ds 0-copie-fichiers-chroot/repo
+=====================================================
+rm -f /home/jnd/05-builds/0-copie-fichiers-chroot/repo/toluapp-*-x86_64.pkg.tar.*
+
+EN ROOT
+========
+# pacman -Syu
+# pacman -Syu conky-lua-git
+
+
+SI PROBLEMES
+================
+
+# pacman -R conky-lua-git
+# rm -f /var/cache/pacman/pkg/conky-lua-git-*
+
+!!! EN USER
+$ rm -f 00-repolocal/conky-lua-git-*-x86_64.pkg.tar.*
+$ maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+
+!!! MODIFIER FICHIERS
+
+DANS : /home/jnd/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+
+namcap conky-lua-git-*-x86_64.pkg.tar.*
+

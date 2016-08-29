@@ -1,0 +1,32 @@
+# Contributor: Carl Mueller  archlinux at carlm e4ward com
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=kdeplasma-yasp-scripted
+pkgver=1.0.8a
+pkgrel=2
+pkgdesc="Yet another system monitor plasmoid for KDE4"
+arch=('i686' 'x86_64')
+url="http://www.kde-look.org/content/show.php/Yasp-Scripted?content=109367"
+license=('GPL')
+depends=('kdelibs' 'kdebase-runtime' 'kdebase-workspace')
+#depends=('kdelibs')
+makedepends=('cmake' 'automoc4')
+#install=$pkgname.install
+source=(http://www.kde-look.org/CONTENT/content-files/109367-yasp-scripted-$pkgver.tar.bz2)
+md5sums=('b271abb634b6310ce7853a479ee682b0')
+_version=1.0.8a
+
+build() {
+    cd "$srcdir/yasp-scripted-$_version"
+    mkdir build
+    cd build
+    cmake .. \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
+    make
+}
+
+package() {
+    cd "$srcdir/yasp-scripted-$_version/build"
+    make DESTDIR="$pkgdir/" install
+}

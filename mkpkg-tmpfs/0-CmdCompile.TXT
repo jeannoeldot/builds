@@ -1,0 +1,126 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd $HOME/05-builds/mkpkg-tmpfs
+
+VERSION = 1.1.1
+
+ls
+
+sha256sum mkpkg-tmpfs-1.1.1.tar.gz
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgver=1.1.1
+
+source=(aaaaaa.tar.gz
+        xxx.patch
+        yyy.patch
+)
+sha256sums=(1111111111
+            2222222222
+            3333333333
+)
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxx.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 xxxxxxx.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/mkpkg-tmpfs/PKGBUILD . \
+&& cp -v $HOME/05-builds/mkpkg-tmpfs/mkpkg-tmpfs-1.1.1.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/mkpkg-tmpfs \
+&& cp -v /tmp/build/mkpkg-tmpfs-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+
+4) MAKEPKG EN USER sur SSD
+===========================
+!!! EN USER
+rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+5) NETTOYAGES fichiers ~
+==========================
+!!! EN USER
+
+rm -rf pkg src
+rm -f *~
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/mkpkg-tmpfs-*-any.pkg.tar.*
+
+$ cp -v mkpkg-tmpfs-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv $HOME/00-repolocal/mkpkg-tmpfs-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv mkpkg-tmpfs-*-any.pkg.tar.* $HOME/00-repolocal/
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+#
+# 1ere Install
+# pacman -Syu mkpkg-tmpfs
+
+
+
+=============================================================
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+3) MAKEPKG en CHROOT
+====================
+!!! INUTILE : PAS DE COMPILATION
+# cd
+# mkpkg-tmpfs -n
+
+3) MAKEPKG en CHROOT
+====================
+!!! INUTILE : PAS DE COMPILATION
+# cd
+# mkpkg-tmpfs $HOME/05-builds/mkpkg-tmpfs -n
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+# $HOME/bin/mkpkg-tmpfs $HOME/05-builds/mkpkg-tmpfs
+# mkpkg-tmpfs $HOME/05-builds/mkpkg-tmpfs
+
+

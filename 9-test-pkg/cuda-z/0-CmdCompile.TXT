@@ -1,0 +1,144 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/cuda-z
+
+1.3 SOURCES
+==============
+
+http://sourceforge.net/projects/cuda-z/files/cuda-z/
+
+http://sourceforge.net/projects/cuda-z/files/cuda-z/0.9/cuda-z-0.9.zip/download
+
+wget http://downloads.sourceforge.net/cuda-z/cuda-z-0.9.zip
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=cuda-z
+_relver=231
+pkgver=0.9
+pkgrel=1
+
+depends=("cuda" "qt4")
+
+sha1sum cuda-z-0.9.zip
+
+sha1sums=(...
+         ...
+)
+
+build(){
+        ...
+        qmake-qt4
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r-- 1 jnd users   32 22 nov.  19:07 cuda-z-0.9.zip
+-rw-r--r-- 1 jnd users 2355 22 nov.  18:56 PKGBUILD
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/cuda-z/PKGBUILD . \
+&& cp -v /home/jnd/05-builds/cuda-z/cuda-z-0.9.zip . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/cuda-z \
+&& cp -v /tmp/build/cuda-z-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/cuda-z && rm -rf /tmp/build
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd /home/jnd/05-builds/cuda-z
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+
+# Verifications...
+
+namcap cuda-z-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/cuda-z-*-x86_64.pkg.tar.*
+
+$ cp -v cuda-z-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /home/jnd/00-repolocal
+---------------------------------------------------------------
+$ mv -v /home/jnd/00-repolocal/cuda-z-*-x86_64.pkg.tar.* \
+/home/jnd/00-repolocal/pkg-OLD/
+!!! OU
+# Supprime le précédent dans  /home/jnd/00-repolocal
+rm -i /home/jnd/00-repolocal/cuda-z-*-x86_64.pkg.tar.*
+
+
+$ mv -v cuda-z-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+$ sync
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -Syu cuda-z
+
+# pacman -R cuda-z
+
+# rm -i /var/cache/pacman/pkg/cuda-z-*-x86_64.pkg.tar.*
+
+
+
+================================================================
+ANCIENS
+========

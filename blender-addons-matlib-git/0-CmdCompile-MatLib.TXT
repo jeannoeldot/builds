@@ -1,0 +1,220 @@
+0) REPERTOIRE
+==============
+
+cd $HOME/05-builds/blender-addons-matlib-git
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/meta-androcto/materials_library
+
+20151212
+
+1.2 SOURCES
+==============
+!!! Répertoire clone de materials_library dans : /0-DataLinux/05-builds-dir-git/matlib
+--------------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep matlib :
+--------------------------------
+ls
+
+!!! SI REP matlib N'EXISTE PAS
+------------------------------
+git clone git://github.com/meta-androcto/materials_library matlib
+
+!!! SI REP matlib EXISTE
+------------------------
+cd matlib
+git pull --rebase origin master
+cd ..
+
+!!!!! Vérifier VERSION YAFARAY : 
+$ head -n 30 matlib/__init__.py
+
+"version": (0, 5, 6),
+"blender": (2, 7, 2),
+
+==> Version = 0.5.6
+
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+tar -cvzf blender-addons-matlib-git-0.5.6.20151212.tar.gz --exclude=.git matlib
+
+
+1-7-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/blender-addons-matlib-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/blender-addons-matlib-git-0.5.6.20151212.tar.gz .
+sync
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=blender-addons-matlib-git
+pkgver=0.5.6.20151212
+pkgrel=1
+
+_slot="2.76"
+_realname="matlib"
+_dir_addons="addons"
+
+source=(${pkgname}-${pkgver}.tar.gz
+)
+
+sha256sum blender-addons-matlib-git-0.5.6.20151212.tar.gz
+
+sha256sums=(1111111111
+)
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 509239 11 nov.  16:08 blender-addons-matlib-git-0.5.6.20151212.tar.gz
+-rw-r--r--  1 jnd users   1164 11 nov.  16:25 fix-ERROR-Failed-to-load-library.patch
+-rw-r--r--  1 jnd users   3155 11 nov.  16:36 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/blender-addons-matlib-git/{PKGBUILD,blender-addons-matlib-git-0.5.6.20151212.tar.gz} . \
+&& makepkg -s \
+&& cd $HOME/05-builds/blender-addons-matlib-git \
+&& cp -v /tmp/build/blender-addons-matlib-git-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/blender-addons-matlib-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+SI depends=("blender-git")
+===========================
+
+$ cp -v $HOME/00-repolocal/blender-git-*-any.pkg.tar.* /tmp/chrootrepo/
+
+SI blender depends=( 'openshadinglanguage-git' 'openimageio-git')
+=================================================================
+$ cp -v $HOME/00-repolocal/openshadinglanguage-git-*-any.pkg.tar.* /tmp/chrootrepo/
+
+$ cp -v $HOME/00-repolocal/openimageio-git-*-any.pkg.tar.* /tmp/chrootrepo/
+
+SI blender depends=( 'opencollada-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/opencollada-git-*-any.pkg.tar.* /tmp/chrootrepo/
+
+SI blender depends=( 'opensubdiv-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/opensubdiv-git-*-any.pkg.tar.* /tmp/chrootrepo/
+
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+4) MAKEPKG en USER
+===================
+!!! EN USER
+
+$ rm -f *~
+makepkg -s
+
+OU : makepkg -f
+
+rm -rf pkg src
+rm -f *~
+!!!! SI TESTS
+!!!	rm blender-addons-matlib-git-*-any.pkg.tar.*
+!!!!
+rm -rf matlib
+
+# Verifications...
+
+namcap blender-addons-matlib-git-*-any.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/blender-addons-matlib-git-*-any.pkg.tar.*
+
+$ cp -v blender-addons-matlib-git-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
+-----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/blender-addons-matlib-git-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v blender-addons-matlib-git-*-any.pkg.tar.* $HOME/00-repolocal/
+!!! OU cp blender-addons-matlib-git-*-any.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i blender-addons-matlib-git-0.5.6.20151212.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+EN ROOT
+========
+# cd
+
+# pacman -R blender-addons-matlib-git
+
+# pacman -Syu
+
+# pacman -Syu blender-addons-matlib-git
+
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R blender-addons-matlib-git
+# rm /var/cache/pacman/pkg/blender-addons-matlib-git-*
+# pacman -S blender-addons-matlib-git
+
+!!! EN USER
+rm -r .config/blender
+
+=================================================================================================================
+ANCIEN
+

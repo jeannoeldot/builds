@@ -1,0 +1,15 @@
+--- release/freedesktop/blender.desktop	2010-08-03 12:37:14.084671725 +0200
++++ release/freedesktop/blender.desktop	2010-08-02 13:37:37.000000000 +0200
+@@ -1,9 +1,9 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+-Name=Blender
++Name=Blender 2.5
+ Comment=3D modeling, animation, rendering and post-production
+-Exec=blender
+-Icon=blender.svg
++Exec=blender-2.5
++Icon=blender-2.5.svg
+ Terminal=false
+ Type=Application
+ Categories=Graphics;3DGraphics;

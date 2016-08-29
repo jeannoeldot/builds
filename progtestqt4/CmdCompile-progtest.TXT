@@ -1,0 +1,95 @@
+# Le répertoire
+cd $HOME/05-builds/progtestqt4
+
+
+md5sum progtestqt4_01.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap progtestqt4_01-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+
+rm -f *~
+
+rm -rf src pkg
+
+# Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+mv $HOME/00-repolocal/progtestqt4_01-*-x86_64.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+mv progtestqt4_01-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+
+=========================================================================================
+ANCIEN
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+# cd
+# cd $HOME/05-builds/progtestqt4
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+# chown jnd:jnd progtestqt4_01.tar.gz
+# mv ../0-chroot/rw/pkgdest/progtestqt4_01-*-x86_64.pkg.tar.gz .
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

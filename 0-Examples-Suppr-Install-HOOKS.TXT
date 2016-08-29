@@ -1,0 +1,116 @@
+ark 16.04.0-2
+=============
+diff --git a/trunk/ark.install b/trunk/ark.install
+deleted file mode 100644
+index 74ff488..0000000
+--- a/trunk/ark.install
++++ /dev/null
+@@ -1,13 +0,0 @@
+-post_install() {
+-    xdg-icon-resource forceupdate --theme hicolor &> /dev/null
+-    update-desktop-database -q
+-}
+-
+-post_upgrade() {
+-    post_install
+-}
+-
+-post_remove() {
+-    post_install
+-}
+-
+
+aspell 0.60.6.1-5
+=================
+diff --git a/trunk/aspell.install b/trunk/aspell.install
+deleted file mode 100644
+index 4bb848e..0000000
+--- a/trunk/aspell.install
++++ /dev/null
+@@ -1,24 +0,0 @@
+-infodir=usr/share/info
+-filelist=(aspell.info aspell-dev.info)
+-
+-post_install() {
+-  echo "==> aspell comes with no default dictionary"
+-  [ -x usr/bin/install-info ] || return 0
+-  for file in ${filelist[@]}; do
+-    install-info $infodir/$file $infodir/dir 2> /dev/null
+-  done
+-}
+-
+-post_upgrade() {
+-  [ -x usr/bin/install-info ] || return 0
+-  for file in ${filelist[@]}; do
+-    install-info $infodir/$file $infodir/dir 2> /dev/null
+-  done
+-}
+-
+-pre_remove() {
+-  [ -x usr/bin/install-info ] || return 0
+-  for file in ${filelist[@]}; do
+-    install-info --delete $infodir/$file $infodir/dir 2> /dev/null
+-  done
+-}
+
+baloo 5.21.0-2
+==============
+diff --git a/trunk/baloo.install b/trunk/baloo.install
+deleted file mode 100644
+index ccb9b0a..0000000
+--- a/trunk/baloo.install
++++ /dev/null
+@@ -1,11 +0,0 @@
+-post_install() {
+-    [[ -x xdg-icon-resource ]] && xdg-icon-resource forceupdate --theme hicolor &> /dev/null || true
+-}
+-
+-post_upgrade() {
+-    post_install
+-}
+-
+-post_remove() {
+-    post_install
+-}
+
+kmymoney 4.7.2-4
+================
+diff --git a/trunk/kmymoney.install b/trunk/kmymoney.install
+deleted file mode 100644
+index f7f5bd0..0000000
+--- a/trunk/kmymoney.install
++++ /dev/null
+@@ -1,13 +0,0 @@
+-post_install() {
+-	update-mime-database usr/share/mime &> /dev/null
+-	xdg-icon-resource forceupdate --theme hicolor &> /dev/null
+-	update-desktop-database -q
+-}
+-
+-post_upgrade() {
+-	post_install
+-}
+-
+-post_remove() {
+-	post_install
+-}
+
+
+==============================================================================
+!!! VOIR PROBLÈMES
+------------------
+(3/6) Updating icon theme caches...
+l’appel à execv a échoué (Permission non accordée)
+erreur : la commande n’a pas pu être exécutée correctement
+
+gtk3 gtk-update-icon-cache 3.20.3-2
+
++ install -Dm755 "$srcdir"/gtk-update-icon-cache.script "$pkgdir"/usr/share/libalpm/scripts/gtk-update-icon-cache
+
+==> FAIRE :
+# chmod +x /usr/share/libalpm/scripts/gtk-update-icon-cache
+# pacman -Syu gtk3
+
+==> (2/3) Updating icon theme caches...
+
+

@@ -1,0 +1,113 @@
+0) REPERTOIRE
+==============
+cd $HOME/05-builds/turbostat
+
+https://github.com/torvalds/linux/tree/master/tools/power/x86/turbostat
+
+1.3 SOURCES
+==============
+
+https://raw.github.com/torvalds/linux/master/tools/power/x86/turbostat/Makefile
+https://raw.github.com/torvalds/linux/master/tools/power/x86/turbostat/turbostat.8
+https://raw.github.com/torvalds/linux/master/tools/power/x86/turbostat/turbostat.c
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+1-8) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/ajaiantilal/i7z
+==> DATE MAJ : 20131012
+
+rm -i i7z-git-*.tar.gz
+tar -cvzf i7z-git-201301012.tar.gz --exclude=.git i7z
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+2-1) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+pkgver=201301012
+pkgrel=1
+
+!!!!!!
+_name="i7z"
+
+md5sum i7z-git-201301012.tar.gz
+
+md5sums=(...
+         ...
+)
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxx.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 xxxxxxxxx.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+!!! EN USER
+
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt4
+
+$ mkpkg-tmpfs -m native -q qt4
+
+
+4) MAKEPKG en USER
+===================
+!!! EN USER
+
+makepkg -s
+
+OU : makepkg -f
+
+voir : makepkg -R   , --repackage
+           Repackage contents of the package without rebuilding the package. This is useful if you forgot a depend or install
+           file in your PKGBUILD and the build itself will not change.
+
+
+!!! EN USER
+=============
+
+rm -rf pkg src
+rm -f *~
+
+rm -rf i7z
+
+namcap turbostat-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+mv $HOME/00-repolocal/turbostat-*-x86_64.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+mv turbostat-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# cd
+
+# pacman -Syu
+
+# pacman -Syu turbostat
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R turbostat
+# rm /var/cache/pacman/pkg/turbostat-*
+# pacman -S turbostat
+
+==================================================================================================
+ANCIEN
+=======
+

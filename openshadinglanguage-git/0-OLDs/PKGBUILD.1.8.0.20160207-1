@@ -1,0 +1,69 @@
+# Maintainer: Sven-Hendrik Haase <sh@lutzhaase.com>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openshadinglanguage-git
+pkgver=1.8.0.20160207
+pkgrel=1
+pkgdesc="Advanced shading language for production GI renderers"
+arch=(i686 x86_64)
+url="https://github.com/imageworks/OpenShadingLanguage"
+license=('custom')
+depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'libwebp'
+         'nvidia-libgl'
+         'openimageio-git'
+)
+makedepends=('boost' 'cmake' 'clang35' 'llvm35')
+provides=('openshadinglanguage')
+conflicts=('openshadinglanguage')
+source=("$pkgname-$pkgver.tar.gz"
+        'llvm35-static-system-libs.patch'
+)
+sha256sums=('7c1baac51b53cf5684e992f5069647de8e82dc67f3c0cd94f6067a23a219ba80'
+            '986e960f1c6221f5cd128cb3dfd3ef87fd03b54b3787e5f5ee6354f66e69f444'
+)
+
+_gitname="osl"
+
+prepare() {
+  cd "${_gitname}"
+   
+  # Add system libraries needed to link against LLVM components (zlib, ncurses)
+  # This is required in order to statically link against LLVM
+  # VOIR Community
+  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
+}
+  
+build() {
+  cd "${_gitname}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DSTOP_ON_WARNING=OFF \
+      -DLLVM_STATIC=ON \
+      -DOSL_BUILD_TESTS=OFF \
+      -DOSL_BUILD_CPP11=ON \
+      -DUSE_SIMD=sse4.2 \
+      -DUSE_CCACHE=OFF \
+    ..
+  make
+}
+
+package() {
+  cd "${_gitname}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  mkdir -p "${pkgdir}"/usr/share/OSL/
+  mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
+  mv "${pkgdir}"/usr/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname} # TODO: Tell upstream about this shit
+  mv "${pkgdir}"/usr/{CHANGES,README.md,INSTALL} "${pkgdir}"/usr/share/OSL/
+  mv "${pkgdir}"/usr/doc "${pkgdir}"/usr/share/OSL/doc
+# !!! TESTS
+#  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+}

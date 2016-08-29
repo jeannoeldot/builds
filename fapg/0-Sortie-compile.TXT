@@ -1,0 +1,65 @@
+==> Starting build()...
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+configure: XSPF support disabled
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: executing depfiles commands
+depbase=`echo fapg.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\" -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE=\"fapg\" -DVERSION=\"0.41\" -DSTDC_HEADERS=1 -I.   -D_FORTIFY_SOURCE=2  -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -MT fapg.o -MD -MP -MF $depbase.Tpo -c -o fapg.o fapg.c &&\
+mv -f $depbase.Tpo $depbase.Po
+fapg.c: In function 'reference':
+fapg.c:506:10: warning: ignoring return value of 'fgets', declared with attribute warn_unused_result [-Wunused-result]
+     fgets(buffer, 1020, pipe);
+          ^
+fapg.c:509:14: warning: ignoring return value of 'fgets', declared with attribute warn_unused_result [-Wunused-result]
+         fgets(buffer, 1020, pipe);
+              ^
+fapg.c:503:13: warning: attempt to free a non-heap object 'command' [-Wfree-nonheap-object]
+         free(command);
+             ^
+gcc  -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4  -Wl,-O1,--sort-common,--as-needed,-z,relro -o fapg fapg.o  
+==> Entering fakeroot environment...
+==> Starting package()...
+make[1]: Entering directory `/build/fapg/src/fapg-0.41'
+test -z "/usr/bin" || /usr/bin/mkdir -p "/build/fapg/pkg/fapg/usr/bin"
+test -z "/usr/share/man/man1" || /usr/bin/mkdir -p "/build/fapg/pkg/fapg/usr/share/man/man1"
+  /usr/bin/install -c 'fapg' '/build/fapg/pkg/fapg/usr/bin/fapg'
+ /usr/bin/install -c -m 644 './fapg.1' '/build/fapg/pkg/fapg/usr/share/man/man1/fapg.1'
+make[1]: Leaving directory `/build/fapg/src/fapg-0.41'
+==> Tidying install...
+  -> Purging unwanted files...
+  -> Compressing man and info pages...
+  -> Stripping unneeded symbols from binaries and libraries...
+==> Creating package "fapg"...
+  -> Generating .PKGINFO file...
+  -> Generating .MTREE file...
+  -> Compressing package...
+==> Leaving fakeroot environment.
+==> Finished making: fapg 0.41-3 (Tue Sep 10 11:02:01 CEST 2013)
+
+:: Suppression des fichiers << .log >> ...
+
+:: Remet propriétaire:groupe à << jnd:users >> ...
+
+:: Fabrication du paquet << fapg 0.41 >> terminée.
+

@@ -1,0 +1,65 @@
+
+
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/tmp/tmpxft_00002a87_00000000-10_kernel.cpp3.i(0): Warning: Optimizing huge function kernel_cuda_shader because Olimit has been overridden;
+        compiler may run out of memory or run very slowly
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(72): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(72): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(72): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(72): Warning: Cannot tell what pointer points to, assuming global memory space
+ptxas info    : 0 bytes gmem, 1168 bytes cmem[0]
+ptxas info    : Compiling entry function 'kernel_cuda_tonemap' for 'sm_11'
+ptxas info    : Used 7 registers, 64 bytes smem, 20 bytes cmem[1]
+ptxas info    : Compiling entry function 'kernel_cuda_shader' for 'sm_11'
+ptxas info    : Used 24 registers, 40 bytes smem, 660 bytes cmem[1], 5244 bytes lmem
+ptxas info    : Compiling entry function 'kernel_cuda_path_trace' for 'sm_11'
+ptxas info    : Used 24 registers, 60 bytes smem, 756 bytes cmem[1], 8400 bytes lmem
+[100%] Built target cycles_kernel_cuda
+
+
+
+Scanning dependencies of target bf_intern_cycles
+[100%] [100%] Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/blender_camera.cpp.o
+Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/blender_mesh.cpp.o
+[100%] Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/blender_object.cpp.o
+[100%] Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/blender_python.cpp.o
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel.cu(35): Warning: Cannot tell what pointer points to, assuming global memory space
+[100%] Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/blender_session.cpp.o
+[100%] Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/blender_shader.cpp.o
+/tmp/tmpxft_00003a2e_00000000-9_kernel.cpp3.i(0): Warning: Optimizing huge function kernel_cuda_shader because Olimit has been overridden;
+        compiler may run out of memory or run very slowly
+[100%] Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/blender_sync.cpp.o
+Linking CXX static library ../../../lib/libbf_intern_cycles.a
+[100%] Built target bf_intern_cycles
+Scanning dependencies of target blender
+[100%] [100%] Building C object source/creator/CMakeFiles/blender.dir/creator.c.o
+Building C object source/creator/CMakeFiles/blender.dir/buildinfo.c.o
+Linking CXX executable ../../bin/blender
+now run: "make install" to copy runtime files and scripts to /usr/share/blender/2.62
+[100%] Built target blender
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(65): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(65): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(65): Warning: Cannot tell what pointer points to, assuming global memory space
+/build/src/blender/intern/cycles/kernel/kernel_displace.h(65): Warning: Cannot tell what pointer points to, assuming global memory space
+ptxas /tmp/tmpxft_00003a2e_00000000-2_kernel.ptx, line 11985; warning : Double is not supported. Demoting to float
+ptxas info    : Compiling entry function 'kernel_cuda_tonemap' for 'sm_11'
+ptxas info    : Used 7 registers, 48+16 bytes smem, 960 bytes cmem[0], 20 bytes cmem[1]
+ptxas info    : Compiling entry function 'kernel_cuda_shader' for 'sm_11'
+ptxas info    : Used 24 registers, 2568+0 bytes lmem, 24+16 bytes smem, 960 bytes cmem[0], 784 bytes cmem[1]
+ptxas info    : Compiling entry function 'kernel_cuda_path_trace' for 'sm_11'
+ptxas info    : Used 24 registers, 4920+0 bytes lmem, 44+16 bytes smem, 960 bytes cmem[0], 912 bytes cmem[1]
+[100%] Built target cycles_kernel_cuda

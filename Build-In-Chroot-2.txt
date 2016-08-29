@@ -1,0 +1,119 @@
+!!! SI PROBLEME
+====================
+
+# killall -9 makechrootpkg
+
+
+!!! EN ROOT
+===============
+$ su -
+mot de passe
+
+1) Faire rep
+=============
+# cd
+# mkdir /0-Chroot/chroot
+
+2-a) Suppression
+=================
+$ su -
+mot de passe
+# cd
+# cd /0-Chroot
+# cd chroot
+# ls
+=> copy  root
+# rm -rf *
+# cd ..
+
+2-b) Mettre en place le chroot
+================================
+!!! ANCIEN
+# mkarchroot -C /etc/pacman.conf -M /etc/makepkg.conf /0-Chroot/chroot/root base base-devel sudo namcap
+
+# mkarchroot -C /etc/pacman.conf -M /etc/makepkg.conf /0-Chroot/chroot/root base base-devel sudo
+
+SI AVEC QT
+===========
+# mkarchroot -C /etc/pacman.conf -M /etc/makepkg.conf /0-Chroot/chroot/root base base-devel sudo qt
+
+warning: database file for 'core' does not exist
+warning: database file for 'extra' does not exist
+warning: database file for 'community' does not exist
+warning: database file for 'multilib' does not exist
+warning: database file for 'repolocal' does not exist
+warning: database file for 'archlinuxfr' does not exist
+:: Synchronizing package databases...
+ core                                                       106.4 KiB   511K/s 00:00 [################################################] 100%
+ extra                                                     1196.5 KiB   523K/s 00:02 [################################################] 100%
+ community                                                 1046.8 KiB   523K/s 00:02 [################################################] 100%
+ multilib                                                    77.7 KiB   510K/s 00:00 [################################################] 100%
+ repolocal                                                    5.3 KiB   209M/s 00:00 [################################################] 100%
+ archlinuxfr                                                 28.3 KiB   292K/s 00:00 [################################################] 100%
+:: There are 56 members in group base:
+:: Repository core
+   1) bash  2) bzip2  3) coreutils  4) cronie  5) cryptsetup  6) device-mapper  7) dhcpcd  8) diffutils  9) e2fsprogs  10) file
+   11) filesystem  12) findutils  13) gawk  14) gcc-libs  15) gettext  16) glibc  17) grep  18) grub  19) gzip  20) heirloom-mailx
+   21) inetutils  22) initscripts  23) iputils  24) jfsutils  25) less  26) licenses  27) linux  28) logrotate  29) lvm2  30) man-db
+   31) man-pages  32) mdadm  33) nano  34) pacman  35) pciutils  36) pcmciautils  37) perl  38) ppp  39) procps  40) psmisc
+   41) reiserfsprogs  42) sed  43) shadow  44) sysfsutils  45) syslog-ng  46) sysvinit  47) tar  48) texinfo  49) udev  50) usbutils
+   51) util-linux  52) vi  53) wget  54) which  55) wpa_supplicant  56) xfsprogs
+
+Enter a selection (default=all): 
+:: There are 12 members in group base-devel:
+:: Repository core
+   1) autoconf  2) automake  3) binutils  4) bison  5) fakeroot  6) flex  7) gcc  8) libtool  9) m4  10) make  11) patch  12) pkg-config
+
+Enter a selection (default=all): 
+resolving dependencies...
+looking for inter-conflicts...
+
+Targets (178) :
+...
+...
+
+3) Copie fichiers
+=================
+
+SI AVEC QT
+===========
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/g++-base.conf /0-Chroot/chroot/root/usr/share/qt/mkspecs/common/g++-base.conf
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/gcc-base.conf /0-Chroot/chroot/root/usr/share/qt/mkspecs/common/gcc-base.conf
+
+
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/mirrorlist /0-Chroot/chroot/root/etc/pacman.d/mirrorlist
+
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/pacman.conf /0-Chroot/chroot/root/etc/pacman.conf
+
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/makepkg.conf /0-Chroot/chroot/root/etc/makepkg.conf
+
+# mkdir /0-Chroot/chroot/root/repo
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/repo/*.pkg.tar.* /0-Chroot/chroot/root/repo/
+
+# cd /0-Chroot/chroot/root/repo
+# rm -f local.db.tar.gz
+# repo-add local.db.tar.gz *.pkg.tar.*
+# cd
+
+
+4) maj chroot
+==============
+
+!!! VOIR UTILITE
+# mkarchroot -u /0-Chroot/chroot/root
+
+
+
+!!! SI PROBLEME
+====================
+
+# killall -9 makechrootpkg
+
+
+
+
+
+
+
+
+

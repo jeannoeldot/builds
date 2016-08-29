@@ -1,0 +1,39 @@
+# Maintainer: Radu Andries <admiral0@tuxfamily.org>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=kdevelop-extra-plugins-qmake-git
+pkgver=20120316
+pkgrel=1
+pkgdesc="Qmake Projects for kdevelop. Experimental plugin"
+arch=('i686' 'x86_64' 'arm')
+url="https://projects.kde.org/projects/playground/devtools/plugins/kdev-qmake"
+license=('GPL')
+depends=('kdevelop-pg-qt')
+makedepends=('cmake' 'automoc4')
+
+_gitname="kdev-qmake"
+
+source=("${pkgname}-${pkgver}.tar.gz"
+)
+md5sums=('db707d10144d448c2256dc999028c9ec'
+)
+
+
+build() {
+  cd "${srcdir}/${_gitname}"
+  mkdir build
+  cd build
+  cmake ..\
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=RELEASE \
+        -DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro,--hash-style=gnu'
+
+  make ${MAKEFLAGS}
+}
+
+package() {
+  cd "${srcdir}/${_gitname}/build"
+  make DESTDIR="${pkgdir}" install
+
+  rm -rf "${pkgdir}/usr/share/apps/kdevappwizard"
+} 

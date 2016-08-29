@@ -1,0 +1,35 @@
+diff -aur cwp-1.5.11/plasma-cwp.cpp cwp-1.5.11.new/plasma-cwp.cpp
+--- cwp-1.5.11/plasma-cwp.cpp	2012-02-28 21:32:30.000000000 +0100
++++ cwp-1.5.11.new/plasma-cwp.cpp	2012-03-07 19:18:22.572903109 +0100
+@@ -1310,11 +1310,31 @@
+ 
+ 		// day name
+ 		QString day_name = "";
++// Début ma modif
++		QString jour_fr = "";
+ 		if ( dayNamesSystem == 0 ) day_name = data_day_name[i];
+ 		else if ( dayNamesSystem == 1 ) day_name = QDate::shortDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+ 		else if ( dayNamesSystem == 2 ) day_name = QDate::longDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+ 		else if ( dayNamesSystem == 3 ) day_name = QDate::currentDate().addDays( i ).toString( Qt::DefaultLocaleShortDate );
+ 
++		if ( day_name == "Mon" ) jour_fr = "Lun";
++		else if ( day_name == "Tue" ) jour_fr = "Mar";
++		else if ( day_name == "Wed" ) jour_fr = "Mer";
++		else if ( day_name == "Thu" ) jour_fr = "Jeu";
++		else if ( day_name == "Fri" ) jour_fr = "Ven";
++		else if ( day_name == "Sat" ) jour_fr = "Sam";
++		else if ( day_name == "Sun" ) jour_fr = "Dim";
++		else if ( day_name == "Monday" ) jour_fr = "Lundi";
++		else if ( day_name == "Tuesday" ) jour_fr = "Mardi";
++		else if ( day_name == "Wednesday" ) jour_fr = "Mercredi";
++		else if ( day_name == "Thursday" ) jour_fr = "Jeudi";
++		else if ( day_name == "Friday" ) jour_fr = "Vendredi";
++		else if ( day_name == "Saturday" ) jour_fr = "Samedi";
++		else if ( day_name == "Sunday" ) jour_fr = "Dimanche";
++
++		if ( jour_fr != "" ) day_name = jour_fr;
++// Fin ma modif
++
+ 		if ( day_name != "" )
+ 		{
+ 			p->setFont( paint_helper->getFittingFontSize( p, day_name_rect[i], Qt::AlignVCenter | Qt::AlignHCenter,

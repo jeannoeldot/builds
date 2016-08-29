@@ -1,0 +1,29 @@
+# Contributor: Fedor Suchkov <f.suchkov@gmail.com>
+
+pkgname=yet-another-systemmonitor-plasmoid
+pkgver=0.7
+pkgrel=1
+pkgdesc="YASP - Yet Another SystemMonitor Plasmoid"
+arch=('i686' 'x86_64')
+url="http://www.kde-look.org/content/show.php/show.php?content=94144"
+license=('GPL2')
+groups=()
+depends=('kdebase-workspace>=4.2')
+makedepends=('gcc' 'cmake' 'automoc4')
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+source=("http://www.kde-look.org/CONTENT/content-files/94144-yasp-$pkgver.tar.bz2")
+noextract=()
+md5sums=('221587e58ba94db9ecb6087d906da68d')
+build() {
+  cd "$srcdir/yasp-$pkgver"
+  mkdir build && cd build
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=release ../ || return 1
+  make DESTDIR="$pkgdir/" install || return 1
+}
+
+# vim:set ts=2 sw=2 et:

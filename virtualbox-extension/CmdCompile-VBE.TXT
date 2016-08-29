@@ -1,0 +1,169 @@
+#Le répertoire
+
+cd $HOME/05-builds/virtualbox-extension
+
+wget http://download.virtualbox.org/virtualbox/5.1.4/Oracle_VM_VirtualBox_Extension_Pack-5.1.4-110228.vbox-extpack
+https://www.virtualbox.org/download/hashes/5.1.4/SHA256SUMS
+sha256sum = 9462ff1b567c37ad9a33c0c7ca1925776615ec89b5a72563f29a8cc8514cf316
+
+!!! ATTENTION AU PKGBUILD !!!
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=virtualbox-extension
+pkgver=5.1.4
+_build=110228
+pkgrel=1
+
+!!! ATTENTION AU N° VERSION !!!!
+source=(... ... ...)
+
+!!! ATTENTION AU N° VERSION !!!!
+sha256sum Oracle_VM_VirtualBox_Extension_Pack-5.1.4.vbox-extpack
+sha256sum Oracle_VM_VirtualBox_Extension_Pack-5.1.4-110228.vbox-extpack
+
+sha256sums=(... ... ...)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxxxxxx.vbox-extpack
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 virtualbox-extension.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/virtualbox-extension/PKGBUILD . \
+&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VM_VirtualBox_Extension_Pack-5.1.4-110228.vbox-extpack . \
+&& cp -v $HOME/05-builds/virtualbox-extension/virtualbox-extension.install . \
+&& makepkg -s \
+&& cd $HOME/05-builds/virtualbox-extension \
+&& cp -v /tmp/build/virtualbox-extension-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+!!! SI ERREUR
+==============
+cd $HOME/05-builds/virtualbox-extension \
+&& rm -rf /tmp/build
+
+
+3) MAKEPKG en USER SUR SSD
+===========================
+cd $HOME/05-builds/virtualbox-extension
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+============
+rm -f *~
+rm -rf pkg src
+
+namcap virtualbox-extension-*-any.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/virtualbox-extension-*-any.pkg.tar.*
+
+$ cp -v virtualbox-extension-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/virtualbox-extension-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v virtualbox-extension-*-any.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i Oracle_VM_VirtualBox_Extension_Pack-5.1.4-110228.vbox-extpack
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+#
+# 1ere Install
+# pacman -Syu virtualbox-extension
+
+======================================================================
+ANCIENS
+========
+
+sha256sum PUEL
+
+-rw-r--r--  1 jnd users     9324 24 juin  20:13 PUEL
+
+&& cp -v $HOME/05-builds/virtualbox-extension/{PKGBUILD,Oracle_VM_VirtualBox_Extension_Pack-5.1.4-110228.vbox-extpack,virtualbox-extension.install,PUEL} . \
+
+3) MAKEPKG en CHROOT
+====================
+!!! EN USER
+
+$ $HOME/bin/mkpkg-tmpfs -n
+
+$ mkpkg-tmpfs -n
+
+
+# $HOME/bin/mkpkg-tmpfs $HOME/05-builds/virtualbox-extension
+
+_build=80737
+sha256sum Oracle_VM_VirtualBox_Extension_Pack-4.2.4-80737.vbox-extpack
+
+!!! MODIFIER FICHIERS
+
+DANS : $HOME/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+
+# chown jnd:jnd namcap.log
+rm -f *.log
+
+3) MAKEPKG en CHROOT
+====================
+
+!!! EN ROOT
+::Mise a Jour
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+::Build
+# cd
+# cd $HOME/05-builds/virtualbox-extension
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+!!! SI PROBLEME COMPILE :
+# cd
+# cd $HOME/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+
+!!! PAS OBLIGATOIRE
+# mv ../0-chroot/copy/pkgdest/namcap.log .
+
+# ls -l
+# chown jnd:jnd Oracle_VM_VirtualBox_Extension_Pack-4.2.4-80737.vbox-extpack PUEL
+# chown jnd:jnd virtualbox-extension-*-any.pkg.tar.*
+# chown jnd:jnd virtualbox-extension-*-package.log
+# ls -l
+

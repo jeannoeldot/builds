@@ -1,0 +1,35 @@
+# Maintainer: Alessio Sergi <asergi at archlinux dot us>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=libxnvctrl
+pkgver=295.20
+pkgrel=1
+pkgdesc="NVIDIA Ctrl X library"
+arch=('i686' 'x86_64')
+url="http://www.nvidia.com/"
+license=('GPL2')
+makedepends=('libx11' 'libxext' 'xextproto')
+source=("ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-$pkgver.tar.bz2"
+)
+md5sums=('c3d84a5e248c6664df341beda85231a1'
+)
+
+build() {
+  cd "nvidia-settings-$pkgver/src/libXNVCtrl"
+
+  export CFLAGS="$CFLAGS -fPIC"
+
+  make clean
+  make
+}
+
+package() {
+  cd "nvidia-settings-$pkgver/src/libXNVCtrl"
+
+  # install libXNVCtrl and headers
+  install -d -m 755 "$pkgdir"/usr/{include/NVCtrl,lib}
+  install -m 644 nv_control.h NVCtrl{,Lib}.h "$pkgdir"/usr/include/NVCtrl/
+  install -m 644 libXNVCtrl.a "$pkgdir"/usr/lib/libXNVCtrl.a
+}
+
+# vim:set ts=2 sw=2 et:

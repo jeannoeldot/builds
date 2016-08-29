@@ -1,0 +1,18 @@
+How to install a Plasmoid
+==========================
+ 
+tar -xvf plasmoid.tar.gz 
+cd plasmoid 
+mkdir build 
+cd build 
+cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` .. 
+make 
+sudo make install OR su -c "make install" 
+
+
+
+
+
+
+
+Have fun! :-)

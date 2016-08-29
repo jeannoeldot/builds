@@ -1,0 +1,81 @@
+FAIRE PATCHS
+====================================
+cd $HOME/05-builds/profile-sync-daemon
+mkdir srcp
+cp profile-sync-daemon-3.0.tar.xz srcp/
+cp profile-sync-daemon-3.2.tar.xz srcp/
+
+cd srcp
+
+tar -xvJf profile-sync-daemon-3.0.tar.xz
+
+tar -xvJf profile-sync-daemon-3.2.tar.xz
+
+diff -aur profile-sync-daemon-3.0 profile-sync-daemon-3.2 > diff-version-3.0-3.2.txt
+
+cd ..
+
+mv srcp/diff-version-3.0-3.2.txt .
+
+
+1) MODIFIER YafaRay/src/yafraycore/imagefilm.cc	 (POUR VERSION)
+=================================================================
+cd srcp
+cp -R YafaRay YafaRay.new
+
+cd YafaRay.new/src/yafraycore
+kwrite imagefilm.cc
+
+MODIFIER LIGNE 693 :	ss << "YafaRay (" << version << ")";
+		EN :	ss << "YafaRay (0.1.2-Beta2)";
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagefilm.cc~
+rm -f imagefilm.cc~
+
+cd ../../..
+
+diff -aur YafaRay YafaRay.new
+diff -aur YafaRay YafaRay.new > git-fix-version.patch
+
+rm -rf YafaRay.new
+
+cd ..
+mv srcp/git-fix-version.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+1) MODIFIER YafaRay/tools/writeconfig.py
+=========================================================
+cd srcp
+cp -R YafaRay YafaRay.new
+
+cd YafaRay.new/tools
+kwrite writeconfig.py
+
+ AJOUTER LIGNE 31 :
+	config.write("#define yendl std::endl\n")
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier writeconfig.py~
+rm -f writeconfig.py~
+
+cd ../..
+
+diff -aur YafaRay YafaRay.new
+diff -aur YafaRay YafaRay.new > git-fix-yendl.patch
+
+rm -rf YafaRay.new
+
+cd ..
+mv srcp/git-fix-yendl.patch git-fix-yendl.patch
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+===============================================================================
+!!! ANCIEN !!!
+

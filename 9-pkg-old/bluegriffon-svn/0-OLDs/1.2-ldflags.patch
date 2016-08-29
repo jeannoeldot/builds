@@ -1,0 +1,8 @@
+diff -aur mozilla-release/layout/build/Makefile.in mozilla-release.new/layout/build/Makefile.in
+--- mozilla-release/layout/build/Makefile.in	2011-06-15 23:57:31.000000000 +0200
++++ mozilla-release.new/layout/build/Makefile.in	2011-06-25 10:04:01.269491557 +0200
+@@ -354,3 +354,4 @@
+ LDFLAGS += -Wl,-LD_LAYOUT:lgot_buffer=50
+ endif
+ endif
++LDFLAGS += -lX11 -lXrender

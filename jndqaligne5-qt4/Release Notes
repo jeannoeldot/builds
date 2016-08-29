@@ -1,0 +1,7 @@
+10 08 2014
+jndqaligne5 => jndqaligne5-qt4
+
+13 02 2009
+Release 1
+- modifs PKGBUILD : $srcdir $pkgdir $pkgname $$pkgver
+

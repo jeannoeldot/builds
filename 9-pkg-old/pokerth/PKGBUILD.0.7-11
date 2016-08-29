@@ -1,0 +1,28 @@
+# Contributor: JND <jeannoeldot@club-internet.fr>
+
+pkgname=pokerth
+_pkgname=PokerTH
+pkgver=0.7
+pkgrel=11
+pkgdesc="Poker game written in C++/QT4"
+arch=('i686' 'x86_64')
+url="http://www.pokerth.net/"
+license=('GPL')
+depends=('xdg-utils' 'gnutls' 'curl' 'boost' 'qt' 'sdl_mixer')
+makedepends=('gnutls' 'curl' 'boost' 'qt' 'sdl_mixer')
+install=pokerth.install
+source=(http://downloads.sourceforge.net/sourceforge/pokerth/$_pkgname-$pkgver-src.tar.bz2)
+md5sums=('bbac2f4c6f55a74c1cd8c25622cea42c')
+
+build() {
+  cd $srcdir/$_pkgname-$pkgver-src
+
+  qmake $pkgname.pro
+  make || return 1
+  make INSTALL_ROOT=$pkgdir install
+  install -D -m755 $pkgname $pkgdir/usr/bin/$pkgname
+  install -D -m644 data/data-copyright.txt $pkgdir/usr/share/licenses/pokerth/data-copyright.txt
+  install -D -m644 docs/pokerth.1 $pkgdir/usr/share/man/man1/pokerth.1
+  rm -rf $pkgdir/usr/share/pokerth/data/data-copyright.txt
+
+}

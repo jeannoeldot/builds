@@ -1,0 +1,268 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/blender-svn
+
+https://svn.blender.org/svnroot/bf-blender/trunk/blender/
+ ==> VERSION 2.5 devel
+
+!!! VOIR : http://bugs.gentoo.org/show_bug.cgi?id=276338
+
+1) Vérifier N° révision
+==========================
+svn log https://svn.blender.org/svnroot/bf-blender/trunk/blender --limit 1 | sed -e '/^r/!d' -e 's/^r\([0-9]\+\) .*/\1/;q'
+
+1.1 CHANGELOG
+==============
+rm -f change-log.TXT
+svn log https://svn.blender.org/svnroot/bf-blender/trunk/blender > change-log.TXT
+ ==> changelog
+
+1.2 REVISION
+==============
+svn info https://svn.blender.org/svnroot/bf-blender/trunk/blender
+
+!!!!! Révision de la dernière modification : 42683
+
+1.3 SOURCES
+==============
+rm -rf blender
+
+svn co https://svn.blender.org/svnroot/bf-blender/trunk/blender blender
+
+!!!!! Vérifier VERSION : cat blender/source/blender/blenkernel/BKE_blender.h
+ ==> #define BLENDER_VERSION                 261
+ ==> #define BLENDER_SUBVERSION              0
+
+!!! SI YAFARAY ICORPORE : NE PAS FAIRE !!!
+!!! SI CHANGEMENT DE VERSION (ex de 2.59 à 2.60 à 2.61)
+==> DESINSTALLER blender-addons-yafaray-git
+==> # pacman -R blender-addons-yafaray-git
+
+
+1-4) MODIF blender/CMakeLists.txt
+=====================================
+
+kwrite blender/CMakeLists.txt
+
+LIGNES 602 à 603 :
+	# GNU Compiler
+	if(CMAKE_COMPILER_IS_GNUCC)
+		set(PLATFORM_CFLAGS "-pipe -fPIC -funsigned-char -fno-strict-aliasing")
+
+DEVIENNENT :
+	if(CMAKE_COMPILER_IS_GNUCC)
+		set(PLATFORM_CFLAGS "-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block")
+
+SUPPRIMER blender/CMakeLists.txt~
+rm blender/CMakeLists.txt~
+
+
+1-5) INSERTION de YAFARAY-GIT
+=================================
+
+Voir : 0-CmdCompile-Yafaray.TXT
+
+ YAFARAY
+https://github.com/YafaRay/Core
+
+ EXPORTER
+https://github.com/YafaRay/Blender-2.5-Exporter
+
+cd blender
+rm -rf YafaRay
+git clone http://github.com/YafaRay/Core.git YafaRay
+
+cd YafaRay
+
+rm -rf Blender-2.5-Exporter
+git clone http://github.com/YafaRay/Blender-2.5-Exporter.git
+
+cd ../..
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+rm -i blender-svn-*.tar.gz
+tar -cvzf blender-svn-2.61.0.42683.tar.gz blender
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+1-9) MODIFIER blender.install
+=================================
+
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+Lire N° de Révision -> pkgver=2.61.0.42683
+pkgrel=1
+
+!!!!!!
+_svnmod="blender"
+_slot="2.61"
+
+md5sum blender-svn-2.61.0.42683.tar.gz
+
+md5sums=(...
+         ...
+)
+
+
+2-2) VERIFIER CMakeLists.txt
+==========================
+  blender/CMakeLists.txt
+
+par exemple :
+	option WITH_FFTW3		==> ON
+	option WITH_BUILTIN_GLEW	==> OFF
+
+	option WITH_XDG_USER_DIRS	==> ???
+	option WITH_MOD_CLOTH_ELTOPO	==> ON
+	option WITH_MOD_OCEANSIM	==> ON
+
+	option WITH_IMAGE_FRAMESERVER
+
+	option WITH_CODEC_FFMPEG	==> ON
+	option WITH_CODEC_SNDFILE	==> ON
+
+	option WITH_OPENCOLLADA		OFF 	    si ON dep = opencollada AUR
+
+	option WITH_JACK		==> ON
+
+	option WITH_INPUT_NDOF		==> OFF
+
+# Cycles
+	option WITH_CYCLES			ON	si ON dep = openimageio AUR
+	option WITH_CYCLES_CUDA_BINARIES	OFF 	si ON dep = cuda-toolkit AUR
+
+
+Ligne ds build()
+	-DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,--no-undefined -Wl,--as-needed' \
+semble inutile (voir 0-Blender-configuration.txt) ==> A SUPPRIMER
+
+
+3) MAKEPKG en CHROOT
+====================
+
+SI WITH_CYCLES = ON
+===================
+!!! EN USER
+cd
+rm -f /home/jnd/05-builds/0-chroot/root/repo/openimageio-git-*-x86_64.pkg.tar.*
+cp /home/jnd/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /home/jnd/05-builds/0-chroot/root/repo
+
+maj-repochroot.sh
+
+cd /home/jnd/05-builds/blender-svn
+!!!!
+
+SI WITH_OPENCOLLADA=ON
+======================
+!!! EN USER
+cd
+rm -f /home/jnd/05-builds/0-chroot/root/repo/opencollada-svn-*-x86_64.pkg.tar.*
+cp /home/jnd/00-repolocal/opencollada-svn-*-x86_64.pkg.tar.* /home/jnd/05-builds/0-chroot/root/repo
+
+maj-repochroot.sh
+
+cd /home/jnd/05-builds/blender-svn
+!!!!
+
+
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/blender-svn
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+# cd /home/jnd/05-builds/blender-svn
+
+# ls -l
+# chown jnd:jnd blender-svn-*.tar.gz
+# chown jnd:jnd blender-svn-*-x86_64.pkg.tar.*
+# chown jnd:jnd blender-svn-*-x86_64-*.log
+# ls -l
+
+3) MAKEPKG en USER
+====================
+!!! EN USER
+cd /home/jnd/05-builds/blender-svn
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+rm -rf blender
+
+# Verifications...
+
+namcap blender-svn-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/blender-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv blender-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -R blender-svn yafaray
+# pacman -S blender-svn
+
+# pacman -R blender-svn
+# rm -i /var/cache/pacman/pkg/blender-svn-*-x86_64.pkg.tar.*
+!!! EN USER
+rm -i /home/jnd/00-repolocal/blender-svn-*-x86_64.pkg.tar.*
+cd
+maj-repolocal.sh
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+==========================================================================
+md5sum blender.config
+
+md5sum blender-2.5-use_usr.diff
+md5sum blender-2.5-doxygen.patch
+md5sum blender-2.5-eigen.patch
+md5sum blender-2.5-glew.patch
+
+# chown jnd:jnd namcap.log
+# chown jnd:jnd blender.config
+# chown jnd:jnd blender-2.5-use_usr.diff
+# chown jnd:jnd blender-2.5-doxygen.patch
+# chown jnd:jnd blender-2.5-eigen.patch
+# chown jnd:jnd blender-2.5-glew.patch
+
+!!!! NON tar -cvzf blender-svn-2.5.42683.tar.gz --exclude .svn blender
+
+
+!!!!!!
+!!! NON blender25-wrapper
+
+!!! NON md5sum blender25-wrapper
+# chown jnd:jnd blender25-wrapper

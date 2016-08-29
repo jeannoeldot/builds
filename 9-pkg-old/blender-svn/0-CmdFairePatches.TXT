@@ -1,0 +1,61 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/blender-svn
+mkdir srcp
+cp -R blender srcp/blender
+
+
+1) MODIFIER blender/extern/eltopo/common/runstats.h
+===================================================
+cd srcp
+cp -R blender blender.new
+
+cd blender.new/extern/eltopo/common
+kwrite runstats.h
+
+MODIFIER LIGNES 16 A 35 :
+
+/* Modifs pour Linux */
+typedef __int64 int64_t;
+typedef unsigned __int64 uint64_t;
+#include <stdint.h>
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier runstats.h~
+rm -f runstats.h~
+
+
+cd ../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-cloth-eltopo.patch
+
+rm -rf blender.new
+
+cd ..
+mv srcp/fix-cloth-eltopo.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+=================================================================
+1er test PAS OK
+----------------
+
+MODIFIER LIGNES 16 A 35 :
+
+/* Modifs pour Linux */
+#include <stdint.h>
+
+typedef signed __int8  int8_t;
+typedef signed __int16 int16_t;
+typedef signed __int32 int32_t;
+
+typedef unsigned __int8  uint8_t;
+typedef unsigned __int16 uint16_t;
+typedef unsigned __int32 uint32_t;
+typedef __int64 int64_t;
+typedef unsigned __int64 uint64_t;
+

@@ -1,0 +1,36 @@
+# Maintainer: Hyacinthe Cartiaux <hyacinthe.cartiaux@free.fr>
+# Based on PKGBUILD firefox-adblock-plus
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=firefox-https-everywhere
+pkgver=5.1.1
+pkgrel=1
+pkgdesc="Plugin for firefox which ensures you are using https whenever it's possible."
+arch=('any')
+url="https://www.eff.org/https-everywhere"
+license=('GPL2')
+depends=("firefox")
+makedepends=("unzip")
+source=("https://www.eff.org/files/https-everywhere-${pkgver}-eff.xpi"
+)
+noextract=("https-everywhere-${pkgver}-eff.xpi")
+sha256sums=('c138399a27bf64ef2649cfdc4bd1dd755cd503834d6db9a6a509fa62b95e77fd'
+)
+
+prepare() {
+  cd "${srcdir}"
+
+  # Ugly hack, bsdtar does not extract the xpi properly...
+  unzip -qqo https-everywhere-${pkgver}-eff.xpi
+}
+
+package() {
+  cd "${srcdir}"
+  local emid=$(sed -n '/.*<em:id>\(.*\)<\/em:id>.*/{s//\1/p;q}' install.rdf)
+  local dstdir="${pkgdir}/usr/lib/firefox/browser/extensions/${emid}"
+  install -d "${dstdir}"
+  cp -R * "${dstdir}"
+  rm "${dstdir}"/*.xpi
+  find "${pkgdir}" -type d -exec chmod 0755 {} \;
+  find "${pkgdir}" -type f -exec chmod 0644 {} \;
+}

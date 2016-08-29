@@ -1,0 +1,117 @@
+
+COMPILE OK libxul.so
+====================
+
+/home/jnd/05-builds/bluegriffon-svn/src/mozilla-release/bg-trunk/config/nsinstall -D ../../dist/sdk/lib
+rm -f libxul.so
+/usr/bin/python2 /home/jnd/05-builds/bluegriffon-svn/src/mozilla-release/config/pythonpath.py
+ -I../../config /home/jnd/05-builds/bluegriffon-svn/src/mozilla-release/config/expandlibs_exec.py
+ --uselist --  c++  -fno-rtti -Wall -Wpointer-arith -Woverloaded-virtual -Wsynth -Wno-ctor-dtor-privacy
+ -Wno-non-virtual-dtor -Wcast-align -Wno-invalid-offsetof -Wno-variadic-macros -Werror=return-type
+ -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2
+ -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block -fno-exceptions -fno-strict-aliasing
+ -std=gnu++0x -pthread -ffunction-sections -fdata-sections -pipe  -DNDEBUG -DTRIMMED -g -Os -freorder-blocks
+  -fomit-frame-pointer -fPIC -shared -Wl,-z,defs -Wl,--gc-sections -Wl,-h,libxul.so
+ -o libxul.so  nsStaticXULComponents.o nsUnicharUtils.o nsBidiUtils.o nsRDFResource.o
+    -lpthread -Wl,-O1,--sort-common,--as-needed,-z,relro,--hash-style=gnu -Wl,-rpath,/usr/lib/bluegriffon
+   -Wl,-rpath-link,/home/jnd/05-builds/bluegriffon-svn/src/mozilla-release/bg-trunk/dist/bin -Wl,-rpath-link,/usr/lib
+    ../../toolkit/xre/libxulapp_s.a  ../../staticlib/components/libnecko.a ../../staticlib/components/libuconv.a
+ ../../staticlib/components/libi18n.a ../../staticlib/components/libchardet.a ../../staticlib/components/libjar50.a
+ ../../staticlib/components/libstartupcache.a ../../staticlib/components/libpref.a ../../staticlib/components/libhtmlpars.a
+ ../../staticlib/components/libimglib2.a ../../staticlib/components/libgkgfx.a ../../staticlib/components/libgklayout.a
+ ../../staticlib/components/libdocshell.a ../../staticlib/components/libembedcomponents.a
+ ../../staticlib/components/libwebbrwsr.a ../../staticlib/components/libnsappshell.a ../../staticlib/components/libtxmgr.a
+ ../../staticlib/components/libcommandlines.a ../../staticlib/components/libtoolkitcomps.a
+ ../../staticlib/components/libpipboot.a ../../staticlib/components/libpipnss.a ../../staticlib/components/libappcomps.a
+ ../../staticlib/components/libjsreflect.a ../../staticlib/components/libcomposer.a ../../staticlib/components/libjetpack_s.a
+ ../../staticlib/components/libtelemetry.a ../../staticlib/components/libjsdebugger.a
+ ../../staticlib/components/libstoragecomps.a ../../staticlib/components/librdf.a ../../staticlib/components/libwindowds.a
+ ../../staticlib/components/libjsctypes.a ../../staticlib/components/libjsperf.a ../../staticlib/components/libgkplugin.a
+ ../../staticlib/components/libunixproxy.a ../../staticlib/components/libjsd.a ../../staticlib/components/libautoconfig.a
+ ../../staticlib/components/libauth.a ../../staticlib/components/libcookie.a ../../staticlib/components/libpermissions.a
+ ../../staticlib/components/libuniversalchardet.a ../../staticlib/components/libfileview.a
+ ../../staticlib/components/libplaces.a ../../staticlib/components/libtkautocomplete.a ../../staticlib/components/libsatchel.a
+ ../../staticlib/components/libpippki.a ../../staticlib/components/libwidget_gtk2.a ../../staticlib/components/libsystem-pref.a
+ ../../staticlib/components/libimgicon.a ../../staticlib/components/libaccessibility.a
+ ../../staticlib/components/libremoteservice.a ../../staticlib/components/libspellchecker.a
+ ../../staticlib/components/libzipwriter.a ../../staticlib/components/libservices-crypto.a ../../staticlib/libjsipc_s.a
+ ../../staticlib/libdomipc_s.a ../../staticlib/libdomplugins_s.a ../../staticlib/libmozipc_s.a
+ ../../staticlib/libmozipdlgen_s.a ../../staticlib/libipcshell_s.a ../../staticlib/libgfx2d.a ../../staticlib/libgfxipc_s.a
+ ../../staticlib/libhal_s.a ../../staticlib/libxpcom_core.a ../../staticlib/libucvutil_s.a ../../staticlib/libchromium_s.a
+ ../../staticlib/libmozreg_s.a ../../staticlib/libgtkxtbin.a ../../staticlib/libthebes.a ../../staticlib/libycbcr.a
+ ../../staticlib/libangle.a
+  -L../../dist/bin -L../../dist/lib -ljpeg  -lpng  ../../gfx/qcms/libmozqcms.a /home/jnd/05-builds/bluegriffon-svn/src/mozilla-release/bg-trunk/dist/lib/libmozjs.a
+ -Wl,-rpath-link,/usr/lib -L/usr/lib -lssl3 -lsmime3 -lnss3 -lnssutil3 -lcrmf -lcairo -lpixman-1 -lfreetype -lfontconfig
+    -lXrender -lcairo -lX11   ../../gfx/harfbuzz/src/libmozharfbuzz.a ../../gfx/ots/src/libmozots.a  -lsqlite3
+    -lz  -lhunspell-1.3   -L/usr/lib -levent -L/usr/lib -lvpx -lasound   -L../../dist/bin -L../../dist/lib  -L/usr/lib
+ -lplds4 -lplc4 -lnspr4 -lpthread -ldl ../../dist/lib/libmozalloc.a -pthread -ldbus-glib-1 -ldbus-1 -lpthread -lgobject-2.0
+ -lgthread-2.0 -lrt -lglib-2.0    -lX11  -lXext  -pthread -lpangoft2-1.0 -lfreetype -lfontconfig -lpangocairo-1.0
+ -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0   -pthread -lgtk-x11-2.0 -latk-1.0 -lgio-2.0
+ -lpangoft2-1.0 -lfreetype -lfontconfig -lgdk-x11-2.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lcairo -lgmodule-2.0
+ -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0   -lXt -lgthread-2.0 -lfreetype -lz -lbz2 -lstartup-notification-1   -ldl  -lrt
+    
+
+
+==========================================================================
+ERREUR libxul.so
+=================
+
+/build/src/mozilla-release/bg-trunk/config/nsinstall -D ../../dist/sdk/lib
+rm -f libxul.so
+/usr/bin/python2 /build/src/mozilla-release/config/pythonpath.py
+ -I../../config /build/src/mozilla-release/config/expandlibs_exec.py
+ --uselist --  c++  -fno-rtti -Wall -Wpointer-arith -Woverloaded-virtual -Wsynth -Wno-ctor-dtor-privacy
+ -Wno-non-virtual-dtor -Wcast-align -Wno-invalid-offsetof -Wno-variadic-macros -Werror=return-type
+ -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2
+ -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block -fno-exceptions -fno-strict-aliasing
+ -std=gnu++0x -pthread -ffunction-sections -fdata-sections -pipe  -DNDEBUG -DTRIMMED -g -Os -freorder-blocks
+  -fomit-frame-pointer -fPIC -shared -Wl,-z,defs -Wl,--gc-sections -Wl,-h,libxul.so
+ -o libxul.so  nsStaticXULComponents.o nsUnicharUtils.o nsBidiUtils.o nsRDFResource.o
+    -lpthread -Wl,-O1,--sort-common,--as-needed,-z,relro,--hash-style=gnu -Wl,-rpath,/usr/lib/bluegriffon
+   -Wl,-rpath-link,/build/src/mozilla-release/bg-trunk/dist/bin -Wl,-rpath-link,/usr/lib
+    ../../toolkit/xre/libxulapp_s.a  ../../staticlib/components/libnecko.a ../../staticlib/components/libuconv.a
+ ../../staticlib/components/libi18n.a ../../staticlib/components/libchardet.a ../../staticlib/components/libjar50.a
+ ../../staticlib/components/libstartupcache.a ../../staticlib/components/libpref.a ../../staticlib/components/libhtmlpars.a
+ ../../staticlib/components/libimglib2.a ../../staticlib/components/libgkgfx.a ../../staticlib/components/libgklayout.a
+ ../../staticlib/components/libdocshell.a ../../staticlib/components/libembedcomponents.a
+ ../../staticlib/components/libwebbrwsr.a ../../staticlib/components/libnsappshell.a ../../staticlib/components/libtxmgr.a
+ ../../staticlib/components/libcommandlines.a ../../staticlib/components/libtoolkitcomps.a
+ ../../staticlib/components/libpipboot.a ../../staticlib/components/libpipnss.a ../../staticlib/components/libappcomps.a
+ ../../staticlib/components/libjsreflect.a ../../staticlib/components/libcomposer.a ../../staticlib/components/libjetpack_s.a
+ ../../staticlib/components/libtelemetry.a ../../staticlib/components/libjsdebugger.a
+ ../../staticlib/components/libstoragecomps.a ../../staticlib/components/librdf.a ../../staticlib/components/libwindowds.a
+ ../../staticlib/components/libjsctypes.a ../../staticlib/components/libjsperf.a ../../staticlib/components/libgkplugin.a
+ ../../staticlib/components/libunixproxy.a ../../staticlib/components/libjsd.a ../../staticlib/components/libautoconfig.a
+ ../../staticlib/components/libauth.a ../../staticlib/components/libcookie.a ../../staticlib/components/libpermissions.a
+ ../../staticlib/components/libuniversalchardet.a ../../staticlib/components/libfileview.a
+ ../../staticlib/components/libplaces.a ../../staticlib/components/libtkautocomplete.a ../../staticlib/components/libsatchel.a
+ ../../staticlib/components/libpippki.a ../../staticlib/components/libwidget_gtk2.a ../../staticlib/components/libsystem-pref.a
+ ../../staticlib/components/libimgicon.a ../../staticlib/components/libaccessibility.a
+ ../../staticlib/components/libremoteservice.a ../../staticlib/components/libspellchecker.a
+ ../../staticlib/components/libzipwriter.a ../../staticlib/components/libservices-crypto.a ../../staticlib/libjsipc_s.a
+ ../../staticlib/libdomipc_s.a ../../staticlib/libdomplugins_s.a ../../staticlib/libmozipc_s.a
+ ../../staticlib/libmozipdlgen_s.a ../../staticlib/libipcshell_s.a ../../staticlib/libgfx2d.a ../../staticlib/libgfxipc_s.a
+ ../../staticlib/libhal_s.a ../../staticlib/libxpcom_core.a ../../staticlib/libucvutil_s.a ../../staticlib/libchromium_s.a
+ ../../staticlib/libmozreg_s.a ../../staticlib/libgtkxtbin.a ../../staticlib/libthebes.a ../../staticlib/libycbcr.a
+ ../../staticlib/libangle.a
+  -L../../dist/bin -L../../dist/lib -ljpeg  -lpng  ../../gfx/qcms/libmozqcms.a /build/src/mozilla-release/bg-trunk/dist/lib/libmozjs.a
+ -Wl,-rpath-link,/usr/lib -L/usr/lib -lssl3 -lsmime3 -lnss3 -lnssutil3 -lcrmf -lcairo -lpixman-1 -lfreetype -lfontconfig
+    -lXrender -lcairo -lX11   ../../gfx/harfbuzz/src/libmozharfbuzz.a ../../gfx/ots/src/libmozots.a  -lsqlite3
+    -lz  -lhunspell-1.3   -L/usr/lib -levent -L/usr/lib -lvpx -lasound   -L../../dist/bin -L../../dist/lib  -L/usr/lib
+ -lplds4 -lplc4 -lnspr4 -lpthread -ldl ../../dist/lib/libmozalloc.a -pthread -ldbus-glib-1 -ldbus-1 -lpthread -lgobject-2.0
+ -lgthread-2.0 -lrt -lglib-2.0    -lX11  -lXext  -pthread -lpangoft2-1.0 -lfreetype -lfontconfig -lpangocairo-1.0
+ -lpango-1.0 -lcairo -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0   -pthread -lgtk-x11-2.0 -latk-1.0 -lgio-2.0
+ -lpangoft2-1.0 -lfreetype -lfontconfig -lgdk-x11-2.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lcairo -lgmodule-2.0
+ -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0   -lXt -lgthread-2.0 -lfreetype -lz -lbz2 -lstartup-notification-1   -ldl  -lrt    
+collect2: ld returned 1 exit status
+make[5]: *** [libxul.so] Error 1
+make[5]: Leaving directory `/build/src/mozilla-release/bg-trunk/toolkit/library'
+make[4]: *** [libs_tier_platform] Error 2
+make[4]: Leaving directory `/build/src/mozilla-release/bg-trunk'
+make[3]: *** [tier_platform] Error 2
+make[3]: Leaving directory `/build/src/mozilla-release/bg-trunk'
+make[2]: *** [default] Error 2
+make[2]: Leaving directory `/build/src/mozilla-release/bg-trunk'
+make[1]: *** [realbuild] Error 2
+make[1]: Leaving directory `/build/src/mozilla-release'
+make: *** [build] Error 2

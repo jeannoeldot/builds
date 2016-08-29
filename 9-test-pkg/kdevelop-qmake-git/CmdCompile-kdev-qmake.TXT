@@ -1,0 +1,236 @@
+#Le répertoire
+
+cd /home/jnd/05-builds/kdevelop-qmake-git
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+=============================================
+http://quickgit.kde.org/?p=kdev-qmake.git
+
+date modification       Fri, 25 Jul 2014 05:47:21 +0000
+
+==>  20140725
+
+git en lecture seule    git://anongit.kde.org/kdev-qmake.git
+
+1.3 SOURCES
+==============
+!!! Répertoire clone de kdev-qmake dans : /0-DataLinux/05-builds-dir-git/kdev-qmake
+-----------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+!!! PAS OBLIGATOIRE SI GIT
+rm -rf kdev-qmake
+
+Vérifier existence rep kdev-qmake :
+--------------------------------
+ls
+
+!!! SI REP kdev-qmake N'EXISTE PAS
+-----------------------------------
+git clone git://anongit.kde.org/kdev-qmake.git
+
+!!! SI REP kdev-qmake EXISTE
+-----------------------------
+cd kdev-qmake
+git pull --rebase origin master
+cd ..
+
+!!!!! Vérifier VERSION : 
+$ head -n 8 kdev-qmake/CMakeLists.txt
+
+project(QMakeManager)
+
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 7)
+set(VERSION_PATCH 60)
+# KDevplatform dependency version
+set( KDEVPLATFORM_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
+
+==> 1.7.60
+
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+rm -i kdevelop-qmake-git-*.tar.gz
+tar -cvzf kdevelop-qmake-git-1.7.60.20140725.tar.gz --exclude=.git kdev-qmake
+
+1-7-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd /home/jnd/05-builds/kdevelop-qmake-git
+
+mv -v /0-DataLinux/05-builds-dir-git/kdevelop-qmake-git-*.tar.gz .
+sync
+
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgname=kdevelop-qmake-git
+pkgver=1.7.60.20140725
+pkgrel=1
+
+source=($pkgname-$pkgver.tar.gz
+        xxx.patch
+        yyy.patch
+)
+
+
+sha256sum kdevelop-qmake-git-1.7.60.20140725.tar.gz
+
+
+
+sha256sums=(1111111111
+         2222222222
+         3333333333
+)
+
+_gitname="kdev-qmake"
+
+2-2) VERIFIER CMakeLists.txt
+==========================
+ kwrite /0-DataLinux/05-builds-dir-git/kdev-qmake/CMakeLists.txt
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 kdevelop-qmake-git-1.7.60.20140725.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/kdevelop-qmake-git/{PKGBUILD,kdevelop-qmake-git-1.7.60.20140725.tar.gz} . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/kdevelop-qmake-git \
+&& cp -v /tmp/build/kdevelop-qmake-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/kdevelop-qmake-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3) MAKEPKG en USER sur SSD
+===========================
+cd /home/jnd/05-builds/kdevelop-qmake-git
+
+$ rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+# Nettoyage...
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+# Verifications...
+namcap kdevelop-qmake-git-*-x86_64.pkg.tar.*
+
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/kdevelop-qmake-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv kdevelop-qmake-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# pacman -Syu
+# pacman -Syu kdevelop-qmake-git
+
+
+SI PROBLEMES
+================
+
+# pacman -R kdevelop-qmake-git
+# rm -f /var/cache/pacman/pkg/kdevelop-qmake-git-*
+
+!!! EN USER
+$ rm -f 00-repolocal/kdevelop-qmake-git-*-x86_64.pkg.tar.*
+$ maj-repolocal
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+
+1-2) SOURCE
+=============================================
+http://quickgit.kde.org/?p=kdev-qmake.git
+
+==> snapshot = 84212ea
+==> kdev-qmake-84212ea.tar.gz
+
+!!! GENTOO
+http://quickgit.kde.org/?p=${MY_PN}.git&a=snapshot&h=${PV%%.0} -> ${P}.tar.gz
+
+wget http://quickgit.kde.org/?p=kdev-qmake.git&a=snapshot&h=84212ea.tar.gz
+
+
+1-2) MODIF blender/CMakeLists.txt
+=====================================
+
+kwrite kdev-qmake/CMakeLists.txt
+
+LIGNE 9 :
+find_package(KDevPlatform 1.3.60 REQUIRED)
+
+DEVIENT :
+find_package(KDevPlatform 1.3.0 REQUIRED)
+
+ENREGISTRER et QUITTER kwrite
+SUPPRIMER kdev-qmake/CMakeLists.txt~
+rm kdev-qmake/CMakeLists.txt~
+
+3) MAKEPKG en CHROOT
+====================
+
+!!! EN USER
+
+
+!!! EN ROOT
+
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/kdevelop-qmake-git -n -qt4
+
+
+

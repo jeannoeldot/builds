@@ -1,0 +1,55 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Radu Andries <admiral0@tuxfamily.org>
+# Contributor: mosra <mosra@centrum.cz>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=kdevelop-qmake-git
+pkgver=1.7.60.20140725
+pkgrel=1
+pkgdesc="Qt's qmake build system plugin for KDevelop - Git build"
+arch=('i686' 'x86_64')
+url="http://www.kdevelop.org/"
+license=('GPL2')
+depends=('kdevelop')
+makedepends=('cmake' 'automoc4' 'kdevelop-pg-qt')
+provides=('kdevelop-qmake')
+conflicts=('kdevelop-qmake')
+source=($pkgname-$pkgver.tar.gz
+)
+sha256sums=('fb4f2b562a75053e6b82d95f9f55f708b13e35f2a6b2d2870ce22bbeb7212b87'
+)
+_gitname="kdev-qmake"
+
+prepare() {
+      cd "${srcdir}/${_gitname}"
+
+#       set( KDEVPLATFORM_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
+      sed -i "/set( KDEVPLATFORM_VERSION/c\set( KDEVPLATFORM_VERSION 1.6.0 )" CMakeLists.txt
+
+#      find_package(KDevPlatform ${KDEVPLATFORM_VERSION} REQUIRED)
+#      sed -i "/find_package(KDevPlatform/c\find_package(KDevPlatform 1.6.0 REQUIRED)" CMakeLists.txt
+}
+
+build() {
+    cd "${srcdir}/${_gitname}"
+
+    [[ -d build ]] && rm -r build
+    mkdir build && cd build
+
+    cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+        ..
+    make ${MAKEFLAGS}
+}
+
+package() {
+    cd "${srcdir}/${_gitname}/build"
+
+    make DESTDIR="${pkgdir}" install
+
+    # /usr/share/apps/kdevappwizard/templates/qmake_qt4guiapp.tar.bz2 is
+    # already in kdesdk-kapptemplate
+    rm "${pkgdir}/usr/share/apps/kdevappwizard/templates/qmake_qt4guiapp.tar.bz2"
+}

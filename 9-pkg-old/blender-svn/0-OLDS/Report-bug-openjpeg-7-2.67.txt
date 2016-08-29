@@ -1,0 +1,23 @@
+
+Following the change openjpeg version (1.5.0 -> 1.5.1), cmake does not detect the file openjpeg.h.
+Extract from the compilation :
+...
+-- Could NOT find OpenJPEG (missing:  OPENJPEG_INCLUDE_DIR) 
+...
+   * WITH_IMAGE_OPENJPEG        OFF
+...
+
+By adding this line in the PKGBUILD:
+        -DOPENJPEG_INCLUDE_DIR=/usr/include/openjpeg-1.5 \
+
+cmake can detect openjpeg.h file, and blender is compiled with support openjpeg.
+
+Just a little note: there are two calls to make in the build() function :
+  make $MAKEFLAGS
+
+  make
+
+thank you for reading
+
+Steps to reproduce:
+# pacman -Syu

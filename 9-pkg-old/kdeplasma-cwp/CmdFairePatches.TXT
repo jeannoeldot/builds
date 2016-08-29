@@ -1,0 +1,130 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/kdeplasma-cwp
+mkdir srcp
+
+cp 98925-cwp-1.6.5.tar.bz2 srcp/
+cd srcp
+tar -xvjf 98925-cwp-1.6.5.tar.bz2
+rm -f 98925-cwp-1.6.5.tar.bz2
+cd ..
+
+1) MODIFIER cwp-1.6.5.new/plasma-cwp.cpp
+================================================================
+cd srcp
+cp -R cwp-1.6.5 cwp-1.6.5.new
+
+cd cwp-1.6.5.new
+
+kwrite plasma-cwp.cpp
+
+1-1 NOMS JOURS EN FR
+=====================
+LIGNES 1313 A 1316 DEVIENNENT :
+
+1311		// day name
+1312		QString day_name = "";
+// Début modif nom jours en FR
+		QString jour_fr = "";
+		if ( dayNamesSystem == 0 ) day_name = data_day_name[i];
+		else if ( dayNamesSystem == 1 ) day_name = QDate::shortDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+		else if ( dayNamesSystem == 2 ) day_name = QDate::longDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+		else if ( dayNamesSystem == 3 ) day_name = QDate::currentDate().addDays( i ).toString( Qt::DefaultLocaleShortDate );
+
+		if ( day_name == "Mon" ) jour_fr = "Lun";
+		else if ( day_name == "Tue" ) jour_fr = "Mar";
+		else if ( day_name == "Wed" ) jour_fr = "Mer";
+		else if ( day_name == "Thu" ) jour_fr = "Jeu";
+		else if ( day_name == "Fri" ) jour_fr = "Ven";
+		else if ( day_name == "Sat" ) jour_fr = "Sam";
+		else if ( day_name == "Sun" ) jour_fr = "Dim";
+		else if ( day_name == "Monday" )    jour_fr = "Lundi";
+		else if ( day_name == "Tuesday" )   jour_fr = "Mardi";
+		else if ( day_name == "Wednesday" ) jour_fr = "Mercredi";
+		else if ( day_name == "Thursday" )  jour_fr = "Jeudi";
+		else if ( day_name == "Friday" )    jour_fr = "Vendredi";
+		else if ( day_name == "Saturday" )  jour_fr = "Samedi";
+		else if ( day_name == "Sunday" )    jour_fr = "Dimanche";
+
+		if ( jour_fr != "" ) day_name = jour_fr;
+// Fin modif
+1317
+1318		if ( day_name != "" )
+1319		{
+
+
+1-2 TEMPERAATURES LOW / HIGH au lieu de HIGH / LOW
+==================================================
+LIGNES 1346
+
+1346		// temperature low/high
+		QString temp_low_high = "";
+// Début modif temperature low / high
+		if ( data_day_temperature_low[i] != "" && data_day_temperature_low[i].contains(QRegExp("[0-9]")) )
+		{
+			temp_low_high = temp_low_high + data_day_temperature_low[i] + QChar(0xB0) + ( showTemperatureUnit ? tempType : "" );
+		}
+		if ( data_day_temperature_high[i] != "" && data_day_temperature_low[i] != "" && data_day_temperature_high[i].contains(QRegExp("[0-9]")) &&
+			data_day_temperature_low[i].contains(QRegExp("[0-9]")) )
+		{
+			temp_low_high = temp_low_high + " / ";
+		}
+		if ( data_day_temperature_high[i] != "" && data_day_temperature_high[i].contains(QRegExp("[0-9]")) )
+		{
+			temp_low_high = temp_low_high + data_day_temperature_high[i] + QChar(0xB0) + ( showTemperatureUnit ? tempType : "" );
+		}
+// Fin modif
+1361
+1362		p->setFont( paint_helper->getFittingFontSize( p, day_temp_rect[i], Qt::AlignVCenter | Qt::AlignHCenter,
+1363			temp_low_high, day_temperature_font, true, true, 0.3, 0, 0 ) );
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier plasma-cwp.cpp~
+rm -f plasma-cwp.cpp~
+
+
+cd ..
+diff -aur cwp-1.6.5 cwp-1.6.5.new
+diff -aur cwp-1.6.5 cwp-1.6.5.new > fix-day-name-fr-temp-low-high.patch
+
+rm -rf cwp-1.6.5.new
+
+cd ..
+mv srcp/fix-day-name-fr-temp-low-high.patch fix-day-name-fr-temp-low-high.patch
+
+
+2) MODIFIER cwp-1.6.5.new/data/fr_weather_com.xml
+================================================================
+cd srcp
+cp -R cwp-1.6.5 cwp-1.6.5.new
+
+cd cwp-1.6.5.new/data
+
+kwrite fr_weather_com.xml
+
+LIGNE 6 DEVIENT :
+
+	<locale_settings locale="fr_FR.utf8" encoding="utf8" />
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier fr_weather_com.xml~
+rm -f fr_weather_com.xml~
+
+
+cd ../..
+diff -aur cwp-1.6.5 cwp-1.6.5.new
+diff -aur cwp-1.6.5 cwp-1.6.5.new > fix-error-locale.patch
+
+rm -rf cwp-1.6.5.new
+
+cd ..
+mv srcp/fix-error-locale.patch fix-error-locale.patch
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+

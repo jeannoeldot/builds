@@ -1,0 +1,64 @@
+FAIRE PATCHS
+====================================
+
+cd /home/jnd/05-builds/gcc47
+
+mkdir /tmp/srcp
+
+cp -v gcc-4.7.4.tar.bz2 /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xjf gcc-4.7.4.tar.bz2
+
+cd /home/jnd/05-builds/gcc47
+
+
+
+1) MODIFIER gcc-4.7.4/gcc/cp/cfns.h
+===================================
+
+cd /tmp/srcp
+
+cp -R gcc-4.7.4 gcc-4.7.4.new
+
+cd gcc-4.7.4.new/gcc/cp
+kwrite cfns.h
+
+RAJOUTER  LIGNE 56 :
+#ifdef __GNUC_STDC_INLINE__
+__attribute__ ((__gnu_inline__))
+#endif
+
+MODIFIER LIGNE 102 :
+  register int hval = len;
+DEVIENT :
+  register int hval = (int)len;
+
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier cfns.h~
+rm -f cfns.h~
+
+cd ../../..
+
+diff -aur gcc-4.7.4 gcc-4.7.4.new
+diff -aur gcc-4.7.4 gcc-4.7.4.new > fix-build-with-gcc-5.patch
+
+rm -rf gcc-4.7.4.new
+
+cd /home/jnd/05-builds/gcc47
+
+
+mv -vf /tmp/srcp/fix-build-with-gcc-5.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+

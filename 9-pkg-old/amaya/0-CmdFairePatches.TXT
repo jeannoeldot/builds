@@ -1,0 +1,406 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/amaya
+
+mkdir /tmp/srcp
+
+cp -v amaya-sources-11.4.4.tgz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xvzf amaya-sources-11.4.4.tgz
+
+
+1) MODIFIER Amaya11.4.4.new/Amaya/thotlib/image/pnghandler.c
+================================================================
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/thotlib/image
+kwrite pnghandler.c
+
+LIGNE 13 : AJOUTER :
+#include <string.h>
+#include "zlib.h"
+#include "png.h"
+LIGNE 18 : SUPPRIMER
+
+LIGNE 133 : DEVIENT :
+   png_uint_32     lw, lh;
+
+LIGNE 139 : DEVIENT :
+  if (png_sig_cmp (pbSig, 0, 8))
+
+LIGNE 154 : DEVIENT :
+    if (setjmp(png_jmpbuf(png_ptr)))
+
+LIGNE 174 : DEVIENT :
+  png_set_expand_gray_1_2_4_to_8(png_ptr);
+
+LIGNE 180 : DEVIENT :
+  png_set_expand_gray_1_2_4_to_8(png_ptr);
+
+LIGNE 311 : DEVIENT :
+  if (setjmp(png_jmpbuf(png_ptr)))
+
+LIGNE 827 : DEVIENT :
+  ret = !png_sig_cmp ((png_byte*)buf, 0, 8);
+
+LIGNE 863 : DEVIENT :
+  if (setjmp(png_jmpbuf(png)))
+
+LIGNE 213 : DEVIENT :
+  /*png_start_read_image (png_ptr);*/
+
+LIGNE 218 : DEVIENT :
+    png_read_end(png_ptr, info_ptr);
+
+LIGNE 463 : DEVIENT :
+  png_read_update_info (png_ptr, info_ptr);
+LIGNE 464 : DEVIENT :
+  /*png_start_read_image (png_ptr);*/
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier pnghandler.c~
+rm -f pnghandler.c~
+
+cd ../../../..
+
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > fix-thotlib-png14.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf /tmp/srcp/fix-thotlib-png14.patch 11.4.4-fix-thotlib-png.patch
+
+
+2-1) MODIFIER Amaya11.4.4.new/Amaya/thotlib/dialogue/AmayaPage.cpp
+===================================================================
+cd /tmp/srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/thotlib/dialogue
+kwrite AmayaPage.cpp
+
+LIGNES 386 : DEVIENT :
+  SetSplitMode(wxSPLIT_VERTICAL); // undefined not allowed
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier AmayaPage.cpp~
+rm -f AmayaPage.cpp~
+cd ../../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > splitmode.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf /tmp/srcp/splitmode.patch 11.4.4-splitmode.patch
+
+
+2-2) MODIFIER Amaya11.4.4.new/Amaya/thotlib/base/AmayaApp.cpp
+===================================================================
+cd /tmp/srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/thotlib/base
+kwrite AmayaApp.cpp
+
+LIGNES 329 : AJOUTER :
+  wxWakeUpIdle();
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier AmayaApp.cpp~
+rm -f AmayaApp.cpp~
+cd ../../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > wakeupidle.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf /tmp/srcp/wakeupidle.patch 11.4.4-wakeupidle.patch
+
+
+2-3) MODIFIER Amaya11.4.4.new/Amaya/thotlib/dialogue/appdialogue_wx.c
+=====================================================================
+cd /tmp/srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/thotlib/dialogue
+kwrite appdialogue_wx.c
+
+LIGNES 996 : DEVIENT :
+  wxTheApp->Yield(TRUE);
+
+LIGNES 1827 : DEVIENT :
+  wxTheApp->Yield(TRUE);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier appdialogue_wx.c~
+rm -f appdialogue_wx.c~
+cd ../../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > wxyield.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf /tmp/srcp/wxyield.patch 11.4.4-wxyield.patch
+
+
+3.1) MODIFIER Amaya11.4.4/Amaya/amaya/Makefile.in
+==================================================================
+cd /tmp/srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/amaya
+kwrite Makefile.in
+
+LIGNE 24 DEVIENT :
+          $(WX_LIBRARIES) -lpng -ljpeg
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > explicite-linking.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf /tmp/srcp/explicite-linking.patch 11.4.4-amaya-explicite-linking.patch
+
+
+3.2) MODIFIER Amaya11.4.4/Amaya/thotlib/Makefile.in
+==================================================================
+cd /tmp/srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/thotlib
+kwrite Makefile.in
+
+LIGNE 354 DEVIENT :
+	$(CXX) $(LDFLAGS) -o $@ $(THOTK_OBJ) $(DISPLAY_OBJ) $(PRINT_OBJ) ../amaya/libCSS.a $(LIBS) -lpng -ljpeg
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > explicite-linking.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf /tmp/srcp/explicite-linking.patch 11.4.4-thotlib-explicite-linking.patch
+
+
+4.1) MODIFIER Amaya11.4.4/Amaya/amaya/html2thot.c et Xml2thot.c
+==================================================================
+cd /tmp/srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/amaya
+kwrite html2thot.c
+
+LIGNE 4352 DEVIENT :
+  LastCharInWorkBuffer = gzread ((gzFile)infile, &FileBuffer[StartOfRead],
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier html2thot.c~
+rm -f html2thot.c~
+
+
+kwrite Xml2thot.c
+
+LIGNE 5850 DEVIENT :
+      res = gzread ((gzFile)infile, bufferRead, COPY_BUFFER_SIZE);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Xml2thot.c~
+rm -f Xml2thot.c~
+
+cd ../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > fix-amaya-gzread.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf /tmp/srcp/fix-amaya-gzread.patch 11.4.4-fix-amaya-gzread.patch
+
+
+
+
+9) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+
+====================================================================================
+ANCIENS
+
+5.1) MODIFIER Amaya11.4.4/Amaya/configure.in
+==================================================================
+cd srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya
+kwrite configure.in
+
+LIGNE 506 DEVIENT :
+#CXX_OPTIONS="-D__cplusplus"
+
+LIGNE 507 DEVIENT :
+CXXFLAGS="${CXXFLAGS} -Wall -x c++"
+
+LIGNE 196 DEVIENT :
+OS_OPTIONS="" # default is UNIX
+
+LIGNE 198 DEVIENT :
+  LINUX)       OS_OPTIONS="" ;;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier configure.in~
+rm -f configure.in~
+cd ../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > fix-amaya-errors-compile.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf srcp/fix-amaya-errors-compile.patch 11.4.4-fix-amaya-errors-compile.patch
+
+3.1) MODIFIER Amaya11.4.4/Amaya/thotlib/base/platform.c
+==================================================================
+cd srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/thotlib/base
+kwrite platform.c
+
+LIGNE 332 DEVIENT :
+      wxFile (targetFile, wxFile::write);
+
+LIGNE 334 DEVIENT :
+      wxFile (tmpFile, wxFile::write);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier platform.c~
+rm -f platform.c~
+cd ../../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > fix-thotlib-wxfile.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf srcp/fix-thotlib-wxfile.patch 11.4.4-fix-thotlib-wxfile.patch
+
+3.2) MODIFIER Amaya11.4.4/Amaya/amaya/HTMLedit.c
+==================================================================
+cd srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/Amaya/amaya
+kwrite HTMLedit.c
+
+LIGNE 1728 DEVIENT :
+                  wxFile (tmpFile, wxFile::write);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier HTMLedit.c~
+rm -f HTMLedit.c~
+cd ../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > fix-amaya-wxfile.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf srcp/fix-amaya-wxfile.patch 11.4.4-fix-amaya-wxfile.patch
+
+
+
+===================================================
+  !!! OU !!!
+
+cp amaya-sources-11.4.4.tar.gz srcp/
+cd srcp
+tar -xvzf amaya-sources-11.4.4.tar.gz
+
+
+1) MODIFIER Amaya11.4.4.new/wxWidgets/src/gtk/gsockgtk.cpp
+==============================================================
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/wxWidgets/src/gtk
+kwrite gsockgtk.cpp
+
+LIGNES 18 ET 19 DEVIENNENT :
+// newer versions of glib define its own GSocket but we unfortunately use this
+// name in our own (semi-)public header and so can't change it -- rename glib
+// one instead
+#define GSocket GlibGSocket
+#include <gdk/gdk.h>
+#include <glib.h>
+#undef GSocket
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier gsockgtk.cpp~
+rm -f gsockgtk.cpp~
+cd ../../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > wxwidgets-gsocket.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf srcp/wxwidgets-gsocket.patch wxwidgets-gsocket.patch
+
+
+2-1) MODIFIER Amaya11.4.4.new/wxWidgets/src/common/imagpng.cpp
+================================================================
+cd srcp
+cp -R Amaya11.4.4 Amaya11.4.4.new
+
+cd Amaya11.4.4.new/wxWidgets/src/common
+kwrite imagpng.cpp
+
+LIGNE 571 DEVIENT :
+    // initialize all line pointers to NULL to ensure that they can be safely
+    // free()d if an error occurs before all of them could be allocated
+    lines = (unsigned char **)calloc(height, sizeof(unsigned char *));
+
+LIGNES 580 581 582 584	SUPPRIMEES	!!! PAS 583
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagpng.cpp~
+rm -f imagpng.cpp~
+
+2-2) MODIFIER Amaya11.4.4.new/wxWidgets/src/common/imagtiff.cpp
+================================================================
+
+kwrite imagtiff.cpp
+
+LIGNE 264 SUPPRIMEE :
+
+LIGNES 277 A 279 DEVIENNENT :
+    // guard against integer overflow during multiplication which could result
+    // in allocating a too small buffer and then overflowing it
+    const double bytesNeeded = (double)w * (double)h * sizeof(uint32);
+    if ( bytesNeeded >= 4294967295U /* UINT32_MAX */ )
+    {
+        if ( verbose )
+            wxLogError( _("TIFF: Image size is abnormally big.") );
+
+        TIFFClose(tif);
+
+        return false;
+    }
+
+    raster = (uint32*) _TIFFmalloc( bytesNeeded );
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagtiff.cpp~
+rm -f imagtiff.cpp~
+
+cd ../../../..
+diff -aur Amaya11.4.4 Amaya11.4.4.new
+diff -aur Amaya11.4.4 Amaya11.4.4.new > wxwidgets-overflow.patch
+
+rm -rf Amaya11.4.4.new
+
+cd /home/jnd/05-builds/amaya
+mv -vf srcp/wxwidgets-overflow.patch wxwidgets-overflow.patch

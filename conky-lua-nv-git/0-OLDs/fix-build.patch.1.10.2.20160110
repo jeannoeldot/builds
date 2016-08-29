@@ -1,0 +1,23 @@
+diff -aur conky/cmake/ConkyPlatformChecks.cmake conky.new/cmake/ConkyPlatformChecks.cmake
+--- conky/cmake/ConkyPlatformChecks.cmake	2015-12-06 15:40:27.000000000 +0100
++++ conky.new/cmake/ConkyPlatformChecks.cmake	2015-12-06 15:58:48.564149214 +0100
+@@ -250,7 +250,7 @@
+ 	endif(X11_FOUND)
+ endif(BUILD_X11)
+ 
+-pkg_search_module(LUA REQUIRED lua5.2 lua-5.2 lua>=5.1 lua5.1 lua-5.1)
++pkg_search_module(LUA REQUIRED lua=5.1 lua5.1 lua-5.1)
+ set(conky_libs ${conky_libs} ${LUA_LIBRARIES})
+ set(conky_includes ${conky_includes} ${LUA_INCLUDE_DIRS})
+ link_directories(${LUA_LIBRARY_DIRS})
+@@ -333,8 +333,8 @@
+ 	find_library(XNVCtrl_LIB NAMES XNVCtrl)
+ 	if(XNVCtrl_INCLUDE_PATH AND XNVCtrl_LIB)
+ 		set(XNVCtrl_FOUND true)
+-		set(conky_libs ${conky_libs} ${XNVCtrl_LIB})
+-		set(conky_includes ${conky_includes} ${XNVCtrl_INCLUDE_PATH})
++		set(conky_libs ${XNVCtrl_LIB} ${conky_libs})
++ 		set(conky_includes ${XNVCtrl_INCLUDE_PATH} ${conky_includes})
+ 	else(XNVCtrl_INCLUDE_PATH AND XNVCtrl_LIB)
+ 		message(FATAL_ERROR "Unable to find XNVCtrl library")
+ 	endif(XNVCtrl_INCLUDE_PATH AND XNVCtrl_LIB)

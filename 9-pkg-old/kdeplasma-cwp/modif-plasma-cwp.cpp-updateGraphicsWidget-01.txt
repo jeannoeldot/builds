@@ -1,0 +1,145 @@
+
+
+LIGNE 1311
+
+		// day name
+		QString day_name = "";
+// Début ma modif
+		QString jour_fr = "";
+		if ( dayNamesSystem == 0 ) day_name = data_day_name[i];
+		else if ( dayNamesSystem == 1 ) day_name = QDate::shortDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+		else if ( dayNamesSystem == 2 ) day_name = QDate::longDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+		else if ( dayNamesSystem == 3 ) day_name = QDate::currentDate().addDays( i ).toString( Qt::DefaultLocaleShortDate );
+
+
+
+
+
+
+===============================================================================================
+LIGNE 1311
+
+		// day name
+		QString day_name = "";
+// Début ma modif
+		QString jour_fr = "";
+		if ( dayNamesSystem == 0 ) day_name = data_day_name[i];
+		else if ( dayNamesSystem == 1 ) day_name = QDate::shortDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+		else if ( dayNamesSystem == 2 ) day_name = QDate::longDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+		else if ( dayNamesSystem == 3 ) day_name = QDate::currentDate().addDays( i ).toString( Qt::DefaultLocaleShortDate );
+
+		if ( day_name == "Mon" )
+		{
+		  jour_fr = "Lun";
+		}
+		else if ( day_name == "Tue" )
+		{
+		  jour_fr = "Mar";
+		}
+		else if ( day_name == "Wed" )
+		{
+		  jour_fr = "Mer";
+		}
+		else if ( day_name == "Thu" )
+		{
+		  jour_fr = "Jeu";
+		}
+		else if ( day_name == "Fri" )
+		{
+		  jour_fr = "Ven";
+		}
+		else if ( day_name == "Sat" )
+		{
+		  jour_fr = "Sam";
+		}
+		else if ( day_name == "Sun" )
+		{
+		  jour_fr = "Dim";
+		}
+		if ( jour_fr != "" )
+		{
+		  day_name = jour_fr;
+		}
+// Fin ma modif
+
+==========================================================================================================================
+
+
+// Ma modif
+	QString jour_fr;
+	QString nom;
+	for( i=0; i<7; i++ )
+	{
+//		data_day_name[i] = dataFromIdentifier( 19 + i * 6 + 0 );
+		nom = dataFromIdentifier( 19 + i * 6 + 0 );
+		jour_fr = nom;
+		  if( nom == "Mon" )
+		  {
+		    jour_fr = "Lun";
+		  }
+		  else if( nom == "Tue" )
+		  {
+		    jour_fr = "Mar";
+		  }
+		  else if( nom == "Wed" )
+		  {
+		    jour_fr = "Mer";
+		  }
+		  else if( nom == "Thu" )
+		  {
+		    jour_fr = "Jeu";
+		  }
+		  else if( nom == "Fri" )
+		  {
+		    jour_fr = "Ven";
+		  }
+		  else if( nom == "Sat" )
+		  {
+		    jour_fr = "Sam";
+		  }
+		  else if( nom == "Sun" )
+		  {
+		    jour_fr = "Dim";
+		  }
+		data_day_name[i] = jour_fr;
+//
+
+=====================================================================================
+// 1ere modif	
+QString jour_fr;
+	QString nom;
+	for( i=0; i<7; i++ )
+	{
+//		data_day_name[i] = dataFromIdentifier( 19 + i * 6 + 0 );
+		nom = dataFromIdentifier( 19 + i * 6 + 0 );
+		jour_fr = nom;
+		  if( nom == "Monday" )
+		  {
+		    jour_fr = "Lundi";
+		  }
+		  else if( nom == "Tuesday" )
+		  {
+		    jour_fr = "Mardi";
+		  }
+		  else if( nom == "Wednesday" )
+		  {
+		    jour_fr = "Mercredi";
+		  }
+		  else if( nom == "Thursday" )
+		  {
+		    jour_fr = "Jeudi";
+		  }
+		  else if( nom == "Friday" )
+		  {
+		    jour_fr = "Vendredi";
+		  }
+		  else if( nom == "Saturday" )
+		  {
+		    jour_fr = "Samedi";
+		  }
+		  else if( nom == "Sunday" )
+		  {
+		    jour_fr = "Dimanche";
+		  }
+		data_day_name[i] = jour_fr;
+//

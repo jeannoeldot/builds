@@ -1,0 +1,93 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/alx-driver
+
+http://drvbp1.linux-foundation.org/~mcgrof/rel-html/backports/
+http://www.kernel.org/pub/linux/kernel/projects/backports/stable/v3.9-rc4/compat-drivers-3.9-rc4-2-su.tar.bz2
+
+ls
+
+sha256sum compat-drivers-3.9-rc4-2-su.tar.bz2
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=
+
+source=(aaaaaa.tar.bz2
+        xxx.patch
+        yyy.patch
+)
+sha256sums=(1111111111
+            2222222222
+            3333333333
+)
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+# mkpkg-tmpfs /home/jnd/05-builds/alx-driver -g
+
+
+4) MAKEPKG EN USER
+=======================
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+5) NETTOYAGES fichiers ~
+==========================
+!!! EN USER
+
+rm -rf pkg src
+rm -f *~
+
+
+6) PREPARATION
+==================
+# Création répertoire dans /0-DataLinux
+$ [[ ! -d "/0-DataLinux/alx-driver" ]] && mkdir /0-DataLinux/alx-driver
+$ mv -v alx-driver-*-x86_64.pkg.tar.* /0-DataLinux/alx-driver/
+$ ls /0-DataLinux/alx-driver/
+
+
+7) INSTALLATION
+===============
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/alx-driver-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv alx-driver-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+# 1ere Install
+# pacman -Syu alx-driver
+
+=============================================================
+TESTS
+======
+$ tar -xjvf compat-drivers-3.9-rc4-2-su.tar.bz2
+$ cd compat-drivers-3.9-rc4-2-su
+$ rm -rf drivers/net/wireless
+$ ./scripts/driver-select alx
+$ make
+
+./scripts/gen-compat-autoconf.sh /home/jnd/05-builds/alx/compat-drivers-3.9-rc4-2-su/.config /home/jnd/05-builds/alx/compat-drivers-3.9-rc4-2-su/config.mk > include/linux/compat_autoconf.h
+make -C /lib/modules/3.9.6-1-ARCH/build M=/home/jnd/05-builds/alx/compat-drivers-3.9-rc4-2-su modules
+make: *** /lib/modules/3.9.6-1-ARCH/build : Aucun fichier ou dossier de ce type. Arrêt.
+make: *** [modules] Erreur 2
+
+
+=============================================================
+ANCIEN
+=============================================================
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/alx-driver g

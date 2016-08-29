@@ -1,0 +1,26 @@
+[09:29:02] INFO: Interface: Done.
+Traceback (most recent call last):
+  File "/usr/share/blender/2.77/scripts/addons_contrib/yafaray/io/yaf_export.py", line 429, in update
+    yaf_scene.exportRenderSettings(self.yi, self.scene)
+  File "/usr/share/blender/2.77/scripts/addons_contrib/yafaray/io/yaf_scene.py", line 226, in exportRenderSettings
+    yi.paramsSetInt("adv_computer_node", bpy.context.user_preferences.addons["yafaray_v3"].preferences.yafaray_computer_node)
+KeyError: 'bpy_prop_collection[key]: key "yafaray_v3" not found'
+
+location: <unknown location>:-1
+
+location: <unknown location>:-1
+
+
+
+
+[09:44:19] INFO: Interface: Done.
+Traceback (most recent call last):
+  File "/usr/share/blender/2.77/scripts/addons_contrib/yafaray/io/yaf_export.py", line 429, in update
+    yaf_scene.exportRenderSettings(self.yi, self.scene)
+  File "/usr/share/blender/2.77/scripts/addons_contrib/yafaray/io/yaf_scene.py", line 226, in exportRenderSettings
+    yi.paramsSetInt("adv_computer_node", bpy.context.user_preferences.addons["yafaray_v3"].preferences.yafaray_computer_node)
+KeyError: 'bpy_prop_collection[key]: key "yafaray_v3" not found'
+
+location: <unknown location>:-1
+
+location: <unknown location>:-1

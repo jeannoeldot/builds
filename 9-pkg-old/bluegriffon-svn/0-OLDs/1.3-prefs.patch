@@ -1,0 +1,22 @@
+diff -aur mozilla-release/bluegriffon/app/profile/bluegriffon-prefs.js mozilla-release.new/bluegriffon/app/profile/bluegriffon-prefs.js
+--- mozilla-release/bluegriffon/app/profile/bluegriffon-prefs.js	2011-11-03 11:15:22.598213675 +0100
++++ mozilla-release.new/bluegriffon/app/profile/bluegriffon-prefs.js	2011-11-03 12:41:43.429493300 +0100
+@@ -109,8 +109,8 @@
+ pref("bluegriffon.structurebar.role.show", true);
+ 
+ // updates
+-pref("bluegriffon.updates.check.enabled", true);
+-pref("bluegriffon.updates.frequency", "launch");
++pref("bluegriffon.updates.check.enabled", false);
++pref("bluegriffon.updates.frequency", "manually");
+ 
+ pref("html5.enable", true);
+ pref("bluegriffon.defaults.doctype", "kXHTML5");
+@@ -128,3 +128,7 @@
+ 
+ pref("bluegriffon.osx.dock-integration", true);
+ pref("extensions.getAddons.cache.enabled", false);
++
++// Locales
++pref("general.useragent.locale", "");
++pref("intl.locale.matchOS", true);

@@ -1,0 +1,59 @@
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafaraycore.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libgradientback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtextureback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsunsky.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libDarkSky.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libperspectiveCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/liborthographicCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libangularCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libexrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libjpgHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpngHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtgaHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtifHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libhdrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libdirectlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libphotonmap.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpathtrace.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbidirpath.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libEmissionIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSingleScatterIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libEmptyVolumeIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libDebugIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSkyIntegrator.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafarayplugin.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsunlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpointlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libdirectional.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libspotlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libarealight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libspherelight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libieslight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbglight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libblendermat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libglossymat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libshinydiffuse.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libcoatedglossy.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsimplemats.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libvolumetrics.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbasictex.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbasicnodes.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libUniformVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libExpDensityVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libNoiseVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSkyVolume.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafarayqt.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/bin/yafaray-xml
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/yafaray/blender/_yafrayinterface.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/yafaray/blender/yafrayinterface.py
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/yafaray/blender/_yafqt.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/yafaray/blender/yafqt.py

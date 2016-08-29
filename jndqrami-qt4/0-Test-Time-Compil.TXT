@@ -1,0 +1,27 @@
+ 
+ $ mkdir /tmp/build
+ 
+ $ cd /tmp/build
+ 
+ $ cp -v /home/jnd/05-builds/jndqrami/{PKGBUILD,jndqrami-0.1.6.tar.gz,jndqrami.install} .
+ 
+ $ time makepkg -s
+ 
+ ....
+ 
+ ==> Création finie : jndqrami 0.1.6-2 (mar. août 13 17:58:11 CEST 2013)
+
+$ cd
+
+$ rm -rf /tmp/build
+
+----------------------------------------------------------------------------------
+# Core 2 Duo
+real    0m12.783s
+user    0m20.833s
+sys     0m1.300s
+
+I7-4770K
+real    0m4.260s
+user    0m14.710s
+sys     0m0.770s

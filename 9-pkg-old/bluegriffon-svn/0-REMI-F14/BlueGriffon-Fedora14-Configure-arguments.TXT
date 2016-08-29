@@ -1,0 +1,33 @@
+Configure arguments
+
+--enable-application=xulrunner
+ --prefix=/usr
+ --libdir=/usr/lib64
+ --with-system-nspr
+ --with-system-nss
+ --with-system-jpeg
+ --with-system-zlib
+ --with-system-bz2
+ --enable-system-hunspell
+ --with-pthreads
+ --disable-strip
+ --disable-tests
+ --disable-mochitest
+ --disable-installer
+ --disable-debug
+ --enable-optimize
+ --enable-xinerama
+ --enable-default-toolkit=cairo-gtk2
+ --enable-pango
+ --enable-svg
+ --enable-canvas
+ --disable-javaxpcom
+ --disable-crashreporter
+ --enable-safe-browsing
+ --enable-extensions=default
+ --enable-libnotify
+ --enable-startup-notification
+ --enable-shared-js
+ --enable-url-classifier
+ --enable-crashreporter
+ --enable-system-lcms

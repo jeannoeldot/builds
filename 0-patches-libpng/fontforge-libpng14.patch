@@ -1,0 +1,14 @@
+--- fontforge-20090923.old/inc/gimage.h	2009-02-23 01:26:06.000000000 +0800
++++ fontforge-20090923/inc/gimage.h	2010-02-09 14:47:04.000000000 +0800
+@@ -63,6 +63,11 @@ typedef struct revcmap RevCMap;
+ 
+ enum image_type { it_mono, it_bitmap=it_mono, it_index, it_true, it_rgba };
+ 
++#if (PNG_LIBPNG_VER >= 10400)
++#define trans_values trans_color
++#define trans trans_alpha
++#endif
++
+ struct _GImage {
+ /* Format: bitmaps are stored with the most significant bit first in byte units
+ 	    indexed    images are stored in byte units

@@ -1,0 +1,160 @@
+#Le répertoire
+
+cd $HOME/05-builds/conky-lua
+
+$ wget http://downloads.sourceforge.net/project/conky/conky/1.9.0/conky-1.9.0.tar.gz
+
+
+1-2) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=1.9.0
+pkgrel=6        Rebuild suite maj ncurses 6.0
+
+source=(http://downloads.sourceforge.net/project/conky/conky/1.9.0/conky-1.9.0.tar.gz
+        xxx.patch
+        yyy.patch
+)
+
+
+sha1sum conky-1.9.0.tar.gz
+
+
+
+sha1sums=(111111111111111111111111111111111111111111
+         2222222222
+         3333333333
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxx.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 xxxxxxx.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+
+$ $HOME/bin/mkpkg-tmpfs -m native
+OU
+$ $HOME/bin/mkpkg-tmpfs -m fast
+
+$ mkpkg-tmpfs -m native
+OU
+$ mkpkg-tmpfs -m fast
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3) MAKEPKG en USER
+=====================
+cd $HOME/05-builds/conky-lua
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/conky-lua-*-x86_64.pkg.tar.*
+
+$ cp -v conky-lua-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/conky-lua-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv  -v conky-lua-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+# SUPPRIME FICHIERS *~
+----------------------
+$ rm -f *~
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# pacman -Syu
+# pacman -Syu conky-lua
+
+
+SI PROBLEMES
+================
+
+# pacman -R conky-lua
+# rm -f /var/cache/pacman/pkg/conky-lua-*
+
+!!! EN USER
+$ rm -f 00-repolocal/conky-lua-*-x86_64.pkg.tar.*
+$ maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! EN USER
+!!! SI AVEC NVIDIA
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/libxnvctrl-*-x86_64.pkg.tar.*
+cp -v $HOME/00-repolocal/libxnvctrl-*-x86_64.pkg.tar.* $HOME/05-builds/0-copie-fichiers-chroot/repo/
+
+!!! OBLIGATOIRE
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/tolua++-*-x86_64.pkg.tar.*
+cp -v $HOME/00-repolocal/tolua++-*-x86_64.pkg.tar.* $HOME/05-builds/0-copie-fichiers-chroot/repo/
+
+# Nettoyage fichiers ds 0-copie-fichiers-chroot/repo
+=====================================================
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/libxnvctrl-*-x86_64.pkg.tar.*
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/tolua++-*-x86_64.pkg.tar.*
+
+
+!!! ANCIEN
+
+cp -v $HOME/00-repolocal/toluapp-*-x86_64.pkg.tar.* $HOME/05-builds/0-copie-fichiers-chroot/repo/
+
+!!! EN ROOT
+
+# cd
+
+# mkpkg-tmpfs $HOME/05-builds/conky-lua -n
+
+# $HOME/bin/mkpkg-tmpfs $HOME/05-builds/conky-lua
+
+!!! MODIFIER FICHIERS
+
+DANS : $HOME/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+
+namcap conky-lua-*-x86_64.pkg.tar.*
+

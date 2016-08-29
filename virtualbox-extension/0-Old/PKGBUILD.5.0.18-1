@@ -1,0 +1,29 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=virtualbox-extension
+pkgver=5.0.18
+_build=106667
+pkgrel=1
+pkgdesc="Oracle VM VirtualBox Extension Pack"
+arch=('any')
+url="http://www.virtualbox.org/"
+license=('custom:PUEL')
+
+depends=("virtualbox")
+optdepends=('rdesktop: client to connect vm via RDP')
+options=('!strip')
+
+source=("http://download.virtualbox.org/virtualbox/$pkgver/Oracle_VM_VirtualBox_Extension_Pack-$pkgver-$_build.vbox-extpack"
+)
+
+sha256sums=('1ccc48d457d1ee568166066df025f6cf82b6dde1ddc993c9bea1fe7abbe255ef'
+)
+
+install="virtualbox-extension.install"
+
+package() {
+  install -Dm 644 "Oracle_VM_VirtualBox_Extension_Pack-$pkgver-$_build.vbox-extpack" \
+		  "$pkgdir/usr/share/virtualbox/extensions/Oracle_VM_VirtualBox_Extension_Pack-$pkgver.vbox-extpack"
+  install -Dm 644 "ExtPack-license.txt" \
+                  "$pkgdir/usr/share/licenses/$pkgname/PUEL"
+}

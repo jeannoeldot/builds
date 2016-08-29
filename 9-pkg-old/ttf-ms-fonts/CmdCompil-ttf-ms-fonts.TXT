@@ -1,0 +1,106 @@
+# Le répertoire
+cd /home/jnd/05-builds/ttf-ms-fonts
+
+http://downloads.sourceforge.net/corefonts/andale32.exe
+http://downloads.sourceforge.net/corefonts/arial32.exe
+http://downloads.sourceforge.net/corefonts/arialb32.exe
+http://downloads.sourceforge.net/corefonts/comic32.exe
+http://downloads.sourceforge.net/corefonts/courie32.exe
+http://downloads.sourceforge.net/corefonts/georgi32.exe
+http://downloads.sourceforge.net/corefonts/impact32.exe
+http://downloads.sourceforge.net/corefonts/times32.exe
+http://downloads.sourceforge.net/corefonts/trebuc32.exe
+http://downloads.sourceforge.net/corefonts/verdan32.exe
+http://downloads.sourceforge.net/corefonts/webdin32.exe
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=2.0
+pkgrel=6
+
+source=(... ...)
+md5sums=(... ...)
+
+
+3) MAKEPKG en CHROOT
+====================
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/ttf-ms-fonts
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# ls -l
+# chown jnd:jnd ttf-ms-fonts-*-any.pkg.tar.*
+# chown jnd:jnd andale32.exe arial32.exe arialb32.exe comic32.exe courie32.exe georgi32.exe
+# chown jnd:jnd impact32.exe times32.exe trebuc32.exe verdan32.exe webdin32.exe
+# chown jnd:jnd LICENSE
+# chown jnd:jnd namcap.log
+# ls -l
+
+4) MAKEPKG
+============
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap ttf-ms-fonts-*-any.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+
+!!! EN USER
+rm -f *~
+
+rm -rf src pkg
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/ttf-ms-fonts-*-any.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv ttf-ms-fonts-*-any.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+!!! 1ERE INSTALLATION
+---------------------
+1) supprimer ttf-ms-fonts
+# pacman -Rcns ttf-ms-fonts
+# pacman -Sc
+2) installer ttf-ms-fonts
+# pacman -S ttf-ms-fonts
+
+!!! MAJ
+# cd
+# pacman -Syu
+
+
+
+
+===================================================================
+cd /home/jnd/05-builds/ttf-ms-fonts
+$ ./build.sh
+# mv ../0-chroot/rw/pkgdest/ttf-ms-fonts-*-x86_64.pkg.tar.gz .
+
+http://downloads.sourceforge.net/corefonts/wd97vwr32.exe
+# chown jnd:jnd impact32.exe times32.exe trebuc32.exe verdan32.exe wd97vwr32.exe webdin32.exe
+
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

@@ -1,0 +1,71 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/lm_sensors-svn
+mkdir srcp
+cp -R lm_sensors srcp/lm_sensors
+
+
+1) MODIFIER lm_sensors/prog/detect/sensors-detect
+===================================================
+cd srcp
+cp -R lm_sensors lm_sensors.new
+
+cd lm_sensors.new/prog/detect
+kwrite sensors-detect
+
+MODIFIER LIGNE 2672 :
+
+$kernel_version =~ /(\d+)\.(\d+)\.(\d+)(.*)/;
+$kernel_version =~ /(\d+)\.(\d+)(.*)/;
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier sensors-detect~
+rm -f sensors-detect~
+
+cd ../../..
+
+diff -aur lm_sensors lm_sensors.new
+diff -aur lm_sensors lm_sensors.new > linux_3.0.patch
+
+rm -rf lm_sensors.new
+
+cd ..
+mv srcp/linux_3.0.patch .
+
+
+2) MODIFIER lm_sensors/prog/pwm/fancontrol
+===================================================================
+cd srcp
+cp -R lm_sensors lm_sensors.new
+
+cd lm_sensors.new/prog/pwm
+kwrite fancontrol
+
+LIGNES 294 : DEVIENT :
+if [[ "$DIR" != "/"  && ( -z "$DEVPATH"  ||  -z "$DEVNAME" ) ]]
+
+LIGNES 341 : DEVIENT :
+        if [ `cat $ENABLE` -eq 1 ] && [ `cat $1` -ge 190 ]
+
+LIGNES 481 : DEVIENT :
+                  if [ $pwmpval -eq 0 ] || [ $min_fanval -eq 0 ]
+
+        
+ENREGISTRER et Quitter Kwrite & EFFACER fichier fancontrol~
+rm -f fancontrol~
+
+cd ../../..
+
+diff -aur lm_sensors lm_sensors.new
+diff -aur lm_sensors lm_sensors.new > lm_sensors-fancontrol.patch
+
+rm -rf lm_sensors.new
+
+cd ..
+mv srcp/lm_sensors-fancontrol.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+

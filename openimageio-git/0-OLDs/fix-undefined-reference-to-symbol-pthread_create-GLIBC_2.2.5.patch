@@ -1,0 +1,32 @@
+diff -aur oiio/src/cmake/externalpackages.cmake oiio.new/src/cmake/externalpackages.cmake
+--- oiio/src/cmake/externalpackages.cmake	2016-02-28 09:04:42.000000000 +0100
++++ oiio.new/src/cmake/externalpackages.cmake	2016-02-28 09:23:38.130545052 +0100
+@@ -62,6 +62,16 @@
+ endif ()
+ 
+ 
++###########################################################################
++# FIXE ERROR : undefined reference to symbol 'pthread_create@@GLIBC_2.2.5'
++# FIXE ERROR : /usr/lib/libpthread.so.0: error adding symbols: DSO missing from command line
++# Threads setup
++
++find_package(Threads REQUIRED)
++
++# Threads setup
++###########################################################################
++
+ 
+ ###########################################################################
+ # IlmBase & OpenEXR setup
+diff -aur oiio/src/testtex/CMakeLists.txt oiio.new/src/testtex/CMakeLists.txt
+--- oiio/src/testtex/CMakeLists.txt	2016-02-21 09:06:00.000000000 +0100
++++ oiio.new/src/testtex/CMakeLists.txt	2016-02-28 09:25:33.075130532 +0100
+@@ -1,4 +1,7 @@
+ set (testtex_srcs testtex.cpp)
+ add_executable (testtex ${testtex_srcs})
+ set_target_properties (testtex PROPERTIES FOLDER "Tools")
+-target_link_libraries (testtex OpenImageIO ${Boost_LIBRARIES} ${CMAKE_DL_LIBS})
++# FIXE ERROR : undefined reference to symbol 'pthread_create@@GLIBC_2.2.5'
++# FIXE ERROR : /usr/lib/libpthread.so.0: error adding symbols: DSO missing from command line
++# target_link_libraries (testtex OpenImageIO ${Boost_LIBRARIES} ${CMAKE_DL_LIBS})
++target_link_libraries (testtex OpenImageIO ${Boost_LIBRARIES} ${CMAKE_DL_LIBS} ${CMAKE_THREAD_LIBS_INIT})

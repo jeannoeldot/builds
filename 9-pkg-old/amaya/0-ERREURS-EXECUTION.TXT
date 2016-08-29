@@ -1,0 +1,95 @@
+
+ESSAI AMAYA COMPILE AVEC GCC 4.7 MAKEPKG TMPFS en CHROOT EN USER
+===================================================================
+amaya-11.4.4-4-x86_64.pkg.tar.xz
+
+┌jnd ( ~ )
+└─> $ amaya
+
+ET PNG S'AFFICHE !!!
+
+
+ESSAI AMAYA COMPILE AVEC GCC 4.7 DANS VBOX
+==============================================
+amaya-11.4.4-4-x86_64.pkg.tar.xz
+
+┌jnd ( ~ )
+└─> $ amaya
+
+ET PNG S'AFFICHE !!!
+
+
+
+ESSAI AMAYA COMPILE AVEC GCC 4.7 DANS VBOX
+==============================================
+amaya-11.4.4-2-x86_64.pkg.tar.xz
+
+┌jnd ( ~ )
+└─> $ amaya
+libpng error: png_start_read_image/png_read_update_info: duplicate call
+libpng error: png_start_read_image/png_read_update_info: duplicate call
+libpng error: png_start_read_image/png_read_update_info: duplicate call
+libpng error: png_start_read_image/png_read_update_info: duplicate call
+libpng error: png_start_read_image/png_read_update_info: duplicate call
+...
+
+ET PNG NE S'AFFICHE PAS.
+
+AVEC -3
+==========
+jnd ~ $ amaya
+
+(amaya_bin:2935): Gtk-WARNING **: Impossible de trouver le moteur de thème dans module_path : « murrine »
+
+AVEC -2
+==========
+jnd ~ $ amaya
+
+(amaya_bin:20275): Gtk-WARNING **: Impossible de trouver le moteur de thème dans module_path : « murrine »
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type
+libpng error: [01][00][00][01]: invalid chunk type                                                                             
+
+
+AVEC -1
+===============
+** (amaya_bin:11791): WARNING **: Pixbuf theme:
+ Cannot load pixmap file /usr/share/themes/kde42-oxygen/gtk-2.0/others/menubar.png:
+ Impossible de charger l'image « /usr/share/themes/kde42-oxygen/gtk-2.0/others/menubar.png » :
+ Erreur fatale dans le fichier d'image PNG : Incompatible libpng version in application and library
+
+
+(amaya_bin:11791): GdkPixbuf-CRITICAL **: gdk_pixbuf_get_width: assertion `GDK_IS_PIXBUF (pixbuf)' failed
+
+(amaya_bin:11791): GdkPixbuf-CRITICAL **: gdk_pixbuf_get_height: assertion `GDK_IS_PIXBUF (pixbuf)' failed
+
+** (amaya_bin:11791): WARNING **: Invalid borders specified for theme pixmap:
+        /usr/share/themes/kde42-oxygen/gtk-2.0/others/menubar.png,
+borders don't fit within the image
+
+(amaya_bin:11791): GdkPixbuf-CRITICAL **: gdk_pixbuf_get_n_channels: assertion `GDK_IS_PIXBUF (pixbuf)' failed
+
+

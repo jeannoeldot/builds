@@ -1,0 +1,28 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=jndqrami-qt5
+pkgver=0.2.1
+pkgrel=3
+pkgdesc="Variante du Rami Kaluki"
+arch=('i686' 'x86_64')
+url="https://github.com/jeannoeldot/jndqrami-qt5"
+license=('GPL2')
+depends=('qt5-base' 'sdl_mixer')
+makedepends=('qt5-base' 'sdl' 'sdl_mixer')
+install="jndqrami-qt5.install"
+provides='jndqrami'
+conflicts='jndqrami'
+source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+sha256sums=('b0c2c69351f91dd02fb8777e51b5caf6fe9ba0bd508b456a833033f227df39e5')
+
+build() {
+      cd "${srcdir}/${pkgname}-${pkgver}"
+
+      qmake-qt5
+      make ${MAKEFLAGS}
+}
+
+package() {
+      cd "${srcdir}/${pkgname}-${pkgver}"
+      make INSTALL_ROOT="${pkgdir}" install
+}

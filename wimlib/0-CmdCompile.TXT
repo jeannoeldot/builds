@@ -1,0 +1,170 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/wimlib
+
+1) TÉLÉCHARGER SOURCES
+======================
+
+1-1) Download snapshot
+----------------------
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/wimlib.tar.gz
+
+tar -xzf wimlib.tar.gz
+
+cd $HOME/05-builds/wimlib
+
+mv -vf /tmp/0-AUR/wimlib/PKGBUILD .
+
+
+1-2) Download source
+----------------------
+wget http://wimlib.net/downloads/wimlib-1.9.1.tar.gz
+ls
+
+sha256sum wimlib-1.9.1.tar.gz
+
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=wimlib
+pkgver=1.9.1
+pkgrel=1
+
+source=($pkgname-$pkgver.tar.gz
+)
+
+sha256sums=(...
+         ...
+)
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   1168  5 déc.  15:55 PKGBUILD
+-rw-r--r--  1 jnd users 960019  5 déc.  15:52 wimlib-1.9.1.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/wimlib/PKGBUILD . \
+&& cp -v $HOME/05-builds/wimlib/wimlib-1.9.1.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/wimlib \
+&& cp -v /tmp/build/wimlib-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/wimlib && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -l logs
+-------------------------------------------------------------------
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd $HOME/05-builds/wimlib
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+# Verifications...
+
+namcap wimlib-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/wimlib-*-x86_64.pkg.tar.*
+
+$ cp -v wimlib-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/wimlib-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v wimlib-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+----------------------------------------
+$ rm -f *~
+$ rm -i wimlib-1.9.1.tar.gz
+$ rm -rf /tmp/0-AUR
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -Syu wimlib
+!!! OU
+# pacman -U $HOME/00-repolocal/wimlib-1.9.1-1-x86_64.pkg.tar.xz
+
+
+
+=========================================================================
+ANCIEN
+======
+
+cd 0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/wimlib.tar.gz
+
+tar -xzf wimlib.tar.gz
+
+cd ..
+
+mv -vf 0-AUR/wimlib/PKGBUILD .
+
+$ rm -f 0-AUR/wimlib.tar.gz
+$ rm -rf 0-AUR/wimlib

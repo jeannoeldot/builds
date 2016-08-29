@@ -1,0 +1,12 @@
+http://quickgit.kde.org/?p=kdev-qmake.git
+
+https://aur.archlinux.org/packages/kd/kdevelop-qmake-git/PKGBUILD
+
+http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/dev-util/kdevelop-qmake/kdevelop-qmake-1.6.0.ebuild?view=markup
+
+https://www.archlinux.org/packages/?sort=&q=kdev&maintainer=&flagged=
+
+https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/kdevelop-php
+
+https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/kdevelop-python
+

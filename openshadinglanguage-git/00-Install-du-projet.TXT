@@ -1,0 +1,62 @@
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/lib/liboslcomp.so
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/lib/liboslcomp.so" to "/usr/lib"
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/lib/liboslquery.so
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/lib/liboslquery.so" to "/usr/lib"
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/lib/liboslexec.so
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/lib/liboslexec.so" to "/usr/lib"
+
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/bin/oslc
+
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/bin/oslc" to "/usr/lib"
+
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/oslutil.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/stdosl.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/glass.osl
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/matte.osl
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/metal.osl
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/image.osl
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/emitter.osl
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/ubersurface.osl
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/glass.oso
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/matte.oso
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/metal.oso
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/image.oso
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/emitter.oso
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/shaders/ubersurface.oso
+
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/bin/oslinfo
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/bin/oslinfo" to "/usr/lib"
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/bin/testshade
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/bin/testshade" to "/usr/lib"
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/lib/libtestshade.so
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/lib/libtestshade.so" to "/usr/lib"
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/bin/testshade_dso
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/bin/testshade_dso" to "/usr/lib"
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/bin/testrender
+-- Set runtime path of "/tmp/build/pkg/openshadinglanguage-git//usr/bin/testrender" to "/usr/lib"
+
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/matrix22.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/Imathx.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/dual.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/oslclosure.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/dual_vec.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/accum.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/shaderglobals.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/rendererservices.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/optautomata.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/oslexec.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/export.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/genclosure.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/oslconfig.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/llvm_util.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/oslcomp.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/oslquery.h
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/include/OSL/oslversion.h
+
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/doc/osl-languagespec.pdf
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/./LICENSE
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/./INSTALL
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/./CHANGES
+-- Installing: /tmp/build/pkg/openshadinglanguage-git/usr/./README.md

@@ -1,0 +1,12 @@
+
+
+Most --as-needed bugs are fixed these day as that flag is widely used (I believe Fedora, Ubuntu & Gentoo).  The --as-needed flag is also awesome at reducing the number of rebuilds needed for a library soname bump, so fixing small numbers of cases where it does not work is preferable to me.
+(Edit: also notice the nice patch used in our binutils package to fix many --as-needed issues...)
+
+I actually did not think about --sort-common when talking about LDFLAGS and agree it would be useful.  Feel free to file a bug report requesting it.
+
+and, this is the line you want in your PKGBUILD.
+Code:
+
+  export LDFLAGS="${LDFLAGS//-Wl,--as-needed}"
+

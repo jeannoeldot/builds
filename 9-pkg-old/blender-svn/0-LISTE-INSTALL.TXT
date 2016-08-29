@@ -1,0 +1,1059 @@
+Install the project...
+-- Install configuration: "RELEASE"
+-- Installing: /build/pkg/usr/bin/blender
+
+-- Installing: /build/pkg/usr/share/applications/blender.desktop
+-- Installing: /build/pkg/usr/share/pixmaps/blender.svg
+
+-- Installing: /build/pkg/usr/bin/blender-thumbnailer.py
+
+-- Installing: /build/pkg/usr/share/man/man1/blender.1
+
+-- Installing: /build/pkg/usr/share/doc/blender
+-- Installing: /build/pkg/usr/share/doc/blender/Python-license.txt
+-- Installing: /build/pkg/usr/share/doc/blender/readme.html
+-- Installing: /build/pkg/usr/share/doc/blender/GPL-license.txt
+-- Installing: /build/pkg/usr/share/doc/blender/copyright.txt
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/cloth
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/cloth/leather.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/cloth/rubber.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/cloth/denim.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/cloth/cotton.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/cloth/silk.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/HDTV_1080p.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/HDTV_720p.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/DVCPRO_HD_1080p.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/HDV_PAL_1080p.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/HDV_NTSC_1080p.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/TV_NTSC_4_colon_3.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/DVCPRO_HD_720p.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/HDV_1080p.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/TV_PAL_16_colon_9.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/TV_PAL_4_colon_3.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/render/TV_NTSC_16_colon_9.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/keyconfig
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/keyconfig/maya.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/interaction
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/interaction/blender.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sunsky
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sunsky/mountain.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sunsky/desert.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sunsky/classic.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/potato.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/ketchup.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/chicken.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/skin1.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/cream.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/apple.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/marble.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/skim_milk.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/whole_milk.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/sss/skin2.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg/theora.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg/SVCD.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg/h264.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg/xvid.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg/VCD.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg/DV.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/presets/ffmpeg/DVD.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_graph.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_userpref_keymap.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_physics_field.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_sequencer.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_game.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_info.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_object_constraint.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_physics_smoke.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_view3d.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_modifier.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_console.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_mesh.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_view3d_toolbar.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_filebrowser.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_physics_cloth.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_object.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_physics_softbody.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_userpref.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_nla.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_node.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_curve.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_physics_common.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_logic.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_bone.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_scene.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_render.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_particle.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_empty.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_lamp.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_armature.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_camera.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_outliner.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_physics_fluid.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_material.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_image.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_text.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_metaball.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_world.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_texture.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_animviz.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_dopesheet.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/properties_data_lattice.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/ui/space_time.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/nla.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_3ds
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_3ds/import_3ds.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_3ds/export_3ds.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_3ds/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/sequencer.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/add_mesh_torus.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/wm.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/uvcalc_smart_project.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/presets.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/console_python.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_fbx
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_fbx/export_fbx.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_fbx/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/fcurve_euler_filter.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/vertexpaint_dirt.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/object_align.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_obj
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_obj/export_obj.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_obj/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_obj/import_obj.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/uvcalc_follow_active.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/object.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/mesh.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_mesh_ply
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_mesh_ply/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_mesh_ply/export_ply.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/object_randomize_transform.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/animsys_update.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/uv.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/console_shell.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/screen_play_rendered_anim.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_x3d
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_x3d/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_scene_x3d/export_x3d.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/image.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_anim_bvh
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_anim_bvh/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_anim_bvh/import_bvh.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_shape_mdd
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_shape_mdd/import_mdd.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_shape_mdd/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/op/io_shape_mdd/export_mdd.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/operator_simple.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/gamelogic.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/operator_modal_view3d.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/operator_modal.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/panel_simple.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/operator_uv.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/operator_modal_draw.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/operator.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/gamelogic_basic.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/templates/gamelogic_module.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpyml_ui.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/add_object_utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/rna_prop_ui.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpy_types.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpyml.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/animsys_refactor.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/console
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/console/complete_import.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/console/intellisense.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/console/complete_namespace.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/console/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/console/complete_calltip.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/graphviz_export.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/rna_info.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/outputs
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/outputs/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/outputs/xml_output.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/util.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/validate.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/ui.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/plugin.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/extensions_framework/engine.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/io_utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/sys_info.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpy
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpy/path.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpy/ops.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpy/utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/bpy/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/modules/blend_render_info.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/keyingsets
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/keyingsets/keyingsets_utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/keyingsets/keyingsets_builtins.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_gemstones.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_import_scene_lwo.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/render_renderfarmfi.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/space_view3d_spacebar_menu.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_anim_camera.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_raw
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_raw/export_raw.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_raw/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_raw/import_raw.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_import_images_as_planes.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_import_scene_mhx.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_export_directx_x.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_twisted_torus.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_import_scene_unreal_psk.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/curve_simplify.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_ant_landscape.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_pipe_joint.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/space_view3d_property_chart.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_curve_aceous_galore.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets/M12.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets/M6.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets/M5.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets/M3.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets/M8.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets/M4.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/presets/M10.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/createMesh.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/Boltfactory.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/original_script_add_mesh_bolt.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_BoltFactory/preset_utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_solid.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/space_view3d_align_tools.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/space_view3d_copy_attributes.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/object_fracture
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/object_fracture/data.blend
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/object_fracture/fracture_ops.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/object_fracture/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/object_fracture/fracture_setup.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/render_povray
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/render_povray/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/render_povray/ui.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/render_povray/render.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/object_add_chain.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/space_view3d_panel_measure.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/space_view3d_3d_navigation.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_3d_function_surface.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/mesh_relax.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_extras.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_stl
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_stl/blender_utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_stl/stl_utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_mesh_stl/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/object_cloud_gen.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_mesh_gears.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/space_view3d_materials_utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/add_curve_torus_knots.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/system_blend_info.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/io_export_unreal_psk_psa.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/addons/mesh_surface_sketch.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/repath.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/netrender.css
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/model.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/slave.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/utils.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/versioning.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/__init__.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/netrender.js
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/ui.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/operators.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/client.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/balancing.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/master.py
+-- Installing: /build/pkg/usr/share/blender/2.55/scripts/io/netrender/master_html.py
+
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/smooth.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/layer.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/texdraw.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/inflate.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/blur.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/lighten.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/crease.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/smear.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/nudge.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/fill.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/add.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/grab.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/thumb.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/clay.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/pinch.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/subtract.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/multiply.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/soften.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/mix.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/blob.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/snake_hook.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/flatten.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/twist.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/vertexdraw.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/draw.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/darken.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/scrape.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/brushicons/clone.png
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/zh_CN
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/zh_CN/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/zh_CN/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ko
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ko/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ko/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/fi
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/fi/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/fi/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/cs
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/cs/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/cs/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sr@Latn
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sr@Latn/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sr@Latn/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sr
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sr/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sr/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ru
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ru/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ru/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ar
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ar/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ar/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/pt_BR
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/pt_BR/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/pt_BR/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ca
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ca/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ca/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/de
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/de/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/de/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/hr
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/hr/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/hr/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/es
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/es/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/es/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ja
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ja/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ja/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/it
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/it/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/it/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/uk
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/uk/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/uk/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/hr_HR
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/hr_HR/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/hr_HR/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/fr
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/fr/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/fr/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sv
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sv/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/sv/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/pl
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/pl/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/pl/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/bg
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/bg/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/bg/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ro
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ro/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/ro/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/el
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/el/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/el/LC_MESSAGES/blender.mo
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/nl
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/nl/LC_MESSAGES
+-- Installing: /build/pkg/usr/share/blender/2.55/datafiles/locale/nl/LC_MESSAGES/blender.mo
+
+
+2 EME ESSAI
+============
+Install the project...
+-- Install configuration: "RELEASE"
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/bin/blender
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/applications/blender.desktop
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/pixmaps/blender.svg
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/bin/blender-thumbnailer.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/man/man1/blender.1
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/doc/blender
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/doc/blender/Python-license.txt
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/doc/blender/readme.html
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/doc/blender/GPL-license.txt
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/doc/blender/copyright.txt
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/cloth
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/cloth/leather.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/cloth/rubber.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/cloth/denim.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/cloth/cotton.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/cloth/silk.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/HDTV_1080p.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/HDTV_720p.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/DVCPRO_HD_1080p.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/TV_NTSC_4_colon_3.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/DVCPRO_HD_720p.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/HDV_1080p.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/TV_PAL_16_colon_9.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/TV_PAL_4_colon_3.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/render/TV_NTSC_16_colon_9.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/keyconfig
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/interaction
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/interaction/blender.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/interaction/maya.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sunsky
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sunsky/mountain.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sunsky/desert.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sunsky/classic.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/potato.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/ketchup.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/chicken.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/skin1.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/cream.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/apple.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/marble.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/skim_milk.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/whole_milk.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/sss/skin2.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg/theora.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg/SVCD.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg/h264.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg/xvid.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg/VCD.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg/DV.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/presets/ffmpeg/DVD.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_graph.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_userpref_keymap.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_armature_rigify.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_physics_field.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_sequencer.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_game.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_info.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_object_constraint.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_physics_smoke.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_view3d.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_modifier.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_console.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_mesh.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_view3d_toolbar.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_filebrowser.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_physics_cloth.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_object.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_physics_softbody.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_userpref.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_nla.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_node.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_curve.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_physics_common.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_logic.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_bone.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_scene.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_render.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_particle.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_empty.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_lamp.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_armature.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_camera.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_outliner.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_physics_fluid.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_material.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_image.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_text.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_metaball.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_world.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_texture.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_animviz.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_dopesheet.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/properties_data_lattice.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/ui/space_time.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/nla.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_3ds
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_3ds/import_3ds.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_3ds/export_3ds.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_3ds/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/sequencer.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/add_mesh_torus.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/wm.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/uvcalc_smart_project.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/presets.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/add_armature_human.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/console_python.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_fbx
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_fbx/export_fbx.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_fbx/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/fcurve_euler_filter.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/vertexpaint_dirt.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/object_align.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_obj
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_obj/export_obj.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_obj/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_obj/import_obj.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/uvcalc_follow_active.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/object.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/mesh.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_mesh_ply
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_mesh_ply/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_mesh_ply/export_ply.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/object_randomize_transform.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/animsys_update.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/uv.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/console_shell.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/screen_play_rendered_anim.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_x3d
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_x3d/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_scene_x3d/export_x3d.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/image.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_anim_bvh
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_anim_bvh/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_anim_bvh/import_bvh.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_shape_mdd
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_shape_mdd/import_mdd.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_shape_mdd/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/op/io_shape_mdd/export_mdd.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/operator_simple.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/gamelogic.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/operator_modal_view3d.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/operator_modal.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/panel_simple.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/operator_uv.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/operator_modal_draw.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/operator.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/gamelogic_basic.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/templates/gamelogic_module.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpyml_ui.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/leg_biped.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/eye_lid.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/copy.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/mouth.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/eye_balls.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/neck_flex.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/finger_curl.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/tongue.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/spine_pivot_flex.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/track_reverse.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/palm_curl.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/shape_key_rotdiff.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/neck.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/leg_quadruped.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/delta.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/tail_control.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/track_dual.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/arm_biped.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/stretch_twist.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/shape_key_control.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/stretch.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify/shape_key_distance.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/add_object_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rna_prop_ui.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpy_types.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpyml.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/animsys_refactor.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rigify_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/console
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/console/complete_import.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/console/intellisense.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/console/complete_namespace.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/console/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/console/complete_calltip.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/graphviz_export.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/rna_info.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/io_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpy
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpy/path.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpy/ops.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpy/utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/bpy/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/modules/blend_render_info.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/keyingsets
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/keyingsets/keyingsets_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/keyingsets/keyingsets_builtins.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_gemstones.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_import_scene_lwo.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/render_renderfarmfi.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/space_view3d_spacebar_menu.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_anim_camera.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_raw
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_raw/export_raw.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_raw/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_raw/import_raw.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_import_images_as_planes.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_import_scene_mhx.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_export_directx_x.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_twisted_torus.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_import_scene_unreal_psk.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/curve_simplify.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_ant_landscape.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_pipe_joint.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/space_view3d_property_chart.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_curve_aceous_galore.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets/M12.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets/M6.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets/M5.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets/M3.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets/M8.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets/M4.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/presets/M10.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/createMesh.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/Boltfactory.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/original_script_add_mesh_bolt.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_BoltFactory/preset_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_solid.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/space_view3d_align_tools.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/space_view3d_copy_attributes.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/object_fracture
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/object_fracture/data.blend
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/object_fracture/fracture_ops.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/object_fracture/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/object_fracture/fracture_setup.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/render_povray
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/render_povray/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/render_povray/ui.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/render_povray/render.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/object_add_chain.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/space_view3d_panel_measure.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/space_view3d_3d_navigation.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_3d_function_surface.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/mesh_relax.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_extras.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_stl
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_stl/blender_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_stl/stl_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_mesh_stl/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/object_cloud_gen.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_mesh_gears.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/space_view3d_materials_utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/add_curve_torus_knots.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/system_blend_info.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/io_export_unreal_psk_psa.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/addons/mesh_surface_sketch.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/repath.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/netrender.css
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/model.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/slave.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/utils.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/__init__.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/netrender.js
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/ui.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/operators.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/client.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/balancing.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/master.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/scripts/io/netrender/master_html.py
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/smooth.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/layer.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/texdraw.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/inflate.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/blur.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/lighten.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/crease.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/smear.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/nudge.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/fill.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/add.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/grab.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/thumb.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/clay.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/pinch.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/subtract.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/multiply.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/soften.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/mix.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/blob.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/snake_hook.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/flatten.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/twist.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/vertexdraw.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/draw.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/darken.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/scrape.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/brushicons/clone.png
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/zh_CN
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/zh_CN/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/zh_CN/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ko
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ko/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ko/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/fi
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/fi/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/fi/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/cs
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/cs/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/cs/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sr@Latn
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sr@Latn/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sr@Latn/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sr
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sr/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sr/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ru
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ru/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ru/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ar
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ar/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ar/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/pt_BR
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/pt_BR/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/pt_BR/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ca
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ca/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ca/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/de
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/de/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/de/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/hr
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/hr/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/hr/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/es
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/es/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/es/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ja
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ja/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ja/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/it
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/it/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/it/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/uk
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/uk/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/uk/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/hr_HR
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/hr_HR/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/hr_HR/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/fr
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/fr/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/fr/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sv
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sv/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/sv/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/pl
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/pl/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/pl/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/bg
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/bg/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/bg/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ro
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ro/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/ro/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/el
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/el/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/el/LC_MESSAGES/blender.mo
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/nl
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/nl/LC_MESSAGES
+-- Installing: /home/jnd/05-builds/blender-2.5/pkg/usr/share/blender/2.54/datafiles/locale/nl/LC_MESSAGES/blender.mo
+
+1 ER ESSAI
+===============
+Install file: "bin/.blender/.Blanguages" as "/build/src/install/linux2/share/blender/2.5/.Blanguages"
+Install file: "bin/.blender/.bfont.ttf" as "/build/src/install/linux2/share/blender/2.5/.bfont.ttf"
+
+Install file: "bin/.blender/locale/zh_CN/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/zh_CN/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/ko/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/ko/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/fi/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/fi/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/cs/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/cs/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/sr@Latn/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/sr@Latn/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/sr/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/sr/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/ru/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/ru/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/ar/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/ar/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/pt_BR/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/pt_BR/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/ca/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/ca/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/de/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/de/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/hr/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/hr/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/es/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/es/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/ja/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/ja/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/it/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/it/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/uk/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/uk/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/hr_HR/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/hr_HR/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/fr/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/fr/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/sv/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/sv/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/pl/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/pl/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/bg/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/bg/LC_MESSAGES/blender.mo"
+Linking library ==> 'libbf_creator.a'
+Install file: "bin/.blender/locale/ro/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/ro/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/el/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/el/LC_MESSAGES/blender.mo"
+Install file: "bin/.blender/locale/nl/LC_MESSAGES/blender.mo" as "/build/src/install/linux2/share/blender/2.5/locale/nl/LC_MESSAGES/blender.mo"
+
+Install file: "release/scripts/presets/cloth/leather.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/cloth/leather.py"
+Linking program ==> 'blender'
+Install file: "release/scripts/presets/cloth/rubber.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/cloth/rubber.py"
+Install file: "release/scripts/presets/cloth/denim.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/cloth/denim.py"
+Install file: "release/scripts/presets/cloth/cotton.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/cloth/cotton.py"
+Install file: "release/scripts/presets/cloth/silk.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/cloth/silk.py"
+Install file: "release/scripts/presets/render/HDTV_1080p.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/HDTV_1080p.py"
+Install file: "release/scripts/presets/render/HDTV_720p.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/HDTV_720p.py"
+Install file: "release/scripts/presets/render/DVCPRO_HD_1080p.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/DVCPRO_HD_1080p.py"
+Install file: "release/scripts/presets/render/TV_NTSC_4_colon_3.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/TV_NTSC_4_colon_3.py"
+Install file: "release/scripts/presets/render/DVCPRO_HD_720p.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/DVCPRO_HD_720p.py"
+Install file: "release/scripts/presets/render/HDV_1080p.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/HDV_1080p.py"
+Install file: "release/scripts/presets/render/TV_PAL_16_colon_9.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/TV_PAL_16_colon_9.py"
+Install file: "release/scripts/presets/render/TV_PAL_4_colon_3.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/TV_PAL_4_colon_3.py"
+Install file: "release/scripts/presets/render/TV_NTSC_16_colon_9.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/render/TV_NTSC_16_colon_9.py"
+Install file: "release/scripts/presets/interaction/blender.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/interaction/blender.py"
+Install file: "release/scripts/presets/interaction/maya.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/interaction/maya.py"
+Install file: "release/scripts/presets/sunsky/mountain.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sunsky/mountain.py"
+Install file: "release/scripts/presets/sunsky/desert.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sunsky/desert.py"
+Install file: "release/scripts/presets/sunsky/classic.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sunsky/classic.py"
+Install file: "release/scripts/presets/sss/potato.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/potato.py"
+Install file: "release/scripts/presets/sss/ketchup.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/ketchup.py"
+Install file: "release/scripts/presets/sss/chicken.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/chicken.py"
+Install file: "release/scripts/presets/sss/skin1.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/skin1.py"
+Install file: "release/scripts/presets/sss/cream.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/cream.py"
+Install file: "release/scripts/presets/sss/apple.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/apple.py"
+Install file: "release/scripts/presets/sss/marble.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/marble.py"
+Install file: "release/scripts/presets/sss/skim_milk.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/skim_milk.py"
+Install file: "release/scripts/presets/sss/whole_milk.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/whole_milk.py"
+Install file: "release/scripts/presets/sss/skin2.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/sss/skin2.py"
+Install file: "release/scripts/presets/ffmpeg/theora.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/ffmpeg/theora.py"
+Install file: "release/scripts/presets/ffmpeg/SVCD.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/ffmpeg/SVCD.py"
+Install file: "release/scripts/presets/ffmpeg/h264.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/ffmpeg/h264.py"
+Install file: "release/scripts/presets/ffmpeg/xvid.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/ffmpeg/xvid.py"
+Install file: "release/scripts/presets/ffmpeg/VCD.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/ffmpeg/VCD.py"
+Install file: "release/scripts/presets/ffmpeg/DV.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/ffmpeg/DV.py"
+Install file: "release/scripts/presets/ffmpeg/DVD.py" as "/build/src/install/linux2/share/blender/2.5/scripts/presets/ffmpeg/DVD.py"
+
+Install file: "release/scripts/ui/space_graph.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_graph.py"
+Install file: "release/scripts/ui/space_userpref_keymap.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_userpref_keymap.py"
+Install file: "release/scripts/ui/properties_data_armature_rigify.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_armature_rigify.py"
+Install file: "release/scripts/ui/properties_physics_field.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_physics_field.py"
+Install file: "release/scripts/ui/space_sequencer.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_sequencer.py"
+Install file: "release/scripts/ui/properties_game.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_game.py"
+Install file: "release/scripts/ui/space_info.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_info.py"
+Install file: "release/scripts/ui/properties_object_constraint.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_object_constraint.py"
+Install file: "release/scripts/ui/properties_physics_smoke.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_physics_smoke.py"
+Install file: "release/scripts/ui/space_view3d.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_view3d.py"
+Install file: "release/scripts/ui/properties_data_modifier.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_modifier.py"
+Install file: "release/scripts/ui/space_console.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_console.py"
+Install file: "release/scripts/ui/properties_data_mesh.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_mesh.py"
+Install file: "release/scripts/ui/space_view3d_toolbar.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_view3d_toolbar.py"
+Install file: "release/scripts/ui/space_filebrowser.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_filebrowser.py"
+Install file: "release/scripts/ui/properties_physics_cloth.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_physics_cloth.py"
+Install file: "release/scripts/ui/properties_object.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_object.py"
+Install file: "release/scripts/ui/properties_physics_softbody.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_physics_softbody.py"
+Install file: "release/scripts/ui/space_userpref.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_userpref.py"
+Install file: "release/scripts/ui/space_nla.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_nla.py"
+Install file: "release/scripts/ui/space_node.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_node.py"
+Install file: "release/scripts/ui/properties_data_curve.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_curve.py"
+Install file: "release/scripts/ui/properties_physics_common.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_physics_common.py"
+Install file: "release/scripts/ui/space_logic.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_logic.py"
+Install file: "release/scripts/ui/properties_data_bone.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_bone.py"
+Install file: "release/scripts/ui/properties_scene.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_scene.py"
+Install file: "release/scripts/ui/properties_render.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_render.py"
+Install file: "release/scripts/ui/properties_particle.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_particle.py"
+Install file: "release/scripts/ui/properties_data_empty.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_empty.py"
+Install file: "release/scripts/ui/properties_data_lamp.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_lamp.py"
+Install file: "release/scripts/ui/properties_data_armature.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_armature.py"
+Install file: "release/scripts/ui/space_buttons.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_buttons.py"
+Install file: "release/scripts/ui/properties_data_camera.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_camera.py"
+Install file: "release/scripts/ui/space_outliner.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_outliner.py"
+Install file: "release/scripts/ui/properties_physics_fluid.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_physics_fluid.py"
+Install file: "release/scripts/ui/properties_material.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_material.py"
+Install file: "release/scripts/ui/space_image.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_image.py"
+Install file: "release/scripts/ui/space_text.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_text.py"
+Install file: "release/scripts/ui/properties_data_metaball.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_metaball.py"
+Install file: "release/scripts/ui/properties_world.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_world.py"
+Install file: "release/scripts/ui/properties_texture.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_texture.py"
+Install file: "release/scripts/ui/properties_animviz.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_animviz.py"
+Install file: "release/scripts/ui/space_dopesheet.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_dopesheet.py"
+Install file: "release/scripts/ui/properties_data_lattice.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/properties_data_lattice.py"
+Install file: "release/scripts/ui/space_time.py" as "/build/src/install/linux2/share/blender/2.5/scripts/ui/space_time.py"
+Install file: "release/scripts/op/nla.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/nla.py"
+Install file: "release/scripts/op/sequencer.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/sequencer.py"
+Install file: "release/scripts/op/add_mesh_torus.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/add_mesh_torus.py"
+Install file: "release/scripts/op/wm.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/wm.py"
+Install file: "release/scripts/op/uvcalc_smart_project.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/uvcalc_smart_project.py"
+Install file: "release/scripts/op/presets.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/presets.py"
+Install file: "release/scripts/op/add_armature_human.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/add_armature_human.py"
+Install file: "release/scripts/op/console_python.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/console_python.py"
+Install file: "release/scripts/op/fcurve_euler_filter.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/fcurve_euler_filter.py"
+Install file: "release/scripts/op/vertexpaint_dirt.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/vertexpaint_dirt.py"
+Install file: "release/scripts/op/object_align.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/object_align.py"
+Install file: "release/scripts/op/uvcalc_follow_active.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/uvcalc_follow_active.py"
+Install file: "release/scripts/op/object.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/object.py"
+Install file: "release/scripts/op/mesh.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/mesh.py"
+Install file: "release/scripts/op/object_randomize_transform.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/object_randomize_transform.py"
+Install file: "release/scripts/op/uv.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/uv.py"
+Install file: "release/scripts/op/console_shell.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/console_shell.py"
+Install file: "release/scripts/op/screen_play_rendered_anim.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/screen_play_rendered_anim.py"
+Install file: "release/scripts/op/image.py" as "/build/src/install/linux2/share/blender/2.5/scripts/op/image.py"
+Install file: "release/scripts/templates/operator_simple.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/operator_simple.py"
+Install file: "release/scripts/templates/gamelogic.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/gamelogic.py"
+Install file: "release/scripts/templates/operator_modal_view3d.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/operator_modal_view3d.py"
+Install file: "release/scripts/templates/operator_modal.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/operator_modal.py"
+Install file: "release/scripts/templates/panel_simple.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/panel_simple.py"
+Install file: "release/scripts/templates/operator_uv.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/operator_uv.py"
+Install file: "release/scripts/templates/operator_modal_draw.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/operator_modal_draw.py"
+Install file: "release/scripts/templates/operator.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/operator.py"
+Install file: "release/scripts/templates/gamelogic_basic.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/gamelogic_basic.py"
+Install file: "release/scripts/templates/gamelogic_module.py" as "/build/src/install/linux2/share/blender/2.5/scripts/templates/gamelogic_module.py"
+Install file: "release/scripts/modules/add_object_utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/add_object_utils.py"
+Install file: "release/scripts/modules/rna_prop_ui.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rna_prop_ui.py"
+Install file: "release/scripts/modules/bpy_types.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/bpy_types.py"
+Install file: "release/scripts/modules/rigify_utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify_utils.py"
+Install file: "release/scripts/modules/graphviz_export.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/graphviz_export.py"
+Install file: "release/scripts/modules/rna_info.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rna_info.py"
+Install file: "release/scripts/modules/blend_render_info.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/blend_render_info.py"
+Install file: "release/scripts/modules/rigify/leg_biped.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/leg_biped.py"
+Install file: "release/scripts/modules/rigify/eye_lid.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/eye_lid.py"
+Install file: "release/scripts/modules/rigify/copy.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/copy.py"
+Install file: "release/scripts/modules/rigify/mouth.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/mouth.py"
+Install file: "release/scripts/modules/rigify/eye_balls.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/eye_balls.py"
+Install file: "release/scripts/modules/rigify/neck_flex.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/neck_flex.py"
+Install file: "release/scripts/modules/rigify/finger_curl.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/finger_curl.py"
+Install file: "release/scripts/modules/rigify/tongue.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/tongue.py"
+Install file: "release/scripts/modules/rigify/spine_pivot_flex.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/spine_pivot_flex.py"
+Install file: "release/scripts/modules/rigify/track_reverse.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/track_reverse.py"
+Install file: "release/scripts/modules/rigify/palm_curl.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/palm_curl.py"
+Install file: "release/scripts/modules/rigify/shape_key_rotdiff.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/shape_key_rotdiff.py"
+Install file: "release/scripts/modules/rigify/neck.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/neck.py"
+Install file: "release/scripts/modules/rigify/leg_quadruped.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/leg_quadruped.py"
+Install file: "release/scripts/modules/rigify/__init__.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/__init__.py"
+Install file: "release/scripts/modules/rigify/delta.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/delta.py"
+Install file: "release/scripts/modules/rigify/tail_control.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/tail_control.py"
+Install file: "release/scripts/modules/rigify/track_dual.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/track_dual.py"
+Install file: "release/scripts/modules/rigify/arm_biped.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/arm_biped.py"
+Install file: "release/scripts/modules/rigify/stretch_twist.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/stretch_twist.py"
+Install file: "release/scripts/modules/rigify/shape_key_control.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/shape_key_control.py"
+Install file: "release/scripts/modules/rigify/stretch.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/stretch.py"
+Install file: "release/scripts/modules/rigify/shape_key_distance.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/rigify/shape_key_distance.py"
+Install file: "release/scripts/modules/console/complete_import.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/console/complete_import.py"
+Install file: "release/scripts/modules/console/intellisense.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/console/intellisense.py"
+Install file: "release/scripts/modules/console/complete_namespace.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/console/complete_namespace.py"
+Install file: "release/scripts/modules/console/__init__.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/console/__init__.py"
+Install file: "release/scripts/modules/console/complete_calltip.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/console/complete_calltip.py"
+Install file: "release/scripts/modules/bpy/ops.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/bpy/ops.py"
+Install file: "release/scripts/modules/bpy/utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/bpy/utils.py"
+Install file: "release/scripts/modules/bpy/__init__.py" as "/build/src/install/linux2/share/blender/2.5/scripts/modules/bpy/__init__.py"
+Install file: "release/scripts/keyingsets/keyingsets_utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/keyingsets/keyingsets_utils.py"
+Install file: "release/scripts/keyingsets/keyingsets_builtins.py" as "/build/src/install/linux2/share/blender/2.5/scripts/keyingsets/keyingsets_builtins.py"
+Install file: "release/scripts/addons/add_mesh_gemstones.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_mesh_gemstones.py"
+Install file: "release/scripts/addons/import_scene_unreal_psk.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/import_scene_unreal_psk.py"
+Install file: "release/scripts/addons/space_view3d_spacebar_menu.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/space_view3d_spacebar_menu.py"
+Install file: "release/scripts/addons/io_anim_camera.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/io_anim_camera.py"
+Install file: "release/scripts/addons/import_scene_dxf.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/import_scene_dxf.py"
+Install file: "release/scripts/addons/add_mesh_twisted_torus.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_mesh_twisted_torus.py"
+Install file: "release/scripts/addons/import_images_as_planes.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/import_images_as_planes.py"
+Install file: "release/scripts/addons/curve_simplify.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/curve_simplify.py"
+Install file: "release/scripts/addons/add_mesh_pipe_joint.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_mesh_pipe_joint.py"
+Install file: "release/scripts/addons/space_view3d_property_chart.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/space_view3d_property_chart.py"
+Install file: "release/scripts/addons/add_curve_aceous_galore.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_curve_aceous_galore.py"
+Install file: "release/scripts/addons/add_mesh_solid.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_mesh_solid.py"
+Install file: "release/scripts/addons/space_view3d_align_tools.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/space_view3d_align_tools.py"
+Install file: "release/scripts/addons/object_add_chain.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/object_add_chain.py"
+Install file: "release/scripts/addons/space_view3d_panel_measure.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/space_view3d_panel_measure.py"
+Install file: "release/scripts/addons/add_mesh_3d_function_surface.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_mesh_3d_function_surface.py"
+Install file: "release/scripts/addons/mesh_relax.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/mesh_relax.py"
+Install file: "release/scripts/addons/add_mesh_extras.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_mesh_extras.py"
+Install file: "release/scripts/addons/object_cloud_gen.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/object_cloud_gen.py"
+Install file: "release/scripts/addons/export_unreal_psk_psa.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/export_unreal_psk_psa.py"
+Install file: "release/scripts/addons/add_mesh_gears.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_mesh_gears.py"
+Install file: "release/scripts/addons/space_view3d_materials_utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/space_view3d_materials_utils.py"
+Install file: "release/scripts/addons/add_curve_torus_knots.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/add_curve_torus_knots.py"
+Install file: "release/scripts/addons/import_scene_mhx.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/import_scene_mhx.py"
+Install file: "release/scripts/addons/mesh_surface_sketch.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/mesh_surface_sketch.py"
+Install file: "release/scripts/addons/io_mesh_raw/export_raw.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/io_mesh_raw/export_raw.py"
+Install file: "release/scripts/addons/io_mesh_raw/__init__.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/io_mesh_raw/__init__.py"
+Install file: "release/scripts/addons/io_mesh_raw/import_raw.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/io_mesh_raw/import_raw.py"
+Install file: "release/scripts/addons/fracture/data.blend" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/fracture/data.blend"
+Install file: "release/scripts/addons/fracture/fracture_ops.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/fracture/fracture_ops.py"
+Install file: "release/scripts/addons/fracture/__init__.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/fracture/__init__.py"
+Install file: "release/scripts/addons/fracture/fracture_setup.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/fracture/fracture_setup.py"
+Install file: "release/scripts/addons/io_mesh_stl/blender_utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/io_mesh_stl/blender_utils.py"
+Install file: "release/scripts/addons/io_mesh_stl/stl_utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/io_mesh_stl/stl_utils.py"
+Install file: "release/scripts/addons/io_mesh_stl/__init__.py" as "/build/src/install/linux2/share/blender/2.5/scripts/addons/io_mesh_stl/__init__.py"
+Install file: "release/scripts/io/export_fbx.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/export_fbx.py"
+Install file: "release/scripts/io/import_shape_mdd.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/import_shape_mdd.py"
+Install file: "release/scripts/io/import_scene_obj.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/import_scene_obj.py"
+Install file: "release/scripts/io/export_obj.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/export_obj.py"
+Install file: "release/scripts/io/export_3ds.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/export_3ds.py"
+Install file: "release/scripts/io/engine_render_pov.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/engine_render_pov.py"
+Install file: "release/scripts/io/export_ply.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/export_ply.py"
+Install file: "release/scripts/io/import_scene_3ds.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/import_scene_3ds.py"
+Install file: "release/scripts/io/export_mdd.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/export_mdd.py"
+Install file: "release/scripts/io/import_anim_bvh.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/import_anim_bvh.py"
+Install file: "release/scripts/io/export_x3d.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/export_x3d.py"
+Install file: "release/scripts/io/netrender/repath.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/repath.py"
+Install file: "release/scripts/io/netrender/netrender.css" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/netrender.css"
+Install file: "release/scripts/io/netrender/model.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/model.py"
+Install file: "release/scripts/io/netrender/slave.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/slave.py"
+Install file: "release/scripts/io/netrender/utils.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/utils.py"
+Install file: "release/scripts/io/netrender/__init__.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/__init__.py"
+Install file: "release/scripts/io/netrender/netrender.js" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/netrender.js"
+Install file: "release/scripts/io/netrender/ui.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/ui.py"
+Install file: "release/scripts/io/netrender/operators.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/operators.py"
+Install file: "release/scripts/io/netrender/client.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/client.py"
+Install file: "release/scripts/io/netrender/balancing.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/balancing.py"
+Install file: "release/scripts/io/netrender/master.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/master.py"
+Install file: "release/scripts/io/netrender/master_html.py" as "/build/src/install/linux2/share/blender/2.5/scripts/io/netrender/master_html.py"
+
+Install file: "release/plugins/Makefile" as "/build/src/install/linux2/share/blender/2.5/plugins/Makefile"
+Install file: "release/plugins/bmake" as "/build/src/install/linux2/share/blender/2.5/plugins/bmake"
+Install file: "release/plugins/sequence/Makefile" as "/build/src/install/linux2/share/blender/2.5/plugins/sequence/Makefile"
+Install file: "release/plugins/sequence/dnr.c" as "/build/src/install/linux2/share/blender/2.5/plugins/sequence/dnr.c"
+Install file: "release/plugins/sequence/color-correction-yuv.c" as "/build/src/install/linux2/share/blender/2.5/plugins/sequence/color-correction-yuv.c"
+Install file: "release/plugins/sequence/gamma.c" as "/build/src/install/linux2/share/blender/2.5/plugins/sequence/gamma.c"
+Install file: "release/plugins/sequence/scatter.c" as "/build/src/install/linux2/share/blender/2.5/plugins/sequence/scatter.c"
+Install file: "release/plugins/sequence/color-correction-hsv.c" as "/build/src/install/linux2/share/blender/2.5/plugins/sequence/color-correction-hsv.c"
+Install file: "release/plugins/sequence/blur.c" as "/build/src/install/linux2/share/blender/2.5/plugins/sequence/blur.c"
+Install file: "release/plugins/texture/Makefile" as "/build/src/install/linux2/share/blender/2.5/plugins/texture/Makefile"
+Install file: "release/plugins/texture/clouds2.c" as "/build/src/install/linux2/share/blender/2.5/plugins/texture/clouds2.c"
+Install file: "release/plugins/texture/tiles.c" as "/build/src/install/linux2/share/blender/2.5/plugins/texture/tiles.c"
+
+Install file: "source/blender/blenpluginapi/documentation.h" as "/build/src/install/linux2/share/blender/2.5/plugins/include/documentation.h"
+Install file: "source/blender/blenpluginapi/externdef.h" as "/build/src/install/linux2/share/blender/2.5/plugins/include/externdef.h"
+Install file: "source/blender/blenpluginapi/floatpatch.h" as "/build/src/install/linux2/share/blender/2.5/plugins/include/floatpatch.h"
+Install file: "source/blender/blenpluginapi/iff.h" as "/build/src/install/linux2/share/blender/2.5/plugins/include/iff.h"
+Install file: "source/blender/blenpluginapi/plugin.h" as "/build/src/install/linux2/share/blender/2.5/plugins/include/plugin.h"
+Install file: "source/blender/blenpluginapi/util.h" as "/build/src/install/linux2/share/blender/2.5/plugins/include/util.h"
+Install file: "source/blender/blenpluginapi/plugin.DEF" as "/build/src/install/linux2/share/blender/2.5/plugins/include/plugin.DEF"
+
+Install file: "release/text/Python-license.txt" as "/build/src/install/linux2/share/blender/2.5/Python-license.txt"
+Install file: "release/text/readme.html" as "/build/src/install/linux2/share/blender/2.5/readme.html"
+Install file: "release/text/GPL-license.txt" as "/build/src/install/linux2/share/blender/2.5/GPL-license.txt"
+Install file: "release/text/copyright.txt" as "/build/src/install/linux2/share/blender/2.5/copyright.txt"
+
+Install file: "release/freedesktop/icons/16x16/blender.png" as "/build/src/install/linux2/share/blender/2.5/icons/16x16/blender.png"
+Install file: "release/freedesktop/icons/16x16/blender.xcf.bz2" as "/build/src/install/linux2/share/blender/2.5/icons/16x16/blender.xcf.bz2"
+Install file: "release/freedesktop/icons/22x22/blender.png" as "/build/src/install/linux2/share/blender/2.5/icons/22x22/blender.png"
+Install file: "release/freedesktop/icons/22x22/blender.xcf.bz2" as "/build/src/install/linux2/share/blender/2.5/icons/22x22/blender.xcf.bz2"
+Install file: "release/freedesktop/icons/scalable/blender.svg" as "/build/src/install/linux2/share/blender/2.5/icons/scalable/blender.svg"
+Install file: "release/freedesktop/icons/32x32/blender.png" as "/build/src/install/linux2/share/blender/2.5/icons/32x32/blender.png"
+Install file: "release/freedesktop/icons/32x32/blender.svg" as "/build/src/install/linux2/share/blender/2.5/icons/32x32/blender.svg"
+
+Install file: "/build/src/build/linux2/bin/blender" as "/build/src/install/linux2/bin/blender"

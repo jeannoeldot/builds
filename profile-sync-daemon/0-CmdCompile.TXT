@@ -1,0 +1,330 @@
+0) REPERTOIRE
+==============
+
+cd $HOME/05-builds/profile-sync-daemon
+
+1) TÉLÉCHARGER SOURCES
+======================
+
+1-1) Download snapshot
+----------------------
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/profile-sync-daemon.tar.gz
+
+tar -xzf profile-sync-daemon.tar.gz
+
+cd $HOME/05-builds/profile-sync-daemon
+
+mv -vf /tmp/0-AUR/profile-sync-daemon/PKGBUILD .
+
+mv -vf /tmp/0-AUR/profile-sync-daemon/psd.install .
+
+
+1-2) Download source
+----------------------
+wget http://repo-ck.com/source/profile-sync-daemon/profile-sync-daemon-6.25.tar.xz
+
+ls
+
+sha256sum profile-sync-daemon-6.25.tar.xz
+
+2) MODIFIER LE PKGBUILD
+========================
+
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgver=
+
+source=(aaaaaa.tar.gz
+        xxx.patch
+        yyy.patch
+)
+sha256sums=(1111111111
+            2222222222
+            3333333333
+)
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   910 21 sept. 19:10 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-sync-daemon-6.25.tar.xz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 psd.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/profile-sync-daemon/PKGBUILD . \
+&& cp -v $HOME/05-builds/profile-sync-daemon/profile-sync-daemon-6.25.tar.xz . \
+&& cp -v $HOME/05-builds/profile-sync-daemon/psd.install . \
+&& makepkg -s \
+&& cd $HOME/05-builds/profile-sync-daemon \
+&& cp -v /tmp/build/profile-sync-daemon-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+!!! SI ERREUR
+==============
+cd $HOME/05-builds/profile-sync-daemon \
+&& rm -rf /tmp/build
+
+
+4) MAKEPKG EN USER
+=======================
+!!! EN USER
+
+rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+5) NETTOYAGES fichiers ~
+==========================
+!!! EN USER
+
+rm -rf pkg src
+rm -f *~
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/profile-sync-daemon-*-any.pkg.tar.*
+
+$ cp -v profile-sync-daemon-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/profile-sync-daemon-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v profile-sync-daemon-*-any.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i profile-sync-daemon-6.25.tar.xz
+$ rm -rf /tmp/0-AUR
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!! VIDER CACHE
+!!! ARRETER FIREFOX
+
+$ profile-cleaner f
+
+!!! MISE A JOUR 6.02 -> 6.07
+============================
+EN ROOT
+========
+# cd
+# pacman -Syu
+
+$ systemctl --user stop psd.service
+$ systemctl --user daemon-reload
+$ systemctl --user start psd.service
+$ systemctl --user status psd.service
+$ psd preview
+
+SI DIFF ENTRE /usr/share/psd/psd.conf ET ~/.config/psd/psd.conf
+---------------------------------------------------------------
+$ kwrite /usr/share/psd/psd.conf &
+$ kwrite $HOME/.config/psd/psd.conf &
+
+!!! EN USER
+============
+$ systemctl --user stop psd.service
+$ rm -i ~/.config/psd/psd.conf
+
+$ systemctl --user daemon-reload
+
+$ systemctl --user start psd.service
+$ systemctl --user stop psd.service
+
+$ kwrite $HOME/.config/psd/psd.conf &
+15  #USE_OVERLAYFS="no"   ==>  A LAISSER
+48  #BROWSERS=""          ==>  BROWSERS="firefox"
+56  #USE_BACKUPS="yes"    ==>  A LAISSER
+
+$ rm -i $HOME/.config/psd/psd.conf~
+
+$ systemctl --user start psd.service
+
+$ systemctl --user status psd.service
+$ systemctl --user status psd-resync.service
+
+$ psd preview   ou    $ psd parse
+$ cat ~/.mozilla/firefox/profiles.ini
+
+!!! AU 07/10/2015 : PASSAGE V 5.75 A 6.02
+=========================================
+EN ROOT
+========
+# cd
+# systemctl stop psd.service psd-resync.service
+# systemctl disable psd.service psd-resync.service
+# systemctl status psd.service
+# systemctl status psd-resync.service
+# pacman -Syu
+#
+# 1ere Install
+# pacman -Syu profile-sync-daemon
+
+# rm -i /etc/psd.conf.pacsave
+
+!!! EN USER
+============
+CREEER FICHIER $HOME/.config/psd/psd.conf
+=========================================
+$ systemctl --user start psd.service
+$ systemctl --user stop psd.service
+
+$ kwrite $HOME/.config/psd/psd.conf &
+19  #USE_OVERLAYFS="no"   ==>  A LAISSER
+52  #BROWSERS=""          ==>  BROWSERS="firefox"
+63  #VOLATILE="/tmp"      ==>  A LAISSER
+71  #USE_BACKUPS="yes"    ==>  A LAISSER
+
+$ rm -i $HOME/.config/psd/psd.conf~
+
+$ profile-cleaner f
+
+$ systemctl --user start psd.service
+$ systemctl --user enable psd.service
+
+$ psd preview   ou    $ psd parse
+
+
+
+=============================================================
+ANCIENS
+========
+
+1-1) Download snapshot
+----------------------
+cd 0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/profile-sync-daemon.tar.gz
+
+tar -xzf profile-sync-daemon.tar.gz
+
+cd ..
+
+mv -vf 0-AUR/profile-sync-daemon/PKGBUILD .
+
+mv -vf 0-AUR/profile-sync-daemon/psd.install .
+
+
+$ rm -f 0-AUR/profile-sync-daemon.tar.gz
+$ rm -rf 0-AUR/profile-sync-daemon
+
+EN ROOT
+========
+# cd
+# systemctl stop psd.service psd-resync.service
+# pacman -Syu
+#
+# 1ere Install
+# pacman -Syu profile-sync-daemon
+
+EDITER FICHIER psd.conf # etc/psd.conf installé en tant que /etc/psd.conf.pacnew
+===========================
+# mv /etc/psd.conf.pacnew /etc/psd.conf
+# nano -w /etc/psd.conf
+!!! USERS=""      ==>  USERS="jnd"
+!!! #BROWSERS=""  ==>  BROWSERS="firefox"
+
+!!! AU 08/03/2015 : TESTS SANS USE_OVERLAYFS="yes"
+---------------------------------------------------
+
+!!! AU 29/04/2015 : TESTS AVEC USE_OVERLAYFS="yes"
+---------------------------------------------------
+!!! SI VERSION Linux kernel >= 3.18.0
+#USE_OVERLAYFS="no"  ==>  USE_OVERLAYFS="yes"
+
+!!! # 1ere Install
+# modprobe overlay
+# lsmod | grep overlay
+# echo '# Load overlay modules at boot.' > /etc/modules-load.d/profile_sync_daemon.conf
+# echo 'overlay' >> /etc/modules-load.d/profile_sync_daemon.conf
+
+# cat /etc/modules-load.d/profile_sync_daemon.conf
+
+
+OU
+# nano -w /etc/psd.conf
+# rm -i /etc/psd.conf.pacnew
+# rm -i /etc/psd.conf~
+
+!!! EN USER
+============
+
+profile-cleaner f
+
+EN ROOT
+========
+# 1ere Install
+# systemctl start psd.service psd-resync.service
+#
+# systemctl enable psd.service psd-resync.service
+OU
+# systemctl --system daemon-reload
+# systemctl start psd.service psd-resync.service
+
+!!! EN USER
+============
+
+$ psd preview
+
+
+3) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ $HOME/bin/mkpkg-tmpfs -n
+
+$ mkpkg-tmpfs -n
+
+
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+# mkpkg-tmpfs $HOME/05-builds/profile-sync-daemon -n
+
+
+# $HOME/bin/mkpkg-tmpfs $HOME/05-builds/profile-sync-daemon
+
+# systemctl start psd.service
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+# cd
+# cd $HOME/05-builds/profile-sync-daemon
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+# ls -l
+# chown jnd:users profile-sync-daemon-*.tar.xz
+# chown jnd:users profile-sync-daemon-*-any.pkg.tar.*
+# chown jnd:users profile-sync-daemon-*-package.log
+# ls -l
+
+rm -f *.log
+
+# chown jnd:users namcap.log

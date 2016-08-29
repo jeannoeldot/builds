@@ -1,0 +1,65 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/dfc
+
+http://projects.gw-computing.net/projects/dfc
+
+http://projects.gw-computing.net/attachments/download/68/dfc-3.0.3.tar.gz
+
+ls
+
+md5sum dfc-3.0.3.tar.gz
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=
+
+source=(aaaaaa.tar.gz
+        xxx.patch
+        yyy.patch
+)
+sha256sums=(1111111111
+            2222222222
+            3333333333
+)
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+# mkpkg-tmpfs /home/jnd/05-builds/dfc -n
+
+
+4) MAKEPKG EN USER
+=======================
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+5) NETTOYAGES fichiers ~
+==========================
+!!! EN USER
+
+rm -rf pkg src
+rm -f *~
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/dfc-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv dfc-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+# 1ere Install
+# pacman -Syu dfc
+
+
+=============================================================

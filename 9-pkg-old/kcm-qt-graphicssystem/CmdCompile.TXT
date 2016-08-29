@@ -1,0 +1,136 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/kcm-qt-graphicssystem
+
+md5sum  129817-kcm-qt-graphicssystem-1.3.tar.xz
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/kcm-qt-graphicssystem qt
+
+
+3) MAKEPKG en USER
+============
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+ls
+namcap kcm-qt-graphicssystem-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+============
+
+rm -f *~
+
+rm -rf src pkg srcp
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/kcm-qt-graphicssystem-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv kcm-qt-graphicssystem-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+# pacman -S kcm-qt-graphicssystem
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/konvertible
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# chown jnd:jnd 116892-konvertible-1.0.1.tar.bz2
+# chown jnd:jnd konvertible-1.0.1-1-x86_64.pkg.tar.*
+# chown jnd:jnd namcap.log
+!!! NON # mv ../0-chroot/rw/pkgdest/kdeplasma-cwp-*-x86_64.pkg.tar.* .
+
+=========================================================
+#La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+
+
+1) FAIRE PATCH
+==========================
+
+Faire 1 PKGBUILD avec la fonction build contenant la commande "echo"
+
+makepkg
+
+ => src
+
+cd src
+
+cp -R yawp-0.2.2 yawp-0.2.2.pristine
+
+cp -R yawp-0.2.2 yawp-0.2.2.new
+
+Faire modifications de yawp.cpp dans yawp-0.2.2.new
+
+LIGNES :	66 => 27.0
+		68 => 5.0
+
+		101 => 226.0
+		103 => 206.0
+
+		229 => "Paris"
+		230 => "France"
+		235 => "EUR|FR|FR012|PARIS"
+
+		1009 => %2\nHumid %3%
+		1011 => %2\nHumid %3%
+
+Effacer fichier yawp.cpp~
+
+diff -aur yawp-0.2.2.pristine yawp-0.2.2.new
+
+diff -aur yawp-0.2.2.pristine yawp-0.2.2.new > loc_pos-H-L-temp_humid.patch
+
+!!! Vérifier patch !!!
+
+cd ..
+
+ls
+
+mv src/loc_pos-H-L-temp_humid.patch loc_pos-H-L-temp_humid.patch
+
+md5sum loc_pos-H-L-temp_humid.patch
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+

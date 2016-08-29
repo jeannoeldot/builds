@@ -1,0 +1,25 @@
+
+[arch-dev-public] Python rebuild on its way to [testing]
+
+Allan McRae
+Mon, 04 Oct 2010 06:54:23 -0700
+
+Hi all,
+
+
+I am in the process of moving the python rebuild into the [testing] and [community-testing] repositories.
+
+There are still a few packages that need rebuilt (the various openoffice incarnations and virtualbox-ose) so if you desperately need them you may want to hold off updating. Other than those packages, this will hopefully be a nice smooth update... I hear some TUs have been running the [staging] repo (which I personally think is crazy!)
+
+If you see any of the following, report a bug:
+ * files linked to libpython2.6.so.1.0
+ * files in /usr/lib/python2.6 or /usr/include/python-2.6
+ * files with a "#!/usr/bin/python" or "#!/usr/bin/env python" shebang
+ * depends/makedepends/optdepends on "python" instead of "python2"
+ * packages that no longer work...
+
+And I mean report a bug...  an email is not enough.
+
+Allan
+
+

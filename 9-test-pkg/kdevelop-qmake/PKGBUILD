@@ -1,0 +1,54 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Radu Andries <admiral0@tuxfamily.org>
+# Contributor: mosra <mosra@centrum.cz>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=kdevelop-qmake
+pkgver=1.6.0
+pkgrel=1
+_srcname="kdev-qmake"
+_snapshot=3e9d50b
+
+pkgdesc="Qt4's qmake build system plugin for KDevelop"
+arch=('i686' 'x86_64')
+url="http://www.kdevelop.org/"
+license=('GPL2')
+depends=('kdevelop')
+makedepends=('cmake' 'automoc4' 'kdevelop-pg-qt')
+provides=('kdevelop-qmake')
+conflicts=('kdevelop-qmake')
+source=(${_srcname}-${_snapshot}.tar.gz
+)
+sha256sums=('d893fe3fb5d7b18ef918c7cc687774466653089e551e46d82a3f06a753457a46'
+)
+
+prepare() {
+      cd "${srcdir}/${_srcname}"
+
+      #set(VERSION_PATCH 60)
+      sed -i "/set(VERSION_PATCH 60)/c\set(VERSION_PATCH 0)" CMakeLists.txt
+}
+
+build() {
+    cd "${srcdir}/${_srcname}"
+
+    [[ -d build ]] && rm -r build
+    mkdir build && cd build
+
+    cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+        ..
+    make ${MAKEFLAGS}
+}
+
+package() {
+    cd "${srcdir}/${_srcname}/build"
+
+    make DESTDIR="${pkgdir}" install
+
+    # /usr/share/apps/kdevappwizard/templates/qmake_qt4guiapp.tar.bz2 is
+    # already in kdesdk-kapptemplate
+    rm "${pkgdir}/usr/share/apps/kdevappwizard/templates/qmake_qt4guiapp.tar.bz2"
+}

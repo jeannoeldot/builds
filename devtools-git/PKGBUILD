@@ -1,0 +1,30 @@
+# $Id$
+# Maintainer: Jason Chu <jason@archlinux.org>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=devtools-git
+pkgver=0.9.30.20120119
+pkgrel=1
+pkgdesc="Tools for Arch Linux package maintainers"
+arch=('any')
+license=('GPL')
+url="http://projects.archlinux.org/devtools.git/"
+depends=('namcap' 'openssh' 'subversion' 'rsync')
+provides=('devtools')
+conflicts=('aurtools')
+source=("${pkgname}-${pkgver}.tar.gz"
+	)
+md5sums=('11d677935492db43d86a67d1959970c1'
+	)
+
+_gitname="devtools"
+
+build() {
+  cd ${srcdir}/${_gitname}
+  make PREFIX=/usr
+}
+
+package() {
+  cd ${srcdir}/${_gitname}
+  make PREFIX=/usr DESTDIR=${pkgdir} install
+}

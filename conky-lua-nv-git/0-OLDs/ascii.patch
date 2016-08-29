@@ -1,0 +1,12 @@
+diff -aur conky/doc/config_settings.xml conky.new/doc/config_settings.xml
+--- conky/doc/config_settings.xml	2015-12-06 15:40:27.000000000 +0100
++++ conky.new/doc/config_settings.xml	2015-12-06 15:44:27.263106786 +0100
+@@ -80,7 +80,7 @@
+         </term>
+         <listitem>A comma-separated list of strings to use as the bars of a graph output
+         to console/shell. The first list item is used for the minimum bar height and the
+-        last item is used for the maximum. Example: " ,_,▁,▂,▃,▄,▅,▆,▇,█".
++        last item is used for the maximum.
+         <para /></listitem>
+     </varlistentry>
+     <varlistentry>

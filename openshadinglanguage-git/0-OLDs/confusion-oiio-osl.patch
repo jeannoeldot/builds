@@ -1,0 +1,28 @@
+diff -aur osl/CMakeLists.txt osl.new/CMakeLists.txt
+--- osl/CMakeLists.txt	2015-09-26 10:31:02.000000000 +0200
++++ osl.new/CMakeLists.txt	2015-09-26 11:20:40.327448268 +0200
+@@ -254,12 +254,12 @@
+     add_definitions ("${EXTRA_CPP_ARGS}")
+ endif()
+ 
+-if (OIIO_BUILD_CPP11 OR OIIO_BUILD_CPP14)
+-    if (OIIO_BUILD_CPP11)
++if (OSL_BUILD_CPP11 OR OSL_BUILD_CPP14)
++    if (OSL_BUILD_CPP11)
+         message (STATUS "Building for C++11")
+         add_definitions ("-std=c++11")
+     endif()
+-    if (OIIO_BUILD_CPP14)
++    if (OSL_BUILD_CPP14)
+         message (STATUS "Building for C++14")
+         add_definitions ("-std=c++14")
+     endif()
+@@ -277,7 +277,7 @@
+ if (NOT USE_SIMD STREQUAL "")
+     message (STATUS "Compiling with SIMD level ${USE_SIMD}")
+     if (USE_SIMD STREQUAL "0")
+-        add_definitions ("-DOIIO_NO_SSE=1")
++        add_definitions ("-DOSL_NO_SSE=1")
+     else ()
+         string (REPLACE "," ";" SIMD_FEATURE_LIST ${USE_SIMD})
+         foreach (feature ${SIMD_FEATURE_LIST})

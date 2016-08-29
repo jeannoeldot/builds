@@ -1,0 +1,61 @@
+
+1) TEST SI MAJ
+===============
+jnd ~ $ su -
+Mot de passe :
+[root@arch64 ~]# pacman -Syu
+:: Synchronisation des bases de données de paquets...
+ repolocal est à jour;
+ core est à jour;
+ extra est à jour;
+ community est à jour;
+ archlinuxfr est à jour;
+:: Début de la mise à jour complète du système...
+Résolution des dépendances...
+Recherche des conflits possibles entre paquets...
+
+Cibles (3): libpng-1.2.39-1  libtiff-3.8.2-6  xorg-server-1.6.3-3
+
+Taille totale des paquets (téléchargement):   5,45 Mo
+Taille totale des paquets (installation):   14,82 Mo
+
+Procéder à l'installation ? [O/n] n
+
+
+2) EN USER
+===========
+jnd ~ $ sudo pacman -Sy
+:: Synchronisation des bases de données de paquets...
+ repolocal est à jour;
+ core est à jour;
+ extra                    413,3K  393,8K/s 00:00:01 [###################################################################] 100%
+ community                372,3K  348,5K/s 00:00:01 [###################################################################] 100%
+ archlinuxfr est à jour;
+
+jnd ~ $ pacman -Qu | wc -l
+3
+
+jnd ~ $ pacman -Qu
+libpng 1.2.38-1
+libtiff 3.8.2-5
+xorg-server 1.6.3-2
+
+
+jnd ~ $ sudo pacman -Sy
+:: Synchronisation des bases de données de paquets...
+ repolocal est à jour;
+ core est à jour;
+ extra est à jour;
+ community est à jour;
+ archlinuxfr est à jour;
+
+
+jnd ~ $ sudo pacman -Sy 2>&1 >/dev/null
+jnd ~ $
+jnd ~ $ sudo pacman -Sy 2>&1 >/dev/null | pacman -Qu | wc -l
+3
+jnd ~ $ sudo pacman -Sy | pacman -Qu | wc -l
+3
+jnd ~ $
+
+

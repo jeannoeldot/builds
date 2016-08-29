@@ -1,0 +1,25 @@
+# arg 1:  the new package version
+post_install() {
+  echo 'By using this package you accept the NVIDIA license,'
+  echo 'which has been installed in /usr/share/licenses/nvidia/LICENSE'
+  echo 'If you do not accept this license, you must remove the package immediately.'
+  echo 'These drivers are beta. We recommend to use the drivers from the extra repo.'
+
+# echo ":: Updating symlinks to use built-in libwfb"
+# ln -sf /usr/lib/xorg/modules/libnvidia-wfb.so.*  /usr/lib/xorg/modules/libwfb.so
+}
+
+# arg 1:  the new package version
+# arg 2:  the old package version
+post_upgrade() {
+  post_install $1
+}
+
+#post_remove() {
+# echo ":: Updating symlinks to use xorg-server libwfb"
+# ln -sf /usr/lib/xorg/modules/libwfb.so.*  /usr/lib/xorg/modules/libwfb.so
+#}
+
+op=$1
+shift
+$op $*

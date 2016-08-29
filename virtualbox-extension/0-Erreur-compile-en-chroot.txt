@@ -1,0 +1,14 @@
+==> Checking buildtime dependencies...
+==> Retrieving sources...
+  -> Found Oracle_VM_VirtualBox_Extension_Pack-4.2.14-86644.vbox-extpack
+  -> Found PUEL
+==> Validating source files with md5sums...
+    Oracle_VM_VirtualBox_Extension_Pack-4.2.14-86644.vbox-extpack ... Passed
+    PUEL ... /startdir/PUEL: Permission denied
+FAILED
+==> ERROR: One or more files did not pass the validity check!
+==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/copy/build
+==> ERREUR: Fabrication du paquet << virtualbox-extension >> impossible.
+      !!! =>  Faire : cd /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/copy/build pour inspection.
+      !!! => Quand fini, appuyer sur une touche pour quitter le script.
+==> ERREUR: Terminé.

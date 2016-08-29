@@ -1,0 +1,86 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd $HOME/05-builds/devtools-git
+
+
+rm -rf devtools
+git clone git://projects.archlinux.org/devtools.git
+
+1-6) ATTENTION A LA DATE DE MAJ SUR LE SITE
+=============================================
+http://projects.archlinux.org/devtools.git/
+
+20120119
+
+tar -cvzf devtools-git-0.9.30.20120119.tar.gz devtools
+
+ls
+
+md5sum devtools-git-0.9.30.20120119.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=0.9.30.20120119
+
+source=(devtools-git-0.9.30.20120119.tar.gz
+        xxx.patch
+        yyy.patch
+)
+md5sums=(1111111111
+         2222222222
+         3333333333
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+
+# mkpkg-tmpfs $HOME/05-builds/devtools-git -n
+
+4) MAKEPKG
+============
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+rm -rf pkg src
+rm -f *~
+
+# Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+mv $HOME/00-repolocal/devtools-git-*-any.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+mv devtools-git-*-any.pkg.tar.* $HOME/00-repolocal/
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+
+=================================================================================
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+# cd
+# cd $HOME/05-builds/devtools-git
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+# ls -l
+# chown jnd:jnd devtools-git-*-any.pkg.tar.*
+# chown jnd:jnd namcap.log
+# chown jnd:jnd devtools-git-*.tar.gz
+# ls -l
+
+
+mv devtools-git-*-x86_64.pkg.tar.gz $HOME/00-repolocal/
+!!! OU cp devtools-git-*-x86_64.pkg.tar.gz $HOME/00-repolocal/

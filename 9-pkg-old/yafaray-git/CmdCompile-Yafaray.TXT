@@ -1,0 +1,176 @@
+0) REPERTOIRE
+==============
+
+cd /home/jnd/05-builds/yafaray-git
+
+
+ YAFARAY
+https://github.com/YafaRay/Core
+
+ EXPORTER
+https://github.com/YafaRay/Blender-2.5-Exporter
+
+
+rm -rf YafaRay
+git clone http://github.com/YafaRay/Core.git YafaRay
+
+cd YafaRay
+
+rm -rf Blender-2.5-Exporter
+git clone http://github.com/YafaRay/Blender-2.5-Exporter.git
+cd ..
+
+
+1-3) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+1-6) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/YafaRay/Core
+
+20110419
+
+tar -cvzf yafaray-git-0.1.2.20110419.tar.gz YafaRay
+
+ls
+
+
+1-8) ATTENTION A UserConfig.txt
+======================================================
+
+cp UserConfig.txt UserConfig.txt.old
+
+cp YafaRay/CMakeConfig/UserConfig.template UserConfig.txt
+
+kwrite UserConfig.txt &
+kwrite UserConfig.txt.old &
+
+MODIF UserConfig.txt
+=======================
+
+ LIGNE 135 :
+#set(USER_INSTALL_PREFIX "")
+ DEVIENT :
+set(USER_INSTALL_PREFIX "/usr/share/blender/2.59/scripts/addons/yafaray")
+
+
+ LIGNE 158 :
+#set(YAF_LIB_DIR lib)
+ DEVIENT :
+set(YAF_LIB_DIR bin)
+
+
+ LIGNE 168 :
+#set(YAF_PLUGIN_DIR "")
+ DEVIENT :
+set(YAF_PLUGIN_DIR bin/plugins)
+
+
+ LIGNE 180 :
+#set(YAF_BINDINGS_PY_DIR ${CMAKE_SOURCE_DIR}/install/bindings/python)
+ DEVIENT :
+set(YAF_BINDINGS_PY_DIR /usr/share/blender/2.59/scripts/addons/yafaray/bin)
+
+
+ LIGNE 227 :
+#set(USER_RELEASE_EXTRA_FLAGS "")
+ DEVIENT :
+set(USER_RELEASE_EXTRA_FLAGS "-march=native -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block")
+
+
+ LIGNE 281 :
+#set(YAF_PY_VERSION 3.1)
+ DEVIENT :
+set(YAF_PY_VERSION 3.2)
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=0.1.2.20110419
+
+source=(yafaray-git-0.1.2.20110419.tar.gz
+        git-xxx.patch
+	UserConfig.txt
+)
+
+md5sum yafaray-git-0.1.2.20110419.tar.gz
+
+md5sum UserConfig.txt
+
+md5sum git-fix-version.patch
+
+md5sums=(1111111111
+         2222222222
+         3333333333
+)
+
+4) MAKEPKG
+============
+!!! EN USER
+makepkg -s
+
+OU : makepkg -f
+
+rm -rf pkg src
+rm -f *~
+!!!! SI TESTS
+!!!	rm yafaray-*-x86_64.pkg.tar.*
+!!!!
+rm -rf YafaRay
+
+# Verifications...
+
+namcap yafaray-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/yafaray-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv yafaray-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+!!! OU cp yafaray-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+
+# pacman -Syu yafaray-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R yafaray-git
+# rm /var/cache/pacman/pkg/yafaray-*
+# pacman -S yafaray-git
+
+!!! EN USER
+rm -r ~/.blender
+
+
+
+!!!NON LIGNE ENLEVEE
+!!!NON ===============
+!!!NON LIGNE 29        sed -i 's|0.1.x|0.1.2-beta2|g' YafaRay_Blender-2.49/yafaray_ui.py
+
+!!!NON LIGNE ENLEVEE
+!!!NON ===============
+!!!NON LIGNE 52	-DYAF_CXX_FLAGS_RELEASE='-O3 -ffast-math -march=native -pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block' \
+
+
+http://github.com/DarkTide/YafaRay
+http://github.com/DarkTide/YafaRay_Blender-2.49
+https://github.com/DarkTide/Blender-2.5-Exporter
+
+git clone http://github.com/DarkTide/YafaRay.git
+rm -rf YafaRay_Blender-2.49
+git clone http://github.com/DarkTide/YafaRay_Blender-2.49.git
+cd ..
+
+OU BLENDER 2.5.9
+
+http://github.com/DarkTide/YafaRay/

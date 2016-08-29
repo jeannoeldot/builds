@@ -1,0 +1,42 @@
+#!/bin/bash
+
+################################
+## POUR TEST
+#set -x
+################################
+
+# Titre
+echo "+--------------------------------------------+"
+echo "| Modification du fichier Options.orig        |"
+echo "+--------------------------------------------+"
+echo ""
+
+cp Options.orig.original Options.orig
+
+echo "AVANT modifs..."
+# CXXFLAGS= -O2 -Wall -x c++ -D__cplusplus
+# THOT_OPTIONS=-D_UNIX -D_GL -D_WX
+# AMAYA_OPTIONS=-D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES
+cat Options.orig | grep -E "CXXFLAGS="
+cat Options.orig | grep -E "THOT_OPTIONS="
+cat Options.orig | grep -E "AMAYA_OPTIONS="
+echo ""
+
+
+sed -i "/^CXXFLAGS=/c\CXXFLAGS= -O2 -Wall -x c++" Options.orig
+sed -i "/^THOT_OPTIONS=/c\THOT_OPTIONS=-D_GL -D_WX" Options.orig
+sed -i "/^AMAYA_OPTIONS=/c\AMAYA_OPTIONS=-DXML_GENERIC -D_GL -D_WX -DTEMPLATES" Options.orig
+
+echo "APRES modifs..."
+cat Options.orig | grep -E "CXXFLAGS="
+cat Options.orig | grep -E "THOT_OPTIONS="
+cat Options.orig | grep -E "AMAYA_OPTIONS="
+echo ""
+
+################################
+## POUR TEST
+#set +x
+################################
+
+exit 0
+

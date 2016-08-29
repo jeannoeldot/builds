@@ -1,0 +1,12 @@
+diff -aur Amaya11.4.4/Amaya/thotlib/Makefile.in Amaya11.4.4.new/Amaya/thotlib/Makefile.in
+--- Amaya11.4.4/Amaya/thotlib/Makefile.in	2009-11-16 11:56:04.000000000 +0100
++++ Amaya11.4.4.new/Amaya/thotlib/Makefile.in	2012-02-13 08:52:31.280173156 +0100
+@@ -351,7 +351,7 @@
+ 
+ ../bin/print : $(THOTK_OBJ) $(DISPLAY_OBJ) $(PRINT_OBJ) \
+         ../amaya/libCSS.a
+-	$(CXX) $(LDFLAGS) -o $@ $(THOTK_OBJ) $(DISPLAY_OBJ) $(PRINT_OBJ) ../amaya/libCSS.a $(LIBS)
++	$(CXX) $(LDFLAGS) -o $@ $(THOTK_OBJ) $(DISPLAY_OBJ) $(PRINT_OBJ) ../amaya/libCSS.a $(LIBS) -lpng -ljpeg
+ 	@$(ECHO) "====>" print is done
+ 
+ CEXTRACT= ../bin/cextract

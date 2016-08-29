@@ -1,0 +1,95 @@
+jnd bin $ readelf -d jndqrami                                                                                                  
+                                                                                                                               
+Dynamic section at offset 0xfc368 contains 42 entries:                                                                         
+  Tag        Type                         Name/Value                                                                           
+ 0x0000000000000001 (NEEDED)             Shared library: [libSDL_mixer-1.2.so.0]                                               
+ 0x0000000000000001 (NEEDED)             Shared library: [libSDL-1.2.so.0]                                                     
+ 0x0000000000000001 (NEEDED)             Shared library: [libQtGui.so.4]                                                       
+ 0x0000000000000001 (NEEDED)             Shared library: [libpng12.so.0]                                                       
+ 0x0000000000000001 (NEEDED)             Shared library: [libfreetype.so.6]                                                    
+ 0x0000000000000001 (NEEDED)             Shared library: [libSM.so.6]                                                          
+ 0x0000000000000001 (NEEDED)             Shared library: [libICE.so.6]                                                         
+ 0x0000000000000001 (NEEDED)             Shared library: [libXrender.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libfontconfig.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libXext.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libX11.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libQtCore.so.4]
+ 0x0000000000000001 (NEEDED)             Shared library: [libz.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgthread-2.0.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [librt.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libdl.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libpthread.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000000c (INIT)               0x408590
+ 0x000000000000000d (FINI)               0x439428
+ 0x0000000000000004 (HASH)               0x400240
+ 0x000000006ffffef5 (GNU_HASH)           0x401268
+ 0x0000000000000005 (STRTAB)             0x403730
+ 0x0000000000000006 (SYMTAB)             0x4016d8
+ 0x000000000000000a (STRSZ)              11111 (bytes)
+ 0x000000000000000b (SYMENT)             24 (bytes)
+ 0x0000000000000015 (DEBUG)              0x0
+ 0x0000000000000003 (PLTGOT)             0x6fc660
+ 0x0000000000000002 (PLTRELSZ)           7704 (bytes)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x406778
+ 0x0000000000000007 (RELA)               0x4065e0
+ 0x0000000000000008 (RELASZ)             408 (bytes)
+ 0x0000000000000009 (RELAENT)            24 (bytes)
+ 0x000000006ffffffe (VERNEED)            0x406550
+ 0x000000006fffffff (VERNEEDNUM)         4
+ 0x000000006ffffff0 (VERSYM)             0x406298
+ 0x0000000000000000 (NULL)               0x0
+
+
+jnd bin $ readelf -d jndqrami                                                                                                  
+                                                                                                                               
+Dynamic section at offset 0xfc8e8 contains 43 entries:                                                                         
+  Tag        Type                         Name/Value                                                                           
+ 0x0000000000000001 (NEEDED)             Shared library: [libSDL_mixer-1.2.so.0]                                               
+ 0x0000000000000001 (NEEDED)             Shared library: [libSDL-1.2.so.0]                                                     
+ 0x0000000000000001 (NEEDED)             Shared library: [libQtGui.so.4]                                                       
+ 0x0000000000000001 (NEEDED)             Shared library: [libpng12.so.0]                                                       
+ 0x0000000000000001 (NEEDED)             Shared library: [libfreetype.so.6]                                                    
+ 0x0000000000000001 (NEEDED)             Shared library: [libSM.so.6]                                                          
+ 0x0000000000000001 (NEEDED)             Shared library: [libICE.so.6]                                                         
+ 0x0000000000000001 (NEEDED)             Shared library: [libXrender.so.1]                                                     
+ 0x0000000000000001 (NEEDED)             Shared library: [libfontconfig.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libXext.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libX11.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libQtCore.so.4]
+ 0x0000000000000001 (NEEDED)             Shared library: [libz.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgthread-2.0.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [librt.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libdl.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libpthread.so.0]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000000f (RPATH)              Library rpath: [/usr/lib]
+ 0x000000000000000c (INIT)               0x408598
+ 0x000000000000000d (FINI)               0x4399e8
+ 0x0000000000000004 (HASH)               0x400240
+ 0x000000006ffffef5 (GNU_HASH)           0x401268
+ 0x0000000000000005 (STRTAB)             0x403730
+ 0x0000000000000006 (SYMTAB)             0x4016d8
+ 0x000000000000000a (STRSZ)              11120 (bytes)
+ 0x000000000000000b (SYMENT)             24 (bytes)
+ 0x0000000000000015 (DEBUG)              0x0
+ 0x0000000000000003 (PLTGOT)             0x6fcbf0
+ 0x0000000000000002 (PLTRELSZ)           7704 (bytes)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x406780
+ 0x0000000000000007 (RELA)               0x4065e8
+ 0x0000000000000008 (RELASZ)             408 (bytes)
+ 0x0000000000000009 (RELAENT)            24 (bytes)
+ 0x000000006ffffffe (VERNEED)            0x406558
+ 0x000000006fffffff (VERNEEDNUM)         4
+ 0x000000006ffffff0 (VERSYM)             0x4062a0
+ 0x0000000000000000 (NULL)               0x0

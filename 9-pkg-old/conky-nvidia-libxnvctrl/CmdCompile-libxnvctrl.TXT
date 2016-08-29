@@ -1,0 +1,102 @@
+#Le répertoire
+
+cd /home/jnd/05-builds/conky-nvidia-libxnvctrl
+
+
+1-1) RECUPERATION FICHIERS SOURCES
+=============================================
+$ wget http://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-313.30.tar.bz2
+
+
+1-2) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgname=libxnvctrl
+pkgver=313.30
+pkgrel=1
+source=("............."
+)
+
+
+md5sum nvidia-settings-313.30.tar.bz2
+
+md5sums=('11111111111111111111111111'
+)
+OU
+sha1sum nvidia-settings-313.30.tar.bz2
+
+sha1sums=('adbee99af57611a69aa2aa777abca4ba8a3150c8'
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/conky-nvidia-libxnvctrl -n
+
+3) MAKEPKG en USER
+=====================
+cd /home/jnd/05-builds/conky-nvidia-libxnvctrl
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/libxnvctrl-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv libxnvctrl-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal
+
+EN ROOT
+========
+!!! PAS SI DEPENDANCE DE CONKY-LUA-NVIDIA-GIT
+# pacman -Syu
+# pacman -Syu libxnvctrl
+
+
+SI PROBLEMES
+================
+
+# pacman -R libxnvctrl
+# rm -f /var/cache/pacman/pkg/libxnvctrl-*
+
+!!! EN USER
+$ rm -f 00-repolocal/libxnvctrl-*-x86_64.pkg.tar.*
+$ maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+
+$ wget ftp://download.nvidia.com/XFree86/nvidia-settings/nvidia-settings-295.20.tar.bz2
+
+!!! MODIFIER FICHIERS
+
+DANS : /home/jnd/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+
+

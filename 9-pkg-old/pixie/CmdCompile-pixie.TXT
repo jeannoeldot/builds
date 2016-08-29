@@ -1,0 +1,77 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/pixie
+
+
+
+md5sum Pixie-src-2.2.6.tgz
+
+md5sum 2.2.6-fix-pixie-zlib.patch
+
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=2.2.6
+
+source=(Pixie-src-2.2.6.tgz
+        xxx.patch
+        yyy.patch
+)
+md5sums=(1111111111
+         2222222222
+         3333333333
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/pixie
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/pixie
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# ls -l
+# chown jnd:jnd pixie-*-x86_64.pkg.tar.*
+# chown jnd:jnd namcap.log
+# chown jnd:jnd pixie-*.tar.gz
+# ls -l
+
+
+4) MAKEPKG
+============
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+rm -rf pkg src
+rm -f *~
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/pixie-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv pixie-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+
+
+mv pixie-*-x86_64.pkg.tar.gz /home/jnd/00-repolocal/
+!!! OU cp pixie-*-x86_64.pkg.tar.gz /home/jnd/00-repolocal/

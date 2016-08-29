@@ -1,0 +1,111 @@
+# Maintainer: JND
+
+pkgname=bluegriffon-svn
+pkgver=1.4.1.983
+pkgrel=1
+_bgname=bluegriffon
+_bgver=1.4.1
+_ffver=10.0.2
+
+pkgdesc="New WYSIWYG content editor for the Web powered by Gecko"
+url="http://bluegriffon.org/"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+depends=('gtk2' 'mozilla-common' 'nss>=3.13.1' 'libxt' 'hunspell' 'startup-notification'
+         'mime-types' 'dbus-glib' 'alsa-lib' 'sqlite3' 'libnotify' 'desktop-file-utils' 'libvpx'
+         'libevent' 'hicolor-icon-theme' 'nspr>=4.8.8'
+)
+makedepends=('unzip' 'zip' 'pkg-config' 'diffutils' 'python2' 'wireless_tools'
+             'yasm' 'mesa' 'autoconf2.13' 'libidl2' 'xorg-server-xvfb' 'gconf'
+)
+
+provides=("bluegriffon")
+conflicts=("bluegriffon")
+
+install=bluegriffon.install
+
+source=("http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/source/firefox-${_ffver}.source.tar.bz2"
+	"${pkgname}-${pkgver}.tar.bz2"
+        'mozconfig'
+	'bluegriffon.sh'
+        'bluegriffon.desktop'
+	'1.4.1-bluegriffon-config-content.patch'
+	'1.4.1-libvpx.patch'
+	'1.4.1-prefs.patch'
+)
+md5sums=('5ce038d591964f72c534fa33b75a62f5'
+	 '28a4ac6d5883a250272c963e9b687ae4'
+         '81a43c965dfaa33744fac5803d091f59'
+         '9c5c47f5d0f5f36a3abd8bfecf6c5d8d'
+         '044abfeea6a59f084d5d2fbc89368f8b'
+         '0d7543f3498905fbc62c92050304655e'
+         '229af230b9b26189381da258b5ab2edd'
+         '9110f529b8daf6200fed500aa176dacb'
+)
+
+
+build() {
+  cd "${srcdir}"/mozilla-release
+
+  tar xjf "${srcdir}/${pkgname}-${pkgver}.tar.bz2"
+
+  # voir http://bluegriffon.org/pages/Build-BlueGriffon
+  # patch -p 1 < bluegriffon/config/content.patch
+  # bluegriffon/config/content.patch rewritted
+  patch -Np1 -i "${srcdir}/1.4.1-bluegriffon-config-content.patch"
+
+  # voir PKGBUILD firefox 10.0.2 sur extra
+  patch -Np1 -i "${srcdir}/1.4.1-libvpx.patch"
+
+  patch -Np1 -i "${srcdir}/1.4.1-prefs.patch"
+
+  # Fix PRE_RELEASE_SUFFIX
+  sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \
+    browser/base/Makefile.in
+
+  cp "${srcdir}"/mozconfig .mozconfig
+
+  export CFLAGS="$CFLAGS -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+  export CXXFLAGS="$CXXFLAGS -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+  export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/lib/${_bgname}"
+  export PYTHON="/usr/bin/python2"
+
+  make -f client.mk build MOZ_MAKE_FLAGS="$MAKEFLAGS"
+}
+package() {
+  cd "${srcdir}"/mozilla-release
+
+  # No Make install for now :(
+  #make DESTDIR="$pkgdir/" -C bg-trunk install
+
+  install -d -m 755 ${pkgdir}/usr/bin
+  install -d -m 755 ${pkgdir}/usr/lib/${_bgname}
+  install -d -m 755 ${pkgdir}/usr/share/applications
+
+  # VOIR : https://github.com/remicollet/remirepo/blob/master/bluegriffon/bluegriffon.spec
+  cd bg-trunk
+  tar --create --file - --dereference --directory=dist/bin --exclude xulrunner . \
+  | tar --extract --file - --directory ${pkgdir}/usr/lib/${_bgname}
+
+  # Launcher
+  cp ${srcdir}/bluegriffon.sh ${pkgdir}/usr/bin/${_bgname}
+  chmod 755 ${pkgdir}/usr/bin/${_bgname}
+
+  cd "${srcdir}"/mozilla-release
+
+  # Icons
+  install -D -m 644 ${_bgname}/app/icons/default16.png "${pkgdir}/usr/share/icons/hicolor/16x16/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/default32.png "${pkgdir}/usr/share/icons/hicolor/32x32/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/default48.png "${pkgdir}/usr/share/icons/hicolor/48x48/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/default50.png "${pkgdir}/usr/share/icons/hicolor/64x64/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/bluegriffon128.png "${pkgdir}/usr/share/icons/hicolor/128x128/apps/${_bgname}.png"
+
+  # Desktop
+  install -D -m 644 "${srcdir}/${_bgname}.desktop" "${pkgdir}/usr/share/applications/${_bgname}.desktop"
+
+  # Use the system hunspell dictionaries
+  rm -rf "${pkgdir}/usr/lib/${_bgname}/{dictionaries,hyphenation}"
+  ln -sf /usr/share/hunspell "$pkgdir/usr/lib/${_bgname}/dictionaries"
+  ln -sf /usr/share/hyphen "$pkgdir/usr/lib/${_bgname}/hyphenation"
+  #ln -sf /usr/share/myspell/dicts "${pkgdir}/usr/lib/${_bgname}/dictionaries"
+}

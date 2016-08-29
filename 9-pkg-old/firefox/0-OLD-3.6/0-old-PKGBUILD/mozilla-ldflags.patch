@@ -1,0 +1,8 @@
+diff -aur mozilla-1.9.1.pristine/layout/build/Makefile.in mozilla-1.9.1.new/layout/build/Makefile.in
+--- mozilla-1.9.1.pristine/layout/build/Makefile.in	2009-09-14 09:08:23.131051816 +0200
++++ mozilla-1.9.1.new/layout/build/Makefile.in	2009-09-14 09:17:02.898083159 +0200
+@@ -322,3 +322,4 @@
+ LDFLAGS += -Wl,-LD_LAYOUT:lgot_buffer=50
+ endif
+ endif
++LDFLAGS += -lX11 -lXrender

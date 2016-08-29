@@ -1,0 +1,37 @@
+COMPILE OK  boost 1.38.0
+=============================
+==> Starting build()...
+/usr/bin/qmake pokerth_lib.pro -unix -o Makefile.pokerth_lib                                                                   
+/usr/bin/qmake pokerth_game.pro -unix -o Makefile.pokerth_game                                                                 
+/usr/bin/qmake pokerth_server.pro -unix -o Makefile.pokerth_server                                                             
+Project MESSAGE: Found boost_thread-mt                                                                                         
+Project MESSAGE: Found boost_filesystem                                                                                        
+Project MESSAGE: Found boost_thread-mt                                                                                         
+Project MESSAGE: Found boost_filesystem-mt                                                                                     
+Project MESSAGE: Found boost_filesystem                                                                                        
+Project MESSAGE: Found boost_iostreams                                                                                         
+Project MESSAGE: Found boost_filesystem-mt                                                                                     
+Project MESSAGE: Found boost_iostreams-mt                                                                                      
+Project MESSAGE: Found boost_program_options                                                                                   
+Project MESSAGE: Found boost_regex                                                                                             
+Project MESSAGE: Found boost_program_options-mt                                                                                
+Project MESSAGE: Found boost_regex-mt                                                                                          
+Project MESSAGE: Found boost_iostreams                                                                                         
+Project MESSAGE: Found boost_iostreams-mt                                                                                      
+Project MESSAGE: Found boost_regex                                                                                             
+Project MESSAGE: Found boost_regex-mt                                                                                          
+
+
+ERREUR boost 1.39.0
+===================================
+==> Starting build()...                    
+/usr/bin/qmake pokerth_lib.pro -unix -o Makefile.pokerth_lib
+/usr/bin/qmake pokerth_game.pro -unix -o Makefile.pokerth_game
+/usr/bin/qmake pokerth_server.pro -unix -o Makefile.pokerth_server
+Project ERROR: Unable to find boost libraries in PREFIX=/usr      
+make: *** [Makefile.pokerth_game] Error 2                         
+make: *** Waiting for unfinished jobs....                         
+Project ERROR: Unable to find boost libraries in PREFIX=/usr      
+make: *** [Makefile.pokerth_server] Error 2                       
+==> ERROR: Build Failed.                                          
+    Aborting...                                                   

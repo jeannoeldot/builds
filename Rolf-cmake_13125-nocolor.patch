@@ -1,0 +1,44 @@
+diff --git a/Modules/FindPkgConfig.cmake b/Modules/FindPkgConfig.cmake
+index 5d93ab1..3090fa3 100644
+--- a/Modules/FindPkgConfig.cmake
++++ b/Modules/FindPkgConfig.cmake
+@@ -13,11 +13,10 @@
+ # When the 'QUIET' argument is set, no status messages will be printed.
+ #
+ # It sets the following variables:
+-#   PKG_CONFIG_FOUND          ... true if pkg-config works on the system
++#   PKG_CONFIG_FOUND          ... if pkg-config executable was found
+ #   PKG_CONFIG_EXECUTABLE     ... pathname of the pkg-config program
+ #   PKG_CONFIG_VERSION_STRING ... the version of the pkg-config program found
+ #                                 (since CMake 2.8.8)
+-#   PKG_CONFIG_FOUND          ... if pkg-config executable was found
+ #
+ # For the following variables two sets of values exist; first one is the
+ # common one and has the given PREFIX. The second set contains flags
+@@ -100,7 +99,7 @@ if (PKG_CONFIG_EXECUTABLE)
+ endif (PKG_CONFIG_EXECUTABLE)
+ 
+ include(${CMAKE_CURRENT_LIST_DIR}/FindPackageHandleStandardArgs.cmake)
+-find_package_handle_standard_args(PkgConfig
++find_package_handle_standard_args(PKG_CONFIG
+                                   REQUIRED_VARS PKG_CONFIG_EXECUTABLE
+                                   VERSION_VAR PKG_CONFIG_VERSION_STRING)
+ 
+diff --git a/Tests/CMakeOnly/AllFindModules/CMakeLists.txt b/Tests/CMakeOnly/AllFindModules/CMakeLists.txt
+index 6604208..fc65e58 100644
+--- a/Tests/CMakeOnly/AllFindModules/CMakeLists.txt
++++ b/Tests/CMakeOnly/AllFindModules/CMakeLists.txt
+@@ -71,7 +71,7 @@ endmacro(check_version_string)
+ # reported.
+ 
+ foreach(VTEST ALSA ARMADILLO BZIP2 CUPS CURL EXPAT FREETYPE GETTEXT GIT HSPELL
+-        JASPER LIBXML2 LIBXSLT PERL PostgreSQL TIFF ZLIB)
++        JASPER LIBXML2 LIBXSLT PERL PKG_CONFIG PostgreSQL TIFF ZLIB)
+     check_version_string(${VTEST} ${VTEST}_VERSION_STRING)
+ endforeach(VTEST)
+ 
+@@ -82,4 +82,3 @@ endforeach(VTEST)
+ 
+ check_version_string(PYTHONINTERP PYTHON_VERSION_STRING)
+ check_version_string(SUBVERSION Subversion_VERSION_SVN)
+-check_version_string(PKGCONFIG PKG_CONFIG_VERSION_STRING)

@@ -1,0 +1,27 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=jndqaligne5-qt5
+pkgver=0.5.0
+pkgrel=5
+pkgdesc="Variante du Morpion"
+arch=('i686' 'x86_64')
+url="https://github.com/jeannoeldot/jndqaligne5-qt5"
+license=('GPL2')
+depends=('qt5-base' 'sdl' 'sdl_mixer' 'desktop-file-utils')
+makedepends=('qt5-base' 'sdl' 'sdl_mixer')
+provides=('jndqaligne5')
+conflicts=('jndqaligne5')
+source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+sha256sums=('54dcf6e39ad3db8ff3354b7e85e8e4819bdf081f3cffd0603c3836e55ad403f6')
+
+build() {
+      cd "${srcdir}/${pkgname}-${pkgver}"
+
+      qmake-qt5
+      make ${MAKEFLAGS}
+}
+
+package() {
+      cd "${srcdir}/${pkgname}-${pkgver}"
+      make INSTALL_ROOT="${pkgdir}" install
+}

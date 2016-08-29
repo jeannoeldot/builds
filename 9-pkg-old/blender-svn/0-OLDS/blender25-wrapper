@@ -1,0 +1,6 @@
+#!/bin/sh
+
+SLOT="2.5"
+export BLENDER_SYSTEM_SCRIPTS="/usr/share/blender/${SLOT}/scripts"
+export BLENDER_SYSTEM_DATAFILES="/usr/share/blender/${SLOT}/datafiles"
+exec /usr/bin/blender25-svn-bin

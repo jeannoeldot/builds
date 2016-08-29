@@ -1,0 +1,84 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/archiso
+
+
+rm -rf archiso
+git clone git://projects.archlinux.org/archiso.git
+
+1-6) ATTENTION A LA DATE DE MAJ SUR LE SITE
+=============================================
+https://projects.archlinux.org/archiso.git/
+
+20110831
+
+tar -cvzf archiso-git-0.1.20110831.tar.gz archiso
+
+ls
+
+md5sum archiso-git-0.1.20110831.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=0.1.20110831
+
+source=(archiso-git-0.1.20110831.tar.gz
+        xxx.patch
+        yyy.patch
+)
+md5sums=(1111111111
+         2222222222
+         3333333333
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/archiso
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# ls -l
+# chown jnd:jnd archiso-*-any.pkg.tar.*
+# chown jnd:jnd namcap.log
+# chown jnd:jnd archiso-git-*.tar.gz
+# ls -l
+
+
+4) MAKEPKG
+============
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+rm -rf pkg src
+rm -f *~
+rm -rf archiso
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/archiso-git-*-any.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv archiso-git-*-any.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+# pacman -Sy archiso-git
+
+mv archiso-git-*-x86_64.pkg.tar.gz /home/jnd/00-repolocal/
+!!! OU cp archiso-git-*-x86_64.pkg.tar.gz /home/jnd/00-repolocal/

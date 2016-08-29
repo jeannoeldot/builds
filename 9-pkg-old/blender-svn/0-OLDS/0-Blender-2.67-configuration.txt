@@ -1,0 +1,83 @@
+-- Found JPEG: /usr/lib64/libjpeg.so  
+-- Found ZLIB: /usr/lib64/libz.so (found version "1.2.8") 
+-- Found PNG: /usr/lib64/libpng.so (found version "1.6.2") 
+-- Found Freetype: /usr/lib64/libfreetype.so (found version "2.4.11") 
+-- Found PythonLibsUnix: python3.3m  
+-- Found OpenEXR: /usr/lib64/libHalf.so;/usr/lib64/libIex.so;/usr/lib64/libIlmImf.so;/usr/lib64/libIlmThread.so;/usr/lib64/libImath.so  
+-- Could NOT find OpenJPEG (missing:  OPENJPEG_INCLUDE_DIR) 
+-- Found TIFF: /usr/lib64/libtiff.so (found version "4.0.3") 
+-- Found OpenAL: /usr/lib64/libopenal.so  
+
+* Blender Configuration *
+
+  Build Options:
+   * WITH_GAMEENGINE            OFF
+   * WITH_PLAYER                OFF
+   * WITH_BULLET                ON
+   * WITH_IK_SOLVER             ON
+   * WITH_IK_ITASC              ON
+   * WITH_OPENCOLLADA           ON
+   * WITH_FFTW3                 ON
+   * WITH_INTERNATIONAL         ON
+   * WITH_INPUT_NDOF            OFF
+   * WITH_CYCLES                OFF
+   * WITH_OPENCOLORIO           ON
+
+  Compiler Options:
+   * WITH_BUILDINFO             ON
+   * WITH_OPENMP                ON
+   * WITH_RAYOPTIMIZATION       ON
+
+  System Options:
+   * WITH_INSTALL_PORTABLE      OFF
+   * WITH_X11_XF86VMODE         ON
+   * WITH_X11_XINPUT            ON
+   * WITH_MEM_JEMALLOC          OFF
+   * WITH_SYSTEM_GLEW           ON
+   * WITH_SYSTEM_OPENJPEG       ON
+
+  Image Formats:
+   * WITH_IMAGE_CINEON          ON
+   * WITH_IMAGE_DDS             ON
+   * WITH_IMAGE_HDR             ON
+   * WITH_IMAGE_OPENEXR         ON
+   * WITH_IMAGE_OPENJPEG        OFF
+   * WITH_IMAGE_REDCODE         OFF
+   * WITH_IMAGE_TIFF            ON
+
+  Audio:
+   * WITH_OPENAL                ON
+   * WITH_SDL                   ON
+   * WITH_JACK                  ON
+   * WITH_JACK_DYNLOAD          OFF
+   * WITH_CODEC_AVI             ON
+   * WITH_CODEC_FFMPEG          ON
+   * WITH_CODEC_SNDFILE         ON
+
+  Compression:
+   * WITH_LZMA                  ON
+   * WITH_LZO                   ON
+
+  Python:
+   * WITH_PYTHON_INSTALL        OFF
+   * WITH_PYTHON_INSTALL_NUMPY  OFF
+   * WITH_PYTHON_MODULE         OFF
+   * WITH_PYTHON_SAFETY         OFF
+
+  Modifiers:
+   * WITH_MOD_BOOLEAN           ON
+   * WITH_MOD_REMESH            ON
+   * WITH_MOD_FLUID             ON
+   * WITH_MOD_OCEANSIM          ON
+
+  
+-- Configuring done
+=================================================================
+SI OPENJPEG = OK
+
+-- Found OpenJPEG: /usr/lib64/libopenjpeg.so  
+
+   * WITH_IMAGE_OPENJPEG        ON
+
+
+

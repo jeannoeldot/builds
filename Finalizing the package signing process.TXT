@@ -1,0 +1,86 @@
+> >> I don't think signing remotely is going to be possible, also I
+>> >> don't see the point of it. We anyway have to download the package
+>> >> in order to test it, so we wouldn't really gain anything.
+>> >
+>> > Not all packages have to be tested, e.g. a large rebuild against a
+>> > new library version which you are sure that nothing is broken in
+>> > your pakage and only needs new linking against the new library.
+>> > That's only as an example.
+>>
+>> But surely you will eventually download and install it? That said, I
+>> guess there will be cases where it would be useful to not immediately
+>> have to download the package (even if I'm struggling to imagine atm).
+>
+> Sure. I will do that. But mainly I build the packages not at home and
+> that's my main problem. But I will try the method with your small
+> script, thanks for that.
+>
+>>
+>> >> I use a script to download, sign and upload signature, then I test
+>> >> the package locally before pushing it to the repos.
+>> >
+>> > Mind if you can provide the script. Such a helper script would help
+>> > a lot.
+>>
+>> Sure, it is based on something given to me by another dev on IRC
+>> (forgot who). Hopefully they won't sue me for copyright infringement
+>> ;-)
+>>
+>> It will leave the packages in /tmp for you to test, so you might want
+>> to remember to delete them afterwards.
+>>
+>> #!/bin/bash
+>>
+>> DIR=`mktemp -d /tmp/signpkg.${1}.XXXXX`
+>> pushd ${DIR}
+>> scp pkgbuild.com:svn-packages/$1/trunk/*.pkg.tar.xz .
+>> for i in *.pkg.tar.xz; do
+>> #  gpg --detach-sign --use-agent -u $KEY "$i"
+>>   gpg --detach-sign --use-agent "$i"
+>> done
+>> scp *.pkg.tar.xz.sig pkgbuild.com:svn-packages/$1/trunk/
+>> popd
+>
+> Thanks for that...
+>
+> Daniel
+>
+
+Just in case it can help, I also made a script [0] that updates the
+svn tree from alderaan to a local tree and rsync the remote packages
+to a local folder.
+
+I then just need to install, test and if OK I can "extrapkg
+'blahblahblah'"  from my local machine.
+
+It also works with community packages.
+
+(Don't forget the configuration file [1] if you want to test)
+
+[0] https://raw.github.com/galaux/scripts/master/duppkgbuild/duppkgbuild
+[1] https://raw.github.com/galaux/scripts/master/duppkgbuild/duppkgbuild.conf
+
+--
+Guillaume
+
+        Re: [arch-dev-public] Finalizing the package signing process Tobias Powalowski
+        Re: [arch-dev-public] Finalizing the package signing process Daniel Isenmann
+            Re: [arch-dev-public] Finalizing the package signing process Giovanni Scafora
+                Re: [arch-dev-public] Finalizing the package signing process Daniel Isenmann
+                    Re: [arch-dev-public] Finalizing the package signing process Pierre Schmitz
+                        Re: [arch-dev-public] Finalizing the package signing process Daniel Isenmann
+                            Re: [arch-dev-public] Finalizing the package signing process Tom Gundersen
+                                Re: [arch-dev-public] Finalizing the package signing process Daniel Isenmann
+                                Re: [arch-dev-public] Finalizing the package signing process Tom Gundersen
+                                Re: [arch-dev-public] Finalizing the package signing process Daniel Isenmann
+                                Re: [arch-dev-public] Finalizing the package signing process Guillaume ALAUX
+            Re: [arch-dev-public] sign packages on alderaan (was: Finalizing the package signing process) Florian Pritz
+                Re: [arch-dev-public] sign packages on alderaan (was: Finalizing the package signing process) Daniel Isenmann
+                    Re: [arch-dev-public] sign packages on alderaan Allan McRae 
+            Re: [arch-dev-public] Finalizing the package signing process Ray Rashif 
+        Re: [arch-dev-public] Finalizing the package signing process Dieter Plaetinck
+        Re: [arch-dev-public] Finalizing the package signing process Gaetan Bisson
+        Re: [arch-dev-public] Finalizing the package signing process Eric Bélanger
+        Re: [arch-dev-public] Finalizing the package signing process Stéphane Gaudreault 
+
+    Reply via email to

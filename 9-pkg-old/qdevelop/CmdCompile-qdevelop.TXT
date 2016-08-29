@@ -1,0 +1,110 @@
+# Le répertoire
+cd /home/jnd/05-builds/qdevelop
+
+
+2) MODIFIER LE PKGBUILD
+========================
+http://biord-software.org/fr/qdevelop/download.php
+
+pkgrel=
+
+source=(... ...)
+
+
+
+md5sum qdevelop-v0.28.tar.gz
+
+md5sum qt47.patch
+
+md5sums=(... ...)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+
+makepkg -s
+
+makepkg -f
+
+
+
+# Verifications...
+==================
+
+namcap qdevelop-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+
+rm -f *~
+rm -f *.log
+rm -rf src pkg
+
+
+# Copie ds repolocal
+=====================
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/qdevelop-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv qdevelop-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+# pacman -Syu qdevelop
+
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+==============================================================================================
+ANCIENS
+========
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/qdevelop
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# chown jnd:jnd qdevelop-0.27.4.tar.gz qdevelop.desktop
+# mv ../0-chroot/rw/pkgdest/qdevelop-*-x86_64.pkg.tar.gz .
+
+

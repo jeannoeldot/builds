@@ -1,0 +1,148 @@
+# Le répertoire
+cd $HOME/05-builds/jndqrami-qt4
+
+ls
+
+sha256sum jndqrami-qt4-0.1.6.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+pkgname='jndqrami-qt4'
+_realname='jndqrami'
+pkgver=0.1.6
+pkgrel=1
+
+provides='jndqrami'
+conflicts='jndqrami'
+
+source=(... ...)
+sha256sums=(... ...)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 jndqrami-qt4-0.1.6.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 jndqrami-qt4.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/jndqrami-qt4/PKGBUILD . \
+&& cp -v $HOME/05-builds/jndqrami-qt4/jndqrami-qt4-0.1.6.tar.gz . \
+&& cp -v $HOME/05-builds/jndqrami-qt4/jndqrami-qt4.install . \
+&& makepkg -s \
+&& cd $HOME/05-builds/jndqrami-qt4 \
+&& cp -v /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/jndqrami-qt4 && rm -rf /tmp/build
+
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+
+cd $HOME/05-builds/jndqrami-qt4
+
+$ rm -f *~
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap jndqrami-qt4-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+# Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+mv $HOME/00-repolocal/jndqrami-qt4-*-x86_64.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+mv jndqrami-qt4-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# pacman -Syu
+OU
+# pacman -Syu jndqrami-qt4
+
+
+
+=========================================================================================
+ANCIEN
+
+3-1) MAKEPKG TMPFS en CHROOT
+============================
+
+!!! EN ROOT
+
+# cd
+
+# mkpkg-tmpfs $HOME/05-builds/jndqrami -n -qt4
+
+
+# $HOME/bin/mkpkg-tmpfs $HOME/05-builds/jndqrami qt4
+
+
+3) MAKEPKG en CHROOT
+====================
+cd $HOME/05-builds/jndqrami
+$ ./build.sh
+
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+# cd
+# cd $HOME/05-builds/jndqrami
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+# chown jnd:jnd jndqrami-0.1.6.tar.gz
+# mv ../0-chroot/rw/pkgdest/jndqrami-*-x86_64.pkg.tar.gz .
+
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

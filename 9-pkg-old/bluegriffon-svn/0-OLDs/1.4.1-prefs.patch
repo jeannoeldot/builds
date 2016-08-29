@@ -1,0 +1,22 @@
+diff -aur mozilla-release/bluegriffon/app/profile/bluegriffon-prefs.js mozilla-release.new/bluegriffon/app/profile/bluegriffon-prefs.js
+--- mozilla-release/bluegriffon/app/profile/bluegriffon-prefs.js	2012-03-11 09:30:48.420276099 +0100
++++ mozilla-release.new/bluegriffon/app/profile/bluegriffon-prefs.js	2012-03-11 11:50:39.323790932 +0100
+@@ -114,8 +114,8 @@
+ pref("bluegriffon.structurebar.role.show", true);
+ 
+ // updates
+-pref("bluegriffon.updates.check.enabled", true);
+-pref("bluegriffon.updates.frequency", "launch");
++pref("bluegriffon.updates.check.enabled", false);
++pref("bluegriffon.updates.frequency", "manually");
+ 
+ pref("html5.enable", true);
+ pref("bluegriffon.defaults.doctype", "kXHTML5");
+@@ -163,3 +163,7 @@
+ 
+ // Enable Floating Toolbar
+ pref("bluegriffon.floatingToolbar.enabled", true);
++
++// Locales
++pref("general.useragent.locale", "");
++pref("intl.locale.matchOS", true);

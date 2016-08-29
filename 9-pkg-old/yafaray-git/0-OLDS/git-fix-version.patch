@@ -1,0 +1,12 @@
+diff -aur YafaRay/src/yafraycore/imagefilm.cc YafaRay.new/src/yafraycore/imagefilm.cc
+--- YafaRay/src/yafraycore/imagefilm.cc	2010-09-12 18:26:11.123375578 +0200
++++ YafaRay.new/src/yafraycore/imagefilm.cc	2010-09-12 18:34:19.414768929 +0200
+@@ -690,7 +690,7 @@
+ 
+ 	std::stringstream ss;
+ 	
+-	ss << "YafaRay (" << version << ")";
++	ss << "YafaRay (0.1.2-Beta2)";
+ 	
+ 	ss << std::setprecision(2);
+ 	double times = gTimer.getTime("rendert");

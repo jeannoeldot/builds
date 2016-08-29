@@ -1,0 +1,44 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=blender-addons-matlib-git
+pkgver=0.5.6.20151212
+pkgrel=1
+pkgdesc="Online Material Library"
+arch=('any')
+url="https://github.com/meta-androcto/materials_library"
+license=('CCPL')
+depends=("blender-git")
+makedepends=('python')
+
+source=("${pkgname}-${pkgver}.tar.gz"
+)
+sha256sums=('d589a63db65cb783c10ec271ef03a7bc0032d0dfac49530c5b451b4806cae3e1'
+)
+
+_slot="2.76"
+_realname="matlib"
+_dir_addons="addons"
+
+package() {
+      cd "${srcdir}"
+      # Prepare destination directory
+      install -d -m 755 "${pkgdir}/usr/share/blender/${_slot}/scripts/${_dir_addons}/matlib"
+
+      # Install addons
+      install -m755 matlib/*.py "${pkgdir}/usr/share/blender/${_slot}/scripts/${_dir_addons}/matlib"
+
+      # Install blend
+      install -m644 matlib/*.blend "${pkgdir}/usr/share/blender/${_slot}/scripts/${_dir_addons}/matlib"
+      install -m644 matlib/categories.txt "${pkgdir}/usr/share/blender/${_slot}/scripts/${_dir_addons}/matlib"
+
+      # Install Doc
+      install -D -m644 matlib/README.txt "${pkgdir}/usr/share/doc/${pkgname}/README.txt"
+      
+      # Install license
+      install -D -m644 matlib/LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+      
+      # Idem blender
+      python -m compileall "${pkgdir}/usr/share/blender"
+      python -O -m compileall "${pkgdir}/usr/share/blender"
+
+}

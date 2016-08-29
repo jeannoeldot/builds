@@ -1,0 +1,139 @@
+# Le répertoire
+cd $HOME/05-builds/awoken-icons
+
+
+1) ARCHIVE TAR.GZ
+=================================
+wget https://dl.dropboxusercontent.com/u/8029324/AwOken-2.5.zip
+
+ls
+
+md5sum AwOken-2.5.zip
+
+sha256sum AwOken-2.5.zip
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=awoken-icons
+pkgver=2.5.2
+pkgrel=1
+
+
+source=("https://dl.dropboxusercontent.com/u/8029324/AwOken-2.5.zip")
+md5sums=('cfa211bdda30d28bf03c668f445095bb')
+
+sha256sums=(... ...)
+
+#PKGEXT='.pkg.tar'
+
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     403 10 août   2014 awoken-icons.install
+-rw-r--r--  1 jnd users     743  2 mars  15:03 PKGBUILD
+-rw-r--r--  1 jnd users 1506705  2 mars  14:55 AwOken-2.5.zip
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/awoken-icons/PKGBUILD . \
+&& cp -v $HOME/05-builds/awoken-icons/AwOken-2.5.zip . \
+&& cp -v $HOME/05-builds/awoken-icons/awoken-icons.install . \
+&& makepkg -s \
+&& cd $HOME/05-builds/awoken-icons \
+&& cp -v /tmp/build/awoken-icons-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/awoken-icons && rm -rf /tmp/build
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+
+cd $HOME/05-builds/awoken-icons
+
+$ rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap
+
+# Nettoyage fichiers~
+=========================
+
+rm -f *~
+rm -rf src pkg
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/awoken-icons-*-any.pkg.tar.*
+
+$ cp -v awoken-icons-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/awoken-icons-*-any.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+$ mv -v awoken-icons-*-any.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i AwOken-2.5.zip
+
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# pacman -Syu
+ou
+# pacman -Syu awoken-icons
+
+
+==============================================================================
+ANCIEN
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"

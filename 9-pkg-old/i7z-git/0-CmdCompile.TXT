@@ -1,0 +1,171 @@
+0) REPERTOIRE
+==============
+cd /home/jnd/05-builds/i7z-git
+
+
+http://code.google.com/p/i7z/
+
+git://github.com/ajaiantilal/i7z.git
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/ajaiantilal/i7z
+==> DATE MAJ : 20131012
+
+1.3 SOURCES
+==============
+!!! Répertoire clone de i7z dans : /0-DataLinux/05-builds-dir-git/i7z
+------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+!!! PAS OBLIGATOIRE SI GIT
+rm -rf i7z
+
+Vérifier existence rep i7z :
+--------------------------------
+ls
+
+!!! SI REP i7z N'EXISTE PAS
+-------------------------------
+git clone git://github.com/ajaiantilal/i7z.git i7z
+
+!!! SI REP i7z EXISTE
+-------------------------
+cd i7z
+git pull --rebase origin master
+cd ..
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+rm -i i7z-git-*.tar.gz
+tar -cvzf i7z-git-20131012.tar.gz --exclude=.git i7z
+
+1-7-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd /home/jnd/05-builds/i7z-git
+
+mv -v /0-DataLinux/05-builds-dir-git/i7z-git-*.tar.gz .
+sync
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+2-1) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+pkgver=20131012
+pkgrel=2
+
+!!!!!!
+_name="i7z"
+
+sha256sum i7z-git-20131012.tar.gz
+
+sha256sums=(...
+         ...
+)
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxx.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/i7z-git/{PKGBUILD,i7z-git-20131012.tar.gz} . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/i7z-git \
+&& cp -v /tmp/build/i7z-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/i7z-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER sur SSD
+=============================
+!!! EN USER
+
+cd /home/jnd/05-builds/i7z-git
+
+rm -f *~
+
+makepkg -s
+
+OU : makepkg -f
+
+voir : makepkg -R   , --repackage
+           Repackage contents of the package without rebuilding the package. This is useful if you forgot a depend or install
+           file in your PKGBUILD and the build itself will not change.
+
+
+!!! EN USER
+=============
+
+rm -rf pkg src
+
+rm -f *~
+
+namcap i7z-git-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/i7z-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv i7z-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# cd
+
+# pacman -Syu
+
+# pacman -Syu i7z-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R i7z-git
+# rm /var/cache/pacman/pkg/i7z-git-*
+# pacman -S i7z-git
+
+==================================================================================================
+ANCIEN
+=======
+
+rm -rf i7z
+

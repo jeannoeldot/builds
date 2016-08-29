@@ -1,0 +1,110 @@
+ 
+	local mycmakeargs=""
+
+	#CUDA Kernal Selection
+	local CUDA_ARCH=""
+	if use cuda; then
+		if use sm_10; then
+			CUDA_ARCH="sm_10"
+		fi
+		if use sm_11; then
+			if [[ -n "${CUDA_ARCH}" ]] ; then
+				CUDA_ARCH="${CUDA_ARCH};sm_11"
+			else
+				CUDA_ARCH="sm_11"
+			fi
+		fi
+		if use sm_12; then
+			if [[ -n "${CUDA_ARCH}" ]] ; then
+				CUDA_ARCH="${CUDA_ARCH};sm_12"
+			else
+				CUDA_ARCH="sm_12"
+			fi
+		fi
+		if use sm_13; then
+			if [[ -n "${CUDA_ARCH}" ]] ; then
+				CUDA_ARCH="${CUDA_ARCH};sm_13"
+			else
+				CUDA_ARCH="sm_13"
+			fi
+		fi
+		if use sm_20; then
+			if [[ -n "${CUDA_ARCH}" ]] ; then
+				CUDA_ARCH="${CUDA_ARCH};sm_20"
+			else
+				CUDA_ARCH="sm_20"
+			fi
+		fi
+		if use sm_21; then
+			if [[ -n "${CUDA_ARCH}" ]] ; then
+				CUDA_ARCH="${CUDA_ARCH};sm_21"
+			else
+				CUDA_ARCH="sm_21"
+			fi
+		fi
+
+		#If a kernel isn't selected then all of them are built by default
+		if [ -n "${CUDA_ARCH}" ] ; then
+			mycmakeargs="${mycmakeargs} -DCYCLES_CUDA_ARCH=${CUDA_ARCH}"
+		fi
+		mycmakeargs="${mycmakeargs}
+			-DWITH_CYCLES_CUDA=ON
+			-DCUDA_INCLUDES=/opt/cuda/include
+			-DCUDA_LIBRARIES=/opt/cuda/lib64
+			-DCUDA_NVCC=/opt/cuda/bin/nvcc"
+	fi
+
+	#iconv is enabled when international is enabled
+	if use intl; then
+		for mylang in "${LINGUAS}" ; do
+			if [[ ${mylang} != "en" && ${mylang} != "en_US" && ${mylang} != "" ]]; then
+				mycmakeargs="${mycmakeargs} -DWITH_INTERNATIONAL=ON"
+				break;
+			fi
+		done
+	fi
+
+		#modified the install prefix in order to get everything to work for src_install
+	#make DESTDIR="${D}" install didn't work
+	mycmakeargs="${mycmakeargs} 
+		-DWITH_BUILTIN_GLEW=OFF
+		-DWITH_PYTHON_INSTALL=OFF
+		-DWITH_BINRELOC=OFF
+		-DWITH_INSTALL_PORTABLE=OFF
+		-DCMAKE_INSTALL_PREFIX="${D}usr"
+		$(cmake-utils_use_with player PLAYER)
+		$(cmake-utils_use_with elbeem MOD_FLUID)
+		$(cmake-utils_use_with sdl SDL)
+		$(cmake-utils_use_with sndfile CODEC_SNDFILE)
+		$(cmake-utils_use_with openexr IMAGE_OPENEXR)
+		$(cmake-utils_use_with dds IMAGE_DDS)
+		$(cmake-utils_use_with fftw FFTW3) 
+		$(cmake-utils_use_with openmp OPENMP)
+		$(cmake-utils_use_with openal OPENAL)
+		$(cmake-utils_use_with ffmpeg CODEC_FFMPEG)
+		$(cmake-utils_use_with sse RAYOPTIMIZATION) 
+		$(cmake-utils_use_with redcode IMAGE_REDCODE)
+		$(cmake-utils_use_with eltopo MOD_CLOTH_ELTOPO)
+		$(cmake-utils_use_with jack JACK)
+		$(cmake-utils_use_with collada OPENCOLLADA)
+		$(cmake-utils_use_with ndof INPUT_NDOF)
+		$(cmake-utils_use_with oceansim MOD_OCEANSIM)"
+
+	# FIX: Game Engine module needs to be active to build the Blender Player
+	if ! use game-engine && use player; then
+		elog "Forcing Game Engine [+game-engine] as required by Blender Player [+player]"
+		mycmakeargs="${mycmakeargs} -DWITH_GAMEENGINE=ON"
+	else
+		mycmakeargs="${mycmakeargs}
+					 $(cmake-utils_use_with game-engine GAMEENGINE)"
+	fi
+
+	if ! use jpeg2k && use redcode; then
+		elog "Forcing OpenJPEG [+jpeg2k] as required by Redcode [+redcode]"
+		mycmakeargs="${mycmakeargs} -DWITH_IMAGE_OPENJPEG=ON"
+	else
+		mycmakeargs="${mycmakeargs}
+					 $(cmake-utils_use_with jpeg2k IMAGE_OPENJPEG)"
+	fi
+
+	cmake-utils_src_configure

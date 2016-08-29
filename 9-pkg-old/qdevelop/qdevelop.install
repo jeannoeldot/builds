@@ -1,0 +1,13 @@
+post_install() {
+  xdg-desktop-menu forceupdate 2> /dev/null || :
+  xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
+}
+
+post_upgrade() {
+post_install $1
+}
+
+post_remove() {
+  xdg-desktop-menu forceupdate 2> /dev/null || :
+  xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
+}

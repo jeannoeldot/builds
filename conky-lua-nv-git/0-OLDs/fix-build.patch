@@ -1,0 +1,23 @@
+diff -aur conky/cmake/ConkyPlatformChecks.cmake conky.new/cmake/ConkyPlatformChecks.cmake
+--- conky/cmake/ConkyPlatformChecks.cmake	2016-03-26 16:39:46.000000000 +0100
++++ conky.new/cmake/ConkyPlatformChecks.cmake	2016-03-26 16:48:28.387661476 +0100
+@@ -258,7 +258,7 @@
+ # Check for Lua itself
+ if(WANT_TOLUA)
+ 	# If we need tolua++, we must compile against Lua 5.1
+-	pkg_search_module(LUA REQUIRED lua5.1 lua-5.1 lua51 lua)
++	pkg_search_module(LUA REQUIRED lua=5.1 lua5.1 lua-5.1 lua51)
+ 	if(NOT LUA_VERSION VERSION_LESS 5.2.0)
+ 		message(FATAL_ERROR "Unable to find Lua 5.1.x")
+ 	endif(NOT LUA_VERSION VERSION_LESS 5.2.0)
+@@ -347,8 +347,8 @@
+ 	find_library(XNVCtrl_LIB NAMES XNVCtrl)
+ 	if(XNVCtrl_INCLUDE_PATH AND XNVCtrl_LIB)
+ 		set(XNVCtrl_FOUND true)
+-		set(conky_libs ${conky_libs} ${XNVCtrl_LIB})
+-		set(conky_includes ${conky_includes} ${XNVCtrl_INCLUDE_PATH})
++		set(conky_libs ${XNVCtrl_LIB} ${conky_libs})
++ 		set(conky_includes ${XNVCtrl_INCLUDE_PATH} ${conky_includes})
+ 	else(XNVCtrl_INCLUDE_PATH AND XNVCtrl_LIB)
+ 		message(FATAL_ERROR "Unable to find XNVCtrl library")
+ 	endif(XNVCtrl_INCLUDE_PATH AND XNVCtrl_LIB)

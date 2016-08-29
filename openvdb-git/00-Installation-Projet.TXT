@@ -1,0 +1,71 @@
+python: Python is unavailable
+pydoc: Python is unavailable
+mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb
+Created /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb
+pushd /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb > /dev/null; \
+    mkdir -p ./ ./ io/ io/ io/ io/ io/ io/ io/ io/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ ./ metadata/ metadata/ metadata/ ./ ./ ./ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ ./ util/ util/ util/ util/ util/ util/ util/ util/ util/ ./; popd > /dev/null
+for f in Exceptions.h Grid.h io/Archive.h io/Compression.h io/File.h io/GridDescriptor.h io/io.h io/Queue.h io/Stream.h io/TempFile.h math/BBox.h math/ConjGradient.h math/Coord.h math/DDA.h math/FiniteDifference.h math/LegacyFrustum.h math/Maps.h math/Mat.h math/Mat3.h math/Mat4.h math/Math.h math/Operators.h math/Proximity.h math/QuantizedUnitVec.h math/Quat.h math/Ray.h math/Stats.h math/Stencils.h math/Transform.h math/Tuple.h math/Vec2.h math/Vec3.h math/Vec4.h Metadata.h metadata/Metadata.h metadata/MetaMap.h metadata/StringMetadata.h openvdb.h Platform.h PlatformConfig.h tools/ChangeBackground.h tools/Clip.h tools/Composite.h tools/Dense.h tools/DenseSparseTools.h tools/Diagnostics.h tools/Filter.h tools/GridOperators.h tools/GridTransformer.h tools/Interpolation.h tools/LevelSetAdvect.h tools/LevelSetFilter.h tools/LevelSetFracture.h tools/LevelSetMeasure.h tools/LevelSetMorph.h tools/LevelSetRebuild.h tools/LevelSetSphere.h tools/LevelSetTracker.h tools/LevelSetUtil.h tools/MaskToLevelSet.h tools/MeshToVolume.h tools/Morphology.h tools/ParticlesToLevelSet.h tools/PointAdvect.h tools/PointIndexGrid.h tools/PointMaskGrid.h tools/PointPartitioner.h tools/PointScatter.h tools/PoissonSolver.h tools/Prune.h tools/RayIntersector.h tools/RayTracer.h tools/SignedFloodFill.h tools/Statistics.h tools/TopologyToLevelSet.h tools/ValueTransformer.h tools/VectorTransformer.h tools/VelocityFields.h tools/VolumeAdvect.h tools/VolumeToMesh.h tools/VolumeToSpheres.h tree/InternalNode.h tree/Iterator.h tree/LeafManager.h tree/LeafNode.h tree/LeafNodeBool.h tree/LeafNodeMask.h tree/NodeManager.h tree/NodeUnion.h tree/RootNode.h tree/Tree.h tree/TreeIterator.h tree/ValueAccessor.h Types.h util/CpuTimer.h util/Formats.h util/logging.h util/MapsUtil.h util/Name.h util/NodeMasks.h util/NullInterrupter.h util/PagedArray.h util/Util.h version.h ; \
+    do cp -f $f /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb/$f; done
+if [ -f libopenvdb_viewer.so.3.2.0 ]; \
+then \
+    mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb_viewer; \
+    echo "Created /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb_viewer"; \
+    cp -f viewer/Viewer.h  /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb_viewer/; \
+fi
+Copied header files to /build/openvdb-git/pkg/openvdb-git/usr/include
+mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/lib
+Created /build/openvdb-git/pkg/openvdb-git/usr/lib/
+cp -f libopenvdb.so.3.2.0 /build/openvdb-git/pkg/openvdb-git/usr/lib
+pushd /build/openvdb-git/pkg/openvdb-git/usr/lib > /dev/null; \
+    if [ -f libopenvdb.so.3.2.0 ]; then \
+        ln -f -s libopenvdb.so.3.2.0 libopenvdb.so; \
+        ln -f -s libopenvdb.so.3.2.0 libopenvdb.so.3.2; \
+    fi; \
+    popd > /dev/null
+Copied libopenvdb to /build/openvdb-git/pkg/openvdb-git/usr/lib/
+if [ -f libopenvdb_viewer.so.3.2.0 ]; \
+then \
+    cp -f libopenvdb_viewer.so.3.2.0 /build/openvdb-git/pkg/openvdb-git/usr/lib; \
+    pushd /build/openvdb-git/pkg/openvdb-git/usr/lib > /dev/null; \
+        if [ -f libopenvdb_viewer.so.3.2.0 ]; then \
+            ln -f -s libopenvdb_viewer.so.3.2.0 libopenvdb_viewer.so; fi; \
+        popd > /dev/null; \
+    echo "Copied libopenvdb_viewer to /build/openvdb-git/pkg/openvdb-git/usr/lib/"; \
+fi
+if [ -f pyopenvdb.so ]; \
+then \
+    installdir=/build/openvdb-git/pkg/openvdb-git/usr/python/include/python; \
+    mkdir -p ${installdir}; \
+    echo "Created ${installdir}"; \
+    cp -f python/pyopenvdb.h  ${installdir}/; \
+    echo "Copied Python header files to ${installdir}"; \
+    installdir=/build/openvdb-git/pkg/openvdb-git/usr/python/lib/python; \
+    mkdir -p ${installdir}; \
+    echo "Created ${installdir}"; \
+    cp -f pyopenvdb.so ${installdir}/; \
+    pushd ${installdir} > /dev/null; \
+    ln -f -s pyopenvdb.so pyopenvdb.so.3.2; \
+    popd > /dev/null; \
+    echo "Copied Python module to ${installdir}"; \
+fi
+mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/bin
+Created /build/openvdb-git/pkg/openvdb-git/usr/bin/
+cp -f vdb_print /build/openvdb-git/pkg/openvdb-git/usr/bin
+Copied vdb_print to /build/openvdb-git/pkg/openvdb-git/usr/bin/
+cp -f vdb_render /build/openvdb-git/pkg/openvdb-git/usr/bin
+Copied vdb_render to /build/openvdb-git/pkg/openvdb-git/usr/bin/
+if [ -f vdb_view ]; \
+then \
+    cp -f vdb_view /build/openvdb-git/pkg/openvdb-git/usr/bin; \
+    echo "Copied vdb_view to /build/openvdb-git/pkg/openvdb-git/usr/bin/"; \
+fi
+Copied vdb_view to /build/openvdb-git/pkg/openvdb-git/usr/bin/
+if [ -d doc/html ]; \
+then \
+    mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
+    echo "Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
+    cp -r -f doc/html /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
+    echo "Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
+fi
+Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/
+Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/

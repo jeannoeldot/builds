@@ -1,0 +1,133 @@
+#Le répertoire
+
+cd /home/jnd/05-builds/kdevelop-extra-plugins-qmake-git
+
+
+https://projects.kde.org/projects/playground/devtools/plugins/kdev-qmake
+
+rm -rf kdev-qmake
+git clone git://anongit.kde.org/kdev-qmake kdev-qmake
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+=============================================
+https://projects.kde.org/projects/playground/devtools/plugins/kdev-qmake/activity
+
+20120316
+
+1-2) MODIF blender/CMakeLists.txt
+=====================================
+
+kwrite kdev-qmake/CMakeLists.txt
+
+LIGNE 9 :
+find_package(KDevPlatform 1.3.60 REQUIRED)
+
+DEVIENT :
+find_package(KDevPlatform 1.3.0 REQUIRED)
+
+ENREGISTRER et QUITTER kwrite
+SUPPRIMER kdev-qmake/CMakeLists.txt~
+rm kdev-qmake/CMakeLists.txt~
+
+
+1-3) FAIRE ARCHIVE TAR.GZ
+=================================
+
+rm -f kdevelop-extra-plugins-qmake-git-*.tar.gz
+tar -cvzf kdevelop-extra-plugins-qmake-git-20120316.tar.gz kdev-qmake
+
+
+1-5) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=20120316
+pkgrel=
+source=(kdevelop-extra-plugins-qmake-git-20120316.tar.gz
+        xxx.patch
+        yyy.patch
+)
+
+
+md5sum kdevelop-extra-plugins-qmake-git-20120316.tar.gz
+
+
+
+md5sums=(1111111111
+         2222222222
+         3333333333
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+!!! EN USER
+
+
+!!! EN ROOT
+
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/kdevelop-extra-plugins-qmake-git -n -qt4
+
+3) MAKEPKG en USER
+=====================
+cd /home/jnd/05-builds/kdevelop-extra-plugins-qmake-git
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/kdevelop-extra-plugins-qmake-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv kdevelop-extra-plugins-qmake-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+# pacman -Syu kdevelop-extra-plugins-qmake-git
+
+
+!!! MODIFIER FICHIERS
+
+DANS : /home/jnd/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+
+SI PROBLEMES
+================
+
+# pacman -R kdevelop-extra-plugins-qmake-git
+# rm -f /var/cache/pacman/pkg/kdevelop-extra-plugins-qmake-git-*
+
+!!! EN USER
+$ rm -f 00-repolocal/kdevelop-extra-plugins-qmake-git-*-x86_64.pkg.tar.*
+$ maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+
+namcap kdevelop-extra-plugins-qmake-git-*-x86_64.pkg.tar.*
+

@@ -1,0 +1,179 @@
+# Le répertoire
+cd /home/jnd/05-builds/gcc47
+
+1) SOURCES
+===========
+wget ftp://gcc.gnu.org/pub/gcc/releases/gcc-4.7.4/gcc-4.7.4.tar.bz2
+
+md5sum gcc-4.7.4.tar.bz2
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+md5sum fix-build-with-gcc-5.patch
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=gcc47
+_ver=4.7
+pkgver=4.7.4
+pkgrel=2
+
+!!! Modifications
+#groups=('base-devel')
+
+!!! PAS OK
+options=('!libtool' '!emptydirs' 'staticlibs')
+
+options=('!emptydirs' '!strip' 'staticlibs')
+
+
+source=(gcc-4.7.4.tar.bz2
+        'fix-build-with-gcc-5.patch'
+)
+md5sums=('4c696da46297de6ae77a82797d2abe28'
+         'd41d8cd98f00b204e9800998ecf8427e'
+)
+
+prepare() {
+  cd ${srcdir}/${_basedir}
+  
+  ...
+  
+  # fix build with gcc 5
+  patch -Np1 -i "${srcdir}/fix-build-with-gcc-5.patch"
+}
+
+build() {
+  cd ${srcdir}/${_basedir}
+        ...
+        configure ...
+        --enable-languages=c,c++ \
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users        0 10 déc.  15:37 fix-build-with-gcc-5.patch
+-rw-r--r--  1 jnd users 82935453 10 déc.  15:17 gcc-4.7.4.tar.bz2
+-rw-r--r--  1 jnd users     3774 10 déc.  15:50 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-2) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/gcc47/{PKGBUILD,gcc-4.7.4.tar.bz2} . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/gcc47 \
+&& cp -v /tmp/build/gcc47-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/gcc47 && rm -rf /tmp/build
+
+
+3-3) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! AU 11/12/2015
+!!! NE COMPILE PLUS :
+checking for suffix of object files... configure: error: in `/build/gcc47/src/gcc-build/x86_64-unknown-linux-gnu/libgcc':
+configure: error: cannot compute suffix of object files: cannot compile
+See `config.log' for more details.
+Makefile:12098: recipe for target 'configure-stage1-target-libgcc' failed
+
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+!!!! POUR GCC 4.7 ET AMAYA
+$ cp -v /home/jnd/00-repolocal/isl-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+$ cp -v /home/jnd/00-repolocal/cloog-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-4) MAKEPKG en USER sur SSD
+============================
+
+cd /home/jnd/05-builds/gcc47
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap gcc47-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/gcc47-*-x86_64.pkg.tar.*
+
+$ cp -v gcc47-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /home/jnd/00-repolocal
+---------------------------------------------------------------
+$ mv -v /home/jnd/00-repolocal/gcc47-*-x86_64.pkg.tar.* \
+/home/jnd/00-repolocal/pkg-OLD/
+
+$ mv -v gcc47-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i gcc-4.7.4.tar.bz2
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!! PAS D'INSTALLATION : POUR COMPILER AMAYA
+
+
+=========================================================================================
+ANCIEN
+
+EN ROOT
+========
+# pacman -Syu
+OU
+# pacman -Syu gcc47
+
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

@@ -1,0 +1,26 @@
+diff -aur mozilla-1.9.2/js/src/configure.in mozilla-1.9.2.new/js/src/configure.in
+--- mozilla-1.9.2/js/src/configure.in	2010-06-11 22:41:02.000000000 +0200
++++ mozilla-1.9.2.new/js/src/configure.in	2010-06-24 08:48:45.159695236 +0200
+@@ -2466,6 +2466,10 @@
+     ENABLE_JIT=1
+     NANOJIT_ARCH=i386
+     ;;
++x86_64*-*)
++    ENABLE_JIT=1
++    NANOJIT_ARCH=X64
++    ;;
+ arm*-*)
+     ENABLE_JIT=1
+     NANOJIT_ARCH=ARM
+@@ -2489,7 +2493,10 @@
+ i?86-*)
+     AC_DEFINE(AVMPLUS_IA32)
+     ;;
+-
++x86_64*-*)
++    AC_DEFINE(AVMPLUS_AMD64)
++    AC_DEFINE(AVMPLUS_64BIT)
++    ;;
+ arm*-*)
+     AC_DEFINE(AVMPLUS_ARM)
+     ;;

@@ -1,0 +1,172 @@
+
+
+2) ERREUR SANS -isystem
+=======================
+==> Starting build()...
+...
+g++: warning: /usr/include/boost: linker input file unused because linking not done
+g++: warning: /usr/include/OpenEXR: linker input file unused because linking not done
+g++: warning: /usr/include/tbb: linker input file unused because linking not done
+g++: warning: /usr/include: linker input file unused because linking not done
+...
+g++: warning: /usr/include/boost: linker input file unused because linking not done
+g++: warning: /usr/include/OpenEXR: linker input file unused because linking not done
+g++: warning: /usr/include/tbb: linker input file unused because linking not done
+g++: warning: /usr/include: linker input file unused because linking not done
+Building libopenvdb.so.3.2.0 because of Grid.o and others
+g++ -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. /usr/include/boost /usr/include/OpenEXR /usr/include/tbb /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -shared -o libopenvdb.so.3.2.0 Grid.o io/Archive.o io/Compression.o io/File.o io/GridDescriptor.o io/Queue.o io/Stream.o io/TempFile.o math/Maps.o math/Proximity.o math/QuantizedUnitVec.o math/Transform.o metadata/Metadata.o metadata/MetaMap.o openvdb.o Platform.o util/Formats.o util/Util.o -ldl -lm -lz -Wl,-rpath,/usr/lib -L/usr/lib -lHalf -Wl,-rpath,/usr/lib -L/usr/lib -ltbb -Wl,-rpath,/usr/lib -L/usr/lib -lboost_iostreams -lboost_system  -Wl,-rpath,/usr/lib -L/usr/lib -lblosc -lz -Wl,-rpath,/usr/lib -L/usr/lib -lrt -Wl,-soname,libopenvdb.so.3.2
+/usr/include/boost: file not recognized: Is a directory
+collect2: error: ld returned 1 exit status
+Makefile:697: recipe for target 'libopenvdb.so.3.2.0' failed
+make: *** [libopenvdb.so.3.2.0] Error 1
+==> ERROR: A failure occurred in build().
+    Aborting...
+
+
+1) ERREUR AVEC -isystem
+=======================
+==> Starting build()...
+Building Grid.o because of Grid.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Grid.o Grid.cc
+Building io/Archive.o because of Archive.cc
+Building io/Compression.o because of Compression.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Archive.o io/Archive.cc
+Building io/File.o because of File.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Compression.o io/Compression.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/File.o io/File.cc
+Building io/Queue.o because of Queue.cc
+Building io/GridDescriptor.o because of GridDescriptor.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Queue.o io/Queue.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/GridDescriptor.o io/GridDescriptor.cc
+Building io/Stream.o because of Stream.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Stream.o io/Stream.cc
+Building io/TempFile.o because of TempFile.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/TempFile.o io/TempFile.cc
+Building math/Maps.o because of Maps.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -pthread -O3 -DNDEBUG -I . -I .. -isystem /usr/include/boost -isystem /usr/include/OpenEXR -isystem /usr/include/tbb -isystem /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o math/Maps.o math/Maps.cc
+In file included from /usr/include/boost/config/platform/linux.hpp:15:0,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from ../openvdb/Platform.h:155,
+                 from io/Archive.h:34,
+                 from io/Archive.cc:31:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+In file included from /usr/include/boost/config/platform/linux.hpp:15:0,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from ../openvdb/Platform.h:155,
+                 from ../openvdb/version.h:34,
+                 from ../openvdb/Types.h:34,
+                 from io/Queue.h:37,
+                 from io/Queue.cc:34:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+Makefile:682: recipe for target 'io/Archive.o' failed
+make: *** [io/Archive.o] Error 1
+make: *** Waiting for unfinished jobs....
+Makefile:682: recipe for target 'io/Queue.o' failed
+make: *** [io/Queue.o] Error 1
+In file included from /usr/include/boost/config/platform/linux.hpp:15:0,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from ../openvdb/Platform.h:155,
+                 from io/io.h:34,
+                 from io/File.h:36,
+                 from io/File.cc:33:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+In file included from /usr/include/boost/config/platform/linux.hpp:15:0,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from ../openvdb/Platform.h:155,
+                 from io/Archive.h:34,
+                 from io/Stream.h:34,
+                 from io/Stream.cc:31:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+compilation terminated.
+Makefile:682: recipe for target 'io/File.o' failed
+make: *** [io/File.o] Error 1
+Makefile:682: recipe for target 'io/Stream.o' failed
+make: *** [io/Stream.o] Error 1
+In file included from /usr/include/boost/config/platform/linux.hpp:15:0,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from ../openvdb/Platform.h:155,
+                 from ../openvdb/version.h:34,
+                 from ../openvdb/Types.h:34,
+                 from io/Compression.h:34,
+                 from io/Compression.cc:31:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+Makefile:682: recipe for target 'io/Compression.o' failed
+make: *** [io/Compression.o] Error 1
+In file included from /usr/include/c++/6.1.1/ext/string_conversions.h:41:0,
+                 from /usr/include/c++/6.1.1/bits/basic_string.h:5402,
+                 from /usr/include/c++/6.1.1/string:52,
+                 from /usr/include/c++/6.1.1/bits/locale_classes.h:40,
+                 from /usr/include/c++/6.1.1/bits/ios_base.h:41,
+                 from /usr/include/c++/6.1.1/ios:42,
+                 from /usr/include/c++/6.1.1/ostream:38,
+                 from /usr/include/c++/6.1.1/iostream:39,
+                 from Grid.h:34,
+                 from Grid.cc:31:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+Makefile:682: recipe for target 'Grid.o' failed
+make: *** [Grid.o] Error 1
+In file included from /usr/include/boost/config/platform/linux.hpp:15:0,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from ../openvdb/Platform.h:155,
+                 from ../openvdb/version.h:34,
+                 from io/TempFile.h:36,
+                 from io/TempFile.cc:33:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+Makefile:682: recipe for target 'io/TempFile.o' failed
+make: *** [io/TempFile.o] Error 1
+In file included from /usr/include/c++/6.1.1/bits/stl_algo.h:59:0,
+                 from /usr/include/c++/6.1.1/algorithm:62,
+                 from math/Math.h:39,
+                 from math/Maps.h:36,
+                 from math/Maps.cc:31:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+Makefile:682: recipe for target 'math/Maps.o' failed
+make: *** [math/Maps.o] Error 1
+In file included from /usr/include/c++/6.1.1/ext/string_conversions.h:41:0,
+                 from /usr/include/c++/6.1.1/bits/basic_string.h:5402,
+                 from /usr/include/c++/6.1.1/string:52,
+                 from /usr/include/c++/6.1.1/bits/locale_classes.h:40,
+                 from /usr/include/c++/6.1.1/bits/ios_base.h:41,
+                 from /usr/include/c++/6.1.1/ios:42,
+                 from /usr/include/c++/6.1.1/ostream:38,
+                 from /usr/include/c++/6.1.1/iostream:39,
+                 from ../openvdb/Grid.h:34,
+                 from io/GridDescriptor.h:34,
+                 from io/GridDescriptor.cc:31:
+/usr/include/c++/6.1.1/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+                         ^
+compilation terminated.
+Makefile:682: recipe for target 'io/GridDescriptor.o' failed
+make: *** [io/GridDescriptor.o] Error 1
+==> ERROR: A failure occurred in build().
+    Aborting...

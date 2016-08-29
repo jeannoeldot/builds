@@ -1,0 +1,41 @@
+Today 13:29:45
+
+graysky
+    Member
+    From: South of Heaven
+    Registered: 2008-12-01
+    Posts: 5,702
+    Email Website
+
+Re: ABS doesn't contain all packages
+
+Just use svn.  Here are the aliases I use (adjust /scratch to a temp dir of your choice):
+
+For core and extra:
+
+getpkg () {
+        if [[ -z "$1" ]]
+        then
+                echo "Supply a package name and try again."
+        else
+                cd /scratch
+                [[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
+                svn checkout --depth=empty svn://svn.archlinux.org/packages && cd packages
+                svn update "$1" && cd "$1"
+        fi
+}
+
+For community:
+
+getpkgc () {
+        if [[ -z "$1" ]]
+        then
+                echo "Supply a package name and try again."
+        else
+                cd /scratch
+                [[ -d "/scratch/packages/$1" ]] && rm -rf "/scratch/packages/$1"
+                svn checkout --depth=empty svn://svn.archlinux.org/community && cd community
+                svn update "$1" && cd "$1"
+        fi
+}
+

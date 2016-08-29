@@ -1,0 +1,63 @@
+archco --help
+The authenticity of host 'svn.archlinux.org (66.211.213.17)' can't be established.
+RSA key fingerprint is 64:ab:c6:01:00:5f:8f:a5:ba:a3:6f:4b:ed:27:52:10.
+Are you sure you want to continue connecting (yes/no)?
+
+$ archco
+Usage: archco <package name> [<package name>]
+
+=============================================================
+
+$ archrelease --help
+archrelease: PKGBUILD not found
+
+$ archrelease
+Usage: archrelease <repo>
+
+======================================================================
+
+$ archrm
+Usage: archrm <path to checkout>
+
+
+$ checkpkg
+This must be run in the directory of a built package.
+
+
+$ finddeps
+usage: finddeps <depname>
+
+Find packages that depend on a given depname.
+Run this script from the top-level directory of your ABS tree.
+
+
+$ lddd
+ Go out and drink some tea, this will take a while :) ...
+DIR /bin
+DIR /usr/bin
+DIR /sbin
+DIR /usr/sbin
+DIR /opt/java/jre/bin
+DIR /usr/bin/perlbin/site
+find: `/usr/bin/perlbin/site': Aucun fichier ou dossier de ce type
+DIR /usr/bin/perlbin/vendor
+find: `/usr/bin/perlbin/vendor': Aucun fichier ou dossier de ce type
+DIR /usr/bin/perlbin/core
+DIR /home/jnd/bin
+DIR /lib
+DIR /usr/lib
+DIR /opt/qt/lib
+find: `/opt/qt/lib': Aucun fichier ou dossier de ce type
+DIR /opt/kde/lib
+find: `/opt/kde/lib': Aucun fichier ou dossier de ce type
+DIR /usr/lib/libfakeroot
+DIR /opt/NX/lib
+find: `/opt/NX/lib': Aucun fichier ou dossier de ce type
+Files saved to /tmp/lddd-script.EZuP
+
+
+$ makechrootpkg
+This script must be run as root.
+
+$ mkarchroot
+error: this script must be run as root.

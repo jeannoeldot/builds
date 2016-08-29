@@ -1,0 +1,17 @@
+#
+# Arch Linux repository mirrorlist
+# Generated on 2009-06-16
+#
+
+# France
+Server = http://mir.archlinux.fr/$repo/os/x86_64
+Server = http://mir1.archlinux.fr/archlinux/$repo/os/x86_64
+Server = http://distrib-coffee.ipsl.jussieu.fr/pub/linux/archlinux/$repo/os/x86_64
+Server = ftp://mir1.archlinux.fr/archlinux/$repo/os/x86_64
+Server = ftp://distrib-coffee.ipsl.jussieu.fr/pub/linux/archlinux/$repo/os/x86_64
+Server = ftp://ftp.free.fr/mirrors/ftp.archlinux.org/$repo/os/x86_64
+Server = ftp://ftp.rez-gif.supelec.fr/Linux/archlinux/$repo/os/x86_64
+#Server = http://mir1.archlinuxfr.org/archlinux/$repo/os/x86_64
+#Server = http://mir2.archlinuxfr.org/archlinux/$repo/os/x86_64
+#Server = ftp://mir1.archlinuxfr.org/archlinux/$repo/os/x86_64
+#Server = ftp://mir2.archlinuxfr.org/archlinux/$repo/os/x86_64

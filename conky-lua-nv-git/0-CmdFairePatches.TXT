@@ -1,0 +1,125 @@
+FAIRE PATCHS
+====================================
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+mkdir /tmp/srcp
+
+cp -v conky-lua-nv-git-1.10.4.20160720.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf conky-lua-nv-git-1.10.4.20160720.tar.gz
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+
+
+1) MODIFIER conky/doc/config_settings.xml
+===================================================
+
+cd /tmp/srcp
+
+cp -R conky conky.new
+
+cd conky.new/doc
+kwrite config_settings.xml
+
+MODIFIER LIGNE 83 :
+        last item is used for the maximum. Example: " ,_,▁,▂,▃,▄,▅,▆,▇,█".
+DEVIENT :
+        last item is used for the maximum.
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier config_settings.xml~
+rm -f config_settings.xml~
+
+cd ../..
+
+diff -aur conky conky.new
+diff -aur conky conky.new > ascii.patch
+
+rm -rf conky.new
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+mv -vf /tmp/srcp/ascii.patch .
+
+
+2) MODIFIER conky/cmake/ConkyPlatformChecks.cmake
+=================================================
+
+cd /tmp/srcp
+
+cp -R conky conky.new
+
+cd conky.new/cmake
+kwrite ConkyPlatformChecks.cmake
+
+MODIFIER LIGNE 261 :
+pkg_search_module(LUA REQUIRED lua5.1 lua-5.1 lua51 lua)
+DEVIENT :
+pkg_search_module(LUA REQUIRED lua=5.1 lua5.1 lua-5.1 lua51)
+
+MODIFIER LIGNES 350 ET 351 :
+		set(conky_libs ${conky_libs} ${XNVCtrl_LIB})
+		set(conky_includes ${conky_includes} ${XNVCtrl_INCLUDE_PATH})
+DEVIENNENT :
+		set(conky_libs ${XNVCtrl_LIB} ${conky_libs})
+ 		set(conky_includes ${XNVCtrl_INCLUDE_PATH} ${conky_includes})
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier ConkyPlatformChecks.cmake~
+rm -f ConkyPlatformChecks.cmake~
+
+cd ../..
+
+diff -aur conky conky.new
+diff -aur conky conky.new > fix-build.patch
+
+rm -rf conky.new
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+mv -vf /tmp/srcp/fix-build.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
+2) MODIFIER conky/src/ccurl_thread.cc
+===================================================
+
+cd /tmp/srcp
+
+cp -R conky conky.new
+
+cd conky.new/src
+kwrite ccurl_thread.cc
+
+MODIFIER LIGNES 122 à 124 :
+		if (headers.h) {
+			curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers.h);
+		}
+DEVIENNENT :
+		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers.h);
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier ccurl_thread.cc~
+rm -f ccurl_thread.cc~
+
+cd ../..
+
+diff -aur conky conky.new
+diff -aur conky conky.new > curl.patch
+
+rm -rf conky.new
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+mv -vf /tmp/srcp/curl.patch .
+

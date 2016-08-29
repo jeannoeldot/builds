@@ -1,0 +1,139 @@
+# Le répertoire
+cd $HOME/05-builds/jndqcbgrd-qt5
+
+!!!!! Vérifier VERSION : 
+https://github.com/jeannoeldot/jndqcbgrd-qt5/releases
+
+==> VERSION = 0.1.9
+
+1) ARCHIVE TAR.GZ
+=================================
+wget https://github.com/jeannoeldot/jndqcbgrd-qt5/archive/v0.1.9.tar.gz
+
+ls
+
+sha256sum v0.1.9.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=jndqcbgrd-qt5
+pkgver=0.1.9
+pkgrel=1
+pkgrel=2    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install
+pkgrel=3    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install + deps
+
+depends=(... 'desktop-file-utils')
+
+provides=('jndqcbgrd')
+conflicts=('jndqcbgrd')
+
+source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+sha256sums=('... ...')
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 v0.1.9.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/jndqcbgrd-qt5/PKGBUILD . \
+&& cp -v $HOME/05-builds/jndqcbgrd-qt5/v0.1.9.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/jndqcbgrd-qt5 \
+&& cp -v /tmp/build/jndqcbgrd-qt5-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/jndqcbgrd-qt5 && rm -rf /tmp/build
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-3) MAKEPKG en USER
+=====================
+
+cd $HOME/05-builds/jndqcbgrd-qt5
+
+$ rm -f *~
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap jndqcbgrd-qt5-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/jndqcbgrd-qt5-*-x86_64.pkg.tar.*
+
+$ cp -v jndqcbgrd-qt5-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/jndqcbgrd-qt5-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v jndqcbgrd-qt5-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i v0.1.9.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# pacman -Syu
+OU
+# pacman -Syu jndqcbgrd-qt5
+
+
+
+=========================================================================================
+ANCIEN
+
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 jndqcbgrd-qt5.install
+&& cp -v $HOME/05-builds/jndqcbgrd-qt5/jndqcbgrd-qt5.install . \

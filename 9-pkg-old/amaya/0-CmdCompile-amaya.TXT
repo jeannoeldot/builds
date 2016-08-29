@@ -1,0 +1,351 @@
+#Le répertoire
+
+cd /home/jnd/05-builds/amaya
+
+SRC : http://www.w3.org/Amaya/Distribution/amaya-sources-11.4.4.tgz
+
+wget http://www.w3.org/Amaya/Distribution/amaya-sources-11.4.4.tgz
+
+md5 check : e8072c7b1d06b983951c56e9f51fbacf
+
+1-1) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+!!! ATTENTION AU PKGBUILD !!!
+
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgver=
+pkgrel=
+
+makedepends=('gcc=4.7')
+OU
+makedepends=('gcc47') : voir : https://aur.archlinux.org/packages/os/oss/PKGBUILD
+
+source=(... tgz
+        ...
+        ...
+)
+
+md5sum amaya-sources-11.4.4.tgz
+
+md5sum 11.4.4-fix-thotlib-png.patch
+
+md5sum 11.4.4-splitmode.patch
+md5sum 11.4.4-wakeupidle.patch
+md5sum 11.4.4-wxyield.patch
+
+md5sum 11.4.4-fix-amaya-gzread.patch
+
+md5sum 11.4.4-amaya-explicite-linking.patch
+md5sum 11.4.4-thotlib-explicite-linking.patch
+
+md5sums=(...
+         ...
+)
+
+3) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxx.tgz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 xxxxxxxxxxx.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+!!! AU 10/12/2015
+!!! NE COMPILE PLUS : error: target not found: cloog
+!!! IDEM GCC 4.7.4
+
+!!! EN USER
+
+$ mkpkg-chroot-repo             # REP_TMP_CHROOT_REPO="/tmp/chrootrepo"
+
+!!!! POUR GCC 4.7
+$ cp -v /home/jnd/00-repolocal/gcc47-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+$ cp -v /home/jnd/00-repolocal/isl-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+$ cp -v /home/jnd/00-repolocal/cloog-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3) MAKEPKG en USER
+=====================
+!!! SI GCC 4.7 EST INSTALLÉ
+
+cd /home/jnd/05-builds/amaya
+
+makepkg -s
+
+makepkg -f
+
+makepkg -R   , --repackage
+           Repackage contents of the package without rebuilding the package.
+           This is useful if you forgot a depend or install
+           file in your PKGBUILD and the build itself will not change.
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+namcap amaya-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/amaya-*-x86_64.pkg.tar.*
+
+$ cp -v amaya-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /home/jnd/00-repolocal
+---------------------------------------------------------------
+$ mv -v /home/jnd/00-repolocal/amaya-*-x86_64.pkg.tar.* \
+/home/jnd/00-repolocal/pkg-OLD/
+
+$ mv -v amaya-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i amaya-sources-11.4.4.tgz
+
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# pacman -Syu
+# pacman -Syu amaya
+
+
+
+SI PROBLEMES
+================
+
+# pacman -R amaya
+# rm -f /var/cache/pacman/pkg/amaya-*
+
+# pacman -U /home/jnd/05-builds/amaya/amaya-11.4.4-4-x86_64.pkg.tar.xz
+
+!!! EN USER
+$ rm -rf .amaya
+$ rm -f .amaya_bin-jnd
+$ rm -f .amaya-check-instance
+$ rm -f 00-repolocal/amaya-*-x86_64.pkg.tar.*
+$ maj-repolocal
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+
+# Nettoyage fichiers ds 0-copie-fichiers-chroot/repo
+=====================================================
+rm -f /home/jnd/05-builds/0-copie-fichiers-chroot/repo/gcc47-*-x86_64.pkg.tar.*
+
+
+md5sum 11.4.4-fix-amaya-errors-compile.patch
+
+
+3) MAKEPKG en CHROOT
+====================
+
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/amaya -n
+
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/amaya
+
+!!! MODIFIER FICHIERS
+
+DANS : /home/jnd/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+# pacman -R libpng12
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/amaya
+[root@arch64 amaya]# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+
+!!! PAS OBLIGATOIRE
+[root@arch64 amaya]# mv ../0-chroot/copy/pkgdest/namcap.log .
+
+[root@arch64 amaya]# ls -l
+[root@arch64 amaya]# chown jnd:jnd amaya-sources-*
+[root@arch64 amaya]# chown jnd:jnd amaya-fix-thotlib-png14.patch amaya-fix-thotlib-wxfile.patch amaya-fix-amaya-wxfile.patch
+[root@arch64 amaya]# chown jnd:jnd amaya-splitmode.patch amaya-wakeupidle.patch amaya-wxyield.patch
+[root@arch64 amaya]# chown jnd:jnd amaya-*-x86_64.pkg.tar.*
+[root@arch64 amaya]# chown jnd:jnd namcap.log
+[root@arch64 amaya]# ls -l
+
+
+md5sum amaya-sources-11.2.tgz
+
+[root@arch64 amaya]# chown jnd:jnd amaya-sources-11.2.tgz
+
+======================================================================
+!!! PAS OBLIGATOIRE
+[root@arch64 amaya]# mv ../0-chroot/rw/pkgdest/amaya-*-x86_64.pkg.tar.gz .
+
+!!! EN ROOT
+# cd
+# cp /etc/makepkg.conf /etc/makepkg.conf.backup.amaya
+
+# sed -i "s|MAKEFLAGS=|#MAKEFLAGS=|" /etc/makepkg.conf
+
+# sed -i "s|CFLAGS=|#CFLAGS=|" /etc/makepkg.conf
+# sed -i "s|CXXFLAGS=|#CXXFLAGS=|" /etc/makepkg.conf
+
+
+!!! EN USER
+cp PKGBUILD-11.1 PKGBUILD
+makepkg -s
+
+
+!!! EN ROOT
+# cd
+# cp /etc/makepkg.conf.backup.amaya /etc/makepkg.conf
+
+
+3-1)
+=====
+# cp /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf.backup
+# sed -i "s|MAKEFLAGS=|#MAKEFLAGS=|" /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf
+# sed -i "s|CFLAGS=|#CFLAGS=|" /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf
+# sed -i "s|CXXFLAGS=|#CXXFLAGS=|" /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf
+
+!!! PAS OBLIGATOIRE SI PAS FAIT EN 3-1
+3-1)
+# cd
+# cp /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf.backup /home/jnd/05-builds/0-chroot/root/etc/makepkg.conf
+
+
+md5sum amaya-sources-11.1.tgz
+md5sum amaya.desktop
+
+md5sum amaya-sources-11.1.tgz
+md5sum amaya_logo_65x50.png
+
+
+[root@arch64 amaya]# chown jnd:jnd amaya-sources-11.1.tgz
+[root@arch64 amaya]# chown jnd:jnd amaya.desktop
+
+[root@arch64 amaya]# chown jnd:jnd amaya-sources-11.1.tgz
+[root@arch64 amaya]# chown jnd:jnd amaya_logo_65x50.png
+
+
+#La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+
+# Dépendances de construction manquantes:
+
+BuildRequires:  freetype-devel >= 2.0
+BuildRequires:  libpng-devel
+BuildRequires:  libjpeg-devel
+BuildRequires:  giflib-devel
+BuildRequires:  libXt-devel
+BuildRequires:  wxGTK-devel
+BuildRequires:  redland-devel
+BuildRequires:  expat-devel
+BuildRequires:  w3c-libwww-devel
+BuildRequires:  desktop-file-utils
+BuildRequires:  perl
+BuildRequires:  bison
+BuildRequires:  flex
+
+
+#Le répertoire
+
+cd /home/jnd/05-builds/amaya
+
+# !!! PROBLEME AVEC amaya-sources-11.0.1.tgz !!!
+================================================
+
+tar -xzvf amaya-sources-11.0.1.tgz => Amaya11.0
+
+rm -f Amaya11.0/Mesa/configs/amaya-sources-11.0-orig.tar.gz
+rm -f Amaya11.0/Amaya/resources/icons/misc/dummy.png
+rm -f Amaya11.0/Amaya/resources/icons/misc/dummy.ico
+rm -f Amaya11.0/Amaya/resources/icons/16x16/dummy.ico
+rm -f Amaya11.0/Amaya/amaya/HTML.trans.~1.44.~
+rm -f Amaya11.0/Amaya/amaya/HTML.trans.fr.~1.10.~
+rm -f Amaya11.0/Amaya/amaya/HTML.trans.es.~1.9.~
+rm -f Amaya11.0/Mesa/configs/freebsd-static~
+
+tar -cvzf amaya-sources-11.0.1.tar.gz Amaya11.0
+
+rm amaya-sources-11.0.1.tgz
+
+rm -R Amaya11.0
+
+md5sum amaya-sources-11.0.1.tar.gz
+md5sum amaya.desktop
+md5sum amaya_logo_65x50.png
+
+# Icone pour Amaya
+/home/jnd/05-builds/amaya/Amaya11.0/Amaya/resources/bundle/logo.png => amaya_logo.png
+
+!!! ATTENTION AU PKGBUILD !!!
+
+# !!! MODIF DE MAKEPKG.CONF !!!
+=================================
+##CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe"
+#CFLAGS="-march=core2 -O2 -pipe"
+##CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe"
+#CXXFLAGS="${CFLAGS}"
+#-- Make Flags: change this for DistCC/SMP systems
+##MAKEFLAGS="-j2"
+#MAKEFLAGS="-j3"
+=====================================================
+# PARTIE ORIGINALE
+====================
+#-- Exclusive: will only run on -march=x86-64
+# -march (or -mcpu) builds exclusively for an architecture
+# -mtune optimizes for an architecture, but builds for whole processor family
+##CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe"
+CFLAGS="-march=core2 -O2 -pipe"
+##CXXFLAGS="-march=x86-64 -mtune=generic -O2 -pipe"
+CXXFLAGS="${CFLAGS}"
+#-- Make Flags: change this for DistCC/SMP systems
+##MAKEFLAGS="-j2"
+MAKEFLAGS="-j3"
+=======================================

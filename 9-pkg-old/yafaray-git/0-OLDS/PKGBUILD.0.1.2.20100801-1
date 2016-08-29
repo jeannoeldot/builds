@@ -1,0 +1,59 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=yafaray-git
+pkgver=0.1.2.20100801
+pkgrel=1
+pkgdesc="Raytracing open source render engine"
+arch=('i686' 'x86_64')
+url="http://www.yafaray.org/"
+license=('GPL')
+depends=('qt' 'python' 'openexr' 'libxml2')
+#optdepends=('qt: QT GUI')
+makedepends=('cmake' 'swig' 'libjpeg' 'libpng' 'freetype2' 'zlib' 'qt')
+source=($pkgname-$pkgver.tar.gz
+#        fix-saveas.patch
+	)
+md5sums=('fd2b7900acb8714368ea8ece147e2ed0'
+#         'c166cfd911120da5883461455b6bf524'
+	)
+
+__realname="YafaRay"
+
+build() {
+      cd $srcdir/$__realname
+
+#  # No progress bar and fix save as
+#  patch -Np1 -i ${srcdir}/no-progressbar-fix-saveas.patch || return 1
+  # fix save as
+#  patch -Np1 -i ${srcdir}/fix-saveas.patch || return 1
+
+      msg "Writing Change in YafaRay_Blender-2.49/yafaray_ui.py"
+      sed -i 's|0.1.x|0.1.2|g' YafaRay_Blender-2.49/yafaray_ui.py
+
+# Test
+  msg "Writing Change in CMakeLists.txt"
+  sed -i "s|-O3 -ffast-math|-O3 -ffast-math -march=native -pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
+#
+
+      # Build
+      mkdir build
+      cd build
+      cmake .. \
+	      -DCMAKE_BUILD_TYPE=RELEASE \
+	      -DCMAKE_SKIP_RPATH=ON \
+	      -DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,--no-undefined -Wl,--as-needed' \
+	      -DCMAKE_INSTALL_PREFIX=/usr \
+	      -DYAF_BINDINGS_PY_DIR=/usr/share/yafaray/blender
+      make
+}
+
+package() {
+      cd $srcdir/$__realname/build
+
+      # Install
+      make DESTDIR=$pkgdir install
+
+      # install Python based Blender export
+      cd $srcdir/$__realname
+      install -m644 YafaRay_Blender-2.49/*.py $pkgdir/usr/share/yafaray/blender
+}

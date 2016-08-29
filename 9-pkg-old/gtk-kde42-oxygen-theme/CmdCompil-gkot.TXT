@@ -1,0 +1,64 @@
+# Le répertoire
+cd /home/jnd/05-builds/gtk-kde42-oxygen-theme
+
+
+md5sum 99926-kde42-oxygen.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+
+
+3) MAKEPKG en CHROOT
+====================
+# cd
+# mkpkg-tmpfs /home/jnd/05-builds/gtk-kde42-oxygen-theme -n
+
+
+4) MAKEPKG EN USER
+=======================
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+5) NETTOYAGES fichiers ~
+==========================
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/gtk-kde42-oxygen-theme-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv gtk-kde42-oxygen-theme-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+
+
+3) MAKEPKG
+============
+
+makepkg -s
+
+makepkg -f
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+ !!! NON# mv ../0-chroot/rw/pkgdest/gtk-kde42-oxygen-theme-*-x86_64.pkg.tar.gz .

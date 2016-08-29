@@ -1,0 +1,175 @@
+# Le répertoire
+cd /home/jnd/05-builds/firefox4-beta
+
+1) FAIRE PATCH
+===============
+voir CmdFairePatches.TXT
+
+2) MODIFIER LE PKGBUILD
+========================
+pkgname=firefox
+_ffver=4.0rc1
+_build=build1
+pkgver=${_ffver}
+pkgrel=1
+
+source=(... ...)
+
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/4.0rc1-candidates/build1/source/firefox-4.0rc1.source.tar.bz2
+OU
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0rc1/source/firefox-4.0rc1.source.tar.bz2
+md5sum firefox-4.0rc1.source.tar.bz2
+
+XPI  FR
+=========
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/4.0rc1-candidates/build1/linux-i686/xpi/fr.xpi
+OU
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0rc1/linux-x86_64/xpi/fr.xpi
+md5sum fr.xpi
+
+md5sum mozconfig
+
+md5sum firefox-default-prefs.js
+
+md5sum firefox.desktop
+md5sum firefox-safe.desktop
+
+md5sum 4.0-ldflags-namespec.patch
+
+
+md5sums=(... ...)
+
+3) MAKEPKG en CHROOT
+====================
+!!! EN ROOT
+::Mise a Jour
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+::Build
+# cd
+# cd /home/jnd/05-builds/firefox4-beta
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+
+!!! PAS OBLIGATOIRE
+# mv ../0-chroot/copy/pkgdest/namcap.log .
+
+# ls -l
+# chown jnd:jnd firefox-safe.desktop firefox.desktop mozconfig
+# chown jnd:jnd firefox-default-prefs.js
+# chown jnd:jnd 4.0-ldflags-namespec.patch
+# chown jnd:jnd firefox-4.0rc1.source.tar.bz2 fr.xpi
+# chown jnd:jnd namcap.log
+# chown jnd:jnd firefox-*-x86_64.pkg.tar.*
+# ls -l
+
+3) MAKEPKG en USER
+====================
+
+makepkg -s
+
+makepkg -f
+
+========================================================================================
+# Verifications...
+==================
+
+namcap
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+rm -rf pkg src
+rm -rf srcp
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+!!!mv /home/jnd/00-repolocal/firefox4-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+mv /home/jnd/00-repolocal/firefox-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+!!!mv firefox4-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+mv firefox-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+
+# pacman -S firefox
+# pacman -S firefox-beta
+# pacman -S firefox4-beta
+
+SI PROBLEMES
+================
+
+# pacman -R firefox
+# pacman -R firefox4-beta
+# pacman -R firefox-beta
+# rm -f /var/cache/pacman/pkg/firefox-*
+
+=========================================================================
+
+md5sum 4.0-system-cairo-fixup.patch
+!!!# chown jnd:jnd 4.0-system-cairo-tee.patch 4.0-system-cairo.patch
+
+md5sum 4.0-python2.7.patch
+# chown jnd:jnd 4.0-ldflags-namespec.patch 4.0-python2.7.patch
+
+:: AUTOCONT 2.13 (DANS EXTRA)
+==============================
+!!! EN USER
+!!! SI PAS DEJA FAIT
+cd
+cp /home/jnd/05-builds/autoconf-compat/autoconf-compat-* /home/jnd/05-builds/0-chroot/root/repo
+
+cd /home/jnd/05-builds/0-chroot/root/repo
+ls
+rm -f local.db.tar.gz
+repo-add local.db.tar.gz *-x86_64.pkg.tar.gz
+OU
+maj-repochroot.sh
+
+=============================================================
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/4.0b6-candidates/build2/source/firefox-4.0b6.source.tar.bz2
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/4.0b6-candidates/build2/linux-i686/xpi/fr.xpi
+
+
+
+md5sum 4.0-fix-mozilla-launcher.patch
+md5sum 4.0-mozilla-lang.patch
+
+# chown jnd:jnd chown jnd:jnd 4.0-mozilla-lang.patch
+# chown jnd:jnd 4.0-fix-mozilla-launcher.patch
+
+md5sum 3.6-system-hunspell-corrections.patch
+md5sum 3.6-mozilla-ps-pdf-simplify-operators.patch
+md5sum 3.6-xulrunner-png14.patch
+md5sum 3.6-xulrunner-xpctools.patch
+md5sum 3.6-enable-x86_64-tracemonkey.patch
+
+# chown jnd:jnd 3.6-system-hunspell-corrections.patch 3.6-mozilla-ps-pdf-simplify-operators.patch
+# chown jnd:jnd 3.6-xulrunner-png14.patch
+
+!!! NON # chown jnd:jnd fix-mozilla-launcher.patch fix-script-firefox.patch
+!!! NON # chown jnd:jnd  3.6-client-mk-autoconf213.patch
+!!! NON # chown jnd:jnd 3.6-xulrunner-xpctools.patch
+
+!!! NON # mv ../0-chroot/rw/pkgdest/firefox-*-x86_64.pkg.tar.* .
+

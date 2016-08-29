@@ -1,0 +1,138 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/refind-efi-tianacore
+
+https://www.archlinux.org/packages/extra/x86_64/refind-efi/
+
+https://projects.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/refind-efi
+
+!!! ATTENTION VERSION
+!!! 0.8.3
+wget http://downloads.sourceforge.net/refind/refind-src-0.8.3.zip
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+
+_USE_GNU_EFI="0"        ==> Built with Tianocore UDK libs
+
+
+
+pkgname="refind-efi"
+!!!!!!
+pkgver="0.8.3"
+pkgrel="11"             + 10 version Extra
+
+
+
+md5sum refind-src-0.8.3.zip
+md5sum refind_linux.conf
+
+source=("http://downloads.sourceforge.net/refind/refind-src-${pkgver}.zip"
+        'refind_linux.conf')
+
+md5sums=(...
+         ...
+)
+
+ligne 51
+        _TIANO_SVN_REV_="15780"
+
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 refind-src-xxx.zip
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 refind-efi.install
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 refind_linux.conf
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/refind-efi-tianacore/{PKGBUILD,refind-src-0.8.3.zip,refind-efi.install,refind_linux.conf} . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/refind-efi-tianacore \
+&& cp -v /tmp/build/refind-efi-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/refind-efi-tianacore && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER sur SSD
+=============================
+!!! EN USER
+cd /home/jnd/05-builds/refind-efi-tianacore
+$ rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+# Nettoyage...
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+
+# Verifications...
+
+namcap refind-efi-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv -v /home/jnd/00-repolocal/refind-efi-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv -v refind-efi-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+
+!!! EN ROOT
+# cd
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -Syu refind-efi
+
+
+
+================================================================
+ANCIENS
+========

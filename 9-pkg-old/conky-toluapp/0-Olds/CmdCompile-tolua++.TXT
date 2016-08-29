@@ -1,0 +1,99 @@
+#Le répertoire
+
+cd /home/jnd/05-builds/conky-toluapp
+
+
+1-1) RECUPERATION FICHIERS SOURCES
+=============================================
+$ wget http://www.codenix.com/~tolua/tolua++-1.0.93.tar.bz2
+
+
+
+1-2) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgname=toluapp
+_pkgname=tolua++
+pkgver=1.0.93
+pkgrel=2
+
+source=("............."
+        "............."
+)
+md5sum tolua++-1.0.93.tar.bz2
+
+md5sum config_linux.py
+
+md5sums=(11111111111111111111111111
+         22222222222222222222222222
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+# cd
+
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/conky-toluapp
+
+3) MAKEPKG en USER
+=====================
+cd /home/jnd/05-builds/conky-toluapp
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/toluapp-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv toluapp-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+!!! PAS SI DEPENDANCE DE CONKY-LUA-NVIDIA-GIT
+# pacman -Syu
+# pacman -Syu toluapp
+
+
+!!! MODIFIER FICHIERS
+
+DANS : /home/jnd/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+
+SI PROBLEMES
+================
+
+# pacman -R toluapp
+# rm -f /var/cache/pacman/pkg/toluapp-*
+
+!!! EN USER
+$ rm -f 00-repolocal/toluapp-*-x86_64.pkg.tar.*
+$ maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+

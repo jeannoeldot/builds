@@ -1,0 +1,18 @@
+ jnd ~ $ blender
+Compiled with Python version 2.7.
+Checking for installed Python... got it!                                                                                            
+WARNING: Importing yafqt failed, Qt GUI will NOT be available.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/jnd/.blender/scripts/yafaray_ui.py", line 93, in <module>
+    import yaf_export
+  File "/home/jnd/.blender/scripts/yafaray/yaf_export.py", line 14, in <module>
+    import yafrayinterface
+  File "/home/jnd/.blender/scripts/yafaray/yafrayinterface.py", line 25, in <module>
+    _yafrayinterface = swig_import_helper()
+  File "/home/jnd/.blender/scripts/yafaray/yafrayinterface.py", line 21, in swig_import_helper
+    _mod = imp.load_module('_yafrayinterface', fp, pathname, description)
+ImportError: libpython2.6.so.1.0: cannot open shared object file: No such file or directory
+Saved session recovery to /tmp/quit.blend
+
+Blender quit                                                                                                                        

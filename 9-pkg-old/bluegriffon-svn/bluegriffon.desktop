@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=BlueGriffon
+GenericName=Web Editor
+GenericName[fr]=Editeur web
+Comment=The next-generation Web Editor
+Exec=bluegriffon
+TryExec=bluegriffon
+Icon=bluegriffon
+Terminal=false
+Type=Application
+StartupWMClass=bluegriffon-bin
+StartupNotify=true
+Categories=Application;Network;

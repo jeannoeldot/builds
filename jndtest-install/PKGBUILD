@@ -1,0 +1,24 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+pkgname=jndtest-install
+pkgver=0.1
+pkgrel=2
+pkgdesc="Test de name.install"
+arch=('any')
+url=http://www.club-internet.fr/jeannoeldot/
+license='GPL2'
+#depends=('qt' 'sdl_mixer')
+#makedepends=('qt' 'sdl' 'sdl_mixer')
+install="jndtest-install.install"
+source=("$pkgname-$pkgver.tar.gz")
+md5sums=('a7c4ccfe2bddc9c46fbf70c0d05dc732')
+
+build() {
+	cd $srcdir/$pkgname
+}
+
+package() {
+	cd $srcdir/$pkgname
+	# file
+	install -d -m755 $pkgdir/usr/share/$pkgname
+	install -D -m644 $srcdir/$pkgname/jndtest_g++.conf $pkgdir/usr/share/$pkgname/jndtest_g++.conf
+}

@@ -1,0 +1,55 @@
+
+# MES DEPENDANCES AVANT MODIFS
+======================================
+depends=('hunspell' 'gtk2' 'pyvorbis' 'pango' 'libxt' 'libidl2' 'alsa-lib' 'dbus-glib' 'mozilla-common'
+         'nss' 'lcms' 'startup-notification' 'desktop-file-utils' 'shared-mime-info'
+         'zlib' 'libjpeg' 'nspr' 'libpng' 'cairo' 'libnotify'
+         'sqlite3' 'dbus-core' 'glib2'
+)
+makedepends=(
+'autoconf2.13'
+'zip' 'unzip' 'python' 'pyvorbis' 'xorg-server' 'imagemagick' 'alsa-lib' 'wireless_tools'
+)
+
+
+# MES DEPENDANCES APRES MODIFS
+======================================
+
+depends=('gtk2' 'gcc-libs' 'libidl2' 'mozilla-common' 'nss' 'libxt' 'hunspell'
+	 'startup-notification' 'mime-types' 'dbus-glib' 'alsa-lib'
+	 'desktop-file-utils'
+	 'libgnomeui' 'python' 'wireless_tools'
+)
+makedepends=('zip' 'pkgconfig' 'diffutils' 'libgnomeui' 'python' 'wireless_tools' 'autoconf2.13'
+)
+
+
+# MES DEPENDANCES APRES MODIFS ET NAMCAP
+==========================================
+
+depends=('gtk2' 'gcc-libs' 'libidl2' 'mozilla-common' 'nss' 'libxt' 'hunspell'
+	 'startup-notification' 'mime-types' 'dbus-glib' 'alsa-lib'
+	 'dbus-core' 'glib2'
+	 'desktop-file-utils'
+	 'libgnomeui' 'python' 'wireless_tools'
+)
+makedepends=('zip' 'pkgconfig' 'diffutils' 'libgnomeui' 'python' 'wireless_tools' 'autoconf2.13'
+)
+
+
+# DEPENDANCES ARCH
+#====================
+# xulrunner arch
+depends=('gtk2>=2.18.9' 'gcc-libs>=4.4.3' 'libidl2>=0.8.13' 'mozilla-common' 'nss>=3.12.6' 'libxt' 'hunspell>=1.2.8'
+ 'startup-notification>=0.10' 'mime-types' 'dbus-glib>=0.82' 'alsa-lib>=1.0.21.a')
+
+makedepends=('zip' 'pkgconfig' 'diffutils' 'libgnomeui' 'python' 'wireless_tools' 'autoconf2.13')
+
+optdepends=('libgnomeui: GNOME integration and MIME handling'
+            'wireless_tools: Location aware browsing'
+            'python: pyxpcom')
+#
+# firefox arch
+depends=("xulrunner=${_xulver}" 'desktop-file-utils')
+makedepends=('zip' 'pkgconfig' 'diffutils' 'libgnomeui>=2.24.1' 'python' 'wireless_tools')
+

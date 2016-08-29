@@ -1,0 +1,38 @@
+DANS 05-builds/0-chroot
+=======================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+--------------------------------------------------------------------
+
+!!! EN ROOT
+# cd
+# cd /home/jnd/05-builds/jre
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+---------------------------------------------------------
+
+DANS /05-builds/jre
+===================
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+# Le répertoire
+cd 05-builds/jre_beta
+
+# build ...
+==============
+
+makepkg -s
+
+makepkg -f
+
+
+# Verifications...
+==================
+
+ls
+
+namcap

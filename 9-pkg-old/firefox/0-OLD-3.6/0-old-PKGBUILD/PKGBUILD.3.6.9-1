@@ -1,0 +1,124 @@
+# Maintainer: JND
+pkgname=firefox
+pkgver=3.6.9
+pkgrel=1
+pkgdesc="Mozilla Firefox optimized. (XULRunner independent, 64-bit TraceMonkey)"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+
+depends=('gtk2' 'gcc-libs' 'libidl2' 'mozilla-common' 'nss' 'libxt' 'hunspell'
+	 'startup-notification' 'mime-types' 'dbus-glib' 'alsa-lib'
+	 'dbus-core' 'glib2'
+	 'desktop-file-utils'
+	 'libgnomeui' 'python' 'wireless_tools'
+)
+makedepends=('zip' 'pkgconfig' 'diffutils' 'libgnomeui' 'python' 'wireless_tools' 'autoconf2.13'
+)
+
+provides=('firefox'="$pkgver")
+conflicts=('firefox')
+install=firefox.install
+url="http://www.mozilla.org/projects/firefox"
+options=('!makeflags')
+
+source=(ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${pkgver}/source/firefox-${pkgver}.source.tar.bz2
+        ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${pkgver}/linux-i686/xpi/fr.xpi
+        mozconfig
+        firefox.desktop
+        firefox-safe.desktop
+        3.6-mozilla-lang.patch
+        3.6-mozilla-ldflags.patch
+        3.6-system-hunspell-corrections.patch
+        3.6-mozilla-ps-pdf-simplify-operators.patch
+	3.6-xulrunner-png14.patch
+	3.6-xulrunner-xpctools.patch
+	3.6-enable-x86_64-tracemonkey.patch
+)
+
+md5sums=('100ecafd6c6c5062bc03bb2fb651fc17'
+         'a4e71186da87d60c06feb70ec5af3662'
+         '55a474eec7d9dcb41604538b7cc2fe72'
+         'd7cc1b38d9380d6a91eb69b295fb8987'
+         '05a73d09d253afbef9339b1500a12d8a'
+         'ced6e9d6911fc9b6f3174d6391f3a14b'
+         'b005f5da0b25b1f37d995ead8b43404b'
+         '9bdc22e90a0779980fcf06ccfe8e5f53'
+         'e46f4a5c2c6c04d7f658cdc5d108f9a9'
+	 '9559d3c089c6e6c12c6afbfa6d61fa0c'
+	 'c0aac7ce8627d21beda06159887dac20'
+	 'a30dc67f6a767197cfcdbc8b2c4b7150'
+)
+
+build() {
+  cd ${srcdir}/mozilla-1.9.2
+
+  patch -Np1 -i ${srcdir}/3.6-mozilla-lang.patch || return 1
+
+  #Add -lxrender -lx11 LDFLAGS.
+  patch -Np1 -i ${srcdir}/3.6-mozilla-ldflags.patch || return 1
+
+  #fix build with system hunspell - gentoo
+  patch -Np1 -i ${srcdir}/3.6-system-hunspell-corrections.patch || return 1
+
+  #Upstream patch. Still not applied to 1.9.1, only in 3.7.x
+  patch -Np1 -i ${srcdir}/3.6-mozilla-ps-pdf-simplify-operators.patch || return 1
+
+  #fix version of libpng14
+  patch -Np1 -i ${srcdir}/3.6-xulrunner-png14.patch || return 1
+
+  #fix build *** Makefile variable 'REQUIRES' changed value after including rules.mk.
+  # Was 'xpcom string js caps necko dom  content editor layout rdf svg xuldoc xultmpl widget ',
+  # now xpcom string js caps necko dom  content editor layout rdf svg xuldoc xultmpl widget  xpctools..
+  # Arrêt.
+  # Voir 301-xulrunner-xpctools.patch - gentoo
+  patch -Np1 -i ${srcdir}/3.6-xulrunner-xpctools.patch || return 1
+
+  # Enable TraceMonkey engine on x86_64; normally only firefox>=3.7
+  # has 64-bit TM.  See Mozilla bug #489146.  Requires autoconf run.
+  # Does not affect 32-bit builds. This can be problematic, but it should
+  # boost speed FAR more than PGO. So, if only PGO and only TM build,
+  # but not both, go with TM.
+  patch -Np1 -i ${srcdir}/3.6-enable-x86_64-tracemonkey.patch || return 1
+
+##  #Fix stub launcher - archlinux
+##  patch -Np1 -i ${srcdir}/fix-mozilla-launcher.patch || return 1
+
+##  patch -Np1 -i ${srcdir}/fix-script-firefox.patch || return 1
+
+##  patch -Np1 -i ${srcdir}/gcc4.4.patch || return 1
+
+  cp ${srcdir}/mozconfig .mozconfig
+
+#note: redistributing self-builded firefox with official branding violates mozilla EULA license. Be warned ;)
+
+#  export LDFLAGS="-fprofile-correction -Wl,--rpath,/usr/lib/firefox-${pkgver},--hash-style=gnu,--sort-common"
+  export LDFLAGS="-Wl,-rpath,/usr/lib/firefox-$pkgver -Wl,-O1,--sort-common,--hash-style=gnu,--as-needed"
+
+#for PGO build
+##  make clean -j3 -f client.mk profiledbuild MOZ_MAKE_FLAGS="${MAKEFLAGS}" || return 1
+#for non-PGO build
+  make -f client.mk MOZ_MAKE_FLAGS="${MAKEFLAGS}" || return 1
+}
+
+package() {
+  cd ${srcdir}/mozilla-1.9.2
+
+  make DESTDIR=${pkgdir} -C ff-pgo install || return 1
+
+  install -m755 -d ${pkgdir}/usr/share/applications
+  install -m755 -d ${pkgdir}/usr/share/pixmaps
+  install -m644 ${srcdir}/mozilla-1.9.2/other-licenses/branding/firefox/default48.png ${pkgdir}/usr/share/pixmaps/firefox.png || return 1
+  install -m644 ${srcdir}/firefox.desktop ${pkgdir}/usr/share/applications/ || return 1
+  install -m644 ${srcdir}/firefox-safe.desktop ${pkgdir}/usr/share/applications/ || return 1
+
+#Install fr.xpi
+  cd ${srcdir}
+  sed -i "s|jar:chrome/fr.jar|jar:fr.jar|g" chrome.manifest || return 1
+  install -D -m 644 chrome/fr.jar ${pkgdir}/usr/lib/firefox-${pkgver}/chrome/fr.jar || return 1
+  install -D -m 644 chrome.manifest ${pkgdir}/usr/lib/firefox-${pkgver}/chrome/fr.manifest || return 1
+
+#Remove devel stuff
+  rm -rf ${pkgdir}/usr/include/
+  rm -rf ${pkgdir}/usr/lib/firefox-devel-${pkgver}/
+  rm -rf ${pkgdir}/usr/share/idl/
+}

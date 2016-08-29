@@ -1,0 +1,310 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/bluegriffon-svn
+
+
+URL:            http://bluegriffon.org/
+
+VOIR : http://bluegriffon.org/pages/Build-BlueGriffon
+
+1) Vérifier N° révision
+==========================
+rm -f change-log.TXT
+svn log http://sources.disruptive-innovations.com/bluegriffon/trunk > change-log.TXT
+ ==> changelog
+
+svn info http://sources.disruptive-innovations.com/bluegriffon/trunk
+
+!!!!! Révision de la dernière modification : 1195
+
+rm -rf bluegriffon
+
+svn checkout http://sources.disruptive-innovations.com/bluegriffon/trunk bluegriffon
+
+cd bluegriffon
+
+svn checkout http://sources.disruptive-innovations.com/bluegriffon-l10n/trunk locales
+
+cd ..
+
+!!! VERSION !!!
+================
+cat bluegriffon/config/version.txt
+ ==> 1.7
+
+tar -cvjf bluegriffon-svn-1.7.1195.tar.bz2 --exclude=.svn bluegriffon
+
+SOURCE FIREFOX
+===============
+
+wget ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/source/firefox-10.0.2.source.tar.bz2
+
+https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/21.0/source/firefox-21.0.source.tar.bz2
+http://releases.mozilla.org/pub/mozilla.org/firefox/releases/21.0/source/firefox-21.0.source.tar.bz2
+
+wget http://releases.mozilla.org/pub/mozilla.org/firefox/releases/21.0/source/firefox-21.0.source.tar.bz2
+
+!!! VOIR PATCHES FIREFOX SUR EXTRA
+
+
+
+
+!!! FAIRE PATCHES  !!!
+!!! 0-CmdFairePatches.TXT !!!
+===============================
+
+ls
+
+md5sum firefox-21.0.source.tar.bz2
+
+md5sum bluegriffon-svn-1.7.1195.tar.bz2
+
+md5sum mozconfig
+
+md5sum bluegriffon.sh
+
+md5sum bluegriffon.desktop
+
+md5sum 1.7-bluegriffon-config-content.patch
+
+md5sum 1.7-prefs.patch
+
+md5sum shared-libs.patch
+
+2) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+Lire N° de Révision -> pkgver=1.7.1195
+pkgrel=1
+
+_bgname=bluegriffon	# nom application
+_bgver=1.7		# version de bluegriffon
+_ffver=21.0		# version de firefox
+
+
+source=("http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/source/firefox-${_ffver}.source.tar.bz2"
+        "${pkgname}-${pkgver}.tar.bz2"
+        'mozconfig'
+	'bluegriffon.sh'
+        'bluegriffon.desktop'
+	'1.7-bluegriffon-config-content.patch'
+	'1.7-prefs.patch'
+        'shared-libs.patch'
+	
+)
+
+
+md5sums=('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+         'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+         'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+...
+)
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+
+!!! EN USER
+
+$ /home/jnd/bin/mkpkg-tmpfs -n
+
+$ mkpkg-tmpfs -n
+
+
+
+3) MAKEPKG en USER
+====================
+!!! EN USER
+cd /home/jnd/05-builds/bluegriffon-svn
+
+makepkg -s
+
+makepkg -f
+
+voir : makepkg -R   , --repackage
+           Repackage contents of the package without rebuilding the package. This is useful if you forgot a depend or install
+           file in your PKGBUILD and the build itself will not change.
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -rf bluegriffon
+
+# Verifications...
+
+namcap bluegriffon-svn-*-x86_64.pkg.tar.* > namcap.log
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/bluegriffon-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv bluegriffon-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -R bluegriffon-svn
+# pacman -S bluegriffon-svn
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+================================================================================================
+====    ANCIENS    =============================================================================
+
+3) MAKEPKG en CHROOT
+====================
+!!! Ne compile pas => erreur libxul.so
+# cd
+
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/bluegriffon-svn
+
+# mkpkg-tmpfs /home/jnd/05-builds/bluegriffon-svn -n
+
+md5sum 1.7-gcc47.patch
+        '1.7-gcc47.patch'
+        
+        
+md5sum 1.5-libvpx.patch
+	'1.5-libvpx.patch'
+
+
+hg clone http://hg.mozilla.org/mozilla-central mozilla-2.0
+
+cd mozilla-2.0
+
+hg update -r 15fb7f28f213
+
+cd ../..
+
+cat mozilla-2.0/bluegriffon/config/version.txt
+ ==> 1.5.20120201
+
+tar -cvjf bluegriffon-svn-1.5.1017.tar.bz2 --exclude=.hg --exclude=.svn mozilla-2.0
+
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/bluegriffon-svn
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+# cd /home/jnd/05-builds/bluegriffon-svn
+
+# ls -l
+# chown jnd:users bluegriffon.desktop mozconfig bluegriffon.sh
+# chown jnd:users 1.4-bluegriffon-config-content.patch 1.4-ldflags.patch 1.4-prefs.patch
+# chown jnd:users bluegriffon-svn-*.tar.bz2
+# chown jnd:users firefox-7.0.1.source.tar.bz2
+# chown jnd:users bluegriffon-svn-*-x86_64.pkg.tar.*
+# chown jnd:users namcap.log
+# ls -l
+
+wget http://releases.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/source/firefox-7.0.1.source.tar.bz2
+
+md5sum firefox-7.0.1.source.tar.bz2
+
+ls
+
+md5sum bluegriffon-svn-1.5.1017.tar.bz2
+
+md5sum mozconfig
+
+md5sum bluegriffon.sh
+
+md5sum bluegriffon.desktop
+
+md5sum 1.4-bluegriffon-config-content.patch
+
+md5sum 1.4-ldflags.patch
+
+md5sum 1.4-prefs.patch
+
+2) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+Lire N° de Révision -> pkgver=1.5.983
+pkgrel=1
+
+_bgname=bluegriffon	# nom application
+_bgver=1.4		# version de bluegriffon
+_ffver=7.0.1		# version de firefox
+_mozver=release		# version de mozilla-X.X dans l'archive de firefox-x.x.x-source.tar.bz2
+
+
+md5sums=('xxxxxx')
+
+ATTENTION LIGNE 59
+	export LDFLAGS="... 1.4 ..."
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/bluegriffon-svn
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+# cd /home/jnd/05-builds/bluegriffon-svn
+
+# ls -l
+# chown jnd:users bluegriffon.desktop mozconfig bluegriffon.sh
+# chown jnd:users 1.4-bluegriffon-config-content.patch 1.4-ldflags.patch 1.4-prefs.patch
+# chown jnd:users bluegriffon-svn-*.tar.bz2
+# chown jnd:users firefox-7.0.1.source.tar.bz2
+# chown jnd:users bluegriffon-svn-*-x86_64.pkg.tar.*
+# chown jnd:users namcap.log
+# ls -l
+
+
+
+
+
+
+ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/source/firefox-4.0.1.source.tar.bz2
+
+md5sum bluegriffon.sh.in
+
+2) MODIFIER LE PKGBUILD
+========================
+_bgname=bluegriffon	# nom application
+_bgver=1.4		# version de bluegriffon
+_ffver=7.0.1		# version de firefox
+_mozver=2.0		# version de mozilla-X.X dans l'archive de firefox-x.x.x-source.tar.bz2
+_xulver=2.0.1		# version de xulrunner
+_xuldirver=2.0		# version de /usr/lib/xulrunner-X.X
+_xulrunner_dir=xulrunner-${_xuldirver}	# 
+_xulrunner_devel_dir=xulrunner-devel-${_xuldirver}
+_xulbin=xulrunner
+
+!!! VOIR ls /etc/gre.d/		==> 2.0.1.system.conf
+
+_grecnf=2.0.1.system
+

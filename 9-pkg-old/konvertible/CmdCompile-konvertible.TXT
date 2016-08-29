@@ -1,0 +1,157 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/konvertible
+
+wget http://kde-apps.org/CONTENT/content-files/116892-konvertible-1.0.1.tar.bz2
+
+md5sum  116892-konvertible-1.0.1.tar.bz2
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxx.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 xxxxxxxx.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+ls
+namcap konvertible-*-x86_64.pkg.tar.*
+
+# Nettoyage fichiers~
+=========================
+
+rm -f *~
+
+rm -rf src pkg
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/konvertible-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv konvertible-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# pacman -Syu
+ou
+# pacman -Syu konvertible
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/konvertible
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# chown jnd:jnd 116892-konvertible-1.0.1.tar.bz2
+# chown jnd:jnd konvertible-1.0.1-1-x86_64.pkg.tar.*
+# chown jnd:jnd namcap.log
+!!! NON # mv ../0-chroot/rw/pkgdest/kdeplasma-cwp-*-x86_64.pkg.tar.* .
+
+=========================================================
+#La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+
+
+1) FAIRE PATCH
+==========================
+
+Faire 1 PKGBUILD avec la fonction build contenant la commande "echo"
+
+makepkg
+
+ => src
+
+cd src
+
+cp -R yawp-0.2.2 yawp-0.2.2.pristine
+
+cp -R yawp-0.2.2 yawp-0.2.2.new
+
+Faire modifications de yawp.cpp dans yawp-0.2.2.new
+
+LIGNES :	66 => 27.0
+		68 => 5.0
+
+		101 => 226.0
+		103 => 206.0
+
+		229 => "Paris"
+		230 => "France"
+		235 => "EUR|FR|FR012|PARIS"
+
+		1009 => %2\nHumid %3%
+		1011 => %2\nHumid %3%
+
+Effacer fichier yawp.cpp~
+
+diff -aur yawp-0.2.2.pristine yawp-0.2.2.new
+
+diff -aur yawp-0.2.2.pristine yawp-0.2.2.new > loc_pos-H-L-temp_humid.patch
+
+!!! Vérifier patch !!!
+
+cd ..
+
+ls
+
+mv src/loc_pos-H-L-temp_humid.patch loc_pos-H-L-temp_humid.patch
+
+md5sum loc_pos-H-L-temp_humid.patch
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+

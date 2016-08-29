@@ -1,0 +1,9 @@
+post_upgrade() {
+echo In case of trouble, try uninstalling,
+echo pacman -Rn yawp-weather-plasmoid 
+echo and then reinstalling.  If necessary, 
+echo log out and log in again.
+}
+post_install() {
+echo If necessary, log out and log in again.
+}

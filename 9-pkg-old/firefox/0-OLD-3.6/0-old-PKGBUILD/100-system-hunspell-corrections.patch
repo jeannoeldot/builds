@@ -1,0 +1,134 @@
+diff -aur mozilla-1.9.1.pristine/extensions/spellcheck/Makefile.in mozilla-1.9.1.new/extensions/spellcheck/Makefile.in
+--- mozilla-1.9.1.pristine/extensions/spellcheck/Makefile.in	2009-09-14 09:08:22.578150514 +0200
++++ mozilla-1.9.1.new/extensions/spellcheck/Makefile.in	2009-09-14 09:47:51.097481625 +0200
+@@ -42,13 +42,19 @@
+ include $(DEPTH)/config/autoconf.mk
+ 
+ MODULE		= spellchecker
++ifndef MOZ_NATIVE_HUNSPELL
+ DIRS		= idl locales
++else
++DIRS		= idl
++endif
+ 
+ ifeq (camino,$(MOZ_BUILD_APP))
+ DIRS		+= osxspell
+ else
++ifndef MOZ_NATIVE_HUNSPELL
+ DIRS		+= hunspell
+ endif
++endif
+ 
+ DIRS += src
+ 
+diff -aur mozilla-1.9.1.pristine/extensions/spellcheck/hunspell/src/mozHunspell.cpp mozilla-1.9.1.new/extensions/spellcheck/hunspell/src/mozHunspell.cpp
+--- mozilla-1.9.1.pristine/extensions/spellcheck/hunspell/src/mozHunspell.cpp	2009-09-14 09:08:22.581482988 +0200
++++ mozilla-1.9.1.new/extensions/spellcheck/hunspell/src/mozHunspell.cpp	2009-09-14 09:37:52.977958252 +0200
+@@ -12,14 +12,14 @@
+  * License.
+  *
+  * The Initial Developers of the Original Code are Kevin Hendricks (MySpell)
+- * and László Németh (Hunspell). Portions created by the Initial Developers
++ * and Lï¿½szlï¿½ Nï¿½meth (Hunspell). Portions created by the Initial Developers
+  * are Copyright (C) 2002-2005 the Initial Developers. All Rights Reserved.
+  *
+  * Contributor(s): Kevin Hendricks (kevin.hendricks@sympatico.ca)
+  *                 David Einstein (deinst@world.std.com)
+  *                 Michiel van Leeuwen (mvl@exedo.nl)
+  *                 Caolan McNamara (cmc@openoffice.org)
+- *                 László Németh (nemethl@gyorsposta.hu)
++ *                 Lï¿½szlï¿½ Nï¿½meth (nemethl@gyorsposta.hu)
+  *                 Davide Prina
+  *                 Giuseppe Modugno
+  *                 Gianluca Turconi
+@@ -63,6 +63,9 @@
+ #include "nsISimpleEnumerator.h"
+ #include "nsIDirectoryEnumerator.h"
+ #include "nsIFile.h"
++#ifdef MOZ_NATIVE_HUNSPELL
++#include "nsILocalFile.h"
++#endif
+ #include "nsDirectoryServiceUtils.h"
+ #include "nsDirectoryServiceDefs.h"
+ #include "mozISpellI18NManager.h"
+@@ -307,6 +310,15 @@
+     return;
+ 
+   nsCOMPtr<nsIFile> dictDir;
++  #ifdef MOZ_NATIVE_HUNSPELL
++    nsCOMPtr<nsILocalFile>  localFile;
++    rv = NS_NewNativeLocalFile(nsDependentCString("/usr/share/myspell"),PR_TRUE, getter_AddRefs(localFile));
++    if (localFile && NS_SUCCEEDED(rv)) {
++      localFile->QueryInterface(NS_GET_IID(nsIFile), getter_AddRefs(dictDir));
++      LoadDictionariesFromDir(dictDir);
++    }
++    else {
++  #endif
+   rv = dirSvc->Get(DICTIONARY_SEARCH_DIRECTORY,
+                    NS_GET_IID(nsIFile), getter_AddRefs(dictDir));
+   if (NS_SUCCEEDED(rv)) {
+@@ -332,6 +344,9 @@
+       LoadDictionariesFromDir(appDir);
+     }
+   }
++#ifdef MOZ_NATIVE_HUNSPELL
++  }
++#endif
+ 
+   nsCOMPtr<nsISimpleEnumerator> dictDirs;
+   rv = dirSvc->Get(DICTIONARY_SEARCH_DIRECTORY_LIST,
+diff -aur mozilla-1.9.1.pristine/extensions/spellcheck/src/Makefile.in mozilla-1.9.1.new/extensions/spellcheck/src/Makefile.in
+--- mozilla-1.9.1.pristine/extensions/spellcheck/src/Makefile.in	2009-09-14 09:08:22.578150514 +0200
++++ mozilla-1.9.1.new/extensions/spellcheck/src/Makefile.in	2009-09-14 09:45:17.041246843 +0200
+@@ -63,9 +63,16 @@
+ 		  txtsvc \
+ 		  uconv \
+ 		  unicharutil \
++		  xulapp \
+ 		  $(NULL)
+ 
+-CPPSRCS		= \
++ifdef MOZ_NATIVE_HUNSPELL
++CPPSRCS         += mozHunspell.cpp
++ifdef MOZ_XUL_APP
++CPPSRCS         += mozHunspellDirProvider.cpp
++endif
++endif
++CPPSRCS		+= \
+ 		mozSpellCheckerFactory.cpp	\
+ 		mozSpellChecker.cpp		\
+ 		mozPersonalDictionary.cpp	\
+@@ -80,8 +87,14 @@
+ SHARED_LIBRARY_LIBS += ../osxspell/src/$(LIB_PREFIX)osxspell_s.$(LIB_SUFFIX)
+ LOCAL_INCLUDES += -I$(srcdir)/../osxspell/src
+ else
++ifndef MOZ_NATIVE_HUNSPELL
+ SHARED_LIBRARY_LIBS += ../hunspell/src/$(LIB_PREFIX)hunspell_s.$(LIB_SUFFIX)
+ LOCAL_INCLUDES += -I$(srcdir)/../hunspell/src
++else
++LOCAL_INCLUDES += $(MOZ_HUNSPELL_CFLAGS) \
++		-DMOZ_NATIVE_HUNSPELL \
++		$(NULL)
++endif
+ endif
+ 
+ EXTRA_DSO_LDOPTS = \
+@@ -96,3 +109,18 @@
+ LOCAL_INCLUDES += \
+ 	-I$(topsrcdir)/xpcom/io \
+ 	$(NULL)
++
++ifdef MOZ_NATIVE_HUNSPELL
++export:: $(srcdir)/../hunspell/src/mozHunspell.cpp
++	$(INSTALL) $(srcdir)/../hunspell/src/mozHunspell.* .
++GARBAGE += mozHunspell.$(OBJ_SUFFIX) mozHunspell.cpp
++clean::
++	rm -f mozHunspell.*
++ifdef MOZ_XUL_APP
++export:: $(srcdir)/../hunspell/src/mozHunspellDirProvider.cpp
++	$(INSTALL) $(srcdir)/../hunspell/src/mozHunspellDirProvider.* .
++GARBAGE += mozHunspellDirProvider.$(OBJ_SUFFIX) mozHunspellDirProvider.cpp
++clean::
++	rm -f mozHunspellDirProvider.*
++endif
++endif

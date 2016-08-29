@@ -1,0 +1,35 @@
+
+ARCH 3 KDE
+
+gcc 5.3.0 gcc-libs 5.3.0 boost boost-libs 1.60.0-4
+glibc 2.23-4
+llvm-libs 3.8.0-1
+
+# pacman -Qo /usr/lib/libstdc++.so.6
+/usr/lib/libstdc++.so.6 appartient à gcc-libs 5.3.0-5
+
+Erreurs/Warnings
+================
+
+-opensubdiv
+-blender
+
+/usr/bin/ar: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ar: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ar: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ar: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ar: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ar: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ar: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ranlib: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ranlib: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)
+
+/usr/bin/ranlib: /usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /usr/lib/libLLVM-3.8.so)

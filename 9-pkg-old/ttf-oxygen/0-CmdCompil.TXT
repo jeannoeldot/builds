@@ -1,0 +1,158 @@
+# Le répertoire
+cd /home/jnd/05-builds/ttf-oxygen
+
+
+1) TELECHARGEMENT
+===================
+https://projects.kde.org/projects/playground/artwork/oxygen-fonts/repository
+https://projects.kde.org/projects/playground/artwork/oxygen-fonts
+
+http://quickgit.kde.org/?p=oxygen-fonts.git&a=snapshot&h=484328b5e36e9a27204ef10a364980fa70bf27ad&fmt=tgz
+
+Télécharger avec Firefox :
+==> oxygen-fonts-484328b.tar.gz
+
+mv oxygen-fonts-484328b.tar.gz oxygen-fonts.tar.gz
+
+chmod a+r oxygen-fonts.tar.gz
+
+ls
+
+md5sum oxygen-fonts.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgver=0.4
+pkgrel=1
+
+source=('oxygen-fonts.tar.gz'
+)
+md5sums=(... ...)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 oxygen-fonts.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 ttf-oxygen.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ /home/jnd/bin/mkpkg-tmpfs -m native
+
+$ mkpkg-tmpfs -m native
+
+
+4) MAKEPKG
+============
+!!! EN USER
+
+makepkg -s
+
+Mot de passe : 
+résolution des dépendances...
+recherche des conflits entre paquets...
+
+Cibles (3) : libspiro-20071029-2  libxkbui-1.0.2-3  fontforge-20111214-3
+
+Taille totale de téléchargement :       7,82 MiB
+Taille totale installé :                27,04 MiB
+
+Procéder à l'installation ? [O/n] 
+:: Récupération des paquets du dépôt extra...
+ libxkbui-1.0.2-3-x86_64                                      9,3 KiB   261K/s 00:00 [################################################] 100%
+ libspiro-20071029-2-x86_64                                   8,8 KiB   617K/s 00:00 [################################################] 100%
+ fontforge-20111214-3-x86_64                                  7,8 MiB   520K/s 00:15 [################################################] 100%
+
+
+makepkg -f
+
+# Nettoyage fichiers~
+=========================
+
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/ttf-oxygen-*-any.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv ttf-oxygen-*-any.pkg.tar.* /home/jnd/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# cd
+!!! 1ERE INSTALLATION
+---------------------
+1) supprimer ttf-oxygen
+# pacman -Rcns ttf-oxygen
+# pacman -Sc
+2) installer ttf-oxygen
+# pacman -Syu ttf-oxygen
+
+!!! MAJ
+# cd
+# pacman -Syu
+
+
+
+
+===================================================================
+3) MAKEPKG en CHROOT
+====================
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/ttf-oxygen -n
+
+3) MAKEPKG en CHROOT
+====================
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/ttf-oxygen
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# ls -l
+# chown jnd:users ttf-oxygen-*-any.pkg.tar.*
+# chown jnd:users ttf-oxygen-*.log
+# chown jnd:users oxygen-fonts.tar.gz
+# chown jnd:users license.rtf
+# ls -l
+
+
+cd /home/jnd/05-builds/ttf-oxygen
+$ ./build.sh
+# mv ../0-chroot/rw/pkgdest/ttf-oxygen-*-x86_64.pkg.tar.gz .
+
+http://downloads.sourceforge.net/corefonts/wd97vwr32.exe
+# chown jnd:users impact32.exe times32.exe trebuc32.exe verdan32.exe wd97vwr32.exe webdin32.exe
+# Verifications...
+==================
+
+namcap ttf-oxygen-*-any.pkg.tar.*
+
+
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+

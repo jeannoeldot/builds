@@ -1,0 +1,12 @@
+diff -aur cwp-1.6.5/data/fr_weather_com.xml cwp-1.6.5.new/data/fr_weather_com.xml
+--- cwp-1.6.5/data/fr_weather_com.xml	2012-10-07 17:16:51.000000000 +0200
++++ cwp-1.6.5.new/data/fr_weather_com.xml	2012-10-21 15:40:37.556933756 +0200
+@@ -3,7 +3,7 @@
+ <custom_weather>
+ 	<xml_file_version type="cwp" version="2012-10-07" name="fr.weather.com" search_page="http://fr.weather.com" example_zip="Paris-FRXX0076" unit="C" />
+ 
+-	<locale_settings locale="utf-8" encoding="utf8" />
++	<locale_settings locale="fr_FR.utf8" encoding="utf8" />
+ 
+ 	<urlc urlc_prefix="http://fr.weather.com/weather/today-" urlc_suffix="" urlc_follow="" />
+ 	

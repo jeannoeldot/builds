@@ -1,0 +1,11 @@
+diff -aur linux-3.2/drivers/ata/libata-core.c linux-3.2.new/drivers/ata/libata-core.c
+--- linux-3.2/drivers/ata/libata-core.c	2012-01-05 00:55:44.000000000 +0100
++++ linux-3.2.new/drivers/ata/libata-core.c	2012-04-04 19:41:15.059742857 +0200
+@@ -4126,6 +4126,7 @@
+ 	{ "PIONEER DVD-RW  DVRTD08",	NULL,	ATA_HORKAGE_NOSETXFER },
+ 	{ "PIONEER DVD-RW  DVR-212D",	NULL,	ATA_HORKAGE_NOSETXFER },
+ 	{ "PIONEER DVD-RW  DVR-216D",	NULL,	ATA_HORKAGE_NOSETXFER },
++	{ "PIONEER DVD-RW  DVR-216",	"1.07",	ATA_HORKAGE_NOSETXFER },
+ 
+ 	/* End Marker */
+ 	{ }

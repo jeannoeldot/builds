@@ -1,0 +1,432 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/pixie
+mkdir srcp
+
+cp Pixie-src-2.2.6.tgz srcp/
+cd srcp
+tar -xvzf Pixie-src-2.2.6.tgz
+rm -f Pixie-src-2.2.6.tgz
+
+1) MODIFIER Pixie.new/src/ri/ribOut.h
+================================================================
+cp -R Pixie Pixie.new
+
+cd Pixie.new/src/ri
+
+kwrite ribOut.h
+
+LIGNE 240 DEVIENT :
+  if (outputCompressed)	gzwrite((gzFile)outFile,scratch,l);
+  
+LIGNE 261 DEVIENT :
+  if (outputCompressed)	gzwrite((gzFile)outFile,scratch,l);
+  
+ENREGISTRER et Quitter Kwrite & EFFACER fichier ribOut.h~
+rm -f ribOut.h~
+
+
+1-1) MODIFIER Pixie.new/src/ri/ribOut.cpp
+================================================================
+kwrite ribOut.cpp
+
+LIGNE 165 DEVIENT :
+  gzclose((gzFile)outFile);
+  
+ENREGISTRER et Quitter Kwrite & EFFACER fichier ribOut.cpp~
+rm -f ribOut.cpp~
+
+
+2) MODIFIER Pixie.new/src/ri/rib.l
+================================================================
+kwrite rib.l
+
+LIGNE 20 DEVIENT :
+  gzclose((gzFile)ribin);
+  
+
+LIGNE 226 DEVIENT :
+  gzclose((gzFile)ribin);
+  
+LIGNE 246 DEVIENT :
+  gzclose((gzFile)ribin);
+  
+ENREGISTRER et Quitter Kwrite & EFFACER fichier rib.l~
+rm -f rib.l~
+
+
+3) MODIFIER Pixie.new/src/ri/rib.y
+================================================================
+kwrite rib.y
+
+LIGNE 2943 DEVIENT :
+  gzclose((gzFile)ribin);
+  
+ENREGISTRER et Quitter Kwrite & EFFACER fichier rib.y~
+rm -f rib.y~
+
+
+
+
+cd ../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > fix-pixie-zlib.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/fix-pixie-zlib.patch 2.2.6-fix-pixie-zlib.patch
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+
+
+
+
+
+
+
+kwrite pnghandler.c
+
+LIGNE 12 : AJOUTER :
+#include <png.h>
+LIGNE 15 : SUPPRIMER
+
+LIGNE 131 : DEVIENT :
+   png_uint_32     lw, lh;
+
+LIGNE 137 : DEVIENT :
+  if (png_sig_cmp (pbSig, 0, 8))
+
+LIGNE 152 : DEVIENT :
+    if (setjmp(png_jmpbuf(png_ptr)))
+
+LIGNE 172 : DEVIENT :
+  png_set_expand_gray_1_2_4_to_8(png_ptr);
+
+LIGNE 178 : DEVIENT :
+  png_set_expand_gray_1_2_4_to_8(png_ptr);
+
+LIGNE 309 : DEVIENT :
+  if (setjmp(png_jmpbuf(png_ptr)))
+
+LIGNE 825 : DEVIENT :
+  ret = !png_sig_cmp ((png_byte*)buf, 0, 8);
+
+LIGNE 861 : DEVIENT :
+  if (setjmp(png_jmpbuf(png)))
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier pnghandler.c~
+rm -f pnghandler.c~
+cd ../../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > fix-thotlib-png14.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/fix-thotlib-png14.patch 2.2.6-fix-thotlib-png.patch
+
+
+2-1) MODIFIER Pixie.new/Amaya/thotlib/dialogue/AmayaPage.cpp
+===================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/thotlib/dialogue
+kwrite AmayaPage.cpp
+
+LIGNES 386 : DEVIENT :
+  SetSplitMode(wxSPLIT_VERTICAL); // undefined not allowed
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier AmayaPage.cpp~
+rm -f AmayaPage.cpp~
+cd ../../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > splitmode.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/splitmode.patch 2.2.6-splitmode.patch
+
+
+2-2) MODIFIER Pixie.new/Amaya/thotlib/base/AmayaApp.cpp
+===================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/thotlib/base
+kwrite AmayaApp.cpp
+
+LIGNES 329 : AJOUTER :
+  wxWakeUpIdle();
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier AmayaApp.cpp~
+rm -f AmayaApp.cpp~
+cd ../../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > wakeupidle.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/wakeupidle.patch 2.2.6-wakeupidle.patch
+
+
+2-3) MODIFIER Pixie.new/Amaya/thotlib/dialogue/appdialogue_wx.c
+=====================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/thotlib/dialogue
+kwrite appdialogue_wx.c
+
+LIGNES 996 : DEVIENT :
+  wxTheApp->Yield(TRUE);
+
+LIGNES 1827 : DEVIENT :
+  wxTheApp->Yield(TRUE);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier appdialogue_wx.c~
+rm -f appdialogue_wx.c~
+cd ../../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > wxyield.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/wxyield.patch 2.2.6-wxyield.patch
+
+
+3.1) MODIFIER Pixie/Amaya/amaya/Makefile.in
+==================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/amaya
+kwrite Makefile.in
+
+LIGNE 24 DEVIENT :
+          $(WX_LIBRARIES) -lpng -ljpeg
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > explicite-linking.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/explicite-linking.patch 2.2.6-amaya-explicite-linking.patch
+
+
+3.2) MODIFIER Pixie/Amaya/thotlib/Makefile.in
+==================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/thotlib
+kwrite Makefile.in
+
+LIGNE 354 DEVIENT :
+	$(CXX) $(LDFLAGS) -o $@ $(THOTK_OBJ) $(DISPLAY_OBJ) $(PRINT_OBJ) ../amaya/libCSS.a $(LIBS) -lpng -ljpeg
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > explicite-linking.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/explicite-linking.patch 2.2.6-thotlib-explicite-linking.patch
+
+
+4.1) MODIFIER Pixie/Amaya/amaya/html2thot.c et Xml2thot.c
+==================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/amaya
+kwrite html2thot.c
+
+LIGNE 4352 DEVIENT :
+  LastCharInWorkBuffer = gzread ((gzFile)infile, &FileBuffer[StartOfRead],
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier html2thot.c~
+rm -f html2thot.c~
+
+
+kwrite Xml2thot.c
+
+LIGNE 5850 DEVIENT :
+      res = gzread ((gzFile)infile, bufferRead, COPY_BUFFER_SIZE);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Xml2thot.c~
+rm -f Xml2thot.c~
+
+cd ../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > fix-amaya-gzread.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/fix-amaya-gzread.patch 2.2.6-fix-amaya-gzread.patch
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+
+====================================================================================
+ANCIENS
+
+
+3.1) MODIFIER Pixie/Amaya/thotlib/base/platform.c
+==================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/thotlib/base
+kwrite platform.c
+
+LIGNE 332 DEVIENT :
+      wxFile (targetFile, wxFile::write);
+
+LIGNE 334 DEVIENT :
+      wxFile (tmpFile, wxFile::write);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier platform.c~
+rm -f platform.c~
+cd ../../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > fix-thotlib-wxfile.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/fix-thotlib-wxfile.patch 2.2.6-fix-thotlib-wxfile.patch
+
+3.2) MODIFIER Pixie/Amaya/amaya/HTMLedit.c
+==================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/Amaya/amaya
+kwrite HTMLedit.c
+
+LIGNE 1728 DEVIENT :
+                  wxFile (tmpFile, wxFile::write);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier HTMLedit.c~
+rm -f HTMLedit.c~
+cd ../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > fix-amaya-wxfile.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/fix-amaya-wxfile.patch 2.2.6-fix-amaya-wxfile.patch
+
+
+
+===================================================
+  !!! OU !!!
+
+cp amaya-sources-2.2.6.tar.gz srcp/
+cd srcp
+tar -xvzf amaya-sources-2.2.6.tar.gz
+
+
+1) MODIFIER Pixie.new/wxWidgets/src/gtk/gsockgtk.cpp
+==============================================================
+cp -R Pixie Pixie.new
+
+cd Pixie.new/wxWidgets/src/gtk
+kwrite gsockgtk.cpp
+
+LIGNES 18 ET 19 DEVIENNENT :
+// newer versions of glib define its own GSocket but we unfortunately use this
+// name in our own (semi-)public header and so can't change it -- rename glib
+// one instead
+#define GSocket GlibGSocket
+#include <gdk/gdk.h>
+#include <glib.h>
+#undef GSocket
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier gsockgtk.cpp~
+rm -f gsockgtk.cpp~
+cd ../../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > wxwidgets-gsocket.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/wxwidgets-gsocket.patch wxwidgets-gsocket.patch
+
+
+2-1) MODIFIER Pixie.new/wxWidgets/src/common/imagpng.cpp
+================================================================
+cd srcp
+cp -R Pixie Pixie.new
+
+cd Pixie.new/wxWidgets/src/common
+kwrite imagpng.cpp
+
+LIGNE 571 DEVIENT :
+    // initialize all line pointers to NULL to ensure that they can be safely
+    // free()d if an error occurs before all of them could be allocated
+    lines = (unsigned char **)calloc(height, sizeof(unsigned char *));
+
+LIGNES 580 581 582 584	SUPPRIMEES	!!! PAS 583
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagpng.cpp~
+rm -f imagpng.cpp~
+
+2-2) MODIFIER Pixie.new/wxWidgets/src/common/imagtiff.cpp
+================================================================
+
+kwrite imagtiff.cpp
+
+LIGNE 264 SUPPRIMEE :
+
+LIGNES 277 A 279 DEVIENNENT :
+    // guard against integer overflow during multiplication which could result
+    // in allocating a too small buffer and then overflowing it
+    const double bytesNeeded = (double)w * (double)h * sizeof(uint32);
+    if ( bytesNeeded >= 4294967295U /* UINT32_MAX */ )
+    {
+        if ( verbose )
+            wxLogError( _("TIFF: Image size is abnormally big.") );
+
+        TIFFClose(tif);
+
+        return false;
+    }
+
+    raster = (uint32*) _TIFFmalloc( bytesNeeded );
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagtiff.cpp~
+rm -f imagtiff.cpp~
+
+cd ../../../..
+diff -aur Pixie Pixie.new
+diff -aur Pixie Pixie.new > wxwidgets-overflow.patch
+
+rm -rf Pixie.new
+
+cd ..
+mv srcp/wxwidgets-overflow.patch wxwidgets-overflow.patch

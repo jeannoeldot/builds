@@ -1,0 +1,169 @@
+0) REPERTOIRE
+==============
+cd /home/jnd/05-builds/opencollada-svn
+
+
+https://code.google.com/p/opencollada/
+
+http://opencollada.googlecode.com/svn/trunk/
+
+1.1 CHANGELOG
+==============
+rm -f change-log.TXT
+svn log http://opencollada.googlecode.com/svn/trunk > change-log.TXT
+
+1.2 REVISION
+==============
+
+svn info http://opencollada.googlecode.com/svn/trunk
+
+!!!!! Révision de la dernière modification : 869
+
+1.3 SOURCES
+==============
+
+rm -rf opencollada
+
+svn co http://opencollada.googlecode.com/svn/trunk opencollada
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+rm -i opencollada-svn-*.tar.gz
+tar -cvzf opencollada-svn-869.tar.gz opencollada
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+2-1) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+Lire N° de Révision -> pkgver=869
+pkgrel=1
+
+!!!!!!
+_svnmod="opencollada"
+
+md5sum opencollada-svn-869.tar.gz
+
+md5sums=(...
+         ...
+)
+
+2-2) VERIFIER CMakeLists.txt
+==========================
+  opencollada/CMakeLists.txt
+
+LIGNES 178 et suivantes
+#-----------------------------------------------------------------------------
+# Set default config options
+
+option(USE_STATIC "Build static libraries"  ON)
+option(USE_SHARED "Build shared libraries"  OFF)	==> ON
+option(USE_LIBXML "Use LibXml2 parser"      ON)
+option(USE_EXPAT  "Use expat parser"        OFF)
+
+!!! TRES LONG : essayer sans modifier USE_SHARED
+
+3) MAKEPKG en CHROOT
+====================
+
+# cd
+
+# /home/jnd/bin/mkpkg-tmpfs /home/jnd/05-builds/opencollada-svn
+
+
+
+4) MAKEPKG en USER
+===================
+!!! EN USER
+
+makepkg -s
+
+OU : makepkg -f
+
+voir : makepkg -R   , --repackage
+           Repackage contents of the package without rebuilding the package. This is useful if you forgot a depend or install
+           file in your PKGBUILD and the build itself will not change.
+
+
+!!! EN USER
+=============
+
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+rm -rf opencollada
+
+namcap opencollada-svn-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/opencollada-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv opencollada-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+
+# pacman -Syu
+
+# pacman -Syu opencollada-svn
+
+!!! MODIFIER FICHIERS
+
+DANS : /home/jnd/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R opencollada-svn
+# rm /var/cache/pacman/pkg/opencollada-svn-*
+# pacman -S opencollada-svn
+
+==================================================================================================
+ANCIEN
+=======
+
+# chown jnd:jnd namcap.log
+
+
+3) MAKEPKG en CHROOT
+====================
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+# cd
+# cd /home/jnd/05-builds/opencollada-svn
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+# cd /home/jnd/05-builds/opencollada-svn
+
+# ls -l
+# chown jnd:jnd opencollada-svn-*-x86_64-*.log
+# chown jnd:jnd opencollada-svn-*-x86_64.pkg.tar.*
+# chown jnd:jnd opencollada-svn-*.tar.*
+# ls -l
+

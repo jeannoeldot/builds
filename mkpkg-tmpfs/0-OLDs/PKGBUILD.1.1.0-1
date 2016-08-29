@@ -1,0 +1,23 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=mkpkg-tmpfs
+pkgver=1.1.0
+pkgrel=1
+pkgdesc='Creation paquets en RAM.'
+arch=('any')
+url='http://www.club-internet.fr/jeannoeldot/'
+license=('GPL2')
+depends=('devtools')
+source=("${pkgname}-${pkgver}.tar.gz")
+sha256sums=('73c06597012b9f613a35da725a4dbc00dc04881b68a5581f53b285ff0a64b3e2')
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+}
+

@@ -1,0 +1,76 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=blender-addons-yafaray-git
+pkgver=3.0.0.20160715
+pkgrel=2
+pkgdesc="Raytracing open source render engine"
+arch=('i686' 'x86_64')
+url="http://www.yafaray.org/"
+license=('LGPL2.1')
+depends=("blender-git")
+makedepends=('cmake' 'swig' 'python' 'boost')
+
+source=("${pkgname}-${pkgver}.tar.gz"
+)
+sha256sums=('534317c509c0cf0f1fbc3f9eb4988a011a06481d32cae816218cc6ed490689c1'
+)
+
+_slot="2.77"
+_realname="YafaRay"
+_name_addon="yafaray_v3"
+_dir_addons="addons_contrib"
+#_dir_addons="addons"
+
+prepare() {
+      cd "${_realname}"
+      
+      cp CMakeConfig/UserConfig.template CMakeConfig/UserConfig.txt
+      sed -i "s|#set(YAF_LIB_DIR lib)|set(YAF_LIB_DIR bin)|" CMakeConfig/UserConfig.txt
+      sed -i "s|#set(USER_RELEASE_OPTIMIZATION_FLAGS \"\")|set(USER_RELEASE_OPTIMIZATION_FLAGS \"-march=native -Ofast -ffast-math -pipe -fdiagnostics-color=always -fstack-protector-strong\")|" CMakeConfig/UserConfig.txt
+      sed -i "s|#set(USER_RELEASE_EXTRA_FLAGS \"\")|set(USER_RELEASE_EXTRA_FLAGS \"-D_FORTIFY_SOURCE=2 -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block\")|" CMakeConfig/UserConfig.txt
+      sed -i "s|#set(YAF_PY_VERSION 3.5)|set(YAF_PY_VERSION 3.5)|" CMakeConfig/UserConfig.txt
+      
+}
+
+build() {
+      cd "${_realname}"
+      # Build
+      mkdir build
+      cd build
+      cmake .. \
+          -DCMAKE_BUILD_TYPE=RELEASE \
+          -DCMAKE_SKIP_RPATH=ON \
+          -DCMAKE_INSTALL_PREFIX=/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon} \
+          -DYAF_BINDINGS_PY_DIR=/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin \
+          -DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,-O1,--sort-common,--as-needed,-z,relro'
+
+      make ${MAKEFLAGS}
+}
+
+package() {
+      cd "${_realname}/build"
+
+      # Install
+      make DESTDIR="${pkgdir}" install
+
+      # Install plugins
+      mv "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin/yafaray \
+         "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin/plugins
+
+      # Erreur ds verif-deps : Copy libyafaray_v3_core.so & libyafaray_v3_plugin.so% to /usr/lib/
+      install -d "${pkgdir}"/usr/lib
+      cp -a "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin/libyafaray_v3_core.so \
+            "${pkgdir}"/usr/lib/libyafaray_v3_core.so
+      cp -a "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin/libyafaray_v3_plugin.so \
+            "${pkgdir}"/usr/lib/libyafaray_v3_plugin.so
+
+      # Install Exporter
+      cd "${srcdir}/${_realname}"
+      rm -f Blender-Exporter/{CHANGELOG,INSTALL,LICENSES,README}
+      cp -a -R Blender-Exporter/* "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/
+
+      # Idem blender
+      python -m compileall ""${pkgdir}"/usr/share/blender"
+      python -O -m compileall ""${pkgdir}"/usr/share/blender"
+
+}

@@ -1,0 +1,98 @@
+<sect1 id="cdcopyhowto">
+	<title
+>Démarrage rapide : copier un CD de données en 4 étapes </title>
+	<para
+>Ce guide de démarrage rapide vous présente comment créer un CD de données à l'aide de &k3b;. Pour suivre ce guide vous avez besoin d'une version opérationnelle de &k3b; et d'insérer le CD que vous voulez copier dans le lecteur de CD. </para>
+	<sect2>
+		<title
+>Étape 1</title>
+		<para
+>Pour copier un CD de données vous devez sélectionner <guimenu
+>Outils</guimenu
+>, <guimenu
+>CD</guimenu
+> <guimenu
+>Copier un CD...</guimenu
+> Vous verrez une boîte de dialogue dans laquelle vous pourrez configurer la gravure. <screenshot>
+				<screeninfo
+>Dans cette boîte de dialogue vous pouvez configurer les paramètres que vous désirez utiliser pour la gravure.</screeninfo>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="cdcopy_settings.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase
+>Capture d'écran</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+		</para>
+	</sect2>
+	<sect2>
+		<title
+>Étape 2</title>
+		<para
+>Après avoir configuré &k3b; cliquez sur <guimenu
+>Démarrer la copie du CD</guimenu
+>. Vous obtiendrez une boîte de dialogue similaire à celle-ci : <screenshot>
+				<screeninfo
+>Dans cette boîte de dialogue vous pouvez suivre l'avancement de la copie. Dès que le fichier image est fini il vous sera demandé un CD vierge sur lequel les données seront gravées.</screeninfo>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="cdcopy_reading.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase
+>Capture d'écran</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+		</para>
+		<para
+>Dans cette boîte de dialogue vous pouvez suivre l'avancement de la copie. Dès que le fichier image est fini il vous sera demandé un CD vierge sur lequel les données seront gravées. </para>
+	</sect2>
+	<sect2>
+		<title
+>Étape 3</title>
+		<screenshot>
+			<screeninfo
+>&k3b; grave le fichier image. Vous devez attendre jusqu'à ce que <guilabel
+>Progression en cours</guilabel
+> atteigne 100 %</screeninfo>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="cdcopy_writing.png" format="PNG"/>
+				</imageobject>
+				<textobject>
+					<phrase
+>Capture d'écran</phrase>
+				</textobject>
+			</mediaobject>
+		</screenshot>
+		<para
+>&k3b; grave le fichier image. Vous devez attendre jusqu'à ce que <guilabel
+>Progression en cours</guilabel
+> atteigne 100 %. </para>
+	</sect2>
+	<sect2>
+		<title
+>Étape 4</title>
+		<para>
+			<screenshot>
+				<screeninfo
+>Dans cette boîte de dialogue vous pouvez voir le résultat de votre gravure</screeninfo>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="cdcopy_done.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase
+>Capture d'écran</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+&k3b; a terminé la gravure. Cliquez sur <guilabel
+>Fermer</guilabel
+> pour fermer la boîte de dialogue. </para>
+	</sect2>
+</sect1>

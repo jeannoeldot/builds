@@ -1,0 +1,32 @@
+diff -aur mozilla-1.9.1.pristine/gfx/thebes/public/gfxPDFSurface.h mozilla-1.9.1.new/gfx/thebes/public/gfxPDFSurface.h
+--- mozilla-1.9.1.pristine/gfx/thebes/public/gfxPDFSurface.h	2009-09-14 09:08:22.454801864 +0200
++++ mozilla-1.9.1.new/gfx/thebes/public/gfxPDFSurface.h	2009-09-14 09:55:13.907437278 +0200
+@@ -63,7 +63,11 @@
+     // this is in points!
+     const gfxSize& GetSize() const { return mSize; }
+ 
+-    virtual PRInt32 GetDefaultContextFlags() const { return gfxContext::FLAG_DISABLE_SNAPPING; }
++    virtual PRInt32 GetDefaultContextFlags() const
++    {
++        return gfxContext::FLAG_SIMPLIFY_OPERATORS |
++               gfxContext::FLAG_DISABLE_SNAPPING;
++    }
+ 
+ private:
+     nsCOMPtr<nsIOutputStream> mStream;
+diff -aur mozilla-1.9.1.pristine/gfx/thebes/public/gfxPSSurface.h mozilla-1.9.1.new/gfx/thebes/public/gfxPSSurface.h
+--- mozilla-1.9.1.pristine/gfx/thebes/public/gfxPSSurface.h	2009-09-14 09:08:22.454801864 +0200
++++ mozilla-1.9.1.new/gfx/thebes/public/gfxPSSurface.h	2009-09-14 09:56:11.654098222 +0200
+@@ -63,7 +63,11 @@
+     // this is in points!
+     const gfxSize& GetSize() const { return mSize; }
+ 
+-    virtual PRInt32 GetDefaultContextFlags() const { return gfxContext::FLAG_DISABLE_SNAPPING; }
++    virtual PRInt32 GetDefaultContextFlags() const
++    {
++        return gfxContext::FLAG_SIMPLIFY_OPERATORS |
++               gfxContext::FLAG_DISABLE_SNAPPING;
++    }
+ 
+ private:
+     nsCOMPtr<nsIOutputStream> mStream;

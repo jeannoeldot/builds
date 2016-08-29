@@ -1,0 +1,332 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/bluegriffon-svn
+mkdir srcp
+cp bluegriffon-svn-*.tar.bz2 srcp/
+cd srcp
+tar -xvjf bluegriffon-svn-*.tar.bz2
+rm -f bluegriffon-svn-*.tar.bz2
+cd ..
+
+
+PATCH : 1.4-bluegriffon-config-content.patch
+===========================================
+!!! VOIR fichier /bluegriffon/config/content.patch
+
+cd srcp
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new/bluegriffon/config
+kwrite content.patch
+  LIGNES 951 à 953 : chemin => widget/src/cocoa/
+diff -r 58e933465c36 widget/src/cocoa/nsMenuItemX.mm
+--- a/widget/src/cocoa/nsMenuItemX.mm	Wed Jan 18 21:25:28 2012 +0100
++++ b/widget/src/cocoa/nsMenuItemX.mm	Wed Jan 25 13:28:12 2012 +0100
+
+  LIGNES 984 à 986 : chemin => widget/src/gtk2/
+diff -r 58e933465c36 widget/gtk2/nsWindow.cpp
+--- a/widget/src/gtk2/nsWindow.cpp	Wed Jan 18 21:25:28 2012 +0100
++++ b/widget/src/gtk2/nsWindow.cpp	Wed Jan 25 13:28:12 2012 +0100
+
+ Enregistrer et Quitter kwrite
+ Effacer content.patch~
+rm -f content.patch~
+
+cd ../../..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 1.4-bluegriffon-config-content.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/1.4-bluegriffon-config-content.patch .
+md5sum 1.4-bluegriffon-config-content.patch
+
+
+PATCH : 1.4-prefs.patch
+======================================
+cd srcp
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new/bluegriffon/app/profile
+kwrite bluegriffon-prefs.js
+ LIGNE 113 et LIGNE 114 : Modifier 2 lignes
+ // updates
+ LIGNE 113	pref("bluegriffon.updates.check.enabled", false);
+ LIGNE 114	pref("bluegriffon.updates.frequency", "manually");
+
+LIGNE 156 : Ajouter 4 lignes
+
+
+// Locales
+pref("general.useragent.locale", "");
+pref("intl.locale.matchOS", true);
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier bluegriffon-prefs.js~
+rm -f bluegriffon-prefs.js~
+cd ../../../..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 1.4-prefs.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/1.4-prefs.patch .
+md5sum 1.4-prefs.patch
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+
+
+===================
+!!!! PAS MIS
+===================
+
+PATCH : 1.4-ldflags.patch
+===========================================
+cd srcp
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new/layout/build
+kwrite Makefile.in
+ LIGNE 298 :Ajouter ligne
+
+LDFLAGS += -lX11 -lXrender
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 1.4-ldflags.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/1.4-ldflags.patch .
+md5sum 1.4-ldflags.patch
+
+
+PATCH : 1.4-bluegriffon-config-content.patch
+===========================================
+!!! VOIR fichier /bluegriffon/config/content.patch
+
+==> Editer fichier avec kwrite
+==> Enregistrer
+==> Quitter kwrite
+==> Supprimer fichier~
+
+cd srcp
+cp -R mozilla-release mozilla-release.new
+
+mozilla-release.new/browser/app/profile/firefox.js
+
+mozilla-release.new/caps/src/nsScriptSecurityManager.cpp
+
+mozilla-release.new/content/base/public/nsIDocumentEncoder.idl
+
+mozilla-release.new/content/base/src/nsCopySupport.cpp
+
+mozilla-release.new/content/base/src/nsDocumentEncoder.cpp
+
+mozilla-release.new/content/base/src/nsHTMLContentSerializer.cpp
+
+mozilla-release.new/content/base/src/nsXHTMLContentSerializer.cpp
+
+mozilla-release.new/content/base/src/nsXMLContentSerializer.cpp
+
+mozilla-release.new/editor/libeditor/html/nsHTMLDataTransfer.cpp
+
+mozilla-release.new/editor/libeditor/html/nsHTMLEditRules.cpp
+
+!!!! VOIR : REMI F15 : SUPPR !!!
+!!!! FAIT QUAND MEME
+mozilla-release.new/editor/libeditor/html/nsHTMLEditor.cpp
+
+mozilla-release.new/toolkit/content/widgets/menu.xml
+
+mozilla-release.new/toolkit/content/xul.css
+
+mozilla-release.new/toolkit/mozapps/extensions/content/extensions.js
+
+mozilla-release.new/toolkit/mozapps/extensions/content/extensions.xul
+
+mozilla-release.new/toolkit/mozapps/handling/nsContentDispatchChooser.js
+
+!!!! VOIR : REMI F15 : SUPPR !!!
+!!!! FAIT QUAND MEME
+mozilla-release.new/widget/src/cocoa/nsMenuItemX.mm
+
+mozilla-release.new/widget/src/gtk2/nsWindow.cpp
+
+!!!! VOIR : REMI F15 : SUPPR !!!
+!!!! FAIT QUAND MEME
+mozilla-release.new/widget/src/xpwidgets/nsWidgetAtomList.h
+
+diff -aur mozilla-release mozilla-release.new
+diff -aur mozilla-release mozilla-release.new > 1.4-bluegriffon-config-content.patch
+
+rm -rf mozilla-release.new
+
+cd ..
+mv srcp/1.4-bluegriffon-config-content.patch .
+md5sum 1.4-bluegriffon-config-content.patch
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+===============================================================================
+!!! INUTILE !!! 
+
+PATCH : 4.0-system-cairo-fixup.patch
+===========================================
+cd srcp
+cp -R mozilla-central mozilla-central.new
+cd mozilla-central.new/gfx/thebes
+kwrite gfxASurface.cpp
+
+ LIGNE 224 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 228 :Ajouter ligne
+#endif
+
+ LIGNE 442 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 445 :Ajouter ligne
+#endif
+
+ LIGNE 453 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 455 :Ajouter 3 lignes
+#else
+ return PR_FALSE;
+#endif
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier gfxASurface.cpp
+rm -f gfxASurface.cpp~
+
+
+kwrite gfxTeeSurface.cpp
+
+ LIGNE 49 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 57 :Ajouter ligne
+#endif
+
+ LIGNE 63 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 66 :Ajouter 4 lignes
+#else
+    gfxIntSize a;
+    return a;
+#endif
+
+ LIGNE 75 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 85 :Ajouter ligne
+#endif
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier gfxTeeSurface.cpp
+rm -f gfxTeeSurface.cpp~
+
+cd ../../..
+diff -aur mozilla-central mozilla-central.new
+diff -aur mozilla-central mozilla-central.new > 4.0-system-cairo-fixup.patch
+
+rm -rf mozilla-central.new
+
+cd ..
+mv srcp/4.0-system-cairo-fixup.patch .
+md5sum 4.0-system-cairo-fixup.patch
+
+4.0-python2.7.patch
+======================================
+cd srcp
+cp -R mozilla-central mozilla-central.new
+cd mozilla-central.new
+kwrite configure.in
+ LIGNE 994 : DEVIENT
+MOZ_PATH_PROGS(PYTHON, $PYTHON python2.7 python2.6 python2.5 python2.4 python)
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier configure.in~
+rm -f configure.in~
+cd ..
+diff -aur mozilla-central mozilla-central.new
+diff -aur mozilla-central mozilla-central.new > 4.0-python2.7.patch
+
+rm -rf mozilla-central.new
+
+cd ..
+mv srcp/4.0-python2.7.patch .
+md5sum 4.0-python2.7.patch
+
+
+1) PATCH : 4.0-fix-mozilla-launcher.patch
+======================================
+cp -R mozilla-central mozilla-central.new
+cd mozilla-central.new/xulrunner/stub
+kwrite nsXULStub.cpp
+ LIGNE 318 : RAJOUTER LIGNE
+  char *testp;
+ LIGNE 319 : VIDE
+
+ LIGNE 320 : REMPLACEE PAR :
+  testp = realpath(argv[0], iniPath);
+  if (!(testp != NULL && stat(iniPath, &fileStat) == 0 && S_ISREG(fileStat.st_mode) && fileStat.st_mode & S_IXUSR) || (testp != NULL && stat(iniPath, &fileStat))) {
+
+
+ LIGNE 334 : REMPLACEE PAR :
+      if (realpath(tmpPath, iniPath) && stat(iniPath, &fileStat) == 0 && S_ISREG(fileStat.st_mode) && fileStat.st_mode & S_IXUSR) {
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier nsXULStub.cpp~
+rm -f nsXULStub.cpp~
+cd ../../..
+diff -aur mozilla-central mozilla-central.new
+diff -aur mozilla-central mozilla-central.new > 4.0-fix-mozilla-launcher.patch
+
+rm -rf mozilla-central.new
+
+cd ..
+mv srcp/4.0-fix-mozilla-launcher.patch .
+md5sum 4.0-fix-mozilla-launcher.patch
+
+
+PATCH : 4.0-mozilla-lang.patch
+======================================
+cd srcp
+cp -R mozilla-central mozilla-central.new
+cd mozilla-central.new/browser/app/profile
+kwrite firefox.js
+ LIGNE 463 : Ajouter 2 lignes
+
+// Use LANG environment variable to choose locale
+pref("intl.locale.matchOS", true);
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier firefox.js~
+rm -f firefox.js~
+cd ../../../..
+diff -aur mozilla-central mozilla-central.new
+diff -aur mozilla-central mozilla-central.new > 4.0-mozilla-lang.patch
+
+rm -rf mozilla-central.new
+
+cd ..
+mv srcp/4.0-mozilla-lang.patch .
+md5sum 4.0-mozilla-lang.patch
+
+
+

@@ -1,0 +1,43 @@
+[arch-dev-public] archbuild: building in a chroot for the lazy
+
+Pierre Schmitz
+Fri, 20 Aug 2010 04:09:57 -0700
+
+Hi all,
+
+atm every dev has his own scripts or he just doesn't build his packages
+in a chroot. Even though mkarchroot and makechrootpkg exist they are
+not straight forward to use and you need to configure your chroot
+properly.
+
+My long term goal is to create easy to use tools which will use the
+exact same build environment for everyone. The first attempt is now in
+testing with devtool-0.9.9.
+
+In short: All you need to do now is run e.g. extra-i686-build,
+testing-x86_64-build, staging-i686-build etc.. This will do all the
+boring work for you like creating the correct chroot etc..
+
+In more detail:
+* By default the script will create the chroots in /var/tmp/archbuild.
+  Make sure you have enough disk space here. You might use another dir
+  by using the -r switch.
+* The -c switch will recreate the chroot even if it already exists.
+* You can also build i686 pacakges on x86_64.
+* TUs can use extra-*-build and testing-*-build to build packages for
+  community or community-testing.
+* You user will need the permission to use sudo
+* Set PACKAGER, MAKEFLAGS, SRCDEST, PKGDEST in your ~/.makepkg.conf
+* the first enabled mirror in your mirrorlist will be used for the
+  chroots; local mirrors using file:// are supported.
+
+This is in early stage and far from ready. So feedback and feature
+request are more than welcome.
+
+Greetings,
+
+Pierre
+
+--
+Pierre Schmitz, https://users.archlinux.de/~pierre
+

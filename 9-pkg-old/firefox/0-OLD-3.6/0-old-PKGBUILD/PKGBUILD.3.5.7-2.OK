@@ -1,0 +1,95 @@
+# Contributor: JND
+pkgname=firefox
+pkgver=3.5.7
+pkgrel=2
+pkgdesc="Standalone web browser from mozilla.org. Optimized for faster use"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+#depends=('gtk2>=2.16.0' 'gcc-libs>=4.3.3' 'libidl2>=0.8.13' 'mozilla-common' 'nss>=3.12.2' 'libxt' 'lcms' 'startup-notification>=0.9' 'desktop-file-utils' 'shared-mime-info' 'libxt' 'zlib' 'libjpeg' 'nspr' 'libpng' 'cairo')
+#makedepends=('zip' 'pkgconfig' 'diffutils' 'python' 'xorg-server' 'imagemagick' 'alsa-lib' 'file')
+depends=('hunspell' 'gtk2' 'pyvorbis' 'pango' 'libxt' 'libidl2' 'alsa-lib' 'dbus-glib' 'mozilla-common'
+         'nss' 'lcms' 'startup-notification' 'desktop-file-utils' 'shared-mime-info'
+         'zlib' 'libjpeg' 'nspr' 'libpng' 'cairo'
+         'sqlite3' 'dbus-core' 'glib2')
+makedepends=('zip' 'unzip' 'python' 'pyvorbis' 'xorg-server' 'imagemagick' 'alsa-lib')
+provides=('firefox'="$pkgver")
+conflicts=('firefox')
+install=firefox.install
+url="http://www.mozilla.org/projects/firefox"
+options=('!makeflags')
+
+source=(ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.7/source/firefox-3.5.7.source.tar.bz2
+        ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.7/linux-i686/xpi/fr.xpi
+        mozconfig
+        firefox.desktop
+        firefox-safe.desktop
+        mozilla-lang.patch
+        mozilla-ldflags.patch
+        100-system-hunspell-corrections.patch
+        mozilla-ps-pdf-simplify-operators.patch)
+
+md5sums=('82e6f568ddeaae52e85aa089277f5d14'
+         'db2594b757d472eaee6836627fdf5ae9'
+         '7bdfaa39d3070c5314af180550852d9b'
+         'd7cc1b38d9380d6a91eb69b295fb8987'
+         '05a73d09d253afbef9339b1500a12d8a'
+         '2298d41fc0828fd116ad37ae3491bfa6'
+         '64c03be93f31b9aa98f706b308ee5d5e'
+         'db065676017299329e626a8bbc84df6e'
+         '01e306de9491ec41fcb59f2902fb857c')
+
+build() {
+  cd ${srcdir}/mozilla-1.9.1
+
+  patch -Np1 -i ${srcdir}/mozilla-lang.patch || return 1
+
+  #Add -lxrender -lx11 LDFLAGS.
+  patch -Np1 -i ${srcdir}/mozilla-ldflags.patch || return 1
+
+  #fix build with system hunspell - gentoo
+  patch -Np1 -i ${srcdir}/100-system-hunspell-corrections.patch || return 1
+
+  #Upstream patch. Still not applied to 1.9.1
+  patch -Np1 -i ${srcdir}/mozilla-ps-pdf-simplify-operators.patch || return 1
+
+##  #Fix stub launcher - archlinux
+##  patch -Np1 -i ${srcdir}/fix-mozilla-launcher.patch || return 1
+
+##  patch -Np1 -i ${srcdir}/fix-script-firefox.patch || return 1
+
+##  patch -Np1 -i ${srcdir}/gcc4.4.patch || return 1
+
+  cp ${srcdir}/mozconfig .mozconfig
+
+#note: redistributing self-builded firefox with official branding violates mozilla EULA license. Be warned ;)
+
+  export LDFLAGS="-fprofile-correction -Wl,--rpath,/usr/lib/firefox-${pkgver},--hash-style=gnu,--sort-common"
+
+#for PGO build
+##  make clean -j3 -f client.mk profiledbuild MOZ_MAKE_FLAGS="${MAKEFLAGS}" || return 1
+#for non-PGO build
+  make -f client.mk MOZ_MAKE_FLAGS="${MAKEFLAGS}" || return 1
+}
+
+package() {
+  cd ${srcdir}/mozilla-1.9.1
+
+  make DESTDIR=${pkgdir} -C ff-pgo install || return 1
+
+  install -m755 -d ${pkgdir}/usr/share/applications
+  install -m755 -d ${pkgdir}/usr/share/pixmaps
+  convert ${srcdir}/mozilla-1.9.1/other-licenses/branding/firefox/mozicon50.xpm ${pkgdir}/usr/share/pixmaps/firefox.png || return 1
+  install -m644 ${srcdir}/firefox.desktop ${pkgdir}/usr/share/applications/ || return 1
+  install -m644 ${srcdir}/firefox-safe.desktop ${pkgdir}/usr/share/applications/ || return 1
+
+#Install fr.xpi
+  cd ${srcdir}
+  sed -i "s|jar:chrome/fr.jar|jar:fr.jar|g" chrome.manifest || return 1
+  install -D -m 644 chrome/fr.jar ${pkgdir}/usr/lib/firefox-${pkgver}/chrome/fr.jar || return 1
+  install -D -m 644 chrome.manifest ${pkgdir}/usr/lib/firefox-${pkgver}/chrome/fr.manifest || return 1
+
+#Remove devel stuff
+  rm -rf ${pkgdir}/usr/include/
+  rm -rf ${pkgdir}/usr/lib/firefox-devel-${pkgver}/
+  rm -rf ${pkgdir}/usr/share/idl/
+}

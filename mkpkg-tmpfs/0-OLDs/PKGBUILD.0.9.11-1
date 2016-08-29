@@ -1,0 +1,25 @@
+# Maintainer: graysky <graysky AT archlinux DOT us>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=mkpkg-tmpfs
+pkgver=0.9.11
+pkgrel=1
+pkgdesc='Creation paquets en RAM.'
+arch=('any')
+url='http://www.club-internet.fr/jeannoeldot/'
+license=('GPL2')
+depends=('devtools')
+source=(${pkgname}-${pkgver}.tar.gz)
+sha256sums=('cb01e106eaa8d3a2ba212814918744049f1efe4dc91c9b16e01a94604c1c0717')
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="${pkgdir}" install
+}
+
+# vim:set ts=2 sw=2 et:

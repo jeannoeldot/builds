@@ -1,0 +1,156 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/lm_sensors-svn
+
+http://www.lm-sensors.org/
+
+http://www.lm-sensors.org/wiki/Download
+
+SI http://www.lm-sensors.org/ EST DOWN
+---------------------------------------
+https://github.com/groeck/lm-sensors/commits/master
+
+https://github.com/groeck/lm-sensors/archive/master.zip
+
+1.1 CHANGELOG
+==============
+rm -f change-log.TXT
+svn log http://lm-sensors.org/svn/lm-sensors/trunk > change-log.TXT
+
+1.2 REVISION
+==============
+svn info http://lm-sensors.org/svn/lm-sensors/trunk
+
+!!!!! Révision de la dernière modification : 6209
+
+1.3 SOURCES
+==============
+rm -rf lm_sensors
+
+http://dl.lm-sensors.org/lm-sensors/snapshots/
+
+==> lm-sensors-r6209-20131113.tar.bz2
+
+OU
+
+svn checkout http://lm-sensors.org/svn/lm-sensors/trunk lm_sensors
+
+!!!!! Vérifier VERSION : 
+cat lm_sensors/version.h
+
+ ==> #define LM_VERSION "3.3.4+SVN"
+ 
+ 
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+rm -i lm_sensors-svn-*.tar.gz
+tar -cvzf lm_sensors-svn-3.3.4.6209.tar.gz --exclude=.svn lm_sensors
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+
+!!!!!!
+Lire N° de Révision -> pkgver=3.3.4.6209
+pkgrel=1
+
+sha1sum lm_sensors-svn-3.3.4.6209.tar.gz
+
+sha1sum healthd
+sha1sum healthd.conf
+sha1sum fancontrol.service
+sha1sum sensord.service
+sha1sum healthd.service
+sha1sum linux_3.0.patch
+sha1sum lm_sensors-fancontrol.patch
+
+
+md5sums=(...
+         ...
+)
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxx.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 xxxxxxxx.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+!!! EN USER
+
+$ /home/jnd/bin/mkpkg-tmpfs -n
+
+$ mkpkg-tmpfs -n
+
+
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd /home/jnd/05-builds/lm_sensors-svn
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+rm -rf lm_sensors
+
+# Verifications...
+
+namcap lm_sensors-svn-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/lm_sensors-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv lm_sensors-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+sync
+cd
+maj-repolocal
+
+
+!!! EN ROOT
+!!! MISE A JOUR
+# cd
+# systemctl stop lm_sensors.service
+# pacman -Syu
+# systemctl --system daemon-reload
+# systemctl start lm_sensors.service
+# systemctl status lm_sensors.service
+
+!!! 1 ERE INSTALLATION
+# cd
+# pacman -Syu lm_sensors-svn
+# sensors-detect
+# systemctl enable lm_sensors.service
+# systemctl start lm_sensors.service
+# systemctl status lm_sensors.service
+
+
+!!! TEST EN USER : 
+$ sensors
+
+===================================================
+!!! ERREUR N° VERSION
+!!! EN ROOT
+# cd
+# systemctl stop lm_sensors.service
+# pacman -Rdd lm_sensors-svn
+

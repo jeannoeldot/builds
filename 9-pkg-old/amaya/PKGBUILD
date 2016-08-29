@@ -1,0 +1,110 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=amaya
+pkgver=11.4.4
+pkgrel=2
+pkgdesc="W3C's Editor/Browser"
+arch=('i686' 'x86_64')
+url="http://www.w3.org/Amaya/"
+license=('W3C')
+
+depends=('raptor' 'wxgtk' 'librsvg' 'mesa' 'expat' 'openssl')
+
+makedepends=('gcc47')
+
+options=('!makeflags')
+
+install=amaya.install
+
+source=(http://www.w3.org/Amaya/Distribution/amaya-sources-${pkgver}.tgz
+	11.4.4-fix-thotlib-png.patch
+	11.4.4-splitmode.patch
+	11.4.4-wakeupidle.patch
+	11.4.4-wxyield.patch
+	11.4.4-fix-amaya-gzread.patch
+	11.4.4-amaya-explicite-linking.patch
+	11.4.4-thotlib-explicite-linking.patch
+)
+
+md5sums=('e8072c7b1d06b983951c56e9f51fbacf'
+	 '4b83f065b369c8c79eadbac08abdfe91'
+	 '645694410668e439955290405722becb'
+	 '209cac2ee388df768e2f14cc63c0dd47'
+	 '314fc7e7df45388dabe51f2ff217ca25'
+	 '67672a8b61fb5455ca8cf1fbf310c113'
+	 '8dab7b0e7773e677a8644de6cb915533'
+	 '15188cb0cab460fde6d4f62f7ed21241'
+)
+
+prepare() {
+  cd "${srcdir}/Amaya${pkgver}"
+
+  # fix libpng14/15/16
+  patch -Np1 -i ${srcdir}/11.4.4-fix-thotlib-png.patch
+
+  # Voir Gentoo http://bugs.gentoo.org/show_bug.cgi?id=165280
+  patch -Np1 -i ${srcdir}/11.4.4-splitmode.patch
+
+  patch -Np1 -i ${srcdir}/11.4.4-wakeupidle.patch
+
+  patch -Np1 -i ${srcdir}/11.4.4-wxyield.patch
+
+  # error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzread(gzFile, voidp, unsigned int)'
+  patch -Np1 -i ${srcdir}/11.4.4-fix-amaya-gzread.patch
+
+  # Voir AUR : explicite linking -lpng -ljpeg
+  patch -Np1 -i ${srcdir}/11.4.4-amaya-explicite-linking.patch
+
+  # Voir AUR : explicite linking -lpng -ljpeg
+  patch -Np1 -i ${srcdir}/11.4.4-thotlib-explicite-linking.patch
+
+  rm -rf Mesa
+  rm -rf wxWidgets
+  rm -rf redland
+}
+
+build() {
+  cd "${srcdir}/Amaya${pkgver}"
+  
+  unset CPPFLAGS
+
+  cd Amaya
+  mkdir wx-build
+  cd wx-build
+
+  ../configure \
+   --prefix=/usr/share \
+   --enable-system-raptor \
+   --enable-system-wx \
+   --with-gl \
+   CC=/usr/bin/gcc-4.7 \
+   CXX=/usr/bin/g++-4.7 \
+   LD=/usr/bin/g++-4.7 \
+   LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,--hash-style=gnu"
+
+  # Supprime -D__cplusplus dans CXXFLAGS= -O2 -Wall -x c++ -D__cplusplus
+  sed -i "/^CXXFLAGS/c\CXXFLAGS= -O2 -Wall -x c++" Options.orig
+
+  make
+}
+
+# check() {
+#   cd "${srcdir}/Amaya${pkgver}/Amaya/wx-build"
+#   make -k check
+# }
+
+package() {
+  cd "${srcdir}/Amaya${pkgver}/Amaya/wx-build"
+
+  install -d ${pkgdir}/usr/share
+  make prefix=${pkgdir}/usr/share install
+  ./script_install_gnomekde ${srcdir}/Amaya${pkgver}/Amaya/wx-build/bin ${pkgdir}/usr/share /usr/share
+
+  mv ${pkgdir}/usr/share/bin ${pkgdir}/usr/bin
+  rm ${pkgdir}/usr/bin/amaya
+
+  cd ${pkgdir}/usr/bin && \
+  ln -f -s ../share/Amaya/wx/bin/amaya amaya
+
+  install -D -m644 ${srcdir}/Amaya${pkgver}/Amaya/amaya/COPYRIGHT ${pkgdir}/usr/share/licenses/${pkgname}/COPYRIGHT
+}

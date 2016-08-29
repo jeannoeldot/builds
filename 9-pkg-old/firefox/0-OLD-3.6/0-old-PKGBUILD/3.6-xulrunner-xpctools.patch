@@ -1,0 +1,26 @@
+diff -aur mozilla-1.9.2/js/src/xpconnect/src/Makefile.in mozilla-1.9.2.new/js/src/xpconnect/src/Makefile.in
+--- mozilla-1.9.2/js/src/xpconnect/src/Makefile.in	2010-01-21 04:30:28.000000000 +0100
++++ mozilla-1.9.2.new/js/src/xpconnect/src/Makefile.in	2010-01-28 20:00:53.968615803 +0100
+@@ -76,6 +76,10 @@
+ 		   xultmpl \
+ 		   widget \
+ 		   $(NULL)
++ifdef MOZ_XPCTOOLS
++DEFINES         +=  -DXPC_TOOLS_SUPPORT
++REQUIRES	+= xpctools
++endif
+ 
+ 
+ CPPSRCS		= \
+@@ -174,11 +178,6 @@
+ 
+ endif # ENABLE_JIT
+ 
+-ifdef MOZ_XPCTOOLS
+-DEFINES         +=  -DXPC_TOOLS_SUPPORT
+-REQUIRES	+= xpctools
+-endif
+-
+ ifdef XPC_IDISPATCH_SUPPORT
+ DEFINES		+= -DXPC_IDISPATCH_SUPPORT
+ ifdef XPC_COMOBJECT

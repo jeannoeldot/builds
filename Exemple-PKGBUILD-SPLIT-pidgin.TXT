@@ -1,0 +1,162 @@
+# $Id: PKGBUILD 50075 2009-08-19 21:08:55Z andyrtr $
+# Maintainer: Alexander Fehr <pizzapunk gmail com>
+# Contributor: Lucien Immink <l.immink@student.fnt.hvu.nl>
+# Modified for split packaging by: Zeqadious <zeqadious@gmail.com>
+
+pkgname=( 'pidgin' 'finch' 'libpurple' )
+pkgver=2.6.1
+pkgrel=0
+url="http://pidgin.im/"
+arch=( 'i686' 'x86_64' )
+license=( 'GPLv2' )
+makedepends=(
+	'startup-notification'
+	'gtkspell'
+	'libxss'
+	'gstreamer0.10'
+	'nss'
+	'libsasl'
+	'python'
+	'hicolor-icon-theme'
+	'silc-toolkit'
+	'avahi'
+	'ca-certificates'
+	'gcc'
+	'intltool'
+	'make'
+	'pkgconfig'
+	'tk'
+)
+options=( '!libtool' )
+source=( http://downloads.sourceforge.net/pidgin/pidgin-${pkgver}.tar.bz2 )
+md5sums=( '306b6b60aefa9c5d5bffb08c576aa955' )
+
+build() {
+	
+	cd ${srcdir}/pidgin-${pkgver}
+
+	./configure \
+			--prefix=/usr \
+			--sysconfdir=/etc \
+			--disable-schemas-install \
+			--disable-meanwhile \
+			--disable-nm \
+			--disable-perl \
+			--disable-gnutls \
+			--enable-cyrus-sasl \
+			--disable-doxygen \
+			--with-system-ssl-certs=/etc/ssl/certs || return 1
+
+	make || return 1
+}
+
+package_pidgin() {
+	
+	pkgrel=( '2' )
+	depends=(
+		'gtkspell'
+		'hicolor-icon-theme'
+		'libpurple'
+		'python'
+		'startup-notification'
+	)
+	replaces=( 'gaim' )
+	install=( 'pidgin.install' )
+	
+	cd ${srcdir}/pidgin-${pkgver}
+
+	make DESTDIR=${pkgdir} install || return 1
+
+	# remove libpurple
+	rm -r ${pkgdir}/usr/share/purple || return 1
+	rm -r ${pkgdir}/usr/share/sounds || return 1
+	rm -r ${pkgdir}/usr/include/libpurple || return 1
+	rm -f ${pkgdir}/usr/bin/purple-* || return 1
+	rm -f ${pkgdir}/usr/lib/pkgconfig/purple.pc || return 1
+	rm -r ${pkgdir}/usr/lib/purple-2 || return 1
+	rm -f ${pkgdir}/usr/lib/libpurple* || return 1
+	rm -f ${pkgdir}/usr/share/aclocal/purple.m4 || return 1
+	
+	# remove finch
+	rm -f ${pkgdir}/usr/bin/finch || return 1
+	rm -r ${pkgdir}/usr/include/finch || return 1
+	rm -r ${pkgdir}/usr/lib/finch || return 1
+	rm -f ${pkgdir}/usr/lib/pkgconfig/finch.pc || return 1
+	rm -f ${pkgdir}/usr/share/man/man1/finch.1 || return 1
+	
+	# Remove GConf schema file
+	rm -rf ${pkgdir}/etc || return 1
+}
+
+package_finch() {
+	
+	pkgrel=( '1' )
+	depends=( 'libpurple' )
+	
+	cd ${srcdir}/pidgin-${pkgver}
+
+	make DESTDIR=${pkgdir} install || return 1
+
+	# remove libpurple
+	rm -r ${pkgdir}/usr/share/purple || return 1
+	rm -r ${pkgdir}/usr/share/sounds || return 1
+	rm -r ${pkgdir}/usr/include/libpurple || return 1
+	rm -f ${pkgdir}/usr/bin/purple-* || return 1
+	rm -f ${pkgdir}/usr/lib/pkgconfig/purple.pc || return 1
+	rm -r ${pkgdir}/usr/lib/purple-2 || return 1
+	rm -f ${pkgdir}/usr/lib/libpurple* || return 1
+	rm -f ${pkgdir}/usr/share/aclocal/purple.m4 || return 1
+	
+	# remove pidgin
+	rm -f ${pkgdir}/usr/bin/pidgin || return 1
+	rm -r ${pkgdir}/usr/include/{gnt,pidgin} || return 1
+	rm -r ${pkgdir}/usr/lib/{gnt,pidgin} || return 1
+	rm -f ${pkgdir}/usr/lib/pkgconfig/{gnt,pidgin}.pc || return 1
+	rm -f ${pkgdir}/usr/lib/libgnt.so* || return 1
+	rm -r ${pkgdir}/usr/share/{aclocal,applications,icons,locale,pixmaps} || return 1
+	rm -f ${pkgdir}/usr/share/man/man1/pidgin.1 || return 1
+	
+	# Remove GConf schema file
+	rm -rf ${pkgdir}/etc || return 1
+}
+
+package_libpurple() {
+	
+	pkgrel=( '1' )
+	pkgdesc=( 'A multi-protocol IM library' )
+	depends=(
+		'libxss'
+		'gstreamer0.10'
+		'nss'
+		'libsasl'
+		'silc-toolkit'
+	)
+	optdepends=(
+		'avahi: Bonjour protocol support'
+		'tk: Tcl/Tk scripting support'
+		'ca-certificates: SSL CA certificates'
+	)	
+	
+	cd ${srcdir}/pidgin-${pkgver}
+
+	make DESTDIR=${pkgdir} install || return 1
+	
+	# remove finch
+	rm -f ${pkgdir}/usr/bin/finch || return 1
+	rm -r ${pkgdir}/usr/include/finch || return 1
+	rm -r ${pkgdir}/usr/lib/finch || return 1
+	rm -f ${pkgdir}/usr/lib/pkgconfig/finch.pc || return 1
+	rm -f ${pkgdir}/usr/share/man/man1/finch.1 || return 1
+
+	# remove pidgin
+	rm -f ${pkgdir}/usr/bin/pidgin || return 1
+	rm -r ${pkgdir}/usr/include/{gnt,pidgin} || return 1
+	rm -r ${pkgdir}/usr/lib/{gnt,pidgin} || return 1
+	rm -f ${pkgdir}/usr/lib/pkgconfig/{gnt,pidgin}.pc || return 1
+	rm -f ${pkgdir}/usr/lib/libgnt.so* || return 1
+	rm -f ${pkgdir}/usr/share/man/man1/pidgin.1 || return 1
+	rm -r ${pkgdir}/usr/share/{aclocal,applications,icons,locale,pixmaps} || return 1
+
+	# Remove GConf schema file
+	rm -rf ${pkgdir}/etc || return 1
+}

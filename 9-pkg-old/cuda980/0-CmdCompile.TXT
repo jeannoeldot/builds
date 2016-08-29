@@ -1,0 +1,188 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/cuda980
+
+
+1.3 SOURCES
+==============
+CUDA 6.5 Production Release with Support for GeForce GTX9xx GPUs
+http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda_6.5.19_linux_64.run
+
+https://developer.nvidia.com/cuda-downloads/checksums2
+cuda_6.5.19_linux_64.run = 74014042f92d3eade43af0da5f65935e
+
+!!! ENVIRON 3 HEURES
+--------------------
+wget http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda_6.5.19_linux_64.run
+
+ls -l
+
+md5sum cuda_6.5.19_linux_64.run 74014042f92d3eade43af0da5f65935e
+
+FICHIERS SUR EXTRA
+------------------
+$ cd 0-Extra
+
+wget https://projects.archlinux.org/svntogit/community.git/plain/trunk/PKGBUILD?h=packages/cuda -O PKGBUILD
+
+wget https://projects.archlinux.org/svntogit/community.git/plain/trunk/cuda.conf?h=packages/cuda -O cuda.conf
+
+wget https://projects.archlinux.org/svntogit/community.git/plain/trunk/cuda.install?h=packages/cuda -O cuda.install
+
+wget https://projects.archlinux.org/svntogit/community.git/plain/trunk/cuda.sh?h=packages/cuda -O cuda.sh
+
+ls -l
+
+-rw-r--r-- 1 jnd users   30 22 nov.  19:03 cuda.conf
+-rw-r--r-- 1 jnd users  308 22 nov.  19:06 cuda.install
+-rw-r--r-- 1 jnd users   32 22 nov.  19:07 cuda.sh
+-rw-r--r-- 1 jnd users 2355 22 nov.  18:56 PKGBUILD
+
+cd ..
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+
+pkgname=cuda980
+!!!!!!
+_realname=cuda
+pkgver=6.5.19
+pkgrel=1
+
+!!!!!!
+replaces=('cuda' 'cuda-toolkit' 'cuda-sdk')
+provides=('cuda' 'cuda-toolkit' 'cuda-sdk')
+ ==>
+provides=('cuda' 'cuda-toolkit' 'cuda-sdk')
+conflicts=('cuda' 'cuda-toolkit' 'cuda-sdk')
+
+
+md5sum cuda_6.5.19_linux_64.run         74014042f92d3eade43af0da5f65935e
+md5sum cuda.sh                          7e5990e03eea90075f5a500e91a0c3d3
+md5sum cuda.conf                        ffe1e6fb7f97b23da28fd94a5fd7356d
+
+md5sums=(...
+         ...
+)
+
+
+!!!!!!
+${pkgname}  ==>  ${_realname}
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 982446238 20 nov.  20:38 cuda_6.5.19_linux_64.run
+-rw-r--r--  1 jnd users        30 22 nov.  19:03 cuda.conf
+-rw-r--r--  1 jnd users       308 22 nov.  19:06 cuda.install
+-rw-r--r--  1 jnd users        32 22 nov.  19:07 cuda.sh
+-rw-r--r--  1 jnd users      2404 22 nov.  19:17 PKGBUILD
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! ENVIRON 10 MINUTES
+-----------------------
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/cuda980/PKGBUILD . \
+&& cp -v /home/jnd/05-builds/cuda980/cuda.sh . \
+&& cp -v /home/jnd/05-builds/cuda980/cuda.install . \
+&& cp -v /home/jnd/05-builds/cuda980/cuda.conf . \
+&& cp -v /home/jnd/05-builds/cuda980/cuda_6.5.19_linux_64.run . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/cuda980 \
+&& cp -v /tmp/build/cuda980-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/cuda980 && rm -rf /tmp/build
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd /home/jnd/05-builds/cuda980
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+
+# Verifications...
+
+namcap cuda980-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/cuda980-*-x86_64.pkg.tar.* \
+/home/jnd/00-repolocal/pkg-OLD/
+!!! OU
+# Supprime le précédent dans  /home/jnd/00-repolocal
+rm -i /home/jnd/00-repolocal/cuda980-*-x86_64.pkg.tar.*
+
+
+mv cuda980-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+sync
+
+cd && maj-repolocal
+sync
+
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -Syu cuda980
+
+# pacman -R cuda
+
+# rm -i /var/cache/pacman/pkg/cuda980-*-x86_64.pkg.tar.*
+
+POUR REMETTRE cuda COMMUNITY
+================================
+# pacman -Rdd cuda980
+# rm /var/cache/pacman/pkg/cuda980-*
+# pacman -Syu cuda
+
+
+================================================================
+ANCIENS
+========

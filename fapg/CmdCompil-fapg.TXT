@@ -1,0 +1,86 @@
+# Le répertoire
+cd $HOME/05-builds/fapg
+
+md5sum fapg-0.41.tar.gz
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgrel=
+
+source=(... ...)
+md5sums=(... ...)
+
+
+3) MAKEPKG TMPFS en CHROOT EN USER
+==================================
+
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+$ rm -rf /tmp/chrootrepo
+
+
+3) MAKEPKG en USER
+=====================
+
+makepkg -s
+
+makepkg -f
+
+5) NETTOYAGES fichiers ~
+==========================
+
+rm -f *~
+
+rm -rf pkg src
+
+# Verifications...
+
+namcap fapg-*-x86_64.pkg.tar.gz
+OU
+namcap fapg-*-x86_64.pkg.tar.*
+
+
+# Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+mv $HOME/00-repolocal/fapg-*-x86_64.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+mv fapg-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# pacman -Syu
+
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+==========================================================
+3) MAKEPKG TMPFS en CHROOT
+==========================
+
+!!! EN ROOT
+
+# cd
+# mkpkg-tmpfs $HOME/05-builds/fapg -n
+
+!!!! ESSAIS
+test-su-args $HOME/05-builds/fapg -n -qt4 -svn
+
+test-su-args -n -qt4 -svn
+
+
+

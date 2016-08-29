@@ -1,0 +1,328 @@
+# Le répertoire
+cd /home/jnd/05-builds/linux-jnd
+
+
+!!! EN ROOT
+===============
+1) MAJ ABS
+===========
+# cd
+# abs
+
+!!! EN USER
+==================
+1) RECUPERATION FICHIERS DE ABS
+================================
+!!! VERIFIE SI FICHIERS A JOUR !!!
+$ cd /home/jnd/05-builds/linux-jnd
+
+$ cp /var/abs/core/linux/* .
+
+2) RECUPERATION FICHIERS SOURCES
+=================================
+
+http://www.kernel.org/pub/linux/kernel/v3.x
+
+  =>	linux-3.10.tar.xz
+  =>	patch-3.10.6.xz
+
+:: DERNIER
+$ wget http://www.kernel.org/pub/linux/kernel/v3.x/linux-3.10.6.tar.xz
+
+:: ARCH
+$ wget http://www.kernel.org/pub/linux/kernel/v3.x/linux-3.10.tar.xz
+$ wget http://www.kernel.org/pub/linux/kernel/v3.x/patch-3.10.6.xz
+
+
+!!! PB ftp://ftp.kernel.org
+http://kernelorg.mirrors.tds.net/pub/linux/kernel/v3.x/linux-3.10.tar.xz
+
+!!! PB ftp://ftp.kernel.org
+$ wget ftp://ftp.archlinux.org/other/linux/patch-3.10.6.xz
+
+
+3) FAIRE PATCH
+===============
+voir 0-CmdFairePatches.TXT
+
+3.10.6-linux-gcc48-core2.patch
+
+4.1) MODIFIER config.x86_64
+===========================
+
+cp config.x86_64 config.x86_64.arch.3.10.6-2
+
+# disable NUMA since 99.9% of users do not have multiple CPUs but do have multiple cores in one CPU
+# see, https://bugs.archlinux.org/task/31187
+sed -i -e 's/CONFIG_NUMA=y/# CONFIG_NUMA is not set/' \
+    -i -e '/CONFIG_AMD_NUMA=y/d' \
+    -i -e '/CONFIG_X86_64_ACPI_NUMA=y/d' \
+    -i -e '/CONFIG_NODES_SPAN_OTHER_NODES=y/d' \
+    -i -e '/# CONFIG_NUMA_EMU is not set/d' \
+    -i -e '/CONFIG_NODES_SHIFT=6/d' \
+    -i -e '/CONFIG_NEED_MULTIPLE_NODES=y/d' \
+    -i -e '/# CONFIG_MOVABLE_NODE is not set/d' \
+    -i -e '/CONFIG_USE_PERCPU_NUMA_NODE_ID=y/d' \
+    -i -e '/CONFIG_ACPI_NUMA=y/d' config.x86_64
+
+
+kwrite config.x86_64
+modifier les lignes 362 à 364
+
+CONFIG_MCORE2=y
+# CONFIG_MATOM is not set
+# CONFIG_GENERIC_CPU is not set
+
+VOIR 0-CmdFaireConfig.TXT
+
+4.2) MODIFIER LE PKGBUILD
+=========================
+
+
+!!!!!	_srcname=linux-3.10
+!!!!!	pkgver=3.10.6
+!!!!!	pkgrel=12	!!! +10 ARCH
+
+  source=(... ...)
+----------------------
+
+http://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz
+http://www.kernel.org/pub/linux/kernel/v3.x/patch-${pkgver}.xz
+...
+'3.10.6-linux-gcc48-core2.patch'
+
+  md5sums=(... ...)
+----------------------------
+
+md5sum linux-3.10.tar.xz
+
+md5sum patch-3.10.6.xz
+
+md5sum config
+
+md5sum config.x86_64
+
+md5sum linux.preset
+
+md5sum change-default-console-loglevel.patch
+
+md5sum criu-no-expert.patch
+
+md5sum 3.10.6-logitech-dj.patch
+
+md5sum 3.10.6-reset-superseed-xhci-hcd.patch
+
+md5sum 3.10.6-linux-gcc48-core2.patch
+
+
+prepare() {
+AJOUTER LIGNES ( 69 )
+
+  ### Patch source to enable more gcc CPU optimizatons via the make nconfig
+  patch -Np1 -i "${srcdir}/3.10.6-linux-gcc48-core2.patch"
+
+
+5) MAKEPKG en CHROOT
+====================
+!!! EN ROOT
+
+# cd
+# mkpkg-tmpfs /home/jnd/05-builds/linux-jnd -n
+
+
+5-A) MAKEPKG en USER
+======================
+!!! EN USER
+
+
+cd /home/jnd/05-builds/linux-jnd
+
+makepkg -s
+
+makepkg -f
+
+========================================================================================
+# Verifications...
+==================
+
+namcap
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+rm -rf pkg src
+rm -rf srcp
+
+# Sauve linux ARCH
+
+cp -v /var/cache/pacman/pkg/linux-3.10.6-2-x86_64.pkg.tar.xz /home/jnd/00-repolinux/LINUX-ARCH-OLD/
+cp -v /var/cache/pacman/pkg/linux-headers-3.10.6-2-x86_64.pkg.tar.xz /home/jnd/00-repolinux/LINUX-ARCH-OLD/
+cp -v /var/cache/pacman/pkg/linux-docs-3.10.6-2-x86_64.pkg.tar.xz /home/jnd/00-repolinux/LINUX-ARCH-OLD/
+
+# Déplace les précédents dans  /home/jnd/00-repolinux/pkg-OLD
+
+mv /home/jnd/00-repolinux/linux-*-x86_64.pkg.tar.* /home/jnd/00-repolinux/pkg-OLD/
+
+# Déplace les paquets dans  /home/jnd/00-repolinux/
+
+mv linux-*-x86_64.pkg.tar.* /home/jnd/00-repolinux/
+
+# MAJ repolinux
+
+cd
+maj-repolinux.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+OU
+# pacman -Syyu
+# pacman -S linux linux-headers
+
+SI PAS MAJ VERSION-ARCH ==> VERSION-MOI	3.10.6-2 ==> 3.10.6-12
+
+mettre 00-repolinux avant core ds pacman.conf
+!!! EN USER : $ kdesu kwrite /etc/pacman.conf
+
+!!! EN ROOT : # rm -i /etc/pacman.conf~
+
+!!! EN ROOT : # pacman -Syyu
+
+# pacman -S /home/jnd/00-repolinux/linux-3.10.6-12 /home/jnd/00-repolinux/linux-headers-3.10.6-12
+
+!!! VERIF INSTALLATION
+
+# ls -l /boot
+
+
+SI PROBLEMES
+================
+
+# pacman -U /home/jnd/00-repolinux/LINUX-ARCH-OLD/linux-3.10.6-2-x86_64.pkg.tar.xz /home/jnd/00-repolinux/LINUX-ARCH-OLD/linux-headers-3.10.6-2-x86_64.pkg.tar.xz
+
+# rm -f /var/cache/pacman/pkg/linux-3.10.6-12-*
+# rm -f /var/cache/pacman/pkg/linux-headers-3.10.6-12-x86_64.pkg.tar.xz
+# rm -f /var/cache/pacman/pkg/linux-docs-3.10.6-12-x86_64.pkg.tar.xz
+
+=========================================================================
+ANCIENS
+========
+3.10-linux-usb.patch
+'3.10-linux-usb.patch'
+md5sum 3.10-linux-usb.patch
+  # Patch : linux-usb
+  # remove this when is made available by upstream
+  patch -Np1 -i "${srcdir}/3.10-linux-usb.patch"
+
+
+
+
+        # My xfermode patch for my PIONEER DVD-RW
+        '3.10-pioneer-xfermode.patch'
+
+build() {
+AJOUTER LIGNES ( FIN )
+
+  # My patch : error xfermode with my DVD-RW
+  # remove this when is made available by upstream
+  patch -Np1 -i "${srcdir}/3.10-pioneer-xfermode.patch"
+
+!!! VERIF INSTALLATION
+
+# ls -l /boot
+total 27987
+drwxr-xr-x 2 root root    1024 21 août  18:05 grub
+-rw-r--r-- 1 root root 9835801 18 août  19:11 initramfs-linux-fallback.img
+-rw-r--r-- 1 root root 2198438 18 août  19:11 initramfs-linux.img
+-rw-r--r-- 1 root root 9632313 28 août  11:49 initramfs-linux-jnd-fallback.img
+-rw-r--r-- 1 root root 2198808 28 août  11:49 initramfs-linux-jnd.img
+drwx------ 2 root root   12288  8 févr.  2009 lost+found
+-rw-r--r-- 1 root root 2330816 17 août  21:58 vmlinuz-linux
+-rw-r--r-- 1 root root 2326224 28 août  11:01 vmlinuz-linux-jnd
+
+==> FAIRE MODIF /boot/grub/menu.lst
+$ kdesu kwrite /boot/grub/menu.lst
+
+# rm -i /boot/grub/menu.lst~
+
+md5sum alsa-powersave-3.10.x.patch
+
+md5sum watchdog-3.10.x.patch
+
+md5sum i915-i2c-crash-3.10.x.patch
+
+---------------------------------
+package_linux() {
+
+package_linux-headers() {
+
+package_linux-docs() {
+
+
+!!!! ERREUR !!!!
+  DEPMOD  3.5.3-1-ARCH
+ERROR: could not open directory /build/pkg/linux/lib/modules/3.5.3-1-ARCH: No such file or directory
+FATAL: could not search modules: No such file or directory
+==> ERROR: A failure occurred in package_linux().
+    Aborting...
+==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/copy/build
+
+
+# pacman -U /home/jnd/05-builds/linux-jnd/0-OLD-LINUX-ARCH/linux-3.10.5-1-x86_64.pkg.tar.xz /home/jnd/05-builds/linux-jnd/0-OLD-LINUX-ARCH/linux-headers-3.10.5-1-x86_64.pkg.tar.xz
+
+
+ftp://ftp.kernel.org/pub/linux/kernel/v3.x
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.2.tar.xz
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/patch-3.2.14.xz
+
+ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.2.tar.xz
+ftp://ftp.kernel.org/pub/linux/kernel/v3.x/patch-3.2.14.xz
+
+md5sum i915-fix-incorrect-error-message.patch
+
+md5sum usb-add-reset-resume-quirk-for-several-webcams.patch
+
+5) MAKEPKG en CHROOT
+====================
+!!! EN ROOT
+::Mise a Jour
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+::Build
+# cd
+# cd /home/jnd/05-builds/linux-jnd
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+:: SI Edition .config
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build/src/linux-3.0/
+# make menuconfig
+# ls -la
+# cp .config /home/jnd/05-builds/linux-jnd/config.x86_64.moi
+# chown jnd:jnd config.x86_64.moi
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+
+# ls -l
+# chown jnd:jnd config config.x86_64 linux.preset
+# chown jnd:jnd *.patch
+# chown jnd:jnd linux-3.2.tar.* patch-3.2.14.*
+# chown jnd:jnd linux-*-*.log
+# chown jnd:jnd linux-*-x86_64.pkg.tar.*
+# ls -l
+
+rm -f *.log
+
+# chown jnd:jnd namcap.log
+# chown jnd:jnd i915-fix-ghost-tv-output.patch i915-fix-incorrect-error-message.patch
+# chown jnd:jnd usb-add-reset-resume-quirk-for-several-webcams.patch
+# chown jnd:jnd change-default-console-loglevel.patch 3.2-pioneer-xfermode.patch

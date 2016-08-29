@@ -1,0 +1,31 @@
+
+COOMANDES A EFFECTUER SI /home/jnd/05-builds/0-chroot/00-tmpfs-chroot NON SUPPRIMÉ
+==================================================================================
+
+REP_TMPFS="/home/jnd/05-builds/0-chroot/00-tmpfs-chroot"
+
+!!!! EN ROOT
+=============
+
+# mount | grep 00-tmpfs-chroot
+
+SI :
+=====
+none on /home/jnd/05-builds/0-chroot/00-tmpfs-chroot type tmpfs (rw,relatime,size=16777216k)
+
+FAIRE :
+========
+
+# umount -f /home/jnd/05-builds/0-chroot/00-tmpfs-chroot
+
+
+VÉRIFIER :
+===========
+
+# mount | grep 00-tmpfs-chroot
+
+
+SI OK :
+========
+
+# rm -rf /home/jnd/05-builds/0-chroot/00-tmpfs-chroot

@@ -1,0 +1,103 @@
+# Maintainer: JND
+
+pkgname=bluegriffon-svn
+pkgver=1.4.944
+pkgrel=1
+_bgname=bluegriffon
+_bgver=1.4
+
+pkgdesc="New WYSIWYG content editor for the Web powered by Gecko"
+url="http://bluegriffon.org/"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+depends=('gtk2' 'mozilla-common' 'libxt' 'hunspell' 'startup-notification'
+         'mime-types' 'dbus-glib' 'alsa-lib' 'sqlite3' 'libnotify' 'desktop-file-utils'
+         'libevent' 'hicolor-icon-theme' 'nspr>=4.8.8'
+)
+#depends=( 'nss' 'libvpx')
+makedepends=('unzip' 'zip' 'pkg-config' 'diffutils' 'python2' 'wireless_tools'
+             'yasm' 'mesa' 'autoconf2.13' 'libidl2' 'xorg-server-xvfb' 'gconf'
+)
+
+provides=("bluegriffon")
+conflicts=("bluegriffon")
+
+install=bluegriffon.install
+
+source=("${pkgname}-${pkgver}.tar.bz2"
+        'mozconfig'
+	'bluegriffon.sh'
+        'bluegriffon.desktop'
+	'1.4-bluegriffon-config-content.patch'
+	'1.4-prefs.patch'
+)
+md5sums=('fde3ff01c181cc5340074a5a357cbf56'
+         '7099ff4c69018a4f524dbba22472bd06'
+         '9c5c47f5d0f5f36a3abd8bfecf6c5d8d'
+         '044abfeea6a59f084d5d2fbc89368f8b'
+         'b659fa765ba1dabaaefef21b2dcabce3'
+         '53f018024478677b78418fc720624b69'
+)
+
+
+build() {
+  cd "${srcdir}"/mozilla-2.0
+
+  # Erreur : can't find file to patch at input line 954 et 987
+  patch -Np1 -i "${srcdir}/1.4-bluegriffon-config-content.patch"
+
+  # voir http://bluegriffon.org/pages/Build-BlueGriffon
+  patch -p 1 < bluegriffon/config/content.patch
+
+  patch -Np1 -i "${srcdir}/1.4-prefs.patch"
+
+  # Fix PRE_RELEASE_SUFFIX
+  sed -i '/^PRE_RELEASE_SUFFIX := ""/s/ ""//' \
+    browser/base/Makefile.in
+
+  cp "${srcdir}"/mozconfig .mozconfig
+
+  export CFLAGS="$CFLAGS -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+  export CXXFLAGS="$CXXFLAGS -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+  export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/lib/${_bgname}"
+  export PYTHON="/usr/bin/python2"
+
+  make -f client.mk build_all MOZ_MAKE_FLAGS="$MAKEFLAGS"
+}
+package() {
+  cd "${srcdir}"/mozilla-2.0
+
+  # No Make install for now :(
+  #make DESTDIR="$pkgdir/" -C bg-trunk install
+
+  install -d -m 755 ${pkgdir}/usr/bin
+  install -d -m 755 ${pkgdir}/usr/lib/${_bgname}
+  install -d -m 755 ${pkgdir}/usr/share/applications
+
+  # VOIR : https://github.com/remicollet/remirepo/blob/master/bluegriffon/bluegriffon.spec
+  cd bg-trunk
+  tar --create --file - --dereference --directory=dist/bin --exclude xulrunner . \
+  | tar --extract --file - --directory ${pkgdir}/usr/lib/${_bgname}
+
+  # Launcher
+  cp ${srcdir}/bluegriffon.sh ${pkgdir}/usr/bin/${_bgname}
+  chmod 755 ${pkgdir}/usr/bin/${_bgname}
+
+  cd "${srcdir}"/mozilla-2.0
+
+  # Icons
+  install -D -m 644 ${_bgname}/app/icons/default16.png "${pkgdir}/usr/share/icons/hicolor/16x16/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/default32.png "${pkgdir}/usr/share/icons/hicolor/32x32/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/default48.png "${pkgdir}/usr/share/icons/hicolor/48x48/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/default50.png "${pkgdir}/usr/share/icons/hicolor/64x64/apps/${_bgname}.png"
+  install -D -m 644 ${_bgname}/app/icons/bluegriffon128.png "${pkgdir}/usr/share/icons/hicolor/128x128/apps/${_bgname}.png"
+
+  # Desktop
+  install -D -m 644 "${srcdir}/${_bgname}.desktop" "${pkgdir}/usr/share/applications/${_bgname}.desktop"
+
+  # Use the system hunspell dictionaries
+  rm -rf "${pkgdir}/usr/lib/${_bgname}/{dictionaries,hyphenation}"
+  ln -sf /usr/share/hunspell "$pkgdir/usr/lib/${_bgname}/dictionaries"
+  ln -sf /usr/share/hyphen "$pkgdir/usr/lib/${_bgname}/hyphenation"
+  #ln -sf /usr/share/myspell/dicts "${pkgdir}/usr/lib/${_bgname}/dictionaries"
+}

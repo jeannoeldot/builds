@@ -1,0 +1,23 @@
+diff -aur blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp blender.new/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp
+--- blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp	2016-05-22 10:39:55.000000000 +0200
++++ blender.new/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp	2016-05-25 16:12:44.685443099 +0200
+@@ -34,14 +34,17 @@
+ #include <math.h>
+ #include <stdlib.h>
+ #include <algorithm>
+-
+-#include "rayobject_rtbuild.h"
++#ifndef isfinite
++#define isfinite(x) std::isfinite(x)
++#endif
+ 
+ #include "MEM_guardedalloc.h"
+ 
+ #include "BLI_math.h"
+ #include "BLI_utildefines.h"
+ 
++#include "rayobject_rtbuild.h"
++
+ static bool selected_node(RTBuilder::Object *node)
+ {
+ 	return node->selected;

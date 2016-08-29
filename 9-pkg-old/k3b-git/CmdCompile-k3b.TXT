@@ -1,0 +1,166 @@
+0) REPERTOIRE
+==============
+cd /home/jnd/05-builds/k3b-git
+
+1) FABRIQUER TAR.GZ
+====================
+ 1-1) k3b-git
+--------------
+git clone git://git.kde.org/k3b
+
+rm -rf k3b
+git clone git://anongit.kde.org/k3b
+
+ 1-2) po
+------------
+http://websvn.kde.org/trunk/l10n-kde4/fr/messages/extragear-multimedia/
+
+rm -rf k3b-git-po
+svn co svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4/fr/messages/extragear-multimedia k3b-git-po
+OU
+svn cp svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4/fr/messages/extragear-multimedia k3b-git-po
+
+cp k3b-git-po/*k3b* po/fr
+
+cp -R po k3b
+
+ 1-3-1) doc-fr
+----------------
+http://websvn.kde.org/trunk/l10n-kde4/fr/docs/extragear-multimedia/k3b/
+
+rm -rf k3b-git-doc-fr
+svn co svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4/fr/docs/extragear-multimedia/k3b k3b-git-doc-fr
+OU
+svn cp svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4/fr/docs/extragear-multimedia/k3b k3b-git-doc-fr
+
+cp k3b-git-doc-fr/* doc-translations/fr_k3b/k3b/
+
+cp -R doc-translations k3b
+
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+ 1-9)
+------------
+cd k3b
+kwrite CMakeLists.txt	===> K3b version = 2.0.80
+ LIGNE 298, AJOUTER LES LIGNES :
+find_package(Msgfmt REQUIRED)
+find_package(Gettext REQUIRED)
+add_subdirectory( po )
+add_subdirectory( doc-translations )
+
+ Enregistrer & Quitter
+rm CMakeLists.txt~
+cd ..
+!!!!!! Version et date
+tar -cvzf k3b-git-2.0.80.20110131.tar.gz k3b
+ls
+md5sum k3b-git-2.0.80.20110131.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+!!!!!!
+Lire N° de Révision -> pkgver=2.0.80.20110131
+
+pkgver=
+pkgrel=
+
+source=(k3b-git-2.0.80.20110131.tar.gz
+	xxx.patch
+)
+md5sums=(123456789
+	 123456789
+)
+
+
+3) MAKEPKG
+============
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf k3b
+rm -rf k3b-git-po
+rm -rf k3b-git-doc-fr
+
+rm -rf pkg src
+rm -f *~
+
+namcap k3b-git-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/k3b-svn-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+mv /home/jnd/00-repolocal/k3b-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv k3b-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# pacman -Syu
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R k3b-svn
+# rm /var/cache/pacman/pkg/k3b-svn-*
+# pacman -S k3b-git
+
+FICHIER PO FR
+==============
+$ svn co svn://anonsvn.kde.org/home/kde/trunk/l10n-kde4/fr/messages/extragear-multimedia k3b-po
+A    k3b-svn-po-fr/desktop_extragear-multimedia_k3b.po
+A    k3b-svn-po-fr/amarokcollectionscanner_qt.po
+A    k3b-svn-po-fr/libk3b.po
+A    k3b-svn-po-fr/kio_videodvd.po
+A    k3b-svn-po-fr/kplayer.po
+A    k3b-svn-po-fr/desktop_extragear-multimedia_kmid.po
+A    k3b-svn-po-fr/desktop_extragear-multimedia_kmplayer.po
+A    k3b-svn-po-fr/kaffeine.po
+A    k3b-svn-po-fr/amarok.po
+A    k3b-svn-po-fr/amarokpkg.po
+A    k3b-svn-po-fr/desktop_extragear-multimedia_kaudiocreator.po
+A    k3b-svn-po-fr/k3b.po
+A    k3b-svn-po-fr/kmplayer.po
+A    k3b-svn-po-fr/kmid.po
+A    k3b-svn-po-fr/libk3bdevice.po
+A    k3b-svn-po-fr/amarok_scriptengine_qscript.po
+A    k3b-svn-po-fr/desktop_extragear-multimedia_kplayer.po
+A    k3b-svn-po-fr/desktop_extragear-multimedia_kaffeine.po
+A    k3b-svn-po-fr/kaudiocreator.po
+A    k3b-svn-po-fr/desktop_extragear-multimedia_amarok.po
+A    k3b-svn-po-fr/k3bsetup.po
+
+#La date en US
+LC_TIME=en_US date +"%a %b %e %Y"
+
+
+============================================================
+!!! PROB QT !!!!
+!!! EN ROOT
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+=> Mise a Jour
+
+# cd
+# cd /home/jnd/05-builds/k3b-svn
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# chown jnd:jnd k3b-svn-1179371.tar.gz
+
+
+!!! NON !!! # mv ../0-chroot/rw/pkgdest/k3b-svn-*-x86_64.pkg.tar.gz .
+
+md5sum k3b-fix-crash-with-qt-4.7.0.patch
+
+

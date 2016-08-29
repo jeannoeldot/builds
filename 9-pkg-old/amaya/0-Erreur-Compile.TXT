@@ -1,0 +1,379 @@
+
+g++  -o ../bin/grm ../thotlib/base/compilmsg.o parser.o grammar.o  -L../thotlib/ -lThotKernel -lz -ldl  -pthread -Wl,-O1,--sort-common,--as-needed,-z,relro  -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_gtk2u_gl-2.8 -lwx_baseu-2.8  
+====> grm is done
+(DIR=`pwd` ; THOTDIR=$DIR/../.. ; export THOTDIR ; \
+        cd ../../batch ; $DIR/../bin/grm APP)
+Grammar OK, creating file .GRM
+
+(DIR=`pwd` ; THOTDIR=$DIR/../.. ; export THOTDIR ; \
+        cd ../../batch ; $DIR/../bin/grm PRESEN)
+Grammar OK, creating file .GRM
+
+(DIR=`pwd` ; THOTDIR=$DIR/../.. ; export THOTDIR ; \
+        cd ../../batch ; $DIR/../bin/grm STRUCT)
+Grammar OK, creating file .GRM
+
+(DIR=`pwd` ; THOTDIR=$DIR/../.. ; export THOTDIR ; \
+         cd ../../batch ; $DIR/../bin/grm TRANS)
+Grammar OK, creating file .GRM
+
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/str.c -o str.o
+g++  -o ../bin/str ../thotlib/base/compilmsg.o parser.o str.o -L../thotlib/ -lThotKernel -lz -ldl  -pthread -Wl,-O1,--sort-common,--as-needed,-z,relro  -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_gtk2u_gl-2.8 -lwx_baseu-2.8  
+====> str is done
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/prs.c -o prs.o
+g++  -o ../bin/prs ../thotlib/base/compilmsg.o parser.o prs.o -L../thotlib/ -lThotKernel -lz -ldl  -pthread -Wl,-O1,--sort-common,--as-needed,-z,relro  -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_gtk2u_gl-2.8 -lwx_baseu-2.8  
+====> prs is done
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/writetra.c -o writetra.o
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/tra.c -o tra.o
+g++  -o ../bin/tra ../thotlib/base/compilmsg.o parser.o writetra.o tra.o -L../thotlib/ -lThotKernel -lz -ldl  -pthread -Wl,-O1,--sort-common,--as-needed,-z,relro  -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_gtk2u_gl-2.8 -lwx_baseu-2.8  
+====> tra is done
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/writeapp.c -o writeapp.o
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/app.c -o app.o
+g++  -o ../bin/app ../thotlib/base/compilmsg.o ../thotlib/dialogue/callbackinit.o parser.o writeapp.o app.o -L../thotlib/ -lThotKernel -lz -ldl  -pthread -Wl,-O1,--sort-common,--as-needed,-z,relro  -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_gtk2u_gl-2.8 -lwx_baseu-2.8  
+====> app is done
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/printstr.c -o printstr.o
+g++  -o ../bin/printstr printstr.o -L../thotlib/ -lThotKernel -lz -ldl  -pthread -Wl,-O1,--sort-common,--as-needed,-z,relro  -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_gtk2u_gl-2.8 -lwx_baseu-2.8  
+====> printstr is done
+g++ '-DCPP="'"gcc -E -x c"'"' -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -mstackrealign -mstackrealign -D_UNIX -D_GL -D_WX -DNODISPLAY -DHAVE_CONFIG_H -I.. -I../../batch/f -I../../thotlib/include -I../../thotlib/internals/var -I../../thotlib/internals/h -I../../thotlib/internals/f   -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread -c ../../batch/rescandialogue.c -o rescandialogue.o
+g++ -o ../bin/rescandialogue rescandialogue.o
+====> rescandialogue is done
+make[1]: Leaving directory `/build/amaya/src/Amaya11.4.4/Amaya/wx-build/batch'
+make[1]: Entering directory `/build/amaya/src/Amaya11.4.4/Amaya/wx-build/amaya'
+Makefile:54: .depends: No such file or directory
+../tools/mkdep/mkdep -relative -vpath ../../amaya -DHAVE_CONFIG_H -I. -I.. -I../../thotlib/include -I../../amaya -I../../amaya/f -I/build/amaya/src/Amaya11.4.4/Amaya/wx-build/../../libwww/Library/src -I/build/amaya/src/Amaya11.4.4/Amaya/wx-build/libwww -I/build/amaya/src/Amaya11.4.4/Amaya/wx-build/../../libwww/modules/expat/lib -I/build/amaya/src/Amaya11.4.4/Amaya/wx-build/../../libwww/Library/src/SSL    -I../../davlib/h -I../../davlib/tree/h -I../../davlib/f  -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread  -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread    -I/usr/include/freetype2  ../../amaya/*.c  ../../amaya/*.cpp > .depends
+make[1]: Leaving directory `/build/amaya/src/Amaya11.4.4/Amaya/wx-build/amaya'
+make[1]: Entering directory `/build/amaya/src/Amaya11.4.4/Amaya/wx-build/amaya'
+make[2]: Entering directory `/build/amaya/src/Amaya11.4.4/Amaya/wx-build/thotlib'
+make[2]: Leaving directory `/build/amaya/src/Amaya11.4.4/Amaya/wx-build/thotlib'
+STR=`pwd`/../bin/str;PRS=`pwd`/../bin/prs;TRA=`pwd`/../bin/tra;\
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$STR -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS HTML ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS HTMLP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE HTMLP HTMLPP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE -DLANDSCAPE HTMLP HTMLPL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER HTMLP HTMLPPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER -DLANDSCAPE HTMLP HTMLUSL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DPAGE HTMLP HTMLPLP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DPAGE -DLANDSCAPE HTMLP  HTMLPLL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DUS_PAPER HTMLP HTMLPLPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DUS_PAPER -DLANDSCAPE HTMLP HTMLUSLL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DBLACK_WHITE HTMLP HTMLPBW ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS HTMLT ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DXML HTMLT HTMLTX;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DXML -DXHTML11 HTMLT HTMLT11;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS HTMLTT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorPRS=`pwd`/../bin/prs ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS HTMLP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE HTMLP HTMLPP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE -DLANDSCAPE HTMLP HTMLPL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER HTMLP HTMLPPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER -DLANDSCAPE HTMLP HTMLUSL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DPAGE HTMLP HTMLPLP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DPAGE -DLANDSCAPE HTMLP  HTMLPLL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DUS_PAPER HTMLP HTMLPLPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLINK_NUMBER -DUS_PAPER -DLANDSCAPE HTMLP HTMLUSLL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DBLACK_WHITE HTMLP HTMLPBW 
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorTRA=`pwd`/../bin/tra ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS HTMLT ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DXML HTMLT HTMLTX;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DXML -DXHTML11 HTMLT HTMLT11;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS HTMLTT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorSTR=`pwd`/../bin/str;PRS=`pwd`/../bin/prs;TRA=`pwd`/../bin/tra;\
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$STR -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS TextFile ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS TextFileP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DLOG TextFileP TextFilePLOG ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE TextFileP TextFilePP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE -DLANDSCAPE TextFileP TextFilePL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER TextFileP TextFilePPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER -DLANDSCAPE TextFileP TextFileUSL ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS TextFileT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorPRS=`pwd`/../bin/prs ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$STR -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS TextFile ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS TextFileP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE TextFileP TextFilePP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE -DLANDSCAPE TextFileP TextFilePL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER TextFileP TextFilePPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER -DLANDSCAPE TextFileP TextFileUSL
+/bin/sh: line 2: -D_UNIX: command not found
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorTRA=`pwd`/../bin/tra ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS TextFileT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorSTR=`pwd`/../bin/str;PRS=`pwd`/../bin/prs;TRA=`pwd`/../bin/tra;\
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$STR -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XLink ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XLinkP ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XLinkT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorPRS=`pwd`/../bin/prs ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XLinkP
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorTRA=`pwd`/../bin/tra ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XLinkT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorSTR=`pwd`/../bin/str;PRS=`pwd`/../bin/prs;TRA=`pwd`/../bin/tra;\
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$STR -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XML ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XMLP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE XMLP XMLPP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE -DLANDSCAPE XMLP XMLPL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER XMLP XMLPPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER -DLANDSCAPE XMLP XMLUSL ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XMLT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorPRS=`pwd`/../bin/prs ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR; \
+$STR -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XML ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XMLP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE XMLP XMLPP ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DPAGE -DLANDSCAPE XMLP XMLPL ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER XMLP XMLPPUS ;\
+$PRS -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS -DUS_PAPER -DLANDSCAPE XMLP XMLUSL
+/bin/sh: line 2: -D_UNIX: command not found
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax errorTRA=`pwd`/../bin/tra ; \
+cd ../../amaya; THOTDIR=`pwd`/.. ;export THOTDIR ;\
+$TRA -D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES -DSSL  -D_SVG  -DTEMPLATES  -DDAV -DHT_DAV -DXML_DTD -DXML_NS XMLT
+*ERR line 1
+/* Copyright (C) 1991-2013 Free Software Foundation, Inc.
+*
+Syntax error(if test "../../amaya" != "" -a "../../amaya" != "." ; then \
+    /usr/bin/cp ../../amaya/HTML.A .  ; \
+    /usr/bin/cp ../../amaya/HTML.STR .  ; \
+fi)
+/usr/bin/cp: cannot stat '../../amaya/HTML.STR': No such file or directory
+make[1]: *** [HTML.h] Error 1
+make[1]: Leaving directory `/build/amaya/src/Amaya11.4.4/Amaya/wx-build/amaya'
+make: *** [amaya_prog] Error 2
+
+====================================================================================================
+
+VOIR AUSSSI : https://aur.archlinux.org/packages.php?ID=27500
+simutrans 111.0-1
+http://simutrans.com/
+meme erreur
+pastebin.com/ZEg88Ch6
+Voir solution : http://forum.simutrans.com/index.php?topic=9191.0
+
+Hi,
+
+Decided to try this game but it failed to compile on my gentoo machine... dug around and realize that its due to zlib-1.2.6....
+
+There is a change in zlib.h
+
+-typedef voidp gzFile;       /* opaque gzip file descriptor */
++typedef struct gzFile_s *gzFile;    /* semi-opaque gzip file descriptor */
+
+
+since gzFile is changed from void * to gzFile_s *, implicit casting from FILE * to gzFile_s * will not work in loadsave.cc for all the zlib functions...
+
+Wrote a quick patch to do explicit cast and tested by setting
+
+loadsave_t::mode_t loadsave_t::save_mode = zipped;
+
+
+Regards,
+Zheng Leong
+* simutrans-0.111.1-zlib.patch (1.46 kB - downloaded 6 times.)
+
+2)
+=====
+../../amaya/html2thot.c: In function 'void GetNextHTMLbuffer(FILE*, ThotBool*, char**, int*)':
+../../amaya/html2thot.c:4353:70: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzread(gzFile, voidp, unsigned int)'
+../../amaya/html2thot.c: In function 'void HTMLparse(FILE*, char*)':
+../../amaya/html2thot.c:4790:65: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+make[1]: *** [html2thot.o] Error 1
+make[1]: Leaving directory `/build/src/Amaya11.4.4/Amaya/wx-build/amaya'
+make: *** [amaya_prog] Error 2
+
+1) : RESOLU
+=====
+../../thotlib/image/pnghandler.c: In function 'unsigned char* ReadPng(FILE*, unsigned int*, unsigned int*, int*, int*, ThotColorStruct**, int*, ThotBool*, ThotBool*)':
+../../thotlib/image/pnghandler.c:152:9: error: invalid use of incomplete type 'png_struct {aka struct png_struct_def}'
+/usr/include/png.h:851:16: error: forward declaration of 'png_struct {aka struct png_struct_def}'
+../../thotlib/image/pnghandler.c: In function 'ThotBool SavePng(const char*, unsigned char*, unsigned int, unsigned int)':
+../../thotlib/image/pnghandler.c:861:7: error: invalid use of incomplete type 'png_struct {aka struct png_struct_def}'
+/usr/include/png.h:851:16: error: forward declaration of 'png_struct {aka struct png_struct_def}'
+make[1]: *** [image/pnghandler.o] Error 1
+make[1]: Leaving directory `/build/src/Amaya11.4.4/Amaya/wx-build/thotlib'
+make: *** [thotlib] Error 2

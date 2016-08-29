@@ -1,0 +1,163 @@
+  Changes to Libpng from version 1.2.42 to 1.4.0 (January 4, 2010) 
+
+Libpng-1.4.0 was released by the PNG Development Group on January
+3, 2010.  Important new features include support for the iTXt chunk
+and a function for limiting the amount of memory that a possibly
+malicious compressed chunk can consume.  Some long-deprecated functions
+and features have been removed.  A new private header file that is
+not visible to applications has been created, to improve our ability
+to maintain binary compatibility among future libpng versions.
+
+Specifically,
+
+1. Private libpng prototypes and macro definitions were moved from
+png.h and pngconf.h into a new pngpriv.h header file that is not
+visible to applications.
+
+2. Some obsolete/deprecated macros and functions have been removed.
+
+   a. We eliminated the obsolete, unused pnggccrd.c and pngvcrd.c files
+      and related makefiles.
+
+   b. We removed the typecasted NULL definitions such as
+
+          #define png_voidp_NULL    (png_voidp)NULL
+
+      If you used these in your application, just use NULL instead.
+
+   c. We eliminated the PNG_1_0_X and PNG_1_2_X macros.
+
+   d. We eliminated the PNG_LEGACY_SUPPORTED macro.
+
+   e. We removed many WIN32_WCE #ifdefs.
+
+   f. We removed the functions png_read_init(info_ptr),
+      png_write_init(info_ptr), png_info_init(info_ptr),
+      png_read_destroy(), and png_write_destroy().
+      They have been deprecated since libpng-0.95.
+
+   g. We removed the png_permit_empty_plte() function. It has been
+      deprecated since libpng-1.0.9.  Use png_permit_mng_features() instead.
+
+   h. We removed the obsolete stub functions png_get_mmx_flagmask(),
+      png_set_mmx_thresholds(), png_get_asm_flags(),
+      png_get_mmx_bitdepth_threshold(), png_get_mmx_rowbytes_threshold(),
+      png_set_asm_flags(), and png_mmx_supported()
+
+   i. We removed the obsolete png_check_sig(), png_memcpy_check(), and
+      png_memset_check() functions.  Instead use !png_sig_cmp(),
+      png_memcpy(), and png_memset(), respectively, i.e.,
+
+      replace
+        png_check_sig(buf, 8)
+      with
+        png_sig_cmp(buf, 0, 8) == 0
+
+      replace
+        png_memcpy_check(png_ptr, dest, src, length)
+      with
+        png_memcpy(dest, src, length)
+
+      and replace
+        png_memset_check(png_ptr, dest, value, length)
+      with
+        png_memset(dest, value, length)
+
+   j. We removed support for global arrays to improve thread safety.
+
+   k. We removed support for numbered error messages by default, since we
+      never got around to actually numbering the error messages. The function
+      png_set_strip_error_numbers() was removed from the library by default.
+
+   l. The png_zalloc() and png_zfree() functions are no longer exported.
+      The png_zalloc() function no longer zeroes out the memory that it
+      allocates.
+
+   m. The function png_set_gray_1_2_4_to_8() was removed. It has been
+      deprecated since libpng-1.0.18 and 1.2.9, when it was replaced with
+      png_set_expand_gray_1_2_4_to_8() because the former function also
+      expanded palette images.
+
+3. Several function prototypes were changed.
+
+   a. We changed the prototype for png_malloc() from
+      png_malloc(png_structp png_ptr, png_uint_32 size) to
+      png_malloc(png_structp png_ptr, png_alloc_size_t size)
+
+   b. We changed the prototypes of png_get_compression_buffer_size() and
+      png_set_compression_buffer_size() to work with png_size_t instead of
+      png_uint_32.
+
+4. We added some new features:
+
+   a. We enabled iTXt chunk support by default.  This changes the png_text
+      structure by adding the itxt_length, lang, and lang_key members.
+
+   b. We added the functions png_set_benign_errors(), png_benign_error(),
+      and png_chunk_benign_error().  With these, you can choose to treat
+      certain normally fatal errors as nonfatal.
+
+   c. Support for setting the maximum amount of memory that the application
+      will allocate for reading chunks was added, as a security measure.
+      The functions png_set_chunk_cache_max() and png_get_chunk_cache_max()
+      were added to the library.
+
+   d. We added the png_calloc() function and used it in place of
+      of "png_malloc(); png_memset();" except in the case in png_read_png()
+      where the array consists of pointers; in this case a "for" loop is used
+      after the png_malloc() to set the pointers to NULL, to give robust.
+      behavior in case the application runs out of memory part-way through
+      the process.
+
+   e. We implemented support for I/O states by adding png_ptr member io_state
+      and functions png_get_io_chunk_name() and png_get_io_state() in pngget.c
+
+   f. We added PNG_TRANSFORM_GRAY_TO_RGB to the available high-level
+      input transforms.
+
+5. Other changes
+
+   a. We changed the names of the png_struct and info_struct members "trans"
+      and "trans_values" to "trans_alpha" and "trans_color", respectively.
+
+   b. Checking for and reporting of errors in the IHDR chunk is more thorough.
+
+   c. We removed the trailing '.' from the warning and error messages.
+
+   d. Direct access to png_ptr->jmpbuf has been deprecated since libpng
+      version 1.0.6, and libpng now generates a warning about it.
+
+      To avoid such warnings, change
+        setjmp(png_ptr->jmpbuf)
+
+      to
+        setjmp(png_jmpbuf(png_ptr))
+
+
+6. Building and linking with the libraries
+
+    The configure script and most of the makefiles will build
+
+    libpng10   (libpng-1.0.52, provided for legacy 1.0.x applications)
+    libpng12   (libpng-1.2.42, stable version, for recent legacy 1.2.x apps)
+    libpng14   (libpng-1.4.0, the current version)
+    libpng     (whichever of the above was built last!)
+
+    You should build them in order
+       1) libpng10 (if you must; you probably don't need libpng10)
+       2) libpng12 (overwrites the libpng created in step 1)
+       3) libpng14 (overwrites the libpng created in step 2)
+
+    Optionally, if you aren't ready to switch, you can build them
+    in order
+       1) libpng14
+       2) libpng12 (this will overwrite the libpng created in step 1)
+
+    If you simply want to link with the last version built, use
+    -lpng -lz when building your application.  If you need a specific
+    version, use, e.g., -lpng12 -lz.  Most applications can probably
+    simply use -lpng -lz.
+
+Send comments to png-mng-implement at lists.sf.net (subscription required;
+visit https://lists.sourceforge.net/lists/listinfo/png-mng-implement
+to subscribe) or to glennrp at users.sourceforge.net

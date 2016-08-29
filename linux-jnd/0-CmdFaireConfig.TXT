@@ -1,0 +1,103 @@
+# Le répertoire
+cd /home/jnd/05-builds/linux-jnd
+
+# Sauver config précédent
+!!!! AVEC NUMERO VERSION PRECEDENTE !!!!
+cp config.x86_64 config.x86_64.jnd.3.7-11
+
+mkdir srcp
+
+2) RECUPERATION FICHIERS SOURCES
+=================================
+ftp://ftp.kernel.org/pub/linux/kernel/v3.x
+
+DERNIER = LATEST-IS-3.7
+
+:: ARCH
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.7.tar.xz
+
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/patch-3.7.xz
+
+
+cp linux-3.7.tar.xz srcp/
+
+
+cd srcp
+
+bsdtar -xf linux-3.7.tar.xz
+
+$ cp ../patch-3.7.xz .
+
+$ xz -dcf patch-3.7.xz > patch-3.7
+
+$ cp ../change-default-console-loglevel.patch .
+
+$ cp ../fat-3.6.x.patch .
+
+$ cp ../3.7-pioneer-xfermode.patch .
+
+# PATCHES
+===============
+
+$ cd linux-3.7
+
+$ patch -p1 -i ../patch-3.7
+
+$ patch -Np1 -i ../change-default-console-loglevel.patch
+
+$ patch -Np1 -i ../fat-3.6.x.patch
+
+$ patch -Np1 -i ../3.7-pioneer-xfermode.patch
+
+
+# CONFIG
+============
+
+$ cp ../../config.x86_64 .config
+
+$ cp ../../config-jnd.x86_64 .config
+
+OU 
+VOIR : https://www.funtoo-quebec.org/wiki/index.php/Configuration_initiale_du_noyau
+
+$ make defconfig
+
+$ ls -la
+
+
+!!! SI EDITION EN COURS
+$ cd srcp/linux-3.7
+
+!!! AGRANDIR CONSOLE 156 X 58
+$ make menuconfig
+
+!!! QD FINI CONFIG
+$ cp .config ../../config.x86_64
+
+
+QUAND FINIS
+=======================
+cd ../../
+rm -rf srcp
+
+
+bsdtar -xf "file"
+
+gzip -dcf patch-3.7.xz > patch-3.7
+bzip2 -dcf patch-3.7.xz > patch-3.7
+xz -dcf patch-3.7.xz > patch-3.7
+================================================================================================
+ANCIENS
+==========
+$ cp ../i915-fix-ghost-tv-output.patch .
+
+$ cp ../i915-fix-incorrect-error-message.patch .
+
+$ cp ../usb-add-reset-resume-quirk-for-several-webcams.patch .
+
+$ patch -Np1 -i ../i915-fix-ghost-tv-output.patch
+
+$ patch -Np1 -i ../i915-fix-incorrect-error-message.patch
+
+$ patch -Np1 -i ../usb-add-reset-resume-quirk-for-several-webcams.patch
+

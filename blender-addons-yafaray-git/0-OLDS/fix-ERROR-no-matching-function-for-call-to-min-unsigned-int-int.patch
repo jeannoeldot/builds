@@ -1,0 +1,14 @@
+diff -aur YafaRay/src/yafraycore/imagefilm.cc YafaRay.new/src/yafraycore/imagefilm.cc
+--- YafaRay/src/yafraycore/imagefilm.cc	2016-08-05 16:31:05.000000000 +0200
++++ YafaRay.new/src/yafraycore/imagefilm.cc	2016-08-05 17:11:27.612713413 +0200
+@@ -1003,8 +1003,8 @@
+ void imageFilm_t::drawFontBitmap( FT_Bitmap* bitmap, int x, int y)
+ {
+ 	int i, j, p, q;
+-	int x_max = std::min(x + bitmap->width, dpimage->getWidth());
+-	int y_max = std::min(y + bitmap->rows, dpimage->getHeight());
++	int x_max = std::min(static_cast<int>(x + bitmap->width), dpimage->getWidth());
++	int y_max = std::min(static_cast<int>(y + bitmap->rows), dpimage->getHeight());
+ 	color_t textColor(1.f);
+ 
+ 	for ( i = x, p = 0; i < x_max; i++, p++ )

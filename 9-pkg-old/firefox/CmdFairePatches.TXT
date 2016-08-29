@@ -1,0 +1,192 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/firefox4-beta
+mkdir srcp
+cp firefox-4.0rc1.source.tar.bz2 srcp/
+cd srcp
+tar -xvjf firefox-4.0rc1.source.tar.bz2
+cd ..
+
+
+PATCH : 4.0-ldflags-namespec.patch
+===========================================
+cd srcp
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new/layout/build
+kwrite Makefile.in
+ LIGNE 371 :Ajouter ligne
+
+LDFLAGS += -lX11 -lXrender
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 4.0-ldflags-namespec.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/4.0-ldflags-namespec.patch .
+md5sum 4.0-ldflags-namespec.patch
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+===============================================================================
+!!! INUTILE !!! 
+
+PATCH : 4.0-system-cairo-fixup.patch
+===========================================
+cd srcp
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new/gfx/thebes
+kwrite gfxASurface.cpp
+
+ LIGNE 224 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 228 :Ajouter ligne
+#endif
+
+ LIGNE 442 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 445 :Ajouter ligne
+#endif
+
+ LIGNE 453 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 455 :Ajouter 3 lignes
+#else
+ return PR_FALSE;
+#endif
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier gfxASurface.cpp
+rm -f gfxASurface.cpp~
+
+
+kwrite gfxTeeSurface.cpp
+
+ LIGNE 49 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 57 :Ajouter ligne
+#endif
+
+ LIGNE 63 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 66 :Ajouter 4 lignes
+#else
+    gfxIntSize a;
+    return a;
+#endif
+
+ LIGNE 75 :Ajouter ligne
+#ifdef MOZ_TREE_CAIRO
+
+ LIGNE 85 :Ajouter ligne
+#endif
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier gfxTeeSurface.cpp
+rm -f gfxTeeSurface.cpp~
+
+cd ../../..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 4.0-system-cairo-fixup.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/4.0-system-cairo-fixup.patch .
+md5sum 4.0-system-cairo-fixup.patch
+
+4.0-python2.7.patch
+======================================
+cd srcp
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new
+kwrite configure.in
+ LIGNE 994 : DEVIENT
+MOZ_PATH_PROGS(PYTHON, $PYTHON python2.7 python2.6 python2.5 python2.4 python)
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier configure.in~
+rm -f configure.in~
+cd ..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 4.0-python2.7.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/4.0-python2.7.patch .
+md5sum 4.0-python2.7.patch
+
+
+1) PATCH : 4.0-fix-mozilla-launcher.patch
+======================================
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new/xulrunner/stub
+kwrite nsXULStub.cpp
+ LIGNE 318 : RAJOUTER LIGNE
+  char *testp;
+ LIGNE 319 : VIDE
+
+ LIGNE 320 : REMPLACEE PAR :
+  testp = realpath(argv[0], iniPath);
+  if (!(testp != NULL && stat(iniPath, &fileStat) == 0 && S_ISREG(fileStat.st_mode) && fileStat.st_mode & S_IXUSR) || (testp != NULL && stat(iniPath, &fileStat))) {
+
+
+ LIGNE 334 : REMPLACEE PAR :
+      if (realpath(tmpPath, iniPath) && stat(iniPath, &fileStat) == 0 && S_ISREG(fileStat.st_mode) && fileStat.st_mode & S_IXUSR) {
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier nsXULStub.cpp~
+rm -f nsXULStub.cpp~
+cd ../../..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 4.0-fix-mozilla-launcher.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/4.0-fix-mozilla-launcher.patch .
+md5sum 4.0-fix-mozilla-launcher.patch
+
+
+PATCH : 4.0-mozilla-lang.patch
+======================================
+cd srcp
+cp -R mozilla-2.0 mozilla-2.0.new
+cd mozilla-2.0.new/browser/app/profile
+kwrite firefox.js
+ LIGNE 463 : Ajouter 2 lignes
+
+// Use LANG environment variable to choose locale
+pref("intl.locale.matchOS", true);
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier firefox.js~
+rm -f firefox.js~
+cd ../../../..
+diff -aur mozilla-2.0 mozilla-2.0.new
+diff -aur mozilla-2.0 mozilla-2.0.new > 4.0-mozilla-lang.patch
+
+rm -rf mozilla-2.0.new
+
+cd ..
+mv srcp/4.0-mozilla-lang.patch .
+md5sum 4.0-mozilla-lang.patch
+
+
+

@@ -1,0 +1,44 @@
+# Maintainer: Martin Schmölzer <mschmoelzer@gmail.com>
+
+pkgname=ttf-win7-fonts
+pkgver=7.1
+pkgrel=2
+pkgdesc="Microsoft Windows 7 TrueType Fonts"
+arch=('any')
+url="http://www.microsoft.com"
+license=('custom')
+depends=('fontconfig' 'xorg-mkfontscale' 'xorg-mkfontdir')
+makedepends=('fontforge')
+provides=('ttf-vista-fonts' 'ttf-ms-fonts' 'ttf-font')
+conflicts=('ttf-vista-fonts' 'ttf-ms-fonts')
+install="$pkgname.install"
+
+source=('win7-sp1-fonts.tar.gz'
+	'license.rtf'
+)
+md5sums=('6bbf22dcb4a13b813b1b45722ea87a48'
+         '67e64cd8785fb3bf563f031559d5c830'
+)
+
+build() {
+  cd "${srcdir}/win7-sp1-fonts"
+
+  # cambria.ttc is a TrueType Collection (TTC) which causes problems with
+  # LibreOffice (Cambria Reguar cannot be selected) so we need to convert
+  # the TTC into a TrueType Font (TTF).
+  FONTFORGE_LANGUAGE=ff fontforge -c 'Open("cambria.ttc(Cambria)"); Generate("cambria.ttf")'
+}
+
+package() {
+  cd "${srcdir}"
+
+  # Prepare destination directory
+  install -d -m 755 "${pkgdir}/usr/share/fonts/TTF"
+
+  # Install fonts and license
+  install -m 644 win7-sp1-fonts/*.ttf "${pkgdir}/usr/share/fonts/TTF"
+#  install -m 644 win7-sp1-fonts/*.TTF "${pkgdir}/usr/share/fonts/TTF"
+  install -D -m 644 "license.rtf" "${pkgdir}/usr/share/licenses/${pkgname}/license.rtf"
+}
+
+# vim: set ts=2 sw=2 ft=sh noet:

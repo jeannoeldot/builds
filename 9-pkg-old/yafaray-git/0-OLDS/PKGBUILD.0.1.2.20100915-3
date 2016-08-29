@@ -1,0 +1,60 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=yafaray-git
+pkgver=0.1.2.20100915
+pkgrel=3
+pkgdesc="Raytracing open source render engine"
+arch=('i686' 'x86_64')
+url="http://www.yafaray.org/"
+license=('GPL')
+depends=('qt' 'python' 'openexr' 'libxml2')
+#optdepends=('qt: QT GUI')
+makedepends=('cmake' 'swig' 'libjpeg' 'libpng' 'freetype2' 'zlib' 'qt')
+source=($pkgname-$pkgver.tar.gz
+	git-fix-version.patch
+	UserConfig.txt
+	)
+md5sums=('2e0db969bff46524b04c6d4324fb65b4'
+	 '9ce6dd15ba05cafae175fe563f614e8a'
+	 '20e9704683f094e8be9abcfb87e3382a'
+	)
+
+__realname="YafaRay"
+
+build() {
+      cd $srcdir/$__realname
+
+      # fix version
+      patch -Np1 -i ${srcdir}/git-fix-version.patch || return 1
+
+# Test
+#  msg "Writing Change in CMakeLists.txt"
+#  sed -i "s|-O3 -ffast-math|-O3 -ffast-math -march=native -pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
+#
+
+# Test pkgrel = 3
+    cp $srcdir/UserConfig.txt CMakeConfig/UserConfig.txt
+#
+
+      # Build
+      mkdir build
+      cd build
+      cmake .. \
+	      -DCMAKE_BUILD_TYPE=RELEASE \
+	      -DCMAKE_SKIP_RPATH=ON \
+	      -DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,--no-undefined -Wl,--as-needed' \
+	      -DCMAKE_INSTALL_PREFIX=/usr \
+	      -DYAF_BINDINGS_PY_DIR=/usr/share/yafaray/blender
+      make
+}
+
+package() {
+      cd $srcdir/$__realname/build
+
+      # Install
+      make DESTDIR=$pkgdir install
+
+      # install Python based Blender export
+      cd $srcdir/$__realname
+      install -m644 YafaRay_Blender-2.49/*.py $pkgdir/usr/share/yafaray/blender
+}

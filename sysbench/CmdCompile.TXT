@@ -1,0 +1,142 @@
+#Le répertoire
+
+cd $HOME/05-builds/sysbench
+
+http://sysbench.sourceforge.net
+http://sourceforge.net/projects/sysbench/
+
+1) TÉLÉCHARGER SOURCES
+======================
+wget http://pkgs.fedoraproject.org/repo/pkgs/sysbench/sysbench-0.4.12.tar.gz/3a6d54fdd3fe002328e4458206392b9d/sysbench-0.4.12.tar.gz
+
+1-2) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgver=0.4.12
+pkgrel=5
+
+source=(http://pkgs.fedoraproject.org/repo/pkgs/${pkgname}/${pkgname}-${pkgver}.tar.gz/3a6d54fdd3fe002328e4458206392b9d/${pkgname}-${pkgver}.tar.gz
+        xxx.patch
+        yyy.patch
+)
+
+
+md5sum sysbench-0.4.12.tar.gz
+
+
+md5sums=(111111111111111111111111111111111111111111
+         2222222222
+         3333333333
+)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxx.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3) MAKEPKG en USER
+=====================
+cd $HOME/05-builds/sysbench
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/sysbench-*-x86_64.pkg.tar.*
+
+$ cp -v sysbench-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/sysbench-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v sysbench-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+----------------------------------------
+$ rm -f *~
+$ rm -i sysbench-0.4.12.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# pacman -Syu
+# pacman -Syu sysbench
+
+
+SI PROBLEMES
+================
+
+# pacman -R sysbench
+# rm -f /var/cache/pacman/pkg/sysbench-*
+
+!!! EN USER
+$ rm -f 00-repolocal/sysbench-*-x86_64.pkg.tar.*
+$ maj-repolocal
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+
+!!! EN ROOT
+
+# cd
+
+# mkpkg-tmpfs $HOME/05-builds/sysbench -n
+
+!!! MODIFIER FICHIERS
+
+DANS : $HOME/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+
+
+namcap sysbench-*-x86_64.pkg.tar.*
+

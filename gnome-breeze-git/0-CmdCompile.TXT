@@ -1,0 +1,156 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/gnome-breeze-git
+
+1 SOURCES
+==============
+
+https://github.com/dirruk1/gnome-breeze
+
+1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/dirruk1/gnome-breeze/commits/master
+==> 20160530
+
+1.3 SOURCES
+==============
+!!! Répertoire clone de gnome-breeze dans : /0-DataLinux/05-builds-dir-git/gnome-breeze
+---------------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep gnome-breeze :
+--------------------------------
+ls
+
+!!! SI REP gnome-breeze N'EXISTE PAS
+-------------------------------
+git clone git://github.com/dirruk1/gnome-breeze.git gnome-breeze
+
+!!! SI REP gnome-breeze EXISTE
+-------------------------
+cd gnome-breeze
+git pull --rebase origin master
+
+!!!!! Vérifier VERSION :
+echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+
+==> 102.49a5cd6
+
+cd ..
+
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+tar -cvzf gnome-breeze-git-102.49a5cd6.20160530.tar.gz --exclude=.git gnome-breeze
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/gnome-breeze-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/gnome-breeze-git-102.49a5cd6.20160530.tar.gz .
+sync
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=gnome-breeze-git
+pkgver=102.49a5cd6.20160530
+pkgrel=1
+
+pkgrel=2    # nouveau PKGBUILD sur AUR
+
+sha256sum gnome-breeze-git-102.49a5cd6.20160530.tar.gz
+
+source=("$pkgname-$pkgver.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   1581  2 mai   16:44 PKGBUILD
+-rw-r--r--  1 jnd users 490685  2 mai   16:48 gnome-breeze-git-102.49a5cd6.20160530.tar.gz
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/gnome-breeze-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/gnome-breeze-git/gnome-breeze-git-102.49a5cd6.20160530.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/gnome-breeze-git \
+&& cp -v /tmp/build/gnome-breeze-git-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/gnome-breeze-git && rm -rf /tmp/build
+
+
+# Verifications...
+
+namcap gnome-breeze-git-*-any.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/gnome-breeze-git-*-any.pkg.tar.*
+
+$ cp -v gnome-breeze-git-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/gnome-breeze-git-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v gnome-breeze-git-*-any.pkg.tar.* $HOME/00-repolocal/
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i gnome-breeze-git-102.49a5cd6.20160530.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+EN ROOT
+========
+# cd
+
+# pacman -Syu gnome-breeze-git
+
+
+!!! EN ROOT
+# cd
+# pacman -R gnome-breeze-git
+
+# rm -i /var/cache/pacman/pkg/gnome-breeze-git-*-any.pkg.tar.*
+
+
+
+================================================================
+ANCIENS
+========

@@ -1,0 +1,20 @@
+Index: source/blender/blenlib/intern/path_util.c
+===================================================================
+--- source/blender/blenlib/intern/path_util.c	(revision 30426)
++++ source/blender/blenlib/intern/path_util.c	(working copy)
+@@ -771,12 +771,12 @@
+ /* ************************************************************* */
+ /* ************************************************************* */
+ 
+-// #define PATH_DEBUG2
++#define PATH_DEBUG2
+ 
+ static char *blender_version_decimal(void)
+ {
+-	static char version_str[5];
+-	sprintf(version_str, "%d.%02d", BLENDER_VERSION/100, BLENDER_VERSION%100);
++	static char version_str[4];
++    strcpy(version_str,"2.5");
+ 	return version_str;
+ }
+ 

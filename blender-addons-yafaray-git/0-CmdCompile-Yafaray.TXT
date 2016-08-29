@@ -1,0 +1,457 @@
+0) REPERTOIRE
+==============
+
+cd $HOME/05-builds/blender-addons-yafaray-git
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/DavidBluecame/Core
+
+et sur
+
+https://github.com/DavidBluecame/Blender-Exporter
+
+20160806
+
+1.2 SOURCES
+==============
+!!! Répertoire clone de YafaRay dans : /0-DataLinux/05-builds-dir-git/YafaRay
+------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+YAFARAY
+https://github.com/DavidBluecame/Core
+
+ EXPORTER
+https://github.com/DavidBluecame/Blender-Exporter
+
+rm -rf YafaRay
+git clone git://github.com/DavidBluecame/Core.git YafaRay
+
+cd YafaRay
+
+rm -rf Blender-Exporter
+git clone git://github.com/DavidBluecame/Blender-Exporter.git
+cd ..
+
+!!!!! Vérifier VERSION YAFARAY :
+https://github.com/DavidBluecame/Core/releases
+https://github.com/DavidBluecame/Blender-Exporter/releases
+==> v3.0.2-beta
+==> Version = 3.0.2
+
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+tar -cvzf blender-addons-yafaray-git-3.0.2.20160806.tar.gz --exclude=.git YafaRay
+
+
+1-7-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/blender-addons-yafaray-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/blender-addons-yafaray-git-3.0.2.20160806.tar.gz .
+sync
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=blender-addons-yafaray-git
+pkgver=3.0.2.20160806
+pkgrel=1
+pkgrel=2          # _name_addon="yafaray_v3"
+
+pkgrel=2          # blender 2.77
+
+_slot="2.77"
+_realname="YafaRay"
+_dir_addons="addons_contrib"
+_name_addon="yafaray_v3"
+
+source=("${pkgname}-${pkgver}.tar.gz"
+)
+
+sha256sum blender-addons-yafaray-git-3.0.2.20160806.tar.gz
+
+sha256sums=(1111111111
+)
+
+YAF_PY_VERSION 3.5
+
+
+2-2) VERIFIER UserConfig.template
+==================================
+  kwrite /0-DataLinux/05-builds-dir-git/YafaRay/CMakeConfig/UserConfig.template &
+
+2-3) VERIFIER CMakeLists.txt
+==================================
+  kwrite /0-DataLinux/05-builds-dir-git/YafaRay/CMakeLists.txt &
+  
+!!! ATTENTION !!!
+==================
+/usr/share/blender/2.77/scripts/addons_contrib/yafaray/bin/libyafaray_v3_core.so
+/usr/share/blender/2.77/scripts/addons_contrib/yafaray/bin/libyafaray_v3_plugin.so 
+à copier dans
+/usr/lib/libyafaray_v3_core.so
+/usr/lib/libyafaray_v3_plugin.so
+
+verif-deps : 
+blender-addons-yafaray-git requiert    libyafaray_v3_core.so => non trouvé
+        libyafaray_v3_plugin.so => non trouvé
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 509239 11 nov.  16:08 blender-addons-yafaray-git-3.0.2.20160806.tar.gz
+-rw-r--r--  1 jnd users   3155 11 nov.  16:36 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/blender-addons-yafaray-git/{PKGBUILD,blender-addons-yafaray-git-3.0.2.20160806.tar.gz} . \
+&& makepkg -s \
+&& cd $HOME/05-builds/blender-addons-yafaray-git \
+&& cp -v /tmp/build/blender-addons-yafaray-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/blender-addons-yafaray-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+SI depends=("blender-git")
+===========================
+
+$ cp -v $HOME/00-repolocal/blender-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+SI blender depends=( 'openshadinglanguage-git' 'openimageio-git')
+=================================================================
+$ cp -v $HOME/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+$ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+SI blender depends=( 'opencollada-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/opencollada-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+SI blender depends=( 'opensubdiv-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+SI blender depends=( 'openvdb-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast
+
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+4) MAKEPKG en USER
+===================
+!!! EN USER
+
+$ rm -f *~
+makepkg -s
+
+OU : makepkg -f
+
+rm -rf pkg src
+rm -f *~
+!!!! SI TESTS
+!!!	rm blender-addons-yafaray-git-*-x86_64.pkg.tar.*
+!!!!
+rm -rf YafaRay
+
+# Verifications...
+
+namcap blender-addons-yafaray-git-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/blender-addons-yafaray-git-*-x86_64.pkg.tar.*
+
+$ cp -v blender-addons-yafaray-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
+-----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/blender-addons-yafaray-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v blender-addons-yafaray-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+!!! OU cp blender-addons-yafaray-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i blender-addons-yafaray-git-3.0.2.20160806.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+EN ROOT
+========
+# cd
+
+# pacman -R blender-addons-yafaray-git
+
+# pacman -Syu
+
+# pacman -Syu blender-addons-yafaray-git
+
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -R blender-addons-yafaray-git
+# rm /var/cache/pacman/pkg/blender-addons-yafaray-git-*
+# pacman -S blender-addons-yafaray-git
+
+!!! EN USER
+rm -r .config/blender
+
+=================================================================================================================
+ANCIEN
+
+        "fix-ERROR-no-matching-function-for-call-to-min-unsigned-int-int.patch"
+sha256sum fix-ERROR-no-matching-function-for-call-to-min-unsigned-int-int.patch
+
+$ head -n 8 YafaRay/include/yafray_constants.h
+
+#define PACKAGE "YafaRay"
+#define VERSION "Experimental 3.0.2"
+
+==> Version = 3.0.2
+
+source=(${pkgname}-${pkgver}.tar.gz
+        'fix-ERROR-Failed-to-load-library.patch'
+)
+
+sha256sum blender-addons-yafaray-git-3.0.2.20160806.tar.gz
+
+sha256sum fix-ERROR-Failed-to-load-library.patch
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/YafaRay/Core
+
+et sur
+
+!!! ANCIEN https://github.com/YafaRay/Blender-2.5-Exporter
+https://github.com/YafaRay/Blender-Exporter
+
+20160806
+
+# Nettoyage fichiers ds 0-copie-fichiers-chroot/repo
+=====================================================
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/blender-git-*-x86_64.pkg.tar.*
+
+
+3) MAKEPKG en CHROOT
+====================
+
+SI depends=("blender-svn")
+===========================
+!!! EN USER
+
+rm -f /tmp/chrootrepo/blender-svn-*-x86_64.pkg.tar.*
+cp $HOME/00-repolocal/blender-svn-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+!!! EN ROOT
+
+# cd
+
+# mkpkg-tmpfs $HOME/05-builds/blender-addons-yafaray-git -n
+
+# $HOME/bin/mkpkg-tmpfs $HOME/05-builds/blender-addons-yafaray-git
+
+!!! MODIFIER SCRIPT VERIF-DEPS
+!!! EN USER
+
+DANS : $HOME/01-scripts/Cherche-maj-deps/
+
+kwrite $HOME/01-scripts/Cherche-maj-deps/verif-deps
+==> modifier ligne 50 : BLENDER_VERSION="2.65"
+
+3) MAKEPKG en CHROOT
+====================
+
+SI depends=("blender-svn")
+===========================
+!!! EN USER
+cd
+rm -f $HOME/05-builds/0-chroot/root/repo/blender-svn-*-x86_64.pkg.tar.*
+cp $HOME/00-repolocal/blender-svn-*-x86_64.pkg.tar.* $HOME/05-builds/0-chroot/root/repo
+
+cd $HOME/05-builds/0-chroot/root/repo
+rm -f local.db.tar.gz
+repo-add local.db.tar.gz *-x86_64.pkg.tar.*
+OU
+cd
+maj-repochroot.sh
+cd $HOME/05-builds/blender-addons-yafaray-git
+!!!!
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+# cd
+# cd $HOME/05-builds/blender-addons-yafaray-git
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd $HOME/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+# cd $HOME/05-builds/blender-addons-yafaray-git
+
+# ls -l
+# chown jnd:jnd blender-addons-yafaray-git-*.tar.gz
+# chown jnd:jnd blender-addons-yafaray-git-*-x86_64.pkg.tar.*
+# chown jnd:jnd blender-addons-yafaray-git-*-x86_64-*.log
+# ls -l
+
+
+# chown jnd:jnd blender-addons-yafaray-git-*-x86_64-package.log
+# chown jnd:jnd namcap.log
+# chown jnd:jnd UserConfig.txt git-fix-version.patch
+
+rm -f *.log
+
+1-8) ATTENTION A UserConfig.txt
+======================================================
+
+cp UserConfig.txt UserConfig.txt.old
+
+cp YafaRay/CMakeConfig/UserConfig.template UserConfig.txt
+
+kwrite UserConfig.txt &
+kwrite UserConfig.txt.old &
+
+MODIF UserConfig.txt
+=======================
+
+ LIGNE 135 :
+#set(USER_INSTALL_PREFIX "")
+ DEVIENT :
+set(USER_INSTALL_PREFIX "/usr/share/blender/2.59/scripts/addons/yafaray")
+
+
+ LIGNE 158 :
+#set(YAF_LIB_DIR lib)
+ DEVIENT :
+set(YAF_LIB_DIR bin)
+
+
+ LIGNE 168 :
+#set(YAF_PLUGIN_DIR "")
+ DEVIENT :
+set(YAF_PLUGIN_DIR bin/plugins)
+
+
+ LIGNE 180 :
+#set(YAF_BINDINGS_PY_DIR ${CMAKE_SOURCE_DIR}/install/bindings/python)
+ DEVIENT :
+set(YAF_BINDINGS_PY_DIR /usr/share/blender/2.59/scripts/addons/yafaray/bin)
+
+
+ LIGNE 227 :
+#set(USER_RELEASE_EXTRA_FLAGS "")
+ DEVIENT :
+set(USER_RELEASE_EXTRA_FLAGS "-march=native -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block")
+
+
+ LIGNE 281 :
+#set(YAF_PY_VERSION 3.1)
+ DEVIENT :
+set(YAF_PY_VERSION 3.2)
+
+source=(blender-addons-yafaray-git-3.0.2.20160806.tar.gz
+        git-xxx.patch
+	UserConfig.txt
+)
+
+md5sum blender-addons-yafaray-git-3.0.2.20160806.tar.gz
+
+md5sum UserConfig.txt
+
+md5sum git-fix-version.patch
+
+md5sums=(1111111111
+         2222222222
+         3333333333
+)
+
+!!!NON LIGNE ENLEVEE
+!!!NON ===============
+!!!NON LIGNE 29        sed -i 's|0.1.x|3.0.2-beta2|g' YafaRay_Blender-2.49/yafaray_ui.py
+
+!!!NON LIGNE ENLEVEE
+!!!NON ===============
+!!!NON LIGNE 52	-DYAF_CXX_FLAGS_RELEASE='-O3 -ffast-math -march=native -pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block' \
+
+
+http://github.com/DarkTide/YafaRay
+http://github.com/DarkTide/YafaRay_Blender-2.49
+https://github.com/DarkTide/Blender-2.5-Exporter
+
+git clone http://github.com/DarkTide/YafaRay.git
+rm -rf YafaRay_Blender-2.49
+git clone http://github.com/DarkTide/YafaRay_Blender-2.49.git
+cd ..
+
+OU BLENDER 2.5.9
+
+http://github.com/DarkTide/YafaRay/

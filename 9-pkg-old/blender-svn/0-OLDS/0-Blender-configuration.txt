@@ -1,0 +1,67 @@
+* Blender Configuration *
+
+  Build Options:
+   * WITH_GAMEENGINE        OFF
+   * WITH_PLAYER            OFF
+   * WITH_BULLET            ON
+   * WITH_IK_ITASC          ON
+   * WITH_OPENCOLLADA       ON
+   * WITH_FFTW3             ON
+   * WITH_INTERNATIONAL     ON
+   * WITH_INPUT_NDOF        OFF
+   * WITH_CYCLES            ON
+
+  Compiler Options:
+   * WITH_BUILDINFO         ON
+   * WITH_OPENMP            ON
+   * WITH_RAYOPTIMIZATION   ON
+
+  System Options:
+   * WITH_INSTALL_PORTABLE  OFF
+   * WITH_X11_XF86VMODE     ON
+   * WITH_X11_XINPUT        ON
+   * WITH_BUILTIN_GLEW      OFF
+
+  Image Formats:
+   * WITH_IMAGE_CINEON      ON
+   * WITH_IMAGE_DDS         ON
+   * WITH_IMAGE_HDR         ON
+   * WITH_IMAGE_OPENEXR     ON
+   * WITH_IMAGE_OPENJPEG    ON
+   * WITH_IMAGE_REDCODE     OFF
+   * WITH_IMAGE_TIFF        ON
+
+  Audio:
+   * WITH_OPENAL            ON
+   * WITH_SDL               ON
+   * WITH_JACK              ON
+   * WITH_CODEC_FFMPEG      ON
+   * WITH_CODEC_SNDFILE     ON
+
+  Compression:
+   * WITH_LZMA              ON
+   * WITH_LZO               ON
+
+  Python:
+   * WITH_PYTHON_INSTALL    OFF
+   * WITH_PYTHON_MODULE     OFF
+   * WITH_PYTHON_SAFETY     OFF
+
+  Modifiers:
+   * WITH_MOD_BOOLEAN       ON
+   * WITH_MOD_REMESH        ON
+   * WITH_MOD_DECIMATE      ON
+   * WITH_MOD_FLUID         ON
+   * WITH_MOD_OCEANSIM      ON
+
+  
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CUDA_INCLUDES
+    CUDA_NVCC
+
+
+-- Build files have been written to: /build/src/blender-build

@@ -1,0 +1,40 @@
+
+
+ribOut.cpp: In destructor 'virtual CRibOut::~CRibOut()':
+ribOut.cpp:165:20: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzclose(gzFile)'
+ribOut.h: In member function 'void CRibOut::out(const char*, ...)':
+ribOut.h:262:50: warning: ignoring return value of 'size_t fwrite(const void*, size_t, size_t, FILE*)', declared with attribute warn_unused_result [-Wunused-result]
+ribOut.h: In member function 'void CRibOut::vout(const char*, __va_list_tag*)':
+ribOut.h:241:50: warning: ignoring return value of 'size_t fwrite(const void*, size_t, size_t, FILE*)', declared with attribute warn_unused_result [-Wunused-result]
+make[4]: *** [ribOut.lo] Error 1
+
+
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I../.. -I.. -march=native -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -MT rib.lo -MD -MP -MF .deps/rib.Tpo -c rib.cpp  -fPIC -DPIC -o .libs/rib.o
+In file included from rib.y:2835:0:
+lex.rib.cpp: In function 'int yy_get_next_buffer()':
+lex.rib.cpp:2392:3: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzread(gzFile, voidp, unsigned int)'
+make[4]: *** [rib.lo] Error 1
+
+
+In file included from rib.y:2835:0:
+rib.l: In function 'int riblex(YYSTYPE*)':
+rib.l:226:29: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzclose(gzFile)'
+In file included from rib.y:2835:0:
+rib.l:246:29: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzclose(gzFile)'
+In file included from rib.y:2835:0:
+lex.rib.cpp: In function 'int yy_get_next_buffer()':
+lex.rib.cpp:2392:3: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzread(gzFile, voidp, unsigned int)'
+rib.y: In function 'void ribParse(const char*, void (*)(const char*, ...))':
+rib.y:2943:17: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzclose(gzFile)'
+
+
+
+ 
+In file included from rendererContext.cpp:77:0:
+ribOut.h: In member function 'void CRibOut::vout(const char*, __va_list_tag*)':
+ribOut.h:240:61: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzwrite(gzFile, voidpc, unsigned int)'
+ribOut.h: In member function 'void CRibOut::out(const char*, ...)':
+ribOut.h:261:61: error: cannot convert 'FILE* {aka _IO_FILE*}' to 'gzFile' for argument '1' to 'int gzwrite(gzFile, voidpc, unsigned int)'
+make[4]: *** [rendererContext.lo] Error 1
+
+==> Pixie/src/ri/ribOut.h

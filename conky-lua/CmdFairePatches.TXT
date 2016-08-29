@@ -1,0 +1,41 @@
+FAIRE PATCHS
+====================================
+cd $HOME/05-builds/conky-lua-nvidia-git
+mkdir srcp
+
+cp conky-lua-nvidia-git-20120129.tar.gz srcp/
+cd srcp
+tar -xvzf conky-lua-nvidia-git-20120129.tar.gz
+rm -f conky-lua-nvidia-git-20120129.tar.gz
+
+1) MODIFIER 
+================================================================
+cp -R conky conky.new
+
+cd conky.new/src
+kwrite conky.cc
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier conky.cc~
+rm -f conky.cc~
+cd ../..
+diff -aur conky conky.new
+diff -aur conky conky.new > update_interval.patch
+
+rm -rf conky.new
+
+cd ..
+mv srcp/update_interval.patch conky-update_interval.patch
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+
+====================================================================================
+ANCIENS
+

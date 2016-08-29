@@ -1,0 +1,28 @@
+[ 16%] Building CXX object src/yafraycore/CMakeFiles/yafaray_v3_core.dir/imagefilm.cc.o
+[ 17%] Building CXX object src/yafraycore/CMakeFiles/yafaray_v3_core.dir/imagesplitter.cc.o
+[ 18%] Building CXX object src/yafraycore/CMakeFiles/yafaray_v3_core.dir/material.cc.o
+[ 18%] Building CXX object src/yafraycore/CMakeFiles/yafaray_v3_core.dir/nodematerial.cc.o
+[ 19%] Building CXX object src/yafraycore/CMakeFiles/yafaray_v3_core.dir/triangle.cc.o
+[ 20%] Building CXX object src/yafraycore/CMakeFiles/yafaray_v3_core.dir/vector3d.cc.o
+/build/blender-addons-yafaray-git/src/YafaRay/src/yafraycore/imagefilm.cc: In member function 'void yafaray::imageFilm_t::drawFontBitmap(FT_Bitmap*, int, int)':
+/build/blender-addons-yafaray-git/src/YafaRay/src/yafraycore/imagefilm.cc:1006:61: error: no matching function for call to 'min(unsigned int, int)'
+  int x_max = std::min(x + bitmap->width, dpimage->getWidth());
+                                                             ^
+In file included from /usr/include/c++/6.1.1/algorithm:62:0,
+                 from /usr/include/opencv2/core/base.hpp:53,
+                 from /usr/include/opencv2/core.hpp:54,
+                 from /usr/include/opencv2/photo.hpp:46,
+                 from /build/blender-addons-yafaray-git/src/YafaRay/include/core_api/session.h:31,
+                 from /build/blender-addons-yafaray-git/src/YafaRay/build/yafray_config.h:6,
+                 from /build/blender-addons-yafaray-git/src/YafaRay/include/core_api/imagefilm.h:26,
+                 from /build/blender-addons-yafaray-git/src/YafaRay/src/yafraycore/imagefilm.cc:23:
+/usr/include/c++/6.1.1/bits/stl_algo.h:3453:5: note: candidate: template<class _Tp, class _Compare> constexpr _Tp std::min(std::initializer_list<_Tp>, _Compare)
+     min(initializer_list<_Tp> __l, _Compare __comp)
+     ^~~
+/usr/include/c++/6.1.1/bits/stl_algo.h:3453:5: note:   template argument deduction/substitution failed:
+/build/blender-addons-yafaray-git/src/YafaRay/src/yafraycore/imagefilm.cc:1006:61: note:   mismatched types 'std::initializer_list<_Tp>' and 'unsigned int'
+  int x_max = std::min(x + bitmap->width, dpimage->getWidth());
+                                                             ^
+/build/blender-addons-yafaray-git/src/YafaRay/src/yafraycore/imagefilm.cc:1007:61: error: no matching function for call to 'min(unsigned int, int)'
+  int y_max = std::min(y + bitmap->rows, dpimage->getHeight());
+                                                             ^

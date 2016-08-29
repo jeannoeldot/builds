@@ -1,0 +1,117 @@
+#Le répertoire
+
+cd /home/jnd/05-builds/conky-toluapp
+
+
+1-1) RECUPERATION FICHIERS SOURCES
+=============================================
+$ wget http://www.codenix.com/~tolua/tolua++-1.0.93.tar.bz2
+
+
+
+1-2) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+!!! ATTENTION : toluapp ==> tolua++
+!!! REVOIR conky-lua
+
+pkgname=tolua++
+pkgver=1.0.93
+pkgrel=2
+
+source=("............."
+        "............."
+)
+md5sum tolua++-1.0.93.tar.bz2
+
+md5sum config_linux.py
+
+md5sums=(11111111111111111111111111
+         22222222222222222222222222
+)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxx.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 xxxxxxx.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG en CHROOT
+====================
+
+!!! EN USER
+
+$ /home/jnd/bin/mkpkg-tmpfs -n
+
+$ mkpkg-tmpfs -n
+
+
+3) MAKEPKG en USER
+=====================
+cd /home/jnd/05-builds/conky-toluapp
+
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/tolua++-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv tolua++-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal
+
+EN ROOT
+========
+!!! PAS D'INSTLLATION SI MAKE DEPENDANCE DE CONKY-LUA-NVIDIA-GIT
+# pacman -Syu
+# pacman -Syu tolua++
+
+
+SI PROBLEMES
+================
+
+# pacman -R tolua++
+# rm -f /var/cache/pacman/pkg/tolua++-*
+
+!!! EN USER
+$ rm -f 00-repolocal/tolua++-*-x86_64.pkg.tar.*
+$ maj-repolocal
+
+EN ROOT
+========
+# pacman -Syu
+
+======================================================================
+!!! ANCIEN
+# cd
+
+# mkpkg-tmpfs /home/jnd/05-builds/conky-toluapp -n
+
+!!! MODIFIER FICHIERS
+
+DANS : /home/jnd/01-scripts/Cherche-maj-deps/
+
+liste_paquets_a_verifier.lst
+
+liste_programmes_a_verifier.lst
+
+

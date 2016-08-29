@@ -1,0 +1,11 @@
+$ su -
+Mot de passe : 
+[root@arch64 ~]# cd /home/jnd/05-builds/9-test-pkg/firefox
+
+[root@arch64 firefox]# ./chown.sh pkg
+
+[root@arch64 firefox]# cd pkg
+
+[root@arch64 pkg]# tar -cvzf firefox-pgo-beta-3.5b99-11-x86_64.pkg.tar.gz .PKGINFO .INSTALL *
+
+[root@arch64 pkg]# bsdtar -czf firefox-pgo-beta-3.5b99-11-x86_64.pkg.tar.gz .PKGINFO .INSTALL *

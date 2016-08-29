@@ -1,0 +1,32 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+pkgname='jndqrami'
+pkgver=0.1.6
+pkgrel=1
+pkgdesc="Variante du Rami Kaluki"
+arch=('i686' 'x86_64')
+url=http://www.club-internet.fr/jeannoeldot/
+license=('GPL2')
+depends=('qt4' 'sdl_mixer')
+makedepends=('qt4' 'sdl' 'sdl_mixer')
+install=jndqrami.install
+source=("${pkgname}-${pkgver}.tar.gz")
+md5sums=('4dc55db28cb5b5cec7fafffcf06303c3')
+
+build() {
+	cd "${srcdir}/${pkgname}"
+
+	# Build
+	qmake-qt4
+	make ${MAKEFLAGS}
+}
+
+package() {
+	cd "${srcdir}/${pkgname}"
+
+	# Binary
+	install -D -m755 bin/${pkgname} "${pkgdir}"/usr/bin/${pkgname}
+
+	# Desktop
+	install -D -m644 "${srcdir}"/${pkgname}/desktop/${pkgname}.desktop "${pkgdir}"/usr/share/applications/${pkgname}.desktop
+	install -D -m644 "${srcdir}"/${pkgname}/desktop/${pkgname}.png "${pkgdir}"/usr/share/pixmaps/${pkgname}.png
+}

@@ -1,0 +1,120 @@
+# Maintainer: JND
+
+pkgname=bluegriffon-svn
+pkgver=1.2.755
+pkgrel=1
+_bgname=bluegriffon
+_bgver=1.2
+_ffver=5.0
+#_mozver=release
+
+pkgdesc="New WYSIWYG content editor for the Web powered by Gecko"
+url="http://bluegriffon.org/"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+depends=('gtk2' 'gcc-libs' 'libidl2' 'mozilla-common' 'nss>=3.12.10' 'libxt'
+         'libxrender' 'hunspell' 'startup-notification' 'mime-types' 'dbus-glib'
+         'alsa-lib' 'libevent' 'sqlite3>=3.7.4' 'libnotify' 'desktop-file-utils'
+         'libvpx' 'lcms' 'nspr>=4.8.8' 'libevent' 'libpng' 'cairo'
+)
+makedepends=('zip' 'pkg-config' 'diffutils' 'python2' 'wireless_tools'
+             'yasm' 'mesa' 'autoconf2.13' 'gconf' 'xorg-server-xvfb'
+)
+
+provides=("bluegriffon")
+conflicts=("bluegriffon")
+
+install=bluegriffon.install
+
+#"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/${_ffver}-candidates/${_build}/source/firefox-${_ffver}.source.tar.bz2"
+#"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/source/firefox-${_ffver}.source.tar.bz2"
+source=("http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/source/firefox-${_ffver}.source.tar.bz2"
+	"${pkgname}-${pkgver}.tar.bz2"
+        'mozconfig'
+	'bluegriffon.sh'
+        'bluegriffon.desktop'
+	'1.2-bluegriffon-config-content.patch'
+	'1.2-ldflags.patch'
+	'1.2-prefs.patch'
+)
+md5sums=('9f64a01e86a5d424e12a8e3305c5debe'
+         'b63988d07555fa22271fbe8dc5931189'
+         '81a43c965dfaa33744fac5803d091f59'
+         '9c5c47f5d0f5f36a3abd8bfecf6c5d8d'
+         '044abfeea6a59f084d5d2fbc89368f8b'
+	 'd07c5e1f1fc58f5617d657780a49a055'
+         'b852b1775fd150c2363b8886b74c0936'
+         '7ceaa034ac5d64ddf3c0eb4965ac729f'
+)
+
+
+build() {
+	cd "${srcdir}"/mozilla-release
+
+	tar xjf "${srcdir}/${pkgname}-${pkgver}.tar.bz2"
+
+#	voir http://bluegriffon.org/pages/Build-BlueGriffon
+#	patch -p 1 < bluegriffon/config/content.patch
+# 	bluegriffon/config/content.patch rewritted
+	patch -Np1 -i "${srcdir}/1.2-bluegriffon-config-content.patch"
+
+#	voir PKGBUILD firefox 5.0 sur extra
+	patch -Np1 -i "${srcdir}/1.2-prefs.patch"
+	patch -Np1 -i "${srcdir}/1.2-ldflags.patch"
+# OU
+#	echo 'LDFLAGS += -lX11 -lXrender' \
+#	  >> layout/build/Makefile.in
+#
+# 	Kill @PRE_RELEASE_SUFFIX@ from browser.xul because it
+# 	gets set to \177 for an unknown reason
+	sed -i 's/@PRE_RELEASE_SUFFIX@//g' \
+	  browser/base/content/browser.xul
+
+#	Don't generate startup cache. Unbreaks make install
+	sed -i 's/^GENERATE_CACHE .*/GENERATE_CACHE = true/' \
+	  toolkit/mozapps/installer/packager.mk
+
+	cp "${srcdir}"/mozconfig .mozconfig
+
+	export CFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	export CXXFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	export LDFLAGS="-Wl,-rpath,/usr/lib/${_bgname} -Wl,-O1,--sort-common,--hash-style=gnu,--as-needed"
+	export PYTHON=python2
+
+	make -f client.mk build MOZ_MAKE_FLAGS="$MAKEFLAGS"
+}
+package() {
+	cd "${srcdir}"/mozilla-release
+
+# No Make install for now :(
+#	make DESTDIR="$pkgdir/" -C bg-trunk install
+
+	install -d -m 755 ${pkgdir}/usr/bin
+	install -d -m 755 ${pkgdir}/usr/lib/${_bgname}
+	install -d -m 755 ${pkgdir}/usr/share/applications
+
+#	VOIR : https://github.com/remicollet/remirepo/blob/master/bluegriffon/bluegriffon.spec
+	cd bg-trunk
+	tar --create --file - --dereference --directory=dist/bin --exclude xulrunner . \
+	| tar --extract --file - --directory ${pkgdir}/usr/lib/${_bgname}
+
+# Launcher
+	cp ${srcdir}/bluegriffon.sh ${pkgdir}/usr/bin/${_bgname}
+	chmod 755 ${pkgdir}/usr/bin/${_bgname}
+
+	cd "${srcdir}"/mozilla-release
+
+# 	Icons
+	install -D -m 644 ${_bgname}/app/icons/default16.png "${pkgdir}/usr/share/icons/hicolor/16x16/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/default32.png "${pkgdir}/usr/share/icons/hicolor/32x32/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/default48.png "${pkgdir}/usr/share/icons/hicolor/48x48/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/default50.png "${pkgdir}/usr/share/icons/hicolor/64x64/apps/${_bgname}.png"
+	install -D -m 644 ${_bgname}/app/icons/bluegriffon128.png "${pkgdir}/usr/share/icons/hicolor/128x128/apps/${_bgname}.png"
+
+#	Desktop
+	install -D -m 644 "${srcdir}/${_bgname}.desktop" "${pkgdir}/usr/share/applications/${_bgname}.desktop"
+
+# 	Use the system hunspell dictionaries
+	rm -rf "${pkgdir}/usr/lib/${_bgname}/dictionaries"
+	ln -sf /usr/share/myspell/dicts "${pkgdir}/usr/lib/${_bgname}/dictionaries"
+}

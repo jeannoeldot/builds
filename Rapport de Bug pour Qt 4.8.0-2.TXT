@@ -1,0 +1,75 @@
+[Qt 4.8] Compiler options in RELEASE mode
+
+The compiler options in RELEASE mode does not correspond to CXXFLAGS.
+
+Since g++.conf has been split into multiple files, in the PKGBUILD, we must also modify the gcc-base.conf.
+
+Here is the result of a compilation in RELEASE mode with Qt-4.7.4 :
+
+cd src/ && /usr/bin/qmake /build/src/jndqaligne5/src/src.pro -o Makefile
+cd src/ && make -f Makefile 
+make[1]: Entering directory `/build/src/jndqaligne5/src'
+/usr/bin/uic dlgpreference.ui -o ui_dlgpreference.h
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o main.o main.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cjeu.o cjeu.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cjoueur.o cjoueur.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o chumain.o chumain.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cordi.o cordi.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cpreference.o cpreference.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o sdlplayer.o sdlplayer.cpp
+/usr/bin/moc -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. caligne5.h -o moc_caligne5.cpp
+/usr/bin/moc -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. cpreference.h -o moc_cpreference.cpp
+/usr/bin/moc -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. sdlplayer.h -o moc_sdlplayer.cpp
+/usr/bin/rcc -name application application.qrc -o qrc_application.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o caligne5.o caligne5.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o moc_caligne5.o moc_caligne5.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o moc_cpreference.o moc_cpreference.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o moc_sdlplayer.o moc_sdlplayer.cpp
+g++ -c -m64 -pipe -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector --param=ssp-buffer-size=4 -D_FORTIFY_SOURCE=2 -fno-strict-aliasing -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o qrc_application.o qrc_application.cpp
+caligne5.cpp: In member function 'void CAligne5::clicBoutonDroit()':
+caligne5.cpp:285:38: warning: 'couleur' may be used uninitialized in this function [-Wuninitialized]
+g++ -m64 -Wl,-O1,--sort-common,--as-needed,-z,relro,--hash-style=gnu -Wl,-O1 -o ../bin/jndqaligne5 main.o caligne5.o cjeu.o cjoueur.o chumain.o cordi.o cpreference.o sdlplayer.o moc_caligne5.o moc_cpreference.o moc_sdlplayer.o qrc_application.o    -L/usr/lib -L/usr/lib -lSDL -lSDL_mixer -lQtGui -lQtCore -lpthread 
+make[1]: Leaving directory `/build/src/jndqaligne5/src'
+...
+
+And the result with Qt-4.8 :
+
+cd src/ && /usr/bin/qmake /build/src/jndqaligne5/src/src.pro -o Makefile
+cd src/ && make -f Makefile 
+make[1]: Entering directory `/build/src/jndqaligne5/src'
+/usr/bin/uic dlgpreference.ui -o ui_dlgpreference.h
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o main.o main.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cjeu.o cjeu.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cjoueur.o cjoueur.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o chumain.o chumain.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cordi.o cordi.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o cpreference.o cpreference.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o sdlplayer.o sdlplayer.cpp
+/usr/bin/moc -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. caligne5.h -o moc_caligne5.cpp
+/usr/bin/moc -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. cpreference.h -o moc_cpreference.cpp
+/usr/bin/moc -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. sdlplayer.h -o moc_sdlplayer.cpp
+/usr/bin/rcc -name application application.qrc -o qrc_application.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o caligne5.o caligne5.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o moc_caligne5.o moc_caligne5.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o moc_cpreference.o moc_cpreference.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o moc_sdlplayer.o moc_sdlplayer.cpp
+g++ -c -m64 -pipe -O2 -D_REENTRANT -Wall -W -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/usr/share/qt/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I. -I. -o qrc_application.o qrc_application.cpp
+caligne5.cpp: In member function ‘void CAligne5::clicBoutonDroit()’:
+caligne5.cpp:285:38: warning: 'couleur' may be used uninitialized in this function [-Wuninitialized]
+g++ -m64 -Wl,-O1,--sort-common,--as-needed,-z,relro,--hash-style=gnu -Wl,-O1 -o ../bin/jndqaligne5 main.o caligne5.o cjeu.o cjoueur.o chumain.o cordi.o cpreference.o sdlplayer.o moc_caligne5.o moc_cpreference.o moc_sdlplayer.o qrc_application.o    -L/usr/lib -L/usr/lib -lSDL -lSDL_mixer -lQtGui -lQtCore -lpthread 
+make[1]: Leaving directory `/build/src/jndqaligne5/src'
+...
+
+The modification to the PKGBUILD can be :
+
+  sed -i "s|-O2|${CXXFLAGS}|" mkspecs/common/gcc-base.conf
+
+
+Arch: x86_64
+Linux: 3.1.5-1
+Qt : 4.8.0-2
+
+
+
+
+

@@ -1,0 +1,235 @@
+SI ISO de Win7 ds 99-dwl-temp
+
+$ cd $HOME/99-dwl-temp/
+
+Avec 7-Zip : clic droit : Extraxt to ... $HOME/99-dwl-temp/Win7
+
+$ cd Win7/sources/
+
+$ 7z x install.wim 1/Windows/Fonts
+
+$ cd ../..
+
+$ mkdir win7-sp1-fonts
+
+$ find Win7/sources/1/Windows/Fonts -name *.tt[fc] -exec cp '{}' ./win7-sp1-fonts/ \;
+
+$ cd win7-sp1-fonts
+
+$ ls
+Candara.ttf   aparajb.ttf   cambriai.ttf  cour.ttf      himalaya.ttf  malgunbd.ttf  ntailub.ttf   shrutib.ttf   trebucit.ttf  upckbi.ttf
+Candarab.ttf  aparajbi.ttf  cambriaz.ttf  courbd.ttf    impact.ttf    mangal.ttf    nyala.ttf     simfang.ttf   tunga.ttf     upcki.ttf
+Candarai.ttf  aparaji.ttf   comic.ttf     courbi.ttf    iskpota.ttf   mangalb.ttf   pala.ttf      simhei.ttf    tungab.ttf    upckl.ttf
+Candaraz.ttf  arabtype.ttf  comicbd.ttf   couri.ttf     iskpotab.ttf  marlett.ttf   palab.ttf     simkai.ttf    upcdb.ttf     upclb.ttf
+Gabriola.ttf  arial.ttf     consola.ttf   daunpenh.ttf  kaiu.ttf      meiryo.ttc    palabi.ttf    simpbdo.ttf   upcdbi.ttf    upclbi.ttf
+KhmerUI.ttf   arialbd.ttf   consolab.ttf  david.ttf     kalinga.ttf   meiryob.ttc   palai.ttf     simpfxo.ttf   upcdi.ttf     upcli.ttf
+KhmerUIb.ttf  arialbi.ttf   consolai.ttf  davidbd.ttf   kalingab.ttf  micross.ttf   phagspa.ttf   simpo.ttf     upcdl.ttf     upcll.ttf
+LaoUI.ttf     ariali.ttf    consolaz.ttf  dokchamp.ttf  kartika.ttf   mingliu.ttc   phagspab.ttf  simsun.ttc    upceb.ttf     utsaah.ttf
+LaoUIb.ttf    ariblk.ttf    constan.ttf   ebrima.ttf    kartikab.ttf  mingliub.ttc  plantc.ttf    simsunb.ttf   upcebi.ttf    utsaahb.ttf
+Shonar.ttf    batang.ttc    constanb.ttf  ebrimabd.ttf  kokila.ttf    monbaiti.ttf  raavi.ttf     sylfaen.ttf   upcei.ttf     utsaahbi.ttf
+Shonarb.ttf   browa.ttf     constani.ttf  estre.ttf     kokilab.ttf   moolbor.ttf   raavib.ttf    symbol.ttf    upcel.ttf     utsaahi.ttf
+Vani.ttf      browab.ttf    constanz.ttf  euphemia.ttf  kokilabi.ttf  mriam.ttf     rod.ttf       tahoma.ttf    upcfb.ttf     verdana.ttf
+Vanib.ttf     browai.ttf    corbel.ttf    framd.ttf     kokilai.ttf   mriamc.ttf    segoepr.ttf   tahomabd.ttf  upcfbi.ttf    verdanab.ttf
+ahronbd.ttf   browau.ttf    corbelb.ttf   framdit.ttf   l_10646.ttf   msgothic.ttc  segoeprb.ttf  taile.ttf     upcfi.ttf     verdanai.ttf
+andlso.ttf    browaub.ttf   corbeli.ttf   frank.ttf     latha.ttf     msjh.ttf      segoesc.ttf   taileb.ttf    upcfl.ttf     verdanaz.ttf
+angsa.ttf     browaui.ttf   corbelz.ttf   gautami.ttf   lathab.ttf    msjhbd.ttf    segoescb.ttf  times.ttf     upcib.ttf     vijaya.ttf
+angsab.ttf    browauz.ttf   cordia.ttf    gautamib.ttf  leelawad.ttf  msmincho.ttc  segoeui.ttf   timesbd.ttf   upcibi.ttf    vijayab.ttf
+angsai.ttf    browaz.ttf    cordiab.ttf   georgia.ttf   leelawdb.ttf  msuighur.ttf  segoeuib.ttf  timesbi.ttf   upcii.ttf     vrinda.ttf
+angsau.ttf    calibri.ttf   cordiai.ttf   georgiab.ttf  lucon.ttf     msyh.ttf      segoeuii.ttf  timesi.ttf    upcil.ttf     vrindab.ttf
+angsaub.ttf   calibrib.ttf  cordiau.ttf   georgiai.ttf  lvnm.ttf      msyhbd.ttf    segoeuil.ttf  tradbdo.ttf   upcjb.ttf     webdings.ttf
+angsaui.ttf   calibrii.ttf  cordiaub.ttf  georgiaz.ttf  lvnmbd.ttf    msyi.ttf      segoeuiz.ttf  trado.ttf     upcjbi.ttf    wingding.ttf
+angsauz.ttf   calibriz.ttf  cordiaui.ttf  gisha.ttf     majalla.ttf   mvboli.ttf    seguisb.ttf   trebuc.ttf    upcji.ttf
+angsaz.ttf    cambria.ttc   cordiauz.ttf  gishabd.ttf   majallab.ttf  nrkis.ttf     seguisym.ttf  trebucbd.ttf  upcjl.ttf
+aparaj.ttf    cambriab.ttf  cordiaz.ttf   gulim.ttc     malgun.ttf    ntailu.ttf    shruti.ttf    trebucbi.ttf  upckb.ttf
+
+$ ls | grep ttf
+
+$ ls | grep ttc
+batang.ttc
+cambria.ttc
+gulim.ttc
+meiryo.ttc
+meiryob.ttc
+mingliu.ttc
+mingliub.ttc
+msgothic.ttc
+msmincho.ttc
+simsun.ttc
+
+$ cd ..
+
+$ cp -R win7-sp1-fonts $HOME/05-builds/ttf-win7-fonts/
+
+$ sync
+
+$ rm -rf Win7
+
+$ rm -rf win7-sp1-fonts
+
+$ sync
+
+
+========================================================================
+
+Comment by: severach on Sun, 18 Dec 2011 01:22:41 +0000
+
+Arial Black and Andale Mono are in ttf-ms-fonts and not in ttf-win7-fonts.
+Installing ttf-win7-fonts removes conflicting package ttf-ms-fonts which removes these fonts
+causing formerly working web pages to display incorrectly.
+Lucidia Sans Unicode, Lucida Console, Microsoft Sans Serif, Palatino Linotype, Symbol, and Tahoma
+are popular and should be in a win-fonts package.
+Tahoma in Win7 is newer than in package ttf-tahoma.
+Until the packages are fixed the fonts can be added and removed manually
+with this manual procedure applicable to any interactive build.
+Remaining Win7 fonts are international or found in the ms-office-2007-fonts package and can be added if desired.
+
+    Note: Arial Black in Windows 7 does not work in X. Use ariblk.ttf from ttf-ms-fonts.
+    Note: AbiWord does not render Symbol properly. Symbol works fine in other GTK apps.
+    Note: MS Gothic msgothic.ttc should be included but I couldn't get it to convert in Fontforge.
+    Note: Arial Narrow fonts from ttf-office-2007-fonts enumerate inside Arial improperly
+and cannot be selected due to incorrect Style information.
+Remove from ttf-office-2007-fonts and use Arial Narrow from Win7 which enumerates as a separate font.
+See Bodoni MT for an example of many font styles enumerating properly.
+    Note: In ttf-office-2007-fonts neither Segoe Chess SEGOECHESS.TTF nor Bookshelf Symbol 7 BSSYM7.TTF render properly.
+    Note: MS Outlook OUTLOOK.TTF has no purpose. These fonts should be removed.
+    Note: Calibri (4), Cambria (3), Candara (4), Consolas (4), Constantia (4), Corbel (4) are duplicated between ttf-win7-fonts and ttf-office-2007-fonts.
+I remove them from ttf-office-2007-fonts.
+    Note: Most GTK apps must be restarted to see newly installed fonts. 
+Firefox immediately uses new fonts on page refresh.
+    Note to package managers: ttf-office-2007-fonts and ttf-win7-fonts should be listed as "optional" in each others PKGBUILD so the a message pops up on install recommending the other
+
+#Use this procedure with ttf-ms-fonts, ttf-office-2007-fonts,
+ttf-google-webfonts, ttf-adobe-fonts, and other interactive build packages with the appropriate changes
+#Log out of root, log in as a user, cd to a folder where we can create folder: ttf-win7-fonts
+cd ~ # not as root, most remaining steps not as root
+yaourt -G ttf-win7-fonts # download the package build into folder of same.
+This build requires user assistance so -S writing to a /tmp folder makes this procedure unnecessarily difficult.
+cd ttf-win7-fonts
+vi PKGBUILD # for instructions and to change font lists
+
+# ttf-win7-fonts:
+# All fonts already mentioned in PKGBUILD plus
+# Andale Mono (1) & Arial Black (1) from ttf-ms-fonts
+# Lucida Console (1)
+=># Arial Narrow (4) from Win7
+# the sed lines are constructed so that they can be run more than once without damage
+# add ttf-tahoma to provides= and conflicts= to make it uninstall
+sed -r -i "s,=\('ttf-vista-fonts' 'ttf-ms-fonts'\),=\('ttf-vista-fonts' 'ttf-ms-fonts' 'ttf-tahoma'\),g" PKGBUILD
+# fix the install line to install uppercase .TTF
+sed -r -i "s,644 \*.ttf \",644 \*.ttf \*.TTF \",g" PKGBUILD
+#Add fonts into sources in the src font listing
+'andalemo.ttf' 'lucon.ttf' 'ariblk.ttf' 'l_10646.ttf' 'micross.ttf' 'pala.ttf' 'palabi.ttf' 'palab.ttf' 'palai.ttf' 'symbol.ttf' 'tahomabd.ttf' 'tahoma.ttf' 'ARIALNBI.TTF' 'ARIALNB.TTF' 'ARIALNI.TTF' 'ARIALN.TTF'
+#done here automatically
+sed -r -i "s,corbel.ttf' 'corbelb.ttf,corbel.ttf' 'andalemo.ttf' 'lucon.ttf' 'ariblk.ttf' 'l_10646.ttf' 'micross.ttf' 'palabi.ttf' 'palab.ttf' 'palai.ttf' 'pala.ttf' 'symbol.ttf' 'tahomabd.ttf' 'tahoma.ttf' 'corbelb.ttf,g" PKGBUILD
+#Copy fonts (74 files) from Windows 7, ariblk.ttf & andalemo.ttf (2 files) from ttf-ms-fonts, change Gabriola.ttf to lower case
+#It's OK to copy extra fonts. The PKGBUILD will only use the fonts it needs
+
+
+JE N'AI QUE 72 TTF et TTC
+
+==================================================
+    #ttf-office-2007-fonts
+    #remove 26 fonts from sources=() list in PKGBUILD
+    #rm SEGOECHESS.TTF BSSYM7.TTF OUTLOOK.TTF CALIBRI*.TTF CAMBRIA*.TTF CANDARA*.TTF CONSOLA*.TTF CONSTAN*.TTF CORBEL*.TTF
+
+    chmod 644 *.ttf *.ttc # Files received through SAMBA shares may have undesirable permissions
+    makepkg -g > xyzzy #some checksums already mismatch and we changed the font list
+    cat xyzzy >> PKGBUILD # paste the checksums into PKGBUILD if you find that easier. The new sums can be left at the end.
+    rm xyzzy
+    vi PKGBUILD # remove previous checksums
+    makepkg
+    mv ttf-win-7-*.xz ~ # I save the .xz files. Building takes too long.
+    cd ~
+    sudo pacman -U ttf-win7-fonts-*.xz #upgrade will not remove fonts when the package is reduced. If fonts are to be removed use pacman -R first.
+    #(optional) rm -rf ttf-win7-fonts # cleanup when the package is verified working
+======================================================
+
+    When the fonts are installed check your work at these websites:
+    http://web.mit.edu/jmorzins/www/fonts.html
+    http://www.codestyle.org/css/font-family/sampler-WindowsResults.shtml
+    http://www.ampsoft.net/webdesign-l/WindowsMacFonts.html
+    http://dustinbrewer.com/fonts-on-the-web-and-a-list-of-web-safe-fonts/
+    http://blogs.adobe.com/typblography/2010/08/adobe-web-fonts-2.html (FAIL)
+    Note: Linux Firefox does not match Franklin Gothic Medium, Monotype Corsiva, or Myriad Pro. Windows Firefox matches correctly.
+    Note: X does not render Lucidia Sans, Cambria, or Constantia with the same line widths as Windows.
+    Note: X auto-bold code adds fuzzy pixels around fonts not available in bold: Arial Black, Impact, Andale
+    Note: Firefox subs Monaco, Helvetica Neue, and Gill Sans incorrectly on Windows and Linux.
+
+DU PKGBUILD
+==============
+# BUILD INSTRUCTIONS:
+# ----------------------
+# This package is intended as a more up-to-date replacement for the AUR
+# 'ttf-ms-fonts' and 'ttf-vista-fonts' packages. It provides newer versions of
+# the fonts in these packages, but due to license issues cannot automatically
+# download the fonts.
+#
+# Instead, you must acquire them from a Windows 7 system or install media:
+#  - Running Windows 7 system: fonts are located in C:\Windows\Fonts
+#  - Windows 7 install media: fonts are located in sources/install.wim, which
+#    is a "Windows Imaging Format" archive. This archive can be extracted with
+#    7-zip (p7zip package): "7z x install.wim 1/Windows/Fonts"
+#    Alternatively, you can use GNOME's File Roller (and maybe other archive
+#    managers) to extract the files if the p7zip package is installed.
+#
+# You need the files listed in the source=() array. Place them in the same
+# directory as this PKGBUILD file, then run makepkg.
+#
+# It is possible that the checksums don't match. This is due to the fact that
+# different Windows releases may have older or newer fonts than the ones I used
+# to create the package. In this case, makepkg will refuse to build the package.
+# To fix this, you have to replace the sha256sums=(...) entry in this PKGBUILD:
+#  - Run "makepkg -g". It will generate the correct checksums for your files
+#    and print them to the console
+#  - Copy and paste them into this file, replacing the existing sha256sums=(...)
+#    entry.
+#
+# Windows 7 SP1 has newer versions of the following fonts:
+#  - Arial
+#  - Cambria
+#  - Gabriola
+#  - Mangal
+#  - Times New Roman
+#  - Verdana
+#
+# These fonts can be extracted from the Windows 7 SP1 updater with the following
+# commands:
+#  $ cd ~/Downloads  # (or any other working directory)
+#  $ wget http://download.microsoft.com/download/0/A/F/0AFB5316-3062-494A-AB78-7FB0D4461357/windows6.1-KB976932-X64.exe
+#  $ cabextract -F *.tt[fc] -d win7_sp1 windows6.1-KB976932-X64.exe
+#  $ mkdir sp1-fonts
+#  $ find win7_sp1 -name *.tt[fc] -exec cp '{}' ./sp1-fonts/ \;
+#
+# This will copy the fonts to the "sp1-fonts" directory.
+
+###################################################################
+#        Normal        Bold           Italic         Bold+Italic  #
+###################################################################
+source=('andalemo.ttf'
+	'arial.ttf'   'arialbd.ttf'  'ariali.ttf'   'arialbi.ttf'
+	'ariblk.ttf'
+        'comic.ttf'   'comicbd.ttf'
+        'cour.ttf'    'courbd.ttf'   'couri.ttf'    'courbi.ttf'
+        'gabriola.ttf'
+        'georgia.ttf' 'georgiab.ttf' 'georgiai.ttf' 'georgiaz.ttf'
+        'impact.ttf'
+	'lucon.ttf'
+	'l_10646.ttf'
+        'mangal.ttf'  'mangalb.ttf'
+	'micross.ttf'
+	'pala.ttf'    'palab.ttf'    'palai.ttf'    'palabi.ttf'
+	'symbol.ttf'
+	'tahoma.ttf'  'tahomabd.ttf'
+        'times.ttf'   'timesbd.ttf'  'timesi.ttf'   'timesbi.ttf'
+        'trebuc.ttf'  'trebucbd.ttf' 'trebucit.ttf' 'trebucbi.ttf'
+        'verdana.ttf' 'verdanab.ttf' 'verdanai.ttf' 'verdanaz.ttf'
+        'webdings.ttf'
+        'wingding.ttf'
+        'calibri.ttf' 'calibrib.ttf' 'calibrii.ttf' 'calibriz.ttf'
+        'cambria.ttc' 'cambriab.ttf' 'cambriai.ttf' 'cambriaz.ttf'
+        'Candara.ttf' 'Candarab.ttf' 'Candarai.ttf' 'Candaraz.ttf'
+        'consola.ttf' 'consolab.ttf' 'consolai.ttf' 'consolaz.ttf'
+        'constan.ttf' 'constanb.ttf' 'constani.ttf' 'constanz.ttf'
+        'corbel.ttf'  'corbelb.ttf'  'corbeli.ttf'  'corbelz.ttf'
+        'license.rtf'
+)

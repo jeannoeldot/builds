@@ -1,0 +1,119 @@
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd /home/jnd/05-builds/flashplayer
+
+
+2) MODIFIER LE PKGBUILD
+========================
+http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_rc1_install_lin_64_090611.tar.gz
+
+ls
+
+md5sum flashplayer11_rc1_install_lin_64_090611.tar.gz
+
+md5sum mms.cfg
+
+md5sum LICENSE
+
+
+pkgver=11.rc1.090611
+
+pkgrel=1
+
+source=(http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_rc1_install_lin_64_090611.tar.gz
+	mms.cfg
+	LICENSE
+)
+md5sums=(1111111111
+	 2222222222
+	 3333333333
+)
+
+
+3) MAKEPKG en CHROOT
+====================
+
+!!! EN ROOT
+::Mise a Jour
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+::Build
+# cd
+# cd /home/jnd/05-builds/flashplayer
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+
+# ls -l
+# chown jnd:jnd flashplayer-*-x86_64.pkg.tar.*
+# chown jnd:jnd namcap.log
+# chown jnd:jnd flashplayer11_*.tar.gz mms.cfg LICENSE
+# ls -l
+
+
+4) MAKEPKG
+============
+!!! EN USER
+
+makepkg -s
+
+makepkg -f
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -rf pkg src
+rm -f *~
+rm -rf srcp
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+!!! flashplayer
+mv /home/jnd/00-repolocal/flashplayer-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv flashplayer-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+cd
+maj-repolocal.sh
+
+EN ROOT
+========
+# cd
+# pacman -Syu flashplayer
+# cd
+# pacman -Syu
+
+!!! OU 1ere INSTALLATION
+# pacman -Rsd flashplugin
+# pacman -Sy flashplayer
+
+=============================================
+ANCIENS
+
+http://download.macromedia.com/pub/labs/flashplatformruntimes/flashplayer11/flashplayer11_b2_install_lin_64_080811.tar.gz
+
+!!! flashplugin-square ==> flashplayer
+mv /home/jnd/00-repolocal/flashplugin-square-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+# pacman -Rsd flashplugin-square
+
+http://download.macromedia.com/pub/labs/flashplayer10/flashplayer_square_p2_64bit_linux_092710.tar.gz
+http://www.adobe.com/products/eulas/pdfs/PlatformClients_PC_WWEULA_Combined_20100108_1657.pdf
+
+md5sum flashplayer_square_p2_64bit_linux_092710.tar.gz
+md5sum PlatformClients_PC_WWEULA_Combined_20100108_1657.pdf
+
+source=(http://download.macromedia.com/pub/labs/flashplayer10/flashplayer_square_p2_64bit_linux_092710.tar.gz
+	http://www.adobe.com/products/eulas/pdfs/PlatformClients_PC_WWEULA_Combined_20100108_1657.pdf
+)
+md5sums=(1111111111
+         2222222222
+)
+
+# chown jnd:jnd PlatformClients_PC_WWEULA_Combined_20100108_1657.pdf

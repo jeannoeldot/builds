@@ -1,0 +1,51 @@
+ 
+Thu Jul 01, 2010 6:23 pm
+
+    _Mo_ wrote:Is there any chance to grab the sources, yet?
+
+_Mo_, yes there is but be warned, the build system changed
+and i've had no time to write the building instructions,
+scons was replaced by cmake, so if you have time to experiment these are the links:
+YafaRay: http://github.com/DarkTide/YafaRay
+Blender 2.49b exporter: http://github.com/DarkTide/YafaRay_Blender-2.49
+simply hit the button that says "download sources" and remember this is in active development
+if you want help configuring the build and running it,
+condar or wizofboz may help you on irc, or me if i'm available
+
+Best regards,
+DarkTide
+
+
+
+
+Thu Jul 01, 2010 8:21 pm
+OK, if anyone is interested how to build Yafaray beta themselves (on Linux, at least) is as follows:
+
+- apart from the standard dependencies from before, you must have installed 'make' and 'cmake'.
+
+- download the packages listed by DarkTide and put them somewhere.
+
+- in the folder where you unpacked the yafaray sources (not the exporter)
+create a directory named build (or whatever).
+The binary files will be created in this directory,
+so they can be easily deleted afterwards and don't clutter the directory where the sources are.
+
+- go in the build directory and issue cmake ../
+This will configure all the options & paths for the building
+(it's an replacement for make's ./configure command).
+
+- now from the same directory issue a make command,
+that will build the binaries and then a sudo make install that will install them.
+
+- now copy everything 
+from <path where you unpacked yafaray sources>/bindings/python and every file in the Blender exporter package,
+to <path where you have Blender>/.blender/scripts/yafaray/.
+Delete (or archive somewhere) everything in the .blender/scripts/yafaray, before doing this.
+
+- you can issue a make clean, to cleanup all the created files.
+
+I don't know what help for configuring is needed, but I don't know much about writing makefiles and "stuff" :D
+
+EDIT: lol, I probably misunderstood that, I thought that I could help... :lol:
+Last edited by _Mo_ on Thu Jul 01, 2010 8:36 pm, edited 2 times in total.
+

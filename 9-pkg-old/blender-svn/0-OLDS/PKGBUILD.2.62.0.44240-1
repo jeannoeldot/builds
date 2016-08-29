@@ -1,0 +1,103 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+pkgname=blender-svn
+pkgver=2.62.0.44240
+pkgrel=1
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('i686' 'x86_64')
+url="http://blender.org/"
+depends=('libjpeg' 'libpng' 'openjpeg' 'libtiff' 'openexr' 
+	 'libgl' 'mesa' 'python'
+	 'libsamplerate' 'ffmpeg' 'fftw' 'freeglut'
+         'openal' 'freetype2' 'sdl' 'libsndfile' 'jack'
+         'eigen' 'glew'
+	 'libxi' 'libxmu'
+	 'gettext' 'desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils'
+	 'openimageio-git' 'boost-libs'
+	 'opencollada-svn'
+)
+optdepends=('cuda-toolkit: CUDA support in Cycles')
+makedepends=('cmake' 'boost' 'cuda-toolkit')
+provides=('blender')
+license=('GPL')
+install=blender.install
+source=($pkgname-$pkgver.tar.gz
+)
+md5sums=('b2a1712bff77fe14a424a06afded210d'
+)
+
+_svnmod="blender"
+_slot="2.62"
+
+build() {
+  cd ${srcdir}/${_svnmod}
+
+  # compile blender
+  mkdir ${srcdir}/${_svnmod}-build
+  cd ${srcdir}/${_svnmod}-build
+  cmake	-DCMAKE_BUILD_TYPE=RELEASE \
+	-DCMAKE_SKIP_RPATH=ON \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DWITH_FFTW3=ON \
+	-DWITH_GAMEENGINE=OFF \
+	-DWITH_BUILTIN_GLEW=OFF \
+	-DWITH_MOD_CLOTH_ELTOPO=ON \
+	-DWITH_MOD_OCEANSIM=ON \
+	-DWITH_CODEC_FFMPEG=ON \
+	-DWITH_CODEC_SNDFILE=ON \
+	-DWITH_OPENCOLLADA=ON \
+	-DWITH_JACK=ON \
+	-DWITH_INPUT_NDOF=OFF \
+	-DWITH_CYCLES=ON \
+	-DWITH_CYCLES_CUDA_BINARIES=ON \
+	-DCYCLES_CUDA_BINARIES_ARCH=sm_11 \
+	-DCUDA_INCLUDES=opt/cuda-toolkit/include \
+	-DCUDA_LIBRARIES=opt/cuda-toolkit/lib64 \
+	-DCUDA_NVCC=opt/cuda-toolkit/bin/nvcc \
+        -DWITH_INSTALL_PORTABLE=OFF \
+	-DWITH_PYTHON_INSTALL=OFF \
+	-DPYTHON_VERSION=3.2 \
+	-DPYTHON_LIBPATH=/usr/lib \
+	-DPYTHON_LIBRARY=python3.2mu \
+	-DPYTHON_INCLUDE_DIRS=/usr/include/python3.2mu \
+	${srcdir}/${_svnmod}
+  make ${MAKEFLAGS}
+
+  # now we will compile some plugins
+  cp -rf ${srcdir}/${_svnmod}/release/plugins/* \
+    ${srcdir}/${_svnmod}/source/blender/blenpluginapi/
+  cd ${srcdir}/${_svnmod}/source/blender/blenpluginapi
+  sed -i "s|-fPIC -funsigned-char -O2|-march=native -O2 -pipe -fPIC -funsigned-char|g" bmake
+  chmod 755 bmake
+  make ${MAKEFLAGS}
+}
+
+package() {
+  # Blender
+  cd ${srcdir}/${_svnmod}-build
+  make DESTDIR=${pkgdir} install
+
+  # voir Extra
+  python -m compileall "${pkgdir}/usr/share/blender"
+
+  # install Blender plugins
+  install -d -m755 ${pkgdir}/usr/share/blender/${_slot}/plugins/{sequence,texture}
+  cp ${srcdir}/${_svnmod}/source/blender/blenpluginapi/sequence/*.so \
+     ${pkgdir}/usr/share/blender/${_slot}/plugins/sequence/
+  cp ${srcdir}/${_svnmod}/source/blender/blenpluginapi/texture/*.so \
+     ${pkgdir}/usr/share/blender/${_slot}/plugins/texture/
+
+# ERREUR :
+#  -> Stripping unneeded symbols from binaries and libraries...
+#strip: Unable to recognise the format of the input file `./usr/share/blender/2.62/scripts/addons/cycles/lib/kernel_sm_11.cubin'
+  if [ -e "$pkgdir"/usr/share/blender/${_slot}/scripts/addons/cycles/lib/ ] ; then
+    # make sure the cuda kernels are not stripped
+    chmod 444 "$pkgdir"/usr/share/blender/${_slot}/scripts/addons/cycles/lib/*
+  fi
+
+  # FIX: making all python scripts readable only by group 'users',
+  #      so nobody can modify scripts apart root user, but python
+  #      cache (*.pyc) can be written and shared across the users.
+  #chown root:users -R "${D}/usr/share/${PN}/${SLOT}/scripts"
+  #chmod 750 -R "${D}/usr/share/${PN}/${SLOT}/scripts"
+
+}

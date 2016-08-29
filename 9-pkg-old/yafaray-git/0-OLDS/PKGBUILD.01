@@ -1,0 +1,55 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=yafaray-git
+pkgver=0.1.2.20110419
+pkgrel=1
+pkgdesc="Raytracing open source render engine"
+arch=('i686' 'x86_64')
+url="http://www.yafaray.org/"
+license=('GPL')
+depends=('qt' 'python2' 'openexr' 'libxml2')
+#optdepends=('qt: QT GUI')
+makedepends=('cmake' 'swig' 'libjpeg' 'libpng' 'freetype2' 'zlib' 'qt')
+source=($pkgname-$pkgver.tar.gz
+	UserConfig.txt
+#	git-fix-version.patch
+	)
+md5sums=('037b1bee0e49219687d3139a9811ec3d'
+	 'b5e286e13f57349f7015bbb02f6aaeb8'
+#	 '9ce6dd15ba05cafae175fe563f614e8a'
+	)
+
+__realname="YafaRay"
+
+build() {
+      cd $srcdir/$__realname
+
+      # fix version
+#      patch -Np1 -i ${srcdir}/git-fix-version.patch
+
+      cp $srcdir/UserConfig.txt CMakeConfig/UserConfig.txt
+
+      # Build
+      mkdir build
+      cd build
+      cmake .. \
+	      -DCMAKE_BUILD_TYPE=RELEASE \
+	      -DCMAKE_SKIP_RPATH=ON \
+	      -DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,--no-undefined -Wl,--as-needed' \
+	      -DYAF_PY_VERSION=3.2 \
+	      -DYAF_BINDINGS_PY_DIR=/usr/lib/python3.2 \
+	      -DCMAKE_INSTALL_PREFIX=/usr
+      make $MAKEFLAGS
+}
+
+package() {
+      cd $srcdir/$__realname/build
+
+      # Install
+      make DESTDIR=$pkgdir install
+
+      # install Exporter
+      cd $srcdir/$__realname
+      install -d -m755 $pkgdir/usr/share/blender/2.59/scripts/addons/yafaray
+      cp -a -R Blender-2.5-Exporter/* $pkgdir/usr/share/blender/2.59/scripts/addons/yafaray/
+}

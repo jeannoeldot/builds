@@ -1,0 +1,90 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+pkgname=blender-svn
+pkgver=2.63.49830
+pkgrel=2
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('i686' 'x86_64')
+url="http://blender.org/"
+depends=('libjpeg' 'libpng' 'openjpeg' 'libtiff' 'openexr' 
+	 'libgl' 'mesa' 'python'
+	 'libsamplerate' 'ffmpeg' 'fftw' 'freeglut'
+         'openal' 'freetype2' 'sdl' 'libsndfile' 'jack'
+         'eigen' 'glew'
+	 'libxi' 'libxmu'
+	 'gettext' 'desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils' 'boost-libs'
+	 'openimageio-git'
+	 'opencollada-svn'
+)
+optdepends=('cuda-toolkit: CUDA support in Cycles')
+makedepends=('cmake' 'boost' 'cuda-toolkit')
+provides=('blender')
+license=('GPL')
+install=blender.install
+source=($pkgname-$pkgver.tar.gz
+	fix-cloth-eltopo.patch
+)
+md5sums=('83da7d6d557d6454e3c8af6a071a3ee3'
+	 'd17ffbb33f4b3a07ecd0512b97a97f08'
+)
+
+_svnmod="blender"
+_slot="2.63"
+
+build() {
+  cd ${srcdir}/${_svnmod}
+
+  # fix error compile cloth-eltopo
+  patch -Np1 -i ${srcdir}/fix-cloth-eltopo.patch
+
+  # compile blender
+  mkdir ${srcdir}/${_svnmod}-build
+  cd ${srcdir}/${_svnmod}-build
+  cmake	-DCMAKE_BUILD_TYPE=RELEASE \
+	-DCMAKE_SKIP_RPATH=ON \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DWITH_FFTW3=ON \
+	-DWITH_GAMEENGINE=OFF \
+	-DWITH_MOD_CLOTH_ELTOPO=ON \
+	-DWITH_MOD_OCEANSIM=ON \
+	-DWITH_CODEC_FFMPEG=ON \
+	-DWITH_CODEC_SNDFILE=ON \
+	-DWITH_OPENCOLLADA=ON \
+	-DWITH_JACK=ON \
+	-DWITH_INPUT_NDOF=OFF \
+	-DWITH_CYCLES_CUDA_BINARIES=ON \
+	-DCYCLES_CUDA_BINARIES_ARCH=sm_11 \
+	-DCUDA_LIBRARIES=opt/cuda-toolkit/lib64 \
+        -DWITH_INSTALL_PORTABLE=OFF \
+	-DWITH_PYTHON_INSTALL=OFF \
+	-DPYTHON_VERSION=3.2 \
+	-DPYTHON_LIBPATH=/usr/lib \
+	-DPYTHON_LIBRARY=python3.2mu \
+	-DPYTHON_INCLUDE_DIRS=/usr/include/python3.2mu \
+	${srcdir}/${_svnmod}
+  make ${MAKEFLAGS}
+
+}
+
+package() {
+  # Blender
+  cd ${srcdir}/${_svnmod}-build
+  make DESTDIR=${pkgdir} install
+
+  # voir Extra
+  python -m compileall "${pkgdir}/usr/share/blender"
+
+# ERREUR :
+#  -> Stripping unneeded symbols from binaries and libraries...
+#strip: Unable to recognise the format of the input file `./usr/share/blender/2.62/scripts/addons/cycles/lib/kernel_sm_11.cubin'
+  if [ -e "$pkgdir"/usr/share/blender/${_slot}/scripts/addons/cycles/lib/ ] ; then
+    # make sure the cuda kernels are not stripped
+    chmod 444 "$pkgdir"/usr/share/blender/${_slot}/scripts/addons/cycles/lib/*
+  fi
+
+  # FIX: making all python scripts readable only by group 'users',
+  #      so nobody can modify scripts apart root user, but python
+  #      cache (*.pyc) can be written and shared across the users.
+  #chown root:users -R "${D}/usr/share/${PN}/${SLOT}/scripts"
+  #chmod 750 -R "${D}/usr/share/${PN}/${SLOT}/scripts"
+
+}

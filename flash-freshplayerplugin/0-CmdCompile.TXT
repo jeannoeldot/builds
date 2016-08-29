@@ -1,0 +1,201 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/flash-freshplayerplugin
+
+1 SOURCES
+==============
+
+1-1) Download snapshot
+----------------------
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/freshplayerplugin.tar.gz
+
+tar -xzf freshplayerplugin.tar.gz
+
+cd $HOME/05-builds/flash-freshplayerplugin
+
+mv -vf /tmp/0-AUR/freshplayerplugin/PKGBUILD .
+mv -vf /tmp/0-AUR/freshplayerplugin/freshplayerplugin.install .
+
+
+1-2) Download source
+----------------------
+
+wget https://github.com/i-rinat/freshplayerplugin/archive/v0.3.5.tar.gz
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=freshplayerplugin
+pkgver=0.3.5
+pkgrel=2
+
+sha1sum v0.3.5.tar.gz
+
+sha1sum freshplayerplugin.install
+
+sha1sums=(...
+         ...
+)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users    243 28 mars  13:43 freshplayerplugin.install
+-rw-r--r--  1 jnd users   1581  2 mai   16:44 PKGBUILD
+-rw-r--r--  1 jnd users 490685  2 mai   16:48 v0.3.5.tar.gz
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/flash-freshplayerplugin/PKGBUILD . \
+&& cp -v $HOME/05-builds/flash-freshplayerplugin/freshplayerplugin.install . \
+&& cp -v $HOME/05-builds/flash-freshplayerplugin/v0.3.5.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/flash-freshplayerplugin \
+&& cp -v /tmp/build/freshplayerplugin-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/flash-freshplayerplugin && rm -rf /tmp/build
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd $HOME/05-builds/flash-freshplayerplugin
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+
+# Verifications...
+
+namcap freshplayerplugin-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/freshplayerplugin-*-x86_64.pkg.tar.*
+
+$ cp -v freshplayerplugin-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/freshplayerplugin-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+!!! OU
+# Supprime le précédent dans  $HOME/00-repolocal
+rm -i $HOME/00-repolocal/freshplayerplugin-*-x86_64.pkg.tar.*
+
+
+$ mv -v freshplayerplugin-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i v0.3.5.tar.gz
+$ rm -i freshplayerplugin.install
+$ rm -rf /tmp/0-AUR
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+5) INSTALLATION
+==================
+
+!!! EN USER
+!!! VIDER CACHE
+!!! ARRETER FIREFOX
+
+$ profile-cleaner f
+
+$ systemctl --user stop psd.service
+
+!!! Vérifier $HOME/.mozilla/firefox/profiles.ini
+$ cat ~/.mozilla/firefox/profiles.ini
+$ rm -i ~/.mozilla/firefox/idy48li7.default/pluginreg.dat
+
+EN ROOT
+========
+# cd
+
+# pacman -Syu freshplayerplugin chromium-pepper-flash
+
+!!! EN USER
+============
+
+$ systemctl --user start psd.service
+
+$ psd preview
+
+
+
+!!! EN ROOT
+# cd
+# pacman -R freshplayerplugin
+
+# rm -i /var/cache/pacman/pkg/freshplayerplugin-*-x86_64.pkg.tar.*
+
+
+
+================================================================
+ANCIENS
+========
+
+cd 0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/freshplayerplugin.tar.gz
+
+tar -xzf freshplayerplugin.tar.gz
+
+cd ..
+
+mv -vf 0-AUR/freshplayerplugin/PKGBUILD .
+mv -vf 0-AUR/freshplayerplugin/freshplayerplugin.install .
+
+
+$ rm -f 0-AUR/freshplayerplugin.tar.gz
+$ rm -rf 0-AUR/freshplayerplugin

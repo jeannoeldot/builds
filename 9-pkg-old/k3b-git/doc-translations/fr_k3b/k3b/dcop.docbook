@@ -1,0 +1,124 @@
+<chapter id="dcop">
+  <title
+>L'interface &DCOP; de &k3b;</title>
+  <para
+>&k3b; implémente, comme beaucoup d'autres applications &kde;, une interface &DCOP; qui rend possible le contrôle d'une partie de ses fonctionnalités depuis &pex; un script shell.</para>
+  <para
+>Pour utiliser ces fonctions &DCOP; vous pouvez soit utiliser le programme en ligne de commande <command
+>dcop</command
+> soit le plus pratique <application
+>Kdcop</application
+>. Les deux fournissent les mêmes fonctionnalités c'est donc principalement une affaire de goût et de contexte d'utilisation qui permettront de choisir entre eux.</para>
+  <para
+>Ce chapitre suppose que vous utilisez le programme en ligne de commande <command
+>dcop</command
+>. Pour accéder aux fonctions &DCOP; de &k3b; assurez vous que &k3b; est en cours d'exécution et saisissez quelque chose comme cela dans un terminal : <screen
+><prompt
+>#</prompt
+> <command
+>dcop</command
+> <option
+>k3b</option
+> <option
+>K3bInterface</option
+> <replaceable
+>[function]</replaceable
+>
+</screen>
+</para>
+
+<para
+>En plus des fonctions &DCOP; disponibles pour toutes les applications &kde;, l'interface DCOP de &k3b; est principalement constituée de deux grandes parties comme décrit ci-dessous.</para>
+
+<sect1>
+<title
+>K3bInterface</title>
+
+<para
+>L'interface DCOP par défaut de K3b fournit des fonctionnalités comme copyCD, formatDVD, et des méthodes pour créer de nouveaux projets.</para>
+
+<programlisting
+>DCOPRef createDataCDProject()
+DCOPRef createAudioCDProject()
+DCOPRef createMixedCDProject()
+DCOPRef createVideoCDProject()
+DCOPRef createMovixCDProject()
+DCOPRef createDataDVDProject()
+DCOPRef createVideoDVDProject()
+DCOPRef createMovixDVDProject()
+DCOPRef openProject(KURL url)
+QValueList&lt;DCOPRef&gt; projects()
+DCOPRef currentProject()
+void copyCd()
+void copyDvd()
+void eraseCdrw()
+void formatDvd()
+void burnCdImage(KURL url)
+void burnDvdImage(KURL url)
+</programlisting>
+
+<para
+>Comme résultat de l'appel d'une des méthode createXXXProject vous obtenez une référence DCOP pointant vers le projet nouvellement créé : <programlisting
+>DCOPRef(k3b,K3bProject-0)</programlisting
+> Alternativement vous pourriez créer un projet en utilisant la ligne de commande : <screen>
+<prompt
+>#</prompt
+> <command
+>k3b</command
+> <replaceable
+>--audiocd</replaceable>
+</screen
+> puis ensuite obtenir une référence à ce projet à l'aide de :<screen>
+<prompt
+>#</prompt
+> <command
+>dcop</command
+> <option
+>k3b</option
+> <option
+>K3bInterface</option
+> <replaceable
+>currentProject</replaceable>
+</screen
+> En utilisant cette référence il est possible de modifier le projet en utilisant l'interface <link linkend="k3bprojectinterface"
+>K3bProjectInterface</link
+>.</para>
+
+</sect1>
+
+<sect1 id="k3bprojectinterface">
+<title
+>K3bProjectInterface</title>
+
+<programlisting
+>void addUrls(KURL::List urls)
+void addUrl(KURL url)
+void burn()
+</programlisting>
+
+<para
+>K3b propose l'interface K3bProjectInterface comme listé au-dessus ou la plus puissante K3bDataProjectInterface qui s'utilise seulement pour les projets de données (CD et DVD) : <programlisting
+>void createFolder(QString name)
+void createFolder(QString name,QString parent)
+void addUrl(KURL url,QString parent)
+void addUrls(KURL::List urls,QString parent)
+void removeItem(QString path)
+void renameItem(QString path,QString newName)
+void setVolumeID(QString id)
+</programlisting>
+</para>
+
+<para
+>Par son utilisation, il est possible de créer un projet de données contenant des fichiers et des dossiers depuis un script. Par exemple le script suivant créé un nouveau projet de données, ajoute plusieurs dossiers au projet et ajoute des fichiers dans les dossiers nouvellement créés : <programlisting
+>#!/bin/bash
+PROJECT=$(dcop k3b K3bInterface createDataCDProject)
+dcop $PROJECT createFolder test
+dcop $PROJECT createFolder foo
+dcop $PROJECT createFolder bar /foo
+dcop $PROJECT addUrl /home/trueg/somefile.txt /foo/bar
+</programlisting>
+
+</para>
+
+</sect1>
+</chapter>

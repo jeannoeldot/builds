@@ -1,0 +1,24 @@
+[Desktop Entry]
+Categories=Application;Network;
+Comment[fr]=
+Comment=
+Encoding=UTF-8
+Exec=firefox -safe-mode %u
+GenericName[fr]=Web Browser - Safe Mode
+GenericName=Web Browser - Safe Mode
+Icon=firefox
+MimeType=
+MultipleArgs=false
+Name[fr]=Firefox - Safe Mode
+Name=Firefox - Safe Mode
+Name[en_GB]=Firefox - Safe Mode
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+Version=1.0
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

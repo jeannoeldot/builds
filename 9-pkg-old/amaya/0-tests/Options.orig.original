@@ -1,0 +1,74 @@
+#
+# User's configurable option
+# Generated from Options.in
+#
+# Increase the Version number each time one entry is added
+# Version : 11.1
+#
+
+SHELL	= /bin/sh
+
+CC	= gcc
+CFLAGS	= -O2 -Wall -x c
+CXX	= g++
+CXXFLAGS= -O2 -Wall -x c++ -D__cplusplus
+CPP     = gcc -E -x c
+LD	= g++
+LDFLAGS	= 
+CP	= /usr/bin/cp
+MV	= /usr/bin/mv
+RM	= /usr/bin/rm -f
+LN_S	= ln -s
+MKDIR	= /usr/bin/mkdir
+ECHO	= /usr/bin/echo
+SED	= /usr/bin/sed
+AR	= /usr/bin/ar rc
+RANLIB	= ranlib
+DIFF	= /usr/bin/diff
+INSTALL	= /usr/bin/install -c
+
+INSTALL_DATA= $(INSTALL) -m 444
+INSTALL_BIN= $(INSTALL) -m 755
+
+CEXTRACT_FLAGS=+O
+BUILDRAPTOR=
+
+THOT_OPTIONS=-D_UNIX -D_GL -D_WX
+AMAYA_OPTIONS=-D_UNIX   -DXML_GENERIC -D_GL -D_WX -DTEMPLATES
+AMAYA_ANNOT_OPTIONS=
+AMAYA_ANNOT_INCLUDES=
+AMAYA_ANNOT_EXTRA_LIBS=
+
+IMGLIBS=
+EXTRA_INCLUDES=
+
+EXPAT_INCLUDES=
+EXPAT_LIBRARIES=
+EXPAT_OPTIONS=-DXML_DTD -DXML_NS
+
+AMAYA_INSTALLDIR=Amaya
+
+# used to identify amaya gui/os when 'make install' is called.
+AMAYAGUI=wx
+AMAYAOS=LINUX
+
+# GUI libraries
+WX_SRCDIR=
+WX_BUILDDIR=
+WX_INCLUDES= -I/usr/lib/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread
+WX_LIBRARIES=-pthread -Wl,-O1,--sort-common,--as-needed,-z,relro  -lwx_gtk2u_aui-2.8 -lwx_gtk2u_xrc-2.8 -lwx_gtk2u_adv-2.8 -lwx_gtk2u_core-2.8 -lwx_baseu_xml-2.8 -lwx_baseu_net-2.8 -lwx_gtk2u_gl-2.8 -lwx_baseu-2.8  
+WX_LINKDEPS=
+
+GUI_INCLUDES=$(WX_INCLUDES)
+
+FREETYPE_INCLUDES=-I/usr/include/freetype2
+FREETYPE_LIBRARIES=-lfreetype -lz -lbz2
+
+GL_BUILDDIR=
+GL_INCLUDES=
+GL_LIBRARIES=-L/usr/lib -L/usr/X11R6/lib -lGL -lGLU
+
+LIBWWW=libwww
+
+
+

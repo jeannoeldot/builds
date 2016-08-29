@@ -1,0 +1,24 @@
+ 
+    Yeah, the python upgrade to 3.2 broke the blender build. Needed to modify the blender cmake build file slightly to make this work. Don't know when blender will be upgrading to python 3.2, but for now at least it is enough to change the version number.
+
+    [gunnar@xps blender]$ pwd
+    /home/gunnar/PKGBUILDS/blender-svn/src/blender
+    [gunnar@xps blender]$ svn di CMakeLists.txt
+    Index: CMakeLists.txt
+    ===================================================================
+    --- CMakeLists.txt (revision 35222)
+    +++ CMakeLists.txt (working copy)
+    @@ -246,12 +246,12 @@
+    # No way to set py31. remove for now.
+    # find_package(PythonLibs)
+    set(PYTHON /usr)
+    - set(PYTHON_VERSION 3.1 CACHE STRING "")
+    + set(PYTHON_VERSION 3.2 CACHE STRING "")
+    mark_as_advanced(PYTHON_VERSION)
+    - set(PYTHON_INCLUDE_DIRS "${PYTHON}/include/python${PYTHON_VERSION}" CACHE STRING "")
+    + set(PYTHON_INCLUDE_DIRS "${PYTHON}/include/python${PYTHON_VERSION}mu" CACHE STRING "")
+    mark_as_advanced(PYTHON_INCLUDE_DIRS)
+    # set(PYTHON_BINARY python) # not used yet
+    - set(PYTHON_LIBRARY python${PYTHON_VERSION} CACHE STRING "")
+    + set(PYTHON_LIBRARY python${PYTHON_VERSION}mu CACHE STRING "")
+

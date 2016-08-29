@@ -1,0 +1,317 @@
+Install the project...
+-- Install configuration: "Release"                          
+                                                                          
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/libyafaraycore.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/libyafarayplugin.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/libyafarayqt.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafrayinterface.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafrayinterface.py
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafqt.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafqt.py
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafaray-xml
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libgradientback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libtextureback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libsunsky.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libSunSky2.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libperspectiveCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/liborthographicCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libangularCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libexrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libjpgHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libpngHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libtifHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libtgaHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libhdrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libdirectlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libphotonmap.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libpathtrace.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libbidirpath.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libsppm.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libEmissionIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libSingleScatterIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libEmptyVolumeIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libDebugIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libSkyIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libsunlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libpointlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libdirectional.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libspotlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libarealight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libspherelight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libieslight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libbglight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libroughglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libblendermat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libglossymat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libshinydiffuse.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libcoatedglossy.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libsimplemats.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libvolumetrics.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libbasictex.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libbasicnodes.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libUniformVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libExpDensityVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libNoiseVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/plugins/libSkyVolume.so
+
+
+
+============================================================================================
+Install the project...
+-- Install configuration: "Release" 
+                                                                                                   
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/libyafaraycore.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libgradientback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libtextureback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libsunsky.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libSunSky2.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libperspectiveCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/liborthographicCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libangularCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libexrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libjpgHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libpngHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libtifHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libtgaHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libhdrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libdirectlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libphotonmap.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libpathtrace.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libbidirpath.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libsppm.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libEmissionIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libSingleScatterIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libEmptyVolumeIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libDebugIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libSkyIntegrator.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/libyafarayplugin.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libsunlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libpointlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libdirectional.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libspotlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libarealight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libspherelight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libieslight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libbglight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libroughglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libblendermat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libglossymat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libshinydiffuse.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libcoatedglossy.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libsimplemats.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libvolumetrics.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libbasictex.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libbasicnodes.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libUniformVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libExpDensityVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libNoiseVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libSkyVolume.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafaray-xml
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/libyafarayqt.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafrayinterface.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafrayinterface.py
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafqt.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafqt.py
+
+======================================================================================================================
+Install the project...
+-- Install configuration: "Release"        
+                                                                                            
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libyafaraycore.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libgradientback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libtextureback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libsunsky.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libSunSky2.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libperspectiveCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/liborthographicCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libangularCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libexrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libjpgHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libpngHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libtifHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libtgaHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libhdrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libdirectlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libphotonmap.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libpathtrace.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libbidirpath.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libsppm.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libEmissionIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libSingleScatterIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libEmptyVolumeIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libDebugIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libSkyIntegrator.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libyafarayplugin.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libsunlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libpointlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libdirectional.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libspotlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libarealight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libspherelight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libieslight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libbglight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libroughglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libblendermat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libglossymat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libshinydiffuse.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libcoatedglossy.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libsimplemats.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libvolumetrics.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libbasictex.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libbasicnodes.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libUniformVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libExpDensityVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libNoiseVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/yafaray/libSkyVolume.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafaray-xml
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/plugins/libyafarayqt.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafrayinterface.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafrayinterface.py
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafqt.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafqt.py
+
+======================================================================================================================================
+
+Install the project...
+-- Install configuration: "Release"                                                                                                    
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafaraycore.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libgradientback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtextureback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsunsky.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSunSky2.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libperspectiveCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/liborthographicCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libangularCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libexrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libjpgHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpngHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtifHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtgaHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libhdrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libdirectlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libphotonmap.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpathtrace.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbidirpath.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsppm.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libEmissionIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSingleScatterIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libEmptyVolumeIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libDebugIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSkyIntegrator.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafarayplugin.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsunlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpointlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libdirectional.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libspotlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libarealight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libspherelight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libieslight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbglight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libroughglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libblendermat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libglossymat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libshinydiffuse.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libcoatedglossy.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsimplemats.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libvolumetrics.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbasictex.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbasicnodes.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libUniformVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libExpDensityVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libNoiseVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSkyVolume.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/bin/yafaray-xml
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafarayqt.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafrayinterface.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafrayinterface.py
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/_yafqt.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/share/blender/2.59/scripts/addons/yafaray/bin/yafqt.py
+
+========================================================================================================
+Install the project...
+-- Install configuration: "Release"                                                               
+                                     
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafaraycore.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libgradientback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtextureback.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsunsky.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSunSky2.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libperspectiveCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/liborthographicCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libangularCamera.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libexrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libjpgHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpngHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtifHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libtgaHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libhdrHandler.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libdirectlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libphotonmap.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpathtrace.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbidirpath.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsppm.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libEmissionIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSingleScatterIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libEmptyVolumeIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libDebugIntegrator.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSkyIntegrator.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafarayplugin.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsunlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libpointlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libdirectional.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libspotlight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libarealight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libspherelight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libieslight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbglight.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libroughglass.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libblendermat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libglossymat.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libshinydiffuse.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libcoatedglossy.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libsimplemats.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libvolumetrics.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbasictex.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libbasicnodes.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libUniformVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libExpDensityVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libNoiseVolume.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/yafaray/libSkyVolume.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/bin/yafaray-xml
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/libyafarayqt.so
+
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/python3.2/_yafrayinterface.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/python3.2/yafrayinterface.py
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/python3.2/_yafqt.so
+-- Installing: /home/jnd/05-builds/yafaray-git/pkg/usr/lib/python3.2/yafqt.py

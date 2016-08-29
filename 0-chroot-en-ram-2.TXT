@@ -1,0 +1,136 @@
+
+
+!!! EN ROOT
+=============
+# rm -rf /0-Chroot/00-tmpfs-chroot
+
+# mkdir /0-Chroot/00-tmpfs-chroot
+
+# mount -t tmpfs -o defaults,size=4G none /0-Chroot/00-tmpfs-chroot
+
+# findmnt
+TARGET                        SOURCE     FSTYPE   OPTIONS
+/                             /dev/sda8  ext4     rw,relatime,user_xattr,acl,barrier=1,data=ordered
+├─/proc                       proc       proc     rw,nosuid,nodev,noexec,relatime
+├─/sys                        /sys       sysfs    rw,nosuid,nodev,noexec,relatime
+├─/dev                        /dev       devtmpfs rw,nosuid,relatime,size=4088112k,nr_inodes=1022028,mode=755
+│ ├─/dev/pts                  devpts     devpts   rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000
+│ └─/dev/shm                  shm        tmpfs    rw,nosuid,nodev,relatime
+├─/run                        /run       tmpfs    rw,nosuid,nodev,relatime,mode=755
+├─/boot                       /dev/sda7  ext4     rw,relatime,user_xattr,acl,barrier=1,data=ordered
+├─/home                       /dev/sda9  ext4     rw,relatime,user_xattr,acl,barrier=1,data=ordered
+├─/0-DataLinux                /dev/sda5  ext4     rw,noatime,user_xattr,barrier=1,data=ordered
+├─/tmp                        tmpfs      tmpfs    rw,nosuid,nodev,noexec,relatime,size=2097152k
+└─/0-Chroot                   /dev/sda13 ext4     rw,noatime,user_xattr,barrier=1,data=ordered
+  └─/0-Chroot/00-tmpfs-chroot            tmpfs    rw,relatime,size=4194304k
+
+
+
+MISE EN PLACE CHROOT
+=======================
+
+# cd /0-Chroot/chroot
+# ls
+=> copy  root copy.lock root.lock
+# rm -rf copy copy.lock
+# cd
+
+
+!!! NON
+# mkdir /tmp/save-chroot
+# rsync -ur --delete "/0-Chroot/chroot/" "/tmp/save-chroot/"
+# rsync -ur --delete "/tmp/save-chroot/" "/0-Chroot/00-tmpfs-chroot/"
+# rm -rf /tmp/save-chroot
+
+OU
+
+!!! NON : # rsync -aur --delete "/0-Chroot/chroot/" "/0-Chroot/00-tmpfs-chroot/"
+
+# cp -ar "/0-Chroot/chroot"/* "/0-Chroot/00-tmpfs-chroot/"
+
+
+COPIE FICHIERS
+=====================
+
+SI AVEC QT
+===========
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/g++-base.conf /0-Chroot/00-tmpfs-chroot/root/usr/share/qt/mkspecs/common/g++-base.conf
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/gcc-base.conf /0-Chroot/00-tmpfs-chroot/root/usr/share/qt/mkspecs/common/gcc-base.conf
+
+
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/mirrorlist /0-Chroot/00-tmpfs-chroot/root/etc/pacman.d/mirrorlist
+
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/pacman.conf /0-Chroot/00-tmpfs-chroot/root/etc/pacman.conf
+
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/makepkg.conf /0-Chroot/00-tmpfs-chroot/root/etc/makepkg.conf
+
+# mkdir /0-Chroot/00-tmpfs-chroot/root/repo
+# cp /home/jnd/05-builds/0-copie-fichiers-chroot/repo/*.pkg.tar.* /0-Chroot/00-tmpfs-chroot/root/repo/
+
+# cd /0-Chroot/00-tmpfs-chroot/root/repo
+# rm -f local.db.tar.gz
+# repo-add local.db.tar.gz *.pkg.tar.*
+# cd
+
+MAJ CHROOT
+=============
+
+# mkarchroot -u /0-Chroot/00-tmpfs-chroot/root
+
+
+TEST FAIRE 1 PAQUET
+======================
+# cd /home/jnd/05-builds/ttf-win7-fonts
+# makechrootpkg -c -r /0-Chroot/00-tmpfs-chroot
+
+# cd /home/jnd/05-builds/devtools-git
+# makechrootpkg -c -r /0-Chroot/00-tmpfs-chroot
+
+# rm -f *.log
+
+# ls -la
+# chown jnd:users devtools-git-0.9.30.20120119-1-any.pkg.tar.xz
+# chown jnd:users devtools-git-0.9.30.20120119.tar.gz
+# ls -la
+
+
+
+TEST FAIRE 1 PAQUET AVEC QT
+============================
+# cd
+# cd /home/jnd/05-builds/jndqaligne5
+# makechrootpkg -c -r /0-Chroot/00-tmpfs-chroot
+
+# rm -f *.log
+
+# ls -la
+# chown jnd:users jndqaligne5-0.4.0-4-x86_64.pkg.tar.xz
+# chown jnd:users jndqaligne5-0.4.0.tar.gz
+# ls -la
+
+FIN COMPILE EN TMPFS
+=====================
+
+# FIN
+!!! VOIR SUPRR copy et copy.lock
+# cd /0-Chroot/00-tmpfs-chroot
+# ls
+=> copy copy.lock  root root.lock
+# rm -rf copy copy.lock
+# cd
+
+!!! NON : # rsync -aur --delete "/0-Chroot/00-tmpfs-chroot/" "/0-Chroot/chroot/"
+
+!!! NON : # mv -f "/0-Chroot/00-tmpfs-chroot"/* "/0-Chroot/chroot"
+mv: échec de déplacement inter-périphérique de « /0-Chroot/00-tmpfs-chroot/root » vers « /0-Chroot/chroot/root »;
+ impossible de supprimer la cible: est un dossier
+
+# cp -afr "/0-Chroot/00-tmpfs-chroot"/* "/0-Chroot/chroot"
+
+
+
+
+# umount /0-Chroot/00-tmpfs-chroot
+# rm -rf /0-Chroot/00-tmpfs-chroot
+
+

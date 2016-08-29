@@ -1,0 +1,71 @@
+# $Id$
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Maintainer: Sven-Hendrik Haase <sh@lutzhaase.com>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openimageio-git
+pkgver=1.7.2.20160220
+pkgrel=1
+pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
+arch=(i686 x86_64)
+url="http://www.openimageio.org/"
+license=('custom')
+depends=('openexr' 'boost-libs' 'jasper' 'glew' 'libtiff' 'opencolorio' 'intel-tbb'
+         'openjpeg' 'libraw'
+         'ffmpeg'
+         'opencv' 'openssl'
+         'nvidia-libgl'
+)
+makedepends=('cmake' 'qt4' 'python2' 'boost' 'mesa')
+optdepends=('qt4: iv image viewer'
+            'python2: bindings support')
+provides=('openimageio')
+conflicts=('openimageio')
+source=("$pkgname-$pkgver.tar.gz"
+        'fix-undefined-reference-to-symbol-pthread_create-GLIBC_2.2.5.patch'
+)
+sha256sums=('bc27c1f1cbd603499757b71ee651cb3151f59b3fd5cf91d89f7a83f4056afa29'
+            '0d61f4007d112bfcfa0d625e8f726a520e29d7db2ed73ace0b572af4a1cd9d87'
+)
+
+_gitname="oiio"
+
+prepare() {
+  cd "${_gitname}"
+   
+  # fix undefined reference to symbol 'pthread_create@@GLIBC_2.2.5'
+  patch -Np1 -i "${srcdir}/fix-undefined-reference-to-symbol-pthread_create-GLIBC_2.2.5.patch"
+}
+  
+build() {
+  cd "${_gitname}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DPYLIB_INSTALL_DIR=lib/python2.7/site-packages \
+      -DSTOP_ON_WARNING=OFF \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DUSE_OPENSSL=ON \
+      -DUSE_PTEX=OFF \
+      -DPYTHON_VERSION=2.7 \
+      -DPYTHON3_VERSION=3.5 \
+      -DUSE_NUKE=OFF \
+      -DUSE_SIMD=sse4.2 \
+      -DUSE_CCACHE=OFF \
+      ..
+  make
+}
+
+package() {
+  cd "${_gitname}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  # license
+  cd ..
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

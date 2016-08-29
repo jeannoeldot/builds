@@ -1,0 +1,89 @@
+# Maintainer: JND
+
+pkgname=bluegriffon-svn
+pkgver=0.9.574
+pkgrel=1
+pkgdesc="New WYSIWYG content editor for the Web powered by Gecko (XULRunner independent)"
+url="http://bluegriffon.org/"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+
+makedepends=('autoconf2.13' 'gcc' 'zip' 'unzip' 'pkgconfig' 'diffutils'
+             'libgnomeui' 'python2' 'wireless_tools' 'yasm'
+             'xorg-server-xvfb' 'mesa'
+)
+depends=('gtk2' 'gcc-libs' 'libidl2' 'mozilla-common'
+         'nss' 'nspr' 'libxt' 'hunspell' 'startup-notification'
+         'libnotify' 'mime-types' 'dbus-glib' 'desktop-file-utils'
+         'libpng' 'libevent' 'alsa-lib' 'mesa'
+         'cairo-tee' 'shared-mime-info'
+)
+#optdepends=('libgnomeui: GNOME integration and MIME handling'
+#            'wireless_tools: Location aware browsing'
+#)
+
+provides=("bluegriffon")
+conflicts=('bluegriffon')
+
+install=bluegriffon.install
+
+_ffver=4.0b12
+
+#"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/${_ffver}-candidates/${_build}/source/firefox-${_ffver}.source.tar.bz2"
+#"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/${_ffver}-candidates/${_build}/linux-i686/xpi/fr.xpi"
+
+source=("ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/source/firefox-${_ffver}.source.tar.bz2"
+	"$pkgname-$pkgver.tar.bz2"
+        'mozconfig'
+        'bluegriffon.desktop'
+)
+md5sums=('8b343c8f9db97199ddcf9744315c2bbb'
+         '5ccfeeba9a94137846263dd3f732a9e3'
+         '36baa462a95be916fdc16f5f3b2c7eb7'
+         '493a08c28f7b721fb91951e7a6d80fe5'
+)
+
+
+build() {
+	cd "$srcdir"/mozilla-central
+
+	tar xjf "$srcdir/$pkgname-$pkgver.tar.bz2"
+
+#	voir http://bluegriffon.org/pages/Build-BlueGriffon
+	patch -p 1 < bluegriffon/config/content.patch
+
+	cp "$srcdir"/mozconfig .mozconfig
+
+	export CFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	export CXXFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	export LDFLAGS="-Wl,-rpath,/usr/lib/bluegriffon-0.9 -Wl,-O1,--sort-common,--hash-style=gnu,--as-needed"
+	export PYTHON=python2
+
+	autoconf-2.13
+
+
+#	make -j1 -f client.mk build MOZ_MAKE_FLAGS="$MAKEFLAGS"
+	make -f client.mk build MOZ_MAKE_FLAGS="$MAKEFLAGS"
+}
+package() {
+	cd "$srcdir"/mozilla-central
+
+# No Make install for now :(
+#	make DESTDIR="$pkgdir/" -C bg-trunk install
+
+# 	Icons
+	install -D -m 644 bluegriffon/app/icons/default16.png "$pkgdir/usr/share/icons/hicolor/16x16/apps/bluegriffon.png"
+	install -D -m 644 bluegriffon/app/icons/default32.png "$pkgdir/usr/share/icons/hicolor/32x32/apps/bluegriffon.png"
+	install -D -m 644 bluegriffon/app/icons/default48.png "$pkgdir/usr/share/icons/hicolor/48x48/apps/bluegriffon.png"
+	install -D -m 644 bluegriffon/app/icons/default50.png "$pkgdir/usr/share/icons/hicolor/64x64/apps/bluegriffon.png"
+	install -D -m 644 bluegriffon/app/icons/bluegriffon128.png "$pkgdir/usr/share/icons/hicolor/128x128/apps/bluegriffon.png"
+
+#	Desktop
+	install -Dm644 "$srcdir/bluegriffon.desktop" "$pkgdir/usr/share/applications/bluegriffon.desktop"
+
+# 	Use the system hunspell dictionaries
+	rm -rf "${pkgdir}/usr/lib/bluegriffon-0.9/dictionaries"
+	ln -sf /usr/share/myspell/dicts "${pkgdir}/usr/lib/bluegriffon-0.9/dictionaries"
+
+
+}

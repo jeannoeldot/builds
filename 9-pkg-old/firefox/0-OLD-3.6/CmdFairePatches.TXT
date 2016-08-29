@@ -1,0 +1,398 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/firefox
+mkdir srcp
+cp firefox-3.6.9.source.tar.bz2 srcp/
+cd srcp
+tar -xvjf firefox-3.6.9.source.tar.bz2
+
+PATCH : 3.6-enable-x86_64-tracemonkey.patch
+==============================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/js/src
+kwrite configure.in
+ LIGNE 2469 : Ajouter 4 lignes
+
+x86_64*-*)
+    ENABLE_JIT=1
+    NANOJIT_ARCH=X64
+    ;;
+
+ LIGNE 2496 : Ajouter 4 lignes
+
+x86_64*-*)
+    AC_DEFINE(AVMPLUS_AMD64)
+    AC_DEFINE(AVMPLUS_64BIT)
+    ;;
+
+ ET ENLEVER LIGNE VIDE 2500
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier configure.in~
+rm -f configure.in~
+cd ../../..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-enable-x86_64-tracemonkey.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-enable-x86_64-tracemonkey.patch 3.6-enable-x86_64-tracemonkey.patch
+md5sum 3.6-enable-x86_64-tracemonkey.patch
+
+PATCH : 3.6-xulrunner-xpctools.patch
+======================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/js/src/xpconnect/src
+kwrite Makefile.in
+ LIGNE 79 : Ajouter 4 lignes
+
+ifdef MOZ_XPCTOOLS
+DEFINES         +=  -DXPC_TOOLS_SUPPORT
+REQUIRES	+= xpctools
+endif
+
+ LIGNES 181 A 184 : Supprimer lignes
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../../../..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-xulrunner-xpctools.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-xulrunner-xpctools.patch 3.6-xulrunner-xpctools.patch
+md5sum 3.6-xulrunner-xpctools.patch
+
+PATCH : 3.6-xulrunner-png14.patch
+======================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/modules/libpr0n/encoders/png
+kwrite nsPNGEncoder.cpp
+ LIGNE 138 : Devient
+
+  NULL,
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier nsPNGEncoder.cpp~
+rm -f nsPNGEncoder.cpp~
+cd ../../../../..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-xulrunner-png14.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-xulrunner-png14.patch 3.6-xulrunner-png14.patch
+md5sum 3.6-xulrunner-png14.patch
+
+PATCH : 3.6-mozilla-lang.patch
+======================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/browser/app/profile
+kwrite firefox.js
+ LIGNE 471 : Ajouter 2 lignes
+
+// Use LANG environment variable to choose locale
+pref("intl.locale.matchOS", true);
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier firefox.js~
+rm -f firefox.js~
+cd ../../../..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-mozilla-lang.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-mozilla-lang.patch 3.6-mozilla-lang.patch
+md5sum 3.6-mozilla-lang.patch
+
+PATCH : 3.6-mozilla-ldflags.patch
+======================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/layout/build
+kwrite Makefile.in
+ LIGNE 339 :Ajouter ligne
+
+LDFLAGS += -lX11 -lXrender
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier Makefile.in~
+rm -f Makefile.in~
+cd ../../..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-mozilla-ldflags.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-mozilla-ldflags.patch 3.6-mozilla-ldflags.patch
+md5sum 3.6-mozilla-ldflags.patch
+
+PATCH : 3.6-system-hunspell-corrections.patch
+==================================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/extensions/spellcheck/hunspell/src
+kwrite mozHunspell.cpp
+Menu Outils -> Mode Lecture seule
+
+ lignes 66 67 68
+#ifdef MOZ_NATIVE_HUNSPELL
+#include "nsILocalFile.h"
+#endif
+
+ lignes 324 à 332
+  #ifdef MOZ_NATIVE_HUNSPELL
+    nsCOMPtr<nsILocalFile>  localFile;
+    rv = NS_NewNativeLocalFile(nsDependentCString("/usr/share/myspell"),PR_TRUE, getter_AddRefs(localFile));
+    if (localFile && NS_SUCCEEDED(rv)) {
+      localFile->QueryInterface(NS_GET_IID(nsIFile), getter_AddRefs(dictDir));
+      LoadDictionariesFromDir(dictDir);
+    }
+    else {
+  #endif
+
+ lignes 358 à 360
+#ifdef MOZ_NATIVE_HUNSPELL
+  }
+#endif
+
+ Enregistrer et Quitter kwrite
+ Effacer fichier mozHunspell.cpp~
+rm -f mozHunspell.cpp~
+
+cd ../..
+cd src
+kwrite Makefile.in
+
+ ligne 66 : +1 ligne
+		  xulapp \
+
+ modif ligne 69 : devient
+ifdef MOZ_NATIVE_HUNSPELL
+CPPSRCS         += mozHunspell.cpp
+ifdef MOZ_XUL_APP
+CPPSRCS         += mozHunspellDirProvider.cpp
+endif
+endif
+CPPSRCS		+= \
+
+ ligne 90 : +1 ligne
+ifndef MOZ_NATIVE_HUNSPELL
+
+ lignes 93 à 97
+else
+LOCAL_INCLUDES += $(MOZ_HUNSPELL_CFLAGS) \
+		-DMOZ_NATIVE_HUNSPELL \
+		$(NULL)
+endif
+
+ modif ligne 112 : en +
+
+ifdef MOZ_NATIVE_HUNSPELL
+export:: $(srcdir)/../hunspell/src/mozHunspell.cpp
+	$(INSTALL) $(srcdir)/../hunspell/src/mozHunspell.* .
+GARBAGE += mozHunspell.$(OBJ_SUFFIX) mozHunspell.cpp
+clean::
+	rm -f mozHunspell.*
+ifdef MOZ_XUL_APP
+export:: $(srcdir)/../hunspell/src/mozHunspellDirProvider.cpp
+	$(INSTALL) $(srcdir)/../hunspell/src/mozHunspellDirProvider.* .
+GARBAGE += mozHunspellDirProvider.$(OBJ_SUFFIX) mozHunspellDirProvider.cpp
+clean::
+	rm -f mozHunspellDirProvider.*
+endif
+endif
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier Makefile.in~
+rm -f Makefile.in~
+
+cd ..
+kwrite Makefile.in
+
+ ligne 45 : en +
+ifndef MOZ_NATIVE_HUNSPELL
+
+ ligne 47 : en +
+else
+DIRS		= idl
+endif
+
+ ligne 54 : en +
+ifndef MOZ_NATIVE_HUNSPELL
+
+ ligne 57 : en +
+endif
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier Makefile.in~
+rm -f Makefile.in~
+
+cd ../../..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-system-hunspell-corrections.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-system-hunspell-corrections.patch 3.6-system-hunspell-corrections.patch
+md5sum 3.6-system-hunspell-corrections.patch
+
+
+PATCH : 3.6-mozilla-ps-pdf-simplify-operators.patch
+======================================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/gfx/thebes/public
+kwrite gfxPDFSurface.h
+ LIGNE 66 : devient
+    virtual PRInt32 GetDefaultContextFlags() const
+    {
+        return gfxContext::FLAG_SIMPLIFY_OPERATORS |
+               gfxContext::FLAG_DISABLE_SNAPPING;
+    }
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier gfxPDFSurface.h~
+rm -f gfxPDFSurface.h~
+
+kwrite gfxPSSurface.h
+ LIGNE 66 : devient
+    virtual PRInt32 GetDefaultContextFlags() const
+    {
+        return gfxContext::FLAG_SIMPLIFY_OPERATORS |
+               gfxContext::FLAG_DISABLE_SNAPPING;
+    }
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier gfxPSSurface.h~
+rm -f gfxPSSurface.h~
+
+cd ../../../..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-mozilla-ps-pdf-simplify-operators.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-mozilla-ps-pdf-simplify-operators.patch 3.6-mozilla-ps-pdf-simplify-operators.patch
+md5sum 3.6-mozilla-ps-pdf-simplify-operators.patch
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+===============================================================================
+!!! INUTILE !!! 
+
+
+1) PATCH : gcc4.4.patch
+========================================
+cp -R mozilla-1.9.2 mozilla-1.9.2.pristine
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+
+cd mozilla-1.9.2.new/toolkit/xre
+kwrite nsAppRunner.cpp
+ LIGNE 1487 : #elif
+         ==>   #else
+
+cd ../../..
+rm -rf mozilla-1.9.2.pristine
+rm -rf mozilla-1.9.2.new
+
+!!! INUTILE !!! 2) PATCH : fix-mozilla-launcher.patch
+======================================
+cd
+cd /home/jnd/05-builds/firefox-qt
+cd src
+
+
+cp -R mozilla-1.9.2 mozilla-1.9.2.pristine
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/xulrunner/stub
+kwrite nsXULStub.cpp
+ LIGNE 281 : +  char *testp;
+ LIGNE 283 : -
+             +
+ LIGNE 297 : 
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier nsXULStub.cpp~
+rm -f nsXULStub.cpp~
+cd ../../..
+diff -aur mozilla-1.9.2.pristine mozilla-1.9.2.new
+diff -aur mozilla-1.9.2.pristine mozilla-1.9.2.new > fix-mozilla-launcher.patch
+
+rm -rf mozilla-1.9.2.pristine
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv src/fix-mozilla-launcher.patch fix-mozilla-launcher.patch
+md5sum fix-mozilla-launcher.patch
+
+!!! INUTILE !!! 4) PATCH : fix-script-firefox.patch
+======================================
+cd src
+!!! NON !!! cp -R mozilla-1.9.2 mozilla-1.9.2.pristine
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new/build/unix
+kwrite mozilla.in
+ LIGNES 137 A 140 : ==>
+
+exec "$dist_bin/run-mozilla.sh" $script_args "$dist_bin/$MOZILLA_BIN" "$@"
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier mozilla.in~
+rm -f mozilla.in~
+cd ../../..
+diff -aur mozilla-1.9.2.pristine mozilla-1.9.2.new
+diff -aur mozilla-1.9.2.pristine mozilla-1.9.2.new > fix-script-firefox.patch
+
+!!! NON !!! rm -rf mozilla-1.9.2.pristine
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv src/fix-script-firefox.patch fix-script-firefox.patch
+md5sum fix-script-firefox.patch
+
+
+!!! INUTILE !!! PATCH : 3.6-client-mk-autoconf213.patch
+==============================================
+cd srcp
+cp -R mozilla-1.9.2 mozilla-1.9.2.new
+cd mozilla-1.9.2.new
+kwrite client.mk
+ LIGNE 94 : DEVIENT
+
+AUTOCONF ?= $(shell which autoconf 2>/dev/null | grep -v '^no autoconf' | head -1)
+
+ LIGNE 97 : DEVIENT
+
+AUTOCONF=$(error Couldn't find autoconf)
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier client.mk~
+rm -f client.mk~
+cd ..
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new
+diff -aur mozilla-1.9.2 mozilla-1.9.2.new > 3.6-client-mk-autoconf213.patch
+
+rm -rf mozilla-1.9.2.new
+
+cd ..
+mv srcp/3.6-client-mk-autoconf213.patch 3.6-client-mk-autoconf213.patch
+md5sum 3.6-client-mk-autoconf213.patch
+

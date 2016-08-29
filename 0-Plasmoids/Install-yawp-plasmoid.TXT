@@ -1,0 +1,30 @@
+How to install a Plasmoid
+
+1 ) INSTALL
+
+cd /home/jnd/05-builds/0-Plasmoids/plasma-yawp-weather
+
+tar -xvf yawp-0.1.65.tar.gz
+cd yawp-0.1.65
+
+mkdir build 
+cd build 
+cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` .. 
+make 
+su -c "make install"
+
+ou
+
+./install.sh
+
+
+
+2 ) UNINSTALL
+
+cd /home/jnd/05-builds/0-Plasmoids/plasma-yawp-weather
+
+cd yawp-0.1.65
+cd build
+su -c "make uninstall"
+
+Have fun! :-) 

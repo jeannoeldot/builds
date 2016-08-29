@@ -1,0 +1,135 @@
+# Maintainer:  Devin Cofer <ranguvar{AT]archlinux[DOT}us>
+# Contributor: blasse <koralik(at)gmail(dot)com>
+# Maintainer: JND
+
+pkgname=firefox
+_mozver=2.0
+_ffmajorver=4.0
+_ffver=4.0rc1
+_build=build1
+pkgver=${_ffver}
+pkgrel=1
+pkgdesc="Mozilla Firefox customizable web browser (XULRunner independent, 64-bit TraceMonkey, beta)"
+url="http://www.mozilla.org/projects/firefox"
+arch=('i686' 'x86_64')
+license=('MPL' 'GPL' 'LGPL')
+
+makedepends=('autoconf2.13' 'gcc' 'zip' 'unzip' 'pkgconfig' 'diffutils'
+             'libgnomeui' 'python2' 'wireless_tools' 'yasm'
+             'xorg-server-xvfb' 'mesa'
+)
+depends=('gtk2' 'gcc-libs' 'libidl2' 'mozilla-common'
+         'nss' 'nspr' 'libxt' 'hunspell' 'startup-notification'
+         'libnotify' 'mime-types' 'dbus-glib' 'desktop-file-utils'
+         'libpng' 'libevent' 'alsa-lib' 'mesa'
+         'cairo-tee' 'lcms' 'libvpx'
+)
+optdepends=('libgnomeui: GNOME integration and MIME handling'
+            'wireless_tools: Location aware browsing'
+)
+
+provides=("firefox=$pkgver" "firefox-pgo=$pkgver" "firefox-beta=$pkgver")
+conflicts=('firefox' 'firefox-pgo' 'firefox-beta' 'firefox4-beta' 'firefox-pgo-minefield' 'firefox-pgo-minefield-smp')
+
+install=firefox.install
+
+#"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/${_ffver}-candidates/${_build}/source/firefox-${_ffver}.source.tar.bz2"
+#"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/${_ffver}-candidates/${_build}/linux-i686/xpi/fr.xpi"
+
+source=("ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/source/firefox-${_ffver}.source.tar.bz2"
+	"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${_ffver}/linux-x86_64/xpi/fr.xpi"
+        'mozconfig'
+        'firefox-default-prefs.js'
+        'firefox.desktop'
+        'firefox-safe.desktop'
+        '4.0-ldflags-namespec.patch'
+)
+md5sums=('511828dcc226f38602c6c67bd192ef40'
+         'd7b71014ce4fe14b8bf7dc05aabe9606'
+         'd1235d38fa85577b722b080c08127580'
+         '6bfa54cc21d28a9989530aa2bf5ac319'
+         'b3216987e63c11e520abc47431d07368'
+         '9eb57a262bfec76f3c32bdcdb1bfc17e'
+         '873bdd1c7d4e63883a446d345e01a39f'
+)
+
+
+build() {
+	cd "$srcdir"/mozilla-$_mozver
+
+#	msg "Patching source."
+	# PGO compilation LDFLAGS fix
+	patch -Np1 -i "$srcdir"/4.0-ldflags-namespec.patch
+
+	cp "$srcdir"/mozconfig .mozconfig
+
+#	msg "Setting up build."
+	# Changing the user's optimization flags is justified, because this is
+	# a package specifically for an optimized software build, and because of
+	# the official branding, binaries can't be redistributed anyways.
+	# These flags just set guidelines for the build, they are overridden in
+	# most compile job pieces by Firefox's better judgement.
+# Mon Test
+#	export CFLAGS="-march=native -O2 -pipe"
+#	export CXXFLAGS="-march=native -O2 -pipe"
+	export CFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	export CXXFLAGS="-march=native -O2 -pipe -fomit-frame-pointer -floop-interchange -floop-strip-mine -floop-block"
+	# The hash-style and as-needed flags are in Arch defaults anyways,
+	# and the other optimization flags are almost definitely safe.
+	export LDFLAGS="-Wl,-rpath,/usr/lib/firefox-$_ffmajorver -Wl,-O1,--sort-common,--hash-style=gnu,--as-needed"
+	export PYTHON=python2
+
+	autoconf-2.13
+
+
+#	msg "Actual build."
+	# Yes, all this is SMP -- MOZ_MAKE_FLAGS takes care of it.
+	# Compile a non-PGO build first to reduce chance of error in PGO build.
+# Mon Test
+#	make -j1 -f client.mk build MOZ_MAKE_FLAGS="$MAKEFLAGS"
+	make -f client.mk build MOZ_MAKE_FLAGS="$MAKEFLAGS"
+}
+package() {
+	cd "$srcdir"/mozilla-$_mozver
+
+#	msg "Installing to $pkgdir."
+
+# Mon Test
+#	make -j1 DESTDIR="$pkgdir" -C ff-pgo install
+	make DESTDIR="$pkgdir" -C ff-pgo install
+
+	install -Dm644 "$srcdir/mozilla-$_mozver/other-licenses/branding/firefox/mozicon128.png" \
+		"$pkgdir/usr/share/pixmaps/firefox.png"
+	install -Dm644 "$srcdir/firefox.desktop" \
+		"$pkgdir/usr/share/applications/firefox.desktop"
+	install -Dm644 "$srcdir/firefox-safe.desktop" \
+		"$pkgdir/usr/share/applications/firefox-safe.desktop"
+
+#Install fr.xpi
+	cd ${srcdir}
+	install -m755 -d ${pkgdir}/usr/lib/firefox-$_ffmajorver/extensions/langpack-fr@firefox.mozilla.org
+	cp -R chrome ${pkgdir}/usr/lib/firefox-$_ffmajorver/extensions/langpack-fr@firefox.mozilla.org
+	install -D -m644 chrome.manifest ${pkgdir}/usr/lib/firefox-$_ffmajorver/extensions/langpack-fr@firefox.mozilla.org/
+	install -D -m644 install.rdf ${pkgdir}/usr/lib/firefox-$_ffmajorver/extensions/langpack-fr@firefox.mozilla.org/
+
+	install -D -m644 firefox-default-prefs.js ${pkgdir}/usr/lib/firefox-$_ffmajorver/defaults/pref/all-arch.js
+
+#  sed -e "s:general.useragent.locale\", \"en-US\":general.useragent.locale\", \"fr\":" \
+#    -i ${pkgdir}/usr/lib/firefox-$_ffver/defaults/pref/firefox.js \
+#    -i ${pkgdir}/usr/lib/firefox-$_ffver/defaults/pref/firefox-l10n.js
+
+# System extensions
+
+# Use the system hunspell dictionaries
+	#Remove included dictionaries, add symlink to system myspell path.
+	#Note: this will cause file conflicts when users have installed dictionaries in the old location
+	rm -rf "${pkgdir}/usr/lib/firefox-$_ffmajorver/dictionaries"
+	ln -sf /usr/share/myspell/dicts "${pkgdir}/usr/lib/firefox-$_ffmajorver/dictionaries"
+
+# ghost files
+
+	# Remove devel stuff.
+	rm -rf "$pkgdir/usr/include/"
+	rm -rf "$pkgdir/usr/lib/firefox-devel-$_ffmajorver/"
+	rm -rf "$pkgdir/usr/share/idl/"
+}

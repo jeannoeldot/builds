@@ -1,0 +1,36 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=qupzilla-git
+pkgver=1.2.0.20120426
+pkgrel=1
+pkgdesc="Modern web browser based on WebKit core and Qt Framework."
+arch=('i686' 'x86_64')
+url="http://www.qupzilla.com"
+license=('GPL3')
+depends=( 'qtwebkit')
+provides=('qupzilla')
+conflicts=('qupzilla')
+source=($pkgname-$pkgver.tar.gz
+)
+md5sums=('fa8c05180a09172c081cc3fba0c0e592'
+)
+
+_realname="qupzilla" 
+
+build() {
+      cd "${srcdir}/${_realname}"
+
+      export USE_WEBGL="true"
+      export KDE="true"
+   
+      qmake-qt4
+      make clean
+      make ${MAKEFLAGS}
+}
+
+package() {
+      cd "${srcdir}/${_realname}"
+
+      make INSTALL_ROOT="${pkgdir}/" install
+
+}

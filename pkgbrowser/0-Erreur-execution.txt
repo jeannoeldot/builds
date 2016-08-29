@@ -1,0 +1,30 @@
+┌jnd ( ~ )
+└─> $ pkgbrowser
+Traceback (most recent call last):
+  File "/usr/lib/pkgbrowser/main.py", line 9, in <module>
+    sys.exit(app.run())
+  File "/usr/lib/pkgbrowser/pkgbrowser/app.py", line 114, in run
+    app.window().setup()
+  File "/usr/lib/pkgbrowser/pkgbrowser/app.py", line 59, in window
+    self._window = Window()
+  File "/usr/lib/pkgbrowser/pkgbrowser/window.py", line 229, in __init__
+    strings[:self.searchBox.maxCount()])
+TypeError: QStringListModel.setStringList(list-of-str): argument 1 has unexpected type 'list'
+
+!!! EN USER
+
+== $ rm -i ~/.config/pkgbrowser/pkgbrowser.conf
+
+
+
+
+Unable to load library icui18n "Cannot load library icui18n: (icui18n: cannot open shared object file: No such file or directory)" 
+
+Should be included in icu dependencies otherwise there this information when compiling in a clean chroot
+
+
+icu devrait être inclu dans les dépendances, car sinon il y a cette information lors de la compilation dans un chroot propre
+icu should be included in the dependencies, otherwise there this information when compiling in a clean chroot
+
+icu devrait être inclu dans les dépendances, car sinon cette information est affichée lors de la compilation dans un chroot propre
+icu should be included in the dependencies, otherwise this information is displayed when compiling in a clean chroot

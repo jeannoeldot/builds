@@ -1,0 +1,35 @@
+# Maintainer: Lukas Jirkovsky <l.jirkovsky@gmail.com>
+# Contributor: flixie <69one@gmx.net>
+
+pkgname=pixie
+pkgver=2.2.6
+pkgrel=1
+pkgdesc="Open source RenderMan renderer for generating photorealistic images"
+url="http://www.renderpixie.com/"
+license=('LGPL')
+arch=('i686' 'x86_64')
+depends=('openexr' 'libgl' 'mesa' 'libtiff' 'libpng' 'libxext')
+optdepends=('fltk: for building show')
+options=(!libtool)
+source=(http://downloads.sourceforge.net/sourceforge/pixie/Pixie-src-$pkgver.tgz
+	2.2.6-fix-pixie-zlib.patch
+)
+md5sums=('e2063e35d88c25c4b22b954af31ad87d'
+	 '6d89db505309252949f33c32142f5f93'
+)
+
+build() {
+  cd "${srcdir}"/Pixie
+
+  # fix zlib
+  patch -Np1 -i "${srcdir}"/2.2.6-fix-pixie-zlib.patch
+
+  ./configure --prefix=/usr --mandir=/usr/share \
+    --disable-selfcontained --enable-openexr-threads
+  
+  make
+}
+package() {
+  cd "${srcdir}"/Pixie
+  make DESTDIR="${pkgdir}" install
+}

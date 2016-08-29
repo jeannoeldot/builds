@@ -1,0 +1,27 @@
+# $Id$
+# Contributor : Anish Bhatt <anish[removethis][at]gatech[dot]edu>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=flashplayer
+pkgver=10.2.p3.111710
+pkgrel=1
+pkgdesc="Adobe Flash Player 10.2 Beta"
+url="http://labs.adobe.com/technologies/flashplayer10/"
+arch=('x86_64')
+depends=('mozilla-common' 'libxt' 'gtk2' 'nss' 'curl')
+conflicts=('flashplugin')
+provides=('flashplayer' 'flashplugin')
+license=('custom')
+options=(!strip)
+
+source=(http://download.macromedia.com/pub/labs/flashplayer10/flashplayer10_2_p3_64bit_linux_111710.tar.gz
+	)
+md5sums=('49b55c7eb8044453e5f6f2e4b3cb4084'
+	)
+
+package() {
+  install -d -m755 ${pkgdir}/usr/lib/mozilla/plugins/
+  install -m755 ${srcdir}/libflashplayer.so ${pkgdir}/usr/lib/mozilla/plugins/
+#  install -d -m755 ${pkgdir}/usr/share/licenses/${pkgname}/
+#  install -m644 "${_licensefile}" ${pkgdir}/usr/share/licenses/${pkgname}/
+}

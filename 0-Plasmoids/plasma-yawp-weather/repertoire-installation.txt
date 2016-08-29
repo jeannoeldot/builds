@@ -1,0 +1,27 @@
+Install the project...
+-- Install configuration: "Debugfull"
+-- Installing: /usr/lib/kde4/plasma_yawp.so
+-- Set runtime path of "/usr/lib/kde4/plasma_yawp.so" to "/usr/lib"
+-- Installing: /usr/share/kde4/services/plasma_yawp.desktop
+-- Installing: /usr/share/apps/desktoptheme/default/widgets/yawp_theme13.svg
+-- Installing: /usr/share/locale/ru/LC_MESSAGES/plasma_applet_yawp.mo
+-- Installing: /usr/share/locale/fr/LC_MESSAGES/plasma_applet_yawp.mo
+-- Installing: /usr/share/locale/cs/LC_MESSAGES/plasma_applet_yawp.mo
+-- Installing: /usr/share/locale/es/LC_MESSAGES/plasma_applet_yawp.mo
+-- Installing: /usr/share/locale/af/LC_MESSAGES/plasma_applet_yawp.mo
+-- Installing: /usr/share/locale/it/LC_MESSAGES/plasma_applet_yawp.mo
+
+
+$ su -c "make uninstall"
+Mot de passe :
+Scanning dependencies of target uninstall
+-- Uninstalling "/usr/lib/kde4/plasma_yawp.so"
+-- Uninstalling "/usr/share/kde4/services/plasma_yawp.desktop"
+-- Uninstalling "/usr/share/apps/desktoptheme/default/widgets/yawp_theme13.svg"
+-- Uninstalling "/usr/share/locale/ru/LC_MESSAGES/plasma_applet_yawp.mo"
+-- Uninstalling "/usr/share/locale/fr/LC_MESSAGES/plasma_applet_yawp.mo"
+-- Uninstalling "/usr/share/locale/cs/LC_MESSAGES/plasma_applet_yawp.mo"
+-- Uninstalling "/usr/share/locale/es/LC_MESSAGES/plasma_applet_yawp.mo"
+-- Uninstalling "/usr/share/locale/af/LC_MESSAGES/plasma_applet_yawp.mo"
+-- Uninstalling "/usr/share/locale/it/LC_MESSAGES/plasma_applet_yawp.mo"
+Built target uninstall

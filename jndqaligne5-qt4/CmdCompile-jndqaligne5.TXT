@@ -1,0 +1,186 @@
+# Le répertoire
+cd $HOME/05-builds/jndqaligne5-qt4
+
+
+sha256sum jndqaligne5-qt4-0.4.0.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+pkgname='jndqaligne5-qt4'
+_realname='jndqaligne5'
+pkgver=0.4.0
+pkgrel=1
+
+provides='jndqaligne5'
+conflicts='jndqaligne5'
+
+source=(... ...)
+sha256sums=(... ...)
+
+
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 jndqaligne5-qt4-0.4.0.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 jndqaligne5-qt4.install
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+====================================
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/jndqaligne5-qt4/PKGBUILD . \
+&& cp -v $HOME/05-builds/jndqaligne5-qt4/jndqaligne5-qt4-0.4.0.tar.gz . \
+&& cp -v $HOME/05-builds/jndqaligne5-qt4/jndqaligne5-qt4.install . \
+&& makepkg -s \
+&& cd $HOME/05-builds/jndqaligne5-qt4 \
+&& cp -v /tmp/build/jndqaligne5-qt4-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/jndqaligne5-qt4 && rm -rf /tmp/build
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+
+cd $HOME/05-builds/jndqaligne5-qt4
+
+$ rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap
+
+# Nettoyage fichiers~
+=========================
+
+rm -f *~
+rm -rf src pkg
+
+
+# Copie ds repolocal
+=====================
+
+# Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+mv $HOME/00-repolocal/jndqaligne5-qt4-*-x86_64.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+mv jndqaligne5-qt4-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# pacman -Syu
+ou
+# pacman -Syu jndqaligne5-qt4
+
+
+
+=====================================================================
+TEST : COMPILE DS TMP ( RAMFS )
+=====================================================================
+
+!!! EN USER
+==============
+$ cd $HOME/05-builds/jndqaligne5
+
+$ rm -f *~
+
+$ cd
+
+$ mkdir /tmp/00-jnd-builds
+
+$ cp $HOME/05-builds/jndqaligne5/* /tmp/00-jnd-builds/
+
+$ cd /tmp/00-jnd-builds
+
+$ makepkg -s
+
+# Copie ds repolocal
+=====================
+
+## Déplace le précédent dans  $HOME/00-repolocal/pkg-OLD
+$ mv $HOME/00-repolocal/jndqaligne5-*-x86_64.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+$ mv -v *-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+$ mv -v *-x86_64.pkg.tar.* $HOME/05-builds/jndqaligne5/
+
+
+$ cd
+
+$ maj-repolocal.sh
+
+
+$ rm -rf /tmp/00-jnd-builds
+
+
+$ cd $HOME/05-builds/jndqaligne5
+
+$ rm -f *~
+$ rm -f *.log
+
+
+EN ROOT
+========
+# pacman -Syu
+
+
+
+========================================================================================================
+3) MAKEPKG en CHROOT
+====================
+rm -f *.log
+
+=> Mise a Jour
+!!! EN ROOT
+# cd
+# mkarchroot -u $HOME/05-builds/0-chroot/root
+
+# cd
+# cd $HOME/05-builds/jndqaligne5
+# makechrootpkg -c -r $HOME/05-builds/0-chroot
+
+# chown jnd:users jndqaligne5-0.4.0.tar.gz
+# chown jnd:users jndqaligne5-0.4.0-4-x86_64.pkg.tar.xz
+
+
+# mv ../0-chroot/rw/pkgdest/jndqaligne5-*-x86_64.pkg.tar.gz .
+
+# La date en FR
+LC_TIME=fr_FR date +"%a %b %e %Y"
+
+# La date en US
+LC_TIME=en_US date +"%a %b %e %Y"

@@ -1,0 +1,120 @@
+[ 81%] Building CXX object extern/eltopo/CMakeFiles/extern_eltopo.dir/common/runstats.cpp.o
+In file included from /build/src/blender/extern/eltopo/common/runstats.cpp:9:0:
+/build/src/blender/extern/eltopo/common/runstats.h:31:9: error: '__int64' does not name a type
+/build/src/blender/extern/eltopo/common/runstats.h:32:26: error: expected initializer before 'uint64_t'
+In file included from /build/src/blender/extern/eltopo/common/runstats.cpp:9:0:
+/build/src/blender/extern/eltopo/common/runstats.h:51:28: error: 'int64_t' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.h:51:35: error: template argument 2 is invalid
+/build/src/blender/extern/eltopo/common/runstats.h:54:37: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.h:55:40: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.h:56:5: error: 'int64_t' does not name a type
+/build/src/blender/extern/eltopo/common/runstats.h:57:37: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.h:58:44: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.h:59:44: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.h:68:58: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.h:80:27: error: 'int64_t' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.h:80:34: error: template argument 2 is invalid
+/build/src/blender/extern/eltopo/common/runstats.h:80:34: error: template argument 4 is invalid
+/build/src/blender/extern/eltopo/common/runstats.cpp:16:43: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'void RunStats::set_int(std::string, int)':
+/build/src/blender/extern/eltopo/common/runstats.cpp:18:19: error: no match for 'operator[]' in '((RunStats*)this)->RunStats::int_stats[name]'
+/build/src/blender/extern/eltopo/common/runstats.cpp: At global scope:
+/build/src/blender/extern/eltopo/common/runstats.cpp:21:46: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'void RunStats::add_to_int(std::string, int)':
+/build/src/blender/extern/eltopo/common/runstats.cpp:23:5: error: 'int64_t' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:23:13: error: expected ';' before 'value'
+/build/src/blender/extern/eltopo/common/runstats.cpp:24:34: error: 'value' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp: At global scope:
+/build/src/blender/extern/eltopo/common/runstats.cpp:33:1: error: 'int64_t' does not name a type
+/build/src/blender/extern/eltopo/common/runstats.cpp:40:43: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'bool RunStats::get_int(std::string, int&)':
+/build/src/blender/extern/eltopo/common/runstats.cpp:42:27: error: 'int64_t' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:42:34: error: template argument 2 is invalid
+/build/src/blender/extern/eltopo/common/runstats.cpp:42:34: error: template argument 4 is invalid
+/build/src/blender/extern/eltopo/common/runstats.cpp:42:46: error: expected initializer before 'iter'
+/build/src/blender/extern/eltopo/common/runstats.cpp:43:10: error: 'iter' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:43:28: error: request for member 'end' in '((RunStats*)this)->RunStats::int_stats', which is of non-class type 'int'
+/build/src/blender/extern/eltopo/common/runstats.cpp:47:13: error: 'iter' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp: At global scope:
+/build/src/blender/extern/eltopo/common/runstats.cpp:51:50: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'void RunStats::update_min_int(std::string, int)':
+/build/src/blender/extern/eltopo/common/runstats.cpp:53:5: error: 'int64_t' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:53:13: error: expected ';' before 'current_min'
+/build/src/blender/extern/eltopo/common/runstats.cpp:54:34: error: 'current_min' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:56:19: error: no match for 'operator[]' in '((RunStats*)this)->RunStats::int_stats[name]'
+/build/src/blender/extern/eltopo/common/runstats.cpp: At global scope:
+/build/src/blender/extern/eltopo/common/runstats.cpp:59:50: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'void RunStats::update_max_int(std::string, int)':
+/build/src/blender/extern/eltopo/common/runstats.cpp:61:5: error: 'int64_t' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:61:13: error: expected ';' before 'current_max'
+/build/src/blender/extern/eltopo/common/runstats.cpp:62:34: error: 'current_max' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:64:19: error: no match for 'operator[]' in '((RunStats*)this)->RunStats::int_stats[name]'
+/build/src/blender/extern/eltopo/common/runstats.cpp: At global scope:
+/build/src/blender/extern/eltopo/common/runstats.cpp:122:64: error: 'int64_t' has not been declared
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'void RunStats::add_per_frame_int(std::string, int, int)':
+/build/src/blender/extern/eltopo/common/runstats.cpp:125:48: error: expression list treated as compound expression in functional cast [-fpermissive]
+/build/src/blender/extern/eltopo/common/runstats.cpp:125:48: warning: left operand of comma operator has no effect [-Wunused-value]
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'void RunStats::write_to_file(const char*)':
+/build/src/blender/extern/eltopo/common/runstats.cpp:165:21: error: request for member 'empty' in '((RunStats*)this)->RunStats::int_stats', which is of non-class type 'int'
+/build/src/blender/extern/eltopo/common/runstats.cpp:168:31: error: 'int64_t' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:168:38: error: template argument 2 is invalid
+/build/src/blender/extern/eltopo/common/runstats.cpp:168:38: error: template argument 4 is invalid
+/build/src/blender/extern/eltopo/common/runstats.cpp:168:50: error: expected initializer before 'int_iterator'
+/build/src/blender/extern/eltopo/common/runstats.cpp:169:17: error: 'int_iterator' was not declared in this scope
+/build/src/blender/extern/eltopo/common/runstats.cpp:169:43: error: request for member 'end' in '((RunStats*)this)->RunStats::int_stats', which is of non-class type 'int'
+/build/src/blender/extern/eltopo/common/runstats.cpp:201:37: error: request for member 'first' in '(& sequence)->std::vector<_Tp, _Alloc>::operator[]<int, std::allocator<int> >(((std::vector<int>::size_type)i))', which is of non-class type 'int'
+/build/src/blender/extern/eltopo/common/runstats.cpp:201:65: error: request for member 'second' in '(& sequence)->std::vector<_Tp, _Alloc>::operator[]<int, std::allocator<int> >(((std::vector<int>::size_type)i))', which is of non-class type 'int'
+/build/src/blender/extern/eltopo/common/runstats.cpp: In member function 'void RunStats::clear()':
+/build/src/blender/extern/eltopo/common/runstats.cpp:231:15: error: request for member 'clear' in '((RunStats*)this)->RunStats::int_stats', which is of non-class type 'int'
+make[2]: *** [extern/eltopo/CMakeFiles/extern_eltopo.dir/common/runstats.cpp.o] Error 1
+make[1]: *** [extern/eltopo/CMakeFiles/extern_eltopo.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+
+ 
+In file included from /build/src/blender/source/blender/blenlib/BLI_math_vector.h:40:0,
+                 from /build/src/blender/source/blender/blenlib/BLI_math.h:59,
+                 from /build/src/blender/source/blender/blenkernel/intern/collision.c:47:
+/build/src/blender/source/blender/blenlib/intern/math_vector_inline.c:65:14: note: expected 'const float *' but argument is of type 'void **'
+/build/src/blender/source/blender/blenkernel/intern/collision.c:790:5: error: implicit declaration of function 'eltopo_line_line_moving_isect_v3v3_f' [-Werror=implicit-function-declaration]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:759:16: warning: unused variable 'collp2' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:759:8: warning: unused variable 'collp1' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:669:8: warning: unused variable 'n1' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:667:29: warning: variable 'i6' set but not used [-Wunused-but-set-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:667:25: warning: variable 'i5' set but not used [-Wunused-but-set-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:667:21: warning: variable 'i4' set but not used [-Wunused-but-set-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:667:17: warning: variable 'i3' set but not used [-Wunused-but-set-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:667:13: warning: variable 'i2' set but not used [-Wunused-but-set-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:667:9: warning: variable 'i1' set but not used [-Wunused-but-set-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:662:9: warning: unused variable 'distance' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:661:15: warning: unused variable 'verts1' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c: In function 'cloth_collision_response_moving':
+/build/src/blender/source/blender/blenkernel/intern/collision.c:925:8: warning: unused variable 'epsilon2' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:923:15: warning: unused variable 'v2' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:922:28: warning: unused variable 'u3' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:922:24: warning: unused variable 'u2' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:922:20: warning: unused variable 'u1' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c: In function 'tripair_cmp':
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1101:18: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1101:27: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1103:6: warning: unused variable 'keysb' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c: In function 'cloth_point_tri_moving_v3v3_f':
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1152:2: error: implicit declaration of function 'eltopo_point_tri_moving_v3v3_f' [-Werror=implicit-function-declaration]
+/build/src/blender/source/blender/blenkernel/intern/collision.c: In function 'cloth_collision':
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1168:21: warning: unused variable 'p' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1168:8: warning: unused variable 'n1' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1162:9: warning: unused variable 'distance' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c:1161:15: warning: unused variable 'verts1' [-Wunused-variable]
+/build/src/blender/source/blender/blenkernel/intern/collision.c: In function 'cloth_bvh_objcollisions_nearcheck':
+/build/src/blender/source/blender/blenkernel/intern/collision.c:2228:2: warning: passing argument 1 of 'BLI_ghash_new' from incompatible pointer type [enabled by default]
+In file included from /build/src/blender/source/blender/blenkernel/intern/collision.c:50:0:
+/build/src/blender/source/blender/blenlib/BLI_ghash.h:68:8: note: expected 'GHashHashFP' but argument is of type 'unsigned int (*)(void *)'
+/build/src/blender/source/blender/blenkernel/intern/collision.c:2229:2: warning: passing argument 1 of 'BLI_ghash_new' from incompatible pointer type [enabled by default]
+In file included from /build/src/blender/source/blender/blenkernel/intern/collision.c:50:0:
+/build/src/blender/source/blender/blenlib/BLI_ghash.h:68:8: note: expected 'GHashHashFP' but argument is of type 'unsigned int (*)(void *)'
+/build/src/blender/source/blender/blenkernel/intern/collision.c: At top level:
+/build/src/blender/source/blender/blenkernel/intern/collision.c:445:13: warning: 'collision_compute_barycentric' defined but not used [-Wunused-function]
+cc1: some warnings being treated as errors
+make[2]: *** [source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/collision.c.o] Error 1
+make[1]: *** [source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/all] Error 2

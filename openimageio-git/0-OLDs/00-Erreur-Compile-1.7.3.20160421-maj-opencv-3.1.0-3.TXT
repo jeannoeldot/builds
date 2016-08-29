@@ -1,0 +1,59 @@
+[ 78%] Built target OpenImageIO
+Scanning dependencies of target iconvert
+Scanning dependencies of target idiff
+Scanning dependencies of target maketx
+Scanning dependencies of target igrep
+Scanning dependencies of target iinfo
+[ 79%] Building CXX object src/iconvert/CMakeFiles/iconvert.dir/iconvert.cpp.o
+[ 80%] Building CXX object src/idiff/CMakeFiles/idiff.dir/idiff.cpp.o
+[ 80%] Building CXX object src/maketx/CMakeFiles/maketx.dir/maketx.cpp.o
+[ 81%] Building CXX object src/igrep/CMakeFiles/igrep.dir/igrep.cpp.o
+[ 82%] Building CXX object src/iinfo/CMakeFiles/iinfo.dir/iinfo.cpp.o
+[ 82%] Linking CXX executable idiff
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvCreateCameraCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvReleaseCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvQueryFrame'
+collect2: error: ld returned 1 exit status
+src/idiff/CMakeFiles/idiff.dir/build.make:150: recipe for target 'src/idiff/idiff' failed
+make[2]: *** [src/idiff/idiff] Error 1
+CMakeFiles/Makefile2:1669: recipe for target 'src/idiff/CMakeFiles/idiff.dir/all' failed
+make[1]: *** [src/idiff/CMakeFiles/idiff.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 83%] Linking CXX executable maketx
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvCreateCameraCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvReleaseCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvQueryFrame'
+collect2: error: ld returned 1 exit status
+src/maketx/CMakeFiles/maketx.dir/build.make:150: recipe for target 'src/maketx/maketx' failed
+make[2]: *** [src/maketx/maketx] Error 1
+CMakeFiles/Makefile2:1834: recipe for target 'src/maketx/CMakeFiles/maketx.dir/all' failed
+make[1]: *** [src/maketx/CMakeFiles/maketx.dir/all] Error 2
+[ 83%] Linking CXX executable iconvert
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvCreateCameraCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvReleaseCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvQueryFrame'
+collect2: error: ld returned 1 exit status
+src/iconvert/CMakeFiles/iconvert.dir/build.make:150: recipe for target 'src/iconvert/iconvert' failed
+make[2]: *** [src/iconvert/iconvert] Error 1
+CMakeFiles/Makefile2:1614: recipe for target 'src/iconvert/CMakeFiles/iconvert.dir/all' failed
+make[1]: *** [src/iconvert/CMakeFiles/iconvert.dir/all] Error 2
+[ 84%] Linking CXX executable iinfo
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvCreateCameraCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvReleaseCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvQueryFrame'
+collect2: error: ld returned 1 exit status
+src/iinfo/CMakeFiles/iinfo.dir/build.make:150: recipe for target 'src/iinfo/iinfo' failed
+make[2]: *** [src/iinfo/iinfo] Error 1
+CMakeFiles/Makefile2:1779: recipe for target 'src/iinfo/CMakeFiles/iinfo.dir/all' failed
+make[1]: *** [src/iinfo/CMakeFiles/iinfo.dir/all] Error 2
+[ 84%] Linking CXX executable igrep
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvCreateCameraCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvReleaseCapture'
+../libOpenImageIO/libOpenImageIO.so.1.7.3: undefined reference to `cvQueryFrame'
+collect2: error: ld returned 1 exit status
+src/igrep/CMakeFiles/igrep.dir/build.make:150: recipe for target 'src/igrep/igrep' failed
+make[2]: *** [src/igrep/igrep] Error 1
+CMakeFiles/Makefile2:1724: recipe for target 'src/igrep/CMakeFiles/igrep.dir/all' failed
+make[1]: *** [src/igrep/CMakeFiles/igrep.dir/all] Error 2
+Makefile:160: recipe for target 'all' failed
+make: *** [all] Error 2

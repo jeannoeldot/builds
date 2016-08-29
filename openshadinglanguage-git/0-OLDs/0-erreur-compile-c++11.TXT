@@ -1,0 +1,28 @@
+ 
+In file included from /build/openshadinglanguage-git/src/osl/src/liboslexec/shadingsys.cpp:49:0:
+/usr/include/OpenImageIO/fmath.h:1301:13: error: 'constexpr bool std::isnan(double)' conflicts with a previous declaration
+  using std::isnan;
+             ^
+In file included from /usr/include/features.h:378:0,
+                 from /usr/include/c++/4.9.1/x86_64-unknown-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/4.9.1/x86_64-unknown-linux-gnu/bits/c++config.h:430,
+                 from /usr/include/c++/4.9.1/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9.1/vector:60,
+                 from /build/openshadinglanguage-git/src/osl/src/liboslexec/shadingsys.cpp:29:
+/usr/include/bits/mathcalls.h:234:1: note: previous declaration 'int isnan(double)'
+ __MATHDECL_1 (int,isnan,, (_Mdouble_ __value)) __attribute__ ((__const__));
+ ^
+In file included from /build/openshadinglanguage-git/src/osl/src/liboslexec/shadingsys.cpp:49:0:
+/usr/include/OpenImageIO/fmath.h:1302:13: error: 'constexpr bool std::isinf(double)' conflicts with a previous declaration
+  using std::isinf;
+             ^
+In file included from /usr/include/features.h:378:0,
+                 from /usr/include/c++/4.9.1/x86_64-unknown-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/4.9.1/x86_64-unknown-linux-gnu/bits/c++config.h:430,
+                 from /usr/include/c++/4.9.1/bits/stl_algobase.h:59,
+                 from /usr/include/c++/4.9.1/vector:60,
+                 from /build/openshadinglanguage-git/src/osl/src/liboslexec/shadingsys.cpp:29:
+/usr/include/bits/mathcalls.h:201:1: note: previous declaration 'int isinf(double)'
+ __MATHDECL_1 (int,isinf,, (_Mdouble_ __value)) __attribute__ ((__const__));
+ ^
+

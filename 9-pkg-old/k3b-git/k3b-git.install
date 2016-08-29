@@ -1,0 +1,17 @@
+post_install() {
+  xdg-desktop-menu forceupdate 2> /dev/null || :
+  xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
+  update-mime-database usr/share/mime
+}
+
+post_upgrade() {
+  xdg-desktop-menu forceupdate 2> /dev/null || :
+  xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
+  update-mime-database usr/share/mime
+}
+
+post_remove() {
+  xdg-desktop-menu forceupdate 2> /dev/null || :
+  xdg-icon-resource forceupdate --theme hicolor 2> /dev/null || :
+  update-mime-database usr/share/mime
+}

@@ -1,0 +1,25 @@
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname=progtestqt4_01
+pkgver=0.1.0
+pkgrel=4
+pkgdesc="Test de C++/QT4"
+arch=('i686' 'x86_64')
+url=http://www.club-internet.fr/jeannoeldot/
+license='GPL2'
+depends=('xdg-utils' 'qt' 'sdl_mixer')
+makedepends=('qt' 'sdl' 'sdl_mixer')
+install="progtestqt4_01.install"
+source=("$pkgname.tar.gz")
+md5sums=('2acd93e9d46f40dedcc270c1fd1d8feb')
+
+build() {
+  cd $srcdir/$pkgname
+  qmake
+  make
+}
+
+package() {
+  cd $srcdir/$pkgname
+  make INSTALL_ROOT=$pkgdir install
+}

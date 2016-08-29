@@ -1,0 +1,131 @@
+# Le répertoire
+===============
+!!! EN USER
+cd /home/jnd/05-builds/cudaminer-git
+
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+
+https://github.com/cbuchner1/CudaMiner
+
+==> 20140312
+
+
+1.3 SOURCES
+==============
+rm -rf cudaminer
+
+git clone https://github.com/cbuchner1/CudaMiner.git cudaminer
+
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+rm -i cudaminer-git-*.tar.gz
+tar -cvzf cudaminer-git-20140312.tar.gz  --exclude=.git cudaminer
+
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+
+pkgname=cudaminer-git
+!!!!!!
+pkgver=20140312
+pkgrel=2
+
+
+md5sum cudaminer-git-20140312.tar.gz
+md5sum conf
+md5sum service
+
+md5sums=(...
+         ...
+)
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxx.tar.gz
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 conf
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 service
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+$ rm -f *~
+
+rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v /home/jnd/05-builds/cudaminer-git/{PKGBUILD,cudaminer-git-20140312.tar.gz,conf,service} . \
+&& makepkg -s \
+&& cd /home/jnd/05-builds/cudaminer-git \
+&& cp -v /tmp/build/cudaminer-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd /home/jnd/05-builds/cudaminer-git && rm -rf /tmp/build
+
+!!! EN USER
+
+$ rm -f *~
+$ /home/jnd/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd /home/jnd/05-builds/cudaminer-git
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+rm -rf cudaminer
+
+# Verifications...
+
+namcap cudaminer-git-*-x86_64.pkg.tar.*
+
+# Déplace le précédent dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/cudaminer-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+mv cudaminer-git-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+
+cd && maj-repolocal
+sync
+
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -R cudaminer-git
+# pacman -Syu cudaminer-git
+
+
+================================================================
+ANCIENS
+========

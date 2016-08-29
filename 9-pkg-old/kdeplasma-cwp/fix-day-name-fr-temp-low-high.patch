@@ -1,0 +1,61 @@
+diff -aur cwp-1.5.11/plasma-cwp.cpp cwp-1.5.11.new/plasma-cwp.cpp
+--- cwp-1.5.11/plasma-cwp.cpp	2012-02-28 21:32:30.000000000 +0100
++++ cwp-1.5.11.new/plasma-cwp.cpp	2012-03-08 19:34:38.899038585 +0100
+@@ -1310,11 +1310,31 @@
+ 
+ 		// day name
+ 		QString day_name = "";
++// Début modif nom jours en FR
++		QString jour_fr = "";
+ 		if ( dayNamesSystem == 0 ) day_name = data_day_name[i];
+ 		else if ( dayNamesSystem == 1 ) day_name = QDate::shortDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+ 		else if ( dayNamesSystem == 2 ) day_name = QDate::longDayName( QDate::currentDate().addDays( i ).dayOfWeek() );
+ 		else if ( dayNamesSystem == 3 ) day_name = QDate::currentDate().addDays( i ).toString( Qt::DefaultLocaleShortDate );
+ 
++		if ( day_name == "Mon" ) jour_fr = "Lun";
++		else if ( day_name == "Tue" ) jour_fr = "Mar";
++		else if ( day_name == "Wed" ) jour_fr = "Mer";
++		else if ( day_name == "Thu" ) jour_fr = "Jeu";
++		else if ( day_name == "Fri" ) jour_fr = "Ven";
++		else if ( day_name == "Sat" ) jour_fr = "Sam";
++		else if ( day_name == "Sun" ) jour_fr = "Dim";
++		else if ( day_name == "Monday" ) jour_fr = "Lundi";
++		else if ( day_name == "Tuesday" ) jour_fr = "Mardi";
++		else if ( day_name == "Wednesday" ) jour_fr = "Mercredi";
++		else if ( day_name == "Thursday" ) jour_fr = "Jeudi";
++		else if ( day_name == "Friday" ) jour_fr = "Vendredi";
++		else if ( day_name == "Saturday" ) jour_fr = "Samedi";
++		else if ( day_name == "Sunday" ) jour_fr = "Dimanche";
++
++		if ( jour_fr != "" ) day_name = jour_fr;
++// Fin modif
++
+ 		if ( day_name != "" )
+ 		{
+ 			p->setFont( paint_helper->getFittingFontSize( p, day_name_rect[i], Qt::AlignVCenter | Qt::AlignHCenter,
+@@ -1325,19 +1345,21 @@
+ 
+ 		// temperature low/high
+ 		QString temp_low_high = "";
+-		if ( data_day_temperature_high[i] != "" && data_day_temperature_high[i].contains(QRegExp("[0-9]")) )
++// Début modif temperature low / high
++		if ( data_day_temperature_low[i] != "" && data_day_temperature_low[i].contains(QRegExp("[0-9]")) )
+ 		{
+-			temp_low_high = temp_low_high + data_day_temperature_high[i] + QChar(0xB0) + ( showTemperatureUnit ? tempType : "" );
++			temp_low_high = temp_low_high + data_day_temperature_low[i] + QChar(0xB0) + ( showTemperatureUnit ? tempType : "" );
+ 		}
+ 		if ( data_day_temperature_high[i] != "" && data_day_temperature_low[i] != "" && data_day_temperature_high[i].contains(QRegExp("[0-9]")) &&
+ 			data_day_temperature_low[i].contains(QRegExp("[0-9]")) )
+ 		{
+ 			temp_low_high = temp_low_high + " / ";
+ 		}
+-		if ( data_day_temperature_low[i] != "" && data_day_temperature_low[i].contains(QRegExp("[0-9]")) )
++		if ( data_day_temperature_high[i] != "" && data_day_temperature_high[i].contains(QRegExp("[0-9]")) )
+ 		{
+-			temp_low_high = temp_low_high + data_day_temperature_low[i] + QChar(0xB0) + ( showTemperatureUnit ? tempType : "" );
++			temp_low_high = temp_low_high + data_day_temperature_high[i] + QChar(0xB0) + ( showTemperatureUnit ? tempType : "" );
+ 		}
++// Fin modif
+ 
+ 		p->setFont( paint_helper->getFittingFontSize( p, day_temp_rect[i], Qt::AlignVCenter | Qt::AlignHCenter,
+ 			temp_low_high, day_temperature_font, true, true, 0.3, 0, 0 ) );

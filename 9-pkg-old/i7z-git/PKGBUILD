@@ -1,0 +1,37 @@
+# Maintainer: graysky <graysky AT archlinux DOT us>
+# Maintainer: JND <jeannoeldot@club-internet.fr>
+
+pkgname='i7z-git'
+_pkgname='i7z'
+pkgver=20131012
+pkgrel=2
+pkgdesc="A better i7 (and now i3, i5) reporting tool for Linux. Git version."
+arch=('i686' 'x86_64')
+license=('GPL2')
+depends=('ncurses')
+makedepends=('qt4')
+optdepends=('qt4: for i7z-gui')
+url="http://code.google.com/p/i7z/"
+provides='i7z'
+conflicts='i7z'
+source=("$pkgname-$pkgver.tar.gz"
+)
+sha256sums=('abc48e5bf04744b9b2c2c1f72be5dcc1b9f6028949a0e54ea3b52f464a780739'
+)
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	make
+
+	cd GUI
+	qmake-qt4
+	make clean
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+
+	install -Dm755 i7z ${pkgdir}/usr/bin/i7z
+	install -Dm755 GUI/i7z_GUI ${pkgdir}/usr/bin/i7z-gui
+}
