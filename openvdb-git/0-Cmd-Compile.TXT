@@ -83,6 +83,8 @@ voir 0-CmdFairePatches.TXT
 pkgname=openvdb-git               # openvdb ds community
 pkgver=3.2.0.20160810
 pkgrel=1
+pkgrel=2          # maj NVidia 370.23-1
+pkgrel=3          # nvidia-libgl 367.35
 pkgrel=2  # rebuild gcc 6.1 boost boost-libs 1.60.0-5
 
 license=('MPL')
@@ -118,6 +120,10 @@ prepare() {
   # Fixe erreur compilation avec gcc 6.1
   sed -i  -e "s/-isystem/-I/g" Makefile
 
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong
+-std=c++0x -pthread -O3 -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Grid.o Grid.cc
+  # Supprime OPTIMIZE := -O3 -DNDEBUG
+  sed -i  -e "s/-O3 //g" Makefile
 
 build() {
 

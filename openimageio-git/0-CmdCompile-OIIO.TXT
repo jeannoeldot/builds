@@ -69,6 +69,8 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=1.7.5.20160817
 pkgrel=1
+pkgrel=2          # maj NVidia 370.23-1
+pkgrel=3          # nvidia-libgl 367.35
 
 provides=('openimageio')
 conflicts=('openimageio')

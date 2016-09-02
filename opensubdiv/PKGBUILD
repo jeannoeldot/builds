@@ -2,7 +2,7 @@
 
 pkgname=opensubdiv-git
 pkgver=3.0.5
-pkgrel=4
+pkgrel=6
 _osd_name="OpenSubdiv"
 _osd_version="3_0_5"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"

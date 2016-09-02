@@ -5,11 +5,11 @@ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.77.3.20160824.tar.gz /tmp/srcp/
+cp -v blender-git-2.77.3.20160828.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.77.3.20160824.tar.gz
+tar -xzf blender-git-2.77.3.20160828.tar.gz
 
 TEST 2 : COMPIL OK
 2) MODIFIER blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp

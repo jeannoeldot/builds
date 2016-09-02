@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.77.3.20160828
+pkgver=2.77.3.20160820
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -28,7 +28,6 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm35'
              'cuda'
              'opencl-headers'
              'git'
-             'gcc5'
 )
 optdepends=('cuda: cycles renderer cuda support')
 provides=('blender')
@@ -36,20 +35,11 @@ conflicts=('blender')
 options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
-        'fix-std-isfinite-has-not-been-declared.patch'
 )
-sha256sums=('30d7eab746e8c36de539d929613ef1a647740496b9074b17e89979e4f1ed52b9'
-            '8d1fcb48f1c21d7bb040239fce6fbedc69a30ff6de6a5e491154047bacebbbbe'
+sha256sums=('5dac09ea2430ac55786bf432fd4944a7488ba6a2bda9ef9b4ac28232e3acf181'
 )
 
 _gitname="blender"
-
-prepare() {
-  cd "${_gitname}"
-  # fix erreur : 
-  # rayobject_rtbuild.cpp:46:12: error: 'std::isfinite' has not been declared
-  patch -Np1 -i "${srcdir}/fix-std-isfinite-has-not-been-declared.patch"
-}
 
 build() {
   cd "${_gitname}"
@@ -58,8 +48,6 @@ build() {
   mkdir build && cd build
   
   cmake \
-        -DCMAKE_C_COMPILER='/usr/bin/gcc-5' \
-        -DCMAKE_CXX_COMPILER='/usr/bin/g++-5' \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_SKIP_RPATH=ON \
