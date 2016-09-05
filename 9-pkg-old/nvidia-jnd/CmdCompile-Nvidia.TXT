@@ -1,0 +1,166 @@
+0) Modifier 
+============
+$ cd /home/jnd/05-builds/nvidia-jnd
+
+
+1) RECUPERATION FICHIERS SOURCES
+=================================
+
+$ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/280.13/NVIDIA-Linux-x86_64-280.13-no-compat32.run
+
+
+2) MODIFIER LE PKGBUILD
+========================
+
+pkgname=nvidia-jnd
+pkgver=280.13
+_kernver='3.0-jnd'
+pkgrel=1
+_pkgdesc="NVIDIA drivers for linux-jnd."
+
+  source=(... ...)
+----------------------
+
+
+  md5sums=(... ...)
+----------------------------
+
+md5sum NVIDIA-Linux-x86_64-280.13-no-compat32.run
+
+3) MAKEPKG en CHROOT
+====================
+
+2) NVIDIA-JND
+--------------------------------------------------------------------
+!!! EN ROOT
+::Mise a Jour
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+::Build
+# cd /home/jnd/05-builds/nvidia-jnd
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+SI PROBLEME COMPILE :
+# cd
+# cd /home/jnd/05-builds/0-chroot/copy/build
+# ls
+# rm -rf pkg src
+# rm -f *
+
+# ls -l
+# chown jnd:jnd NVIDIA-Linux-x86_64-280.13-no-compat32.run
+# chown jnd:jnd namcap.log
+# chown jnd:jnd nvidia-jnd-*-x86_64.pkg.tar.*
+# ls -l
+
+5-A) MAKEPKG en USER
+======================
+
+makepkg -s
+
+makepkg -f
+
+========================================================================================
+# Verifications...
+==================
+
+namcap
+
+# Nettoyage fichiers~
+=========================
+
+!!! EN USER
+rm -f *~
+rm -rf pkg src
+rm -rf srcp
+
+# Déplace les précédents dans  /home/jnd/00-repolocal/pkg-OLD
+mv /home/jnd/00-repolocal/nvidia-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/pkg-OLD/
+
+$ mv nvidia-*-x86_64.pkg.tar.* /home/jnd/00-repolocal/
+$ cd
+$ maj-repolocal.sh
+
+# Nettoyage fichiers ds 0-copie-fichiers-chroot/repo
+=====================================================
+rm -f /home/jnd/05-builds/0-chroot/root/repo/nvidia-utils-*-x86_64.pkg.tar.*
+
+!!! MAJ EN INIT 3 !!!!!
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+OU
+# pacman -Syy
+# pacman -S nvidia-jnd
+
+
+
+
+PKGBUILD.nvidia-utils-beta
+PKGBUILD.nvidia-beta
+
+pkgver=260.19.06
+
+md5sum NVIDIA-Linux-x86_64-260.19.06-no-compat32.run
+md5sum 20-nvidia.conf
+
+md5sums=('xxxx')
+
+1) NVIDIA-UTILS
+--------------------------------------------------------------------
+
+!!! EN USER
+$ cd /home/jnd/05-builds/nvidia-jnd
+$ rm -f PKGBUILD
+$ cp PKGBUILD.nvidia-utils-beta PKGBUILD
+
+
+!!! EN ROOT
+::Mise a Jour
+# cd
+# mkarchroot -u /home/jnd/05-builds/0-chroot/root
+
+::Build
+# cd /home/jnd/05-builds/nvidia-jnd
+# makechrootpkg -c -r /home/jnd/05-builds/0-chroot
+
+# ls -l
+# chown jnd:jnd NVIDIA-Linux-x86_64-260.19.06-no-compat32.run
+# chown jnd:jnd 20-nvidia.conf
+# chown jnd:jnd namcap.log
+# chown jnd:jnd nvidia-utils-beta-*-x86_64.pkg.tar.*
+# ls -l
+
+!!! A NE FAIRE QUE LA 1 ERE FOIS
+!!! EN ROOT
+# cd /home/jnd/05-builds/0-chroot/root
+# mkdir repo
+# chmod 777 /home/jnd/05-builds/0-chroot/root/repo
+
+# cd /home/jnd/05-builds/0-chroot/root/etc
+# nano pacman.conf
+=> rajout depot : [local] avant [core]
+
+!!! EN USER
+cd
+rm -f /home/jnd/05-builds/0-chroot/root/repo/nvidia-utils-*-x86_64.pkg.tar.*
+cp /home/jnd/05-builds/nvidia-jnd/nvidia-utils-*-x86_64.pkg.tar.* /home/jnd/05-builds/0-chroot/root/repo
+
+cd /home/jnd/05-builds/0-chroot/root/repo
+rm -f local.db.tar.gz
+repo-add local.db.tar.gz *-x86_64.pkg.tar.gz
+OU
+maj-repochroot.sh
+
+
+
+================= OLD ====================================
+cp /home/jnd/05-builds/nvidia-utils/nvidia-utils-180.37-1-x86_64.pkg.tar.gz /home/jnd/05-builds/0-chroot/root/repo
+cd /home/jnd/05-builds/0-chroot/root/repo
+repo-add local.db.tar.gz nvidia-utils-180.37-1-x86_64.pkg.tar.gz
+
+!!! NON # mv ../0-chroot/rw/pkgdest/nvidia-utils-*-x86_64.pkg.tar.gz .
+

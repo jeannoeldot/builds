@@ -1,0 +1,92 @@
+# $Id$
+# Maintainer: Sven-Hendrik Haase <sh@lutzhaase.com>
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Thomas Baechler <thomas@archlinux.org>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgbase=nvidia-367
+pkgname=(nvidia-367 nvidia-367-dkms)
+pkgver=367.44
+_extramodules=extramodules-4.7-ARCH
+pkgrel=1
+pkgdesc="NVIDIA drivers for linux"
+arch=('i686' 'x86_64')
+url="http://www.nvidia.com/"
+makedepends=('nvidia-367-libgl' "nvidia-367-utils=${pkgver}" 'linux' 'linux-headers>=4.7' 'linux-headers<4.8')
+conflicts=('nvidia')
+license=('custom')
+options=('!strip')
+source_i686=("http://us.download.nvidia.com/XFree86/Linux-x86/${pkgver}/NVIDIA-Linux-x86-${pkgver}.run"
+             "0001-linux-4.7-i686.patch")
+source_x86_64=("http://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run"
+               "0001-linux-4.7-x86_64.patch")
+md5sums_i686=('42db6f6485c3c337c7c756380ec64b7a'
+              '0ceb49f5c537ae60743fdf7177eb996e')
+md5sums_x86_64=('7478b957513f3f9234b71b88b6d032b9'
+                'b1e6760dca837e8685fd02be15aa4f51')
+
+[[ "$CARCH" = "i686" ]] && _pkg="NVIDIA-Linux-x86-${pkgver}"
+[[ "$CARCH" = "x86_64" ]] && _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
+
+prepare() { 
+    sh "${_pkg}.run" --extract-only
+    cd "${_pkg}"
+
+#    patch -Np1 -d kernel < ../0001-linux-4.7-${CARCH}.patch
+    cp -a kernel kernel-dkms
+    cd kernel-dkms
+    sed -i "s/__VERSION_STRING/${pkgver}/" dkms.conf
+    sed -i 's/__JOBS/`nproc`/' dkms.conf
+    sed -i 's/__DKMS_MODULES//' dkms.conf
+    sed -i '$iBUILT_MODULE_NAME[0]="nvidia"\
+DEST_MODULE_LOCATION[0]="/kernel/drivers/video"\
+BUILT_MODULE_NAME[1]="nvidia-uvm"\
+DEST_MODULE_LOCATION[1]="/kernel/drivers/video"\
+BUILT_MODULE_NAME[2]="nvidia-modeset"\
+DEST_MODULE_LOCATION[2]="/kernel/drivers/video"\
+BUILT_MODULE_NAME[3]="nvidia-drm"\
+DEST_MODULE_LOCATION[3]="/kernel/drivers/video"' dkms.conf
+}
+
+build() {
+    _kernver="$(cat /usr/lib/modules/${_extramodules}/version)"
+    cd "${_pkg}"/kernel
+    make SYSSRC=/usr/lib/modules/"${_kernver}/build" module
+}
+
+package_nvidia-367() {
+    pkgdesc="NVIDIA drivers for linux"
+    depends=('linux>=4.7' 'linux<4.8' "nvidia-367-utils=${pkgver}" 'libgl')
+    conflict+=('nvidia-367-dkms')
+    install=nvidia-367.install
+
+    install -D -m644 "${srcdir}/${_pkg}/kernel/nvidia.ko" \
+        "${pkgdir}/usr/lib/modules/${_extramodules}/nvidia.ko"
+    install -D -m644 "${srcdir}/${_pkg}/kernel/nvidia-modeset.ko" \
+         "${pkgdir}/usr/lib/modules/${_extramodules}/nvidia-modeset.ko"
+    install -D -m644 "${srcdir}/${_pkg}/kernel/nvidia-drm.ko" \
+         "${pkgdir}/usr/lib/modules/${_extramodules}/nvidia-drm.ko"
+
+    if [[ "$CARCH" = "x86_64" ]]; then
+        install -D -m644 "${srcdir}/${_pkg}/kernel/nvidia-uvm.ko" \
+            "${pkgdir}/usr/lib/modules/${_extramodules}/nvidia-uvm.ko"
+    fi
+
+    gzip "${pkgdir}/usr/lib/modules/${_extramodules}/"*.ko
+    install -d -m755 "${pkgdir}/usr/lib/modprobe.d"
+
+    echo "blacklist nouveau" >> "${pkgdir}/usr/lib/modprobe.d/nvidia.conf"
+}
+
+package_nvidia-367-dkms() {
+    pkgdesc="NVIDIA driver sources for linux"
+    depends=('dkms' "nvidia-367-utils=$pkgver" 'libgl')
+    optdepends=('linux-headers: Build the module for Arch kernel'
+                'linux-lts-headers: Build the module for LTS Arch kernel')
+    conflicts+=('nvidia-367')
+
+    cd ${_pkg}
+    install -dm 755 "${pkgdir}"/usr/{lib/modprobe.d,src}
+    cp -dr --no-preserve='ownership' kernel-dkms "${pkgdir}/usr/src/nvidia-${pkgver}"
+    echo 'blacklist nouveau' > "${pkgdir}/usr/lib/modprobe.d/nvidia.conf"
+}

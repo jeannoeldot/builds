@@ -1,0 +1,149 @@
+FAIRE PATCHS
+====================================
+cd /home/jnd/05-builds/linux-jnd
+mkdir srcp
+cp -v {linux-3.10.tar.xz,patch-3.10.6.xz,change-default-console-loglevel.patch,} srcp/
+cp -v {criu-no-expert.patch,3.10.6-logitech-dj.patch,3.10.6-reset-superseed-xhci-hcd.patch} srcp/
+
+cd srcp
+tar -xJf linux-3.10.tar.xz
+xz -dcf patch-3.10.6.xz > patch-3.10.6
+!!!VOIR : tar -xJf linux-3.10.tar.xz
+
+# PATCHES
+===============
+cd linux-3.10
+
+patch -p1 -i ../patch-3.10.6
+
+patch -Np1 -i ../change-default-console-loglevel.patch
+patch -Np1 -i ../criu-no-expert.patch
+patch -Np1 -i ../3.10.6-logitech-dj.patch
+patch -Np1 -i ../3.10.6-reset-superseed-xhci-hcd.patch
+
+cd ../../
+
+
+PATCH : 3.10.6-linux-gcc48-core2.patch
+========================================
+cd srcp
+cp -R linux-3.10 linux-3.10.new
+
+cd linux-3.10.new/arch/x86/include/asm/
+kwrite module.h
+rm -f module.h~
+cd ../../../../..
+
+cd linux-3.10.new/arch/x86/
+kwrite Kconfig.cpu
+ LIGNE 263 : Ajouter 2 lignes
+-------------------------------------------
+          Enables -march=core2
+
+-------------------------------
+Enregistrer et Quitter Kwrite
+Effacer fichier Kconfig.cpu~
+rm -f Kconfig.cpu~
+
+kwrite Makefile
+LIGNE 68 : DEVIENT
+-------------------------------------------------------------------------------
+                $(call cc-option,-march=core2,$(call cc-option,-mtune=core2))
+----------------------------------------------------------------------------------
+
+Enregistrer et Quitter Kwrite
+Effacer fichier Makefile~
+rm -f Makefile~
+
+kwrite Makefile_32.cpu
+rm -f Makefile_32.cpu~
+
+cd ../../..
+diff -aur linux-3.10 linux-3.10.new
+diff -aur linux-3.10 linux-3.10.new > 3.10.6-linux-gcc48-core2.patch
+
+rm -rf linux-3.10.new
+
+cd ..
+mv srcp/3.10.6-linux-gcc48-core2.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+
+===============================================================================
+ANCIENS
+=======
+
+PATCH : 3.10-linux-usb
+===========================================
+cp linux-3.10.tar.xz srcp/
+cp patch-3.10.6.xz srcp/
+cp change-default-console-loglevel.patch srcp/
+cp criu-no-expert.patch srcp/
+cp 3.10.6-logitech-dj.patch srcp/
+cp 3.10.6-reset-superseed-xhci-hcd.patch srcp/
+
+xz -d linux-3.10.tar.xz
+tar -xvf linux-3.10.tar
+
+cd srcp
+cp -R linux-3.10 linux-3.10.new
+cd linux-3.10.new/drivers/scsi/
+kwrite scsi.c
+ LIGNE 1034 : Ajouter 3 lignes
+
+--------------------------------
+       if (sdev->skip_vpd_pages)
+               goto fail;
+
+----------------------------------
+
+Enregistrer et Quitter Kwrite
+Effacer fichier scsi.c~
+rm -f scsi.c~
+cd ../../..
+diff -aur linux-3.10 linux-3.10.new
+diff -aur linux-3.10 linux-3.10.new > 3.10-linux-usb.patch
+
+rm -rf linux-3.10.new
+
+cd ..
+mv srcp/3.10-linux-usb.patch .
+
+md5sum 3.10-linux-usb.patch
+
+
+
+PATCH : 3.5-pioneer-xfermode.patch
+===========================================
+cd srcp
+cp -R linux-3.5 linux-3.5.new
+cd linux-3.5.new/drivers/ata/
+kwrite libata-core.c
+ LIGNE 4139 :Ajouter ligne
+
+        { "PIONEER DVD-RW  DVR-216",    "1.07", ATA_HORKAGE_NOSETXFER },
+
+ Enregistrer et Quitter Kwrite
+ Effacer fichier libata-core.c~
+rm -f libata-core.c~
+cd ../../..
+diff -aur linux-3.5 linux-3.5.new
+diff -aur linux-3.5 linux-3.5.new > 3.5-pioneer-xfermode.patch
+
+rm -rf linux-3.5.new
+
+cd ..
+mv srcp/3.5-pioneer-xfermode.patch .
+
+md5sum 3.5-pioneer-xfermode.patch
+
+
+!!! INUTILE !!! 
+
+tar -xvjf linux-3.2.tar.xz
+
+
+===============================================================================

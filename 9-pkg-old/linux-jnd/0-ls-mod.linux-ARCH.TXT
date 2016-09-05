@@ -1,0 +1,52 @@
+┌jnd ( ~ )
+└─> $ lsmod
+Module                  Size  Used by
+nvidia               9323761  39 
+iTCO_wdt                5407  0 
+iTCO_vendor_support     1929  1 iTCO_wdt
+coretemp                6038  0 
+microcode              13172  0 
+evdev                   9880  6 
+i2c_i801               11237  0 
+snd_hda_codec_realtek    35549  1 
+drm                   231168  2 nvidia
+snd_hda_intel          35309  2 
+lpc_ich                12849  0 
+i2c_core               23720  3 drm,i2c_i801,nvidia
+atl1e                  30708  0 
+snd_hda_codec         147474  2 snd_hda_codec_realtek,snd_hda_intel
+snd_hwdep               6332  1 snd_hda_codec
+snd_pcm                77765  2 snd_hda_codec,snd_hda_intel
+snd_page_alloc          7234  2 snd_pcm,snd_hda_intel
+snd_timer              18718  1 snd_pcm
+acpi_cpufreq           10502  0 
+mperf                   1267  1 acpi_cpufreq
+snd                    58950  10 snd_hda_codec_realtek,snd_hwdep,snd_timer,snd_pcm,snd_hda_codec,snd_hda_intel
+soundcore               5418  1 snd
+asus_atk0110           12000  0 
+processor              27755  1 acpi_cpufreq
+button                  4669  0 
+vboxnetflt             17612  0 
+vboxdrv              1823264  1 vboxnetflt
+ext4                  456123  3 
+crc16                   1359  1 ext4
+mbcache                 5866  1 ext4
+jbd2                   81946  1 ext4
+sr_mod                 14898  0 
+cdrom                  34848  1 sr_mod
+sd_mod                 30730  6 
+hid_generic             1153  0 
+usbhid                 41466  0 
+hid                    88502  2 hid_generic,usbhid
+ahci                   22792  6 
+libahci                21169  1 ahci
+firewire_ohci          31869  0 
+libata                171016  2 ahci,libahci
+scsi_mod              127740  3 libata,sd_mod,sr_mod
+firewire_core          51955  1 firewire_ohci
+crc_itu_t               1363  1 firewire_core
+ehci_pci                4120  0 
+uhci_hcd               24595  0 
+ehci_hcd               47640  1 ehci_pci
+usbcore               177151  4 uhci_hcd,ehci_hcd,ehci_pci,usbhid
+usb_common              1648  1 usbcore

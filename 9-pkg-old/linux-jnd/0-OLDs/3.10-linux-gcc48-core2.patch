@@ -1,0 +1,24 @@
+diff -aur linux-3.10/arch/x86/Kconfig.cpu linux-3.10.new/arch/x86/Kconfig.cpu
+--- linux-3.10/arch/x86/Kconfig.cpu	2013-08-15 08:04:21.951014237 +0200
++++ linux-3.10.new/arch/x86/Kconfig.cpu	2013-08-15 08:49:47.014210223 +0200
+@@ -260,6 +260,8 @@
+ 	  family in /proc/cpuinfo. Newer ones have 6 and older ones 15
+ 	  (not a typo)
+ 
++          Enables -march=core2
++
+ config MATOM
+ 	bool "Intel Atom"
+ 	---help---
+diff -aur linux-3.10/arch/x86/Makefile linux-3.10.new/arch/x86/Makefile
+--- linux-3.10/arch/x86/Makefile	2013-08-15 08:04:21.917680151 +0200
++++ linux-3.10.new/arch/x86/Makefile	2013-08-15 08:50:40.465402596 +0200
+@@ -65,7 +65,7 @@
+         cflags-$(CONFIG_MPSC) += $(call cc-option,-march=nocona)
+ 
+         cflags-$(CONFIG_MCORE2) += \
+-                $(call cc-option,-march=core2,$(call cc-option,-mtune=generic))
++                $(call cc-option,-march=core2,$(call cc-option,-mtune=core2))
+ 	cflags-$(CONFIG_MATOM) += $(call cc-option,-march=atom) \
+ 		$(call cc-option,-mtune=atom,$(call cc-option,-mtune=generic))
+         cflags-$(CONFIG_GENERIC_CPU) += $(call cc-option,-mtune=generic)

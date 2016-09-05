@@ -1,0 +1,24 @@
+FAIRE PATCHS
+====================================
+
+cd $HOME/05-builds/nvidia/2-nvidia
+
+mkdir /tmp/srcp
+
+cp -v NVIDIA-Linux-x86_64-367.44-no-compat32.run /tmp/srcp/
+
+cd /tmp/srcp
+
+sh NVIDIA-Linux-x86_64-367.44-no-compat32.run --extract-only
+
+
+
+
+
+cd $HOME/05-builds/nvidia/2-nvidia
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+

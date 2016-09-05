@@ -1,0 +1,80 @@
+RÉPERTOIRES
+====================================
+cd /home/jnd/05-builds/linux-jnd
+mkdir srcp
+
+2) RECUPERATION FICHIERS SOURCES
+=================================
+ftp://ftp.kernel.org/pub/linux/kernel/v3.x
+
+:: ARCH
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.14.tar.xz
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/patch-3.14.5.xz
+
+::MOI
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.14.4.tar.xz
+
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.14.5.tar.xz
+OU :
+$ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.14.4.tar.xz
+
+$ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.14.5.tar.xz
+
+$ cp -v {linux-3.14.4.tar.xz,linux-3.14.5.tar.xz} srcp/
+
+$ cd srcp
+$ tar -xJf linux-3.14.4.tar.xz
+$ tar -xJf linux-3.14.5.tar.xz
+
+$ sync
+
+$ diff -aur linux-3.14.4 linux-3.14.5 > diff-3.14.4-3.14.5.TXT
+
+
+5) QUAND  FINI
+=======================
+$ cd ..
+
+$ mv srcp/diff-3.14.4-3.14.5.TXT .
+
+$ rm -rf srcp
+
+$ sync
+
+$ kwrite diff-3.14.4-3.14.5.TXT
+
+===============================================================================
+ANCIENS
+============
+
+
+:: ARCH
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.14.tar.xz
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/patch-3.14.4.xz
+
+::MOI
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.13.11.tar.xz
+
+$ wget ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.14.4.tar.xz
+
+cp -v {linux-3.13.11.tar.xz,linux-3.14.4.tar.xz} srcp/
+
+cd srcp
+tar -xJf linux-3.13.11.tar.xz
+tar -xJf linux-3.14.4.tar.xz
+
+diff -aur linux-3.13.11 linux-3.14.4 > diff-3.13.11-3.14.4.TXT
+
+
+
+
+
+5) QUAND  FINI
+=======================
+cd ..
+
+mv srcp/diff-3.13.11-3.14.4.TXT .
+
+rm -rf srcp
+
+sync

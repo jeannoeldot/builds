@@ -1,0 +1,31 @@
+1 SOURCES
+==============
+pkgver=367.35
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/367.35/NVIDIA-Linux-x86_64-367.35-no-compat32.run
+
+sh NVIDIA-Linux-x86_64-367.35-no-compat32.run --extract-only
+
+pkgver=367.44
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/367.44/NVIDIA-Linux-x86_64-367.44-no-compat32.run
+
+sh NVIDIA-Linux-x86_64-367.44-no-compat32.run --extract-only
+
+
+pkgver=370.23
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/370.23/NVIDIA-Linux-x86_64-370.23-no-compat32.run
+
+sh NVIDIA-Linux-x86_64-370.23-no-compat32.run --extract-only
+
+
+
+2 POUR PATCH, VOIR :
+====================
+https://devtalk.nvidia.com/default/board/98/linux/
+Linux 4.7-rc7 - 367.35 build errors
+https://devtalk.nvidia.com/default/topic/938665/linux/linux-4-7-rc7-367-35-build-errors/
+
+nvidia-367.35 DKMS build errors for a 4.7.0 kernel
+https://devtalk.nvidia.com/default/topic/954279/linux/nvidia-367-35-dkms-build-errors-for-a-4-7-0-kernel/
+
+
+
