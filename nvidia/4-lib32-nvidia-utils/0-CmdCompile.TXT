@@ -1,0 +1,128 @@
+# Le répertoire
+===============
+!!! EN USER
+$ cd $HOME/05-builds/nvidia/4-lib32-nvidia-utils
+
+1.1 SOURCES
+==============
+pkgver=367.44
+_arch='x86'
+_pkg="NVIDIA-Linux-${_arch}-${pkgver}"
+source=("http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+
+wget http://us.download.nvidia.com/XFree86/Linux-x86/367.44/NVIDIA-Linux-x86-367.44.run
+!!! Décompression
+sh NVIDIA-Linux-x86-367.44.run --extract-only
+
+OU
+cp -v /0-DataLinux/05-builds-nvidia/nvidia-367.44\
+/NVIDIA-Linux-x86-367.44.run .
+
+
+2-0) PKGBUILD INSTALL
+===========================
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+_pkgbasename=nvidia-367-utils
+pkgbase=lib32-$_pkgbasename
+pkgname=('lib32-nvidia-367-utils' 'lib32-nvidia-367-libgl' 'lib32-opencl-nvidia-367')
+pkgver=367.44
+
+pkgrel=1
+
+makedepends=('nvidia-367-libgl')  # To avoid conflict during installation in the build chroot
+
+md5sum NVIDIA-Linux-x86-367.44.run
+
+md5sums_x86_64=('93ff8e1fe32939ca4fd6522b93825edc'
+)
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+makedepends=('nvidia-367-libgl')  # To avoid conflict during installation in the build chroot
+depends=('lib32-nvidia-367-utils' 'nvidia-367-libgl')
+depends=('lib32-zlib' 'lib32-gcc-libs' 'lib32-libglvnd' 'nvidia-367-utils')
+
+SI depends=( 'nvidia-367-libgl' 'nvidia-367-utils=367.44')
+==========================================================
+$ cp -v $HOME/00-reponvidia\
+/lib32-nvidia-367-libgl-367.44-1-x86_64.pkg.tar.xz /tmp/chrootrepo/
+
+$ cp -v $HOME/00-reponvidia\
+/lib32-nvidia-367-utils-367.44-1-x86_64.pkg.tar.xz /tmp/chrootrepo/
+
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -l logs
+-------------------------------------------------------------------
+  FAST
+-------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -l logs
+-------------------------------------------------------------------
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+# COPIE DANS /0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
+-------------------------------------------------------------------
+$ cp -v {lib32-nvidia-367-libgl-367.44-1-x86_64.pkg.tar.xz,\
+lib32-nvidia-367-utils-367.44-1-x86_64.pkg.tar.xz,\
+lib32-opencl-nvidia-367-367.44-1-x86_64.pkg.tar.xz} \
+/0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-reponvidia
+---------------------------------------------------------------
+$ mv -v $HOME/00-reponvidia/\
+{lib32-nvidia-367-libgl-367.44-1-x86_64.pkg.tar.xz,\
+lib32-nvidia-367-utils-367.44-1-x86_64.pkg.tar.xz,\
+lib32-opencl-nvidia-367-367.44-1-x86_64.pkg.tar.xz} \
+$HOME/00-reponvidia/pkg-OLD/
+
+$ mv -v {lib32-nvidia-367-libgl-367.44-1-x86_64.pkg.tar.xz,\
+lib32-nvidia-367-utils-367.44-1-x86_64.pkg.tar.xz,\
+lib32-opencl-nvidia-367-367.44-1-x86_64.pkg.tar.xz} \
+$HOME/00-reponvidia/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ mv -v NVIDIA-Linux-x86-367.44.run \
+/0-DataLinux/05-builds-nvidia/nvidia-367.44/
+OU
+$ rm -i NVIDIA-Linux-x86-367.44.run
+
+
+$ cd && maj-reponvidia
+$ sync

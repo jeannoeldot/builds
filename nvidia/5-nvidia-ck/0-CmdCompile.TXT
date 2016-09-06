@@ -1,0 +1,187 @@
+# Le répertoire
+===============
+!!! EN USER
+$ cd $HOME/05-builds/nvidia/5-nvidia-ck
+
+1.1 SOURCES
+==============
+pkgver=367.44
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/367.44/NVIDIA-Linux-x86_64-367.44-no-compat32.run
+!!! Décompression
+sh NVIDIA-Linux-x86_64-367.44-no-compat32.run --extract-only
+
+OU
+cp -v /0-DataLinux/05-builds-nvidia/nvidia-367.44\
+/NVIDIA-Linux-x86_64-367.44-no-compat32.run .
+
+
+POUR PATCH, VOIR :
+====================
+https://devtalk.nvidia.com/default/board/98/linux/
+Linux 4.7-rc7 - 367.35 build errors
+https://devtalk.nvidia.com/default/topic/938665/linux/linux-4-7-rc7-367-35-build-errors/
+
+nvidia-367.35 DKMS build errors for a 4.7.0 kernel
+https://devtalk.nvidia.com/default/topic/954279/linux/nvidia-367-35-dkms-build-errors-for-a-4-7-0-kernel/
+
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=nvidia-367-ck-haswell
+pkgver=367.44
+_extramodules=extramodules-4.7-ck
+pkgrel=1
+
+depends=('linux-ck-haswell>=4.7' 'linux-ck-haswell<4.8' 'libgl'
+"nvidia-367-utils=${pkgver}")
+makedepends=('linux-ck-haswell-headers>=4.7' 'linux-ck-haswell-headers<4.8'
+'nvidia-367-libgl')
+
+sha256sum NVIDIA-Linux-x86_64-367.44-no-compat32.run
+sha256sum 0001-linux-4.7-x86_64.patch
+
+sha256sums_x86_64=('53ae50a381f57293dd3e6b00e87237606451af90a38e6772ac95f84160c563e7'
+                '786dc522c4fe626acb30fac262bc7c2bc6580fd086d9985aa169399db4c6dfc1')
+
+
+!!! ERREUR COMPILE AVEC PATCH
+!!! ESSAI AVEC 
+#     patch -Np1 -d kernel < ../0001-linux-4.7-${CARCH}.patch
+!!! ==> SANS PATCH
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+depends=('linux-ck-haswell>=4.7' 'linux-ck-haswell<4.8'
+'libgl' "nvidia-367-utils=${pkgver}")
+makedepends=('linux-ck-haswell-headers>=4.7' 'linux-ck-haswell-headers<4.8'
+'nvidia-367-libgl')
+
+SI depends=('linux-ck-haswell>=4.7' 'linux-ck-haswell<4.8')
+===========================================================
+$ cp -v /var/cache/pacman/pkg\
+/linux-ck-haswell-4.7.2-2-x86_64.pkg.tar.xz /tmp/chrootrepo/
+
+$ cp -v /var/cache/pacman/pkg\
+/linux-ck-haswell-headers-4.7.2-2-x86_64.pkg.tar.xz /tmp/chrootrepo/
+
+SI depends=( 'nvidia-367-libgl' 'nvidia-367-utils=367.44')
+==========================================================
+$ cp -v $HOME/00-reponvidia\
+/nvidia-367-libgl-367.44-1-x86_64.pkg.tar.xz /tmp/chrootrepo/
+
+$ cp -v $HOME/00-reponvidia\
+/nvidia-367-utils-367.44-1-x86_64.pkg.tar.xz /tmp/chrootrepo/
+
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -l logs
+-------------------------------------------------------------------
+  FAST
+-------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -l logs
+-------------------------------------------------------------------
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+# COPIE DANS /0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
+-------------------------------------------------------------------
+$ cp -v nvidia-367-ck-haswell-367.44-1-x86_64.pkg.tar.xz \
+/0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-reponvidia
+---------------------------------------------------------------
+$ mv -v $HOME/00-reponvidia/\
+nvidia-367-ck-haswell-367.44-1-x86_64.pkg.tar.xz \
+$HOME/00-reponvidia/pkg-OLD/
+
+$ mv -v nvidia-367-ck-haswell-367.44-1-x86_64.pkg.tar.xz \
+$HOME/00-reponvidia/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ mv -v NVIDIA-Linux-x86_64-367.44-no-compat32.run \
+/0-DataLinux/05-builds-nvidia/nvidia-367.44/
+OU
+$ rm -i NVIDIA-Linux-x86_64-367.44-no-compat32.run
+
+
+$ cd && maj-reponvidia
+$ sync
+
+
+
+
+
+
+
+
+!!! EN ROOT
+#
+# 1ere Install
+# cd /0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.35/
+# ARCH1 ET ARCH2 : LIB 32 ET CK-HASWELL
+# -------------------------------------
+# pacman -U \
+nvidia-utils-367.35-1-x86_64.pkg.tar.xz \
+nvidia-libgl-367.35-1-x86_64.pkg.tar.xz \
+lib32-nvidia-utils-367.35-1-x86_64.pkg.tar.xz \
+lib32-nvidia-libgl-367.35-1-x86_64.pkg.tar.xz \
+lib32-opencl-nvidia-367.35-1-x86_64.pkg.tar.xz \
+libxnvctrl-367.35-1-x86_64.pkg.tar.xz \
+nvidia-367.35-13-x86_64.pkg.tar.xz \
+nvidia-ck-haswell-367.35-4-x86_64.pkg.tar.xz \
+nvidia-settings-367.35-1-x86_64.pkg.tar.xz \
+opencl-nvidia-367.35-1-x86_64.pkg.tar.xz \
+# ARCH3 : PAS LIB32 NI CK-HASWELL
+# -------------------------------
+# pacman -U \
+nvidia-utils-367.35-1-x86_64.pkg.tar.xz \
+nvidia-libgl-367.35-1-x86_64.pkg.tar.xz \
+libxnvctrl-367.35-1-x86_64.pkg.tar.xz \
+nvidia-367.35-13-x86_64.pkg.tar.xz \
+nvidia-settings-367.35-1-x86_64.pkg.tar.xz \
+opencl-nvidia-367.35-1-x86_64.pkg.tar.xz \
+#
+# cd
+# MAJ
+
+
+
+
+===========================================================
+ANCIEN
+======
+

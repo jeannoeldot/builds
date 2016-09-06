@@ -1,39 +1,45 @@
 # $Id$
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
 # Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
-pkgbase=nvidia-settings
-pkgname=('nvidia-settings' 'libxnvctrl')
-pkgver=367.35
+pkgbase=nvidia-367-settings
+pkgname=('nvidia-367-settings' 'libxnvctrl-367')
+pkgver=367.44
 pkgrel=1
 pkgdesc="Tool for configuring the NVIDIA graphics driver"
 arch=('i686' 'x86_64')
 url="https://github.com/NVIDIA/nvidia-settings"
 license=('GPL2')
-makedepends=('git' 'inetutils' 'gtk2' 'jansson' 'gtk3' 'libxv' 'libvdpau' 'nvidia-utils' 'libxext')
+makedepends=('git' 'inetutils' 'gtk2' 'jansson' 'gtk3' 'libxv' 'libvdpau'
+             'nvidia-367-utils' 'libxext')
 options=('staticlibs')
-source=("git+https://github.com/NVIDIA/nvidia-settings#tag=$pkgver"
-        libxnvctrl_so.patch)
-sha1sums=('SKIP'
+source=("https://github.com/NVIDIA/nvidia-settings/archive/$pkgver.tar.gz"
+        "libxnvctrl_so.patch")
+sha1sums=('7cf749a151451430f28b1d2809ff071d6c635beb'
           '16619a01e92e565c79ad344be87ad11244ac1762')
+
+_pkg="nvidia-settings-${pkgver}"
 
 prepare() {
   export PREFIX=/usr
   export NV_USE_BUNDLED_LIBJANSSON=0
-  cd ${pkgbase}
+  cd "${_pkg}"
   patch -p1 < "${srcdir}/libxnvctrl_so.patch"
 }
 
 build() {
-  cd ${pkgbase}
+  cd "${_pkg}"
   make
   make -C src/libXNVCtrl
 }
 
-package_nvidia-settings() {
-  depends=('jansson' 'gtk3' 'libxv' 'libvdpau' 'nvidia-utils' 'libxnvctrl')
+package_nvidia-367-settings() {
+  depends=('jansson' 'gtk3' 'libxv' 'libvdpau' 'nvidia-367-utils' 'libxnvctrl')
+  conflicts=('nvidia-settings')
+  provides=('nvidia-settings')
 
-  cd ${pkgbase}
+  cd "${_pkg}"
   make DESTDIR="${pkgdir}" install
 
   install -D -m644 doc/nvidia-settings.desktop "${pkgdir}/usr/share/applications/nvidia-settings.desktop"
@@ -43,11 +49,13 @@ package_nvidia-settings() {
   rm "$pkgdir/usr/lib/libnvidia-gtk2.so.$pkgver"
 }
 
-package_libxnvctrl() {
-  depends=('libxext')
+package_libxnvctrl-367() {
   pkgdesc='NVIDIA NV-CONTROL X extension'
+  depends=('libxext')
+  conflicts=('libxnvctrl')
+  provides=('libxnvctrl')
 
-  cd ${pkgbase}
+  cd "${_pkg}"
   install -Dm 644 doc/{NV-CONTROL-API.txt,FRAMELOCK.txt} -t "${pkgdir}/usr/share/doc/${pkgname}"
   install -Dm 644 samples/{Makefile,README,*.c,*.h,*.mk} -t "${pkgdir}/usr/share/doc/${pkgname}/samples"
 

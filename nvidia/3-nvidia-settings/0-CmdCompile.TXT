@@ -1,0 +1,124 @@
+# Le répertoire
+===============
+!!! EN USER
+$ cd $HOME/05-builds/nvidia/3-nvidia-settings
+
+1.1 SOURCES
+==============
+pkgver=367.44
+wget https://github.com/NVIDIA/nvidia-settings/archive/367.44.tar.gz
+
+OU
+cp -v /0-DataLinux/05-builds-nvidia/nvidia-367.44\
+/367.44.tar.gz .
+
+
+2-0) PKGBUILD INSTALL
+===========================
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgbase=nvidia-367-settings
+pkgname=('nvidia-367-settings' 'libxnvctrl')
+pkgver=367.44
+
+pkgrel=1
+
+makedepends=('git' 'inetutils' 'gtk2' 'jansson' 'gtk3' 'libxv' 'libvdpau'
+             'nvidia-367-utils' 'libxext')
+
+source=("https://github.com/NVIDIA/nvidia-settings/archive/$pkgver.tar.gz"
+        "libxnvctrl_so.patch")
+
+sha1sum 367.44.tar.gz
+sha1sum libxnvctrl_so.patch
+
+sha1sums_x86_64=('7cf749a151451430f28b1d2809ff071d6c635beb'
+                 '16619a01e92e565c79ad344be87ad11244ac1762'
+)
+
+_pkg="nvidia-settings-${pkgver}"
+
+cd "${pkgbase}"  ==>  cd "${_pkg}"
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+makedepends=('git' 'inetutils' 'gtk2' 'jansson' 'gtk3' 'libxv' 'libvdpau'
+             'nvidia-367-utils' 'libxext')
+depends=('jansson' 'gtk3' 'libxv' 'libvdpau' 'nvidia-367-utils' 'libxnvctrl')
+
+SI depends=('nvidia-367-utils=367.44')
+==========================================================
+$ cp -v $HOME/00-reponvidia\
+/nvidia-367-utils-367.44-1-x86_64.pkg.tar.xz /tmp/chrootrepo/
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -l logs
+-------------------------------------------------------------------
+  FAST
+-------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -l logs
+-------------------------------------------------------------------
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+# COPIE DANS /0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
+-------------------------------------------------------------------
+$ cp -v {nvidia-367-settings-367.44-1-x86_64.pkg.tar.xz,\
+libxnvctrl-367-367.44-1-x86_64.pkg.tar.xz} \
+/0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-reponvidia
+---------------------------------------------------------------
+$ mv -v $HOME/00-reponvidia/\
+{nvidia-367-settings-367.44-1-x86_64.pkg.tar.xz,\
+libxnvctrl-367-367.44-1-x86_64.pkg.tar.xz} \
+$HOME/00-reponvidia/pkg-OLD/
+
+$ mv -v {nvidia-367-settings-367.44-1-x86_64.pkg.tar.xz,\
+libxnvctrl-367-367.44-1-x86_64.pkg.tar.xz} \
+$HOME/00-reponvidia/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ mv -v 367.44.tar.gz \
+/0-DataLinux/05-builds-nvidia/nvidia-367.44/
+OU
+$ rm -i 367.44.tar.gz
+
+
+$ cd && maj-reponvidia
+$ sync
