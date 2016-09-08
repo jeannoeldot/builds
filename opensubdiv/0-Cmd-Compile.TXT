@@ -32,6 +32,7 @@ pkgrel=1
 pkgrel=4          # maj GLEW 2.0.0
 pkgrel=5          # maj NVidia 370.23-1 TEST
 pkgrel=6          # nvidia-libgl 367.35
+pkgrel=7          # SANS nvidia-libgl ( ==> libgl )
 
 LE 13/07/2016
 TEST COMPIL DS CHROOT

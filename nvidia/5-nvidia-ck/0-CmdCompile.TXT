@@ -3,16 +3,30 @@
 !!! EN USER
 $ cd $HOME/05-builds/nvidia/5-nvidia-ck
 
-1.1 SOURCES
-==============
+1.1 SOURCES NVIDIA 367.44
+=========================
 pkgver=367.44
-wget http://us.download.nvidia.com/XFree86/Linux-x86_64/367.44/NVIDIA-Linux-x86_64-367.44-no-compat32.run
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64\
+/367.44/NVIDIA-Linux-x86_64-367.44-no-compat32.run
 !!! Décompression
 sh NVIDIA-Linux-x86_64-367.44-no-compat32.run --extract-only
 
 OU
-cp -v /0-DataLinux/05-builds-nvidia/nvidia-367.44\
-/NVIDIA-Linux-x86_64-367.44-no-compat32.run .
+cp -v /0-DataLinux/05-builds-nvidia\
+/nvidia-367.44/NVIDIA-Linux-x86_64-367.44-no-compat32.run .
+
+
+1.2 SOURCES LINUX-CK-HASWELL 4.7.3-1
+====================================
+cd /0-DataLinux/05-builds-nvidia
+
+wget http://repo-ck.com/x86_64\
+/linux-ck-haswell-4.7.3-1-x86_64.pkg.tar.xz
+
+wget http://repo-ck.com/x86_64\
+/linux-ck-haswell-headers-4.7.3-1-x86_64.pkg.tar.xz
+
+cd $HOME/05-builds/nvidia/5-nvidia-ck
 
 
 POUR PATCH, VOIR :
@@ -25,6 +39,8 @@ nvidia-367.35 DKMS build errors for a 4.7.0 kernel
 https://devtalk.nvidia.com/default/topic/954279/linux/nvidia-367-35-dkms-build-errors-for-a-4-7-0-kernel/
 
 
+2-0) MODIFIER change-log.TXT
+============================
 
 2-1) MODIFIER LE PKGBUILD
 ========================
@@ -33,7 +49,7 @@ https://devtalk.nvidia.com/default/topic/954279/linux/nvidia-367-35-dkms-build-e
 pkgname=nvidia-367-ck-haswell
 pkgver=367.44
 _extramodules=extramodules-4.7-ck
-pkgrel=1
+pkgrel=2
 
 depends=('linux-ck-haswell>=4.7' 'linux-ck-haswell<4.8' 'libgl'
 "nvidia-367-utils=${pkgver}")
@@ -41,16 +57,10 @@ makedepends=('linux-ck-haswell-headers>=4.7' 'linux-ck-haswell-headers<4.8'
 'nvidia-367-libgl')
 
 sha256sum NVIDIA-Linux-x86_64-367.44-no-compat32.run
-sha256sum 0001-linux-4.7-x86_64.patch
 
 sha256sums_x86_64=('53ae50a381f57293dd3e6b00e87237606451af90a38e6772ac95f84160c563e7'
-                '786dc522c4fe626acb30fac262bc7c2bc6580fd086d9985aa169399db4c6dfc1')
+)
 
-
-!!! ERREUR COMPILE AVEC PATCH
-!!! ESSAI AVEC 
-#     patch -Np1 -d kernel < ../0001-linux-4.7-${CARCH}.patch
-!!! ==> SANS PATCH
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
 ====================================
@@ -65,11 +75,11 @@ makedepends=('linux-ck-haswell-headers>=4.7' 'linux-ck-haswell-headers<4.8'
 
 SI depends=('linux-ck-haswell>=4.7' 'linux-ck-haswell<4.8')
 ===========================================================
-$ cp -v /var/cache/pacman/pkg\
-/linux-ck-haswell-4.7.2-2-x86_64.pkg.tar.xz /tmp/chrootrepo/
+$ cp -v /0-DataLinux/05-builds-nvidia\
+/linux-ck-haswell-4.7.3-1-x86_64.pkg.tar.xz /tmp/chrootrepo/
 
-$ cp -v /var/cache/pacman/pkg\
-/linux-ck-haswell-headers-4.7.2-2-x86_64.pkg.tar.xz /tmp/chrootrepo/
+$ cp -v /0-DataLinux/05-builds-nvidia\
+/linux-ck-haswell-headers-4.7.3-1-x86_64.pkg.tar.xz /tmp/chrootrepo/
 
 SI depends=( 'nvidia-367-libgl' 'nvidia-367-utils=367.44')
 ==========================================================
@@ -112,10 +122,11 @@ $ mkpkg-tmpfs -m fast -l logs
 
 $ rm -rf /tmp/chrootrepo
 
-
+!!! ANCIENNE VERSION = 367.44-1
+!!! NOUVELLE VERSION = 367.44-2
 # COPIE DANS /0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
 -------------------------------------------------------------------
-$ cp -v nvidia-367-ck-haswell-367.44-1-x86_64.pkg.tar.xz \
+$ cp -v nvidia-367-ck-haswell-367.44-2-x86_64.pkg.tar.xz \
 /0-DataLinux/00-OLDS-VERSION-OK/NVidia.367.44/
 
 # DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-reponvidia
@@ -124,7 +135,7 @@ $ mv -v $HOME/00-reponvidia/\
 nvidia-367-ck-haswell-367.44-1-x86_64.pkg.tar.xz \
 $HOME/00-reponvidia/pkg-OLD/
 
-$ mv -v nvidia-367-ck-haswell-367.44-1-x86_64.pkg.tar.xz \
+$ mv -v nvidia-367-ck-haswell-367.44-2-x86_64.pkg.tar.xz \
 $HOME/00-reponvidia/
 
 
@@ -141,7 +152,12 @@ $ rm -i NVIDIA-Linux-x86_64-367.44-no-compat32.run
 $ cd && maj-reponvidia
 $ sync
 
-
+!!! EN ROOT
+#
+# 1ere Install
+# ...
+#
+# maj
 
 
 
@@ -184,4 +200,16 @@ opencl-nvidia-367.35-1-x86_64.pkg.tar.xz \
 ===========================================================
 ANCIEN
 ======
+
+sha256sum NVIDIA-Linux-x86_64-367.44-no-compat32.run
+sha256sum 0001-linux-4.7-x86_64.patch
+
+sha256sums_x86_64=('53ae50a381f57293dd3e6b00e87237606451af90a38e6772ac95f84160c563e7'
+                '786dc522c4fe626acb30fac262bc7c2bc6580fd086d9985aa169399db4c6dfc1')
+
+
+!!! ERREUR COMPILE AVEC PATCH
+!!! ESSAI AVEC 
+#     patch -Np1 -d kernel < ../0001-linux-4.7-${CARCH}.patch
+!!! ==> SANS PATCH
 

@@ -1,0 +1,8 @@
+CHANGE-LOG
+==========
+
+367.44-2    linux-ck-haswell-4.7.3-1
+            SANS PATCH
+
+367.44-1    linux-ck-haswell-4.7.2-2
+

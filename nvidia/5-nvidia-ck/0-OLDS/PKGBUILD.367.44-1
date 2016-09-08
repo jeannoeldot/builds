@@ -6,7 +6,7 @@
 pkgname=nvidia-367-ck-haswell
 pkgver=367.44
 _extramodules=extramodules-4.7-ck
-pkgrel=2
+pkgrel=1
 _pkgdesc="NVIDIA drivers for linux-ck, 367 legacy branch."
 pkgdesc="$_pkgdesc"
 arch=('i686' 'x86_64')
@@ -20,19 +20,20 @@ license=('custom')
 install=nvidia-367-ck.install
 options=(!strip)
 source_i686=("http://us.download.nvidia.com/XFree86/Linux-x86/${pkgver}/NVIDIA-Linux-x86-${pkgver}.run"
-)
+"0001-linux-4.7-i686.patch")
 source_x86_64=("http://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run"
-)
+"0001-linux-4.7-x86_64.patch")
 sha256sums_i686=('38cb22fa85ef74ea960d3e5d644838cd961984ffc32bb0d052414cc7fa32e315'
-)
+                 'ca820f1cb77b377ca92f0298873ba04819fa9d33215392870ce159b39e639b37')
 sha256sums_x86_64=('53ae50a381f57293dd3e6b00e87237606451af90a38e6772ac95f84160c563e7'
-)
+                   '786dc522c4fe626acb30fac262bc7c2bc6580fd086d9985aa169399db4c6dfc1')
 [[ "$CARCH" = "i686" ]] && _pkg="NVIDIA-Linux-x86-${pkgver}"
 [[ "$CARCH" = "x86_64" ]] && _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
 
 prepare() {
     sh "${_pkg}.run" --extract-only
     cd "${_pkg}"
+#    patch -Np1 -d kernel < ../0001-linux-4.7-${CARCH}.patch
 }
 
 build() {

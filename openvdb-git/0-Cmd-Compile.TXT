@@ -85,6 +85,7 @@ pkgver=3.2.0.20160810
 pkgrel=1
 pkgrel=2          # maj NVidia 370.23-1
 pkgrel=3          # nvidia-libgl 367.35
+pkgrel=4          # SANS nvidia-libgl ( ==> libgl )
 pkgrel=2  # rebuild gcc 6.1 boost boost-libs 1.60.0-5
 
 license=('MPL')
@@ -93,7 +94,7 @@ license=('MPL')
 depends=('boost-libs' 'openexr' 'ilmbase' 'intel-tbb'
          'blosc' 'zlib'
          'jemalloc'
-         'glfw' 'nvidia-libgl'
+         'glfw-x11' 'glew'
 )
 
 makedepends=('boost' 'mesa' 'doxygen')
