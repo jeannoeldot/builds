@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.0.20160911
+pkgver=2.78.0.20160908
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -29,13 +29,13 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm35'
              'git'
 )
 optdepends=('cuda: cycles renderer cuda support')
-conflicts=('blender')
 provides=('blender')
+conflicts=('blender')
 options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('3a6adb5b77b60183e106322ff94d3d1c32f2e5f0c25f387a7ab023bb3f7b6767'
+sha256sums=('2dcb3309d5a192eb8793f93ef86891b9ad394e689818538468f8e7af121dfd47'
 )
 
 _gitname="blender"

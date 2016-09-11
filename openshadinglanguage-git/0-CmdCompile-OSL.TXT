@@ -76,9 +76,10 @@ voir 0-CmdFairePatches-LLVM35.STATIC.TXT
 pkgname=openshadinglanguage-git
 pkgver=1.8.2.20160907
 pkgrel=1
+pkgrel=2          # rebuild boost boost-libs 1.61.0-2
 
-provides=('openshadinglanguage')
 conflicts=('openshadinglanguage')
+provides=('openshadinglanguage')
 
 2-1) PKGBUILD AVEC PATCH
 ========================

@@ -86,6 +86,8 @@ pkgrel=1
 pkgrel=2          # maj NVidia 370.23-1
 pkgrel=3          # nvidia-libgl 367.35
 pkgrel=4          # SANS nvidia-libgl ( ==> libgl )
+pkgrel=5          # rebuild boost boost-libs 1.61.0-2
+
 pkgrel=2  # rebuild gcc 6.1 boost boost-libs 1.60.0-5
 
 license=('MPL')
@@ -99,8 +101,8 @@ depends=('boost-libs' 'openexr' 'ilmbase' 'intel-tbb'
 
 makedepends=('boost' 'mesa' 'doxygen')
 
-provides='openvdb'
 conflicts='openvdb'
+provides='openvdb'
 
 sha256sum openvdb-git-3.2.0.20160810.tar.gz
 

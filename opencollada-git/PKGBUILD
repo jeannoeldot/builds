@@ -2,15 +2,15 @@
 
 pkgname=opencollada-git
 pkgver=1.6.30.20160824
-pkgrel=1
+pkgrel=2
 pkgdesc="Stream based reader and writer library for COLLADA files"
 arch=('i686' 'x86_64')
 url="https://github.com/KhronosGroup/OpenCOLLADA"
 license=('GPL')
 depends=('libxml2' 'pcre')
 makedepends=('cmake')
-provides=('opencollada')
 conflicts=('opencollada')
+provides=('opencollada')
 source=("$pkgname-$pkgver.tar.gz"
         'opencollada.conf'
 )

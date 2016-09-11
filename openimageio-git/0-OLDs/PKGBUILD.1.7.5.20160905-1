@@ -4,7 +4,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.7.5.20160910
+pkgver=1.7.5.20160905
 pkgrel=1
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('i686' 'x86_64')
@@ -18,11 +18,11 @@ depends=('openexr' 'boost-libs' 'jasper' 'glew' 'libtiff' 'opencolorio' 'intel-t
 makedepends=('cmake' 'qt4' 'python2' 'boost' 'mesa')
 optdepends=('qt4: iv image viewer'
             'python2: bindings support')
-conflicts=('openimageio')
 provides=('openimageio')
+conflicts=('openimageio')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('1193de5d980459bce684ab053b8f0ec6fbd2c3e7fb51a70d8c53fbee7874e234'
+sha256sums=('f210f7007a9051a67175baa680125dc0e7dda4646962fb8fba4eb5cfa7542ec0'
 )
 
 _gitname="oiio"

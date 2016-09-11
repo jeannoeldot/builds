@@ -68,8 +68,8 @@ pkgver=1.6.30.20160824
 pkgrel=1
 pkgrel=2    # gcc 6.1.1
 
-provides=('opencollada')
 conflicts=('opencollada')
+provides=('opencollada')
 
 2-2) PKGBUILD SANS PATCH
 ========================
