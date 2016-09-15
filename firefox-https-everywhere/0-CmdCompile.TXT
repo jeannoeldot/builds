@@ -6,7 +6,7 @@ cd $HOME/05-builds/firefox-https-everywhere
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.5.2.1-1
+cp -v PKGBUILD PKGBUILD.5.2.4-2
 
 
 1-1) Download snapshot
@@ -24,12 +24,13 @@ mv -vf /tmp/0-AUR/firefox-extension-https-everywhere/firefox-extension-verificat
 
 1-2) Download source
 ----------------------
-!!! file = 471033
-wget https://addons.mozilla.org/firefox/downloads/file/471033/https_everywhere-5.2.1-an+tb+sm+fx.xpi
+!!! file = 494992
+wget https://addons.mozilla.org/firefox/downloads/file\
+/494992/https_everywhere-5.2.4-an+tb+sm+fx.xpi
 
 ls
 
-sha256sum https_everywhere-5.2.1-an+tb+sm+fx.xpi
+sha256sum https_everywhere-5.2.4-an+tb+sm+fx.xpi
 
 2) MODIFIER LE PKGBUILD
 ========================
@@ -37,9 +38,9 @@ sha256sum https_everywhere-5.2.1-an+tb+sm+fx.xpi
 
 _pkgname=https-everywhere
 pkgname=firefox-extension-${_pkgname}
-pkgver=5.2.1
-pkgrel=1
-_file=471033
+pkgver=5.2.4
+pkgrel=2
+_file=494992
 
 source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/${_pkgname/-/_}-${pkgver}-an+tb+sm+fx.xpi")
 noextract=("${_pkgname}-${pkgver}.xpi")
@@ -66,7 +67,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/firefox-https-everywhere/PKGBUILD . \
-&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-5.2.1-an+tb+sm+fx.xpi . \
+&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-5.2.4-an+tb+sm+fx.xpi . \
 && cp -v $HOME/05-builds/firefox-https-everywhere/firefox-extension-verification.install . \
 && makepkg -s \
 && cd $HOME/05-builds/firefox-https-everywhere \
@@ -113,7 +114,7 @@ $ mv -v firefox-extension-https-everywhere-*-any.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i https_everywhere-5.2.1-an+tb+sm+fx.xpi
+$ rm -i https_everywhere-5.2.4-an+tb+sm+fx.xpi
 $ rm -rf /tmp/0-AUR
 
 
