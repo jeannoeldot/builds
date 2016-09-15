@@ -162,7 +162,7 @@ EN ROOT
 ========
 # cd
 
-# pacman -Syu freshplayerplugin chromium-pepper-flash
+# pacman -Syu freshplayerplugin pepper-flash
 
 !!! EN USER
 ============
