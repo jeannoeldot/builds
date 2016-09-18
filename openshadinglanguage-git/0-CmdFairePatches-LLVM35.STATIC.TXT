@@ -4,11 +4,11 @@ cd $HOME/05-builds/openshadinglanguage-git/
 
 mkdir /tmp/srcp
 
-cp -v openshadinglanguage-git-1.8.2.20160907.tar.gz /tmp/srcp/
+cp -v openshadinglanguage-git-1.8.2.20160914.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openshadinglanguage-git-1.8.2.20160907.tar.gz
+tar -xzf openshadinglanguage-git-1.8.2.20160914.tar.gz
 
 cd $HOME/05-builds/openshadinglanguage-git/
 

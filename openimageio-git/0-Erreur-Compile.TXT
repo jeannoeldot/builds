@@ -1,0 +1,102 @@
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/libutil/farmhash.cpp:26:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/libutil/argparse.cpp:43:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/libutil/errorhandler.cpp:37:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/paramlist.h:52,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/imageio.h:61,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmp_pvt.h:34,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmpinput.cpp:30:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:135: src/libutil/CMakeFiles/OpenImageIO_Util.dir/farmhash.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[  3%] Building CXX object src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmpoutput.cpp.o
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:63: src/libutil/CMakeFiles/OpenImageIO_Util.dir/argparse.cpp.o] Error 1
+[  4%] Building CXX object src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmp_pvt.cpp.o
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:87: src/libutil/CMakeFiles/OpenImageIO_Util.dir/errorhandler.cpp.o] Error 1
+[  4%] Building CXX object src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/cineon.imageio/cineoninput.cpp.o
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:63: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmpinput.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/libutil/filesystem.cpp:45:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmpoutput.cpp:31:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/paramlist.h:52,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/imageio.h:61,
+                 from /build/openimageio-git/src/oiio/src/cineon.imageio/cineoninput.cpp:35:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/paramlist.h:52,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/imageio.h:61,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmp_pvt.h:34,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmp_pvt.cpp:30:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_7::simd::bool8 OpenImageIO::v1_7::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_7::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:111: src/libutil/CMakeFiles/OpenImageIO_Util.dir/filesystem.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:1019: src/libutil/CMakeFiles/OpenImageIO_Util.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:87: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmpoutput.cpp.o] Error 1
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:111: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmp_pvt.cpp.o] Error 1
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:135: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/cineon.imageio/cineoninput.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:1560: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/all] Error 2
+make: *** [Makefile:161: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
+==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build
+==> ERREUR: Fabrication du paquet « openimageio-git » impossible.
+      !!! =>  Faire : cd /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build pour inspection.
+      !!! =>  Quand fini :
+      !!! =>  ==> fermer tous les fichiers ouverts.
+      !!! =>  ==> appuyer sur une touche pour quitter le script.
+...
+==> ERREUR: Terminé.
