@@ -1,8 +1,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=virtualbox-extension
-pkgver=5.1.6
-_build=110634
+pkgver=5.1.4
+_build=110228
 pkgrel=1
 pkgdesc="Oracle VM VirtualBox Extension Pack"
 arch=('any')
@@ -16,7 +16,7 @@ options=('!strip')
 source=("http://download.virtualbox.org/virtualbox/$pkgver/Oracle_VM_VirtualBox_Extension_Pack-$pkgver-$_build.vbox-extpack"
 )
 
-sha256sums=('607ac3636bd49a738d5c48159b39261369b5487f71fb10afa2ecf869627a12de'
+sha256sums=('9462ff1b567c37ad9a33c0c7ca1925776615ec89b5a72563f29a8cc8514cf316'
 )
 
 install="virtualbox-extension.install"
