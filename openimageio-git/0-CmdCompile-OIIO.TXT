@@ -5,7 +5,7 @@ cd $HOME/05-builds/openimageio-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/OpenImageIO/oiio
-==> 20160915
+==> 20161001
 
 
 1.3 SOURCES
@@ -34,16 +34,16 @@ $ head -n 8 oiio/CMakeLists.txt
 
 # Release version of the library
 set (OIIO_VERSION_MAJOR 1)
-set (OIIO_VERSION_MINOR 7)
-set (OIIO_VERSION_PATCH 6)
+set (OIIO_VERSION_MINOR 8)
+set (OIIO_VERSION_PATCH 0)
 set (OIIO_VERSION_RELEASE_TYPE "dev")   # "dev", "betaX", "RCY", ""
 
-==> 1.7.6
+==> 1.8.0
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openimageio-git-1.7.6.20160915.tar.gz --exclude=.git oiio
+tar -cvzf openimageio-git-1.8.0.20161001.tar.gz --exclude=.git oiio
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -51,7 +51,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openimageio-git-1.7.6.20160915.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openimageio-git-1.8.0.20161001.tar.gz .
 sync
 
 
@@ -67,7 +67,7 @@ voir : CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.7.6.20160915
+pkgver=1.8.0.20161001
 pkgrel=1
 
 conflicts=('openimageio')
@@ -76,16 +76,27 @@ provides=('openimageio')
 2-2) PKGBUILD SANS PATCH
 ========================
 source=("$pkgname-$pkgver.tar.gz"
+        "fix-gcc-error-about-casting-for-AVX2.patch"
 )
 
-sha256sum openimageio-git-1.7.6.20160915.tar.gz
+sha256sum openimageio-git-1.8.0.20161001.tar.gz
 
-sha256sums=(...
+sha256sum fix-gcc-error-about-casting-for-AVX2.patch
+
+sha256sums=('...'
+            '...'
 )
 
 !!!!!!
 _gitname="oiio"
 
+prepare() {
+  cd "${srcdir}/${_gitname}"
+   
+  # Fix gcc warning about casting for AVX2
+  patch -Np1 -i "${srcdir}/fix-gcc-error-about-casting-for-AVX2.patch"
+}
+  
 
 2-3) VERIFIER CMakeLists.txt
 ==========================
@@ -96,53 +107,53 @@ LIGNE 36
 LIGNE 55 
   STOP_ON_WARNING ON    =>      -DSTOP_ON_WARNING=OFF \
   
-LIGNES 165 ET ...
+LIGNES 168 ET ...
   OIIO_BUILD_TESTS ON   =>      -DOIIO_BUILD_TESTS=OFF \
 
   !!! A VOIR : 
-LIGNE 168
+LIGNE 174
   HIDE_SYMBOLS OFF
 
   !!! A VOIR : 
-LIGNE 169
+LIGNE 175
   USE_OPENGL ON         depends= glew -> glu -> 'libgl'
 
-LIGNES 174 175
+LIGNES 180 181
 set (PYTHON_VERSION 2.6)  =>    -DPYTHON_VERSION=2.7 \
 set (PYTHON3_VERSION 3.2) =>    -DPYTHON3_VERSION=3.5 \
   
-LIGNE 181
+LIGNE 187
   USE_JPEGTURBO ON      depends= ... 'libjpeg-turbo'
 
-LIGNE 185
+LIGNE 191
   USE_OPENCV ON         depends= ... 'opencv'
 
-LIGNE 186
+LIGNE 192
   USE_OPENSSL OFF       =>      -DUSE_OPENSSL=ON \         depends= ... 'openssl'
 
-LIGNE 189
+LIGNE 195
   USE_PTEX ON           =>      -DUSE_PTEX=OFF \
 
-LIGNE 194
+LIGNE 200
   USE_NUKE ON           =>      -DUSE_NUKE=OFF \
 
-LIGNE 204
+LIGNE 210
   USE_CPP11 ON CACHE BOOL "Compile in C++11 mode"
   
-LIGNE 208
+LIGNE 215
   !!! A VOIR : $ cat /proc/cpuinfo | grep sse4_2
   USE_SIMD ""         =>      -DUSE_SIMD=sse4.2 \
   
   !!! A VOIR : $ cat /proc/cpuinfo | grep avx
   USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
   
-LIGNE 209
+LIGNE 216
   USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
 
-LIGNE 210
+LIGNE 217
   CODECOV OFF
 
-LIGNE 416
+LIGNE 423
   !!! A VOIR :
   set (INSTALL_FONTS ON CACHE BOOL "Install default fonts")   => -DINSTALL_FONTS=OFF \
 
@@ -152,7 +163,7 @@ LIGNE 416
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users   909 21 sept. 19:09 openimageio-git-1.7.6.20160915.tar.gz
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 openimageio-git-1.8.0.20161001.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -169,7 +180,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/openimageio-git-1.7.6.20160915.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/openimageio-git-1.8.0.20161001.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -244,7 +255,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i openimageio-git-1.7.6.20160915.tar.gz
+$ rm -i openimageio-git-1.8.0.20161001.tar.gz
 
 
 $ cd && maj-repolocal
@@ -284,9 +295,9 @@ pkgrel=3          # nvidia-libgl 367.35
   USE_OPENGL ON         depends= ... 'nvidia-libgl'
 
 !!! COMMIT DU 20/02/2016 : ERREUR COMPILATION
-!!! CONSERVER V 1.7.6 DU 07/02/2016
+!!! CONSERVER V 1.8.0 DU 07/02/2016
 
-!!! TESTS COMPILATION OSL AVEC OIIO 1.7.6.20160915
+!!! TESTS COMPILATION OSL AVEC OIIO 1.8.0.20161001
 $ mv -v openimageio-git-*-x86_64.pkg.tar.* /0-DataLinux/05-builds-dir-git/0-Test-openimageio-git/
 
 
@@ -307,7 +318,7 @@ source=($pkgname-$pkgver.tar.gz
         'fix-previous-declaration-gcc4.9.1-c++11.patch'
 )
 
-sha256sum openimageio-git-1.7.6.20160915.tar.gz
+sha256sum openimageio-git-1.8.0.20161001.tar.gz
 
 sha256sum fix-previous-declaration-gcc4.9.1-c++11.patch
 

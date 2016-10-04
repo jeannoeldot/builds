@@ -4,11 +4,11 @@ cd $HOME/05-builds/openimageio-git/
 
 mkdir /tmp/srcp
 
-cp -v openimageio-git-1.7.2.20160228.tar.gz /tmp/srcp/
+cp -v openimageio-git-1.8.0.20161001.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openimageio-git-1.7.2.20160228.tar.gz
+tar -xzf openimageio-git-1.8.0.20161001.tar.gz
 
 cd $HOME/05-builds/openimageio-git/
 
@@ -16,6 +16,47 @@ cd $HOME/05-builds/openimageio-git/
 cd /tmp/srcp
 
 cp -R oiio oiio.new
+
+1) MODIFIER oiio/src/include/OpenImageIO/simd.h
+=================================================
+
+cd oiio.new/src/include/OpenImageIO
+
+kwrite simd.h
+
+MODIFIER LIGNE 2328
+    return _mm256_cmpeq_epi8 (anyval, anyval);
+
+DEVIENT :
+    return _mm256_castsi256_ps (_mm256_cmpeq_epi8 (anyval, anyval));
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier simd.h~
+rm -f simd.h~
+ 
+cd ../../../..
+ 
+diff -aur oiio oiio.new
+
+diff -aur oiio oiio.new > fix-gcc-error-about-casting-for-AVX2.patch
+
+rm -rf oiio.new
+
+cd $HOME/05-builds/openimageio-git
+mv -v /tmp/srcp/fix-gcc-error-about-casting-for-AVX2.patch .
+
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
 
 1) MODIFIER oiio/src/cmake/externalpackages.cmake
 =================================================
@@ -75,19 +116,7 @@ cd $HOME/05-builds/openimageio-git
 mv -v /tmp/srcp/fix-undefined-reference-to-symbol-pthread_create-GLIBC_2.2.5.patch .
 
 
-
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-sync
-
-==============================================================================
-ANCIENS OU PAS OK
-=================
-
-PATCH 1.7.2.20160228
+PATCH 1.8.0.20161001
 ====================
 1) MODIFIER oiio/src/cmake/externalpackages.cmake
 =================================================

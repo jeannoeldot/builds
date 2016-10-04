@@ -4,7 +4,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.8.0.20161001
+pkgver=1.7.5.20160910
 pkgrel=1
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('i686' 'x86_64')
@@ -21,21 +21,12 @@ optdepends=('qt4: iv image viewer'
 conflicts=('openimageio')
 provides=('openimageio')
 source=("$pkgname-$pkgver.tar.gz"
-        "fix-gcc-error-about-casting-for-AVX2.patch"
 )
-sha256sums=('2aa4c466bd056ec7fd8e7e2231cd9e973a9cb895a2cc3a0a80d533fad1298884'
-            '2b459a9e2b2c1d32e1d04ff0c526e36de385ae444d6592c8c6d0cae0b3c4b59c'
+sha256sums=('1193de5d980459bce684ab053b8f0ec6fbd2c3e7fb51a70d8c53fbee7874e234'
 )
 
 _gitname="oiio"
 
-prepare() {
-  cd "${srcdir}/${_gitname}"
-   
-  # Fix gcc warning about casting for AVX2
-  patch -Np1 -i "${srcdir}/fix-gcc-error-about-casting-for-AVX2.patch"
-}
-  
 build() {
   cd "${_gitname}"
 
@@ -53,7 +44,7 @@ build() {
       -DUSE_OPENSSL=ON \
       -DUSE_PTEX=OFF \
       -DUSE_NUKE=OFF \
-      -DUSE_SIMD=avx2 \
+      -DUSE_SIMD=sse4.2 \
       -DUSE_CCACHE=OFF \
       ..
   make

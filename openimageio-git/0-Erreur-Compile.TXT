@@ -1,3 +1,154 @@
+
+Arch Linux
+Linux 4.7.5-1
+
+gcc version 6.2.1 20160830 (GCC)
+
+cat /proc/cpuinfo
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts
+
+-- The C compiler identification is GNU 6.2.1
+-- The CXX compiler identification is GNU 6.2.1
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Project build dir = /build/openimageio-git/src/oiio/build
+-- CMAKE_CXX_COMPILER is /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID is GNU
+-- Building for C++11
+-- Compiling with SIMD level avx2
+-- Setting Namespace to: OpenImageIO
+-- platform = linux64
+-- Found BZip2: /usr/lib64/libbz2.so (found version "1.0.6") 
+-- Looking for BZ2_bzCompressInit
+-- Looking for BZ2_bzCompressInit - found
+-- Field3D not found
+-- Found OpenSSL: /usr/lib64/libssl.so;/usr/lib64/libcrypto.so (found version "1.0.2j") 
+-- OpenSSL enabled
+-- OPENSSL_INCLUDES: /usr/include
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openimageio-git/src/oiio/build
+Scanning dependencies of target CopyFiles
+[  0%] Generating testsuite/runtest.py
+[  0%] Built target CopyFiles
+Scanning dependencies of target OpenImageIO_Util
+[  1%] Building CXX object src/libutil/CMakeFiles/OpenImageIO_Util.dir/argparse.cpp.o
+[  1%] Building CXX object src/libutil/CMakeFiles/OpenImageIO_Util.dir/errorhandler.cpp.o
+[  1%] Building CXX object src/libutil/CMakeFiles/OpenImageIO_Util.dir/farmhash.cpp.o
+[  2%] Building CXX object src/libutil/CMakeFiles/OpenImageIO_Util.dir/filesystem.cpp.o
+Scanning dependencies of target OpenImageIO
+[  3%] Building CXX object src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmpinput.cpp.o
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/libutil/farmhash.cpp:26:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/libutil/errorhandler.cpp:37:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/libutil/argparse.cpp:43:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:135: src/libutil/CMakeFiles/OpenImageIO_Util.dir/farmhash.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/paramlist.h:52,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/imageio.h:61,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmp_pvt.h:34,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmpinput.cpp:30:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+[  3%] Building CXX object src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmpoutput.cpp.o
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:63: src/libutil/CMakeFiles/OpenImageIO_Util.dir/argparse.cpp.o] Error 1
+[  4%] Building CXX object src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmp_pvt.cpp.o
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:87: src/libutil/CMakeFiles/OpenImageIO_Util.dir/errorhandler.cpp.o] Error 1
+[  4%] Building CXX object src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/cineon.imageio/cineoninput.cpp.o
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:63: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmpinput.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/libutil/filesystem.cpp:45:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmpoutput.cpp:31:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/paramlist.h:52,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/imageio.h:61,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmp_pvt.h:34,
+                 from /build/openimageio-git/src/oiio/src/bmp.imageio/bmp_pvt.cpp:30:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/strutil.h:54,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/ustring.h:137,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/paramlist.h:52,
+                 from /build/openimageio-git/src/oiio/src/include/OpenImageIO/imageio.h:61,
+                 from /build/openimageio-git/src/oiio/src/cineon.imageio/cineoninput.cpp:35:
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h: In static member function 'static const OpenImageIO::v1_8::simd::bool8 OpenImageIO::v1_8::simd::bool8::True()':
+/build/openimageio-git/src/oiio/src/include/OpenImageIO/simd.h:2328:30: error: could not convert '_mm256_cmpeq_epi8(anyval, anyval)' from '__m256i {aka __vector(4) long long int}' to 'const OpenImageIO::v1_8::simd::bool8'
+     return _mm256_cmpeq_epi8 (anyval, anyval);
+            ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+make[2]: *** [src/libutil/CMakeFiles/OpenImageIO_Util.dir/build.make:111: src/libutil/CMakeFiles/OpenImageIO_Util.dir/filesystem.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:1019: src/libutil/CMakeFiles/OpenImageIO_Util.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:87: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmpoutput.cpp.o] Error 1
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:111: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/bmp.imageio/bmp_pvt.cpp.o] Error 1
+make[2]: *** [src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/build.make:135: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/__/cineon.imageio/cineoninput.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:1560: src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/all] Error 2
+make: *** [Makefile:161: all] Error 2
+
+
+
+
+
+
+
+=======================================================================================================================================================================================================================================
 In file included from /build/openimageio-git/src/oiio/src/include/OpenImageIO/fmath.h:64:0,
                  from /build/openimageio-git/src/oiio/src/include/OpenImageIO/hash.h:50,
                  from /build/openimageio-git/src/oiio/src/libutil/farmhash.cpp:26:
