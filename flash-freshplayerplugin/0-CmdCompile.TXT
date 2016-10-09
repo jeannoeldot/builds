@@ -23,7 +23,7 @@ mv -vf /tmp/0-AUR/freshplayerplugin/freshplayerplugin.install .
 1-2) Download source
 ----------------------
 
-wget https://github.com/i-rinat/freshplayerplugin/archive/v0.3.5.tar.gz
+wget https://github.com/i-rinat/freshplayerplugin/archive/v0.3.6.tar.gz
 
 
 1-8) FAIRE PATCH
@@ -36,10 +36,10 @@ voir CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=freshplayerplugin
-pkgver=0.3.5
-pkgrel=2
+pkgver=0.3.6
+pkgrel=1
 
-sha1sum v0.3.5.tar.gz
+sha1sum v0.3.6.tar.gz
 
 sha1sum freshplayerplugin.install
 
@@ -54,7 +54,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users    243 28 mars  13:43 freshplayerplugin.install
 -rw-r--r--  1 jnd users   1581  2 mai   16:44 PKGBUILD
--rw-r--r--  1 jnd users 490685  2 mai   16:48 v0.3.5.tar.gz
+-rw-r--r--  1 jnd users 490685  2 mai   16:48 v0.3.6.tar.gz
 
 
 !!! A MODIFIER SI PAS OK !
@@ -69,7 +69,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/flash-freshplayerplugin/PKGBUILD . \
 && cp -v $HOME/05-builds/flash-freshplayerplugin/freshplayerplugin.install . \
-&& cp -v $HOME/05-builds/flash-freshplayerplugin/v0.3.5.tar.gz . \
+&& cp -v $HOME/05-builds/flash-freshplayerplugin/v0.3.6.tar.gz . \
 && makepkg -s \
 && cd $HOME/05-builds/flash-freshplayerplugin \
 && cp -v /tmp/build/freshplayerplugin-*-x86_64.pkg.tar.* . \
@@ -134,7 +134,7 @@ $ mv -v freshplayerplugin-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i v0.3.5.tar.gz
+$ rm -i v0.3.6.tar.gz
 $ rm -i freshplayerplugin.install
 $ rm -rf /tmp/0-AUR
 

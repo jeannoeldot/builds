@@ -5,11 +5,11 @@ cd $HOME/05-builds/conky-lua-nv-git
 
 mkdir /tmp/srcp
 
-cp -v conky-lua-nv-git-1.10.4.20160720.tar.gz /tmp/srcp/
+cp -v conky-lua-nv-git-1.10.6.20161007.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf conky-lua-nv-git-1.10.4.20160720.tar.gz
+tar -xzf conky-lua-nv-git-1.10.6.20161007.tar.gz
 
 cd $HOME/05-builds/conky-lua-nv-git
 
