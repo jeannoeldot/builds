@@ -6,7 +6,7 @@ cd $HOME/05-builds/firefox-https-everywhere
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.5.2.4-2
+cp -v PKGBUILD PKGBUILD.5.2.5-2
 
 
 1-1) Download snapshot
@@ -24,13 +24,13 @@ mv -vf /tmp/0-AUR/firefox-extension-https-everywhere/firefox-extension-verificat
 
 1-2) Download source
 ----------------------
-!!! file = 494992
+!!! file = 507323
 wget https://addons.mozilla.org/firefox/downloads/file\
-/494992/https_everywhere-5.2.4-an+tb+sm+fx.xpi
+/507323/https_everywhere-5.2.5-an+tb+sm+fx.xpi
 
 ls
 
-sha256sum https_everywhere-5.2.4-an+tb+sm+fx.xpi
+sha256sum https_everywhere-5.2.5-an+tb+sm+fx.xpi
 
 2) MODIFIER LE PKGBUILD
 ========================
@@ -38,9 +38,9 @@ sha256sum https_everywhere-5.2.4-an+tb+sm+fx.xpi
 
 _pkgname=https-everywhere
 pkgname=firefox-extension-${_pkgname}
-pkgver=5.2.4
+pkgver=5.2.5
 pkgrel=2
-_file=494992
+_file=507323
 
 source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/${_pkgname/-/_}-${pkgver}-an+tb+sm+fx.xpi")
 noextract=("${_pkgname}-${pkgver}.xpi")
@@ -67,12 +67,13 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/firefox-https-everywhere/PKGBUILD . \
-&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-5.2.4-an+tb+sm+fx.xpi . \
 && cp -v $HOME/05-builds/firefox-https-everywhere/firefox-extension-verification.install . \
 && makepkg -s \
 && cd $HOME/05-builds/firefox-https-everywhere \
 && cp -v /tmp/build/firefox-extension-https-everywhere-*-any.pkg.tar.* . \
 && rm -rf /tmp/build
+
+&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-5.2.5-an+tb+sm+fx.xpi . \
 
 !!! SI ERREUR
 ==============
@@ -99,22 +100,25 @@ rm -f *~
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/firefox-extension-https-everywhere-*-any.pkg.tar.*
+$ rm /0-DataLinux/00-repolocal\
+/firefox-extension-https-everywhere-*-any.pkg.tar.*
 
-$ cp -v firefox-extension-https-everywhere-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+$ cp -v firefox-extension-https-everywhere-*-any.pkg.tar.* \
+/0-DataLinux/00-repolocal/
 
 # DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
 ---------------------------------------------------------------
 $ mv -v $HOME/00-repolocal/firefox-extension-https-everywhere-*-any.pkg.tar.* \
 $HOME/00-repolocal/pkg-OLD/
 
-$ mv -v firefox-extension-https-everywhere-*-any.pkg.tar.* $HOME/00-repolocal/
+$ mv -v firefox-extension-https-everywhere-*-any.pkg.tar.* \
+$HOME/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i https_everywhere-5.2.4-an+tb+sm+fx.xpi
+$ rm -i https_everywhere-5.2.5-an+tb+sm+fx.xpi
 $ rm -rf /tmp/0-AUR
 
 

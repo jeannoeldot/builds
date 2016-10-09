@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change    Sat, 1 Oct 2016 22:41:46 +0200 (22:41 +0200)
-==> 20161001
+==> last change    Sun, 9 Oct 2016 01:54:29 +0200 (01:54 +0200)
+==> 20161009
 
 
 1.2 REVISION
@@ -54,7 +54,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
  
  ==> #define BLENDER_VERSION_CYCLE   alpha
  
-==> Version = 2.78.1.20161001
+==> Version = 2.78.1.20161009
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.77 à 2.78)
 !!! EN ROOT
@@ -68,7 +68,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.78.1.20161001.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.78.1.20161009.tar.gz --exclude=.git blender
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -76,7 +76,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.1.20161001.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.1.20161009.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -96,7 +96,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.78.1.20161001
+pkgver=2.78.1.20161009
 pkgrel=1
 
 ---------------------------------------------------------------------------
@@ -136,7 +136,7 @@ _gitname="blender"
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.78.1.20161001.tar.gz
+sha256sum blender-git-2.78.1.20161009.tar.gz
 
 sha256sums=(...
          ...
@@ -205,9 +205,9 @@ endif()
 314 option WITH_MOD_OCEANSIM	==> ON
 
 # Image format support
-316 option(WITH_IMAGE_OPENEXR	==> ON
+318 option(WITH_IMAGE_OPENEXR	==> ON
 
-324 option WITH_IMAGE_FRAMESERVER    ==> OFF
+328 option WITH_IMAGE_FRAMESERVER    ==> OFF
 
 # Audio/Video format support
 328	option WITH_CODEC_FFMPEG	==> ON
@@ -256,6 +256,8 @@ CUDA_TOOLKIT_ROOT_DIR not found or specified
 -- Could NOT find CUDA (missing:  CUDA_TOOLKIT_ROOT_DIR CUDA_INCLUDE_DIRS CUDA_CUDART_LIBRARY) (found version "7.5")
 -- CUDA compiler not found, disabling WITH_CYCLES_CUDA_BINARIES
 
+LE 09/10/2016 : TEST SANS
+=========================
 -DCUDA_TOOLKIT_ROOT_DIR=/opt/cuda \
 -DCUDA_INCLUDE_DIRS=/opt/cuda/include \
 -DCUDA_CUDART_LIBRARY=/opt/cuda/lib64 \
@@ -364,7 +366,7 @@ INCHANGÉS :
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161001.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161009.tar.gz
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
 !!! A MODIFIER SI PAS OK !
@@ -482,7 +484,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.78.1.20161001.tar.gz
+$ rm -i blender-git-2.78.1.20161009.tar.gz
 
 
 $ cd && maj-repolocal
@@ -540,7 +542,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.78.1.20161001.tar.gz
+sha256sum blender-git-2.78.1.20161009.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -560,7 +562,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161001.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161009.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -575,7 +577,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161001.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161009.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -645,7 +647,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.78.1.20161001.tar.gz
+sha256sum blender-git-2.78.1.20161009.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -702,7 +704,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161001.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161009.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \

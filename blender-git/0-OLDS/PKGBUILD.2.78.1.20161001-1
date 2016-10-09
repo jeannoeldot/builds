@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.1.20161009
+pkgver=2.78.1.20161001
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -35,7 +35,7 @@ options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('f7a294358a3c68a990d1ade7176600640612050898f78c04bade8ff81394cc91'
+sha256sums=('84d027a07da2d5d2f54c30eab58be68724892664e2dd02b94a12a61a6e2fe056'
 )
 
 _gitname="blender"
@@ -72,6 +72,9 @@ build() {
         -DWITH_PYTHON_INSTALL=OFF \
         -DWITH_PYTHON_INSTALL_NUMPY=OFF \
         -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
+        -DCUDA_TOOLKIT_ROOT_DIR=/opt/cuda \
+        -DCUDA_INCLUDE_DIRS=/opt/cuda/include \
+        -DCUDA_CUDART_LIBRARY=/opt/cuda/lib64 \
         -DWITH_CYCLES_OSL=ON \
         -DWITH_CYCLES_OPENSUBDIV=ON \
         -DWITH_CYCLES_CUDA_BINARIES=ON \

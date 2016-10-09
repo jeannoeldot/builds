@@ -18,12 +18,12 @@ http://wiki.blender.org/index.php/User:Kevindietrich/OpenVDBCompile
 https://github.com/dreamworksanimation/openvdb
 
 https://github.com/dreamworksanimation/openvdb/releases
-https://github.com/dreamworksanimation/openvdb/archive/openvdb-git-3.2.0.20160810.tar.gz
+https://github.com/dreamworksanimation/openvdb/archive/openvdb-git-4.0.0.20161007.tar.gz
 
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/dreamworksanimation/openvdb/commits/master
-==> 20160810
+==> 20161007
 
 1.3 SOURCES
 ==============
@@ -49,18 +49,22 @@ cd ..
 !!!!! Vérifier VERSION : 
 $ head -n 50 openvdb/openvdb/version.h | grep VERSION
 
-// Library major, minor and patch version numbers
-#define OPENVDB_LIBRARY_MAJOR_VERSION_NUMBER 3
-#define OPENVDB_LIBRARY_MINOR_VERSION_NUMBER 2
+#ifndef OPENVDB_VERSION_HAS_BEEN_INCLUDED
+#define OPENVDB_VERSION_HAS_BEEN_INCLUDED
+/// where X, Y and Z are OPENVDB_LIBRARY_MAJOR_VERSION, OPENVDB_LIBRARY_MINOR_VERSION
+/// and OPENVDB_LIBRARY_PATCH_VERSION, respectively (defined below).
+#define OPENVDB_VERSION_NAME v4_0_0
+#define OPENVDB_LIBRARY_MAJOR_VERSION_NUMBER 4
+#define OPENVDB_LIBRARY_MINOR_VERSION_NUMBER 0
 #define OPENVDB_LIBRARY_PATCH_VERSION_NUMBER 0
 
-==> 3.2.0
+==> 4.0.0
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 cd openvdb
-tar -cvzf openvdb-git-3.2.0.20160810.tar.gz --exclude=.git openvdb
-mv -v openvdb-git-3.2.0.20160810.tar.gz ..
+tar -cvzf openvdb-git-4.0.0.20161007.tar.gz --exclude=.git openvdb
+mv -v openvdb-git-4.0.0.20161007.tar.gz ..
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -68,7 +72,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openvdb-git-3.2.0.20160810.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openvdb-git-4.0.0.20161007.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -81,14 +85,8 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=3.2.0.20160810
+pkgver=4.0.0.20161007
 pkgrel=1
-pkgrel=2          # maj NVidia 370.23-1
-pkgrel=3          # nvidia-libgl 367.35
-pkgrel=4          # SANS nvidia-libgl ( ==> libgl )
-pkgrel=5          # rebuild boost boost-libs 1.61.0-2
-
-pkgrel=2  # rebuild gcc 6.1 boost boost-libs 1.60.0-5
 
 license=('MPL')
 
@@ -104,7 +102,7 @@ makedepends=('boost' 'mesa' 'doxygen')
 conflicts='openvdb'
 provides='openvdb'
 
-sha256sum openvdb-git-3.2.0.20160810.tar.gz
+sha256sum openvdb-git-4.0.0.20161007.tar.gz
 
 source=("$pkgname-$pkgver.tar.gz"
 )
@@ -136,7 +134,7 @@ build() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openvdb-git-3.2.0.20160810.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openvdb-git-4.0.0.20161007.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -154,7 +152,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-3.2.0.20160810.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-4.0.0.20161007.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -217,7 +215,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openvdb-git-3.2.0.20160810.tar.gz
+$ rm -i openvdb-git-4.0.0.20161007.tar.gz
 
 
 $ cd && maj-repolocal
@@ -240,5 +238,14 @@ SI PROBLEME
 # pacman -S openvdb-git
 
 
+ANCIEN
+======
+
+pkgrel=2          # maj NVidia 370.23-1
+pkgrel=3          # nvidia-libgl 367.35
+pkgrel=4          # SANS nvidia-libgl ( ==> libgl )
+pkgrel=5          # rebuild boost boost-libs 1.61.0-2
+
+pkgrel=2  # rebuild gcc 6.1 boost boost-libs 1.60.0-5
 
 

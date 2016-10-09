@@ -15,8 +15,8 @@ makedepends=('cmake' 'mesa' 'cuda'
              'opencl-headers'
              'gcc5'
 )
-provides=('opensubdiv')
 conflicts=('opensubdiv')
+provides=('opensubdiv')
 source=("https://github.com/PixarAnimationStudios/${_osd_name}/archive/v${_osd_version}.tar.gz"
 )
 sha256sums=('d0a1a860af9745fc8db05a41f32b1c0756066f11d8c553dcf64090ed549ad388'
