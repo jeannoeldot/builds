@@ -3,6 +3,11 @@
 
 cd $HOME/05-builds/profile-sync-daemon
 
+0) SAUVEGARDER PKGBUILD PRÉCÉDENT
+=================================
+cp -v PKGBUILD PKGBUILD.6.28-1
+
+
 1) TÉLÉCHARGER SOURCES
 ======================
 
@@ -23,11 +28,12 @@ mv -vf /tmp/0-AUR/profile-sync-daemon/psd.install .
 
 1-2) Download source
 ----------------------
-wget http://repo-ck.com/source/profile-sync-daemon/profile-sync-daemon-6.27.tar.xz
+wget http://repo-ck.com/source/profile-sync-daemon\
+/profile-sync-daemon-6.28.tar.xz
 
 ls
 
-sha256sum profile-sync-daemon-6.27.tar.xz
+sha256sum profile-sync-daemon-6.28.tar.xz
 
 2) MODIFIER LE PKGBUILD
 ========================
@@ -50,7 +56,7 @@ sha256sums=(1111111111
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   910 21 sept. 19:10 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-sync-daemon-6.27.tar.xz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-sync-daemon-6.28.tar.xz
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 psd.install
 
 !!! A MODIFIER SI PAS OK !
@@ -64,7 +70,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/profile-sync-daemon/PKGBUILD . \
-&& cp -v $HOME/05-builds/profile-sync-daemon/profile-sync-daemon-6.27.tar.xz . \
+&& cp -v $HOME/05-builds/profile-sync-daemon/profile-sync-daemon-6.28.tar.xz . \
 && cp -v $HOME/05-builds/profile-sync-daemon/psd.install . \
 && makepkg -s \
 && cd $HOME/05-builds/profile-sync-daemon \
@@ -111,7 +117,7 @@ $ mv -v profile-sync-daemon-*-any.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i profile-sync-daemon-6.27.tar.xz
+$ rm -i profile-sync-daemon-6.28.tar.xz
 $ rm -rf /tmp/0-AUR
 
 
@@ -123,6 +129,8 @@ $ sync
 
 $ profile-cleaner f
 
+$ systemctl --user stop psd.service
+
 !!! MISE A JOUR 6.02 -> 6.07
 ============================
 EN ROOT
@@ -130,7 +138,8 @@ EN ROOT
 # cd
 # pacman -Syu
 
-$ systemctl --user stop psd.service
+!!! EN USER
+============
 $ systemctl --user daemon-reload
 $ systemctl --user start psd.service
 $ systemctl --user status psd.service
