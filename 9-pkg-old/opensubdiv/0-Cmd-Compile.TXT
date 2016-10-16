@@ -1,0 +1,255 @@
+ 
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/opensubdiv
+
+
+1) SOURCES
+==============
+https://github.com/PixarAnimationStudios/OpenSubdiv/releases
+==> VERSION = v3_1_0_RC2
+
+wget https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v3_1_0_RC2.tar.gz
+
+OU
+--
+
+cp -v /0-DataLinux/05-builds-dir-git/OpenSubDiv-v3_1_0_RC2.tar.gz v3_1_0_RC2.tar.gz
+
+ls
+
+sha256sum v3_1_0_RC2.tar.gz
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=opensubdiv-git               # opensubdiv ds community
+pkgver=3.1.0.RC2
+pkgrel=1
+
+---------------------------------------------------------------------------
+!!! PAS OK DANS CHROOT
+!!! -------------------------------------------------------
+
+
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+             'gcc5'
+)
+    -D CMAKE_C_COMPILER='/usr/bin/gcc-5' \
+    -D CMAKE_CXX_COMPILER='/usr/bin/g++-5' \
+
+_osd_name="OpenSubdiv"
+_osd_version="3_1_0_RC2"
+
+license=('custom')
+
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+)
+
+conflicts='opensubdiv'
+provides='opensubdiv'
+
+source=("https://github.com/PixarAnimationStudios/${_osd_name}/archive/v${_osd_version}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+build() {
+        ...
+        -DCMAKE_SKIP_RPATH=ON \
+
+2-2) VERIFIER CMakeLists.txt
+==============================
+
+https://github.com/PixarAnimationStudios/OpenSubdiv/blob/master/CMakeLists.txt
+
+!!! CLONER BLENDER AVANT
+!!! VOIR 0-CmdCompile-blender.TXT LIGNE 21
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
+
+-DCUDA_TOOLKIT_ROOT_DIR=[path to CUDA Toolkit]
+
+-DGLEW_LOCATION=[path to GLEW]
+
+
+!!! VOIR PTEX
+!!! VOIR PKGBUILD DE BLENDER DS COMMUNITY
+
+LIGNES 271 ET SUIVANTES
+-----------------------
+# ptex is only needed when nicholas bishop is ready
+-D NO_PTEX=1 \
+-D NO_CLEW=1 \
+# docs, tutorials, regression tests and examples are not needed
+-D NO_DOC=1 \
+-D NO_TUTORIALS=1 \
+-D NO_REGRESSION=1 \
+-D NO_EXAMPLES=1 \
+
+LIGNES 479 ET SUIVANTES
+-----------------------
+!!! VOIR commit du 30/09/2016 : Fixed CUDA build with newer SDKs
+OSD_CUDA_NVCC_FLAGS
+-D OSD_CUDA_NVCC_FLAGS="--gpu-architecture compute_52" \
+
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
+-rw-r--r--  1 jnd users 15825430  9 août  09:43 v3_1_0_RC2.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/opensubdiv/PKGBUILD . \
+&& cp -v $HOME/05-builds/opensubdiv/v3_1_0_RC2.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/opensubdiv \
+&& cp -v /tmp/build/opensubdiv-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/opensubdiv && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+!!! EN USER
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ $HOME/bin/mkpkg-tmpfs -m fast
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap opensubdiv-git-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.*
+
+$ cp -v opensubdiv-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v opensubdiv-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ mv -v v3_1_0_RC2.tar.gz /0-DataLinux/05-builds-dir-git/OpenSubDiv-v3_1_0_RC2.tar.gz
+OU
+$ rm -i v3_1_0_RC2.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# pacman -Syu
+
+# pacman -Syu opensubdiv-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -Rdd opensubdiv-git
+# rm /var/cache/pacman/pkg/opensubdiv-git-*
+# pacman -S opensubdiv-git
+
+
+
+================================================================
+ANCIENS
+========
+
+pkgver=3.1.0.RC2
+pkgrel=1
+pkgrel=4          # maj GLEW 2.0.0
+pkgrel=5          # maj NVidia 370.23-1 TEST
+pkgrel=6          # nvidia-libgl 367.35
+pkgrel=7          # SANS nvidia-libgl ( ==> libgl )
+pkgrel=8          # Test compil ds ARCH1 DANS TMP EN USER
+
+LE 13/07/2016
+TEST COMPIL DS CHROOT
+AVEC GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5.18-4 / GCC5 5.4.0 COMMUNITY
+pkgver=3.1.0.RC2
+pkgrel=3
+---------------------------------------------------------------------------
+!!! PAS OK DANS CHROOT
+!!! -------------------------------------------------------
+
+!!! ERREUR COMPIL GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5.18-4
+
+pkgrel=2
+!!! TEST AVEC gcc 5.3.0-6 AUR et CUDA 7.5 ET LIENS : OK
+
+# maya plugin, docs, tutorials, regression tests and examples are not needed
+-D NO_MAYA=1 \
+
+
+  
+pkgver=3.0.4
+pkgrel=2      # cd "${srcdir}/${_osd_name}-${_osd_version}" => cd "${_osd_name}-${_osd_version}"
+
+pkgver=3.0.3
+pkgrel=2                             # -DCMAKE_SKIP_RPATH=ON
+pkgrel=3                             # + 'opencl-headers'
+pkgrel=4                             # C++11 ABI
+pkgrel=5                             # 'libgl'
+pkgrel=6                             # 'nvidia-libgl'
+

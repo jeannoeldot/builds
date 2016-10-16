@@ -1,0 +1,17 @@
+[ 85%] Building NVCC (Device) object opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o
+nvcc fatal   : Value 'compute_11' is not defined for option 'gpu-architecture'
+CMake Error at osd_static_gpu_generated_cudaKernel.cu.o.cmake:207 (message):
+  Error generating
+  /tmp/build/src/OpenSubdiv-3_0_2/build/opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/./osd_static_gpu_generated_cudaKernel.cu.o
+
+
+opensubdiv/CMakeFiles/osd_static_gpu.dir/build.make:63 : la recette pour la cible « opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o » a échouée
+make[2]: *** [opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o] Erreur 1
+CMakeFiles/Makefile2:258 : la recette pour la cible « opensubdiv/CMakeFiles/osd_static_gpu.dir/all » a échouée
+make[1]: *** [opensubdiv/CMakeFiles/osd_static_gpu.dir/all] Erreur 2
+make[1]: *** Attente des tâches non terminées....
+[ 85%] Built target far_obj
+Makefile:138 : la recette pour la cible « all » a échouée
+make: *** [all] Erreur 2
+==> ERREUR : Une erreur s’est produite dans build().
+    Abandon...
