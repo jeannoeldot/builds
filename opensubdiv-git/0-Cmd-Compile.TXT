@@ -8,12 +8,12 @@ cd $HOME/05-builds/opensubdiv-git
 1) SOURCES
 ==============
 https://github.com/PixarAnimationStudios/OpenSubdiv/releases
-==> VERSION = v3_1_0_RC2
+==> VERSION = v3_1_0
 
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/PixarAnimationStudios/OpenSubdiv/commits/master
-==> 20161014
+==> 20161022
 
 1.3 SOURCES
 ==============
@@ -46,7 +46,7 @@ $ head -n 46 opensubdiv/opensubdiv/version.h | grep VERSION
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
-tar -cvzf opensubdiv-git-3.1.0.20161014.tar.gz --exclude=.git opensubdiv
+tar -cvzf opensubdiv-git-3.1.0.20161022.tar.gz --exclude=.git opensubdiv
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -54,7 +54,7 @@ cd $HOME/05-builds/opensubdiv-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/opensubdiv-git-3.1.0.20161014.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/opensubdiv-git-3.1.0.20161022.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -67,7 +67,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=opensubdiv-git               # opensubdiv ds community
-pkgver=3.1.0.20161014
+pkgver=3.1.0.20161022
 pkgrel=1
 
 ----------------------------------------------------------
@@ -94,7 +94,7 @@ provides='opensubdiv'
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum opensubdiv-git-3.1.0.20161014.tar.gz
+sha256sum opensubdiv-git-3.1.0.20161022.tar.gz
 
 sha256sums=('... ...'
 )
@@ -146,7 +146,7 @@ OSD_CUDA_NVCC_FLAGS
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 15825430  9 août  09:43 opensubdiv-git-3.1.0.20161014.tar.gz
+-rw-r--r--  1 jnd users 15825430  9 août  09:43 opensubdiv-git-3.1.0.20161022.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -164,7 +164,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/opensubdiv-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/opensubdiv-git/opensubdiv-git-3.1.0.20161014.tar.gz . \
+&& cp -v $HOME/05-builds/opensubdiv-git/opensubdiv-git-3.1.0.20161022.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/opensubdiv-git \
 && cp -v /tmp/build/opensubdiv-git-*-x86_64.pkg.tar.* . \
@@ -229,7 +229,7 @@ $ mv -v opensubdiv-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i opensubdiv-git-3.1.0.20161014.tar.gz
+$ rm -i opensubdiv-git-3.1.0.20161022.tar.gz
 
 
 $ cd && maj-repolocal
