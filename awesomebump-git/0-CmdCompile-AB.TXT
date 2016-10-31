@@ -1,0 +1,259 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/awesomebump-git
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+
+https://github.com/kmkolasinski/AwesomeBump/commits/master
+
+==> 20160819
+
+1.1) SOURCES awesomebump
+========================
+!!! Répertoire clone de awesomebump dans : /0-DataLinux/05-builds-dir-git/awesomebump
+-------------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep awesomebump :
+------------------------------------
+ls
+
+!!! SI REP awesomebump N'EXISTE PAS
+-----------------------------------
+https://github.com/kmkolasinski/AwesomeBump.git
+git clone git://github.com/kmkolasinski/AwesomeBump.git awesomebump
+
+!!! SI REP awesomebump EXISTE
+-----------------------------
+cd awesomebump
+git pull --rebase origin master
+cd ..
+
+1.2) SOURCES QtnProperty
+========================
+https://github.com/kmkolasinski/QtnProperty
+cd awesomebump/Sources/utils/
+rm -rf QtnProperty
+git clone git://github.com/kmkolasinski/QtnProperty.git
+cd ../../../
+
+
+1.3) VÉRIFIER VERSION
+=====================
+$ head -n 20 awesomebump/Sources/Sources.pro | grep VERSION
+VERSION_STRING = 5.0
+VERSION_FULL = 5.0.0
+
+==> 5.0
+
+1-5) FAIRE ARCHIVE TAR.GZ
+=================================
+tar -cvzf awesomebump-git-5.0.20160819.tar.gz --exclude=.git awesomebump
+
+1-5-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/awesomebump-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/awesomebump-git-5.0.20160819.tar.gz .
+sync
+
+
+1-6) DOWNLOAD snapshot
+======================
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/awesomebump-git.tar.gz
+
+tar -xzf awesomebump-git.tar.gz
+
+cd $HOME/05-builds/awesomebump-git
+
+mv -vf /tmp/0-AUR/awesomebump-git/awesomebump.desktop .
+
+mv -vf /tmp/0-AUR/awesomebump-git/awesomeBump.sh .
+
+
+1-7) COPIE ICONE logo.png
+=========================
+cp -vf /0-DataLinux/05-builds-dir-git\
+/awesomebump/Sources/resources/icons/icon.png \
+./awesomebump.png
+
+
+1-9) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+2-0) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=awesomebump-git
+pkgver=5.0.20160819
+pkgrel=1
+
+source=("$pkgname-$pkgver.tar.gz"
+        "log-file-moved-to-tmp.patch"
+        "awesomeBump.sh"
+        "awesomebump.desktop"
+        "awesomebump.png"
+)
+
+sha256sum awesomebump-git-5.0.20160819.tar.gz
+sha256sum log-file-moved-to-tmp.patch
+sha256sum awesomeBump.sh
+sha256sum awesomebump.desktop
+sha256sum awesomebump.png
+
+sha256sums=(...
+         ...
+)
+
+!!!!!!
+_gitname="awesomebump"
+
+prepare() {
+  cd "${_gitname}"
+   
+build() {
+  cd "${_gitname}"
+  
+package() {
+  cd "${_gitname}"
+
+2-2) VERIFIER unixBuildScript.sh
+================================
+  kwrite /0-DataLinux/05-builds-dir-git/awesomebump/unixBuildScript.sh &
+
+2-2) VERIFIER Sources.pro
+================================
+  kwrite /0-DataLinux/05-builds-dir-git/awesomebump/Sources/Sources.pro &
+
+
+3-1) MAKEPKG DANS /TMP en USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users      256  9 oct.  14:14 awesomebump.desktop
+-rw-r--r--  1 jnd users 33200270 30 oct.  16:50 awesomebump-git-5.0.20160819.tar.gz
+-rw-r--r--  1 jnd users    66603 30 oct.  16:30 awesomebump.png
+-rwxr-xr-x  1 jnd users       50  9 oct.  14:14 awesomeBump.sh
+-rw-r--r--  1 jnd users      521 31 oct.  10:41 log-file-moved-to-tmp.patch
+-rw-r--r--  1 jnd users     1625 31 oct.  10:56 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/awesomebump-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/awesomebump-git/awesomebump-git-5.0.20160819.tar.gz . \
+&& cp -v $HOME/05-builds/awesomebump-git/log-file-moved-to-tmp.patch . \
+&& cp -v $HOME/05-builds/awesomebump-git/awesomeBump.sh . \
+&& cp -v $HOME/05-builds/awesomebump-git/awesomebump.desktop . \
+&& cp -v $HOME/05-builds/awesomebump-git/awesomebump.png . \
+&& makepkg -s \
+&& cd $HOME/05-builds/awesomebump-git \
+&& cp -v /tmp/build/awesomebump-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/awesomebump-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt -l logs
+-------------------------------------------------------------------
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd $HOME/05-builds/awesomebump-git
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+rm -rf awesomebump
+
+# Verifications...
+
+namcap awesomebump-git-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/awesomebump-git-*-x86_64.pkg.tar.*
+
+$ cp -v awesomebump-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/awesomebump-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v awesomebump-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i awesomebump-git-5.0.20160819.tar.gz
+$ rm -rf /tmp/0-AUR
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -Syu awesomebump-git
+!!! OU
+# pacman -U $HOME/00-repolocal/awesomebump-git-1.10.0-11-x86_64.pkg.tar.xz
+
+
+ANCIEN
+======
+

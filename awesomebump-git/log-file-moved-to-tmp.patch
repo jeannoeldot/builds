@@ -1,0 +1,13 @@
+diff -aur awesomebump/Sources/CommonObjects.h awesomebump.new/Sources/CommonObjects.h
+--- awesomebump/Sources/CommonObjects.h	2016-10-30 16:30:52.000000000 +0100
++++ awesomebump.new/Sources/CommonObjects.h	2016-10-31 10:38:26.280823779 +0100
+@@ -14,6 +14,9 @@
+ #ifdef Q_OS_MAC
+ # define AB_INI "AwesomeBump.ini"
+ # define AB_LOG "AwesomeBump.log"
++#elif defined(Q_OS_LINUX)
++# define AB_INI "config.ini"
++# define AB_LOG "/tmp/awesomebump-log.txt"
+ #else
+ # define AB_INI "config.ini"
+ # define AB_LOG "log.txt"

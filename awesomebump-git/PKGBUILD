@@ -1,0 +1,50 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=awesomebump-git
+pkgver=5.0.20160819
+pkgrel=1
+pkgdesc="Generate normal, height, specular or ambient occlusion textures from a single image"
+arch=('i686' 'x86_64')
+url="http://awesomebump.besaba.com/"
+license=('LGPL3')
+depends=('qt5-base' 'qt5-location' 'qt5-script')
+makedepends=('qt5-base' 'qt5-location' 'qt5-script')
+conflicts=('awesomebump')
+provides=('awesomebump')
+source=("$pkgname-$pkgver.tar.gz"
+        "log-file-moved-to-tmp.patch"
+        "awesomeBump.sh"
+        "awesomebump.desktop"
+        "awesomebump.png"
+)
+sha256sums=('9bd6709a89afe84c3d14ecacac8d73fb7caa225b87ee3badb5bdde95959d0485'
+            'e97680403b755109b886f9b17eb73a500d06b57a788451036275bb7aa434479c'
+            'd43f250fc7eb642b9c10674a23a82c98b337b0d5927428126ac752009ff06bf7'            
+            '72b8fcb4af1d23c8bbdd472f08520f667a0075ec70f4c3b5d6c533643fcb5879'
+            'ff9dbd2d32965408f915bfe4679de38876f8b2f22f254af3db6ff8cffff8240e'
+)
+
+_gitname="awesomebump"
+
+prepare() {
+  cd "${_gitname}"
+  patch -Np1 -i "${srcdir}/log-file-moved-to-tmp.patch"
+}
+
+build() {
+  cd "${_gitname}"
+  qmake-qt5
+  make ${MAKEFLAGS}
+}
+
+package() {
+  cd "${srcdir}"
+  install -dm755 "${pkgdir}/opt"
+
+  cp --preserve=mode -r "${_gitname}"/workdir/`cat "${_gitname}"/workdir/current`/bin/AwesomeBump$exe "${_gitname}"/Bin
+  cp --preserve=mode -r "${_gitname}"/Bin "${pkgdir}/opt/awesomebump"
+
+  install -Dm644 "awesomebump.png" "${pkgdir}/usr/share/pixmaps/awesomebump.png"
+  install -Dm644 "awesomebump.desktop" "${pkgdir}/usr/share/applications/awesomebump.desktop"
+  install -Dm755 "awesomeBump.sh" "${pkgdir}/usr/bin/awesomeBump"
+}

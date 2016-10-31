@@ -1,0 +1,57 @@
+FAIRE PATCHS
+====================================
+
+cd $HOME/05-builds/awesomebump-git
+
+mkdir /tmp/srcp
+
+cp -v awesomebump-git-5.0.20160819.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf awesomebump-git-5.0.20160819.tar.gz
+
+cd $HOME/05-builds/awesomebump-git
+
+
+
+1) MODIFIER awesomebump/Sources/CommonObjects.h
+===================================================
+
+cd /tmp/srcp
+
+cp -R awesomebump awesomebump.new
+
+cd awesomebump.new/Sources
+kwrite CommonObjects.h
+
+LIGNE 17 : AJOUTER :
+#elif defined(Q_OS_LINUX)
+# define AB_INI "config.ini"
+# define AB_LOG "/tmp/awesomebump-log.txt"
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier CommonObjects.h~
+rm -f CommonObjects.h~
+
+cd ../..
+
+diff -aur awesomebump awesomebump.new
+diff -aur awesomebump awesomebump.new > log-file-moved-to-tmp.patch
+
+rm -rf awesomebump.new
+
+cd $HOME/05-builds/awesomebump-git
+
+mv -vf /tmp/srcp/log-file-moved-to-tmp.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
