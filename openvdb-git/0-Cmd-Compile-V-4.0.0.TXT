@@ -18,18 +18,15 @@ http://wiki.blender.org/index.php/User:Kevindietrich/OpenVDBCompile
 https://github.com/dreamworksanimation/openvdb
 
 https://github.com/dreamworksanimation/openvdb/releases
+https://github.com/dreamworksanimation/openvdb/archive/openvdb-git-4.0.0.20161015.tar.gz
 
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/dreamworksanimation/openvdb/commits/master
-==> 20160810
+==> 20161015
 
 1.3 SOURCES
 ==============
-
-!!! ERREURS COMPILATION BLENDER ET VERSION 4.0.0
-!!! CONSERVER VERSION 3.2.0
-
 !!! Répertoire clone de openvdb dans : /0-DataLinux/05-builds-dir-git/openvdb
 ------------------------------------------------------------------------------
 
@@ -56,18 +53,18 @@ $ head -n 50 openvdb/openvdb/version.h | grep VERSION
 #define OPENVDB_VERSION_HAS_BEEN_INCLUDED
 /// where X, Y and Z are OPENVDB_LIBRARY_MAJOR_VERSION, OPENVDB_LIBRARY_MINOR_VERSION
 /// and OPENVDB_LIBRARY_PATCH_VERSION, respectively (defined below).
-#define OPENVDB_VERSION_NAME v3_2_0
-#define OPENVDB_LIBRARY_MAJOR_VERSION_NUMBER 3
-#define OPENVDB_LIBRARY_MINOR_VERSION_NUMBER 2
+#define OPENVDB_VERSION_NAME v4_0_0
+#define OPENVDB_LIBRARY_MAJOR_VERSION_NUMBER 4
+#define OPENVDB_LIBRARY_MINOR_VERSION_NUMBER 0
 #define OPENVDB_LIBRARY_PATCH_VERSION_NUMBER 0
 
-==> 3.2.0
+==> 4.0.0
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 cd openvdb
-tar -cvzf openvdb-git-3.2.0.20160810.tar.gz --exclude=.git openvdb
-mv -v openvdb-git-3.2.0.20160810.tar.gz ..
+tar -cvzf openvdb-git-4.0.0.20161015.tar.gz --exclude=.git openvdb
+mv -v openvdb-git-4.0.0.20161015.tar.gz ..
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -75,7 +72,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openvdb-git-3.2.0.20160810.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openvdb-git-4.0.0.20161015.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -88,9 +85,8 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=3.2.0.20160810
+pkgver=4.0.0.20161015
 pkgrel=1
-pkgrel=6          # rebuild boost boost-libs 1.62.0-2
 
 license=('MPL')
 
@@ -106,7 +102,7 @@ makedepends=('boost' 'mesa' 'doxygen')
 conflicts='openvdb'
 provides='openvdb'
 
-sha256sum openvdb-git-3.2.0.20160810.tar.gz
+sha256sum openvdb-git-4.0.0.20161015.tar.gz
 
 source=("$pkgname-$pkgver.tar.gz"
 )
@@ -121,6 +117,13 @@ _gitname="openvdb"
 ==============================
  kwrite /0-DataLinux/05-builds-dir-git/openvdb/openvdb/Makefile &
 
+ LIGNE 53 ET SUIVANTES
+ ---------------------
+# Options:
+#   abi=3               build for compatibility with the OpenVDB 3.x Grid ABI
+#                       (some OpenVDB 4.x features will be disabled)
+
+ 
 prepare() {
   # Fixe erreur compilation avec gcc 6.1
   sed -i  -e "s/-isystem/-I/g" Makefile
@@ -132,7 +135,7 @@ g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -
 
 build() {
   ...
-  make all
+  make all abi=3
 
   
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -140,7 +143,7 @@ build() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openvdb-git-3.2.0.20160810.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openvdb-git-4.0.0.20161015.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -158,7 +161,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-3.2.0.20160810.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-4.0.0.20161015.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -221,7 +224,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openvdb-git-3.2.0.20160810.tar.gz
+$ rm -i openvdb-git-4.0.0.20161015.tar.gz
 
 
 $ cd && maj-repolocal
