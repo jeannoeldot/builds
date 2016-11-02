@@ -5,7 +5,7 @@ cd $HOME/05-builds/flash-pepper-flash
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.23.0.0.185-1
+cp -v PKGBUILD PKGBUILD.23.0.0.205-1
 
 
 1) SOURCES
@@ -28,7 +28,7 @@ mv -vf /tmp/0-AUR/pepper-flash/PKGBUILD .
 wget http://wwwimages.adobe.com/content/dam/acom/en/legal/licenses-terms\
 /pdf/Flash_Player_23_0.pdf
 
-wget https://fpdownload.adobe.com/pub/flashplayer/pdc/23.0.0.185\
+wget https://fpdownload.adobe.com/pub/flashplayer/pdc/23.0.0.205\
 /flash_player_ppapi_linux.x86_64.tar.gz
 
 
@@ -42,7 +42,7 @@ voir CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=pepper-flash
-pkgver=23.0.0.185
+pkgver=23.0.0.205
 pkgrel=1
 
 !!! source=("......")
