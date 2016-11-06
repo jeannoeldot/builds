@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change    Mon, 31 Oct 2016 15:31:47 +0100 (15:31 +0100)
-==> 20161031
+==> last change    Sat, 5 Nov 2016 21:04:23 +0100 (14:04 -0600)
+==> 20161105
 
 
 1.2 REVISION
@@ -54,7 +54,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
  
  ==> #define BLENDER_VERSION_CYCLE   alpha
  
-==> Version = 2.78.1.20161031
+==> Version = 2.78.1.20161105
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.77 à 2.78)
 !!! EN ROOT
@@ -68,7 +68,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.78.1.20161031.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.78.1.20161105.tar.gz --exclude=.git blender
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -76,7 +76,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.1.20161031.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.1.20161105.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -96,7 +96,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.78.1.20161031
+pkgver=2.78.1.20161105
 pkgrel=1
 
 ---------------------------------------------------------------------------
@@ -136,7 +136,7 @@ _gitname="blender"
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.78.1.20161031.tar.gz
+sha256sum blender-git-2.78.1.20161105.tar.gz
 
 sha256sums=(...
          ...
@@ -318,13 +318,6 @@ TESTS DANS PKGBUILD
         -DWITH_GL_PROFILE_CORE=ON \
 
 
-!!!!! VOIR
-        option(WITH_GPU_DEBUG         OFF
-INCHANGÉS :
-------------
-/build/blender-git/src/blender/source/blender/gpu/intern/gpu_debug.c:203:7: error: 'MX_profile_es20' undeclared (first use in this function)
-
-
 # Experimental support of C++11
 Lignes 495 et ...
 506 option(WITH_C11 "Build with C11 standard enabled, for development use only!" OFF)
@@ -333,8 +326,10 @@ Lignes 495 et ...
 508 option(WITH_CXX11 "Build with C++11 standard enabled, for development use only!" OFF)
 ==> ON  : -DWITH_CXX11=ON \ 
 
+# Compiler toolchain
+
 # Dependency graph
-Lignes 511 et ...
+Lignes 517 et ...
 option(WITH_LEGACY_DEPSGRAPH "Build Blender with legacy dependency graph" ON)
 mark_as_advanced(WITH_LEGACY_DEPSGRAPH)
 INCHANGÉS :
@@ -354,7 +349,7 @@ INCHANGÉS :
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161031.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161105.tar.gz
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
 !!! A MODIFIER SI PAS OK !
@@ -472,7 +467,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.78.1.20161031.tar.gz
+$ rm -i blender-git-2.78.1.20161105.tar.gz
 
 
 $ cd && maj-repolocal
@@ -503,6 +498,13 @@ $ rm -rf .config/blender/2.76
 ANCIENS
 ========
 ------------------------------------------------------------
+!!!!! VOIR
+        option(WITH_GPU_DEBUG         OFF
+INCHANGÉS :
+------------
+/build/blender-git/src/blender/source/blender/gpu/intern/gpu_debug.c:203:7: error: 'MX_profile_es20' undeclared (first use in this function)
+
+
 LE 24/07/2016
 =============
 !!! ERREUR
@@ -543,7 +545,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.78.1.20161031.tar.gz
+sha256sum blender-git-2.78.1.20161105.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -563,7 +565,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161031.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.1.20161105.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -578,7 +580,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161031.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161105.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -648,7 +650,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.78.1.20161031.tar.gz
+sha256sum blender-git-2.78.1.20161105.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -705,7 +707,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161031.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.1.20161105.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \
