@@ -5,13 +5,13 @@ cd $HOME/05-builds/flash-pepper-flash
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.23.0.0.205-1
+cp -v PKGBUILD PKGBUILD.23.0.0.207-1
 
 
-1) SOURCES
+0) SOURCES
 ==============
 
-1-1) Download snapshot
+0-1) Download snapshot
 ----------------------
 rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
 
@@ -23,14 +23,9 @@ cd $HOME/05-builds/flash-pepper-flash
 
 mv -vf /tmp/0-AUR/pepper-flash/PKGBUILD .
 
-1-2) Download source
-----------------------
-wget http://wwwimages.adobe.com/content/dam/acom/en/legal/licenses-terms\
-/pdf/Flash_Player_23_0.pdf
-
-wget https://fpdownload.adobe.com/pub/flashplayer/pdc/23.0.0.205\
-/flash_player_ppapi_linux.x86_64.tar.gz
-
+1) LIRE NOUVEAU PKGBUILD
+========================
+pkgver=23.0.0.207
 
 1-8) FAIRE PATCH
 ===============================
@@ -41,8 +36,106 @@ voir CmdFairePatches.TXT
 ========================
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
+1-2) Download source
+----------------------
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1249 29 avril 01:30 PKGBUILD
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/flash-pepper-flash/PKGBUILD . \
+&& makepkg -s \
+&& cd $HOME/05-builds/flash-pepper-flash \
+&& cp -v /tmp/build/pepper-flash-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/flash-pepper-flash && rm -rf /tmp/build
+
+3-2) MAKEPKG en USER
+====================
+!!! EN USER
+cd $HOME/05-builds/flash-pepper-flash
+makepkg -s
+
+makepkg -f
+
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+rm -f *.log
+
+
+# Verifications...
+
+namcap pepper-flash-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/pepper-flash-*-x86_64.pkg.tar.*
+
+$ cp -v pepper-flash-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/pepper-flash-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v pepper-flash-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -rf /tmp/0-AUR
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+VOIR $HOME/05-builds/flash-freshplayerplugin/0-CmdCompile.TXT
+=================================================================
+  5) INSTALLATION
+  ===============
+
+!!! EN ROOT
+
+# pacman -R pepper-flash
+
+# rm -i /var/cache/pacman/pkg/pepper-flash-*-x86_64.pkg.tar.*
+
+
+
+================================================================
+ANCIENS
+========
+
+1-2) Download source
+----------------------
+wget http://wwwimages.adobe.com/content/dam/acom/en/legal/licenses-terms\
+/pdf/Flash_Player_23_0.pdf
+
+wget https://fpdownload.adobe.com/pub/flashplayer/pdc/23.0.0.207\
+/flash_player_ppapi_linux.x86_64.tar.gz
+
+
 pkgname=pepper-flash
-pkgver=23.0.0.205
+pkgver=23.0.0.207
 pkgrel=1
 
 !!! source=("......")
@@ -86,45 +179,9 @@ rm -f *~ \
 && cp -v /tmp/build/pepper-flash-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
-SI ERREUR :
-------------
-cd $HOME/05-builds/flash-pepper-flash && rm -rf /tmp/build
-
-3-2) MAKEPKG en USER
-====================
-!!! EN USER
-cd $HOME/05-builds/flash-pepper-flash
-makepkg -s
-
-makepkg -f
-
-!!! EN USER
-rm -rf pkg src
-rm -f *~
-rm -f *.log
-
-
-# Verifications...
-
-namcap pepper-flash-*-x86_64.pkg.tar.*
-
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
--------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/pepper-flash-*-x86_64.pkg.tar.*
-
-$ cp -v pepper-flash-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
----------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/pepper-flash-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
 !!! OU
 # Supprime le précédent dans  $HOME/00-repolocal
 rm -i $HOME/00-repolocal/pepper-flash-*-x86_64.pkg.tar.*
-
-
-$ mv -v pepper-flash-*-x86_64.pkg.tar.* $HOME/00-repolocal/
-
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
@@ -132,27 +189,6 @@ $ rm -i flash_player_ppapi_linux.x86_64.tar.gz
 $ rm -i Flash_Player_23_0.pdf
 $ rm -rf /tmp/0-AUR
 
-
-$ cd && maj-repolocal
-$ sync
-
-
-VOIR $HOME/05-builds/flash-freshplayerplugin/0-CmdCompile.TXT
-=================================================================
-  5) INSTALLATION
-  ===============
-
-!!! EN ROOT
-
-# pacman -R pepper-flash
-
-# rm -i /var/cache/pacman/pkg/pepper-flash-*-x86_64.pkg.tar.*
-
-
-
-================================================================
-ANCIENS
-========
 
 cd 0-AUR
 

@@ -1,0 +1,48 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openvdb-git
+pkgver=4.0.0.20161107
+pkgrel=1
+pkgdesc="Library and tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
+arch=('i686' 'x86_64')
+url="http://www.openvdb.org/"
+license=('MPL')
+depends=('boost-libs' 'openexr' 'ilmbase' 'intel-tbb'
+         'blosc' 'zlib'
+         'jemalloc'
+         'glfw-x11' 'glew'
+)
+makedepends=('cmake' 'boost' 'mesa' 'cppunit' 'doxygen')
+conflicts=('openvdb')
+provides=('openvdb')
+source=("$pkgname-$pkgver.tar.gz"
+)
+sha256sums=('c7a68d50cdb073f4f319c8142eb04b0152aea0d983c8088aa85c49647134b328'
+)
+
+_gitname="openvdb"
+
+prepare() {
+  cd "${_gitname}"
+}
+  
+build() {
+  cd "${_gitname}"
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+  
+  cmake \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D CMAKE_SKIP_RPATH=ON \
+        -D OPENVDB_BUILD_PYTHON_MODULE=OFF \
+        -D OPENVDB_ENABLE_RPATH=OFF \
+        -D OPENVDB_ENABLE_3_ABI_COMPATIBLE=OFF \
+        ..
+  make ${MAKEFLAGS}
+}
+
+package() {
+  cd "${_gitname}/build"
+  make DESTDIR="${pkgdir}" install
+}

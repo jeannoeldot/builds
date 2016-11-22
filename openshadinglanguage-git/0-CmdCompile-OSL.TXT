@@ -8,7 +8,7 @@ GIT     A REVOIR
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/imageworks/OpenShadingLanguage
-==> 20161101
+==> 20161108
 
 1.3 SOURCES
 ==============
@@ -37,15 +37,15 @@ $ head -n 8 osl/CMakeLists.txt
 # Release version of the library
 set (OSL_LIBRARY_VERSION_MAJOR 1)
 set (OSL_LIBRARY_VERSION_MINOR 8)
-set (OSL_LIBRARY_VERSION_PATCH 2)
+set (OSL_LIBRARY_VERSION_PATCH 3)
 set (OSL_LIBRARY_VERSION_RELEASE_TYPE "dev")   # "dev", "betaX", "RCY", ""
 
-==> 1.8.2
+==> 1.8.3
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openshadinglanguage-git-1.8.2.20161101.tar.gz --exclude=.git osl
+tar -cvzf openshadinglanguage-git-1.8.3.20161108.tar.gz --exclude=.git osl
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -53,7 +53,7 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.8.2.20161101.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.8.3.20161108.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -74,7 +74,7 @@ voir 0-CmdFairePatches-LLVM35.STATIC.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.2.20161101
+pkgver=1.8.3.20161108
 pkgrel=1
 pkgrel=2          # rebuild boost boost-libs 1.61.0-2
 
@@ -87,7 +87,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'llvm35-static-system-libs.patch'
 )
 
-sha256sum openshadinglanguage-git-1.8.2.20161101.tar.gz
+sha256sum openshadinglanguage-git-1.8.3.20161108.tar.gz
 
 sha256sum llvm35-static-system-libs.patch
 
@@ -153,7 +153,7 @@ LIGNE 244
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.8.2.20161101.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.8.3.20161108.tar.gz
 -rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm35-static-system-libs.patch
 
 
@@ -170,7 +170,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.8.2.20161101.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.8.3.20161108.tar.gz . \
 && cp -v $HOME/05-builds/openshadinglanguage-git/llvm35-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
@@ -250,7 +250,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openshadinglanguage-git-1.8.2.20161101.tar.gz
+$ rm -i openshadinglanguage-git-1.8.3.20161108.tar.gz
 
 
 $ cd && maj-repolocal

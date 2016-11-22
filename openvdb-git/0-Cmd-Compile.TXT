@@ -85,6 +85,8 @@ voir 0-CmdFairePatches.TXT
 
 2-1) MODIFIER LE PKGBUILD
 =========================
+cp -vf PKGBUILD.3.2.0.20160810 PKGBUILD
+
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git               # openvdb ds community
@@ -216,6 +218,10 @@ $HOME/00-repolocal/pkg-OLD/
 
 $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 
+
+5-1) SAUVE LE PKGBUILD
+=========================
+cp -vf PKGBUILD PKGBUILD.3.2.0.20160810
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------

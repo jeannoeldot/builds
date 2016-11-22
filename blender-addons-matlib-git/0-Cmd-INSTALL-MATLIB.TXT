@@ -1,0 +1,49 @@
+
+1) ADRESSE DU SITE
+==================
+https://github.com/meta-androcto/materials_library
+
+
+2) ATTENTION A LA DATE DE MAJ
+=============================
+
+Commits on May 13, 2016
+
+
+10) VERSION DE BLENDER
+======================
+2.78
+
+11) RÉPERTOIRE USER CONFIG DE BLENDER
+=====================================
+$HOME/.config/blender/2.78/scripts/addons
+
+
+!!! SI DATE MAJ SITE SUPÉRIEUR À DATE INSTALLATION PRÉCÉDENTE
+-------------------------------------------------------------
+cd $HOME/.config/blender/2.78/scripts/addons
+ls
+rm -rf matlib
+cd
+
+12) SOURCES
+===========
+mkdir -p $HOME/.config/blender/2.78/scripts/addons
+cd $HOME/.config/blender/2.78/scripts/addons
+git clone git://github.com/meta-androcto/materials_library matlib
+
+12-1) SUPPRIME RÉPERTOIRE .git ET FICHIER .gitignore
+====================================================
+rm -rf matlib/.git
+rm -f matlib/.gitignore
+
+
+13) COMPILE FICHIER .py
+=======================
+python -m compileall "$HOME/.config/blender/2.78/scripts/addons/matlib"
+python -O -m compileall "$HOME/.config/blender/2.78/scripts/addons/matlib"
+
+
+99) FIN
+=======
+cd
