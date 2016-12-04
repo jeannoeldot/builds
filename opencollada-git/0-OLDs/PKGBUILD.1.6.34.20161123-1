@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=opencollada-git
-pkgver=1.6.36.20161130
+pkgver=1.6.34.20161123
 pkgrel=1
 pkgdesc="Stream based reader and writer library for COLLADA files"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ provides=('opencollada')
 source=("$pkgname-$pkgver.tar.gz"
         'opencollada.conf'
 )
-sha256sums=('f7e212c92a31c8d59e42f6cff1bbead08165ac1af30d8be28627c9fc2914652b'
+sha256sums=('33ddfc7c82c68d4efc9345a9eb6d4b75e6b8ba15dd2f15d01d5e9f714ce78a18'
             '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
 )
 
@@ -28,6 +28,7 @@ build() {
 
   cmake \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
     -DUSE_STATIC=OFF \
     -DUSE_SHARED=ON \
      .. 
