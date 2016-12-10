@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=conky-lua-nv-git
-pkgver=1.10.7.20161206
+pkgver=1.10.6.20161007
 pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
@@ -23,7 +23,7 @@ optdepends=('nvidia: for GT4xx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('9e359e96c8c35d6a7f3e65108efffec27c7ba4e971a833cc6ca9c323a8af8764'
+sha256sums=('70c79740380783a3723887538c6798842dce62d0a443f482b14bda4547532c8f'
 )
 #options=('!strip' 'debug')
 install="conky-lua-nv-git.install"
@@ -44,7 +44,6 @@ build() {
     -D BUILD_LUA_CAIRO=ON \
     -D BUILD_LUA_IMLIB2=ON \
     -D BUILD_LUA_RSVG=ON \
-    -D BUILD_MPD=OFF \
     -D BUILD_MOC=OFF \
     -D BUILD_CURL=ON \
     -D BUILD_RSS=ON \

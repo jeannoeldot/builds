@@ -5,7 +5,7 @@ cd $HOME/05-builds/profile-sync-daemon
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.6.29-1
+cp -v PKGBUILD PKGBUILD.6.31-1
 
 
 1) TÉLÉCHARGER SOURCES
@@ -29,11 +29,11 @@ mv -vf /tmp/0-AUR/profile-sync-daemon/psd.install .
 1-2) Download source
 ----------------------
 wget http://repo-ck.com/source/profile-sync-daemon\
-/profile-sync-daemon-6.29.tar.xz
+/profile-sync-daemon-6.31.tar.xz
 
 ls
 
-sha256sum profile-sync-daemon-6.29.tar.xz
+sha256sum profile-sync-daemon-6.31.tar.xz
 
 2) MODIFIER LE PKGBUILD
 ========================
@@ -56,7 +56,7 @@ sha256sums=(1111111111
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   910 21 sept. 19:10 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-sync-daemon-6.29.tar.xz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-sync-daemon-6.31.tar.xz
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 psd.install
 
 !!! A MODIFIER SI PAS OK !
@@ -70,7 +70,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/profile-sync-daemon/PKGBUILD . \
-&& cp -v $HOME/05-builds/profile-sync-daemon/profile-sync-daemon-6.29.tar.xz . \
+&& cp -v $HOME/05-builds/profile-sync-daemon/profile-sync-daemon-6.31.tar.xz . \
 && cp -v $HOME/05-builds/profile-sync-daemon/psd.install . \
 && makepkg -s \
 && cd $HOME/05-builds/profile-sync-daemon \
@@ -117,7 +117,7 @@ $ mv -v profile-sync-daemon-*-any.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i profile-sync-daemon-6.29.tar.xz
+$ rm -i profile-sync-daemon-6.31.tar.xz
 $ rm -rf /tmp/0-AUR
 
 
@@ -162,8 +162,9 @@ $ systemctl --user stop psd.service
 
 $ kwrite $HOME/.config/psd/psd.conf &
 15  #USE_OVERLAYFS="no"   ==>  A LAISSER
-48  #BROWSERS=""          ==>  BROWSERS="firefox"
-56  #USE_BACKUPS="yes"    ==>  A LAISSER
+50  #BROWSERS=""          ==>  BROWSERS="firefox"
+58  #USE_BACKUPS="yes"    ==>  A LAISSER
+64  #BACKUP_LIMIT=5       ==>  A LAISSER
 
 $ rm -i $HOME/.config/psd/psd.conf~
 

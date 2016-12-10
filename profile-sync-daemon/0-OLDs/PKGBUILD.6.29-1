@@ -2,7 +2,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname='profile-sync-daemon'
-pkgver=6.31
+pkgver=6.29
 pkgrel=1
 pkgdesc='Syncs browser profiles to tmpfs reducing SSD/HDD calls and speeding-up browsers.'
 arch=('any')
@@ -13,7 +13,7 @@ conflicts=('firefox-sync' 'goanysync' 'go-anysync-git' 'iceweasel-sync'
 'tmpfs-store' 'tmpfs-sync' 'user-profile-sync-daemon')
 source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz")
 install=psd.install
-sha256sums=('3aa6f83ad5cb47653d486124233d6af7cf79e58bd1e57a4bcd34029012be9a13')
+sha256sums=('8adc2f5470dfe4f705c592f4b8b8376a5d84e5ba0d32d06aeb9e68f7957f9f51')
 
 build() {
   cd "$pkgname-$pkgver"

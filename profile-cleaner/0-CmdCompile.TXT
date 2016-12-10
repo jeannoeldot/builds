@@ -4,17 +4,43 @@
 #Le répertoire
 cd $HOME/05-builds/profile-cleaner
 
-wget http://repo-ck.com/source/profile-cleaner/profile-cleaner-2.35.tar.xz
+0) SAUVEGARDER PKGBUILD PRÉCÉDENT
+=================================
+cp -v PKGBUILD PKGBUILD.2.35-1
 
-ls -la
 
-sha256sum profile-cleaner-2.35.tar.xz
+1) TÉLÉCHARGER SOURCES
+======================
+
+1-1) Download snapshot
+----------------------
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/profile-cleaner.tar.gz
+
+tar -xzf profile-cleaner.tar.gz
+
+cd $HOME/05-builds/profile-cleaner
+
+mv -vf /tmp/0-AUR/profile-cleaner/PKGBUILD .
+
+mv -vf /tmp/0-AUR/profile-cleaner/readme.install .
+
+
+1-2) Download source
+----------------------
+wget http://repo-ck.com/source/profile-cleaner\
+/profile-cleaner-2.36.tar.xz
+
+ls
+
+sha256sum profile-cleaner-2.36.tar.xz
 
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
-pkgver=2.35
+pkgver=
 
 source=(aaaaaa.tar.gz
         xxx.patch
@@ -30,7 +56,7 @@ sha256sums=(1111111111
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-cleaner-2.35.tar.xz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-cleaner-2.36.tar.xz
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 readme.install
 
 !!! A MODIFIER SI PAS OK !
@@ -44,7 +70,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/profile-cleaner/PKGBUILD . \
-&& cp -v $HOME/05-builds/profile-cleaner/profile-cleaner-2.35.tar.xz . \
+&& cp -v $HOME/05-builds/profile-cleaner/profile-cleaner-2.36.tar.xz . \
 && cp -v $HOME/05-builds/profile-cleaner/readme.install . \
 && makepkg -s \
 && cd $HOME/05-builds/profile-cleaner \
@@ -91,7 +117,8 @@ $ mv -v profile-cleaner-*-any.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i profile-cleaner-2.35.tar.xz
+$ rm -i profile-cleaner-2.36.tar.xz
+$ rm -rf /tmp/0-AUR
 
 
 $ cd && maj-repolocal
