@@ -4,7 +4,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.8.2.20170107
+pkgver=1.8.1.20161231
 pkgrel=1
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('i686' 'x86_64')
@@ -22,7 +22,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('29136f7138e7639d1543c3711a6e3335bbf19938fbb5f5c26ba940dd7427c124'
+sha256sums=('5139585c735bc2e25ed96a691d2da046e506af6c65444c62f8ff7ce1ab4e0378'
 )
 
 _gitname="oiio"
@@ -40,7 +40,7 @@ build() {
       -DSTOP_ON_WARNING=OFF \
       -DOIIO_BUILD_TESTS=OFF \
       -DPYTHON_VERSION=2.7 \
-      -DPYTHON3_VERSION=3.6 \
+      -DPYTHON3_VERSION=3.5 \
       -DUSE_OPENSSL=ON \
       -DUSE_PTEX=OFF \
       -DUSE_NUKE=OFF \

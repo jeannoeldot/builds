@@ -5,11 +5,61 @@ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.77.3.20160824.tar.gz /tmp/srcp/
+cp -v blender-git-2.78.4.20170106.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.77.3.20160824.tar.gz
+tar -xzf blender-git-2.78.4.20170106.tar.gz
+
+1) MODIFIER blender/release/scripts/addons_contrib/curve_tools/CurveIntersections.py
+====================================================================================
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons_contrib/curve_tools
+kwrite CurveIntersections.py
+
+LIGNES 473 ET 474 : RAJOUTER
+        global algoDIR
+        global algoPOV
+
+LIGNE 492 : DEVIENT
+                #global algoDIR
+
+LIGNE 502 : DEVIENT
+                #global algoPOV
+
+LIGNE 538 : DEVIENT
+                    #global algoDIR
+
+LIGNE 544 : DEVIENT
+                    #global algoPOV
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CurveIntersections.py~
+rm -f CurveIntersections.py~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-algoDIR-algoPOV.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-algoDIR-algoPOV.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 TEST 2 : COMPIL OK
 2) MODIFIER blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp
@@ -48,17 +98,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/fix-std-isfinite-has-not-been-declared.patch .
 
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 TEST 0 : COMPIL OK
 0) MODIFIER blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp

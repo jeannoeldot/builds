@@ -2,7 +2,7 @@
 
 pkgname=blender-addons-yafaray-git
 pkgver=3.0.2.20160806
-pkgrel=2
+pkgrel=1
 pkgdesc="Raytracing open source render engine"
 arch=('i686' 'x86_64')
 url="http://www.yafaray.org/"
@@ -15,7 +15,7 @@ source=("${pkgname}-${pkgver}.tar.gz"
 sha256sums=('77cbedce2d35880bc7270138cd0b496afe5d28f28d0b1aed34b7bacc60437bc1'
 )
 
-_slot="2.78"
+_slot="2.77"
 _realname="YafaRay"
 _name_addon="yafaray_v3"
 _dir_addons="addons_contrib"
@@ -28,7 +28,7 @@ prepare() {
       sed -i "s|#set(YAF_LIB_DIR lib)|set(YAF_LIB_DIR bin)|" CMakeConfig/UserConfig.txt
       sed -i "s|#set(USER_RELEASE_OPTIMIZATION_FLAGS \"\")|set(USER_RELEASE_OPTIMIZATION_FLAGS \"-march=native -Ofast -ffast-math -pipe -fdiagnostics-color=always -fstack-protector-strong\")|" CMakeConfig/UserConfig.txt
       sed -i "s|#set(USER_RELEASE_EXTRA_FLAGS \"\")|set(USER_RELEASE_EXTRA_FLAGS \"-D_FORTIFY_SOURCE=2 -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block\")|" CMakeConfig/UserConfig.txt
-      sed -i "s|#set(YAF_PY_VERSION 3.6)|set(YAF_PY_VERSION 3.6)|" CMakeConfig/UserConfig.txt
+      sed -i "s|#set(YAF_PY_VERSION 3.5)|set(YAF_PY_VERSION 3.5)|" CMakeConfig/UserConfig.txt
 }
 
 build() {
