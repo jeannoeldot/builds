@@ -93,6 +93,7 @@ pkgname=openvdb-git               # openvdb ds community
 pkgver=3.2.0.20160810
 pkgrel=1
 pkgrel=6          # rebuild boost boost-libs 1.62.0-2
+pkgrel=7          # rebuild boost boost-libs 1.63.0-1
 
 license=('MPL')
 

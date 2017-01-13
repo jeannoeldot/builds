@@ -98,6 +98,7 @@ pkgname=blender-git
 !!!!!!
 pkgver=2.78.4.20170106
 pkgrel=1
+pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
 ---------------------------------------------------------------------------
 !!! OK DANS CHROOT

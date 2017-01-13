@@ -5,7 +5,7 @@
 
 pkgname=openimageio-git
 pkgver=1.8.2.20170107
-pkgrel=1
+pkgrel=2
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('i686' 'x86_64')
 url="http://www.openimageio.org/"

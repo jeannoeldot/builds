@@ -1,0 +1,35 @@
+Blender Addons de addons_contrib absent
+
+Pourriez-vous revoir la fabrication du paquet
+
+car le répertoire addons_contrib est vide
+
+ls /usr/share/blender/2.78/scripts/addons_contrib/
+
+
+De plus, lors du passage à python 3.6, la version de llvm a été modifiée aussi
+commit 	4fd095945c7881bd4a3067f2b3e7d177a8f2319a du 25/12/2016
++ -DLLVM_VERSION=3.6 \
+
+Il semble que les sources pour scons ne soient plus utilisées.
+
+
+Allez sur https://www.archlinux.org/packages/community/x86_64/blender/
+
+
+
+Blender Addons of addons_contrib absent
+Could you review the manufacture of the package
+because the addons_contrib directory is empty
+
+ls /usr/share/blender/2.78/scripts/addons_contrib/
+
+In addition, when switching to python 3.6, the version of llvm has also been modified
+See commit 4fd095945c7881bd4a3067f2b3e7d177a8f2319a of 25/12/2016
++ -DLLVM_VERSION=3.6 \
+
+Also, it seems that the sources for scons are no longer used.
+
+
+Go to https://www.archlinux.org/packages/community/x86_64/blender/
+ 
