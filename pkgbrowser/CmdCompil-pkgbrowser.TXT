@@ -20,18 +20,25 @@ mv -vf /tmp/0-AUR/pkgbrowser/pkgbrowser.install .
 
 1-2) Download source
 ----------------------
-wget https://bitbucket.org/kachelaqa/pkgbrowser/downloads/pkgbrowser-0.20.tar.gz
+wget https://bitbucket.org/kachelaqa/pkgbrowser/downloads/pkgbrowser-0.20.1.tar.gz
 
 ls
 
-md5sum pkgbrowser-0.20.tar.gz
+md5sum pkgbrowser-0.20.1.tar.gz
 
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
-pkgver=0.20
+pkgver=0.20.1
 pkgrel=1
+
+AJOUTER : hicolor-icon-theme
+depends=('pacman>=4.1' 'pacman<5.1' 'python>=3.2' 'python<3.7' 'python-pyqt5'
+         'hicolor-icon-theme')
+
+SUPPRIMER :
+install="$pkgname.install"
 
 source=(... ...)
 md5sums=(... ...)
@@ -44,7 +51,7 @@ md5sums=(... ...)
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 pkgbrowser-0.20.tar.gz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 pkgbrowser-0.20.1.tar.gz
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 pkgbrowser.install
 
 !!! A MODIFIER SI PAS OK !
@@ -59,7 +66,7 @@ $ rm -f *~
 rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.20.tar.gz,pkgbrowser.install} . \
+&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.20.1.tar.gz,pkgbrowser.install} . \
 && makepkg -s \
 && cd $HOME/05-builds/pkgbrowser \
 && cp -v /tmp/build/pkgbrowser-*-x86_64.pkg.tar.* . \
@@ -97,6 +104,11 @@ makepkg -f
 ==================
 
 namcap pkgbrowser-*-x86_64.pkg.tar.*
+pkgbrowser W: .INSTALL file runs a command provided by hooks.
+pkgbrowser E: Dependency hicolor-icon-theme detected and not included (needed for hicolor theme hierarchy)
+pkgbrowser W: Dependency python included but already satisfied
+pkgbrowser W: Dependency python included but already satisfied
+pkgbrowser W: Dependency included and not needed ('python-pyqt5')
 
 # Nettoyage fichiers~
 =========================
@@ -123,7 +135,7 @@ $ mv -v pkgbrowser-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -i pkgbrowser.install
-$ rm -i pkgbrowser-0.20.tar.gz
+$ rm -i pkgbrowser-0.20.1.tar.gz
 $ rm -rf /tmp/0-AUR
 
 

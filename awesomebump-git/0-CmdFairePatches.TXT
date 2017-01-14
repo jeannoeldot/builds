@@ -5,11 +5,11 @@ cd $HOME/05-builds/awesomebump-git
 
 mkdir /tmp/srcp
 
-cp -v awesomebump-git-5.0.20160819.tar.gz /tmp/srcp/
+cp -v awesomebump-git-5.0.20161030.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf awesomebump-git-5.0.20160819.tar.gz
+tar -xzf awesomebump-git-5.0.20161030.tar.gz
 
 cd $HOME/05-builds/awesomebump-git
 
