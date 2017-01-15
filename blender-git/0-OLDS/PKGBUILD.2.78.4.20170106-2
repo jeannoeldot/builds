@@ -1,8 +1,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.4.20170114
-pkgrel=1
+pkgver=2.78.4.20170106
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -34,11 +34,21 @@ provides=('blender')
 options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
+        'fix-SyntaxError-algoDIR-algoPOV.patch'
 )
-sha256sums=('ddc01f6c7e4bb829675e6ac3834e5f75305c1895635dff315a330ca404fe23aa'
+sha256sums=('6d88a7b7ebe19141c3cbe0a442b6f36ecb44568765b538d50c2039ede5b99b07'
+            'd700193b7934a3626be7724957a861038e632277fb47af731eb0c2852f3406f3'
 )
 
 _gitname="blender"
+
+prepare() {
+  cd "${_gitname}"
+  #blender/release/scripts/addons_contrib/curve_tools/CurveIntersections.py
+  # fix erreur : line 536
+  # SyntaxError: name 'algoDIR' is used prior to global declaration
+  patch -Np1 -i "${srcdir}/fix-SyntaxError-algoDIR-algoPOV.patch"
+}
 
 build() {
   cd "${_gitname}"

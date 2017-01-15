@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=opensubdiv-git
-pkgver=3.1.1.20170112
+pkgver=3.1.0.20161022
 pkgrel=1
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('i686' 'x86_64')
@@ -9,12 +9,15 @@ license=('custom')
 url="http://graphics.pixar.com/opensubdiv"
 depends=('glew' 'glfw-x11' 'intel-tbb'
 )
-makedepends=('cmake' 'mesa')
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+             'gcc5'
+)
 conflicts=('opensubdiv')
 provides=('opensubdiv')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('f8bc83ead0455dda87c6047ac86dd8572e8ce7a841d6757088f5d69d37ce10e1'
+sha256sums=('81ec7ac4e74c094c10dd6dcb4a14deabc677c1f6257b9f444a67175023793b1c'
 )
 
 _gitname="opensubdiv"
@@ -26,17 +29,18 @@ build() {
   mkdir build && cd build
   
   cmake \
+        -D CMAKE_C_COMPILER='/usr/bin/gcc-5' \
+        -D CMAKE_CXX_COMPILER='/usr/bin/g++-5' \
         -D CMAKE_BUILD_TYPE=Release \
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D CMAKE_SKIP_RPATH=ON \
         -D NO_PTEX=1 \
         -D NO_CLEW=1 \
-        -D NO_CUDA=1 \
-        -D NO_OPENCL=1 \
         -D NO_DOC=1 \
         -D NO_TUTORIALS=1 \
         -D NO_REGRESSION=1 \
         -D NO_EXAMPLES=1 \
+        -D OSD_CUDA_NVCC_FLAGS="--gpu-architecture compute_52" \
         ..
   make ${MAKEFLAGS}
 }

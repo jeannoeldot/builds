@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change    Fri, 6 Jan 2017 18:18:20 +0100 (18:18 +0100)
-==> 20170106
+==> last change    Sat, 14 Jan 2017 03:34:51 +0100 (00:34 -0200)
+==> 20170114
 
 
 1.2 REVISION
@@ -54,7 +54,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
  
  ==> #define BLENDER_VERSION_CYCLE   alpha
  
-==> Version = 2.78.4.20170106
+==> Version = 2.78.4.20170114
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.77 à 2.78)
 !!! EN ROOT
@@ -68,7 +68,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.78.4.20170106.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.78.4.20170114.tar.gz --exclude=.git blender
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -76,7 +76,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170106.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170114.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -96,7 +96,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.78.4.20170106
+pkgver=2.78.4.20170114
 pkgrel=1
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
@@ -138,34 +138,11 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.78.4.20170106.tar.gz
+sha256sum blender-git-2.78.4.20170114.tar.gz
 
 sha256sums=(...
          ...
 )
-
-AVEC PATCH
-----------
-source=("$pkgname-$pkgver.tar.gz"
-        'fix-SyntaxError-algoDIR-algoPOV.patch'
-)
-
-sha256sum blender-git-2.78.4.20170106.tar.gz
-
-sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
-
-sha256sums=('...'
-            '...'
-)
-
-prepare() {
-  cd "${_gitname}"
-  #blender/release/scripts/addons_contrib/curve_tools/CurveIntersections.py
-  # fix erreur : line 536
-  # SyntaxError: name 'algoDIR' is used prior to global declaration
-  patch -Np1 -i "${srcdir}/fix-SyntaxError-algoDIR-algoPOV.patch"
-}
-
 
 # LLVM : VOIR PKGBUILD sur COMMUNITY
 ------------------------------------
@@ -231,13 +208,6 @@ endif()
 250 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
 251 option(WITH_OPENVDB_BLOSC   ==> ON
 
-# GHOST Windowing Library Options
-????
-261 option(WITH_GHOST_XDND    "Enable drag'n'drop support on X11 using XDND protocol" ON)
-
-# Misc...
-277 option(WITH_OPENMP  ON
-
 300 WITH_SYSTEM_OPENJPEG      ==> ON
 
 302     !!! VOIR
@@ -261,14 +231,12 @@ endif()
 
 Lignes 331 et ...
 # Alembic support
-!!! ????
 option(WITH_ALEMBIC             "Enable Alembic Support" OFF)
 option(WITH_ALEMBIC_HDF5        "Enable Legacy Alembic Support (not officially supported)" OFF)
 
 Lignes 341
 # 3D format support
 option WITH_OPENCOLLADA		ON 	    si ON dep = opencollada-git
-option(WITH_OPENCOLLADA   "Enable OpenCollada Support (http://www.opencollada.org)" ${_init_OPENCOLLADA})
 
 # Sound output
 344   option(WITH_SDL   	==> ON
@@ -283,6 +251,7 @@ option(WITH_OPENCOLLADA   "Enable OpenCollada Support (http://www.opencollada.or
 # Misc
 373	option WITH_INPUT_NDOF		==> OFF
 
+
 376	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
 384     WITH_PYTHON_INSTALL             ON   ==> OFF
@@ -291,7 +260,6 @@ option(WITH_OPENCOLLADA   "Enable OpenCollada Support (http://www.opencollada.or
 
 391     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
-397     WITH_CPU_SSE    ON
         
 
 400 # Cycles
@@ -322,16 +290,6 @@ option(WITH_LLVM   	==> ON
 option(LLVM_STATIC   	==> ON
 
 
-Lignes 430 et ...
-option(WITH_MEM_JEMALLOC   "Enable malloc replacement (http://www.canonware.com/jemalloc)" ON)
-  ==> depends=(... 'jemalloc' ...
-
-444 WITH_BOOST      ON
-
-# Unit testsing
-Ligne 447
-WITH_GTESTS "Enable GTest unit testing"  OFF
-  
 # Documentation
 Lignes 451 et ...
 if(UNIX AND NOT APPLE)
@@ -373,11 +331,6 @@ Lignes 495 et ...
 # Compiler toolchain
 
 # Dependency graph
-Lignes 517 et ...
-option(WITH_LEGACY_DEPSGRAPH "Build Blender with legacy dependency graph" ON)
-mark_as_advanced(WITH_LEGACY_DEPSGRAPH)
-INCHANGÉS :
-------------
 
 
 =================================================================
@@ -393,7 +346,7 @@ INCHANGÉS :
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170106.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170114.tar.gz
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
 !!! A MODIFIER SI PAS OK !
@@ -511,7 +464,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.78.4.20170106.tar.gz
+$ rm -i blender-git-2.78.4.20170114.tar.gz
 
 
 $ cd && maj-repolocal
@@ -541,6 +494,29 @@ $ rm -rf .config/blender/2.76
 ================================================================
 ANCIENS
 ========
+AVEC PATCH
+----------
+source=("$pkgname-$pkgver.tar.gz"
+        'fix-SyntaxError-algoDIR-algoPOV.patch'
+)
+
+sha256sum blender-git-2.78.4.20170114.tar.gz
+
+sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
+
+sha256sums=('...'
+            '...'
+)
+
+prepare() {
+  cd "${_gitname}"
+  #blender/release/scripts/addons_contrib/curve_tools/CurveIntersections.py
+  # fix erreur : line 536
+  # SyntaxError: name 'algoDIR' is used prior to global declaration
+  patch -Np1 -i "${srcdir}/fix-SyntaxError-algoDIR-algoPOV.patch"
+}
+
+
 ------------------------------------------------------------
 blender-git E: Dependency libxxf86vm detected and not included (libraries ['usr/lib/libXxf86vm.so.1'] needed in files ['usr/bin/blender'])
 
@@ -592,7 +568,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.78.4.20170106.tar.gz
+sha256sum blender-git-2.78.4.20170114.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -612,7 +588,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170106.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170114.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -627,7 +603,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170106.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170114.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -697,7 +673,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.78.4.20170106.tar.gz
+sha256sum blender-git-2.78.4.20170114.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -754,7 +730,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170106.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170114.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \

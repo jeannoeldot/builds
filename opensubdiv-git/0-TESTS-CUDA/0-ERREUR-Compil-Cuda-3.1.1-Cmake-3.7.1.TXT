@@ -1,0 +1,73 @@
+[ 86%] Building NVCC (Device) object opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o
+CMake Warning (dev) at osd_static_gpu_generated_cudaKernel.cu.o.Release.cmake:81:
+  Syntax Warning in cmake code at column 63
+
+  Argument not separated from preceding token by whitespace.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+nvcc fatal   : Stray '"' character
+CMake Error at osd_static_gpu_generated_cudaKernel.cu.o.Release.cmake:222 (message):
+  Error generating
+  /tmp/build/src/opensubdiv/build/opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/./osd_static_gpu_generated_cudaKernel.cu.o
+
+
+make[2]: *** [opensubdiv/CMakeFiles/osd_static_gpu.dir/build.make:65: opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:180: opensubdiv/CMakeFiles/osd_static_gpu.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 86%] Built target far_obj
+make: *** [Makefile:139: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
+
+    
+    
+[ 91%] Building NVCC (Device) object opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o
+[ 94%] Building NVCC (Device) object opensubdiv/CMakeFiles/osd_dynamic_gpu.dir/osd/osd_dynamic_gpu_generated_cudaKernel.cu.o
+[ 94%] Building NVCC (Device) object opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o
+CMake Warning (dev) at osd_static_gpu_generated_cudaKernel.cu.o.Release.cmake:81:
+  Syntax Warning in cmake code at column 63
+
+  Argument not separated from preceding token by whitespace.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at osd_static_gpu_generated_cudaKernel.cu.o.Release.cmake:81:
+  Syntax Warning in cmake code at column 63
+
+  Argument not separated from preceding token by whitespace.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at osd_dynamic_gpu_generated_cudaKernel.cu.o.Release.cmake:81:
+  Syntax Warning in cmake code at column 63
+
+  Argument not separated from preceding token by whitespace.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+nvcc fatal   : Stray '"' character
+nvcc fatal   : Stray '"' character
+nvcc fatal   : Stray '"' character
+CMake Error at osd_static_gpu_generated_cudaKernel.cu.o.Release.cmake:222 (message):
+  Error generating
+  /tmp/build/src/opensubdiv/build/opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/./osd_static_gpu_generated_cudaKernel.cu.o
+
+
+CMake Error at osd_dynamic_gpu_generated_cudaKernel.cu.o.Release.cmake:222 (message):
+  Error generating
+  /tmp/build/src/opensubdiv/build/opensubdiv/CMakeFiles/osd_dynamic_gpu.dir/osd/./osd_dynamic_gpu_generated_cudaKernel.cu.o
+
+CMake Error at osd_static_gpu_generated_cudaKernel.cu.o.Release.cmake:222 (message):
+  Error generating
+  /tmp/build/src/opensubdiv/build/opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/./osd_static_gpu_generated_cudaKernel.cu.o
+
+
+
+make[2]: *** [opensubdiv/CMakeFiles/osd_dynamic_gpu.dir/build.make:65: opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [opensubdiv/CMakeFiles/osd_static_gpu.dir/build.make:65: opensubdiv/CMakeFiles/osd_static_gpu.dir/osd/osd_static_gpu_generated_cudaKernel.cu.o] Error 1
+make[2]: *** [opensubdiv/CMakeFiles/osd_dynamic_gpu.dir/build.make:72: opensubdiv/CMakeFiles/osd_dynamic_gpu.dir/osd/osd_dynamic_gpu_generated_cudaKernel.cu.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:180: opensubdiv/CMakeFiles/osd_static_gpu.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/Makefile2:218: opensubdiv/CMakeFiles/osd_dynamic_gpu.dir/all] Error 2
+make: *** [Makefile:139: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
+    

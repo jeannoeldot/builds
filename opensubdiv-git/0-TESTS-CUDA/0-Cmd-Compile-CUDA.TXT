@@ -70,9 +70,22 @@ pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.1.1.20170112
 pkgrel=1
 
+----------------------------------------------------------
+!!! COMPILE PAS OK DANS CHROOT
+!!! ------------------------------------------------------
+
+
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+             'gcc5'
+)
+    -D CMAKE_C_COMPILER='/usr/bin/gcc-5' \
+    -D CMAKE_CXX_COMPILER='/usr/bin/g++-5' \
+
 license=('custom')
 
-makedepends=('cmake' 'mesa'
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
 )
 
 conflicts='opensubdiv'
@@ -88,25 +101,6 @@ sha256sums=('... ...'
 
 !!!!!!
 _gitname="opensubdiv"
-
-!!! INUTILE SI
-$ find . -name \*.py
-./regression/far_regression/example_createMesh.py
-./examples/common/export_obj.py
-./documentation/processHtml.py
-./documentation/processTutorials.py
-
--D NO_DOC=1 \
--D NO_TUTORIALS=1 \
--D NO_REGRESSION=1 \
--D NO_EXAMPLES=1 \
-
-prepare() {
-    cd "OpenSubdiv-${pkgver//./_}"
-
-    find . -name \*.py | xargs sed -i "s/env python/env python2/g"
-}
-!!!
 
 build() {
         ...
@@ -132,16 +126,18 @@ LIGNES 271 ET SUIVANTES
 -----------------------
 # ptex is only needed when nicholas bishop is ready
 -D NO_PTEX=1 \
-
 -D NO_CLEW=1 \
--D NO_CUDA=1 \
--D NO_OPENCL=1 \
-
 # docs, tutorials, regression tests and examples are not needed
 -D NO_DOC=1 \
 -D NO_TUTORIALS=1 \
 -D NO_REGRESSION=1 \
 -D NO_EXAMPLES=1 \
+
+LIGNES 475 ET SUIVANTES
+-----------------------
+!!! VOIR commit du 30/09/2016 : Fixed CUDA build with newer SDKs
+OSD_CUDA_NVCC_FLAGS
+-D OSD_CUDA_NVCC_FLAGS="--gpu-architecture compute_52" \
 
 
 
