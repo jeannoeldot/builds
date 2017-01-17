@@ -13,7 +13,7 @@ depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'libwebp'
          'openimageio-git'
 )
-makedepends=('boost' 'cmake' 'clang35' 'llvm35')
+makedepends=('boost' 'cmake' 'llvm35' 'clang35')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$pkgname-$pkgver.tar.gz"

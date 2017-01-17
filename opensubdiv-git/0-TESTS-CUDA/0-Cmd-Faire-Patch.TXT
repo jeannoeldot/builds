@@ -1,7 +1,7 @@
 FAIRE PATCHS
 ====================================
 
-cd $HOME/05-builds/opensubdiv-git
+cd $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA
 
 mkdir /tmp/srcp
 
@@ -32,7 +32,7 @@ diff -aur opensubdiv opensubdiv.new > fix-Argument-not-separated-from-preceding-
 
 rm -rf opensubdiv.new
 
-cd $HOME/05-builds/opensubdiv-git
+cd $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA
 
 mv -vf /tmp/srcp/fix-Argument-not-separated-from-preceding-token-by-whitespace.patch .
 

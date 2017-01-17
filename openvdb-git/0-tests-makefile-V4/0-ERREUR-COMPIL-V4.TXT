@@ -1,0 +1,131 @@
+
+ERREUR : make abi=3 lib
+=======================
+==> Starting package()...
+ln -f -s viewer openvdb_viewer
+python: Python is unavailable
+Building vdb_print because of libopenvdb.so.4.0.1 main.cc
+Building vdb_render because of libopenvdb.so.4.0.1 main.cc
+g++ -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -o vdb_print cmd/openvdb_print/main.cc -I . \
+    -Wl,-rpath,/build/openvdb-git/pkg/openvdb-git/usr/lib -L/build/openvdb-git/src/openvdb libopenvdb.so.4.0.1 \
+    -ldl -lm -lz -Wl,-rpath,/usr/lib -L/usr/lib -lHalf -Wl,-rpath,/usr/lib -L/usr/lib -ltbb -Wl,-rpath,/usr/lib -L/usr/lib -lboost_iostreams -lboost_system  -Wl,-rpath,/usr/lib -L/usr/lib -lblosc -lz -Wl,-rpath,/usr/lib -L/usr/lib -lrt -ljemalloc
+g++ -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -o vdb_render cmd/openvdb_render/main.cc -I . \
+    -I /usr/include/OpenEXR -I /usr/include/OpenEXR \
+    -Wl,-rpath,/usr/lib -L/usr/lib -lIlmImf \
+    -Wl,-rpath,/usr/lib -L/usr/lib -lIlmThread -lIex -lImath \
+    -Wl,-rpath,/build/openvdb-git/pkg/openvdb-git/usr/lib -L/build/openvdb-git/src/openvdb libopenvdb.so.4.0.1 \
+    -ldl -lm -lz -Wl,-rpath,/usr/lib -L/usr/lib -lHalf -Wl,-rpath,/usr/lib -L/usr/lib -ltbb -Wl,-rpath,/usr/lib -L/usr/lib -lboost_iostreams -lboost_system  -Wl,-rpath,/usr/lib -L/usr/lib -lblosc -lz -Wl,-rpath,/usr/lib -L/usr/lib -lrt -ljemalloc
+Generating documentation because of doxygen-config and others
+echo 'OUTPUT_DIRECTORY=./doc' | cat doxygen-config - | doxygen - > /dev/null
+pydoc: Python is unavailable
+Building viewer/Camera.o because of Camera.cc and others
+g++ -c -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -I . -I /usr/include/GLFW -DGL_GLEXT_PROTOTYPES=1 -fPIC -o viewer/Camera.o viewer/Camera.cc
+Building viewer/ClipBox.o because of ClipBox.cc and others
+g++ -c -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -I . -I /usr/include/GLFW -DGL_GLEXT_PROTOTYPES=1 -fPIC -o viewer/ClipBox.o viewer/ClipBox.cc
+/build/openvdb-git/src/openvdb/doc/points.txt:5: warning: multiple use of section label 'Contents' while adding section, (first occurrence: /build/openvdb-git/src/openvdb/doc/doc.txt, line 47)
+/build/openvdb-git/src/openvdb/doc/points.txt:25: warning: multiple use of section label 'secOverview' while adding section, (first occurrence: /build/openvdb-git/src/openvdb/doc/doc.txt, line 68)
+/build/openvdb-git/src/openvdb/doc/points.txt:183: warning: multiple use of section label 'secSparsity' while adding section, (first occurrence: /build/openvdb-git/src/openvdb/doc/doc.txt, line 155)
+/build/openvdb-git/src/openvdb/doc/points.txt:258: warning: multiple use of section label 'secSpaceAndTrans' while adding section, (first occurrence: /build/openvdb-git/src/openvdb/doc/doc.txt, line 204)
+Building viewer/Font.o because of Font.cc and others
+g++ -c -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -I . -I /usr/include/GLFW -DGL_GLEXT_PROTOTYPES=1 -fPIC -o viewer/Font.o viewer/Font.cc
+Building viewer/RenderModules.o because of RenderModules.cc and others
+g++ -c -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -I . -I /usr/include/GLFW -DGL_GLEXT_PROTOTYPES=1 -fPIC -o viewer/RenderModules.o viewer/RenderModules.cc
+Building viewer/Viewer.o because of Viewer.cc and others
+g++ -c -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -I . -I /usr/include/GLFW -DGL_GLEXT_PROTOTYPES=1 -fPIC -o viewer/Viewer.o viewer/Viewer.cc
+/tmp/ccsidRwL.o: In function `openvdb::v4_0_1::math::AffineMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math9AffineMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math9AffineMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccsidRwL.o: In function `openvdb::v4_0_1::math::ScaleTranslateMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math17ScaleTranslateMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math17ScaleTranslateMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccsidRwL.o: In function `openvdb::v4_0_1::math::TranslationMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math14TranslationMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math14TranslationMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccsidRwL.o: In function `openvdb::v4_0_1::math::ScaleMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math8ScaleMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math8ScaleMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccsidRwL.o: In function `openvdb::v4_0_1::math::AffineMap::preShear(double, openvdb::v4_0_1::math::Axis, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math9AffineMap8preShearEdNS1_4AxisES3_[_ZNK7openvdb6v4_0_14math9AffineMap8preShearEdNS1_4AxisES3_]+0x6e): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccsidRwL.o:main.cc:(.text._ZNK7openvdb6v4_0_14math17ScaleTranslateMap8preShearEdNS1_4AxisES3_[_ZNK7openvdb6v4_0_14math17ScaleTranslateMap8preShearEdNS1_4AxisES3_]+0x6e): more undefined references to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)' follow
+/tmp/ccsidRwL.o: In function `openvdb::v4_0_1::tree::LeafBuffer<float, 3u>::doLoad() const':
+main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferIfLj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferIfLj3EE6doLoadEv]+0x14b): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+/tmp/ccsidRwL.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec3<float>, 3u>::doLoad() const':
+main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IfEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IfEELj3EE6doLoadEv]+0x14b): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:773: vdb_render] Error 1
+make: *** Waiting for unfinished jobs....
+/build/openvdb-git/src/openvdb/util/Formats.h:53: warning: argument 'tail' of command @param is not found in the argument list of openvdb::v4_0_1::util::printBytes(std::ostream &os, uint64_t bytes, const std::string &head="")
+/build/openvdb-git/src/openvdb/util/Formats.h:53: warning: argument 'exact' of command @param is not found in the argument list of openvdb::v4_0_1::util::printBytes(std::ostream &os, uint64_t bytes, const std::string &head="")
+/build/openvdb-git/src/openvdb/util/Formats.h:53: warning: argument 'width' of command @param is not found in the argument list of openvdb::v4_0_1::util::printBytes(std::ostream &os, uint64_t bytes, const std::string &head="")
+/build/openvdb-git/src/openvdb/util/Formats.h:53: warning: argument 'precision' of command @param is not found in the argument list of openvdb::v4_0_1::util::printBytes(std::ostream &os, uint64_t bytes, const std::string &head="")
+/build/openvdb-git/src/openvdb/util/Formats.h:68: warning: argument 'tail' of command @param is not found in the argument list of openvdb::v4_0_1::util::printNumber(std::ostream &os, uint64_t number, const std::string &head="")
+/build/openvdb-git/src/openvdb/util/Formats.h:68: warning: argument 'exact' of command @param is not found in the argument list of openvdb::v4_0_1::util::printNumber(std::ostream &os, uint64_t number, const std::string &head="")
+/build/openvdb-git/src/openvdb/util/Formats.h:68: warning: argument 'width' of command @param is not found in the argument list of openvdb::v4_0_1::util::printNumber(std::ostream &os, uint64_t number, const std::string &head="")
+/build/openvdb-git/src/openvdb/util/Formats.h:68: warning: argument 'precision' of command @param is not found in the argument list of openvdb::v4_0_1::util::printNumber(std::ostream &os, uint64_t number, const std::string &head="")
+sh: latex: command not found
+error: Problems running latex. Check your installation or look for typos in _formulas.tex and check _formulas.log!
+sh: dvips: command not found
+error: Problems running dvips. Check your installation!
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::math::AffineMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math9AffineMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math9AffineMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::math::ScaleTranslateMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math17ScaleTranslateMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math17ScaleTranslateMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::math::TranslationMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math14TranslationMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math14TranslationMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::math::ScaleMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math8ScaleMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math8ScaleMap10postRotateEdNS1_4AxisE]+0x66): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::math::AffineMap::preShear(double, openvdb::v4_0_1::math::Axis, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math9AffineMap8preShearEdNS1_4AxisES3_[_ZNK7openvdb6v4_0_14math9AffineMap8preShearEdNS1_4AxisES3_]+0x6e): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/cciHtjvL.o:main.cc:(.text._ZNK7openvdb6v4_0_14math17ScaleTranslateMap8preShearEdNS1_4AxisES3_[_ZNK7openvdb6v4_0_14math17ScaleTranslateMap8preShearEdNS1_4AxisES3_]+0x6e): more undefined references to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)' follow
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::GridBase::GridBase(openvdb::v4_0_1::GridBase const&)':
+main.cc:(.text._ZN7openvdb6v4_0_18GridBaseC2ERKS1_[_ZN7openvdb6v4_0_18GridBaseC5ERKS1_]+0x51): undefined reference to `openvdb::v4_0_1::math::Transform::Transform(std::shared_ptr<openvdb::v4_0_1::math::MapBase> const&)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::Grid<openvdb::v4_0_1::tree::Tree<openvdb::v4_0_1::tree::RootNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::LeafNode<openvdb::v4_0_1::math::Vec3<double>, 3u>, 3u>, 4u> > > >::registerGrid()':
+main.cc:(.text._ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec3IdEELj3EEELj3EEELj4EEEEEEEE12registerGridEv[_ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec3IdEELj3EEELj3EEELj4EEEEEEEE12registerGridEv]+0x3e): undefined reference to `openvdb::v4_0_1::GridBase::registerGrid(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::shared_ptr<openvdb::v4_0_1::GridBase> (*)())'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::Grid<openvdb::v4_0_1::tree::Tree<openvdb::v4_0_1::tree::RootNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::LeafNode<openvdb::v4_0_1::math::Vec3<float>, 3u>, 3u>, 4u> > > >::registerGrid()':
+main.cc:(.text._ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec3IfEELj3EEELj3EEELj4EEEEEEEE12registerGridEv[_ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec3IfEELj3EEELj3EEELj4EEEEEEEE12registerGridEv]+0x3e): undefined reference to `openvdb::v4_0_1::GridBase::registerGrid(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::shared_ptr<openvdb::v4_0_1::GridBase> (*)())'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::Grid<openvdb::v4_0_1::tree::Tree<openvdb::v4_0_1::tree::RootNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::LeafNode<openvdb::v4_0_1::math::Vec3<int>, 3u>, 3u>, 4u> > > >::registerGrid()':
+main.cc:(.text._ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec3IiEELj3EEELj3EEELj4EEEEEEEE12registerGridEv[_ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec3IiEELj3EEELj3EEELj4EEEEEEEE12registerGridEv]+0x3e): undefined reference to `openvdb::v4_0_1::GridBase::registerGrid(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::shared_ptr<openvdb::v4_0_1::GridBase> (*)())'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::Grid<openvdb::v4_0_1::tree::Tree<openvdb::v4_0_1::tree::RootNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::LeafNode<openvdb::v4_0_1::math::Vec2<double>, 3u>, 3u>, 4u> > > >::registerGrid()':
+main.cc:(.text._ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec2IdEELj3EEELj3EEELj4EEEEEEEE12registerGridEv[_ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec2IdEELj3EEELj3EEELj4EEEEEEEE12registerGridEv]+0x3e): undefined reference to `openvdb::v4_0_1::GridBase::registerGrid(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::shared_ptr<openvdb::v4_0_1::GridBase> (*)())'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::Grid<openvdb::v4_0_1::tree::Tree<openvdb::v4_0_1::tree::RootNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::InternalNode<openvdb::v4_0_1::tree::LeafNode<openvdb::v4_0_1::math::Vec2<float>, 3u>, 3u>, 4u> > > >::registerGrid()':
+main.cc:(.text._ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec2IfEELj3EEELj3EEELj4EEEEEEEE12registerGridEv[_ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec2IfEELj3EEELj3EEELj4EEEEEEEE12registerGridEv]+0x3e): undefined reference to `openvdb::v4_0_1::GridBase::registerGrid(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::shared_ptr<openvdb::v4_0_1::GridBase> (*)())'
+/tmp/cciHtjvL.o:main.cc:(.text._ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec2IiEELj3EEELj3EEELj4EEEEEEEE12registerGridEv[_ZN7openvdb6v4_0_14GridINS0_4tree4TreeINS2_8RootNodeINS2_12InternalNodeINS5_INS2_8LeafNodeINS0_4math4Vec2IiEELj3EEELj3EEELj4EEEEEEEE12registerGridEv]+0x3e): more undefined references to `openvdb::v4_0_1::GridBase::registerGrid(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::shared_ptr<openvdb::v4_0_1::GridBase> (*)())' follow
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec3<double>, 3u>::doLoad() const':
+main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IdEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IdEELj3EE6doLoadEv]+0x102): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec3<float>, 3u>::doLoad() const':
+main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IfEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IfEELj3EE6doLoadEv]+0x102): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec3<int>, 3u>::doLoad() const':
+main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IiEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IiEELj3EE6doLoadEv]+0x102): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec2<double>, 3u>::doLoad() const':
+main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec2IdEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec2IdEELj3EE6doLoadEv]+0x102): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+/tmp/cciHtjvL.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec2<float>, 3u>::doLoad() const':
+main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec2IfEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec2IfEELj3EE6doLoadEv]+0x102): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+/tmp/cciHtjvL.o:main.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec2IiEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec2IiEELj3EE6doLoadEv]+0x102): more undefined references to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)' follow
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:767: vdb_print] Error 1
+==> ERROR: A failure occurred in package().
+    Aborting...
+
+
+ERREUR : make abi=3 all
+=======================
+viewer/RenderModules.o: In function `openvdb::v4_0_1::tree::LeafBuffer<int, 3u>::doLoad() const':
+RenderModules.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferIiLj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferIiLj3EE6doLoadEv]+0x149): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+viewer/RenderModules.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec3<int>, 3u>::doLoad() const':
+RenderModules.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IiEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IiEELj3EE6doLoadEv]+0x149): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+viewer/RenderModules.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec3<float>, 3u>::doLoad() const':
+RenderModules.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IfEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IfEELj3EE6doLoadEv]+0x149): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+viewer/RenderModules.o: In function `openvdb::v4_0_1::tree::LeafBuffer<openvdb::v4_0_1::math::Vec3<double>, 3u>::doLoad() const':
+RenderModules.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IdEELj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferINS0_4math4Vec3IdEELj3EE6doLoadEv]+0x149): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+viewer/RenderModules.o: In function `openvdb::v4_0_1::tree::LeafBuffer<unsigned int, 3u>::doLoad() const':
+RenderModules.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferIjLj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferIjLj3EE6doLoadEv]+0x149): undefined reference to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)'
+viewer/RenderModules.o:RenderModules.cc:(.text._ZNK7openvdb6v4_0_14tree10LeafBufferIsLj3EE6doLoadEv[_ZNK7openvdb6v4_0_14tree10LeafBufferIsLj3EE6doLoadEv]+0x149): more undefined references to `openvdb::v4_0_1::io::setStreamMetadataPtr(std::ios_base&, std::shared_ptr<openvdb::v4_0_1::io::StreamMetadata>&, bool)' follow
+/tmp/ccTIeNgy.o: In function `openvdb::v4_0_1::math::AffineMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math9AffineMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math9AffineMap10postRotateEdNS1_4AxisE]+0x31f): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccTIeNgy.o: In function `openvdb::v4_0_1::math::ScaleTranslateMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math17ScaleTranslateMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math17ScaleTranslateMap10postRotateEdNS1_4AxisE]+0x7f): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccTIeNgy.o: In function `openvdb::v4_0_1::math::TranslationMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math14TranslationMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math14TranslationMap10postRotateEdNS1_4AxisE]+0x7f): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccTIeNgy.o: In function `openvdb::v4_0_1::math::ScaleMap::postRotate(double, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math8ScaleMap10postRotateEdNS1_4AxisE[_ZNK7openvdb6v4_0_14math8ScaleMap10postRotateEdNS1_4AxisE]+0x13d): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccTIeNgy.o: In function `openvdb::v4_0_1::math::AffineMap::preShear(double, openvdb::v4_0_1::math::Axis, openvdb::v4_0_1::math::Axis) const':
+main.cc:(.text._ZNK7openvdb6v4_0_14math9AffineMap8preShearEdNS1_4AxisES3_[_ZNK7openvdb6v4_0_14math9AffineMap8preShearEdNS1_4AxisES3_]+0x33b): undefined reference to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)'
+/tmp/ccTIeNgy.o:main.cc:(.text._ZNK7openvdb6v4_0_14math17ScaleTranslateMap8preShearEdNS1_4AxisES3_[_ZNK7openvdb6v4_0_14math17ScaleTranslateMap8preShearEdNS1_4AxisES3_]+0xc7): more undefined references to `openvdb::v4_0_1::math::simplify(std::shared_ptr<openvdb::v4_0_1::math::AffineMap>)' follow
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:798: vdb_view] Error 1

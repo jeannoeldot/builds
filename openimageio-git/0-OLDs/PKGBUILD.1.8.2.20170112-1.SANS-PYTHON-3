@@ -5,7 +5,7 @@
 
 pkgname=openimageio-git
 pkgver=1.8.2.20170112
-pkgrel=2
+pkgrel=1
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('i686' 'x86_64')
 url="http://www.openimageio.org/"
@@ -15,12 +15,9 @@ depends=('openexr' 'boost-libs' 'jasper' 'glew' 'libtiff' 'opencolorio' 'intel-t
          'ffmpeg'
          'opencv' 'openssl'
 )
-makedepends=('cmake' 'qt4' 'python' 'python2' 'boost' 'mesa'
-)
+makedepends=('cmake' 'qt4' 'python2' 'boost' 'mesa')
 optdepends=('qt4: iv image viewer'
-            'python2: Python 2 bindings support'
-            'python: Python 3 bindings support'
-)
+            'python2: bindings support')
 conflicts=('openimageio')
 provides=('openimageio')
 source=("$pkgname-$pkgver.tar.gz"
@@ -39,11 +36,9 @@ build() {
   cmake \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_SKIP_RPATH=ON \
-      -DSTOP_ON_WARNING=OFF \
       -DPYLIB_INSTALL_DIR=lib/python2.7/site-packages \
-      -DPYLIB3_INSTALL_DIR=lib/python3.6/site-packages \
+      -DSTOP_ON_WARNING=OFF \
       -DOIIO_BUILD_TESTS=OFF \
-      -DUSE_PYTHON3=ON \
       -DPYTHON_VERSION=2.7 \
       -DPYTHON3_VERSION=3.6 \
       -DUSE_OPENSSL=ON \

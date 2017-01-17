@@ -2,7 +2,7 @@
 # Le répertoire
 ===============
 !!! EN USER
-cd $HOME/05-builds/opensubdiv-git
+cd $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA
 
 
 1) SOURCES
@@ -50,7 +50,7 @@ tar -cvzf opensubdiv-git-3.1.1.20170112.tar.gz --exclude=.git opensubdiv
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/opensubdiv-git
+cd $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
@@ -104,7 +104,13 @@ _gitname="opensubdiv"
 
 build() {
         ...
-        -DCMAKE_SKIP_RPATH=ON \
+!!!!!! TEST
+   cmake -Wno-dev \
+        ...
+!!!!!! FIN TEST
+=====> PAS OK
+   
+       -DCMAKE_SKIP_RPATH=ON \
 
 2-2) VERIFIER CMakeLists.txt
 ==============================
@@ -163,16 +169,16 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/opensubdiv-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/opensubdiv-git/opensubdiv-git-3.1.1.20170112.tar.gz . \
+&& cp -v $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA/PKGBUILD . \
+&& cp -v $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA/opensubdiv-git-3.1.1.20170112.tar.gz . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/opensubdiv-git \
+&& cd $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA \
 && cp -v /tmp/build/opensubdiv-git-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/opensubdiv-git && rm -rf /tmp/build
+cd $HOME/05-builds/opensubdiv-git/0-TESTS-CUDA && rm -rf /tmp/build
 
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
@@ -256,65 +262,3 @@ SI PROBLEME
 ================================================================
 ANCIENS
 ========
-AVEC PATCH
-----------
-source=("$pkgname-$pkgver.tar.gz"
-        'fix-Argument-not-separated-from-preceding-token-by-whitespace.patch'
-)
-
-sha256sum opensubdiv-git-3.1.1.20170112.tar.gz
-
-sha256sum fix-Argument-not-separated-from-preceding-token-by-whitespace.patch
-
-sha256sums=('...'
-            '...'
-)
-
-prepare() {
-  cd "${_gitname}"
-  # Syntax Warning in cmake code at column 63
-  # Argument not separated from preceding token by whitespace.
-  # This warning is for project developers.  Use -Wno-dev to suppress it.
-  patch -Np1 -i "${srcdir}/fix-Argument-not-separated-from-preceding-token-by-whitespace.patch"
-}
-
-&& cp -v $HOME/05-builds/opensubdiv-git/fix-Argument-not-separated-from-preceding-token-by-whitespace.patch . \
-
-
-pkgver=3.1.1.RC2
-pkgrel=1
-pkgrel=4          # maj GLEW 2.0.0
-pkgrel=5          # maj NVidia 370.23-1 TEST
-pkgrel=6          # nvidia-libgl 367.35
-pkgrel=7          # SANS nvidia-libgl ( ==> libgl )
-pkgrel=8          # Test compil ds ARCH1 DANS TMP EN USER
-
-LE 13/07/2016
-TEST COMPIL DS CHROOT
-AVEC GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5.18-4 / GCC5 5.4.0 COMMUNITY
-pkgver=3.1.1.RC2
-pkgrel=3
----------------------------------------------------------------------------
-!!! PAS OK DANS CHROOT
-!!! -------------------------------------------------------
-
-!!! ERREUR COMPIL GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5.18-4
-
-pkgrel=2
-!!! TEST AVEC gcc 5.3.0-6 AUR et CUDA 7.5 ET LIENS : OK
-
-# maya plugin, docs, tutorials, regression tests and examples are not needed
--D NO_MAYA=1 \
-
-
-  
-pkgver=3.0.4
-pkgrel=2      # cd "${srcdir}/${_osd_name}-${_osd_version}" => cd "${_osd_name}-${_osd_version}"
-
-pkgver=3.0.3
-pkgrel=2                             # -DCMAKE_SKIP_RPATH=ON
-pkgrel=3                             # + 'opencl-headers'
-pkgrel=4                             # C++11 ABI
-pkgrel=5                             # 'libgl'
-pkgrel=6                             # 'nvidia-libgl'
-

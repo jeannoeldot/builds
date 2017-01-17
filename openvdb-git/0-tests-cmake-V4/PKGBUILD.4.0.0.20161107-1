@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git
-pkgver=4.0.1.20170113
+pkgver=4.0.0.20161107
 pkgrel=1
 pkgdesc="Library and tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ conflicts=('openvdb')
 provides=('openvdb')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('f8822d8c5a45fa415750507fe2c486d83f996ffbe77cbf6a42b2fdc1795ed7a1'
+sha256sums=('c7a68d50cdb073f4f319c8142eb04b0152aea0d983c8088aa85c49647134b328'
 )
 
 _gitname="openvdb"
@@ -35,9 +35,9 @@ build() {
         -D CMAKE_BUILD_TYPE=Release \
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D CMAKE_SKIP_RPATH=ON \
-        -D OPENVDB_BUILD_UNITTESTS=OFF \
         -D OPENVDB_BUILD_PYTHON_MODULE=OFF \
         -D OPENVDB_ENABLE_RPATH=OFF \
+        -D OPENVDB_ENABLE_3_ABI_COMPATIBLE=OFF \
         ..
   make ${MAKEFLAGS}
 }

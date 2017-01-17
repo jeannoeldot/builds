@@ -68,7 +68,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=1.8.2.20170112
-pkgrel=1
+pkgrel=2          # rebuild avec PYTHON 3.6
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
 conflicts=('openimageio')
@@ -89,6 +89,13 @@ sha256sums=('...'
 _gitname="oiio"
 
 
+!!!!!!
+ATTENTION AUX VERSIONS DE PYTHON
+PYTHON_VERSION=2.7
+PYTHON3_VERSION=3.6
+-DPYLIB_INSTALL_DIR=lib/python2.7/site-packages \
+-DPYLIB3_INSTALL_DIR=lib/python3.6/site-packages \
+
 2-3) VERIFIER CMakeLists.txt
 ==========================
  kwrite /0-DataLinux/05-builds-dir-git/oiio/CMakeLists.txt &
@@ -108,6 +115,10 @@ LIGNE 178
   !!! A VOIR : 
 LIGNE 179
   USE_OPENGL ON         depends= glew -> glu -> 'libgl'
+
+  !!! A VOIR : 
+LIGNE 183
+  USE_PYTHON3 OFF       =>      -DUSE_PYTHON3=ON \  makedepends= ... 'python'
 
 LIGNES 184 185
 set (PYTHON_VERSION 2.6)  =>    -DPYTHON_VERSION=2.7 \
