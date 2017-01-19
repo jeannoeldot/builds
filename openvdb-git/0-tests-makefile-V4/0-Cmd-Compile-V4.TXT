@@ -1,7 +1,7 @@
 # Le répertoire
 ===============
 !!! EN USER
-cd $HOME/05-builds/openvdb-git
+cd $HOME/05-builds/openvdb-git/0-tests-makefile-V4
 
 http://www.openvdb.org/
 
@@ -70,7 +70,7 @@ mv -v openvdb-git-4.0.1.20170113.tar.gz ..
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/openvdb-git
+cd $HOME/05-builds/openvdb-git/0-tests-makefile-V4
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
@@ -150,12 +150,17 @@ g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -
 
 build() {
   ...
+  # build the library and commands
   make abi=3 all    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
 ==> ERREUR
   
+  # build the library
   make abi=3 lib    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
 ==> ERREUR
 
+package() {
+  ...
+  make abi=3 install    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
   
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
@@ -179,16 +184,16 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-4.0.1.20170113.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/0-tests-makefile-V4/PKGBUILD . \
+&& cp -v $HOME/05-builds/openvdb-git/0-tests-makefile-V4/openvdb-git-4.0.1.20170113.tar.gz . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/openvdb-git \
+&& cd $HOME/05-builds/openvdb-git/0-tests-makefile-V4 \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/openvdb-git && rm -rf /tmp/build
+cd $HOME/05-builds/openvdb-git/0-tests-makefile-V4 && rm -rf /tmp/build
 
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER

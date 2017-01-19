@@ -66,12 +66,12 @@ prepare() {
   
 build() {
   cd "${_gitname}"
-  # build the library
-  make abi=3 lib
+  # build the library and commands
+  make abi=3 all
 }
 
 package() {
   cd "${_gitname}"
   # copy generated files into the directory tree rooted at $(DESTDIR)
-  make install
+  make abi=3 install
 }

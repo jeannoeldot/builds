@@ -1,0 +1,55 @@
+
+[ 17%] Building CXX object intern/openvdb/CMakeFiles/bf_intern_openvdb.dir/intern/openvdb_writer.cc.o
+/build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.cc: In member function 'void OpenVDBWriter::insert(const openvdb::v4_0_1::GridBase&)':
+/build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.cc:48:36: error: no matching function for call to 'std::vector<std::shared_ptr<openvdb::v4_0_1::GridBase> >::push_back(openvdb::v4_0_1::GridBase::ConstPtr)'
+  m_grids->push_back(grid.copyGrid());
+                                    ^
+In file included from /usr/include/c++/6.3.1/vector:64:0,
+                 from /usr/include/boost/random/detail/polynomial.hpp:18,
+                 from /usr/include/boost/random/mersenne_twister.hpp:32,
+                 from /usr/include/openvdb/math/Math.h:48,
+                 from /usr/include/openvdb/Types.h:37,
+                 from /usr/include/openvdb/openvdb.h:35,
+                 from /build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.h:29,
+                 from /build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.cc:26:
+/usr/include/c++/6.3.1/bits/stl_vector.h:914:7: note: candidate: void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::shared_ptr<openvdb::v4_0_1::GridBase>; _Alloc = std::allocator<std::shared_ptr<openvdb::v4_0_1::GridBase> >; std::vector<_Tp, _Alloc>::value_type = std::shared_ptr<openvdb::v4_0_1::GridBase>]
+       push_back(const value_type& __x)
+       ^~~~~~~~~
+/usr/include/c++/6.3.1/bits/stl_vector.h:914:7: note:   no known conversion for argument 1 from 'openvdb::v4_0_1::GridBase::ConstPtr {aka std::shared_ptr<const openvdb::v4_0_1::GridBase>}' to 'const value_type& {aka const std::shared_ptr<openvdb::v4_0_1::GridBase>&}'
+/usr/include/c++/6.3.1/bits/stl_vector.h:932:7: note: candidate: void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = std::shared_ptr<openvdb::v4_0_1::GridBase>; _Alloc = std::allocator<std::shared_ptr<openvdb::v4_0_1::GridBase> >; std::vector<_Tp, _Alloc>::value_type = std::shared_ptr<openvdb::v4_0_1::GridBase>]
+       push_back(value_type&& __x)
+       ^~~~~~~~~
+/usr/include/c++/6.3.1/bits/stl_vector.h:932:7: note:   no known conversion for argument 1 from 'openvdb::v4_0_1::GridBase::ConstPtr {aka std::shared_ptr<const openvdb::v4_0_1::GridBase>}' to 'std::vector<std::shared_ptr<openvdb::v4_0_1::GridBase> >::value_type&& {aka std::shared_ptr<openvdb::v4_0_1::GridBase>&&}'
+make[2]: *** [intern/openvdb/CMakeFiles/bf_intern_openvdb.dir/build.make:111: intern/openvdb/CMakeFiles/bf_intern_openvdb.dir/intern/openvdb_writer.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+
+
+
+
+
+
+======================================
+/build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.cc: In member function 'void OpenVDBWriter::insert(const openvdb::v4_0_0::GridBase&)':
+/build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.cc:48:36: error: no matching function for call to 'std::vector<std::shared_ptr<openvdb::v4_0_0::GridBase> >::push_back(openvdb::v4_0_0::GridBase::ConstPtr)'
+  m_grids->push_back(grid.copyGrid());
+                                    ^
+In file included from /usr/include/c++/6.2.1/vector:64:0,
+                 from /usr/include/boost/format.hpp:17,
+                 from /usr/include/boost/math/policies/error_handling.hpp:31,
+                 from /usr/include/boost/math/special_functions/cbrt.hpp:14,
+                 from /usr/include/openvdb/math/Math.h:46,
+                 from /usr/include/openvdb/Types.h:37,
+                 from /usr/include/openvdb/openvdb.h:35,
+                 from /build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.h:29,
+                 from /build/blender-git/src/blender/intern/openvdb/intern/openvdb_writer.cc:26:
+/usr/include/c++/6.2.1/bits/stl_vector.h:914:7: note: candidate: void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = std::shared_ptr<openvdb::v4_0_0::GridBase>; _Alloc = std::allocator<std::shared_ptr<openvdb::v4_0_0::GridBase> >; std::vector<_Tp, _Alloc>::value_type = std::shared_ptr<openvdb::v4_0_0::GridBase>]
+       push_back(const value_type& __x)
+       ^~~~~~~~~
+/usr/include/c++/6.2.1/bits/stl_vector.h:914:7: note:   no known conversion for argument 1 from 'openvdb::v4_0_0::GridBase::ConstPtr {aka std::shared_ptr<const openvdb::v4_0_0::GridBase>}' to 'const value_type& {aka const std::shared_ptr<openvdb::v4_0_0::GridBase>&}'
+/usr/include/c++/6.2.1/bits/stl_vector.h:932:7: note: candidate: void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = std::shared_ptr<openvdb::v4_0_0::GridBase>; _Alloc = std::allocator<std::shared_ptr<openvdb::v4_0_0::GridBase> >; std::vector<_Tp, _Alloc>::value_type = std::shared_ptr<openvdb::v4_0_0::GridBase>]
+       push_back(value_type&& __x)
+       ^~~~~~~~~
+/usr/include/c++/6.2.1/bits/stl_vector.h:932:7: note:   no known conversion for argument 1 from 'openvdb::v4_0_0::GridBase::ConstPtr {aka std::shared_ptr<const openvdb::v4_0_0::GridBase>}' to 'std::vector<std::shared_ptr<openvdb::v4_0_0::GridBase> >::value_type&& {aka std::shared_ptr<openvdb::v4_0_0::GridBase>&&}'
+make[2]: *** [intern/openvdb/CMakeFiles/bf_intern_openvdb.dir/build.make:111: intern/openvdb/CMakeFiles/bf_intern_openvdb.dir/intern/openvdb_writer.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
