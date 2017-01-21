@@ -99,6 +99,7 @@ pkgname=blender-git
 pkgver=2.78.4.20170114
 pkgrel=1
 pkgrel=2      # TEST openvdb-git 4.0.1.20170113
+pkgrel=3      # TEST openvdb-git 4.0.1.20170113 CXXFLAGS+=' -DOPENVDB_3_ABI_COMPATIBLE'
 
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
@@ -145,6 +146,13 @@ sha256sum blender-git-2.78.4.20170114.tar.gz
 sha256sums=(...
          ...
 )
+
+# OPENVDB : SI VERSION >= 4
+------------------------------------
+build() {
+  ...
+  CXXFLAGS+=' -DOPENVDB_3_ABI_COMPATIBLE'
+  ...
 
 # LLVM : VOIR PKGBUILD sur COMMUNITY
 ------------------------------------
@@ -365,7 +373,7 @@ $ ls -la
 cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast \
 $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.original
 
-cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.blender \
+cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.blenderovdb4 \
 $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast
 
 
