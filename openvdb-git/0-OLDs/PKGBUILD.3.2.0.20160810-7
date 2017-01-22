@@ -1,8 +1,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git
-pkgver=4.0.1.20170119
-pkgrel=1
+pkgver=3.2.0.20160810
+pkgrel=7
 pkgdesc="Library and tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
 arch=('i686' 'x86_64')
 url="http://www.openvdb.org/"
@@ -17,7 +17,7 @@ conflicts=('openvdb')
 provides=('openvdb')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('8d73040982aef2d5452e79094d8d6d754db9e4681bcf5394e20d9165d898c581'
+sha256sums=('023ffb90f928fce5067a4701391c38f317d2c9554b1a47e91d0f8b06743f0fc2'
 )
 
 _gitname="openvdb"
@@ -60,18 +60,18 @@ prepare() {
   # Fixe erreur compilation avec gcc 6.1
   sed -i  -e "s/-isystem/-I/g" Makefile
   
-  # Supprime OPTIMIZE := -O3
+  # Supprime OPTIMIZE := -O3 -DNDEBUG
   sed -i  -e "s/-O3 //g" Makefile
 }
   
 build() {
   cd "${_gitname}"
   # build the library and commands
-  make abi=3 all
+  make all
 }
 
 package() {
   cd "${_gitname}"
   # copy generated files into the directory tree rooted at $(DESTDIR)
-  make abi=3 install
+  make install
 }
