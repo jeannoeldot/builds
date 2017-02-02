@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=opensubdiv-git
-pkgver=3.1.1.20170112
+pkgver=3.2.0.20170131
 pkgrel=1
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('i686' 'x86_64')
@@ -16,11 +16,21 @@ makedepends=('cmake' 'mesa' 'cuda'
 conflicts=('opensubdiv')
 provides=('opensubdiv')
 source=("$pkgname-$pkgver.tar.gz"
+        'fix-Erreur-compil-cmake-nvcc.patch'
 )
-sha256sums=('f8bc83ead0455dda87c6047ac86dd8572e8ce7a841d6757088f5d69d37ce10e1'
+sha256sums=('e8754542c23199c2e9113b1fc28d1e3e87f7a102150e089d94d5c60340ea07e7'
+            'e3b430df7f41b32c31430dc594a50d33a6f83ec2aafbb9b4b06d878341f72be9'
 )
 
 _gitname="opensubdiv"
+
+prepare() {
+  cd "${_gitname}"
+  # Syntax Warning in cmake code at column 63
+  # Argument not separated from preceding token by whitespace.
+  # This warning is for project developers.  Use -Wno-dev to suppress it.
+  patch -Np1 -i "${srcdir}/fix-Erreur-compil-cmake-nvcc.patch"
+}
 
 build() {
   cd "${_gitname}"

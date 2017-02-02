@@ -1,0 +1,12 @@
+diff -aur opensubdiv/CMakeLists.txt opensubdiv.new/CMakeLists.txt
+--- opensubdiv/CMakeLists.txt	2017-02-02 16:43:09.000000000 +0100
++++ opensubdiv.new/CMakeLists.txt	2017-02-02 16:57:56.352469584 +0100
+@@ -48,7 +48,7 @@
+     string(REGEX REPLACE "^v" "" OSD_SONAME ${OSD_SONAME})
+ 
+     add_definitions(
+-        -DOPENSUBDIV_VERSION_STRING="${OSD_SONAME}"
++        -DOPENSUBDIV_VERSION_STRING=${OSD_SONAME}
+     )
+ 
+ #-------------------------------------------------------------------------------
