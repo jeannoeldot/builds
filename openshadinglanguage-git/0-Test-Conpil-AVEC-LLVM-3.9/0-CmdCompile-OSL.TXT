@@ -1,7 +1,7 @@
 # Le répertoire
 ===============
 !!! EN USER
-cd $HOME/05-builds/openshadinglanguage-git
+cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9
 
 GIT     A REVOIR
 =================
@@ -49,7 +49,7 @@ tar -cvzf openshadinglanguage-git-1.8.3.20170204.tar.gz --exclude=.git osl
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/openshadinglanguage-git
+cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
@@ -58,7 +58,7 @@ sync
 
 1-8) FAIRE PATCH
 ===============================
-voir 0-CmdFairePatches-LLVM35.STATIC.TXT
+voir 0-CmdFairePatches-LLVM.STATIC.TXT
 
 
 !!! TESTS AVEC /usr/shaders
@@ -83,15 +83,17 @@ pkgrel=2          # rebuild boost boost-libs 1.61.0-2
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
+makedepends=('boost' 'cmake' 'llvm' 'clang')
+
 2-1) PKGBUILD AVEC PATCH
 ========================
 source=("$pkgname-$pkgver.tar.gz"
-        'llvm35-static-system-libs.patch'
+        'llvm-static-system-libs.patch'
 )
 
 sha256sum openshadinglanguage-git-1.8.3.20170204.tar.gz
 
-sha256sum llvm35-static-system-libs.patch
+sha256sum llvm-static-system-libs.patch
 
 sha256sums=(...
          ...
@@ -106,9 +108,8 @@ prepare() {
   # Add system libraries needed to link against LLVM components (zlib, ncurses)
   # This is required in order to statically link against LLVM
   # VOIR Community
-  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
+  patch -Np1 -i "${srcdir}/llvm-static-system-libs.patch"
 }
-
 
 build() {
       ...
@@ -163,7 +164,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.8.3.20170204.tar.gz
--rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm35-static-system-libs.patch
+-rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm-static-system-libs.patch
 
 
 !!! A MODIFIER SI PAS OK !
@@ -178,17 +179,17 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.8.3.20170204.tar.gz . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/llvm35-static-system-libs.patch . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/PKGBUILD . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/openshadinglanguage-git-1.8.3.20170204.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/llvm-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/openshadinglanguage-git \
+&& cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9 \
 && cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/openshadinglanguage-git && rm -rf /tmp/build
+cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9 && rm -rf /tmp/build
 
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
@@ -225,7 +226,7 @@ $ rm -rf /tmp/chrootrepo
 3-2) MAKEPKG en USER sur SSD
 =============================
 !!! EN USER
-cd $HOME/05-builds/openshadinglanguage-git
+cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9
 
 $ rm -f *~
 
@@ -293,6 +294,9 @@ POUR REMETTRE openshadinglanguage EXTRA
 ANCIENS
 ========
 
+makedepends=('boost' 'cmake' 'llvm35' 'clang35')
+
+
 pkgrel=2          # nvidia-libgl 367.35
 pkgrel=2    # maj oiio
 pkgrel=2          # maj NVidia 370.23-1
@@ -300,9 +304,9 @@ pkgrel=2          # maj NVidia 370.23-1
 pkgrel=5    # maj oiio + gcc 6.1.1
 
 -rw-r--r--  1 jnd users      828 17 mars  18:39 fix-error-compile-llvm35-llvm36.patch
-&& cp -v $HOME/05-builds/openshadinglanguage-git/fix-error-compile-llvm35-llvm36.patch . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/fix-error-compile-llvm35-llvm36.patch . \
 -rw-r--r--  1 jnd users      828 17 mars  18:39 confusion-oiio-osl.patch
-&& cp -v $HOME/05-builds/openshadinglanguage-git/confusion-oiio-osl.patch . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/confusion-oiio-osl.patch . \
 
 !!! AU 06/09/2015, 13/09/2015, 26/09/2015
 !!! OSL DU 25/09/2015 INCOMPATIBLE AVEC OIIO COMMIT DU 27 ET 31 /08/2015

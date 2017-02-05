@@ -1,6 +1,6 @@
 diff -aur osl/src/cmake/externalpackages.cmake osl.new/src/cmake/externalpackages.cmake
 --- osl/src/cmake/externalpackages.cmake	2017-02-05 11:21:20.000000000 +0100
-+++ osl.new/src/cmake/externalpackages.cmake	2017-02-05 11:31:23.787629018 +0100
++++ osl.new/src/cmake/externalpackages.cmake	2017-02-05 16:08:10.239710482 +0100
 @@ -232,9 +232,10 @@
      # if static LLVM libraries were requested, use llvm-config to generate
      # the list of what libraries we need, and substitute that in the right

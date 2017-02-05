@@ -13,14 +13,14 @@ depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'libwebp'
          'openimageio-git'
 )
-makedepends=('boost' 'cmake' 'llvm35' 'clang35')
+makedepends=('boost' 'cmake' 'llvm' 'clang')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$pkgname-$pkgver.tar.gz"
-        'llvm35-static-system-libs.patch'
+        'llvm-static-system-libs.patch'
 )
-sha256sums=('6cb9a46295f12af95d2fbe44c78e594bc3b049daeb538326eb893ce2dd041246'
-            '0e2850c037572ef3754df563e3fd2be53c6cf2305156ada5b0c8d199854827ef'
+sha256sums=('05f4399c392fccca0a89ef020bbeb0bd0d8ad55cc0531638af0539dcce4f003b'
+            '8e7c942248b559f424b162e5800648bdb0f17fc0b2e53fe35ef6d18c6c528782'
 )
 
 _gitname="osl"
@@ -31,7 +31,7 @@ prepare() {
   # Add system libraries needed to link against LLVM components (zlib, ncurses)
   # This is required in order to statically link against LLVM
   # VOIR Community
-  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
+  patch -Np1 -i "${srcdir}/llvm-static-system-libs.patch"
 }
   
 build() {
