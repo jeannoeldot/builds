@@ -70,21 +70,18 @@ pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.2.0.20170131
 pkgrel=1
 
-makedepends=('cmake' 'mesa' 'cuda'
-             'opencl-headers'
-             'gcc5'
-)
-    -D CMAKE_C_COMPILER='/usr/bin/gcc-5' \
-    -D CMAKE_CXX_COMPILER='/usr/bin/g++-5' \
-
 license=('custom')
-
-makedepends=('cmake' 'mesa' 'cuda'
-             'opencl-headers'
-)
 
 conflicts='opensubdiv'
 provides='opensubdiv'
+
+!!!!!!
+_gitname="opensubdiv"
+
+
+SANS CUDA
+=========
+makedepends=('cmake' 'mesa')
 
 source=("$pkgname-$pkgver.tar.gz"
 )
@@ -94,34 +91,20 @@ sha256sum opensubdiv-git-3.2.0.20170131.tar.gz
 sha256sums=('... ...'
 )
 
-!!!!!!
-_gitname="opensubdiv"
 
-!!! INUTILE SI
-$ find . -name \*.py
-./regression/far_regression/example_createMesh.py
-./examples/common/export_obj.py
-./documentation/processHtml.py
-./documentation/processTutorials.py
+AVEC CUDA
+=========
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+             'gcc5'
+)
+    -D CMAKE_C_COMPILER='/usr/bin/gcc-5' \
+    -D CMAKE_CXX_COMPILER='/usr/bin/g++-5' \
 
--D NO_DOC=1 \
--D NO_TUTORIALS=1 \
--D NO_REGRESSION=1 \
--D NO_EXAMPLES=1 \
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+)
 
-prepare() {
-    cd "OpenSubdiv-${pkgver//./_}"
-
-    find . -name \*.py | xargs sed -i "s/env python/env python2/g"
-}
-!!!
-
-build() {
-        ... 
-       -DCMAKE_SKIP_RPATH=ON \
-
-AVEC PATCH
-----------
 source=("$pkgname-$pkgver.tar.gz"
         'fix-Erreur-compil-cmake-nvcc.patch'
 )
@@ -142,6 +125,25 @@ prepare() {
   patch -Np1 -i "${srcdir}/fix-Erreur-compil-cmake-nvcc.patch"
 }
 
+!!! INUTILE SI
+$ find . -name \*.py
+./regression/far_regression/example_createMesh.py
+./examples/common/export_obj.py
+./documentation/processHtml.py
+./documentation/processTutorials.py
+
+-D NO_DOC=1 \
+-D NO_TUTORIALS=1 \
+-D NO_REGRESSION=1 \
+-D NO_EXAMPLES=1 \
+
+prepare() {
+    cd "OpenSubdiv-${pkgver//./_}"
+
+    find . -name \*.py | xargs sed -i "s/env python/env python2/g"
+}
+!!!
+
 
 2-2) VERIFIER CMakeLists.txt
 ==============================
@@ -159,6 +161,24 @@ prepare() {
 !!! VOIR PTEX
 !!! VOIR PKGBUILD DE BLENDER DS COMMUNITY
 
+SANS CUDA
+=========
+# ptex is only needed when nicholas bishop is ready
+-D NO_PTEX=1 \
+-D NO_CLEW=1 \
+
+-D NO_CUDA=1 \
+-D NO_OPENCL=1 \
+
+# docs, tutorials, regression tests and examples are not needed
+-D NO_DOC=1 \
+-D NO_TUTORIALS=1 \
+-D NO_REGRESSION=1 \
+-D NO_EXAMPLES=1 \
+
+
+AVEC CUDA
+=========
 LIGNES 284 ET SUIVANTES
 -----------------------
 # ptex is only needed when nicholas bishop is ready
@@ -295,18 +315,3 @@ SI PROBLEME
 ================================================================
 ANCIENS
 ========
-build() {
-        ...
-!!!!!! TEST
-   cmake -Wno-dev \
-        ...
-!!!!!! FIN TEST
-=====> PAS OK
-   
-       -DCMAKE_SKIP_RPATH=ON \
-
-----------------------------------------------------------
-!!! COMPILE PAS OK DANS CHROOT
-!!! ------------------------------------------------------
-
-

@@ -4,11 +4,11 @@ cd $HOME/05-builds/openshadinglanguage-git/
 
 mkdir /tmp/srcp
 
-cp -v openshadinglanguage-git-1.8.3.20161212.tar.gz /tmp/srcp/
+cp -v openshadinglanguage-git-1.8.3.20170204.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openshadinglanguage-git-1.8.3.20161212.tar.gz
+tar -xzf openshadinglanguage-git-1.8.3.20170204.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git/
 
@@ -29,7 +29,7 @@ DEVIENT :
     execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
 
 RAJOUTER LIGNE 238 :
-    string (REPLACE "\n" " " LLVM_LIBRARY ${LLVM_LIBRARY})
+    string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
 
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier externalpackages.cmake~
@@ -56,6 +56,9 @@ sync
 ==============================================================================
 ANCIENS OU PAS OK
 =================
+
+RAJOUTER LIGNE 238 :
+    string (REPLACE "\n" " " LLVM_LIBRARY ${LLVM_LIBRARY})
 
 2) MODIFIER osl/CMakeLists.txt
 ===============================
