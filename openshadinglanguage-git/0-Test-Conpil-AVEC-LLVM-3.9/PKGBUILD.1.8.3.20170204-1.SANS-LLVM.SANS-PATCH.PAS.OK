@@ -1,0 +1,56 @@
+# Maintainer: Sven-Hendrik Haase <sh@lutzhaase.com>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openshadinglanguage-git
+pkgver=1.8.3.20170204
+pkgrel=1
+pkgdesc="Advanced shading language for production GI renderers"
+arch=('i686' 'x86_64')
+url="https://github.com/imageworks/OpenShadingLanguage"
+license=('custom')
+depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'libwebp'
+         'openimageio-git'
+)
+makedepends=('boost' 'cmake')
+conflicts=('openshadinglanguage')
+provides=('openshadinglanguage')
+source=("$pkgname-$pkgver.tar.gz"
+)
+sha256sums=('05f4399c392fccca0a89ef020bbeb0bd0d8ad55cc0531638af0539dcce4f003b'
+)
+
+_gitname="osl"
+
+build() {
+  cd "${_gitname}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DSTOP_ON_WARNING=OFF \
+      -DOSL_BUILD_TESTS=OFF \
+      -DUSE_PARTIO=OFF \
+      -DUSE_SIMD=sse4.2 \
+      -DUSE_CCACHE=OFF \
+    ..
+  make
+}
+
+package() {
+  cd "${_gitname}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  mkdir -p "${pkgdir}"/usr/share/OSL/
+  mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
+  mv "${pkgdir}"/usr/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname} # TODO: Tell upstream about this shit
+  mv "${pkgdir}"/usr/{INSTALL.md,CHANGES.md,README.md} "${pkgdir}"/usr/share/OSL/
+  mv "${pkgdir}"/usr/doc "${pkgdir}"/usr/share/OSL/doc
+# !!! TESTS
+#  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+}

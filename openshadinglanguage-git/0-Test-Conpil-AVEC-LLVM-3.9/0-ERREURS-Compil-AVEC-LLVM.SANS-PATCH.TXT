@@ -1,0 +1,137 @@
+==> Starting build()...
+-- The C compiler identification is GNU 6.3.1
+-- The CXX compiler identification is GNU 6.3.1
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Project build dir = /build/openshadinglanguage-git/src/osl/build
+-- CMAKE_CXX_COMPILER is /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID is GNU
+-- Building for C++11
+-- Compiling with SIMD level sse4.2
+-- Setting Namespace to: 
+-- platform = linux64
+-- LLVM version  = 3.9.1
+-- CMAKE_INSTALL_RPATH = /usr/lib
+-- Create oslversion.h from oslversion.h.in
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openshadinglanguage-git/src/osl/build
+[  1%] Generating osolex.cpp
+[  2%] Generating osllex.cpp
+Scanning dependencies of target CopyFiles
+[  3%] Generating llvm_ops.bc.cpp
+Scanning dependencies of target oslnoise
+[  4%] Generating testsuite/runtest.py
+[  5%] Generating osogram.cpp
+[  6%] Generating oslgram.cpp
+[  8%] Building CXX object src/liboslnoise/CMakeFiles/oslnoise.dir/gabornoise.cpp.o
+[  8%] Built target CopyFiles
+[  9%] Generating osogram.cpp
+/build/openshadinglanguage-git/src/osl/src/liboslcomp/oslgram.y: warning: 1 shift/reduce conflict [-Wconflicts-sr]
+/build/openshadinglanguage-git/src/osl/src/liboslcomp/oslgram.y: warning: 3 reduce/reduce conflicts [-Wconflicts-rr]
+Scanning dependencies of target oslquery
+[ 10%] Building CXX object src/liboslquery/CMakeFiles/oslquery.dir/oslquery.cpp.o
+[ 11%] Building CXX object src/liboslnoise/CMakeFiles/oslnoise.dir/simplexnoise.cpp.o
+Scanning dependencies of target oslcomp
+[ 12%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/ast.cpp.o
+[ 13%] Generating osolex.cpp
+[ 14%] Building CXX object src/liboslquery/CMakeFiles/oslquery.dir/querystub.cpp.o
+[ 16%] Generating oslgram.cpp
+/build/openshadinglanguage-git/src/osl/src/liboslexec/../liboslcomp/oslgram.y: warning: 1 shift/reduce conflict [-Wconflicts-sr]
+/build/openshadinglanguage-git/src/osl/src/liboslexec/../liboslcomp/oslgram.y: warning: 3 reduce/reduce conflicts [-Wconflicts-rr]
+[ 17%] Generating osllex.cpp
+Scanning dependencies of target oslexec
+[ 18%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/shadingsys.cpp.o
+[ 19%] Linking CXX shared library liboslnoise.so
+[ 20%] Building CXX object src/liboslquery/CMakeFiles/oslquery.dir/__/liboslexec/typespec.cpp.o
+[ 20%] Built target oslnoise
+[ 21%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/codegen.cpp.o
+[ 22%] Building CXX object src/liboslquery/CMakeFiles/oslquery.dir/osogram.cpp.o
+[ 24%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/oslcomp.cpp.o
+[ 25%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/closure.cpp.o
+[ 26%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/dictionary.cpp.o
+[ 27%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/context.cpp.o
+[ 28%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/instance.cpp.o
+[ 29%] Building CXX object src/liboslquery/CMakeFiles/oslquery.dir/osolex.cpp.o
+[ 32%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/typecheck.cpp.o
+[ 32%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/symtab.cpp.o
+[ 33%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/loadshader.cpp.o
+[ 34%] Linking CXX shared library liboslquery.so
+[ 34%] Built target oslquery
+[ 35%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/__/liboslexec/oslexec.cpp.o
+[ 36%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/master.cpp.o
+[ 37%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/__/liboslexec/typespec.cpp.o
+Scanning dependencies of target oslinfo
+[ 39%] Building CXX object src/oslinfo/CMakeFiles/oslinfo.dir/oslinfo.cpp.o
+[ 41%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/oslgram.cpp.o
+[ 41%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/opcolor.cpp.o
+[ 42%] Linking CXX executable oslinfo
+[ 43%] Building CXX object src/liboslcomp/CMakeFiles/oslcomp.dir/osllex.cpp.o
+[ 43%] Built target oslinfo
+[ 44%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/opmatrix.cpp.o
+[ 45%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/opmessage.cpp.o
+[ 47%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/opnoise.cpp.o
+[ 48%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/opspline.cpp.o
+[ 49%] Linking CXX shared library liboslcomp.so
+[ 49%] Built target oslcomp
+[ 50%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/opstring.cpp.o
+[ 51%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/optexture.cpp.o
+Scanning dependencies of target oslc
+[ 52%] Building CXX object src/oslc/CMakeFiles/oslc.dir/oslcmain.cpp.o
+[ 54%] Linking CXX executable oslc
+[ 54%] Built target oslc
+[ 56%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/oslexec.cpp.o
+[ 56%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/pointcloud.cpp.o
+Scanning dependencies of target shaders
+[ 57%] Generating stdosl.h
+[ 58%] Generating oslutil.h
+[ 59%] Generating emitter.oso
+[ 60%] Generating glass.oso
+[ 62%] Generating image.oso
+[ 63%] Generating matte.oso
+[ 64%] Generating metal.oso
+[ 65%] Generating ubersurface.oso
+[ 65%] Built target shaders
+[ 66%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/rendservices.cpp.o
+[ 67%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/constfold.cpp.o
+[ 68%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/runtimeoptimize.cpp.o
+[ 70%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/typespec.cpp.o
+[ 71%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/lpexp.cpp.o
+[ 72%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/lpeparse.cpp.o
+[ 73%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/automata.cpp.o
+[ 74%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/accum.cpp.o
+[ 75%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/opclosure.cpp.o
+[ 77%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/shadeimage.cpp.o
+[ 78%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/backendllvm.cpp.o
+[ 79%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/llvm_gen.cpp.o
+[ 80%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/llvm_instance.cpp.o
+[ 81%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/llvm_util.cpp.o
+[ 82%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslcomp/ast.cpp.o
+[ 83%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslcomp/codegen.cpp.o
+[ 85%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslcomp/oslcomp.cpp.o
+[ 86%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslcomp/symtab.cpp.o
+[ 87%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslcomp/typecheck.cpp.o
+[ 88%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslnoise/gabornoise.cpp.o
+[ 89%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslnoise/simplexnoise.cpp.o
+[ 90%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/__/liboslquery/oslquery.cpp.o
+[ 91%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/osogram.cpp.o
+[ 93%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/osolex.cpp.o
+[ 94%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/oslgram.cpp.o
+[ 95%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/osllex.cpp.o
+make[2]: *** No rule to make target '/usr/lib/liblibLLVM-3.9.so.so', needed by 'src/liboslexec/liboslexec.so'.  Stop.
+make[2]: *** Waiting for unfinished jobs....
+[ 96%] Building CXX object src/liboslexec/CMakeFiles/oslexec.dir/llvm_ops.bc.cpp.o
+make[1]: *** [CMakeFiles/Makefile2:1129: src/liboslexec/CMakeFiles/oslexec.dir/all] Error 2
+make: *** [Makefile:161: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...

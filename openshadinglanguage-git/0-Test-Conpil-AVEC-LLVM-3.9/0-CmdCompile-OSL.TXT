@@ -76,6 +76,7 @@ voir 0-CmdFairePatches-LLVM.STATIC.TXT
 pkgname=openshadinglanguage-git
 pkgver=1.8.3.20170204
 pkgrel=1
+
 pkgrel=6          # rebuild oiio
 pkgrel=4          # rebuild boost boost-libs 1.63.0-1
 pkgrel=2          # rebuild boost boost-libs 1.61.0-2
@@ -83,10 +84,37 @@ pkgrel=2          # rebuild boost boost-libs 1.61.0-2
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
+
+2-1) PKGBUILD SANS LLVM et SANS PATCH
+=====================================
+makedepends=('boost' 'cmake')
+
+sha256sum openshadinglanguage-git-1.8.3.20170204.tar.gz
+
+!!!!!!
+_gitname="osl"
+
+
+2-1) PKGBUILD SANS PATCH
+========================
 makedepends=('boost' 'cmake' 'llvm' 'clang')
+
+source=("$pkgname-$pkgver.tar.gz"
+)
+
+sha256sum openshadinglanguage-git-1.8.3.20170204.tar.gz
+
+sha256sums=(...
+)
+
+!!!!!!
+_gitname="osl"
+
 
 2-1) PKGBUILD AVEC PATCH
 ========================
+makedepends=('boost' 'cmake' 'llvm' 'clang')
+
 source=("$pkgname-$pkgver.tar.gz"
         'llvm-static-system-libs.patch'
 )
