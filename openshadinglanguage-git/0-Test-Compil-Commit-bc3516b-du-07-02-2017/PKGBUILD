@@ -2,7 +2,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.3.20170201
+pkgver=1.9.0.20170207
 pkgrel=1
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
@@ -19,8 +19,8 @@ provides=('openshadinglanguage')
 source=("$pkgname-$pkgver.tar.gz"
         'llvm35-static-system-libs.patch'
 )
-sha256sums=('927a1d0fb7d030e108a3f3b7decdad392047ea2f499b38a11f2fca0effbbb6dc'
-            '85c2462e61f3a0ece6c041db8767e3847cac510e69fc37e4f987d816a09fe619'
+sha256sums=('2d76c73133d7fb46ad7a1134e98ef30b51f0cef3e1ff7831f75c7d5704ca15cb'
+            '9600e401e3a1e00811c696efcc1850468ebbdeb5dc9eff7571ab7b5f5b7e24cd'
 )
 
 _gitname="osl"

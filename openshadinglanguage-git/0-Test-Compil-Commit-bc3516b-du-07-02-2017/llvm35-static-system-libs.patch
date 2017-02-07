@@ -1,15 +1,15 @@
 diff -aur osl/src/cmake/externalpackages.cmake osl.new/src/cmake/externalpackages.cmake
---- osl/src/cmake/externalpackages.cmake	2017-02-06 16:50:16.000000000 +0100
-+++ osl.new/src/cmake/externalpackages.cmake	2017-02-07 16:36:07.700716816 +0100
-@@ -229,9 +229,10 @@
+--- osl/src/cmake/externalpackages.cmake	2017-02-07 16:02:11.000000000 +0100
++++ osl.new/src/cmake/externalpackages.cmake	2017-02-07 16:11:32.521463673 +0100
+@@ -232,9 +232,10 @@
      # if static LLVM libraries were requested, use llvm-config to generate
      # the list of what libraries we need, and substitute that in the right
      # way for LLVM_LIBRARY.
 -    execute_process (COMMAND ${LLVM_CONFIG} --libfiles
 +    execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
-                      OUTPUT_VARIABLE LLVM_LIBRARY
+                      OUTPUT_VARIABLE LLVM_LIBRARIES
                       OUTPUT_STRIP_TRAILING_WHITESPACE)
-+    string (REPLACE "\n" " " LLVM_LIBRARY ${LLVM_LIBRARY})
-     string (REPLACE " " ";" LLVM_LIBRARY ${LLVM_LIBRARY})
-   endif ()
-   if (NOT LLVM_FIND_QUIETLY)
++    string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+     string (REPLACE " " ";" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+     set (LLVM_LIBRARY "")
+   else ()
