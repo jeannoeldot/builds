@@ -8,7 +8,7 @@ cd $HOME/05-builds/awesomebump-git
 
 https://github.com/kmkolasinski/AwesomeBump/commits/master
 
-==> 20161030
+==> 20170216
 
 1.1) SOURCES awesomebump
 ========================
@@ -51,7 +51,7 @@ VERSION_FULL = 5.0.0
 
 1-5) FAIRE ARCHIVE TAR.GZ
 =================================
-tar -cvzf awesomebump-git-5.0.20161030.tar.gz --exclude=.git awesomebump
+tar -cvzf awesomebump-git-5.0.20170216.tar.gz --exclude=.git awesomebump
 
 1-5-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -59,7 +59,7 @@ cd $HOME/05-builds/awesomebump-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/awesomebump-git-5.0.20161030.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/awesomebump-git-5.0.20170216.tar.gz .
 sync
 
 
@@ -95,7 +95,7 @@ voir CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=awesomebump-git
-pkgver=5.0.20161030
+pkgver=5.0.20170216
 pkgrel=1
 
 source=("$pkgname-$pkgver.tar.gz"
@@ -105,7 +105,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "awesomebump.png"
 )
 
-sha256sum awesomebump-git-5.0.20161030.tar.gz
+sha256sum awesomebump-git-5.0.20170216.tar.gz
 sha256sum log-file-moved-to-tmp.patch
 sha256sum awesomeBump.sh
 sha256sum awesomebump.desktop
@@ -143,7 +143,7 @@ package() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users      256  9 oct.  14:14 awesomebump.desktop
--rw-r--r--  1 jnd users 33200270 30 oct.  16:50 awesomebump-git-5.0.20161030.tar.gz
+-rw-r--r--  1 jnd users 33200270 30 oct.  16:50 awesomebump-git-5.0.20170216.tar.gz
 -rw-r--r--  1 jnd users    66603 30 oct.  16:30 awesomebump.png
 -rwxr-xr-x  1 jnd users       50  9 oct.  14:14 awesomeBump.sh
 -rw-r--r--  1 jnd users      521 31 oct.  10:41 log-file-moved-to-tmp.patch
@@ -160,7 +160,7 @@ $ ls -la
 mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/awesomebump-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/awesomebump-git/awesomebump-git-5.0.20161030.tar.gz . \
+&& cp -v $HOME/05-builds/awesomebump-git/awesomebump-git-5.0.20170216.tar.gz . \
 && cp -v $HOME/05-builds/awesomebump-git/log-file-moved-to-tmp.patch . \
 && cp -v $HOME/05-builds/awesomebump-git/awesomeBump.sh . \
 && cp -v $HOME/05-builds/awesomebump-git/awesomebump.desktop . \
@@ -237,7 +237,7 @@ $ mv -v awesomebump-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i awesomebump-git-5.0.20161030.tar.gz
+$ rm -i awesomebump-git-5.0.20170216.tar.gz
 $ rm -rf /tmp/0-AUR
 
 

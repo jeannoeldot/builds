@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=awesomebump-git
-pkgver=5.0.20170216
+pkgver=5.0.20161030
 pkgrel=1
 pkgdesc="Generate normal, height, specular or ambient occlusion textures from a single image"
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "awesomebump.desktop"
         "awesomebump.png"
 )
-sha256sums=('6e98ec326113cd9e4c30b29d94aefe4765fa489540c745892efea0ee64ecaa47'
+sha256sums=('e7d559fb6b76472906b72717e7710c42b39b6f1e336a01044f8953679d5e1ab8'
             'e97680403b755109b886f9b17eb73a500d06b57a788451036275bb7aa434479c'
             'd43f250fc7eb642b9c10674a23a82c98b337b0d5927428126ac752009ff06bf7'            
             '72b8fcb4af1d23c8bbdd472f08520f667a0075ec70f4c3b5d6c533643fcb5879'

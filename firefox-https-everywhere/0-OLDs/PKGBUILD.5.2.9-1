@@ -1,24 +1,24 @@
 # Maintainer: Hyacinthe Cartiaux <hyacinthe.cartiaux@free.fr>
 # Maintainer: Eli Schwartz <eschwartz93@gmail.com>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 # All my PKGBUILDs are managed at https://github.com/eli-schwartz/pkgbuilds
 
 _pkgname=https-everywhere
 pkgname=firefox-extension-${_pkgname}
-pkgver=5.2.11
+pkgver=5.2.9
 pkgrel=1
+_file=557482
 pkgdesc="Plugin for firefox which ensures you are using https whenever it's possible."
 license=('GPL2')
 arch=('any')
 url="https://www.eff.org/https-everywhere"
 depends=("firefox")
 makedepends=("unzip")
-source=("${_pkgname}-${pkgver}.xpi::https://www.eff.org/files/https-everywhere-${pkgver}-eff.xpi"
-        "${_pkgname}-${pkgver}.xpi.sig::https://www.eff.org/files/https-everywhere-${pkgver}-eff.xpi.sig")
+# Apparently, API endpoints are all the rage -- so this isn't actually a file...
+source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/")
 noextract=("${_pkgname}-${pkgver}.xpi")
-sha256sums=('f535d79da305aa8a35f753788ae7f2768762dcabe47776e195d66fd9768dce4d'
-            'SKIP')
-validpgpkeys=('1073E74EB38BD6D19476CBF8EA9DBF9FB761A677') # William Budington
+sha256sums=('770668c7f296d6c0bde3320354854781fc5e871feda345d2b22005ee33eacdaf')
 
 prepare() {
   cd "$srcdir"
