@@ -1,0 +1,15 @@
+diff -aur osl/src/cmake/modules/FindLLVM.cmake osl.new/src/cmake/modules/FindLLVM.cmake
+--- osl/src/cmake/modules/FindLLVM.cmake	2017-02-18 16:43:19.000000000 +0100
++++ osl.new/src/cmake/modules/FindLLVM.cmake	2017-02-18 16:59:15.866268795 +0100
+@@ -78,9 +78,10 @@
+     # if static LLVM libraries were requested, use llvm-config to generate
+     # the list of what libraries we need, and substitute that in the right
+     # way for LLVM_LIBRARY.
+-    execute_process (COMMAND ${LLVM_CONFIG} --libfiles
++    execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
+                      OUTPUT_VARIABLE LLVM_LIBRARIES
+                      OUTPUT_STRIP_TRAILING_WHITESPACE)
++    string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+     string (REPLACE " " ";" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+     set (LLVM_LIBRARY "")
+   else ()
