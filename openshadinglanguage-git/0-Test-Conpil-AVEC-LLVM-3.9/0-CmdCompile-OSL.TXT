@@ -8,7 +8,7 @@ GIT     A REVOIR
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/imageworks/OpenShadingLanguage
-==> 20170204
+==> 20170216
 
 1.3 SOURCES
 ==============
@@ -32,20 +32,17 @@ git pull --rebase origin master
 cd ..
 
 !!!!! Vérifier VERSION : 
-$ head -n 8 osl/CMakeLists.txt
+$ head -n 6 osl/CMakeLists.txt
 
-# Release version of the library
-set (OSL_LIBRARY_VERSION_MAJOR 1)
-set (OSL_LIBRARY_VERSION_MINOR 8)
-set (OSL_LIBRARY_VERSION_PATCH 3)
-set (OSL_LIBRARY_VERSION_RELEASE_TYPE "dev")   # "dev", "betaX", "RCY", ""
+project (OSL
+         VERSION 1.9.0
 
-==> 1.8.3
+==> 1.9.0
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openshadinglanguage-git-1.8.3.20170204.tar.gz --exclude=.git osl
+tar -cvzf openshadinglanguage-git-1.9.0.20170216.tar.gz --exclude=.git osl
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -53,7 +50,7 @@ cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.8.3.20170204.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170216.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -74,7 +71,7 @@ voir 0-CmdFairePatches-LLVM.STATIC.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.3.20170204
+pkgver=1.9.0.20170216
 pkgrel=1
 
 pkgrel=6          # rebuild oiio
@@ -89,7 +86,7 @@ provides=('openshadinglanguage')
 =====================================
 makedepends=('boost' 'cmake')
 
-sha256sum openshadinglanguage-git-1.8.3.20170204.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170216.tar.gz
 
 !!!!!!
 _gitname="osl"
@@ -102,7 +99,7 @@ makedepends=('boost' 'cmake' 'llvm' 'clang')
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum openshadinglanguage-git-1.8.3.20170204.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170216.tar.gz
 
 sha256sums=(...
 )
@@ -116,12 +113,12 @@ _gitname="osl"
 makedepends=('boost' 'cmake' 'llvm' 'clang')
 
 source=("$pkgname-$pkgver.tar.gz"
-        'llvm-static-system-libs.patch'
+        'llvm39-static-system-libs.patch'
 )
 
-sha256sum openshadinglanguage-git-1.8.3.20170204.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170216.tar.gz
 
-sha256sum llvm-static-system-libs.patch
+sha256sum llvm39-static-system-libs.patch
 
 sha256sums=(...
          ...
@@ -136,7 +133,7 @@ prepare() {
   # Add system libraries needed to link against LLVM components (zlib, ncurses)
   # This is required in order to statically link against LLVM
   # VOIR Community
-  patch -Np1 -i "${srcdir}/llvm-static-system-libs.patch"
+  patch -Np1 -i "${srcdir}/llvm39-static-system-libs.patch"
 }
 
 build() {
@@ -149,41 +146,45 @@ build() {
 ==============================
  kwrite /0-DataLinux/05-builds-dir-git/osl/CMakeLists.txt &
   
-LIGNE 36
+LIGNE 42
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
   
-LIGNE 54
+LIGNE 60
   STOP_ON_WARNING ON    =>      -DSTOP_ON_WARNING=OFF \ 
   
-LIGNE 123
+LIGNE 129
   LLVM_STATIC           =>      -DLLVM_STATIC=1 \
   LLVM_STATIC           =>      -DLLVM_STATIC=ON \
 
-LIGNE 223
+LIGNE 229
   OSL_BUILD_TESTS ON    =>      -DOSL_BUILD_TESTS=OFF \
   
-LIGNE 224
+LIGNE 230
   BUILDSTATIC OFF
 
-LIGNE 234
+LIGNE 240
   USE_PARTIO ON    =>      -DUSE_PARTIO=OFF \
   
-LIGNE 241
+LIGNE 243
+  /!\ /!\ /!\  ATTENTION
+  USE_CPP 11
+
+LIGNE 246
   !!! A VOIR : $ cat /proc/cpuinfo | grep sse4_2
   USE_SIMD ""         =>      -DUSE_SIMD=sse4.2 \
 
-LIGNE 242
+LIGNE 247
   !!! A VOIR
   OSL_NO_DEFAULT_TEXTURESYSTEM OFF
 
-LIGNE 243
+LIGNE 248
   !!! A VOIR
   OSL_BUILD_PLUGINS ON
 
-LIGNE 244
+LIGNE 249
   USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
 
-LIGNE 245
+LIGNE 250
   CODECOV OFF
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -191,8 +192,8 @@ LIGNE 245
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.8.3.20170204.tar.gz
--rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm-static-system-libs.patch
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170216.tar.gz
+-rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm39-static-system-libs.patch
 
 
 !!! A MODIFIER SI PAS OK !
@@ -208,8 +209,8 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/openshadinglanguage-git-1.8.3.20170204.tar.gz . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/llvm-static-system-libs.patch . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/openshadinglanguage-git-1.9.0.20170216.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/llvm39-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9 \
 && cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \
@@ -288,7 +289,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openshadinglanguage-git-1.8.3.20170204.tar.gz
+$ rm -i openshadinglanguage-git-1.9.0.20170216.tar.gz
 
 
 $ cd && maj-repolocal
