@@ -3,7 +3,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.9.0.20170216
-pkgrel=2
+pkgrel=1
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -43,7 +43,6 @@ build() {
   cmake \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_PREFIX=/usr \
-      -DCMAKE_VERBOSE_MAKEFILE=ON \
       -DSTOP_ON_WARNING=OFF \
       -DLLVM_STATIC=ON \
       -DOSL_BUILD_TESTS=OFF \
