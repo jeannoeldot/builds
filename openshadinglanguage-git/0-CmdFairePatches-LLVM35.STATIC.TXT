@@ -4,11 +4,11 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 mkdir /tmp/srcp
 
-cp -v openshadinglanguage-git-1.9.0.20170216.tar.gz /tmp/srcp/
+cp -v openshadinglanguage-git-1.9.0.20170225.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openshadinglanguage-git-1.9.0.20170216.tar.gz
+tar -xzf openshadinglanguage-git-1.9.0.20170225.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git
 
@@ -23,12 +23,12 @@ cd osl.new/src/cmake/modules
 
 kwrite FindLLVM.cmake
 
-MODIFIER LIGNE 81 :
+MODIFIER LIGNE 96 :
     execute_process (COMMAND ${LLVM_CONFIG} --libfiles
 DEVIENT :
     execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
 
-RAJOUTER LIGNE 84 :
+RAJOUTER LIGNE 99 :
     string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
 
 

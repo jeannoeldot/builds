@@ -5,11 +5,70 @@ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.78.4.20170106.tar.gz /tmp/srcp/
+cp -v blender-git-2.78.4.20170226.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.78.4.20170106.tar.gz
+tar -xzf blender-git-2.78.4.20170226.tar.gz
+
+1) MODIFIER CONTENU RÉP blender/release/datafiles/colormanagement/
+==================================================================
+cp -R blender blender.new
+
+SOURCES FILMIC-BLENDER
+======================
+https://github.com/sobotka/filmic-blender
+
+!!! Répertoire clone de filmic-blender dans : /0-DataLinux/05-builds-dir-git/filmic-blender
+-------------------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep filmic-blender :
+---------------------------------------
+ls | grep filmic-blender
+
+!!! SI REP filmic-blender N'EXISTE PAS
+--------------------------------------
+git clone git://github.com/sobotka/filmic-blender.git filmic-blender
+
+!!! SI REP filmic-blender EXISTE
+--------------------------------
+cd filmic-blender
+git pull --rebase origin master
+cd ..
+
+
+cd /tmp/srcp
+
+SUPPRIMER FICHIERS ET RÉPRTOIRES ORIGINAUX :
+rm -rf blender.new/release/datafiles/colormanagement/*
+
+COPIER NOUVEAUX FICHIERS ET RÉPRTOIRES DE filmic-blender :
+cp -r /0-DataLinux/05-builds-dir-git/filmic-blender/* \
+blender.new/release/datafiles/colormanagement/
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Remplace-colormanagement-with-filmic-blender.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Remplace-colormanagement-with-filmic-blender.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) MODIFIER blender/release/scripts/addons_contrib/curve_tools/CurveIntersections.py
 ====================================================================================
@@ -49,17 +108,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/fix-SyntaxError-algoDIR-algoPOV.patch .
 
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 TEST 2 : COMPIL OK
 2) MODIFIER blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp
