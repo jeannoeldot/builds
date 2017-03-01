@@ -8,7 +8,7 @@ GIT     A REVOIR
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/imageworks/OpenShadingLanguage
-==> 20170216
+==> 20170225
 
 1.3 SOURCES
 ==============
@@ -42,7 +42,7 @@ project (OSL
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openshadinglanguage-git-1.9.0.20170216.tar.gz --exclude=.git osl
+tar -cvzf openshadinglanguage-git-1.9.0.20170225.tar.gz --exclude=.git osl
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -50,7 +50,7 @@ cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170216.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170225.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -71,11 +71,18 @@ voir 0-CmdFairePatches-LLVM.STATIC.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.9.0.20170216
+pkgver=1.9.0.20170225
 pkgrel=1
 
 pkgrel=2  # Ajout de -DCMAKE_VERBOSE_MAKEFILE=ON \
+pkgrel=3  # SANS -DCMAKE_VERBOSE_MAKEFILE=ON \
+          # SANS -DLLVM_FIND_QUIETLY=??? \
 
+
+!!! VOIR :
+#  LLVM_FIND_QUIETLY - if true, will suppress most console output
+# Ajout de -DLLVM_FIND_QUIETLY=OFF \    ==> PAS AFFICHAGE
+# Ajout de -DLLVM_FIND_QUIETLY=ON \    ==> PAS AFFICHAGE
 
 
 pkgrel=6          # rebuild oiio
@@ -86,16 +93,6 @@ conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
 
-2-1) PKGBUILD SANS LLVM et SANS PATCH
-=====================================
-makedepends=('boost' 'cmake')
-
-sha256sum openshadinglanguage-git-1.9.0.20170216.tar.gz
-
-!!!!!!
-_gitname="osl"
-
-
 2-1) PKGBUILD SANS PATCH
 ========================
 makedepends=('boost' 'cmake' 'llvm' 'clang')
@@ -103,7 +100,7 @@ makedepends=('boost' 'cmake' 'llvm' 'clang')
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum openshadinglanguage-git-1.9.0.20170216.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170225.tar.gz
 
 sha256sums=(...
 )
@@ -120,7 +117,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'llvm39-static-system-libs.patch'
 )
 
-sha256sum openshadinglanguage-git-1.9.0.20170216.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170225.tar.gz
 
 sha256sum llvm39-static-system-libs.patch
 
@@ -196,7 +193,7 @@ LIGNE 250
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170216.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170225.tar.gz
 -rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm39-static-system-libs.patch
 
 
@@ -213,7 +210,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/openshadinglanguage-git-1.9.0.20170216.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/openshadinglanguage-git-1.9.0.20170225.tar.gz . \
 && cp -v $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/llvm39-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9 \
@@ -293,7 +290,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openshadinglanguage-git-1.9.0.20170216.tar.gz
+$ rm -i openshadinglanguage-git-1.9.0.20170225.tar.gz
 
 
 $ cd && maj-repolocal
@@ -326,6 +323,16 @@ POUR REMETTRE openshadinglanguage EXTRA
 ================================================================
 ANCIENS
 ========
+
+2-1) PKGBUILD SANS LLVM et SANS PATCH
+=====================================
+makedepends=('boost' 'cmake')
+
+sha256sum openshadinglanguage-git-1.9.0.20170225.tar.gz
+
+!!!!!!
+_gitname="osl"
+
 
 makedepends=('boost' 'cmake' 'llvm35' 'clang35')
 

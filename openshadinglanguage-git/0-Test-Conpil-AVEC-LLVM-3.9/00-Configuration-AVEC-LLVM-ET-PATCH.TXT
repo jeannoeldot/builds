@@ -1,0 +1,36 @@
+==> Starting build()...
+-- The CXX compiler identification is GNU 6.3.1
+-- The C compiler identification is GNU 6.3.1
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Building OSL 1.9.0
+-- CMake version is 3.7.2
+-- Project build dir = /build/openshadinglanguage-git/src/osl/build
+-- CMAKE_CXX_COMPILER is /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID is GNU
+-- Building for C++11
+-- Compiling with SIMD level sse4.2
+-- Setting Namespace to: 
+-- platform = linux64
+-- Using OpenImageIO 1.8.3
+-- LLVM version  = 3.9.1
+-- LLVM dir        = /usr
+-- LLVM includes   = /usr/include
+-- LLVM lib dir    = /usr/lib
+-- LLVM libraries  = /usr/lib/libLLVM-3.9.so;-lrt;-ldl;-lcurses;-lpthread;-lz;-lm
+-- LLVM sys libs   = -lrt -ldl -lcurses -lpthread -lz -lm
+-- Clang libraries = /usr/lib64/libclangFrontend.a;/usr/lib64/libclangDriver.a;/usr/lib64/libclangSerialization.a;/usr/lib64/libclangParse.a;/usr/lib64/libclangSema.a;/usr/lib64/libclangAnalysis.a;/usr/lib64/libclangAST.a;/usr/lib64/libclangBasic.a;/usr/lib64/libclangEdit.a;/usr/lib64/libclangLex.a
+-- Using Boost Wave for preprocessing
+-- CMAKE_INSTALL_RPATH = /usr/lib
+-- Create oslversion.h from oslversion.h.in
+-- Configuring done

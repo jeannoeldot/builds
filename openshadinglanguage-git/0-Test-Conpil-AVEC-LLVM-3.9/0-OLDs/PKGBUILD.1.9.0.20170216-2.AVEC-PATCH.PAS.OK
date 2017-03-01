@@ -2,8 +2,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.9.0.20170225
-pkgrel=3
+pkgver=1.9.0.20170216
+pkgrel=2
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -19,8 +19,8 @@ provides=('openshadinglanguage')
 source=("$pkgname-$pkgver.tar.gz"
         'llvm39-static-system-libs.patch'
 )
-sha256sums=('384f1da76df724407287361f9afe874d18f7ea038456759a9b21b9ad4dac5a80'
-            '533067a9286adc8e031fdffff044de21709ef929985472f212f7893e9e84f1c6'
+sha256sums=('7590e6799ba716013a864452d8effb0360066ef0945126d627b9f7d9e8a9448e'
+            'e5e215d2c5a52fb24470d79b413850a26ba30262eff98a6926633d2a627149f7'
 )
 
 _gitname="osl"
@@ -43,6 +43,7 @@ build() {
   cmake \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_VERBOSE_MAKEFILE=ON \
       -DSTOP_ON_WARNING=OFF \
       -DLLVM_STATIC=ON \
       -DOSL_BUILD_TESTS=OFF \

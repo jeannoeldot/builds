@@ -4,11 +4,11 @@ cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/
 
 mkdir /tmp/srcp
 
-cp -v openshadinglanguage-git-1.9.0.20170216.tar.gz /tmp/srcp/
+cp -v openshadinglanguage-git-1.9.0.20170225.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openshadinglanguage-git-1.9.0.20170216.tar.gz
+tar -xzf openshadinglanguage-git-1.9.0.20170225.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git/0-Test-Conpil-AVEC-LLVM-3.9/
 
@@ -23,12 +23,14 @@ cd osl.new/src/cmake/modules
 
 kwrite FindLLVM.cmake
 
-MODIFIER LIGNE 81 :
+MODIFIER LIGNE 96 :
     execute_process (COMMAND ${LLVM_CONFIG} --libfiles
 DEVIENT :
     execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
 
-RAJOUTER LIGNE 84 :
+RAJOUTER LIGNE 99 :
+    string (REPLACE "liblib" "lib" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+    string (REPLACE ".so.so" ".so" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
     string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
 
 
@@ -52,6 +54,44 @@ mv -v /tmp/srcp/llvm39-static-system-libs.patch .
 =======================
 rm -rf /tmp/srcp
 sync
+
+
+!==============================================================================
+!! TEST !!!
+!!! VOIR :
+https://github.com/ChristophHaag/mesa-mesa/commit/75e65bc4b17f2c19b0d6b1cc5463910cc2970e64
++        LLVM_SO_NAME=LLVM-`$LLVM_CONFIG --version | sed "s/4.0.0git/4.0svn/"`
+
+ERREUR :
+make[2]: *** No rule to make target '/usr/lib/liblibLLVM-3.9.so.so'
+
+$ llvm-config --libfiles --system-libs
+/usr/lib/liblibLLVM-3.9.so.so
+-lrt -ldl -lcurses -lpthread -lz -lm
+
+$ llvm-config --libfiles --system-libs | sed "s/liblib/lib/"
+/usr/lib/libLLVM-3.9.so.so
+-lrt -ldl -lcurses -lpthread -lz -lm
+
+$ llvm-config --libfiles --system-libs | sed "s/liblib/lib/" | sed "s/.so.so/.so/"
+/usr/lib/libLLVM-3.9.so
+-lrt -ldl -lcurses -lpthread -lz -lm
+
+$ llvm-config --libfiles --system-libs | sed "s/liblib/lib/;s/.so.so/.so/"
+/usr/lib/libLLVM-3.9.so
+-lrt -ldl -lcurses -lpthread -lz -lm
+
+
+$ ls -l /usr/lib/libLLVM-3.9.so
+-rwxr-xr-x 1 root root 47095984 31 déc.  14:58 /usr/lib/libLLVM-3.9.so
+
+
+OU
+===
++    string (REPLACE "liblib" "lib" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
++    string (REPLACE ".so.so" ".so" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+
+
 
 ==============================================================================
 ANCIENS OU PAS OK
@@ -142,7 +182,6 @@ cd ..
 =======================
 rm -rf srcp
 sync
-
 
 !!! PAS OK
 1) MODIFIER osl/src/include/OpenImageIO/fmath.h
