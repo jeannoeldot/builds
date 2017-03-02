@@ -1,8 +1,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.4.20170204
-pkgrel=1
+pkgver=2.78.4.20170226
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -23,7 +23,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils
           'opensubdiv-git'
           'openvdb-git'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm35'
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'opencl-headers'
              'git'
@@ -35,7 +35,7 @@ options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('f132c2592da01cad5242e12b6e9aa313077cc9cbd2eb5f53e27b49acf9b03b68'
+sha256sums=('c8c48a05046ccaa1f1ab344faa8334ae4d577df5bc01c0937d4cf7f167ec2821'
 )
 
 _gitname="blender"
@@ -79,7 +79,7 @@ build() {
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_LOGGING=OFF \
         -DWITH_LLVM=ON \
-        -DLLVM_VERSION=3.5 \
+        -DLLVM_VERSION=3.9 \
         -DLLVM_STATIC=ON \
         -DWITH_DOC_MANPAGE=ON \
         -DWITH_C11=ON \

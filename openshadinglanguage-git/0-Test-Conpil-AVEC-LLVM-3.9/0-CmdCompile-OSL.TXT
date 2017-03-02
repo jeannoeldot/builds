@@ -72,10 +72,10 @@ voir 0-CmdFairePatches-LLVM.STATIC.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.9.0.20170225
-pkgrel=1
+pkgrel=11
 
-pkgrel=2  # Ajout de -DCMAKE_VERBOSE_MAKEFILE=ON \
-pkgrel=3  # SANS -DCMAKE_VERBOSE_MAKEFILE=ON \
+pkgrel=12  # Ajout de -DCMAKE_VERBOSE_MAKEFILE=ON \
+pkgrel=13  # SANS -DCMAKE_VERBOSE_MAKEFILE=ON \
           # SANS -DLLVM_FIND_QUIETLY=??? \
 
 
@@ -271,6 +271,13 @@ rm -f *~
 # Verifications...
 
 namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
+
+!!! TEST
+========
+# DÉPLACE DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------

@@ -81,14 +81,9 @@ cd $HOME/05-builds/blender-git
 cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170226.tar.gz .
 sync
 
-1-7-1-2) Move ARCHIVE TAR.GZ ds rep compile
-==========================================
-cd $HOME/05-builds/blender-git
-
 
 1-7-5) AVEC FILMIC
 ==================
-
 1-7-5-1) FAIRE ARCHIVE TAR.GZ AVEC FILMIC
 =========================================
 !!! VOIR 0-CmdFaireTarGz-Avec-Filmic.TXT
