@@ -1,3 +1,13 @@
+
+$ grep -lR "LLVM_CONFIG" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt
+/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/platform/platform_apple.cmake
+/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/Modules/FindLLVM.cmake
+
+
+
+
+
 ┌jnd ( ~ )
 └─> $ search.sh /0-DataLinux/05-builds-dir-git/blender/ LLVM
 Recherche en cours...

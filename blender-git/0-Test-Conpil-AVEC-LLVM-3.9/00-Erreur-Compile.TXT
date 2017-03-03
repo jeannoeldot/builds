@@ -1,0 +1,120 @@
+
+==> Starting build()...
+-- The C compiler identification is GNU 6.3.1
+-- The CXX compiler identification is GNU 6.3.1
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test SUPPORT_SSE_BUILD
+-- Performing Test SUPPORT_SSE_BUILD - Success
+-- SSE Support: detected.
+-- Performing Test SUPPORT_SSE2_BUILD
+-- Performing Test SUPPORT_SSE2_BUILD - Success
+-- SSE2 Support: detected.
+-- Found Git: /usr/bin/git (found version "2.12.0") 
+-- Looking for C++ include memory
+-- Looking for C++ include memory - found
+-- Performing Test HAVE_SHARED_PTR_IN_STD_NAMESPACE
+-- Performing Test HAVE_SHARED_PTR_IN_STD_NAMESPACE - Success
+-- Found shared_ptr in std namespace using <memory> header.
+-- Looking for C++ include unordered_map
+-- Looking for C++ include unordered_map - found
+-- Performing Test HAVE_UNORDERED_MAP_IN_STD_NAMESPACE
+-- Performing Test HAVE_UNORDERED_MAP_IN_STD_NAMESPACE - Success
+-- Found unordered_map/set in std namespace.
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found X11: /usr/lib64/libX11.so
+-- Found JPEG: /usr/lib64/libjpeg.so  
+-- Found ZLIB: /usr/lib64/libz.so (found version "1.2.11") 
+-- Found PNG: /usr/lib64/libpng.so (found version "1.6.28") 
+-- Found Freetype: /usr/lib64/libfreetype.so (found version "2.7.1") 
+-- Found PythonLibsUnix: python3.6m  
+-- #define OPENEXR_VERSION_STRING "2.2.0"
+-- Found OpenEXR: /usr/lib64/libHalf.so;/usr/lib64/libIex.so;/usr/lib64/libIlmImf.so;/usr/lib64/libIlmThread.so;/usr/lib64/libImath.so  
+-- Found OpenJPEG: /usr/lib64/libopenjpeg.so  
+-- Found TIFF: /usr/lib64/libtiff.so (found version "4.0.7") 
+-- Found OpenAL: /usr/lib64/libopenal.so  
+-- Found SDL2: /usr/lib64/libSDL2.so  
+-- Found SndFile: /usr/lib64/libsndfile.so  
+-- Found Fftw3: /usr/lib64/libfftw3.so  
+-- Found OpenCOLLADA: /usr/lib64/opencollada/libOpenCOLLADAStreamWriter.so;/usr/lib64/opencollada/libOpenCOLLADASaxFrameworkLoader.so;/usr/lib64/opencollada/libOpenCOLLADAFramework.so;/usr/lib64/opencollada/libOpenCOLLADABaseUtils.so;/usr/lib64/opencollada/libGeneratedSaxParser.so;/usr/lib64/opencollada/libMathMLSolver.so;/usr/lib64/opencollada/libbuffer.so;/usr/lib64/opencollada/libftoa.so;/usr/lib64/opencollada/libUTF.so  
+-- Found XML2: /usr/lib64/libxml2.so  
+-- Found PCRE: /usr/lib64/libpcre.so  
+-- Found JeMalloc: /usr/lib64/libjemalloc.so  
+-- Found OSL: /usr/lib64/liboslcomp.so;/usr/lib64/liboslexec.so;/usr/lib64/liboslquery.so  
+-- Found OPENVDB: /usr/lib64/libopenvdb.so  
+-- Found TBB: /usr/lib64/libtbb.so  
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Boost version: 1.63.0
+-- Found the following Boost libraries:
+--   filesystem
+--   regex
+--   thread
+--   date_time
+--   wave
+--   locale
+--   iostreams
+--   system
+--   chrono
+--   atomic
+--   serialization
+-- Found OpenImageIO: /usr/lib64/libOpenImageIO.so  
+-- Found OpenColorIO: /usr/lib64/libOpenColorIO.so  
+runningllvm-config-3.9
+-- Found LLVM: /usr/lib/liblibLLVM-3.9.so.so  
+-- Found OpenSubdiv: /usr/lib64/libosdGPU.so;/usr/lib64/libosdCPU.so  
+-- Try OpenMP C flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Try OpenMP CXX flag = [-fopenmp]
+-- Performing Test OpenMP_FLAG_DETECTED
+-- Performing Test OpenMP_FLAG_DETECTED - Success
+-- Found OpenMP: -fopenmp  
+-- Check if the system is big endian
+-- Searching 16 bit integer
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of unsigned short
+-- Check size of unsigned short - done
+-- Using unsigned short
+-- Check if the system is big endian - little endian
+-- Found OpenGL: /usr/lib64/libGL.so  
+-- Found Glew: /usr/lib64/libGLEW.so  
+
+[100%] Building C object source/creator/CMakeFiles/blender.dir/creator.c.o
+make[2]: *** No rule to make target '/usr/lib/liblibLLVM-3.9.so.so', needed by 'bin/blender'.  Stop.
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/Makefile2:7197: source/creator/CMakeFiles/blender.dir/all] Error 2
+make: *** [Makefile:161: all] Error 2
