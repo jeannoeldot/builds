@@ -15,7 +15,6 @@ tar -xzf pkgbrowser.tar.gz
 cd $HOME/05-builds/pkgbrowser
 
 mv -vf /tmp/0-AUR/pkgbrowser/PKGBUILD .
-mv -vf /tmp/0-AUR/pkgbrowser/pkgbrowser.install .
 
 
 1-2) Download source
@@ -52,7 +51,6 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
 -rw-r--r--  1 jnd users 21776 21 sept. 19:07 pkgbrowser-0.20.1.tar.gz
--rw-r--r--  1 jnd users  2422  7 juin  00:20 pkgbrowser.install
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -66,7 +64,7 @@ $ rm -f *~
 rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.20.1.tar.gz,pkgbrowser.install} . \
+&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.20.1.tar.gz} . \
 && makepkg -s \
 && cd $HOME/05-builds/pkgbrowser \
 && cp -v /tmp/build/pkgbrowser-*-x86_64.pkg.tar.* . \
@@ -134,7 +132,6 @@ $ mv -v pkgbrowser-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i pkgbrowser.install
 $ rm -i pkgbrowser-0.20.1.tar.gz
 $ rm -rf /tmp/0-AUR
 
@@ -170,6 +167,11 @@ mv -vf 0-AUR/pkgbrowser/pkgbrowser.install .
 $ rm -f 0-AUR/pkgbrowser.tar.gz
 $ rm -rf 0-AUR/pkgbrowser
 
+&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.20.1.tar.gz,pkgbrowser.install} . \
+
+$ rm -i pkgbrowser.install
+mv -vf /tmp/0-AUR/pkgbrowser/pkgbrowser.install .
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 pkgbrowser.install
 
 
 3) MAKEPKG en CHROOT

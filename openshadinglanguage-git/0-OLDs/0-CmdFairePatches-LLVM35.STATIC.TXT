@@ -1,0 +1,253 @@
+FAIRE PATCHS
+====================================
+cd $HOME/05-builds/openshadinglanguage-git
+
+mkdir /tmp/srcp
+
+cp -v openshadinglanguage-git-1.9.0.20170225.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf openshadinglanguage-git-1.9.0.20170225.tar.gz
+
+/!\ cd $HOME/05-builds/openshadinglanguage-git
+
+1) MODIFIER osl/src/cmake/modules/FindLLVM.cmake
+================================================
+
+/!\ cd /tmp/srcp
+
+cp -R osl osl.new
+
+cd osl.new/src/cmake/modules
+
+kwrite FindLLVM.cmake
+
+MODIFIER LIGNE 96 :
+    execute_process (COMMAND ${LLVM_CONFIG} --libfiles
+DEVIENT :
+    execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
+
+RAJOUTER LIGNE 99 :
+    string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindLLVM.cmake~
+rm -f FindLLVM.cmake~
+ 
+cd ../../../..
+ 
+diff -aur osl osl.new
+diff -aur osl osl.new > llvm35-static-system-libs.patch
+
+rm -rf osl.new
+
+cd $HOME/05-builds/openshadinglanguage-git
+
+mv -v /tmp/srcp/llvm35-static-system-libs.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
+
+1) MODIFIER osl/src/cmake/modules/FindLLVM.cmake
+================================================
+
+/!\ cd /tmp/srcp
+
+cp -R osl osl.new
+
+cd osl.new/src/cmake/modules
+
+kwrite FindLLVM.cmake
+
+MODIFIER LIGNE 96 :
+    execute_process (COMMAND ${LLVM_CONFIG} --libfiles
+DEVIENT :
+    execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
+
+RAJOUTER LIGNE 99 :
+    string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindLLVM.cmake~
+rm -f FindLLVM.cmake~
+ 
+cd ../../../..
+ 
+diff -aur osl osl.new
+diff -aur osl osl.new > llvm35-static-system-libs.patch
+
+rm -rf osl.new
+
+cd $HOME/05-builds/openshadinglanguage-git
+
+mv -v /tmp/srcp/llvm35-static-system-libs.patch .
+
+
+cd osl.new/src/cmake
+
+kwrite externalpackages.cmake
+
+
+2) MODIFIER osl/CMakeLists.txt
+===============================
+
+cd /tmp/srcp
+
+cp -R osl osl.new
+
+cd osl.new/
+
+kwrite CMakeLists.txt
+
+MODIFIER LIGNES 257 À 270
+  OIIO_ ==> OSL_
+
+MODIFIER LIGNES 277 À 294
+  OIIO_ ==> OSL_
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ..
+
+diff -aur osl osl.new
+diff -aur osl osl.new > confusion-oiio-osl.patch
+
+rm -rf osl.new
+
+cd $HOME/05-builds/openshadinglanguage-git
+mv -v /tmp/srcp/confusion-oiio-osl.patch .
+
+
+!!! PAS OK
+1) MODIFIER osl/src/liboslexec/llvm_util.cpp
+============================================
+
+cd /tmp/srcp
+
+cp -R osl osl.new
+
+cd osl.new/src/liboslexec
+
+kwrite llvm_util.cpp
+
+MODIFIER LIGNES 98-100 :
+#endif
+#include <llvm/ExecutionEngine/JIT.h>
+#include <llvm/ExecutionEngine/JITMemoryManager.h>
+DEVIENNENT :
+#else
+#include <llvm/ExecutionEngine/JIT.h>
+#include <llvm/ExecutionEngine/JITMemoryManager.h>
+#endif
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier llvm_util.cpp~
+rm -f llvm_util.cpp~
+
+cd ../../..
+ 
+diff -aur osl osl.new
+diff -aur osl osl.new > fix-include-llvm36.patch
+
+rm -rf osl.new
+
+cd $HOME/05-builds/openshadinglanguage-git
+mv -v /tmp/srcp/fix-include-llvm36.patch .
+
+
+mkdir srcp
+
+cp -v openshadinglanguage-git-1.5.5.20140912.tar.gz srcp/
+
+cd srcp
+
+tar -xzf openshadinglanguage-git-1.5.5.20140912.tar.gz
+
+cd ..
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf srcp
+sync
+
+
+!!! PAS OK
+1) MODIFIER osl/src/include/OpenImageIO/fmath.h
+===================================================
+
+cd srcp
+
+cp -R osl osl.new
+
+cd osl.new/src/include/OpenImageIO
+
+kwrite fmath.h
+
+DEPLACER LIGNES 1299 à 1305
+#ifndef _MSC_VER
+ // Some systems have isnan, isinf and isfinite in the std namespace.
+ using std::isnan;
+ using std::isinf;
+ using std::isfinite;
+#endif
+
+A LA LIGNE 1272
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier fmath.h~
+rm -f fmath.h~
+ 
+cd ../../../..
+ 
+diff -aur osl osl.new
+diff -aur osl osl.new > fix-previous-declaration-gcc4.9.1-c++11.patch
+
+rm -rf osl.new
+
+cd ..
+mv srcp/fix-previous-declaration-gcc4.9.1-c++11.patch .
+
+
+1) MODIFIER osl/src/include/OpenImageIO/fmath.h
+===================================================
+
+cd srcp
+
+cp -R osl osl.new
+
+cd osl.new/src/include/OpenImageIO
+
+kwrite fmath.h
+
+MODIFIER LIGNES 1301 à 1303
+ using std::isnan;
+ using std::isinf;
+ using std::isfinite;
+DEVIENNENT :
+/* gcc 4.9.1 : c++11 : previous declaration
+ using std::isnan;
+ using std::isinf;
+ using std::isfinite;
+*/
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier fmath.h~
+rm -f fmath.h~
+ 
+cd ../../../..
+ 
+diff -aur osl osl.new
+diff -aur osl osl.new > fix-previous-declaration-gcc4.9.1-c++11.patch
+
+rm -rf osl.new
+
+cd ..
+mv srcp/fix-previous-declaration-gcc4.9.1-c++11.patch .

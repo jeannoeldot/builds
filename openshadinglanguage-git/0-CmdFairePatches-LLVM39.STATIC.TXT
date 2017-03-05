@@ -4,13 +4,60 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 mkdir /tmp/srcp
 
-cp -v openshadinglanguage-git-1.9.0.20170225.tar.gz /tmp/srcp/
+cp -v openshadinglanguage-git-1.9.0.20170302.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openshadinglanguage-git-1.9.0.20170225.tar.gz
+tar -xzf openshadinglanguage-git-1.9.0.20170302.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git
+
+1) MODIFIER osl/src/cmake/modules/FindLLVM.cmake
+================================================
+
+/!\ cd /tmp/srcp
+
+cp -R osl osl.new
+
+cd osl.new/src/cmake/modules
+
+kwrite FindLLVM.cmake
+
+MODIFIER LIGNE 96 :
+    execute_process (COMMAND ${LLVM_CONFIG} --libfiles
+DEVIENT :
+    execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
+
+RAJOUTER LIGNE 99 :
+    string (REPLACE "liblib" "lib" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+    string (REPLACE ".so.so" ".so" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+    string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindLLVM.cmake~
+rm -f FindLLVM.cmake~
+ 
+cd ../../../..
+ 
+diff -aur osl osl.new
+diff -aur osl osl.new > llvm39-static-system-libs.patch
+
+rm -rf osl.new
+
+cd $HOME/05-builds/openshadinglanguage-git
+
+mv -v /tmp/srcp/llvm39-static-system-libs.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
 
 1) MODIFIER osl/src/cmake/modules/FindLLVM.cmake
 ================================================
@@ -46,16 +93,6 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 mv -v /tmp/srcp/llvm35-static-system-libs.patch .
 
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-sync
-
-==============================================================================
-ANCIENS OU PAS OK
-=================
 
 cd osl.new/src/cmake
 
