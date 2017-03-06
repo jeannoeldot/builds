@@ -5,13 +5,109 @@ cd $HOME/05-builds/conky-lua-nv-git
 
 mkdir /tmp/srcp
 
-cp -v conky-lua-nv-git-1.10.6.20161007.tar.gz /tmp/srcp/
+cp -v conky-lua-nv-git-1.10.7.20170211.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf conky-lua-nv-git-1.10.6.20161007.tar.gz
+tar -xzf conky-lua-nv-git-1.10.7.20170211.tar.gz
 
 cd $HOME/05-builds/conky-lua-nv-git
+
+
+1) MODIFIER conky/doc/config_settings.xml
+===================================================
+
+cd /tmp/srcp
+
+cp -R conky conky.new
+
+cd conky.new/doc
+kwrite config_settings.xml
+
+MODIFIER LIGNE 83 :
+        last item is used for the maximum. Example: " ,_,▁,▂,▃,▄,▅,▆,▇,█".
+DEVIENT :
+        last item is used for the maximum. Example: " ,_,=,#".
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier config_settings.xml~
+rm -f config_settings.xml~
+
+cd ../..
+
+diff -aur conky conky.new
+diff -aur conky conky.new > Fix-error-when-generating-man-pages-from-XML.patch
+
+rm -rf conky.new
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+mv -vf /tmp/srcp/Fix-error-when-generating-man-pages-from-XML.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
+2) MODIFIER conky/src/luamm.cc
+=================================================
+
+cd /tmp/srcp
+
+cp -R conky conky.new
+
+cd conky.new/src
+kwrite luamm.cc
+
+MODIFIER LIGNE 168 :
+		int safe_misc_trampoline(lua_State *l)
+DEVIENT :
+		int safe_misc_trampoline_set(lua_State *l)
+		{
+			misc(l, 1);
+			return nresults;
+		}
+
+		template<int (*misc)(lua_State *, int), int nresults>
+		int safe_misc_trampoline_get(lua_State *l)
+
+
+MODIFIER LIGNE 344 :
+		return safe_compare(&safe_compare_trampoline<lua_equal>, index1, index2);
+DEVIENT :
+		return safe_compare(&safe_compare_trampoline<&lua_equal>, index1, index2);
+
+MODIFIER LIGNE 386 :
+		lua_pushcfunction(cobj.get(), (&safe_misc_trampoline<&lua_gettable, 1>));
+DEVIENT :
+		lua_pushcfunction(cobj.get(), (&safe_misc_trampoline_get<&lua_gettable, 1>));
+
+MODIFIER LIGNE 511 :
+		lua_pushcfunction(cobj.get(), (&safe_misc_trampoline<&lua_settable, 0>));
+DEVIENT :
+		lua_pushcfunction(cobj.get(), (&safe_misc_trampoline_set<&lua_settable, 0>));
+
+
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier luamm.cc~
+rm -f luamm.cc~
+
+cd ../..
+
+diff -aur conky conky.new
+diff -aur conky conky.new > lua53.patch
+
+rm -rf conky.new
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+mv -vf /tmp/srcp/lua53.patch .
 
 
 
@@ -81,16 +177,6 @@ cd $HOME/05-builds/conky-lua-nv-git
 
 mv -vf /tmp/srcp/fix-build.patch .
 
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 2) MODIFIER conky/src/ccurl_thread.cc
 ===================================================

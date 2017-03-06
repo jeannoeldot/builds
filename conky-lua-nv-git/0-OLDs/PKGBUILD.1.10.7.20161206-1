@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=conky-lua-nv-git
-pkgver=1.10.7.20170211
+pkgver=1.10.7.20161206
 pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
@@ -12,9 +12,9 @@ conflicts=('conky' 'conky-lua')
 provides=('conky' 'conky-lua')
 depends=('alsa-lib' 'libxml2' 'curl' 'cairo' 'wireless_tools'
           'libxft' 'glib2' 'libxdamage' 'imlib2' 'lua51' 'librsvg' 'tolua++'
-          'libxinerama' 'libxnvctrl'
+          'libxinerama'
 )
-makedepends=('docbook2x' 'perl-xml-libxml'
+makedepends=('docbook2x' 'libxnvctrl' 'perl-xml-libxml'
              'docbook-xml' 'docbook-xsl' 'cmake' 'git'
 )
 optdepends=('nvidia: for GT4xx and newer GPUs',
@@ -22,21 +22,13 @@ optdepends=('nvidia: for GT4xx and newer GPUs',
             'nvidia-304xx: for GeForce 6/7 GPUs'
 )
 source=("$pkgname-$pkgver.tar.gz"
-        'Fix-error-when-generating-man-pages-from-XML.patch'
 )
-sha256sums=('5c44264c2bf2e37dd4bba33fb6bad1c39cffab8911a03b18e2fa70c4c0467cb9'
-            'ee270f55921d42205741b8ae7efbc7d1801bc57ebcd721cb41f4987cf22c0d7f'
+sha256sums=('9e359e96c8c35d6a7f3e65108efffec27c7ba4e971a833cc6ca9c323a8af8764'
 )
 #options=('!strip' 'debug')
 install="conky-lua-nv-git.install"
 
 _gitname="conky"
-
-prepare() {
-  cd "${_gitname}"
-  # https://github.com/brndnmtthws/conky/pull/370/commits/b9def6994c439188d75dba2bf78a1dcf8acceb4b
-  patch -Np1 -i "${srcdir}/Fix-error-when-generating-man-pages-from-XML.patch"
-}
 
 build() {
   cd "${_gitname}"

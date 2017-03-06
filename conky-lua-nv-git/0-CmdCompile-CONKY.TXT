@@ -8,7 +8,7 @@ cd $HOME/05-builds/conky-lua-nv-git
 
 https://github.com/brndnmtthws/conky/commits/master
 
-==> 20161206
+==> 20170211
 
 1.3 SOURCES
 ==============
@@ -45,7 +45,7 @@ set(VERSION_PATCH "7")
  
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
-tar -cvzf conky-lua-nv-git-1.10.7.20161206.tar.gz --exclude=.git conky
+tar -cvzf conky-lua-nv-git-1.10.7.20170211.tar.gz --exclude=.git conky
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -53,7 +53,7 @@ cd $HOME/05-builds/conky-lua-nv-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/conky-lua-nv-git-1.10.7.20161206.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/conky-lua-nv-git-1.10.7.20170211.tar.gz .
 sync
 
 
@@ -67,17 +67,41 @@ voir CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=conky-lua-nv-git
-pkgver=1.10.7.20161206
+pkgver=1.10.7.20170211
 pkgrel=1
 
+!!! SANS PATCH
+--------------
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum conky-lua-nv-git-1.10.7.20161206.tar.gz
+sha256sum conky-lua-nv-git-1.10.7.20170211.tar.gz
 
 sha256sums=(...
          ...
 )
+
+!!! AVEC PATCH
+--------------
+source=("$pkgname-$pkgver.tar.gz"
+        'Fix-error-when-generating-man-pages-from-XML.patch'
+)
+
+sha256sum conky-lua-nv-git-1.10.7.20170211.tar.gz
+
+sha256sum Fix-error-when-generating-man-pages-from-XML.patch
+
+sha256sums=(...
+         ...
+         ...
+)
+
+prepare() {
+  cd "${_gitname}"
+  # https://github.com/brndnmtthws/conky/pull/370/commits/b9def6994c439188d75dba2bf78a1dcf8acceb4b
+  patch -Np1 -i "${srcdir}/Fix-error-when-generating-man-pages-from-XML.patch"
+}
+
 
 !!!!!!
 _gitname="conky"
@@ -125,10 +149,9 @@ BUILD_PULSEAUDIO false
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users    639 16 août  11:33 ascii.patch
--rw-r--r--  1 jnd users 352587 16 août  11:06 conky-lua-nv-git-1.10.7.20161206.tar.gz
+-rw-r--r--  1 jnd users 352587 16 août  11:06 conky-lua-nv-git-1.10.7.20170211.tar.gz
 -rw-r--r--  1 jnd users    182 15 août  16:57 conky-lua-nv-git.install
--rw-r--r--  1 jnd users    531 16 août  12:11 fix-build.patch
+-rw-r--r--  1 jnd users    659  6 mars  11:35 Fix-error-when-generating-man-pages-from-XML.patch
 -rw-r--r--  1 jnd users   2675 16 août  14:55 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -142,9 +165,8 @@ $ ls -la
 mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/conky-lua-nv-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/conky-lua-nv-git/conky-lua-nv-git-1.10.7.20161206.tar.gz . \
-&& cp -v $HOME/05-builds/conky-lua-nv-git/ascii.patch . \
-&& cp -v $HOME/05-builds/conky-lua-nv-git/fix-build.patch . \
+&& cp -v $HOME/05-builds/conky-lua-nv-git/conky-lua-nv-git-1.10.7.20170211.tar.gz . \
+&& cp -v $HOME/05-builds/conky-lua-nv-git/Fix-error-when-generating-man-pages-from-XML.patch . \
 && cp -v $HOME/05-builds/conky-lua-nv-git/conky-lua-nv-git.install . \
 && makepkg -s \
 && cd $HOME/05-builds/conky-lua-nv-git \
@@ -239,7 +261,7 @@ $ mv -v conky-lua-nv-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i conky-lua-nv-git-1.10.7.20161206.tar.gz
+$ rm -i conky-lua-nv-git-1.10.7.20170211.tar.gz
 
 
 $ cd && maj-repolocal
@@ -265,6 +287,34 @@ conky -c $HOME/00-Conky/Systeme/systemerc.conf &
 
 ANCIEN
 ======
+
+pkgrel=2    # AVEC lua (5.3) + patch
+
+!!! AVEC PATCH
+--------------
+source=("$pkgname-$pkgver.tar.gz"
+        'lua53.patch'
+        'Fix-error-when-generating-man-pages-from-XML.patch'
+)
+
+sha256sum conky-lua-nv-git-1.10.7.20170211.tar.gz
+
+sha256sum lua53.patch
+
+sha256sum Fix-error-when-generating-man-pages-from-XML.patch
+
+sha256sums=(...
+         ...
+         ...
+)
+
+prepare() {
+  cd "${_gitname}"
+  # lua_gettable returns an int in lua-5.3
+  patch -Np1 -i "${srcdir}/lua53.patch"
+  # https://github.com/brndnmtthws/conky/pull/370/commits/b9def6994c439188d75dba2bf78a1dcf8acceb4b
+  patch -Np1 -i "${srcdir}/Fix-error-when-generating-man-pages-from-XML.patch"
+}
 
 pkgname=conky-lua-nv-git
 pkgver=1.10.7.20160714
