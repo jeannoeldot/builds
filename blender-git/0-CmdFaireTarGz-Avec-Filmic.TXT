@@ -5,11 +5,11 @@ FAIRE ARCHIVE TAR.GZ AVEC FILMIC
 
 mkdir /tmp/srcp
 
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170305.tar.gz /tmp/srcp/
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170311.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.78.4.20170305.tar.gz
+tar -xzf blender-git-2.78.4.20170311.tar.gz
 
 1) MODIFIER CONTENU RÉP blender/release/datafiles/colormanagement/
 ==================================================================
@@ -44,28 +44,30 @@ git pull --rebase origin master
 cd /tmp/srcp
 
 SUPPRIMER FICHIERS ET RÉPRTOIRES ORIGINAUX :
+--------------------------------------------
 rm -rf blender/release/datafiles/colormanagement/*
 
 COPIER NOUVEAUX FICHIERS ET RÉPRTOIRES DE filmic-blender :
+----------------------------------------------------------
 cp -r /0-DataLinux/05-builds-dir-git/filmic-blender/* \
 blender/release/datafiles/colormanagement/
 
 
 2) SUPPRESSION ARCHIVE TAR.GZ SANS FILMIC
 =========================================
-rm -f blender-git-2.78.4.20170305.tar.gz
+rm -f blender-git-2.78.4.20170311.tar.gz
 
 
 3) CRÉATION ARCHIVE TAR.GZ AVEC FILMIC
 ======================================
-tar -cvzf blender-git-2.78.4.20170305.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.78.4.20170311.tar.gz --exclude=.git blender
 
 
 4) Move ARCHIVE TAR.GZ AVEC FILMIC ds rep compile
 =================================================
 cd $HOME/05-builds/blender-git
 
-mv -vf /tmp/srcp/blender-git-2.78.4.20170305.tar.gz .
+mv -vf /tmp/srcp/blender-git-2.78.4.20170311.tar.gz .
 
 
 

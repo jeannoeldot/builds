@@ -1,0 +1,15 @@
+CONKY + LUA 5.3
+================
+
+https://github.com/brndnmtthws/conky/issues/350
+
+http://pkgs.fedoraproject.org/cgit/rpms/conky.git/tree/conky.spec
+
+
+https://aur.archlinux.org/packages/conky-cairo/
+
+https://aur.archlinux.org/packages/tolua%2B%2B_5.3/
+
+https://aur.archlinux.org/cgit/aur.git/tree/tolua53.patch?h=tolua%2B%2B_5.3
+
+
