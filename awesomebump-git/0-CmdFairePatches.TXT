@@ -5,20 +5,20 @@ cd $HOME/05-builds/awesomebump-git
 
 mkdir /tmp/srcp
 
-cp -v awesomebump-git-5.0.20170301.tar.gz /tmp/srcp/
+cp -v awesomebump-git-5.0.20170313.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf awesomebump-git-5.0.20170301.tar.gz
+tar -xzf awesomebump-git-5.0.20170313.tar.gz
 
-cd $HOME/05-builds/awesomebump-git
+/!\ /!\ cd $HOME/05-builds/awesomebump-git
 
 
 
 1) MODIFIER awesomebump/Sources/CommonObjects.h
 ===================================================
 
-cd /tmp/srcp
+/!\ /!\ cd /tmp/srcp
 
 cp -R awesomebump awesomebump.new
 

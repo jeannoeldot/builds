@@ -1,0 +1,29 @@
+==> Starting build()...
+Info: creating stash file /build/awesomebump-git/src/awesomebump/.qmake.stash
+cd Sources/ && ( test -e Makefile || /usr/bin/qmake-qt5 -o Makefile /build/awesomebump-git/src/awesomebump/Sources/Sources.pro ) && make -f Makefile 
+Project MESSAGE: *** Adding 'qtnproperty' module.
+WARNING: Failure to find: utils/activelabel.cpp
+WARNING: Failure to find: utils/activelabel.h
+
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/Standard Multi v2.1.ttf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaBlack.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaBlackItalic.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaBold.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaBoldItalic.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaLight.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaLightItalic.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaMedium.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaMediumItalic.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaRegular.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaRegularItalic.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaThin.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/citadina/CitadinaThinItalic.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/Tecnica/Graviton_Tecnica.Bold.Alternate.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/Tecnica/Graviton_Tecnica.Bold.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/Tecnica/Graviton_Tecnica.Regular.Alternate.otf'
+RCC: Error in 'content.qrc': Cannot find file 'resources/fonts/Tecnica/Graviton_Tecnica.Regular.otf'
+
+
+mainwindow.cpp:12:25: fatal error: activelabel.h: No such file or directory
+
+                         ^
