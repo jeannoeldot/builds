@@ -3,7 +3,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.9.0.20170311
-pkgrel=2
+pkgrel=3
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"

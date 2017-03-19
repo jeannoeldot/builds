@@ -5,11 +5,11 @@ FAIRE ARCHIVE TAR.GZ AVEC FILMIC
 
 mkdir /tmp/srcp
 
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170311.tar.gz /tmp/srcp/
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170318.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.78.4.20170311.tar.gz
+tar -xzf blender-git-2.78.4.20170318.tar.gz
 
 1) MODIFIER CONTENU RÉP blender/release/datafiles/colormanagement/
 ==================================================================
@@ -43,8 +43,17 @@ git pull --rebase origin master
 
 cd /tmp/srcp
 
-SUPPRIMER FICHIERS ET RÉPRTOIRES ORIGINAUX :
---------------------------------------------
+VÉRIFIER FICHIERS ET RÉPERTOIRES ORIGINAUX :
+---------------------------------------------
+ls -la blender/release/datafiles/colormanagement/
+total 28
+drwxr-xr-x 3 jnd users    80 18 sept. 16:13 .
+drwxr-xr-x 9 jnd users   580 19 févr. 11:13 ..
+-rw-r--r-- 1 jnd users 27229 18 sept. 16:13 config.ocio
+drwxr-xr-x 3 jnd users   440 18 sept. 16:13 luts
+
+SUPPRIMER FICHIERS ET RÉPERTOIRES ORIGINAUX :
+---------------------------------------------
 rm -rf blender/release/datafiles/colormanagement/*
 
 COPIER NOUVEAUX FICHIERS ET RÉPRTOIRES DE filmic-blender :
@@ -52,22 +61,34 @@ COPIER NOUVEAUX FICHIERS ET RÉPRTOIRES DE filmic-blender :
 cp -r /0-DataLinux/05-builds-dir-git/filmic-blender/* \
 blender/release/datafiles/colormanagement/
 
+VÉRIFIER FICHIERS ET RÉPERTOIRES MODIFIÉS :
+---------------------------------------------
+ls -la blender/release/datafiles/colormanagement/
+total 24
+drwxr-xr-x 4 jnd users  160 19 mars  11:17 .
+drwxr-xr-x 9 jnd users  580 19 févr. 11:13 ..
+-rw-r--r-- 1 jnd users 6743 19 mars  11:17 config.ocio
+-rw-r--r-- 1 jnd users   26 19 mars  11:17 _config.yml
+-rw-r--r-- 1 jnd users   80 19 mars  11:17 index.md
+drwxr-xr-x 2 jnd users  200 19 mars  11:17 looks
+drwxr-xr-x 2 jnd users  100 19 mars  11:17 luts
+-rw-r--r-- 1 jnd users 6326 19 mars  11:17 README.md
 
 2) SUPPRESSION ARCHIVE TAR.GZ SANS FILMIC
 =========================================
-rm -f blender-git-2.78.4.20170311.tar.gz
+rm -f blender-git-2.78.4.20170318.tar.gz
 
 
 3) CRÉATION ARCHIVE TAR.GZ AVEC FILMIC
 ======================================
-tar -cvzf blender-git-2.78.4.20170311.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.78.4.20170318.tar.gz --exclude=.git blender
 
 
 4) Move ARCHIVE TAR.GZ AVEC FILMIC ds rep compile
 =================================================
 cd $HOME/05-builds/blender-git
 
-mv -vf /tmp/srcp/blender-git-2.78.4.20170311.tar.gz .
+mv -vf /tmp/srcp/blender-git-2.78.4.20170318.tar.gz .
 
 
 

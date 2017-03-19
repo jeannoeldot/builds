@@ -5,11 +5,11 @@ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.78.4.20170311.tar.gz /tmp/srcp/
+cp -v blender-git-2.78.4.20170318.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.78.4.20170311.tar.gz
+tar -xzf blender-git-2.78.4.20170318.tar.gz
 
 
 1) MODIFIER blender/build_files/cmake/Modules/FindLLVM.cmake
