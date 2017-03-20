@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.4.20170320
+pkgver=2.78.4.20170318
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -36,7 +36,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
-sha256sums=('727c899b7a0ceaaa45f72629161393a5bbedc0982996525a8eb526d8b9156ec7'
+sha256sums=('8c5cc4f7e61a0b0cca42744ea17577046b0d52ce32d65dff2decf0215199d015'
             'ff3b7e6c874926c1102c3f9d27a63a13638a0c78955aeb133ca704366f001526'
 )
 
