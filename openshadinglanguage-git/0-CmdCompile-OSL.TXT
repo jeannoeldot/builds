@@ -6,7 +6,7 @@ cd $HOME/05-builds/openshadinglanguage-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/imageworks/OpenShadingLanguage
-==> 20170311
+==> 20170324
 
 1.3 SOURCES
 ==============
@@ -40,7 +40,7 @@ project (OSL
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openshadinglanguage-git-1.9.0.20170311.tar.gz --exclude=.git osl
+tar -cvzf openshadinglanguage-git-1.9.0.20170324.tar.gz --exclude=.git osl
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -48,7 +48,7 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170311.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170324.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -69,7 +69,7 @@ voir 0-CmdFairePatches-LLVM39.STATIC.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.9.0.20170311
+pkgver=1.9.0.20170324
 pkgrel=1
 pkgrel=2    # rebuild avec /usr/shaders
 pkgrel=3          # rebuild oiio
@@ -87,7 +87,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'llvm39-static-system-libs.patch'
 )
 
-sha256sum openshadinglanguage-git-1.9.0.20170311.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170324.tar.gz
 
 sha256sum llvm39-static-system-libs.patch
 
@@ -118,7 +118,7 @@ build() {
 ==============================
 1) kwrite /0-DataLinux/05-builds-dir-git/osl/CMakeLists.txt &
   
-LIGNE 42
+LIGNE 43
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
   
 LIGNE 80
@@ -150,6 +150,9 @@ LIGNE 9
   !!! A VOIR : $ cat /proc/cpuinfo | grep sse4_2
   USE_SIMD ""         =>      -DUSE_SIMD=sse4.2 \
 
+  !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
+  USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
+  
 LIGNE 10
   STOP_ON_WARNING ON    =>      -DSTOP_ON_WARNING=OFF \ 
   
@@ -190,7 +193,7 @@ LIGNE 90 ET ...
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170311.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170324.tar.gz
 -rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm39-static-system-libs.patch
 
 
@@ -207,7 +210,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.9.0.20170311.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.9.0.20170324.tar.gz . \
 && cp -v $HOME/05-builds/openshadinglanguage-git/llvm39-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
@@ -287,7 +290,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openshadinglanguage-git-1.9.0.20170311.tar.gz
+$ rm -i openshadinglanguage-git-1.9.0.20170324.tar.gz
 
 
 $ cd && maj-repolocal

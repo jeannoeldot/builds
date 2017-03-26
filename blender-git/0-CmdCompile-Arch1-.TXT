@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   Mon, 20 Mar 2017 02:46:20 +0100 (12:46 +1100)
-==> 20170320
+==> last change   Sun, 26 Mar 2017 09:08:16 +0200 (04:08 -0300)
+==> 20170326
 
 
 1.2 REVISION
@@ -45,16 +45,19 @@ git pull --rebase
 git submodule foreach git pull --rebase origin master
 cd ..
 
+!!! Vérifier si CMakeLists.txt est modifié :
+--------------------------------------------
+==> OUI ==> CMAKELISTS.TXT=MODIFIÉ
+==> NON ==> CMAKELISTS.TXT=NON_MODIFIÉ
+
+
 !!!!! Vérifier VERSION : 
-$ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
- ==> #define BLENDER_VERSION                 278
- ==> #define BLENDER_SUBVERSION              4
- 
- ==> #define BLENDER_VERSION_CHAR
- 
- ==> #define BLENDER_VERSION_CYCLE   alpha
- 
-==> Version = 2.78.4.20170320
+$ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
+
+#define BLENDER_VERSION         278
+#define BLENDER_SUBVERSION      4
+
+==> Version = 2.78.4.20170326
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.77 à 2.78)
 !!! EN ROOT
@@ -68,7 +71,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.78.4.20170320.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.78.4.20170326.tar.gz --exclude=.git blender
 
 1-7-1)  SANS FILMIC
 ===================
@@ -78,7 +81,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170320.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170326.tar.gz .
 sync
 
 
@@ -110,7 +113,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.78.4.20170320
+pkgver=2.78.4.20170326
 pkgrel=1
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
@@ -152,7 +155,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.78.4.20170320.tar.gz
+sha256sum blender-git-2.78.4.20170326.tar.gz
 
 sha256sums=(...
          ...
@@ -163,7 +166,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
 
-sha256sum blender-git-2.78.4.20170320.tar.gz
+sha256sum blender-git-2.78.4.20170326.tar.gz
 
 sha256sum fix-Error-llvm-config-3.9.patch
 
@@ -219,8 +222,9 @@ $ pacman -Ss python | grep 3 | grep install
     -DPYTHON_INCLUDE_DIRS=/usr/include/python3.6m \
 
 
-2-2) VERIFIER CMakeLists.txt
-==========================
+2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
+    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
+=======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
 Lignes 170 et ...
@@ -392,7 +396,7 @@ Lignes 496 et ...
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170320.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170326.tar.gz
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 -rw-r--r--  1 jnd users      673  5 mars  14:11 fix-Error-llvm-config-3.9.patch
 
@@ -513,7 +517,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.78.4.20170320.tar.gz
+$ rm -i blender-git-2.78.4.20170326.tar.gz
 
 
 $ cd && maj-repolocal
@@ -549,7 +553,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-algoDIR-algoPOV.patch'
 )
 
-sha256sum blender-git-2.78.4.20170320.tar.gz
+sha256sum blender-git-2.78.4.20170326.tar.gz
 
 sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
 
@@ -617,7 +621,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.78.4.20170320.tar.gz
+sha256sum blender-git-2.78.4.20170326.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -637,7 +641,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170320.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170326.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -652,7 +656,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170320.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170326.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -722,7 +726,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.78.4.20170320.tar.gz
+sha256sum blender-git-2.78.4.20170326.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -779,7 +783,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170320.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170326.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \

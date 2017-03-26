@@ -5,7 +5,7 @@ cd $HOME/05-builds/openimageio-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/OpenImageIO/oiio
-==> 20170319
+==> 20170323
 
 
 1.3 SOURCES
@@ -30,20 +30,17 @@ git pull --rebase origin master
 cd ..
 
 !!!!! Vérifier VERSION : 
-$ head -n 8 oiio/CMakeLists.txt
+$ head -n 4 oiio/CMakeLists.txt
 
-# Release version of the library
-set (OIIO_VERSION_MAJOR 1)
-set (OIIO_VERSION_MINOR 8)
-set (OIIO_VERSION_PATCH 3)
-set (OIIO_VERSION_RELEASE_TYPE "dev")   # "dev", "betaX", "RCY", ""
+project (OpenImageIO
+         VERSION 1.8.3
 
 ==> 1.8.3
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openimageio-git-1.8.3.20170319.tar.gz --exclude=.git oiio
+tar -cvzf openimageio-git-1.8.3.20170323.tar.gz --exclude=.git oiio
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -51,7 +48,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openimageio-git-1.8.3.20170319.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openimageio-git-1.8.3.20170323.tar.gz .
 sync
 
 
@@ -67,7 +64,7 @@ voir : CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.8.3.20170319
+pkgver=1.8.3.20170323
 pkgrel=1
 pkgrel=2          # rebuild avec PYTHON 3.6
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
@@ -80,7 +77,7 @@ provides=('openimageio')
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum openimageio-git-1.8.3.20170319.tar.gz
+sha256sum openimageio-git-1.8.3.20170323.tar.gz
 
 sha256sums=('...'
             '...'
@@ -101,44 +98,44 @@ PYTHON3_VERSION=3.6
 ==========================
 1) kwrite /0-DataLinux/05-builds-dir-git/oiio/CMakeLists.txt &
 
-LIGNE 38
+LIGNE 41
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
 
-LIGNES 62
+LIGNES 65
   OIIO_BUILD_TESTS ON   =>      -DOIIO_BUILD_TESTS=OFF \
 
   !!! A VOIR : 
-LIGNE 63
+LIGNE 66
   USE_OPENGL ON         depends= glew -> glu -> 'libgl'
 
   !!! A VOIR : 
-LIGNE 67
+LIGNE 70
   USE_PYTHON3 = OFF       =>      -DUSE_PYTHON3=ON \  makedepends= ... 'python'
 
-LIGNES 68 69
+LIGNES 71 72
 set (PYTHON_VERSION 2.6)  =>    -DPYTHON_VERSION=2.7 \
 set (PYTHON3_VERSION 3.2) =>    -DPYTHON3_VERSION=3.6 \
   
   !!! A VOIR : 
-LIGNE 72
+LIGNE 75
   USE_FIELD3D ON       =>      -DUSE_FIELD3D=OFF \
 
-LIGNE 75
+LIGNE 78
   USE_JPEGTURBO ON      depends= ... 'libjpeg-turbo'
 
-LIGNE 79
+LIGNE 82
   USE_OPENCV ON         depends= ... 'opencv'
 
-LIGNE 80
+LIGNE 83
   USE_OPENSSL = OFF       =>      -DUSE_OPENSSL=ON \  depends= ... 'openssl'
 
-LIGNE 83
+LIGNE 86
   USE_PTEX ON           =>      -DUSE_PTEX=OFF \
 
-LIGNE 87
+LIGNE 90
   USE_NUKE ON           =>      -DUSE_NUKE=OFF \
 
-LIGNE 93
+LIGNE 96
   USE_DICOM ON           =>      -DUSE_DICOM=OFF \
 
 
@@ -151,7 +148,7 @@ LIGNE 9
   !!! A VOIR : $ cat /proc/cpuinfo | grep sse4_2
   USE_SIMD ""         =>      -DUSE_SIMD=sse4.2 \
   
-  !!! A VOIR : $ cat /proc/cpuinfo | grep avx
+  !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
   USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
   
 LIGNE 10 
@@ -185,7 +182,7 @@ LIGNE 57
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users   909 21 sept. 19:09 openimageio-git-1.8.3.20170319.tar.gz
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 openimageio-git-1.8.3.20170323.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -202,7 +199,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/openimageio-git-1.8.3.20170319.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/openimageio-git-1.8.3.20170323.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -277,7 +274,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i openimageio-git-1.8.3.20170319.tar.gz
+$ rm -i openimageio-git-1.8.3.20170323.tar.gz
 
 
 $ cd && maj-repolocal
@@ -329,7 +326,7 @@ pkgrel=3          # nvidia-libgl 367.35
 !!! COMMIT DU 20/02/2016 : ERREUR COMPILATION
 !!! CONSERVER V 1.8.3 DU 07/02/2016
 
-!!! TESTS COMPILATION OSL AVEC OIIO 1.8.3.20170319
+!!! TESTS COMPILATION OSL AVEC OIIO 1.8.3.20170323
 $ mv -v openimageio-git-*-x86_64.pkg.tar.* /0-DataLinux/05-builds-dir-git/0-Test-openimageio-git/
 
 
@@ -350,7 +347,7 @@ source=($pkgname-$pkgver.tar.gz
         'fix-previous-declaration-gcc4.9.1-c++11.patch'
 )
 
-sha256sum openimageio-git-1.8.3.20170319.tar.gz
+sha256sum openimageio-git-1.8.3.20170323.tar.gz
 
 sha256sum fix-previous-declaration-gcc4.9.1-c++11.patch
 
