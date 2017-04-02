@@ -6,7 +6,7 @@ cd $HOME/05-builds/firefox-https-everywhere
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.5.2.12-1
+cp -v PKGBUILD PKGBUILD.5.2.13-1
 
 
 0-1) Download snapshot
@@ -23,7 +23,7 @@ mv -vf /tmp/0-AUR/firefox-extension-https-everywhere/PKGBUILD .
 
 1) LIRE NOUVEAU PKGBUILD
 ========================
-pkgver=5.2.12
+pkgver=5.2.13
 
 2) MODIFIER LE PKGBUILD
 ========================
@@ -31,7 +31,7 @@ pkgver=5.2.12
 
 _pkgname=https-everywhere
 pkgname=firefox-extension-${_pkgname}
-pkgver=5.2.12
+pkgver=5.2.13
 pkgrel=1
 
 source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/${_pkgname/-/_}-${pkgver}-an+tb+sm+fx.xpi")
@@ -143,19 +143,19 @@ _file=557482
 1-2) Download source
 ----------------------
 wget https://addons.mozilla.org/firefox/downloads/file\
-/557482/https_everywhere-5.2.12-an+tb+sm+fx.xpi
+/557482/https_everywhere-5.2.13-an+tb+sm+fx.xpi
 
 ls
 
-sha256sum https_everywhere-5.2.12-an+tb+sm+fx.xpi
+sha256sum https_everywhere-5.2.13-an+tb+sm+fx.xpi
 
 -rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxx.xpi
 
-&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-5.2.12-an+tb+sm+fx.xpi . \
+&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-5.2.13-an+tb+sm+fx.xpi . \
 
 md5sum fix-path-to-rulesets-db.patch
 -rw-r--r--  1 jnd users    834  9 mai   11:08 fix-path-to-rulesets-db.patch
-$ rm -i https_everywhere-5.2.12-an+tb+sm+fx.xpi
+$ rm -i https_everywhere-5.2.13-an+tb+sm+fx.xpi
 
 3) MAKEPKG DANS TMP EN USER
 ====================================

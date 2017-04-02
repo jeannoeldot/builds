@@ -35,6 +35,7 @@ sha256sum wimlib-1.9.1.tar.gz
 pkgname=wimlib
 pkgver=1.9.1
 pkgrel=1
+pkgrel=2    # MAJ ntfs-3g
 
 source=($pkgname-$pkgver.tar.gz
 )
