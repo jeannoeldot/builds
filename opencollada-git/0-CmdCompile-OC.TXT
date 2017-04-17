@@ -5,7 +5,7 @@ cd $HOME/05-builds/opencollada-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/KhronosGroup/OpenCOLLADA
-==> 20170308
+==> 20170413
 
 1.3 SOURCES
 ==============
@@ -30,17 +30,17 @@ cd ..
 
 !!!!! Vérifier VERSION :
 https://github.com/KhronosGroup/OpenCOLLADA/tags
-==> v1.6.43
+==> v1.6.45
 
 $ head -n 12 opencollada/COLLADABaseUtils/include/COLLADABUVersionInfo.h
         const String CURRENT_REVISION = "1.6.developer_version";
 
-==> 1.6.43
+==> 1.6.45
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf opencollada-git-1.6.43.20170308.tar.gz --exclude=.git opencollada
+tar -cvzf opencollada-git-1.6.45.20170413.tar.gz --exclude=.git opencollada
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -48,7 +48,7 @@ cd $HOME/05-builds/opencollada-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/opencollada-git-1.6.43.20170308.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/opencollada-git-1.6.45.20170413.tar.gz .
 sync
 
 
@@ -64,7 +64,7 @@ voir : CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=opencollada-git
-pkgver=1.6.43.20170308
+pkgver=1.6.45.20170413
 pkgrel=1
 pkgrel=2    # gcc 6.1.1
 
@@ -77,7 +77,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'opencollada.conf'
 )
 
-sha256sum opencollada-git-1.6.43.20170308.tar.gz
+sha256sum opencollada-git-1.6.45.20170413.tar.gz
 
 sha256sum opencollada.conf
 
@@ -115,7 +115,7 @@ option(USE_STATIC_MSVC_RUNTIME "Use static version of the MSVC run-time library"
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users       21 11 mai   19:52 opencollada.conf
--rw-r--r--  1 jnd users 11800644 12 mai   18:38 opencollada-git-1.6.43.20170308.tar.gz
+-rw-r--r--  1 jnd users 11800644 12 mai   18:38 opencollada-git-1.6.45.20170413.tar.gz
 -rw-r--r--  1 jnd users      833 12 mai   18:38 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -132,7 +132,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/opencollada-git/PKGBUILD . \
 && cp -v $HOME/05-builds/opencollada-git/opencollada.conf . \
-&& cp -v $HOME/05-builds/opencollada-git/opencollada-git-1.6.43.20170308.tar.gz . \
+&& cp -v $HOME/05-builds/opencollada-git/opencollada-git-1.6.45.20170413.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/opencollada-git \
 && cp -v /tmp/build/opencollada-git-*-x86_64.pkg.tar.* . \
@@ -198,7 +198,7 @@ $ mv -v opencollada-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i opencollada-git-1.6.43.20170308.tar.gz
+$ rm -i opencollada-git-1.6.45.20170413.tar.gz
 
 
 $ cd && maj-repolocal
@@ -239,7 +239,7 @@ set(OPENCOLLADA_VERSION_MAJOR 0)
 set(OPENCOLLADA_VERSION_MINOR 1)
 set(OPENCOLLADA_VERSION_PATCH 0)
 
-==> 1.6.43
+==> 1.6.45
 
 
 -rw-r--r--  1 jnd users      542 10 sept. 19:26 fix-previous-declaration-gcc4.9.1-c++11.patch

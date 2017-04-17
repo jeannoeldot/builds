@@ -6,7 +6,7 @@ cd $HOME/05-builds/openshadinglanguage-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/imageworks/OpenShadingLanguage
-==> 20170402
+==> 20170414
 
 1.3 SOURCES
 ==============
@@ -40,7 +40,7 @@ project (OSL
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openshadinglanguage-git-1.9.0.20170402.tar.gz --exclude=.git osl
+tar -cvzf openshadinglanguage-git-1.9.0.20170414.tar.gz --exclude=.git osl
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -48,7 +48,7 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170402.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170414.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -69,7 +69,7 @@ voir 0-CmdFairePatches-LLVM39.STATIC.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.9.0.20170402
+pkgver=1.9.0.20170414
 pkgrel=1
 pkgrel=2    # rebuild avec /usr/shaders
 pkgrel=3          # rebuild oiio
@@ -87,7 +87,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'llvm39-static-system-libs.patch'
 )
 
-sha256sum openshadinglanguage-git-1.9.0.20170402.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170414.tar.gz
 
 sha256sum llvm39-static-system-libs.patch
 
@@ -121,25 +121,21 @@ build() {
 LIGNE 44
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
   
-LIGNE 80
-  !!! A VOIR
-  VERBOSE OF    =>      -DVERBOSE=OFF \
-
-LIGNE 81
+LIGNE 82
   OSL_BUILD_TESTS ON    =>      -DOSL_BUILD_TESTS=OFF \
   
-LIGNE 87
+LIGNE 88
   USE_PARTIO ON    =>      -DUSE_PARTIO=OFF \
   
-LIGNE 92
+LIGNE 93
   !!! A VOIR
   OSL_BUILD_PLUGINS ON
 
-LIGNE 93
+LIGNE 94
   !!! A VOIR
   USE_BOOST_WAVE OFF
 
-LIGNE 101
+LIGNE 102
   !!! A VOIR
   OSL_NO_DEFAULT_TEXTURESYSTEM OFF
 
@@ -162,7 +158,7 @@ LIGNE 10
   
   !!! A VOIR : 
 LIGNE 11
-  HIDE_SYMBOLS = OFF
+  HIDE_SYMBOLS = ON
 
 LIGNE 12
   USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
@@ -197,7 +193,7 @@ LIGNE 90 ET ...
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170402.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170414.tar.gz
 -rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm39-static-system-libs.patch
 
 
@@ -214,7 +210,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.9.0.20170402.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.9.0.20170414.tar.gz . \
 && cp -v $HOME/05-builds/openshadinglanguage-git/llvm39-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
@@ -240,9 +236,6 @@ $ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
   NATIVE
 --------
-$ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m native
-
 $ rm -f *~
 $ mkpkg-tmpfs -m native
 
@@ -294,7 +287,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openshadinglanguage-git-1.9.0.20170402.tar.gz
+$ rm -i openshadinglanguage-git-1.9.0.20170414.tar.gz
 
 
 $ cd && maj-repolocal
@@ -327,6 +320,37 @@ POUR REMETTRE openshadinglanguage EXTRA
 ================================================================
 ANCIENS
 ========
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+SI depends=("openimageio-git")
+==============================
+$ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+!!! EN USER
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ mkpkg-tmpfs -m fast -l logs
+
+
+$ rm -rf /tmp/chrootrepo
+
 
 pkgrel=2          # nvidia-libgl 367.35
 pkgrel=2    # maj oiio

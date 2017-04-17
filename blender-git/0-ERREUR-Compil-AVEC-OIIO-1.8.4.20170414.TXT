@@ -1,0 +1,46 @@
+
+Scanning dependencies of target bf_imbuf_openimageio
+[ 63%] Building CXX object source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/openimageio_api.cpp.o
+[ 63%] Linking CXX static library ../../../../../lib/libbf_imbuf_openexr.a
+[ 63%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/speaker.c.o
+[ 63%] Built target bf_imbuf_openexr
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_lummaMatte.c.o
+[ 63%] Building CXX object source/blender/compositor/CMakeFiles/bf_compositor.dir/intern/COM_MemoryBuffer.cpp.o
+Scanning dependencies of target bf_imbuf_dds
+[ 63%] Building CXX object source/blender/imbuf/intern/dds/CMakeFiles/bf_imbuf_dds.dir/BlockDXT.cpp.o
+[ 63%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/subsurf_ccg.c.o
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_mapUV.c.o
+[ 63%] Building CXX object source/blender/imbuf/intern/dds/CMakeFiles/bf_imbuf_dds.dir/ColorBlock.cpp.o
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_mapValue.c.o
+[ 63%] Building CXX object source/blender/imbuf/intern/dds/CMakeFiles/bf_imbuf_dds.dir/DirectDrawSurface.cpp.o
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_mapRange.c.o
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_math.c.o
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_mask.c.o
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_mixrgb.c.o
+[ 63%] Building CXX object source/blender/imbuf/intern/dds/CMakeFiles/bf_imbuf_dds.dir/FlipDXT.cpp.o
+[ 63%] Building CXX object source/blender/imbuf/intern/dds/CMakeFiles/bf_imbuf_dds.dir/Image.cpp.o
+/build/blender-git/src/blender/source/blender/imbuf/intern/oiio/openimageio_api.cpp: In function ‘ImBuf* imb_load_photoshop(const char*, int, char*)’:
+/build/blender-git/src/blender/source/blender/imbuf/intern/oiio/openimageio_api.cpp:216:16: error: ‘OpenImageIO’ has not been declared
+             << OpenImageIO::geterror() << std::endl;
+                ^~~~~~~~~~~
+[ 63%] Building CXX object source/blender/imbuf/intern/dds/CMakeFiles/bf_imbuf_dds.dir/Stream.cpp.o
+[ 63%] Building C object source/blender/nodes/CMakeFiles/bf_nodes.dir/composite/nodes/node_composite_movieclip.c.o
+[ 63%] Building CXX object source/blender/compositor/CMakeFiles/bf_compositor.dir/intern/COM_WorkScheduler.cpp.o
+[ 63%] Building CXX object source/blender/imbuf/intern/dds/CMakeFiles/bf_imbuf_dds.dir/dds_api.cpp.o
+make[2]: *** [source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/build.make:63: source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/openimageio_api.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:6464: source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+============================================================
+Scanning dependencies of target bf_imbuf_openimageio
+[ 62%] Building CXX object source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/openimageio_api.cpp.o
+[ 62%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/node.c.o
+[ 62%] Building CXX object source/blender/compositor/CMakeFiles/bf_compositor.dir/intern/COM_ExecutionGroup.cpp.o
+[ 62%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/object.c.o
+/build/blender-git/src/blender/source/blender/imbuf/intern/oiio/openimageio_api.cpp: In function ‘ImBuf* imb_load_photoshop(const char*, int, char*)’:
+/build/blender-git/src/blender/source/blender/imbuf/intern/oiio/openimageio_api.cpp:216:16: error: ‘OpenImageIO’ has not been declared
+             << OpenImageIO::geterror() << std::endl;
+                ^~~~~~~~~~~
+make[2]: *** [source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/build.make:63: source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/openimageio_api.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:6464: source/blender/imbuf/intern/oiio/CMakeFiles/bf_imbuf_openimageio.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....

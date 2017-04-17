@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.4.20170417
+pkgver=2.78.4.20170415
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -36,7 +36,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
-sha256sums=('73a3a8347506e5abb30cef25e15d3f34b6ee334afb0b3960ae0ca87f3b03ab21'
+sha256sums=('4491054a4f45274baf998809eab4f4e259eee24697a228eab2fde14832118804'
             'ff3b7e6c874926c1102c3f9d27a63a13638a0c78955aeb133ca704366f001526'
 )
 
@@ -46,17 +46,6 @@ prepare() {
   cd "${_gitname}"
   # fix erreur : Found LLVM: /usr/lib/liblibLLVM-3.9.so.so
   patch -Np1 -i "${srcdir}/fix-Error-llvm-config-3.9.patch"
-  
-  # fix erreur : ‘OpenImageIO’ has not been declared
-  # Voir OIIO, commit 2460f7b du 12/04/2017: Namespace overhaul :
-  # Change OIIO_NAMESPACE_USING with `using namespace OIIO`
-  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_args.h
-  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_image.h
-  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_param.h
-  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_path.cpp
-  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_xml.h
-  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" source/blender/imbuf/intern/oiio/openimageio_api.cpp
-  sed -i  -e "s/OpenImageIO::/OIIO::/" source/blender/imbuf/intern/oiio/openimageio_api.cpp
 }
 
 build() {
