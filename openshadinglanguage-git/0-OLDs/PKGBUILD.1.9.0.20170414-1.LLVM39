@@ -2,7 +2,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.9.0.20170421
+pkgver=1.9.0.20170414
 pkgrel=1
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
@@ -17,12 +17,23 @@ makedepends=('boost' 'cmake' 'llvm' 'clang')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$pkgname-$pkgver.tar.gz"
+        'llvm39-static-system-libs.patch'
 )
-sha256sums=('539b9279167e89e09d0c7aa8f57a1f2cbebfaee61ed916c802156e354fe42ef8'
+sha256sums=('617effc72daf61982f7dc0d7100add8a591d97f6c675fcad2e9285b881ccd172'
+            '4dd81b1652c2e306884fb3bd8a23f5e83303c115130fbeb67f5327da54e71eb2'
 )
 
 _gitname="osl"
 
+prepare() {
+  cd "${_gitname}"
+   
+  # Add system libraries needed to link against LLVM components (zlib, ncurses)
+  # This is required in order to statically link against LLVM
+  # VOIR Community
+  patch -Np1 -i "${srcdir}/llvm39-static-system-libs.patch"
+}
+  
 build() {
   cd "${_gitname}"
 

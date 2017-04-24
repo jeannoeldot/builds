@@ -6,7 +6,7 @@ cd $HOME/05-builds/openshadinglanguage-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/imageworks/OpenShadingLanguage
-==> 20170414
+==> 20170421
 
 1.3 SOURCES
 ==============
@@ -40,7 +40,7 @@ project (OSL
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf openshadinglanguage-git-1.9.0.20170414.tar.gz --exclude=.git osl
+tar -cvzf openshadinglanguage-git-1.9.0.20170421.tar.gz --exclude=.git osl
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -48,12 +48,16 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170414.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openshadinglanguage-git-1.9.0.20170421.tar.gz .
 sync
 
 1-8) FAIRE PATCH
 ===============================
-voir 0-CmdFairePatches-LLVM39.STATIC.TXT
+!!! INUTILE AVEC LLVM 4.0.0
+$ llvm-config --libfiles --system-libs
+/usr/lib/libLLVM-4.0.so
+
+voir 0-CmdFairePatches-LLVM40.STATIC.TXT
 
 
 !!! TESTS AVEC /usr/shaders
@@ -69,7 +73,7 @@ voir 0-CmdFairePatches-LLVM39.STATIC.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.9.0.20170414
+pkgver=1.9.0.20170421
 pkgrel=1
 pkgrel=2    # rebuild avec /usr/shaders
 pkgrel=3          # rebuild oiio
@@ -81,15 +85,15 @@ pkgrel=2          # rebuild boost boost-libs 1.61.0-2
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-2-1) PKGBUILD AVEC PATCH
+2-2) PKGBUILD AVEC PATCH
 ========================
 source=("$pkgname-$pkgver.tar.gz"
-        'llvm39-static-system-libs.patch'
+        'llvm40-static-system-libs.patch'
 )
 
-sha256sum openshadinglanguage-git-1.9.0.20170414.tar.gz
+sha256sum openshadinglanguage-git-1.9.0.20170421.tar.gz
 
-sha256sum llvm39-static-system-libs.patch
+sha256sum llvm40-static-system-libs.patch
 
 sha256sums=(...
          ...
@@ -104,8 +108,23 @@ prepare() {
   # Add system libraries needed to link against LLVM components (zlib, ncurses)
   # This is required in order to statically link against LLVM
   # VOIR Community
-  patch -Np1 -i "${srcdir}/llvm39-static-system-libs.patch"
+  patch -Np1 -i "${srcdir}/llvm40-static-system-libs.patch"
 }
+
+2-3) PKGBUILD SANS PATCH LLVM 4.0.0
+===================================
+source=("$pkgname-$pkgver.tar.gz"
+)
+
+sha256sum openshadinglanguage-git-1.9.0.20170421.tar.gz
+
+sha256sums=(...
+         ...
+)
+
+!!!!!!
+_gitname="osl"
+
 
 
 build() {
@@ -114,7 +133,7 @@ build() {
 
 
 
-2-2) VERIFIER CMakeLists.txt
+2-5) VERIFIER CMakeLists.txt
 ==============================
 1) kwrite /0-DataLinux/05-builds-dir-git/osl/CMakeLists.txt &
   
@@ -193,8 +212,8 @@ LIGNE 90 ET ...
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170414.tar.gz
--rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm39-static-system-libs.patch
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openshadinglanguage-git-1.9.0.20170421.tar.gz
+-rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm40-static-system-libs.patch
 
 
 !!! A MODIFIER SI PAS OK !
@@ -210,8 +229,8 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.9.0.20170414.tar.gz . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/llvm39-static-system-libs.patch . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/openshadinglanguage-git-1.9.0.20170421.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/llvm40-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
 && cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \
@@ -287,7 +306,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openshadinglanguage-git-1.9.0.20170414.tar.gz
+$ rm -i openshadinglanguage-git-1.9.0.20170421.tar.gz
 
 
 $ cd && maj-repolocal
