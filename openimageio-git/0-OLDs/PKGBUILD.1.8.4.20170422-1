@@ -4,9 +4,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.7.13.20170330
+pkgver=1.8.4.20170422
 pkgrel=1
-_name_release="oiio-Release-1.7.13"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('i686' 'x86_64')
 url="http://www.openimageio.org/"
@@ -24,13 +23,15 @@ optdepends=('qt4: iv image viewer'
 )
 conflicts=('openimageio')
 provides=('openimageio')
-source=("$_name_release.tar.gz"
+source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('d9ffed79180232636ebed670233666ec7f05eb05fa24e12519b28d042b673b36'
+sha256sums=('6a7dac485f5eeb52edcc160c6f011e4f7c78c1c05467eca557ccd441eee897fd'
 )
 
+_gitname="oiio"
+
 build() {
-  cd "${_name_release}"
+  cd "${_gitname}"
 
   [[ -d build ]] && rm -r build
   mkdir build && cd build
@@ -58,7 +59,7 @@ build() {
 }
 
 package() {
-  cd "${_name_release}/build"
+  cd "${_gitname}/build"
 
   make DESTDIR="${pkgdir}" install
 

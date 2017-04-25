@@ -1,53 +1,22 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.78.4.20170424
+!!! VERSION = 2.78.4.20170425
 
 
 cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.78.4.20170424.tar.gz /tmp/srcp/
+cp -v blender-git-2.78.4.20170425.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.78.4.20170424.tar.gz
-
-
-1) MODIFIER blender/intern/cycles/kernel/osl/osl_closures.cpp
-=============================================================
-cp -R blender blender.new
-
-cd blender.new/intern/cycles/kernel/osl
-kwrite osl_closures.cpp
-
-MODIFIER LIGNE 245 :
-	ss->register_closure(name, id, params, prepare, NULL, 16);
-DEVIENT
-	ss->register_closure(name, id, params, prepare, NULL);
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier osl_closures.cpp~
-rm -f osl_closures.cpp~
- 
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-Error-OSL-alignment-for-closure-structs.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-Error-OSL-alignment-for-closure-structs.patch .
+tar -xzf blender-git-2.78.4.20170425.tar.gz
 
 
 2) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
 ===================================================================================
-cd /tmp/srcp
-
 cp -R blender blender.new
 
 cd blender.new/release/scripts/addons_contrib/np_station
@@ -99,6 +68,35 @@ sync
 =================================================================
 ANCIENS
 ========
+
+1) MODIFIER blender/intern/cycles/kernel/osl/osl_closures.cpp
+=============================================================
+cp -R blender blender.new
+
+cd blender.new/intern/cycles/kernel/osl
+kwrite osl_closures.cpp
+
+MODIFIER LIGNE 245 :
+	ss->register_closure(name, id, params, prepare, NULL, 16);
+DEVIENT
+	ss->register_closure(name, id, params, prepare, NULL);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier osl_closures.cpp~
+rm -f osl_closures.cpp~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-Error-OSL-alignment-for-closure-structs.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-Error-OSL-alignment-for-closure-structs.patch .
+
 
 1) MODIFIER blender/build_files/cmake/Modules/FindLLVM.cmake
 ============================================================

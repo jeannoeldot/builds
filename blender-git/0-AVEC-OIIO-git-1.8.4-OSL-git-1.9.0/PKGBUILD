@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.4.20170425
+pkgver=2.78.4.20170424
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -23,8 +23,9 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils
           'opensubdiv-git'
           'openvdb-git'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm35'
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
+             'opencl-headers'
              'git'
 )
 optdepends=('cuda: cycles renderer cuda support')
@@ -33,9 +34,11 @@ provides=('blender')
 options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
+        'fix-Error-OSL-alignment-for-closure-structs.patch'
         'fix-IndentationError-expected-an-indented-block.patch'
 )
-sha256sums=('7b76113425c8866ad7eeef31ab225f6d02bd7722ba392e00a088655e45db4197'
+sha256sums=('5103b6344c8f0cdb8d2f5b9c11b62cbdb8c995de71a34326849045af7844fcf9'
+            '18870a864e33fb330675c0fef85d716a600f222836358b5e2a94ee4494b35026'
             '8439f0ff8f942525773f847f5369a4b1a8758851521b1b9169d8106bbce84647'
 )
 
@@ -43,8 +46,24 @@ _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+  # fix erreur : no matching function for call to OSL_v1_9::ShadingSystem::register_closure
+  # note:   candidate expects 5 arguments, 6 provided
+  # Voir OSL, commit a0fde55 du 17/04/2017: Fix the handling of alignment for closure structs
+  patch -Np1 -i "${srcdir}/fix-Error-OSL-alignment-for-closure-structs.patch"  
+  
   # fix erreur : IndentationError: expected an indented block (np_point_dimension.py, line 148)
   patch -Np1 -i "${srcdir}/fix-IndentationError-expected-an-indented-block.patch"
+
+  # fix erreur : ‘OpenImageIO’ has not been declared
+  # Voir OIIO, commit 2460f7b du 12/04/2017: Namespace overhaul :
+  # Change OIIO_NAMESPACE_USING with `using namespace OIIO`
+  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_args.h
+  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_image.h
+  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_param.h
+  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_path.cpp
+  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" intern/cycles/util/util_xml.h
+  sed -i  -e "s/OIIO_NAMESPACE_USING/using namespace OIIO;/" source/blender/imbuf/intern/oiio/openimageio_api.cpp
+  sed -i  -e "s/OpenImageIO::/OIIO::/" source/blender/imbuf/intern/oiio/openimageio_api.cpp
 }
 
 build() {
@@ -86,7 +105,7 @@ build() {
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_LOGGING=OFF \
         -DWITH_LLVM=ON \
-        -DLLVM_VERSION=3.5 \
+        -DLLVM_VERSION=4.0 \
         -DLLVM_STATIC=ON \
         -DWITH_DOC_MANPAGE=ON \
         -DWITH_C11=ON \

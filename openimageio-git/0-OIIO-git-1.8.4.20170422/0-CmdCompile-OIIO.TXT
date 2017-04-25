@@ -2,30 +2,54 @@
 ==============
 cd $HOME/05-builds/openimageio-git
 
-1-2) ATTENTION A VERSION ET DATE SUR LE SITE
-============================================
-https://github.com/OpenImageIO/oiio/releases
-==> 30/03/2017
-==> Release-1.7.13
-==> 1.7.13.20170330
+1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/OpenImageIO/oiio
+==> 20170422
+
 
 1.3 SOURCES
 ==============
+!!! Répertoire clone de oiio dans : /0-DataLinux/05-builds-dir-git/oiio
+------------------------------------------------------------------------------
+
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageIO/oiio/archive/Release-1.7.13.tar.gz
+Vérifier existence rep oiio :
+--------------------------------
+ls
 
-1-4) RENOMMER ARCHIVE TAR.GZ
+!!! SI REP oiio N'EXISTE PAS
+-------------------------------
+git clone git://github.com/OpenImageIO/oiio.git oiio
+
+!!! SI REP oiio EXISTE
+-------------------------
+cd oiio
+git pull --rebase origin master
+cd ..
+
+!!!!! Vérifier VERSION : 
+$ head -n 4 oiio/CMakeLists.txt
+
+project (OpenImageIO
+         VERSION 1.8.4
+
+==> 1.8.4
+
+1-7) FAIRE ARCHIVE TAR.GZ
 =================================
-mv -v Release-1.7.13.tar.gz oiio-Release-1.7.13.tar.gz
 
-1-7) Move ARCHIVE TAR.GZ ds rep compile
+tar -cvzf openimageio-git-1.8.4.20170422.tar.gz --exclude=.git oiio
+
+1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
 cd $HOME/05-builds/openimageio-git
 
-!!! CONSERVE Release DANS 05-builds-dir-git
+!!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-1.7.13.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openimageio-git-1.8.4.20170422.tar.gz .
+sync
 
 
 1-8) FAIRE PATCHES
@@ -40,27 +64,28 @@ voir : CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.7.13.20170330
+pkgver=1.8.4.20170422
 pkgrel=1
 pkgrel=2          # rebuild avec PYTHON 3.6
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
-
-!!!!!!
-_name_release="oiio-Release-1.7.13"
 
 conflicts=('openimageio')
 provides=('openimageio')
 
 2-2) PKGBUILD SANS PATCH
 ========================
-source=("$_name_release.tar.gz"
+source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum oiio-Release-1.7.13.tar.gz
+sha256sum openimageio-git-1.8.4.20170422.tar.gz
 
 sha256sums=('...'
             '...'
 )
+
+!!!!!!
+_gitname="oiio"
+
 
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
@@ -77,79 +102,85 @@ PYTHON3_VERSION=3.6
 -DPYLIB3_INSTALL_DIR=lib/python3.6/site-packages \
 
 2-3) VERIFIER CMakeLists.txt
-============================
-mkdir /tmp/srcp
+==========================
+1) kwrite /0-DataLinux/05-builds-dir-git/oiio/CMakeLists.txt &
 
-cp -v oiio-Release-1.7.13.tar.gz /tmp/srcp/
-
-cd /tmp/srcp
-
-tar -xzf /tmp/srcp/oiio-Release-1.7.13.tar.gz
-
-kwrite oiio-Release-1.7.13/CMakeLists.txt
-
-LIGNE 37
+LIGNE 42
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
 
-LIGNE 55 
-  STOP_ON_WARNING ON    =>      -DSTOP_ON_WARNING=OFF \
-  
-LIGNES 175
+LIGNES 68
   OIIO_BUILD_TESTS ON   =>      -DOIIO_BUILD_TESTS=OFF \
 
   !!! A VOIR : 
-LIGNE 178
-  HIDE_SYMBOLS = OFF
-
-LIGNE 179
+LIGNE 69
   USE_OPENGL ON         depends= glew -> glu -> 'libgl'
 
-LIGNE 183
+  !!! A VOIR : 
+LIGNE 73
   USE_PYTHON3 = OFF       =>      -DUSE_PYTHON3=ON \  makedepends= ... 'python'
 
-LIGNES 184 185
+LIGNES 74 75
 set (PYTHON_VERSION 2.6)  =>    -DPYTHON_VERSION=2.7 \
 set (PYTHON3_VERSION 3.2) =>    -DPYTHON3_VERSION=3.6 \
   
-LIGNE 188
+  !!! A VOIR : 
+LIGNE 78
   USE_FIELD3D ON       =>      -DUSE_FIELD3D=OFF \
 
-LIGNE 191
+LIGNE 81
   USE_JPEGTURBO ON      depends= ... 'libjpeg-turbo'
 
-LIGNE 195
+LIGNE 85
   USE_OPENCV ON         depends= ... 'opencv'
 
-LIGNE 196
+LIGNE 86
   USE_OPENSSL = OFF       =>      -DUSE_OPENSSL=ON \  depends= ... 'openssl'
 
-LIGNE 199
+LIGNE 89
   USE_PTEX ON           =>      -DUSE_PTEX=OFF \
 
-LIGNE 204
+LIGNE 93
   USE_NUKE ON           =>      -DUSE_NUKE=OFF \
 
-LIGNE 214
-  USE_CPP11  ON
+LIGNE 99
+  USE_DICOM ON           =>      -DUSE_DICOM=OFF \
+
+
+2) kwrite /0-DataLinux/05-builds-dir-git/oiio/src/cmake/compiler.cmake &
+
+LIGNE 7
+  USE_CPP  = 11  "C++ standard to prefer (11, 14, etc.)"
   
-LIGNE 219
+LIGNE 9
+  !!! A VOIR : $ cat /proc/cpuinfo | grep sse4_2
+  USE_SIMD ""         =>      -DUSE_SIMD=sse4.2 \
+  
   !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
   USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
   
-LIGNE 220
+LIGNE 10 
+  STOP_ON_WARNING ON    =>      -DSTOP_ON_WARNING=OFF \
+  
+  !!! A VOIR : 
+LIGNE 11
+  HIDE_SYMBOLS = OFF
+
+LIGNE 12
   USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
 
-LIGNE 221
+LIGNE 18
   CODECOV = OFF
 
-LIGNE 428
+  !!! A VOIR : 
+LIGNE 19
+set (SANITIZE "" CACHE STRING "Build code using sanitizer (address, thread)")
+
+
+3) kwrite /0-DataLinux/05-builds-dir-git/oiio/src/cmake/install.cmake &
+
+LIGNE 57
   !!! A VOIR : = community/ttf-droid
   INSTALL_FONTS ON CACHE BOOL "Install default fonts" => -DINSTALL_FONTS=OFF \
-
-
-cd $HOME/05-builds/openimageio-git
-
-rm -rf /tmp/srcp
 
 
 
@@ -158,7 +189,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users   909 21 sept. 19:09 oiio-Release-1.7.13.tar.gz
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 openimageio-git-1.8.4.20170422.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -175,7 +206,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-1.7.13.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/openimageio-git-1.8.4.20170422.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -242,7 +273,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i oiio-Release-1.7.13.tar.gz
+$ rm -i openimageio-git-1.8.4.20170422.tar.gz
 
 
 $ cd && maj-repolocal
@@ -276,3 +307,104 @@ POUR REMETTRE openimageio EXTRA
 ==================================================================================================
 ANCIEN
 =======
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt4
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt4
+
+OU SI depends= ... 'nvidia-libgl'
+---------------------------------
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ mkpkg-tmpfs -m fast -l logs
+
+$ rm -rf /tmp/chrootrepo
+
+
+
+sha256sum fix-gcc-error-about-casting-for-AVX2.patch
+        "fix-gcc-error-about-casting-for-AVX2.patch"
+
+prepare() {
+  cd "${srcdir}/${_gitname}"
+   
+  # Fix gcc warning about casting for AVX2
+  patch -Np1 -i "${srcdir}/fix-gcc-error-about-casting-for-AVX2.patch"
+}
+  
+pkgrel=2          # maj NVidia 370.23-1
+pkgrel=3          # nvidia-libgl 367.35
+  OU
+  USE_OPENGL ON         depends= ... 'nvidia-libgl'
+
+!!! COMMIT DU 20/02/2016 : ERREUR COMPILATION
+!!! CONSERVER V 1.8.4 DU 07/02/2016
+
+!!! TESTS COMPILATION OSL AVEC OIIO 1.8.4.20170422
+$ mv -v openimageio-git-*-x86_64.pkg.tar.* /0-DataLinux/05-builds-dir-git/0-Test-openimageio-git/
+
+
+!!! COMMIT DU 27 ET 31 /08/2015, 11/09/2015
+!!! INCOMPATIBLE AVEC OSL DU 20/08/2015, 11/09/2015, 21/11/2015
+!!! CONSERVER V DU 24/08/2015
+
+!!! COMMIT DU 27/11/2015 : OK AVEC OSL DU 28/11/2015
+!!! COMMIT DU 06/12/2015 : OK AVEC OSL DU 03/12/2015
+!!! COMMIT DU 10/12/2015 : OK AVEC OSL DU 09/12/2015
+
+LIGNE 203
+  OIIO_BUILD_CPP11 OFF CACHE BOOL "Compile in C++11 mode"     ==>     -DOIIO_BUILD_CPP11=ON \
+  
+2-1) PKGBUILD AVEC PATCH
+========================
+source=($pkgname-$pkgver.tar.gz
+        'fix-previous-declaration-gcc4.9.1-c++11.patch'
+)
+
+sha256sum openimageio-git-1.8.4.20170422.tar.gz
+
+sha256sum fix-previous-declaration-gcc4.9.1-c++11.patch
+
+sha256sums=(...
+         ...
+)
+
+!!!!!!
+_gitname="oiio"
+
+prepare() {
+  cd "${srcdir}/${_gitname}"
+   
+  # fix previous declaration gcc 4.9.1 c++11
+  patch -Np1 -i "${srcdir}/fix-previous-declaration-gcc4.9.1-c++11.patch"
+}
+  
+
+
+  !!! A VOIR : NON : ERREUR COMPILATION ( previous declaration )
+  USE_CPP11 OFF CACHE BOOL "Compile in C++11 mode")     ==>     -DUSE_CPP11=ON \
+
+-rw-r--r--  1 jnd users      542 10 sept. 19:26 fix-previous-declaration-gcc4.9.1-c++11.patch
+&& cp -v $HOME/05-builds/openimageio-git/fix-previous-declaration-gcc4.9.1-c++11.patch . \
+
+!!! PAS OBLIGATOIRE SI GIT
+rm -rf oiio
+
+rm -rf oiio
+
