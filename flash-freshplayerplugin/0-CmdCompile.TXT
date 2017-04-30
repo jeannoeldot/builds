@@ -39,6 +39,7 @@ pkgname=freshplayerplugin
 pkgver=0.3.6
 pkgrel=1
 pkgrel=2    # MAJ icu
+pkgrel=3    # MAJ icu 59.1
 
 sha1sum v0.3.6.tar.gz
 

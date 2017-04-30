@@ -99,13 +99,9 @@ build() {
 ============================
 mkdir /tmp/srcp
 
-cp -v OpenShadingLanguage-Release-1.8.7.tar.gz /tmp/srcp/
+tar -xzf OpenShadingLanguage-Release-1.8.7.tar.gz -C /tmp/srcp
 
-cd /tmp/srcp
-
-tar -xzf /tmp/srcp/OpenShadingLanguage-Release-1.8.7.tar.gz
-
-1) kwrite OpenShadingLanguage-Release-1.8.7/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.7/CMakeLists.txt
 
 LIGNE 33
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
@@ -152,13 +148,11 @@ LIGNE 243
   USE_BOOST_WAVE OFF
 
 
-2) kwrite OpenShadingLanguage-Release-1.8.7/src/cmake/modules/FindLLVM.cmake
+2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.7/src/cmake/modules/FindLLVM.cmake
 
 LIGNE 90 ET ...
   LLVM_STATIC           =>      -DLLVM_STATIC=ON \
 
-
-cd $HOME/05-builds/openshadinglanguage-git
 
 rm -rf /tmp/srcp
 

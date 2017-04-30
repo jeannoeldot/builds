@@ -80,13 +80,9 @@ PYTHON3_VERSION=3.6
 ============================
 mkdir /tmp/srcp
 
-cp -v oiio-Release-1.7.13.tar.gz /tmp/srcp/
+tar -xzf oiio-Release-1.7.13.tar.gz -C /tmp/srcp
 
-cd /tmp/srcp
-
-tar -xzf /tmp/srcp/oiio-Release-1.7.13.tar.gz
-
-kwrite oiio-Release-1.7.13/CMakeLists.txt
+kwrite /tmp/srcp/oiio-Release-1.7.13/CMakeLists.txt
 
 LIGNE 37
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
@@ -147,10 +143,7 @@ LIGNE 428
   INSTALL_FONTS ON CACHE BOOL "Install default fonts" => -DINSTALL_FONTS=OFF \
 
 
-cd $HOME/05-builds/openimageio-git
-
 rm -rf /tmp/srcp
-
 
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
