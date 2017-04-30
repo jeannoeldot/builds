@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git
-pkgver=4.0.2.20170427
+pkgver=4.0.2.20170422
 pkgrel=1
 pkgdesc="Library and tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ conflicts=('openvdb')
 provides=('openvdb')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('b88ab15196a6d813f65de4429d11207cc59ac40fb36163c3e0c64cb1a994ea8a'
+sha256sums=('2f339b8a3d0e5621c5d82a7e031210e71c37934220b7be2342562aa4c6429fed'
 )
 
 _gitname="openvdb"

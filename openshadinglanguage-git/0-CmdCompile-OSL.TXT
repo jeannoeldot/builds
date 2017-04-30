@@ -49,6 +49,8 @@ voir 0-CmdFairePatches-LLVM35.STATIC.TXT
 pkgname=openshadinglanguage-git
 pkgver=1.8.7.20170401
 pkgrel=1
+pkgrel=2          # rebuild libwebp 0.6.0-1
+
 pkgrel=2    # rebuild avec /usr/shaders
 pkgrel=3          # rebuild oiio
 

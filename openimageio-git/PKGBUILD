@@ -5,7 +5,7 @@
 
 pkgname=openimageio-git
 pkgver=1.7.13.20170330
-pkgrel=1
+pkgrel=2
 _name_release="oiio-Release-1.7.13"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('i686' 'x86_64')
@@ -49,7 +49,6 @@ build() {
       -DUSE_OPENSSL=ON \
       -DUSE_PTEX=OFF \
       -DUSE_NUKE=OFF \
-      -DUSE_DICOM=OFF \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF \
       -DINSTALL_FONTS=OFF \
