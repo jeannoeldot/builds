@@ -6,19 +6,19 @@ cd $HOME/05-builds/openshadinglanguage-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/imageworks/OpenShadingLanguage/releases
-==> 01/05/2017
-==> Release-1.8.8
-==> 1.8.8.20170501
+==> 01/04/2017
+==> Release-1.8.7
+==> 1.8.7.20170401
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.8.tar.gz
+wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.7.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-1.8.8.tar.gz OpenShadingLanguage-Release-1.8.8.tar.gz
+mv -v Release-1.8.7.tar.gz OpenShadingLanguage-Release-1.8.7.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -26,11 +26,12 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.8.8.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.8.7.tar.gz .
 
 
 1-8) FAIRE PATCH
 ===============================
+voir 0-CmdFairePatches-LLVM35.STATIC.TXT
 
 
 !!! TESTS AVEC /usr/shaders
@@ -46,7 +47,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.8.8.tar.gz .
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.8.20170501
+pkgver=1.8.7.20170401
 pkgrel=1
 pkgrel=2          # rebuild libwebp 0.6.0-1
 
@@ -58,35 +59,36 @@ pkgrel=4          # rebuild boost boost-libs 1.63.0-1
 pkgrel=2          # rebuild boost boost-libs 1.61.0-2
 
 !!!!!!
-_name_release="OpenShadingLanguage-Release-1.8.8"
+_name_release="OpenShadingLanguage-Release-1.8.7"
 
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-!!! LLVM 4.0
-------------------------------------
-$ pacman -Ss llvm
-extra/llvm 4.0.0-2
-extra/llvm-libs 4.0.0-2
-
-depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
-         'llvm-libs'
-         'zlib' 'ncurses'
-         'openimageio-git'
-)
-makedepends=('boost' 'cmake' 'llvm' 'clang')
+makedepends=('boost' 'cmake' 'llvm35' 'clang35')
 
 
-2-2) PKGBUILD SANS PATCH LLVM 4.0
-=================================
+2-2) PKGBUILD AVEC PATCH
+========================
 source=("$_name_release.tar.gz"
+        'llvm35-static-system-libs.patch'
 )
 
-sha256sum OpenShadingLanguage-Release-1.8.8.tar.gz
+sha256sum OpenShadingLanguage-Release-1.8.7.tar.gz
+
+sha256sum llvm35-static-system-libs.patch
 
 sha256sums=(...
          ...
 )
+
+prepare() {
+  cd "${_name_release}"
+   
+  # Add system libraries needed to link against LLVM components (zlib, ncurses)
+  # This is required in order to statically link against LLVM
+  # VOIR Community
+  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
+}
 
 
 build() {
@@ -99,61 +101,59 @@ build() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenShadingLanguage-Release-1.8.8.tar.gz -C /tmp/srcp
+tar -xzf OpenShadingLanguage-Release-1.8.7.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.8/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.7/CMakeLists.txt
 
-LIGNE 40
+LIGNE 33
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
   
-LIGNE 58
+LIGNE 51
   STOP_ON_WARNING ON    =>      -DSTOP_ON_WARNING=OFF \ 
   
-LIGNE 227
+LIGNE 220
   OSL_BUILD_TESTS ON    =>      -DOSL_BUILD_TESTS=OFF \
   
-LIGNE 228
+LIGNE 221
   BUILDSTATIC OFF
 
-LIGNE 229
+LIGNE 222
   HIDE_SYMBOLS OFF
 
-LIGNE 238
+LIGNE 231
   USE_PARTIO ON    =>      -DUSE_PARTIO=OFF \
   
-LIGNE 241
+LIGNE 234
 /!\ /!\ /!\
   USE_CPP11 ON
 
-LIGNE 245
+LIGNE 238
   !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
   USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
   
-LIGNE 246
+LIGNE 239
   !!! A VOIR
   OSL_NO_DEFAULT_TEXTURESYSTEM OFF
 
-LIGNE 247
+LIGNE 240
   !!! A VOIR
   OSL_BUILD_PLUGINS ON
 
-LIGNE 248
+LIGNE 241
   USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
 
-LIGNE 249
+LIGNE 242
   CODECOV OFF
 
-LIGNE 250
+LIGNE 243
   !!! A VOIR
   USE_BOOST_WAVE OFF
 
 
-2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.8/src/cmake/modules/FindLLVM.cmake
+2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.7/src/cmake/modules/FindLLVM.cmake
 
-!!! LLVM 4.0
-------------------------------------
 LIGNE 90 ET ...
-  LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
+  LLVM_STATIC           =>      -DLLVM_STATIC=ON \
 
 
 rm -rf /tmp/srcp
@@ -164,7 +164,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.8.8.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.8.7.tar.gz
 -rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm35-static-system-libs.patch
 
 
@@ -181,7 +181,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-Release-1.8.8.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-Release-1.8.7.tar.gz . \
 && cp -v $HOME/05-builds/openshadinglanguage-git/llvm35-static-system-libs.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
@@ -258,7 +258,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenShadingLanguage-Release-1.8.8.tar.gz
+$ rm -i OpenShadingLanguage-Release-1.8.7.tar.gz
 
 
 $ cd && maj-repolocal
@@ -291,35 +291,6 @@ POUR REMETTRE openshadinglanguage EXTRA
 ================================================================
 ANCIENS
 ========
-
-voir 0-CmdFairePatches-LLVM35.STATIC.TXT
-
-2-2) PKGBUILD AVEC PATCH
-========================
-source=("$_name_release.tar.gz"
-        'llvm35-static-system-libs.patch'
-)
-
-sha256sum OpenShadingLanguage-Release-1.8.8.tar.gz
-
-sha256sum llvm35-static-system-libs.patch
-
-sha256sums=(...
-         ...
-)
-
-prepare() {
-  cd "${_name_release}"
-   
-  # Add system libraries needed to link against LLVM components (zlib, ncurses)
-  # This is required in order to statically link against LLVM
-  # VOIR Community
-  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
-}
-
-
-
-
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
 ====================================

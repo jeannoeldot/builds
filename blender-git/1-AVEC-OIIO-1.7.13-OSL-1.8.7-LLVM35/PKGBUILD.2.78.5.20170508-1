@@ -19,12 +19,11 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils
           'gettext'
           'jemalloc'
           'opencolorio'
-          'llvm-libs'
           'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
           'opensubdiv-git'
           'openvdb-git'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm'
+makedepends=('cmake' 'boost' 'mesa' 'llvm35'
              'cuda'
              'git'
 )
@@ -36,7 +35,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-expected-an-indented-block.patch'
 )
-sha256sums=('c52c65811729ee4fa9126e95ccf387609c73430278d751d07ffe7c7f6a705867'
+sha256sums=('44fff863cf21f7cf43b4a9939805a643df116321fe0649b86930a3fbe0048f76'
             '8439f0ff8f942525773f847f5369a4b1a8758851521b1b9169d8106bbce84647'
 )
 
@@ -87,8 +86,8 @@ build() {
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_LOGGING=OFF \
         -DWITH_LLVM=ON \
-        -DLLVM_VERSION=4.0 \
-        -DLLVM_STATIC=OFF \
+        -DLLVM_VERSION=3.5 \
+        -DLLVM_STATIC=ON \
         -DWITH_DOC_MANPAGE=ON \
         -DWITH_C11=ON \
         -DWITH_CXX11=ON \

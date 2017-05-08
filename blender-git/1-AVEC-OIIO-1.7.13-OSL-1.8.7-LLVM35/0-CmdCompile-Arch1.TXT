@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   Sat, 29 Apr 2017 18:58:36 +0200 (02:58 +1000)
-==> 20170429
+==> last change   Mon, 8 May 2017 01:44:11 +0200 (09:44 +1000)
+==> 20170508
 
 
 1.2 REVISION
@@ -56,9 +56,9 @@ cd ..
 $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
 #define BLENDER_VERSION         278
-#define BLENDER_SUBVERSION      4
+#define BLENDER_SUBVERSION      5
 
-==> Version = 2.78.4.20170429
+==> Version = 2.78.5.20170508
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.77 à 2.78)
 !!! EN ROOT
@@ -72,25 +72,16 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.78.4.20170429.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.78.5.20170508.tar.gz --exclude=.git blender
 
-1-7-1)  SANS FILMIC
-===================
-1-7-1-1) Move ARCHIVE TAR.GZ ds rep compile
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
 cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.4.20170429.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.5.20170508.tar.gz .
 sync
-
-
-1-7-5) AVEC FILMIC
-==================
-1-7-5-1) FAIRE ARCHIVE TAR.GZ AVEC FILMIC
-=========================================
-!!! VOIR 0-CmdFaireTarGz-Avec-Filmic.TXT
 
 
 1-8) FAIRE PATCH
@@ -107,9 +98,6 @@ voir CmdFairePatches.TXT
 !!!
 - LLVM              : Use LLVM 3.5
 
-!!! LE 26/02/2017 : AJOUT
-- FILMIC            : Filmic View and Look Transformations
-
 
 2-1) MODIFIER LE PKGBUILD
 ========================
@@ -117,7 +105,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.78.4.20170429
+pkgver=2.78.5.20170508
 pkgrel=1
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
@@ -154,7 +142,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-expected-an-indented-block.patch'
 )
 
-sha256sum blender-git-2.78.4.20170429.tar.gz
+sha256sum blender-git-2.78.5.20170508.tar.gz
 
 sha256sum fix-IndentationError-expected-an-indented-block.patch
 
@@ -173,7 +161,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.78.4.20170429.tar.gz
+sha256sum blender-git-2.78.5.20170508.tar.gz
 
 sha256sums=(...
          ...
@@ -189,8 +177,8 @@ build() {
 # LLVM : VOIR PKGBUILD sur COMMUNITY
 ------------------------------------
 $ pacman -Ss llvm35
-extra/llvm 3.5.2-3 [installé]
-extra/llvm-libs 3.5.2-3 [installé]
+extra/llvm 3.5.2-3
+extra/llvm-libs 3.5.2-3
 
         -DWITH_LLVM=ON \
         -DLLVM_VERSION=3.5 \
@@ -211,7 +199,7 @@ CMake Warning:
 
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.6.0-2 [installé]
+==> extra/python 3.6.1-1 [installé]
 
     -DPYTHON_VERSION=3.6 \
     -DPYTHON_LIBPATH=/usr/lib \
@@ -395,7 +383,7 @@ Lignes 502 et ...
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170429.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.5.20170508.tar.gz
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 -rw-r--r--  1 jnd users      673  5 mars  14:11 xxxxxxxxxxxxxxxxx.patch
 
@@ -505,7 +493,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.78.4.20170429.tar.gz
+$ rm -i blender-git-2.78.5.20170508.tar.gz
 
 
 $ cd && maj-repolocal
@@ -535,6 +523,33 @@ $ rm -rf .config/blender/2.76
 ================================================================
 ANCIENS
 ========
+
+
+!!!! VOIR COMMIT DU Sun, 7 May 2017 16:41:38 +0200 (16:41 +0200)
+!!!! Color management: add Filmic view transform to Blender configuration.
+!!!! Brecht Van Lommel <brechtvanlommel@gmail.com>
+!!!! 3cd27374ee53bc2ae3fd08b0b73c0a3118f81020
+1-7-1)  SANS FILMIC
+===================
+1-7-1-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/blender-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.78.5.20170508.tar.gz .
+sync
+
+
+1-7-5) AVEC FILMIC
+==================
+1-7-5-1) FAIRE ARCHIVE TAR.GZ AVEC FILMIC
+=========================================
+!!! VOIR 0-CmdFaireTarGz-Avec-Filmic.TXT
+!!! LE 26/02/2017 : AJOUT
+- FILMIC            : Filmic View and Look Transformations
+
+
 !!!!!!
 VOIR RAJOUT DE opencl-headers
 makedepends=('cmake' 'boost' 'mesa' 'llvm35'
@@ -550,7 +565,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
 
-sha256sum blender-git-2.78.4.20170429.tar.gz
+sha256sum blender-git-2.78.5.20170508.tar.gz
 
 sha256sum fix-Error-llvm-config-3.9.patch
 
@@ -668,7 +683,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-algoDIR-algoPOV.patch'
 )
 
-sha256sum blender-git-2.78.4.20170429.tar.gz
+sha256sum blender-git-2.78.5.20170508.tar.gz
 
 sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
 
@@ -720,7 +735,7 @@ LE 12/07/2016
 TEST COMPIL DS CHROOT
 AVEC GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5.18-4 / GCC5 5.4.0 COMMUNITY
  SANS PATCH fix-isfinite-was-not-declared-in-this-scope.patch
-pkgver=2.78.4.20160627
+pkgver=2.78.5.20160627
 pkgrel=2
 !!!!!!-----------------------------------------------------------
 !!! SI DANS ARCH3 KDE:
@@ -736,7 +751,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.78.4.20170429.tar.gz
+sha256sum blender-git-2.78.5.20170508.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -756,7 +771,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.4.20170429.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.78.5.20170508.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -771,7 +786,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170429.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.5.20170508.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -841,7 +856,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.78.4.20170429.tar.gz
+sha256sum blender-git-2.78.5.20170508.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -898,7 +913,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.4.20170429.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.78.5.20170508.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \

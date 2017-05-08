@@ -2,25 +2,35 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.8.20170501
-pkgrel=1
-_name_release="OpenShadingLanguage-Release-1.8.8"
+pkgver=1.8.7.20170401
+pkgrel=2
+_name_release="OpenShadingLanguage-Release-1.8.7"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
 license=('custom')
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
-         'llvm-libs'
          'zlib' 'ncurses'
          'openimageio-git'
 )
-makedepends=('boost' 'cmake' 'llvm' 'clang')
+makedepends=('boost' 'cmake' 'llvm35' 'clang35')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
+        'llvm35-static-system-libs.patch'
 )
-sha256sums=('6a76549ab9141e22862bdb1e4531af67dea2cec03eb3f74a78e10ebf68c2aae3'
+sha256sums=('45ffae7bc6ccffa3bef483c1634d3b8fb4dd6a4939d5bbdd0bc133063c07eeff'
+            '0e09aef60d64b958a5a36e9f31a0ab52eda698575f7ce752298acc906cede0b6'
 )
+
+prepare() {
+  cd "${_name_release}"
+   
+  # Add system libraries needed to link against LLVM components (zlib, ncurses)
+  # This is required in order to statically link against LLVM
+  # VOIR Community
+  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
+}
 
 build() {
   cd "${_name_release}"
@@ -32,7 +42,7 @@ build() {
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DSTOP_ON_WARNING=OFF \
-      -DLLVM_STATIC=OFF \
+      -DLLVM_STATIC=ON \
       -DOSL_BUILD_TESTS=OFF \
       -DUSE_PARTIO=OFF \
       -DUSE_SIMD=avx2 \
