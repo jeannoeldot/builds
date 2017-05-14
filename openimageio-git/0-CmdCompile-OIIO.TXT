@@ -13,11 +13,8 @@ https://github.com/OpenImageIO/oiio/releases
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageIO/oiio/archive/Release-1.7.14.tar.gz
-
-1-4) RENOMMER ARCHIVE TAR.GZ
-=================================
-mv -v Release-1.7.14.tar.gz oiio-Release-1.7.14.tar.gz
+wget -O oiio-Release-1.7.14.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.7.14.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -271,3 +268,15 @@ POUR REMETTRE openimageio EXTRA
 ==================================================================================================
 ANCIEN
 =======
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget https://github.com/OpenImageIO/oiio/archive/Release-1.7.14.tar.gz
+wget -O oiio-Release-1.7.14.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.7.14.tar.gz
+
+1-4) RENOMMER ARCHIVE TAR.GZ
+=================================
+mv -v Release-1.7.14.tar.gz oiio-Release-1.7.14.tar.gz
+

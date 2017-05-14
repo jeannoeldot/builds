@@ -14,11 +14,8 @@ https://github.com/imageworks/OpenShadingLanguage/releases
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.8.tar.gz
-
-1-4) RENOMMER ARCHIVE TAR.GZ
-=================================
-mv -v Release-1.8.8.tar.gz OpenShadingLanguage-Release-1.8.8.tar.gz
+wget -O OpenShadingLanguage-Release-1.8.8.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.8.8.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -291,6 +288,18 @@ POUR REMETTRE openshadinglanguage EXTRA
 ================================================================
 ANCIENS
 ========
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.8.tar.gz
+wget -O OpenShadingLanguage-Release-1.8.8.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.8.8.tar.gz
+
+1-4) RENOMMER ARCHIVE TAR.GZ
+=================================
+mv -v Release-1.8.8.tar.gz OpenShadingLanguage-Release-1.8.8.tar.gz
+
 
 voir 0-CmdFairePatches-LLVM35.STATIC.TXT
 
