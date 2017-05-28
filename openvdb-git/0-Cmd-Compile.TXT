@@ -21,7 +21,7 @@ https://github.com/dreamworksanimation/openvdb/releases
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/dreamworksanimation/openvdb/commits/master
-==> 20170427
+==> 20170525
 
 1.3 SOURCES
 ==============
@@ -62,8 +62,8 @@ $ head -n 50 openvdb/openvdb/version.h | grep VERSION
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 cd openvdb
-tar -cvzf openvdb-git-4.0.2.20170427.tar.gz --exclude=.git openvdb
-mv -v openvdb-git-4.0.2.20170427.tar.gz ..
+tar -cvzf openvdb-git-4.0.2.20170525.tar.gz --exclude=.git openvdb
+mv -v openvdb-git-4.0.2.20170525.tar.gz ..
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -71,7 +71,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openvdb-git-4.0.2.20170427.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openvdb-git-4.0.2.20170525.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -84,7 +84,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=4.0.2.20170427
+pkgver=4.0.2.20170525
 pkgrel=1
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
@@ -102,7 +102,7 @@ makedepends=('boost' 'mesa' 'doxygen')
 conflicts='openvdb'
 provides='openvdb'
 
-sha256sum openvdb-git-4.0.2.20170427.tar.gz
+sha256sum openvdb-git-4.0.2.20170525.tar.gz
 
 source=("$pkgname-$pkgver.tar.gz"
 )
@@ -147,7 +147,7 @@ package() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openvdb-git-4.0.2.20170427.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openvdb-git-4.0.2.20170525.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -165,7 +165,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-4.0.2.20170427.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-4.0.2.20170525.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -225,7 +225,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openvdb-git-4.0.2.20170427.tar.gz
+$ rm -i openvdb-git-4.0.2.20170525.tar.gz
 
 
 $ cd && maj-repolocal

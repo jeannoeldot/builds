@@ -119,6 +119,9 @@ Server = file:///home/jnd/00-repolocal
 SigLevel = Never
 Server = http://repo.archlinux.fr/$arch
 
-#[xyne-x86_64]
-#SigLevel = Required
+[xyne-x86_64]
+SigLevel = Required
+# Temporarily broken due to host error.
 #Server = http://xyne.archlinux.ca/repos/xyne
+# Workaround
+Server = http://xyne.archlinux.ca/bin/repo.php?file=
