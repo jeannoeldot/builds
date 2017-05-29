@@ -36,6 +36,7 @@ pkgname=wimlib
 pkgver=1.9.1
 pkgrel=1
 pkgrel=2    # MAJ ntfs-3g
+pkgrel=3    # MAJ openssl
 
 source=($pkgname-$pkgver.tar.gz
 )
