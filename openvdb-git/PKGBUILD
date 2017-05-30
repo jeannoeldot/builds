@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=4.0.2.20170525
-pkgrel=1
+pkgrel=2
 pkgdesc="Library and tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
 arch=('i686' 'x86_64')
 url="http://www.openvdb.org/"

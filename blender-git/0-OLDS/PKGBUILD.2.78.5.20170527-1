@@ -1,21 +1,22 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.5.20170530
+pkgver=2.78.5.20170527
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
 license=('GPL')
 url="http://blender.org/"
-depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
+depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils'
           'libjpeg' 'libpng' 'openjpeg' 'libtiff' 'openexr' 
           'python'
-          'libsamplerate' 'ffmpeg' 'fftw'
+          'libsamplerate' 'ffmpeg' 'fftw' 'freeglut'
           'openal' 'freetype2' 'libsndfile'
           'sdl2'
           'glew' 'glfw-x11'
           'libxi' 'libxmu' 'libxxf86vm'
           'boost-libs'
+          'gettext'
           'jemalloc'
           'opencolorio'
           'llvm-libs'
@@ -35,7 +36,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-expected-an-indented-block.patch'
 )
-sha256sums=('5c98951023428d267929b9763554959ddd351384e75fddc16e1a6cc8db8e0d09'
+sha256sums=('fcc19e90536c00a3f5827a819a62e4e444209771fa3e11d687756d1238b06073'
             '8439f0ff8f942525773f847f5369a4b1a8758851521b1b9169d8106bbce84647'
 )
 

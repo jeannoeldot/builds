@@ -39,8 +39,9 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=1.7.14.20170501
 pkgrel=1
-pkgrel=2          # rebuild libwebp 0.6.0-1
+pkgrel=2          # rebuild boost boost-libs 1.64.0-1
 
+pkgrel=2          # rebuild libwebp 0.6.0-1
 pkgrel=2          # rebuild avec PYTHON 3.6
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 
