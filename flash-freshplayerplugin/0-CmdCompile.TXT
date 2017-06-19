@@ -163,7 +163,9 @@ $ rm -i ~/.mozilla/firefox/idy48li7.default/pluginreg.dat
 EN ROOT
 ========
 # cd
-
+## MAJ
+# pacman -Syu freshplayerplugin
+## 1ere Install
 # pacman -Syu freshplayerplugin pepper-flash
 
 !!! EN USER
