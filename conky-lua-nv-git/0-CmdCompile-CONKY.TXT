@@ -69,6 +69,7 @@ voir CmdFairePatches.TXT
 pkgname=conky-lua-nv-git
 pkgver=1.10.7.20170211
 pkgrel=1
+pkgrel=2  # Fix build avec gcc7
 
 !!! SANS PATCH
 --------------
@@ -85,11 +86,14 @@ sha256sums=(...
 --------------
 source=("$pkgname-$pkgver.tar.gz"
         'Fix-error-when-generating-man-pages-from-XML.patch'
+        'Fix-build-with-gcc7-missing-include.patch'
 )
 
 sha256sum conky-lua-nv-git-1.10.7.20170211.tar.gz
 
 sha256sum Fix-error-when-generating-man-pages-from-XML.patch
+
+sha256sum Fix-build-with-gcc7-missing-include.patch
 
 sha256sums=(...
          ...
@@ -100,6 +104,8 @@ prepare() {
   cd "${_gitname}"
   # https://github.com/brndnmtthws/conky/pull/370/commits/b9def6994c439188d75dba2bf78a1dcf8acceb4b
   patch -Np1 -i "${srcdir}/Fix-error-when-generating-man-pages-from-XML.patch"
+  # https://github.com/brndnmtthws/conky/issues/396
+  patch -Np1 -i "${srcdir}/Fix-build-with-gcc7-missing-include.patch"
 }
 
 
@@ -151,6 +157,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 352587 16 août  11:06 conky-lua-nv-git-1.10.7.20170211.tar.gz
 -rw-r--r--  1 jnd users    182 15 août  16:57 conky-lua-nv-git.install
+-rw-r--r--  1 jnd users    302 19 juin  17:04 Fix-build-with-gcc7-missing-include.patch
 -rw-r--r--  1 jnd users    659  6 mars  11:35 Fix-error-when-generating-man-pages-from-XML.patch
 -rw-r--r--  1 jnd users   2675 16 août  14:55 PKGBUILD
 

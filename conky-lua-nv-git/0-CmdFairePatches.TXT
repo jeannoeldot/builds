@@ -1,7 +1,7 @@
 FAIRE PATCHS
 ====================================
 
-cd $HOME/05-builds/conky-lua-nv-git
+/!\ /!\ /!\   cd $HOME/05-builds/conky-lua-nv-git
 
 mkdir /tmp/srcp
 
@@ -11,13 +11,13 @@ cd /tmp/srcp
 
 tar -xzf conky-lua-nv-git-1.10.7.20170211.tar.gz
 
-cd $HOME/05-builds/conky-lua-nv-git
+/!\ /!\ /!\   cd $HOME/05-builds/conky-lua-nv-git
 
 
 1) MODIFIER conky/doc/config_settings.xml
 ===================================================
 
-cd /tmp/srcp
+/!\ /!\ /!\   cd /tmp/srcp
 
 cp -R conky conky.new
 
@@ -42,6 +42,35 @@ rm -rf conky.new
 cd $HOME/05-builds/conky-lua-nv-git
 
 mv -vf /tmp/srcp/Fix-error-when-generating-man-pages-from-XML.patch .
+
+
+2) MODIFIER conky/src/luamm.hh
+=================================================
+
+cd /tmp/srcp
+
+cp -R conky conky.new
+
+cd conky.new/src
+kwrite luamm.hh
+
+RAJOUTER LIGNE 31 :
+#include <functional>
+
+
+ENREGISTRER et Quitter kwrite & EFFACER fichier luamm.hh~
+rm -f luamm.hh~
+
+cd ../..
+
+diff -aur conky conky.new
+diff -aur conky conky.new > Fix-build-with-gcc7-missing-include.patch
+
+rm -rf conky.new
+
+cd $HOME/05-builds/conky-lua-nv-git
+
+mv -vf /tmp/srcp/Fix-build-with-gcc7-missing-include.patch .
 
 
 

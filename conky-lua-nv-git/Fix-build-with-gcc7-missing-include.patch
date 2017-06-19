@@ -1,0 +1,11 @@
+diff -aur conky/src/luamm.hh conky.new/src/luamm.hh
+--- conky/src/luamm.hh	2016-10-09 16:53:05.000000000 +0200
++++ conky.new/src/luamm.hh	2017-06-19 17:01:19.653804812 +0200
+@@ -28,6 +28,7 @@
+ #include <exception>
+ #include <stdexcept>
+ #include <string>
++#include <functional>
+ 
+ #include <lua.hpp>
+ 

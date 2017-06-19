@@ -2,7 +2,7 @@
 
 pkgname=conky-lua-nv-git
 pkgver=1.10.7.20170211
-pkgrel=2
+pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
 url="https://github.com/brndnmtthws/conky"
@@ -23,11 +23,9 @@ optdepends=('nvidia: for GT4xx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
         'Fix-error-when-generating-man-pages-from-XML.patch'
-        'Fix-build-with-gcc7-missing-include.patch'
 )
 sha256sums=('5c44264c2bf2e37dd4bba33fb6bad1c39cffab8911a03b18e2fa70c4c0467cb9'
             'ee270f55921d42205741b8ae7efbc7d1801bc57ebcd721cb41f4987cf22c0d7f'
-            'dbf683262810462189f5badce8bbd3d3ba4d312d86a14323447816d0b5f72591'
 )
 #options=('!strip' 'debug')
 install="conky-lua-nv-git.install"
@@ -38,8 +36,6 @@ prepare() {
   cd "${_gitname}"
   # https://github.com/brndnmtthws/conky/pull/370/commits/b9def6994c439188d75dba2bf78a1dcf8acceb4b
   patch -Np1 -i "${srcdir}/Fix-error-when-generating-man-pages-from-XML.patch"
-  # https://github.com/brndnmtthws/conky/issues/396
-  patch -Np1 -i "${srcdir}/Fix-build-with-gcc7-missing-include.patch"
 }
 
 build() {
