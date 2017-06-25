@@ -1,21 +1,21 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.78.5.20170611
+!!! VERSION = 2.78.5.20170624
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.78.5.20170611.tar.gz /tmp/srcp/
+cp -v blender-git-2.78.5.20170624.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.78.5.20170611.tar.gz
+tar -xzf blender-git-2.78.5.20170624.tar.gz
 
 
-2) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
+1) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
 ===================================================================================
 cp -R blender blender.new
 
@@ -48,13 +48,44 @@ rm -f np_point_dimension.py~
 cd ../../../../..
 
 diff -aur blender blender.new
-diff -aur blender blender.new > fix-IndentationError-expected-an-indented-block.patch
+diff -aur blender blender.new > fix-IndentationError-np_station.patch
 
 rm -rf blender.new
 
 cd $HOME/05-builds/blender-git
 
-mv -vf /tmp/srcp/fix-IndentationError-expected-an-indented-block.patch .
+mv -vf /tmp/srcp/fix-IndentationError-np_station.patch .
+
+
+2) MODIFIER blender/release/scripts/addons/ant_landscape/test.py
+================================================================
+cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/ant_landscape
+kwrite test.py
+
+MODIFIER LIGNE 21 :
+ print(stats.memory())
+ 
+DEVIENT
+    print(stats.memory())
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier test.py~
+rm -f test.py~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-IndentationError-ant_landscape.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-IndentationError-ant_landscape.patch .
 
 
 

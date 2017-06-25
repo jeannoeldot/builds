@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.5.20170625
+pkgver=2.78.5.20170611
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -33,12 +33,10 @@ provides=('blender')
 options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
-        'fix-IndentationError-np_station.patch'
-        'fix-IndentationError-ant_landscape.patch'
+        'fix-IndentationError-expected-an-indented-block.patch'
 )
-sha256sums=('4c9366b7ed1a04a1ba937df037a402bb4c47c1be0c39fcd553907c5464653670'
-            'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
-            '046233673a6cedd2580323c716c090cf90699bf74f9dff7e96031f476451acea'
+sha256sums=('0a843425ba2d891b87de65ce7b3d0d702a674e062877b3ce893827dad51abda5'
+            '8439f0ff8f942525773f847f5369a4b1a8758851521b1b9169d8106bbce84647'
 )
 
 _gitname="blender"
@@ -46,9 +44,7 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
   # fix erreur : IndentationError: expected an indented block (np_point_dimension.py, line 148)
-  patch -Np1 -i "${srcdir}/fix-IndentationError-np_station.patch"
-  # fix erreur : IndentationError: unindent does not match any outer indentation level (test.py, line 21)
-  patch -Np1 -i "${srcdir}/fix-IndentationError-ant_landscape.patch"
+  patch -Np1 -i "${srcdir}/fix-IndentationError-expected-an-indented-block.patch"
 }
 
 build() {
