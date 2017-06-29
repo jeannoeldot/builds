@@ -9,7 +9,7 @@
 
 pkgname=freshplayerplugin
 pkgver=0.3.6
-pkgrel=3
+pkgrel=4
 pkgdesc='PPAPI-host NPAPI-plugin adapter.'
 arch=( 'i686' 'x86_64' )
 url='https://github.com/i-rinat/freshplayerplugin'
