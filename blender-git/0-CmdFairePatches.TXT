@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.78.5.20170624
+!!! VERSION = 2.78.5.20170701
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.78.5.20170624.tar.gz /tmp/srcp/
+cp -v blender-git-2.78.5.20170701.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.78.5.20170624.tar.gz
+tar -xzf blender-git-2.78.5.20170701.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
@@ -57,6 +57,18 @@ cd $HOME/05-builds/blender-git
 mv -vf /tmp/srcp/fix-IndentationError-np_station.patch .
 
 
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
 2) MODIFIER blender/release/scripts/addons/ant_landscape/test.py
 ================================================================
 cd /tmp/srcp
@@ -87,18 +99,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/fix-IndentationError-ant_landscape.patch .
 
-
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) MODIFIER blender/intern/cycles/kernel/osl/osl_closures.cpp
 =============================================================
