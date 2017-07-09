@@ -1,9 +1,9 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.10.20170630
+pkgver=1.8.9.20170531
 pkgrel=1
-_name_release="OpenShadingLanguage-Release-1.8.10"
+_name_release="OpenShadingLanguage-Release-1.8.9"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -18,7 +18,7 @@ conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('5b9ad6814fd55e68f4ac50e4214120629ab9175142dc93aac350d0f54bea745a'
+sha256sums=('1b6297a960b4eb26d4b8b52d378492d18ff428c9fff2d46453807adb787c892a'
 )
 
 build() {
@@ -47,8 +47,8 @@ package() {
 
   mkdir -p "${pkgdir}"/usr/share/OSL/
   mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
-  mv "${pkgdir}"/usr/doc/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname} # TODO: Tell upstream about this shit
-  mv "${pkgdir}"/usr/doc/{INSTALL.md,CHANGES.md,README.md} "${pkgdir}"/usr/share/OSL/
+  mv "${pkgdir}"/usr/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname} # TODO: Tell upstream about this shit
+  mv "${pkgdir}"/usr/{INSTALL.md,CHANGES.md,README.md} "${pkgdir}"/usr/share/OSL/
   mv "${pkgdir}"/usr/doc "${pkgdir}"/usr/share/OSL/doc
 #  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
 }
