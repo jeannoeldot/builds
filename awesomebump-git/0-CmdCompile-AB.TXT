@@ -32,6 +32,15 @@ cd awesomebump
 git pull --rebase origin master
 cd ..
 
+!!! SI REP awesomebump EXISTE
+!!! PASSAGE DE master À Release
+-------------------------------
+cd awesomebump
+git checkout Release
+git pull --rebase origin Release
+cd ..
+
+
 1.2) SOURCES QtnProperty
 ========================
 https://github.com/kmkolasinski/QtnProperty
