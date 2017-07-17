@@ -1,15 +1,17 @@
 FAIRE PATCHS
 ====================================
 
+!!! VERSION = 5.0.20170710
+
 cd $HOME/05-builds/awesomebump-git
 
 mkdir /tmp/srcp
 
-cp -v awesomebump-git-5.0.20170625.tar.gz /tmp/srcp/
+cp -v awesomebump-git-5.0.20170710.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf awesomebump-git-5.0.20170625.tar.gz
+tar -xzf awesomebump-git-5.0.20170710.tar.gz
 
 /!\ /!\ cd $HOME/05-builds/awesomebump-git
 
