@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.78.5.20170722
+pkgver=2.78.5.20170717
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -35,7 +35,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
-sha256sums=('5c7a2f5230bb4fc94366c94d2f99c89102c991d232cbad5f534c62bcff48151c'
+sha256sums=('fdbbfb4e88437d0be367e2b1b5aec486ae147ddfe6ac339b1a7d27821b3fb728'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
 )
 
