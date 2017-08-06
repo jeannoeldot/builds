@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=opensubdiv-git
-pkgver=3.3.0.20170801
+pkgver=3.2.0.20170131
 pkgrel=1
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ conflicts=('opensubdiv')
 provides=('opensubdiv')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('7f8c991339d324f8a9548a824743aa0a7946cedd2447bbefa1110f74b15ba12f'
+sha256sums=('e8754542c23199c2e9113b1fc28d1e3e87f7a102150e089d94d5c60340ea07e7'
 )
 
 _gitname="opensubdiv"
@@ -37,7 +37,6 @@ build() {
         -D NO_TUTORIALS=1 \
         -D NO_REGRESSION=1 \
         -D NO_EXAMPLES=1 \
-        -D NO_METAL=1 \
         ..
   make ${MAKEFLAGS}
 }

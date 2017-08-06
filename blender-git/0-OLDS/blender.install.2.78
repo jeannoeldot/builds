@@ -4,7 +4,7 @@ post_install() {
 
 NOTE
 ----
-This package brings GIT Blender 2.79 compiled with Cmake
+This package brings GIT Blender 2.78 compiled with Cmake
 Features includes:
       - BUILDINFO         : Include extra build details
       - FFTW3             : Used for smoke and audio effects
