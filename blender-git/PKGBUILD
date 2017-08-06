@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=2.79.0.20170805
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -40,6 +40,7 @@ sha256sums=('541ef4495c5dda0397172b82530967c90a7e987f2aef5684ac4826c44050efda'
 )
 
 _gitname="blender"
+_slot="2.79"
 
 prepare() {
   cd "${_gitname}"
@@ -103,6 +104,13 @@ package() {
   # Blender
   cd "${_gitname}/build"
   make DESTDIR="${pkgdir}" install
+
+  # Install addons_contrib. Version 2.79 du 05/08/2017 : NON installé par défaut
+  msg "Install addons_contrib..."
+  cp --preserve=mode -r ../release/scripts/addons_contrib/* \
+                        "${pkgdir}"/usr/share/blender/${_slot}/scripts/addons_contrib/
+
+  rm -f "${pkgdir}"/usr/share/blender/${_slot}/scripts/addons_contrib/{.arcconfig,.gitignore}
 
   # voir Extra
   python -m compileall "${pkgdir}/usr/share/blender"
