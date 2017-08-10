@@ -57,7 +57,7 @@ package() {
          "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin/plugins
 
       # Erreur ds verif-deps : Copy libyafaray_v3_core.so & libyafaray_v3_plugin.so% to /usr/lib/
-      install -d "${pkgdir}"/usr/lib
+      install -dm755 "${pkgdir}"/usr/lib
       cp -a "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin/libyafaray_v3_core.so \
             "${pkgdir}"/usr/lib/libyafaray_v3_core.so
       cp -a "${pkgdir}"/usr/share/blender/${_slot}/scripts/${_dir_addons}/${_name_addon}/bin/libyafaray_v3_plugin.so \

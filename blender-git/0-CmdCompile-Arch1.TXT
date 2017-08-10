@@ -145,6 +145,9 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm'
 !!!!!!
 _gitname="blender"
 
+!!!!!!
+_slot="2.79"
+
 AVEC PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
