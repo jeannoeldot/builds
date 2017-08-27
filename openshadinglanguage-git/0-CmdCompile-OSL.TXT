@@ -47,6 +47,7 @@ pkgver=1.8.10.20170630
 pkgrel=1
 pkgrel=2          # rebuild llvm 4.0.1-5
 pkgrel=3          # rebuild oiio 1.7.16.20170802
+pkgrel=4          # rebuild oiio opencv 3.3.0-1
 
 pkgrel=2          # rebuild boost boost-libs 1.64.0-1
 
