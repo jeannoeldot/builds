@@ -48,6 +48,7 @@ pkgrel=1
 pkgrel=2          # rebuild llvm 4.0.1-5
 pkgrel=3          # rebuild oiio 1.7.16.20170802
 pkgrel=4          # rebuild oiio opencv 3.3.0-1
+pkgrel=5          # rebuild oiio 1.7.17.20170831
 
 pkgrel=2          # rebuild boost boost-libs 1.64.0-1
 
@@ -234,9 +235,6 @@ makepkg -f
 !!! EN USER
 rm -f *~
 
-# Verifications...
-
-namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
