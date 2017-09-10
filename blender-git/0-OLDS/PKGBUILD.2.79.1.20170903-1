@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.1.20170910
+pkgver=2.79.1.20170903
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -23,7 +23,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opensubdiv-git'
           'openvdb-git'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm' 'gcc5'
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
 )
@@ -35,7 +35,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
-sha256sums=('9c0977b0acd44ad3c35f8d35d323c3329422601efde3dba6ee7849b41640ddd2'
+sha256sums=('8a86fbcf57fa99dcc5cee4fbf07fbd1d62d3421a611776e0d2e010fd7374a2a6'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
 )
 
@@ -54,7 +54,6 @@ build() {
   [[ -d build ]] && rm -r build
   mkdir build && cd build
   
-  # OPENVDB : VERSION >= 4
   CXXFLAGS+=' -DOPENVDB_3_ABI_COMPATIBLE'
   cmake \
         -DCMAKE_INSTALL_PREFIX=/usr \
@@ -87,7 +86,6 @@ build() {
         -DWITH_CYCLES_CUDA_BINARIES=ON \
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_LOGGING=OFF \
-        -DCUDA_NVCC_FLAGS="-D_BITS_FLOATN_H" \
         -DWITH_LLVM=ON \
         -DLLVM_VERSION=4.0 \
         -DLLVM_STATIC=OFF \
@@ -114,7 +112,7 @@ package() {
                         "${pkgdir}"/usr/share/blender/${_slot}/scripts/addons_contrib/
   rm -f "${pkgdir}"/usr/share/blender/${_slot}/scripts/addons_contrib/{.arcconfig,.gitignore}
 
-  # voir Community
+  # voir Extra
   python -m compileall "${pkgdir}/usr/share/blender"
   python -O -m compileall "${pkgdir}/usr/share/blender"
 }
