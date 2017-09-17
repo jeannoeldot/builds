@@ -1,0 +1,15 @@
+diff -aur OpenShadingLanguage-Release-1.8.10/src/cmake/modules/FindLLVM.cmake OpenShadingLanguage-Release-1.8.10.new/src/cmake/modules/FindLLVM.cmake
+--- OpenShadingLanguage-Release-1.8.10/src/cmake/modules/FindLLVM.cmake	2017-06-30 20:22:54.000000000 +0200
++++ OpenShadingLanguage-Release-1.8.10.new/src/cmake/modules/FindLLVM.cmake	2017-09-17 10:39:47.608654944 +0200
+@@ -93,9 +93,10 @@
+     # if static LLVM libraries were requested, use llvm-config to generate
+     # the list of what libraries we need, and substitute that in the right
+     # way for LLVM_LIBRARY.
+-    execute_process (COMMAND ${LLVM_CONFIG} --libfiles
++    execute_process (COMMAND ${LLVM_CONFIG} --libfiles --system-libs
+                      OUTPUT_VARIABLE LLVM_LIBRARIES
+                      OUTPUT_STRIP_TRAILING_WHITESPACE)
++    string (REPLACE "\n" " " LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+     string (REPLACE " " ";" LLVM_LIBRARIES "${LLVM_LIBRARIES}")
+     set (LLVM_LIBRARY "")
+   else ()

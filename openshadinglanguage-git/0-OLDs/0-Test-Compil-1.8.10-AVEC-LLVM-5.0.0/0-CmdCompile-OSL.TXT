@@ -28,7 +28,6 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.8.10.tar.gz .
 
 1-8) FAIRE PATCH
 ===============================
-voir 0-CmdFairePatches-LLVM35.STATIC.TXT
 
 
 !!! TESTS AVEC /usr/shaders
@@ -46,14 +45,11 @@ voir 0-CmdFairePatches-LLVM35.STATIC.TXT
 pkgname=openshadinglanguage-git
 pkgver=1.8.10.20170630
 pkgrel=1
-pkgrel=7          # rebuild AVEC llvm35 + Patch
-
 pkgrel=2          # rebuild llvm 4.0.1-5
 pkgrel=3          # rebuild oiio 1.7.16.20170802
 pkgrel=4          # rebuild oiio opencv 3.3.0-1
 pkgrel=5          # rebuild oiio 1.7.17.20170831
-!!!
-pkgrel=6          # rebuild llvm 5.0.0 => PAS OK
+pkgrel=6          # rebuild llvm 5.0.0
 
 
 !!!!!!
@@ -62,41 +58,30 @@ _name_release="OpenShadingLanguage-Release-1.8.10"
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-!!! LLVM 35
+!!! LLVM 5.0
 ------------------------------------
-$ pacman -Ss llvm35
-extra/llvm 3.5.2-4
-extra/llvm-libs 3.5.2-4
+$ pacman -Ss llvm
+extra/llvm 5.0.0-1
+extra/llvm-libs 5.0.0-1
 
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
+         'llvm-libs'
          'zlib' 'ncurses'
          'openimageio-git'
 )
-makedepends=('boost' 'cmake' 'llvm35' 'clang35')
+makedepends=('boost' 'cmake' 'llvm' 'clang')
 
 
-2-2) PKGBUILD AVEC PATCH
-========================
+2-2) PKGBUILD SANS PATCH LLVM 5.0
+=================================
 source=("$_name_release.tar.gz"
-        'llvm35-static-system-libs.patch'
 )
 
 sha256sum OpenShadingLanguage-Release-1.8.10.tar.gz
 
-sha256sum llvm35-static-system-libs.patch
-
 sha256sums=(...
          ...
 )
-
-prepare() {
-  cd "${_name_release}"
-   
-  # Add system libraries needed to link against LLVM components (zlib, ncurses)
-  # This is required in order to statically link against LLVM
-  # VOIR Community
-  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
-}
 
 
 build() {
@@ -160,8 +145,10 @@ LIGNE 250
 
 2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.10/src/cmake/modules/FindLLVM.cmake
 
+!!! LLVM 5.0
+------------------------------------
 LIGNE 90 ET ...
-  LLVM_STATIC           =>      -DLLVM_STATIC=ON \
+  LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
 
 
 rm -rf /tmp/srcp
@@ -173,7 +160,6 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.8.10.tar.gz
--rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm35-static-system-libs.patch
 
 
 !!! A MODIFIER SI PAS OK !

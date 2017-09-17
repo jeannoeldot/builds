@@ -2,34 +2,24 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.8.10.20170630
-pkgrel=7
+pkgrel=5
 _name_release="OpenShadingLanguage-Release-1.8.10"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
 license=('custom')
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
+         'llvm-libs'
          'zlib' 'ncurses'
          'openimageio-git'
 )
-makedepends=('boost' 'cmake' 'llvm35' 'clang35')
+makedepends=('boost' 'cmake' 'llvm' 'clang')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
-        'llvm35-static-system-libs.patch'
 )
 sha256sums=('5b9ad6814fd55e68f4ac50e4214120629ab9175142dc93aac350d0f54bea745a'
-            'f37543a2504619ba8b0bc3d0c7aa733780ac7d2b38eff444d15e90c1b03f35eb'
 )
-
-prepare() {
-  cd "${_name_release}"
-   
-  # Add system libraries needed to link against LLVM components (zlib, ncurses)
-  # This is required in order to statically link against LLVM
-  # VOIR Community
-  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
-}
 
 build() {
   cd "${_name_release}"
@@ -41,7 +31,7 @@ build() {
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DSTOP_ON_WARNING=OFF \
-      -DLLVM_STATIC=ON \
+      -DLLVM_STATIC=OFF \
       -DOSL_BUILD_TESTS=OFF \
       -DUSE_PARTIO=OFF \
       -DUSE_SIMD=avx2 \

@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   Sun, 10 Sep 2017 09:16:47 +0200 (17:16 +1000)
-==> 20170910
+==> last change   Sun, 17 Sep 2017 10:00:13 +0200 (18:00 +1000)
+==> 20170917
 
 
 1.2 REVISION
@@ -58,7 +58,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 #define BLENDER_VERSION         279
 #define BLENDER_SUBVERSION      1
 
-==> Version = 2.79.1.20170910
+==> Version = 2.79.1.20170917
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.78 à 2.79)
 !!! EN ROOT
@@ -72,7 +72,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.79.1.20170910.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.79.1.20170917.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -80,7 +80,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.1.20170910.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.1.20170917.tar.gz .
 sync
 
 
@@ -96,7 +96,7 @@ voir CmdFairePatches.TXT
 !!! LE 01/05/2016 : MODIFS SUITE HOOKS PACMAN
 
 !!!
-- LLVM              : Use LLVM 4.0
+- LLVM              : Use LLVM 3.5
 
 
 2-1) MODIFIER LE PKGBUILD
@@ -105,7 +105,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.79.1.20170910
+pkgver=2.79.1.20170917
 pkgrel=1
 
 pkgrel=2          # rebuild OSL 1.8.8 et LLVM 4.0 DYNAMIC
@@ -124,10 +124,6 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
          'jemalloc'
          'opencolorio'
 !!!!!!
-LLVM 4.0
-         'llvm-libs'
-!!!!!!
-!!!!!!
          'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
 !!!!!!
          'opensubdiv-git'
@@ -136,7 +132,7 @@ LLVM 4.0
 )
 
 !!!!!!
-makedepends=('cmake' 'boost' 'mesa' 'llvm' 'gcc5'
+makedepends=('cmake' 'boost' 'mesa' 'llvm35' 'gcc5'
              'cuda'
 !!! POUR BUILDINFO
              'git'
@@ -154,7 +150,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
 
-sha256sum blender-git-2.79.1.20170910.tar.gz
+sha256sum blender-git-2.79.1.20170917.tar.gz
 
 sha256sum fix-IndentationError-np_station.patch
 
@@ -173,7 +169,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.79.1.20170910.tar.gz
+sha256sum blender-git-2.79.1.20170917.tar.gz
 
 sha256sums=(...
          ...
@@ -187,11 +183,6 @@ build() {
   CXXFLAGS+=' -DOPENVDB_3_ABI_COMPATIBLE'
   ...
 
-  # GLIBC 2.26 : We need -DCUDA_NVCC_FLAGS="-D_BITS_FLOATN_H"
-  # VOIR PKGBUILD sur COMMUNITY
-        -DCUDA_NVCC_FLAGS="-D_BITS_FLOATN_H" \
-
-...
 
 /!\/!\/!\/!\/!\
 ---------------
@@ -333,18 +324,13 @@ option(WITH_CYCLES_LOGGING              ON   ==> OFF
 425   WITH_CUDA_DYNLOAD     ON
 
 
-428 # LLVM
-$ pacman -Ss llvm | grep install
-extra/llvm 4.0.1-5 [installé]
-extra/llvm-libs 4.0.1-5 [installé]
-
+428 # LLVM 35
         -DWITH_LLVM=ON \
-        -DLLVM_VERSION=4.0 \
-        
-        -DLLVM_STATIC=OFF
+        -DLLVM_VERSION=3.5 \
+        -DLLVM_STATIC=ON
 
 option(WITH_LLVM   	==> ON
-option(LLVM_STATIC   	==> OFF
+option(LLVM_STATIC   	==> ON
 
 
 # Documentation
@@ -403,7 +389,7 @@ Lignes 504 et ...
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.1.20170910.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.1.20170917.tar.gz
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 -rw-r--r--  1 jnd users      673  5 mars  14:11 xxxxxxxxxxxxxxxxx.patch
 
@@ -516,7 +502,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.79.1.20170910.tar.gz
+$ rm -i blender-git-2.79.1.20170917.tar.gz
 
 
 $ cd && maj-repolocal
@@ -547,6 +533,38 @@ $ rm -rf .config/blender/2.77
 ANCIENS
 ========
 
+!!!
+- LLVM              : Use LLVM 4.0
+
+!!!!!!
+LLVM 4.0
+         'llvm-libs'
+!!!!!!
+
+  # GLIBC 2.26 : We need -DCUDA_NVCC_FLAGS="-D_BITS_FLOATN_H"
+  # VOIR PKGBUILD sur COMMUNITY
+        -DCUDA_NVCC_FLAGS="-D_BITS_FLOATN_H" \
+
+...
+
+
+428 # LLVM
+$ pacman -Ss llvm | grep install
+extra/llvm 4.0.1-5 [installé]
+extra/llvm-libs 4.0.1-5 [installé]
+
+        -DWITH_LLVM=ON \
+        -DLLVM_VERSION=4.0 \
+        
+        -DLLVM_STATIC=OFF
+
+option(WITH_LLVM   	==> ON
+option(LLVM_STATIC   	==> OFF
+
+
+
+
+
 AVEC PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
@@ -554,7 +572,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-ant_landscape.patch'
 )
 
-sha256sum blender-git-2.79.1.20170910.tar.gz
+sha256sum blender-git-2.79.1.20170917.tar.gz
 
 sha256sum fix-IndentationError-np_station.patch
 
@@ -593,7 +611,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.1.20170910.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.1.20170917.tar.gz .
 sync
 
 
@@ -621,7 +639,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
 
-sha256sum blender-git-2.79.1.20170910.tar.gz
+sha256sum blender-git-2.79.1.20170917.tar.gz
 
 sha256sum fix-Error-llvm-config-3.9.patch
 
@@ -739,7 +757,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-algoDIR-algoPOV.patch'
 )
 
-sha256sum blender-git-2.79.1.20170910.tar.gz
+sha256sum blender-git-2.79.1.20170917.tar.gz
 
 sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
 
@@ -807,7 +825,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.79.1.20170910.tar.gz
+sha256sum blender-git-2.79.1.20170917.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -827,7 +845,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.1.20170910.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.1.20170917.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -842,7 +860,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.1.20170910.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.1.20170917.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -912,7 +930,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.79.1.20170910.tar.gz
+sha256sum blender-git-2.79.1.20170917.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -969,7 +987,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.1.20170910.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.1.20170917.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \
