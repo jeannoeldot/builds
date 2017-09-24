@@ -107,6 +107,7 @@ pkgname=blender-git
 !!!!!!
 pkgver=2.79.1.20170923
 pkgrel=1
+pkgrel=2          # Ajout dép python-numpy pour ant_landscape
 
 pkgrel=2          # rebuild OSL 1.8.8 et LLVM 4.0 DYNAMIC
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
@@ -123,6 +124,10 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
          ...
          'jemalloc'
          'opencolorio'
+!!!!!!
+!!! POUR ant_landscape
+          'python-numpy'
+!!!!!!
 !!!!!!
          'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
 !!!!!!
