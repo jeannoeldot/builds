@@ -86,6 +86,8 @@ voir 0-CmdFairePatches.TXT
 pkgname=openvdb-git               # openvdb ds community
 pkgver=4.0.2.20170731
 pkgrel=1
+pkgrel=2          # rebuild boost boost-libs 1.65.1-1
+
 pkgrel=2          # rebuild boost boost-libs 1.64.0-1
 
 license=('MPL')
