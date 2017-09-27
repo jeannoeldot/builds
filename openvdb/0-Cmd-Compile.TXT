@@ -1,0 +1,236 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/openvdb
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/dreamworksanimation/openvdb/releases
+==> OpenVDB-DevTeam released this on 31 Jul  ==> 20170731
+==> v4.0.2  ==> 4.0.2
+==> 4.0.2.20170731
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O OpenVDB-v4.0.2.tar.gz \
+https://github.com/dreamworksanimation/openvdb/archive/v4.0.2.tar.gz
+
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/openvdb
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v4.0.2.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openvdb               # openvdb ds community
+pkgver=4.0.2
+pkgrel=12
+
+
+
+pkgrel=1
+pkgrel=2          # rebuild boost boost-libs 1.65.1-1
+pkgrel=3          # SANS doc, SANS ABI=3
+
+pkgrel=2          # rebuild boost boost-libs 1.64.0-1
+
+license=('MPL')
+
+!!! VOIR : cppunit python2 python2-numpy epydoc
+depends=('boost-libs' 'openexr' 'ilmbase' 'intel-tbb'
+         'blosc' 'zlib'
+         'jemalloc'
+         'glfw-x11' 'glew'
+)
+
+makedepends=('boost' 'mesa' 'doxygen')
+
+conflicts='openvdb'
+provides='openvdb'
+
+sha512sum OpenVDB-v4.0.2.tar.gz
+
+source=("OpenVDB-v${pkgver}.tar.gz"
+)
+sha512sums=('... ...'
+)
+
+!!!!!!
+_gitname="openvdb"
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf OpenVDB-v4.0.2.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/openvdb-4.0.2/CMakeLists.txt
+
+LIGNE 33: !!!!!!
+----------------
+ENABLE_TESTING()
+
+LIGNE 35:
+---------
+OPENVDB_BUILD_UNITTESTS "Build the OpenVDB unit tests" ON ==> OFF
+
+LIGNE 36:
+---------
+OPENVDB_BUILD_DOCS "Build the OpenVDB documentation" OFF
+
+LIGNE 37:
+---------
+OPENVDB_BUILD_PYTHON_MODULE "Build the pyopenvdb Python module" ON ==> OFF
+
+LIGNES 38 ET 39:
+----------------
+OPENVDB_BUILD_HOUDINI_SOPS "Build the Houdini SOPs" OFF
+OPENVDB_BUILD_MAYA_PLUGIN "Build the Maya plugin" OFF
+
+LIGNE 41: !!!!!!
+----------------
+OPENVDB_ENABLE_RPATH "Build with RPATH information" ON ==> OFF
+
+LIGNE 42:
+---------
+VOIR: BLENDER
+OpenVDB: Fix compilation error against OpenVDB 4
+author	Sergey Sharybin <sergey.vfx@gmail.com>	
+	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
+commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
+
+OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" ON ==> OFF
+
+
+rm -rf /tmp/srcp
+
+
+  
+  
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v4.0.2.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/openvdb/PKGBUILD . \
+&& cp -v $HOME/05-builds/openvdb/OpenVDB-v4.0.2.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/openvdb \
+&& cp -v /tmp/build/openvdb-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/openvdb && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+!!! EN USER
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap openvdb-*-x86_64.pkg.tar.*
+openvdb W: Package was 82% docs by size; maybe you should split out a docs package
+openvdb E: Insecure RPATH '/build/openvdb/pkg/openvdb/usr/lib' in file ('usr/bin/vdb_lod')
+openvdb E: Insecure RPATH '/build/openvdb/pkg/openvdb/usr/lib' in file ('usr/bin/vdb_print')
+openvdb E: Insecure RPATH '/build/openvdb/pkg/openvdb/usr/lib' in file ('usr/bin/vdb_render')
+openvdb E: Insecure RPATH '/build/openvdb/pkg/openvdb/usr/lib' in file ('usr/bin/vdb_view')
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/openvdb-*-x86_64.pkg.tar.*
+
+$ cp -v openvdb-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/openvdb-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v openvdb-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i OpenVDB-v4.0.2.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# pacman -Syu
+
+# pacman -Syu openvdb
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -Rdd openvdb
+# rm /var/cache/pacman/pkg/openvdb-*
+# pacman -S openvdb
+
+
+ANCIEN
+======

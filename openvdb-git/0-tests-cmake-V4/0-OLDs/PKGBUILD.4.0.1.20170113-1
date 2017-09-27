@@ -1,8 +1,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openvdb-git
-pkgver=4.0.2.20170731
-pkgrel=3
+pkgver=4.0.1.20170113
+pkgrel=1
 pkgdesc="Library and tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
 arch=('i686' 'x86_64')
 url="http://www.openvdb.org/"
@@ -17,7 +17,7 @@ conflicts=('openvdb')
 provides=('openvdb')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('e88089ee6e66bac134a89125aaf8fe46e7b48465ae4be1e73f6e4aff0490c77e'
+sha256sums=('f8822d8c5a45fa415750507fe2c486d83f996ffbe77cbf6a42b2fdc1795ed7a1'
 )
 
 _gitname="openvdb"
@@ -32,23 +32,12 @@ build() {
   mkdir build && cd build
   
   cmake \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_SKIP_RPATH=ON \
-        -DOPENVDB_BUILD_UNITTESTS=OFF \
-        -DOPENVDB_BUILD_PYTHON_MODULE=OFF \
-        -DOPENVDB_ENABLE_RPATH=OFF \
-        -DOPENVDB_ENABLE_3_ABI_COMPATIBLE=OFF \
-        -DBLOSC_LOCATION=/usr/ \
-        -DTBB_LOCATION=/usr/ \
-        -DUSE_GLFW3=ON \
-        -DGLFW3_LOCATION=/usr/include/GLFW \
-        -DILMBASE_NAMESPACE_VERSIONING=OFF \
-        -DILMBASE_LOCATION=/usr/ \
-        -DOPENEXR_NAMESPACE_VERSIONING=OFF \
-        -DOPENEXR_LOCATION=/usr/ \
-        -DCPPUNIT_LOCATION=/usr/ \
-        -DGLEW_LOCATION=/usr/ \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D CMAKE_SKIP_RPATH=ON \
+        -D OPENVDB_BUILD_UNITTESTS=OFF \
+        -D OPENVDB_BUILD_PYTHON_MODULE=OFF \
+        -D OPENVDB_ENABLE_RPATH=OFF \
         ..
   make ${MAKEFLAGS}
 }

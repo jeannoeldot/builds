@@ -167,6 +167,9 @@ prepare() {
   cd "${_gitname}"
   # fix erreur : IndentationError: expected an indented block (np_point_dimension.py, line 148)
   patch -Np1 -i "${srcdir}/fix-IndentationError-np_station.patch"
+  
+  # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
+  sed -i  -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
 }
 
 SANS PATCH

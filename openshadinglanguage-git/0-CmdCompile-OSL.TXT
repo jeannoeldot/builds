@@ -17,7 +17,7 @@ cd /0-DataLinux/05-builds-dir-git
 wget -O OpenShadingLanguage-Release-1.8.10.tar.gz \
 https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.10.tar.gz
 
-1-7) Move ARCHIVE TAR.GZ ds rep compile
+1-7) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
 cd $HOME/05-builds/openshadinglanguage-git
 

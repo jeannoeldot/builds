@@ -87,6 +87,7 @@ pkgname=openvdb-git               # openvdb ds community
 pkgver=4.0.2.20170731
 pkgrel=1
 pkgrel=2          # rebuild boost boost-libs 1.65.1-1
+pkgrel=3          # SANS doc, SANS ABI=3
 
 pkgrel=2          # rebuild boost boost-libs 1.64.0-1
 
@@ -119,12 +120,39 @@ _gitname="openvdb"
 ==============================
  kwrite /0-DataLinux/05-builds-dir-git/openvdb/openvdb/Makefile &
  
+
 LIGNE 56 :
 ----------
 # Options:
 #   abi=3               build for compatibility with the OpenVDB 3.x Grid ABI
 #                       (some OpenVDB 4.x features will be disabled)
 
+VOIR: BLENDER
+OpenVDB: Fix compilation error against OpenVDB 4
+author	Sergey Sharybin <sergey.vfx@gmail.com>	
+	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
+commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
+
+One crucial thing here: OpenVDB shoudl be compiled WITHOUT
+OPENVDB_ENABLE_3_ABI_COMPATIBLE flag. This is how OpenVDB's Makefile is
+configured and it's not really possible to detect this for a compiled library.
+
+If we ever want to support that option, we need to add extra CMake argument and
+use old version 3 API everywhere.
+
+LIGNE 946 :
+-----------
+ if [ -d doc/html ]; \
+then \
+    mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
+    echo "Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
+    cp -r -f doc/html /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
+    echo "Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
+fi
+Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/
+Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/
+
+ 
 
 prepare() {
   # Fixe erreur compilation avec gcc 6.1
@@ -138,11 +166,14 @@ g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -
 build() {
   ...
   # build the library and commands
-  make abi=3 all    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
+  make all
   
 package() {
   ...
-  make abi=3 install    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
+  make install
+  # SUPPRIME doc
+  rm -rf "$pkgdir"/usr/share
+  
   
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
@@ -257,6 +288,17 @@ SI PROBLEME
 
 ANCIEN
 ======
+
+build() {
+  ...
+  # build the library and commands
+  make abi=3 all    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
+  
+package() {
+  ...
+  make abi=3 install    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
+  
+
 
 pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 pkgrel=2          # maj NVidia 370.23-1

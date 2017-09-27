@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=4.0.2.20170731
-pkgrel=3
+pkgrel=2
 pkgdesc="Library and tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
 arch=('i686' 'x86_64')
 url="http://www.openvdb.org/"
@@ -67,13 +67,11 @@ prepare() {
 build() {
   cd "${_gitname}"
   # build the library and commands
-  make all
+  make abi=3 all
 }
 
 package() {
   cd "${_gitname}"
   # copy generated files into the directory tree rooted at $(DESTDIR)
-  make install
-  # SUPPRIME doc
-  rm -rf "$pkgdir"/usr/share
+  make abi=3 install
 }

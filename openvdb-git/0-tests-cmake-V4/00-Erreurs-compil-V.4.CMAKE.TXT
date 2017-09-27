@@ -1,7 +1,6 @@
-
 ==> Starting build()...
--- The C compiler identification is GNU 6.3.1
--- The CXX compiler identification is GNU 6.3.1
+-- The C compiler identification is GNU 7.2.0
+-- The CXX compiler identification is GNU 7.2.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -14,126 +13,32 @@
 -- Detecting CXX compiler ABI info - done
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
-CMake Warning at /usr/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
-  Imported targets not available for Boost version 106300
-Call Stack (most recent call first):
-  /usr/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
-  /usr/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
-  openvdb/CMakeLists.txt:92 (FIND_PACKAGE)
+CMake Error at CMakeLists.txt:30 (FIND_PACKAGE):
+  By not providing "FindGLFW3.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "GLFW3", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "GLFW3" with any of
+  the following names:
+
+    GLFW3Config.cmake
+    glfw3-config.cmake
+
+  Add the installation prefix of "GLFW3" to CMAKE_PREFIX_PATH or set
+  "GLFW3_DIR" to a directory containing one of the above files.  If "GLFW3"
+  provides a separate development package or SDK, be sure it has been
+  installed.
 
 
-CMake Warning at /usr/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
-  Imported targets not available for Boost version 106300
-Call Stack (most recent call first):
-  /usr/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
-  /usr/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
-  openvdb/CMakeLists.txt:92 (FIND_PACKAGE)
+CMake Warning (dev) in CMakeLists.txt:
+  No cmake_minimum_required command is present.  A line of code such as
 
+    cmake_minimum_required(VERSION 3.9)
 
-CMake Warning at /usr/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
-  Imported targets not available for Boost version 106300
-Call Stack (most recent call first):
-  /usr/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
-  /usr/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
-  openvdb/CMakeLists.txt:92 (FIND_PACKAGE)
-
-
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Looking for pthread_create
--- Looking for pthread_create - not found
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - found
--- Found Threads: TRUE  
--- Boost version: 1.63.0
--- Found the following Boost libraries:
---   iostreams
---   system
---   thread
-CMake Error at /usr/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake:138 (message):
-  Could NOT find Blosc (missing: BLOSC_LOCATION)
-Call Stack (most recent call first):
-  /usr/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake:378 (_FPHSA_FAILURE_MESSAGE)
-  cmake/FindBlosc.cmake:46 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
-  openvdb/CMakeLists.txt:94 (FIND_PACKAGE)
-
+  should be added at the top of the file.  The version specified may be lower
+  if you wish to support older CMake versions for this project.  For more
+  information run "cmake --help-policy CMP0000".
+This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Configuring incomplete, errors occurred!
 See also "/build/openvdb-git/src/openvdb/build/CMakeFiles/CMakeOutput.log".
-See also "/build/openvdb-git/src/openvdb/build/CMakeFiles/CMakeError.log".
-==> ERROR: A failure occurred in build().
-    Aborting...
-==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build
-
-
-
-
-==> Starting build()...
--- The C compiler identification is GNU 6.2.1
--- The CXX compiler identification is GNU 6.2.1
--- Check for working C compiler: /usr/bin/cc
--- Check for working C compiler: /usr/bin/cc -- works
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Detecting C compile features
--- Detecting C compile features - done
--- Check for working CXX compiler: /usr/bin/c++
--- Check for working CXX compiler: /usr/bin/c++ -- works
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Detecting CXX compile features
--- Detecting CXX compile features - done
-CMake Warning at /usr/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
-  Imported targets not available for Boost version 106200
-Call Stack (most recent call first):
-  /usr/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
-  /usr/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
-  openvdb/CMakeLists.txt:92 (FIND_PACKAGE)
-
-
-CMake Warning at /usr/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
-  Imported targets not available for Boost version 106200
-Call Stack (most recent call first):
-  /usr/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
-  /usr/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
-  openvdb/CMakeLists.txt:92 (FIND_PACKAGE)
-
-
-CMake Warning at /usr/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
-  Imported targets not available for Boost version 106200
-Call Stack (most recent call first):
-  /usr/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
-  /usr/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
-  openvdb/CMakeLists.txt:92 (FIND_PACKAGE)
-
-
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Looking for pthread_create
--- Looking for pthread_create - not found
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - found
--- Found Threads: TRUE  
--- Boost version: 1.62.0
--- Found the following Boost libraries:
---   iostreams
---   system
---   thread
-CMake Error at /usr/share/cmake-3.6/Modules/FindPackageHandleStandardArgs.cmake:148 (message):
-  Could NOT find Blosc (missing: BLOSC_LOCATION)
-Call Stack (most recent call first):
-  /usr/share/cmake-3.6/Modules/FindPackageHandleStandardArgs.cmake:388 (_FPHSA_FAILURE_MESSAGE)
-  cmake/FindBlosc.cmake:46 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
-  openvdb/CMakeLists.txt:94 (FIND_PACKAGE)
-
-
--- Configuring incomplete, errors occurred!
-See also "/build/openvdb-git/src/openvdb/build/CMakeFiles/CMakeOutput.log".
-See also "/build/openvdb-git/src/openvdb/build/CMakeFiles/CMakeError.log".
-==> ERROR: A failure occurred in build().
-    Aborting...
-==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build
