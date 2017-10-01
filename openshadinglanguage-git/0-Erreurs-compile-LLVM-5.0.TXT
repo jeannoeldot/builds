@@ -1,0 +1,102 @@
+
+VOIR COMMIT 104bd26e7153b0ae9e12fd1a98112e3697836f5d
+DU 18/08/2017
+Make OSL work with clang5/llvm5 (#787)
+
+ 21 src/liboslexec/llvm_util.cpp
+@@ -286,7 +286,12 @@ class LLVM_Util::MemoryManager : public LLVMMemoryManager {
+         mm->registerEHFrames (Addr, LoadAddr, Size);
+     }
+     virtual void deregisterEHFrames(uint8_t *Addr, uint64_t LoadAddr, size_t Size) {
++#if OSL_LLVM_VERSION < 50
+         mm->deregisterEHFrames(Addr, LoadAddr, Size);
++#else
++        // TODO: verify this is correct
++        mm->deregisterEHFrames();
++#endif 21 src/liboslexec/llvm_util.cpp
+@@ -286,7 +286,12 @@ class LLVM_Util::MemoryManager : public LLVMMemoryManager {
+         mm->registerEHFrames (Addr, LoadAddr, Size);
+     }
+     virtual void deregisterEHFrames(uint8_t *Addr, uint64_t LoadAddr, size_t Size) {
++#if OSL_LLVM_VERSION < 50
+         mm->deregisterEHFrames(Addr, LoadAddr, Size);
++#else
++        // TODO: verify this is correct
++        mm->deregisterEHFrames();
++#endif
+     }
+     virtual uint64_t getSymbolAddress(const std::string &Name) {
+         return mm->getSymbolAddress (Name);
+@@ -859,12 +864,16 @@ LLVM_Util::make_function (const std::string &name, bool fastcall,
+                           llvm::Type *arg3,
+                           llvm::Type *arg4)
+ {
+-    llvm::Function *func = llvm::cast<llvm::Function>(
+-        module()->getOrInsertFunction (name, rettype,
+-                                       arg1, arg2, arg3, arg4, NULL));
+-    if (fastcall)
+-        func->setCallingConv(llvm::CallingConv::Fast);
+-    return func;
++    std::vector<llvm::Type*> argtypes;
++    if (arg1)
++        argtypes.emplace_back(arg1);
++    if (arg2)
++        argtypes.emplace_back(arg2);
++    if (arg3)
++        argtypes.emplace_back(arg3);
++    if (arg4)
++        argtypes.emplace_back(arg4);
++    return make_function (name, fastcall, rettype, argtypes, false);
+ }
+ 
+ 
+     }
+     virtual uint64_t getSymbolAddress(const std::string &Name) {
+         return mm->getSymbolAddress (Name);
+@@ -859,12 +864,16 @@ LLVM_Util::make_function (const std::string &name, bool fastcall,
+                           llvm::Type *arg3,
+                           llvm::Type *arg4)
+ {
+-    llvm::Function *func = llvm::cast<llvm::Function>(
+-        module()->getOrInsertFunction (name, rettype,
+-                                       arg1, arg2, arg3, arg4, NULL));
+-    if (fastcall)
+-        func->setCallingConv(llvm::CallingConv::Fast);
+-    return func;
++    std::vector<llvm::Type*> argtypes;
++    if (arg1)
++        argtypes.emplace_back(arg1);
++    if (arg2)
++        argtypes.emplace_back(arg2);
++    if (arg3)
++        argtypes.emplace_back(arg3);
++    if (arg4)
++        argtypes.emplace_back(arg4);
++    return make_function (name, fastcall, rettype, argtypes, false);
+ }
+ 
+ 
+
+
+
+
+/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.8.10/src/liboslexec/llvm_util.cpp: In member function ‘virtual void OSL::pvt::LLVM_Util::MemoryManager::deregisterEHFrames(uint8_t*, uint64_t, size_t)’:
+/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.8.10/src/liboslexec/llvm_util.cpp:288:52: error: no matching function for call to ‘llvm::SectionMemoryManager::deregisterEHFrames(uint8_t*&, uint64_t&, size_t&)’
+         mm->deregisterEHFrames(Addr, LoadAddr, Size);
+                                                    ^
+
+
+In file included from /build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.8.10/src/liboslexec/llvm_util.cpp:52:0:
+/usr/include/llvm/IR/Module.h: In instantiation of ‘llvm::Constant* llvm::Module::getOrInsertFunction(llvm::StringRef, llvm::AttributeList, llvm::Type*, ArgsTy ...) [with ArgsTy = {llvm::Type*, llvm::Type*, llvm::Type*, llvm::Type*, long int}]’:
+/usr/include/llvm/IR/Module.h:353:69:   required from ‘llvm::Constant* llvm::Module::getOrInsertFunction(llvm::StringRef, llvm::Type*, ArgsTy ...) [with ArgsTy = {llvm::Type*, llvm::Type*, llvm::Type*, llvm::Type*, long int}]’
+/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.8.10/src/liboslexec/llvm_util.cpp:863:68:   required from here
+/usr/include/llvm/IR/Module.h:344:43: error: no matching function for call to ‘llvm::SmallVector<llvm::Type*, 5>::SmallVector(<brace-enclosed initializer list>)’
+     SmallVector<Type*, sizeof...(ArgsTy)> ArgTys{Args...};
+                                           ^~~~~~
+
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:808: src/liboslexec/CMakeFiles/oslexec.dir/llvm_util.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+
+make[1]: *** [CMakeFiles/Makefile2:1129: src/liboslexec/CMakeFiles/oslexec.dir/all] Error 2
+make: *** [Makefile:163: all] Error 2

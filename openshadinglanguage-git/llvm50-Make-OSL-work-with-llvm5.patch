@@ -1,0 +1,39 @@
+diff -aur OpenShadingLanguage-Release-1.8.10/src/liboslexec/llvm_util.cpp OpenShadingLanguage-Release-1.8.10.new/src/liboslexec/llvm_util.cpp
+--- OpenShadingLanguage-Release-1.8.10/src/liboslexec/llvm_util.cpp	2017-06-30 20:22:54.000000000 +0200
++++ OpenShadingLanguage-Release-1.8.10.new/src/liboslexec/llvm_util.cpp	2017-10-01 16:10:58.098641689 +0200
+@@ -285,7 +285,12 @@
+         mm->registerEHFrames (Addr, LoadAddr, Size);
+     }
+     virtual void deregisterEHFrames(uint8_t *Addr, uint64_t LoadAddr, size_t Size) {
++#if OSL_LLVM_VERSION < 50
+         mm->deregisterEHFrames(Addr, LoadAddr, Size);
++#else
++        // TODO: verify this is correct
++        mm->deregisterEHFrames();
++#endif
+     }
+     virtual uint64_t getSymbolAddress(const std::string &Name) {
+         return mm->getSymbolAddress (Name);
+@@ -858,12 +863,16 @@
+                           llvm::Type *arg3,
+                           llvm::Type *arg4)
+ {
+-    llvm::Function *func = llvm::cast<llvm::Function>(
+-        module()->getOrInsertFunction (name, rettype,
+-                                       arg1, arg2, arg3, arg4, NULL));
+-    if (fastcall)
+-        func->setCallingConv(llvm::CallingConv::Fast);
+-    return func;
++    std::vector<llvm::Type*> argtypes;
++    if (arg1)
++        argtypes.emplace_back(arg1);
++    if (arg2)
++        argtypes.emplace_back(arg2);
++    if (arg3)
++        argtypes.emplace_back(arg3);
++    if (arg4)
++        argtypes.emplace_back(arg4);
++    return make_function (name, fastcall, rettype, argtypes, false);
+ }
+ 
+ 

@@ -49,7 +49,7 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=MODIFIÉ
+==> CMAKELISTS.TXT=NON_MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
@@ -96,7 +96,7 @@ voir CmdFairePatches.TXT
 !!! LE 01/05/2016 : MODIFS SUITE HOOKS PACMAN
 
 !!!
-- LLVM              : Use LLVM 3.5
+- LLVM              : Use LLVM 5.0
 
 
 2-1) MODIFIER LE PKGBUILD
@@ -107,6 +107,8 @@ pkgname=blender-git
 !!!!!!
 pkgver=2.79.1.20171001
 pkgrel=1
+pkgrel=2          # rebuild OSL 1.8.10 et LLVM 5.0 DYNAMIC
+
 pkgrel=2          # Ajout dép python-numpy pour ant_landscape
 
 pkgrel=2          # rebuild OSL 1.8.8 et LLVM 4.0 DYNAMIC
@@ -134,10 +136,15 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
          'opensubdiv-git'
 !!!!!!
          'openvdb-git'
+!!!!!!
+LLVM 5.0
+         'llvm-libs'
+!!!!!!
 )
 
 !!!!!!
-makedepends=('cmake' 'boost' 'mesa' 'llvm35' 'gcc5'
+LLVM 5.0
+makedepends=('cmake' 'boost' 'mesa' 'llvm' 'gcc5'
              'cuda'
 !!! POUR BUILDINFO
              'git'
@@ -224,7 +231,7 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
-    VALEUR CMAKELISTS.TXT=MODIFIÉ
+    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
@@ -338,13 +345,18 @@ option(WITH_CYCLES_LOGGING              ON   ==> OFF
 421   WITH_CUDA_DYNLOAD     ON
 
 
-424 # LLVM 35
+424 # LLVM
+$ pacman -Ss llvm | grep install
+extra/llvm 5.0.0-1 [installé]
+extra/llvm-libs 5.0.0-1 [installé]
+
         -DWITH_LLVM=ON \
-        -DLLVM_VERSION=3.5 \
-        -DLLVM_STATIC=ON
+        -DLLVM_VERSION=5.0 \
+        
+        -DLLVM_STATIC=OFF
 
 option(WITH_LLVM   	==> ON
-option(LLVM_STATIC   	==> ON
+option(LLVM_STATIC   	==> OFF
 
 
 # Documentation

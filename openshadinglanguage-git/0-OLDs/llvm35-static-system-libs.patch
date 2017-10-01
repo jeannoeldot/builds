@@ -1,6 +1,6 @@
-diff -aur OpenShadingLanguage-Release-1.8.7/src/cmake/modules/FindLLVM.cmake OpenShadingLanguage-Release-1.8.7.new/src/cmake/modules/FindLLVM.cmake
---- OpenShadingLanguage-Release-1.8.7/src/cmake/modules/FindLLVM.cmake	2017-04-01 00:10:30.000000000 +0200
-+++ OpenShadingLanguage-Release-1.8.7.new/src/cmake/modules/FindLLVM.cmake	2017-04-25 14:52:14.987341621 +0200
+diff -aur OpenShadingLanguage-Release-1.8.10/src/cmake/modules/FindLLVM.cmake OpenShadingLanguage-Release-1.8.10.new/src/cmake/modules/FindLLVM.cmake
+--- OpenShadingLanguage-Release-1.8.10/src/cmake/modules/FindLLVM.cmake	2017-06-30 20:22:54.000000000 +0200
++++ OpenShadingLanguage-Release-1.8.10.new/src/cmake/modules/FindLLVM.cmake	2017-09-17 10:39:47.608654944 +0200
 @@ -93,9 +93,10 @@
      # if static LLVM libraries were requested, use llvm-config to generate
      # the list of what libraries we need, and substitute that in the right

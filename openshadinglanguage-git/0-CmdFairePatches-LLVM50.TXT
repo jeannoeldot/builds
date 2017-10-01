@@ -1,6 +1,9 @@
 FAIRE PATCHS
 ====================================
-cd $HOME/05-builds/openshadinglanguage-git
+!!! VERSION = OpenShadingLanguage-Release-1.8.10
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/openshadinglanguage-git
 
 mkdir /tmp/srcp
 
@@ -11,6 +14,73 @@ cd /tmp/srcp
 tar -xzf OpenShadingLanguage-Release-1.8.10.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git
+
+1) MODIFIER OpenShadingLanguage-Release-1.8.10/src/liboslexec/llvm_util.cpp
+===========================================================================
+
+/!\ cd /tmp/srcp
+
+cp -R OpenShadingLanguage-Release-1.8.10 OpenShadingLanguage-Release-1.8.10.new
+
+cd OpenShadingLanguage-Release-1.8.10.new/src/liboslexec
+
+kwrite llvm_util.cpp
+
+RAJOUTER LIGNE 288 :
+#if OSL_LLVM_VERSION < 50
+
+RAJOUTER LIGNES 290 À 293 :
+#else
+        // TODO: verify this is correct
+        mm->deregisterEHFrames();
+#endif
+
+MODIFIER LIGNES 866 À 871
+    llvm::Function *func = llvm::cast<llvm::Function>(
+        module()->getOrInsertFunction (name, rettype,
+                                       arg1, arg2, arg3, arg4, NULL));
+    if (fastcall)
+        func->setCallingConv(llvm::CallingConv::Fast);
+    return func;
+
+DEVIENNENT :
+    std::vector<llvm::Type*> argtypes;
+    if (arg1)
+        argtypes.emplace_back(arg1);
+    if (arg2)
+        argtypes.emplace_back(arg2);
+    if (arg3)
+        argtypes.emplace_back(arg3);
+    if (arg4)
+        argtypes.emplace_back(arg4);
+    return make_function (name, fastcall, rettype, argtypes, false);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier llvm_util.cpp~
+rm -f llvm_util.cpp~
+ 
+cd ../../..
+ 
+diff -aur OpenShadingLanguage-Release-1.8.10 OpenShadingLanguage-Release-1.8.10.new
+diff -aur OpenShadingLanguage-Release-1.8.10 OpenShadingLanguage-Release-1.8.10.new > \
+llvm50-Make-OSL-work-with-llvm5.patch
+
+rm -rf OpenShadingLanguage-Release-1.8.10.new
+
+cd $HOME/05-builds/openshadinglanguage-git
+
+mv -v /tmp/srcp/llvm50-Make-OSL-work-with-llvm5.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
 
 1) MODIFIER OpenShadingLanguage-Release-1.8.10/src/cmake/modules/FindLLVM.cmake
 ==============================================================================
@@ -47,15 +117,6 @@ cd $HOME/05-builds/openshadinglanguage-git
 mv -v /tmp/srcp/llvm35-static-system-libs.patch .
 
 
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-sync
-
-==============================================================================
-ANCIENS OU PAS OK
-=================
 
 1) MODIFIER osl/src/cmake/modules/FindLLVM.cmake
 ================================================
