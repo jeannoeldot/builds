@@ -1,8 +1,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.1.20171001
-pkgrel=1
+pkgver=2.79.1.20170923
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -35,7 +35,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
-sha256sums=('a7cfd788233d630bc6b79aba296abdc730b55f48921d1f898d7ea1910a163e95'
+sha256sums=('65f4375534f9f8f230b95854c3dde830d9cec3ad6f7b68792fb7b1aeea1040b3'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
 )
 
@@ -57,6 +57,8 @@ build() {
   [[ -d build ]] && rm -r build
   mkdir build && cd build
   
+  # OPENVDB : VERSION >= 4
+  CXXFLAGS+=' -DOPENVDB_3_ABI_COMPATIBLE'
   cmake \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \

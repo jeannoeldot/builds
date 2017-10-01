@@ -3,67 +3,20 @@
 !!! EN USER
 cd $HOME/05-builds/openvdb-git
 
-http://www.openvdb.org/
-
-1) SOURCES
-==============
-https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/e9452f909cdba368f54637cd0b15ff14d1c60cf3
-
-http://wiki.blender.org/index.php?title=Dev:Doc/Building_Blender/Linux/Dependencies_From_Source#OpenVDB
-
-http://wiki.blender.org/index.php/User:Kevindietrich/OpenVDBCompile
-
-
-https://github.com/dreamworksanimation/openvdb
-
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
 https://github.com/dreamworksanimation/openvdb/releases
-
-1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
-======================================================
-https://github.com/dreamworksanimation/openvdb/commits/master
-==> 20170731
+==> OpenVDB-DevTeam released this on 31 Jul  ==> 20170731
+==> v4.0.2  ==> 4.0.2
+==> 4.0.2.20170731
 
 1.3 SOURCES
 ==============
-
-!!! Répertoire clone de openvdb dans : /0-DataLinux/05-builds-dir-git/openvdb
-------------------------------------------------------------------------------
-
 cd /0-DataLinux/05-builds-dir-git
 
-Vérifier existence rep openvdb :
---------------------------------
-ls
+wget -O OpenVDB-v4.0.2.tar.gz \
+https://github.com/dreamworksanimation/openvdb/archive/v4.0.2.tar.gz
 
-!!! SI REP openvdb N'EXISTE PAS
--------------------------------
-git clone git://github.com/dreamworksanimation/openvdb.git openvdb
-
-!!! SI REP openvdb EXISTE
--------------------------
-cd openvdb
-git pull --rebase origin master
-cd ..
-
-!!!!! Vérifier VERSION : 
-$ head -n 50 openvdb/openvdb/version.h | grep VERSION
-
-#ifndef OPENVDB_VERSION_HAS_BEEN_INCLUDED
-#define OPENVDB_VERSION_HAS_BEEN_INCLUDED
-/// where X, Y and Z are OPENVDB_LIBRARY_MAJOR_VERSION, OPENVDB_LIBRARY_MINOR_VERSION
-/// and OPENVDB_LIBRARY_PATCH_VERSION, respectively (defined below).
-#define OPENVDB_VERSION_NAME v4_0_2
-#define OPENVDB_LIBRARY_MAJOR_VERSION_NUMBER 4
-#define OPENVDB_LIBRARY_MINOR_VERSION_NUMBER 0
-#define OPENVDB_LIBRARY_PATCH_VERSION_NUMBER 2
-
-==> 4.0.2
-
-1-7) FAIRE ARCHIVE TAR.GZ
-=================================
-cd openvdb
-tar -cvzf openvdb-git-4.0.2.20170731.tar.gz --exclude=.git openvdb
-mv -v openvdb-git-4.0.2.20170731.tar.gz ..
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -71,7 +24,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openvdb-git-4.0.2.20170731.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v4.0.2.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -85,94 +38,92 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=4.0.2.20170731
+pkgrel=4
+
 pkgrel=1
 pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 pkgrel=3          # SANS doc, SANS ABI=3
 
 pkgrel=2          # rebuild boost boost-libs 1.64.0-1
 
+!!!!!!
+_ver_release="4.0.2"
+_name_release="openvdb-${_ver_release}"
+
 license=('MPL')
 
-!!! VOIR : cppunit python2 python2-numpy epydoc
-depends=('boost-libs' 'openexr' 'ilmbase' 'intel-tbb'
-         'blosc' 'zlib'
-         'jemalloc'
-         'glfw-x11' 'glew'
+depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
+          'blosc' 'glfw-x11' 'glu'
+          'jemalloc'
 )
 
-makedepends=('boost' 'mesa' 'doxygen')
+!!! VOIR : cppunit python
+makedepends=('boost' 'mesa' 'doxygen' 'cmake')
 
 conflicts='openvdb'
 provides='openvdb'
 
-sha256sum openvdb-git-4.0.2.20170731.tar.gz
+sha256sum OpenVDB-v4.0.2.tar.gz
 
-source=("$pkgname-$pkgver.tar.gz"
+source=("OpenVDB-v${_ver_release}.tar.gz"
 )
 sha256sums=('... ...'
 )
 
-!!!!!!
-_gitname="openvdb"
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}"
 
 
-2-2) VERIFIER Makefile
-==============================
- kwrite /0-DataLinux/05-builds-dir-git/openvdb/openvdb/Makefile &
- 
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
 
-LIGNE 56 :
-----------
-# Options:
-#   abi=3               build for compatibility with the OpenVDB 3.x Grid ABI
-#                       (some OpenVDB 4.x features will be disabled)
+tar -xzf OpenVDB-v4.0.2.tar.gz -C /tmp/srcp
 
+1) kwrite /tmp/srcp/openvdb-4.0.2/CMakeLists.txt
+
+LIGNE 33: !!!!!!
+----------------
+ENABLE_TESTING()
+
+LIGNE 35:
+---------
+OPENVDB_BUILD_UNITTESTS "Build the OpenVDB unit tests" ON ==> OFF
+
+LIGNE 36:
+---------
+OPENVDB_BUILD_DOCS "Build the OpenVDB documentation" OFF
+
+LIGNE 37:
+---------
+OPENVDB_BUILD_PYTHON_MODULE "Build the pyopenvdb Python module" ON ==> OFF
+
+LIGNES 38 ET 39:
+----------------
+OPENVDB_BUILD_HOUDINI_SOPS "Build the Houdini SOPs" OFF
+OPENVDB_BUILD_MAYA_PLUGIN "Build the Maya plugin" OFF
+
+LIGNE 41: !!!!!!
+----------------
+OPENVDB_ENABLE_RPATH "Build with RPATH information" ON ==> OFF
+
+LIGNE 42:
+---------
 VOIR: BLENDER
 OpenVDB: Fix compilation error against OpenVDB 4
 author	Sergey Sharybin <sergey.vfx@gmail.com>	
 	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
 commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
 
-One crucial thing here: OpenVDB shoudl be compiled WITHOUT
-OPENVDB_ENABLE_3_ABI_COMPATIBLE flag. This is how OpenVDB's Makefile is
-configured and it's not really possible to detect this for a compiled library.
+OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" ON ==> OFF
 
-If we ever want to support that option, we need to add extra CMake argument and
-use old version 3 API everywhere.
 
-LIGNE 946 :
------------
- if [ -d doc/html ]; \
-then \
-    mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
-    echo "Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
-    cp -r -f doc/html /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
-    echo "Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
-fi
-Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/
-Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/
+rm -rf /tmp/srcp
 
- 
 
-prepare() {
-  # Fixe erreur compilation avec gcc 6.1
-  sed -i  -e "s/-isystem/-I/g" Makefile
-
-g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong
--std=c++0x -pthread -O3 -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Grid.o Grid.cc
-  # Supprime OPTIMIZE := -O3 -DNDEBUG
-  sed -i  -e "s/-O3 //g" Makefile
-
-build() {
-  ...
-  # build the library and commands
-  make all
-  
-package() {
-  ...
-  make install
-  # SUPPRIME doc
-  rm -rf "$pkgdir"/usr/share
   
   
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -180,7 +131,7 @@ package() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 openvdb-git-4.0.2.20170731.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v4.0.2.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -198,7 +149,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/openvdb-git-4.0.2.20170731.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v4.0.2.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -238,12 +189,10 @@ rm -f *~
 
 # Verifications...
 
-namcap openvdb-git-*-x86_64.pkg.tar.*
-openvdb-git W: Package was 82% docs by size; maybe you should split out a docs package
-openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_lod')
-openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_print')
-openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_render')
-openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_view')
+Checking openvdb-git-4.0.2.20170731-4-x86_64.pkg.tar.xz
+openvdb-git W: Referenced library 'libopenvdb.so.4.0' is an uninstalled dependency
+openvdb-git W: Dependency zlib included but already satisfied
+openvdb-git W: Dependency included and not needed ('jemalloc')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -263,7 +212,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openvdb-git-4.0.2.20170731.tar.gz
+$ rm -i OpenVDB-v4.0.2.tar.gz
 
 
 $ cd && maj-repolocal
@@ -288,37 +237,3 @@ SI PROBLEME
 
 ANCIEN
 ======
-
-build() {
-  ...
-  # build the library and commands
-  make abi=3 all    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
-  
-package() {
-  ...
-  make abi=3 install    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
-  
-
-
-pkgrel=2          # rebuild boost boost-libs 1.63.0-1
-pkgrel=2          # maj NVidia 370.23-1
-pkgrel=3          # nvidia-libgl 367.35
-pkgrel=4          # SANS nvidia-libgl ( ==> libgl )
-pkgrel=5          # rebuild boost boost-libs 1.61.0-2
-
-pkgrel=2  # rebuild gcc 6.1 boost boost-libs 1.60.0-5
-
-
-  NATIVE
---------
-$ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m native
-
-$ rm -f *~
-$ mkpkg-tmpfs -m native
-
-  FAST
--------
-$ rm -f *~
-$ mkpkg-tmpfs -m fast
-
