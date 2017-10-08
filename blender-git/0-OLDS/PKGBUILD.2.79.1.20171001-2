@@ -1,8 +1,8 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.1.20171008
-pkgrel=1
+pkgver=2.79.1.20171001
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -24,7 +24,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openvdb-git'
           'llvm-libs'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm'
+makedepends=('cmake' 'boost' 'mesa' 'llvm' 'gcc5'
              'cuda'
              'git'
 )
@@ -36,7 +36,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
-sha256sums=('28317b7c58290c1a035a5ceb8a1787ffc5753054e17341b87bd4fd570add4ef2'
+sha256sums=('36c056df697beb927021ea383e9329bf315749e6d92e5e32f41e4e04a0151860'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
 )
 

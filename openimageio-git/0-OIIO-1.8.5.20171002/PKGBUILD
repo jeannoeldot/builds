@@ -1,0 +1,62 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openimageio-git
+pkgver=1.8.5.20171002
+pkgrel=1
+_name_release="oiio-Release-1.8.5"
+pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
+arch=('i686' 'x86_64')
+url="http://www.openimageio.org/"
+license=('custom')
+depends=('openexr' 'boost-libs' 'jasper' 'glew' 'libtiff' 'opencolorio' 'intel-tbb'
+         'libjpeg-turbo' 'openjpeg' 'libraw'
+         'ffmpeg'
+         'opencv' 'openssl'
+         'qt5-base' 'python2'
+)
+makedepends=('cmake' 'boost' 'mesa'
+)
+conflicts=('openimageio')
+provides=('openimageio')
+source=("$_name_release.tar.gz"
+)
+sha256sums=('e449057d8219a6e4b7d3b503fad85091f924d83e2754f553aea9dda24b8c269f'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DSTOP_ON_WARNING=OFF \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DPYTHON_VERSION=2.7 \
+      -DUSE_FIELD3D=OFF \
+      -DUSE_OPENSSL=ON \
+      -DUSE_PTEX=OFF \
+      -DUSE_NUKE=OFF \
+      -DUSE_DICOM=OFF \
+      -DUSE_SIMD=avx2 \
+      -DUSE_CCACHE=OFF \
+      -DINSTALL_FONTS=OFF \
+      ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  # Install par défaut dans lib64 au lieu de lib
+  msg "Move /usr/lib64 in /usr/lib..."
+  mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
+
+  # license
+  cd ..
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

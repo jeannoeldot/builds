@@ -1,0 +1,64 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openimageio-git
+pkgver=1.7.17.20170831
+pkgrel=2
+_name_release="oiio-Release-1.7.17"
+pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
+arch=('i686' 'x86_64')
+url="http://www.openimageio.org/"
+license=('custom')
+depends=('openexr' 'boost-libs' 'jasper' 'glew' 'libtiff' 'opencolorio' 'intel-tbb'
+         'libjpeg-turbo' 'openjpeg' 'libraw'
+         'ffmpeg'
+         'opencv' 'openssl'
+)
+makedepends=('cmake' 'qt4' 'python' 'python2' 'boost' 'mesa'
+)
+optdepends=('qt4: iv image viewer'
+            'python2: Python 2 bindings support'
+            'python: Python 3 bindings support'
+)
+conflicts=('openimageio')
+provides=('openimageio')
+source=("$_name_release.tar.gz"
+)
+sha256sums=('669c59d06399dd882c3e2469bb3a4b33d537db150f6fe056495c3429b5c3838f'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DSTOP_ON_WARNING=OFF \
+      -DPYLIB_INSTALL_DIR=lib/python2.7/site-packages \
+      -DPYLIB3_INSTALL_DIR=lib/python3.6/site-packages \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DUSE_PYTHON3=ON \
+      -DPYTHON_VERSION=2.7 \
+      -DPYTHON3_VERSION=3.6 \
+      -DUSE_FIELD3D=OFF \
+      -DUSE_OPENSSL=ON \
+      -DUSE_PTEX=OFF \
+      -DUSE_NUKE=OFF \
+      -DUSE_SIMD=avx2 \
+      -DUSE_CCACHE=OFF \
+      -DINSTALL_FONTS=OFF \
+      ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  # license
+  cd ..
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.1.20171008
+pkgver=2.79.1.20171001
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('i686' 'x86_64')
@@ -22,9 +22,8 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
           'opensubdiv-git'
           'openvdb-git'
-          'llvm-libs'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm'
+makedepends=('cmake' 'boost' 'mesa' 'llvm35' 'gcc5'
              'cuda'
              'git'
 )
@@ -36,7 +35,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
-sha256sums=('28317b7c58290c1a035a5ceb8a1787ffc5753054e17341b87bd4fd570add4ef2'
+sha256sums=('a7cfd788233d630bc6b79aba296abdc730b55f48921d1f898d7ea1910a163e95'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
 )
 
@@ -90,8 +89,8 @@ build() {
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_LOGGING=OFF \
         -DWITH_LLVM=ON \
-        -DLLVM_VERSION=5.0 \
-        -DLLVM_STATIC=OFF \
+        -DLLVM_VERSION=3.5 \
+        -DLLVM_STATIC=ON \
         -DWITH_DOC_MANPAGE=ON \
         -DWITH_C11=ON \
         -DWITH_CXX11=ON \

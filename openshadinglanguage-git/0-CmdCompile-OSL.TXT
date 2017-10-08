@@ -6,16 +6,16 @@ cd $HOME/05-builds/openshadinglanguage-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/imageworks/OpenShadingLanguage/releases
-==> 30/06/2017  ==> 20170630
-==> Release-1.8.10  ==> 1.8.10
-==> 1.8.10.20170630
+==> 03/10/2017  ==> 20171003
+==> Release-1.8.11  ==> 1.8.11
+==> 1.8.11.20171003
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenShadingLanguage-Release-1.8.10.tar.gz \
-https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.10.tar.gz
+wget -O OpenShadingLanguage-Release-1.8.11.tar.gz \
+https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.11.tar.gz
 
 1-7) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,12 +23,11 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.8.10.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.8.11.tar.gz .
 
 
 1-8) FAIRE PATCH
 ===============================
-voir 0-CmdFairePatches-LLVM50.STATIC.TXT
 
 
 !!! TESTS AVEC /usr/shaders
@@ -44,22 +43,12 @@ voir 0-CmdFairePatches-LLVM50.STATIC.TXT
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.10.20170630
+pkgver=1.8.11.20171003
 pkgrel=1
-pkgrel=7          # rebuild AVEC llvm35 + Patch
-pkgrel=8          # rebuild boost boost-libs 1.65.1-1
-pkgrel=9          # rebuild llvm 5.0.0
-
-pkgrel=2          # rebuild llvm 4.0.1-5
-pkgrel=3          # rebuild oiio 1.7.16.20170802
-pkgrel=4          # rebuild oiio opencv 3.3.0-1
-pkgrel=5          # rebuild oiio 1.7.17.20170831
-!!!
-pkgrel=6          # rebuild llvm 5.0.0 => PAS OK
-
+pkgrel=2    # Rebuild avec OIIO 1.7.17
 
 !!!!!!
-_name_release="OpenShadingLanguage-Release-1.8.10"
+_name_release="OpenShadingLanguage-Release-1.8.11"
 
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
@@ -78,28 +67,16 @@ depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
 makedepends=('boost' 'cmake' 'llvm' 'clang')
 
 
-2-2) PKGBUILD AVEC PATCH
+2-2) PKGBUILD SANS PATCH
 ========================
 source=("$_name_release.tar.gz"
-        'llvm50-Make-OSL-work-with-llvm5.patch'
 )
 
-sha256sum OpenShadingLanguage-Release-1.8.10.tar.gz
-
-sha256sum llvm50-Make-OSL-work-with-llvm5.patch
+sha256sum OpenShadingLanguage-Release-1.8.11.tar.gz
 
 sha256sums=(...
          ...
 )
-
-prepare() {
-  cd "${_name_release}"
-   
-  # Make OSL work with clang5/llvm5 (#787)
-  # Commit 104bd26e7153b0ae9e12fd1a98112e3697836f5d
-  #  lgritz committed on GitHub on 18 Aug
-  patch -Np1 -i "${srcdir}/llvm50-Make-OSL-work-with-llvm5.patch"
-}
 
 
 build() {
@@ -112,9 +89,9 @@ build() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenShadingLanguage-Release-1.8.10.tar.gz -C /tmp/srcp
+tar -xzf OpenShadingLanguage-Release-1.8.11.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.10/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.11/CMakeLists.txt
 
 LIGNE 40
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
@@ -161,7 +138,7 @@ LIGNE 250
   USE_BOOST_WAVE OFF
 
 
-2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.10/src/cmake/modules/FindLLVM.cmake
+2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.8.11/src/cmake/modules/FindLLVM.cmake
 
 !!! LLVM 5.0
 ------------------------------------
@@ -177,7 +154,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.8.10.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.8.11.tar.gz
 -rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm50-Make-OSL-work-with-llvm5.patch
 
 
@@ -194,7 +171,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-Release-1.8.10.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-Release-1.8.11.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
 && cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \
@@ -264,7 +241,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenShadingLanguage-Release-1.8.10.tar.gz
+$ rm -i OpenShadingLanguage-Release-1.8.11.tar.gz
 
 
 $ cd && maj-repolocal
@@ -297,6 +274,47 @@ POUR REMETTRE openshadinglanguage EXTRA
 ================================================================
 ANCIENS
 ========
+voir 0-CmdFairePatches-LLVM50.STATIC.TXT
+
+pkgrel=7          # rebuild AVEC llvm35 + Patch
+pkgrel=8          # rebuild boost boost-libs 1.65.1-1
+pkgrel=9          # rebuild llvm 5.0.0
+
+pkgrel=2          # rebuild llvm 4.0.1-5
+pkgrel=3          # rebuild oiio 1.7.16.20170802
+pkgrel=4          # rebuild oiio opencv 3.3.0-1
+pkgrel=5          # rebuild oiio 1.7.17.20170831
+!!!
+pkgrel=6          # rebuild llvm 5.0.0 => PAS OK
+
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("$_name_release.tar.gz"
+        'llvm50-Make-OSL-work-with-llvm5.patch'
+)
+
+sha256sum OpenShadingLanguage-Release-1.8.11.tar.gz
+
+sha256sum llvm50-Make-OSL-work-with-llvm5.patch
+
+sha256sums=(...
+         ...
+)
+
+prepare() {
+  cd "${_name_release}"
+   
+  # Make OSL work with clang5/llvm5 (#787)
+  # Commit 104bd26e7153b0ae9e12fd1a98112e3697836f5d
+  #  lgritz committed on GitHub on 18 Aug
+  patch -Np1 -i "${srcdir}/llvm50-Make-OSL-work-with-llvm5.patch"
+}
+
+
+
+
+
 pkgrel=2          # rebuild boost boost-libs 1.64.0-1
 
 pkgrel=2          # rebuild libwebp 0.6.0-1
@@ -330,13 +348,13 @@ LIGNE 90 ET ...
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.10.tar.gz
-wget -O OpenShadingLanguage-Release-1.8.10.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-1.8.10.tar.gz
+wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.8.11.tar.gz
+wget -O OpenShadingLanguage-Release-1.8.11.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.8.11.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-1.8.10.tar.gz OpenShadingLanguage-Release-1.8.10.tar.gz
+mv -v Release-1.8.11.tar.gz OpenShadingLanguage-Release-1.8.11.tar.gz
 
 
 voir 0-CmdFairePatches-LLVM35.STATIC.TXT
@@ -347,7 +365,7 @@ source=("$_name_release.tar.gz"
         'llvm35-static-system-libs.patch'
 )
 
-sha256sum OpenShadingLanguage-Release-1.8.10.tar.gz
+sha256sum OpenShadingLanguage-Release-1.8.11.tar.gz
 
 sha256sum llvm35-static-system-libs.patch
 

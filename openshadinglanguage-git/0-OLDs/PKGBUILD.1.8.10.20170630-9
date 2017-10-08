@@ -1,9 +1,9 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.8.11.20171003
-pkgrel=2
-_name_release="OpenShadingLanguage-Release-1.8.11"
+pkgver=1.8.10.20170630
+pkgrel=9
+_name_release="OpenShadingLanguage-Release-1.8.10"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('i686' 'x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -17,9 +17,20 @@ makedepends=('boost' 'cmake' 'llvm' 'clang')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
+        'llvm50-Make-OSL-work-with-llvm5.patch'
 )
-sha256sums=('94280ae56fbb67fd8a882c43ca6f8ef429640f68e482e808fe1d1f81c3dbc06e'
+sha256sums=('5b9ad6814fd55e68f4ac50e4214120629ab9175142dc93aac350d0f54bea745a'
+            'd349622f1aaeb72336587296933adaba479e2f4b3045bfa47db98712522ae42e'
 )
+
+prepare() {
+  cd "${_name_release}"
+   
+  # Make OSL work with clang5/llvm5 (#787)
+  # Commit 104bd26e7153b0ae9e12fd1a98112e3697836f5d
+  #  lgritz committed on GitHub on 18 Aug
+  patch -Np1 -i "${srcdir}/llvm50-Make-OSL-work-with-llvm5.patch"
+}
 
 build() {
   cd "${_name_release}"

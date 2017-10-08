@@ -1,0 +1,112 @@
+
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/lib64/libOpenImageIO_Util.so.1.8.5
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/lib64/libOpenImageIO_Util.so.1.8
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/lib64/libOpenImageIO_Util.so
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/lib64/libOpenImageIO.so.1.8.5
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/lib64/libOpenImageIO.so.1.8
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/lib64/libOpenImageIO.so
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/bin/iconvert
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/bin/iconvert" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/bin/idiff
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/bin/idiff" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/bin/igrep
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/bin/igrep" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/bin/iinfo
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/bin/iinfo" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/bin/maketx
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/bin/maketx" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/bin/oiiotool
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/bin/oiiotool" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/bin/iv
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/bin/iv" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/lib64/python2.7/site-packages/OpenImageIO.so
+-- Set runtime path of "/build/openimageio-git/pkg/openimageio-git/usr/lib64/python2.7/site-packages/OpenImageIO.so" to ""
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/SHA1.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/argparse.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/array_view.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/atomic.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/benchmark.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/color.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/dassert.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/deepdata.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/errorhandler.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/export.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/filesystem.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/filter.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/fmath.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/fstream_mingw.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/function_view.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/hash.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/image_view.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/imagebuf.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/imagebufalgo.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/imagebufalgo_util.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/imagecache.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/imageio.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/missing_math.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/optparser.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/osdep.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/parallel.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/paramlist.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/platform.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/plugin.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/refcnt.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/simd.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/strided_ptr.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/string_view.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/strutil.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/sysutil.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/texture.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/thread.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/timer.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/tinyformat.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/typedesc.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/unittest.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/unordered_map_concurrent.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/ustring.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/varyingref.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/version.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/pugixml.hpp
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/pugiconfig.hpp
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/pugixml.cpp
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/include/OpenImageIO/oiioversion.h
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/share/doc/OpenImageIO/openimageio.pdf
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/share/doc/OpenImageIO/LICENSE
+-- Installing: /build/openimageio-git/pkg/openimageio-git/usr/share/doc/OpenImageIO/CHANGES.md
+
+
+
+Checking PKGBUILD
+Checking openimageio-git-1.8.5.20171002-1-x86_64.pkg.tar.xz
+openimageio-git E: ELF file ('usr/lib64/libOpenImageIO_Util.so.1.8.5') outside of a valid path.
+openimageio-git E: ELF file ('usr/lib64/libOpenImageIO.so.1.8.5') outside of a valid path.
+openimageio-git E: ELF file ('usr/lib64/python2.7/site-packages/OpenImageIO.so') outside of a valid path.
+openimageio-git W: File (usr/lib64/) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/libOpenImageIO_Util.so.1.8.5) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/libOpenImageIO.so.1.8.5) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/python2.7/) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/libOpenImageIO.so) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/libOpenImageIO.so.1.8) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/libOpenImageIO_Util.so) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/libOpenImageIO_Util.so.1.8) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/python2.7/site-packages/) exists in a non-standard directory.
+openimageio-git W: File (usr/lib64/python2.7/site-packages/OpenImageIO.so) exists in a non-standard directory.
+openimageio-git W: Referenced library 'libOpenImageIO.so.1.8' is an uninstalled dependency
+openimageio-git W: Unused shared library '/usr/lib/libdl.so.2' by file ('usr/bin/iconvert')
+openimageio-git W: Unused shared library '/usr/lib/libdl.so.2' by file ('usr/bin/idiff')
+openimageio-git W: Unused shared library '/usr/lib/libdl.so.2' by file ('usr/bin/igrep')
+openimageio-git W: Unused shared library '/usr/lib/libdl.so.2' by file ('usr/bin/iinfo')
+openimageio-git W: Unused shared library '/usr/lib/libdl.so.2' by file ('usr/bin/maketx')
+openimageio-git W: Unused shared library '/usr/lib/libdl.so.2' by file ('usr/bin/oiiotool')
+openimageio-git W: Dependency qt5-base detected but optional (libraries ['usr/lib/libQt5Widgets.so.5', 'usr/lib/libQt5Core.so.5', 'usr/lib/libQt5Gui.so.5', 'usr/lib/libQt5OpenGL.so.5'] needed in files ['usr/bin/iv'])
+openimageio-git W: Dependency python2 detected but optional (libraries ['usr/lib/libpython2.7.so.1.0'] needed in files ['usr/lib64/python2.7/site-packages/OpenImageIO.so'])
+openimageio-git W: Dependency openexr included but already satisfied
+openimageio-git W: Dependency jasper included but already satisfied
+openimageio-git W: Dependency libtiff included but already satisfied
+openimageio-git W: Dependency intel-tbb included but already satisfied
+openimageio-git W: Dependency libjpeg-turbo included but already satisfied
+openimageio-git W: Dependency included and not needed ('openjpeg')
+openimageio-git W: Dependency ffmpeg included but already satisfied
+openimageio-git W: Dependency openssl included but already satisfied
