@@ -6,7 +6,7 @@ cd $HOME/05-builds/firefox-https-everywhere
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.2017.8.31-1
+cp -v PKGBUILD PKGBUILD.2017.10.4-1
 
 
 0-1) Download snapshot
@@ -23,7 +23,26 @@ mv -vf /tmp/0-AUR/firefox-extension-https-everywhere/PKGBUILD .
 
 1) LIRE NOUVEAU PKGBUILD
 ========================
-pkgver=2017.8.31
+pkgver=2017.10.4
+
+OU SI AUR PAS À JOUR
+====================
+https://www.eff.org/https-everywhere
+
+VERSION : 2017.10.4
+
+1-2) Download source xpi
+------------------------
+wget https://www.eff.org/files/https-everywhere-2017.10.4-eff.xpi
+
+1-2) Download source SIG
+------------------------
+wget https://www.eff.org/files/https-everywhere-2017.10.4-eff.xpi.sig
+
+ls
+
+sha256sum https-everywhere-2017.10.4-eff.xpi
+
 
 2) MODIFIER LE PKGBUILD
 ========================
@@ -31,13 +50,14 @@ pkgver=2017.8.31
 
 _pkgname=https-everywhere
 pkgname=firefox-extension-${_pkgname}
-pkgver=2017.8.31
+pkgver=2017.10.4
 pkgrel=1
 
-source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/${_pkgname/-/_}-${pkgver}-an+tb+sm+fx.xpi")
-noextract=("${_pkgname}-${pkgver}.xpi")
+source=("${_pkgname}-${pkgver}.xpi::https://www.eff.org/files/https-everywhere-${pkgver}-eff.xpi"
+        "${_pkgname}-${pkgver}.xpi.sig::https://www.eff.org/files/https-everywhere-${pkgver}-eff.xpi.sig")
 
 sha256sums=('1111111111'
+            'SKIP')
 )
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -107,6 +127,9 @@ $HOME/00-repolocal/
 $ rm -f *~
 $ rm -rf /tmp/0-AUR
 
+ET
+rm -f https-everywhere-2017.10.4-eff.xpi
+rm -f https-everywhere-2017.10.4-eff.xpi.sig
 
 $ cd && maj-repolocal
 $ sync
@@ -143,19 +166,19 @@ _file=557482
 1-2) Download source
 ----------------------
 wget https://addons.mozilla.org/firefox/downloads/file\
-/557482/https_everywhere-2017.8.31-an+tb+sm+fx.xpi
+/557482/https_everywhere-2017.10.4-an+tb+sm+fx.xpi
 
 ls
 
-sha256sum https_everywhere-2017.8.31-an+tb+sm+fx.xpi
+sha256sum https_everywhere-2017.10.4-an+tb+sm+fx.xpi
 
 -rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxx.xpi
 
-&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-2017.8.31-an+tb+sm+fx.xpi . \
+&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-2017.10.4-an+tb+sm+fx.xpi . \
 
 md5sum fix-path-to-rulesets-db.patch
 -rw-r--r--  1 jnd users    834  9 mai   11:08 fix-path-to-rulesets-db.patch
-$ rm -i https_everywhere-2017.8.31-an+tb+sm+fx.xpi
+$ rm -i https_everywhere-2017.10.4-an+tb+sm+fx.xpi
 
 3) MAKEPKG DANS TMP EN USER
 ====================================
