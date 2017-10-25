@@ -2,12 +2,14 @@
 
 cd $HOME/05-builds/sysbench
 
-http://sysbench.sourceforge.net
-http://sourceforge.net/projects/sysbench/
+https://github.com/akopytov/sysbench
 
 1) TÉLÉCHARGER SOURCES
 ======================
-wget http://pkgs.fedoraproject.org/repo/pkgs/sysbench/sysbench-0.4.12.tar.gz/3a6d54fdd3fe002328e4458206392b9d/sysbench-0.4.12.tar.gz
+
+wget -O sysbench-1.0.9.tar.gz \
+https://github.com/akopytov/sysbench/archive/1.0.9.tar.gz
+
 
 1-2) FAIRE PATCHES
 =====================
@@ -20,16 +22,16 @@ voir : CmdFairePatches.TXT
 ========================
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
-pkgver=0.4.12
-pkgrel=5
+pkgver=1.0.9
+pkgrel=1
 
-source=(http://pkgs.fedoraproject.org/repo/pkgs/${pkgname}/${pkgname}-${pkgver}.tar.gz/3a6d54fdd3fe002328e4458206392b9d/${pkgname}-${pkgver}.tar.gz
-        xxx.patch
-        yyy.patch
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/akopytov/${pkgname}/archive/${pkgver}.tar.gz"
+        "xxx.patch"
+        "yyy.patch"
 )
 
 
-md5sum sysbench-0.4.12.tar.gz
+md5sum sysbench-1.0.9.tar.gz
 
 
 md5sums=(111111111111111111111111111111111111111111
@@ -93,7 +95,7 @@ $ mv -v sysbench-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 ----------------------------------------
 $ rm -f *~
-$ rm -i sysbench-0.4.12.tar.gz
+$ rm -i sysbench-1.0.9.tar.gz
 
 
 $ cd && maj-repolocal
