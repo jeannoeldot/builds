@@ -6,7 +6,7 @@ cd $HOME/05-builds/firefox-https-everywhere
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.2017.10.24-1
+cp -v PKGBUILD PKGBUILD.2017.10.30-1
 
 
 0-1) Download snapshot
@@ -23,25 +23,25 @@ mv -vf /tmp/0-AUR/firefox-extension-https-everywhere/PKGBUILD .
 
 1) LIRE NOUVEAU PKGBUILD
 ========================
-pkgver=2017.10.24
+pkgver=2017.10.30
 
 OU SI AUR PAS À JOUR
 ====================
 https://www.eff.org/https-everywhere
 
-VERSION : 2017.10.24
+VERSION : 2017.10.30
 
 1-2) Download source xpi
 ------------------------
-wget https://www.eff.org/files/https-everywhere-2017.10.24-eff.xpi
+wget https://www.eff.org/files/https-everywhere-2017.10.30-eff.xpi
 
 1-2) Download source SIG
 ------------------------
-wget https://www.eff.org/files/https-everywhere-2017.10.24-eff.xpi.sig
+wget https://www.eff.org/files/https-everywhere-2017.10.30-eff.xpi.sig
 
 ls
 
-sha256sum https-everywhere-2017.10.24-eff.xpi
+sha256sum https-everywhere-2017.10.30-eff.xpi
 
 
 2) MODIFIER LE PKGBUILD
@@ -50,7 +50,7 @@ sha256sum https-everywhere-2017.10.24-eff.xpi
 
 _pkgname=https-everywhere
 pkgname=firefox-extension-${_pkgname}
-pkgver=2017.10.24
+pkgver=2017.10.30
 pkgrel=1
 
 source=("${_pkgname}-${pkgver}.xpi::https://www.eff.org/files/https-everywhere-${pkgver}-eff.xpi"
@@ -87,6 +87,15 @@ rm -f *~ \
 cd $HOME/05-builds/firefox-https-everywhere \
 && rm -rf /tmp/build
 
+
+SI PROBLÈME DE CLEF PUBLIQUE INCONNUE PGP
+=========================================
+==> Vérification des signatures des fichiers sources grâce à gpg...
+    https-everywhere-5.2.11.xpi ... ÉCHEC (Clef publique inconnue EA9DBF9FB761A677)
+==> ERREUR : Une ou plusieurs signatures PGP n’ont pas pu être vérifiées.
+==> ERREUR : Makepkg n'a pas pu construire firefox-extension-https-everywhere.
+
+$ gpg --recv-keys EA9DBF9FB761A677
 
 4) MAKEPKG EN USER
 =======================
@@ -128,8 +137,8 @@ $ rm -f *~
 $ rm -rf /tmp/0-AUR
 
 ET
-rm -f https-everywhere-2017.10.24-eff.xpi
-rm -f https-everywhere-2017.10.24-eff.xpi.sig
+rm -f https-everywhere-2017.10.30-eff.xpi
+rm -f https-everywhere-2017.10.30-eff.xpi.sig
 
 $ cd && maj-repolocal
 $ sync
@@ -166,19 +175,19 @@ _file=557482
 1-2) Download source
 ----------------------
 wget https://addons.mozilla.org/firefox/downloads/file\
-/557482/https_everywhere-2017.10.24-an+tb+sm+fx.xpi
+/557482/https_everywhere-2017.10.30-an+tb+sm+fx.xpi
 
 ls
 
-sha256sum https_everywhere-2017.10.24-an+tb+sm+fx.xpi
+sha256sum https_everywhere-2017.10.30-an+tb+sm+fx.xpi
 
 -rw-r--r--  1 jnd users 21776 21 sept. 19:07 xxxxxxxxxxx.xpi
 
-&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-2017.10.24-an+tb+sm+fx.xpi . \
+&& cp -v $HOME/05-builds/firefox-https-everywhere/https_everywhere-2017.10.30-an+tb+sm+fx.xpi . \
 
 md5sum fix-path-to-rulesets-db.patch
 -rw-r--r--  1 jnd users    834  9 mai   11:08 fix-path-to-rulesets-db.patch
-$ rm -i https_everywhere-2017.10.24-an+tb+sm+fx.xpi
+$ rm -i https_everywhere-2017.10.30-an+tb+sm+fx.xpi
 
 3) MAKEPKG DANS TMP EN USER
 ====================================
@@ -203,5 +212,17 @@ $ $HOME/bin/mkpkg-tmpfs -n
 $ mkpkg-tmpfs -n
 
 !!! VERSION 3.4.5, 3.5  3.5.1   3.5.3: PAS OK
+
+
+X) TEST
+=======
+
+  _extension_id="$(sed -n '/.*<em:id>\(.*\)<\/em:id>.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/install.rdf)"
+  _extension_id="$(sed -n '/.*"id":\(.*\).*/{s//\1/p;q}' manifest.json)"
+  echo "_extension_id="${_extension_id}
+==> _extension_id= "https-everywhere-eff@eff.org",
+  
+
+
 
 

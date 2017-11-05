@@ -1,0 +1,100 @@
+0) REPERTOIRE
+==============
+
+cd $HOME/05-builds/CK-linux
+
+0) SAUVEGARDER PKGBUILD PRÉCÉDENT
+=================================
+cp -v PKGBUILD PKGBUILD.4.13.10-3
+
+0-1) Download snapshot
+----------------------
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/linux-ck.tar.gz
+
+tar -xzf linux-ck.tar.gz
+
+cd $HOME/05-builds/CK-linux
+
+mv -vf /tmp/0-AUR/linux-ck/* .
+
+1) LIRE NOUVEAU PKGBUILD
+========================
+pkgver=4.13.10
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 ...
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 ...
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/CK-linux/* . \
+&& makepkg -s \
+&& cd $HOME/05-builds/CK-linux \
+&& cp -v /tmp/build/linux-ck-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+!!! SI ERREUR
+==============
+cd $HOME/05-builds/CK-linux \
+&& rm -rf /tmp/build
+
+
+SI PROBLÈME DE CLEF PUBLIQUE INCONNUE PGP
+=========================================
+==> Vérification des signatures des fichiers sources grâce à gpg...
+    linux-4.13.tar ... ÉCHEC (Clé publique inconnue 79BE3E4300411886)
+    patch-4.13.10 ... ÉCHEC (Clé publique inconnue 38DBBDC86092693E)
+==> ERREUR : Une ou plusieurs signatures PGP n’ont pas pu être vérifiées.
+
+$ gpg --recv-keys 79BE3E4300411886
+$ gpg --recv-keys 38DBBDC86092693E
+
+
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.hook
+$ rm -f config.*
+$ rm -f linux.*
+$ rm -f *.patch
+$ rm -rf /tmp/0-AUR
+
+
+
+
+
+
+
+
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+# 1ere Install
+# pacman -Syu linux-ck linux-ck-headers

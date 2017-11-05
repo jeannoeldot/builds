@@ -24,7 +24,7 @@ Architecture = auto
 
 # Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup
 #IgnorePkg   = cuda
-IgnorePkg   = linux-ck-haswell linux-ck-haswell-headers nvidia-ck-haswell
+#IgnorePkg   = linux-ck-haswell linux-ck-haswell-headers nvidia-ck-haswell
 #IgnoreGroup =
 
 #NoUpgrade   =
@@ -77,13 +77,13 @@ LocalFileSigLevel = Optional
 #[testing]
 #Include = /etc/pacman.d/mirrorlist
 
-[repo-ck]
-Server = https://mirror.archlinux.no/repo-ck/os/$arch
-Server = http://repo-ck.com/$arch
-Server = http://repo-ck.com/$arch
-Server = http://repo-ck.com/$arch
-Server = http://repo-ck.com/$arch
-Server = http://repo-ck.com/$arch
+#[repo-ck]
+#Server = https://mirror.archlinux.no/repo-ck/os/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
 
 [core]
 Include = /etc/pacman.d/mirrorlist
