@@ -60,6 +60,24 @@ sha256sums=('1111111111'
             'SKIP')
 )
 
+/!\/!\/!\/!\/!\
+package() {
+
+  _extension_id="$(sed -n '/.*"id": "\(.*\)",.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/manifest.json)"
+  _extension_dest="${pkgdir}/usr/lib/firefox/browser/extensions/${_extension_id}"
+
+/!\/!\/!\/!\/!\
+==> PAS OK
+  # Not Unpacked
+  install -Dm644 ${_pkgname}-${pkgver}.xpi "${_extension_dest}.xpi"
+
+/!\/!\/!\/!\/!\
+  # Unpacked
+  install -dm755 "${_extension_dest}"
+  cp -R ${_pkgname}-${pkgver}/* "${_extension_dest}"
+  chmod -R ugo+rX "${_extension_dest}"
+
+
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
 $ ls -la
@@ -217,11 +235,19 @@ $ mkpkg-tmpfs -n
 X) TEST
 =======
 
-  _extension_id="$(sed -n '/.*<em:id>\(.*\)<\/em:id>.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/install.rdf)"
-  _extension_id="$(sed -n '/.*"id":\(.*\).*/{s//\1/p;q}' manifest.json)"
-  echo "_extension_id="${_extension_id}
+_extension_id="$(sed -n '/.*<em:id>\(.*\)<\/em:id>.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/install.rdf)"
+
+_extension_id="$(sed -n '/.*"id":\(.*\).*/{s//\1/p;q}' manifest.json)"
+echo "_extension_id="${_extension_id}
 ==> _extension_id= "https-everywhere-eff@eff.org",
+
+_extension_id="$(sed -n '/.*"id": "\(.*\).*/{s//\1/p;q}' manifest.json)"
+echo "_extension_id="${_extension_id}
+==> _extension_id=https-everywhere-eff@eff.org",
   
+_extension_id="$(sed -n '/.*"id": "\(.*\)",.*/{s//\1/p;q}' manifest.json)"
+echo "_extension_id="${_extension_id}
+==> _extension_id=https-everywhere-eff@eff.org
 
 
 

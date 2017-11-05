@@ -7,7 +7,7 @@
 _pkgname=https-everywhere
 pkgname=firefox-extension-${_pkgname}
 pkgver=2017.10.30
-pkgrel=1
+pkgrel=2
 pkgdesc="Plugin for firefox which ensures you are using https whenever it's possible."
 license=('GPL2')
 arch=('any')
@@ -30,14 +30,12 @@ prepare() {
 package() {
   cd "${srcdir}"
 
-  _extension_id="$(sed -n '/.*<em:id>\(.*\)<\/em:id>.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/install.rdf)"
+  _extension_id="$(sed -n '/.*"id": "\(.*\)",.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/manifest.json)"
   _extension_dest="${pkgdir}/usr/lib/firefox/browser/extensions/${_extension_id}"
-  # Should this extension be unpacked or not?
-  if grep '<em:unpack>true</em:unpack>' ${_pkgname}-${pkgver}/install.rdf > /dev/null; then
-    install -dm755 "${_extension_dest}"
-    cp -R ${_pkgname}-${pkgver}/* "${_extension_dest}"
-    chmod -R ugo+rX "${_extension_dest}"
-  else
-    install -Dm644 ${_pkgname}-${pkgver}.xpi "${_extension_dest}.xpi"
-  fi
+#   # Not Unpacked
+#   install -Dm644 ${_pkgname}-${pkgver}.xpi "${_extension_dest}.xpi"
+  # Unpacked
+  install -dm755 "${_extension_dest}"
+  cp -R ${_pkgname}-${pkgver}/* "${_extension_dest}"
+  chmod -R ugo+rX "${_extension_dest}"
 }
