@@ -1,0 +1,322 @@
+0) REPERTOIRE
+==============
+cd $HOME/05-builds/openimageio-git
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/OpenImageIO/oiio/releases
+==> 31/10/2017  ==> 20171031
+==> Release-1.8.6
+==> 1.8.6.20171031
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O oiio-Release-1.8.6.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.8.6.tar.gz
+
+1-7) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/openimageio-git
+
+!!! CONSERVE Release DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-1.8.6.tar.gz .
+
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=openimageio-git
+pkgver=1.8.6.20171031
+pkgrel=1
+pkgrel=2          # rebuild boost boost-libs 1.65.1-1
+
+!!!!!!
+_name_release="oiio-Release-1.8.6"
+
+conflicts=('openimageio')
+provides=('openimageio')
+
+2-2) PKGBUILD SANS PATCH
+========================
+source=("$_name_release.tar.gz"
+)
+
+sha256sum oiio-Release-1.8.6.tar.gz
+
+sha256sums=('...'
+            '...'
+)
+
+!!!!!!
+depends=(...
+        ...
+        'qt5-base' 'python2'
+
+!!!!!! SUPPRIMÉ
+optdepends=(
+
+
+!!! VERSION 1.8.6
+package() {
+  ...
+  # Install par défaut dans lib64 au lieu de lib
+  msg "Move /usr/lib64 in /usr/lib..."
+  mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
+  ...
+
+
+
+!!!!!!
+!!! VÉRIFIER VERSION PYTHON INSTALLÉE
+$ pacman -Ss python2 | grep 2 | grep install
+==> extra/python2 2.7.14-1 [installé]
+
+ATTENTION AUX VERSIONS DE PYTHON
+PYTHON_VERSION=2.7
+
+2-3) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf oiio-Release-1.8.6.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/oiio-Release-1.8.6/CMakeLists.txt &
+
+LIGNE 42
+  CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
+
+
+LIGNES 65
+  VERBOSE OFF   =>      -DVERBOSE=ON \
+
+LIGNES 70
+  OIIO_BUILD_TESTS ON   =>      -DOIIO_BUILD_TESTS=OFF \
+
+LIGNE 71
+  USE_OPENGL ON         depends= glew -> glu -> 'libgl'
+
+LIGNE 72
+option (USE_QT "Include Qt support" ON)      depends= ... 'qt5-base'
+
+LIGNE 74
+  USE_PYTHON ON         depends= python2
+  set (PYTHON_VERSION "2.7" CACHE STRING "Target version of python to find")
+
+LIGNE 78
+  USE_FIELD3D ON       =>      -DUSE_FIELD3D=OFF \
+
+LIGNE 81
+  USE_JPEGTURBO ON      depends= ... 'libjpeg-turbo'
+
+LIGNE 85
+  USE_OPENCV ON         depends= ... 'opencv'
+
+LIGNE 86
+  USE_OPENSSL = ON       depends= ... 'openssl'
+
+LIGNE 87
+option (USE_FREETYPE "Use Freetype if found" ON)
+
+LIGNE 88
+option (USE_GIF "Use GIF if found" ON)
+
+LIGNE 89
+  USE_PTEX ON           =>      -DUSE_PTEX=OFF \
+
+LIGNE 93
+  USE_NUKE ON           =>      -DUSE_NUKE=OFF \
+
+LIGNE 99
+  USE_DICOM ON           =>      -DUSE_DICOM=OFF \
+
+
+2) kwrite /tmp/srcp/oiio-Release-1.8.6/src/cmake/compiler.cmake &
+
+LIGNE 7
+  USE_CPP 11
+  
+LIGNE 9
+  !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
+  USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
+  
+LIGNE 10 
+  STOP_ON_WARNING ON    =>      -DSTOP_ON_WARNING=OFF \
+  
+  !!! A VOIR : 
+LIGNE 11
+  HIDE_SYMBOLS = OFF
+
+LIGNE 12
+  USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
+
+LIGNE 18
+  CODECOV = OFF
+
+  !!! A VOIR : 
+LIGNE 19
+set (SANITIZE "" CACHE STRING "Build code using sanitizer (address, thread)")
+
+
+2) kwrite /tmp/srcp/oiio-Release-1.8.6/src/cmake/install.cmake &
+
+LIGNE 7
+  !!! A VOIR : = community/ttf-droid
+  INSTALL_FONTS ON CACHE BOOL "Install default fonts" => -DINSTALL_FONTS=OFF \
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 oiio-Release-1.8.6.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!!! PAS DE COMPILATION DANS /tmp : ==> PROBLÈME AVEC GIF
+---------------------------------------------------------
+!!! EN ROOT
+# pacman -Syu
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-1.8.6.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/openimageio-git \
+&& cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/openimageio-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ mkpkg-tmpfs -m fast -l logs
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER sur SSD
+=============================
+!!! EN USER
+cd $HOME/05-builds/openimageio-git
+
+$ rm -f *~
+
+makepkg -s
+
+OU : makepkg -f
+
+# Nettoyage...
+!!! EN USER
+
+rm -f *~
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/openimageio-git-*-x86_64.pkg.tar.*
+
+$ cp -v openimageio-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
+-----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i oiio-Release-1.8.6.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+EN ROOT
+========
+# cd
+
+# pacman -Syu
+
+# pacman -Syu openimageio-git
+
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -Rdd openimageio-git
+# rm /var/cache/pacman/pkg/openimageio-git-*
+# pacman -S openimageio-git
+
+POUR REMETTRE openimageio EXTRA
+================================
+# pacman -Rdd openimageio-git
+# rm /var/cache/pacman/pkg/openimageio-git-*
+# pacman -Syu openimageio
+
+==================================================================================================
+ANCIEN
+=======
+pkgrel=2          # opencv 3.3.0-1
+
+pkgrel=2          # rebuild boost boost-libs 1.64.0-1
+
+pkgrel=2          # rebuild libwebp 0.6.0-1
+pkgrel=2          # rebuild avec PYTHON 3.6
+pkgrel=2          # rebuild boost boost-libs 1.63.0-1
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.6.tar.gz
+wget -O oiio-Release-1.8.6.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.8.6.tar.gz
+
+1-4) RENOMMER ARCHIVE TAR.GZ
+=================================
+mv -v Release-1.8.6.tar.gz oiio-Release-1.8.6.tar.gz
+

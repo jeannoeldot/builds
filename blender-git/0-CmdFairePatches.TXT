@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.79.1.20171105
+!!! VERSION = 2.79.1.20171112
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.79.1.20171105.tar.gz /tmp/srcp/
+cp -v blender-git-2.79.1.20171112.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.79.1.20171105.tar.gz
+tar -xzf blender-git-2.79.1.20171112.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py

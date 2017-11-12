@@ -63,7 +63,7 @@ sha256sums=('1111111111'
 /!\/!\/!\/!\/!\
 package() {
 
-  _extension_id="$(sed -n '/.*"id": "\(.*\)",.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/manifest.json)"
+  _extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' ${_pkgname}-${pkgver}/manifest.json)"
   _extension_dest="${pkgdir}/usr/lib/firefox/browser/extensions/${_extension_id}"
 
 /!\/!\/!\/!\/!\
@@ -234,6 +234,7 @@ $ mkpkg-tmpfs -n
 
 X) TEST
 =======
+cd $HOME/05-builds/firefox-https-everywhere
 
 _extension_id="$(sed -n '/.*<em:id>\(.*\)<\/em:id>.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/install.rdf)"
 
@@ -249,6 +250,7 @@ _extension_id="$(sed -n '/.*"id": "\(.*\)",.*/{s//\1/p;q}' manifest.json)"
 echo "_extension_id="${_extension_id}
 ==> _extension_id=https-everywhere-eff@eff.org
 
-
-
+_extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' manifest.json)"
+echo "_extension_id="${_extension_id}
+==> _extension_id=https-everywhere-eff@eff.org
 

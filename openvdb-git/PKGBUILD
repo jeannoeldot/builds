@@ -8,7 +8,7 @@ _ver_release="4.0.2"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://github.com/dreamworksanimation/openvdb'
-arch=('i686' 'x86_64')
+arch=('x86_64')
 license=('MPL')
 depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
           'blosc' 'glfw-x11' 'glu'

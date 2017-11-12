@@ -2,10 +2,10 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.8.12.20171030
-pkgrel=1
+pkgrel=2
 _name_release="OpenShadingLanguage-Release-1.8.12"
 pkgdesc="Advanced shading language for production GI renderers"
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
 license=('custom')
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'

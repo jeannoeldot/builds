@@ -30,7 +30,7 @@ prepare() {
 package() {
   cd "${srcdir}"
 
-  _extension_id="$(sed -n '/.*"id": "\(.*\)",.*/{s//\1/p;q}' ${_pkgname}-${pkgver}/manifest.json)"
+  _extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' ${_pkgname}-${pkgver}/manifest.json)"
   _extension_dest="${pkgdir}/usr/lib/firefox/browser/extensions/${_extension_id}"
 #   # Not Unpacked
 #   install -Dm644 ${_pkgname}-${pkgver}.xpi "${_extension_dest}.xpi"
