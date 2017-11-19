@@ -1,0 +1,171 @@
+
+/!\/!\/!\/!\/!\/!\/!\/!\/!\
+PAS OK : MODULE NON SIGNÉ
+/!\/!\/!\/!\/!\/!\/!\/!\/!\
+
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd $HOME/05-builds/firefox-adblock-plus
+
+0) SAUVEGARDER PKGBUILD PRÉCÉDENT
+=================================
+cp -v PKGBUILD PKGBUILD.3.0.1-1
+
+
+1-2) Download source xpi
+------------------------
+https://addons.mozilla.org/en-US/firefox/addon/adblock-plus/
+VERSION : 3.0.1
+FILE : 764081
+
+wget https://addons.mozilla.org/firefox/downloads/file/764081/adblock-plus-3.0.1.xpi
+
+
+ls
+
+sha256sum adblock-plus-3.0.1.xpi
+
+
+1-5) VERIFIER id dans manifest.json
+====================================
+mkdir /tmp/srcp
+
+unzip -qqo adblock-plus-3.0.1.xpi -d /tmp/srcp/adblock-plus-3.0.1
+
+kwrite /tmp/srcp/adblock-plus-3.0.1/manifest.json
+
+LIGNE 4
+      "id": "{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}", 
+
+rm -rf /tmp/srcp
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+_pkgname=adblock-plus
+_file=764081
+pkgname=firefox-extension-${_pkgname}
+pkgver=3.0.1
+pkgrel=1
+
+conflicts=('firefox-adblock-plus')
+provides=('firefox-adblock-plus')
+
+source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/${_pkgname}-${pkgver}.xpi"
+)
+
+sha256sums=('1111111111'
+)
+)
+
+/!\/!\/!\/!\/!\
+package() {
+
+  _extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' ${_pkgname}-${pkgver}/manifest.json)"
+  _extension_dest="${pkgdir}/usr/lib/firefox/browser/extensions/${_extension_id}"
+
+/!\/!\/!\/!\/!\
+==> PAS OK
+  # Not Unpacked
+  install -Dm644 ${_pkgname}-${pkgver}.xpi "${_extension_dest}.xpi"
+
+/!\/!\/!\/!\/!\
+  # Unpacked
+  install -dm755 "${_extension_dest}"
+  cp -R ${_pkgname}-${pkgver}/* "${_extension_dest}"
+  chmod -R ugo+rX "${_extension_dest}"
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/firefox-adblock-plus/PKGBUILD . \
+&& makepkg -s \
+&& cd $HOME/05-builds/firefox-adblock-plus \
+&& cp -v /tmp/build/firefox-extension-adblock-plus-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+!!! SI ERREUR
+==============
+cd $HOME/05-builds/firefox-adblock-plus \
+&& rm -rf /tmp/build
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal\
+/firefox-extension-adblock-plus-*-any.pkg.tar.*
+
+$ cp -v firefox-extension-adblock-plus-*-any.pkg.tar.* \
+/0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/firefox-extension-adblock-plus-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v firefox-extension-adblock-plus-*-any.pkg.tar.* \
+$HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -rf /tmp/0-AUR
+
+ET
+rm -f adblock-plus-3.0.1.xpi
+
+$ cd && maj-repolocal
+$ sync
+
+!!! EN USER
+!!! VIDER CACHE
+!!! ARRETER FIREFOX
+
+$ profile-cleaner f
+
+$ systemctl --user stop psd.service
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+# 1ere Install
+# pacman -Syu firefox-extension-adblock-plus
+
+
+!!! EN USER
+============
+$ systemctl --user start psd.service
+
+$ psd preview
+
+=============================================================
+ANCIENS
+=======
+
+X) TEST
+=======
+cd $HOME/05-builds/firefox-adblock-plus
+
+_extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' manifest.json)"
+echo "_extension_id="${_extension_id}
+==> _extension_id={d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}
+

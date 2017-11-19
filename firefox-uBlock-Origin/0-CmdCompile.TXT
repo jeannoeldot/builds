@@ -1,0 +1,166 @@
+
+0) REPERTOIRE
+==============
+
+#Le répertoire
+cd $HOME/05-builds/firefox-uBlock-Origin
+
+0) SAUVEGARDER PKGBUILD PRÉCÉDENT
+=================================
+cp -v PKGBUILD PKGBUILD.1.14.18-1
+
+
+1-2) Download source xpi
+------------------------
+https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
+VERSION : 1.14.18
+FILE : 764482
+
+wget https://addons.mozilla.org/firefox/downloads/file/764482/ublock_origin-1.14.18.xpi
+
+ls
+
+sha256sum ublock_origin-1.14.18.xpi
+
+
+1-5) VERIFIER id dans manifest.json
+====================================
+mkdir /tmp/srcp
+
+unzip -qqo ublock_origin-1.14.18.xpi -d /tmp/srcp/ublock_origin-1.14.18
+
+kwrite /tmp/srcp/ublock_origin-1.14.18/manifest.json
+
+LIGNE 4
+      "id": "uBlock0@raymondhill.net", 
+
+rm -rf /tmp/srcp
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+_pkgname=ublock_origin
+_file=764482
+pkgname=firefox-extension-${_pkgname}
+pkgver=1.14.18
+pkgrel=1
+
+conflicts=('firefox-uBlock-Origin')
+provides=('firefox-uBlock-Origin')
+
+source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/${_pkgname}-${pkgver}.xpi"
+)
+
+sha256sums=('1111111111'
+)
+)
+
+/!\/!\/!\/!\/!\
+package() {
+
+  _extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' ${_pkgname}-${pkgver}/manifest.json)"
+  _extension_dest="${pkgdir}/usr/lib/firefox/browser/extensions/${_extension_id}"
+
+/!\/!\/!\/!\/!\
+==> PAS OK
+  # Not Unpacked
+  install -Dm644 ${_pkgname}-${pkgver}.xpi "${_extension_dest}.xpi"
+
+/!\/!\/!\/!\/!\
+  # Unpacked
+  install -dm755 "${_extension_dest}"
+  cp -R ${_pkgname}-${pkgver}/* "${_extension_dest}"
+  chmod -R ugo+rX "${_extension_dest}"
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/firefox-uBlock-Origin/PKGBUILD . \
+&& makepkg -s \
+&& cd $HOME/05-builds/firefox-uBlock-Origin \
+&& cp -v /tmp/build/firefox-extension-ublock_origin-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+!!! SI ERREUR
+==============
+cd $HOME/05-builds/firefox-uBlock-Origin \
+&& rm -rf /tmp/build
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal\
+/firefox-extension-ublock_origin-*-any.pkg.tar.*
+
+$ cp -v firefox-extension-ublock_origin-*-any.pkg.tar.* \
+/0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/firefox-extension-ublock_origin-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v firefox-extension-ublock_origin-*-any.pkg.tar.* \
+$HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -rf /tmp/0-AUR
+
+ET
+rm -f ublock_origin-1.14.18.xpi
+
+$ cd && maj-repolocal
+$ sync
+
+!!! EN USER
+!!! VIDER CACHE
+!!! ARRETER FIREFOX
+
+$ profile-cleaner f
+
+$ systemctl --user stop psd.service
+
+EN ROOT
+========
+# cd
+# pacman -Syu
+# 1ere Install
+# pacman -Syu firefox-extension-ublock_origin
+
+
+!!! EN USER
+============
+$ systemctl --user start psd.service
+
+$ psd preview
+
+=============================================================
+ANCIENS
+=======
+
+X) TEST
+=======
+cd $HOME/05-builds/firefox-uBlock-Origin
+
+_extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' manifest.json)"
+echo "_extension_id="${_extension_id}
+==> _extension_id=uBlock0@raymondhill.net
+

@@ -1,0 +1,39 @@
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+_pkgname=adblock-plus
+_file=764081
+pkgname=firefox-extension-${_pkgname}
+pkgver=3.0.1
+pkgrel=1
+pkgdesc="Extension for firefox which block ads and banners"
+license=('GPL')
+arch=('any')
+url="http://adblockplus.org/"
+conflicts=('firefox-adblock-plus')
+provides=('firefox-adblock-plus')
+depends=("firefox")
+makedepends=("unzip")
+source=("${_pkgname}-${pkgver}.xpi::https://addons.mozilla.org/firefox/downloads/file/${_file}/${_pkgname}-${pkgver}.xpi"
+)
+noextract=("${_pkgname}-${pkgver}.xpi")
+sha256sums=('0e9973e14e6a57871e797b72d044e30b252121822e233b73e3087f51a0bc5efc'
+)
+
+prepare() {
+  cd "$srcdir"
+
+  unzip -qqo "${_pkgname}-${pkgver}.xpi" -d "${_pkgname}-${pkgver}"
+}
+
+package() {
+  cd "${srcdir}"
+
+  _extension_id="$(sed -n 's/.*"id": "\(.*\)".*/\1/p' ${_pkgname}-${pkgver}/manifest.json)"
+  _extension_dest="${pkgdir}/usr/lib/firefox/browser/extensions/${_extension_id}"
+#   # Not Unpacked
+#   install -Dm644 ${_pkgname}-${pkgver}.xpi "${_extension_dest}.xpi"
+  # Unpacked
+  install -dm755 "${_extension_dest}"
+  cp -R ${_pkgname}-${pkgver}/* "${_extension_dest}"
+  chmod -R ugo+rX "${_extension_dest}"
+}
