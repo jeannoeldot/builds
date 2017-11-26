@@ -1,7 +1,7 @@
 # Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.1.20171126
+pkgver=2.79.1.20171119
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -36,7 +36,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
-sha256sums=('a21198bfbb76584b96a32435bd1228189ab9ed9368ad230e67d57197afacc271'
+sha256sums=('f4accf640b88165337831e29517b75983167ec2722d3008f2b8292b05676aa3a'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
 )
 
@@ -50,10 +50,6 @@ prepare() {
   
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
   sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
-
-  # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
-  # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
-  sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 }
 
 build() {
