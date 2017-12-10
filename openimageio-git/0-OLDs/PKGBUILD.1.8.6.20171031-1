@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=1.8.6.20171031
-pkgrel=2
+pkgrel=1
 _name_release="oiio-Release-1.8.6"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
@@ -56,7 +56,6 @@ package() {
   mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
 
   # license
-   mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
-   mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}
-
+  cd ..
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

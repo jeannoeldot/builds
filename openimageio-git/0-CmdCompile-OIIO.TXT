@@ -39,6 +39,8 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=1.8.6.20171031
 pkgrel=1
+pkgrel=2          # rebuild LICENSE
+
 pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 
 !!!!!!
@@ -70,8 +72,7 @@ optdepends=(
 !!! VERSION 1.8.6
 package() {
   ...
-  # Install par défaut dans lib64 au lieu de lib
-  msg "Move /usr/lib64 in /usr/lib..."
+  # Install lib*.so par défaut dans lib64 au lieu de lib
   mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
   ...
 
