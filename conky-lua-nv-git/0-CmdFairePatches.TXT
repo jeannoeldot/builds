@@ -5,11 +5,11 @@ FAIRE PATCHS
 
 mkdir /tmp/srcp
 
-cp -v conky-lua-nv-git-1.10.7.20170211.tar.gz /tmp/srcp/
+cp -v conky-lua-nv-git-1.10.7.20171207.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf conky-lua-nv-git-1.10.7.20170211.tar.gz
+tar -xzf conky-lua-nv-git-1.10.7.20171207.tar.gz
 
 /!\ /!\ /!\   cd $HOME/05-builds/conky-lua-nv-git
 
@@ -44,6 +44,16 @@ cd $HOME/05-builds/conky-lua-nv-git
 mv -vf /tmp/srcp/Fix-error-when-generating-man-pages-from-XML.patch .
 
 
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
 2) MODIFIER conky/src/luamm.hh
 =================================================
 
@@ -73,16 +83,6 @@ cd $HOME/05-builds/conky-lua-nv-git
 mv -vf /tmp/srcp/Fix-build-with-gcc7-missing-include.patch .
 
 
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 2) MODIFIER conky/src/luamm.cc
 =================================================
