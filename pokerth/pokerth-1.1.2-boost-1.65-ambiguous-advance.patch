@@ -1,0 +1,12 @@
+diff -aur pokerth-1.1.2-rc/src/gui/qt/gametable/gametableimpl.cpp pokerth-1.1.2-rc.new/src/gui/qt/gametable/gametableimpl.cpp
+--- pokerth-1.1.2-rc/src/gui/qt/gametable/gametableimpl.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/gui/qt/gametable/gametableimpl.cpp	2017-12-21 16:53:48.130733076 +0100
+@@ -3859,7 +3859,7 @@
+ 	int playerCount = static_cast<int>(seatList->size());
+ 	if (id < playerCount) {
+ 		PlayerListIterator pos = seatList->begin();
+-		advance(pos, id);
++		std::advance(pos, id);
+ 		myStartWindow->getSession()->startVoteKickPlayer((*pos)->getMyUniqueID());
+ 	}
+ }

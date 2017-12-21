@@ -1,0 +1,59 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.1.2
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/pokerth
+
+mkdir /tmp/srcp
+
+cp -v pokerth-1.1.2.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf pokerth-1.1.2.tar.gz
+
+
+1) MODIFIER pokerth-1.1.2-rc/src/gui/qt/gametable/gametableimpl.cpp
+===================================================================
+cp -R pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+cd pokerth-1.1.2-rc.new/src/gui/qt/gametable
+kwrite gametableimpl.cpp
+
+MODIFIER LIGNE 3862 :
+		advance(pos, id);
+
+DEVIENT
+		std::advance(pos, id);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier gametableimpl.cpp~
+rm -f gametableimpl.cpp~
+ 
+
+cd ../../../../..
+
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > pokerth-1.1.2-boost-1.65-ambiguous-advance.patch
+
+rm -rf pokerth-1.1.2-rc.new
+
+cd $HOME/05-builds/pokerth
+
+mv -vf /tmp/srcp/pokerth-1.1.2-boost-1.65-ambiguous-advance.patch .
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+

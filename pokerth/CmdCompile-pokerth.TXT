@@ -1,0 +1,125 @@
+
+0) REPERTOIRE
+==============
+cd /home/jnd/05-builds/pokerth
+
+1-1) SOURCES
+==============
+http://www.pokerth.net/
+VERSION = 1.1.2
+
+wget https://downloads.sourceforge.net/project/pokerth/pokerth/1.1.2/pokerth-1.1.2.tar.gz
+
+
+1-2) FAIRE PATCHES
+=====================
+
+voir : 0-CmdFairePatches.TXT
+-----------------------------
+
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=pokerth
+pkgver=1.1.2
+_pkgver=1.1.2-rc
+pkgrel=2
+
+source=("$pkgname-$pkgver.tar.gz"
+        "pokerth-1.1.2-boost-1.65-ambiguous-advance.patch"
+)
+
+sha512sum pokerth-1.1.2.tar.gz
+
+sha512sum pokerth-1.1.2-boost-1.65-ambiguous-advance.patch
+
+sha512sums=("..."
+            "..."
+)
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+-rw-r--r--  1 jnd users     1644 21 déc.  16:34 PKGBUILD
+-rw-r--r--  1 jnd users      465 21 déc.  16:14 pokerth-1.1.2-boost-1.65-ambiguous-advance.patch
+-rw-r--r--  1 jnd users 21354306 31 oct.  11:21 pokerth-1.1.2.tar.gz
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/pokerth/PKGBUILD . \
+&& cp -v $HOME/05-builds/pokerth/pokerth-1.1.2-boost-1.65-ambiguous-advance.patch . \
+&& cp -v $HOME/05-builds/pokerth/pokerth-1.1.2.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/pokerth \
+&& cp -v /tmp/build/pokerth-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/pokerth && rm -rf /tmp/build
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
+!!! TESTS
+$ rm -f *~
+$ mkpkg-tmpfs -m native -l logs -q qt
+
+$ rm -rf /tmp/chrootrepo
+
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/pokerth-*-x86_64.pkg.tar.*
+
+$ cp -v pokerth-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
+-----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/pokerth-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v pokerth-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i pokerth-1.1.2.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -Syu pokerth
+
+
