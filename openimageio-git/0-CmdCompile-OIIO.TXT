@@ -38,8 +38,9 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=1.8.6.20171031
-pkgrel=1
+pkgrel=3          # rebuild MAJ opencv
 pkgrel=2          # rebuild LICENSE
+pkgrel=1
 
 pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 
