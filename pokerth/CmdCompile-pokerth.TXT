@@ -6,17 +6,27 @@ cd /home/jnd/05-builds/pokerth
 1-1) SOURCES
 ==============
 http://www.pokerth.net/
+https://www.pokerth.net/download
 VERSION = 1.1.2
+
+cd /0-DataLinux/05-builds-dir-git
 
 wget https://downloads.sourceforge.net/project/pokerth/pokerth/1.1.2/pokerth-1.1.2.tar.gz
 
+1-2) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/pokerth
 
-1-2) FAIRE PATCHES
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/pokerth-1.1.2.tar.gz .
+sync
+
+1-3) FAIRE PATCHES
 =====================
 
 voir : 0-CmdFairePatches.TXT
 -----------------------------
-
 
 
 2) MODIFIER LE PKGBUILD
@@ -26,6 +36,7 @@ voir : 0-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=3      # protobuf rebuild  ==> PAS OK
 pkgrel=2
 
 source=("$pkgname-$pkgver.tar.gz"
@@ -39,6 +50,10 @@ sha512sum pokerth-1.1.2-boost-1.65-ambiguous-advance.patch
 sha512sums=("..."
             "..."
 )
+!!! ATTENTION : protobuf 3.5.0.1-1
+==================================
+VOIR ERREURS COMPILE
+0-Erreurs-Compil-protobuf.TXT
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
