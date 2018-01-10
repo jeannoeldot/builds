@@ -36,20 +36,24 @@ voir : 0-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=4      # rebuild avec patch boost 1.65 1.66. protobuf 3.5.1.1
 pkgrel=3      # protobuf rebuild  ==> PAS OK
 pkgrel=2
 
 source=("$pkgname-$pkgver.tar.gz"
-        "pokerth-1.1.2-boost-1.65-ambiguous-advance.patch"
+        "fix-build-with-boost-1.65-boost-1.66.patch"
+        "fix-build-with-protobuf-3.5.1.1.patch"
 )
 
 sha512sum pokerth-1.1.2.tar.gz
 
-sha512sum pokerth-1.1.2-boost-1.65-ambiguous-advance.patch
+sha512sum fix-build-with-boost-1.65-boost-1.66.patch
+sha512sum fix-build-with-protobuf-3.5.1.1.patch
 
 sha512sums=("..."
             "..."
-)
+)            "..."
+
 !!! ATTENTION : protobuf 3.5.0.1-1
 ==================================
 VOIR ERREURS COMPILE
@@ -58,9 +62,10 @@ VOIR ERREURS COMPILE
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
 $ ls -la
--rw-r--r--  1 jnd users     1644 21 déc.  16:34 PKGBUILD
--rw-r--r--  1 jnd users      465 21 déc.  16:14 pokerth-1.1.2-boost-1.65-ambiguous-advance.patch
--rw-r--r--  1 jnd users 21354306 31 oct.  11:21 pokerth-1.1.2.tar.gz
+-rw-r--r-- 1 jnd users     2143 10 janv. 11:30 fix-build-with-boost-1.65-boost-1.66.patch
+-rw-r--r-- 1 jnd users     1861 10 janv. 11:48 fix-build-with-protobuf-3.5.1.1.patch
+-rw-r--r-- 1 jnd users     1702 10 janv. 11:03 PKGBUILD
+-rw-r--r-- 1 jnd users 21354306 10 janv. 11:07 pokerth-1.1.2.tar.gz
 !!! A MODIFIER SI PAS OK !
 ===============================
 
@@ -75,7 +80,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/pokerth/PKGBUILD . \
-&& cp -v $HOME/05-builds/pokerth/pokerth-1.1.2-boost-1.65-ambiguous-advance.patch . \
+&& cp -v $HOME/05-builds/pokerth/fix-build-with-boost-1.65-boost-1.66.patch . \
 && cp -v $HOME/05-builds/pokerth/pokerth-1.1.2.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/pokerth \

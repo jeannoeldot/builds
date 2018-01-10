@@ -9,7 +9,7 @@
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=4
+pkgrel=3
 pkgdesc="Open source Texas Hold'em Poker simulator"
 arch=('i686' 'x86_64')
 url="http://www.pokerth.net/"
@@ -18,24 +18,16 @@ depends=('curl' 'boost-libs' 'gsasl' 'gnutls' 'protobuf' 'libxkbcommon-x11'
          'qt5-base' 'sdl_mixer' 'libircclient' 'tinyxml')
 makedepends=('boost')
 source=("$pkgname-$pkgver.tar.gz"
-        "fix-build-with-boost-1.65-boost-1.66.patch"
-        "fix-build-with-protobuf-3.5.1.1.patch"
+        "pokerth-1.1.2-boost-1.65-ambiguous-advance.patch"
 )
 sha512sums=('d54c84f199636eb5a53580213e5e4ccc828cf565bf4b055797daa82e2ad54d8c52c7a16a781b82c8cc89d184a2b3c4105922394d08c7d2e06383b96963c36b5a'
-            '62b2c0dd103337f4fd32cd359870e732b26a41b5342ca7a32c9f193f64a6eaf5aa70e8c518efc9112508b8cda96619f24f3672988ee96c7dffc44bc337f07e05'
-            'bf798fcf2e00c53aef6bac9d4a0569047d52c5a67720ca8ec4d757ec36a57c3fea201ef22485f41994212a8960575f43bc674a8688ad39cafd16ce060c9b2567'
+            '608bf93f861a9454c975bba2522fad97a7210585429026c5a2ae7236cc62e0370dae20db66d3888cfed716690c2deae7c2c7025438d84c451210a02719b1a385'
 )
 
 prepare() {
   cd "$pkgname-$_pkgver"
-  # Patchs boost 1.65 et 1.66
-  patch -Np1 < "$srcdir"/fix-build-with-boost-1.65-boost-1.66.patch
-  # Patch protobuf 3.5.1.1
-  patch -Np1 < "$srcdir"/fix-build-with-protobuf-3.5.1.1.patch
-  
-  # Rebuild files protobuf
-  protoc -I="$srcdir"/"$pkgname-$_pkgver"/ "$srcdir"/"$pkgname-$_pkgver"/pokerth.proto --cpp_out="$srcdir"/"$pkgname-$_pkgver"/src/third_party/protobuf/
-  protoc -I="$srcdir"/"$pkgname-$_pkgver"/ "$srcdir"/"$pkgname-$_pkgver"/chatcleaner.proto --cpp_out="$srcdir"/"$pkgname-$_pkgver"/src/third_party/protobuf/
+
+  patch -Np1 < "$srcdir"/pokerth-1.1.2-boost-1.65-ambiguous-advance.patch
 }
 
 build() {
@@ -51,7 +43,8 @@ package() {
   # The make install target doesn't do shit anymore for some reason.
   make INSTALL_ROOT="$pkgdir" install
 
+  # mkdir -p "$pkgdir"/usr/share/pokerth
+  # cp -r data "$pkgdir"/usr/share/pokerth
   install -Dm644 "docs/pokerth.1" "$pkgdir/usr/share/man/man1/pokerth.1"
   install -Dm644 "data/data-copyright.txt" "$pkgdir/usr/share/licenses/pokerth/data-copyright.txt"
-  rm -f "$pkgdir/usr/share/pokerth/data/data-copyright.txt"
 }
