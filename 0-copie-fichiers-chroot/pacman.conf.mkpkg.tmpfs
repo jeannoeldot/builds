@@ -122,7 +122,6 @@ Server = http://repo.archlinux.fr/$arch
 
 [xyne-x86_64]
 SigLevel = Required
-# Temporarily broken due to host error.
-#Server = https://xyne.archlinux.ca/repos/xyne
+Server = https://xyne.archlinux.ca/repos/xyne
 # Workaround
-Server = https://xyne.archlinux.ca/bin/repo.php?file=
+#Server = https://xyne.archlinux.ca/bin/repo.php?file=
