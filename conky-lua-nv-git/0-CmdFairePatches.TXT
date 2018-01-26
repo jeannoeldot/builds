@@ -5,14 +5,25 @@ FAIRE PATCHS
 
 mkdir /tmp/srcp
 
-cp -v conky-lua-nv-git-1.10.7.20171207.tar.gz /tmp/srcp/
+cp -v conky-lua-nv-git-1.10.8.20180123.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf conky-lua-nv-git-1.10.7.20171207.tar.gz
+tar -xzf conky-lua-nv-git-1.10.8.20180123.tar.gz
 
 /!\ /!\ /!\   cd $HOME/05-builds/conky-lua-nv-git
 
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) MODIFIER conky/doc/config_settings.xml
 ===================================================
@@ -42,17 +53,6 @@ rm -rf conky.new
 cd $HOME/05-builds/conky-lua-nv-git
 
 mv -vf /tmp/srcp/Fix-error-when-generating-man-pages-from-XML.patch .
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 2) MODIFIER conky/src/luamm.hh
 =================================================
