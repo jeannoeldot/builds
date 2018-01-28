@@ -1,88 +1,91 @@
 ===========================================
-= Blender 2.77 (sub 1) System Information =
+= Blender 2.79 (sub 2) System Information =
 ===========================================
 
 
 Blender:
 ===========================================
 
-version: 2.77 (sub 1), branch: unknown, commit date: 1970-01-01 00:00, hash: unknown, type: Release
-build date: 2016-05-29, 12:30:15
+version: 2.79 (sub 2), branch: unknown, commit date: 1970-01-01 00:00, hash: unknown, type: Release
+build date: 2018-01-28, 10:55:06
 platform: Linux
 binary path: '/usr/bin/blender'
-build cflags:  -Wall -Wcast-align -Werror=implicit-function-declaration -Werror=return-type -Werror=vla -Wstrict-prototypes -Wmissing-prototypes -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wlogical-op -Wundef -Winit-self -Wnonnull -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Wformat-signedness -Wuninitialized -Wredundant-decls -Wshadow -Wno-error=unused-but-set-variable -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong  -fuse-ld=gold -fopenmp -std=gnu11  -msse2  -msse -pipe -fPIC -funsigned-char -fno-strict-aliasing
-build cxxflags:  -Wredundant-decls -Wall -Wno-invalid-offsetof -Wno-sign-compare -Wlogical-op -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Werror=return-type -Werror=implicit-function-declaration -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wundef -Wformat-signedness -Wuninitialized -Wundef -Wmissing-declarations -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong  -fuse-ld=gold -fopenmp -std=c++11  -msse2  -msse -pipe -fPIC -funsigned-char -fno-strict-aliasing
-build linkflags:  -Wl,--version-script='/tmp/build/src/blender/source/creator/blender.map'
+build cflags:  -Wall -Wcast-align -Werror=implicit-function-declaration -Werror=return-type -Werror=vla -Wstrict-prototypes -Wmissing-prototypes -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wlogical-op -Wundef -Winit-self -Wnonnull -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Wformat-signedness -Wrestrict -Wuninitialized -Wredundant-decls -Wshadow -Wno-error=unused-but-set-variable -Wimplicit-fallthrough=5 -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -fno-plt -fuse-ld=gold -fopenmp -std=gnu11   -msse -pipe -fPIC -funsigned-char -fno-strict-aliasing -msse2
+build cxxflags:  -Wredundant-decls -Wall -Wno-invalid-offsetof -Wno-sign-compare -Wlogical-op -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Werror=return-type -Werror=implicit-function-declaration -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wundef -Wformat-signedness -Wrestrict -Wuninitialized -Wundef -Wmissing-declarations -Wimplicit-fallthrough=5 -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -fno-plt -fuse-ld=gold -fopenmp -std=c++11   -msse -pipe -fPIC -funsigned-char -fno-strict-aliasing -msse2
+build linkflags:  -Wl,--version-script='/build/blender-git/src/blender/source/creator/blender.map'
 build system: CMake
 
 Python:
 ===========================================
 
-version: 3.5.1 (default, Mar  3 2016, 09:29:07) 
-[GCC 5.3.0]
+version: 3.6.4 (default, Jan  5 2018, 02:35:40) 
+[GCC 7.2.1 20171224]
 paths:
-	'/usr/share/blender/2.77/scripts/addons_contrib'
-	'/usr/share/blender/2.77/scripts/addons'
-	'/usr/share/blender/2.77/scripts/startup'
-	'/usr/share/blender/2.77/scripts/modules'
-	'/usr/lib/python35.zip'
-	'/usr/lib/python3.5'
-	'/usr/lib/python3.5/plat-linux'
-	'/usr/lib/python3.5/lib-dynload'
-	'/usr/lib/python3.5/site-packages'
-	'/usr/share/blender/2.77/scripts/freestyle/modules'
-	'/usr/share/blender/2.77/scripts/addons/modules'
-	'/home/jnd/.config/blender/2.77/scripts/addons/modules'
+	'/usr/share/blender/2.79/scripts/addons_contrib'
+	'/home/jnd/.config/blender/2.79/scripts/addons'
+	'/usr/share/blender/2.79/scripts/addons'
+	'/usr/share/blender/2.79/scripts/startup'
+	'/usr/share/blender/2.79/scripts/modules'
+	'/usr/lib/python36.zip'
+	'/usr/lib/python3.6'
+	'/usr/lib/python3.6/lib-dynload'
+	'/usr/lib/python3.6/site-packages'
+	'/usr/share/blender/2.79/scripts/freestyle/modules'
+	'/usr/share/blender/2.79/scripts/addons/modules'
+	'/home/jnd/.config/blender/2.79/scripts/addons/modules'
 
 Python (External Binary):
 ===========================================
 
-binary path: '/usr/bin/python3.5m'
-version: Python 3.5.1
+binary path: '/usr/bin/python3.6m'
+version: Python 3.6.4
 
 Directories:
 ===========================================
 
 scripts:
-	'/usr/share/blender/2.77/scripts/modules'
-	'/usr/share/blender/2.77/scripts'
-user scripts: '/home/jnd/.config/blender/2.77/scripts'
+	'/usr/share/blender/2.79/scripts/modules'
+	'/usr/share/blender/2.79/scripts'
+	'/home/jnd/.config/blender/2.79/scripts'
+user scripts: '/home/jnd/.config/blender/2.79/scripts'
 pref scripts: None
-datafiles: '/home/jnd/.config/blender/2.77/datafiles/'
-config: '/home/jnd/.config/blender/2.77/config/'
-scripts : '/home/jnd/.config/blender/2.77/scripts/'
-autosave: '/home/jnd/.config/blender/2.77/autosave/'
-tempdir: '/tmp/blender_pwU6Js/'
+datafiles: '/home/jnd/.config/blender/2.79/datafiles/'
+config: '/home/jnd/.config/blender/2.79/config/'
+scripts : '/home/jnd/.config/blender/2.79/scripts/'
+autosave: '/home/jnd/.config/blender/2.79/autosave/'
+tempdir: '/tmp/blender_OzO9fQ/'
 
 FFmpeg:
 ===========================================
 
-avcodec:   '57, 24, 102'
-avdevice:  '57,  0, 101'
-avformat:  '57, 25, 100'
-avutil:    '55, 17, 103'
-swscale:   ' 4,  0, 100'
+avcodec:   '57, 107, 100'
+avdevice:  '57, 10, 100'
+avformat:  '57, 83, 100'
+avutil:    '55, 78, 100'
+swscale:   ' 4,  8, 100'
 
 SDL:
 ===========================================
 
-Version: 2.0.4
+Version: 2.0.7
 Loading method: linked (WITH_SDL_DYNLOAD=OFF)
 
 Other Libraries:
 ===========================================
 
 OpenColorIO:  1,  0,  9
-OpenImageIO:  1,  7,  3
-OpenShadingLanguage:  1,  8,  0
-OpenVDB:  3,  2,  0
+OpenImageIO:  1,  8,  7
+OpenShadingLanguage:  1,  9,  6
+OpenSubdiv:  3,  3,  0
+OpenVDB:  4,  0,  0
+Alembic: Blender was built without Alembic support
 
 OpenGL:
 ===========================================
 
 renderer:	'GeForce GTX 980/PCIe/SSE2'
 vendor:		'NVIDIA Corporation'
-version:	'4.5.0 NVIDIA 364.19'
+version:	'4.6.0 NVIDIA 387.34'
 extensions:
 	GL_AMD_multi_draw_indirect
 	GL_AMD_seamless_cubemap_per_texture
@@ -136,6 +139,7 @@ extensions:
 	GL_ARB_geometry_shader4
 	GL_ARB_get_program_binary
 	GL_ARB_get_texture_sub_image
+	GL_ARB_gl_spirv
 	GL_ARB_gpu_shader5
 	GL_ARB_gpu_shader_fp64
 	GL_ARB_gpu_shader_int64
@@ -160,6 +164,7 @@ extensions:
 	GL_ARB_pixel_buffer_object
 	GL_ARB_point_parameters
 	GL_ARB_point_sprite
+	GL_ARB_polygon_offset_clamp
 	GL_ARB_post_depth_coverage
 	GL_ARB_program_interface_query
 	GL_ARB_provoking_vertex
@@ -197,6 +202,7 @@ extensions:
 	GL_ARB_sparse_texture
 	GL_ARB_sparse_texture2
 	GL_ARB_sparse_texture_clamp
+	GL_ARB_spirv_extensions
 	GL_ARB_stencil_texturing
 	GL_ARB_sync
 	GL_ARB_tessellation_shader
@@ -214,6 +220,7 @@ extensions:
 	GL_ARB_texture_env_combine
 	GL_ARB_texture_env_crossbar
 	GL_ARB_texture_env_dot3
+	GL_ARB_texture_filter_anisotropic
 	GL_ARB_texture_filter_minmax
 	GL_ARB_texture_float
 	GL_ARB_texture_gather
@@ -278,6 +285,8 @@ extensions:
 	GL_EXT_gpu_program_parameters
 	GL_EXT_gpu_shader4
 	GL_EXT_import_sync_object
+	GL_EXT_memory_object
+	GL_EXT_memory_object_fd
 	GL_EXT_multi_draw_arrays
 	GL_EXT_packed_depth_stencil
 	GL_EXT_packed_float
@@ -290,6 +299,8 @@ extensions:
 	GL_EXT_raster_multisample
 	GL_EXT_rescale_normal
 	GL_EXT_secondary_color
+	GL_EXT_semaphore
+	GL_EXT_semaphore_fd
 	GL_EXT_separate_shader_objects
 	GL_EXT_separate_specular_color
 	GL_EXT_shader_image_load_formatted
@@ -328,6 +339,7 @@ extensions:
 	GL_EXT_vertex_array
 	GL_EXT_vertex_array_bgra
 	GL_EXT_vertex_attrib_64bit
+	GL_EXT_window_rectangles
 	GL_EXT_x11_sync_object
 	GL_IBM_rasterpos_clip
 	GL_IBM_texture_mirrored_repeat
@@ -336,6 +348,7 @@ extensions:
 	GL_KHR_context_flush_control
 	GL_KHR_debug
 	GL_KHR_no_error
+	GL_KHR_parallel_shader_compile
 	GL_KHR_robust_buffer_access_behavior
 	GL_KHR_robustness
 	GL_KTX_buffer_region
@@ -344,11 +357,13 @@ extensions:
 	GL_NVX_nvenc_interop
 	GL_NV_ES1_1_compatibility
 	GL_NV_ES3_1_compatibility
+	GL_NV_alpha_to_coverage_dither_control
 	GL_NV_bindless_multi_draw_indirect
 	GL_NV_bindless_multi_draw_indirect_count
 	GL_NV_bindless_texture
 	GL_NV_blend_equation_advanced
 	GL_NV_blend_equation_advanced_coherent
+	GL_NV_blend_minmax_factor
 	GL_NV_blend_square
 	GL_NV_command_list
 	GL_NV_compute_program5
@@ -395,8 +410,11 @@ extensions:
 	GL_NV_pixel_data_range
 	GL_NV_point_sprite
 	GL_NV_primitive_restart
+	GL_NV_query_resource
+	GL_NV_query_resource_tag
 	GL_NV_register_combiners
 	GL_NV_register_combiners2
+	GL_NV_robustness_video_memory_purge
 	GL_NV_sample_locations
 	GL_NV_sample_mask_override_coverage
 	GL_NV_shader_atomic_counters
@@ -413,6 +431,7 @@ extensions:
 	GL_NV_texture_env_combine4
 	GL_NV_texture_multisample
 	GL_NV_texture_rectangle
+	GL_NV_texture_rectangle_compressed
 	GL_NV_texture_shader
 	GL_NV_texture_shader2
 	GL_NV_texture_shader3
@@ -430,6 +449,7 @@ extensions:
 	GL_NV_vertex_program2_option
 	GL_NV_vertex_program3
 	GL_NV_viewport_array2
+	GL_NV_viewport_swizzle
 	GL_S3_s3tc
 	GL_SGIS_generate_mipmap
 	GL_SGIS_texture_lod
@@ -457,6 +477,23 @@ Cycles:
 ===========================================
 
 CPU device capabilities: SSE2 SSE3 SSE41 AVX AVX2
+
+OpenCL device capabilities:
+Number of platforms: 1
+Platform #0
+	Platform Name: NVIDIA CUDA
+	Platform Vendor: NVIDIA Corporation
+	Platform Version: OpenCL 1.2 CUDA 9.1.98
+	Platform Profile: FULL_PROFILE
+	Platform Extensions: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp64 cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll cl_nv_copy_opts cl_nv_create_buffer
+	Number of devices: 1
+		Device: #0
+			Device Name: GeForce GTX 980
+			Device Vendor: NVIDIA Corporation
+			Device OpenCL C Version: OpenCL C 1.2 
+			Device Profile: FULL_PROFILE
+			Device Version: OpenCL 1.2 CUDA
+			Device Extensions: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp64 cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll cl_nv_copy_opts cl_nv_create_buffer
 
 CUDA device capabilities:
 	GeForce GTX 980
@@ -516,23 +553,23 @@ CUDA device capabilities:
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_WIDTH			16384
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_WIDTH			16384
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS			2046
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH			65536
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH			16384
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_WIDTH			65536
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_HEIGHT			32768
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH			65536
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT			32768
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH			2048
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH			65536
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_HEIGHT			65536
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH			4096
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT			4096
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH			4096
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH			16384
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS			2048
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH			65536
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT			32768
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH			16384
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT			16384
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_LAYERS			2048
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH			32768
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH			32768
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH			16384
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH			16384
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_LAYERS			2046
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH			134217728
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH			65000
-		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT			65000
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH			65536
+		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT			65536
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_PITCH			1048544
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH			16384
 		CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT			16384
@@ -549,19 +586,20 @@ CUDA device capabilities:
 		CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID			0
 
 
-OpenCL device capabilities:
-Number of platforms: 1
-Platform #0
-	Platform Name: NVIDIA CUDA
-	Platform Vendor: NVIDIA Corporation
-	Platform Version: OpenCL 1.2 CUDA 8.0.0
-	Platform Profile: FULL_PROFILE
-	Platform Extensions: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp64 cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll cl_nv_copy_opts
-	Number of devices: 1
-		Device: #0
-			Device Name: GeForce GTX 980
-			Device Vendor: NVIDIA Corporation
-			Device OpenCL C Version: OpenCL C 1.2 
-			Device Profile: FULL_PROFILE
-			Device Version: OpenCL 1.2 CUDA
-			Device Extensions: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp64 cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll cl_nv_copy_opts
+Enabled add-ons:
+===========================================
+
+io_scene_3ds (version: UNKNOWN, path: /usr/share/blender/2.79/scripts/addons/io_scene_3ds/__init__.py)
+io_scene_fbx (version: (3, 8, 7), path: /usr/share/blender/2.79/scripts/addons/io_scene_fbx/__init__.py)
+io_anim_bvh (version: UNKNOWN, path: /usr/share/blender/2.79/scripts/addons/io_anim_bvh/__init__.py)
+io_mesh_ply (version: UNKNOWN, path: /usr/share/blender/2.79/scripts/addons/io_mesh_ply/__init__.py)
+io_scene_obj (version: (2, 3, 6), path: /usr/share/blender/2.79/scripts/addons/io_scene_obj/__init__.py)
+io_scene_x3d (version: (1, 2, 0), path: /usr/share/blender/2.79/scripts/addons/io_scene_x3d/__init__.py)
+io_mesh_stl (version: (1, 1, 2), path: /usr/share/blender/2.79/scripts/addons/io_mesh_stl/__init__.py)
+io_mesh_uv_layout (version: (1, 1, 1), path: /usr/share/blender/2.79/scripts/addons/io_mesh_uv_layout/__init__.py)
+io_curve_svg (version: UNKNOWN, path: /usr/share/blender/2.79/scripts/addons/io_curve_svg/__init__.py)
+cycles (version: UNKNOWN, path: /usr/share/blender/2.79/scripts/addons/cycles/__init__.py)
+matlib (version: (1, 0, 0), path: /home/jnd/.config/blender/2.79/scripts/addons/matlib/__init__.py)
+node_wrangler (version: (3, 35), path: /usr/share/blender/2.79/scripts/addons/node_wrangler.py)
+render_auto_tile_size (version: (3, 1, 2), path: /usr/share/blender/2.79/scripts/addons/render_auto_tile_size.py)
+mesh_looptools (version: (4, 6, 7), path: /usr/share/blender/2.79/scripts/addons/mesh_looptools.py)
