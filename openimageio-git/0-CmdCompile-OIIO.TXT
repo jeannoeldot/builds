@@ -5,16 +5,16 @@ cd $HOME/05-builds/openimageio-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageIO/oiio/releases
-==> 02/01/2018  ==> 20180102
-==> Release-1.8.7
-==> 1.8.7.20180102
+==> 01/02/2018  ==> 20180201
+==> Release-1.8.8
+==> 1.8.8.20180201
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O oiio-Release-1.8.7.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-1.8.7.tar.gz
+wget -O oiio-Release-1.8.8.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.8.8.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-1.8.7.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-1.8.8.tar.gz .
 
 
 1-8) FAIRE PATCHES
@@ -34,10 +34,10 @@ voir : CmdFairePatches.TXT
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.8.7.20180102
+pkgver=1.8.8.20180201
 pkgrel=1
 
 pkgrel=3          # rebuild MAJ opencv
@@ -46,7 +46,7 @@ pkgrel=2          # rebuild LICENSE
 pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 
 !!!!!!
-_name_release="oiio-Release-1.8.7"
+_name_release="oiio-Release-1.8.8"
 
 conflicts=('openimageio')
 provides=('openimageio')
@@ -56,11 +56,16 @@ provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
 
-sha256sum oiio-Release-1.8.7.tar.gz
+sha256sum oiio-Release-1.8.8.tar.gz
 
 sha256sums=('...'
             '...'
 )
+
+!!!!!!
+!!! DÉPS SUPPR LE 04/02/2018
+openimageio-git W: Dependency included and not needed ('glew')
+!!!!!!
 
 !!!!!!
 depends=(...
@@ -71,7 +76,7 @@ depends=(...
 optdepends=(
 
 
-!!! VERSION 1.8.7
+!!! VERSION 1.8.8
 package() {
   ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -83,7 +88,7 @@ package() {
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python2 | grep 2 | grep install
-==> extra/python2 2.7.14-1 [installé]
+==> extra/python2 2.7.14-2 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=2.7
@@ -92,9 +97,9 @@ PYTHON_VERSION=2.7
 ============================
 mkdir /tmp/srcp
 
-tar -xzf oiio-Release-1.8.7.tar.gz -C /tmp/srcp
+tar -xzf oiio-Release-1.8.8.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/oiio-Release-1.8.7/CMakeLists.txt &
+1) kwrite /tmp/srcp/oiio-Release-1.8.8/CMakeLists.txt &
 
 LIGNE 42
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release \
@@ -107,7 +112,7 @@ LIGNES 70
   OIIO_BUILD_TESTS ON   =>      -DOIIO_BUILD_TESTS=OFF \
 
 LIGNE 71
-  USE_OPENGL ON         depends= glew -> glu -> 'libgl'
+  USE_OPENGL ON
 
 LIGNE 72
 option (USE_QT "Include Qt support" ON)      depends= ... 'qt5-base'
@@ -116,35 +121,35 @@ LIGNE 74
   USE_PYTHON ON         depends= python2
   set (PYTHON_VERSION "2.7" CACHE STRING "Target version of python to find")
 
-LIGNE 78
+LIGNE 77
   USE_FIELD3D ON       =>      -DUSE_FIELD3D=OFF \
 
-LIGNE 81
+LIGNE 80
   USE_JPEGTURBO ON      depends= ... 'libjpeg-turbo'
 
-LIGNE 85
+LIGNE 84
   USE_OPENCV ON         depends= ... 'opencv'
 
-LIGNE 86
+LIGNE 85
   USE_OPENSSL = ON       depends= ... 'openssl'
 
-LIGNE 87
+LIGNE 86
 option (USE_FREETYPE "Use Freetype if found" ON)
 
-LIGNE 88
+LIGNE 87
 option (USE_GIF "Use GIF if found" ON)
 
-LIGNE 89
+LIGNE 88
   USE_PTEX ON           =>      -DUSE_PTEX=OFF \
 
-LIGNE 93
+LIGNE 92
   USE_NUKE ON           =>      -DUSE_NUKE=OFF \
 
-LIGNE 99
+LIGNE 98
   USE_DICOM ON           =>      -DUSE_DICOM=OFF \
 
 
-2) kwrite /tmp/srcp/oiio-Release-1.8.7/src/cmake/compiler.cmake &
+2) kwrite /tmp/srcp/oiio-Release-1.8.8/src/cmake/compiler.cmake &
 
 LIGNE 7
   USE_CPP 11
@@ -171,7 +176,7 @@ LIGNE 19
 set (SANITIZE "" CACHE STRING "Build code using sanitizer (address, thread)")
 
 
-2) kwrite /tmp/srcp/oiio-Release-1.8.7/src/cmake/install.cmake &
+2) kwrite /tmp/srcp/oiio-Release-1.8.8/src/cmake/install.cmake &
 
 LIGNE 7
   !!! A VOIR : = community/ttf-droid
@@ -186,7 +191,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users   909 21 sept. 19:09 oiio-Release-1.8.7.tar.gz
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 oiio-Release-1.8.8.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -203,7 +208,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-1.8.7.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-1.8.8.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -269,7 +274,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i oiio-Release-1.8.7.tar.gz
+$ rm -i oiio-Release-1.8.8.tar.gz
 
 
 $ cd && maj-repolocal
@@ -315,11 +320,11 @@ pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.7.tar.gz
-wget -O oiio-Release-1.8.7.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-1.8.7.tar.gz
+wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.8.tar.gz
+wget -O oiio-Release-1.8.8.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.8.8.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-1.8.7.tar.gz oiio-Release-1.8.7.tar.gz
+mv -v Release-1.8.8.tar.gz oiio-Release-1.8.8.tar.gz
 

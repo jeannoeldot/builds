@@ -1,14 +1,14 @@
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.8.8.20180201
+pkgver=1.8.7.20180102
 pkgrel=1
-_name_release="oiio-Release-1.8.8"
+_name_release="oiio-Release-1.8.7"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
 license=('custom')
-depends=('openexr' 'boost-libs' 'jasper' 'libtiff' 'opencolorio' 'intel-tbb'
+depends=('openexr' 'boost-libs' 'jasper' 'glew' 'libtiff' 'opencolorio' 'intel-tbb'
          'libjpeg-turbo' 'openjpeg' 'libraw'
          'ffmpeg'
          'opencv' 'openssl'
@@ -20,7 +20,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('d7d529f1318b2ac8325f18b94f017d4d0bf878731178afb72eb5e75642873dc5'
+sha256sums=('ed23ecdd3e4037a411c69a6a681273d01d4a2fbcc223eac86daba77dd03fc5ed'
 )
 
 build() {
