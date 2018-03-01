@@ -5,7 +5,7 @@ cd $HOME/05-builds/profile-sync-daemon
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.6.31-1
+cp -v PKGBUILD PKGBUILD.6.33-1
 
 
 1) TÉLÉCHARGER SOURCES
@@ -28,17 +28,17 @@ mv -vf /tmp/0-AUR/profile-sync-daemon/psd.install .
 
 1-2) Download source
 ----------------------
-wget http://repo-ck.com/source/profile-sync-daemon\
-/profile-sync-daemon-6.31.tar.xz
+wget -O profile-sync-daemon-6.33.tar.gz \
+https://github.com/graysky2/profile-sync-daemon/archive/v6.33.tar.gz
 
 ls
 
-sha256sum profile-sync-daemon-6.31.tar.xz
+sha256sum profile-sync-daemon-6.33.tar.gz
 
 2) MODIFIER LE PKGBUILD
 ========================
 
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgver=
 
@@ -56,7 +56,7 @@ sha256sums=(1111111111
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   910 21 sept. 19:10 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-sync-daemon-6.31.tar.xz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-sync-daemon-6.33.tar.gz
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 psd.install
 
 !!! A MODIFIER SI PAS OK !
@@ -70,7 +70,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/profile-sync-daemon/PKGBUILD . \
-&& cp -v $HOME/05-builds/profile-sync-daemon/profile-sync-daemon-6.31.tar.xz . \
+&& cp -v $HOME/05-builds/profile-sync-daemon/profile-sync-daemon-6.33.tar.gz . \
 && cp -v $HOME/05-builds/profile-sync-daemon/psd.install . \
 && makepkg -s \
 && cd $HOME/05-builds/profile-sync-daemon \
@@ -117,7 +117,7 @@ $ mv -v profile-sync-daemon-*-any.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i profile-sync-daemon-6.31.tar.xz
+$ rm -i profile-sync-daemon-6.33.tar.gz
 $ rm -rf /tmp/0-AUR
 
 
