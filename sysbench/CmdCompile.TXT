@@ -4,11 +4,18 @@ cd $HOME/05-builds/sysbench
 
 https://github.com/akopytov/sysbench
 
+0) SAUVEGARDER PKGBUILD PRÉCÉDENT
+=================================
+cp -v PKGBUILD PKGBUILD.1.0.12-1
+
+
+VERSION = 1.0.12
+
 1) TÉLÉCHARGER SOURCES
 ======================
 
-wget -O sysbench-1.0.9.tar.gz \
-https://github.com/akopytov/sysbench/archive/1.0.9.tar.gz
+wget -O sysbench-1.0.12.tar.gz \
+https://github.com/akopytov/sysbench/archive/1.0.12.tar.gz
 
 
 1-2) FAIRE PATCHES
@@ -20,9 +27,9 @@ voir : CmdFairePatches.TXT
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Moi <name AT fai DOT fr>
 
-pkgver=1.0.9
+pkgver=1.0.12
 pkgrel=1
 
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/akopytov/${pkgname}/archive/${pkgver}.tar.gz"
@@ -31,7 +38,7 @@ source=("${pkgname}-${pkgver}.tar.gz::https://github.com/akopytov/${pkgname}/arc
 )
 
 
-md5sum sysbench-1.0.9.tar.gz
+md5sum sysbench-1.0.12.tar.gz
 
 
 md5sums=(111111111111111111111111111111111111111111
@@ -78,6 +85,14 @@ makepkg -f
 rm -f *~
 rm -rf pkg src
 
+# Verifications...
+==================
+Checking PKGBUILD
+Checking sysbench-1.0.12-1-x86_64.pkg.tar.xz
+sysbench W: Referenced library 'sysbench' is an uninstalled dependency
+sysbench W: Dependency included and not needed ('mariadb-clients')
+
+
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
 $ rm /0-DataLinux/00-repolocal/sysbench-*-x86_64.pkg.tar.*
@@ -95,7 +110,7 @@ $ mv -v sysbench-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 ----------------------------------------
 $ rm -f *~
-$ rm -i sysbench-1.0.9.tar.gz
+$ rm -i sysbench-1.0.12.tar.gz
 
 
 $ cd && maj-repolocal
