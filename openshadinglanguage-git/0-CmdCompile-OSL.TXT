@@ -44,6 +44,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.9.7.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.9.7.20180201
+pkgrel=2    # Rebuild MAJ OIIO 1.8.9 et MAJ opencv ilmbase/openexr 2.2.1
 pkgrel=1
 
 pkgrel=3    # Rebuild MAJ OIIO 1.8.6 et MAJ opencv

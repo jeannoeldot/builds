@@ -34,10 +34,11 @@ voir 0-CmdFairePatches.TXT
 
 2-1) MODIFIER LE PKGBUILD
 =========================
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=4.0.2.20170731
+pkgrel=6          # rebuild ilmbase/openexr 2.2.1
 pkgrel=5          # rebuild boost boost-libs 1.66.0-1
 pkgrel=4
 
