@@ -39,6 +39,7 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=1.8.9.20180301
 pkgrel=1
+pkgrel=2          # rebuild CMAKE_INSTALL_LIBDIR=lib
 
 pkgrel=3          # rebuild MAJ opencv
 pkgrel=2          # rebuild LICENSE
@@ -76,15 +77,6 @@ depends=(...
 optdepends=(
 
 
-!!! VERSION 1.8.9
-package() {
-  ...
-  # Install lib*.so par défaut dans lib64 au lieu de lib
-  mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
-  ...
-
-
-
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python2 | grep 2 | grep install
@@ -92,6 +84,13 @@ $ pacman -Ss python2 | grep 2 | grep install
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=2.7
+
+!!! VERSION 1.8.9
+build() {
+      ...
+  # Install lib*.so par défaut dans lib64 au lieu de lib
+      -DCMAKE_INSTALL_LIBDIR=lib \
+  ...
 
 2-3) VERIFIER CMakeLists.txt
 ============================
@@ -308,6 +307,15 @@ POUR REMETTRE openimageio EXTRA
 ==================================================================================================
 ANCIEN
 =======
+!!! VERSION 1.8.9
+package() {
+  ...
+  # Install lib*.so par défaut dans lib64 au lieu de lib
+  mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
+  ...
+
+
+
 pkgrel=2          # opencv 3.3.0-1
 
 pkgrel=2          # rebuild boost boost-libs 1.64.0-1

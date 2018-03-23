@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=1.8.9.20180301
-pkgrel=2
+pkgrel=1
 _name_release="oiio-Release-1.8.9"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
@@ -43,7 +43,6 @@ build() {
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF \
       -DINSTALL_FONTS=OFF \
-      -DCMAKE_INSTALL_LIBDIR=lib \
       ..
   make
 }
@@ -52,6 +51,9 @@ package() {
   cd "${_name_release}/build"
 
   make DESTDIR="${pkgdir}" install
+
+  # Install lib*.so par défaut dans lib64 au lieu de lib
+  mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
 
   # license
    mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
