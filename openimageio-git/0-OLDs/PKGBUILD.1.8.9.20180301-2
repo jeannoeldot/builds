@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.8.10.20180331
-pkgrel=1
-_name_release="oiio-Release-1.8.10"
+pkgver=1.8.9.20180301
+pkgrel=2
+_name_release="oiio-Release-1.8.9"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -20,7 +20,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('9bc86cbc1df67285134bb4ac0ed7a450d52dfe75423577c469cae809a1154665'
+sha256sums=('6b785abc890a95c600903bd67d6746e14ee363a8bbea23842d2175d4e7a837f3'
 )
 
 build() {
@@ -31,7 +31,6 @@ build() {
 
   cmake \
       -DCMAKE_INSTALL_PREFIX=/usr \
-      -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
       -DSTOP_ON_WARNING=OFF \
       -DVERBOSE=ON \
@@ -44,6 +43,7 @@ build() {
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF \
       -DINSTALL_FONTS=OFF \
+      -DCMAKE_INSTALL_LIBDIR=lib \
       ..
   make
 }

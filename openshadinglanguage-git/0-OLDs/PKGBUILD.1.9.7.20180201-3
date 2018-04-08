@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openshadinglanguage-git
-pkgver=1.9.8.20180331
-pkgrel=1
-_name_release="OpenShadingLanguage-Release-1.9.8"
+pkgver=1.9.7.20180201
+pkgrel=3
+_name_release="OpenShadingLanguage-Release-1.9.7"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -18,7 +18,7 @@ conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('c2c6e43b6b6ede327d673fe435de2993a8018765ced9d9ed5c340d1fab64f6fa'
+sha256sums=('3ceec67b52befeb32013df1807f37ac0d9954f012a96fa42368f9aefcb73772b'
 )
 
 build() {
@@ -28,15 +28,16 @@ build() {
   mkdir build && cd build
 
   cmake \
+      -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_PREFIX=/usr \
-      -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
+      -DSTOP_ON_WARNING=OFF \
       -DLLVM_STATIC=OFF \
-      -DVERBOSE=ON \
       -DOSL_BUILD_TESTS=OFF \
       -DUSE_PARTIO=OFF \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF \
+      -DCMAKE_INSTALL_LIBDIR=lib \
     ..
   make
 }
