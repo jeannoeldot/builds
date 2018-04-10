@@ -6,7 +6,7 @@ cd $HOME/05-builds/profile-cleaner
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.2.35-1
+cp -v PKGBUILD PKGBUILD.2.37-1
 
 
 1) TÉLÉCHARGER SOURCES
@@ -29,16 +29,15 @@ mv -vf /tmp/0-AUR/profile-cleaner/readme.install .
 
 1-2) Download source
 ----------------------
-wget http://repo-ck.com/source/profile-cleaner\
-/profile-cleaner-2.36.tar.xz
+wget https://github.com/graysky2/profile-cleaner/archive/v2.37.tar.gz
 
 ls
 
-sha256sum profile-cleaner-2.36.tar.xz
+sha256sum v2.37.tar.gz
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgver=
 
@@ -56,7 +55,7 @@ sha256sums=(1111111111
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 profile-cleaner-2.36.tar.xz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 v2.37.tar.gz
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 readme.install
 
 !!! A MODIFIER SI PAS OK !
@@ -70,7 +69,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/profile-cleaner/PKGBUILD . \
-&& cp -v $HOME/05-builds/profile-cleaner/profile-cleaner-2.36.tar.xz . \
+&& cp -v $HOME/05-builds/profile-cleaner/v2.37.tar.gz . \
 && cp -v $HOME/05-builds/profile-cleaner/readme.install . \
 && makepkg -s \
 && cd $HOME/05-builds/profile-cleaner \
@@ -117,7 +116,7 @@ $ mv -v profile-cleaner-*-any.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i profile-cleaner-2.36.tar.xz
+$ rm -i v2.37.tar.gz
 $ rm -rf /tmp/0-AUR
 
 
@@ -144,6 +143,11 @@ profile-cleaner f
 =============================================================
 ANCIENS
 =======
+
+wget http://repo-ck.com/source/profile-cleaner\
+/v2.37.tar.gz
+
+
 
 3) MAKEPKG TMPFS en CHROOT EN USER
 ====================================
