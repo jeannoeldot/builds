@@ -6,16 +6,16 @@ cd $HOME/05-builds/openvdb-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/dreamworksanimation/openvdb/releases
-==> OpenVDB-DevTeam released this on 31 Jul  ==> 20170731
-==> v4.0.2  ==> 4.0.2
-==> 4.0.2.20170731
+==> OpenVDB-DevTeam released this on 10 Apr  ==> 20180410
+==> v5.1.0  ==> 5.1.0
+==> 5.1.0.20180410
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenVDB-v4.0.2.tar.gz \
-https://github.com/dreamworksanimation/openvdb/archive/v4.0.2.tar.gz
+wget -O OpenVDB-v5.1.0.tar.gz \
+https://github.com/dreamworksanimation/openvdb/archive/v5.1.0.tar.gz
 
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
@@ -24,7 +24,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v4.0.2.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v5.1.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -37,7 +37,10 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=4.0.2.20170731
+pkgver=5.1.0.20180410
+pkgrel=1
+
+
 pkgrel=6          # rebuild ilmbase/openexr 2.2.1
 pkgrel=5          # rebuild boost boost-libs 1.66.0-1
 pkgrel=4
@@ -47,7 +50,7 @@ pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 pkgrel=3          # SANS doc, SANS ABI=3
 
 !!!!!!
-_ver_release="4.0.2"
+_ver_release="5.1.0"
 _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
@@ -63,7 +66,7 @@ makedepends=('boost' 'mesa' 'doxygen' 'cmake')
 conflicts='openvdb'
 provides='openvdb'
 
-sha256sum OpenVDB-v4.0.2.tar.gz
+sha256sum OpenVDB-v5.1.0.tar.gz
 
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
@@ -81,42 +84,48 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenVDB-v4.0.2.tar.gz -C /tmp/srcp
+tar -xzf OpenVDB-v5.1.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openvdb-4.0.2/CMakeLists.txt
+1) kwrite /tmp/srcp/openvdb-5.1.0/CMakeLists.txt
 
 LIGNE 33: !!!!!!
 ----------------
 ENABLE_TESTING()
 
-LIGNE 35:
+LIGNE 41:
 ---------
 OPENVDB_BUILD_UNITTESTS "Build the OpenVDB unit tests" ON ==> OFF
 
-LIGNE 36:
+LIGNE 42:
 ---------
 OPENVDB_BUILD_DOCS "Build the OpenVDB documentation" OFF
 
-LIGNE 37:
+LIGNE 43:
 ---------
 OPENVDB_BUILD_PYTHON_MODULE "Build the pyopenvdb Python module" ON ==> OFF
 
-LIGNES 38 ET 39:
+LIGNES 44 ET 45:
 ----------------
 OPENVDB_BUILD_HOUDINI_SOPS "Build the Houdini SOPs" OFF
 OPENVDB_BUILD_MAYA_PLUGIN "Build the Maya plugin" OFF
 
-LIGNE 41: !!!!!!
+LIGNE 47: !!!!!!
 ----------------
 OPENVDB_ENABLE_RPATH "Build with RPATH information" ON ==> OFF
 
-LIGNE 42:
+LIGNE 48:
 ---------
 VOIR: BLENDER
 OpenVDB: Fix compilation error against OpenVDB 4
 author	Sergey Sharybin <sergey.vfx@gmail.com>	
 	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
 commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
+
+Build: add WITH_OPENVDB_3_ABI_COMPATIBLE option.
+author	Brecht Van Lommel <brechtvanlommel@gmail.com>	
+	Mon, 2 Apr 2018 18:55:10 +0200 (18:55 +0200)
+commit	71d7d6cd8c431b7f4fac8d65a4eaedf3cff6c8f6
+
 
 OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" ON ==> OFF
 
@@ -131,7 +140,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v4.0.2.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v5.1.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -149,7 +158,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v4.0.2.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v5.1.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -168,15 +177,15 @@ $ mkpkg-chroot-repo
 
 !!! EN USER
 
-  NATIVE
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m native
-
   FAST
 -------
 $ rm -f *~
 $ mkpkg-tmpfs -m fast
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
 
 
 $ rm -rf /tmp/chrootrepo
@@ -189,7 +198,7 @@ rm -f *~
 
 # Verifications...
 
-Checking openvdb-git-4.0.2.20170731-4-x86_64.pkg.tar.xz
+Checking openvdb-git-5.1.0.20180410-4-x86_64.pkg.tar.xz
 openvdb-git W: Referenced library 'libopenvdb.so.4.0' is an uninstalled dependency
 openvdb-git W: Dependency zlib included but already satisfied
 openvdb-git W: Dependency included and not needed ('jemalloc')
@@ -212,7 +221,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenVDB-v4.0.2.tar.gz
+$ rm -i OpenVDB-v5.1.0.tar.gz
 
 
 $ cd && maj-repolocal
