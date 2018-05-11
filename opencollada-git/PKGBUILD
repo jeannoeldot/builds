@@ -2,7 +2,7 @@
 
 pkgname=opencollada-git
 pkgver=1.6.62.20180113
-pkgrel=1
+pkgrel=2
 pkgdesc="Stream based reader and writer library for COLLADA files"
 arch=('x86_64')
 url="https://github.com/KhronosGroup/OpenCOLLADA"
@@ -12,13 +12,21 @@ makedepends=('cmake')
 conflicts=('opencollada')
 provides=('opencollada')
 source=("$pkgname-$pkgver.tar.gz"
+        'fix-conflicting-declaration-pcre-gcc810.patch'
         'opencollada.conf'
 )
 sha256sums=('bf1abc21ed4bc8731d0589030437aff54e45eae636307d1a09f176f515549cd6'
+            '8706faf6b3e5592f20122604f6a082bf70003cb1a7ee9d83a756211a40420260'
             '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
 )
 
 _gitname="opencollada"
+
+prepare() {
+  cd "${_gitname}"
+  # fix erreur : conflicting declaration ‘typedef struct real_pcre8_or_16 pcre’
+  patch -Np1 -i "${srcdir}/fix-conflicting-declaration-pcre-gcc810.patch"
+}
 
 build() {
   cd "${_gitname}"

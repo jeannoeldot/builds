@@ -1,0 +1,13 @@
+diff -aur opencollada/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h opencollada.new/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h
+--- opencollada/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h	2018-01-14 11:19:01.000000000 +0100
++++ opencollada.new/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h	2018-05-11 16:41:20.624457675 +0200
+@@ -13,8 +13,7 @@
+ 
+ #include "COLLADABUPrerequisites.h"
+ 
+-struct real_pcre;
+-typedef struct real_pcre pcre;
++#include "pcre.h"
+ 
+ 
+ namespace COLLADABU
