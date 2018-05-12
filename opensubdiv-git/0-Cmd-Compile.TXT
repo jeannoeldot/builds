@@ -69,6 +69,8 @@ voir 0-CmdFairePatches.TXT
 pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.3.1.20180214
 pkgrel=1
+pkgrel=2    # gcc 8.1.0
+
 
 license=('custom')
 
@@ -250,6 +252,13 @@ $ mkpkg-chroot-repo
 
 !!! EN USER
 
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ $HOME/bin/mkpkg-tmpfs -m fast
+
   NATIVE
 --------
 $ rm -f *~
@@ -257,13 +266,6 @@ $ $HOME/bin/mkpkg-tmpfs -m native
 
 $ rm -f *~
 $ mkpkg-tmpfs -m native
-
-  FAST
--------
-$ rm -f *~
-$ mkpkg-tmpfs -m fast
-
-$ $HOME/bin/mkpkg-tmpfs -m fast
 
 
 $ rm -rf /tmp/chrootrepo

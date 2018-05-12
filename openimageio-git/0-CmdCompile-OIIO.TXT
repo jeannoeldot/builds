@@ -39,6 +39,8 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=1.8.11.20180501
 pkgrel=1
+pkgrel=2    # gcc 8.1.0
+
 
 pkgrel=2          # rebuild CMAKE_INSTALL_LIBDIR=lib
 
@@ -224,17 +226,18 @@ cd $HOME/05-builds/openimageio-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-  NATIVE
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m native
-
   FAST
 -------
 $ rm -f *~
 $ mkpkg-tmpfs -m fast
 
 $ mkpkg-tmpfs -m fast -l logs
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
 
 $ rm -rf /tmp/chrootrepo
 

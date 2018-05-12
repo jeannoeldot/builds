@@ -1,8 +1,8 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.4.20180512
-pkgrel=1
+pkgver=2.79.4.20180509
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -36,7 +36,7 @@ install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
-sha256sums=('6361531eff213f152bad6203eff0c08766c0980809c647b7f5acb5e410f42b22'
+sha256sums=('d243a95107bf41deaf6e935f4d2357e5ed064c3dbdda3bf35c2a49fbc905b987'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
 )
 
@@ -56,9 +56,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "c84b8d48019"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "0385b33f0b3"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1526105096|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1525873949|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -99,6 +99,8 @@ build() {
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_LOGGING=OFF \
         -DWITH_LLVM=ON \
+        -DLLVM_VERSION=6.0 \
+        -DLLVM_STATIC=OFF \
         -DWITH_DOC_MANPAGE=ON \
         -DWITH_C11=ON \
         -DWITH_CXX11=ON \
@@ -114,6 +116,13 @@ package() {
   # Blender
   cd "${_gitname}/build"
   make DESTDIR="${pkgdir}" install
+
+  # Install addons_contrib. Version 2.79 du 05/08/2017 : NON installé par défaut
+  msg "Install addons_contrib..."
+  install -dm755 "${pkgdir}"/usr/share/blender/${_slot}/scripts/addons_contrib
+  cp --preserve=mode -r ../release/scripts/addons_contrib/* \
+                        "${pkgdir}"/usr/share/blender/${_slot}/scripts/addons_contrib/
+  rm -f "${pkgdir}"/usr/share/blender/${_slot}/scripts/addons_contrib/{.arcconfig,.gitignore}
 
   # voir Community
   python -m compileall "${pkgdir}/usr/share/blender"

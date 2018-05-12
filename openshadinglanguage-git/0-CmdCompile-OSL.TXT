@@ -45,6 +45,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.9.9.tar.gz .
 pkgname=openshadinglanguage-git
 pkgver=1.9.9.20180502
 pkgrel=1
+pkgrel=2    # gcc 8.1.0
 
 pkgrel=3    # Rebuild MAJ LLVM 6.0.0 et CMAKE_INSTALL_LIBDIR=lib
 
@@ -227,17 +228,17 @@ SI depends=("openimageio-git")
 ==============================
 $ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
-  NATIVE
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m native
-
   FAST
 -------
 $ rm -f *~
 $ mkpkg-tmpfs -m fast
 
 $ mkpkg-tmpfs -m fast -l logs
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
 
 
 $ rm -rf /tmp/chrootrepo

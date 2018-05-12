@@ -2,7 +2,7 @@
 
 pkgname=opensubdiv-git
 pkgver=3.3.1.20180214
-pkgrel=1
+pkgrel=2
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
 license=('custom')
