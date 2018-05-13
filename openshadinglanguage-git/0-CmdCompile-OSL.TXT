@@ -46,6 +46,7 @@ pkgname=openshadinglanguage-git
 pkgver=1.9.9.20180502
 pkgrel=1
 pkgrel=2    # gcc 8.1.0
+pkgrel=3    # Rebuild MAJ OIIO et MAJ ffmpeg 4.0
 
 pkgrel=3    # Rebuild MAJ LLVM 6.0.0 et CMAKE_INSTALL_LIBDIR=lib
 
