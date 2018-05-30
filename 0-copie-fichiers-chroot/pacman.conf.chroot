@@ -110,10 +110,6 @@ Include = /etc/pacman.d/mirrorlist
 #SigLevel = Optional TrustAll
 #Server = file:///home/custompkgs
 
-#[archlinuxfr]
-#SigLevel = Never
-#Server = http://repo.archlinux.fr/x86_64
-
 #[xyne-x86_64]
 ## A repo for Xyne's own projects: http://xyne.archlinux.ca/projects/
 ## Packages for the "x86_64" architecture.

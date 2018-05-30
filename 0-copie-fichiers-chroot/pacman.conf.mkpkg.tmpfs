@@ -116,10 +116,6 @@ Include = /etc/pacman.d/mirrorlist
 SigLevel = Optional TrustAll
 Server = file:///home/jnd/00-repolocal
 
-[archlinuxfr]
-SigLevel = Never
-Server = http://repo.archlinux.fr/$arch
-
 [xyne-x86_64]
 SigLevel = Required
 Server = https://xyne.archlinux.ca/repos/xyne
