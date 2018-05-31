@@ -3,7 +3,7 @@ cd $HOME/05-builds/pkgbrowser
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.0.20.1-1
+cp -v PKGBUILD PKGBUILD.0.21.1-1
 
 
 VERSION = 0.21
@@ -37,7 +37,7 @@ md5sum pkgbrowser-0.21.tar.gz
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgver=0.21
-pkgrel=1
+pkgrel=2
 
 AJOUTER : hicolor-icon-theme
 depends=('pacman>=4.1' 'pacman<5.1' 'python>=3.2' 'python<3.7' 'python-pyqt5'
@@ -108,7 +108,8 @@ makepkg -f
 # Verifications...
 ==================
 
-Checking pkgbrowser-0.21-1-x86_64.pkg.tar.xz
+namcap pkgbrowser-*-x86_64.pkg.tar.*
+Checking pkgbrowser-0.21-2-x86_64.pkg.tar.xz
 pkgbrowser W: Dependency python included but already satisfied
 pkgbrowser W: Dependency python included but already satisfied
 pkgbrowser W: Dependency included and not needed ('python-pyqt5')
