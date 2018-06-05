@@ -125,6 +125,7 @@ pkgname=blender-git
 !!!!!!
 pkgver=2.79.4.20180605
 pkgrel=1
+pkgrel=2          # CUDA 9.2.88.1 : Render GPU PAS OK. Test avec CUDA=9.1.85.3
 
 pkgrel=1          # TEST build gcc 8.1.0 ==> OK
 pkgrel=2          # rebuild OpenVDB-v5.1.0
@@ -507,6 +508,29 @@ $ mkpkg-tmpfs -m native -g 16G -l logs
 
 
 $ rm -rf /tmp/chrootrepo
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/blender-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.4.20180605.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/fix-IndentationError-np_station.patch . \
+&& cp -v $HOME/05-builds/blender-git/blender.install . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/blender-git \
+&& cp -v /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/blender-git && rm -rf /tmp/build
+
 
 
 ==> Installing missing dependencies...

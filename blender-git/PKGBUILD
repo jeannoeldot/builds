@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=2.79.4.20180605
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -25,7 +25,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'llvm-libs'
 )
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
-             'cuda'
+             'cuda=9.1.85.3'
              'git'
 )
 optdepends=('cuda: cycles renderer cuda support')
@@ -58,7 +58,7 @@ prepare() {
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
   sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b99d064e914"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1526186643|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1528173357|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
