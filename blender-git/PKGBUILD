@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=2.79.4.20180605
-pkgrel=2
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')

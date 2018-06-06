@@ -126,6 +126,7 @@ pkgname=blender-git
 pkgver=2.79.4.20180605
 pkgrel=1
 pkgrel=2          # CUDA 9.2.88.1 : Render GPU PAS OK. Test avec CUDA=9.1.85.3
+pkgrel=3          # TEST build dans chroot
 
 pkgrel=1          # TEST build gcc 8.1.0 ==> OK
 pkgrel=2          # rebuild OpenVDB-v5.1.0
@@ -495,6 +496,14 @@ $ mkpkg-tmpfs -m fast -g 16G
 OU
 $ rm -f *~
 $ mkpkg-tmpfs -m fast -g 16G -l logs
+
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G -l logs
+
 -------------------------------------------------------------------
 
   NATIVE
@@ -513,8 +522,12 @@ $ rm -rf /tmp/chrootrepo
 ====================================
 !!! EN ROOT
 # pacman -Syu
+OU
+# maj
 
 rm -f *~ \
+&& sudo cp -v /etc/makepkg.conf /etc/makepkg.conf.backup.build.blender \
+&& sudo cp -v -f /home/jnd/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast /etc/makepkg.conf \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
@@ -524,12 +537,15 @@ rm -f *~ \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
-&& cp -v /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
-&& rm -rf /tmp/build
+&& cp -v -f /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build \
+&& sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/blender-git && rm -rf /tmp/build
+cd $HOME/05-builds/blender-git \
+&& rm -rf /tmp/build \
+&& sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
 
 
 
