@@ -39,6 +39,8 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=1.8.12.20180601
 pkgrel=1
+pkgrel=2          # rebuild boost boost-libs 1.67.0-4
+
 pkgrel=2          # gcc 8.1.0
 pkgrel=3          # rebuild MAJ ffmpeg 4.0
 

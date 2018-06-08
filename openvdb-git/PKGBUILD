@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=5.1.0.20180410
-pkgrel=1
+pkgrel=2
 _ver_release="5.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
@@ -18,10 +18,18 @@ makedepends=('doxygen' 'boost' 'cmake' 'mesa'
 conflicts=('openvdb')
 provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
+        'boost-1.67.patch'
 )
 sha256sums=('eb5a8011732bcdeb115de9a38f640ee376bcb85b54e060d3b1ab08f9dc92f40b'
+            '5c9b8a610bcfb1c005789cd29b7ca6c92da34c751ac9b23f8ff3e611c0822641'
 )
 
+
+prepare() {
+  cd "${_name_release}"
+  # Fix erreur : undefined reference to symbol 'pthread_condattr_setclock@@GLIBC_2.3.3'
+  patch -Np1 -i "${srcdir}/boost-1.67.patch"
+}
 
 build() {
   cd "${_name_release}"

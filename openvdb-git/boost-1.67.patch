@@ -1,0 +1,11 @@
+diff -aur openvdb-5.1.0/openvdb/CMakeLists.txt openvdb-5.1.0.new/openvdb/CMakeLists.txt
+--- openvdb-5.1.0/openvdb/CMakeLists.txt	2018-04-10 20:22:17.000000000 +0200
++++ openvdb-5.1.0.new/openvdb/CMakeLists.txt	2018-06-08 16:18:46.051773793 +0200
+@@ -275,6 +275,7 @@
+   TARGET_LINK_LIBRARIES ( vdb_view
+     openvdb_shared
+     ${Boost_THREAD_LIBRARY}
++    ${CMAKE_THREAD_LIBS_INIT}
+     ${OPENGL_gl_LIBRARY}
+     ${OPENGL_glu_LIBRARY}
+     ${COCOA_LIBRARY}

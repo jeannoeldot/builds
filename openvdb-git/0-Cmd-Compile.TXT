@@ -39,6 +39,7 @@ voir 0-CmdFairePatches.TXT
 pkgname=openvdb-git               # openvdb ds community
 pkgver=5.1.0.20180410
 pkgrel=1
+pkgrel=2          # rebuild boost boost-libs 1.67.0-4
 
 
 pkgrel=6          # rebuild ilmbase/openexr 2.2.1
@@ -66,12 +67,34 @@ makedepends=('boost' 'mesa' 'doxygen' 'cmake')
 conflicts='openvdb'
 provides='openvdb'
 
+AVEC PATCH
+----------
+source=("OpenVDB-v${_ver_release}.tar.gz"
+        'boost-1.67.patch'
+)
+
+sha256sum OpenVDB-v5.1.0.tar.gz
+
+sha256sum boost-1.67.patch
+
+sha256sums=('...'
+            '...'
+)
+
+SANS PATCH
+----------
 sha256sum OpenVDB-v5.1.0.tar.gz
 
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
 sha256sums=('... ...'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # Fix erreur : undefined reference to symbol 'pthread_condattr_setclock@@GLIBC_2.3.3'
+  patch -Np1 -i "${srcdir}/boost-1.67.patch"
+
 
 build() {
   cd "${_name_release}"

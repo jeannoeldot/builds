@@ -1,0 +1,148 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 5.1.0
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/openvdb-git
+
+mkdir /tmp/srcp
+
+cp -v OpenVDB-v5.1.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf OpenVDB-v5.1.0.tar.gz
+
+
+1) MODIFIER openvdb-5.1.0/openvdb/CMakeLists.txt
+================================================
+cp -R openvdb-5.1.0 openvdb-5.1.0.new
+
+cd openvdb-5.1.0.new/openvdb
+
+kwrite CMakeLists.txt
+
+LIGNE 278 : RAJOUTER :
+    ${CMAKE_THREAD_LIBS_INIT}
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+ 
+cd ../..
+
+diff -aur openvdb-5.1.0 openvdb-5.1.0.new
+diff -aur openvdb-5.1.0 openvdb-5.1.0.new > boost-1.67.patch
+
+rm -rf openvdb-5.1.0.new
+
+cd $HOME/05-builds/openvdb-git
+
+mv -vf /tmp/srcp/boost-1.67.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
+
+
+=================================================================
+TESTS SED PKGBUILD
+==================
+
+cd $HOME/05-builds/openvdb-git
+
+mkdir /tmp/srcp
+
+cp -v OpenVDB-v5.1.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf OpenVDB-v5.1.0.tar.gz
+
+cd openvdb
+
+cp -v Makefile Makefile.original
+
+1) TESTS SED DÉPENDANCES
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "/^DESTDIR := /c\DESTDIR := ${pkgdir}/usr" \
+          -e "/^BOOST_INCL_DIR := /c\BOOST_INCL_DIR := /usr/include/boost" \
+          -e "/^BOOST_LIB_DIR := /c\BOOST_LIB_DIR := /usr/lib" \
+          -e "/^EXR_INCL_DIR := /c\EXR_INCL_DIR := /usr/include/OpenEXR" \
+          -e "/^EXR_LIB_DIR := /c\EXR_LIB_DIR := /usr/lib" \
+          -e "/^ILMBASE_INCL_DIR := /c\ILMBASE_INCL_DIR := /usr/include/OpenEXR" \
+          -e "/^ILMBASE_LIB_DIR := /c\ILMBASE_LIB_DIR := /usr/lib" \
+          -e "/^TBB_INCL_DIR := /c\TBB_INCL_DIR := /usr/include/tbb" \
+          -e "/^TBB_LIB_DIR := /c\TBB_LIB_DIR := /usr/lib" \
+          -e "/^BLOSC_INCL_DIR := /c\BLOSC_INCL_DIR := /usr/include" \
+          -e "/^BLOSC_LIB_DIR := /c\BLOSC_LIB_DIR := /usr/lib" \
+          -e "/^BLOSC_LIB := /c\BLOSC_LIB := -lblosc -lz" \
+          -e "/^CONCURRENT_MALLOC_LIB_DIR := /c\CONCURRENT_MALLOC_LIB_DIR := /usr/lib" \
+          -e "/^CPPUNIT_INCL_DIR := /c\CPPUNIT_INCL_DIR :=" \
+          -e "/^CPPUNIT_LIB_DIR := /c\CPPUNIT_LIB_DIR :=" \
+          -e "/^CPPUNIT_LIB := /c\CPPUNIT_LIB :=" \
+          -e "/^LOG4CPLUS_INCL_DIR := /c\LOG4CPLUS_INCL_DIR :=" \
+          -e "/^LOG4CPLUS_LIB_DIR := /c\LOG4CPLUS_LIB_DIR :=" \
+          -e "/^LOG4CPLUS_LIB := /c\LOG4CPLUS_LIB :=" \
+          -e "/^GLFW_INCL_DIR := /c\GLFW_INCL_DIR := /usr/include/GLFW" \
+          -e "/^GLFW_LIB_DIR := /c\GLFW_LIB_DIR := /usr/lib" \
+          -e "/^PYTHON_VERSION := /c\PYTHON_VERSION :=" \
+          -e "/^PYTHON_INCL_DIR := /c\PYTHON_INCL_DIR :=" \
+          -e "/^PYCONFIG_INCL_DIR := /c\PYCONFIG_INCL_DIR :=" \
+          -e "/^PYTHON_LIB_DIR := /c\PYTHON_LIB_DIR :=" \
+          -e "/^PYTHON_LIB := /c\PYTHON_LIB :=" \
+          -e "/^BOOST_PYTHON_LIB_DIR := /c\BOOST_PYTHON_LIB_DIR :=" \
+          -e "/^BOOST_PYTHON_LIB := /c\BOOST_PYTHON_LIB :=" \
+          -e "/^NUMPY_INCL_DIR := /c\NUMPY_INCL_DIR :=" \
+          -e "/^EPYDOC := /c\EPYDOC :=" \
+          Makefile
+
+head -n 182 Makefile
+
+2) TESTS SED -isystem
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-isystem/-I/g" Makefile
+
+cat Makefile
+
+
+
+!!! ==> COMPIL PAS OK
+
+2) TESTS SED -isystem
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-isystem //g" Makefile
+
+cat Makefile
+
+3) TESTS SED -I . -I .. 
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-I . -I .. //g" Makefile
+
+cat Makefile
+
+5) QUAND TESTS FINIS
+=======================
+cd $HOME/05-builds/openvdb-git
+
+rm -rf /tmp/srcp
+
+sync
