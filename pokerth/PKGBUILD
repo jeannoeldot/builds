@@ -4,12 +4,12 @@
 # Contributor: Bartłomiej Piotrowski <barthalion@gmail.com>
 # Contributor: Vasco Costa <vasco.costa@meiodigital.com>
 # Contributor: Federico Cinelli <cinelli@aur.archlinux.org>
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=4
+pkgrel=5
 pkgdesc="Open source Texas Hold'em Poker simulator"
 arch=('i686' 'x86_64')
 url="http://www.pokerth.net/"
@@ -48,7 +48,6 @@ build() {
 package() {
   cd "$pkgname-$_pkgver"
 
-  # The make install target doesn't do shit anymore for some reason.
   make INSTALL_ROOT="$pkgdir" install
 
   install -Dm644 "docs/pokerth.1" "$pkgdir/usr/share/man/man1/pokerth.1"
