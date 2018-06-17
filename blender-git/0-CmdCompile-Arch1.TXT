@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   Fri, 8 Jun 2018 22:17:21 +0200 (22:17 +0200)
-==> 20180608
+==> last change   Sat, 16 Jun 2018 20:29:38 +0200 (12:29 -0600)
+==> 20180616
 
 
 1.2 REVISION
@@ -47,7 +47,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short HEAD
-==> MY_WC_HASH = 5165d629315
+==> MY_WC_HASH = 36e82b77593
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -57,7 +57,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1528489041
+==> MY_WC_COMMIT_TIMESTAM = 1529173778
 
 
 cd ..
@@ -74,9 +74,9 @@ cd ..
 $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
 #define BLENDER_VERSION         279
-#define BLENDER_SUBVERSION      4
+#define BLENDER_SUBVERSION      5
 
-==> Version = 2.79.4.20180608
+==> Version = 2.79.5.20180616
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.78 à 2.79)
 !!! EN ROOT
@@ -90,7 +90,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.79.4.20180608.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.79.5.20180616.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -98,7 +98,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.4.20180608.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.5.20180616.tar.gz .
 sync
 
 
@@ -123,8 +123,9 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.79.4.20180608
+pkgver=2.79.5.20180616
 pkgrel=1
+
 pkgrel=1          # rebuild boost boost-libs 1.67.0-4
 
 pkgrel=2          # CUDA 9.2.88.1 : Render GPU PAS OK. Test avec CUDA=9.1.85.3
@@ -188,7 +189,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
 )
 
-sha256sum blender-git-2.79.4.20180608.tar.gz
+sha256sum blender-git-2.79.5.20180616.tar.gz
 
 sha256sum fix-IndentationError-np_station.patch
 
@@ -214,9 +215,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 55 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5165d629315"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "36e82b77593"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1528489041|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1529173778|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -225,7 +226,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.79.4.20180608.tar.gz
+sha256sum blender-git-2.79.5.20180616.tar.gz
 
 sha256sums=(...
          ...
@@ -448,7 +449,7 @@ Lignes 512 et ...
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.79.4.20180608.tar.gz
+-rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.79.5.20180616.tar.gz
 -rw-r--r--  1 jnd users     1228  1 oct.  16:46 blender.install
 -rw-r--r--  1 jnd users      479 25 juin   2017 fix-IndentationError-np_station.patch
 -rw-r--r--  1 jnd users     4070 28 janv. 10:41 PKGBUILD
@@ -534,7 +535,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.4.20180608.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.5.20180616.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-IndentationError-np_station.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -599,7 +600,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.79.4.20180608.tar.gz
+$ rm -i blender-git-2.79.5.20180616.tar.gz
 
 
 $ cd && maj-repolocal
@@ -636,11 +637,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "5165d629315"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "36e82b77593"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1528489041|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1529173778|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -718,7 +719,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-ant_landscape.patch'
 )
 
-sha256sum blender-git-2.79.4.20180608.tar.gz
+sha256sum blender-git-2.79.5.20180616.tar.gz
 
 sha256sum fix-IndentationError-np_station.patch
 
@@ -757,7 +758,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.4.20180608.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.5.20180616.tar.gz .
 sync
 
 
@@ -785,7 +786,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
 
-sha256sum blender-git-2.79.4.20180608.tar.gz
+sha256sum blender-git-2.79.5.20180616.tar.gz
 
 sha256sum fix-Error-llvm-config-3.9.patch
 
@@ -903,7 +904,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-algoDIR-algoPOV.patch'
 )
 
-sha256sum blender-git-2.79.4.20180608.tar.gz
+sha256sum blender-git-2.79.5.20180616.tar.gz
 
 sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
 
@@ -955,7 +956,7 @@ LE 12/07/2016
 TEST COMPIL DS CHROOT
 AVEC GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5.18-4 / GCC5 5.4.0 COMMUNITY
  SANS PATCH fix-isfinite-was-not-declared-in-this-scope.patch
-pkgver=2.79.4.20160627
+pkgver=2.79.5.20160627
 pkgrel=2
 !!!!!!-----------------------------------------------------------
 !!! SI DANS ARCH3 KDE:
@@ -971,7 +972,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.79.4.20180608.tar.gz
+sha256sum blender-git-2.79.5.20180616.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -991,7 +992,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.4.20180608.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.5.20180616.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -1006,7 +1007,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.4.20180608.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.5.20180616.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -1076,7 +1077,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.79.4.20180608.tar.gz
+sha256sum blender-git-2.79.5.20180616.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -1133,7 +1134,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.4.20180608.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.5.20180616.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \
