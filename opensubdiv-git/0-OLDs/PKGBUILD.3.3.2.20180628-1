@@ -1,7 +1,7 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=opensubdiv-git
-pkgver=3.3.3.20180718
+pkgver=3.3.2.20180628
 pkgrel=1
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
@@ -14,7 +14,7 @@ conflicts=('opensubdiv')
 provides=('opensubdiv')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('e4aab03a2f5e1706f99c84f5f9339dae0153c277c2172a165dabee27e4be401d'
+sha256sums=('8f9d7721ea1f83df032717e7d80aa618340b9e48332fb84029612ae3d7f8c586'
 )
 
 _gitname="opensubdiv"
