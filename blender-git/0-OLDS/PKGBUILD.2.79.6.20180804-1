@@ -1,7 +1,7 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.6.20180806
+pkgver=2.79.6.20180804
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,11 +35,9 @@ options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-np_station.patch'
-        'fix-SyntaxError-object_facemap_auto.patch'
 )
-sha256sums=('eaf7f962f3aa4a1459386764f33caa010860a28aa131194868b1e7e941da5835'
+sha256sums=('d8e887868e32e1c716b2ed1ae762be29be8c6ec4a73974deb77f05197d658b5d'
             'a3c09dd90f80536ff73dc4d216b47ace735ecdd8c88ec7858bdb4edb7b584873'
-            'a86b8c6b605586ed5339908c61435a0d8cf6f8e4162c2310bc42800451bf810d'
 )
 
 _gitname="blender"
@@ -49,9 +47,6 @@ prepare() {
   cd "${_gitname}"
   # fix erreur : IndentationError: expected an indented block (np_point_dimension.py, line 148)
   patch -Np1 -i "${srcdir}/fix-IndentationError-np_station.patch"
-
-  # fix erreur : SyntaxError: Generator expression must be parenthesized (auto_fmap_widgets.py, line 327)
-  patch -Np1 -i "${srcdir}/fix-SyntaxError-object_facemap_auto.patch"
   
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
   sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
@@ -61,9 +56,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4c4aa65adbe"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "a56ec3dfe3e"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1533550295|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1533382838|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -105,10 +100,10 @@ build() {
         -DWITH_CYCLES_LOGGING=OFF \
         -DWITH_LLVM=ON \
         -DWITH_DOC_MANPAGE=ON \
-        -DPYTHON_VERSION=3.7 \
+        -DPYTHON_VERSION=3.6 \
         -DPYTHON_LIBPATH=/usr/lib \
-        -DPYTHON_LIBRARY=python3.7m \
-        -DPYTHON_INCLUDE_DIRS=/usr/include/python3.7m \
+        -DPYTHON_LIBRARY=python3.6m \
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python3.6m \
         ..
   make ${MAKEFLAGS}
 }

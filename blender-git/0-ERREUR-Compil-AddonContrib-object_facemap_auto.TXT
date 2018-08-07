@@ -1,0 +1,19 @@
+
+https://www.archlinux.org/todo/python-37-rebuild-failures/
+
+https://github.com/django/django/commit/931c60c5216bd71bc11f489e00e063331cf21f40
+
+
+Listing '/build/blender-git/pkg/blender-git/usr/share/blender/2.79/scripts/addons_contrib/object_facemap_auto'...
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.79/scripts/addons_contrib/object_facemap_auto/__init__.py'...
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.79/scripts/addons_contrib/object_facemap_auto/auto_fmap_ops.py'...
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.79/scripts/addons_contrib/object_facemap_auto/auto_fmap_utils.py'...
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.79/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py'...
+***   File "/build/blender-git/pkg/blender-git/usr/share/blender/2.79/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py", line 327
+    item.partition("=")[::2] for item in fmap_rules,
+    ^
+SyntaxError: Generator expression must be parenthesized
+
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.79/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets_xform.py'...
+
+

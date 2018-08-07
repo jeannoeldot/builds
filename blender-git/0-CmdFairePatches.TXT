@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.79.6.20180804
+!!! VERSION = 2.79.6.20180806
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.79.6.20180804.tar.gz /tmp/srcp/
+cp -v blender-git-2.79.6.20180806.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.79.6.20180804.tar.gz
+tar -xzf blender-git-2.79.6.20180806.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
@@ -55,6 +55,40 @@ rm -rf blender.new
 cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/fix-IndentationError-np_station.patch .
+
+
+2) MODIFIER blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
+===========================================================================================
+cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons_contrib/object_facemap_auto
+kwrite auto_fmap_widgets.py
+
+MODIFIER LIGNES 326 327 328 :
+        mpr.fmap_target_rules = dict(
+            item.partition("=")[::2] for item in fmap_rules,
+        )
+ 
+DEVIENNENT
+        mpr.fmap_target_rules = dict(item.partition("=")[::2] for item in fmap_rules)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier auto_fmap_widgets.py~
+rm -f auto_fmap_widgets.py~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-object_facemap_auto.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-object_facemap_auto.patch .
 
 
 

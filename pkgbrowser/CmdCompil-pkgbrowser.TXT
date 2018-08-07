@@ -37,10 +37,11 @@ md5sum pkgbrowser-0.21.tar.gz
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgver=0.21
-pkgrel=2
+pkgrel=3    # MAJ python 3.7
+pkgrel=2    # MAJ pacman 5.1
 
 AJOUTER : hicolor-icon-theme
-depends=('pacman>=4.1' 'pacman<5.1' 'python>=3.2' 'python<3.7' 'python-pyqt5'
+depends=('pacman>=4.1' 'pacman<5.2' 'python>=3.2' 'python<3.8' 'python-pyqt5'
          'hicolor-icon-theme')
 
 SUPPRIMER :
