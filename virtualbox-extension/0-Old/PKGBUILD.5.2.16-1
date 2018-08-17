@@ -1,8 +1,8 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=virtualbox-extension
-pkgver=5.2.18
-_build=124319
+pkgver=5.2.16
+_build=123759
 pkgrel=1
 pkgdesc="Oracle VM VirtualBox Extension Pack"
 arch=('any')
@@ -16,7 +16,7 @@ options=('!strip')
 source=("http://download.virtualbox.org/virtualbox/$pkgver/Oracle_VM_VirtualBox_Extension_Pack-$pkgver-$_build.vbox-extpack"
 )
 
-sha256sums=('3ecb43c71502741f4eb790576c608eb65cd424bcf3dfdb56471e4a2cac806f68'
+sha256sums=('dcb3b24d28c30749e6c073e102719ba16700fc9fe4e7a25de9503976b6774bf5'
 )
 
 install="virtualbox-extension.install"
