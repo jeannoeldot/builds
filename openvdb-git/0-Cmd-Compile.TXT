@@ -38,8 +38,9 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=5.1.0.20180410
-pkgrel=1
+pkgrel=3          # rebuild MAJ ilmbase/openexr 2.3
 pkgrel=2          # rebuild boost boost-libs 1.67.0-4
+pkgrel=1
 
 
 pkgrel=6          # rebuild ilmbase/openexr 2.2.1
