@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   Fri, 24 Aug 2018 14:36:18 +0200 (14:36 +0200)
-==> 20180824
+==> last change   Sun, 2 Sep 2018 10:51:31 +0200 (18:51 +1000)
+==> 20180902
 
 
 1.2 REVISION
@@ -47,7 +47,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short HEAD
-==> MY_WC_HASH = 658a9c6cf52
+==> MY_WC_HASH = 0ddf3e110ef
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -57,7 +57,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1535114178
+==> MY_WC_COMMIT_TIMESTAM = 1535878291
 
 
 cd ..
@@ -67,7 +67,7 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=NON_MODIFIÉ
+==> CMAKELISTS.TXT=MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
@@ -76,7 +76,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 #define BLENDER_VERSION         279
 #define BLENDER_SUBVERSION      6
 
-==> Version = 2.79.6.20180824
+==> Version = 2.79.6.20180902
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.78 à 2.79)
 !!! EN ROOT
@@ -90,7 +90,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.79.6.20180824.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.79.6.20180902.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -98,7 +98,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20180824.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20180902.tar.gz .
 sync
 
 
@@ -123,7 +123,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.79.6.20180824
+pkgver=2.79.6.20180902
 pkgrel=1
 
 pkgrel=1          # rebuild python 3.7
@@ -192,7 +192,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.79.6.20180824.tar.gz
+sha256sum blender-git-2.79.6.20180902.tar.gz
 
 sha256sum fix-IndentationError-np_station.patch
 
@@ -223,9 +223,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 55 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "658a9c6cf52"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "0ddf3e110ef"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1535114178|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1535878291|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -234,7 +234,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.79.6.20180824.tar.gz
+sha256sum blender-git-2.79.6.20180902.tar.gz
 
 sha256sums=(...
          ...
@@ -273,11 +273,11 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI NON_MODIFIÉ
-    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
+    VALEUR CMAKELISTS.TXT=MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
-Lignes 168 et ...
+Lignes 173 et ...
 # customize...
 if(UNIX AND NOT APPLE)
         # some of these libraries are problematic on Linux
@@ -292,55 +292,56 @@ if(UNIX AND NOT APPLE)
         set(_init_SDL                            OFF)   ==> ON
         set(_init_FFTW3                          OFF)   ==> ON
         set(_init_OPENSUBDIV                     OFF)   ==> ON
+	set(_init_SYSTEM_OPENJPG                 OFF)   ==> ON
 endif()
 
 # Blender internal features
-216 option(WITH_BUILDINFO   ==> ON   si ON makedepends = git
+223 option(WITH_BUILDINFO   ==> ON   si ON makedepends = git
 
-230 option(WITH_FFTW3   ==> ON
+237 option(WITH_FFTW3   ==> ON
 
-234 option(WITH_GAMEENGINE   ==> OFF
+241 option(WITH_GAMEENGINE   ==> OFF
 
-241 option(WITH_OPENCOLORIO   ==> ON
+248 option(WITH_OPENCOLORIO   ==> ON
 
 # Compositor
-246 option(WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
-248 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
-249 option(WITH_OPENVDB_BLOSC   ==> ON
+243 option(WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
+255 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
+256 option(WITH_OPENVDB_BLOSC   ==> ON
 
-301 WITH_SYSTEM_OPENJPEG      ==> ON
+308 WITH_SYSTEM_OPENJPEG      ==> ON
 
-303     !!! VOIR
+310     !!! VOIR
 if(UNIX AND NOT APPLE)
 	option(WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
 endif()
 
 
 # Modifiers
-312 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
-314 option WITH_MOD_OCEANSIM	==> ON
+319 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
+321 option WITH_MOD_OCEANSIM	==> ON
 
 # Image format support
-318 option(WITH_IMAGE_OPENEXR	==> ON
+325 option(WITH_IMAGE_OPENEXR	==> ON
 
 324 option WITH_IMAGE_FRAMESERVER    ==> OFF
 
 # Audio/Video format support
-328	option WITH_CODEC_FFMPEG	==> ON
-329	option WITH_CODEC_SNDFILE	==> ON
+335	option WITH_CODEC_FFMPEG	==> ON
+336	option WITH_CODEC_SNDFILE	==> ON
 
-Lignes 331 et ...
+Lignes 338 et ...
 # Alembic support
 option(WITH_ALEMBIC             "Enable Alembic Support" OFF)
 option(WITH_ALEMBIC_HDF5        "Enable Legacy Alembic Support (not officially supported)" OFF)
 
 Lignes 335
 # 3D format support
-337   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
+344   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
 
 # Sound output
-340   option(WITH_SDL   	==> ON
-342   option WITH_JACK          ==> OFF         si ON  dep =  jack
+347   option(WITH_SDL   	==> ON
+349   option WITH_JACK          ==> OFF         si ON  dep =  jack
 
 # Compression
 
@@ -351,19 +352,19 @@ Lignes 335
 # Freestyle
 
 # Misc
-375	option WITH_INPUT_NDOF		==> OFF
+382	option WITH_INPUT_NDOF		==> OFF
 
 
-378	WITH_INSTALL_PORTABLE       ON   ==> OFF
+385	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-386     WITH_PYTHON_INSTALL             ON   ==> OFF
+393     WITH_PYTHON_INSTALL             ON   ==> OFF
 
-388     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+395     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-393     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+400     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
         
-406 # Cycles
+409 # Cycles
 option WITH_CYCLES			ON     si ON dep = openimageio
 option WITH_CYCLES_OSL                  ==> ON dep = openshadinglanguage
 option(WITH_CYCLES_OPENSUBDIV		==> ON dep = opensubdiv
@@ -383,27 +384,27 @@ LIGNE 119:
 exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
 -DCYCLES_CUDA_BINARIES_ARCH=sm_52;sm_61
 
-Lignes 413 ????
+Lignes 422 ????
 option(WITH_CYCLES_LOGGING              ON   ==> OFF
         
 !!! A VOIR ???
-415 WITH_CYCLES_NATIVE_ONLY	"Build Cycles with native kernel only (which fits current CPU, use for development only)" OFF)
+424 WITH_CYCLES_NATIVE_ONLY	"Build Cycles with native kernel only (which fits current CPU, use for development only)" OFF)
    	==> ON ???
 
 !!! A VOIR ???
-428   WITH_CUDA_DYNLOAD     ON
+437   WITH_CUDA_DYNLOAD     ON
 
 
-431 # LLVM
+440 # LLVM
 $ pacman -Ss llvm | grep install
 extra/llvm 6.0.1-4 [installé]
 extra/llvm-libs 6.0.1-4 [installé]
 
-432 option(WITH_LLVM   	OFF  ==> ON
+441 option(WITH_LLVM   	OFF  ==> ON
 
 
 # Documentation
-Lignes 463 et ...
+Lignes 473 et ...
 if(UNIX AND NOT APPLE)
         option(WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON
 endif()
@@ -412,11 +413,11 @@ endif()
 # OpenGL
 # OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
 ---------------------------------------------------
-Lignes 290 et ...
+Lignes 297 et ...
         option(WITH_SYSTEM_GLEW         ==> OFF
         option(WITH_SYSTEM_GLES         ==> ON
 
-Lignes 469 et ...
+Lignes 478 et ...
 INCHANGÉS :
 ------------
 error: VOIR : 00-Erreur-Compile-WITH_GL_PROFILE_CORE-ON.TXT
@@ -433,10 +434,10 @@ TESTS DANS PKGBUILD
 
 
 # Compiler toolchain
-Lignes 508 et ...
+Lignes 517 et ...
 
 # Dependency graph
-Lignes 557 et ...
+Lignes 566 et ...
 
 
 =================================================================
@@ -451,7 +452,7 @@ Lignes 557 et ...
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.79.6.20180824.tar.gz
+-rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.79.6.20180902.tar.gz
 -rw-r--r--  1 jnd users     1228  1 oct.  16:46 blender.install
 -rw-r--r--  1 jnd users      479 25 juin   2017 fix-IndentationError-np_station.patch
 -rw-r--r--  1 jnd users      877  7 août  15:33 fix-SyntaxError-object_facemap_auto.patch
@@ -538,7 +539,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20180824.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20180902.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-IndentationError-np_station.patch . \
 && cp -v $HOME/05-builds/blender-git/fix-SyntaxError-object_facemap_auto.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
@@ -604,7 +605,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.79.6.20180824.tar.gz
+$ rm -i blender-git-2.79.6.20180902.tar.gz
 
 
 $ cd && maj-repolocal
@@ -641,11 +642,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "658a9c6cf52"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "0ddf3e110ef"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1535114178|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1535878291|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -731,7 +732,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-ant_landscape.patch'
 )
 
-sha256sum blender-git-2.79.6.20180824.tar.gz
+sha256sum blender-git-2.79.6.20180902.tar.gz
 
 sha256sum fix-IndentationError-np_station.patch
 
@@ -770,7 +771,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20180824.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20180902.tar.gz .
 sync
 
 
@@ -798,7 +799,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
 
-sha256sum blender-git-2.79.6.20180824.tar.gz
+sha256sum blender-git-2.79.6.20180902.tar.gz
 
 sha256sum fix-Error-llvm-config-3.9.patch
 
@@ -916,7 +917,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-algoDIR-algoPOV.patch'
 )
 
-sha256sum blender-git-2.79.6.20180824.tar.gz
+sha256sum blender-git-2.79.6.20180902.tar.gz
 
 sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
 
@@ -984,7 +985,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.79.6.20180824.tar.gz
+sha256sum blender-git-2.79.6.20180902.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -1004,7 +1005,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.6.20180824.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.6.20180902.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -1019,7 +1020,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20180824.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20180902.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -1089,7 +1090,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.79.6.20180824.tar.gz
+sha256sum blender-git-2.79.6.20180902.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -1146,7 +1147,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20180824.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20180902.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \
