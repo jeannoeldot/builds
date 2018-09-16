@@ -11,6 +11,7 @@ Features includes:
       - OPENCOLORIO       : OpenColorIO color management
       - OPENSUBDIV        : OpenSubdiv for surface subdivision
       - OPENVDB           : Features relying on OpenVDB
+      - OPENJPEG          : Use the operating systems OpenJPEG library
       - MOD OCEANSIM      : Ocean Modifier
       - IMAGE OPENEXR     : OpenEXR Support
       - CODEC_FFMPEG      : FFMPeg Support

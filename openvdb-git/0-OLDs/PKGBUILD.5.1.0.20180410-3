@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openvdb-git
-pkgver=5.2.0.20180817
-pkgrel=1
-_ver_release="5.2.0"
+pkgver=5.1.0.20180410
+pkgrel=3
+_ver_release="5.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://github.com/dreamworksanimation/openvdb'
@@ -20,7 +20,7 @@ provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
         'boost-1.67.patch'
 )
-sha256sums=('86b3bc51002bc25ae8d69991228228c79b040cb1a5803d87543b407645f6ab20'
+sha256sums=('eb5a8011732bcdeb115de9a38f640ee376bcb85b54e060d3b1ab08f9dc92f40b'
             '5c9b8a610bcfb1c005789cd29b7ca6c92da34c751ac9b23f8ff3e611c0822641'
 )
 

@@ -6,16 +6,16 @@ cd $HOME/05-builds/openvdb-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/dreamworksanimation/openvdb/releases
-==> OpenVDB-DevTeam released this on 10 Apr  ==> 20180410
-==> v5.1.0  ==> 5.1.0
-==> 5.1.0.20180410
+==> OpenVDB-DevTeam released this on 17 Aug  ==> 20180817
+==> v5.2.0  ==> 5.2.0
+==> 5.2.0.20180817
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenVDB-v5.1.0.tar.gz \
-https://github.com/dreamworksanimation/openvdb/archive/v5.1.0.tar.gz
+wget -O OpenVDB-v5.2.0.tar.gz \
+https://github.com/dreamworksanimation/openvdb/archive/v5.2.0.tar.gz
 
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
@@ -24,7 +24,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v5.1.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v5.2.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -37,11 +37,13 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=5.1.0.20180410
+pkgver=5.2.0.20180817
+pkgrel=1
+
+
 pkgrel=3          # rebuild MAJ ilmbase/openexr 2.3
 pkgrel=2          # rebuild boost boost-libs 1.67.0-4
 pkgrel=1
-
 
 pkgrel=6          # rebuild ilmbase/openexr 2.2.1
 pkgrel=5          # rebuild boost boost-libs 1.66.0-1
@@ -52,7 +54,7 @@ pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 pkgrel=3          # SANS doc, SANS ABI=3
 
 !!!!!!
-_ver_release="5.1.0"
+_ver_release="5.2.0"
 _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
@@ -74,7 +76,7 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
         'boost-1.67.patch'
 )
 
-sha256sum OpenVDB-v5.1.0.tar.gz
+sha256sum OpenVDB-v5.2.0.tar.gz
 
 sha256sum boost-1.67.patch
 
@@ -84,7 +86,7 @@ sha256sums=('...'
 
 SANS PATCH
 ----------
-sha256sum OpenVDB-v5.1.0.tar.gz
+sha256sum OpenVDB-v5.2.0.tar.gz
 
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
@@ -108,9 +110,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenVDB-v5.1.0.tar.gz -C /tmp/srcp
+tar -xzf OpenVDB-v5.2.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openvdb-5.1.0/CMakeLists.txt
+1) kwrite /tmp/srcp/openvdb-5.2.0/CMakeLists.txt
 
 LIGNE 33: !!!!!!
 ----------------
@@ -164,7 +166,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v5.1.0.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v5.2.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -182,7 +184,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v5.1.0.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v5.2.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -222,7 +224,7 @@ rm -f *~
 
 # Verifications...
 
-Checking openvdb-git-5.1.0.20180410-4-x86_64.pkg.tar.xz
+Checking openvdb-git-5.2.0.20180817-1-x86_64.pkg.tar.xz
 openvdb-git W: Referenced library 'libopenvdb.so.4.0' is an uninstalled dependency
 openvdb-git W: Dependency zlib included but already satisfied
 openvdb-git W: Dependency included and not needed ('jemalloc')
@@ -245,7 +247,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenVDB-v5.1.0.tar.gz
+$ rm -i OpenVDB-v5.2.0.tar.gz
 
 
 $ cd && maj-repolocal

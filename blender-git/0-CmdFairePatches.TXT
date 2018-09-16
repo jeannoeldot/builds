@@ -1,65 +1,23 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.79.6.20180902
+!!! VERSION = 2.79.6.20180914
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.79.6.20180902.tar.gz /tmp/srcp/
+cp -v blender-git-2.79.6.20180914.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.79.6.20180902.tar.gz
+tar -xzf blender-git-2.79.6.20180914.tar.gz
 
 
-1) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
-===================================================================================
-cp -R blender blender.new
-
-cd blender.new/release/scripts/addons_contrib/np_station
-kwrite np_point_dimension.py
-
-MODIFIER LIGNES 143 À 151 :
-def register():
-
-
-
-
-def unregister():
-
-
-    pass
-DEVIENNENT
-def register():
-    pass
-
-
-def unregister():
-    pass
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier np_point_dimension.py~
-rm -f np_point_dimension.py~
- 
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-IndentationError-np_station.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-IndentationError-np_station.patch .
-
-
-2) MODIFIER blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
+1) MODIFIER blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
 ===========================================================================================
-cd /tmp/srcp
+/!\ /!\ /!\ cd /tmp/srcp
 
 cp -R blender blender.new
 
@@ -102,6 +60,48 @@ sync
 =================================================================
 ANCIENS
 ========
+
+1) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
+===================================================================================
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons_contrib/np_station
+kwrite np_point_dimension.py
+
+MODIFIER LIGNES 143 À 151 :
+def register():
+
+
+
+
+def unregister():
+
+
+    pass
+DEVIENNENT
+def register():
+    pass
+
+
+def unregister():
+    pass
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier np_point_dimension.py~
+rm -f np_point_dimension.py~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-IndentationError-np_station.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-IndentationError-np_station.patch .
+
 
 2) MODIFIER blender/release/scripts/addons/ant_landscape/test.py
 ================================================================
