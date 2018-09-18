@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.9.10.20180904
-pkgrel=1
+pkgrel=2
 _name_release="OpenShadingLanguage-Release-1.9.10"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
@@ -13,7 +13,7 @@ depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'openimageio-git'
          'llvm-libs'
 )
-makedepends=('boost' 'cmake' 'llvm' 'clang')
+makedepends=('boost' 'cmake' 'llvm' 'clang' 'python')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
@@ -54,10 +54,12 @@ package() {
   for _oso in $(find "${pkgdir}"/usr/shaders/*.oso -type f)
   do
     sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/|g" ${_oso}
   done
 
   for _oso in $(find "${pkgdir}"/usr/shaders/MaterialX/*.oso -type f)
   do
     sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/|g" ${_oso}
   done
 }

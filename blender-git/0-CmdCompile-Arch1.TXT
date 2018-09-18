@@ -124,6 +124,7 @@ voir CmdFairePatches.TXT
 pkgname=blender-git
 !!!!!!
 pkgver=2.79.6.20180914
+pkgrel=2          # Rebuild fix python compileall to not reference BUILDDIR
 pkgrel=1
 
 pkgrel=1          # rebuild python 3.7
@@ -576,6 +577,13 @@ rm -f *~
 namcap blender-git-*-x86_64.pkg.tar.*
 !!! VU
 blender-git W: Directory (usr/share/blender/2.79/scripts/addons_contrib) is empty
+
+==> WARNING: Package contains reference to $srcdir
+usr/bin/blender
+usr/share/blender/2.79/scripts/addons/cycles/shader/node_rgb_to_bw.oso
+......
+usr/share/blender/2.79/scripts/addons/cycles/shader/node_add_closure.oso
+
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------

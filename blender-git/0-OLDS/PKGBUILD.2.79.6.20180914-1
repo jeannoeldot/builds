@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=2.79.6.20180914
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -113,6 +113,6 @@ package() {
   make DESTDIR="${pkgdir}" install
 
   # voir Community
-  python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
-  python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+  python -m compileall "${pkgdir}/usr/share/blender"
+  python -O -m compileall "${pkgdir}/usr/share/blender"
 }
