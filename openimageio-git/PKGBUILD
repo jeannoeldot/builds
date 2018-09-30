@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=1.8.14.20180902
-pkgrel=1
+pkgrel=2
 _name_release="oiio-Release-1.8.14"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')

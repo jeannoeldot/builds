@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.79.6.20180914
+!!! VERSION = 2.79.6.20180928
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.79.6.20180914.tar.gz /tmp/srcp/
+cp -v blender-git-2.79.6.20180928.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.79.6.20180914.tar.gz
+tar -xzf blender-git-2.79.6.20180928.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py

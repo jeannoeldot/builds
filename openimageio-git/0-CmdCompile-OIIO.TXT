@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=1.8.14.20180902
+pkgrel=2          # rebuild boost boost-libs 1.68.0
 pkgrel=1
 
 pkgrel=2          # rebuild MAJ libraw 0.19.0 ilmbase/openexr 2.3
