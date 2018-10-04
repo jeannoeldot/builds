@@ -1,7 +1,7 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=blender-git
-pkgver=2.79.6.20181003
+pkgver=2.79.6.20180928
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,11 +35,9 @@ options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
-        'fix-Error-python3.7-io_mesh_stl.patch'
 )
-sha256sums=('18cbe0f632f96297f3c65ff47775f52e3746a0f58b4749d9538c54ca9ec5ad15'
+sha256sums=('46a20065e645c79b36741ca7051d84162665286950199aacb603324b051e75b7'
             'a86b8c6b605586ed5339908c61435a0d8cf6f8e4162c2310bc42800451bf810d'
-            '0ffe824c6108c208e2497e8eae1157ddd231524f8dcf4146640591ca7dac04f8'
 )
 
 _gitname="blender"
@@ -50,10 +48,6 @@ prepare() {
   # fix erreur : SyntaxError: Generator expression must be parenthesized (auto_fmap_widgets.py, line 327)
   patch -Np1 -i "${srcdir}/fix-SyntaxError-object_facemap_auto.patch"
   
-  # fix BUG : https://bugs.archlinux.org/task/60249?project=5&string=blender
-  # FS#60249 - [blender] Exporting STL fails since linking against python3.7
-  patch -Np1 -i "${srcdir}/fix-Error-python3.7-io_mesh_stl.patch"
-  
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
   sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
 
@@ -62,9 +56,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9a674a749b1"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "de3ee3c6e84"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1538583502|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1538139764|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.79.6.20180928
+!!! VERSION = 2.79.6.20181003
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.79.6.20180928.tar.gz /tmp/srcp/
+cp -v blender-git-2.79.6.20181003.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.79.6.20180928.tar.gz
+tar -xzf blender-git-2.79.6.20181003.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
@@ -47,6 +47,37 @@ rm -rf blender.new
 cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/fix-SyntaxError-object_facemap_auto.patch .
+
+
+2) MODIFIER blender/release/scripts/addons/io_mesh_stl/blender_utils.py
+=======================================================================
+cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/io_mesh_stl
+kwrite blender_utils.py
+
+MODIFIER LIGNE 89 :
+        raise StopIteration
+ 
+DEVIENT
+        return
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier blender_utils.py~
+rm -f blender_utils.py~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-Error-python3.7-io_mesh_stl.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-Error-python3.7-io_mesh_stl.patch .
 
 
 
