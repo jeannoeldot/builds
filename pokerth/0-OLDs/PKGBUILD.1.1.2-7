@@ -9,7 +9,7 @@
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=8
+pkgrel=7
 pkgdesc="Open source Texas Hold'em Poker simulator"
 arch=('i686' 'x86_64')
 url="http://www.pokerth.net/"
@@ -18,20 +18,20 @@ depends=('curl' 'boost-libs' 'gsasl' 'gnutls' 'protobuf' 'libxkbcommon-x11'
          'qt5-base' 'sdl_mixer' 'libircclient' 'tinyxml')
 makedepends=('boost')
 source=("$pkgname-$pkgver.tar.gz"
-        "fix-build-with-boost.patch"
-        "fix-build-with-protobuf.patch"
+        "fix-build-with-boost-1.65-boost-1.66.patch"
+        "fix-build-with-protobuf-3.5.1.1.patch"
 )
 sha512sums=('d54c84f199636eb5a53580213e5e4ccc828cf565bf4b055797daa82e2ad54d8c52c7a16a781b82c8cc89d184a2b3c4105922394d08c7d2e06383b96963c36b5a'
-            '659bab85dee8529bd96b58906639d33013e38dcacf3dc3c0b13f98bb063a7874b4dfb17c52dd127a5dab9bf62501efc37ed75f65b7faf0e1bd68422f41165f18'
-            '79e952b60e0688ff1bceea7558dd9f172f12c3bae3c9e973c4974971790ea329dfc376cfdbca932b6570c4001afb305a5568a34a8d752c758a0813a4db0c8c2b'
+            '62b2c0dd103337f4fd32cd359870e732b26a41b5342ca7a32c9f193f64a6eaf5aa70e8c518efc9112508b8cda96619f24f3672988ee96c7dffc44bc337f07e05'
+            'bf798fcf2e00c53aef6bac9d4a0569047d52c5a67720ca8ec4d757ec36a57c3fea201ef22485f41994212a8960575f43bc674a8688ad39cafd16ce060c9b2567'
 )
 
 prepare() {
   cd "$pkgname-$_pkgver"
-  # Patchs boost V >= 1.65
-  patch -Np1 < "$srcdir"/fix-build-with-boost.patch
-  # Patch protobuf V >= 3.5.1.1
-  patch -Np1 < "$srcdir"/fix-build-with-protobuf.patch
+  # Patchs boost 1.65 et 1.66
+  patch -Np1 < "$srcdir"/fix-build-with-boost-1.65-boost-1.66.patch
+  # Patch protobuf 3.5.1.1
+  patch -Np1 < "$srcdir"/fix-build-with-protobuf-3.5.1.1.patch
   
   # Rebuild files protobuf
   protoc -I="$srcdir"/"$pkgname-$_pkgver"/ "$srcdir"/"$pkgname-$_pkgver"/pokerth.proto --cpp_out="$srcdir"/"$pkgname-$_pkgver"/src/third_party/protobuf/

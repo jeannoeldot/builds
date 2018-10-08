@@ -36,6 +36,7 @@ voir : 0-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=8      # rebuild boost boost-libs 1.68.0-1
 pkgrel=7      # rebuild protobuf 3.6.1
 pkgrel=6      # rebuild protobuf 3.6.0.1
 pkgrel=5      # rebuild boost boost-libs 1.67.0-4
@@ -44,29 +45,24 @@ pkgrel=3      # protobuf rebuild  ==> PAS OK
 pkgrel=2
 
 source=("$pkgname-$pkgver.tar.gz"
-        "fix-build-with-boost-1.65-boost-1.66.patch"
-        "fix-build-with-protobuf-3.5.1.1.patch"
+        "fix-build-with-boost.patch"
+        "fix-build-with-protobuf.patch"
 )
 
 sha512sum pokerth-1.1.2.tar.gz
 
-sha512sum fix-build-with-boost-1.65-boost-1.66.patch
-sha512sum fix-build-with-protobuf-3.5.1.1.patch
+sha512sum fix-build-with-boost.patch
+sha512sum fix-build-with-protobuf.patch
 
 sha512sums=("..."
             "..."
 )            "..."
 
-!!! ATTENTION : protobuf 3.5.0.1-1
-==================================
-VOIR ERREURS COMPILE
-0-Erreurs-Compil-protobuf.TXT
-
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
 $ ls -la
--rw-r--r-- 1 jnd users     2143 10 janv. 11:30 fix-build-with-boost-1.65-boost-1.66.patch
--rw-r--r-- 1 jnd users     1861 10 janv. 11:48 fix-build-with-protobuf-3.5.1.1.patch
+-rw-r--r-- 1 jnd users     2143 10 janv. 11:30 fix-build-with-boost.patch
+-rw-r--r-- 1 jnd users     1861 10 janv. 11:48 fix-build-with-protobuf.patch
 -rw-r--r-- 1 jnd users     1702 10 janv. 11:03 PKGBUILD
 -rw-r--r-- 1 jnd users 21354306 10 janv. 11:07 pokerth-1.1.2.tar.gz
 !!! A MODIFIER SI PAS OK !
@@ -83,7 +79,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/pokerth/PKGBUILD . \
-&& cp -v $HOME/05-builds/pokerth/fix-build-with-boost-1.65-boost-1.66.patch . \
+&& cp -v $HOME/05-builds/pokerth/fix-build-with-boost.patch . \
 && cp -v $HOME/05-builds/pokerth/pokerth-1.1.2.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/pokerth \
@@ -145,4 +141,13 @@ $ sync
 !!! OU
 # pacman -Syu pokerth
 
+
+================================================================
+ANCIENS
+=======
+
+!!! ATTENTION : protobuf 3.5.0.1-1
+==================================
+VOIR ERREURS COMPILE
+0-Erreurs-Compil-protobuf.TXT
 

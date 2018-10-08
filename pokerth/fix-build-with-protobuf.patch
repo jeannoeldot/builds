@@ -1,0 +1,43 @@
+diff -aur pokerth-1.1.2-rc/chatcleaner.proto pokerth-1.1.2-rc.new/chatcleaner.proto
+--- pokerth-1.1.2-rc/chatcleaner.proto	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/chatcleaner.proto	2018-10-08 11:46:37.856434516 +0200
+@@ -28,6 +28,7 @@
+  * shall include the source code for the parts of OpenSSL used as well       *
+  * as that of the covered work.                                              *
+  *****************************************************************************/
++syntax = "proto2";
+ 
+ option java_package = "de.chatcleaner.protocol";
+ option java_outer_classname = "ProtoBuf";
+diff -aur pokerth-1.1.2-rc/pokerth.proto pokerth-1.1.2-rc.new/pokerth.proto
+--- pokerth-1.1.2-rc/pokerth.proto	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/pokerth.proto	2018-10-08 11:48:30.337603684 +0200
+@@ -28,6 +28,7 @@
+  * shall include the source code for the parts of OpenSSL used as well       *
+  * as that of the covered work.                                              *
+  *****************************************************************************/
++syntax = "proto2";
+ 
+ option java_package = "de.pokerth.protocol";
+ option java_outer_classname = "ProtoBuf";
+@@ -701,7 +702,7 @@
+ 
+ message ErrorMessage {
+ 	enum ErrorReason {
+-		reserved = 0;
++		custReserved = 0;
+ 		initVersionNotSupported = 1;
+ 		initServerFull = 2;
+ 		initAuthFailure = 3;
+diff -aur pokerth-1.1.2-rc/src/net/common/netpacket.cpp pokerth-1.1.2-rc.new/src/net/common/netpacket.cpp
+--- pokerth-1.1.2-rc/src/net/common/netpacket.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/common/netpacket.cpp	2018-10-08 11:49:35.796343718 +0200
+@@ -249,7 +249,7 @@
+ 		retVal = ErrorMessage::sessionTimeout;
+ 		break;
+ 	default :
+-		retVal = ErrorMessage::reserved;
++		retVal = ErrorMessage::custReserved;
+ 		break;
+ 	}
+ 	return retVal;

@@ -14,8 +14,8 @@ cd /tmp/srcp
 
 tar -xzf pokerth-1.1.2.tar.gz
 
-1) PATCH BOOST 1.65/1.66
-========================
+1) PATCH BOOST VERSION >= 1.65/1.66/1.67/1.68
+=============================================
 1-1) MODIFIER pokerth-1.1.2-rc/src/gui/qt/gametable/gametableimpl.cpp
 ---------------------------------------------------------------------
 cp -R pokerth-1.1.2-rc pokerth-1.1.2-rc.new
@@ -67,7 +67,7 @@ rm -f serveraccepthelper.h~
 cd ../../..
 
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
-diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-boost-1.65-boost-1.66.patch
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-boost.patch
 
 rm -rf pokerth-1.1.2-rc.new
 
@@ -122,15 +122,15 @@ cd ../../../..
 
 
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
-diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-protobuf-3.5.1.1.patch
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-protobuf.patch
 
 rm -rf pokerth-1.1.2-rc.new
 
 
 cd $HOME/05-builds/pokerth
 
-mv -vf /tmp/srcp/fix-build-with-boost-1.65-boost-1.66.patch .
-mv -vf /tmp/srcp/fix-build-with-protobuf-3.5.1.1.patch .
+mv -vf /tmp/srcp/fix-build-with-boost.patch .
+mv -vf /tmp/srcp/fix-build-with-protobuf.patch .
 
 
 
