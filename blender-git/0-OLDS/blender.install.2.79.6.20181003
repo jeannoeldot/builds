@@ -15,7 +15,6 @@ Features includes:
       - IMAGE OPENEXR     : OpenEXR Support
       - CODEC_FFMPEG      : FFMPeg Support
       - OPENCOLLADA       : OpenCollada support
-      - ALEMBIC           : Alembic Support
       - SDL2              : For sound and joystick support
       - CYCLES OSL        : Cycles with OSL support
       - CYCLES OPENSUBDIV : Cycles with OpenSubdiv support
@@ -29,6 +28,7 @@ Features no includes:
       - Image FrameServer Support for rendering
       - NDOF input devices
       - Jack
+      - Alembic Support
 
 EOF
 }
