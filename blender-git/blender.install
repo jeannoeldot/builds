@@ -29,6 +29,7 @@ Features no includes:
       - Image FrameServer Support for rendering
       - NDOF input devices
       - Jack
+      - CYCLES EMBREE
 
 EOF
 }
