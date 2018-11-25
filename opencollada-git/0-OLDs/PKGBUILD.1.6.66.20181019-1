@@ -1,7 +1,7 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=opencollada-git
-pkgver=1.6.67.20181114
+pkgver=1.6.66.20181019
 pkgrel=1
 pkgdesc="Stream based reader and writer library for COLLADA files"
 arch=('x86_64')
@@ -15,7 +15,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-conflicting-declaration-pcre-gcc810.patch'
         'opencollada.conf'
 )
-sha256sums=('5ee5f5c1702fbe59ffb9111a30fbb67ec8d17317283a82c90ee3918d825c6621'
+sha256sums=('13eef05ba52e283e83bb1d7ee8e5b13e511cab530dc9461d1954a5c80d98ba66'
             '8706faf6b3e5592f20122604f6a082bf70003cb1a7ee9d83a756211a40420260'
             '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
 )

@@ -45,6 +45,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.9.12.tar.gz .
 pkgname=openshadinglanguage-git
 pkgver=1.9.12.20181029
 pkgrel=1
+pkgrel=2    # Rebuild MAJ OIIO 1.8.16 et MAJ opencv 4.0.0
 
 pkgrel=3    # rebuild boost boost-libs 1.68.0
 pkgrel=2    # Rebuild SUPPR WARNING Référence à BBUILDIR
@@ -272,6 +273,10 @@ makepkg -f
 # Nettoyage...
 !!! EN USER
 rm -f *~
+
+# Verifications...
+
+namcap openshadinglanguage-git-1.9.12.20181029-2-x86_64.pkg.tar.xz
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/

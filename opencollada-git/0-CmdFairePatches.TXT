@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 1.6.66.20181019
+!!! VERSION = 1.6.67.20181114
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/opencollada-git
 
 mkdir /tmp/srcp
 
-cp -v opencollada-git-1.6.66.20181019.tar.gz /tmp/srcp/
+cp -v opencollada-git-1.6.67.20181114.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf opencollada-git-1.6.66.20181019.tar.gz
+tar -xzf opencollada-git-1.6.67.20181114.tar.gz
 
 
 1) MODIFIER opencollada/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h

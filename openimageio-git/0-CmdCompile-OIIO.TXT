@@ -39,6 +39,7 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=1.8.16.20181101
 pkgrel=1
+pkgrel=2          # rebuild MAJ opencv 4.0.0
 
 pkgrel=2          # rebuild boost boost-libs 1.68.0
 
@@ -135,6 +136,9 @@ LIGNE 77
 LIGNE 80
   USE_JPEGTURBO ON      depends= ... 'libjpeg-turbo'
 
+!!!! opencv 4.0.0-4 : maj 25/11/2018
+!!!! -- Could NOT find OpenCV (missing: OpenCV_INCLUDE_DIR) 
+!!!! -- OpenCV library not found
 LIGNE 84
   USE_OPENCV ON         depends= ... 'opencv'
 
@@ -264,6 +268,11 @@ OU : makepkg -f
 !!! EN USER
 
 rm -f *~
+
+# Verifications...
+
+namcap openimageio-git-1.8.16.20181101-2-x86_64.pkg.tar.xz
+
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
