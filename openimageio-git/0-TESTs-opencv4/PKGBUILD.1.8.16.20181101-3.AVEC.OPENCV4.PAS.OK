@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimageio-git
-pkgver=1.8.17.20181201
-pkgrel=1
-_name_release="oiio-Release-1.8.17"
+pkgver=1.8.16.20181101
+pkgrel=3
+_name_release="oiio-Release-1.8.16"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -19,9 +19,21 @@ makedepends=('cmake' 'boost' 'mesa'
 conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
+        "cmake-module-opencv4.patch"
+        "imagebufalgo-opencv4.patch"
 )
-sha256sums=('a019086c05a6150d445a2240bab1723dff540dde5f5c327c36a97f0b5ae0e157'
+sha256sums=('a67bb2800805bce10c055bc3f5ed32ce31498381fc1cf8e42e24d4193f3f935f'
+            '2e72790a632b31a86e3fa136946d8114f21bd414d6ade9ce15c9b50a21fab76f'
+            '8156e00a97254ae39cc57ecddfa7adc62957e11a3e3c1a32c9887b293298f30f'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # opencv 4.0.0-4 : fix erreur : Could NOT find OpenCV (missing: OpenCV_INCLUDE_DIR)
+  patch -Np1 -i "${srcdir}/cmake-module-opencv4.patch"
+  # opencv 4.0.0-4
+  patch -Np1 -i "${srcdir}/imagebufalgo-opencv4.patch"
+}
 
 build() {
   cd "${_name_release}"

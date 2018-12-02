@@ -1,0 +1,13 @@
+Hello.
+
+Arch Linux
+OpnCV 4.0.0
+OIIO 1.8.16 and 1.8.17
+
+When I want to compile OIIO with OpenCV 4.0.0, I get the following report:
+-- Could NOT find OpenCV (missing: OpenCV_INCLUDE_DIR)
+-- OpenCV library not found
+
+Would it be possible to make OIIO compatible with OpenCV 4.0.0?
+
+Thank you.

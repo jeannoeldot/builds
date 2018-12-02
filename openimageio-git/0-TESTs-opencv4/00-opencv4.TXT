@@ -1,0 +1,55 @@
+
+
+SANS PATCH
+==========
+!!!! opencv 4.0.0-4 : maj 25/11/2018
+!!!! -- Could NOT find OpenCV (missing: OpenCV_INCLUDE_DIR) 
+!!!! -- OpenCV library not found
+
+AVEC PATCH cmake-module-opencv4.patch
+=====================================
+-- Found OpenCV: /usr/lib/libopencv_videoio.so;/usr/lib/libopencv_imgproc.so;/usr/lib/libopencv_core.so (found version "4.0.0") 
+
+/tmp/build/src/oiio-Release-1.8.16/src/libOpenImageIO/imagebufalgo_opencv.cpp:37:10: fatal error: opencv2/core/core_c.h: No such file or directory
+ #include <opencv2/core/core_c.h>
+          ^~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+
+AVEC PATCH cmake-module-opencv4.patch ET oiio-imagebufalgo-opencv4.patch
+========================================================================
+-- Found OpenCV: /usr/lib/libopencv_videoio.so;/usr/lib/libopencv_imgproc.so;/usr/lib/libopencv_core.so (found version "4.0.0") 
+
+In file included from /tmp/build/src/oiio-Release-1.8.16/src/libOpenImageIO/imagebufalgo_opencv.cpp:37:
+/usr/include/opencv4/opencv2/core/core_c.h:48:10: fatal error: opencv2/core/types_c.h: No such file or directory
+ #include "opencv2/core/types_c.h"
+
+
+┌jnd ( ~ )
+└─> $ grep -lR "opencv" /home/jnd/99-temp/OIIO/oiio-Release-1.8.16/
+/home/jnd/99-temp/OIIO/oiio-Release-1.8.16/src/libOpenImageIO/CMakeLists.txt
+/home/jnd/99-temp/OIIO/oiio-Release-1.8.16/src/libOpenImageIO/imagebufalgo_opencv.cpp
+/home/jnd/99-temp/OIIO/oiio-Release-1.8.16/src/cmake/modules/FindOpenCV.cmake
+/home/jnd/99-temp/OIIO/oiio-Release-1.8.16/src/build-scripts/install_homebrew_deps.bash
+
+
+
+┌jnd ( ~ )
+└─> $ grep -lR "CV_" /home/jnd/99-temp/OIIO/oiio-Release-1.8.16/
+
+/home/jnd/99-temp/OIIO/oiio-Release-1.8.16/src/libOpenImageIO/imagebufalgo_opencv.cpp
+
+#ifdef USE_OPENCV
+#include <opencv2/core/core_c.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc/imgproc_c.h>
+#endif
+
+
+    // OpenCV uses BGR ordering
+    if (spec.nchannels == 3) {
+        cvCvtColor(ipl, ipl, CV_RGB2BGR);
+    } else if (spec.nchannels == 4) {
+        cvCvtColor(ipl, ipl, CV_RGBA2BGRA);
+    }
+
+

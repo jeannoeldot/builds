@@ -18,6 +18,7 @@ Features includes:
       - ALEMBIC           : Alembic Support
       - SDL2              : For sound and joystick support
       - CYCLES OSL        : Cycles with OSL support
+      - CYCLES OPENSUBDIV : Cycles with OpenSubdiv support
       - LLVM              : Use LLVM 7.0
       - C11               : Experimental support of C11
       - C++11             : Experimental support of C++11

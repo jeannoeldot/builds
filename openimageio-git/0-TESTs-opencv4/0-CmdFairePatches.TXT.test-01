@@ -1,0 +1,112 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.8.16.20181101
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/openimageio-git
+
+mkdir /tmp/srcp
+
+cp -v oiio-Release-1.8.16.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf oiio-Release-1.8.16.tar.gz
+
+
+1) MODIFIER oiio-Release-1.8.16/src/cmake/modules/FindOpenCV.cmake
+==================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R oiio-Release-1.8.16 oiio-Release-1.8.16.new
+
+cd oiio-Release-1.8.16.new/src/cmake/modules
+
+kwrite FindOpenCV.cmake
+
+MODIFIER LIGNE 19 :
+find_path (OpenCV_INCLUDE_DIR opencv/cv.h
+
+DEVIENT :
+find_path (OpenCV_INCLUDE_DIR opencv4/opencv2/cvconfig.h
+
+
+LIGNES 27 À 43 :
+MODIFIER : /opencv2/core/version.hpp
+DEVIENT : /opencv4/opencv2/core/version.hpp
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindOpenCV.cmake~
+rm -f FindOpenCV.cmake~
+ 
+cd ../../../..
+
+diff -aur oiio-Release-1.8.16 oiio-Release-1.8.16.new
+diff -aur oiio-Release-1.8.16 oiio-Release-1.8.16.new > cmake-module-opencv4.patch
+
+rm -rf oiio-Release-1.8.16.new
+
+cd $HOME/05-builds/openimageio-git
+
+mv -vf /tmp/srcp/cmake-module-opencv4.patch .
+
+
+
+2) MODIFIER oiio-Release-1.8.16/src/libOpenImageIO/imagebufalgo_opencv.cpp
+==========================================================================
+cd /tmp/srcp
+
+cp -R oiio-Release-1.8.16 oiio-Release-1.8.16.new
+
+cd oiio-Release-1.8.16.new/src/libOpenImageIO
+
+kwrite imagebufalgo_opencv.cpp
+
+MODIFIER LIGNES 37 À 39
+#include <opencv2/core/core_c.h>
+#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/imgproc/imgproc_c.h>
+DEVIENNENT :
+#include <opencv4/opencv2/core/core_c.h>
+#include <opencv4/opencv2/highgui/highgui_c.h>
+#include <opencv4/opencv2/imgproc/imgproc_c.h>
+
+MODIFIER LIGNE 204 :
+        cvCvtColor(ipl, ipl, CV_RGB2BGR);
+DEVIENT :
+        cvCvtColor(ipl, ipl, cv::COLOR_RGB2BGR);
+
+MODIFIER LIGNE 206 :
+        cvCvtColor(ipl, ipl, CV_RGBA2BGRA);
+DEVIENT :
+        cvCvtColor(ipl, ipl, cv::COLOR_RGBA2BGRA);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier imagebufalgo_opencv.cpp~
+rm -f imagebufalgo_opencv.cpp~
+ 
+cd ../../..
+
+diff -aur oiio-Release-1.8.16 oiio-Release-1.8.16.new
+diff -aur oiio-Release-1.8.16 oiio-Release-1.8.16.new > oiio-imagebufalgo-opencv4.patch
+
+rm -rf oiio-Release-1.8.16.new
+
+cd $HOME/05-builds/openimageio-git
+
+mv -vf /tmp/srcp/oiio-imagebufalgo-opencv4.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
+
+
