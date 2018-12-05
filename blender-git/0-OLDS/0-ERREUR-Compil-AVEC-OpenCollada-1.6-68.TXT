@@ -1,3 +1,9 @@
+
+https://developer.blender.org/T58568
+
+opencollada-1.6.65.patch
+
+
 /build/blender-git/src/blender/source/blender/collada/collada.cpp:
 In function ‘int collada_import(bContext*, ImportSettings*)’:
 /build/blender-git/src/blender/source/blender/collada/collada.cpp:47:19:

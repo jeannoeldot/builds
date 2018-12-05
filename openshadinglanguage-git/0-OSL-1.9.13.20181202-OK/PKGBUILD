@@ -1,0 +1,65 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=openshadinglanguage-git
+pkgver=1.9.13.20181202
+pkgrel=1
+_name_release="OpenShadingLanguage-Release-1.9.13"
+pkgdesc="Advanced shading language for production GI renderers"
+arch=('x86_64')
+url="https://github.com/imageworks/OpenShadingLanguage"
+license=('custom')
+depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'openimageio-git'
+         'llvm-libs'
+)
+makedepends=('boost' 'cmake' 'llvm' 'clang' 'python')
+conflicts=('openshadinglanguage')
+provides=('openshadinglanguage')
+source=("$_name_release.tar.gz"
+)
+sha256sums=('2bcd1d835f210dbc9e73f1d8892bb15c067d269cbb7b77d9fe5054e2f4fee394'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DLLVM_STATIC=OFF \
+      -DVERBOSE=ON \
+      -DOSL_BUILD_TESTS=OFF \
+      -DUSE_PARTIO=OFF \
+      -DUSE_SIMD=avx2 \
+      -DUSE_CCACHE=OFF \
+    ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  # license
+  mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
+  mv -v "${pkgdir}"/usr/share/doc/OSL/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}
+
+  # Ugly hacks /usr/shaders/*.oso and /usr/shaders/MaterialX/*.oso
+  for _oso in $(find "${pkgdir}"/usr/shaders/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/|g" ${_oso}
+  done
+
+  for _oso in $(find "${pkgdir}"/usr/shaders/MaterialX/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/|g" ${_oso}
+  done
+}

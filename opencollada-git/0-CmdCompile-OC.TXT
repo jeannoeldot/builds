@@ -2,10 +2,6 @@
 ==============
 cd $HOME/05-builds/opencollada-git
 
-/!\ /!\ /!\
-/!\ VERSION 1.6.68 DU 27/11/2018 INCOMPATIBLE avec blender
-/!\ /!\ /!\
-
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/KhronosGroup/OpenCOLLADA
@@ -70,6 +66,7 @@ voir : CmdFairePatches.TXT
 pkgname=opencollada-git
 pkgver=1.6.68.20181127
 pkgrel=1
+
 pkgrel=2    # gcc 8.1.0
 
 pkgrel=2    # gcc 6.1.1
