@@ -9,8 +9,8 @@ cd $HOME/05-builds/blender-git
 
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   Tue, 4 Dec 2018 22:36:37 +0100 (08:36 +1100)
-==> 20181204
+==> last change   Thu, 6 Dec 2018 04:52:55 +0100 (14:52 +1100)
+==> 20181206
 
 
 1.2 REVISION
@@ -47,7 +47,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short HEAD
-==> MY_WC_HASH = 45c11c1a1bd
+==> MY_WC_HASH = d24cfa329b2
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -57,7 +57,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1543959397
+==> MY_WC_COMMIT_TIMESTAM = 1544068375
 
 
 cd ..
@@ -67,7 +67,7 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=MODIFIÉ
+==> CMAKELISTS.TXT=NON_MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
@@ -76,7 +76,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 #define BLENDER_VERSION         279
 #define BLENDER_SUBVERSION      6
 
-==> Version = 2.79.6.20181204
+==> Version = 2.79.6.20181206
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.78 à 2.79)
 !!! EN ROOT
@@ -90,7 +90,7 @@ $ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERS
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.79.6.20181204.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.79.6.20181206.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -98,7 +98,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20181204.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20181206.tar.gz .
 sync
 
 
@@ -123,7 +123,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.79.6.20181204
+pkgver=2.79.6.20181206
 pkgrel=1
 
 
@@ -199,7 +199,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-python3.7-io_mesh_stl.patch'
 )
 
-sha256sum blender-git-2.79.6.20181204.tar.gz
+sha256sum blender-git-2.79.6.20181206.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -231,9 +231,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 55 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "45c11c1a1bd"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d24cfa329b2"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1543959397|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544068375|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -242,7 +242,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.79.6.20181204.tar.gz
+sha256sum blender-git-2.79.6.20181206.tar.gz
 
 sha256sums=(...
          ...
@@ -281,7 +281,7 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI NON_MODIFIÉ
-    VALEUR CMAKELISTS.TXT=MODIFIÉ
+    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
@@ -459,7 +459,7 @@ Lignes 558 et ...
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.79.6.20181204.tar.gz
+-rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.79.6.20181206.tar.gz
 -rw-r--r--  1 jnd users     1228  1 oct.  16:46 blender.install
 -rw-r--r--  1 jnd users      479 25 juin   2017 fix-Error-python3.7-io_mesh_stl.patch
 -rw-r--r--  1 jnd users      877  7 août  15:33 fix-SyntaxError-object_facemap_auto.patch
@@ -486,8 +486,6 @@ $ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* \
 
 SI depends=( 'opencollada-git' )
 ==========================================================
-!!! opencollada-git-1.6.68.20181127 PAS OK
-!!! Conserver opencollada-git-1.6.67.20181114
 $ cp -v $HOME/00-repolocal/opencollada-git-*-x86_64.pkg.tar.* \
 /tmp/chrootrepo/
 
@@ -553,7 +551,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20181204.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20181206.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-SyntaxError-object_facemap_auto.patch . \
 && cp -v $HOME/05-builds/blender-git/fix-Error-python3.7-io_mesh_stl.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
@@ -626,7 +624,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.79.6.20181204.tar.gz
+$ rm -i blender-git-2.79.6.20181206.tar.gz
 
 
 $ cd && maj-repolocal
@@ -663,11 +661,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "45c11c1a1bd"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "d24cfa329b2"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1543959397|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544068375|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -771,7 +769,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-IndentationError-ant_landscape.patch'
 )
 
-sha256sum blender-git-2.79.6.20181204.tar.gz
+sha256sum blender-git-2.79.6.20181206.tar.gz
 
 sha256sum fix-IndentationError-np_station.patch
 
@@ -810,7 +808,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20181204.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.79.6.20181206.tar.gz .
 sync
 
 
@@ -838,7 +836,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Error-llvm-config-3.9.patch'
 )
 
-sha256sum blender-git-2.79.6.20181204.tar.gz
+sha256sum blender-git-2.79.6.20181206.tar.gz
 
 sha256sum fix-Error-llvm-config-3.9.patch
 
@@ -956,7 +954,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-algoDIR-algoPOV.patch'
 )
 
-sha256sum blender-git-2.79.6.20181204.tar.gz
+sha256sum blender-git-2.79.6.20181206.tar.gz
 
 sha256sum fix-SyntaxError-algoDIR-algoPOV.patch
 
@@ -1024,7 +1022,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-std-isfinite-has-not-been-declared.patch'
 )
 
-sha256sum blender-git-2.79.6.20181204.tar.gz
+sha256sum blender-git-2.79.6.20181206.tar.gz
 
 sha256sum fix-std-isfinite-has-not-been-declared.patch
 
@@ -1044,7 +1042,7 @@ prepare() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
--rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.6.20181204.tar.gz
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.79.6.20181206.tar.gz
 -rw-r--r--  1 jnd users      900 22 mai   11:53 fix-std-isfinite-has-not-been-declared.patch
 -rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
 
@@ -1059,7 +1057,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20181204.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20181206.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-std-isfinite-has-not-been-declared.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -1129,7 +1127,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-isfinite-was-not-declared-in-this-scope.patch'
 )
 
-sha256sum blender-git-2.79.6.20181204.tar.gz
+sha256sum blender-git-2.79.6.20181206.tar.gz
 
 sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
 
@@ -1186,7 +1184,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20181204.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.79.6.20181206.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && makepkg -s \

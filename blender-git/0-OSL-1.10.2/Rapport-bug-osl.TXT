@@ -1,9 +1,0 @@
-
-https://developer.blender.org/T58600
-
-Adjust for OSL 1.10.x changes
-
-osl110.patch
-
-https://developer.blender.org/rB5a6f1fa563759a065d4a21b9b6178d61ebe993a2
-https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/5a6f1fa563759a065d4a21b9b6178d61ebe993a2
