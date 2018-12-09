@@ -20,7 +20,6 @@ source=("alembic-${_ver_release}.tar.gz"
 sha256sums=('04012fb37c02fd1ba8e4d4f37f5b1e7a3d78151c6368718c4be07f89a99c8148'
 )
 
-
 build() {
   cd "${_name_release}"
 

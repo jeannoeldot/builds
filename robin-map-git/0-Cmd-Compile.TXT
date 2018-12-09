@@ -1,0 +1,191 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/robin-map-git
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/Tessil/robin-map/releases
+==>  Tessil released this on 3 Nov  ==> 20181103
+==> v0.5.0  ==> 0.5.0
+==> 0.5.0.20181103
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O robin-map-0.5.0.tar.gz \
+https://github.com/Tessil/robin-map/archive/v0.5.0.tar.gz
+
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/robin-map-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/robin-map-0.5.0.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=robin-map-git
+pkgver=0.5.0.20181103
+pkgrel=1
+
+
+!!!!!!
+_ver_release="0.5.0"
+_name_release="robin-map-${_ver_release}"
+
+arch=('any')
+
+license=('MIT')
+
+depends=(
+)
+
+makedepends=('cmake')
+
+
+conflicts='robin-map'
+provides='robin-map'
+
+SANS PATCH
+----------
+sha256sum robin-map-0.5.0.tar.gz
+
+source=("robin-map-${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf robin-map-0.5.0.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/robin-map-0.5.0/CMakeLists.txt
+
+!!! VOIR
+
+rm -rf /tmp/srcp
+
+  
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 robin-map-0.5.0.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/robin-map-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/robin-map-git/robin-map-0.5.0.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/robin-map-git \
+&& cp -v /tmp/build/robin-map-git-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/robin-map-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap robin-map-git-*-*.pkg.tar.xz
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/robin-map-git-*-any.pkg.tar.*
+
+$ cp -v robin-map-git-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/robin-map-git-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v robin-map-git-*-any.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i robin-map-0.5.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE openimageio
+===========================================
+!!! EN ROOT
+# cd
+# pacman -Syu
+
+# pacman -Syu robin-map-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -Rdd robin-map-git
+# rm /var/cache/pacman/pkg/robin-map-git-*
+# pacman -S robin-map-git
+
+
+ANCIEN
+======

@@ -1,0 +1,143 @@
+==> Starting build()...
+-- The CXX compiler identification is GNU 8.2.1
+-- The C compiler identification is GNU 8.2.1
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- CMake version is 3.13.1
+CMake Deprecation Warning at CMakeLists.txt:17 (cmake_policy):
+  The OLD behavior for policy CMP0046 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+
+
+-- Project source dir = /build/openimageio-git/src/oiio-Release-2.0.3
+-- Project build dir   = /build/openimageio-git/src/oiio-Release-2.0.3/build
+-- Project install dir = /usr
+-- CMAKE_SYSTEM_NAME = Linux
+-- CMAKE_SYSTEM_VERSION = 4.19.4-arch1-1-ARCH
+-- SYSTEM_PROCESSOR = x86_64
+-- Unix! Linux
+-- platform = linux64
+-- CMAKE_CXX_COMPILER is /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID is GNU
+-- Using gcc 8.2.1 as the compiler
+-- Building for C++11
+-- Compiling with SIMD level avx2
+-- SIMD feature: avx2
+-- Performing Test USE_STD_REGEX
+-- Performing Test USE_STD_REGEX - Success
+-- clang-format not found.
+-- Setting Namespace to: OpenImageIO_v2_0
+-- Found TIFF: /usr/lib/libtiff.so (found suitable version "4.0.10", minimum required is "3.9") 
+-- Found ZLIB: /usr/lib/libz.so (found version "1.2.11") 
+-- Found PNG: /usr/lib/libpng.so (found version "1.6.35") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.5.4") 
+-- Found OpenEXR: /usr/include (found suitable version "2.3.0", minimum required is "2.0") 
+-- OPENEXR_INCLUDE_DIR = /usr/include
+-- OPENEXR_LIBRARIES = /lib/libIlmImf.so;/lib/libImath.so;/lib/libIex.so;/lib/libHalf.so;/lib/libIlmThread.so;-lpthread;/usr/lib/libz.so
+-- BOOST_ROOT 
+-- Boost version: 1.68.0
+-- Found the following Boost libraries:
+--   filesystem
+--   system
+--   thread
+--   chrono
+--   date_time
+--   atomic
+-- BOOST_ROOT 
+-- Boost found 1 
+-- Boost version      106800
+-- Boost include dirs /usr/include
+-- Boost library dirs /usr/lib
+-- Boost libraries    /usr/lib/libboost_filesystem.so;/usr/lib/libboost_system.so;/usr/lib/libboost_thread.so;-lpthread;/usr/lib/libboost_chrono.so;/usr/lib/libboost_date_time.so;/usr/lib/libboost_atomic.so;rt
+CMake Warning (dev) at /usr/share/cmake-3.13/Modules/FindOpenGL.cmake:270 (message):
+  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
+  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  FindOpenGL found both a legacy GL library:
+
+    OPENGL_gl_LIBRARY: /usr/lib/libGL.so
+
+  and GLVND libraries for OpenGL and GLX:
+
+    OPENGL_opengl_LIBRARY: /usr/lib/libOpenGL.so
+    OPENGL_glx_LIBRARY: /usr/lib/libGLX.so
+
+  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
+  compatibility with CMake 3.10 and below the legacy GL library will be used.
+Call Stack (most recent call first):
+  src/cmake/externalpackages.cmake:131 (find_package)
+  CMakeLists.txt:130 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found OpenGL: /usr/lib/libOpenGL.so   
+-- OPENGL_FOUND=TRUE USE_OPENGL=ON
+-- Found OCIO library /usr/lib/libOpenColorIO.so
+-- Found OCIO includes /usr/include
+-- Qt5_FOUND=1
+-- Found BZip2: /usr/lib/libbz2.so (found version "1.0.6") 
+-- Looking for BZ2_bzCompressInit
+-- Looking for BZ2_bzCompressInit - found
+-- Found FFMPEG or Libav: /usr/lib/libavcodec.so;/usr/lib/libavformat.so;/usr/lib/libavutil.so;/usr/lib/libswscale.so, /usr/include
+-- FFMPEG includes = /usr/include
+-- FFMPEG library = /usr/lib/libavcodec.so;/usr/lib/libavformat.so;/usr/lib/libavutil.so;/usr/lib/libswscale.so
+-- Field3d will not be used
+-- Found TBB: /usr/include (found suitable version "2019.0", minimum required is "2017")  
+-- Intel TBB includes = /usr/include
+-- Intel TBB library = /usr/lib/libtbbmalloc.so;/usr/lib/libtbb.so
+-- Could NOT find OPENVDB (missing: OPENVDB_LIBRARY OPENVDB_INCLUDE_DIR) 
+-- OpenVDB not found, OPENVDB_ROOT_DIR=''
+-- Found JPEG: /usr/lib/libjpeg.so  
+-- Found OpenJpeg: /usr/include/openjpeg-2.3  
+-- Found OpenJpeg: v2.3 /usr/lib/libopenjp2.so
+-- Looking for LibRaw with 
+-- Found LibRaw: /usr/lib/libraw.so (found version "0.19.1") 
+-- Found LibRaw, include /usr/include
+-- WEBP_HOME=
+-- WEBP includes = /usr/include 
+-- WEBP library = /usr/lib/libwebp.so 
+-- Found OpenCV 4.0.0 include in /usr/include/opencv4
+-- Found OpenCV libs: /lib/libopencv_core.so;/lib/libopencv_imgproc.so;/lib/libopencv_videoio.so
+-- Found OpenCV: /lib/libopencv_core.so;/lib/libopencv_imgproc.so;/lib/libopencv_videoio.so (found version "4.0.0") 
+-- Found Freetype: /usr/lib/libfreetype.so (found version "2.9.1") 
+-- Freetype includes = /usr/include/freetype2 
+-- Freetype libs = /usr/lib/libfreetype.so 
+-- Found GIF: /usr/lib/libgif.so (found version "5.1.4") 
+-- Setting SOVERSION to: 2.0
+-- Downloading local Tessil/robin-map
+CMake Error at /usr/share/cmake-3.13/Modules/FindPackageHandleStandardArgs.cmake:137 (message):
+  Could NOT find Git (missing: GIT_EXECUTABLE)
+Call Stack (most recent call first):
+  /usr/share/cmake-3.13/Modules/FindPackageHandleStandardArgs.cmake:378 (_FPHSA_FAILURE_MESSAGE)
+  /usr/share/cmake-3.13/Modules/FindGit.cmake:83 (find_package_handle_standard_args)
+  src/cmake/externalpackages.cmake:602 (find_package)
+  CMakeLists.txt:150 (find_or_download_robin_map)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/build/openimageio-git/src/oiio-Release-2.0.3/build/CMakeFiles/CMakeOutput.log".
+See also "/build/openimageio-git/src/oiio-Release-2.0.3/build/CMakeFiles/CMakeError.log".

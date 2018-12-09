@@ -244,9 +244,11 @@ cd $HOME/05-builds/openshadinglanguage-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-SI depends=("openimageio-git")
-==============================
+SI depends=("openimageio-git") + openvdb-git
+============================================================
 $ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+$ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
   FAST
 -------
