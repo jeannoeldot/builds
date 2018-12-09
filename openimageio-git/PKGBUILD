@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimageio-git
-pkgver=2.0.3.20181208
+pkgver=1.8.17.20181201
 pkgrel=1
-_name_release="oiio-Release-2.0.3"
+_name_release="oiio-Release-1.8.17"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -11,20 +11,16 @@ license=('custom')
 depends=('openexr' 'boost-libs' 'jasper' 'libtiff' 'opencolorio' 'intel-tbb'
          'libjpeg-turbo' 'openjpeg' 'libraw'
          'ffmpeg'
-         'opencv'
-         'qt5-base'
-         'python'
-         'openvdb-git'
+         'opencv' 'openssl'
+         'qt5-base' 'python2'
 )
 makedepends=('cmake' 'boost' 'mesa'
-             'robin-map-git'
-             'pybind11' 'python-numpy'
 )
 conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('b33a1e9d7ab34914e173a1dd97dc14889c05d2c057df8a54553a187300e0aa05'
+sha256sums=('a019086c05a6150d445a2240bab1723dff540dde5f5c327c36a97f0b5ae0e157'
 )
 
 build() {
@@ -37,10 +33,11 @@ build() {
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
+      -DSTOP_ON_WARNING=OFF \
       -DVERBOSE=ON \
       -DOIIO_BUILD_TESTS=OFF \
-      -DPYTHON_VERSION=3.7 \
       -DUSE_FIELD3D=OFF \
+      -DUSE_OPENSSL=ON \
       -DUSE_PTEX=OFF \
       -DUSE_NUKE=OFF \
       -DUSE_DICOM=OFF \
@@ -58,6 +55,6 @@ package() {
 
   # license
   mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
-  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
-  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE-THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE-THIRD-PARTY
+  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}
+
 }
