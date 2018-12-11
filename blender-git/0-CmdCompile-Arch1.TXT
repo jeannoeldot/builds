@@ -27,7 +27,7 @@ cd /0-DataLinux/05-builds-dir-git
 
 Vérifier existence rep blender :
 --------------------------------
-ls
+ls | grep blender
 
 !!! SI REP blender N'EXISTE PAS
 -------------------------------
