@@ -141,22 +141,18 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
          ...
          'jemalloc'
          'opencolorio'
-!!!!!!
 !!! POUR ant_landscape
-          'python-numpy'
-!!!!!!
-!!!!!!
+         'python-numpy'
+
          'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
-!!!!!!
-         'opensubdiv-git' 'openvdb-git' 'alembic-git' 'embree-git'
-!!!!!!
-LLVM 7.0
+         'opensubdiv-git' 'openvdb-git' 'alembic-git'
+         
+!!! ERREUR Compile avec embree 3.3.0
+         'embree-git'
+
          'llvm-libs'
-!!!!!!
 )
 
-!!!!!!
-LLVM 7.0
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
 !!! POUR BUILDINFO
@@ -164,7 +160,7 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm'
 )
 
 !!!!!!
-_gitname="blender"
+_gitname="blender280"
 
 !!!!!!
 _slot="2.80"
@@ -218,25 +214,6 @@ sha256sums=(...
          ...
 )
 
-/!\/!\/!\/!\/!\
----------------
-build() {
-  ...
-OpenVDB: Fix compilation error against OpenVDB 4
-author	Sergey Sharybin <sergey.vfx@gmail.com>	
-	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
-commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
-
-Build: add WITH_OPENVDB_3_ABI_COMPATIBLE option.
-author	Brecht Van Lommel <brechtvanlommel@gmail.com>	
-	Mon, 2 Apr 2018 18:55:10 +0200 (18:55 +0200)
-commit	71d7d6cd8c431b7f4fac8d65a4eaedf3cff6c8f6
-
-==> INUTILE
-  # OPENVDB : VERSION >= 4
-  CXXFLAGS+=' -DOPENVDB_3_ABI_COMPATIBLE'
-  ...
-
 
 # PYTHON : VOIR PKGBUILD sur COMMUNITY
 --------------------------------------
@@ -250,12 +227,12 @@ $ pacman -Ss python | grep 3 | grep install
     -DPYTHON_INCLUDE_DIRS=/usr/include/python3.7m \
 
 
-2-2) VERIFIER CMakeLists.txt SI NON_MODIFIÉ
+2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
     VALEUR CMAKELISTS.TXT=MODIFIÉ
 =======================================
-  kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
+  kwrite /0-DataLinux/05-builds-dir-git/blender280/CMakeLists.txt &
 
-Lignes 171 et ...
+Lignes 170 et ...
 # customize...
 if(UNIX AND NOT APPLE)
         # some of these libraries are problematic on Linux
@@ -272,18 +249,16 @@ if(UNIX AND NOT APPLE)
 endif()
 
 # Blender internal features
-218 option(WITH_BUILDINFO   ==> ON   si ON makedepends = git
+216 option(WITH_BUILDINFO   ==> ON   si ON makedepends = git
 
-232 option(WITH_FFTW3   ==> ON
+230 option(WITH_FFTW3   ==> ON
 
-236 option(WITH_GAMEENGINE   ==> OFF
-
-243 option(WITH_OPENCOLORIO   ==> ON
+234 option(WITH_OPENCOLORIO   ==> ON
 
 # Compositor
-248 option(WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
-250 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
-251 option(WITH_OPENVDB_BLOSC   ==> ON
+239 option(WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
+241 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
+242 option(WITH_OPENVDB_BLOSC   ==> ON
 
 302     !!! VOIR
 if(UNIX AND NOT APPLE)
@@ -292,30 +267,28 @@ endif()
 
 
 # Modifiers
-311 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
-313 option WITH_MOD_OCEANSIM	==> ON
+302 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
+304 option WITH_MOD_OCEANSIM	==> ON
 
 # Image format support
-317 option(WITH_IMAGE_OPENEXR	==> ON
-
-323 option WITH_IMAGE_FRAMESERVER    ==> OFF
+308 option(WITH_IMAGE_OPENEXR	==> ON
 
 # Audio/Video format support
-327	option WITH_CODEC_FFMPEG	==> ON
-328	option WITH_CODEC_SNDFILE	==> ON
+317	option WITH_CODEC_FFMPEG	==> ON
+318	option WITH_CODEC_SNDFILE	==> ON
 
-Lignes 330 et ...
+Lignes 320 et ...
 # Alembic support
 option(WITH_ALEMBIC             OFF ==> ON dep = alembic-git
 option(WITH_ALEMBIC_HDF5        "Enable Legacy Alembic Support (not officially supported)" OFF)
 
 Lignes 334
 # 3D format support
-336   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
+326   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
 
 # Sound output
-339   option(WITH_SDL   	==> ON
-341   option WITH_JACK          ==> OFF         si ON  dep =  jack
+329   option(WITH_SDL   	==> ON
+331   option WITH_JACK          ==> OFF         si ON  dep =  jack
 
 # Compression
 
@@ -326,19 +299,19 @@ Lignes 334
 # Freestyle
 
 # Misc
-374	option WITH_INPUT_NDOF		==> OFF
+364	option WITH_INPUT_NDOF		==> OFF
 
 
-377	WITH_INSTALL_PORTABLE       ON   ==> OFF
+367	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-385     WITH_PYTHON_INSTALL             ON   ==> OFF
+375     WITH_PYTHON_INSTALL             ON   ==> OFF
 
-387     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+385     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-392     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+388     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
         
-401 # Cycles
+397 # Cycles
 option WITH_CYCLES			ON     si ON dep = openimageio
 option WITH_CYCLES_OSL                  ==> ON dep = openshadinglanguage
 
@@ -355,67 +328,53 @@ exemple :  GeForce GTX 980    5.2
 
 !!! SI PLUSIEURS CUDA BINARIES:
 ================================
-VOIR /0-DataLinux/05-builds-dir-git/blender/build_files/buildbot/slave_compile.py
-LIGNE 119:
- cuda_cmake_options.append("-DCYCLES_CUDA_BINARIES_ARCH=sm_30;sm_35;sm_37;sm_50;sm_52;sm_60;sm_61")
 exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
 -DCYCLES_CUDA_BINARIES_ARCH=sm_52;sm_61
 
-Lignes 418 ????
-option(WITH_CYCLES_LOGGING              ON   ==> OFF
+Lignes 410 ????
+option(WITH_CYCLES_LOGGING     ON ???
         
 !!! A VOIR ???
-420 WITH_CYCLES_NATIVE_ONLY	"Build Cycles with native kernel only (which fits current CPU, use for development only)" OFF)
-   	==> ON ???
+412 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
 
 !!! A VOIR ???
-429   WITH_CUDA_DYNLOAD     ON
+425   WITH_CUDA_DYNLOAD     ON
 
 
-432 # LLVM
+428 # LLVM
 $ pacman -Ss llvm | grep install
 extra/llvm 7.0.0-2 [installé]
 extra/llvm-libs 7.0.0-2 [installé]
 
-433 option(WITH_LLVM   	OFF  ==> ON
+429 option(WITH_LLVM   	OFF  ==> ON
 
 
 # Documentation
-Lignes 464 et ...
+Lignes 460 et ...
 if(UNIX AND NOT APPLE)
-        option(WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON
+        option(WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
 endif()
 
 
 # OpenGL
 # OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
 ---------------------------------------------------
-Lignes 294 et ...
-        option(WITH_SYSTEM_GLEW         ==> OFF
-        option(WITH_SYSTEM_GLES         ==> ON
+Lignes 283 et ...
+        option(WITH_SYSTEM_GLEW   OFF
+        option(WITH_SYSTEM_GLES   ON
 
-Lignes 470 et ...
+Lignes 466 et ...
 INCHANGÉS :
 ------------
-error: VOIR : 00-Erreur-Compile-WITH_GL_PROFILE_CORE-ON.TXT
-
-option(WITH_GL_PROFILE_COMPAT         ON   ==> OFF
-OpenGL core profile version string: 4.5.0 NVIDIA 367.27
-        option(WITH_GL_PROFILE_CORE         OFF  ==> ON
-OpenGL ES profile version string: OpenGL ES 3.2 NVIDIA 367.27
-        option(WITH_GL_PROFILE_ES20         OFF  ==> ON
-        
-TESTS DANS PKGBUILD
-        -DWITH_GL_PROFILE_COMPAT=OFF \
-        -DWITH_GL_PROFILE_CORE=ON \
+468 WITH_OPENGL ON
 
 
 # Compiler toolchain
-Lignes 509 et ...
+Lignes 495 et ...
 
 # Dependency graph
-Lignes 558 et ...
-
+Lignes 544 et ...
+WITH_LEGACY_DEPSGRAPH ON
 
 =================================================================
 
@@ -431,7 +390,6 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.80.37.20181211.tar.gz
 -rw-r--r--  1 jnd users     1228  1 oct.  16:46 blender.install
--rw-r--r--  1 jnd users      479 25 juin   2017 fix-Error-python3.7-io_mesh_stl.patch
 -rw-r--r--  1 jnd users      877  7 août  15:33 fix-SyntaxError-object_facemap_auto.patch
 -rw-r--r--  1 jnd users     4070 28 janv. 10:41 PKGBUILD
 
@@ -523,7 +481,6 @@ rm -f *~ \
 && cp -v $HOME/05-builds/blender280-git/PKGBUILD . \
 && cp -v $HOME/05-builds/blender280-git/blender-git-2.80.37.20181211.tar.gz . \
 && cp -v $HOME/05-builds/blender280-git/fix-SyntaxError-object_facemap_auto.patch . \
-&& cp -v $HOME/05-builds/blender280-git/fix-Error-python3.7-io_mesh_stl.patch . \
 && cp -v $HOME/05-builds/blender280-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender280-git \
@@ -566,8 +523,6 @@ rm -f *~
 # Verifications...
 
 namcap blender-git-*-x86_64.pkg.tar.*
-!!! VU
-blender-git W: Directory (usr/share/blender/2.79/scripts/addons_contrib) is empty
 
 ==> WARNING: Package contains reference to $srcdir
 usr/bin/blender
@@ -604,22 +559,21 @@ $ sync
 # cd
 # pacman -Syu
 !!! OU
-# pacman -R blender-git blender-addons-yafaray-git
 # pacman -Syu blender-git
 
 
 !!! MODIFIER FICHIERS
 !!! EN USER
 
-!!! SI CHANGEMENT DE VERSION ( 2.78 -> 2.79  ... )
+!!! SI CHANGEMENT DE VERSION ( 2.80 -> 2.81  ... )
 
 $ cd
-$ cp -r .config/blender/2.78 .config/blender/2.79
-# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.79/cache
-$ rm -f .config/blender/2.79/cache/bvh_*
+$ cp -r .config/blender/2.80 .config/blender/2.81
+# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.81/cache
+$ rm -f .config/blender/2.81/cache/bvh_*
 
 # SUPPRINE VERSION N-2
-$ rm -rf .config/blender/2.77
+$ rm -rf .config/blender/2.xx
 
 ================================================================
 TESTS

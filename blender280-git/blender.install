@@ -22,13 +22,12 @@ Features includes:
       - C11               : Experimental support of C11
       - C++11             : Experimental support of C++11
 Features no includes:
-      - Game Engine
       - Player
       - Cloth ELTOPO support
-      - Image FrameServer Support for rendering
-      - NDOF input devices
       - Jack
+      - NDOF input devices
       - CYCLES EMBREE
+      - DOC_MANPAGE
 
 EOF
 }

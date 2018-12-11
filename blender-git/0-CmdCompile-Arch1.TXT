@@ -280,7 +280,7 @@ $ pacman -Ss python | grep 3 | grep install
     -DPYTHON_INCLUDE_DIRS=/usr/include/python3.7m \
 
 
-2-2) VERIFIER CMakeLists.txt SI NON_MODIFIÉ
+2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
     VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
