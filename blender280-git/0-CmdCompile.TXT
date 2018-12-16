@@ -11,9 +11,9 @@ AM = matin  PM = après-midi
 https://developer.blender.org/diffusion/B/graph/blender2.8/
 https://developer.blender.org/diffusion/B/history/blender2.8/
 
-adaadb2fa0a4
-==> Wed, Dec 12, 10:44 AM
-==> 20181212
+4488056f3d96
+==> Sun, Dec 16, 1:27 AM.
+==> 20181216
 
 1.3 SOURCES
 ==============
@@ -37,7 +37,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short HEAD
-==> MY_WC_HASH = adaadb2fa0a
+==> MY_WC_HASH = 4488056f3d9
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -47,7 +47,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1544607879
+==> MY_WC_COMMIT_TIMESTAM = 1544920021
 
 cd ..
 
@@ -66,7 +66,7 @@ git submodule update --init --recursive --remote
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short HEAD
-==> MY_WC_HASH = adaadb2fa0a
+==> MY_WC_HASH = 4488056f3d9
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -76,7 +76,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1544607879
+==> MY_WC_COMMIT_TIMESTAM = 1544920021
 
 
 cd ..
@@ -86,7 +86,7 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=NON_MODIFIÉ
+==> CMAKELISTS.TXT=MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
@@ -95,7 +95,7 @@ $ head -n 45 blender280/source/blender/blenkernel/BKE_blender_version.h | grep V
 #define BLENDER_VERSION         280
 #define BLENDER_SUBVERSION      37
 
-==> Version = 2.80.37.20181212
+==> Version = 2.80.37.20181216
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.80 à 2.81)
 
@@ -104,7 +104,7 @@ $ head -n 45 blender280/source/blender/blenkernel/BKE_blender_version.h | grep V
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.80.37.20181212.tar.gz --exclude=.git blender280
+tar -cvzf blender-git-2.80.37.20181216.tar.gz --exclude=.git blender280
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -112,7 +112,7 @@ cd $HOME/05-builds/blender280-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.37.20181212.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.37.20181216.tar.gz .
 sync
 
 
@@ -131,7 +131,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.80.37.20181212
+pkgver=2.80.37.20181216
 pkgrel=1
 
 
@@ -171,7 +171,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.80.37.20181212.tar.gz
+sha256sum blender-git-2.80.37.20181216.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -197,9 +197,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 55 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "adaadb2fa0a"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4488056f3d9"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "blender2.8"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544607879|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544920021|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -208,7 +208,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.80.37.20181212.tar.gz
+sha256sum blender-git-2.80.37.20181216.tar.gz
 
 sha256sums=(...
          ...
@@ -228,11 +228,11 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
-    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
+    VALEUR CMAKELISTS.TXT=MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender280/CMakeLists.txt &
 
-Lignes 170 et ...
+Lignes 177 et ...
 # customize...
 if(UNIX AND NOT APPLE)
         # some of these libraries are problematic on Linux
@@ -249,46 +249,46 @@ if(UNIX AND NOT APPLE)
 endif()
 
 # Blender internal features
-216 option(WITH_BUILDINFO   ==> ON   si ON makedepends = git
+223 option(WITH_BUILDINFO   ==> ON   si ON makedepends = git
 
-230 option(WITH_FFTW3   ==> ON
+237 option(WITH_FFTW3   ==> ON
 
-234 option(WITH_OPENCOLORIO   ==> ON
+241 option(WITH_OPENCOLORIO   ==> ON
 
 # Compositor
-239 option(WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
-241 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
-242 option(WITH_OPENVDB_BLOSC   ==> ON
+246 option(WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
+248 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
+249 option(WITH_OPENVDB_BLOSC   ==> ON
 
-302     !!! VOIR
+300     !!! VOIR
 if(UNIX AND NOT APPLE)
 	option(WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
 endif()
 
 
 # Modifiers
-302 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
-304 option WITH_MOD_OCEANSIM	==> ON
+309 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
+311 option WITH_MOD_OCEANSIM	==> ON
 
 # Image format support
-308 option(WITH_IMAGE_OPENEXR	==> ON
+315 option(WITH_IMAGE_OPENEXR	==> ON
 
 # Audio/Video format support
-317	option WITH_CODEC_FFMPEG	==> ON
-318	option WITH_CODEC_SNDFILE	==> ON
+324	option WITH_CODEC_FFMPEG	==> ON
+325	option WITH_CODEC_SNDFILE	==> ON
 
-Lignes 320 et ...
+Lignes 327 et ...
 # Alembic support
 option(WITH_ALEMBIC             OFF ==> ON dep = alembic-git
 option(WITH_ALEMBIC_HDF5        "Enable Legacy Alembic Support (not officially supported)" OFF)
 
-Lignes 334
+Lignes 331
 # 3D format support
-326   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
+333   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
 
 # Sound output
-329   option(WITH_SDL   	==> ON
-331   option WITH_JACK          ==> OFF         si ON  dep =  jack
+336   option(WITH_SDL   	==> ON
+338   option WITH_JACK          ==> OFF         si ON  dep =  jack
 
 # Compression
 
@@ -299,19 +299,19 @@ Lignes 334
 # Freestyle
 
 # Misc
-364	option WITH_INPUT_NDOF		==> OFF
+371	option WITH_INPUT_NDOF		==> OFF
 
 
-367	WITH_INSTALL_PORTABLE       ON   ==> OFF
+374	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-375     WITH_PYTHON_INSTALL             ON   ==> OFF
+382     WITH_PYTHON_INSTALL             ON   ==> OFF
 
-385     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+392     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-388     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+395     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
         
-397 # Cycles
+404 # Cycles
 option WITH_CYCLES			ON     si ON dep = openimageio
 option WITH_CYCLES_OSL                  ==> ON dep = openshadinglanguage
 
@@ -331,26 +331,26 @@ exemple :  GeForce GTX 980    5.2
 exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
 -DCYCLES_CUDA_BINARIES_ARCH=sm_52;sm_61
 
-Lignes 410 ????
+Lignes 417 ????
 option(WITH_CYCLES_LOGGING     ON ???
         
 !!! A VOIR ???
-412 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
+419 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
 
 !!! A VOIR ???
-425   WITH_CUDA_DYNLOAD     ON
+432   WITH_CUDA_DYNLOAD     ON
 
 
-428 # LLVM
+435 # LLVM
 $ pacman -Ss llvm | grep install
 extra/llvm 7.0.0-2 [installé]
 extra/llvm-libs 7.0.0-2 [installé]
 
-429 option(WITH_LLVM   	OFF  ==> ON
+436 option(WITH_LLVM   	OFF  ==> ON
 
 
 # Documentation
-Lignes 460 et ...
+Lignes 468 et ...
 if(UNIX AND NOT APPLE)
         option(WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
 endif()
@@ -359,21 +359,21 @@ endif()
 # OpenGL
 # OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
 ---------------------------------------------------
-Lignes 283 et ...
+Lignes 290 et ...
         option(WITH_SYSTEM_GLEW   OFF
         option(WITH_SYSTEM_GLES   ON
 
-Lignes 466 et ...
+Lignes 473 et ...
 INCHANGÉS :
 ------------
-468 WITH_OPENGL ON
+475 WITH_OPENGL ON
 
 
 # Compiler toolchain
-Lignes 495 et ...
+Lignes 502 et ...
 
 # Dependency graph
-Lignes 544 et ...
+Lignes 551 et ...
 WITH_LEGACY_DEPSGRAPH ON
 
 =================================================================
@@ -388,7 +388,7 @@ WITH_LEGACY_DEPSGRAPH ON
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.80.37.20181212.tar.gz
+-rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.80.37.20181216.tar.gz
 -rw-r--r--  1 jnd users     1228  1 oct.  16:46 blender.install
 -rw-r--r--  1 jnd users      877  7 août  15:33 fix-SyntaxError-object_facemap_auto.patch
 -rw-r--r--  1 jnd users     4070 28 janv. 10:41 PKGBUILD
@@ -479,7 +479,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender280-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.37.20181212.tar.gz . \
+&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.37.20181216.tar.gz . \
 && cp -v $HOME/05-builds/blender280-git/fix-SyntaxError-object_facemap_auto.patch . \
 && cp -v $HOME/05-builds/blender280-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -549,7 +549,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.80.37.20181212.tar.gz
+$ rm -i blender-git-2.80.37.20181216.tar.gz
 
 
 $ cd && maj-repolocal
@@ -585,11 +585,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "adaadb2fa0a"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "4488056f3d9"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "blender2.8"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544607879|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544920021|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
