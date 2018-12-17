@@ -1,7 +1,7 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=conky-lua-nv-git
-pkgver=1.11.2.20181216
+pkgver=1.10.9.20180227
 pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
@@ -20,7 +20,7 @@ optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('dbf8dda7a21f00c7c26707e33c266438686239b57ff86a27553b931aa4d68cbb'
+sha256sums=('996e0b9a4a229fc7af0d01488246573fa548fe6a9cd4584bc5b1a07decb9b734'
 )
 #options=('!strip' 'debug')
 
@@ -33,17 +33,15 @@ build() {
     -D CMAKE_SKIP_RPATH=ON \
     -D CMAKE_BUILD_TYPE=Release \
     -D MAINTAINER_MODE=ON \
-    -D BUILD_NVIDIA=ON \
     -D BUILD_WLAN=ON \
+    -D BUILD_NVIDIA=ON \
     -D BUILD_LUA_CAIRO=ON \
     -D BUILD_LUA_IMLIB2=ON \
     -D BUILD_LUA_RSVG=ON \
     -D BUILD_MPD=OFF \
     -D BUILD_MOC=OFF \
-    -D BUILD_EVE=OFF \
     -D BUILD_CURL=ON \
     -D BUILD_RSS=ON \
-    -D BUILD_CMUS=OFF \
     -D CMAKE_INSTALL_PREFIX=/usr \
     .
 
