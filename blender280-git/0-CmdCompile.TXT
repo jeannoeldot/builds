@@ -11,9 +11,9 @@ AM = matin  PM = après-midi
 https://developer.blender.org/diffusion/B/graph/blender2.8/
 https://developer.blender.org/diffusion/B/history/blender2.8/
 
-4488056f3d96
-==> Sun, Dec 16, 1:27 AM.
-==> 20181216
+7d8f57e0c013
+==> Thu, Dec 20, 8:18 AM.
+==> 20181220
 
 1.3 SOURCES
 ==============
@@ -36,8 +36,8 @@ git submodule foreach git pull --rebase origin master
 
 !!! LIRE MY_WC_HASH
 -------------------
-git rev-parse --short HEAD
-==> MY_WC_HASH = 4488056f3d9
+git rev-parse --short=12 HEAD
+==> MY_WC_HASH = 7d8f57e0c013
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -47,7 +47,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1544920021
+==> MY_WC_COMMIT_TIMESTAM = 1545290322
 
 cd ..
 
@@ -56,17 +56,19 @@ cd ..
 cd blender280
 git pull --rebase
 
-git submodule update --init --recursive
-git submodule foreach "git checkout blender2.8 || git checkout master"
-==> error: le spécificateur de chemin 'blender2.8' ne correspond à aucun fichier connu de git
-git submodule foreach git pull --rebase origin
+!!! git submodule update --init --recursive
+!!! git submodule foreach "git checkout blender2.8 || git checkout master"
+!!! ==> error: le spécificateur de chemin 'blender2.8' ne correspond à aucun fichier connu de git
+!!! git submodule foreach git pull --rebase origin
 OU
 git submodule update --init --recursive --remote
 
+!!! Vérifier si build_files/cmake/buildinfo.cmake est modifié
+-------------------------------------------------------------
 !!! LIRE MY_WC_HASH
 -------------------
-git rev-parse --short HEAD
-==> MY_WC_HASH = 4488056f3d9
+git rev-parse --short=12 HEAD
+==> MY_WC_HASH = 7d8f57e0c013
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -76,7 +78,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1544920021
+==> MY_WC_COMMIT_TIMESTAM = 1545290322
 
 
 cd ..
@@ -86,16 +88,16 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=MODIFIÉ
+==> CMAKELISTS.TXT=NON_MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
 $ head -n 45 blender280/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
 #define BLENDER_VERSION         280
-#define BLENDER_SUBVERSION      37
+#define BLENDER_SUBVERSION      39
 
-==> Version = 2.80.37.20181216
+==> Version = 2.80.39.20181220
 
 !!! SI CHANGEMENT DE VERSION (ex de 2.80 à 2.81)
 
@@ -104,7 +106,7 @@ $ head -n 45 blender280/source/blender/blenkernel/BKE_blender_version.h | grep V
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.80.37.20181216.tar.gz --exclude=.git blender280
+tar -cvzf blender-git-2.80.39.20181220.tar.gz --exclude=.git blender280
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -112,7 +114,7 @@ cd $HOME/05-builds/blender280-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.37.20181216.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.39.20181220.tar.gz .
 sync
 
 
@@ -131,7 +133,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.80.37.20181216
+pkgver=2.80.39.20181220
 pkgrel=1
 
 
@@ -171,7 +173,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.80.37.20181216.tar.gz
+sha256sum blender-git-2.80.39.20181220.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -197,9 +199,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 55 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4488056f3d9"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7d8f57e0c013"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "blender2.8"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544920021|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1545290322|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -208,7 +210,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.80.37.20181216.tar.gz
+sha256sum blender-git-2.80.39.20181220.tar.gz
 
 sha256sums=(...
          ...
@@ -228,7 +230,7 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
-    VALEUR CMAKELISTS.TXT=MODIFIÉ
+    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender280/CMakeLists.txt &
 
@@ -343,8 +345,8 @@ option(WITH_CYCLES_LOGGING     ON ???
 
 435 # LLVM
 $ pacman -Ss llvm | grep install
-extra/llvm 7.0.0-2 [installé]
-extra/llvm-libs 7.0.0-2 [installé]
+extra/llvm 7.0.1-1 [installé]
+extra/llvm-libs 7.0.1-1 [installé]
 
 436 option(WITH_LLVM   	OFF  ==> ON
 
@@ -388,7 +390,7 @@ WITH_LEGACY_DEPSGRAPH ON
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.80.37.20181216.tar.gz
+-rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.80.39.20181220.tar.gz
 -rw-r--r--  1 jnd users     1228  1 oct.  16:46 blender.install
 -rw-r--r--  1 jnd users      877  7 août  15:33 fix-SyntaxError-object_facemap_auto.patch
 -rw-r--r--  1 jnd users     4070 28 janv. 10:41 PKGBUILD
@@ -479,7 +481,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender280-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.37.20181216.tar.gz . \
+&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.39.20181220.tar.gz . \
 && cp -v $HOME/05-builds/blender280-git/fix-SyntaxError-object_facemap_auto.patch . \
 && cp -v $HOME/05-builds/blender280-git/blender.install . \
 && LC_ALL=C makepkg -s \
@@ -549,7 +551,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.80.37.20181216.tar.gz
+$ rm -i blender-git-2.80.39.20181220.tar.gz
 
 
 $ cd && maj-repolocal
@@ -585,11 +587,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "4488056f3d9"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "7d8f57e0c013"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "blender2.8"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1544920021|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1545290322|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS

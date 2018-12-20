@@ -46,7 +46,7 @@ git submodule foreach git pull --rebase origin master
 
 !!! LIRE MY_WC_HASH
 -------------------
-git rev-parse --short HEAD
+git rev-parse --short=12 HEAD
 ==> MY_WC_HASH = 0eb61c799d0
 
 !!! LIRE MY_WC_BRANCH
