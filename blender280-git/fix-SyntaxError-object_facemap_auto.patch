@@ -1,6 +1,6 @@
-diff -aur blender280/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py blender280.new/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
---- blender280/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py	2018-12-11 11:44:41.000000000 +0100
-+++ blender280.new/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py	2018-12-11 11:59:40.996911850 +0100
+diff -aur blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py blender.new/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
+--- blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py	2018-12-22 11:09:19.000000000 +0100
++++ blender.new/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py	2018-12-22 11:22:42.948550886 +0100
 @@ -323,9 +323,7 @@
          mpr.select = fmap.select
  

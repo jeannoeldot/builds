@@ -1,27 +1,27 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.39.20181220
+!!! VERSION = 2.80.39.20181222
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender280-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.39.20181220.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.39.20181222.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.39.20181220.tar.gz
+tar -xzf blender-git-2.80.39.20181222.tar.gz
 
 
-1) MODIFIER blender280/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
-==============================================================================================
+1) MODIFIER blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
+===========================================================================================
 /!\ /!\ /!\ cd /tmp/srcp
 
-cp -R blender280 blender280.new
+cp -R blender blender.new
 
-cd blender280.new/release/scripts/addons_contrib/object_facemap_auto
+cd blender.new/release/scripts/addons_contrib/object_facemap_auto
 kwrite auto_fmap_widgets.py
 
 MODIFIER LIGNES 326 327 328 :
@@ -39,10 +39,10 @@ rm -f auto_fmap_widgets.py~
 
 cd ../../../../..
 
-diff -aur blender280 blender280.new
-diff -aur blender280 blender280.new > fix-SyntaxError-object_facemap_auto.patch
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-object_facemap_auto.patch
 
-rm -rf blender280.new
+rm -rf blender.new
 
 cd $HOME/05-builds/blender280-git
 
