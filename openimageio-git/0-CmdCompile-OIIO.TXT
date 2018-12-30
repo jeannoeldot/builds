@@ -39,6 +39,7 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=2.0.3.20181208
 pkgrel=1
+pkgrel=2          # rebuild MAJ openvdb 6.0.0
 
 
 pkgrel=2          # rebuild MAJ opencv 4.0.0

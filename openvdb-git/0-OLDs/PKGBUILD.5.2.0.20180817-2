@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openvdb-git
-pkgver=6.0.0.20181218
-pkgrel=1
-_ver_release="6.0.0"
+pkgver=5.2.0.20180817
+pkgrel=2
+_ver_release="5.2.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://github.com/dreamworksanimation/openvdb'
@@ -18,17 +18,17 @@ makedepends=('doxygen' 'boost' 'cmake' 'mesa'
 conflicts=('openvdb')
 provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
-        'fix-error-boost-egal-sup-1.67.patch'
+        'boost-1.67.patch'
 )
-sha256sums=('dbdf3048336444c402e5d3727c9bfb2e84454b8d0fd468ba92a8c7225e24b7b4'
-            '7508921a498e26c17ad26896b65fec238c3cd5eeff8ab719b3ff167cc03ea726'
+sha256sums=('86b3bc51002bc25ae8d69991228228c79b040cb1a5803d87543b407645f6ab20'
+            '5c9b8a610bcfb1c005789cd29b7ca6c92da34c751ac9b23f8ff3e611c0822641'
 )
 
 
 prepare() {
   cd "${_name_release}"
   # Fix erreur : undefined reference to symbol 'pthread_condattr_setclock@@GLIBC_2.3.3'
-  patch -Np1 -i "${srcdir}/fix-error-boost-egal-sup-1.67.patch"
+  patch -Np1 -i "${srcdir}/boost-1.67.patch"
 }
 
 build() {

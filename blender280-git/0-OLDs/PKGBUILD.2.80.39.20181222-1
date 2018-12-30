@@ -1,7 +1,7 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=blender-git
-pkgver=2.80.39.20181230
+pkgver=2.80.39.20181222
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -33,8 +33,10 @@ provides=('blender')
 options=('!strip')
 install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
+        'fix-SyntaxError-object_facemap_auto.patch'
 )
-sha256sums=('e4b7b4543f89a84839784b5b240ca8683440014bd7149819c840f57f55c97faf'
+sha256sums=('6c4bb7a2c3766b21e96907c61ff2c7f3b78f99b519fbc12a5b96b1ad208b4f92'
+            '71ce42cd2bcdb5d3e01d8a88b51b33c9983ab77c329950511cec023c66a141b5'
 )
 
 _gitname="blender"
@@ -42,6 +44,9 @@ _slot="2.80"
 
 prepare() {
   cd "${_gitname}"
+  # fix erreur : SyntaxError: Generator expression must be parenthesized (auto_fmap_widgets.py, line 327)
+  patch -Np1 -i "${srcdir}/fix-SyntaxError-object_facemap_auto.patch"
+  
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
   sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
 
@@ -50,9 +55,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "543ddbe6bfa8"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4c5e76025d83"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1546143305|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1545472564|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
