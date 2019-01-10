@@ -37,11 +37,11 @@ CHOST="x86_64-pc-linux-gnu"
 
 #-- Compiler and Linker Flags
 CPPFLAGS="-D_FORTIFY_SOURCE=2"
-CFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt"
-CXXFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt"
+CFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -fno-plt"
+CXXFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong -fno-plt -floop-interchange -floop-strip-mine -floop-block"
 LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 #-- Make Flags: change this for DistCC/SMP systems
-MAKEFLAGS="-j5"
+MAKEFLAGS="-j9"
 #-- Debugging flags
 DEBUG_CFLAGS="-g -fvar-tracking-assignments"
 DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"
