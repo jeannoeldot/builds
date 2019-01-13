@@ -250,13 +250,16 @@ cd $HOME/05-builds/openimageio-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-SI makedepends=("robin-map-git")
-================================
-$ cp -v $HOME/00-repolocal/robin-map-git-*-any.pkg.tar.* /tmp/chrootrepo/
+SI depends= 'openvdb-git'
+SI makedepends= 'robin-map-git'
+======================================
+$ cp -v $HOME/00-repolocal/\
+{\
+openvdb-git-*-x86_64.pkg.tar.*,\
+robin-map-git-*-any.pkg.tar.*\
+} \
+/tmp/chrootrepo/
 
-SI depends=( 'openvdb-git' )
-==========================================================
-$ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
   FAST
 -------
@@ -347,6 +350,16 @@ POUR REMETTRE openimageio EXTRA
 ==================================================================================================
 ANCIEN
 =======
+
+
+SI makedepends=("robin-map-git")
+================================
+$ cp -v $HOME/00-repolocal/robin-map-git-*-any.pkg.tar.* /tmp/chrootrepo/
+
+SI depends=( 'openvdb-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
 !!! VERSION 2.0.4
 package() {
   ...
