@@ -5,16 +5,38 @@ cd $HOME/05-builds/virtualbox-extension
 VERSION = 6.0.4
 BUILD = 128413
 
+1) TÉLÉCHARGER SOURCES
+======================
+
+1-1) Download snapshot
+----------------------
+rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+
+wget https://aur.archlinux.org/cgit/aur.git/snapshot/virtualbox-ext-oracle.tar.gz
+
+tar -xzf virtualbox-ext-oracle.tar.gz
+
+cd $HOME/05-builds/virtualbox-extension
+
+mv -vf /tmp/0-AUR/virtualbox-ext-oracle/PKGBUILD .
+
+mv -vf /tmp/0-AUR/virtualbox-ext-oracle/virtualbox-ext-oracle.install .
+
+
+1-2) Download source
+----------------------
 wget http://download.virtualbox.org/virtualbox/6.0.4/Oracle_VM_VirtualBox_Extension_Pack-6.0.4-128413.vbox-extpack
 https://www.virtualbox.org/download/hashes/6.0.4/SHA256SUMS
 sha256sum = 8887d5dd9dd26bd376926b38857715e28f2d678b6d3a034144ddc3fde4a387d9
 
-!!! ATTENTION AU PKGBUILD !!!
-# Maintainer: Moi <name AT fai DOT fr>
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Name <name@fai.com>
 
 pkgname=virtualbox-extension
 pkgver=6.0.4
 _build=128413
+pkgrel=2
 pkgrel=1
 
 !!! ATTENTION AU N° VERSION !!!!
@@ -92,6 +114,7 @@ $ mv -v virtualbox-extension-*-any.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -i Oracle_VM_VirtualBox_Extension_Pack-6.0.4-128413.vbox-extpack
+$ rm -rf /tmp/0-AUR
 
 
 $ cd && maj-repolocal
@@ -102,7 +125,7 @@ $ sync
 # maj OU  pacman -Syu
 #
 # 1ere Install
-# pacman -Syu virtualbox-extension
+# LC_ALL=C pacman -Syu virtualbox-extension
 
 ======================================================================
 ANCIENS

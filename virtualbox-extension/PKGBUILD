@@ -1,9 +1,9 @@
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=virtualbox-extension
 pkgver=6.0.4
 _build=128413
-pkgrel=1
+pkgrel=2
 pkgdesc="Oracle VM VirtualBox Extension Pack"
 arch=('any')
 url="http://www.virtualbox.org/"

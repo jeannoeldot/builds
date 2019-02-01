@@ -11,7 +11,7 @@
 # If you wish to use different paths, uncomment and update the paths.
 #RootDir     = /
 #DBPath      = /var/lib/pacman/
-#CacheDir    = /var/cache/pacman/pkg/
+CacheDir    = /0-DataLinux/01-cache-pacman-pkg/
 #LogFile     = /var/log/pacman.log
 #GPGDir      = /etc/pacman.d/gnupg/
 #HookDir     = /etc/pacman.d/hooks/
@@ -23,8 +23,8 @@ HoldPkg     = pacman glibc
 Architecture = auto
 
 # Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup
-#IgnorePkg   = 
-#IgnorePkg   = 
+#IgnorePkg   = cuda
+#IgnorePkg   = linux-ck-haswell linux-ck-haswell-headers nvidia-ck-haswell
 #IgnoreGroup =
 
 #NoUpgrade   =
@@ -70,8 +70,20 @@ LocalFileSigLevel = Optional
 # repo name header and Include lines. You can add preferred servers immediately
 # after the header, and they will be used before the default mirrors.
 
+#[reponvidia]
+#SigLevel = Optional TrustAll
+#Server = file:///home/jnd/00-reponvidia
+
 #[testing]
 #Include = /etc/pacman.d/mirrorlist
+
+#[repo-ck]
+#Server = https://mirror.archlinux.no/repo-ck/os/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
+#Server = http://repo-ck.com/$arch
 
 [core]
 Include = /etc/pacman.d/mirrorlist

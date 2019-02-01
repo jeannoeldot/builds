@@ -11,7 +11,7 @@
 # If you wish to use different paths, uncomment and update the paths.
 #RootDir     = /
 #DBPath      = /var/lib/pacman/
-#CacheDir    = /var/cache/pacman/pkg/
+CacheDir    = /0-DataLinux/01-cache-pacman-pkg/
 #LogFile     = /var/log/pacman.log
 #GPGDir      = /etc/pacman.d/gnupg/
 #HookDir     = /etc/pacman.d/hooks/
@@ -23,8 +23,7 @@ HoldPkg     = pacman glibc
 Architecture = auto
 
 # Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup
-#IgnorePkg   = 
-#IgnorePkg   = 
+#IgnorePkg   = cuda
 #IgnoreGroup =
 
 #NoUpgrade   =
@@ -35,7 +34,7 @@ Architecture = auto
 Color
 #TotalDownload
 CheckSpace
-VerbosePkgLists
+#VerbosePkgLists
 
 # By default, pacman accepts packages signed by keys that its local keyring
 # trusts (see pacman-key and its man page), as well as unsigned packages.
@@ -71,27 +70,38 @@ LocalFileSigLevel = Optional
 # after the header, and they will be used before the default mirrors.
 
 #[testing]
+#SigLevel = Never
 #Include = /etc/pacman.d/mirrorlist
 
+[chroot-repolocal]
+SigLevel = Never
+Server = file:///chrootrepolocal
+
 [core]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
 [extra]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
 #[community-testing]
+#SigLevel = PackageRequired
 #Include = /etc/pacman.d/mirrorlist
 
 [community]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
 # If you want to run 32 bit applications on your x86_64 system,
 # enable the multilib repositories as required here.
 
 #[multilib-testing]
+#SigLevel = PackageRequired
 #Include = /etc/pacman.d/mirrorlist
 
 [multilib]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
 # An example of a custom package repository.  See the pacman manpage for
@@ -100,12 +110,9 @@ Include = /etc/pacman.d/mirrorlist
 #SigLevel = Optional TrustAll
 #Server = file:///home/custompkgs
 
-[repolocal]
-SigLevel = Optional TrustAll
-Server = file:///home/jnd/00-repolocal
-
-[xyne-x86_64]
-SigLevel = Required
-Server = https://xyne.archlinux.ca/repos/xyne
-# Workaround
-#Server = https://xyne.archlinux.ca/bin/repo.php?file=
+#[xyne-x86_64]
+## A repo for Xyne's own projects: http://xyne.archlinux.ca/projects/
+## Packages for the "x86_64" architecture.
+## Note that this includes all packages in [xyne-any].
+#SigLevel = Never
+#Server = http://xyne.archlinux.ca/repos/xyne
