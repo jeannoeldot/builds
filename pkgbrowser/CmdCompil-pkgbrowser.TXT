@@ -34,18 +34,14 @@ md5sum pkgbrowser-0.21.tar.gz
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgver=0.21
 pkgrel=3    # MAJ python 3.7
 pkgrel=2    # MAJ pacman 5.1
 
-AJOUTER : hicolor-icon-theme
 depends=('pacman>=4.1' 'pacman<5.2' 'python>=3.2' 'python<3.8' 'python-pyqt5'
          'hicolor-icon-theme')
-
-SUPPRIMER :
-install="$pkgname.install"
 
 source=(... ...)
 md5sums=(... ...)
@@ -110,9 +106,6 @@ makepkg -f
 ==================
 
 namcap pkgbrowser-*-x86_64.pkg.tar.*
-Checking pkgbrowser-0.21-2-x86_64.pkg.tar.xz
-pkgbrowser W: Dependency python included but already satisfied
-pkgbrowser W: Dependency python included but already satisfied
 pkgbrowser W: Dependency included and not needed ('python-pyqt5')
 
 # Nettoyage fichiers~
@@ -151,13 +144,19 @@ $ rm -i ~/.config/pkgbrowser/pkgbrowser.conf
 
 EN ROOT
 ========
-# pacman -Syu
+# maj
+OU
+# LC_ALL=C pacman -Syu
 ou
-# pacman -Syu pkgbrowser
+# LC_ALL=C pacman -Syu pkgbrowser
 
 =========================================================================
 ANCIEN
 ======
+
+AJOUTER : hicolor-icon-theme
+SUPPRIMER :
+install="$pkgname.install"
 
 # Verifications...
 ==================
