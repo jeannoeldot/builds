@@ -1,7 +1,7 @@
-# Maintainer: Name <name@fai.com>
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=conky-lua-nv-git
-pkgver=1.11.3.20190124
+pkgver=1.11.2.20181216
 pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ license=('GPL3' 'BSD')
 conflicts=('conky')
 provides=('conky')
 depends=('alsa-lib' 'libxml2' 'curl' 'cairo' 'wireless_tools'
-          'libxft' 'glib2' 'libxdamage' 'imlib2' 'lua' 'librsvg'
+          'libxft' 'glib2' 'libxdamage' 'imlib2' 'lua51' 'librsvg' 'tolua++'
           'libxinerama' 'libxnvctrl'
 )
 makedepends=('docbook2x' 'perl-xml-libxml'
@@ -20,7 +20,7 @@ optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('90937fed94bf089a35f3634484888d689383438c0bb8ab2df9701ddc313db509'
+sha256sums=('dbf8dda7a21f00c7c26707e33c266438686239b57ff86a27553b931aa4d68cbb'
 )
 #options=('!strip' 'debug')
 
@@ -40,9 +40,9 @@ build() {
     -D BUILD_LUA_RSVG=ON \
     -D BUILD_MPD=OFF \
     -D BUILD_MOC=OFF \
+    -D BUILD_EVE=OFF \
     -D BUILD_CURL=ON \
     -D BUILD_RSS=ON \
-    -D BUILD_WEATHER_METAR=OFF \
     -D BUILD_CMUS=OFF \
     -D CMAKE_INSTALL_PREFIX=/usr \
     .

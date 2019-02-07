@@ -31,12 +31,11 @@ voir : 0-CmdFairePatches.TXT
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Name <name@fai.com
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=9      # rebuild boost boost-libs 1.69.0-1
 pkgrel=8      # rebuild boost boost-libs 1.68.0-1
 pkgrel=7      # rebuild protobuf 3.6.1
 pkgrel=6      # rebuild protobuf 3.6.0.1
@@ -81,7 +80,6 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/pokerth/PKGBUILD . \
 && cp -v $HOME/05-builds/pokerth/fix-build-with-boost.patch . \
-&& cp -v $HOME/05-builds/pokerth/fix-build-with-protobuf.patch . \
 && cp -v $HOME/05-builds/pokerth/pokerth-1.1.2.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/pokerth \
@@ -139,11 +137,9 @@ $ sync
 
 !!! EN ROOT
 # cd
-# maj
-OU
-# LC_ALL=C pacman -Syu
-OU
-# LC_ALL=C pacman -Syu pokerth
+# pacman -Syu
+!!! OU
+# pacman -Syu pokerth
 
 
 ================================================================

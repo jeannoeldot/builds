@@ -1,9 +1,15 @@
-# Maintainer: Name <name@fai.com
+# $Id$
+# Maintainer: Sven-Hendrik Haase <sh@lutzhaase.com>
+# Contributor: Mateusz Herych <heniekk@gmail.com>
+# Contributor: Bartłomiej Piotrowski <barthalion@gmail.com>
+# Contributor: Vasco Costa <vasco.costa@meiodigital.com>
+# Contributor: Federico Cinelli <cinelli@aur.archlinux.org>
+# Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=9
+pkgrel=8
 pkgdesc="Open source Texas Hold'em Poker simulator"
 arch=('i686' 'x86_64')
 url="http://www.pokerth.net/"
