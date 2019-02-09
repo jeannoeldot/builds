@@ -4,15 +4,15 @@ cd $HOME/05-builds/jndqcbgrd-qt5
 !!!!! Vérifier VERSION : 
 https://github.com/jeannoeldot/jndqcbgrd-qt5/releases
 
-==> VERSION = 0.1.9
+==> VERSION = 0.2.0
 
 1) ARCHIVE TAR.GZ
 =================================
-wget https://github.com/jeannoeldot/jndqcbgrd-qt5/archive/v0.1.9.tar.gz
+wget https://github.com/jeannoeldot/jndqcbgrd-qt5/archive/v0.2.0.tar.gz
 
 ls
 
-sha256sum v0.1.9.tar.gz
+sha256sum v0.2.0.tar.gz
 
 
 2) MODIFIER LE PKGBUILD
@@ -20,9 +20,10 @@ sha256sum v0.1.9.tar.gz
 # Maintainer: Name <name@fai.com>
 
 pkgname=jndqcbgrd-qt5
-pkgver=0.1.9
-pkgrel=2    # Rebuild nouveau PC Qt 5.12.1
+pkgver=0.2.0
 pkgrel=1
+
+pkgrel=2    # Rebuild nouveau PC Qt 5.12.1
 
 pkgrel=2    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install
 pkgrel=3    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install + deps
@@ -41,7 +42,7 @@ sha256sums=('... ...')
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 v0.1.9.tar.gz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 v0.2.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -54,7 +55,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/jndqcbgrd-qt5/PKGBUILD . \
-&& cp -v $HOME/05-builds/jndqcbgrd-qt5/v0.1.9.tar.gz . \
+&& cp -v $HOME/05-builds/jndqcbgrd-qt5/v0.2.0.tar.gz . \
 && makepkg -s \
 && cd $HOME/05-builds/jndqcbgrd-qt5 \
 && cp -v /tmp/build/jndqcbgrd-qt5-*-x86_64.pkg.tar.* . \
@@ -120,7 +121,7 @@ $ mv -v jndqcbgrd-qt5-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i v0.1.9.tar.gz
+$ rm -i v0.2.0.tar.gz
 
 
 $ cd && maj-repolocal
