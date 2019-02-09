@@ -1,8 +1,8 @@
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git
 pkgver=6.0.0.20181218
-pkgrel=2
+pkgrel=3
 _ver_release="6.0.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'

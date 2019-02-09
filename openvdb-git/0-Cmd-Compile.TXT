@@ -34,10 +34,11 @@ voir 0-CmdFairePatches.TXT
 
 2-1) MODIFIER LE PKGBUILD
 =========================
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=6.0.0.20181218
+pkgrel=3          # Rebuild nouveau PC
 pkgrel=2          # rebuild boost boost-libs 1.69.0
 pkgrel=1
 
@@ -259,9 +260,11 @@ $ sync
 ===================================================================================
 !!! EN ROOT
 # cd
-# pacman -Syu
+# maj
+OU
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu openvdb-git
+# LC_ALL=C pacman -Syu openvdb-git
 
 SI PROBLEME
 ==============

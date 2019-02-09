@@ -1,8 +1,8 @@
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=opencollada-git
 pkgver=1.6.68.20181127
-pkgrel=1
+pkgrel=2
 pkgdesc="Stream based reader and writer library for COLLADA files"
 arch=('x86_64')
 url="https://github.com/KhronosGroup/OpenCOLLADA"

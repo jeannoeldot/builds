@@ -61,10 +61,11 @@ voir : CmdFairePatches.TXT
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=opencollada-git
 pkgver=1.6.68.20181127
+pkgrel=2    # Rebuild nouveau PC 
 pkgrel=1
 
 pkgrel=2    # gcc 8.1.0
@@ -207,7 +208,7 @@ rm -f *~
 
 # Verifications...
 
-namcap opencollada-git-1.6.68.20181127-1-x86_64.pkg.tar.xz
+namcap opencollada-git-*-x86_64.pkg.tar.xz
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
@@ -239,10 +240,11 @@ $ sync
 EN ROOT
 ========
 # cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu
-
-# pacman -Syu opencollada-git
+# LC_ALL=C pacman -Syu opencollada-git
 
 
 SI PROBLEME

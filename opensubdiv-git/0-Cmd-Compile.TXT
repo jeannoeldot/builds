@@ -64,11 +64,13 @@ voir 0-CmdFairePatches.TXT
 
 2-1) MODIFIER LE PKGBUILD
 =========================
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.3.3.20180718
+pkgrel=2    # Rebuild nouveau PC 
 pkgrel=1
+
 pkgrel=2    # gcc 8.1.0
 
 
@@ -250,8 +252,6 @@ cd $HOME/05-builds/opensubdiv-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-!!! EN USER
-
   FAST
 -------
 $ rm -f *~
@@ -309,9 +309,11 @@ $ sync
 ===================================================================================
 !!! EN ROOT
 # cd
-# pacman -Syu
+# maj
+OU
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu opensubdiv-git
+# LC_ALL=C pacman -Syu opensubdiv-git
 
 SI PROBLEME
 ==============

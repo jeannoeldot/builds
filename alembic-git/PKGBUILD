@@ -1,8 +1,8 @@
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=alembic-git
 pkgver=1.7.10.20181205
-pkgrel=1
+pkgrel=2
 _ver_release="1.7.10"
 _name_release="alembic-${_ver_release}"
 pkgdesc="A open framework for storing and sharing scene data"

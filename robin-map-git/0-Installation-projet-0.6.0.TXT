@@ -1,0 +1,11 @@
+==> Starting package()...
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/include/tsl
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/include/tsl/robin_set.h
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/include/tsl/robin_map.h
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/include/tsl/robin_hash.h
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/include/tsl/robin_growth_policy.h
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/share/cmake/tsl-robin-map/tsl-robin-mapConfig.cmake
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/share/cmake/tsl-robin-map/tsl-robin-mapTargets.cmake
+-- Installing: /build/robin-map-git/pkg/robin-map-git/usr/share/cmake/tsl-robin-map/tsl-robin-mapConfigVersion.cmake

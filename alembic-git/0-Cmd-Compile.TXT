@@ -34,10 +34,12 @@ voir 0-CmdFairePatches.TXT
 
 2-1) MODIFIER LE PKGBUILD
 =========================
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=alembic-git               # alembic ds community
 pkgver=1.7.10.20181205
+pkgrel=2    # Rebuild nouveau PC 
+
 pkgrel=1
 
 
@@ -198,9 +200,11 @@ $ sync
 ===================================================================================
 !!! EN ROOT
 # cd
-# pacman -Syu
+# maj
+OU
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu alembic-git
+# LC_ALL=C pacman -Syu alembic-git
 
 SI PROBLEME
 ==============
