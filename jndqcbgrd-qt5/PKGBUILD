@@ -1,8 +1,8 @@
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=jndqcbgrd-qt5
 pkgver=0.1.9
-pkgrel=1
+pkgrel=2
 pkgdesc="Gestion Revenu Dépenses"
 arch=('i686' 'x86_64')
 url="https://github.com/jeannoeldot/jndqcbgrd-qt5"

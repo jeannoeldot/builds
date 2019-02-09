@@ -16,12 +16,13 @@ sha256sum v0.2.1.tar.gz
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=jndqrami-qt5
 pkgver=0.2.1
-pkgrel=3
+pkgrel=5    # Rebuild nouveau PC Qt 5.12.1
 pkgrel=4    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install + deps
+pkgrel=3
 
 depends=(... 'desktop-file-utils')
 
@@ -130,9 +131,11 @@ $ sync
 
 EN ROOT
 ========
-# pacman -Syu
+# maj
 OU
-# pacman -Syu jndqrami-qt5
+# LC_ALL=C pacman -Syu
+OU
+# LC_ALL=C pacman -Syu jndqrami-qt5
 
 
 

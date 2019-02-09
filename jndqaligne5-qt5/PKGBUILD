@@ -1,8 +1,8 @@
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=jndqaligne5-qt5
 pkgver=0.5.0
-pkgrel=5
+pkgrel=6
 pkgdesc="Variante du Morpion"
 arch=('i686' 'x86_64')
 url="https://github.com/jeannoeldot/jndqaligne5-qt5"

@@ -1,0 +1,124 @@
+creationcomptedlg.cpp: In constructor ‘CreationCompteDlg::CreationCompteDlg(QWidget*)’:
+creationcomptedlg.cpp:15:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant01->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:16:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant02->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:17:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant03->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:18:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant04->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:19:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant05->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:20:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant06->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:21:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant07->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:22:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant08->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:23:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant09->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:24:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant10->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:25:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant11->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:26:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant12->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:27:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant13->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:28:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant14->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:29:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant15->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:30:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant16->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:31:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant17->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:32:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant18->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:33:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant19->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+creationcomptedlg.cpp:34:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditMontant20->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+make: *** [Makefile:885: creationcomptedlg.o] Error 1
+make: *** Waiting for unfinished jobs....
+previsionbudgetdlg.cpp: In constructor ‘PrevisionBudgetDlg::PrevisionBudgetDlg(const CCompte&, const QString&, QWidget*)’:
+previsionbudgetdlg.cpp:18:38: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditRevenu->setValidator(new QRegExpValidator(regExp, this));
+                                      ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:20:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense01->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:21:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense02->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:22:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense03->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:23:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense04->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:24:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense05->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:25:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense06->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:26:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense07->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:27:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense08->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:28:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense09->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:29:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense10->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:30:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense11->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:31:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense12->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:32:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense13->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:33:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense14->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:34:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense15->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:35:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense16->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:36:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense17->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:37:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense18->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
+previsionbudgetdlg.cpp:38:41: error: expected type-specifier before ‘QRegExpValidator’
+     lineEditDepense19->setValidator(new QRegExpValidator(regExp, this));
+                                         ^~~~~~~~~~~~~~~~
