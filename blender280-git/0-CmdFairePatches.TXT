@@ -1,18 +1,114 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.41.20190117
+!!! VERSION = 2.80.44.20190210
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender280-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.41.20190117.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.44.20190210.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.41.20190117.tar.gz
+tar -xzf blender-git-2.80.44.20190210.tar.gz
+
+
+1) MODIFIER blender/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py
+===================================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/io_convert_image_to_mesh_img/mesh
+kwrite dtm.py
+
+MODIFIER LIGNE 133 :
+        num_labels = self.label.get(text='LABEL_RECORDS', 1)
+ 
+DEVIENT
+        num_labels = self.label.get(1, text='LABEL_RECORDS')
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier dtm.py~
+rm -f dtm.py~
+ 
+
+cd ../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-io_convert_image_to_mesh_img.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender280-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-io_convert_image_to_mesh_img.patch .
+
+
+2) MODIFIER blender/release/scripts/addons_contrib/curve_tools/Properties.py
+============================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons_contrib/curve_tools
+kwrite Properties.py
+
+MODIFIER LIGNE 39 :
+        row.label(text="Sel:", nrSelectedObjects)
+ 
+DEVIENT
+        row.label(nrSelectedObjects, text="Sel:")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Properties.py~
+rm -f Properties.py~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-curve_tools.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender280-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-curve_tools.patch .
+
+
+3) MODIFIER blender/release/scripts/addons_contrib/io_scene_cod/__init__.py
+===========================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons_contrib/io_scene_cod
+kwrite __init__.py
+
+MODIFIER LIGNE 417 :
+        col.label(text="Armature: %s" % armature_info, icon)
+ 
+DEVIENT
+        col.label(icon, text="Armature: %s" % armature_info)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier __init__.py~
+rm -f __init__.py~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-io_scene_cod.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender280-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-io_scene_cod.patch .
 
 
 

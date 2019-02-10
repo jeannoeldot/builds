@@ -1,0 +1,39 @@
+
+
+
+addons-contrib: add missing text= keyword after label
+-----------------------------------------------------
+https://developer.blender.org/rBAC24ac9c6bbd6d159f003ddc367933575ad1a0ccbe#change-KKefkbjpUblu
+Authored by nBurn (nBurn) on Wed, Jan 23, 9:26 PM.
+
+addons_contrib/curve_tools
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.80/scripts/addons_contrib/curve_tools/Properties.py'...
+***   File "/usr/share/blender/2.80/scripts/addons_contrib/curve_tools/Properties.py", line 39
+SyntaxError: positional argument follows keyword argument
+
+
+addons_contrib/io_scene_cod
+Listing '/build/blender-git/pkg/blender-git/usr/share/blender/2.80/scripts/addons_contrib/io_scene_cod'...
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.80/scripts/addons_contrib/io_scene_cod/__init__.py'...
+***   File "/usr/share/blender/2.80/scripts/addons_contrib/io_scene_cod/__init__.py", line 417
+SyntaxError: positional argument follows keyword argument
+
+
+
+addons: add missing text= keyword after label
+-----------------------------------------------------
+https://developer.blender.org/rBA49c1b409286937d00a63fbf4cfb1f820a75a80c0#change-dGZsEhFesquZ
+Authored by nBurn (nBurn) on Wed, Jan 23, 9:03 PM.
+
+addons/io_convert_image_to_mesh_img
+Compiling '/build/blender-git/pkg/blender-git/usr/share/blender/2.80/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py'...
+***   File "/usr/share/blender/2.80/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py", line 133
+SyntaxError: positional argument follows keyword argument
+
+--------------------------------------------------------
+VOIR SOLUTIONS
+
+https://www.discoverbits.in/229/syntaxerror-positional-argument-follows-keyword-argument
+
+https://stackoverflow.com/questions/52414215/syntaxerror-positional-argument-follows-keyword-argument
+

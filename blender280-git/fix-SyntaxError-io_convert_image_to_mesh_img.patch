@@ -1,0 +1,12 @@
+diff -aur blender/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py blender.new/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py
+--- blender/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py	2019-02-10 11:09:21.000000000 +0100
++++ blender.new/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py	2019-02-10 14:21:43.038240710 +0100
+@@ -130,7 +130,7 @@
+     def _get_data_start(self):
+         """Gets the start position of the DTM data block"""
+         label_length = self.label['RECORD_BYTES']
+-        num_labels = self.label.get(text='LABEL_RECORDS', 1)
++        num_labels = self.label.get(1, text='LABEL_RECORDS')
+         return int(label_length * num_labels)
+ 
+     def _process_invalid_data(self, data):

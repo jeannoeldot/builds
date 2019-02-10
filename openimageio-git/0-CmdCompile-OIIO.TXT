@@ -5,16 +5,16 @@ cd $HOME/05-builds/openimageio-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageIO/oiio/releases
-==> 06/01/2019  ==> 20190106
-==> Release-2.0.4
-==> 2.0.4.20190106
+==> 02/02/2019  ==> 20190202
+==> Release-2.0.5
+==> 2.0.5.20190202
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O oiio-Release-2.0.4.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.0.4.tar.gz
+wget -O oiio-Release-2.0.5.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.0.5.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.0.4.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.0.5.tar.gz .
 
 
 1-8) FAIRE PATCHES
@@ -34,13 +34,13 @@ voir : CmdFairePatches.TXT
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Moi <name AT fai DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.0.4.20190106
-pkgrel=2          # rebuild boost boost-libs 1.69.0
+pkgver=2.0.5.20190202
 pkgrel=1
 
+pkgrel=2          # rebuild boost boost-libs 1.69.0
 
 pkgrel=2          # rebuild MAJ openvdb 6.0.0
 
@@ -59,7 +59,7 @@ pkgrel=3          # rebuild MAJ opencv
 pkgrel=2          # rebuild LICENSE
 
 !!!!!!
-_name_release="oiio-Release-2.0.4"
+_name_release="oiio-Release-2.0.5"
 
 conflicts=('openimageio')
 provides=('openimageio')
@@ -69,7 +69,7 @@ provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
 
-sha256sum oiio-Release-2.0.4.tar.gz
+sha256sum oiio-Release-2.0.5.tar.gz
 
 sha256sums=('...'
             '...'
@@ -94,12 +94,12 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.7.2-1 [installé]
+==> extra/python 3.7.2-3 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.7
 
-!!! VERSION 2.0.4
+!!! VERSION 2.0.5
 build() {
       ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -110,9 +110,9 @@ build() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf oiio-Release-2.0.4.tar.gz -C /tmp/srcp
+tar -xzf oiio-Release-2.0.5.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/oiio-Release-2.0.4/CMakeLists.txt &
+1) kwrite /tmp/srcp/oiio-Release-2.0.5/CMakeLists.txt &
 
 LIGNE 42
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
@@ -133,49 +133,49 @@ LIGNE 73 ET 74
   USE_PYTHON ON         depends= 'python' 'pybind11' 'python-numpy'
   PYTHON_VERSION "2.7"  =>     -DPYTHON_VERSION=3.7 \
 
-LIGNE 78
+LIGNE 82
   USE_FIELD3D ON       =>      -DUSE_FIELD3D=OFF \
 
 !!! À VOIR
-LIGNE 79
+LIGNE 83
   USE_OPENVDB ON      ==>       dépends = ... 'openvdb-git' 
 
-LIGNE 81
+LIGNE 85
   USE_TBB ON        dépends 'intel-tbb'
 
-LIGNE 85
+LIGNE 89
   USE_JPEGTURBO ON      depends= ... 'libjpeg-turbo'
 
-LIGNE 89
+LIGNE 93
   USE_OPENCV ON         depends= ... 'opencv'
 
 LIGNE 90
 option (USE_FREETYPE "Use Freetype if found" ON)
 
-LIGNE 91
+LIGNE 95
 option (USE_GIF "Use GIF if found" ON)
 
-LIGNE 92
+LIGNE 96
   USE_PTEX ON           =>      -DUSE_PTEX=OFF \
 
-LIGNE 96
+LIGNE 100
   USE_NUKE ON           =>      -DUSE_NUKE=OFF \
 
-LIGNE 102
+LIGNE 106
   USE_DICOM ON           =>      -DUSE_DICOM=OFF \
 
-LIGNE 107
+LIGNE 111 et 112
 option (BUILD_DOCS "If ON, build documentation and man pages." ON)
 option (INSTALL_DOCS "If ON, install documentation and man pages." ON)
 
-LIGNE 109
+LIGNE 113
   INSTALL_FONTS "If ON, install default fonts" ON) => -DINSTALL_FONTS=OFF \
 
-LIGNE 110
+LIGNE 114
 option (INSTALL_CMAKE_HELPER "If On, install FindOpenImageIO.cmake" ON)
 
 
-2) kwrite /tmp/srcp/oiio-Release-2.0.4/src/cmake/compiler.cmake &
+2) kwrite /tmp/srcp/oiio-Release-2.0.5/src/cmake/compiler.cmake &
 
 LIGNE 7
   USE_CPP 11
@@ -212,7 +212,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 27821011 26 nov.  15:36 oiio-Release-2.0.4.tar.gz
+-rw-r--r--  1 jnd users 27821011 26 nov.  15:36 oiio-Release-2.0.5.tar.gz
 -rw-r--r--  1 jnd users     1748 26 nov.  16:01 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -230,7 +230,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-2.0.4.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-2.0.5.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -313,7 +313,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i oiio-Release-2.0.4.tar.gz
+$ rm -i oiio-Release-2.0.5.tar.gz
 
 
 $ cd && maj-repolocal
@@ -322,13 +322,13 @@ $ sync
 
 !!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
 ===================================================================================
-EN ROOT
-========
+!!! EN ROOT
 # cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu
-
-# pacman -Syu openimageio-git
+# LC_ALL=C pacman -Syu openimageio-git
 
 
 SI PROBLEME
@@ -357,7 +357,7 @@ SI depends=( 'openvdb-git' )
 ==========================================================
 $ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
-!!! VERSION 2.0.4
+!!! VERSION 2.0.5
 package() {
   ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -378,11 +378,11 @@ pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageIO/oiio/archive/Release-2.0.4.tar.gz
-wget -O oiio-Release-2.0.4.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.0.4.tar.gz
+wget https://github.com/OpenImageIO/oiio/archive/Release-2.0.5.tar.gz
+wget -O oiio-Release-2.0.5.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.0.5.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-2.0.4.tar.gz oiio-Release-2.0.4.tar.gz
+mv -v Release-2.0.5.tar.gz oiio-Release-2.0.5.tar.gz
 
