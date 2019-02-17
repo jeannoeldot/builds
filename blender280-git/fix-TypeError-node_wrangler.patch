@@ -1,0 +1,12 @@
+diff -aur blender/release/scripts/addons/node_wrangler.py blender.new/release/scripts/addons/node_wrangler.py
+--- blender/release/scripts/addons/node_wrangler.py	2019-02-10 11:09:21.000000000 +0100
++++ blender.new/release/scripts/addons/node_wrangler.py	2019-02-17 11:09:24.347941302 +0100
+@@ -4038,7 +4038,7 @@
+             for vcol in vcols:
+                 l.operator(NWAddAttrNode.bl_idname, text=vcol).attr_name = vcol
+         else:
+-            l.label("No Vertex Color layers on objects with this material")
++            l.label(text="No Vertex Color layers on objects with this material")
+ 
+ 
+ class NWSwitchNodeTypeMenu(Menu, NWBase):

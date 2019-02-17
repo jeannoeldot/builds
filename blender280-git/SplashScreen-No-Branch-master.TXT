@@ -1,0 +1,37 @@
+
+Splash Screen : No Branch: master
+==================================
+
+1) Branche master
+-----------------
+$ grep -lR "Branch:" /0-DataLinux/05-builds-dir-git/blender/
+==> /0-DataLinux/05-builds-dir-git/blender/source/blender/windowmanager/intern/wm_operators.c
+Ligne 1350
+
+2) Branche blender-2.8
+----------------------
+$ grep -lR "Branch:" /0-DataLinux/05-builds-dir-git/blender280/
+==> /0-DataLinux/05-builds-dir-git/blender280/source/blender/windowmanager/intern/wm_operators.c
+Ligne 1359
+
+
+3) OLD Blender 2.79.6
+---------------------
+$ grep -lR "Branch:" /0-DataLinux/05-builds-dir-git/blender27x/
+==> /0-DataLinux/05-builds-dir-git/blender27x/source/blender/windowmanager/intern/wm_operators.c
+Ligne 1481
+
+
+
+DIFF
+====
+1) diff blender-2.8/master
+----------------------------
+$ cd /home/jnd/99-temp/diff-blender/
+
+$ diff -aur blender280-wm_operators.c blender-wm_operators.c
+
+$ diff -aur blender280-wm_operators.c blender-wm_operators.c > diff-blender280-blender.patch
+
+
+$ cd
