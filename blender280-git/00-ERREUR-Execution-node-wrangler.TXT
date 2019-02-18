@@ -1,4 +1,19 @@
 
+Traceback (most recent call last):
+  File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 961, in draw_callback_nodeoutline
+    draw_rounded_node_border(n1, radius=6, colour=col_outer)  # outline
+  File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 796, in draw_rounded_node_border
+    bgl.glColor4f(colour[0], colour[1], colour[2], colour[3])
+AttributeError: module 'bgl' has no attribute 'glColor4f'
+
+
+
+
+
+=====================================================================
+RÉSOLU
+
+PATCH : fix-TypeError-node_wrangler.patch
 
 Traceback (most recent call last):
   File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 4041, in draw
