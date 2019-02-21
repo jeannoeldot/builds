@@ -1,0 +1,29 @@
+diff -aur blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py blender.new/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py
+--- blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py	2019-02-10 11:09:21.000000000 +0100
++++ blender.new/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py	2019-02-21 10:56:46.618407989 +0100
+@@ -666,13 +666,13 @@
+         layout.label(text="In object mode, still needs a selection in Edit Mode")
+         layout.separator()
+         layout.label(text="Doodads - additional objects layered on the mesh surface")
+-        layout.label("(Similar to dupliverts - but as one separate object)")
++        layout.label(text="(Similar to dupliverts - but as one separate object)")
+         layout.separator()
+         layout.label(text="Limitations:", icon="MOD_EXPLODE")
+         layout.label(text="Be careful with the repeat protusions setting")
+-        layout.label("(Runs reqursively)")
++        layout.label(text="(Runs reqursively)")
+         layout.label(text="If possible, avoid using on a high polycount base mesh")
+-        layout.label("(It can run out of memory and take a long time to compute)")
++        layout.label(text="(It can run out of memory and take a long time to compute)")
+ 
+ class VIEW3D_OT_tools_discombobulate(Operator):
+     bl_idname = "discombobulate.ops"
+@@ -682,7 +682,7 @@
+     bl_options = {"REGISTER"}
+ 
+     executing = False
+-    
++
+     DISC_doodads = []
+     # Protusions Buttons:
+     repeatprot: IntProperty(

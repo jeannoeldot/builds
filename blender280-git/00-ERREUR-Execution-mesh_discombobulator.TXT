@@ -1,0 +1,9 @@
+
+Traceback (most recent call last):
+  File "/usr/share/blender/2.80/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py", line 669, in draw
+    layout.label("(Similar to dupliverts - but as one separate object)")
+TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
+
+location: <unknown location>:-1
+
+location: <unknown location>:-1

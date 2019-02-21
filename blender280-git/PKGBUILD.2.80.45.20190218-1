@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.80.45.20190221
+pkgver=2.80.45.20190218
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -34,14 +34,12 @@ options=('!strip')
 #install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-node_wrangler.patch"
-        "fix-TypeError-mesh_discombobulator.patch"
         "fix-SyntaxError-io_convert_image_to_mesh_img.patch"
         "fix-SyntaxError-curve_tools.patch"
         "fix-SyntaxError-io_scene_cod.patch"
 )
-sha256sums=('ef818d55cb1109381b8406331b54c4e14f6c8bd07f2afae3bf81828930a7b711'
+sha256sums=('0a9f17d9766a89e8bc0208d0592f06b3b978d47b1fbc90e4a5adc8f4929187ec'
             '4b5a0dd172599700b3db17d607123d0afe5e2748954e8d83467d2298d4b9842d'
-            '8b389543a34a933f53264e4cc33870eaa9adb684bfb6f8b146f5a7731109c1a0'
             '0b62f60ef3afefff26c997bcefd343f5d8e026ea4e22ca0244474a862fa1fe84'
             '5b4ec5ac68e444a4d0872af2aa68ddcc632dad981ef9bbad4a1fb84bf045ccfe'
             'e2ce934c3f965e492e6508536fa79264f4e4e998f23188e509d19c9047e69794'
@@ -54,7 +52,6 @@ prepare() {
   cd "${_gitname}"
   # TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
   patch -Np1 -i "${srcdir}/fix-TypeError-node_wrangler.patch"
-  patch -Np1 -i "${srcdir}/fix-TypeError-mesh_discombobulator.patch"
 
   # fix erreur : SyntaxError: positional argument follows keyword argument
   patch -Np1 -i "${srcdir}/fix-SyntaxError-io_convert_image_to_mesh_img.patch"
@@ -69,9 +66,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f4d9e49f286f"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "3b3eba637406"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1550731933|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1550482926|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

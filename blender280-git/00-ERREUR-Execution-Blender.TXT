@@ -1,0 +1,19 @@
+Read prefs: /home/jnd/.config/blender/2.80/config/userpref.blend
+Read blend: /home/jnd/00-3D/3D-blender/blender-280/Tutos/DN33/03-recipient.blend
+Info: 0 vertices supprimés
+
+Info: 0 vertices supprimés
+
+Info: 0 vertices supprimés
+
+Info: Saved "03-recipient.blend"
+
+Info: Saved "03-recipient.blend"
+
+ERROR (bke.modifier): /build/blender-git/src/blender/source/blender/blenkernel/intern/modifier.c:386 modifier_setError: Cacher, masquer et affichage optimisé désactivés
+Info: Saved "03-recipient.blend"
+
+Saved session recovery to '/tmp/quit.blend'
+Error: Not freed memory blocks: 128, total unfreed memory 0.025391 MB
+
+Blender quit
