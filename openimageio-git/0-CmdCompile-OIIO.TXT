@@ -5,16 +5,16 @@ cd $HOME/05-builds/openimageio-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageIO/oiio/releases
-==> 02/02/2019  ==> 20190202
-==> Release-2.0.5
-==> 2.0.5.20190202
+==> 02/03/2019  ==> 20190302
+==> Release-2.0.6
+==> 2.0.6.20190302
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O oiio-Release-2.0.5.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.0.5.tar.gz
+wget -O oiio-Release-2.0.6.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.0.6.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.0.5.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.0.6.tar.gz .
 
 
 1-8) FAIRE PATCHES
@@ -37,7 +37,7 @@ voir : CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.0.5.20190202
+pkgver=2.0.6.20190302
 pkgrel=1
 
 pkgrel=2          # rebuild boost boost-libs 1.69.0
@@ -59,7 +59,7 @@ pkgrel=3          # rebuild MAJ opencv
 pkgrel=2          # rebuild LICENSE
 
 !!!!!!
-_name_release="oiio-Release-2.0.5"
+_name_release="oiio-Release-2.0.6"
 
 conflicts=('openimageio')
 provides=('openimageio')
@@ -69,7 +69,7 @@ provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
 
-sha256sum oiio-Release-2.0.5.tar.gz
+sha256sum oiio-Release-2.0.6.tar.gz
 
 sha256sums=('...'
             '...'
@@ -99,7 +99,7 @@ $ pacman -Ss python | grep 3 | grep install
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.7
 
-!!! VERSION 2.0.5
+!!! VERSION 2.0.6
 build() {
       ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -110,9 +110,9 @@ build() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf oiio-Release-2.0.5.tar.gz -C /tmp/srcp
+tar -xzf oiio-Release-2.0.6.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/oiio-Release-2.0.5/CMakeLists.txt &
+1) kwrite /tmp/srcp/oiio-Release-2.0.6/CMakeLists.txt &
 
 LIGNE 42
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
@@ -175,7 +175,7 @@ LIGNE 114
 option (INSTALL_CMAKE_HELPER "If On, install FindOpenImageIO.cmake" ON)
 
 
-2) kwrite /tmp/srcp/oiio-Release-2.0.5/src/cmake/compiler.cmake &
+2) kwrite /tmp/srcp/oiio-Release-2.0.6/src/cmake/compiler.cmake &
 
 LIGNE 7
   USE_CPP 11
@@ -212,7 +212,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 27821011 26 nov.  15:36 oiio-Release-2.0.5.tar.gz
+-rw-r--r--  1 jnd users 27821011 26 nov.  15:36 oiio-Release-2.0.6.tar.gz
 -rw-r--r--  1 jnd users     1748 26 nov.  16:01 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -230,7 +230,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-2.0.5.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/oiio-Release-2.0.6.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -313,7 +313,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i oiio-Release-2.0.5.tar.gz
+$ rm -i oiio-Release-2.0.6.tar.gz
 
 
 $ cd && maj-repolocal
@@ -357,7 +357,7 @@ SI depends=( 'openvdb-git' )
 ==========================================================
 $ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
-!!! VERSION 2.0.5
+!!! VERSION 2.0.6
 package() {
   ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -378,11 +378,11 @@ pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageIO/oiio/archive/Release-2.0.5.tar.gz
-wget -O oiio-Release-2.0.5.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.0.5.tar.gz
+wget https://github.com/OpenImageIO/oiio/archive/Release-2.0.6.tar.gz
+wget -O oiio-Release-2.0.6.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.0.6.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-2.0.5.tar.gz oiio-Release-2.0.5.tar.gz
+mv -v Release-2.0.6.tar.gz oiio-Release-2.0.6.tar.gz
 

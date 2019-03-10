@@ -10,10 +10,10 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   Thu, 28 Feb 2019 08:03:31 +0100 (18:03 +1100)
-==> 20190228
+==> last change   Sun, 10 Mar 2019 08:55:38 +0100 (08:55 +0100)
+==> 20190310
 
-commit	9d34a9d7e59d73509e17e08465add6ea8f446b5b
+commit	b7bcc30329251f33f4b0b58689d5489f9c42299d
 
 1.3 SOURCES
 ==============
@@ -38,7 +38,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 9d34a9d7e59d
+==> MY_WC_HASH = b7bcc3032925
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -48,7 +48,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1551337411
+==> MY_WC_COMMIT_TIMESTAM = 1552204538
 
 cd ..
 
@@ -66,7 +66,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 9d34a9d7e59d
+==> MY_WC_HASH = b7bcc3032925
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -76,7 +76,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1551337411
+==> MY_WC_COMMIT_TIMESTAM = 1552204538
 
 cd ..
 
@@ -92,9 +92,9 @@ cd ..
 head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
 #define BLENDER_VERSION         280
-#define BLENDER_SUBVERSION      45
+#define BLENDER_SUBVERSION      47
 
-==> Version = 2.80.45.20190228
+==> Version = 2.80.47.20190310
 
 /!\ /!\ /!\ UTILITÉ ???
 !!! SI CHANGEMENT DE VERSION (ex de 2.80 à 2.81)
@@ -104,7 +104,7 @@ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSIO
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.80.45.20190228.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.80.47.20190310.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -112,7 +112,7 @@ cd $HOME/05-builds/blender280-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.45.20190228.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.47.20190310.tar.gz .
 sync
 
 
@@ -133,7 +133,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.80.45.20190228
+pkgver=2.80.47.20190310
 pkgrel=1
 
 
@@ -175,7 +175,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.80.45.20190228.tar.gz
+sha256sum blender-git-2.80.47.20190310.tar.gz
 
 sha256sums=(...
          ...
@@ -191,7 +191,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-SyntaxError-io_scene_cod.patch"
 )
 
-sha256sum blender-git-2.80.45.20190228.tar.gz
+sha256sum blender-git-2.80.47.20190310.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -228,9 +228,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 55 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9d34a9d7e59d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b7bcc3032925"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1551337411|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1552204538|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -409,7 +409,7 @@ WITH_LEGACY_DEPSGRAPH ON
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.80.45.20190228.tar.gz
+-rw-r--r--  1 jnd users 55939483 28 janv. 10:37 blender-git-2.80.47.20190310.tar.gz
 -rw-r--r--  1 jnd users      601 10 févr. 14:27 fix-SyntaxError-curve_tools.patch
 -rw-r--r--  1 jnd users      767 10 févr. 14:22 fix-SyntaxError-io_convert_image_to_mesh_img.patch
 -rw-r--r--  1 jnd users      699 10 févr. 14:29 fix-SyntaxError-io_scene_cod.patch
@@ -485,7 +485,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender280-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.45.20190228.tar.gz . \
+&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.47.20190310.tar.gz . \
 && cp -v $HOME/05-builds/blender280-git/fix-SyntaxError-io_convert_image_to_mesh_img.patch . \
 && cp -v $HOME/05-builds/blender280-git/fix-SyntaxError-curve_tools.patch . \
 && cp -v $HOME/05-builds/blender280-git/fix-SyntaxError-io_scene_cod.patch . \
@@ -558,7 +558,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.80.45.20190228.tar.gz
+$ rm -i blender-git-2.80.47.20190310.tar.gz
 
 
 $ cd && maj-repolocal
@@ -596,11 +596,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "9d34a9d7e59d"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "b7bcc3032925"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1551337411|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1552204538|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -660,7 +660,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender280-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.45.20190228.tar.gz . \
+&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.47.20190310.tar.gz . \
 && cp -v $HOME/05-builds/blender280-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender280-git \
@@ -676,7 +676,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.80.45.20190228.tar.gz
+sha256sum blender-git-2.80.47.20190310.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -702,9 +702,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 55 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9d34a9d7e59d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b7bcc3032925"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1551337411|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1552204538|' build_files/cmake/buildinfo.cmake
   
 }
 

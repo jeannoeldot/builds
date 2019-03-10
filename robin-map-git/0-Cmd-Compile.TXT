@@ -6,16 +6,16 @@ cd $HOME/05-builds/robin-map-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/Tessil/robin-map/releases
-==>  Tessil released this on 27 Jan  ==> 20190127
-==> v0.6.0  ==> 0.6.0
-==> 0.6.0.20190127
+==>  Tessil released this on 17 Fev  ==> 20190217
+==> v0.6.1  ==> 0.6.1
+==> 0.6.1.20190217
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O robin-map-0.6.0.tar.gz \
-https://github.com/Tessil/robin-map/archive/v0.6.0.tar.gz
+wget -O robin-map-0.6.1.tar.gz \
+https://github.com/Tessil/robin-map/archive/v0.6.1.tar.gz
 
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
@@ -24,7 +24,7 @@ cd $HOME/05-builds/robin-map-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/robin-map-0.6.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/robin-map-0.6.1.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -37,12 +37,12 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=robin-map-git
-pkgver=0.6.0.20190127
+pkgver=0.6.1.20190217
 pkgrel=1
 
 
 !!!!!!
-_ver_release="0.6.0"
+_ver_release="0.6.1"
 _name_release="robin-map-${_ver_release}"
 
 arch=('any')
@@ -60,7 +60,7 @@ provides='robin-map'
 
 SANS PATCH
 ----------
-sha256sum robin-map-0.6.0.tar.gz
+sha256sum robin-map-0.6.1.tar.gz
 
 source=("robin-map-${_ver_release}.tar.gz"
 )
@@ -78,9 +78,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf robin-map-0.6.0.tar.gz -C /tmp/srcp
+tar -xzf robin-map-0.6.1.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/robin-map-0.6.0/CMakeLists.txt
+1) kwrite /tmp/srcp/robin-map-0.6.1/CMakeLists.txt
 
 !!! VOIR
 
@@ -92,7 +92,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 robin-map-0.6.0.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 robin-map-0.6.1.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -110,7 +110,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/robin-map-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/robin-map-git/robin-map-0.6.0.tar.gz . \
+&& cp -v $HOME/05-builds/robin-map-git/robin-map-0.6.1.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/robin-map-git \
 && cp -v /tmp/build/robin-map-git-*-any.pkg.tar.* . \
@@ -164,7 +164,7 @@ $ mv -v robin-map-git-*-any.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i robin-map-0.6.0.tar.gz
+$ rm -i robin-map-0.6.1.tar.gz
 
 
 $ cd && maj-repolocal
