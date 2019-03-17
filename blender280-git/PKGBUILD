@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.80.47.20190310
+pkgver=2.80.49.20190317
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -39,8 +39,8 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-SyntaxError-curve_tools.patch"
         "fix-SyntaxError-io_scene_cod.patch"
 )
-sha256sums=('0b453df6e7f243f152b3bc4c4ab0014de5f0ef22677d89dcd09644e5811acf03'
-            '4b5a0dd172599700b3db17d607123d0afe5e2748954e8d83467d2298d4b9842d'
+sha256sums=('d00584daaddcaf4d863efbb7315f1be7a22b55918f6f85bd58457a91548be90b'
+            '31d3da481394b1a5af5cbcefc07fadca87dda6d91b9468eea4fbcb99dd72c9ab'
             '8b389543a34a933f53264e4cc33870eaa9adb684bfb6f8b146f5a7731109c1a0'
             '0b62f60ef3afefff26c997bcefd343f5d8e026ea4e22ca0244474a862fa1fe84'
             '5b4ec5ac68e444a4d0872af2aa68ddcc632dad981ef9bbad4a1fb84bf045ccfe'
@@ -69,9 +69,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b7bcc3032925"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b28bd7c5a4c6"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1552204538|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1552825478|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

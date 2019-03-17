@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.47.20190310
+!!! VERSION = 2.80.49.20190317
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender280-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.47.20190310.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.49.20190317.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.47.20190310.tar.gz
+tar -xzf blender-git-2.80.49.20190317.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py
@@ -120,7 +120,7 @@ cp -R blender blender.new
 cd blender.new/release/scripts/addons
 kwrite node_wrangler.py
 
-MODIFIER LIGNE 4041 :
+MODIFIER LIGNE 4038 :
             l.label("No Vertex Color layers on objects with this material")
  
 DEVIENT
