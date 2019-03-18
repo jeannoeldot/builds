@@ -1,0 +1,260 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/lm_sensors-git
+
+1-1) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/lm-sensors/lm-sensors
+https://github.com/lm-sensors/lm-sensors/commits/master
+==> Commits on Jan 23, 2019
+==> 20190123
+
+
+1.3) SOURCES
+==============
+!!! Répertoire clone de lm-sensors dans : /0-DataLinux/05-builds-dir-git/lm-sensors
+-------------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep lm-sensors :
+------------------------------------
+ls
+
+!!! SI REP lm-sensors N'EXISTE PAS
+-----------------------------------
+https://github.com/lm-sensors/lm-sensors.git
+git clone git://github.com/lm-sensors/lm-sensors.git lm-sensors
+
+!!! SI REP lm-sensors EXISTE
+-------------------------------
+cd lm-sensors
+git pull --rebase
+git pull --rebase origin master
+cd ..
+
+1.3-1) RÉCUPÉRATION FICHIER PRIME-Z370-A.conf
+=============================================
+https://raw.githubusercontent.com/lm-sensors/lm-sensors/87f64e08d009c6d2cea8a0c1af61faab04e3bf9c/configs/Asus/PRIME-Z370-A.conf
+
+cd lm-sensors/configs/Asus
+wget https://raw.githubusercontent.com/lm-sensors/lm-sensors/87f64e08d009c6d2cea8a0c1af61faab04e3bf9c/configs/Asus/PRIME-Z370-A.conf
+
+cd ../../..
+
+1.3-2) RÉCUPÉRATION FICHIERS healthd healthd.conf healthd.service sensord.conf
+==============================================================================
+https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/lm_sensors
+
+wget -O healthd \
+https://git.archlinux.org/svntogit/packages.git/plain/trunk/healthd?h=packages/lm_sensors
+
+wget -O healthd.conf \
+https://git.archlinux.org/svntogit/packages.git/plain/trunk/healthd.conf?h=packages/lm_sensors
+
+wget -O healthd.service \
+https://git.archlinux.org/svntogit/packages.git/plain/trunk/healthd.service?h=packages/lm_sensors
+
+wget -O sensord.conf \
+https://git.archlinux.org/svntogit/packages.git/plain/trunk/sensord.conf?h=packages/lm_sensors
+
+
+!!!!! Vérifier VERSION : 
+========================
+head -n 5 lm-sensors/version.h | grep LM_VERSION
+==> #define LM_VERSION "3.5.0+git"
+
+==> Version = 3.5.0.20190123
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+tar -cvzf lm-sensors-git-3.5.0.20190123.tar.gz --exclude=.git lm-sensors
+
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/lm_sensors-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/lm-sensors-git-3.5.0.20190123.tar.gz .
+
+cp -v /0-DataLinux/05-builds-dir-git/{healthd,healthd.conf,healthd.service,sensord.conf} .
+
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=lm_sensors-git               # lm_sensors ds Extra
+pkgver=3.5.0.20190123
+pkgrel=1
+!!!!
+_name_release="lm-sensors"
+
+license=('GPL' 'LGPL')
+
+!!! TESTS = OK
+depends=('perl'
+)
+
+makedepends=('git' 'rrdtool'
+)
+
+# lm_sensors ds Extra
+conflicts='lm_sensors'
+provides='lm_sensors'
+
+SANS PATCH
+----------
+sha256sum lm-sensors-git-3.5.0.20190123.tar.gz
+sha256sum healthd
+sha256sum healthd.conf
+sha256sum healthd.service
+sha256sum sensord.conf
+
+source=("${_name_release}-git-${pkgver}.tar.gz"
+        "healthd"
+        "healthd.conf"
+        "healthd.service"
+        "sensord.conf"
+)
+sha256sums=('... ...'
+)
+
+prepare() {
+  cd "${srcdir}/lm-sensors"
+
+build() {
+  cd "${srcdir}/lm-sensors"
+
+package() {
+  cd "${srcdir}/lm-sensors"
+
+  
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users    919 18 mars  14:46 healthd
+-rw-r--r--  1 jnd users    450 18 mars  14:46 healthd.conf
+-rw-r--r--  1 jnd users    199 18 mars  14:46 healthd.service
+-rw-r--r--  1 jnd users 274985 18 mars  14:42 lm-sensors-git-3.5.0.20190123.tar.gz
+-rw-r--r--  1 jnd users   1902 18 mars  14:52 PKGBUILD
+-rw-r--r--  1 jnd users    173 18 mars  14:46 sensord.conf
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/lm_sensors-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/lm_sensors-git/lm-sensors-git-3.5.0.20190123.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/lm_sensors-git \
+&& cp -v /tmp/build/lm_sensors-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/lm_sensors-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap lm_sensors-git-3.5.0.20190123-1-x86_64.pkg.tar.xz
+lm_sensors-git W: ELF file ('usr/bin/isadump') lacks FULL RELRO, check LDFLAGS.
+lm_sensors-git W: ELF file ('usr/bin/isaset') lacks FULL RELRO, check LDFLAGS.
+lm_sensors-git W: ELF file ('usr/bin/sensord') lacks FULL RELRO, check LDFLAGS.
+lm_sensors-git W: ELF file ('usr/bin/sensors') lacks FULL RELRO, check LDFLAGS.
+lm_sensors-git W: Directory (etc/sensors.d) is empty
+lm_sensors-git E: Dependency lm_sensors detected and not included (libraries ['usr/lib/libsensors.so.5'] needed in files ['usr/bin/sensors'])
+lm_sensors-git W: Dependency rrdtool detected but optional (libraries ['usr/lib/librrd.so.8'] needed in files ['usr/bin/sensord'])
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/lm_sensors-git-*-x86_64.pkg.tar.*
+
+$ cp -v lm_sensors-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/lm_sensors-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v lm_sensors-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i lm-sensors-git-3.5.0.20190123.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! INSTALLATION
+=================
+!!! EN ROOT
+# cd
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu lm_sensors-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd lm_sensors-git
+# rm -i /var/cache/pacman/pkg/lm_sensors-git-*
+# LC_ALL=C pacman -Syu lm_sensors
+
+
+ANCIEN
+======
+
