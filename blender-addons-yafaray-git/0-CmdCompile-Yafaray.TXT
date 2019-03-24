@@ -66,7 +66,7 @@ voir : CmdFairePatches.TXT
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=blender-addons-yafaray-git
 pkgver=3.0.2.20160806

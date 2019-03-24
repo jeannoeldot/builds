@@ -116,3 +116,5 @@ Include = /etc/pacman.d/mirrorlist
 ## Note that this includes all packages in [xyne-any].
 #SigLevel = Never
 #Server = http://xyne.archlinux.ca/repos/xyne
+# Workaround
+#Server = https://xyne.archlinux.ca/bin/repo.php?file=

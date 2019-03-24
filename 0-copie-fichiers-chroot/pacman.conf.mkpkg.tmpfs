@@ -106,6 +106,6 @@ Server = file:///home/jnd/00-repolocal
 
 [xyne-x86_64]
 SigLevel = Required
-Server = https://xyne.archlinux.ca/repos/xyne
+#Server = https://xyne.archlinux.ca/repos/xyne
 # Workaround
-#Server = https://xyne.archlinux.ca/bin/repo.php?file=
+Server = https://xyne.archlinux.ca/bin/repo.php?file=
