@@ -44,6 +44,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.3.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.3.20190202
+pkgrel=3    # Rebuild MAJ LLVM 8.0.0
 pkgrel=2    # Rebuild MAJ OIIO 2.0.6
 pkgrel=1
 
@@ -85,8 +86,8 @@ provides=('openshadinglanguage')
 !!! LLVM 7.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/llvm 7.0.1-2 [installé]
-extra/llvm-libs 7.0.1-2 [installé]
+extra/llvm 8.0.0-1 [installé]
+extra/llvm-libs 8.0.0-1 [installé]
 
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
@@ -299,7 +300,6 @@ rm -f *~
 # Verifications...
 
 namcap openshadinglanguage-git-*-x86_64.pkg.tar.xz
-openshadinglanguage-git E: Dependency qt5-base detected and not included (libraries ['usr/lib/libQt5Widgets.so.5', 'usr/lib/libQt5Core.so.5', 'usr/lib/libQt5Gui.so.5'] needed in files ['usr/bin/osltoy'])
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -382,6 +382,7 @@ sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.3/
 ANCIENS
 ========
 
+openshadinglanguage-git E: Dependency qt5-base detected and not included (libraries ['usr/lib/libQt5Widgets.so.5', 'usr/lib/libQt5Core.so.5', 'usr/lib/libQt5Gui.so.5'] needed in files ['usr/bin/osltoy'])
 
 SI depends=("openimageio-git") + openvdb-git
 ============================================================
