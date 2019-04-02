@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.0.7.20190401
+pkgver=2.0.6.20190302
 pkgrel=1
-_name_release="oiio-Release-2.0.7"
+_name_release="oiio-Release-2.0.6"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -15,7 +15,6 @@ depends=('openexr' 'boost-libs' 'jasper' 'libtiff' 'opencolorio' 'intel-tbb'
          'qt5-base'
          'python'
          'openvdb-git'
-         'libwebp'
 )
 makedepends=('cmake' 'boost' 'mesa'
              'robin-map-git'
@@ -25,7 +24,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('3abe7e09c9d4e17e357c31c3cb856aea1fa7f79ab24f1fbe0bd46fd8fbd8c769'
+sha256sums=('58b3ca8e1729d484cae5a93882711f54fafaefdca124dc5c14c3ed3bc80f055c'
 )
 
 build() {
