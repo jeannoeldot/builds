@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.53.20190402
+!!! VERSION = 2.80.54.20190407
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender280-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.53.20190402.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.54.20190407.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.53.20190402.tar.gz
+tar -xzf blender-git-2.80.54.20190407.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py
