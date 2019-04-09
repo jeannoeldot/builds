@@ -44,6 +44,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.4.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.4.20190401
+pkgrel=2    # Rebuild MAJ OIIO 2.0.7 + opencv 4.1.0
 pkgrel=1
 
 pkgrel=3    # Rebuild MAJ LLVM 8.0.0
