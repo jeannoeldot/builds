@@ -1,0 +1,33 @@
+Errors thrown in console when running node_wrangler
+
+Blender Version
+
+
+Description
+An error is thrown in console when using node_wrangler
+
+Exact steps for others to reproduce the error
+
+- Open blender from the command line
+- UTILISER node_wrangler
+- Look at output to command line
+
+Traceback (most recent call last):
+  File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 4041, in draw
+    l.label("No Vertex Color layers on objects with this material")
+TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
+
+location: <unknown location>:-1
+
+Possible fix for node_wrangler.py errors
+
+diff -aur blender/release/scripts/addons/node_wrangler.py blender.new/release/scripts/addons/node_wrangler.py
+--- blender/release/scripts/addons/node_wrangler.py	2019-03-17 14:00:09.000000000 +0100
++++ blender.new/release/scripts/addons/node_wrangler.py	2019-03-17 14:07:40.193015546 +0100
+@@ -4035,7 +4035,7 @@
+             for vcol in vcols:
+                 l.operator(NWAddAttrNode.bl_idname, text=vcol).attr_name = vcol
+         else:
+-            l.label("No Vertex Color layers on objects with this material")
++            l.label(text="No Vertex Color layers on objects with this material")
+ 
