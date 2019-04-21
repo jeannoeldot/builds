@@ -9,22 +9,24 @@ An error is thrown in console when using mesh_discombobulator
 Exact steps for others to reproduce the error
 
 - Open blender from the command line
-- UTILISER mesh_discombobulator
+- Object Mode - Add - Mesh - Discombobulator : open Usage Information
 - Look at output to command line
 
 Traceback (most recent call last):
-  File "/usr/share/blender/2.80/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py", line 669, in draw
+  File "/home/USER/blender-2.80-bc8b884e5325-linux-glibc224-x86_64/2.80/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py", line 669, in draw
     layout.label("(Similar to dupliverts - but as one separate object)")
 TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
 
 location: <unknown location>:-1
 
 
+
+
 Possible fix for mesh_discombobulator.py errors
 
-diff -aur blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py blender.new/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py
---- blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py	2019-02-10 11:09:21.000000000 +0100
-+++ blender.new/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py	2019-02-21 10:56:46.618407989 +0100
+diff -aur a/add_mesh_extra_objects/mesh_discombobulator.py b/add_mesh_extra_objects/mesh_discombobulator.py
+--- a/add_mesh_extra_objects/mesh_discombobulator.py	2019-04-20 11:09:21.000000000 +0100
++++ b/add_mesh_extra_objects/mesh_discombobulator.py	2019-04-20 10:56:46.618407989 +0100
 @@ -666,13 +666,13 @@
          layout.label(text="In object mode, still needs a selection in Edit Mode")
          layout.separator()

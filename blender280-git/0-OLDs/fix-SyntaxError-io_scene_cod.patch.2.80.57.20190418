@@ -1,12 +1,12 @@
 diff -aur blender/release/scripts/addons_contrib/io_scene_cod/__init__.py blender.new/release/scripts/addons_contrib/io_scene_cod/__init__.py
---- blender/release/scripts/addons_contrib/io_scene_cod/__init__.py	2019-04-02 14:52:29.000000000 +0200
-+++ blender.new/release/scripts/addons_contrib/io_scene_cod/__init__.py	2019-04-21 10:46:24.903353379 +0200
+--- blender/release/scripts/addons_contrib/io_scene_cod/__init__.py	2019-02-10 11:09:21.000000000 +0100
++++ blender.new/release/scripts/addons_contrib/io_scene_cod/__init__.py	2019-02-10 14:28:49.020519089 +0100
 @@ -414,7 +414,7 @@
              icon = 'ERROR'
  
          col = layout.column(align=True)
 -        col.label(text="Armature: %s" % armature_info, icon)
-+        col.label("Armature: %s" % armature_info, icon)
++        col.label(icon, text="Armature: %s" % armature_info)
  
          col = layout.column(align=True)
          col.prop(self, "use_selection", "Selection only (%i bones)" % bones_selected)

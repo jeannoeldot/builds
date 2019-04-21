@@ -1,13 +1,10 @@
 
 Traceback (most recent call last):
-  File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 961, in draw_callback_nodeoutline
-    draw_rounded_node_border(n1, radius=6, colour=col_outer)  # outline
-  File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 796, in draw_rounded_node_border
-    bgl.glColor4f(colour[0], colour[1], colour[2], colour[3])
-AttributeError: module 'bgl' has no attribute 'glColor4f'
+  File "/home/USER/blender-2.80-bc8b884e5325-linux-glibc224-x86_64/2.80/scripts/addons/node_wrangler.py", line 4038, in draw
+    l.label("No Vertex Color layers on objects with this material")
+TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
 
-
-
+location: <unknown location>:-1
 
 
 =====================================================================
@@ -31,3 +28,17 @@ TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
 location: <unknown location>:-1
 
 location: <unknown location>:-1
+
+
+=====================================================================
+Traceback (most recent call last):
+  File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 961, in draw_callback_nodeoutline
+    draw_rounded_node_border(n1, radius=6, colour=col_outer)  # outline
+  File "/usr/share/blender/2.80/scripts/addons/node_wrangler.py", line 796, in draw_rounded_node_border
+    bgl.glColor4f(colour[0], colour[1], colour[2], colour[3])
+AttributeError: module 'bgl' has no attribute 'glColor4f'
+
+
+
+
+
