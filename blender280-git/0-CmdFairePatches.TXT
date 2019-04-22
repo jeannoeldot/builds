@@ -110,6 +110,63 @@ mv -vf /tmp/srcp/fix-TypeError-node_wrangler.patch .
 
 
 
+4) MODIFIER blender/release/scripts/addons/add_mesh_discombobulator/mesh_discombobulator.py
+===========================================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/add_mesh_discombobulator
+kwrite mesh_discombobulator.py
+
+MODIFIER LIGNE 669 :
+            layout.label("(Similar to dupliverts - but as one separate object)")
+ 
+DEVIENT
+            layout.label(text="(Similar to dupliverts - but as one separate object)")
+
+MODIFIER LIGNE 673 :
+            layout.label("(Runs reqursively)")
+ 
+DEVIENT
+            layout.label(text="(Runs reqursively)")
+
+MODIFIER LIGNE 675 :
+            layout.label("(It can run out of memory and take a long time to compute)")
+ 
+DEVIENT
+            layout.label(text="(It can run out of memory and take a long time to compute)")
+
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier mesh_discombobulator.py~
+rm -f mesh_discombobulator.py~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-TypeError-mesh_discombobulator.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender280-git
+
+mv -vf /tmp/srcp/fix-TypeError-mesh_discombobulator.patch .
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
 4) MODIFIER blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py
 =========================================================================================
 /!\ /!\ /!\ cd /tmp/srcp
@@ -156,17 +213,6 @@ cd $HOME/05-builds/blender280-git
 mv -vf /tmp/srcp/fix-TypeError-mesh_discombobulator.patch .
 
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) MODIFIER blender/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py
 ===================================================================================

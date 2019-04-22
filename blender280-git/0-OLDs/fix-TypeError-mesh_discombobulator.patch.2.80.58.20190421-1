@@ -1,6 +1,6 @@
-diff -aur blender/release/scripts/addons/add_mesh_discombobulator/mesh_discombobulator.py blender.new/release/scripts/addons/add_mesh_discombobulator/mesh_discombobulator.py
---- blender/release/scripts/addons/add_mesh_discombobulator/mesh_discombobulator.py	2019-04-22 10:27:53.000000000 +0200
-+++ blender.new/release/scripts/addons/add_mesh_discombobulator/mesh_discombobulator.py	2019-04-22 10:40:15.751758438 +0200
+diff -aur blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py blender.new/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py
+--- blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py	2019-02-10 11:09:21.000000000 +0100
++++ blender.new/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py	2019-02-21 10:56:46.618407989 +0100
 @@ -666,13 +666,13 @@
          layout.label(text="In object mode, still needs a selection in Edit Mode")
          layout.separator()
