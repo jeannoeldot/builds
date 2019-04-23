@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=embree-git               # embree ds community ?
 pkgver=3.5.2.20190313
+pkgrel=2    # static libs
 pkgrel=1
 
 
@@ -55,6 +56,9 @@ makedepends=('cmake')
 
 conflicts='embree'
 provides='embree'
+
+!!! TESTS
+options=(staticlibs)
 
 SANS PATCH
 ----------
@@ -86,7 +90,7 @@ tar -xzf embree-3.5.2.tar.gz -C /tmp/srcp
 
 LIGNE 104 ET ...
 ----------------
-EMBREE_STATIC_LIB               OFF by default          install_deps = ON
+EMBREE_STATIC_LIB               OFF by default  ==> ON  install_deps = ON
 EMBREE_ISPC_SUPPORT             ON by default   ==> OFF install_deps = OFF
 EMBREE_TUTORIALS                ON by default   ==> OFF install_deps = OFF
 
@@ -104,7 +108,7 @@ EMBREE_GEOMETRY_SUBDIVISION     ON by default
 EMBREE_GEOMETRY_USER            ON by default
 EMBREE_GEOMETRY_INSTANCE        ON by default
 EMBREE_GEOMETRY_GRID            ON by default
-EMBREE_GEOMETRY_POINT            ON by default
+EMBREE_GEOMETRY_POINT           ON by default
 EMBREE_RAY_PACKETS              ON by default
 
 EMBREE_CURVE_SELF_INTERSECTION_AVOIDANCE_FACTOR   2.0f is the default value
@@ -181,7 +185,7 @@ rm -f *~
 
 # Verifications...
 
-namcap embree-git-3.5.2.20190313-1-x86_64.pkg.tar.xz
+namcap embree-git-*-x86_64.pkg.tar.xz
 embree-git W: Dependency included and not needed ('intel-tbb')
 embree-git W: Dependency included and not needed ('glfw-x11')
 

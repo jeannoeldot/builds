@@ -2,7 +2,7 @@
 
 pkgname=embree-git
 pkgver=3.5.2.20190313
-pkgrel=1
+pkgrel=2
 _ver_release="3.5.2"
 _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"
@@ -15,6 +15,7 @@ makedepends=('cmake'
 )
 conflicts=('embree')
 provides=('embree')
+options=(staticlibs)
 source=("embree-${_ver_release}.tar.gz"
 )
 sha256sums=('245af8820a820af94679fa1d43a05a9c825451be0d603b6165229556adf49517'
@@ -32,6 +33,7 @@ build() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_SKIP_RPATH=ON \
     -DEMBREE_ISPC_SUPPORT=OFF \
+    -DEMBREE_STATIC_LIB=ON \
     -DEMBREE_TUTORIALS=OFF \
     -DEMBREE_RAY_MASK=ON \
     -DEMBREE_TASKING_SYSTEM=INTERNAL \

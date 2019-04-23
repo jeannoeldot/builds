@@ -136,7 +136,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
          'python-numpy'
 
          'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
-         'opensubdiv-git' 'openvdb-git' 'alembic-git' 'embree-git'
+         'opensubdiv-git' 'openvdb-git' 'alembic-git'
          'llvm-libs'
 )
 
@@ -315,7 +315,8 @@ Lignes 326
 option WITH_CYCLES			ON     si ON dep = openimageio
 option WITH_CYCLES_OSL                  ==> ON dep = openshadinglanguage
 
-!!! -- Could NOT find EMBREE (missing: _embree_LIBRARIES)
+!!! ERREUR COMPILE
+!!! error: undefined reference to 'rtcXXXXXXXXXXXX'
 option WITH_CYCLES_EMBREE               OFF  si ON dep = embree
 
 option WITH_CYCLES_CUDA_BINARIES	==> ON dep = cuda
@@ -398,7 +399,7 @@ $ mkpkg-chroot-repo
 
 SI depends=
           'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
-          'opensubdiv-git' 'openvdb-git' 'alembic-git' 'embree-git'
+          'opensubdiv-git' 'openvdb-git' 'alembic-git'
 =======================================================================
 $ cp -v $HOME/00-repolocal/\
 {\
@@ -407,8 +408,7 @@ openimageio-git-*-x86_64.pkg.tar.*,\
 opencollada-git-*-x86_64.pkg.tar.*,\
 opensubdiv-git-*-x86_64.pkg.tar.*,\
 openvdb-git-*-x86_64.pkg.tar.*,\
-alembic-git-*-x86_64.pkg.tar.*,\
-embree-git-*-x86_64.pkg.tar.*\
+alembic-git-*-x86_64.pkg.tar.*\
 } \
 /tmp/chrootrepo/
 
