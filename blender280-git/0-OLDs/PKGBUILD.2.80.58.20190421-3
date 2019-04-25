@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.80.59.20190425
-pkgrel=1
+pkgver=2.80.58.20190421
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -30,14 +30,19 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm'
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
 provides=('blender')
-#options=('!strip')
+options=('!strip')
+#install="blender.install"
 source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-node_wrangler.patch"
         "fix-TypeError-mesh_discombobulator.patch"
+        "fix-SyntaxError-curve_tools.patch"
+        "fix-SyntaxError-io_scene_cod.patch"
 )
-sha256sums=('bd6c43bf4fd9f9b0608e5e5a1bc7a9b44ea598716317b0af08673a0af1d099b8'
+sha256sums=('f8c1cb591a26e0b9c94f101270508e28619a32de825289808a74e5079d3d6468'
             '31d3da481394b1a5af5cbcefc07fadca87dda6d91b9468eea4fbcb99dd72c9ab'
             '74ef1b43d91311b618ec9208ca8e17b61d303fce7399f36e7e212d5199725f32'
+            '67d163d3f05a472577a5ac86a609aea0529a24d22d989cd48d6e547e2c7706dc'
+            '604b0cc1f72bc7ca68f30f2ab53759b45f36b920d57167953fa97308f9394cd7'
 )
 
 _gitname="blender"
@@ -49,6 +54,10 @@ prepare() {
   patch -Np1 -i "${srcdir}/fix-TypeError-node_wrangler.patch"
   patch -Np1 -i "${srcdir}/fix-TypeError-mesh_discombobulator.patch"
 
+  # fix erreur : SyntaxError: positional argument follows keyword argument
+  patch -Np1 -i "${srcdir}/fix-SyntaxError-curve_tools.patch"
+  patch -Np1 -i "${srcdir}/fix-SyntaxError-io_scene_cod.patch"
+
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
   sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
 
@@ -57,9 +66,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "486d9356bab3"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "797539e76ccf"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556182989|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1555878608|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
