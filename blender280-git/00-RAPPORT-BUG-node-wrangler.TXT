@@ -1,7 +1,12 @@
 Errors thrown in console when running node_wrangler
 
-Blender Version
+OS: Arch Linux 5.0.9-arch1-1-ARCH
+GeForce GTX 980/PCIe/SSE2
+'NVIDIA 418.56'
 
+Blender Version
+blender-2.80-157cc54ed521-linux-glibc224-x86_64
+version: 2.80 (sub 59), branch: blender2.7, commit date: 2019-04-26 22:13, hash: 157cc54ed521, type: Release
 
 Description
 An error is thrown in console when using node_wrangler
@@ -9,11 +14,11 @@ An error is thrown in console when using node_wrangler
 Exact steps for others to reproduce the error
 
 - Open blender from the command line
-- UTILISER node_wrangler
+- Use node_wrangler
 - Look at output to command line
 
 Traceback (most recent call last):
-  File "/home/USER/blender-2.80-bc8b884e5325-linux-glibc224-x86_64/2.80/scripts/addons/node_wrangler.py", line 4038, in draw
+  File "/home/USER/blender-2.80-157cc54ed521-linux-glibc224-x86_64/2.80/scripts/addons/node_wrangler.py", line 4038, in draw
     l.label("No Vertex Color layers on objects with this material")
 TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
 
@@ -21,9 +26,9 @@ location: <unknown location>:-1
 
 Possible fix for node_wrangler.py errors
 
-diff -aur a/node_wrangler.py b/node_wrangler.py
---- a/node_wrangler.py	2019-04-20 14:00:09.000000000 +0100
-+++ b/node_wrangler.py	2019-04-20 14:07:40.193015546 +0100
+diff -u a/node_wrangler.py b/node_wrangler.py
+--- a/node_wrangler.py  2019-04-27 01:06:09.000000000 +0200
++++ b/node_wrangler.py	2019-04-28 10:43:35.470844638 +0200
 @@ -4035,7 +4035,7 @@
              for vcol in vcols:
                  l.operator(NWAddAttrNode.bl_idname, text=vcol).attr_name = vcol

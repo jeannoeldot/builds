@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.80.59.20190427
+pkgver=2.80.59.20190425
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -20,13 +20,12 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opencolorio'
           'python-numpy'
           'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
-          'opensubdiv-git' 'openvdb-git' 'alembic-git'
+          'opensubdiv-git' 'openvdb-git' 'alembic-git' 'embree-git'
           'llvm-libs'
 )
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
-             'embree-git'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -36,7 +35,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-node_wrangler.patch"
         "fix-TypeError-mesh_discombobulator.patch"
 )
-sha256sums=('1b6ca3eefb3db16efdc459df636dc1507633660868eb9b2d7fc4df81fc9b1be1'
+sha256sums=('bd6c43bf4fd9f9b0608e5e5a1bc7a9b44ea598716317b0af08673a0af1d099b8'
             '31d3da481394b1a5af5cbcefc07fadca87dda6d91b9468eea4fbcb99dd72c9ab'
             '74ef1b43d91311b618ec9208ca8e17b61d303fce7399f36e7e212d5199725f32'
 )
@@ -58,9 +57,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d2f1705b15be"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "486d9356bab3"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556390249|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556182989|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

@@ -1,4 +1,17 @@
 
+
+Traceback (most recent call last):
+  File "/home/USER/blender-2.80-157cc54ed521-linux-glibc224-x86_64/2.80/scripts/addons/node_wrangler.py", line 4038, in draw
+    l.label("No Vertex Color layers on objects with this material")
+TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
+
+location: <unknown location>:-1
+
+
+
+
+
+=====================================================================
 Traceback (most recent call last):
   File "/home/USER/blender-2.80-bc8b884e5325-linux-glibc224-x86_64/2.80/scripts/addons/node_wrangler.py", line 4038, in draw
     l.label("No Vertex Color layers on objects with this material")

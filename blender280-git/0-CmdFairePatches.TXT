@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.59.20190425
+!!! VERSION = 2.80.59.20190427
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender280-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.59.20190425.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.59.20190427.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.59.20190425.tar.gz
+tar -xzf blender-git-2.80.59.20190427.tar.gz
 
 
 1) MODIFIER blender/release/scripts/addons/node_wrangler.py
