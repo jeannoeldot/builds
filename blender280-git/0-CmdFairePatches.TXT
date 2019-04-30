@@ -1,19 +1,30 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.59.20190427
+!!! VERSION = 2.80.60.20190430
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender280-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.59.20190427.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.60.20190430.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.59.20190427.tar.gz
+tar -xzf blender-git-2.80.60.20190430.tar.gz
 
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) MODIFIER blender/release/scripts/addons/node_wrangler.py
 ===========================================================
@@ -93,17 +104,6 @@ cd $HOME/05-builds/blender280-git
 mv -vf /tmp/srcp/fix-TypeError-mesh_discombobulator.patch .
 
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) MODIFIER blender/release/scripts/addons_contrib/curve_tools/Properties.py
 ============================================================================

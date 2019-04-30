@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.80.60.20190430
+pkgver=2.80.59.20190427
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -33,8 +33,12 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
+        "fix-TypeError-node_wrangler.patch"
+        "fix-TypeError-mesh_discombobulator.patch"
 )
-sha256sums=('2401750b6a52ac778132d50bcdeb3b26f4395317444b06bf98f3ba98c295c8c8'
+sha256sums=('1b6ca3eefb3db16efdc459df636dc1507633660868eb9b2d7fc4df81fc9b1be1'
+            '31d3da481394b1a5af5cbcefc07fadca87dda6d91b9468eea4fbcb99dd72c9ab'
+            '74ef1b43d91311b618ec9208ca8e17b61d303fce7399f36e7e212d5199725f32'
 )
 
 _gitname="blender"
@@ -42,6 +46,10 @@ _slot="2.80"
 
 prepare() {
   cd "${_gitname}"
+  # TypeError: UILayout.label(): required parameter "text" to be a keyword argument!
+  patch -Np1 -i "${srcdir}/fix-TypeError-node_wrangler.patch"
+  patch -Np1 -i "${srcdir}/fix-TypeError-mesh_discombobulator.patch"
+
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
   sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
 
@@ -50,9 +58,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "546e20f5a2c0"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d2f1705b15be"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556600647|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556390249|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
