@@ -10,10 +10,10 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-==> last change   	Tue, 30 Apr 2019 07:04:07 +0200 (15:04 +1000)
-==> 20190430
+==> last change   Wed, 1 May 2019 05:55:50 +0200 (13:55 +1000)
+==> 20190501
 
-commit	546e20f5a2c090da9328e44af2c9d5b6d4cb1fb9
+commit	7191f66aa4caf125b217207fffa47ae981ab533b
 
 1.3 SOURCES
 ==============
@@ -38,7 +38,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 546e20f5a2c0
+==> MY_WC_HASH = 7191f66aa4ca
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -48,7 +48,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1556600647
+==> MY_WC_COMMIT_TIMESTAM = 1556682950
 
 cd ..
 
@@ -66,7 +66,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 546e20f5a2c0
+==> MY_WC_HASH = 7191f66aa4ca
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -76,7 +76,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1556600647
+==> MY_WC_COMMIT_TIMESTAM = 1556682950
 
 cd ..
 
@@ -94,12 +94,12 @@ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSIO
 #define BLENDER_VERSION         280
 #define BLENDER_SUBVERSION      60
 
-==> Version = 2.80.60.20190430
+==> Version = 2.80.60.20190501
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.80.60.20190430.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.80.60.20190501.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -107,7 +107,7 @@ cd $HOME/05-builds/blender280-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.60.20190430.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.80.60.20190501.tar.gz .
 sync
 
 
@@ -122,7 +122,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.80.60.20190430
+pkgver=2.80.60.20190501
 pkgrel=1
 pkgrel=3    # Teste Avec Embree + staticlibs
 pkgrel=2
@@ -169,7 +169,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.80.60.20190430.tar.gz
+sha256sum blender-git-2.80.60.20190501.tar.gz
 
 sha256sums=(...
          ...
@@ -190,9 +190,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "546e20f5a2c0"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7191f66aa4ca"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556600647|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556682950|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -363,7 +363,7 @@ Lignes 498 et ...
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 62396508 22 avril 10:35 blender-git-2.80.60.20190430.tar.gz
+-rw-r--r--  1 jnd users 62396508 22 avril 10:35 blender-git-2.80.60.20190501.tar.gz
 -rw-r--r--  1 jnd users     4393 22 avril 10:46 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -435,7 +435,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender280-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.60.20190430.tar.gz . \
+&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.60.20190501.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender280-git \
 && cp -v -f /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
@@ -510,7 +510,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.80.60.20190430.tar.gz
+$ rm -i blender-git-2.80.60.20190501.tar.gz
 
 
 $ cd && maj-repolocal
@@ -548,11 +548,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "546e20f5a2c0"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "7191f66aa4ca"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556600647|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556682950|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -565,7 +565,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-mesh_discombobulator.patch"
 )
 
-sha256sum blender-git-2.80.60.20190430.tar.gz
+sha256sum blender-git-2.80.60.20190501.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -697,7 +697,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender280-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.60.20190430.tar.gz . \
+&& cp -v $HOME/05-builds/blender280-git/blender-git-2.80.60.20190501.tar.gz . \
 && cp -v $HOME/05-builds/blender280-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender280-git \
@@ -713,7 +713,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.80.60.20190430.tar.gz
+sha256sum blender-git-2.80.60.20190501.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -739,9 +739,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "546e20f5a2c0"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7191f66aa4ca"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556600647|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1556682950|' build_files/cmake/buildinfo.cmake
   
 }
 
