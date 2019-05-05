@@ -1,18 +1,249 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.79.6.20181207
+!!! VERSION = 2.80.60.20190505
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.79.6.20181207.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.60.20190505.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.79.6.20181207.tar.gz
+tar -xzf blender-git-2.80.60.20190505.tar.gz
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
+1) MODIFIER blender/release/scripts/addons/node_wrangler.py
+===========================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons
+kwrite node_wrangler.py
+
+MODIFIER LIGNE 4038 :
+            l.label("No Vertex Color layers on objects with this material")
+ 
+DEVIENT
+            l.label(text="No Vertex Color layers on objects with this material")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier node_wrangler.py~
+rm -f node_wrangler.py~
+ 
+
+cd ../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-TypeError-node_wrangler.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-TypeError-node_wrangler.patch .
+
+
+
+2) MODIFIER blender/release/scripts/addons/add_mesh_discombobulator/mesh_discombobulator.py
+===========================================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/add_mesh_discombobulator
+kwrite mesh_discombobulator.py
+
+MODIFIER LIGNE 669 :
+            layout.label("(Similar to dupliverts - but as one separate object)")
+ 
+DEVIENT
+            layout.label(text="(Similar to dupliverts - but as one separate object)")
+
+MODIFIER LIGNE 673 :
+            layout.label("(Runs reqursively)")
+ 
+DEVIENT
+            layout.label(text="(Runs reqursively)")
+
+MODIFIER LIGNE 675 :
+            layout.label("(It can run out of memory and take a long time to compute)")
+ 
+DEVIENT
+            layout.label(text="(It can run out of memory and take a long time to compute)")
+
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier mesh_discombobulator.py~
+rm -f mesh_discombobulator.py~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-TypeError-mesh_discombobulator.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-TypeError-mesh_discombobulator.patch .
+
+
+
+1) MODIFIER blender/release/scripts/addons_contrib/curve_tools/Properties.py
+============================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons_contrib/curve_tools
+kwrite Properties.py
+
+MODIFIER LIGNE 39 :
+        row.label(text="Sel:", nrSelectedObjects)
+ 
+DEVIENT
+        row.label("Sel:", nrSelectedObjects)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Properties.py~
+rm -f Properties.py~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-curve_tools.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-curve_tools.patch .
+
+
+2) MODIFIER blender/release/scripts/addons_contrib/io_scene_cod/__init__.py
+===========================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons_contrib/io_scene_cod
+kwrite __init__.py
+
+MODIFIER LIGNE 417 :
+        col.label(text="Armature: %s" % armature_info, icon)
+ 
+DEVIENT
+        col.label("Armature: %s" % armature_info, icon)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier __init__.py~
+rm -f __init__.py~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-io_scene_cod.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-io_scene_cod.patch .
+
+
+4) MODIFIER blender/release/scripts/addons/add_mesh_extra_objects/mesh_discombobulator.py
+=========================================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/add_mesh_extra_objects
+kwrite mesh_discombobulator.py
+
+MODIFIER LIGNE 669 :
+            layout.label("(Similar to dupliverts - but as one separate object)")
+ 
+DEVIENT
+            layout.label(text="(Similar to dupliverts - but as one separate object)")
+
+MODIFIER LIGNE 673 :
+            layout.label("(Runs reqursively)")
+ 
+DEVIENT
+            layout.label(text="(Runs reqursively)")
+
+MODIFIER LIGNE 675 :
+            layout.label("(It can run out of memory and take a long time to compute)")
+ 
+DEVIENT
+            layout.label(text="(It can run out of memory and take a long time to compute)")
+
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier mesh_discombobulator.py~
+rm -f mesh_discombobulator.py~
+ 
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-TypeError-mesh_discombobulator.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-TypeError-mesh_discombobulator.patch .
+
+
+
+1) MODIFIER blender/release/scripts/addons/io_convert_image_to_mesh_img/mesh/dtm.py
+===================================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/io_convert_image_to_mesh_img/mesh
+kwrite dtm.py
+
+MODIFIER LIGNE 133 :
+        num_labels = self.label.get(text='LABEL_RECORDS', 1)
+ 
+DEVIENT
+        num_labels = self.label.get(1, text='LABEL_RECORDS')
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier dtm.py~
+rm -f dtm.py~
+ 
+
+cd ../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-SyntaxError-io_convert_image_to_mesh_img.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-SyntaxError-io_convert_image_to_mesh_img.patch .
 
 
 1) MODIFIER blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
@@ -49,717 +280,4 @@ cd $HOME/05-builds/blender-git
 mv -vf /tmp/srcp/fix-SyntaxError-object_facemap_auto.patch .
 
 
-2) MODIFIER blender/release/scripts/addons/io_mesh_stl/blender_utils.py
-=======================================================================
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/release/scripts/addons/io_mesh_stl
-kwrite blender_utils.py
-
-MODIFIER LIGNE 89 :
-        raise StopIteration
- 
-DEVIENT
-        return
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier blender_utils.py~
-rm -f blender_utils.py~
- 
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-Error-python3.7-io_mesh_stl.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-Error-python3.7-io_mesh_stl.patch .
-
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
-
-1) MODIFIER blender/release/scripts/addons_contrib/np_station/np_point_dimension.py
-===================================================================================
-cp -R blender blender.new
-
-cd blender.new/release/scripts/addons_contrib/np_station
-kwrite np_point_dimension.py
-
-MODIFIER LIGNES 143 À 151 :
-def register():
-
-
-
-
-def unregister():
-
-
-    pass
-DEVIENNENT
-def register():
-    pass
-
-
-def unregister():
-    pass
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier np_point_dimension.py~
-rm -f np_point_dimension.py~
- 
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-IndentationError-np_station.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-IndentationError-np_station.patch .
-
-
-2) MODIFIER blender/release/scripts/addons/ant_landscape/test.py
-================================================================
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/release/scripts/addons/ant_landscape
-kwrite test.py
-
-MODIFIER LIGNE 21 :
- print(stats.memory())
- 
-DEVIENT
-    print(stats.memory())
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier test.py~
-rm -f test.py~
- 
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-IndentationError-ant_landscape.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-IndentationError-ant_landscape.patch .
-
-
-1) MODIFIER blender/intern/cycles/kernel/osl/osl_closures.cpp
-=============================================================
-cp -R blender blender.new
-
-cd blender.new/intern/cycles/kernel/osl
-kwrite osl_closures.cpp
-
-MODIFIER LIGNE 245 :
-	ss->register_closure(name, id, params, prepare, NULL, 16);
-DEVIENT
-	ss->register_closure(name, id, params, prepare, NULL);
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier osl_closures.cpp~
-rm -f osl_closures.cpp~
- 
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-Error-OSL-alignment-for-closure-structs.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-Error-OSL-alignment-for-closure-structs.patch .
-
-
-1) MODIFIER blender/build_files/cmake/Modules/FindLLVM.cmake
-============================================================
-cp -R blender blender.new
-
-cd blender.new/build_files/cmake/Modules
-kwrite FindLLVM.cmake
-
-RAJOUTER LIGNE 82 :
-		string(REPLACE "liblib" "lib" LLVM_LIBRARY "${LLVM_LIBRARY}")
-		string(REPLACE ".so.so" ".so" LLVM_LIBRARY "${LLVM_LIBRARY}")
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier FindLLVM.cmake~
-rm -f FindLLVM.cmake~
- 
-
-cd ../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-Error-llvm-config-3.9.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-Error-llvm-config-3.9.patch .
-
-
-
-1) MODIFIER blender/release/scripts/addons_contrib/curve_tools/CurveIntersections.py
-====================================================================================
-cp -R blender blender.new
-
-cd blender.new/release/scripts/addons_contrib/curve_tools
-kwrite CurveIntersections.py
-
-LIGNES 473 ET 474 : RAJOUTER
-        global algoDIR
-        global algoPOV
-
-LIGNE 492 : DEVIENT
-                #global algoDIR
-
-LIGNE 502 : DEVIENT
-                #global algoPOV
-
-LIGNE 538 : DEVIENT
-                    #global algoDIR
-
-LIGNE 544 : DEVIENT
-                    #global algoPOV
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier CurveIntersections.py~
-rm -f CurveIntersections.py~
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-SyntaxError-algoDIR-algoPOV.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-SyntaxError-algoDIR-algoPOV.patch .
-
-
-TEST 2 : COMPIL OK
-2) MODIFIER blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp
-================================================================================
-cp -R blender blender.new
-
-cd blender.new/source/blender/render/intern/raytrace
-kwrite rayobject_rtbuild.cpp
-
-LIGNE 38 : RAJOUTER
-#ifndef isfinite
-#define isfinite(x) std::isfinite(x)
-#endif
-
-LIGNES 41 ET 42 : A DEPLACER EN LIGNES 48 ET 49
-
-#include "rayobject_rtbuild.h"
-
-SUPPRIMER LES LIGNES 49 A 51
-#if __cplusplus >= 201103L
-using std::isfinite;
-#endif
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier rayobject_rtbuild.cpp~
-rm -f rayobject_rtbuild.cpp~
-
-cd ../../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-std-isfinite-has-not-been-declared.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-std-isfinite-has-not-been-declared.patch .
-
-
-TEST 0 : COMPIL OK
-0) MODIFIER blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp
-================================================================================
-cp -R blender blender.new
-
-cd blender.new/source/blender/render/intern/raytrace
-kwrite rayobject_rtbuild.cpp
-
-MODIFIER LIGNE 112 :
-	if (!isfinite(bb[0]) || !isfinite(bb[1]) || !isfinite(bb[2]))
-DEVIENT :
-    if (!finite(bb[0]) || !finite(bb[1]) || !finite(bb[2]))
-
-MODIFIER LIGNE 114 :
-	if (!isfinite(bb[3]) || !isfinite(bb[4]) || !isfinite(bb[5]))
-DEVIENT :
-    if (!finite(bb[3]) || !finite(bb[4]) || !finite(bb[5]))
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier rayobject_rtbuild.cpp~
-rm -f rayobject_rtbuild.cpp~
-
-cd ../../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-isfinite-was-not-declared-in-this-scope.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-isfinite-was-not-declared-in-this-scope.patch .
-
-
-TEST 1 :  COMPIL PAS OK
-1) MODIFIER blender/source/blender/render/intern/raytrace/rayobject_rtbuild.cpp
-================================================================================
-cp -R blender blender.new
-
-cd blender.new/source/blender/render/intern/raytrace
-kwrite rayobject_rtbuild.cpp
-
-LIGNES 37 ET 38 : A DEPLACER EN LIGNES 42 ET 43
-
-#include "rayobject_rtbuild.h"
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier rayobject_rtbuild.cpp~
-rm -f rayobject_rtbuild.cpp~
-
-cd ../../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix1-isfinite-was-not-declared-in-this-scope.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix1-isfinite-was-not-declared-in-this-scope.patch .
-
-
-1) MODIFIER blender/intern/cycles/util/util_simd.h
-===================================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/intern/cycles/util
-kwrite util_simd.h
-
-!!!!! INUTILES !!!!!
-MODIFIER LIGNES 61 et 62 :
-#define _tzcnt_u32 __tzcnt_u32
-#define _tzcnt_u64 __tzcnt_u64
-DEVIENNENT :
-/* gcc 5.2.0 : redefinition
-#define _tzcnt_u32 __tzcnt_u32
-#define _tzcnt_u64 __tzcnt_u64
-*/
-
-MODIFIER LIGNES 70 et 71 :
-#define _lzcnt_u32 __lzcnt32
-#define _lzcnt_u64 __lzcnt64
-DEVIENNENT :
-/* gcc 5.2.0 : redefinition
-#define _lzcnt_u32 __lzcnt32
-#define _lzcnt_u64 __lzcnt64
-*/
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier util_simd.h~
-rm -f util_simd.h~
-
-cd ../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-redefinitions-cpp11-gcc5.2.0.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-redefinitions-cpp11-gcc5.2.0.patch .
-
-
-2) MODIFIER blender/source/blender/collada/DocumentExporter.cpp
-===============================================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/source/blender/collada
-kwrite DocumentExporter.cpp
-
-MODIFIER LIGNES 304 et 305 :
-	COLLADASW::Scene scene(&sw, COLLADASW::URI(COLLADABU::Utils::EMPTY_STRING,
-	                                           scene_name));
-DEVIENNENT :
-	COLLADASW::Scene scene(&sw, COLLADASW::URI(COLLADABU::Utils::EMPTY_STRING), scene_name);
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier DocumentExporter.cpp~
-rm -f DocumentExporter.cpp~
-
-cd ../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-error-no-matching-function-for-call-to-COLLADASW-Scene.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-error-no-matching-function-for-call-to-COLLADASW-Scene.patch .
-
-
-MODIFIER LIGNES 61 et 62 :
-#define _tzcnt_u32 __tzcnt_u32
-#define _tzcnt_u64 __tzcnt_u64
-DEVIENNENT :
-/* gcc 4.9.2 : redefinition
-#define _tzcnt_u32 __tzcnt_u32
-#define _tzcnt_u64 __tzcnt_u64
-*/
-
-MODIFIER LIGNES 66 et 67 ( ==> 68 ET 69 ):
-#define _lzcnt_u32 __lzcnt32
-#define _lzcnt_u64 __lzcnt64
-DEVIENNENT :
-/* gcc 4.9.2 : redefinition
-#define _lzcnt_u32 __lzcnt32
-#define _lzcnt_u64 __lzcnt64
-*/
-
-
-diff -aur blender blender.new > fix-redefinitions-cpp11-gcc4.9.2.patch
-
-mv -vf /tmp/srcp/fix-redefinitions-cpp11-gcc4.9.2.patch .
--------------------------------------------------------------------------
-
-
-# Commit du 12/03/2015 : Campbell Barton : Remove version from readme, (replace on install).
-1-1) MODIFIER blender/source/creator/CMakeLists.txt
-===================================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/source/creator
-kwrite CMakeLists.txt
-
-LIGNE 980 : DEVIENT :
-----------------------------
-# patch Commit du 12/03/2015 : Campbell Barton : Remove version from readme, (replace on install).
-#	install_text_files_patch("\${CMAKE_INSTALL_PREFIX}/${BLENDER_TEXT_FILES_DESTINATION}")
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
-rm -f CMakeLists.txt~
-
-cd ../../..
-
-
-1-2) MODIFIER blender/release/text/readme.html
-==============================================
-
-cd blender.new/release/text
-kwrite readme.html
-
-
-REMPLACER BLENDER_VERSION PAR 2.74
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier readme.html~
-rm -f readme.html~
-
-cd ../../..
-
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-commit-2015.03.15-Remove-version-from-readme-replace-on-install.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-commit-2015.03.15-Remove-version-from-readme-replace-on-install.patch .
-
-
-1) MODIFIER blender/intern/cycles/render/osl.cpp
-================================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new//intern/cycles/render
-kwrite osl.cpp
-
-MODIFIER LIGNE 273 :
-        OSL::OSLCompiler *compiler = OSL::OSLCompiler::create();
-DEVIENT :
-#if OSL_LIBRARY_VERSION_CODE < 10602
-        OSL::OSLCompiler *compiler = OSL::OSLCompiler::create();
-#else
-        OSL::OSLCompiler *compiler = new OSL::OSLCompiler();
-#endif
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier osl.cpp~
-rm -f osl.cpp~
-
-cd ../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-Linking-OSLCompiler-compile.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-Linking-OSLCompiler-compile.patch .
-
-1) MODIFIER blender/intern/cycles/render/osl.cpp
-================================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new//intern/cycles/render
-kwrite osl.cpp
-
-MODIFIER LIGNE 254 :
-        vector<string_view> options;
-DEVIENT :
-        vector<std::string> options;
-
-
-MODIFIER LIGNE 269 :
-        OSL::OSLCompiler *compiler = OSL::OSLCompiler::create();
-DEVIENT :
-        OSL::OSLCompiler *compiler = new OSL::OSLCompiler();
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier osl.cpp~
-rm -f osl.cpp~
-
-cd ../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-Compile-Linking-OSLCompiler-compile.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-Compile-Linking-OSLCompiler-compile.patch .
-
-
-1) MODIFIER blender/intern/cycles/util/util_simd.h
-===================================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/intern/cycles/util
-kwrite util_simd.h
-
-MODIFIER LIGNES 61 et 62 :
-#define _tzcnt_u32 __tzcnt_u32
-#define _tzcnt_u64 __tzcnt_u64
-DEVIENNENT :
-/* gcc 4.9.2 : redefinition
-#define _tzcnt_u32 __tzcnt_u32
-#define _tzcnt_u64 __tzcnt_u64
-*/
-
-MODIFIER LIGNES 66 et 67 ( ==> 68 ET 69 ):
-#define _lzcnt_u32 __lzcnt32
-#define _lzcnt_u64 __lzcnt64
-DEVIENNENT :
-/* gcc 4.9.2 : redefinition
-#define _lzcnt_u32 __lzcnt32
-#define _lzcnt_u64 __lzcnt64
-*/
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier util_simd.h~
-rm -f util_simd.h~
-
-cd ../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-redefinitions-gcc4.9.2.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/fix-redefinitions-gcc4.9.2.patch .
-
-------------------------------------------------------------------
-2) MODIFIER blender/release/scripts/addons/mesh_inset
-=====================================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/release/scripts/addons/mesh_inset
-kwrite __init__.py
-
-MODIFIER LIGNE 24 :
-    "version": (1, 0. 1),
-DEVIENT :
-    "version": (1, 0, 1),
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier __init__.py~
-rm -f __init__.py~
-
-cd ../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-SyntaxError-invalid-syntax-mesh_inset.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -v /tmp/srcp/fix-SyntaxError-invalid-syntax-mesh_inset.patch .
-
-
-
-# Commit du 08/11/2014 : cmake buildfiles Cleanup / Refactor, no functional changes.
-# BUG T42553
-2-1) MODIFIER blender/CMakeLists.txt
-====================================
-
-cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new
-kwrite CMakeLists.txt
-
-SUPPRIMER LIGNES 366 À 382
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
-rm -f CMakeLists.txt~
-
-cd ..
-
-2-2) MODIFIER blender/source/creator/CMakeLists.txt
-===================================================
-
-cd blender.new/source/creator
-kwrite CMakeLists.txt
-
-LIGNE 238 : RAJOUTER :
-----------------------------
-
-if(MSVC_IDE)
-       # ${CMAKE_CFG_INTDIR} should replace \${BUILD_TYPE} when using add_command
-       set(TARGETDIR ${EXECUTABLE_OUTPUT_PATH}/\${BUILD_TYPE})
-elseif(APPLE)
-       set(TARGETDIR ${EXECUTABLE_OUTPUT_PATH}/\${BUILD_TYPE})
-else()
-       set(TARGETDIR ${EXECUTABLE_OUTPUT_PATH})
-endif()
--------------------------------
-
-REMPLACER :  DESTINATION "."  PAR   DESTINATION ${TARGETDIR}
-
-REMPLACER :  ${CMAKE_INSTALL_PREFIX}  PAR   ${TARGETDIR}
-SAUF LIGNES : 274  454  459  467  474  484  489  493  497
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
-rm -f CMakeLists.txt~
-
-cd ../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-commit-2014-11-08-cmake-buildfiles-Cleanup-Refactor.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -v /tmp/srcp/fix-commit-2014-11-08-cmake-buildfiles-Cleanup-Refactor.patch .
-
-
-
-
-1) MODIFIER blender/extern/eltopo/common/runstats.h
-===================================================
-cd srcp
-cp -R blender blender.new
-
-cd blender.new/extern/eltopo/common
-kwrite runstats.h
-
-MODIFIER LIGNES 16 A 35 :
-
-/* Modifs pour Linux */
-typedef __int64 int64_t;
-typedef unsigned __int64 uint64_t;
-#include <stdint.h>
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier runstats.h~
-rm -f runstats.h~
-
-
-cd ../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > fix-cloth-eltopo.patch
-
-rm -rf blender.new
-
-cd ..
-mv srcp/fix-cloth-eltopo.patch .
-
-
-1er test PAS OK
-----------------
-
-MODIFIER LIGNES 16 A 35 :
-
-/* Modifs pour Linux */
-#include <stdint.h>
-
-typedef signed __int8  int8_t;
-typedef signed __int16 int16_t;
-typedef signed __int32 int32_t;
-
-typedef unsigned __int8  uint8_t;
-typedef unsigned __int16 uint16_t;
-typedef unsigned __int32 uint32_t;
-typedef __int64 int64_t;
-typedef unsigned __int64 uint64_t;
 
