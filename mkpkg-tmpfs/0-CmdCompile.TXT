@@ -4,17 +4,17 @@
 #Le répertoire
 cd $HOME/05-builds/mkpkg-tmpfs
 
-VERSION = 1.1.1
+VERSION = 1.1.2
 
 ls
 
-sha256sum mkpkg-tmpfs-1.1.1.tar.gz
+sha256sum mkpkg-tmpfs-1.1.2.tar.gz
 
 2) MODIFIER LE PKGBUILD
 ========================
-# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+# Maintainer: Name <name@fai.com
 
-pkgver=1.1.1
+pkgver=1.1.2
 
 source=(aaaaaa.tar.gz
         xxx.patch
@@ -44,7 +44,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/mkpkg-tmpfs/PKGBUILD . \
-&& cp -v $HOME/05-builds/mkpkg-tmpfs/mkpkg-tmpfs-1.1.1.tar.gz . \
+&& cp -v $HOME/05-builds/mkpkg-tmpfs/mkpkg-tmpfs-1.1.2.tar.gz . \
 && makepkg -s \
 && cd $HOME/05-builds/mkpkg-tmpfs \
 && cp -v /tmp/build/mkpkg-tmpfs-*-any.pkg.tar.* . \
@@ -83,13 +83,13 @@ $ mv mkpkg-tmpfs-*-any.pkg.tar.* $HOME/00-repolocal/
 $ cd && maj-repolocal
 $ sync
 
-EN ROOT
-========
+!!! EN ROOT
 # cd
-# pacman -Syu
-#
-# 1ere Install
-# pacman -Syu mkpkg-tmpfs
+# maj
+OU
+# LC_ALL=C pacman -Syu
+OU
+# LC_ALL=C pacman -Syu mkpkg-tmpfs
 
 
 
