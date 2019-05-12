@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.80.61.20190511
+pkgver=2.80.60.20190507
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -33,20 +33,15 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
-        "Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
 )
-sha256sums=('655738e8b0400f2e28f0dcc83a6792d5cd11ab8e4321f7defb3a17606df20b89'
-            'c96cadef5a3cf2d9ff3ee4fc59e2a00b0170935dddbb3275b0d8701345854ef3')
+sha256sums=('fa819118f13df11d9bffe126af97d20487202bfba48925fbeb5d81ee1d646399'
+)
 
 _gitname="blender"
 _slot="2.80"
 
 prepare() {
   cd "${_gitname}"
-  # https://developer.blender.org/D4843
-  # Fix T64463: Visual Artifacts with ColorRamp
-  patch -Np1 -i "${srcdir}/Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
-
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
   sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
 
@@ -55,9 +50,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "ebc44aae9897"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7ebe5b76dc74"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1557598821|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1557220361|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

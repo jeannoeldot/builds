@@ -1,18 +1,63 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.60.20190507
+!!! VERSION = 2.80.61.20190511
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.60.20190507.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.61.20190511.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.60.20190507.tar.gz
+tar -xzf blender-git-2.80.61.20190511.tar.gz
+
+1) Fix T64463: Visual Artifacts with ColorRamp
+1) https://developer.blender.org/D4843
+1a) MODIFIER blender/source/blender/editors/interface/interface_draw.c
+======================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/editors/interface
+kwrite interface_draw.c
+
+MODIFIER LIGNES 1602 ET 1603 :
+  float x1 = rect->xmin + (0.25f * UI_UNIT_X);
+  float sizex = rect->xmax - x1 - (0.30f * UI_UNIT_X);
+ 
+DEVIENNENT
+  float x1 = rect->xmin;
+  float sizex = rect->xmax - x1;
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier interface_draw.c~
+rm -f interface_draw.c~
+
+1b) MODIFIER blender/source/blender/editors/interface/interface_widgets.c
+=========================================================================
+kwrite interface_widgets.c
+
+AJOUTER LIGNES 4648, 4649 ET 4650 :
+        /* do not draw right to edge of rect */
+        rect->xmin += (0.25f * UI_UNIT_X);
+        rect->xmax -= (0.3f * UI_UNIT_X);
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier interface_widgets.c~
+rm -f interface_widgets.c~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-T64463-Visual-Artifacts-with-ColorRamp.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Fix-T64463-Visual-Artifacts-with-ColorRamp.patch .
 
 
 

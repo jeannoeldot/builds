@@ -1,0 +1,27 @@
+diff -aur blender/source/blender/editors/interface/interface_draw.c blender.new/source/blender/editors/interface/interface_draw.c
+--- blender/source/blender/editors/interface/interface_draw.c	2019-05-12 11:03:45.000000000 +0200
++++ blender.new/source/blender/editors/interface/interface_draw.c	2019-05-12 11:56:43.208599592 +0200
+@@ -1599,8 +1599,8 @@
+     return;
+   }
+ 
+-  float x1 = rect->xmin + (0.25f * UI_UNIT_X);
+-  float sizex = rect->xmax - x1 - (0.30f * UI_UNIT_X);
++  float x1 = rect->xmin;
++  float sizex = rect->xmax - x1;
+   float sizey = BLI_rcti_size_y(rect);
+   float sizey_solid = sizey * 0.25f;
+   float y1 = rect->ymin;
+diff -aur blender/source/blender/editors/interface/interface_widgets.c blender.new/source/blender/editors/interface/interface_widgets.c
+--- blender/source/blender/editors/interface/interface_widgets.c	2019-05-12 11:03:45.000000000 +0200
++++ blender.new/source/blender/editors/interface/interface_widgets.c	2019-05-12 11:57:50.211457154 +0200
+@@ -4645,6 +4645,9 @@
+         break;
+ 
+       case UI_BTYPE_COLORBAND:
++        /* do not draw right to edge of rect */
++        rect->xmin += (0.25f * UI_UNIT_X);
++        rect->xmax -= (0.3f * UI_UNIT_X);
+         ui_draw_but_COLORBAND(but, &tui->wcol_regular, rect);
+         break;
+ 
