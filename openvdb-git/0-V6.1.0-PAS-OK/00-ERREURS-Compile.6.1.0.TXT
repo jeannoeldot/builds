@@ -1,0 +1,126 @@
+
+!!!! VOIR
+https://github.com/Linuxbrew/brew/issues/724
+https://github.com/sjackman/linuxbrew/commit/9087d011a591d53fa8b66d1d11475d7549962196
+
+
+Scanning dependencies of target openvdb_shared
+Scanning dependencies of target openvdb_static
+[  1%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/Grid.cc.o
+[  3%] Building CXX object openvdb/CMakeFiles/openvdb_static.dir/Grid.cc.o
+[  5%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/Compression.cc.o
+[  7%] Building CXX object openvdb/CMakeFiles/openvdb_static.dir/io/Archive.cc.o
+[  9%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/Archive.cc.o
+[ 11%] Building CXX object openvdb/CMakeFiles/openvdb_static.dir/io/Compression.cc.o
+[ 13%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/File.cc.o
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Exceptions.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Exceptions.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_static.dir/build.make:63: openvdb/CMakeFiles/openvdb_static.dir/Grid.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:63: openvdb/CMakeFiles/openvdb_shared.dir/Grid.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Types.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:89: openvdb/CMakeFiles/openvdb_shared.dir/io/Compression.cc.o] Error 1
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/File.h:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/File.cc:33:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+[ 15%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/GridDescriptor.cc.o
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Types.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:102: openvdb/CMakeFiles/openvdb_shared.dir/io/File.cc.o] Error 1
+make[2]: *** [openvdb/CMakeFiles/openvdb_static.dir/build.make:89: openvdb/CMakeFiles/openvdb_static.dir/io/Compression.cc.o] Error 1
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:76: openvdb/CMakeFiles/openvdb_shared.dir/io/Archive.cc.o] Error 1
+make[2]: *** [openvdb/CMakeFiles/openvdb_static.dir/build.make:76: openvdb/CMakeFiles/openvdb_static.dir/io/Archive.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:125: openvdb/CMakeFiles/openvdb_static.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Exceptions.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Grid.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/GridDescriptor.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/GridDescriptor.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:115: openvdb/CMakeFiles/openvdb_shared.dir/io/GridDescriptor.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:162: openvdb/CMakeFiles/openvdb_shared.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...

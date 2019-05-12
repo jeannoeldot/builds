@@ -1,35 +1,25 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 6.1.0
+!!! VERSION = 6.0.0
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openvdb-git
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v6.1.0.tar.gz /tmp/srcp/
+cp -v OpenVDB-v6.0.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v6.1.0.tar.gz
+tar -xzf OpenVDB-v6.0.0.tar.gz
 
 
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
-1) MODIFIER openvdb-6.1.0/openvdb/CMakeLists.txt
+1) MODIFIER openvdb-6.0.0/openvdb/CMakeLists.txt
 ================================================
-cp -R openvdb-6.1.0 openvdb-6.1.0.new
+cp -R openvdb-6.0.0 openvdb-6.0.0.new
 
-cd openvdb-6.1.0.new/openvdb
+cd openvdb-6.0.0.new/openvdb
 
 kwrite CMakeLists.txt
 
@@ -42,16 +32,26 @@ rm -f CMakeLists.txt~
  
 cd ../..
 
-diff -aur openvdb-6.1.0 openvdb-6.1.0.new
-diff -aur openvdb-6.1.0 openvdb-6.1.0.new > fix-error-boost-egal-sup-1.67.patch
+diff -aur openvdb-6.0.0 openvdb-6.0.0.new
+diff -aur openvdb-6.0.0 openvdb-6.0.0.new > fix-error-boost-egal-sup-1.67.patch
 
-rm -rf openvdb-6.1.0.new
+rm -rf openvdb-6.0.0.new
 
 cd $HOME/05-builds/openvdb-git
 
 mv -vf /tmp/srcp/fix-error-boost-egal-sup-1.67.patch .
 
 
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 
 
@@ -63,11 +63,11 @@ cd $HOME/05-builds/openvdb-git
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v6.1.0.tar.gz /tmp/srcp/
+cp -v OpenVDB-v6.0.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v6.1.0.tar.gz
+tar -xzf OpenVDB-v6.0.0.tar.gz
 
 cd openvdb
 
