@@ -1,18 +1,30 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.80.61.20190511
+!!! VERSION = 2.80.62.20190513
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.80.61.20190511.tar.gz /tmp/srcp/
+cp -v blender-git-2.80.62.20190513.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.80.61.20190511.tar.gz
+tar -xzf blender-git-2.80.62.20190513.tar.gz
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) Fix T64463: Visual Artifacts with ColorRamp
 1) https://developer.blender.org/D4843
@@ -58,18 +70,6 @@ rm -rf blender.new
 cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/Fix-T64463-Visual-Artifacts-with-ColorRamp.patch .
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) MODIFIER blender/release/scripts/addons/node_wrangler.py
 ===========================================================
