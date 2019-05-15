@@ -1,0 +1,158 @@
+
+INSTALL
+=======
+https://github.com/AcademySoftwareFoundation/openvdb/blob/master/openvdb/INSTALL
+
+
+# The parent directory of the boost/ header directory
+BOOST_INCL_DIR := /opt/lib/boost/include
+# The directory containing libboost_iostreams, libboost_system, etc.
+BOOST_LIB_DIR := /opt/lib/boost
+BOOST_LIB := -lboost_iostreams -lboost_system
+BOOST_THREAD_LIB := -lboost_thread
+
+boost 1.69.0-2
+==============
+/usr/include/boost
+
+boost-libs 1.69.0-2
+===================
+/usr/lib
+-----------------------------------------------------------------------------
+# The parent directory of the OpenEXR/ header directory
+EXR_INCL_DIR := /opt/lib/openexr/include
+# The directory containing IlmImf
+EXR_LIB_DIR := /opt/lib/openexr/lib
+EXR_LIB := -lIlmImf
+
+openexr 2.3.0-1
+===============
+/usr/include/OpenEXR
+/usr/lib
+-----------------------------------------------------------------------------
+# The parent directory of the OpenEXR/ header directory (which contains half.h)
+ILMBASE_INCL_DIR := $(EXR_INCL_DIR)
+# The directory containing libIlmThread, libIlmThread, libHalf etc.
+ILMBASE_LIB_DIR := $(EXR_LIB_DIR)
+ILMBASE_LIB := -lIlmThread -lIex -lImath
+HALF_LIB := -lHalf
+
+ilmbase 2.3.0-1
+===============
+/usr/include/OpenEXR
+/usr/lib
+-----------------------------------------------------------------------------
+# The parent directory of the tbb/ header directory
+TBB_INCL_DIR := //usr/include
+# The directory containing libtbb
+TBB_LIB_DIR := //usr/lib
+TBB_LIB := -ltbb
+
+intel-tbb 2019.5-1
+========================
+/usr/include/tbb
+/usr/lib
+-----------------------------------------------------------------------------
+# The parent directory of the blosc.h header
+# (leave blank if Blosc is unavailable)
+BLOSC_INCL_DIR := /opt/lib/blosc/include
+# The directory containing libblosc
+BLOSC_LIB_DIR := /opt/lib/blosc/lib
+BLOSC_LIB := -lblosc -lz
+
+blosc 1.16.3-1
+=============
+/usr/include
+/usr/lib
+-----------------------------------------------------------------------------
+# A scalable, concurrent malloc replacement library
+# such as jemalloc (included in the Houdini HDK) or TBB malloc
+# (leave blank if unavailable)
+CONCURRENT_MALLOC_LIB := -ljemalloc
+#CONCURRENT_MALLOC_LIB := -ltbbmalloc_proxy -ltbbmalloc
+# The directory containing the malloc replacement library
+CONCURRENT_MALLOC_LIB_DIR := /usr/lib/x86_64-linux-gnu
+
+jemalloc 1:5.2.0-1
+================
+/usr/lib
+-----------------------------------------------------------------------------
+# The parent directory of the cppunit/ header directory
+# (leave blank if CppUnit is unavailable)
+CPPUNIT_INCL_DIR :=
+# The directory containing libcppunit
+CPPUNIT_LIB_DIR :=
+CPPUNIT_LIB :=
+
+cppunit 1.14.0-2
+================
+/usr/include/cppunit
+/usr/lib
+-lcppunit
+-----------------------------------------------------------------------------
+# The parent directory of the log4cplus/ header directory
+# (leave blank if log4cplus is unavailable)
+LOG4CPLUS_INCL_DIR :=
+# The directory containing liblog4cplus
+LOG4CPLUS_LIB_DIR :=
+LOG4CPLUS_LIB :=
+-----------------------------------------------------------------------------
+# The directory containing glfw.h
+# (leave blank if GLFW is unavailable)
+GLFW_INCL_DIR :=
+# The directory containing libglfw
+GLFW_LIB_DIR :=
+GLFW_LIB :=
+# The major version number of the GLFW library
+# (header filenames changed between GLFW 2 and 3, so this must be specified explicitly)
+GLFW_MAJOR_VERSION :=
+
+glfw 3.3-2
+============
+/usr/include/GLFW
+/usr/lib
+-lglfw
+3
+-----------------------------------------------------------------------------
+# The version of Python for which to build the OpenVDB module
+# (leave blank if Python is unavailable)
+PYTHON_VERSION :=
+# The directory containing Python.h
+PYTHON_INCL_DIR :=
+# The directory containing pyconfig.h
+PYCONFIG_INCL_DIR :=
+# The directory containing libpython
+PYTHON_LIB_DIR :=
+PYTHON_LIB :=
+# The directory containing libboost_python
+BOOST_PYTHON_LIB_DIR :=
+BOOST_PYTHON_LIB :=
+# The directory containing arrayobject.h
+# (leave blank if NumPy is unavailable)
+NUMPY_INCL_DIR :=
+# The Epydoc executable
+# (leave blank if Epydoc is unavailable)
+EPYDOC :=
+# Set PYTHON_WRAP_ALL_GRID_TYPES to "yes" to specify that the Python module
+# should expose (almost) all of the grid types defined in openvdb.h
+# Otherwise, only FloatGrid, BoolGrid and Vec3SGrid will be exposed
+# (see, e.g., exportIntGrid() in python/pyIntGrid.cc).
+# Compiling the Python module with PYTHON_WRAP_ALL_GRID_TYPES set to "yes"
+# can be very memory-intensive.
+PYTHON_WRAP_ALL_GRID_TYPES := no
+
+python2 2.7.16-1
+================
+
+python2-numpy 1.16.3-1
+======================
+
+epydoc 3.0.1-4
+==============
+-----------------------------------------------------------------------------
+# The Doxygen executable
+# (leave blank if Doxygen is unavailable)
+DOXYGEN := doxygen
+
+doxygen 1.8.15-1
+================

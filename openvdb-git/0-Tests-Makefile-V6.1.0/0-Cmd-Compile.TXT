@@ -1,0 +1,305 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0
+
+http://www.openvdb.org/
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/dreamworksanimation/openvdb/releases
+==> pcucka released this 2 days ago ==> 20190507
+==> v6.1.0  ==> 6.1.0
+==> 6.1.0.20190507
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O OpenVDB-v6.1.0.tar.gz \
+https://github.com/dreamworksanimation/openvdb/archive/v6.1.0.tar.gz
+
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v6.1.0.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=openvdb-git               # openvdb ds community
+pkgver=6.1.0.20190507
+pkgrel=1
+
+pkgrel=2          # rebuild boost boost-libs 1.65.1-1
+pkgrel=3          # SANS doc, SANS ABI=3
+
+pkgrel=2          # rebuild boost boost-libs 1.64.0-1
+
+!!!!!!
+_ver_release="6.1.0"
+_name_release="openvdb-${_ver_release}"
+
+license=('MPL')
+
+!!! VOIR : cppunit python2 python2-numpy epydoc
+depends=('boost-libs' 'openexr' 'ilmbase' 'intel-tbb'
+         'blosc' 'zlib'
+         'jemalloc'
+         'glfw-x11' 'glu'
+)
+
+makedepends=('boost' 'mesa' 'chrpath')
+
+conflicts='openvdb'
+provides='openvdb'
+
+sha256sum OpenVDB-v6.1.0.tar.gz
+
+source=("OpenVDB-v${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+
+2-2) VERIFIER Makefile
+==============================
+mkdir /tmp/srcp
+
+tar -xzf OpenVDB-v6.1.0.tar.gz -C /tmp/srcp
+
+kwrite /tmp/srcp/openvdb-6.1.0/openvdb/Makefile
+ 
+
+LIGNE 58 :
+----------
+# Options:
+#   abi=N               build for compatibility with version N of the
+#                       OpenVDB Grid ABI, where N is 2, 3, 4, etc.
+#                       (some newer features will be disabled)
+
+LIGNE 1003 :
+-----------
+ if [ -d doc/html ]; \
+then \
+    mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
+    echo "Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
+    cp -r -f doc/html /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb; \
+    echo "Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/"; \
+fi
+Created /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/
+Copied documentation to /build/openvdb-git/pkg/openvdb-git/usr/share/doc/openvdb/
+
+
+rm -rf /tmp/srcp
+
+ 
+
+prepare() {
+  # Fixe erreur compilation avec gcc 6.1
+  sed -i  -e "s/-isystem/-I/g" Makefile
+
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong
+-std=c++0x -pthread -O3 -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Grid.o Grid.cc
+  # Supprime OPTIMIZE := -O3 -DNDEBUG
+  sed -i  -e "s/-O3 //g" Makefile
+
+build() {
+  ...
+  # build the library and commands
+  make all
+  
+package() {
+  ...
+  make install
+  
+  find "$pkgdir/usr/bin" -name 'vdb_*' -exec chrpath -d {} +
+  chrpath -d "$pkgdir/usr/bin/calc"
+
+  chrpath -d "$pkgname-$pkgver/medivia"
+
+  # SUPPRIME doc
+  rm -rf "$pkgdir"/usr/share
+  
+  
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r-- 1 jnd users 1864024 15 mai   14:16 OpenVDB-v6.1.0.tar.gz
+-rw-r--r-- 1 jnd users    3058 15 mai   14:15 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0/PKGBUILD . \
+&& cp -v $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0/OpenVDB-v6.1.0.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0 \
+&& cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0 && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+!!! EN USER
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+==> WARNING: Package contains reference to $pkgdir
+usr/bin/vdb_lod
+usr/bin/vdb_print
+usr/bin/vdb_render
+usr/bin/vdb_view
+
+namcap openvdb-git-*-x86_64.pkg.tar.*
+openvdb-git W: ELF file ('usr/bin/vdb_lod') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/bin/vdb_print') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/bin/vdb_render') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/bin/vdb_view') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/lib/libopenvdb.so.6.1.0') lacks FULL RELRO, check LDFLAGS.
+
+openvdb-git W: Dependency ilmbase included but already satisfied
+openvdb-git W: Dependency zlib included but already satisfied
+openvdb-git W: Dependency glu included but already satisfied
+
+!!!!!
+VOIR LIGNES 314 ET 320 Makefile
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/openvdb-git-*-x86_64.pkg.tar.*
+
+$ cp -v openvdb-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i OpenVDB-v6.1.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu openvdb-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -Rdd openvdb-git
+# rm /var/cache/pacman/pkg/openvdb-git-*
+# pacman -S openvdb-git
+
+
+=======================================================================
+ANCIEN
+======
+
+openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_lod')
+openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_print')
+openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_render')
+openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_view')
+
+openvdb-git W: Package was 82% docs by size; maybe you should split out a docs package
+
+build() {
+  ...
+  # build the library and commands
+  make abi=3 all    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
+  
+package() {
+  ...
+  make abi=3 install    ==> CXXFLAGS += -DOPENVDB_3_ABI_COMPATIBLE
+  
+
+
+pkgrel=2          # rebuild boost boost-libs 1.63.0-1
+pkgrel=2          # maj NVidia 370.23-1
+pkgrel=3          # nvidia-libgl 367.35
+pkgrel=4          # SANS nvidia-libgl ( ==> libgl )
+pkgrel=5          # rebuild boost boost-libs 1.61.0-2
+
+pkgrel=2  # rebuild gcc 6.1 boost boost-libs 1.60.0-5
+
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+

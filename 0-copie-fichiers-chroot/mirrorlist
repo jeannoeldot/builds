@@ -1,57 +1,57 @@
 ##
 ## Arch Linux repository mirrorlist
 ## Filtered by mirror score from mirror status page
-## Generated on 2019-05-13
+## Generated on 2019-05-14
 ##
 
-## France
-Server = http://mirrors.standaloneinstaller.com/archlinux/$repo/os/$arch
-## France
-Server = https://mirrors.celianvdb.fr/archlinux/$repo/os/$arch
-## France
-Server = http://mir.archlinux.fr/$repo/os/$arch
-## France
-Server = http://archlinux.mirrors.benatherton.com/$repo/os/$arch
-## France
-Server = http://archlinux.mirrors.ovh.net/archlinux/$repo/os/$arch
-## France
-Server = https://mirror.thekinrar.fr/archlinux/$repo/os/$arch
 ## France
 Server = http://mirrors.phx.ms/arch/$repo/os/$arch
 ## France
 Server = http://mirrors.arnoldthebat.co.uk/archlinux/$repo/os/$arch
 ## France
-Server = http://archlinux.vi-di.fr/$repo/os/$arch
-## France
-Server = https://mirrors.phx.ms/arch/$repo/os/$arch
-## France
-Server = http://archlinux.polymorf.fr/$repo/os/$arch
-## France
-Server = https://mirrors.arnoldthebat.co.uk/archlinux/$repo/os/$arch
-## France
-Server = http://arch.nimukaito.net/$repo/os/$arch
-## France
-Server = http://mirror.oldsql.cc/archlinux/$repo/os/$arch
-## France
-Server = https://archlinux.vi-di.fr/$repo/os/$arch
+Server = https://mirrors.celianvdb.fr/archlinux/$repo/os/$arch
 ## France
 Server = https://mirror.wormhole.eu/archlinux/$repo/os/$arch
 ## France
-Server = https://mirror.cyberbits.eu/archlinux/$repo/os/$arch
+Server = http://archlinux.mirrors.benatherton.com/$repo/os/$arch
 ## France
-Server = http://archlinux.de-labrusse.fr/$repo/os/$arch
-## France
-Server = https://mirror.oldsql.cc/archlinux/$repo/os/$arch
-## France
-Server = http://ftp.u-strasbg.fr/linux/distributions/archlinux/$repo/os/$arch
-## France
-Server = http://mirror.ibcp.fr/pub/archlinux/$repo/os/$arch
+Server = http://mirrors.standaloneinstaller.com/archlinux/$repo/os/$arch
 ## France
 Server = http://mirror.cyberbits.eu/archlinux/$repo/os/$arch
 ## France
-Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch
+Server = https://archlinux.vi-di.fr/$repo/os/$arch
+## France
+Server = https://mirror.thekinrar.fr/archlinux/$repo/os/$arch
+## France
+Server = http://mirror.oldsql.cc/archlinux/$repo/os/$arch
+## France
+Server = http://arch.nimukaito.net/$repo/os/$arch
+## France
+Server = http://mir.archlinux.fr/$repo/os/$arch
 ## France
 Server = http://mirror.lastmikoi.net/archlinux/$repo/os/$arch
 ## France
+Server = http://archlinux.mirrors.ovh.net/archlinux/$repo/os/$arch
+## France
+Server = http://ftp.u-strasbg.fr/linux/distributions/archlinux/$repo/os/$arch
+## France
+Server = http://archlinux.vi-di.fr/$repo/os/$arch
+## France
+Server = https://mirror.oldsql.cc/archlinux/$repo/os/$arch
+## France
+Server = http://archlinux.polymorf.fr/$repo/os/$arch
+## France
+Server = https://mirror.cyberbits.eu/archlinux/$repo/os/$arch
+## France
+Server = https://mirrors.arnoldthebat.co.uk/archlinux/$repo/os/$arch
+## France
+Server = http://mirror.archlinux.ikoula.com/archlinux/$repo/os/$arch
+## France
+Server = http://archlinux.de-labrusse.fr/$repo/os/$arch
+## France
 Server = http://mirrors.celianvdb.fr/archlinux/$repo/os/$arch
+## France
+Server = https://mirrors.phx.ms/arch/$repo/os/$arch
+## France
+Server = http://mirror.ibcp.fr/pub/archlinux/$repo/os/$arch
 
