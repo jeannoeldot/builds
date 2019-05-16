@@ -43,7 +43,7 @@ cd /tmp/srcp
 
 tar -xzf OpenVDB-v6.1.0.tar.gz
 
-cd openvdb
+cd openvdb-6.1.0/openvdb
 
 cp -v Makefile Makefile.original
 
@@ -113,7 +113,33 @@ cp -v Makefile.original Makefile
 
 cat Makefile
 
-5) QUAND TESTS FINIS
+
+4) TESTS SED -ldl -lm -lz LIGNES 313 et 319
+===========================================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-ldl -lm -lz/\$(LDFLAGS) -ldl -lm -lz/g" Makefile
+#  sed -i  -e "s/-ldl -lm -lz/\${LDFLAGS} -ldl -lm -lz/g" Makefile
+
+cat Makefile
+kwrite Makefile
+
+
+
+
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-ldl -lm -lz/LDFLAGS += -ldl -lm -lz/g" Makefile
+
+cat Makefile
+kwrite Makefile
+!!! ==> COMPIL PAS OK
+g++: error: LDFLAGS: No such file or directory
+g++: error: +=: No such file or directory
+
+
+
+99) QUAND TESTS FINIS
 =======================
 cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0
 

@@ -107,13 +107,16 @@ rm -rf /tmp/srcp
  
 
 prepare() {
-  # Fixe erreur compilation avec gcc 6.1
+  # Fixe erreur compilation avec gcc
   sed -i  -e "s/-isystem/-I/g" Makefile
 
 g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fstack-protector-strong
 -std=c++0x -pthread -O3 -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Grid.o Grid.cc
   # Supprime OPTIMIZE := -O3 -DNDEBUG
   sed -i  -e "s/-O3 //g" Makefile
+  
+  # Fixe namcap : W: ELF file ('usr/bin/*') lacks FULL RELRO, check LDFLAGS.
+  sed -i  -e "s/-ldl -lm -lz/\$(LDFLAGS) -ldl -lm -lz/g" Makefile
 
 build() {
   ...
@@ -124,10 +127,8 @@ package() {
   ...
   make install
   
+  # Fix namcap : E: Insecure RPATH
   find "$pkgdir/usr/bin" -name 'vdb_*' -exec chrpath -d {} +
-  chrpath -d "$pkgdir/usr/bin/calc"
-
-  chrpath -d "$pkgname-$pkgver/medivia"
 
   # SUPPRIME doc
   rm -rf "$pkgdir"/usr/share
@@ -202,18 +203,13 @@ usr/bin/vdb_render
 usr/bin/vdb_view
 
 namcap openvdb-git-*-x86_64.pkg.tar.*
-openvdb-git W: ELF file ('usr/bin/vdb_lod') lacks FULL RELRO, check LDFLAGS.
-openvdb-git W: ELF file ('usr/bin/vdb_print') lacks FULL RELRO, check LDFLAGS.
-openvdb-git W: ELF file ('usr/bin/vdb_render') lacks FULL RELRO, check LDFLAGS.
-openvdb-git W: ELF file ('usr/bin/vdb_view') lacks FULL RELRO, check LDFLAGS.
-openvdb-git W: ELF file ('usr/lib/libopenvdb.so.6.1.0') lacks FULL RELRO, check LDFLAGS.
-
+openvdb-git W: Referenced library 'libopenvdb.so.6.1' is an uninstalled dependency
+openvdb-git W: Unused shared library '/usr/lib/libIlmThread-2_3.so.24' by file ('usr/bin/vdb_render')
+openvdb-git W: Unused shared library '/usr/lib/libIex-2_3.so.24' by file ('usr/bin/vdb_render')
+openvdb-git W: Unused shared library '/usr/lib/libImath-2_3.so.24' by file ('usr/bin/vdb_render')
 openvdb-git W: Dependency ilmbase included but already satisfied
 openvdb-git W: Dependency zlib included but already satisfied
 openvdb-git W: Dependency glu included but already satisfied
-
-!!!!!
-VOIR LIGNES 314 ET 320 Makefile
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
@@ -268,6 +264,16 @@ openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in fi
 openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_render')
 openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_view')
 
+!!!!!
+VOIR LIGNES 314 ET 320 Makefile
+
+openvdb-git W: ELF file ('usr/bin/vdb_lod') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/bin/vdb_print') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/bin/vdb_render') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/bin/vdb_view') lacks FULL RELRO, check LDFLAGS.
+openvdb-git W: ELF file ('usr/lib/libopenvdb.so.6.1.0') lacks FULL RELRO, check LDFLAGS.
+
+
 openvdb-git W: Package was 82% docs by size; maybe you should split out a docs package
 
 build() {
@@ -302,4 +308,9 @@ $ mkpkg-tmpfs -m native
 -------
 $ rm -f *~
 $ mkpkg-tmpfs -m fast
+
+  sed -i  -e "s/-ldl -lm -lz/LDFLAGS += -ldl -lm -lz/g" Makefile
+!!! ==> COMPIL PAS OK
+g++: error: LDFLAGS: No such file or directory
+g++: error: +=: No such file or directory
 

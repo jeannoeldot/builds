@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=6.1.0.20190507
-pkgrel=1
+pkgrel=2
 _ver_release="6.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc="A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
@@ -63,6 +63,9 @@ prepare() {
   
   # Supprime OPTIMIZE := -O3
   sed -i  -e "s/-O3 //g" Makefile
+  
+  # Fixe namcap : W: ELF file ('usr/bin/*') lacks FULL RELRO, check LDFLAGS.
+  sed -i  -e "s/-ldl -lm -lz/\$(LDFLAGS) -ldl -lm -lz/g" Makefile
 }
   
 build() {
@@ -76,6 +79,7 @@ package() {
   # copy generated files into the directory tree rooted at $(DESTDIR)
   make install
   
+  # Fix namcap : E: Insecure RPATH
   find "$pkgdir/usr/bin" -name 'vdb_*' -exec chrpath -d {} +
 
   # SUPPRIME doc
