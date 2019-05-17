@@ -26,6 +26,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
+             'embree-git'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -84,6 +85,7 @@ build() {
         -DWITH_PYTHON_INSTALL_NUMPY=OFF \
         -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
         -DWITH_CYCLES_OSL=ON \
+        -DWITH_CYCLES_EMBREE=ON \
         -DWITH_CYCLES_CUDA_BINARIES=ON \
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_LLVM=ON \
