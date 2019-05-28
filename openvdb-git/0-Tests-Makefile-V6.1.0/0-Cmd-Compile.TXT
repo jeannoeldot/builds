@@ -40,6 +40,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=6.1.0.20190507
+pkgrel=2          # Fixe namcap : W: ELF file ('usr/bin/*') lacks FULL RELRO, check LDFLAGS.
 pkgrel=1
 
 pkgrel=2          # rebuild boost boost-libs 1.65.1-1
