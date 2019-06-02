@@ -53,7 +53,7 @@ build() {
     -DILMBASE_LOCATION=/usr/ \
     -DOPENEXR_LOCATION=/usr/ \
     ..
-  make
+  make VERBOSE=1
 }
 
 package() {

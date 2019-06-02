@@ -37,7 +37,7 @@ build() {
     -DUSE_EXR=ON \
     -DUSE_CCACHE=OFF \
     ..
-  make
+  make VERBOSE=1
 }
 
 package() {

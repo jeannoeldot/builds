@@ -1,7 +1,7 @@
 # Le répertoire
 ===============
 !!! EN USER
-cd $HOME/05-builds/openvdb-git
+cd $HOME/05-builds/openvdb-git/0-V6.0.0-OK
 
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
@@ -20,7 +20,7 @@ https://github.com/dreamworksanimation/openvdb/archive/v6.0.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/openvdb-git
+cd $HOME/05-builds/openvdb-git/0-V6.0.0-OK
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
@@ -185,17 +185,17 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v6.0.0.tar.gz . \
-&& cp -v $HOME/05-builds/openvdb-git/fix-error-boost-egal-sup-1.67.patch . \
+&& cp -v $HOME/05-builds/openvdb-git/0-V6.0.0-OK/PKGBUILD . \
+&& cp -v $HOME/05-builds/openvdb-git/0-V6.0.0-OK/OpenVDB-v6.0.0.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/0-V6.0.0-OK/fix-error-boost-egal-sup-1.67.patch . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/openvdb-git \
+&& cd $HOME/05-builds/openvdb-git/0-V6.0.0-OK \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/openvdb-git && rm -rf /tmp/build
+cd $HOME/05-builds/openvdb-git/0-V6.0.0-OK && rm -rf /tmp/build
 
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
