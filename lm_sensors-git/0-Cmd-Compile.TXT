@@ -205,7 +205,7 @@ rm -f *~
 
 # Verifications...
 
-namcap lm_sensors-git-3.5.0.20190123-1-x86_64.pkg.tar.xz
+namcap lm_sensors-git-*-x86_64.pkg.tar.*
 lm_sensors-git W: ELF file ('usr/bin/isadump') lacks FULL RELRO, check LDFLAGS.
 lm_sensors-git W: ELF file ('usr/bin/isaset') lacks FULL RELRO, check LDFLAGS.
 lm_sensors-git W: ELF file ('usr/bin/sensord') lacks FULL RELRO, check LDFLAGS.

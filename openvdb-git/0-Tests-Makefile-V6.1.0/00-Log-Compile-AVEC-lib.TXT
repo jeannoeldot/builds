@@ -1,0 +1,88 @@
+
+AVEC  make lib
+==>  -DOPENVDB_3_ABI_COMPATIBLE   -DOPENVDB_ABI_VERSION_NUMBER=6
+----------------------------------------------------------------
+
+==> Starting build()...
+Building io/Archive.o because of Archive.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Archive.o io/Archive.cc
+Building io/Compression.o because of Compression.cc
+Building Grid.o because of Grid.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Compression.o io/Compression.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Grid.o Grid.cc
+Building io/File.o because of File.cc
+Building io/GridDescriptor.o because of GridDescriptor.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/File.o io/File.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/GridDescriptor.o io/GridDescriptor.cc
+Building io/Queue.o because of Queue.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Queue.o io/Queue.cc
+Building io/Stream.o because of Stream.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/Stream.o io/Stream.cc
+Building io/TempFile.o because of TempFile.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o io/TempFile.o io/TempFile.cc
+Building math/Maps.o because of Maps.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o math/Maps.o math/Maps.cc
+In file included from /usr/include/boost/random/detail/integer_log2.hpp:19,
+                 from /usr/include/boost/random/detail/large_arithmetic.hpp:19,
+                 from /usr/include/boost/random/detail/const_mod.hpp:23,
+                 from /usr/include/boost/random/detail/seed_impl.hpp:26,
+                 from /usr/include/boost/random/mersenne_twister.hpp:30,
+                 from /usr/include/boost/uuid/random_generator.hpp:17,
+                 from /usr/include/boost/uuid/uuid_generators.hpp:17,
+                 from io/Archive.cc:53:
+/usr/include/boost/pending/integer_log2.hpp:7:59: note: #pragma message: This header is deprecated. Use <boost/integer/integer_log2.hpp> instead.
+ BOOST_HEADER_DEPRECATED("<boost/integer/integer_log2.hpp>");
+                                                           ^
+Building math/Proximity.o because of Proximity.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o math/Proximity.o math/Proximity.cc
+Building math/QuantizedUnitVec.o because of QuantizedUnitVec.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o math/QuantizedUnitVec.o math/QuantizedUnitVec.cc
+Building math/Transform.o because of Transform.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o math/Transform.o math/Transform.cc
+Building Metadata.o because of Metadata.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Metadata.o Metadata.cc
+Building MetaMap.o because of MetaMap.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o MetaMap.o MetaMap.cc
+Building openvdb.o because of openvdb.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o openvdb.o openvdb.cc
+Building Platform.o because of Platform.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o Platform.o Platform.cc
+Building points/AttributeArray.o because of AttributeArray.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o points/AttributeArray.o points/AttributeArray.cc
+Building points/AttributeArrayString.o because of AttributeArrayString.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o points/AttributeArrayString.o points/AttributeArrayString.cc
+Building points/AttributeGroup.o because of AttributeGroup.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o points/AttributeGroup.o points/AttributeGroup.cc
+Building points/AttributeSet.o because of AttributeSet.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o points/AttributeSet.o points/AttributeSet.cc
+Building points/points.o because of points.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o points/points.o points/points.cc
+Building points/StreamCompression.o because of StreamCompression.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o points/StreamCompression.o points/StreamCompression.cc
+Building util/Formats.o because of Formats.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o util/Formats.o util/Formats.cc
+Building util/Util.o because of Util.cc
+g++ -c -DOPENVDB_PRIVATE -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -fPIC -o util/Util.o util/Util.cc
+Building libopenvdb.so.6.1.0 because of Grid.o and others
+g++ -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -pthread -DNDEBUG -I . -I .. -I /usr/include/boost -I /usr/include/OpenEXR -I /usr/include/tbb -I /usr/include -DOPENVDB_USE_BLOSC -DOPENVDB_USE_GLFW_3 -shared -o libopenvdb.so.6.1.0 Grid.o io/Archive.o io/Compression.o io/File.o io/GridDescriptor.o io/Queue.o io/Stream.o io/TempFile.o math/Maps.o math/Proximity.o math/QuantizedUnitVec.o math/Transform.o Metadata.o MetaMap.o openvdb.o Platform.o points/AttributeArray.o points/AttributeArrayString.o points/AttributeGroup.o points/AttributeSet.o points/points.o points/StreamCompression.o util/Formats.o util/Util.o -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -ldl -lm -lz -Wl,-rpath,/usr/lib -L/usr/lib -lHalf -Wl,-rpath,/usr/lib -L/usr/lib -ltbb -Wl,-rpath,/usr/lib -L/usr/lib -lboost_iostreams -lboost_system  -Wl,-rpath,/usr/lib -L/usr/lib -lblosc -lz -Wl,-rpath,/usr/lib -L/usr/lib -lrt -Wl,-soname,libopenvdb.so.6.1
+ln -f -s libopenvdb.so.6.1.0 libopenvdb.so
+ln -f -s libopenvdb.so.6.1.0 libopenvdb.so.6.1
+==> Entering fakeroot environment...
+==> Starting package()...
+mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb
+Created /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb
+pushd /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb > /dev/null; \
+    mkdir -p ./ ./ io/ io/ io/ io/ io/ io/ io/ io/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ math/ ./ ./ ./ ./ ./ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ points/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tools/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ tree/ ./ util/ util/ util/ util/ util/ util/ util/ util/ util/ ./; popd > /dev/null
+for f in Exceptions.h Grid.h io/Archive.h io/Compression.h io/File.h io/GridDescriptor.h io/io.h io/Queue.h io/Stream.h io/TempFile.h math/BBox.h math/ConjGradient.h math/Coord.h math/DDA.h math/FiniteDifference.h math/LegacyFrustum.h math/Maps.h math/Mat.h math/Mat3.h math/Mat4.h math/Math.h math/Operators.h math/Proximity.h math/QuantizedUnitVec.h math/Quat.h math/Ray.h math/Stats.h math/Stencils.h math/Transform.h math/Tuple.h math/Vec2.h math/Vec3.h math/Vec4.h Metadata.h MetaMap.h openvdb.h Platform.h PlatformConfig.h points/AttributeArray.h points/AttributeArrayString.h points/AttributeGroup.h points/AttributeSet.h points/IndexFilter.h points/IndexIterator.h points/PointAdvect.h points/PointAttribute.h points/PointConversion.h points/PointCount.h points/PointDataGrid.h points/PointDelete.h points/PointGroup.h points/PointMask.h points/PointMove.h points/PointSample.h points/PointScatter.h points/StreamCompression.h tools/ChangeBackground.h tools/Clip.h tools/Composite.h tools/Dense.h tools/DenseSparseTools.h tools/Diagnostics.h tools/Filter.h tools/GridOperators.h tools/GridTransformer.h tools/Interpolation.h tools/LevelSetAdvect.h tools/LevelSetFilter.h tools/LevelSetFracture.h tools/LevelSetMeasure.h tools/LevelSetMorph.h tools/LevelSetPlatonic.h tools/LevelSetRebuild.h tools/LevelSetSphere.h tools/LevelSetTracker.h tools/LevelSetUtil.h tools/Mask.h tools/MeshToVolume.h tools/Morphology.h tools/MultiResGrid.h tools/ParticleAtlas.h tools/ParticlesToLevelSet.h tools/PointAdvect.h tools/PointIndexGrid.h tools/PointPartitioner.h tools/PointScatter.h tools/PointsToMask.h tools/PoissonSolver.h tools/PotentialFlow.h tools/Prune.h tools/RayIntersector.h tools/RayTracer.h tools/SignedFloodFill.h tools/Statistics.h tools/TopologyToLevelSet.h tools/ValueTransformer.h tools/VectorTransformer.h tools/VelocityFields.h tools/VolumeAdvect.h tools/VolumeToMesh.h tools/VolumeToSpheres.h tree/InternalNode.h tree/Iterator.h tree/LeafBuffer.h tree/LeafManager.h tree/LeafNode.h tree/LeafNodeBool.h tree/LeafNodeMask.h tree/NodeManager.h tree/NodeUnion.h tree/RootNode.h tree/Tree.h tree/TreeIterator.h tree/ValueAccessor.h Types.h util/CpuTimer.h util/Formats.h util/logging.h util/MapsUtil.h util/Name.h util/NodeMasks.h util/NullInterrupter.h util/PagedArray.h util/Util.h version.h ; \
+    do cp -f $f /build/openvdb-git/pkg/openvdb-git/usr/include/openvdb/$f; done
+Copied header files to /build/openvdb-git/pkg/openvdb-git/usr/include
+mkdir -p /build/openvdb-git/pkg/openvdb-git/usr/lib
+Created /build/openvdb-git/pkg/openvdb-git/usr/lib
+cp -f libopenvdb.so.6.1.0 /build/openvdb-git/pkg/openvdb-git/usr/lib
+pushd /build/openvdb-git/pkg/openvdb-git/usr/lib > /dev/null; \
+    if [ -f libopenvdb.so.6.1.0 ]; then \
+        ln -f -s libopenvdb.so.6.1.0 libopenvdb.so; \
+        ln -f -s libopenvdb.so.6.1.0 libopenvdb.so.6.1; \
+    fi; \
+    popd > /dev/null
+Copied libopenvdb to /build/openvdb-git/pkg/openvdb-git/usr/lib

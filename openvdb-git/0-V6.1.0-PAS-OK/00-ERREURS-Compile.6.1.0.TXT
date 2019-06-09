@@ -8,6 +8,168 @@ https://github.com/Martchus/tageditor/issues/22
 
 !!!!
 AVEC    make VERBOSE=1
+        cmake 3.14.5
+    -DCMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES:PATH='/usr/include/OpenEXR' \
+    -DCMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES:PATH='/usr/include/OpenEXR' \
+    -DCMAKE_C_FLAGS:STRING='-I/usr/include/OpenEXR' \
+    -DCMAKE_CXX_FLAGS:STRING='-I/usr/include/OpenEXR' \
+        
+-- Build files have been written to: /build/openvdb-git/src/openvdb-6.1.0/build
+/usr/bin/cmake -S/build/openvdb-git/src/openvdb-6.1.0 -B/build/openvdb-git/src/openvdb-6.1.0/build --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /build/openvdb-git/src/openvdb-6.1.0/build/CMakeFiles /build/openvdb-git/src/openvdb-6.1.0/build/CMakeFiles/progress.marks
+make -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+make -f openvdb/CMakeFiles/openvdb_static.dir/build.make openvdb/CMakeFiles/openvdb_static.dir/depend
+make -f openvdb/CMakeFiles/openvdb_shared.dir/build.make openvdb/CMakeFiles/openvdb_shared.dir/depend
+make[2]: Entering directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+cd /build/openvdb-git/src/openvdb-6.1.0/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /build/openvdb-git/src/openvdb-6.1.0 /build/openvdb-git/src/openvdb-6.1.0/openvdb /build/openvdb-git/src/openvdb-6.1.0/build /build/openvdb-git/src/openvdb-6.1.0/build/openvdb /build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_static.dir/DependInfo.cmake --color=
+make[2]: Entering directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+cd /build/openvdb-git/src/openvdb-6.1.0/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /build/openvdb-git/src/openvdb-6.1.0 /build/openvdb-git/src/openvdb-6.1.0/openvdb /build/openvdb-git/src/openvdb-6.1.0/build /build/openvdb-git/src/openvdb-6.1.0/build/openvdb /build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_shared.dir/DependInfo.cmake --color=
+Dependee "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_static.dir/DependInfo.cmake" is newer than depender "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_static.dir/depend.internal".
+Dependee "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_static.dir/depend.internal".
+Dependee "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_shared.dir/DependInfo.cmake" is newer than depender "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_shared.dir/depend.internal".
+Dependee "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/build/openvdb-git/src/openvdb-6.1.0/build/openvdb/CMakeFiles/openvdb_shared.dir/depend.internal".
+Scanning dependencies of target openvdb_shared
+make[2]: Leaving directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+make -f openvdb/CMakeFiles/openvdb_shared.dir/build.make openvdb/CMakeFiles/openvdb_shared.dir/build
+Scanning dependencies of target openvdb_static
+make[2]: Leaving directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+make -f openvdb/CMakeFiles/openvdb_static.dir/build.make openvdb/CMakeFiles/openvdb_static.dir/build
+make[2]: Entering directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+make[2]: Entering directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+[  1%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/Grid.cc.o
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -Dopenvdb_shared_EXPORTS -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG -fPIC   -pthread -std=c++11 -o CMakeFiles/openvdb_shared.dir/Grid.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc
+[  3%] Building CXX object openvdb/CMakeFiles/openvdb_static.dir/Grid.cc.o
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG   -pthread -std=c++11 -o CMakeFiles/openvdb_static.dir/Grid.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc
+[  5%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/Compression.cc.o
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -Dopenvdb_shared_EXPORTS -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG -fPIC   -pthread -std=c++11 -o CMakeFiles/openvdb_shared.dir/io/Compression.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.cc
+[  7%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/Archive.cc.o
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -Dopenvdb_shared_EXPORTS -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG -fPIC   -pthread -std=c++11 -o CMakeFiles/openvdb_shared.dir/io/Archive.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.cc
+[  9%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/File.cc.o
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -Dopenvdb_shared_EXPORTS -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG -fPIC   -pthread -std=c++11 -o CMakeFiles/openvdb_shared.dir/io/File.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/File.cc
+[ 11%] Building CXX object openvdb/CMakeFiles/openvdb_static.dir/io/Archive.cc.o
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Exceptions.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG   -pthread -std=c++11 -o CMakeFiles/openvdb_static.dir/io/Archive.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.cc
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:63: openvdb/CMakeFiles/openvdb_shared.dir/Grid.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[ 13%] Building CXX object openvdb/CMakeFiles/openvdb_shared.dir/io/GridDescriptor.cc.o
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -Dopenvdb_shared_EXPORTS -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG -fPIC   -pthread -std=c++11 -o CMakeFiles/openvdb_shared.dir/io/GridDescriptor.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/GridDescriptor.cc
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Exceptions.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Types.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_static.dir/build.make:63: openvdb/CMakeFiles/openvdb_static.dir/Grid.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:89: openvdb/CMakeFiles/openvdb_shared.dir/io/Compression.cc.o] Error 1
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/File.h:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/File.cc:33:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:102: openvdb/CMakeFiles/openvdb_shared.dir/io/File.cc.o] Error 1
+[ 15%] Building CXX object openvdb/CMakeFiles/openvdb_static.dir/io/Compression.cc.o
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb && /usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -isystem /usr/include/OpenEXR/..  -I/usr/include/OpenEXR -O3 -DNDEBUG   -pthread -std=c++11 -o CMakeFiles/openvdb_static.dir/io/Compression.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.cc
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Exceptions.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Grid.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/GridDescriptor.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/GridDescriptor.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:76: openvdb/CMakeFiles/openvdb_shared.dir/io/Archive.cc.o] Error 1
+make[2]: *** [openvdb/CMakeFiles/openvdb_shared.dir/build.make:115: openvdb/CMakeFiles/openvdb_shared.dir/io/GridDescriptor.cc.o] Error 1
+make[2]: Leaving directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+make[1]: *** [CMakeFiles/Makefile2:162: openvdb/CMakeFiles/openvdb_shared.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Archive.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_static.dir/build.make:76: openvdb/CMakeFiles/openvdb_static.dir/io/Archive.cc.o] Error 1
+In file included from /usr/include/boost/config/platform/linux.hpp:15,
+                 from /usr/include/boost/config.hpp:57,
+                 from /usr/include/boost/cstdint.hpp:36,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Platform.h:248,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/version.h:72,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/../openvdb/Types.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.h:34,
+                 from /build/openvdb-git/src/openvdb-6.1.0/openvdb/io/Compression.cc:31:
+/usr/include/c++/8.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [openvdb/CMakeFiles/openvdb_static.dir/build.make:89: openvdb/CMakeFiles/openvdb_static.dir/io/Compression.cc.o] Error 1
+make[2]: Leaving directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+make[1]: *** [CMakeFiles/Makefile2:125: openvdb/CMakeFiles/openvdb_static.dir/all] Error 2
+make[1]: Leaving directory '/build/openvdb-git/src/openvdb-6.1.0/build'
+make: *** [Makefile:141: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
+
+=================================================================================
+!!!!
+AVEC    make VERBOSE=1
 AVEC    cmake 3.14.5
 
 -- Build files have been written to: /build/openvdb-git/src/openvdb-6.1.0/build

@@ -110,6 +110,8 @@ $ mkpkg-tmpfs -m native -l logs -q qt
 
 $ rm -rf /tmp/chrootrepo
 
+# Verifications...
+namcap pokerth-*-x86_64.pkg.tar.*
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/

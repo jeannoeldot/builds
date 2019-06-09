@@ -40,7 +40,14 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=6.1.0.20190507
-pkgrel=2          # Fixe namcap : W: ELF file ('usr/bin/*') lacks FULL RELRO, check LDFLAGS.
+
+!!! VOIR 00-Log-Compile-AVEC-lib.TXT
+pkgrel=4    # Targets: lib, install_lib.
+
+!!! VOIR 00-Log-Compile-AVEC-lib-abi-6.TXT
+pkgrel=3    # Targets: lib, install_lib. Options: abi=6
+
+pkgrel=2    # Fixe namcap : W: ELF file ('usr/bin/*') lacks FULL RELRO, check LDFLAGS.
 pkgrel=1
 
 pkgrel=2          # rebuild boost boost-libs 1.65.1-1
@@ -123,12 +130,19 @@ build() {
   ...
   # build the library and commands
   make all
-  
+  OU
+  # the OpenVDB library
+  make lib
+
 package() {
   ...
   make install
+  OU
+  # install just the OpenVDB library and its headers into subdirectories of DESTDIR
+  make install_lib
   
   # Fix namcap : E: Insecure RPATH
+  # INUTILE si Targets: lib, install_lib.
   find "$pkgdir/usr/bin" -name 'vdb_*' -exec chrpath -d {} +
 
   # SUPPRIME doc

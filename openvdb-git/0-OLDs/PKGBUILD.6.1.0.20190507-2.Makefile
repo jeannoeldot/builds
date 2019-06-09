@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=6.1.0.20190507
-pkgrel=4
+pkgrel=2
 _ver_release="6.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc="A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids"
@@ -70,18 +70,17 @@ prepare() {
   
 build() {
   cd "${_name_release}/openvdb"
-  # the OpenVDB library
-  make lib
+  # build the library and commands
+  make all
 }
 
 package() {
   cd "${_name_release}/openvdb"
-  # install just the OpenVDB library and its headers into subdirectories of DESTDIR
-  make install_lib
+  # copy generated files into the directory tree rooted at $(DESTDIR)
+  make install
   
-#  # Fix namcap : E: Insecure RPATH
-#  # INUTILE si Targets: lib, install_lib.
-#  find "$pkgdir/usr/bin" -name 'vdb_*' -exec chrpath -d {} +
+  # Fix namcap : E: Insecure RPATH
+  find "$pkgdir/usr/bin" -name 'vdb_*' -exec chrpath -d {} +
 
   # SUPPRIME doc
   rm -rf "$pkgdir"/usr/share
