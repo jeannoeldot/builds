@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.80.74.20190630
+pkgver=2.80.74.20190717
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -34,7 +34,7 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('a0351970c3cdde76e9778bf860f019ab57ce0b79bd47dddb979e856ab1e253fc'
+sha256sums=('d888301b6f02d532b1d87159f68d2a59625ed63ccf2ee4c026acdc3b8e734502'
 )
 
 _gitname="blender"
@@ -43,16 +43,16 @@ _slot="2.80"
 prepare() {
   cd "${_gitname}"
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
-  sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
+  sed -i -e "s/python3.5/python/" release/scripts/addons_contrib/io_blend_utils/install_whl.py
 
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e40f3f5c48ea"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9e9fbb39d7f9"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1561879805|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1563352782|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
