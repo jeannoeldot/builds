@@ -5,7 +5,7 @@ cd $HOME/05-builds/openvdb-git
 
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
-https://github.com/dreamworksanimation/openvdb/releases
+https://github.com/AcademySoftwareFoundation/openvdb/releases
 ==> pcucka released this 2 days ago ==> 20190507
 ==> v6.1.0  ==> 6.1.0
 ==> 6.1.0.20190507
@@ -15,8 +15,7 @@ https://github.com/dreamworksanimation/openvdb/releases
 cd /0-DataLinux/05-builds-dir-git
 
 wget -O OpenVDB-v6.1.0.tar.gz \
-https://github.com/dreamworksanimation/openvdb/archive/v6.1.0.tar.gz
-
+https://github.com/AcademySoftwareFoundation/openvdb/archive/v6.1.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -38,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=6.1.0.20190507
+pkgrel=6          # Tests Cmake
 pkgrel=1
 
 pkgrel=3          # Rebuild nouveau PC
@@ -98,8 +98,8 @@ tar -xzf OpenVDB-v6.1.0.tar.gz -C /tmp/srcp
 
 LIGNE 79 ET 80:
 ---------------
-OPENVDB_BUILD_CORE  ON
-OPENVDB_BUILD_BINARIES  ON
+OPENVDB_BUILD_CORE  ON      Both static and shared versions are enabled by default
+OPENVDB_BUILD_BINARIES  ON  Only vdb_print is enabled by default
 
 LIGNE 81:
 ---------
@@ -107,7 +107,7 @@ OPENVDB_BUILD_PYTHON_MODULE "Build the pyopenvdb Python module" ON ==> OFF
 
 LIGNE 82:
 ---------
-OPENVDB_BUILD_UNITTESTS "Build the OpenVDB unit tests" ON ==> OFF
+OPENVDB_BUILD_UNITTESTS "Build the OpenVDB unit tests" OFF
 
 LIGNE 83:
 ---------
@@ -143,14 +143,13 @@ LIGNE 103:
 ----------
 USE_LOG4CPLUS OFF
 
-LIGNE 103:
+LIGNE 107:
 ----------
 USE_EXR OFF ==> ON
 
 LIGNE 114:
 ----------
 USE_CCACHE  ON ==> OFF
-
 
 LIGNE 122:
 ----------
@@ -165,8 +164,27 @@ author	Brecht Van Lommel <brechtvanlommel@gmail.com>
 	Mon, 2 Apr 2018 18:55:10 +0200 (18:55 +0200)
 commit	71d7d6cd8c431b7f4fac8d65a4eaedf3cff6c8f6
 
-
 OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" OFF
+
+
+2) kwrite /tmp/srcp/openvdb-6.1.0/openvdb/CMakeLists.txt
+
+LIGNE 42:
+---------
+OPENVDB_CORE_SHARED "Build dynamically linked version  ON
+LIGNE 43:
+---------
+OPENVDB_CORE_STATIC "Build statically linked version of the core library." ON ==> OFF
+
+
+3) kwrite /tmp/srcp/openvdb-6.1.0/openvdb/cmd/CMakeLists.txt
+
+LIGNE 42 À 45:
+--------------
+OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
+OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF ==> ON
+OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF ==> ON
+OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF ==> ON
 
 
 rm -rf /tmp/srcp
@@ -234,10 +252,8 @@ rm -f *~
 # Verifications...
 
 namcap openvdb-git-*-x86_64.pkg.tar.xz
-openvdb-git W: Referenced library 'libopenvdb.so.6.0' is an uninstalled dependency
 openvdb-git W: Dependency zlib included but already satisfied
 openvdb-git W: Dependency glu included but already satisfied
-openvdb-git W: Dependency included and not needed ('jemalloc')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------

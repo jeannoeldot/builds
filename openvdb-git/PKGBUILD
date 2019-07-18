@@ -2,11 +2,11 @@
 
 pkgname=openvdb-git
 pkgver=6.1.0.20190507
-pkgrel=1
+pkgrel=6
 _ver_release="6.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
-url='https://github.com/dreamworksanimation/openvdb'
+url='https://www.openvdb.org/'
 arch=('x86_64')
 license=('MPL')
 depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
@@ -28,19 +28,19 @@ build() {
   [[ -d build ]] && rm -rf build
   mkdir build && cd build
   cmake \
-    -DCMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES:PATH='/usr/include/OpenEXR' \
-    -DCMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES:PATH='/usr/include/OpenEXR' \
-    -DCMAKE_C_FLAGS:STRING='-I/usr/include/OpenEXR' \
-    -DCMAKE_CXX_FLAGS:STRING='-I/usr/include/OpenEXR' \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
     -DOPENVDB_BUILD_PYTHON_MODULE=OFF \
-    -DOPENVDB_BUILD_UNITTESTS=OFF \
     -DOPENVDB_ENABLE_RPATH=OFF \
     -DUSE_EXR=ON \
     -DUSE_CCACHE=OFF \
+    -DOPENVDB_CORE_STATIC=OFF \
+    -DOPENVDB_BUILD_VDB_LOD=ON \
+    -DOPENVDB_BUILD_VDB_RENDER=ON \
+    -DOPENVDB_BUILD_VDB_VIEW=ON \
     ..
+  sed -i "s/isystem/I/g" $(find . -name flags.make)
   make VERBOSE=1
 }
 

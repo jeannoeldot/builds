@@ -1,4 +1,93 @@
 
+VERSION 6.1.0-6
+===============
+==> Starting build()...
+-- The C compiler identification is GNU 9.1.0
+-- The CXX compiler identification is GNU 9.1.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Configuring for OpenVDB Version 6.1.0
+-- Configuring for OpenVDB ABI Version 6
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.6.1") 
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  Half Iex IexMath IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  IlmImf IlmImfUtil 
+-- Found TBB: /usr/include (found suitable version "2019.0", minimum required is "4.4") found components:  tbb 
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7") 
+-- Found Blosc: /usr/lib64/libblosc.so (found suitable version "1.16", minimum required is "1.5") 
+CMake Warning at openvdb/CMakeLists.txt:90 (message):
+  The version of Blosc located is greater than 1.5.  There have been reported
+  issues with using later versions of Blosc with OpenVDB.  OpenVDB has been
+  tested fully against Blosc 1.5, it is recommended that you use this version
+  where possible.
+
+
+-- Boost version: 1.69.0
+-- Found the following Boost libraries:
+--   iostreams
+--   system
+--   regex
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  Half Iex IlmThread 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  IlmImf 
+-- Boost version: 1.69.0
+-- Found the following Boost libraries:
+--   thread
+--   chrono
+--   date_time
+--   atomic
+CMake Warning (dev) at /usr/share/cmake-3.14/Modules/FindOpenGL.cmake:275 (message):
+  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
+  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  FindOpenGL found both a legacy GL library:
+
+    OPENGL_gl_LIBRARY: /usr/lib/libGL.so
+
+  and GLVND libraries for OpenGL and GLX:
+
+    OPENGL_opengl_LIBRARY: /usr/lib/libOpenGL.so
+    OPENGL_glx_LIBRARY: /usr/lib/libGLX.so
+
+  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
+  compatibility with CMake 3.10 and below the legacy GL library will be used.
+Call Stack (most recent call first):
+  openvdb/cmd/CMakeLists.txt:200 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found OpenGL: /usr/lib/libOpenGL.so   
+-- Found glfw3: /usr/lib64/cmake/glfw3 (found suitable version "3.3.0", minimum required is "3.0") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openvdb-git/src/openvdb-6.1.0/build
+
+
+
+
+======================================================================
 VERSION 6.1.0
 =============
 ==> Starting build()...

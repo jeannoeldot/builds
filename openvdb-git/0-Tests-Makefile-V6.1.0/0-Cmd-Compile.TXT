@@ -7,7 +7,7 @@ http://www.openvdb.org/
 
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
-https://github.com/dreamworksanimation/openvdb/releases
+https://github.com/AcademySoftwareFoundation/openvdb/releases
 ==> pcucka released this 2 days ago ==> 20190507
 ==> v6.1.0  ==> 6.1.0
 ==> 6.1.0.20190507
@@ -17,8 +17,7 @@ https://github.com/dreamworksanimation/openvdb/releases
 cd /0-DataLinux/05-builds-dir-git
 
 wget -O OpenVDB-v6.1.0.tar.gz \
-https://github.com/dreamworksanimation/openvdb/archive/v6.1.0.tar.gz
-
+https://github.com/AcademySoftwareFoundation/openvdb/archive/v6.1.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
