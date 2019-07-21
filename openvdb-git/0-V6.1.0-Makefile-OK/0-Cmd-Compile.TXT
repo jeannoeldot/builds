@@ -1,7 +1,7 @@
 # Le répertoire
 ===============
 !!! EN USER
-cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0
+cd $HOME/05-builds/openvdb-git/0-V6.1.0-Makefile-OK
 
 http://www.openvdb.org/
 
@@ -21,7 +21,7 @@ https://github.com/AcademySoftwareFoundation/openvdb/archive/v6.1.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0
+cd $HOME/05-builds/openvdb-git/0-V6.1.0-Makefile-OK
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
@@ -170,16 +170,16 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0/OpenVDB-v6.1.0.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/0-V6.1.0-Makefile-OK/PKGBUILD . \
+&& cp -v $HOME/05-builds/openvdb-git/0-V6.1.0-Makefile-OK/OpenVDB-v6.1.0.tar.gz . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0 \
+&& cd $HOME/05-builds/openvdb-git/0-V6.1.0-Makefile-OK \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/openvdb-git/0-Tests-Makefile-V6.1.0 && rm -rf /tmp/build
+cd $HOME/05-builds/openvdb-git/0-V6.1.0-Makefile-OK && rm -rf /tmp/build
 
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
@@ -210,11 +210,6 @@ $ rm -rf /tmp/chrootrepo
 rm -f *~
 
 # Verifications...
-==> WARNING: Package contains reference to $pkgdir
-usr/bin/vdb_lod
-usr/bin/vdb_print
-usr/bin/vdb_render
-usr/bin/vdb_view
 
 namcap openvdb-git-*-x86_64.pkg.tar.*
 openvdb-git W: Referenced library 'libopenvdb.so.6.1' is an uninstalled dependency
@@ -272,6 +267,13 @@ SI PROBLEME
 =======================================================================
 ANCIEN
 ======
+
+==> WARNING: Package contains reference to $pkgdir
+usr/bin/vdb_lod
+usr/bin/vdb_print
+usr/bin/vdb_render
+usr/bin/vdb_view
+
 
 openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_lod')
 openvdb-git E: Insecure RPATH '/build/openvdb-git/pkg/openvdb-git/usr/lib' in file ('usr/bin/vdb_print')
