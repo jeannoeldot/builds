@@ -68,6 +68,7 @@ voir CmdFairePatches.TXT
 
 pkgname=conky-lua-nv-git
 pkgver=1.11.4.20190416
+pkgrel=3  # Rebuild suite maj libxnvctrl 430.40-1
 pkgrel=2  # License = GPL3. MAINTAINER_MODE = false
 pkgrel=1
 pkgrel=2  # Fix build avec gcc7
@@ -226,6 +227,12 @@ rm -rf conky
 # Verifications...
 namcap conky-lua-nv-git-*-x86_64.pkg.tar.xz
 conky-lua-nv-git E: Dependency hicolor-icon-theme detected and not included (needed for hicolor theme hierarchy)
+conky-lua-nv-git W: Dependency included and not needed ('alsa-lib')
+conky-lua-nv-git W: Dependency libxml2 included but already satisfied
+conky-lua-nv-git W: Dependency cairo included but already satisfied
+conky-lua-nv-git W: Dependency libxft included but already satisfied
+conky-lua-nv-git W: Dependency glib2 included but already satisfied
+conky-lua-nv-git W: Dependency included and not needed ('libxnvctrl')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/

@@ -1,0 +1,118 @@
+==> Retrieving sources...
+  -> Found conky-lua-nv-git-1.11.4.20190416.tar.gz
+==> WARNING: Skipping all source file integrity checks.
+==> Extracting sources...
+  -> Extracting conky-lua-nv-git-1.11.4.20190416.tar.gz with bsdtar
+==> Starting build()...
+-- The C compiler identification is GNU 9.1.0
+-- The CXX compiler identification is GNU 9.1.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- CMAKE_C_FLAGS: -std=c99
+-- CMAKE_CXX_FLAGS: -std=c++17
+-- CMAKE_C_FLAGS_DEBUG: -g
+-- CMAKE_CXX_FLAGS_DEBUG: -g
+-- CMAKE_C_FLAGS_MINSIZEREL: -Os -DNDEBUG
+-- CMAKE_CXX_FLAGS_MINSIZEREL: -Os -DNDEBUG
+-- CMAKE_C_FLAGS_RELEASE: -O3 -DNDEBUG
+-- CMAKE_CXX_FLAGS_RELEASE: -O3 -DNDEBUG
+-- CMAKE_C_FLAGS_RELWITHDEBINFO: -O2 -g -DNDEBUG
+-- CMAKE_CXX_FLAGS_RELWITHDEBINFO: -O2 -g -DNDEBUG
+-- CMAKE_BUILD_TYPE: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.6.3") 
+-- Looking for include file sys/statfs.h
+-- Looking for include file sys/statfs.h - found
+-- Looking for include file sys/param.h
+-- Looking for include file sys/param.h - found
+-- Looking for include file sys/inotify.h
+-- Looking for include file sys/inotify.h - found
+-- Looking for include file dirent.h
+-- Looking for include file dirent.h - found
+-- Looking for strndup
+-- Looking for strndup - found
+-- Looking for pipe2
+-- Looking for pipe2 - not found
+-- Looking for O_CLOEXEC
+-- Looking for O_CLOEXEC - found
+-- Looking for statfs64
+-- Looking for statfs64 - found
+-- Looking for clock_gettime
+-- Looking for clock_gettime - found
+-- Looking for include file linux/soundcard.h
+-- Looking for include file linux/soundcard.h - found
+-- Looking for include file linux/soundcard.h
+-- Looking for include file linux/soundcard.h - found
+-- Found Curses: /usr/lib/libcurses.so  
+-- Looking for include file iwlib.h
+-- Looking for include file iwlib.h - found
+-- Looking for iw_sockets_open
+-- Looking for iw_sockets_open - not found
+-- Looking for getnameinfo
+-- Looking for getnameinfo - found
+-- Looking for 5 include files netdb.h, ..., arpa/inet.h
+-- Looking for 5 include files netdb.h, ..., arpa/inet.h - found
+-- Found X11: /usr/include   
+-- Looking for XOpenDisplay in /usr/lib/libX11.so;/usr/lib/libXext.so
+-- Looking for XOpenDisplay in /usr/lib/libX11.so;/usr/lib/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Checking for one of the modules 'lua>=5.3;lua5.3;lua-5.3;lua53;lua5.2;lua-5.2;lua52'
+-- Checking for modules 'cairo;cairo-xlib'
+--   Found cairo, version 1.16.0
+--   Found cairo-xlib, version 1.16.0
+-- Checking for one of the modules 'imlib2;Imlib2'
+-- Checking for module 'librsvg-2.0'
+--   Found librsvg-2.0, version 2.44.14
+-- Checking for module 'libcurl'
+--   Found libcurl, version 7.65.3
+-- Found LibXml2: /usr/lib/libxml2.so (found version "2.9.9") 
+Configuration for target conky-cairo
+-- SOURCE_DIR = /build/conky-lua-nv-git/src/conky/lua
+-- BINARY_DIR = /build/conky-lua-nv-git/src/conky/lua
+-- INCLUDE_DIRECTORIES = /build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include;/usr/include/cairo;/usr/include/glib-2.0;/usr/lib/glib-2.0/include;/usr/lib/libffi-3.2.1/include;/usr/include/pixman-1;/usr/include/freetype2;/usr/include/libpng16;/usr/include/harfbuzz;/usr/include/uuid;/build/conky-lua-nv-git/src/conky/lua
+-- LINK_LIBRARIES = cairo;X11;Xext;lua;m;toluapp_lib_static
+Configuration for target conky-imlib2
+-- SOURCE_DIR = /build/conky-lua-nv-git/src/conky/lua
+-- BINARY_DIR = /build/conky-lua-nv-git/src/conky/lua
+-- INCLUDE_DIRECTORIES = /build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include;/usr/include/cairo;/usr/include/glib-2.0;/usr/lib/glib-2.0/include;/usr/lib/libffi-3.2.1/include;/usr/include/pixman-1;/usr/include/freetype2;/usr/include/libpng16;/usr/include/harfbuzz;/usr/include/uuid;/build/conky-lua-nv-git/src/conky/lua;/usr/include;/build/conky-lua-nv-git/src/conky/lua
+-- LINK_LIBRARIES = -lImlib2;lua;m;toluapp_lib_static
+Configuration for target conky-rsvg
+-- SOURCE_DIR = /build/conky-lua-nv-git/src/conky/lua
+-- BINARY_DIR = /build/conky-lua-nv-git/src/conky/lua
+-- INCLUDE_DIRECTORIES = /build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include;/usr/include/cairo;/usr/include/glib-2.0;/usr/lib/glib-2.0/include;/usr/lib/libffi-3.2.1/include;/usr/include/pixman-1;/usr/include/freetype2;/usr/include/libpng16;/usr/include/harfbuzz;/usr/include/uuid;/build/conky-lua-nv-git/src/conky/lua;/usr/include;/build/conky-lua-nv-git/src/conky/lua;/usr/include/librsvg-2.0;/usr/include/glib-2.0;/usr/lib/glib-2.0/include;/usr/lib/libffi-3.2.1/include;/usr/include/libmount;/usr/include/blkid;/usr/include/gdk-pixbuf-2.0;/usr/include/cairo;/usr/include/pixman-1;/usr/include/freetype2;/usr/include/libpng16;/usr/include/harfbuzz;/usr/include/uuid;/build/conky-lua-nv-git/src/conky/lua
+-- LINK_LIBRARIES = rsvg-2;m;gio-2.0;gdk_pixbuf-2.0;gobject-2.0;glib-2.0;cairo;lua;m;toluapp_lib_static
+-- Looking for XineramaQueryScreens in /usr/lib/libXinerama.so
+-- Looking for XineramaQueryScreens in /usr/lib/libXinerama.so - found
+Configuration for target conky
+-- SOURCE_DIR = /build/conky-lua-nv-git/src/conky/src
+-- BINARY_DIR = /build/conky-lua-nv-git/src/conky/src
+-- INCLUDE_DIRECTORIES = /build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include;/build/conky-lua-nv-git/src/conky;/usr/include;/usr/include;/usr/include/freetype2;/usr/include;/usr/include/libxml2;/build/conky-lua-nv-git/src/conky/data
+-- LINK_LIBRARIES = -lpthread;-lm;/usr/lib/libcurses.so;/usr/lib/libform.so;/usr/lib/libiw.so;/usr/lib/libX11.so;/usr/lib/libXext.so;/usr/lib/libXdamage.so;/usr/lib/libXfixes.so;/usr/lib/libXft.so;/usr/lib/libXext.so;lua;m;/usr/lib/libXNVCtrl.a;-lImlib2;curl;/usr/lib/libxml2.so;toluapp_lib_static;tcp-portmon;/usr/lib/libXinerama.so
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/conky-lua-nv-git/src/conky
