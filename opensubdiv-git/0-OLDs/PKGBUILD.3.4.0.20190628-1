@@ -2,7 +2,7 @@
 
 pkgname=opensubdiv-git
 pkgver=3.4.0.20190628
-pkgrel=3
+pkgrel=1
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
 license=('custom')
@@ -39,7 +39,6 @@ build() {
         -D NO_EXAMPLES=1 \
         -D NO_METAL=1 \
         ..
-  find . -type f -exec sed -i -e 's/\-O3//g' {} \;
   make VERBOSE=1
 }
 
@@ -47,7 +46,7 @@ package() {
   cd "${_gitname}/build"
   make DESTDIR="${pkgdir}" install
 
-  #license
+  # license
   cd ..
   install -Dm644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

@@ -1,0 +1,6 @@
+
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb &&
+/usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -Dopenvdb_shared_EXPORTS
+-I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -I /usr/include/OpenEXR/.. -I /usr/include/OpenEXR
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG -fPIC   -pthread -std=c++11
+-o CMakeFiles/openvdb_shared.dir/Grid.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc

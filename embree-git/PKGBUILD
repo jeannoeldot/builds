@@ -39,7 +39,7 @@ build() {
     -DEMBREE_TASKING_SYSTEM=INTERNAL \
     -DEMBREE_MAX_ISA=AVX2 \
     ..
-  make
+  make VERBOSE=1
 }
 
 package() {

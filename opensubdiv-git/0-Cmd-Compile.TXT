@@ -71,6 +71,9 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.4.0.20190628
+pkgrel=3    # find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+pkgrel=2    # sed -i -e "s/-O3 //g" $(find . -name flags.make)
+
 pkgrel=1
 
 pkgrel=2    # Rebuild nouveau PC 
@@ -255,6 +258,13 @@ cd $HOME/05-builds/opensubdiv-git && rm -rf /tmp/build
 !!! EN USER
 
 $ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
+$ $HOME/bin/mkpkg-tmpfs -m floop
 
   FAST
 -------

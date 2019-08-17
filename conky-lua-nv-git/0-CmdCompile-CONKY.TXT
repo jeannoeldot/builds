@@ -68,6 +68,7 @@ voir CmdFairePatches.TXT
 
 pkgname=conky-lua-nv-git
 pkgver=1.11.4.20190416
+pkgrel=4  # Rebuild suite maj libxnvctrl 430.40-3
 pkgrel=3  # Rebuild suite maj libxnvctrl 430.40-1
 pkgrel=2  # License = GPL3. MAINTAINER_MODE = false
 pkgrel=1

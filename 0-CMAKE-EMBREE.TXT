@@ -1,0 +1,8 @@
+
+cd /build/embree-git/src/embree-3.5.2/build/common/math &&
+/usr/bin/c++  -DEMBREE_TARGET_AVX -DEMBREE_TARGET_AVX2 -DEMBREE_TARGET_SSE2 -DEMBREE_TARGET_SSE42 -DTASKING_INTERNAL
+-Wall -Wformat -Wformat-security -fPIE -fPIC -std=c++11 -fvisibility=hidden -fvisibility-inlines-hidden -fno-strict-aliasing -fno-tree-vectorize  -DNDEBUG -O3 -D_FORTIFY_SOURCE=2    -msse2
+-o CMakeFiles/math.dir/constants.cpp.o -c /build/embree-git/src/embree-3.5.2/common/math/constants.cpp
+
+
+

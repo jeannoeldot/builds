@@ -1,0 +1,12 @@
+
+cd /build/opencollada-git/src/opencollada/build/Externals/UTF &&
+/usr/bin/cc -DGENERATEDSAXPARSER_XMLPARSER_LIBXML -DUTF_shared_EXPORTS -DXMLPARSER_LIBXML
+-I/build/opencollada-git/src/opencollada/Externals/UTF/include
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt  -Wall -Wextra -Wno-unknown-pragmas -Wno-switch -Wno-unused-parameter -Wno-ignored-qualifiers -O3 -DNDEBUG -fPIC
+-o CMakeFiles/UTF_shared.dir/src/ConvertUTF.c.o   -c /build/opencollada-git/src/opencollada/Externals/UTF/src/ConvertUTF.c
+
+cd /build/opencollada-git/src/opencollada/build/common/libftoa && /usr/bin/c++
+-DGENERATEDSAXPARSER_XMLPARSER_LIBXML -DXMLPARSER_LIBXML -Dftoa_shared_EXPORTS
+-I/build/opencollada-git/src/opencollada/common/libftoa/include
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -Wall -Wextra -Wno-unknown-pragmas -Wno-switch -Wno-reorder -Wno-unused-parameter -Wno-ignored-qualifiers -O3 -DNDEBUG -fPIC
+-o CMakeFiles/ftoa_shared.dir/src/Commondtoa.cpp.o -c /build/opencollada-git/src/opencollada/common/libftoa/src/Commondtoa.cpp

@@ -31,7 +31,7 @@ build() {
     -DCMAKE_SKIP_RPATH=ON \
     -DUSE_TESTS=OFF \
     ..
-  make
+  make VERBOSE=1
 }
 
 package() {

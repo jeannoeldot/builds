@@ -1,0 +1,5 @@
+
+cd /build/alembic-git/src/alembic-1.7.11/build/lib/Alembic &&
+/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX -I/usr/include/OpenEXR -I/build/alembic-git/src/alembic-1.7.11/lib -I/build/alembic-git/src/alembic-1.7.11/build/lib
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden -O3 -DNDEBUG -fPIC   -UDEBUG -O3 -fPIC
+-o CMakeFiles/Alembic.dir/Util/Murmur3.cpp.o -c /build/alembic-git/src/alembic-1.7.11/lib/Alembic/Util/Murmur3.cpp

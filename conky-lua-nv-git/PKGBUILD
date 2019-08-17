@@ -2,7 +2,7 @@
 
 pkgname=conky-lua-nv-git
 pkgver=1.11.4.20190416
-pkgrel=3
+pkgrel=4
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
 url="https://github.com/brndnmtthws/conky"
@@ -47,7 +47,7 @@ build() {
     -D CMAKE_INSTALL_PREFIX=/usr \
     .
 
-  make
+  make VERBOSE=1
 }
 
 package() {

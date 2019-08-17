@@ -39,7 +39,7 @@ build() {
     -DUSE_STATIC=OFF \
     -DUSE_SHARED=ON \
      .. 
-  make
+  make VERBOSE=1
 }
 
 package() {

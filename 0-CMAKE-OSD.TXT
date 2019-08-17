@@ -1,0 +1,30 @@
+
+cd /build/opensubdiv-git/src/opensubdiv/build/regression/common &&
+/usr/bin/c++  -DGLFW_VERSION_3 -DOPENSUBDIV_HAS_GLSL_COMPUTE -DOPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK -DOPENSUBDIV_HAS_OPENGL -DOPENSUBDIV_HAS_OPENMP -DOPENSUBDIV_HAS_TBB -DOPENSUBDIV_VERSION_STRING=\"3.4.0\" -DOSD_USES_GLEW
+-I/build/opensubdiv-git/src/opensubdiv
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -O3 -DNDEBUG   -Wall -Wextra -Wno-invalid-offsetof -Wno-strict-aliasing -fopenmp
+-o CMakeFiles/regression_common_obj.dir/shape_utils.cpp.o -c /build/opensubdiv-git/src/opensubdiv/regression/common/shape_utils.cpp
+
+
+PKGBUILD AVEC   sed -i -e "s/-O3 //g" $(find . -name flags.make)
+----------------------------------------------------------------
+
+cd /build/opensubdiv-git/src/opensubdiv/build/opensubdiv/sdc &&
+/usr/bin/c++  -DGLFW_VERSION_3 -DOPENSUBDIV_HAS_GLSL_COMPUTE -DOPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK -DOPENSUBDIV_HAS_OPENGL -DOPENSUBDIV_HAS_OPENMP -DOPENSUBDIV_HAS_TBB -DOPENSUBDIV_VERSION_STRING=\"3.4.0\" -DOSD_USES_GLEW
+-I/build/opensubdiv-git/src/opensubdiv/opensubdiv -I/build/opensubdiv-git/src/opensubdiv/build/opensubdiv/sdc
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt  -DNDEBUG   -Wall -Wextra -Wno-invalid-offsetof -Wno-strict-aliasing -fopenmp -fPIC
+-o CMakeFiles/sdc_obj.dir/crease.cpp.o -c /build/opensubdiv-git/src/opensubdiv/opensubdiv/sdc/crease.cpp
+
+PKGBUILD AVEC   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+----------------------------------------------------------------
+
+cd /build/opensubdiv-git/src/opensubdiv/build/opensubdiv/osd &&
+/usr/bin/c++  -DGLFW_VERSION_3 -DOPENSUBDIV_HAS_GLSL_COMPUTE -DOPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK -DOPENSUBDIV_HAS_OPENGL -DOPENSUBDIV_HAS_OPENMP -DOPENSUBDIV_HAS_TBB -DOPENSUBDIV_VERSION_STRING=\"3.4.0\" -DOSD_USES_GLEW
+-I/build/opensubdiv-git/src/opensubdiv/opensubdiv -I/build/opensubdiv-git/src/opensubdiv/build/opensubdiv/osd
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block   -DNDEBUG   -Wall -Wextra -Wno-invalid-offsetof -Wno-strict-aliasing -fopenmp -fPIC
+-o CMakeFiles/osd_cpu_obj.dir/cpuEvaluator.cpp.o -c /build/opensubdiv-git/src/opensubdiv/opensubdiv/osd/cpuEvaluator.cpp
+
+[100%] Linking CXX shared library ../lib/libosdGPU.so
+cd /build/opensubdiv-git/src/opensubdiv/build/opensubdiv && /usr/bin/cmake -E cmake_link_script CMakeFiles/osd_dynamic_gpu.dir/link.txt --verbose=1
+/usr/bin/c++ -fPIC -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block   -DNDEBUG -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -shared -Wl,-soname,libosdGPU.so.3.4.0 -o ../lib/libosdGPU.so.3.4.0 CMakeFiles/osd_dynamic_gpu.dir/version.cpp.o osd/CMakeFiles/osd_gpu_obj.dir/cpuGLVertexBuffer.cpp.o osd/CMakeFiles/osd_gpu_obj.dir/glLegacyGregoryPatchTable.cpp.o osd/CMakeFiles/osd_gpu_obj.dir/glPatchTable.cpp.o osd/CMakeFiles/osd_gpu_obj.dir/glVertexBuffer.cpp.o osd/CMakeFiles/osd_gpu_obj.dir/glslPatchShaderSource.cpp.o osd/CMakeFiles/osd_gpu_obj.dir/glXFBEvaluator.cpp.o osd/CMakeFiles/osd_gpu_obj.dir/glComputeEvaluator.cpp.o ../lib/libosdCPU.so.3.4.0 -lgomp -ltbb -ltbb_debug -ltbbmalloc -ltbbmalloc_debug -ltbbmalloc_proxy -ltbbmalloc_proxy_debug -lGL -lGLU -lGLEW 
+
