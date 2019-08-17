@@ -1,5 +1,80 @@
 
 cd /build/alembic-git/src/alembic-1.7.11/build/lib/Alembic &&
-/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX -I/usr/include/OpenEXR -I/build/alembic-git/src/alembic-1.7.11/lib -I/build/alembic-git/src/alembic-1.7.11/build/lib
+/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX
+-I/usr/include/OpenEXR -I/build/alembic-git/src/alembic-1.7.11/lib -I/build/alembic-git/src/alembic-1.7.11/build/lib
 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden -O3 -DNDEBUG -fPIC   -UDEBUG -O3 -fPIC
 -o CMakeFiles/Alembic.dir/Util/Murmur3.cpp.o -c /build/alembic-git/src/alembic-1.7.11/lib/Alembic/Util/Murmur3.cpp
+
+PKGBUILD AVEC    -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+----------------------------------------------------------------
+
+cd /build/alembic-git/src/alembic-1.7.11/build/lib/Alembic &&
+/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX
+-I/usr/include/OpenEXR -I/build/alembic-git/src/alembic-1.7.11/lib -I/build/alembic-git/src/alembic-1.7.11/build/lib
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden -DNDEBUG -fPIC   -UDEBUG -O3 -fPIC
+-o CMakeFiles/Alembic.dir/Util/Murmur3.cpp.o -c /build/alembic-git/src/alembic-1.7.11/lib/Alembic/Util/Murmur3.cpp
+
+[100%] Linking CXX executable abcstitcher
+cd /build/alembic-git/src/alembic-1.7.11/build/bin/AbcStitcher && /usr/bin/cmake -E cmake_link_script CMakeFiles/abcstitcher.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic
+CMakeFiles/abcstitcher.dir/AbcStitcher.cpp.o CMakeFiles/abcstitcher.dir/util.cpp.o  -o abcstitcher ../../lib/Alembic/libAlembic.so.1.7.11 -lImath -lIlmThread -lIex -lHalf -lpthread -lm 
+
+
+PKGBUILD AVEC   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+----------------------------------------------------------------
+
+cd /build/alembic-git/src/alembic-1.7.11/build/lib/Alembic &&
+/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX
+-I/usr/include/OpenEXR -I/build/alembic-git/src/alembic-1.7.11/lib -I/build/alembic-git/src/alembic-1.7.11/build/lib
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden  -DNDEBUG -fPIC   -UDEBUG -O3 -fPIC
+-o CMakeFiles/Alembic.dir/Util/Murmur3.cpp.o -c /build/alembic-git/src/alembic-1.7.11/lib/Alembic/Util/Murmur3.cpp
+
+[100%] Linking CXX executable abcstitcher
+cd /build/alembic-git/src/alembic-1.7.11/build/bin/AbcStitcher && /usr/bin/cmake -E cmake_link_script CMakeFiles/abcstitcher.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden  -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic
+CMakeFiles/abcstitcher.dir/AbcStitcher.cpp.o CMakeFiles/abcstitcher.dir/util.cpp.o  -o abcstitcher ../../lib/Alembic/libAlembic.so.1.7.11 -lImath -lIlmThread -lIex -lHalf -lpthread -lm 
+
+
+PKGBUILD AVEC    -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+PKGBUILD AVEC   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+----------------------------------------------------------------
+
+cd /tmp/build/src/alembic-1.7.11/build/lib/Alembic &&
+/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX
+-I/usr/include/OpenEXR -I/tmp/build/src/alembic-1.7.11/lib -I/tmp/build/src/alembic-1.7.11/build/lib
+-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -fvisibility=hidden -DNDEBUG -fPIC   -UDEBUG -O3 -fPIC
+-o CMakeFiles/Alembic.dir/Util/Murmur3.cpp.o -c /tmp/build/src/alembic-1.7.11/lib/Alembic/Util/Murmur3.cpp
+
+[100%] Linking CXX executable abcstitcher
+cd /tmp/build/src/alembic-1.7.11/build/bin/AbcStitcher && /usr/bin/cmake -E cmake_link_script CMakeFiles/abcstitcher.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -O2 -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -fvisibility=hidden -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic
+CMakeFiles/abcstitcher.dir/AbcStitcher.cpp.o CMakeFiles/abcstitcher.dir/util.cpp.o  -o abcstitcher ../../lib/Alembic/libAlembic.so.1.7.11 -lImath -lIlmThread -lIex -lHalf -lpthread -lm 
+
+PKGBUILD AVEC    -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+PKGBUILD AVEC   sed -i "s/\-O3//g" $(find . -name flags.make)
+----------------------------------------------------------------
+
+cd /build/alembic-git/src/alembic-1.7.11/build/lib/Alembic &&
+/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX
+-I/usr/include/OpenEXR -I/build/alembic-git/src/alembic-1.7.11/lib -I/build/alembic-git/src/alembic-1.7.11/build/lib
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden -DNDEBUG -fPIC   -UDEBUG  -fPIC
+-o CMakeFiles/Alembic.dir/Util/Murmur3.cpp.o -c /build/alembic-git/src/alembic-1.7.11/lib/Alembic/Util/Murmur3.cpp
+
+[100%] Linking CXX executable abcstitcher
+cd /build/alembic-git/src/alembic-1.7.11/build/bin/AbcStitcher && /usr/bin/cmake -E cmake_link_script CMakeFiles/abcstitcher.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility=hidden -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic
+CMakeFiles/abcstitcher.dir/AbcStitcher.cpp.o CMakeFiles/abcstitcher.dir/util.cpp.o  -o abcstitcher ../../lib/Alembic/libAlembic.so.1.7.11 -lImath -lIlmThread -lIex -lHalf -lpthread -lm 
+
+cd /tmp/build/src/alembic-1.7.11/build/lib/Alembic &&
+/usr/bin/c++  -DALEMBIC_EXPORTS -DNDEBUG=1 -DPLATFORM=LINUX -DPLATFORM_LINUX
+-I/usr/include/OpenEXR -I/tmp/build/src/alembic-1.7.11/lib -I/tmp/build/src/alembic-1.7.11/build/lib
+-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -fvisibility=hidden -DNDEBUG -fPIC   -UDEBUG  -fPIC
+-o CMakeFiles/Alembic.dir/Util/Naming.cpp.o -c /tmp/build/src/alembic-1.7.11/lib/Alembic/Util/Naming.cpp
+
+[100%] Linking CXX executable abcstitcher
+cd /tmp/build/src/alembic-1.7.11/build/bin/AbcStitcher && /usr/bin/cmake -E cmake_link_script CMakeFiles/abcstitcher.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -O2 -pipe -fdiagnostics-color=always -fno-plt -std=c++11 -fvisibility=hidden -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic
+CMakeFiles/abcstitcher.dir/AbcStitcher.cpp.o CMakeFiles/abcstitcher.dir/util.cpp.o  -o abcstitcher ../../lib/Alembic/libAlembic.so.1.7.11 -lImath -lIlmThread -lIex -lHalf -lpthread -lm 

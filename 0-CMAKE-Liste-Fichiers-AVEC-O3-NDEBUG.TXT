@@ -4,10 +4,14 @@
 ┌jnd ( ~ )
 └─> $ grep -lR "\-O3 \-DNDEBUG" /usr/share/cmake-3.15/
 
-
 /usr/share/cmake-3.15/Modules/Compiler/GNU.cmake
 /usr/share/cmake-3.15/Modules/Compiler/NVIDIA-CUDA.cmake
 /usr/share/cmake-3.15/Modules/Platform/Windows-Clang.cmake
+
+
+┌jnd ( ~ )
+└─> $ grep -lR "\-UDEBUG" /usr/share/cmake-3.15/
+
 
 
 ==========================================================
@@ -22,4 +26,25 @@ openvdb 6.1.0-1
 
   sed -i "s/isystem/I/g" $(find . -name flags.make)
 
+
+==========================================================
+
+Alembic
+-------
+  find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+
+
+┌jnd ( /tmp/build )
+└─> $ cd /tmp/build/src/alembic-1.7.11/
+
+┌jnd ( /tmp/build/src/alembic-1.7.11 )
+└─> $ grep -lR "\-O3" .
+./build/bin/AbcDiff/CMakeFiles/abcdiff.dir/flags.make
+./build/bin/AbcStitcher/CMakeFiles/abcstitcher.dir/flags.make
+./build/bin/AbcTree/CMakeFiles/abctree.dir/flags.make
+./build/bin/AbcLs/CMakeFiles/abcls.dir/flags.make
+./build/bin/AbcEcho/CMakeFiles/abcecho.dir/flags.make
+./build/bin/AbcEcho/CMakeFiles/abcechobounds.dir/flags.make
+./build/lib/Alembic/CMakeFiles/Alembic.dir/flags.make
+./CMakeLists.txt
 

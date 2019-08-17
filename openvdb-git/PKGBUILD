@@ -29,6 +29,8 @@ build() {
   mkdir build && cd build
   cmake \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
     -DOPENVDB_BUILD_PYTHON_MODULE=OFF \
@@ -41,7 +43,7 @@ build() {
     -DOPENVDB_BUILD_VDB_VIEW=ON \
     ..
 
-  sed -i "s/isystem/I/g;s/\-O3//g" $(find . -name flags.make)
+  sed -i "s/isystem/I/g" $(find . -name flags.make)
   
   make VERBOSE=1
 }
