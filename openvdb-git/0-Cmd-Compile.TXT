@@ -37,7 +37,10 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=6.1.0.20190507
-pkgrel=6          # Tests Cmake
+pkgrel=6    # Tests Cmake find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+                          sed -i "s/isystem/I/g" $(find . -name flags.make)
+                          sed -i "s/isystem/I/g;s/\-O3//g" $(find . -name flags.make)
+
 pkgrel=1
 
 pkgrel=3          # Rebuild nouveau PC
@@ -229,6 +232,11 @@ cd $HOME/05-builds/openvdb-git && rm -rf /tmp/build
 !!! EN USER
 
 $ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
 
   FAST
 -------

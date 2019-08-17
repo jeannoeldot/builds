@@ -190,6 +190,11 @@ $ mkpkg-chroot-repo
 
 !!! EN USER
 
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
   FAST
 -------
 $ rm -f *~

@@ -40,7 +40,9 @@ build() {
     -DOPENVDB_BUILD_VDB_RENDER=ON \
     -DOPENVDB_BUILD_VDB_VIEW=ON \
     ..
-  sed -i "s/isystem/I/g" $(find . -name flags.make)
+
+  sed -i "s/isystem/I/g;s/\-O3//g" $(find . -name flags.make)
+  
   make VERBOSE=1
 }
 

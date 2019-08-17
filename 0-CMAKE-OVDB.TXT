@@ -4,3 +4,25 @@ cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb &&
 -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -I /usr/include/OpenEXR/.. -I /usr/include/OpenEXR
 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG -fPIC   -pthread -std=c++11
 -o CMakeFiles/openvdb_shared.dir/Grid.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc
+
+[100%] Linking CXX executable vdb_lod
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb/cmd && /usr/bin/cmake -E cmake_link_script CMakeFiles/vdb_lod.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic CMakeFiles/vdb_lod.dir/openvdb_lod.cc.o  -o vdb_lod ../libopenvdb.so.6.1.0 /usr/lib/libboost_iostreams.so /usr/lib/libboost_regex.so /usr/lib/libboost_system.so /usr/lib/libHalf.so /usr/lib/libIlmThread.so /usr/lib/libIex.so /usr/lib/libImath.so /usr/lib/libIlmImf.so /usr/lib64/libblosc.so /usr/lib64/libtbb.so.2 /usr/lib/libz.so -pthread 
+
+
+PKGBUILD AVEC   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+----------------------------------------------------------------
+===> ERREUR COMPIL
+
+PKGBUILD AVEC  sed -i "s/isystem/I/g;s/\-O3//g" $(find . -name flags.make)
+---------------------------------------------------------------------------
+
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb &&
+/usr/bin/c++  -DOPENVDB_ABI_VERSION_NUMBER=6 -DOPENVDB_PRIVATE -DOPENVDB_TOOLS_RAYTRACER_USE_EXR -DOPENVDB_USE_BLOSC -Dopenvdb_shared_EXPORTS
+-I/build/openvdb-git/src/openvdb-6.1.0/openvdb/.. -I/build/openvdb-git/src/openvdb-6.1.0/openvdb/. -I /usr/include/OpenEXR/.. -I /usr/include/OpenEXR
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -DNDEBUG -fPIC   -pthread -std=c++11
+-o CMakeFiles/openvdb_shared.dir/Grid.cc.o -c /build/openvdb-git/src/openvdb-6.1.0/openvdb/Grid.cc
+
+[100%] Linking CXX executable vdb_lod
+cd /build/openvdb-git/src/openvdb-6.1.0/build/openvdb/cmd && /usr/bin/cmake -E cmake_link_script CMakeFiles/vdb_lod.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic CMakeFiles/vdb_lod.dir/openvdb_lod.cc.o  -o vdb_lod ../libopenvdb.so.6.1.0 /usr/lib/libboost_iostreams.so /usr/lib/libboost_regex.so /usr/lib/libboost_system.so /usr/lib/libHalf.so /usr/lib/libIlmThread.so /usr/lib/libIex.so /usr/lib/libImath.so /usr/lib/libIlmImf.so /usr/lib64/libblosc.so /usr/lib64/libtbb.so.2 /usr/lib/libz.so -pthread 
