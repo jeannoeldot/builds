@@ -65,6 +65,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=opencollada-git
 pkgver=1.6.68.20181127
+pkgrel=3    # Test cmake -O3
 pkgrel=2    # Rebuild nouveau PC 
 pkgrel=1
 
@@ -159,6 +160,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/opencollada-git/PKGBUILD . \
 && cp -v $HOME/05-builds/opencollada-git/opencollada.conf . \
+&& cp -v $HOME/05-builds/opencollada-git/fix-conflicting-declaration-pcre-gcc810.patch . \
 && cp -v $HOME/05-builds/opencollada-git/opencollada-git-1.6.68.20181127.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/opencollada-git \
@@ -175,6 +177,11 @@ cd $HOME/05-builds/opencollada-git && rm -rf /tmp/build
 !!! EN USER
 
 $ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
 
  FAST
 -------

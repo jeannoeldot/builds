@@ -48,3 +48,39 @@ Alembic
 ./build/lib/Alembic/CMakeFiles/Alembic.dir/flags.make
 ./CMakeLists.txt
 
+OpenCollada
+-----------
+$ cd /tmp/build/src/opencollada/
+$ grep -lR "\-O3" .
+
+./build/CMakeCache.txt
+./build/DAEValidator/CMakeFiles/DAEValidatorLibrary.dir/flags.make
+./build/DAEValidator/CMakeFiles/DAEValidatorExecutable.dir/flags.make
+./build/DAEValidator/CMakeFiles/DAEValidatorExecutable.dir/link.txt
+./build/COLLADAValidator/CMakeFiles/OpenCOLLADAValidator.dir/flags.make
+./build/COLLADAValidator/CMakeFiles/OpenCOLLADAValidator.dir/link.txt
+./build/COLLADAStreamWriter/CMakeFiles/OpenCOLLADAStreamWriter_shared.dir/flags.make
+./build/COLLADAStreamWriter/CMakeFiles/OpenCOLLADAStreamWriter_shared.dir/link.txt
+./build/COLLADASaxFrameworkLoader/CMakeFiles/OpenCOLLADASaxFrameworkLoader_shared.dir/flags.make
+./build/COLLADASaxFrameworkLoader/CMakeFiles/OpenCOLLADASaxFrameworkLoader_shared.dir/link.txt
+./build/GeneratedSaxParser/CMakeFiles/GeneratedSaxParser_shared.dir/flags.make
+./build/GeneratedSaxParser/CMakeFiles/GeneratedSaxParser_shared.dir/link.txt
+./build/COLLADAFramework/CMakeFiles/OpenCOLLADAFramework_shared.dir/flags.make
+./build/COLLADAFramework/CMakeFiles/OpenCOLLADAFramework_shared.dir/link.txt
+./build/COLLADABaseUtils/CMakeFiles/OpenCOLLADABaseUtils_shared.dir/flags.make
+./build/COLLADABaseUtils/CMakeFiles/OpenCOLLADABaseUtils_shared.dir/link.txt
+./build/Externals/zlib/CMakeFiles/zlib_shared.dir/flags.make
+./build/Externals/zlib/CMakeFiles/zlib_shared.dir/link.txt
+./build/Externals/MathMLSolver/CMakeFiles/MathMLSolver_shared.dir/flags.make
+./build/Externals/MathMLSolver/CMakeFiles/MathMLSolver_shared.dir/link.txt
+./build/Externals/UTF/CMakeFiles/UTF_shared.dir/flags.make
+./build/Externals/UTF/CMakeFiles/UTF_shared.dir/link.txt
+./build/common/libBuffer/CMakeFiles/buffer_shared.dir/flags.make
+./build/common/libBuffer/CMakeFiles/buffer_shared.dir/link.txt
+./build/common/libftoa/CMakeFiles/ftoa_shared.dir/flags.make
+./build/common/libftoa/CMakeFiles/ftoa_shared.dir/link.txt
+./Externals/zlib/src/crc32.c
+./xsd2cppsax/lib/xbean.jar
+./common/libBuffer/src/performanceTest/build.sh
+
+

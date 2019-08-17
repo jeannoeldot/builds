@@ -5,8 +5,30 @@ cd /build/opencollada-git/src/opencollada/build/Externals/UTF &&
 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt  -Wall -Wextra -Wno-unknown-pragmas -Wno-switch -Wno-unused-parameter -Wno-ignored-qualifiers -O3 -DNDEBUG -fPIC
 -o CMakeFiles/UTF_shared.dir/src/ConvertUTF.c.o   -c /build/opencollada-git/src/opencollada/Externals/UTF/src/ConvertUTF.c
 
-cd /build/opencollada-git/src/opencollada/build/common/libftoa && /usr/bin/c++
--DGENERATEDSAXPARSER_XMLPARSER_LIBXML -DXMLPARSER_LIBXML -Dftoa_shared_EXPORTS
+cd /build/opencollada-git/src/opencollada/build/common/libftoa &&
+/usr/bin/c++ -DGENERATEDSAXPARSER_XMLPARSER_LIBXML -DXMLPARSER_LIBXML -Dftoa_shared_EXPORTS
 -I/build/opencollada-git/src/opencollada/common/libftoa/include
 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -Wall -Wextra -Wno-unknown-pragmas -Wno-switch -Wno-reorder -Wno-unused-parameter -Wno-ignored-qualifiers -O3 -DNDEBUG -fPIC
 -o CMakeFiles/ftoa_shared.dir/src/Commondtoa.cpp.o -c /build/opencollada-git/src/opencollada/common/libftoa/src/Commondtoa.cpp
+
+
+PKGBUILD AVEC   -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+                -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+----------------------------------------------------------------
+
+cd /build/opencollada-git/src/opencollada/build/Externals/UTF &&
+/usr/bin/cc -DGENERATEDSAXPARSER_XMLPARSER_LIBXML -DUTF_shared_EXPORTS -DXMLPARSER_LIBXML
+-I/build/opencollada-git/src/opencollada/Externals/UTF/include
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -Wall -Wextra -Wno-unknown-pragmas -Wno-switch -Wno-unused-parameter -Wno-ignored-qualifiers -DNDEBUG -fPIC
+-o CMakeFiles/UTF_shared.dir/src/ConvertUTF.c.o   -c /build/opencollada-git/src/opencollada/Externals/UTF/src/ConvertUTF.c
+
+cd /build/opencollada-git/src/opencollada/build/common/libftoa &&
+/usr/bin/c++  -DGENERATEDSAXPARSER_XMLPARSER_LIBXML -DXMLPARSER_LIBXML -Dftoa_shared_EXPORTS
+-I/build/opencollada-git/src/opencollada/common/libftoa/include
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -Wall -Wextra -Wno-unknown-pragmas -Wno-switch -Wno-reorder -Wno-unused-parameter -Wno-ignored-qualifiers -DNDEBUG -fPIC
+-o CMakeFiles/ftoa_shared.dir/src/Commondtoa.cpp.o -c /build/opencollada-git/src/opencollada/common/libftoa/src/Commondtoa.cpp
+
+[100%] Linking CXX executable ../bin/OpenCOLLADAValidator
+cd /build/opencollada-git/src/opencollada/build/COLLADAValidator && /usr/bin/cmake -E cmake_link_script CMakeFiles/OpenCOLLADAValidator.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -Wall -Wextra -Wno-unknown-pragmas -Wno-switch -Wno-reorder -Wno-unused-parameter -Wno-ignored-qualifiers -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic
+CMakeFiles/OpenCOLLADAValidator.dir/src/main.cpp.o CMakeFiles/OpenCOLLADAValidator.dir/src/ValidationErrorHandler.cpp.o  -o ../bin/OpenCOLLADAValidator  -L/build/opencollada-git/src/opencollada/build/lib -lOpenCOLLADASaxFrameworkLoader -lGeneratedSaxParser -lOpenCOLLADAFramework -lOpenCOLLADABaseUtils -lMathMLSolver -lpcre -lpcreposix -lxml2 -lUTF 
