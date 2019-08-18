@@ -44,6 +44,9 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.6.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.6.20190708
+pkgrel=4    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+              -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+
 pkgrel=3    # Rebuild MAJ OIIO 2.0.10
 pkgrel=2    # Rebuild MAJ LLVM 8.0.1
 pkgrel=1
@@ -249,6 +252,11 @@ openimageio-git-*-x86_64.pkg.tar.*\
 } \
 /tmp/chrootrepo/
 
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
 
   FAST
 -------

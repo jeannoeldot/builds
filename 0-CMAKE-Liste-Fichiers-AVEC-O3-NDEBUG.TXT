@@ -112,4 +112,7 @@ $ grep -lR "\-O3" .
 ./build/src/libutil/CMakeFiles/OpenImageIO_Util.dir/flags.make
 ./build/src/libutil/CMakeFiles/OpenImageIO_Util.dir/link.txt
 
+OpenShadingLanguage
+-------------------
+
 

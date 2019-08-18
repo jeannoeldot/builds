@@ -1,5 +1,21 @@
+
 cd /build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/build/src/liboslnoise && 
 /usr/bin/c++  -DOSL_FAST_MATH=1 -DOSL_LLVM_FULL_VERSION=\"8.0.1\" -DOSL_LLVM_VERSION=80 -DUSE_BOOST_WAVE=1 -DUSE_STD_REGEX -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -Doslnoise_EXPORTS
 -I/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/build/include -I/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/src/include -I/usr/include/OpenImageIO -I/usr/include/OpenEXR -I/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/src/liboslnoise/../liboslexec
 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -fno-rtti -O3 -DNDEBUG -fPIC   -Wall -fno-math-errno -fvisibility=hidden -fvisibility-inlines-hidden -Wno-error=strict-overflow -Wno-error=unused-local-typedefs -Wno-unused-local-typedefs -Wno-unused-result -Wno-error=misleading-indentation -std=c++11 -mavx2
 -o CMakeFiles/oslnoise.dir/gabornoise.cpp.o -c /build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/src/liboslnoise/gabornoise.cpp
+
+PKGBUILD AVEC   -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+                -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+----------------------------------------------------------------
+
+cd /build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/build/src/liboslnoise &&
+/usr/bin/c++  -DOSL_FAST_MATH=1 -DOSL_LLVM_FULL_VERSION=\"8.0.1\" -DOSL_LLVM_VERSION=80 -DUSE_BOOST_WAVE=1 -DUSE_STD_REGEX -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -Doslnoise_EXPORTS
+-I/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/build/include -I/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/src/include -I/usr/include/OpenImageIO -I/usr/include/OpenEXR -I/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/src/liboslnoise/../liboslexec
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -fno-rtti -DNDEBUG -fPIC   -Wall -fno-math-errno -fvisibility=hidden -fvisibility-inlines-hidden -Wno-error=strict-overflow -Wno-error=unused-local-typedefs -Wno-unused-local-typedefs -Wno-unused-result -Wno-error=misleading-indentation -std=c++11 -mavx2
+-o CMakeFiles/oslnoise.dir/gabornoise.cpp.o -c /build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/src/liboslnoise/gabornoise.cpp
+
+[100%] Linking CXX executable osltoy
+cd /build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/build/src/osltoy && /usr/bin/cmake -E cmake_link_script CMakeFiles/osltoy.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -fno-rtti -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -rdynamic
+CMakeFiles/osltoy.dir/osltoy_autogen/mocs_compilation.cpp.o CMakeFiles/osltoy.dir/osltoymain.cpp.o CMakeFiles/osltoy.dir/osltoyapp.cpp.o CMakeFiles/osltoy.dir/codeeditor.cpp.o CMakeFiles/osltoy.dir/osltoyrenderer.cpp.o  -o osltoy -Wl,-rpath,/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/build/src/liboslexec: ../liboslexec/liboslexec.so.1.10.6 /usr/lib/libQt5Widgets.so.5.13.0 -lOpenImageIO -lboost_system -lboost_thread -lpthread -lboost_filesystem -lboost_wave -lboost_chrono -lboost_date_time -lboost_atomic -lboost_serialization -lrt -ldl -fvisibility=hidden -fvisibility-inlines-hidden -Wl,--version-script=/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.6/src/build-scripts/hidesymbols.map -lImath -lIex -lHalf -lIlmThread -lOpenImageIO -lz -lboost_system -lboost_thread -lpthread -lboost_filesystem -lboost_wave -lboost_chrono -lboost_date_time -lboost_atomic -lboost_serialization -lrt -ldl -lclangFrontend -lclangDriver -lclangSerialization -lclangParse -lclangSema -lclangAnalysis -lclangAST -lclangBasic -lclangEdit -lclangLex -lLLVM-8.0.1 /usr/lib/libQt5Gui.so.5.13.0 /usr/lib/libQt5Core.so.5.13.0 
