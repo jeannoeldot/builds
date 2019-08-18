@@ -1,0 +1,43 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=openimagedenoise-git
+pkgver=1.0.0.20190729
+pkgrel=2
+_ver_release="1.0.0"
+_name_release="oidn-${_ver_release}"
+pkgdesc="Intel(R) Open Image Denoise library"
+url="http://www.openimagedenoise.org/"
+arch=('x86_64')
+license=('Apache')
+depends=('intel-tbb' 'python'
+)
+makedepends=('cmake'
+)
+conflicts=('openimagedenoise' 'oidn')
+provides=('openimagedenoise' 'oidn')
+#options=(staticlibs)
+source=("oidn-${_ver_release}.src.tar.gz"
+)
+sha256sums=('e3cb903c9def3a1485191da1a6d252055d907ed1b9a007b3bda1d3b522cd324e'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    ..
+  make VERBOSE=1
+}
+
+package() {
+  cd "${_name_release}/build"
+  
+  make DESTDIR="${pkgdir}" install
+}

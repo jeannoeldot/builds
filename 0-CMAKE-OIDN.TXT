@@ -1,0 +1,26 @@
+
+cd /build/openimagedenoise-git/src/oidn-1.0.0/build/common &&
+/usr/bin/c++  -DMKLDNN_THR=MKLDNN_THR_TBB -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -D__TBBMALLOC_NO_IMPLICIT_LINKAGE=1 -D__TBB_NO_IMPLICIT_LINKAGE=1
+-I/build/openimagedenoise-git/src/oidn-1.0.0
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility-inlines-hidden -fPIC -Wformat -Wformat-security -fstack-protector-strong  -Wno-strict-overflow -O3 -DNDEBUG -DNDEBUG -D_FORTIFY_SOURCE=2
+-o CMakeFiles/common.dir/platform.cpp.o -c /build/openimagedenoise-git/src/oidn-1.0.0/common/platform.cpp
+
+[100%] Linking CXX executable ../denoise
+cd /build/openimagedenoise-git/src/oidn-1.0.0/build/examples && /usr/bin/cmake -E cmake_link_script CMakeFiles/denoise.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility-inlines-hidden -fPIC -Wformat -Wformat-security -fstack-protector-strong  -Wno-strict-overflow -O3 -DNDEBUG -DNDEBUG -D_FORTIFY_SOURCE=2  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -rdynamic
+CMakeFiles/denoise.dir/denoise.cpp.o CMakeFiles/denoise.dir/image_io.cpp.o  -o ../denoise ../libcommon.a ../libOpenImageDenoise.so.1.0.0 -ltbb -ltbbmalloc -lpthread -lrt 
+
+PKGBUILD AVEC   -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+----------------------------------------------------------------
+
+cd /build/openimagedenoise-git/src/oidn-1.0.0/build/common &&
+/usr/bin/c++  -DMKLDNN_THR=MKLDNN_THR_TBB -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -D__TBBMALLOC_NO_IMPLICIT_LINKAGE=1 -D__TBB_NO_IMPLICIT_LINKAGE=1
+-I/build/openimagedenoise-git/src/oidn-1.0.0
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility-inlines-hidden -fPIC -Wformat -Wformat-security -fstack-protector-strong  -Wno-strict-overflow -DNDEBUG -DNDEBUG -D_FORTIFY_SOURCE=2
+-o CMakeFiles/common.dir/tasking.cpp.o -c /build/openimagedenoise-git/src/oidn-1.0.0/common/tasking.cpp
+
+[100%] Linking CXX executable ../denoise
+cd /build/openimagedenoise-git/src/oidn-1.0.0/build/examples && /usr/bin/cmake -E cmake_link_script CMakeFiles/denoise.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -std=c++11 -fvisibility-inlines-hidden -fPIC -Wformat -Wformat-security -fstack-protector-strong  -Wno-strict-overflow -DNDEBUG -DNDEBUG -D_FORTIFY_SOURCE=2  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -pie -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -rdynamic
+CMakeFiles/denoise.dir/denoise.cpp.o CMakeFiles/denoise.dir/image_io.cpp.o  -o ../denoise ../libcommon.a ../libOpenImageDenoise.so.1.0.0 -ltbb -ltbbmalloc -lpthread -lrt 
+
