@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=2.81.2.20190818
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -35,7 +35,7 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('4032aaa6c760297a6fed5b04083105abab3759c492a06d7535fc1c69662619dd'
+sha256sums=('a0f5cd69804e5b64749888a8bf91061062e4a146da6e6a216cf34e49a415ade8'
 )
 
 _gitname="blender"

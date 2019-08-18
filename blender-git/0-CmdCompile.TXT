@@ -10,10 +10,9 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Antonio Vazquez <blendergit@gmail.com>	
-	Sun, 18 Aug 2019 09:40:23 +0000 (11:40 +0200)
-commit	454b120f48201abe2e1a9ca7e5d25c28cb04013a
-
+committer	Andrea Weikert <elubie@gmx.net>	
+	Sun, 18 Aug 2019 14:42:41 +0000 (16:42 +0200)
+commit	38380ddca373cd7f49e3d6e831480ff05a2af72e
 
 
 ==> 20190818
@@ -42,7 +41,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 454b120f4820
+==> MY_WC_HASH = 38380ddca373
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -52,7 +51,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1566121223
+==> MY_WC_COMMIT_TIMESTAM = 1566139361
 
 cd ..
 
@@ -70,7 +69,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 454b120f4820
+==> MY_WC_HASH = 38380ddca373
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -80,7 +79,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1566121223
+==> MY_WC_COMMIT_TIMESTAM = 1566139361
 
 cd ..
 
@@ -89,7 +88,7 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=MODIFIÉ
+==> CMAKELISTS.TXT=NON_MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
@@ -129,8 +128,9 @@ voir CmdFairePatches.TXT
 pkgname=blender-git
 !!!!!!
 pkgver=2.81.2.20190818
+pkgrel=2    # Teste Avec Embree + staticlibs
 pkgrel=1
-pkgrel=3    # Teste Avec Embree + staticlibs
+pkgrel=3    # Teste Avec openimagedenoise + staticlibs
 pkgrel=2
 
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
@@ -199,9 +199,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "454b120f4820"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "38380ddca373"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566121223|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566139361|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -219,7 +219,7 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
-    VALEUR CMAKELISTS.TXT=MODIFIÉ
+    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
@@ -390,8 +390,8 @@ $ ls -la
 $ mkpkg-chroot-repo
 
 SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
-            'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'
-SI makedepends= 'embree-git'
+            'opensubdiv-git' 'openvdb-git' 'alembic-git'
+SI makedepends= 'embree-git' 'openimagedenoise-git'
 ================================================================================
 $ cp -v $HOME/00-repolocal/\
 {\
@@ -568,11 +568,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "454b120f4820"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "38380ddca373"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566121223|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566139361|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -783,9 +783,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "454b120f4820"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "38380ddca373"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566121223|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566139361|' build_files/cmake/buildinfo.cmake
   
 }
 
