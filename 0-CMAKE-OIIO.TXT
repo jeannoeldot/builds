@@ -5,3 +5,17 @@ cd /build/openimageio-git/src/oiio-Release-2.0.10/build/src/libutil &&
 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -O3 -DNDEBUG -fPIC   -Wall -fno-math-errno -Wno-unused-local-typedefs -Wno-unused-result -Wno-aligned-new -Wno-noexcept-type -std=c++11 -mavx2 -UUSE_FIELD3D
 -o CMakeFiles/OpenImageIO_Util.dir/argparse.cpp.o -c /build/openimageio-git/src/oiio-Release-2.0.10/src/libutil/argparse.cpp
 
+PKGBUILD AVEC   -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+                -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+----------------------------------------------------------------
+
+cd /build/openimageio-git/src/oiio-Release-2.0.10/build/src/libutil &&
+/usr/bin/c++  -DOpenImageIO_Util_EXPORTS -DUSE_FREETYPE -DUSE_JPEG_TURBO=1 -DUSE_OCIO=1 -DUSE_OPENCV -DUSE_OPENVDB=1 -DUSE_STD_REGEX -DUSE_TBB=1 -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS
+-I/build/openimageio-git/src/oiio-Release-2.0.10/build/include -I/build/openimageio-git/src/oiio-Release-2.0.10/src/include -I/usr/include/OpenEXR
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -DNDEBUG -fPIC   -Wall -fno-math-errno -Wno-unused-local-typedefs -Wno-unused-result -Wno-aligned-new -Wno-noexcept-type -std=c++11 -mavx2 -UUSE_FIELD3D
+-o CMakeFiles/OpenImageIO_Util.dir/filter.cpp.o -c /build/openimageio-git/src/oiio-Release-2.0.10/src/libutil/filter.cpp
+
+[100%] Linking CXX shared module OpenImageIO.so
+cd /build/openimageio-git/src/oiio-Release-2.0.10/build/src/python && /usr/bin/cmake -E cmake_link_script CMakeFiles/PyOpenImageIO.dir/link.txt --verbose=1
+/usr/bin/c++ -fPIC -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -DNDEBUG -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -shared
+-o OpenImageIO.so CMakeFiles/PyOpenImageIO.dir/py_imageinput.cpp.o CMakeFiles/PyOpenImageIO.dir/py_imageoutput.cpp.o CMakeFiles/PyOpenImageIO.dir/py_imagecache.cpp.o CMakeFiles/PyOpenImageIO.dir/py_imagespec.cpp.o CMakeFiles/PyOpenImageIO.dir/py_roi.cpp.o CMakeFiles/PyOpenImageIO.dir/py_imagebuf.cpp.o CMakeFiles/PyOpenImageIO.dir/py_imagebufalgo.cpp.o CMakeFiles/PyOpenImageIO.dir/py_typedesc.cpp.o CMakeFiles/PyOpenImageIO.dir/py_paramvalue.cpp.o CMakeFiles/PyOpenImageIO.dir/py_deepdata.cpp.o CMakeFiles/PyOpenImageIO.dir/py_colorconfig.cpp.o CMakeFiles/PyOpenImageIO.dir/py_oiio.cpp.o -Wl,-rpath,/build/openimageio-git/src/oiio-Release-2.0.10/build/src/libOpenImageIO: ../libOpenImageIO/libOpenImageIO.so.2.0.10 -lboost_filesystem -lboost_system -lboost_thread -lpthread -lboost_chrono -lboost_date_time -lboost_atomic -lrt -lpython3.7m -ldl -lIlmImf -lImath -lIex -lHalf -lIlmThread -lz -lavcodec -lavformat -lavutil -lswscale -lbz2 -lgif -lpng -ljpeg -lopenjp2 -lopenvdb -ltbb -lraw_r -ltiff -lwebp -lOpenColorIO -lopencv_core -lopencv_imgproc -lopencv_videoio -lfreetype -lIlmImf -lImath -lIex -lHalf -lIlmThread -lz -lavcodec -lavformat -lavutil -lswscale -lbz2 -lgif -lpng -ljpeg -lopenjp2 -lopenvdb -ltbb -lraw_r -ltiff -lwebp -lOpenColorIO -lopencv_core -lopencv_imgproc -lopencv_videoio -lfreetype -lboost_filesystem -lboost_system -lboost_thread -lpthread -lboost_chrono -lboost_date_time -lboost_atomic -lrt -ldl 

@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.0.10.20190802
+pkgrel=2    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+              -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
 pkgrel=1
 
 pkgrel=2          # rebuild MAJ openvdb 6.1.0
@@ -264,6 +266,11 @@ robin-map-git-*-any.pkg.tar.*\
 } \
 /tmp/chrootrepo/
 
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
 
   FAST
 -------

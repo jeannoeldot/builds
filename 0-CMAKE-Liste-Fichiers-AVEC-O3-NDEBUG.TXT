@@ -83,4 +83,33 @@ $ grep -lR "\-O3" .
 ./xsd2cppsax/lib/xbean.jar
 ./common/libBuffer/src/performanceTest/build.sh
 
+OpenImageIO
+-----------
+$ cd /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build/openimageio-git/src/oiio-Release-2.0.10/
+$ grep -lR "\-O3" .
+
+./build/CMakeCache.txt
+./build/src/python/CMakeFiles/PyOpenImageIO.dir/flags.make
+./build/src/python/CMakeFiles/PyOpenImageIO.dir/link.txt
+./build/src/iv/CMakeFiles/iv.dir/flags.make
+./build/src/iv/CMakeFiles/iv.dir/link.txt
+./build/src/testtex/CMakeFiles/testtex.dir/flags.make
+./build/src/testtex/CMakeFiles/testtex.dir/link.txt
+./build/src/oiiotool/CMakeFiles/oiiotool.dir/flags.make
+./build/src/oiiotool/CMakeFiles/oiiotool.dir/link.txt
+./build/src/maketx/CMakeFiles/maketx.dir/flags.make
+./build/src/maketx/CMakeFiles/maketx.dir/link.txt
+./build/src/iinfo/CMakeFiles/iinfo.dir/flags.make
+./build/src/iinfo/CMakeFiles/iinfo.dir/link.txt
+./build/src/igrep/CMakeFiles/igrep.dir/flags.make
+./build/src/igrep/CMakeFiles/igrep.dir/link.txt
+./build/src/idiff/CMakeFiles/idiff.dir/flags.make
+./build/src/idiff/CMakeFiles/idiff.dir/link.txt
+./build/src/iconvert/CMakeFiles/iconvert.dir/flags.make
+./build/src/iconvert/CMakeFiles/iconvert.dir/link.txt
+./build/src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/flags.make
+./build/src/libOpenImageIO/CMakeFiles/OpenImageIO.dir/link.txt
+./build/src/libutil/CMakeFiles/OpenImageIO_Util.dir/flags.make
+./build/src/libutil/CMakeFiles/OpenImageIO_Util.dir/link.txt
+
 

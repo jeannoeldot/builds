@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=embree-git               # embree ds community ?
 pkgver=3.5.2.20190313
+pkgrel=3  # Test cmake Ofast floop
 pkgrel=2    # static libs
 pkgrel=1
 
@@ -163,6 +164,11 @@ cd $HOME/05-builds/embree-git && rm -rf /tmp/build
 !!! EN USER
 
 $ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
 
   FAST
 -------

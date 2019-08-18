@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.0.10.20190802
-pkgrel=1
+pkgrel=2
 _name_release="oiio-Release-2.0.10"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
@@ -36,6 +36,8 @@ build() {
 
   cmake \
       -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
       -DVERBOSE=ON \
