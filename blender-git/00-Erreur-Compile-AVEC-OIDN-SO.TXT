@@ -1,0 +1,18 @@
+
+1) OIDN : DYNAMIC
+=================
+-- Found OPENIMAGEDENOISE: /usr/lib/libOpenImageDenoise.so  
+
+- WITH_OPENIMAGEDENOISE       ON
+
+
+CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+Please set them or make sure they are set and tested correctly in the CMake files:
+OPENIMAGEDENOISE_COMMON_LIBRARY (ADVANCED)
+    linked by target "blender" in directory /build/blender-git/src/blender/source/creator
+OPENIMAGEDENOISE_MKLDNN_LIBRARY (ADVANCED)
+    linked by target "blender" in directory /build/blender-git/src/blender/source/creator
+
+-- Configuring incomplete, errors occurred!
+See also "/build/blender-git/src/blender/build/CMakeFiles/CMakeOutput.log".
+See also "/build/blender-git/src/blender/build/CMakeFiles/CMakeError.log".

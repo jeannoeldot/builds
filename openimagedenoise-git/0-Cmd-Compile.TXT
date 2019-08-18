@@ -36,10 +36,10 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-git
 pkgver=1.0.0.20190729
+pkgrel=3    # static libs
 pkgrel=2  # Test cmake Ofast floop
 pkgrel=1
 
-pkgrel=2    # static libs
 
 
 !!!!!!
@@ -93,6 +93,9 @@ tar -xzf oidn-1.0.0.src.tar.gz -C /tmp/srcp
 2661     cmake_d="$cmake_d -D WITH_EXAMPLE=OFF"
 2662     cmake_d="$cmake_d -D WITH_TEST=OFF"
 2663     cmake_d="$cmake_d -D OIDN_STATIC_LIB=ON"
+
+LIGNE 34 ET ... # Build as shared or static library
+OIDN_STATIC_LIB OFF ==> ON
 
 LIGNE 48 ET ...
 CMAKE_BUILD_TYPE "Release"
@@ -168,8 +171,8 @@ rm -f *~
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
-usr/lib/libOpenImageDenoise.so.1.0.0
-
+usr/bin/denoise
+usr/lib/libmkldnn.a
 
 namcap openimagedenoise-git-*-x86_64.pkg.tar.xz
 openimagedenoise-git W: Dependency included and not needed ('python')

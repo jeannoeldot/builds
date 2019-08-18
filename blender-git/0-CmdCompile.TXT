@@ -11,11 +11,12 @@ AM = matin  PM = après-midi
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
 committer	Antonio Vazquez <blendergit@gmail.com>	
-	Sun, 4 Aug 2019 08:21:02 +0000 (10:21 +0200)
-commit	dd3cdf6f1e9d7b19cc0b4bb85136a12e558e291d
+	Sun, 18 Aug 2019 09:40:23 +0000 (11:40 +0200)
+commit	454b120f48201abe2e1a9ca7e5d25c28cb04013a
 
 
-==> 20190804
+
+==> 20190818
 
 
 1.3 SOURCES
@@ -41,7 +42,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = dd3cdf6f1e9d
+==> MY_WC_HASH = 454b120f4820
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -51,7 +52,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1564906862
+==> MY_WC_COMMIT_TIMESTAM = 1566121223
 
 cd ..
 
@@ -69,7 +70,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = dd3cdf6f1e9d
+==> MY_WC_HASH = 454b120f4820
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -79,7 +80,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1564906862
+==> MY_WC_COMMIT_TIMESTAM = 1566121223
 
 cd ..
 
@@ -88,23 +89,23 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=NON_MODIFIÉ
+==> CMAKELISTS.TXT=MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
 head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
 #define BLENDER_VERSION         281
-#define BLENDER_SUBVERSION      1
+#define BLENDER_SUBVERSION      2
 
-==> Version = 2.81.1
+==> Version = 2.81.2
 
-==> Version = 2.81.1.20190804
+==> Version = 2.81.2.20190818
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.81.1.20190804.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.81.2.20190818.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -112,7 +113,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.81.1.20190804.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.81.2.20190818.tar.gz .
 sync
 
 
@@ -127,7 +128,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.81.1.20190804
+pkgver=2.81.2.20190818
 pkgrel=1
 pkgrel=3    # Teste Avec Embree + staticlibs
 pkgrel=2
@@ -151,6 +152,8 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'git'
 !!! Erreur namcap : blender-git W: Dependency included and not needed ('embree-git')
               'embree-git'
+!!! Erreur namcap : blender-git W: Dependency included and not needed ('openimagedenoise-git')
+         'openimagedenoise-git'
 )
 
 !!!!!!
@@ -174,7 +177,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.81.1.20190804.tar.gz
+sha256sum blender-git-2.81.2.20190818.tar.gz
 
 sha256sums=(...
          ...
@@ -196,9 +199,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "dd3cdf6f1e9d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "454b120f4820"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1564906862|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566121223|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -216,70 +219,73 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
-    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
+    VALEUR CMAKELISTS.TXT=MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
 Lignes 172 et ...
 # customize...
 if(UNIX AND NOT APPLE)
-        # some of these libraries are problematic on Linux
-        # disable less important dependencies by default
-        set(_init_CODEC_FFMPEG                   OFF)   ==> ON
-        set(_init_CYCLES_OSL                     OFF)   ==> ON
-        set(_init_IMAGE_OPENEXR                  OFF)   ==> ON
-        set(_init_JACK                           OFF)
-        set(_init_OPENCOLLADA                    OFF)   ==> ON
-        set(_init_OPENCOLORIO                    OFF)   ==> ON
-        set(_init_SDL                            OFF)   ==> ON
-        set(_init_FFTW3                          OFF)   ==> ON
-        set(_init_OPENSUBDIV                     OFF)   ==> ON
+  # some of these libraries are problematic on Linux
+  # disable less important dependencies by default
+  set(_init_CODEC_FFMPEG                   OFF)
+  set(_init_CYCLES_OSL                     OFF)
+  set(_init_IMAGE_OPENEXR                  OFF)
+  set(_init_JACK                           OFF)
+  set(_init_OPENCOLLADA                    OFF)
+  set(_init_OPENCOLORIO                    OFF)
+  set(_init_SDL                            OFF)
+  set(_init_FFTW3                          OFF)
+  set(_init_OPENSUBDIV                     OFF)
+  set(_init_OPENVDB                        OFF)
+  set(_init_OPENIMAGEDENOISE               OFF)
 endif()
 
 # Blender internal features
-218 option WITH_BUILDINFO   ==> ON   si ON makedepends = git
+220 option WITH_BUILDINFO   ==> ON   si ON makedepends = git
 
-232 option WITH_FFTW3   ==> ON
+234 option WITH_FFTW3   ==> ON
 
-236 option WITH_OPENCOLORIO   ==> ON
+238 option WITH_OPENCOLORIO   ==> ON
 
 # Compositor
-241 option WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
-243 option WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
-244 option WITH_OPENVDB_BLOSC   ==> ON
+241 option WITH_OPENIMAGEDENOISE  ==> ON   si ON dep = openimagedenoise-git
+244 option WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
+246 option WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
+247 option WITH_OPENVDB_BLOSC   ==> ON
 
-295     !!! VOIR
+298     !!! VOIR
 if(UNIX AND NOT APPLE)
 	option WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
 endif()
 
 # Modifiers
-304 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
-306 option WITH_MOD_OCEANSIM	==> ON
+307 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
+309 option WITH_MOD_OCEANSIM	==> ON
 
 # Image format support
-310 option WITH_IMAGE_OPENEXR	==> ON
+313 option WITH_IMAGE_OPENEXR	==> ON
 
 # Audio/Video format support
-319	option WITH_CODEC_FFMPEG	==> ON
-320	option WITH_CODEC_SNDFILE	==> ON
+322	option WITH_CODEC_FFMPEG	==> ON
+323	option WITH_CODEC_SNDFILE	==> ON
 
-Lignes 322 et ...
+Lignes 325 et ...
 # Alembic support
 option WITH_ALEMBIC             OFF ==> ON dep = alembic-git
 option WITH_ALEMBIC_HDF5        "Enable Legacy Alembic Support (not officially supported)" OFF)
 
-Lignes 326
+Lignes 329
 # 3D format support
-328   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
+331   option WITH_OPENCOLLADA	ON 	    si ON dep = opencollada-git
 
 # Sound output
-331   option WITH_SDL   	==> ON
-333   option WITH_JACK          ==> OFF         si ON  dep =  jack
+334   option WITH_SDL   	==> ON
+336   option WITH_JACK          ==> OFF         si ON  dep =  jack
 
 # Compression
 !!! VOIR
-347   option WITH_DRACO   	==> ON
+350   option WITH_DRACO   	==> ON
 
 # Camera/motion tracking
 
@@ -288,19 +294,19 @@ Lignes 326
 # Freestyle
 
 # Misc
-367	option WITH_INPUT_NDOF		==> OFF
+370	option WITH_INPUT_NDOF		==> OFF
 
 
-370 	WITH_INSTALL_PORTABLE       ON   ==> OFF
+373 	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-378     WITH_PYTHON_INSTALL             ON   ==> OFF
+381     WITH_PYTHON_INSTALL             ON   ==> OFF
 
-388     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+391     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-391     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+394     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
         
-400 # Cycles
+403 # Cycles
 option WITH_CYCLES			ON     si ON dep = openimageio
 option WITH_CYCLES_OSL             ==> ON dep = openshadinglanguage
 
@@ -310,7 +316,7 @@ option WITH_CYCLES_EMBREE           OFF  si ON makedepends = embree(-git)
 
 option WITH_CYCLES_CUDA_BINARIES	==> ON dep = cuda
         
-Ligne 410
+Ligne 413
 URL  GPU et sm_??  : https://developer.nvidia.com/cuda-gpus
 https://developer.nvidia.com/cuda-gpus#collapse4
 
@@ -322,26 +328,26 @@ exemple :  GeForce GTX 980    5.2
 exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
 -DCYCLES_CUDA_BINARIES_ARCH=sm_52;sm_61
 
-Lignes 413 ????
+Lignes 416 ????
 option WITH_CYCLES_LOGGING     ON ???
         
 !!! A VOIR ???
-415 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
+418 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
 
 !!! A VOIR ???
-428   WITH_CUDA_DYNLOAD     ON
+433   WITH_CUDA_DYNLOAD     ON
 
 
-431 # LLVM
+436 # LLVM
 $ pacman -Ss llvm | grep install
 extra/llvm 8.0.1-1 [installé]
 extra/llvm-libs 8.0.1-1 [installé]
 
-432 option WITH_LLVM   	OFF  ==> ON
+437 option WITH_LLVM   	OFF  ==> ON
 
 
 # Documentation
-Lignes 463 et ...
+Lignes 468 et ...
 if(UNIX AND NOT APPLE)
         option WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
 endif()
@@ -350,18 +356,18 @@ endif()
 # OpenGL
 # OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
 ---------------------------------------------------
-Lignes 290 et ...
+Lignes 288 et ...
         option WITH_SYSTEM_GLEW   OFF
         option WITH_SYSTEM_GLES   ON
 
-Lignes 469 et ...
+Lignes 474 et ...
 INCHANGÉS :
 ------------
-471 WITH_OPENGL ON
+476 WITH_OPENGL ON
 
 
 # Compiler toolchain
-Lignes 498 et ...
+Lignes 503 et ...
 
 =================================================================
 
@@ -371,7 +377,7 @@ Lignes 498 et ...
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.81.1.20190804.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.81.2.20190818.tar.gz
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -384,9 +390,9 @@ $ ls -la
 $ mkpkg-chroot-repo
 
 SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
-            'opensubdiv-git' 'openvdb-git' 'alembic-git'
+            'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'
 SI makedepends= 'embree-git'
-=======================================================================
+================================================================================
 $ cp -v $HOME/00-repolocal/\
 {\
 openshadinglanguage-git-*-x86_64.pkg.tar.*,\
@@ -395,10 +401,16 @@ opencollada-git-*-x86_64.pkg.tar.*,\
 opensubdiv-git-*-x86_64.pkg.tar.*,\
 openvdb-git-*-x86_64.pkg.tar.*,\
 alembic-git-*-x86_64.pkg.tar.*,\
+openimagedenoise-git-*-x86_64.pkg.tar.*,\
 embree-git-*-x86_64.pkg.tar.*\
 } \
 /tmp/chrootrepo/
 
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 16G
 
   FAST
 -------
@@ -443,7 +455,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.81.1.20190804.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.81.2.20190818.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
 && cp -v -f /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
@@ -518,7 +530,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.81.1.20190804.tar.gz
+$ rm -i blender-git-2.81.2.20190818.tar.gz
 
 
 $ cd && maj-repolocal
@@ -556,11 +568,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "dd3cdf6f1e9d"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "454b120f4820"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1564906862|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566121223|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -572,7 +584,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
 )
 
-sha256sum blender-git-2.81.1.20190804.tar.gz
+sha256sum blender-git-2.81.2.20190818.tar.gz
 
 sha256sum Fix-T64463-Visual-Artifacts-with-ColorRamp.patch
 
@@ -597,7 +609,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-mesh_discombobulator.patch"
 )
 
-sha256sum blender-git-2.81.1.20190804.tar.gz
+sha256sum blender-git-2.81.2.20190818.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -729,7 +741,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.81.1.20190804.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.81.2.20190818.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
@@ -745,7 +757,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.81.1.20190804.tar.gz
+sha256sum blender-git-2.81.2.20190818.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -771,9 +783,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "dd3cdf6f1e9d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "454b120f4820"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1564906862|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1566121223|' build_files/cmake/buildinfo.cmake
   
 }
 
