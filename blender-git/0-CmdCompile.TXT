@@ -10,9 +10,12 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Andrea Weikert <elubie@gmx.net>	
-	Sun, 18 Aug 2019 14:42:41 +0000 (16:42 +0200)
-commit	38380ddca373cd7f49e3d6e831480ff05a2af72e
+committer	Andrea Weikert <elubie@gmx.net>	
+
+	Sun, 18 Aug 2019 14:42:41 +0000 (16:42 +0200)
+
+commit	38380ddca373cd7f49e3d6e831480ff05a2af72e
+
 
 
 ==> 20190818
@@ -128,9 +131,11 @@ voir CmdFairePatches.TXT
 pkgname=blender-git
 !!!!!!
 pkgver=2.81.2.20190818
-pkgrel=2    # Teste Avec Embree + staticlibs
+pkgrel=3    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+              -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+pkgrel=2    # Test Avec openimagedenoise + staticlibs
 pkgrel=1
-pkgrel=3    # Teste Avec openimagedenoise + staticlibs
+pkgrel=2    # Test Avec Embree + staticlibs
 pkgrel=2
 
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
