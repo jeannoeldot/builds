@@ -259,5 +259,14 @@ build/source/blender/datatoc/CMakeFiles/datatoc_icon.dir/link.txt
 build/source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/flags.make
 build_files/build_environment/cmake/options.cmake
 
+Embree
+------
+$ cd /tmp/srcp/embree-3.5.2/
+$ grep -lR "\-O3" .
+./common/cmake/ispc.cmake
+./common/cmake/intel.cmake
+./common/cmake/gnu.cmake
+./common/cmake/clang.cmake
+
 
 
