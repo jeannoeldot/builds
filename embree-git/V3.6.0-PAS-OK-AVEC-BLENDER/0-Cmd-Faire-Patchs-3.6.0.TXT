@@ -1,27 +1,27 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.5.2
+!!! VERSION = 3.6.0.20190820
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/embree-git
 
 mkdir /tmp/srcp
 
-cp -v embree-3.5.2.tar.gz /tmp/srcp/
+cp -v embree-3.6.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf embree-3.5.2.tar.gz
+tar -xzf embree-3.6.0.tar.gz
 
 
-1) MODIFIER embree-3.5.2/common/cmake/gnu.cmake
+1) MODIFIER embree-3.6.0/common/cmake/gnu.cmake
 ===========================================================
 /!\ /!\ /!\ cd /tmp/srcp
 
-cp -R embree-3.5.2 embree-3.5.2.new
+cp -R embree-3.6.0 embree-3.6.0.new
 
-cd embree-3.5.2.new/common/cmake/
+cd embree-3.6.0.new/common/cmake/
 kwrite gnu.cmake
 
 MODIFIER LIGNE 65 :
@@ -36,10 +36,10 @@ rm -f gnu.cmake~
 
 cd ../../..
 
-diff -aur embree-3.5.2 embree-3.5.2.new
-diff -aur embree-3.5.2 embree-3.5.2.new > enable-optimizations-Ofast-floop.patch
+diff -aur embree-3.6.0 embree-3.6.0.new
+diff -aur embree-3.6.0 embree-3.6.0.new > enable-optimizations-Ofast-floop.patch
 
-rm -rf embree-3.5.2.new
+rm -rf embree-3.6.0.new
 
 cd $HOME/05-builds/embree-git
 

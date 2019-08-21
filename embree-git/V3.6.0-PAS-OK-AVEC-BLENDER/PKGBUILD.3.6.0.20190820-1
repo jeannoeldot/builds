@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git
-pkgver=3.5.2.20190313
-pkgrel=3
-_ver_release="3.5.2"
+pkgver=3.6.0.20190820
+pkgrel=1
+_ver_release="3.6.0"
 _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"
 url="https://github.com/embree"
@@ -19,8 +19,8 @@ options=(staticlibs)
 source=("embree-${_ver_release}.tar.gz"
         "enable-optimizations-Ofast-floop.patch"
 )
-sha256sums=('245af8820a820af94679fa1d43a05a9c825451be0d603b6165229556adf49517'
-            '16c1b08427db83ac6d0d7d08d5663a90c747f59eb721fe1a7f74561eae1bc092'
+sha256sums=('3c179aa09efe1f591f277cd8835e37726998f657730ca456d08f584fc8780559'
+            'd47399edb747f70a89dcaf06d94aa1642ca8ba520b908d80a0e3dabb0b16eaea'
 )
 
 prepare() {
