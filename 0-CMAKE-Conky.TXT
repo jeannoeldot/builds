@@ -1,4 +1,5 @@
 
+1)
 -- CMAKE_C_FLAGS: -std=c99
 -- CMAKE_CXX_FLAGS: -std=c++17
 -- CMAKE_C_FLAGS_DEBUG: -g
@@ -23,3 +24,83 @@ cd /build/conky-lua-nv-git/src/conky/src &&
 /usr/bin/c++  -D_LARGEFILE64_SOURCE -D_POSIX_C_SOURCE=200809L -I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include -I/build/conky-lua-nv-git/src/conky -I/usr/include/freetype2 -I/usr/include/libxml2 -I/build/conky-lua-nv-git/src/conky/data
 -std=c++17 -O3 -DNDEBUG   -std=gnu++17
 -o CMakeFiles/tcp-portmon.dir/libtcp-portmon.cc.o -c /build/conky-lua-nv-git/src/conky/src/libtcp-portmon.cc
+
+-----------------------------------------------------
+4)
+PKGBUILD AVEC
+  sed -i '/set(CMAKE_C_FLAGS/,+5d' cmake/ConkyBuildOptions.cmake
+    -D CMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -D CMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+
+-- CMAKE_C_FLAGS: -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block
+-- CMAKE_CXX_FLAGS: -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block
+-- CMAKE_C_FLAGS_DEBUG: -g
+-- CMAKE_CXX_FLAGS_DEBUG: -g
+-- CMAKE_C_FLAGS_MINSIZEREL: -Os -DNDEBUG
+-- CMAKE_CXX_FLAGS_MINSIZEREL: -Os -DNDEBUG
+-- CMAKE_C_FLAGS_RELEASE: -DNDEBUG
+-- CMAKE_CXX_FLAGS_RELEASE: -DNDEBUG
+-- CMAKE_C_FLAGS_RELWITHDEBINFO: -O2 -g -DNDEBUG
+-- CMAKE_CXX_FLAGS_RELWITHDEBINFO: -O2 -g -DNDEBUG
+-- CMAKE_BUILD_TYPE: Release
+
+[  9%] Building C object 3rdparty/toluapp/CMakeFiles/toluapp_lib_static.dir/src/lib/tolua_is.c.o
+cd /build/conky-lua-nv-git/src/conky/3rdparty/toluapp &&
+/usr/bin/cc -D_LARGEFILE64_SOURCE -D_POSIX_C_SOURCE=200809L
+-I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include -I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/src/lib -I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/src/bin
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -DNDEBUG   -fPIC
+-o CMakeFiles/toluapp_lib_static.dir/src/lib/tolua_is.c.o   -c /build/conky-lua-nv-git/src/conky/3rdparty/toluapp/src/lib/tolua_is.c
+
+[ 14%] Building CXX object src/CMakeFiles/tcp-portmon.dir/libtcp-portmon.cc.o
+cd /build/conky-lua-nv-git/src/conky/src &&
+/usr/bin/c++  -D_LARGEFILE64_SOURCE -D_POSIX_C_SOURCE=200809L
+-I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include -I/build/conky-lua-nv-git/src/conky -I/usr/include/freetype2 -I/usr/include/libxml2 -I/build/conky-lua-nv-git/src/conky/data
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -DNDEBUG   -std=gnu++17
+-o CMakeFiles/tcp-portmon.dir/libtcp-portmon.cc.o -c /build/conky-lua-nv-git/src/conky/src/libtcp-portmon.cc
+
+[100%] Linking CXX executable conky
+cd /build/conky-lua-nv-git/src/conky/src && /usr/bin/cmake -E cmake_link_script CMakeFiles/conky.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now
+
+-----------------------------------------------------
+3)
+PKGBUILD AVEC
+  sed -i '/set(CMAKE_C_FLAGS/,+5d' cmake/ConkyBuildOptions.cmake
+
+-- CMAKE_C_FLAGS: -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block
+-- CMAKE_CXX_FLAGS: -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block
+-- CMAKE_C_FLAGS_DEBUG: -g
+-- CMAKE_CXX_FLAGS_DEBUG: -g
+-- CMAKE_C_FLAGS_MINSIZEREL: -Os -DNDEBUG
+-- CMAKE_CXX_FLAGS_MINSIZEREL: -Os -DNDEBUG
+-- CMAKE_C_FLAGS_RELEASE: -O3 -DNDEBUG
+-- CMAKE_CXX_FLAGS_RELEASE: -O3 -DNDEBUG
+-- CMAKE_C_FLAGS_RELWITHDEBINFO: -O2 -g -DNDEBUG
+-- CMAKE_CXX_FLAGS_RELWITHDEBINFO: -O2 -g -DNDEBUG
+-- CMAKE_BUILD_TYPE: Release
+
+cd /build/conky-lua-nv-git/src/conky/3rdparty/toluapp &&
+/usr/bin/cc -D_LARGEFILE64_SOURCE -D_POSIX_C_SOURCE=200809L
+-I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include -I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/src/lib -I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/src/bin
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG   -fPIC
+-o CMakeFiles/toluapp_lib_static.dir/src/lib/tolua_event.c.o   -c /build/conky-lua-nv-git/src/conky/3rdparty/toluapp/src/lib/tolua_event.c
+
+cd /build/conky-lua-nv-git/src/conky/src &&
+/usr/bin/c++  -D_LARGEFILE64_SOURCE -D_POSIX_C_SOURCE=200809L
+-I/build/conky-lua-nv-git/src/conky/3rdparty/toluapp/include -I/build/conky-lua-nv-git/src/conky -I/usr/include/freetype2 -I/usr/include/libxml2 -I/build/conky-lua-nv-git/src/conky/data
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG   -std=gnu++17
+-o CMakeFiles/tcp-portmon.dir/libtcp-portmon.cc.o -c /build/conky-lua-nv-git/src/conky/src/libtcp-portmon.cc
+
+[100%] Linking CXX executable conky
+cd /build/conky-lua-nv-git/src/conky/src && /usr/bin/cmake -E cmake_link_script CMakeFiles/conky.dir/link.txt --verbose=1
+/usr/bin/c++  -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG  -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now
+
+-----------------------------------------------------
+2)
+PKGBUILD AVEC
+    -D CMAKE_C_FLAGS="-std=c99 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block"
+    -D CMAKE_CXX_FLAGS="-std=c++17 -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block"
+
+==> inutile
+
+

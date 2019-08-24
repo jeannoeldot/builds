@@ -68,6 +68,10 @@ voir CmdFairePatches.TXT
 
 pkgname=conky-lua-nv-git
 pkgver=1.11.4.20190416
+
+pkgrel=5  # TEST Ofast floop
+
+
 pkgrel=4  # Rebuild suite maj libxnvctrl 430.40-3
 pkgrel=3  # Rebuild suite maj libxnvctrl 430.40-1
 pkgrel=2  # License = GPL3. MAINTAINER_MODE = false
@@ -90,6 +94,9 @@ sha256sums=(...
 
 !!!!!!
 _gitname="conky"
+
+prepare() {
+  cd "${_gitname}"
 
 build() {
   cd "${_gitname}"
@@ -168,15 +175,15 @@ cd $HOME/05-builds/conky-lua-nv-git && rm -rf /tmp/build
 ====================================
 !!! EN USER
 
-!!! A FAIRE !!!
-===============
-cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast \
-$HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.original
-
-cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.conky \
-$HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast
-
 $ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m floop
 
   FAST
 --------
@@ -203,11 +210,6 @@ $ mkpkg-tmpfs -m native -l logs
 
 
 $ rm -rf /tmp/chrootrepo
-
-!!! A FAIRE !!!
-===============
-cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.original \
-$HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast
 
 
 3-2) MAKEPKG en USER
@@ -283,6 +285,19 @@ conky -c $HOME/00-Conky/Systeme/systemerc.conf &
 ================================================================
 ANCIEN
 ======
+
+!!! A FAIRE !!!
+===============
+cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast \
+$HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.original
+
+cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.conky \
+$HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast
+
+!!! A FAIRE !!!
+===============
+cp -v $HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast.original \
+$HOME/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast
 
 
 !!! AVEC PATCH

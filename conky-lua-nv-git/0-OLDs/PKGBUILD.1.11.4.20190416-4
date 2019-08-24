@@ -2,7 +2,7 @@
 
 pkgname=conky-lua-nv-git
 pkgver=1.11.4.20190416
-pkgrel=5
+pkgrel=4
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
 url="https://github.com/brndnmtthws/conky"
@@ -26,20 +26,12 @@ sha256sums=('9b08157ace3d0d827b0f874fd1c8439c09e097792f052e53c0c03903701101d8'
 
 _gitname="conky"
 
-prepare() {
-  cd "${_gitname}"
-  # Use our CFLAGS / CXXFLAGS
-  sed -i '/set(CMAKE_C_FLAGS/,+5d' cmake/ConkyBuildOptions.cmake
-}
-
 build() {
   cd "${_gitname}"
 
   cmake \
     -D CMAKE_SKIP_RPATH=ON \
     -D CMAKE_BUILD_TYPE=Release \
-    -D CMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
-    -D CMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
     -D BUILD_DOCS=ON \
     -D BUILD_NVIDIA=ON \
     -D BUILD_WLAN=ON \

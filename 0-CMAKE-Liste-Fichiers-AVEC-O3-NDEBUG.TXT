@@ -268,5 +268,27 @@ $ grep -lR "\-O3" .
 ./common/cmake/gnu.cmake
 ./common/cmake/clang.cmake
 
+Conky
+------
+$ cd /0-DataLinux/05-builds-dir-git/conky/
+$ grep -lR "\-O3 \-DNDEBUG"
+==> rien
+$ grep -lR "\-O3" .
+==> rien
+$ grep -lR "\-DNDEBUG"
+==> rien
 
+$ grep -lR "CMAKE_CXX_FLAGS" .
+./cmake/ConkyBuildOptions.cmake
+./cmake/CodeCoverage.cmake
+
+$ grep -lR "CMAKE_C_FLAGS" .
+./cmake/ConkyBuildOptions.cmake
+./cmake/CodeCoverage.cmake
+
+$ grep -lR "CMAKE_C_FLAGS_RELEASE" .
+./cmake/ConkyBuildOptions.cmake
+
+$ grep -lR "CMAKE_CXX_FLAGS_RELEASE" .
+./cmake/ConkyBuildOptions.cmake
 
