@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.6.20190708
-pkgrel=4
+pkgrel=5
 _name_release="OpenShadingLanguage-Release-1.10.6"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
@@ -37,6 +37,7 @@ build() {
       -DLLVM_STATIC=OFF \
       -DVERBOSE=ON \
       -DOSL_BUILD_TESTS=OFF \
+      -DUSE_LLVM_BITCODE=OFF \
       -DUSE_PARTIO=OFF \
       -DUSE_SIMD=avx2 \
       -DSTOP_ON_WARNING=OFF \
