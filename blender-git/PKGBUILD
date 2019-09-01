@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.81.4.20190829
+pkgver=2.81.4.20190901
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,7 +35,7 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('1c3c90fb6272259c0d50a310dd98d259593623d8cbb1656bc551f52f31739e60'
+sha256sums=('4ea28ed7f815b3ad821cd7fdf4dad923189adc8483dfa5c1c22cafcbdb2c3ae7'
 )
 
 _gitname="blender"
@@ -51,9 +51,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "6b33bd1067dc"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "ae43b1d51b4a"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1567068264|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1567323080|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -98,8 +98,7 @@ build() {
         -DPYTHON_LIBRARY=python3.7m \
         -DPYTHON_INCLUDE_DIRS=/usr/include/python3.7m \
         ..
-  make VERBOSE=1
-#  make ${MAKEFLAGS}
+  make
 }
 
 package() {

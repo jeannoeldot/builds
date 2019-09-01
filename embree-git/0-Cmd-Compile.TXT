@@ -6,16 +6,16 @@ cd $HOME/05-builds/embree-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/embree/embree/releases
-==>  cbenthin released this on 20 aout  ==> 20190820
-==> Embree v3.6.0  ==> 3.6.0
-==> 3.6.0.20190820
+==>  cbenthin released this on 29 aout  ==> 20190829
+==> Embree v3.6.1  ==> 3.6.1
+==> 3.6.1.20190829
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O embree-3.6.0.tar.gz \
-https://github.com/embree/embree/archive/v3.6.0.tar.gz
+wget -O embree-3.6.1.tar.gz \
+https://github.com/embree/embree/archive/v3.6.1.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/embree-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/embree-3.6.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/embree-3.6.1.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,10 +36,10 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git               # embree ds community ?
-pkgver=3.6.0.20190820
-pkgrel=2
+pkgver=3.6.1.20190829
 pkgrel=1
 
+pkgrel=2
 !!! Erreur compil blender
 pkgrel=3  # Avec patch Ofast floop
 
@@ -47,7 +47,7 @@ pkgrel=2    # static libs
 
 
 !!!!!!
-_ver_release="3.6.0"
+_ver_release="3.6.1"
 _name_release="embree-${_ver_release}"
 
 license=('Apache')
@@ -67,7 +67,7 @@ options=(staticlibs)
 
 SANS PATCH
 ----------
-sha256sum embree-3.6.0.tar.gz
+sha256sum embree-3.6.1.tar.gz
 
 source=("embree-${_ver_release}.tar.gz"
 )
@@ -84,9 +84,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf embree-3.6.0.tar.gz -C /tmp/srcp
+tar -xzf embree-3.6.1.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/embree-3.6.0/CMakeLists.txt
+1) kwrite /tmp/srcp/embree-3.6.1/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -132,7 +132,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.6.0.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.6.1.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -151,7 +151,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/embree-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/embree-git/embree-3.6.0.tar.gz . \
+&& cp -v $HOME/05-builds/embree-git/embree-3.6.1.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/embree-git \
 && cp -v /tmp/build/embree-git-*-x86_64.pkg.tar.* . \
@@ -211,7 +211,7 @@ $ mv -v embree-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i embree-3.6.0.tar.gz
+$ rm -i embree-3.6.1.tar.gz
 
 
 $ cd && maj-repolocal
