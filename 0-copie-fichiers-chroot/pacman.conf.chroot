@@ -75,7 +75,9 @@ LocalFileSigLevel = Optional
 
 [chroot-repolocal]
 SigLevel = Never
-Server = file:///chrootrepolocal
+#Server = file:///chrootrepolocal
+#Suite MAJ devtools 20190821-1
+Server = file:///home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/chrootrepolocal
 
 [core]
 SigLevel = Never

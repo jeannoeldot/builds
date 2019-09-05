@@ -70,3 +70,18 @@ Failed to stat /chrootrepolocal: No such file or directory
 Failed to stat /chrootrepolocal: No such file or directory
 ==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build
 
+1) TEST pacman.conf.chroot AVEC 
+Server = file:///root/chrootrepolocal
+==> IDEM
+Failed to stat /root/chrootrepolocal: No such file or directory
+
+
+2) TEST pacman.conf.chroot AVEC 
+Server = file:///jnd/chrootrepolocal
+==> IDEM
+Failed to stat /jnd/chrootrepolocal: No such file or directory
+
+
+3) TEST pacman.conf.chroot AVEC 
+Server = file:///home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/chrootrepolocal
+==> OK
