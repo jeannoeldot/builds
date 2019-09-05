@@ -1,0 +1,72 @@
+
+
+downgrading package devtools (20190821-1 => 20190329-1)
+=======================================================
+
+┌jnd ( ~ )
+└─> $ su -
+Mot de passe : 
+[root@arch1kde ~]# ls /home/jnd/05-builds/0-copie-fichiers-chroot/ | grep devtools
+devtools-20190329-1-any.pkg.tar.xz
+
+[root@arch1kde ~]# LC_ALL=C pacman -U /home/jnd/05-builds/0-copie-fichiers-chroot/devtools-20190329-1-any.pkg.tar.xz
+loading packages...
+warning: downgrading package devtools (20190821-1 => 20190329-1)
+resolving dependencies...
+looking for conflicting packages...
+
+Package (1)  Old Version  New Version  Net Change
+
+devtools     20190821-1   20190329-1     0.00 MiB
+
+Total Installed Size:  0.18 MiB
+Net Upgrade Size:      0.00 MiB
+
+:: Proceed with installation? [Y/n] 
+(1/1) checking keys in keyring                                                [############################################] 100%
+(1/1) checking package integrity                                              [############################################] 100%
+(1/1) loading package files                                                   [############################################] 100%
+(1/1) checking for file conflicts                                             [############################################] 100%
+(1/1) checking available disk space                                           [############################################] 100%
+:: Processing package changes...
+(1/1) downgrading devtools                                                    [############################################] 100%
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate...
+
+
+AVEC DEVTOOLS 20190329-1
+------------------------
+==> Création du nouveau fichier de dépôt « /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/root/chrootrepolocal/chroot-repolocal.db.tar.gz »
+
+:: Fabrication du paquet « blender-git 2.81.8.20190905 » ...
+
+==> Synchronizing chroot copy [/home/jnd/05-builds/0-chroot/00-tmpfs-chroot/root] -> [jnd]...done
+:: Synchronizing package databases...
+ chroot-repolocal                                      2.6 KiB  0.00B/s 00:00 [############################################] 100%
+ core is up to date
+ extra is up to date
+ community is up to date
+ multilib is up to date
+:: Starting full system upgrade...
+ there is nothing to do
+
+
+
+
+
+AVEC DEVTOOLS 20190821-1
+------------------------
+==> Création du nouveau fichier de dépôt « /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/root/chrootrepolocal/chroot-repolocal.db.tar.gz »
+
+:: Fabrication du paquet « blender-git 2.81.8.20190905 » ...
+
+==> Synchronizing chroot copy [/home/jnd/05-builds/0-chroot/00-tmpfs-chroot/root] -> [jnd]...done
+Failed to stat /chrootrepolocal: No such file or directory
+==> Making package: blender-git 2.81.8.20190905-1 (jeu. 05 sept. 2019 11:41:44 CEST)
+==> Retrieving sources...
+  -> Found blender-git-2.81.8.20190905.tar.gz
+==> Validating source files with sha256sums...
+    blender-git-2.81.8.20190905.tar.gz ... Passed
+Failed to stat /chrootrepolocal: No such file or directory
+==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build
+
