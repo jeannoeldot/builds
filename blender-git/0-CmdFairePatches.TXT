@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.81.4.20190901
+!!! VERSION = 2.81.8.20190908
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.81.4.20190901.tar.gz /tmp/srcp/
+cp -v blender-git-2.81.8.20190908.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.81.4.20190901.tar.gz
+tar -xzf blender-git-2.81.8.20190908.tar.gz
 
 
 
