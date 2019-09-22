@@ -44,6 +44,8 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.6.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.6.20190708
+pkgrel=6    # Rebuild OIIO 2.0.10 + openvdb 6.2.0
+
 pkgrel=5    # Voir install_deps.sh
 
 pkgrel=4    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
