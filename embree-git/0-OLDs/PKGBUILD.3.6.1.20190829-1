@@ -1,7 +1,7 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git
-pkgver=3.6.1.20190911
+pkgver=3.6.1.20190829
 pkgrel=1
 _ver_release="3.6.1"
 _name_release="embree-${_ver_release}"
@@ -18,7 +18,7 @@ provides=('embree')
 options=(staticlibs)
 source=("embree-${_ver_release}.tar.gz"
 )
-sha256sums=('9030ab589cf7134b5995af3639b5e3e9aacaab95d839f619817e2c1348c9b51a'
+sha256sums=('1d82b334114d8784a455fc3d33d3a5860101a4a05a93c79b35cc752509234458'
 )
 
 

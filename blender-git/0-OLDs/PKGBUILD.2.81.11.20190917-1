@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.81.12.20190921
+pkgver=2.81.11.20190917
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,7 +35,7 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('10510218308da3657530032a5c7ab5a990c7d34ca428b385a51d878a6d4a91ba'
+sha256sums=('af85bdb27aefc058b7cfccf68f587d1a5c123aab2fae4be094e0fbaa0394c605'
 )
 
 _gitname="blender"
@@ -43,6 +43,9 @@ _slot="2.81"
 
 prepare() {
   cd "${_gitname}"
+  # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
+  sed -i -e "s/python3.5/python/" release/scripts/addons_contrib/io_blend_utils/install_whl.py
+
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
