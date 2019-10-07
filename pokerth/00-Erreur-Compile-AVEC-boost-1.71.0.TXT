@@ -1,0 +1,50 @@
+In file included from /usr/include/boost/asio/executor.hpp:338,
+                 from /usr/include/boost/asio/basic_socket.hpp:27,
+                 from /usr/include/boost/asio/basic_datagram_socket.hpp:20,
+                 from /usr/include/boost/asio.hpp:24,
+                 from src/net/chatcleanermanager.h:36,
+                 from src/net/common/chatcleanermanager.cpp:32:
+/usr/include/boost/asio/impl/executor.hpp: In instantiation of ‘boost::asio::execution_context& boost::asio::executor::impl< <template-parameter-1-1>, <template-parameter-1-2> >::context() [with Executor = std::reference_wrapper<boost::asio::io_context>; Allocator = std::allocator<void>]’:
+/usr/include/boost/asio/impl/executor.hpp:177:22:   required from here
+/usr/include/boost/asio/impl/executor.hpp:179:22: error: ‘class std::reference_wrapper<boost::asio::io_context>’ has no member named ‘context’
+  179 |     return executor_.context();
+      |            ~~~~~~~~~~^~~~~~~
+/usr/include/boost/asio/impl/executor.hpp: In instantiation of ‘void boost::asio::executor::impl< <template-parameter-1-1>, <template-parameter-1-2> >::on_work_started() [with Executor = std::reference_wrapper<boost::asio::io_context>; Allocator = std::allocator<void>]’:
+/usr/include/boost/asio/impl/executor.hpp:167:8:   required from here
+/usr/include/boost/asio/impl/executor.hpp:169:15: error: ‘class std::reference_wrapper<boost::asio::io_context>’ has no member named ‘on_work_started’
+  169 |     executor_.on_work_started();
+      |     ~~~~~~~~~~^~~~~~~~~~~~~~~
+/usr/include/boost/asio/impl/executor.hpp: In instantiation of ‘void boost::asio::executor::impl< <template-parameter-1-1>, <template-parameter-1-2> >::on_work_finished() [with Executor = std::reference_wrapper<boost::asio::io_context>; Allocator = std::allocator<void>]’:
+/usr/include/boost/asio/impl/executor.hpp:172:8:   required from here
+/usr/include/boost/asio/impl/executor.hpp:174:15: error: ‘class std::reference_wrapper<boost::asio::io_context>’ has no member named ‘on_work_finished’
+  174 |     executor_.on_work_finished();
+      |     ~~~~~~~~~~^~~~~~~~~~~~~~~~
+/usr/include/boost/asio/impl/executor.hpp: In instantiation of ‘void boost::asio::executor::impl< <template-parameter-1-1>, <template-parameter-1-2> >::dispatch(boost::asio::executor::function&&) [with Executor = std::reference_wrapper<boost::asio::io_context>; Allocator = std::allocator<void>]’:
+/usr/include/boost/asio/impl/executor.hpp:182:8:   required from here
+/usr/include/boost/asio/impl/executor.hpp:184:15: error: ‘class std::reference_wrapper<boost::asio::io_context>’ has no member named ‘dispatch’
+  184 |     executor_.dispatch(BOOST_ASIO_MOVE_CAST(function)(f), allocator_);
+      |     ~~~~~~~~~~^~~~~~~~
+/usr/include/boost/asio/impl/executor.hpp: In instantiation of ‘void boost::asio::executor::impl< <template-parameter-1-1>, <template-parameter-1-2> >::post(boost::asio::executor::function&&) [with Executor = std::reference_wrapper<boost::asio::io_context>; Allocator = std::allocator<void>]’:
+/usr/include/boost/asio/impl/executor.hpp:187:8:   required from here
+/usr/include/boost/asio/impl/executor.hpp:189:15: error: ‘class std::reference_wrapper<boost::asio::io_context>’ has no member named ‘post’
+  189 |     executor_.post(BOOST_ASIO_MOVE_CAST(function)(f), allocator_);
+      |     ~~~~~~~~~~^~~~
+/usr/include/boost/asio/impl/executor.hpp: In instantiation of ‘void boost::asio::executor::impl< <template-parameter-1-1>, <template-parameter-1-2> >::defer(boost::asio::executor::function&&) [with Executor = std::reference_wrapper<boost::asio::io_context>; Allocator = std::allocator<void>]’:
+/usr/include/boost/asio/impl/executor.hpp:192:8:   required from here
+/usr/include/boost/asio/impl/executor.hpp:194:15: error: ‘class std::reference_wrapper<boost::asio::io_context>’ has no member named ‘defer’
+  194 |     executor_.defer(BOOST_ASIO_MOVE_CAST(function)(f), allocator_);
+      |     ~~~~~~~~~~^~~~~
+/usr/include/boost/asio/impl/executor.hpp: In instantiation of ‘bool boost::asio::executor::impl< <template-parameter-1-1>, <template-parameter-1-2> >::equals(const boost::asio::executor::impl_base*) const [with Executor = std::reference_wrapper<boost::asio::io_context>; Allocator = std::allocator<void>]’:
+/usr/include/boost/asio/impl/executor.hpp:212:8:   required from here
+/usr/include/boost/asio/impl/executor.hpp:218:22: error: no match for ‘operator==’ (operand types are ‘const std::reference_wrapper<boost::asio::io_context>’ and ‘const std::reference_wrapper<boost::asio::io_context>’)
+  218 |     return executor_ == *static_cast<const Executor*>(e->target());
+      |            ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+make[1]: *** [Makefile.pokerth_lib:1787: obj/chatcleanermanager.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: Leaving directory '/build/pokerth/src/pokerth-1.1.2-rc'
+make: *** [Makefile:105: sub-pokerth_lib-pro-make_first-ordered] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
+==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build

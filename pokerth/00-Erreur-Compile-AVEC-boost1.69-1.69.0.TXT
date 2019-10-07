@@ -1,0 +1,59 @@
+==> Checking buildtime dependencies...
+==> Installing missing dependencies...
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) boost1.69-1.69.0-2
+
+Total Download Size:    12.27 MiB
+Total Installed Size:  167.95 MiB
+
+:: Proceed with installation? [Y/n] 
+:: Retrieving packages...
+ boost1.69-1.69.0-2-x86_64                            12.3 MiB   337K/s 00:37 [############################################] 100%
+(1/1) checking keys in keyring                                                [############################################] 100%
+(1/1) checking package integrity                                              [############################################] 100%
+(1/1) loading package files                                                   [############################################] 100%
+(1/1) checking for file conflicts                                             [############################################] 100%
+error: failed to commit transaction (conflicting files)
+boost1.69: /usr/lib/libboost_atomic.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_chrono.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_container.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_context.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_contract.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_coroutine.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_date_time.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_fiber.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_filesystem.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_graph.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_graph_parallel.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_iostreams.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_locale.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_log.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_log_setup.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_math_c99.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_math_c99f.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_math_c99l.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_math_tr1.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_math_tr1f.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_math_tr1l.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_mpi.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_numpy27.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_prg_exec_monitor.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_program_options.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_python27.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_random.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_regex.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_serialization.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_stacktrace_addr2line.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_stacktrace_basic.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_stacktrace_noop.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_system.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_thread.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_timer.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_type_erasure.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_unit_test_framework.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_wave.so exists in filesystem (owned by boost-libs)
+boost1.69: /usr/lib/libboost_wserialization.so exists in filesystem (owned by boost-libs)
+Errors occurred, no packages were upgraded.
+==> ERROR: 'pacman' failed to install missing dependencies.
