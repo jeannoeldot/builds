@@ -44,6 +44,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.7.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.7.20191001
+pkgrel=3    # Rebuild MAJ LLVM 9.0.0
 pkgrel=2    # rebuild boost boost-libs 1.71.0
 pkgrel=1
 
@@ -75,8 +76,8 @@ provides=('openshadinglanguage')
 !!! LLVM 8.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/llvm 8.0.1-3 [installé]
-extra/llvm-libs 8.0.1-3 [installé]
+extra/llvm 9.0.0-3 [installé]
+extra/llvm-libs 9.0.0-3 [installé]
 
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
