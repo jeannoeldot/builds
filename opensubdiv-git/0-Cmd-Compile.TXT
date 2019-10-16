@@ -71,6 +71,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.4.0.20190628
+pkgrel=4    # MAJ intel-tbb 2019.9-1
 pkgrel=3    # find . -type f -exec sed -i -e 's/\-O3//g' {} \;
 pkgrel=2    # sed -i -e "s/-O3 //g" $(find . -name flags.make)
 

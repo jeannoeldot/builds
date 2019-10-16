@@ -2,7 +2,7 @@
 
 pkgname=opensubdiv-git
 pkgver=3.4.0.20190628
-pkgrel=3
+pkgrel=4
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
 license=('custom')
@@ -40,7 +40,7 @@ build() {
         -D NO_METAL=1 \
         ..
   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
-  make VERBOSE=1
+  make
 }
 
 package() {
