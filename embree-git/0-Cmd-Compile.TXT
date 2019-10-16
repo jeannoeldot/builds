@@ -37,9 +37,9 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=embree-git               # embree ds community ?
 pkgver=3.6.1.20190911
+pkgrel=2    # MAJ intel-tbb 2019.9-1
 pkgrel=1
 
-pkgrel=2
 !!! Erreur compil blender
 pkgrel=3  # Avec patch Ofast floop
 
