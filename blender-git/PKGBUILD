@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.82.0.20191011
+pkgver=2.82.0.20191016
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,7 +35,7 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('9f3341ed83665497505012601299dbb217f309471d3fffd228e1a91783e02077'
+sha256sums=('93ababd86de4599c5448329265681e5d6990650e669f7751b8d33c4267ec7e8b'
 )
 
 _gitname="blender"
