@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.0.11.20191001
+pkgrel=3    # Rebuild MAJ intel-tbb 2019.9-1
 pkgrel=2          # rebuild boost boost-libs 1.71.0
 pkgrel=1
 
