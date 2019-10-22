@@ -44,6 +44,8 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.7.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.7.20191001
+pkgrel=5          # rebuild MAJ openexr 2.4
+
 pkgrel=4    # Rebuild MAJ intel-tbb 2019.9-1
 pkgrel=3    # Rebuild MAJ LLVM 9.0.0
 pkgrel=2    # rebuild boost boost-libs 1.71.0
@@ -208,7 +210,7 @@ set (INSTALL_FONTS "Install default fonts" OFF)
 
 4) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.7/src/cmake/modules/FindLLVM.cmake
 
-!!! LLVM 8.0
+!!! LLVM 9.0
 ------------------------------------
 LIGNE 90 ET ...
   LLVM_STATIC           =>      -DLLVM_STATIC=OFF \

@@ -2,7 +2,7 @@
 
 pkgname=alembic-git
 pkgver=1.7.11.20190516
-pkgrel=3
+pkgrel=4
 _ver_release="1.7.11"
 _name_release="alembic-${_ver_release}"
 pkgdesc="A open framework for storing and sharing scene data"
@@ -34,7 +34,7 @@ build() {
     -DUSE_TESTS=OFF \
     ..
   sed -i "s/\-O3//g" $(find . -name flags.make)
-  make VERBOSE=1
+  make
 }
 
 package() {

@@ -38,6 +38,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=alembic-git               # alembic ds community
 pkgver=1.7.11.20190516
+pkgrel=4          # rebuild MAJ openexr 2.4
+
 pkgrel=3  #   sed -i "s/\-O3//g" $(find . -name flags.make)
             -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
             -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \

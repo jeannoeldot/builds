@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.0.11.20191001
+pkgrel=4          # rebuild MAJ openexr 2.4
+
 pkgrel=3    # Rebuild MAJ intel-tbb 2019.9-1
 pkgrel=2          # rebuild boost boost-libs 1.71.0
 pkgrel=1
@@ -103,7 +105,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.7.4-1 [installé]
+==> extra/python 3.7.4-2 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.7
@@ -320,7 +322,6 @@ usr/lib/libOpenImageIO.so.2.0.11
 usr/lib/python3.7/site-packages/OpenImageIO.so
 
 namcap openimageio-git-*-x86_64.pkg.tar.xz
-
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
