@@ -1,17 +1,16 @@
 # Maintainer: kachelaqa <kachelaqa at gmail dot com>
 
 pkgname='pkgbrowser'
-pkgver=0.22
-pkgrel=1
+pkgver=0.21
+pkgrel=3
 pkgdesc='A utility for browsing pacman databases and the AUR'
 arch=('x86_64')
 url="https://bitbucket.org/kachelaqa/$pkgname"
 license=('GPL2')
-depends=('pacman>=4.1' 'pacman<5.3' 'python>=3.2' 'python<3.8' 'python-pyqt5'
-        'hicolor-icon-theme')
-#install="$pkgname.install"
+depends=('pacman>=4.1' 'pacman<5.2' 'python>=3.2' 'python<3.8' 'python-pyqt5'
+         'hicolor-icon-theme')
 source=("$url/downloads/$pkgname-$pkgver.tar.gz")
-md5sums=('0ace358c14cbb4cb052b6abd04774979')
+md5sums=('5f5be024e6f5256ea4ba744341a55767')
 
 build() {
     cd "$srcdir/$pkgname-$pkgver"
