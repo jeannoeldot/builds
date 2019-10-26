@@ -1,14 +1,14 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=awesomebump-git
-pkgver=5.1.20190915
+pkgver=5.0.20170721
 pkgrel=1
 pkgdesc="Generate normal, height, specular or ambient occlusion textures from a single image"
 arch=('x86_64')
 url="http://awesomebump.besaba.com/"
 license=('LGPL3')
-depends=('qt5-base' 'qt5-location' 'qt5-script' 'qt5-svg')
-makedepends=('qt5-base' 'qt5-location' 'qt5-script' 'qt5-svg')
+depends=('qt5-base' 'qt5-location' 'qt5-script')
+makedepends=('qt5-base' 'qt5-location' 'qt5-script')
 conflicts=('awesomebump')
 provides=('awesomebump')
 source=("$pkgname-$pkgver.tar.gz"
@@ -17,7 +17,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "awesomebump.desktop"
         "awesomebump.png"
 )
-sha256sums=('4297dc9034d46616e64d3013c387f5fa77cf127bb51ba6edbf897f94b52b92a3'
+sha256sums=('9924f852746c2d6c76e04a7f904c4756fbce483c471bb0c0a455f664a4683880'
             'e97680403b755109b886f9b17eb73a500d06b57a788451036275bb7aa434479c'
             'd43f250fc7eb642b9c10674a23a82c98b337b0d5927428126ac752009ff06bf7'            
             '72b8fcb4af1d23c8bbdd472f08520f667a0075ec70f4c3b5d6c533643fcb5879'

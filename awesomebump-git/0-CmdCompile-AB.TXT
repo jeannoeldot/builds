@@ -7,8 +7,9 @@ cd $HOME/05-builds/awesomebump-git
 ======================================================
 
 https://github.com/kmkolasinski/AwesomeBump/commits/Release
+kmkolasinski released this on 15 Sep
 
-==> 20170721
+==> 20190915
 
 1.1) SOURCES awesomebump
 ========================
@@ -19,7 +20,7 @@ cd /0-DataLinux/05-builds-dir-git
 
 Vérifier existence rep awesomebump :
 ------------------------------------
-ls
+ls | grep awesomebump
 
 !!! SI REP awesomebump N'EXISTE PAS
 -----------------------------------
@@ -46,14 +47,14 @@ cd ../../../
 1.3) VÉRIFIER VERSION
 =====================
 $ head -n 20 awesomebump/Sources/Sources.pro | grep VERSION
-VERSION_STRING = 5.0
-VERSION_FULL = 5.0.0
+VERSION_STRING = 5.1
+VERSION_FULL = 5.1.0
 
-==> 5.0
+==> 5.1
 
 1-5) FAIRE ARCHIVE TAR.GZ
 =================================
-tar -cvzf awesomebump-git-5.0.20170721.tar.gz --exclude=.git awesomebump
+tar -cvzf awesomebump-git-5.1.20190915.tar.gz --exclude=.git awesomebump
 
 1-5-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -61,7 +62,7 @@ cd $HOME/05-builds/awesomebump-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/awesomebump-git-5.0.20170721.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/awesomebump-git-5.1.20190915.tar.gz .
 sync
 
 
@@ -97,7 +98,7 @@ voir CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=awesomebump-git
-pkgver=5.0.20170721
+pkgver=5.1.20190915
 pkgrel=1
 
 source=("$pkgname-$pkgver.tar.gz"
@@ -107,7 +108,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "awesomebump.png"
 )
 
-sha256sum awesomebump-git-5.0.20170721.tar.gz
+sha256sum awesomebump-git-5.1.20190915.tar.gz
 sha256sum log-file-moved-to-tmp.patch
 sha256sum awesomeBump.sh
 sha256sum awesomebump.desktop
@@ -145,7 +146,7 @@ package() {
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users      256  9 oct.  14:14 awesomebump.desktop
--rw-r--r--  1 jnd users 33200270 30 oct.  16:50 awesomebump-git-5.0.20170721.tar.gz
+-rw-r--r--  1 jnd users 33200270 30 oct.  16:50 awesomebump-git-5.1.20190915.tar.gz
 -rw-r--r--  1 jnd users    66603 30 oct.  16:30 awesomebump.png
 -rwxr-xr-x  1 jnd users       50  9 oct.  14:14 awesomeBump.sh
 -rw-r--r--  1 jnd users      521 31 oct.  10:41 log-file-moved-to-tmp.patch
@@ -162,7 +163,7 @@ $ ls -la
 mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/awesomebump-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/awesomebump-git/awesomebump-git-5.0.20170721.tar.gz . \
+&& cp -v $HOME/05-builds/awesomebump-git/awesomebump-git-5.1.20190915.tar.gz . \
 && cp -v $HOME/05-builds/awesomebump-git/log-file-moved-to-tmp.patch . \
 && cp -v $HOME/05-builds/awesomebump-git/awesomeBump.sh . \
 && cp -v $HOME/05-builds/awesomebump-git/awesomebump.desktop . \
@@ -239,7 +240,7 @@ $ mv -v awesomebump-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i awesomebump-git-5.0.20170721.tar.gz
+$ rm -i awesomebump-git-5.1.20190915.tar.gz
 $ rm -rf /tmp/0-AUR
 
 
