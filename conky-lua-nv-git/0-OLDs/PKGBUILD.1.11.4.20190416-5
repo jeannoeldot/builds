@@ -1,28 +1,26 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=conky-lua-nv-git
-pkgver=1.11.6.20191021
-pkgrel=1
+pkgver=1.11.4.20190416
+pkgrel=5
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
 url="https://github.com/brndnmtthws/conky"
 license=('GPL3')
 conflicts=('conky')
 provides=('conky')
-depends=('libxml2' 'curl' 'cairo' 'wireless_tools'
+depends=('alsa-lib' 'libxml2' 'curl' 'cairo' 'wireless_tools'
           'libxft' 'glib2' 'libxdamage' 'imlib2' 'lua' 'librsvg'
           'libxinerama' 'libxnvctrl'
-          'hicolor-icon-theme'
-          'libpulse'
 )
 makedepends=('docbook2x' 'perl-xml-libxml'
-             'docbook-xml' 'docbook-xsl' 'cmake'  'git' 'man-db'
+             'docbook-xml' 'docbook-xsl' 'cmake'  'git'
 )
 optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('e8234b2394b895a403e0231f36705ca72e5413a40bb4b454b037ad4a91297568'
+sha256sums=('9b08157ace3d0d827b0f874fd1c8439c09e097792f052e53c0c03903701101d8'
 )
 #options=('!strip' 'debug')
 
