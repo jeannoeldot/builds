@@ -88,7 +88,7 @@ syntax = "proto2";
 ENREGISTRER et Quitter Kwrite & EFFACER fichier chatcleaner.proto~
 rm -f chatcleaner.proto~
 
-1-2) MODIFIER pokerth-1.1.2-rc/pokerth.proto
+2-2) MODIFIER pokerth-1.1.2-rc/pokerth.proto
 --------------------------------------------
 kwrite pokerth.proto
 
@@ -105,7 +105,7 @@ rm -f pokerth.proto~
 
 cd ..
 
-1-3) MODIFIER pokerth-1.1.2-rc/src/net/common/netpacket.cpp
+2-3) MODIFIER pokerth-1.1.2-rc/src/net/common/netpacket.cpp
 --------------------------------------------------------------
 cd pokerth-1.1.2-rc.new/src/net/common
 kwrite netpacket.cpp
@@ -127,69 +127,111 @@ diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-protobuf.patch
 rm -rf pokerth-1.1.2-rc.new
 
 
-cd $HOME/05-builds/pokerth
-
-mv -vf /tmp/srcp/fix-build-with-boost.patch .
-mv -vf /tmp/srcp/fix-build-with-protobuf.patch .
-
-
+VOIR : https://aur.archlinux.org/cgit/aur.git/plain/pokerth-1.1.2.patch.2019?h=pokerth
 3) PATCH BOOST VERSION >= 1.71 ET websocketpp
 =============================================
-1-1) MODIFIER pokerth-1.1.2-rc/src/gui/qt/gametable/gametableimpl.cpp
----------------------------------------------------------------------
+3-1) MODIFIER pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp
+----------------------------------------------------------------------------------------------------
 cp -R pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 
-cd pokerth-1.1.2-rc.new/src/gui/qt/gametable
-kwrite gametableimpl.cpp
+cd pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio
+kwrite connection.hpp
 
-MODIFIER LIGNE 3862 :
-		advance(pos, id);
-DEVIENT :
-		std::advance(pos, id);
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier gametableimpl.cpp~
-rm -f gametableimpl.cpp~
- 
-cd ../../../../..
-
-1-2) MODIFIER pokerth-1.1.2-rc/src/net/common/clientthread.cpp
---------------------------------------------------------------
-cd pokerth-1.1.2-rc.new/src/net/common
-kwrite clientthread.cpp
-
-MODIFIER LIGNES 996 ET 997 :
-		boost::asio::socket_base::non_blocking_io command(true);
-		newSock->io_control(command);
+MODIFIER LIGNES 314-315-316 :
+        timer_ptr new_timer = lib::make_shared<lib::asio::steady_timer>(
+            lib::ref(*m_io_service),
+            lib::asio::milliseconds(duration)
 DEVIENNENT :
-		newSock->non_blocking(true);
+        timer_ptr new_timer(
+            new lib::asio::steady_timer(
+                *m_io_service,
+                lib::asio::milliseconds(duration))
 
-ENREGISTRER et Quitter Kwrite & EFFACER fichier clientthread.cpp~
-rm -f clientthread.cpp~
- 
-cd ../../../..
-
-1-3) MODIFIER pokerth-1.1.2-rc/src/net/serveraccepthelper.h
------------------------------------------------------------
-cd pokerth-1.1.2-rc.new/src/net
-kwrite serveraccepthelper.h
-
-MODIFIER LIGNES 125 ET 126 :
-			boost::asio::socket_base::non_blocking_io command(true);
-			acceptedSocket->io_control(command);
+MODIFIER LIGNES 465 ET 466 :
+            m_strand = lib::make_shared<lib::asio::io_service::strand>(
+                lib::ref(*io_service));
 DEVIENNENT :
-			acceptedSocket->non_blocking(true);
+            m_strand.reset(new lib::asio::io_service::strand(*io_service));
 
-ENREGISTRER et Quitter Kwrite & EFFACER fichier serveraccepthelper.h~
-rm -f serveraccepthelper.h~
+ENREGISTRER et Quitter Kwrite & EFFACER fichier connection.hpp~
+rm -f connection.hpp~
+ 
+cd ../../../../../../..
 
-cd ../../..
+3-2) MODIFIER pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp
+--------------------------------------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio
+kwrite endpoint.hpp
+
+MODIFIER LIGNES 194 ET 195 :
+        m_acceptor = lib::make_shared<lib::asio::ip::tcp::acceptor>(
+            lib::ref(*m_io_service));
+DEVIENNENT :
+        m_acceptor.reset(new lib::asio::ip::tcp::acceptor(*m_io_service));
+
+MODIFIER LIGNES 662 À 664 :
+        m_work = lib::make_shared<lib::asio::io_service::work>(
+            lib::ref(*m_io_service)
+        );
+DEVIENNENT :
+        m_work.reset(new lib::asio::io_service::work(*m_io_service));
+
+MODIFIER LIGNES 826 À 827 :
+            m_resolver = lib::make_shared<lib::asio::ip::tcp::resolver>(
+                lib::ref(*m_io_service));
+DEVIENNENT :
+            m_resolver.reset(new lib::asio::ip::tcp::resolver(*m_io_service));
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier endpoint.hpp~
+rm -f endpoint.hpp~
+ 
+cd ../../../../../../..
+
+3-3) MODIFIER pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp
+-------------------------------------------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security
+kwrite none.hpp
+
+MODIFIER LIGNES 171 ET 172 :
+        m_socket = lib::make_shared<lib::asio::ip::tcp::socket>(
+            lib::ref(*service));
+DEVIENNENT :
+        m_socket.reset(new lib::asio::ip::tcp::socket(*service));
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier none.hpp~
+rm -f none.hpp~
+
+cd ../../../../../../../..
+
+3-4) MODIFIER pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/security/tls.hpp
+------------------------------------------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security
+kwrite tls.hpp
+
+MODIFIER LIGNES 196 ET 197 :
+        m_socket = lib::make_shared<socket_type>(
+            _WEBSOCKETPP_REF(*service),lib::ref(*m_context));
+DEVIENNENT :
+        m_socket.reset(new socket_type(*service, *m_context));
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier tls.hpp~
+rm -f tls.hpp~
+
+cd ../../../../../../../..
+
 
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-websocketpp-with-boost.patch
 
 rm -rf pokerth-1.1.2-rc.new
 
+
+cd $HOME/05-builds/pokerth
+
+mv -vf /tmp/srcp/fix-build-with-boost.patch .
+mv -vf /tmp/srcp/fix-build-with-protobuf.patch .
+mv -vf /tmp/srcp/fix-build-websocketpp-with-boost.patch .
 
 
 5) QUAND PATCHES FINIS
