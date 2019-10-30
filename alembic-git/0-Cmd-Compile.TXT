@@ -6,16 +6,16 @@ cd $HOME/05-builds/alembic-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/alembic/alembic/releases
-==> lamiller0 released this on 16 may 2019 ==> 20190516
-==> Alembic 1.7.11  ==> 1.7.11
-==> 1.7.11.20190516
+==> lamiller0 released this on 26 oct 2019 ==> 20191026
+==> Alembic 1.7.12  ==> 1.7.12
+==> 1.7.12.20191026
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O alembic-1.7.11.tar.gz \
-https://github.com/alembic/alembic/archive/1.7.11.tar.gz
+wget -O alembic-1.7.12.tar.gz \
+https://github.com/alembic/alembic/archive/1.7.12.tar.gz
 
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
@@ -24,7 +24,7 @@ cd $HOME/05-builds/alembic-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/alembic-1.7.11.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/alembic-1.7.12.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -37,7 +37,9 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=alembic-git               # alembic ds community
-pkgver=1.7.11.20190516
+pkgver=1.7.12.20191026
+pkgrel=1
+
 pkgrel=4          # rebuild MAJ openexr 2.4
 
 pkgrel=3  #   sed -i "s/\-O3//g" $(find . -name flags.make)
@@ -47,12 +49,10 @@ pkgrel=3  #   sed -i "s/\-O3//g" $(find . -name flags.make)
 pkgrel=2  # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
             -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
 
-pkgrel=1
-
 pkgrel=2    # Rebuild nouveau PC 
 
 !!!!!!
-_ver_release="1.7.11"
+_ver_release="1.7.12"
 _name_release="alembic-${_ver_release}"
 
 license=('BSD')
@@ -69,7 +69,7 @@ provides='alembic'
 
 SANS PATCH
 ----------
-sha256sum alembic-1.7.11.tar.gz
+sha256sum alembic-1.7.12.tar.gz
 
 source=("alembic-${_ver_release}.tar.gz"
 )
@@ -87,9 +87,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf alembic-1.7.11.tar.gz -C /tmp/srcp
+tar -xzf alembic-1.7.12.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/alembic-1.7.11/CMakeLists.txt
+1) kwrite /tmp/srcp/alembic-1.7.12/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -121,7 +121,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 alembic-1.7.11.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 alembic-1.7.12.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -139,7 +139,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/alembic-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/alembic-git/alembic-1.7.11.tar.gz . \
+&& cp -v $HOME/05-builds/alembic-git/alembic-1.7.12.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/alembic-git \
 && cp -v /tmp/build/alembic-git-*-x86_64.pkg.tar.* . \
@@ -182,9 +182,10 @@ rm -f *~
 
 # Verifications...
 
-Checking alembic-git-1.7.11.20190516-1-x86_64.pkg.tar.xz
+Checking alembic-git-1.7.12.20191026-1-x86_64.pkg.tar.xz
 
 namcap alembic-git-*-x86_64.pkg.tar.*
+alembic-git E: Dependency gcc-libs detected and not included (libraries ['usr/lib/libgcc_s.so.1', 'usr/lib/libstdc++.so.6'] needed in files ['usr/lib/libAlembic.so.1.7.12'])
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -204,7 +205,7 @@ $ mv -v alembic-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i alembic-1.7.11.tar.gz
+$ rm -i alembic-1.7.12.tar.gz
 
 
 $ cd && maj-repolocal
