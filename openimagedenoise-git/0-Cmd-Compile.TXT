@@ -36,6 +36,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-git
 pkgver=1.1.0.20191015
+pkgrel=2  # REBUILD python 3.8
+
 pkgrel=1
 
 pkgrel=2  # Test cmake Ofast floop
@@ -48,6 +50,7 @@ license=('Apache')
 
 depends=('intel-tbb' 'python'
 )
+
 
 makedepends=('cmake')
 
@@ -163,11 +166,9 @@ rm -f *~
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
-usr/bin/denoise
 usr/lib/libOpenImageDenoise.so.1.1.0
 
 namcap openimagedenoise-git-*-x86_64.pkg.tar.xz
-openimagedenoise-git W: Dependency included and not needed ('python')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -212,6 +213,15 @@ SI PROBLEME
 
 ANCIEN
 ======
+# Verifications...
+==> WARNING: Package contains reference to $srcdir
+usr/bin/denoise
+usr/lib/libOpenImageDenoise.so.1.1.0
+
+namcap openimagedenoise-git-*-x86_64.pkg.tar.xz
+openimagedenoise-git W: Dependency included and not needed ('python')
+
+
 pkgrel=3    # static libs
 !!! TESTS
 options=(staticlibs)

@@ -2,7 +2,7 @@
 
 pkgname=openimagedenoise-git
 pkgver=1.1.0.20191015
-pkgrel=1
+pkgrel=2
 _ver_release="1.1.0"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
