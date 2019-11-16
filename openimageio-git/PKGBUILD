@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.0.12.20191101
-pkgrel=1
+pkgrel=2
 _name_release="oiio-Release-2.0.12"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
@@ -42,7 +42,7 @@ build() {
       -DCMAKE_SKIP_RPATH=ON \
       -DVERBOSE=ON \
       -DOIIO_BUILD_TESTS=OFF \
-      -DPYTHON_VERSION=3.7 \
+      -DPYTHON_VERSION=3.8 \
       -DUSE_FIELD3D=OFF \
       -DUSE_PTEX=OFF \
       -DUSE_NUKE=OFF \

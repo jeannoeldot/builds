@@ -36,7 +36,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-git
 pkgver=1.1.0.20191015
-pkgrel=2  # REBUILD python 3.8
+pkgrel=2  # Rebuild MAJ python 3.8
 
 pkgrel=1
 

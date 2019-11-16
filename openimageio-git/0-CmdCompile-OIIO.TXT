@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.0.12.20191101
+pkgrel=2  # Rebuild MAJ python 3.8
+
 pkgrel=1
 
 pkgrel=4          # rebuild MAJ openexr 2.4
@@ -104,10 +106,10 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.7.4-2 [installé]
+==> extra/python 3.8.0-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
-PYTHON_VERSION=3.7
+PYTHON_VERSION=3.8
 
 !!! VERSION 2.0.12
 build() {
@@ -318,7 +320,7 @@ usr/bin/idiff
 usr/bin/oiiotool
 usr/lib/libOpenImageIO_Util.so.2.0.12
 usr/lib/libOpenImageIO.so.2.0.12
-usr/lib/python3.7/site-packages/OpenImageIO.so
+usr/lib/python3.8/site-packages/OpenImageIO.so
 
 namcap openimageio-git-*-x86_64.pkg.tar.xz
 
