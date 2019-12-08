@@ -10,11 +10,11 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Alexander Gavrilov <angavrilov@gmail.com>	
-	Sat, 16 Nov 2019 09:56:38 +0100 (11:56 +0300)
-commit	e385bdb228acd3a4c64a886e6fee39f5fcb3cebf
+committer	William Reynish <billrey@me.com>	
+	Sun, 8 Dec 2019 05:05:31 +0100 (13:05 +0900)
+commit	d82d19904b66a7ca2d0c181045a9a16d6504a54c
 
-==> 20191116
+==> 20191208
 
 
 1.3 SOURCES
@@ -40,7 +40,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = e385bdb228ac
+==> MY_WC_HASH = d82d19904b66
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -50,7 +50,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1573894598
+==> MY_WC_COMMIT_TIMESTAM = 1575777931
 
 cd ..
 
@@ -68,7 +68,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = e385bdb228ac
+==> MY_WC_HASH = d82d19904b66
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -78,7 +78,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1573894598
+==> MY_WC_COMMIT_TIMESTAM = 1575777931
 
 cd ..
 
@@ -94,16 +94,16 @@ cd ..
 head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
 #define BLENDER_VERSION         282
-#define BLENDER_SUBVERSION      1
+#define BLENDER_SUBVERSION      4
 
-==> Version = 2.82.1
+==> Version = 2.82.4
 
-==> Version = 2.82.1.20191116
+==> Version = 2.82.4.20191208
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.82.1.20191116.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.82.4.20191208.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -111,7 +111,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.82.1.20191116.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.82.4.20191208.tar.gz .
 sync
 
 
@@ -126,7 +126,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.82.1.20191116
+pkgver=2.82.4.20191208
 pkgrel=1
 
 pkgrel=1    # Avec openimagedenoise + dynamic clibs
@@ -180,7 +180,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.82.1.20191116.tar.gz
+sha256sum blender-git-2.82.4.20191208.tar.gz
 
 sha256sums=(...
          ...
@@ -199,9 +199,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e385bdb228ac"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d82d19904b66"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1573894598|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1575777931|' build_files/cmake/buildinfo.cmake
 }
 
 
@@ -221,6 +221,324 @@ $ pacman -Ss python | grep 3 | grep install
     VALEUR CMAKELISTS.TXT=MODIFIÉ
 =======================================
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
+
+# Blender internal features
+159 option WITH_BUILDINFO   ON   makedepends = git
+
+# Compositor
+181 option WITH_OPENIMAGEDENOISE  ON   dep = openimagedenoise-git
+183 option WITH_OPENSUBDIV        ON   dep = opensubdiv-git
+185 option WITH_OPENVDB           ON   dep = openvdb-git
+
+239     !!! VOIR
+if(UNIX AND NOT APPLE)
+	option WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
+endif()
+
+Lignes 264 et ...
+# Alembic support
+option WITH_ALEMBIC             ON  dep = alembic-git
+
+Lignes 268
+# 3D format support
+270   option WITH_OPENCOLLADA	ON  dep = opencollada-git
+
+# Sound output
+276   option WITH_JACK          ==> OFF         si ON  dep =  jack
+
+# Logging/unbit test libraries.
+
+# Misc
+311	option WITH_INPUT_NDOF		==> OFF
+
+
+313 	WITH_INSTALL_PORTABLE       ON   ==> OFF
+
+321     WITH_PYTHON_INSTALL             ON   ==> OFF
+
+331     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+
+334     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+
+        
+343 # Cycles
+option WITH_CYCLES			ON   dep = openimageio(-git)
+option WITH_CYCLES_OSL      ON   dep = openshadinglanguage(-git)
+
+!!! -- Could NOT find EMBREE (missing: _embree_LIBRARIES)
+!!! OK si embree(-git) compilé avec STATICS LIBS
+option WITH_CYCLES_EMBREE           OFF  si ON makedepends = embree(-git)
+
+option WITH_CYCLES_CUDA_BINARIES	==> ON dep = cuda
+        
+Ligne 353
+URL  GPU et sm_??  : https://developer.nvidia.com/cuda-gpus
+https://developer.nvidia.com/cuda-gpus#collapse4
+
+exemple :  GeForce GTX 980    5.2
+  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH=sm_52
+
+!!! SI PLUSIEURS CUDA BINARIES:
+================================
+exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
+-DCYCLES_CUDA_BINARIES_ARCH=sm_52;sm_61
+
+Lignes 356 ????
+option WITH_CYCLES_LOGGING     ON ???
+        
+!!! A VOIR ???
+358 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
+
+!!! VOIR https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/a2b52dc5716a97e5413acbd6eefc9ce3788b6456
+367 option WITH_CYCLES_DEVICE_OPTIX   "Enable Cycles OptiX support" OFF
+
+!!! A VOIR ???
+374   WITH_CUDA_DYNLOAD     ON
+
+
+377 # LLVM
+$ pacman -Ss llvm | grep install
+extra/llvm 9.0.0-4 [installé]
+extra/llvm-libs 9.0.0-4 [installé]
+
+449 option WITH_LLVM   	OFF  ==> ON
+
+# Debug
+401 option WITH_BOOST     ON
+402 option WITH_TBB     ON  dep = intel-tbb
+406 option WITH_TBB_MALLOC_PROXY  OFF
+
+# Documentation
+Lignes 414 et ...
+if(UNIX AND NOT APPLE)
+        option WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
+endif()
+
+
+# OpenGL
+# OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
+---------------------------------------------------
+Lignes 229 et ...
+        option WITH_SYSTEM_GLEW   OFF
+        option WITH_SYSTEM_GLES   ON
+
+Lignes 422 et ...
+INCHANGÉS :
+------------
+422 WITH_OPENGL ON
+
+
+# Compiler toolchain
+Lignes 449 et ...
+
+=================================================================
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.82.4.20191208.tar.gz
+-rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
+            'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'
+SI makedepends= 'embree-git'
+================================================================================
+$ cp -v $HOME/00-repolocal/\
+{\
+openshadinglanguage-git-*-x86_64.pkg.tar.*,\
+openimageio-git-*-x86_64.pkg.tar.*,\
+opencollada-git-*-x86_64.pkg.tar.*,\
+opensubdiv-git-*-x86_64.pkg.tar.*,\
+openvdb-git-*-x86_64.pkg.tar.*,\
+alembic-git-*-x86_64.pkg.tar.*,\
+openimagedenoise-git-*-x86_64.pkg.tar.*,\
+embree-git-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
+
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 16G
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 16G
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 16G -l logs
+
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G -l logs
+
+-------------------------------------------------------------------
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 16G
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 16G -l logs
+-------------------------------------------------------------------
+
+
+$ rm -rf /tmp/chrootrepo
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# LC_ALL=C pacman -Syu
+OU
+# maj
+
+rm -f *~ \
+&& sudo cp -v /etc/makepkg.conf /etc/makepkg.conf.backup.build.blender \
+&& sudo cp -v -f /home/jnd/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast /etc/makepkg.conf \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/blender-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.82.4.20191208.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/blender-git \
+&& cp -v -f /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build \
+&& sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/blender-git \
+&& rm -rf /tmp/build \
+&& sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
+
+==> Installing missing dependencies...
+resolving dependencies...
+:: There are 3 providers available for libgl:
+:: Repository extra
+   1) libglvnd  2) nvidia-304xx-utils  3) nvidia-340xx-utils
+
+Enter a number (default=1): 
+
+
+3-2) MAKEPKG en USER sur SSD
+=============================
+!!! EN USER
+cd $HOME/05-builds/blender-git
+$ rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+# Nettoyage...
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+
+# Verifications...
+
+==> WARNING: Package contains reference to $srcdir
+usr/bin/blender
+usr/share/blender/2.82/scripts/addons/cycles/shader/node_rgb_to_bw.oso
+......
+usr/share/blender/2.82/scripts/addons/cycles/shader/node_add_closure.oso
+
+namcap blender-git-*-x86_64.pkg.tar.*
+
+blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
+blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
+blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
+blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/blender-git-*-x86_64.pkg.tar.*
+
+$ cp -v blender-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/blender-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i blender-git-2.82.4.20191208.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu blender-git
+
+
+!!! MODIFIER FICHIERS
+!!! EN USER
+
+!!! SI CHANGEMENT DE VERSION ( 2.81 -> 2.82  ... )
+
+$ cd
+$ cp -r .config/blender/2.81 .config/blender/2.82
+# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.82/cache
+$ rm -f .config/blender/2.82/cache/bvh_*
+
+# SUPPRINE VERSION N-2
+$ rm -rf .config/blender/2.80
+
+================================================================
+TESTS
+========
+
+/home/jnd/99-dwl-temp/kernel_config.h
+#sed -i "s|-pipe -fPIC -funsigned-char -fno-strict-aliasing|-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
+sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|g" /home/jnd/99-dwl-temp/kernel_config.h
+
+
+/home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "d82d19904b66"|' /home/jnd/99-temp/blender/buildinfo.cmake
+
+sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
+
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1575777931|' /home/jnd/99-temp/blender/buildinfo.cmake
+
+================================================================
+ANCIENS
+========
 
 Lignes 181 et ...
 # customize...
@@ -375,215 +693,6 @@ INCHANGÉS :
 # Compiler toolchain
 Lignes 516 et ...
 
-=================================================================
-
-3-1) MAKEPKG TMPFS en CHROOT EN USER
-====================================
-!!! ATTENTION : ATTRIBUTS FICHIERS
-==================================
-$ ls -la
-==> 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.82.1.20191116.tar.gz
--rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
-
-!!! A MODIFIER SI PAS OK !
-===============================
-
-3-1) MAKEPKG TMPFS en CHROOT EN USER
-====================================
-!!! EN USER
-
-$ mkpkg-chroot-repo
-
-SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
-            'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'
-SI makedepends= 'embree-git'
-================================================================================
-$ cp -v $HOME/00-repolocal/\
-{\
-openshadinglanguage-git-*-x86_64.pkg.tar.*,\
-openimageio-git-*-x86_64.pkg.tar.*,\
-opencollada-git-*-x86_64.pkg.tar.*,\
-opensubdiv-git-*-x86_64.pkg.tar.*,\
-openvdb-git-*-x86_64.pkg.tar.*,\
-alembic-git-*-x86_64.pkg.tar.*,\
-openimagedenoise-git-*-x86_64.pkg.tar.*,\
-embree-git-*-x86_64.pkg.tar.*\
-} \
-/tmp/chrootrepo/
-
-
-  FLOOP
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m floop -g 16G
-
-  FAST
--------
-$ rm -f *~
-$ mkpkg-tmpfs -m fast -g 16G
-OU
-$ rm -f *~
-$ mkpkg-tmpfs -m fast -g 16G -l logs
-
-
-$ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G
-OU
-$ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G -l logs
-
--------------------------------------------------------------------
-
-  NATIVE
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m native -g 16G
-OU
-$ rm -f *~
-$ mkpkg-tmpfs -m native -g 16G -l logs
--------------------------------------------------------------------
-
-
-$ rm -rf /tmp/chrootrepo
-
-3) MAKEPKG DANS TMP EN USER
-====================================
-!!! EN ROOT
-# LC_ALL=C pacman -Syu
-OU
-# maj
-
-rm -f *~ \
-&& sudo cp -v /etc/makepkg.conf /etc/makepkg.conf.backup.build.blender \
-&& sudo cp -v -f /home/jnd/05-builds/0-copie-fichiers-chroot/makepkg.conf.fast /etc/makepkg.conf \
-&& rm -rf /tmp/build \
-&& mkdir /tmp/build \
-&& cd /tmp/build \
-&& cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.82.1.20191116.tar.gz . \
-&& LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/blender-git \
-&& cp -v -f /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
-&& rm -rf /tmp/build \
-&& sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
-
-SI ERREUR :
-------------
-cd $HOME/05-builds/blender-git \
-&& rm -rf /tmp/build \
-&& sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
-
-==> Installing missing dependencies...
-resolving dependencies...
-:: There are 3 providers available for libgl:
-:: Repository extra
-   1) libglvnd  2) nvidia-304xx-utils  3) nvidia-340xx-utils
-
-Enter a number (default=1): 
-
-
-3-2) MAKEPKG en USER sur SSD
-=============================
-!!! EN USER
-cd $HOME/05-builds/blender-git
-$ rm -f *~
-
-makepkg -s
-
-makepkg -f
-
-# Nettoyage...
-!!! EN USER
-rm -rf pkg src
-rm -f *~
-
-# Verifications...
-
-==> WARNING: Package contains reference to $srcdir
-usr/bin/blender
-usr/share/blender/2.82/scripts/addons/cycles/shader/node_rgb_to_bw.oso
-......
-usr/share/blender/2.82/scripts/addons/cycles/shader/node_add_closure.oso
-
-namcap blender-git-*-x86_64.pkg.tar.*
-
-blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
-blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
-
-
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
--------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/blender-git-*-x86_64.pkg.tar.*
-
-$ cp -v blender-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
----------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/blender-git-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
-
-$ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
-
-
-# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
---------------------------------------------
-$ rm -f *~
-$ rm -f *.log
-$ rm -i blender-git-2.82.1.20191116.tar.gz
-
-
-$ cd && maj-repolocal
-$ sync
-
-!!! EN ROOT
-# cd
-# maj
-OU
-# LC_ALL=C pacman -Syu
-
-# LC_ALL=C pacman -Syu blender-git
-
-
-!!! MODIFIER FICHIERS
-!!! EN USER
-
-!!! SI CHANGEMENT DE VERSION ( 2.81 -> 2.82  ... )
-
-$ cd
-$ cp -r .config/blender/2.81 .config/blender/2.82
-# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.82/cache
-$ rm -f .config/blender/2.82/cache/bvh_*
-
-# SUPPRINE VERSION N-2
-$ rm -rf .config/blender/2.80
-
-================================================================
-TESTS
-========
-
-/home/jnd/99-dwl-temp/kernel_config.h
-#sed -i "s|-pipe -fPIC -funsigned-char -fno-strict-aliasing|-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
-sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|g" /home/jnd/99-dwl-temp/kernel_config.h
-
-
-/home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "e385bdb228ac"|' /home/jnd/99-temp/blender/buildinfo.cmake
-
-sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
-
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1573894598|' /home/jnd/99-temp/blender/buildinfo.cmake
-
-================================================================
-ANCIENS
-========
-
 prepare() {
   cd "${_gitname}"
   # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
@@ -596,9 +705,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e385bdb228ac"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d82d19904b66"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1573894598|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1575777931|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -608,7 +717,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
 )
 
-sha256sum blender-git-2.82.1.20191116.tar.gz
+sha256sum blender-git-2.82.4.20191208.tar.gz
 
 sha256sum Fix-T64463-Visual-Artifacts-with-ColorRamp.patch
 
@@ -633,7 +742,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-mesh_discombobulator.patch"
 )
 
-sha256sum blender-git-2.82.1.20191116.tar.gz
+sha256sum blender-git-2.82.4.20191208.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -765,7 +874,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.82.1.20191116.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.82.4.20191208.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
@@ -781,7 +890,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.82.1.20191116.tar.gz
+sha256sum blender-git-2.82.4.20191208.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -807,9 +916,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e385bdb228ac"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d82d19904b66"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1573894598|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1575777931|' build_files/cmake/buildinfo.cmake
   
 }
 
