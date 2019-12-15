@@ -267,7 +267,7 @@ option WITH_CYCLES_OSL      ON   dep = openshadinglanguage(-git)
 
 !!! -- Could NOT find EMBREE (missing: _embree_LIBRARIES)
 !!! OK si embree(-git) compilé avec STATICS LIBS
-option WITH_CYCLES_EMBREE           OFF  si ON makedepends = embree(-git)
+option WITH_CYCLES_EMBREE           OFF ==> ON si ON makedepends = embree(-git)
 
 option WITH_CYCLES_CUDA_BINARIES	==> ON dep = cuda
         
