@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.0.13.20191204
+pkgrel=2          # rebuild MAJ openvdb 7.0.0
 pkgrel=1
 
 pkgrel=2  # Rebuild MAJ python 3.8

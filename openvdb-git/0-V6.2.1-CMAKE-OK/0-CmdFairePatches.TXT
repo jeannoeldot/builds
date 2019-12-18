@@ -1,19 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 7.0.0
-!!! VERSION = v7.0.0
+!!! VERSION = 6.2.1
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openvdb-git
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v7.0.0.tar.gz /tmp/srcp/
+cp -v OpenVDB-v6.2.1.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v7.0.0.tar.gz
+tar -xzf OpenVDB-v6.2.1.tar.gz
 
 
 

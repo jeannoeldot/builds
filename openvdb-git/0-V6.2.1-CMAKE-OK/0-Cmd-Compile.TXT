@@ -6,16 +6,16 @@ cd $HOME/05-builds/openvdb-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/AcademySoftwareFoundation/openvdb/releases
-==>  Idclip released this 12 days ago : 6 déc. 2019 ==> 20191206
-==> v7.0.0  ==> 7.0.0
-==> 7.0.0.20191206
+==>  danrbailey released this 3 days ago : 1 oct. 2019 ==> 20191001
+==> v6.2.1  ==> 6.2.1
+==> 6.2.1.20191001
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenVDB-v7.0.0.tar.gz \
-https://github.com/AcademySoftwareFoundation/openvdb/archive/v7.0.0.tar.gz
+wget -O OpenVDB-v6.2.1.tar.gz \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/v6.2.1.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v7.0.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v6.2.1.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,12 +36,13 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=7.0.0.20191206
-pkgrel=1
-
+pkgver=6.2.1.20191001
 pkgrel=4          # rebuild MAJ openexr 2.4
+
 pkgrel=3    # Rebuild MAJ intel-tbb 2019.9-1
 pkgrel=2          # rebuild boost boost-libs 1.71.0
+pkgrel=1
+
 pkgrel=6    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
               -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
               sed -i "s/isystem/I/g" $(find . -name flags.make)
@@ -61,7 +62,7 @@ pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 pkgrel=3          # SANS doc, SANS ABI=3
 
 !!!!!!
-_ver_release="7.0.0"
+_ver_release="6.2.1"
 _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
@@ -79,7 +80,7 @@ provides='openvdb'
 
 SANS PATCH
 ----------
-sha256sum OpenVDB-v7.0.0.tar.gz
+sha256sum OpenVDB-v6.2.1.tar.gz
 
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
@@ -98,70 +99,70 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenVDB-v7.0.0.tar.gz -C /tmp/srcp
+tar -xzf OpenVDB-v6.2.1.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openvdb-7.0.0/CMakeLists.txt
+1) kwrite /tmp/srcp/openvdb-6.2.1/CMakeLists.txt
 
-LIGNE 54 ET 55:
+LIGNE 79 ET 80:
 ---------------
 OPENVDB_BUILD_CORE  ON      Both static and shared versions are enabled by default
 OPENVDB_BUILD_BINARIES  ON  Only vdb_print is enabled by default
 
-LIGNE 56:
+LIGNE 81:
 ---------
 OPENVDB_BUILD_PYTHON_MODULE "Build the pyopenvdb Python module" ON ==> OFF
 
-LIGNE 57:
+LIGNE 82:
 ---------
 OPENVDB_BUILD_UNITTESTS "Build the OpenVDB unit tests" OFF
 
-LIGNE 58:
+LIGNE 83:
 ---------
 OPENVDB_BUILD_DOCS "Build the OpenVDB documentation" OFF
 
-LIGNES 59 ET 60:
+LIGNES 84 ET 85:
 ----------------
 OPENVDB_BUILD_HOUDINI_PLUGIN "Build the Houdini plugin" OFF
 OPENVDB_INSTALL_HOUDINI_PYTHONRC OFF
 
-LIGNE 62:
+LIGNE 87:
 ---------
 OPENVDB_BUILD_MAYA_PLUGIN "Build the Maya plugin" OFF
 
-LIGNE 63: !!!!!!
+LIGNE 88: !!!!!!
 ----------------
 OPENVDB_ENABLE_RPATH "Build with RPATH information" ON ==> OFF
 
-LIGNE 66:
+LIGNE 91:
 ---------
 OPENVDB_INSTALL_CMAKE_MODULES ON
 
 
-LIGNE 70:
+LIGNE 95:
 ---------
 USE_HOUDINI OFF
 
-LIGNE 74:
+LIGNE 99:
 ---------
 USE_MAYA  OFF
 
-LIGNE 77:
+LIGNE 102:
 ---------
 USE_BLOSC ON
 
-LIGNE 81:
+LIGNE 106:
 ----------
 USE_LOG4CPLUS OFF
 
-LIGNE 85:
+LIGNE 110:
 ----------
 USE_EXR OFF ==> ON
 
-LIGNE 91:
+LIGNE 117:
 ----------
 USE_CCACHE  ON ==> OFF
 
-LIGNE 139:
+LIGNE 140:
 ----------
 VOIR: BLENDER
 OpenVDB: Fix compilation error against OpenVDB 4
@@ -177,19 +178,19 @@ commit	71d7d6cd8c431b7f4fac8d65a4eaedf3cff6c8f6
 OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" OFF
 
 
-2) kwrite /tmp/srcp/openvdb-7.0.0/openvdb/CMakeLists.txt
+2) kwrite /tmp/srcp/openvdb-6.2.1/openvdb/CMakeLists.txt
 
-LIGNE 20:
+LIGNE 42:
 ---------
 OPENVDB_CORE_SHARED "Build dynamically linked version  ON
-LIGNE 21:
+LIGNE 43:
 ---------
 OPENVDB_CORE_STATIC "Build statically linked version of the core library." ON ==> OFF
 
 
-3) kwrite /tmp/srcp/openvdb-7.0.0/openvdb/cmd/CMakeLists.txt
+3) kwrite /tmp/srcp/openvdb-6.2.1/openvdb/cmd/CMakeLists.txt
 
-LIGNE 20 À 23:
+LIGNE 42 À 45:
 --------------
 OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
 OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF ==> ON
@@ -205,7 +206,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v7.0.0.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v6.2.1.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -223,7 +224,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v7.0.0.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v6.2.1.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -268,6 +269,7 @@ rm -f *~
 
 namcap openvdb-git-*-x86_64.pkg.tar.xz
 openvdb-git W: Dependency zlib included but already satisfied
+openvdb-git W: Dependency glu included but already satisfied
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -287,7 +289,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenVDB-v7.0.0.tar.gz
+$ rm -i OpenVDB-v6.2.1.tar.gz
 
 
 $ cd && maj-repolocal
@@ -314,8 +316,6 @@ SI PROBLEME
 
 ANCIEN
 ======
-openvdb-git W: Dependency glu included but already satisfied
-
 LIGNE 33: !!!!!!
 ----------------
 ENABLE_TESTING()
@@ -326,7 +326,7 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
         'fix-error-boost-egal-sup-1.67.patch'
 )
 
-sha256sum OpenVDB-v7.0.0.tar.gz
+sha256sum OpenVDB-v6.2.1.tar.gz
 
 sha256sum fix-error-boost-egal-sup-1.67.patch
 
