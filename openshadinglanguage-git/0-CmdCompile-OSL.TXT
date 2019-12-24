@@ -44,6 +44,8 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.8.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.8.20191204
+pkgrel=3    # Rebuild MAJ OIIO 2.0.13 + opencv 4.2.0
+
 pkgrel=2    # Rebuild MAJ OIIO 2.0.13 + openvdb 7.0.0
 
 pkgrel=1
@@ -55,21 +57,10 @@ pkgrel=4    # Rebuild MAJ intel-tbb 2019.9-1
 pkgrel=3    # Rebuild MAJ LLVM 9.0.0
 pkgrel=2    # rebuild boost boost-libs 1.71.0
 
-pkgrel=6    # Rebuild MAJ OIIO 2.0.10 + openvdb 6.2.0
-
 pkgrel=5    # Voir install_deps.sh
 
 pkgrel=4    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
               -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
-
-pkgrel=3    # Rebuild MAJ OIIO 2.0.10
-pkgrel=2    # Rebuild MAJ LLVM 8.0.1
-pkgrel=2    # Rebuild MAJ OIIO 2.0.8 + openvdb 6.1.0
-pkgrel=2    # Rebuild MAJ OIIO 2.0.7 + opencv 4.1.0
-pkgrel=3    # Rebuild MAJ LLVM 8.0.0
-pkgrel=2    # Rebuild MAJ OIIO 2.0.6
-
-pkgrel=6    # rebuild boost boost-libs 1.69.0
 
 pkgrel=3    # Rebuild MAJ LLVM 6.0.0 et CMAKE_INSTALL_LIBDIR=lib
 

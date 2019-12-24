@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.0.13.20191204
+pkgrel=3          # rebuild MAJ opencv 4.2.0
+
 pkgrel=2          # rebuild MAJ openvdb 7.0.0
 pkgrel=1
 
@@ -48,17 +50,8 @@ pkgrel=4          # rebuild MAJ openexr 2.4
 pkgrel=3    # Rebuild MAJ intel-tbb 2019.9-1
 pkgrel=2          # rebuild boost boost-libs 1.71.0
 
-pkgrel=3          # rebuild MAJ openvdb 6.2.0
-
 pkgrel=2    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
               -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
-pkgrel=2          # rebuild MAJ openvdb 6.1.0
-
-pkgrel=2          # rebuild MAJ opencv 4.1.0
-
-pkgrel=2          # rebuild boost boost-libs 1.69.0
-
-pkgrel=2          # rebuild MAJ openvdb 6.0.0
 
 pkgrel=2          # rebuild MAJ libraw 0.19.0 ilmbase/openexr 2.3
 
@@ -67,7 +60,6 @@ pkgrel=3          # rebuild MAJ ffmpeg 4.0
 
 pkgrel=2          # rebuild CMAKE_INSTALL_LIBDIR=lib
 
-pkgrel=3          # rebuild MAJ opencv
 pkgrel=2          # rebuild LICENSE
 
 !!!!!!
