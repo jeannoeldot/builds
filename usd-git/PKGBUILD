@@ -1,0 +1,51 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=usd-git
+pkgver=19.11.20191026
+pkgrel=1
+_ver_release="19.11"
+_name_release="USD-${_ver_release}"
+pkgdesc="Universal Scene Description"
+url="http://www.openusd.org/"
+arch=('x86_64')
+license=('custom')
+depends=('boost-libs' 'intel-tbb'
+)
+makedepends=('boost' 'cmake'
+)
+conflicts=('usd')
+provides=('usd')
+source=("USD--v${_ver_release}.tar.gz"
+        "blender-usd-diff.patch"
+)
+sha256sums=('84f3bb123f7950b277aace096d678c8876737add0ed0b6ccb77cabb4f32dbcb0'
+            '1111111111111111111111111111111111111111111111111111111111111111'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # 
+  patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
+}
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    
+    ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+  
+  make DESTDIR="${pkgdir}" install
+}

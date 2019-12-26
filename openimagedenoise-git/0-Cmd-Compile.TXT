@@ -5,7 +5,7 @@ cd $HOME/05-builds/openimagedenoise-git
 
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
-https://github.com/embree/embree/releases
+https://github.com/OpenImageDenoise/oidn/releases
 ==>  atafra released this on 15 oct 2019  ==> 20191015
 ==> Open Image Denoise v1.1.0  ==> 1.1.0
 ==> 1.1.0.20191015

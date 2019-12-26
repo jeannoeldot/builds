@@ -1,0 +1,85 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 19.11
+!!! VERSION = v19.11
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/usd-git
+
+mkdir /tmp/srcp
+
+cp -v USD-v19.11.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf USD-v19.11.tar.gz
+
+!!! VOIR
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+
+1A) MODIFIER USD-19.11/cmake/defaults/Options.cmake
+===================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R USD-19.11 USD-19.11.new
+
+cd USD-19.11.new/cmake/defaults
+kwrite Options.cmake
+
+AJOUTER LIGNE 28
+option(PXR_BUILD_USD_TOOLS "Build commandline tools" ON)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Options.cmake~
+rm -f Options.cmake~
+ 
+1B) MODIFIER USD-19.11/cmake/defaults/Packages.cmake
+====================================================
+
+kwrite Packages.cmake
+
+MODIFIER LIGNE 67 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+
+2) MODIFIER USD-19.11/pxr/base/lib/plug/initConfig.cpp
+======================================================
+
+cd USD-19.11.new/pxr/base/lib/plug
+kwrite initConfig.cpp
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier initConfig.cpp~
+rm -f initConfig.cpp~
+
+cd ../../../../..
+
+
+
+diff -aur USD-19.11 USD-19.11.new
+diff -aur USD-19.11 USD-19.11.new > blender-usd-diff.patch
+
+rm -rf USD-19.11.new
+
+cd $HOME/05-builds/usd-git
+
+mv -vf /tmp/srcp/blender-usd-diff.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
