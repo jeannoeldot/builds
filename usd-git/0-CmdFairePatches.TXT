@@ -17,9 +17,15 @@ tar -xzf USD-v19.11.tar.gz
 
 !!! VOIR
 /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+!!!
+kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+cd /home/jnd/99-temp/usd
+tar -xzf USD-v19.11.tar.gz
 
-1A) MODIFIER USD-19.11/cmake/defaults/Options.cmake
-===================================================
+
+
+1-A) MODIFIER USD-19.11/cmake/defaults/Options.cmake
+====================================================
 /!\ /!\ /!\ cd /tmp/srcp
 
 cp -R USD-19.11 USD-19.11.new
@@ -33,8 +39,8 @@ option(PXR_BUILD_USD_TOOLS "Build commandline tools" ON)
 ENREGISTRER et Quitter Kwrite & EFFACER fichier Options.cmake~
 rm -f Options.cmake~
  
-1B) MODIFIER USD-19.11/cmake/defaults/Packages.cmake
-====================================================
+1-B) MODIFIER USD-19.11/cmake/defaults/Packages.cmake
+=====================================================
 
 kwrite Packages.cmake
 
@@ -56,11 +62,91 @@ cd ../../..
 cd USD-19.11.new/pxr/base/lib/plug
 kwrite initConfig.cpp
 
+AJOUTER LIGNES 72 À 92
+    /* The contents of this constructor have been moved to usd_initialise_plugin_path(...) */
+}
+
+}; // end of anonymous namespace
+
+/**
+ * The contents of this function used to be in the static constructor Plug_InitConfig.
+ * This static constructor made it impossible for Blender to pass a path to the USD
+ * library at runtime, as the constructor would run before Blender's main() function.
+ *
+ * This function is wrapped in a C function of the same name (defined below),
+ * so that it can be called from Blender's main() function.
+ *
+ * The datafiles_usd_path path is used to point to the USD plugin path when Blender
+ * has been installed. The fallback_usd_path path should point to the build-time
+ * location of the USD plugin files so that Blender can be run on a development machine
+ * without requiring an installation step.
+ */
+void
+usd_initialise_plugin_path(const char *datafiles_usd_path)
+{
+
+AJOUTER LIGNES 95 À 103
+    // Add Blender-specific paths. They MUST end in a slash, or symlinks will not be treated as directory.
+    if (datafiles_usd_path != NULL && datafiles_usd_path[0] != '\0') {
+        std::string datafiles_usd_path_str(datafiles_usd_path);
+        if (datafiles_usd_path_str.back() != '/') {
+            datafiles_usd_path_str += "/";
+        }
+        result.push_back(datafiles_usd_path_str);
+    }
+
+
+REMPLACER LIGNES 127 À 128
+    Plug_SetPaths(result);
+}
+PAR :
+    if (!TfGetenv("PXR_PATH_DEBUG").empty()) {
+        printf("USD Plugin paths: (%zu in total):\n", result.size());
+        for(const std::string &path : result) {
+            printf("    %s\n", path.c_str());
+        }
+    }
+  
+    Plug_SetPaths(result);
+
+AJOUTER LIGNES 139 À 148
+
+/* Workaround to make it possible to pass a path at runtime to USD. */
+extern "C" {
+void
+usd_initialise_plugin_path(
+    const char *datafiles_usd_path)
+{
+    PXR_NS::usd_initialise_plugin_path(datafiles_usd_path);
+}
+}
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier initConfig.cpp~
 rm -f initConfig.cpp~
 
 cd ../../../../..
+
+
+3) MODIFIER USD-19.11/pxr/usd/CMakeLists.txt
+============================================
+
+cd USD-19.11.new/pxr/usd
+kwrite CMakeLists.txt
+
+SUPPRIMER LIGNE 3 :
+    bin
+
+AJOUTER LIGNES 10 À 14
+if (PXR_BUILD_USD_TOOLS)
+    add_subdirectory(bin)
+else()
+    message(STATUS "Skipping commandline tools because PXR_BUILD_USD_TOOLS=OFF")
+endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../..
 
 
 

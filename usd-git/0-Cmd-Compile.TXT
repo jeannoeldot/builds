@@ -98,7 +98,7 @@ tar -xzf USD-v19.11.tar.gz -C /tmp/srcp
     cmake_d="$cmake_d -DBUILD_SHARED_LIBS=ON"
     cmake_d="$cmake_d -DPXR_BUILD_MONOLITHIC=ON"
     
-    cmake_d="$cmake_d -DPXR_BUILD_USD_TOOLS=OFF"
+    cmake_d="$cmake_d -DPXR_BUILD_USD_TOOLS=OFF"  /!\/!\/!\ ATTENTION
     cmake_d="$cmake_d -DCMAKE_DEBUG_POSTFIX=_d"
 
 1) kwrite /tmp/srcp/USD-v19.11/CMakeLists.txt

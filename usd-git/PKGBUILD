@@ -19,7 +19,7 @@ source=("USD--v${_ver_release}.tar.gz"
         "blender-usd-diff.patch"
 )
 sha256sums=('84f3bb123f7950b277aace096d678c8876737add0ed0b6ccb77cabb4f32dbcb0'
-            '1111111111111111111111111111111111111111111111111111111111111111'
+            'f3046b43bcdf272bf02066e4965093629449edba7d6a111de68058a9e11fba68'
 )
 
 prepare() {
