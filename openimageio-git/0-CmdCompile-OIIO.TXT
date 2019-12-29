@@ -315,7 +315,7 @@ usr/lib/libOpenImageIO_Util.so.2.0.13
 usr/lib/libOpenImageIO.so.2.0.13
 usr/lib/python3.8/site-packages/OpenImageIO.so
 
-namcap openimageio-git-*-x86_64.pkg.tar.xz
+namcap openimageio-git-*-x86_64.pkg.tar.*
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/

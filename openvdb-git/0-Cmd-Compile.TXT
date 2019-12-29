@@ -266,7 +266,7 @@ rm -f *~
 
 # Verifications...
 
-namcap openvdb-git-*-x86_64.pkg.tar.xz
+namcap openvdb-git-*-x86_64.pkg.tar.*
 openvdb-git W: Dependency zlib included but already satisfied
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/

@@ -136,9 +136,9 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users     531 11 mai   16:43 blender-usd-diff.patch
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 USD-v19.11.tar.gz
--rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+-rw-r--r--  1 jnd users     4222 28 déc.  11:55 blender-usd-diff.patch
+-rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 USD-v19.11.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -200,8 +200,25 @@ rm -f *~
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
+usr/share/usd/examples/plugin/usdObj.so
+usr/share/usd/examples/plugin/usdDancingCubesExample.so
+usr/share/usd/examples/plugin/usdRecursivePayloadsExample.so
+usr/share/usd/examples/plugin/usdSchemaExamples.so
+usr/lib/libusd_ms.so
 
-namcap usd-git-*-x86_64.pkg.tar.xz
+namcap usd-git-*-x86_64.pkg.tar.*
+usd-git E: ELF file ('usr/share/usd/examples/plugin/usdDancingCubesExample.so') outside of a valid path.
+usd-git E: ELF file ('usr/share/usd/examples/plugin/usdObj.so') outside of a valid path.
+usd-git E: ELF file ('usr/share/usd/examples/plugin/usdRecursivePayloadsExample.so') outside of a valid path.
+usd-git E: ELF file ('usr/share/usd/examples/plugin/usdSchemaExamples.so') outside of a valid path.
+
+usd-git W: File (usr/plugin/) exists in a non-standard directory.
+usd-git W: File (usr/plugin/usd/) exists in a non-standard directory.
+usd-git W: File (usr/plugin/usd/plugInfo.json) exists in a non-standard directory.
+
+usd-git W: Referenced library 'libusd_ms.so' is an uninstalled dependency
+usd-git W: Dependency included and not needed ('boost-libs')
+
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------

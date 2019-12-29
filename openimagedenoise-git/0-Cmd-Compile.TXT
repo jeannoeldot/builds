@@ -168,7 +168,7 @@ rm -f *~
 ==> WARNING: Package contains reference to $srcdir
 usr/lib/libOpenImageDenoise.so.1.1.0
 
-namcap openimagedenoise-git-*-x86_64.pkg.tar.xz
+namcap openimagedenoise-git-*-x86_64.pkg.tar.*
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------

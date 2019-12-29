@@ -215,7 +215,7 @@ rm -f *~
 
 # Verifications...
 
-namcap opencollada-git-*-x86_64.pkg.tar.xz
+namcap opencollada-git-*-x86_64.pkg.tar.*
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/

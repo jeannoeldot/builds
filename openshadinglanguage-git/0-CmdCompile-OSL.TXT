@@ -305,7 +305,7 @@ usr/lib/liboslquery.so.1.10.8
 usr/lib/liboslexec.so.1.10.8
 usr/lib/osl.imageio.so.1.10.8
 
-namcap openshadinglanguage-git-*-x86_64.pkg.tar.xz
+namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------

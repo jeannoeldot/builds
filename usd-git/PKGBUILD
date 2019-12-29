@@ -11,11 +11,11 @@ arch=('x86_64')
 license=('custom')
 depends=('boost-libs' 'intel-tbb'
 )
-makedepends=('boost' 'cmake'
+makedepends=('boost' 'cmake' 'python'
 )
 conflicts=('usd')
 provides=('usd')
-source=("USD--v${_ver_release}.tar.gz"
+source=("USD-v${_ver_release}.tar.gz"
         "blender-usd-diff.patch"
 )
 sha256sums=('84f3bb123f7950b277aace096d678c8876737add0ed0b6ccb77cabb4f32dbcb0'
@@ -24,7 +24,7 @@ sha256sums=('84f3bb123f7950b277aace096d678c8876737add0ed0b6ccb77cabb4f32dbcb0'
 
 prepare() {
   cd "${_name_release}"
-  # 
+  # blender/build_files/build_environment/patches/usd.diff
   patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
 }
 
@@ -35,17 +35,30 @@ build() {
   mkdir build && cd build
   cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_SKIP_RPATH=ON \
-    
+    -DPXR_SET_INTERNAL_NAMESPACE=usdBlender \
+    -DPXR_ENABLE_PYTHON_SUPPORT=OFF \
+    -DPXR_BUILD_IMAGING=OFF \
+    -DPXR_BUILD_TESTS=OFF \
+    -DBUILD_SHARED_LIBS=ON \
+    -DPXR_BUILD_MONOLITHIC=ON \
+    -DPXR_BUILD_USD_TOOLS=OFF \
+    -DCMAKE_DEBUG_POSTFIX=_d \
     ..
-  make
+  find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+  make VERBOSE=1
 }
 
 package() {
   cd "${_name_release}/build"
-  
   make DESTDIR="${pkgdir}" install
+  
+  # pxrConfig.cmake
+  mkdir -p "${pkgdir}"/usr/lib/cmake/pxr
+  mv -v "${pkgdir}"/usr/pxrConfig.cmake "${pkgdir}"/usr/lib/cmake/pxr
+  
+  #license
+  cd ..
+  install -Dm644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

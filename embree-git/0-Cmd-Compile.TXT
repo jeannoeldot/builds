@@ -189,7 +189,7 @@ rm -f *~
 
 # Verifications...
 
-namcap embree-git-*-x86_64.pkg.tar.xz
+namcap embree-git-*-x86_64.pkg.tar.*
 embree-git W: Dependency included and not needed ('intel-tbb')
 embree-git W: Dependency included and not needed ('glfw-x11')
 

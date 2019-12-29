@@ -1,0 +1,28 @@
+
+cd /build/usd-git/src/USD-19.11/build/pxr/base/lib/arch &&
+/usr/bin/c++  -DARCH_EXPORTS=1 -DAR_EXPORTS=1 -DBOOST_PYTHON_NO_PY_SIGNATURES -DGF_EXPORTS=1 -DGLX_GLXEXT_PROTOTYPES -DGL_GLEXT_PROTOTYPES -DJS_EXPORTS=1 -DKIND_EXPORTS=1 -DLINUX -DMFB_ALT_PACKAGE_NAME=arch -DMFB_PACKAGE_MODULE=Arch -DMFB_PACKAGE_NAME=arch -DNDR_EXPORTS=1 -DPCP_EXPORTS=1 -DPLUG_EXPORTS=1 -DPXR_BUILD_LOCATION=usd -DPXR_PLUGIN_BUILD_LOCATION=../plugin/usd -DPXR_PYTHON_ENABLED=1 -DPXR_PYTHON_MODULES_ENABLED=1 -DSDF_EXPORTS=1 -DSDR_EXPORTS=1 -DTF_EXPORTS=1 -DTRACE_EXPORTS=1 -DUSDGEOM_EXPORTS=1 -DUSDHYDRA_EXPORTS=1 -DUSDLUX_EXPORTS=1 -DUSDRENDER_EXPORTS=1 -DUSDRI_EXPORTS=1 -DUSDSHADE_EXPORTS=1 -DUSDSKEL_EXPORTS=1 -DUSDUI_EXPORTS=1 -DUSDUTILS_EXPORTS=1 -DUSDVOL_EXPORTS=1 -DUSD_EXPORTS=1 -DVT_EXPORTS=1 -DWORK_EXPORTS=1
+-I/build/usd-git/src/USD-19.11/build/include
+-std=c++11 -Wall -pthread -Wno-deprecated -Wno-deprecated-declarations -Wno-unused-local-typedefs
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block -O3 -DNDEBUG -fPIC
+-o CMakeFiles/arch.dir/assumptions.cpp.o -c /build/usd-git/src/USD-19.11/pxr/base/lib/arch/assumptions.cpp
+
+[ 99%] Linking CXX shared library usdSchemaExamples.so
+cd /build/usd-git/src/USD-19.11/build/extras/usd/examples/usdSchemaExamples && /usr/bin/cmake -E cmake_link_script CMakeFiles/usdSchemaExamples.dir/link.txt --verbose=1
+/usr/bin/c++ -fPIC  -std=c++11 -Wall -pthread -Wno-deprecated -Wno-deprecated-declarations -Wno-unused-local-typedefs -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block
+-O3 -DNDEBUG -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -shared -Wl,-soname,usdSchemaExamples.so -o usdSchemaExamples.so CMakeFiles/usdSchemaExamples.dir/simple.cpp.o CMakeFiles/usdSchemaExamples.dir/complex.cpp.o CMakeFiles/usdSchemaExamples.dir/paramsAPI.cpp.o CMakeFiles/usdSchemaExamples.dir/tokens.cpp.o  ../../../../libusd_ms.so -ldl -lm -ltbb 
+
+
+PKGBUILD AVEC   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+----------------------------------------------------------------
+
+cd /build/usd-git/src/USD-19.11/build/pxr/base/lib/arch &&
+/usr/bin/c++  -DARCH_EXPORTS=1 -DAR_EXPORTS=1 -DBOOST_PYTHON_NO_PY_SIGNATURES -DGF_EXPORTS=1 -DGLX_GLXEXT_PROTOTYPES -DGL_GLEXT_PROTOTYPES -DJS_EXPORTS=1 -DKIND_EXPORTS=1 -DLINUX -DMFB_ALT_PACKAGE_NAME=arch -DMFB_PACKAGE_MODULE=Arch -DMFB_PACKAGE_NAME=arch -DNDR_EXPORTS=1 -DPCP_EXPORTS=1 -DPLUG_EXPORTS=1 -DPXR_BUILD_LOCATION=usd -DPXR_PLUGIN_BUILD_LOCATION=../plugin/usd -DPXR_PYTHON_ENABLED=1 -DPXR_PYTHON_MODULES_ENABLED=1 -DSDF_EXPORTS=1 -DSDR_EXPORTS=1 -DTF_EXPORTS=1 -DTRACE_EXPORTS=1 -DUSDGEOM_EXPORTS=1 -DUSDHYDRA_EXPORTS=1 -DUSDLUX_EXPORTS=1 -DUSDRENDER_EXPORTS=1 -DUSDRI_EXPORTS=1 -DUSDSHADE_EXPORTS=1 -DUSDSKEL_EXPORTS=1 -DUSDUI_EXPORTS=1 -DUSDUTILS_EXPORTS=1 -DUSDVOL_EXPORTS=1 -DUSD_EXPORTS=1 -DVT_EXPORTS=1 -DWORK_EXPORTS=1
+-I/build/usd-git/src/USD-19.11/build/include
+-std=c++11 -Wall -pthread -Wno-deprecated -Wno-deprecated-declarations -Wno-unused-local-typedefs
+-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block  -DNDEBUG -fPIC
+-o CMakeFiles/arch.dir/env.cpp.o -c /build/usd-git/src/USD-19.11/pxr/base/lib/arch/env.cpp
+
+[ 99%] Linking CXX shared library usdSchemaExamples.so
+cd /build/usd-git/src/USD-19.11/build/extras/usd/examples/usdSchemaExamples && /usr/bin/cmake -E cmake_link_script CMakeFiles/usdSchemaExamples.dir/link.txt --verbose=1
+/usr/bin/c++ -fPIC  -std=c++11 -Wall -pthread -Wno-deprecated -Wno-deprecated-declarations -Wno-unused-local-typedefs -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block
+-DNDEBUG -Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -shared -Wl,-soname,usdSchemaExamples.so -o usdSchemaExamples.so CMakeFiles/usdSchemaExamples.dir/simple.cpp.o CMakeFiles/usdSchemaExamples.dir/complex.cpp.o CMakeFiles/usdSchemaExamples.dir/paramsAPI.cpp.o CMakeFiles/usdSchemaExamples.dir/tokens.cpp.o  ../../../../libusd_ms.so -ldl -lm -ltbb 
