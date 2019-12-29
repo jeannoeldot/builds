@@ -1,0 +1,311 @@
+
+1) TEST AVEC USD-GIT
+=====================
+-- Could NOT find USD (missing: USD_LIBRARY) 
+
+
+1) SANS USD-GIT
+=====================
+==> Starting build()...
+-- The C compiler identification is GNU 9.2.0
+-- The CXX compiler identification is GNU 9.2.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- WITH_DRACO requires WITH_PYTHON_INSTALL to be ON, disabling WITH_DRACO for now
+-- Performing Test SUPPORT_SSE_BUILD
+-- Performing Test SUPPORT_SSE_BUILD - Success
+-- SSE Support: detected.
+-- Performing Test SUPPORT_SSE2_BUILD
+-- Performing Test SUPPORT_SSE2_BUILD - Success
+-- SSE2 Support: detected.
+-- Found Git: /usr/bin/git (found version "2.24.1") 
+-- Found X11: /usr/include   
+-- Looking for XOpenDisplay in /usr/lib/libX11.so;/usr/lib/libXext.so
+-- Looking for XOpenDisplay in /usr/lib/libX11.so;/usr/lib/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Found JPEG: /usr/lib/libjpeg.so (found version "80") 
+-- Found ZLIB: /usr/lib/libz.so (found version "1.2.11") 
+-- Found PNG: /usr/lib/libpng.so (found version "1.6.37") 
+-- Found Freetype: /usr/lib/libfreetype.so (found version "2.10.1") 
+-- Found PythonLibsUnix: python3.8  
+-- #define OPENEXR_VERSION_STRING "2.4.0"
+-- Found OpenEXR: /usr/lib/libHalf-2_4.so;/usr/lib/libIex-2_4.so;/usr/lib/libIlmImf-2_4.so;/usr/lib/libIlmThread-2_4.so;/usr/lib/libImath-2_4.so  
+-- Found OpenJPEG: /usr/lib/libopenjp2.so  
+-- Found TIFF: /usr/lib/libtiff.so (found version "4.1.0") 
+-- Found OpenAL: /usr/lib/libopenal.so  
+-- Found SDL2: /usr/lib64/libSDL2.so  
+-- Found SndFile: /usr/lib/libsndfile.so  
+-- Found Fftw3: /usr/lib/libfftw3.so  
+-- Found OpenCOLLADA: /usr/lib64/opencollada/libOpenCOLLADAStreamWriter.so;/usr/lib64/opencollada/libOpenCOLLADASaxFrameworkLoader.so;/usr/lib64/opencollada/libOpenCOLLADAFramework.so;/usr/lib64/opencollada/libOpenCOLLADABaseUtils.so;/usr/lib64/opencollada/libGeneratedSaxParser.so;/usr/lib64/opencollada/libMathMLSolver.so;/usr/lib64/opencollada/libbuffer.so;/usr/lib64/opencollada/libftoa.so;/usr/lib64/opencollada/libUTF.so  
+-- Found XML2: /usr/lib/libxml2.so  
+-- Found PCRE: /usr/lib/libpcre.so  
+-- Found JeMalloc: /usr/lib/libjemalloc.so  
+-- Found OSL: /usr/lib/liboslcomp.so;/usr/lib/liboslexec.so;/usr/lib/liboslquery.so  
+-- Found OPENVDB: /usr/lib/libopenvdb.so  
+-- Found BLOSC: /usr/lib/libblosc.so  
+-- Found ALEMBIC: /usr/lib/libAlembic.so  
+-- Could NOT find USD (missing: USD_LIBRARY USD_INCLUDE_DIR) 
+-- Found Boost: /usr/lib64/cmake/Boost-1.71.0/BoostConfig.cmake (found suitable version "1.71.0", minimum required is "1.48") found components: filesystem regex thread date_time wave locale iostreams system 
+-- Found OpenImageIO: /usr/lib/libOpenImageIO.so  
+-- Found OpenColorIO: /usr/lib/libOpenColorIO.so;/usr/lib/libyaml-cpp.so;/usr/lib/libtinyxml.so  
+-- Found EMBREE: /usr/lib/libembree3.a;/usr/lib/libembree_avx.a;/usr/lib/libembree_avx2.a;/usr/lib/libembree_sse42.a;/usr/lib/liblexers.a;/usr/lib/libmath.a;/usr/lib/libsimd.a;/usr/lib/libsys.a;/usr/lib/libtasking.a  
+-- Found OPENIMAGEDENOISE: /usr/lib/libOpenImageDenoise.so  
+-- Found LLVM: /usr/lib/libLLVM-9.0.0.so  
+-- Found OpenSubdiv: /usr/lib/libosdGPU.so;/usr/lib/libosdCPU.so  
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+-- Found TBB: /usr/lib/libtbb.so  
+-- Found Threads: TRUE  
+-- Check if the system is big endian
+-- Searching 16 bit integer
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of unsigned short
+-- Check size of unsigned short - done
+-- Using unsigned short
+-- Check if the system is big endian - little endian
+-- Found OpenGL: /usr/lib/libOpenGL.so   
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Performing Test C_WARN_ALL
+-- Performing Test C_WARN_ALL - Success
+-- Performing Test C_WARN_CAST_ALIGN
+-- Performing Test C_WARN_CAST_ALIGN - Success
+-- Performing Test C_WARN_ERROR_IMPLICIT_FUNCTION_DECLARATION
+-- Performing Test C_WARN_ERROR_IMPLICIT_FUNCTION_DECLARATION - Success
+-- Performing Test C_WARN_ERROR_RETURN_TYPE
+-- Performing Test C_WARN_ERROR_RETURN_TYPE - Success
+-- Performing Test C_WARN_ERROR_VLA
+-- Performing Test C_WARN_ERROR_VLA - Success
+-- Performing Test C_WARN_STRICT_PROTOTYPES
+-- Performing Test C_WARN_STRICT_PROTOTYPES - Success
+-- Performing Test C_WARN_MISSING_PROTOTYPES
+-- Performing Test C_WARN_MISSING_PROTOTYPES - Success
+-- Performing Test C_WARN_NO_CHAR_SUBSCRIPTS
+-- Performing Test C_WARN_NO_CHAR_SUBSCRIPTS - Success
+-- Performing Test C_WARN_NO_UNKNOWN_PRAGMAS
+-- Performing Test C_WARN_NO_UNKNOWN_PRAGMAS - Success
+-- Performing Test C_WARN_POINTER_ARITH
+-- Performing Test C_WARN_POINTER_ARITH - Success
+-- Performing Test C_WARN_UNUSED_PARAMETER
+-- Performing Test C_WARN_UNUSED_PARAMETER - Success
+-- Performing Test C_WARN_WRITE_STRINGS
+-- Performing Test C_WARN_WRITE_STRINGS - Success
+-- Performing Test C_WARN_LOGICAL_OP
+-- Performing Test C_WARN_LOGICAL_OP - Success
+-- Performing Test C_WARN_UNDEF
+-- Performing Test C_WARN_UNDEF - Success
+-- Performing Test C_WARN_INIT_SELF
+-- Performing Test C_WARN_INIT_SELF - Success
+-- Performing Test C_WARN_MISSING_INCLUDE_DIRS
+-- Performing Test C_WARN_MISSING_INCLUDE_DIRS - Success
+-- Performing Test C_WARN_NO_DIV_BY_ZERO
+-- Performing Test C_WARN_NO_DIV_BY_ZERO - Success
+-- Performing Test C_WARN_TYPE_LIMITS
+-- Performing Test C_WARN_TYPE_LIMITS - Success
+-- Performing Test C_WARN_FORMAT_SIGN
+-- Performing Test C_WARN_FORMAT_SIGN - Success
+-- Performing Test C_WARN_RESTRICT
+-- Performing Test C_WARN_RESTRICT - Success
+-- Performing Test C_WARN_NO_NULL
+-- Performing Test C_WARN_NO_NULL - Success
+-- Performing Test C_WARN_ABSOLUTE_VALUE
+-- Performing Test C_WARN_ABSOLUTE_VALUE - Success
+-- Performing Test C_WARN_UNINITIALIZED
+-- Performing Test C_WARN_UNINITIALIZED - Success
+-- Performing Test C_WARN_REDUNDANT_DECLS
+-- Performing Test C_WARN_REDUNDANT_DECLS - Success
+-- Performing Test CXX_WARN_REDUNDANT_DECLS
+-- Performing Test CXX_WARN_REDUNDANT_DECLS - Success
+-- Performing Test C_WARN_SHADOW
+-- Performing Test C_WARN_SHADOW - Success
+-- Performing Test C_WARN_NO_ERROR_UNUSED_BUT_SET_VARIABLE
+-- Performing Test C_WARN_NO_ERROR_UNUSED_BUT_SET_VARIABLE - Success
+-- Performing Test CXX_WARN_ALL
+-- Performing Test CXX_WARN_ALL - Success
+-- Performing Test CXX_WARN_NO_INVALID_OFFSETOF
+-- Performing Test CXX_WARN_NO_INVALID_OFFSETOF - Success
+-- Performing Test CXX_WARN_NO_SIGN_COMPARE
+-- Performing Test CXX_WARN_NO_SIGN_COMPARE - Success
+-- Performing Test CXX_WARN_LOGICAL_OP
+-- Performing Test CXX_WARN_LOGICAL_OP - Success
+-- Performing Test CXX_WARN_INIT_SELF
+-- Performing Test CXX_WARN_INIT_SELF - Success
+-- Performing Test CXX_WARN_MISSING_INCLUDE_DIRS
+-- Performing Test CXX_WARN_MISSING_INCLUDE_DIRS - Success
+-- Performing Test CXX_WARN_NO_DIV_BY_ZERO
+-- Performing Test CXX_WARN_NO_DIV_BY_ZERO - Success
+-- Performing Test CXX_WARN_TYPE_LIMITS
+-- Performing Test CXX_WARN_TYPE_LIMITS - Success
+-- Performing Test CXX_WARN_ERROR_RETURN_TYPE
+-- Performing Test CXX_WARN_ERROR_RETURN_TYPE - Success
+-- Performing Test CXX_WARN_NO_CHAR_SUBSCRIPTS
+-- Performing Test CXX_WARN_NO_CHAR_SUBSCRIPTS - Success
+-- Performing Test CXX_WARN_NO_UNKNOWN_PRAGMAS
+-- Performing Test CXX_WARN_NO_UNKNOWN_PRAGMAS - Success
+-- Performing Test CXX_WARN_POINTER_ARITH
+-- Performing Test CXX_WARN_POINTER_ARITH - Success
+-- Performing Test CXX_WARN_UNUSED_PARAMETER
+-- Performing Test CXX_WARN_UNUSED_PARAMETER - Success
+-- Performing Test CXX_WARN_WRITE_STRINGS
+-- Performing Test CXX_WARN_WRITE_STRINGS - Success
+-- Performing Test CXX_WARN_UNDEF
+-- Performing Test CXX_WARN_UNDEF - Success
+-- Performing Test CXX_WARN_FORMAT_SIGN
+-- Performing Test CXX_WARN_FORMAT_SIGN - Success
+-- Performing Test CXX_WARN_RESTRICT
+-- Performing Test CXX_WARN_RESTRICT - Success
+-- Performing Test CXX_WARN_UNINITIALIZED
+-- Performing Test CXX_WARN_UNINITIALIZED - Success
+-- Performing Test CXX_WARN_MISSING_DECLARATIONS
+-- Performing Test CXX_WARN_MISSING_DECLARATIONS - Success
+-- Performing Test C_WARN_IMPLICIT_FALLTHROUGH
+-- Performing Test C_WARN_IMPLICIT_FALLTHROUGH - Success
+-- Performing Test CXX_WARN_IMPLICIT_FALLTHROUGH
+-- Performing Test CXX_WARN_IMPLICIT_FALLTHROUGH - Success
+-- Performing Test C_WARN_NO_DEPRECATED_DECLARATIONS
+-- Performing Test C_WARN_NO_DEPRECATED_DECLARATIONS - Success
+-- Performing Test C_WARN_NO_UNUSED_PARAMETER
+-- Performing Test C_WARN_NO_UNUSED_PARAMETER - Success
+-- Performing Test C_WARN_NO_UNUSED_FUNCTION
+-- Performing Test C_WARN_NO_UNUSED_FUNCTION - Success
+-- Performing Test C_WARN_NO_TYPE_LIMITS
+-- Performing Test C_WARN_NO_TYPE_LIMITS - Success
+-- Performing Test C_WARN_NO_INT_IN_BOOL_CONTEXT
+-- Performing Test C_WARN_NO_INT_IN_BOOL_CONTEXT - Success
+-- Performing Test C_WARN_NO_FORMAT
+-- Performing Test C_WARN_NO_FORMAT - Success
+-- Performing Test C_WARN_NO_SWITCH
+-- Performing Test C_WARN_NO_SWITCH - Success
+-- Performing Test CXX_WARN_NO_CLASS_MEMACCESS
+-- Performing Test CXX_WARN_NO_CLASS_MEMACCESS - Success
+-- Performing Test CXX_WARN_NO_COMMENT
+-- Performing Test CXX_WARN_NO_COMMENT - Success
+-- Performing Test CXX_WARN_NO_UNUSED_TYPEDEFS
+-- Performing Test CXX_WARN_NO_UNUSED_TYPEDEFS - Success
+-- Performing Test C_WARN_NO_IMPLICIT_FALLTHROUGH
+-- Performing Test C_WARN_NO_IMPLICIT_FALLTHROUGH - Success
+-- numpy found at '/usr/lib/python3.8/site-packages'
+-- Found CUDA: /opt/cuda (found version "10.2") 
+-- CUDA nvcc = /opt/cuda/bin/nvcc
+-- Performing Test CXX_HAS_SSE
+-- Performing Test CXX_HAS_SSE - Success
+-- Performing Test CXX_HAS_AVX
+-- Performing Test CXX_HAS_AVX - Success
+-- Performing Test CXX_HAS_AVX2
+-- Performing Test CXX_HAS_AVX2 - Success
+-- Performing Test _has_cxxflag_float_conversion
+-- Performing Test _has_cxxflag_float_conversion - Success
+-- Performing Test _has_cxxflag_double_promotion
+-- Performing Test _has_cxxflag_double_promotion - Success
+-- Performing Test _has_no_error_unused_macros
+-- Performing Test _has_no_error_unused_macros - Success
+CMake Warning at intern/cycles/kernel/CMakeLists.txt:370 (message):
+  CUDA version 10.2 detected, build may succeed but only CUDA 10.1 is
+  officially supported
+
+
+-- Disabling render tests because tests folder does not exist at /build/blender-git/src/blender/../lib/tests
+-- RPM Build Not Found (rpmbuild). RPM generation will not be available
+-- C Compiler:   "GNU"
+-- C++ Compiler: "GNU"
+
+Blender Configuration
+=====================
+
+  Build Options:
+  - WITH_BULLET                 ON
+  - WITH_IK_SOLVER              ON
+  - WITH_IK_ITASC               ON
+  - WITH_OPENCOLLADA            ON
+  - WITH_FFTW3                  ON
+  - WITH_INTERNATIONAL          ON
+  - WITH_INPUT_NDOF             OFF
+  - WITH_CYCLES                 ON
+  - WITH_FREESTYLE              ON
+  - WITH_OPENCOLORIO            ON
+  - WITH_OPENIMAGEDENOISE       ON
+  - WITH_OPENVDB                ON
+  - WITH_ALEMBIC                ON
+  - WITH_QUADRIFLOW             ON
+  - WITH_USD                    OFF
+
+  Compiler Options:
+  - WITH_BUILDINFO              ON
+  - WITH_OPENMP                 ON
+
+  System Options:
+  - WITH_INSTALL_PORTABLE       OFF
+  - WITH_X11_ALPHA              ON
+  - WITH_X11_XF86VMODE          ON
+  - WITH_X11_XFIXES             ON
+  - WITH_X11_XINPUT             ON
+  - WITH_MEM_JEMALLOC           ON
+  - WITH_MEM_VALGRIND           OFF
+  - WITH_SYSTEM_GLEW            OFF
+
+  Image Formats:
+  - WITH_OPENIMAGEIO            ON
+  - WITH_IMAGE_CINEON           ON
+  - WITH_IMAGE_DDS              ON
+  - WITH_IMAGE_HDR              ON
+  - WITH_IMAGE_OPENEXR          ON
+  - WITH_IMAGE_OPENJPEG         ON
+  - WITH_IMAGE_TIFF             ON
+
+  Audio:
+  - WITH_OPENAL                 ON
+  - WITH_SDL                    ON
+  - WITH_SDL_DYNLOAD            OFF
+  - WITH_JACK                   OFF
+  - WITH_JACK_DYNLOAD           OFF
+  - WITH_CODEC_AVI              ON
+  - WITH_CODEC_FFMPEG           ON
+  - WITH_CODEC_SNDFILE          ON
+
+  Compression:
+  - WITH_LZMA                   ON
+  - WITH_LZO                    ON
+
+  Python:
+  - WITH_PYTHON_INSTALL         OFF
+  - WITH_PYTHON_INSTALL_NUMPY   OFF
+  - WITH_PYTHON_MODULE          OFF
+  - WITH_PYTHON_SAFETY          OFF
+
+  Modifiers:
+  - WITH_MOD_REMESH             ON
+  - WITH_MOD_FLUID              ON
+  - WITH_MOD_OCEANSIM           ON
+
+  OpenGL:
+  - WITH_GLEW_ES                OFF
+  - WITH_GL_EGL                 OFF
+  - WITH_GL_PROFILE_ES20        OFF
+
+  
+-- Configuring done
