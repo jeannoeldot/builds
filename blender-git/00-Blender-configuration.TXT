@@ -1,4 +1,3 @@
-==> Starting build()...
 -- The C compiler identification is GNU 9.2.0
 -- The CXX compiler identification is GNU 9.2.0
 -- Check for working C compiler: /usr/bin/cc
@@ -55,13 +54,12 @@
 -- Found OPENVDB: /usr/lib/libopenvdb.so  
 -- Found BLOSC: /usr/lib/libblosc.so  
 -- Found ALEMBIC: /usr/lib/libAlembic.so  
--- Could NOT find USD (missing: USD_LIBRARY USD_INCLUDE_DIR) 
 -- Found Boost: /usr/lib64/cmake/Boost-1.71.0/BoostConfig.cmake (found suitable version "1.71.0", minimum required is "1.48") found components: filesystem regex thread date_time wave locale iostreams system 
 -- Found OpenImageIO: /usr/lib/libOpenImageIO.so  
 -- Found OpenColorIO: /usr/lib/libOpenColorIO.so;/usr/lib/libyaml-cpp.so;/usr/lib/libtinyxml.so  
 -- Found EMBREE: /usr/lib/libembree3.a;/usr/lib/libembree_avx.a;/usr/lib/libembree_avx2.a;/usr/lib/libembree_sse42.a;/usr/lib/liblexers.a;/usr/lib/libmath.a;/usr/lib/libsimd.a;/usr/lib/libsys.a;/usr/lib/libtasking.a  
 -- Found OPENIMAGEDENOISE: /usr/lib/libOpenImageDenoise.so  
--- Found LLVM: /usr/lib/libLLVM-9.0.0.so  
+-- Found LLVM: /usr/lib/libLLVM-9.0.1.so  
 -- Found OpenSubdiv: /usr/lib/libosdGPU.so;/usr/lib/libosdCPU.so  
 -- Found OpenMP_C: -fopenmp (found version "4.5") 
 -- Found OpenMP_CXX: -fopenmp (found version "4.5") 
