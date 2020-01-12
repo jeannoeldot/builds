@@ -6,16 +6,16 @@ cd $HOME/05-builds/embree-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/embree/embree/releases
-==>  cbenthin released this on 11 sept  ==> 20190911
-==> Embree v3.6.1  ==> 3.6.1
-==> 3.6.1.20190911
+==> svenwoop released this on 10 janv 2020 ==> 20200110
+==> Embree v3.7.0  ==> 3.7.0
+==> 3.7.0.20200110
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O embree-3.6.1.tar.gz \
-https://github.com/embree/embree/archive/v3.6.1.tar.gz
+wget -O embree-3.7.0.tar.gz \
+https://github.com/embree/embree/archive/v3.7.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/embree-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/embree-3.6.1.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/embree-3.7.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,10 +36,10 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git               # embree ds community ?
-pkgver=3.6.1.20190911
-pkgrel=2    # Rebuild MAJ intel-tbb 2019.9-1
+pkgver=3.7.0.20200110
 pkgrel=1
 
+pkgrel=2    # Rebuild MAJ intel-tbb 2019.9-1
 !!! Erreur compil blender
 pkgrel=3  # Avec patch Ofast floop
 
@@ -47,7 +47,7 @@ pkgrel=2    # static libs
 
 
 !!!!!!
-_ver_release="3.6.1"
+_ver_release="3.7.0"
 _name_release="embree-${_ver_release}"
 
 license=('Apache')
@@ -67,7 +67,7 @@ options=(staticlibs)
 
 SANS PATCH
 ----------
-sha256sum embree-3.6.1.tar.gz
+sha256sum embree-3.7.0.tar.gz
 
 source=("embree-${_ver_release}.tar.gz"
 )
@@ -84,20 +84,22 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf embree-3.6.1.tar.gz -C /tmp/srcp
+tar -xzf embree-3.7.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/embree-3.6.1/CMakeLists.txt
+1) kwrite /tmp/srcp/embree-3.7.0/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
 !!! LIGNES 2564 et ...
 
-LIGNE 87 ET ...
+LIGNE 97 ET ...
 ----------------
 EMBREE_STATIC_LIB               OFF by default  ==> ON  install_deps = ON
 EMBREE_ISPC_SUPPORT             ON by default   ==> OFF install_deps = OFF
 EMBREE_TUTORIALS                ON by default   ==> OFF install_deps = OFF
 
+LIGNE 124 ET ...
+----------------
 EMBREE_STACK_PROTECTOR          OFF by default
 
 EMBREE_RAY_MASK                 OFF by default  ==> ON  install_deps = ON
@@ -119,7 +121,7 @@ EMBREE_CURVE_SELF_INTERSECTION_AVOIDANCE_FACTOR   2.0f is the default value
 
 EMBREE_TASKING_SYSTEM           TBB by default  ==> INTERNAL  install_deps = INTERNAL
 
-LIGNE 216 ET ...
+LIGNE 226 ET ...
 ----------------
 !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
 EMBREE_MAX_ISA                  AVX2 by default               install_deps = AVX2
@@ -132,7 +134,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.6.1.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.7.0.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -151,7 +153,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/embree-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/embree-git/embree-3.6.1.tar.gz . \
+&& cp -v $HOME/05-builds/embree-git/embree-3.7.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/embree-git \
 && cp -v /tmp/build/embree-git-*-x86_64.pkg.tar.* . \
@@ -211,7 +213,7 @@ $ mv -v embree-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i embree-3.6.1.tar.gz
+$ rm -i embree-3.7.0.tar.gz
 
 
 $ cd && maj-repolocal
