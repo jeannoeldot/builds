@@ -74,7 +74,7 @@ rm -rf pokerth-1.1.2-rc.new
 
 2) PATCH PROTOBUF 3.5.1.1/.../3.7.0
 ===================================
-1-1) MODIFIER pokerth-1.1.2-rc/chatcleaner.proto
+2-1) MODIFIER pokerth-1.1.2-rc/chatcleaner.proto
 ------------------------------------------------
 cp -R pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 

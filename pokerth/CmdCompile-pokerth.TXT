@@ -36,6 +36,7 @@ voir : 0-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=15     # rebuild boost boost-libs 1.72.0-1
 pkgrel=14     # rebuild protobuf 3.11.1-2
 pkgrel=13     # rebuild avec patch boost 1.65-1.69. protobuf 3.5.1.1 websocketpp/boost 1.71
 pkgrel=12     # rebuild boost1.69 1.69.0-2 boost1.69-libs 1.69.0-2 : Erreur Compile
