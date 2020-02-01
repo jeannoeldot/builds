@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=7.0.0.20191206
+pkgrel=2          # rebuild boost boost-libs 1.72.0
 pkgrel=1
 
 pkgrel=4          # rebuild MAJ openexr 2.4
