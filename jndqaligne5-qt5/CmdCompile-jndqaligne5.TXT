@@ -20,6 +20,8 @@ sha256sum v0.5.0.tar.gz
 
 pkgname=jndqaligne5-qt5
 pkgver=0.5.0
+pkgrel=7    # Rebuild Qt 5.14.1 et .zst
+
 pkgrel=6    # Rebuild nouveau PC Qt 5.12.1
 pkgrel=5    # HOOKS PACMAN 5 : SUPPR jndqaligne5-qt5.install + deps
 pkgrel=4    # HOOKS PACMAN 5 : SUPPR jndqaligne5-qt5.install
@@ -71,11 +73,10 @@ cd $HOME/05-builds/jndqaligne5-qt5 && rm -rf /tmp/build
 $ mkpkg-chroot-repo
 
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+$ mkpkg-tmpfs -m native
 
 $ rm -f *~
-$ mkpkg-tmpfs -m native -q qt
-
+$ $HOME/bin/mkpkg-tmpfs -m native
 
 $ rm -rf /tmp/chrootrepo
 
@@ -137,6 +138,13 @@ OU
 
 ==============================================================================
 ANCIEN
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
 -rw-r--r--  1 jnd users     403 10 août   2014 jndqaligne5-qt5.install
 && cp -v $HOME/05-builds/jndqaligne5-qt5/jndqaligne5-qt5.install . \
 

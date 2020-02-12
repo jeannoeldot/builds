@@ -21,6 +21,8 @@ sha256sum v0.2.1.tar.gz
 
 pkgname=jndqcbgrd-qt5
 pkgver=0.2.1
+pkgrel=2    # Rebuild Qt 5.14.1 et .zst
+
 pkgrel=1
 
 pkgrel=2    # Rebuild nouveau PC Qt 5.12.1
@@ -72,11 +74,10 @@ cd $HOME/05-builds/jndqcbgrd-qt5 && rm -rf /tmp/build
 $ mkpkg-chroot-repo
 
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+$ mkpkg-tmpfs -m native
 
 $ rm -f *~
-$ mkpkg-tmpfs -m native -q qt
-
+$ $HOME/bin/mkpkg-tmpfs -m native
 
 $ rm -rf /tmp/chrootrepo
 
@@ -139,6 +140,13 @@ OU
 
 =========================================================================================
 ANCIEN
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
+
 
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 jndqcbgrd-qt5.install
 && cp -v $HOME/05-builds/jndqcbgrd-qt5/jndqcbgrd-qt5.install . \

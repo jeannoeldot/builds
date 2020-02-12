@@ -2,7 +2,7 @@
 
 pkgname=jndqcbgrd-qt5
 pkgver=0.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Gestion Revenu Dépenses"
 arch=('i686' 'x86_64')
 url="https://github.com/jeannoeldot/jndqcbgrd-qt5"

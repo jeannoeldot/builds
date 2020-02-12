@@ -20,6 +20,8 @@ sha256sum v0.2.1.tar.gz
 
 pkgname=jndqrami-qt5
 pkgver=0.2.1
+pkgrel=6    # Rebuild Qt 5.14.1 et .zst
+
 pkgrel=5    # Rebuild nouveau PC Qt 5.12.1
 pkgrel=4    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install + deps
 pkgrel=3
@@ -69,17 +71,15 @@ cd $HOME/05-builds/jndqrami-qt5 && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
+$ rm -f *~
+$ mkpkg-tmpfs -m native
 
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m native -q qt
-
-$ rm -f *~
-$ mkpkg-tmpfs -m native -q qt
+$ $HOME/bin/mkpkg-tmpfs -m native
 
 !!! TESTS
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m native -l logs -q qt
-
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs
 
 $ rm -rf /tmp/chrootrepo
 
@@ -151,6 +151,17 @@ sync
 
 ==============================================================================
 ANCIEN
+
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -q qt
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
+!!! TESTS
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs -q qt
 
 -rw-r--r--  1 jnd users  2422  7 juin  00:20 jndqrami-qt5.install
 && cp -v $HOME/05-builds/jndqrami-qt5/jndqrami-qt5.install . \
