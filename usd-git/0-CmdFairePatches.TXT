@@ -13,20 +13,31 @@ cp -v USD-v19.11.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
+OU
+===
+mkdir -p $HOME/99-temp/usd/
+
+cp -v USD-v19.11.tar.gz $HOME/99-temp/usd/
+
+cd $HOME/99-temp/usd/
+
 tar -xzf USD-v19.11.tar.gz
 
+
 !!! VOIR
+
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob_plain/4db9562246b36d0d0d18a3f1b33b87f1d91fe146:/build_files/build_environment/patches/usd.diff
+kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
+
 /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
 !!!
 kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
-cd /home/jnd/99-temp/usd
-tar -xzf USD-v19.11.tar.gz
-
 
 
 1-A) MODIFIER USD-19.11/cmake/defaults/Options.cmake
 ====================================================
 /!\ /!\ /!\ cd /tmp/srcp
+/!\ /!\ /!\ cd $HOME/99-temp/usd/
 
 cp -R USD-19.11 USD-19.11.new
 
@@ -96,6 +107,7 @@ AJOUTER LIGNES 95 À 103
     }
 
 
+
 REMPLACER LIGNES 127 À 128
     Plug_SetPaths(result);
 }
@@ -106,10 +118,11 @@ PAR :
             printf("    %s\n", path.c_str());
         }
     }
-  
+ 
     Plug_SetPaths(result);
 
 AJOUTER LIGNES 139 À 148
+
 
 /* Workaround to make it possible to pass a path at runtime to USD. */
 extern "C" {
@@ -149,6 +162,43 @@ rm -f CMakeLists.txt~
 cd ../../..
 
 
+4) MODIFIER USD-19.11/pxr/base/lib/tf/preprocessorUtils.h
+=========================================================
+
+cd USD-19.11.new/pxr/base/lib/tf
+kwrite preprocessorUtils.h
+
+MODIFIER LIGNE 192 :
+#if defined(ARCH_OS_WINDOWS)
+
+DEVIENT
+#if defined(ARCH_COMPILER_MSVC)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier preprocessorUtils.h~
+rm -f preprocessorUtils.h~
+
+cd ../../../../..
+
+
+5) MODIFIER USD-19.11/cmake/macros/Public.cmake
+===============================================
+
+cd USD-19.11.new/cmake/macros
+kwrite Public.cmake
+
+AJOUTER LIGNES 999 À 1004
+        # When building for blender, we do NOT want to export all symbols on windows.
+        # This is a dirty hack, but USD makes it impossible to do the right thing
+        # with the default options exposed.
+        if (WIN32)
+            list(APPEND exports "PXR_STATIC=1")
+        endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Public.cmake~
+rm -f Public.cmake~
+
+cd ../../..
+
 
 diff -aur USD-19.11 USD-19.11.new
 diff -aur USD-19.11 USD-19.11.new > blender-usd-diff.patch
@@ -158,11 +208,15 @@ rm -rf USD-19.11.new
 cd $HOME/05-builds/usd-git
 
 mv -vf /tmp/srcp/blender-usd-diff.patch .
+OU
+mv -vf $HOME/99-temp/usd/blender-usd-diff.patch .
 
 
-5) QUAND PATCHES FINIS
+99) QUAND PATCHES FINIS
 =======================
 rm -rf /tmp/srcp
+OU
+rm -rf $HOME/99-temp/usd
 
 sync
 
