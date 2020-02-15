@@ -127,6 +127,7 @@ voir CmdFairePatches.TXT
 pkgname=blender-git
 !!!!!!
 pkgver=2.83.2.20200214
+pkgrel=2    # TEST AVEC USD et /usr/share/usd/plugin
 pkgrel=1    # TEST AVEC USD
 
 pkgrel=1
@@ -227,49 +228,49 @@ $ pacman -Ss python | grep 3 | grep install
   kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
 # Blender internal features
-159 option WITH_BUILDINFO   ON   makedepends = git
+164 option WITH_BUILDINFO   ON   makedepends = git
 
 # Compositor
-181 option WITH_OPENIMAGEDENOISE  ON   dep = openimagedenoise-git
-183 option WITH_OPENSUBDIV        ON   dep = opensubdiv-git
-185 option WITH_OPENVDB           ON   dep = openvdb-git
+186 option WITH_OPENIMAGEDENOISE  ON   dep = openimagedenoise-git
+188 option WITH_OPENSUBDIV        ON   dep = opensubdiv-git
+190 option WITH_OPENVDB           ON   dep = openvdb-git
 
-239     !!! VOIR
+244     !!! VOIR
 if(UNIX AND NOT APPLE)
 	option WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
 endif()
 
-Lignes 263 et ...
+Lignes 269 et ...
 # Alembic support
 option WITH_ALEMBIC             ON  dep = alembic-git
 
 Lignes 273
 # Universal Scene Description support
-option(WITH_USD                 OFF ==> ON
+option(WITH_USD                 OFF ==> ON  dep = usd-git
 
-Lignes 270
+Lignes 277
 # 3D format support
-272   option WITH_OPENCOLLADA	ON  dep = opencollada-git
+277   option WITH_OPENCOLLADA	ON  dep = opencollada-git
 
 # Sound output
-278   option WITH_JACK          ==> OFF         si ON  dep =  jack
+283   option WITH_JACK          ==> OFF         si ON  dep =  jack
 
 # Logging/unbit test libraries.
 
 # Misc
-313	option WITH_INPUT_NDOF		==> OFF
+318	option WITH_INPUT_NDOF		==> OFF
 
 
-315 	WITH_INSTALL_PORTABLE       ON   ==> OFF
+320 	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-323     WITH_PYTHON_INSTALL             ON   ==> OFF
+328     WITH_PYTHON_INSTALL             ON   ==> OFF
 
-333     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+338     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-336     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+341     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
         
-345 # Cycles
+350 # Cycles
 option WITH_CYCLES			ON   dep = openimageio(-git)
 option WITH_CYCLES_OSL      ON   dep = openshadinglanguage(-git)
 
@@ -279,7 +280,7 @@ option WITH_CYCLES_EMBREE           OFF ==> ON si ON makedepends = embree(-git)
 
 option WITH_CYCLES_CUDA_BINARIES	==> ON dep = cuda
         
-Ligne 355
+Ligne 360
 URL  GPU et sm_??  : https://developer.nvidia.com/cuda-gpus
 https://developer.nvidia.com/cuda-gpus#collapse4
 
@@ -291,33 +292,32 @@ exemple :  GeForce GTX 980    5.2
 exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
 -DCYCLES_CUDA_BINARIES_ARCH=sm_52;sm_61
 
-Lignes 358 ????
+Lignes 363 ????
 option WITH_CYCLES_LOGGING     ON ???
         
 !!! A VOIR ???
-360 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
+365 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???   (-march=native)
 
 !!! VOIR https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/a2b52dc5716a97e5413acbd6eefc9ce3788b6456
-369 option WITH_CYCLES_DEVICE_OPTIX   "Enable Cycles OptiX support" OFF
+374 option WITH_CYCLES_DEVICE_OPTIX   "Enable Cycles OptiX support" OFF
 
 !!! A VOIR ???
-376   WITH_CUDA_DYNLOAD     ON
+381   WITH_CUDA_DYNLOAD     ON
 
 
-379 # LLVM
+384 # LLVM
 $ pacman -Ss llvm | grep install
 extra/llvm 9.0.1-1 [installé]
 extra/llvm-libs 9.0.1-1 [installé]
 
-380 option WITH_LLVM   	OFF  ==> ON
+385 option WITH_LLVM   	OFF  ==> ON
 
 # Debug
-403 option WITH_BOOST     ON
-404 option WITH_TBB     ON  dep = intel-tbb
-408 option WITH_TBB_MALLOC_PROXY  OFF
+408 option WITH_BOOST     ON
+409 option WITH_TBB     ON  dep = intel-tbb
 
 # Documentation
-Lignes 416 et ...
+Lignes 421 et ...
 if(UNIX AND NOT APPLE)
         option WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
 endif()
@@ -330,14 +330,14 @@ Lignes 229 et ...
         option WITH_SYSTEM_GLEW   OFF
         option WITH_SYSTEM_GLES   ON
 
-Lignes 424 et ...
+Lignes 429 et ...
 INCHANGÉS :
 ------------
-424 WITH_OPENGL ON
+429 WITH_OPENGL ON
 
 
 # Compiler toolchain
-Lignes 451 et ...
+Lignes 456 et ...
 
 =================================================================
 
@@ -524,15 +524,15 @@ OU
 !!! MODIFIER FICHIERS
 !!! EN USER
 
-!!! SI CHANGEMENT DE VERSION ( 2.81 -> 2.82  ... )
+!!! SI CHANGEMENT DE VERSION ( 2.82 -> 2.83  ... )
 
 $ cd
-$ cp -r .config/blender/2.81 .config/blender/2.82
-# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.82/cache
-$ rm -f .config/blender/2.82/cache/bvh_*
+$ cp -r .config/blender/2.82 .config/blender/2.83
+# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.83/cache
+$ rm -f .config/blender/2.83/cache/bvh_*
 
 # SUPPRINE VERSION N-2
-$ rm -rf .config/blender/2.80
+$ rm -rf .config/blender/2.81
 
 ================================================================
 TESTS

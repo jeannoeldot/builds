@@ -216,10 +216,6 @@ usd-git E: ELF file ('usr/share/usd/examples/plugin/usdObj.so') outside of a val
 usd-git E: ELF file ('usr/share/usd/examples/plugin/usdRecursivePayloadsExample.so') outside of a valid path.
 usd-git E: ELF file ('usr/share/usd/examples/plugin/usdSchemaExamples.so') outside of a valid path.
 
-usd-git W: File (usr/plugin/) exists in a non-standard directory.
-usd-git W: File (usr/plugin/usd/) exists in a non-standard directory.
-usd-git W: File (usr/plugin/usd/plugInfo.json) exists in a non-standard directory.
-
 usd-git W: Referenced library 'libusd_ms.so' is an uninstalled dependency
 usd-git W: Dependency included and not needed ('boost-libs')
 
@@ -267,3 +263,7 @@ SI PROBLEME
 
 ANCIEN
 ======
+usd-git W: File (usr/plugin/) exists in a non-standard directory.
+usd-git W: File (usr/plugin/usd/) exists in a non-standard directory.
+usd-git W: File (usr/plugin/usd/plugInfo.json) exists in a non-standard directory.
+

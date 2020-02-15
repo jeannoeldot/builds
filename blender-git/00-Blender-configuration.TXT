@@ -1,3 +1,33 @@
+2) TEST AVEC USD-GIT
+=====================
+...
+-- Found USD: /usr/lib/libusd_ms.so  
+
+Blender Configuration
+=====================
+
+  Build Options:
+  - WITH_BULLET                 ON
+  - WITH_IK_SOLVER              ON
+  - WITH_IK_ITASC               ON
+  - WITH_OPENCOLLADA            ON
+  - WITH_FFTW3                  ON
+  - WITH_INTERNATIONAL          ON
+  - WITH_INPUT_NDOF             OFF
+  - WITH_CYCLES                 ON
+  - WITH_FREESTYLE              ON
+  - WITH_OPENCOLORIO            ON
+  - WITH_OPENIMAGEDENOISE       ON
+  - WITH_OPENVDB                ON
+  - WITH_ALEMBIC                ON
+  - WITH_QUADRIFLOW             ON
+  - WITH_USD                    ON
+...
+
+
+0) SANS USD-GIT
+=====================
+==> Starting build()...
 -- The C compiler identification is GNU 9.2.0
 -- The CXX compiler identification is GNU 9.2.0
 -- Check for working C compiler: /usr/bin/cc
