@@ -293,7 +293,7 @@ Lignes 363 ????
 option WITH_CYCLES_LOGGING     ON ???
         
 !!! A VOIR ???
-365 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???
+365 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON ???   (-march=native)
 
 !!! VOIR https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/a2b52dc5716a97e5413acbd6eefc9ce3788b6456
 374 option WITH_CYCLES_DEVICE_OPTIX   "Enable Cycles OptiX support" OFF

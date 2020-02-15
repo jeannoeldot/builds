@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=usd-git
 pkgver=19.11.20191026
+pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
+
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 pkgrel=1
