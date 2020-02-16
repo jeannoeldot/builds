@@ -10,11 +10,11 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Philipp Oeser <info@graphics-engineer.com>	
-	Fri, 14 Feb 2020 11:37:17 +0100 (11:37 +0100)
-commit	5ca7c85e105d910f554db4855c099a6b74e59886
+committer	mano-wii <germano.costa@ig.com.br>	
+	Sat, 15 Feb 2020 22:44:11 +0100 (18:44 -0300)
+commit	071639442344bc8fd689456108bbea0bfd527037
 
-==> 20200214
+==> 20200215
 
 
 1.3 SOURCES
@@ -40,7 +40,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 5ca7c85e105d
+==> MY_WC_HASH = 071639442344
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -50,7 +50,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1581676637
+==> MY_WC_COMMIT_TIMESTAM = 1581803051
 
 cd ..
 
@@ -68,7 +68,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 5ca7c85e105d
+==> MY_WC_HASH = 071639442344
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -78,7 +78,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1581676637
+==> MY_WC_COMMIT_TIMESTAM = 1581803051
 
 cd ..
 
@@ -94,16 +94,16 @@ cd ..
 head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
 #define BLENDER_VERSION         283
-#define BLENDER_SUBVERSION      2
+#define BLENDER_SUBVERSION      3
 
-==> Version = 2.83.2
+==> Version = 2.83.3
 
-==> Version = 2.83.2.20200214
+==> Version = 2.83.3.20200215
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.83.2.20200214.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.83.3.20200215.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -111,7 +111,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.83.2.20200214.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.83.3.20200215.tar.gz .
 sync
 
 
@@ -126,11 +126,11 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 !!!!!!
-pkgver=2.83.2.20200214
+pkgver=2.83.3.20200215
+pkgrel=1
+
 pkgrel=2    # TEST AVEC USD et /usr/share/usd/plugin
 pkgrel=1    # TEST AVEC USD
-
-pkgrel=1
 
 pkgrel=1    # Avec openimagedenoise + dynamic clibs
 
@@ -176,8 +176,8 @@ options=('!strip')
 !!!!!! ESSAI
 #options=('!strip')
   -> Stripping unneeded symbols from binaries and libraries...
-strip: Unable to recognise the format of the input file `./usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin'
-strip: Unable to recognise the format of the input file `./usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin'
+strip: Unable to recognise the format of the input file `./usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin'
+strip: Unable to recognise the format of the input file `./usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin'
 
 
 SANS PATCH
@@ -185,7 +185,7 @@ SANS PATCH
 source=("$pkgname-$pkgver.tar.gz"
 )
 
-sha256sum blender-git-2.83.2.20200214.tar.gz
+sha256sum blender-git-2.83.3.20200215.tar.gz
 
 sha256sums=(...
          ...
@@ -204,9 +204,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5ca7c85e105d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "071639442344"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581676637|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581803051|' build_files/cmake/buildinfo.cmake
 }
 
 
@@ -347,7 +347,7 @@ Lignes 456 et ...
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.83.2.20200214.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.83.3.20200215.tar.gz
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -427,7 +427,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.83.2.20200214.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.83.3.20200215.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
 && cp -v -f /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
@@ -468,20 +468,20 @@ rm -f *~
 
 ==> WARNING: Package contains reference to $srcdir
 usr/bin/blender
-usr/share/blender/2.82/scripts/addons/cycles/shader/node_rgb_to_bw.oso
+usr/share/blender/2.83/scripts/addons/cycles/shader/node_rgb_to_bw.oso
 ......
-usr/share/blender/2.82/scripts/addons/cycles/shader/node_add_closure.oso
+usr/share/blender/2.83/scripts/addons/cycles/shader/node_add_closure.oso
 
 namcap blender-git-*-x86_64.pkg.tar.*
 
-blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
-blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
+blender-git E: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
+blender-git E: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
 
 blender-git W: Dependency included and not needed ('python-numpy')
 blender-git W: Dependency included and not needed ('python-requests')
@@ -506,7 +506,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.83.2.20200214.tar.gz
+$ rm -i blender-git-2.83.3.20200215.tar.gz
 
 
 $ cd && maj-repolocal
@@ -544,11 +544,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "5ca7c85e105d"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "071639442344"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581676637|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581803051|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -719,9 +719,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5ca7c85e105d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "071639442344"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581676637|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581803051|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -731,7 +731,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
 )
 
-sha256sum blender-git-2.83.2.20200214.tar.gz
+sha256sum blender-git-2.83.3.20200215.tar.gz
 
 sha256sum Fix-T64463-Visual-Artifacts-with-ColorRamp.patch
 
@@ -756,7 +756,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-mesh_discombobulator.patch"
 )
 
-sha256sum blender-git-2.83.2.20200214.tar.gz
+sha256sum blender-git-2.83.3.20200215.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -795,15 +795,15 @@ sha256sum fix-SyntaxError-io_scene_cod.patch
 !!! ERREUR Compile avec embree 3.5.2
          'embree-git'
 
-blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
-blender-git E: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git E: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
+blender-git E: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
 blender-git W: ELF file ('usr/bin/blender') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
-blender-git W: ELF file ('usr/share/blender/2.82/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
+blender-git W: ELF file ('usr/share/blender/2.83/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
 
         "fix-SyntaxError-io_convert_image_to_mesh_img.patch"
 sha256sum fix-SyntaxError-io_convert_image_to_mesh_img.patch
@@ -816,7 +816,7 @@ Lignes 547 et ...
 WITH_LEGACY_DEPSGRAPH ON
 
 /!\ /!\ /!\ UTILITÉ ???
-!!! SI CHANGEMENT DE VERSION (ex de 2.82 à 2.82)
+!!! SI CHANGEMENT DE VERSION (ex de 2.83 à 2.83)
 
 ==> Modifier blender.install
 
@@ -888,7 +888,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.83.2.20200214.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.83.3.20200215.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
@@ -904,7 +904,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.83.2.20200214.tar.gz
+sha256sum blender-git-2.83.3.20200215.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -930,9 +930,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5ca7c85e105d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "071639442344"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581676637|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1581803051|' build_files/cmake/buildinfo.cmake
   
 }
 
