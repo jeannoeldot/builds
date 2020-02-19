@@ -44,6 +44,8 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.9.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.9.20200202
+pkgrel=2    # TEST /usr/share/OSL/shaders
+
 pkgrel=1
 
 pkgrel=4    # rebuild boost boost-libs 1.72.0
@@ -108,7 +110,20 @@ build() {
 
 
 package() {
-  ...
+...
+
+# TEST /usr/share/OSL/shaders
+  # license
+#   mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
+#   mv -v "${pkgdir}"/usr/share/doc/OSL/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}
+  install -Dm644 "${pkgdir}"/usr/share/doc/OSL/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+
+  # shaders
+  mkdir "${pkgdir}"/usr/share/OSL
+  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+# FIN TEST /usr/share/OSL/shaders
+
+...
   # Ugly hacks /usr/shaders/*.oso and /usr/shaders/MaterialX/*.oso
   for _oso in $(find "${pkgdir}"/usr/shaders/*.oso -type f)
   do
@@ -363,25 +378,25 @@ TESTS
 ========
 
 #!!! OK
-for _oso in $(find /home/jnd/99-temp/OSL/usr/shaders/*.oso -type f)
+for _oso in $(find $HOME/99-temp/OSL/usr/shaders/*.oso -type f)
 do
   sed -i "s|/usr/|/chemin/test/for/find/|g" ${_oso}
 done
 
-for _oso in $(find /home/jnd/99-temp/OSL/usr/shaders/MaterialX/*.oso -type f)
+for _oso in $(find $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso -type f)
 do
   sed -i "s|/usr/|/chemin/test/for/find/|g" ${_oso}
 done
 
-/home/jnd/99-dwl-temp/emitter.oso
+$HOME/99-dwl-temp/emitter.oso
 #sed -i "s|-pipe -fPIC -funsigned-char -fno-strict-aliasing|-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
-sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.9/src/|/usr/|g" /home/jnd/99-dwl-temp/emitter.oso
+sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.9/src/|/usr/|g" $HOME/99-dwl-temp/emitter.oso
 
-/home/jnd/99-temp/OSL/usr/shaders/
+$HOME/99-temp/OSL/usr/shaders/
 sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.9/src/|/usr/|g" \
-/home/jnd/99-temp/OSL/usr/shaders/*.oso
+$HOME/99-temp/OSL/usr/shaders/*.oso
 sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.9/src/|/usr/|g" \
-/home/jnd/99-temp/OSL/usr/shaders/MaterialX/*.oso
+$HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 
 /build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.9/build/src/shaders/emitter.oso
 

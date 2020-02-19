@@ -62,6 +62,14 @@ git submodule update --init --recursive
 git submodule foreach git checkout master
 git submodule foreach git pull --rebase origin master
 
+OU
+===
+https://wiki.blender.org/wiki/Tools/Git#Repository_Update
+cd blender
+git pull --rebase
+git submodule foreach git pull --rebase origin master
+
+
 
 !!! Vérifier si build_files/cmake/buildinfo.cmake est modifié
 -------------------------------------------------------------
