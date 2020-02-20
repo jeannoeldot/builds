@@ -171,6 +171,12 @@ LIGNE 99
   !!! A VOIR
   USE_BOOST_WAVE OFF
 
+  !!! A VOIR
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/02f44049a8c978186e557ce56b3a02662525d15b
+Fix make deps OSL build on some systems with Qt libraries
+LIGNE 100
+  USE_QT "Include Qt support" ON  Blender ==> -DUSE_QT=OFF \
+
 LIGNE 101
   USE_OPTIX OFF
 
