@@ -1,0 +1,11 @@
+diff -aur blender/source/blender/editors/space_view3d/view3d_gizmo_empty.c blender.new/source/blender/editors/space_view3d/view3d_gizmo_empty.c
+--- blender/source/blender/editors/space_view3d/view3d_gizmo_empty.c	2019-10-12 11:06:16.000000000 +0200
++++ blender.new/source/blender/editors/space_view3d/view3d_gizmo_empty.c	2020-03-01 15:07:34.627437864 +0100
+@@ -137,6 +137,7 @@
+   gzgroup->customdata = igzgroup;
+ 
+   WM_gizmo_set_flag(gz, WM_GIZMO_DRAW_HOVER, true);
++  WM_gizmo_set_scale(gz, 0.02f);
+ 
+   UI_GetThemeColor3fv(TH_GIZMO_PRIMARY, gz->color);
+   UI_GetThemeColor3fv(TH_GIZMO_HI, gz->color_hi);

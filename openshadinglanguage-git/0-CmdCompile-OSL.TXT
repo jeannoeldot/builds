@@ -44,6 +44,8 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.9.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.9.20200202
+pkgrel=3    # TEST Rebuild MAJ OIIO 2.1.11.2
+
 pkgrel=2    # TEST /usr/share/OSL/shaders
 
 pkgrel=1

@@ -1,18 +1,46 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.83.4.20200222
+!!! VERSION = 2.83.5.20200229
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.83.4.20200222.tar.gz /tmp/srcp/
+cp -v blender-git-2.83.5.20200229.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.83.4.20200222.tar.gz
+tar -xzf blender-git-2.83.5.20200229.tar.gz
+
+1) Fix T74278: Image Object handles too big
+1) https://developer.blender.org/D6965
+1) MODIFIER blender/source/blender/editors/space_view3d/view3d_gizmo_empty.c
+============================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/editors/space_view3d
+kwrite view3d_gizmo_empty.c
+
+AJOUTER LIGNE 140
+  WM_gizmo_set_scale(gz, 0.02f); 
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier view3d_gizmo_empty.c~
+rm -f view3d_gizmo_empty.c~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-T74278-Image-Object-handles-too-big.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Fix-T74278-Image-Object-handles-too-big.patch .
 
 
 

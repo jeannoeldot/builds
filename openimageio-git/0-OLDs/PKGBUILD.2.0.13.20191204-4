@@ -1,22 +1,21 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.1.11.2.20200213
-pkgrel=1
-_name_release="oiio-Release-2.1.11.2"
+pkgver=2.0.13.20191204
+pkgrel=4
+_name_release="oiio-Release-2.0.13"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
 license=('custom')
-depends=('openexr' 'boost-libs' 'libtiff' 'opencolorio' 'intel-tbb'
+depends=('openexr' 'boost-libs' 'jasper' 'libtiff' 'opencolorio' 'intel-tbb'
          'libjpeg-turbo' 'openjpeg' 'libraw'
          'ffmpeg'
          'opencv'
          'qt5-base'
          'python'
-         'libwebp'
-         'freetype2'
          'openvdb-git'
+         'libwebp'
 )
 makedepends=('cmake' 'boost' 'mesa'
              'robin-map-git'
@@ -26,7 +25,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('0982f46a6a3107045c06ca825cc1637e023d7e7f16075523a85b10de9acedf55'
+sha256sums=('83d9f9b3923a1ceda838fd7f41a136129886dd7973f40953fd7fb376fad949cc'
 )
 
 build() {
@@ -42,10 +41,14 @@ build() {
       -DCMAKE_SKIP_RPATH=ON \
       -DVERBOSE=ON \
       -DOIIO_BUILD_TESTS=OFF \
-      -DINSTALL_FONTS=OFF \
-      -DUSE_CCACHE=OFF \
-      -DUSE_SIMD=avx2 \
       -DPYTHON_VERSION=3.8 \
+      -DUSE_FIELD3D=OFF \
+      -DUSE_PTEX=OFF \
+      -DUSE_NUKE=OFF \
+      -DUSE_DICOM=OFF \
+      -DUSE_SIMD=avx2 \
+      -DUSE_CCACHE=OFF \
+      -DINSTALL_FONTS=OFF \
       ..
   make
 }
@@ -56,10 +59,7 @@ package() {
   make DESTDIR="${pkgdir}" install
 
   # license
-#  mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
-#  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
-#  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE-THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE-THIRD-PARTY
-
-  install -Dm644 ../LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
-  install -Dm644 ../LICENSE-THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE-THIRD-PARTY
+  mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
+  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE-THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE-THIRD-PARTY
 }
