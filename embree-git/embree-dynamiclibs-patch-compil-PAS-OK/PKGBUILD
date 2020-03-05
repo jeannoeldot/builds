@@ -1,0 +1,54 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=embree-git
+pkgver=3.8.0.20200205
+pkgrel=2
+_ver_release="3.8.0"
+_name_release="embree-${_ver_release}"
+pkgdesc="High Performance Ray Tracing Kernels"
+url="https://github.com/embree"
+arch=('x86_64')
+license=('Apache')
+depends=('intel-tbb' 'glfw-x11'
+)
+makedepends=('cmake'
+)
+conflicts=('embree')
+provides=('embree')
+source=("embree-${_ver_release}.tar.gz"
+        "enable-optimizations-Ofast-floop.patch"
+)
+sha256sums=('ae42c08fe05672942083c0b272bfa6915b209eb8c76ae53c8948e2f1f7491e68'
+            '95a84fdb131c6b7ad3b8155777414f83160926564a02f2243e9145983ca54826'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # Enable optimizations Ofast et floop
+  patch -Np1 -i "${srcdir}/enable-optimizations-Ofast-floop.patch"
+}
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DEMBREE_ISPC_SUPPORT=OFF \
+    -DEMBREE_TUTORIALS=OFF \
+    -DEMBREE_RAY_MASK=ON \
+    -DEMBREE_TASKING_SYSTEM=INTERNAL \
+    -DEMBREE_MAX_ISA=AVX2 \
+    ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+  
+  make DESTDIR="${pkgdir}" install
+}

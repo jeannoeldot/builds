@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.83.6.20200305
+pkgver=2.83.5.20200229
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,8 +35,10 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
+        "Fix-T74278-Image-Object-handles-too-big.patch"
 )
-sha256sums=('3e0b4b95321abfc7c7eac048960d95136c2fe7c8c6a4f22e413dce6bfad78f5f'
+sha256sums=('012a5b817f0bb10910483b33417c1fbaf8c5f0e3278e790b78d72a31face1600'
+            '2dae5167f1c995f2182d3e8078b8295797ff62f78e37ae7fc772acb1b7478569'
 )
 
 _gitname="blender"
@@ -44,14 +46,18 @@ _slot="2.83"
 
 prepare() {
   cd "${_gitname}"
+  # https://developer.blender.org/D6965
+  # Fix T74278: Image Object handles too big
+  patch -Np1 -i "${srcdir}/Fix-T74278-Image-Object-handles-too-big.patch"
+
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "c328049535a4"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4cf3977a742a"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1583402338|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1583003234|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
