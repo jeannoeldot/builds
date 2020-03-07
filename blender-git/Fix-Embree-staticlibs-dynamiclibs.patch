@@ -1,0 +1,41 @@
+diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_files/cmake/Modules/FindEmbree.cmake
+--- blender/build_files/cmake/Modules/FindEmbree.cmake	2020-02-09 11:20:25.000000000 +0100
++++ blender.new/build_files/cmake/Modules/FindEmbree.cmake	2020-03-07 11:39:23.986832305 +0100
+@@ -72,7 +72,7 @@
+ 
+ FIND_LIBRARY(EMBREE_LIBRARY
+   NAMES
+-    libembree3
++    embree3
+   HINTS
+     ${_embree_SEARCH_DIRS}
+   PATH_SUFFIXES
+@@ -83,10 +83,10 @@
+ # all listed variables are TRUE
+ INCLUDE(FindPackageHandleStandardArgs)
+ FIND_PACKAGE_HANDLE_STANDARD_ARGS(EMBREE DEFAULT_MSG
+-    _embree_LIBRARIES EMBREE_INCLUDE_DIR)
++    EMBREE_LIBRARY EMBREE_INCLUDE_DIR)
+ 
+ IF(EMBREE_FOUND)
+-  SET(EMBREE_LIBRARIES ${_embree_LIBRARIES})
++  SET(EMBREE_LIBRARIES ${EMBREE_LIBRARY})
+   SET(EMBREE_INCLUDE_DIRS ${EMBREE_INCLUDE_DIR})
+ ENDIF(EMBREE_FOUND)
+ 
+diff -aur blender/intern/cycles/blender/CMakeLists.txt blender.new/intern/cycles/blender/CMakeLists.txt
+--- blender/intern/cycles/blender/CMakeLists.txt	2020-02-09 11:20:25.000000000 +0100
++++ blender.new/intern/cycles/blender/CMakeLists.txt	2020-03-07 11:28:16.044675178 +0100
+@@ -66,6 +66,12 @@
+   )
+ endif()
+ 
++if(WITH_CYCLES_EMBREE)
++  list(APPEND LIB
++    ${EMBREE_LIBRARIES}
++  )
++endif()
++
+ set(ADDON_FILES
+   addon/__init__.py
+   addon/engine.py

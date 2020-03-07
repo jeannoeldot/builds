@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.83.6.20200307
+pkgver=2.83.6.20200305
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -22,21 +22,21 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'llvm-libs'
           'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
-          'embree-git' 'openimagedenoise-git' 'usd-git'
+          'openimagedenoise-git'
+          'usd-git'
 )
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
+             'embree-git'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
-        "Fix-Embree-staticlibs-dynamiclibs.patch"
 )
-sha256sums=('f6b4b6e1469e801176a0679ae0ed0cc545a4a65aff6c06666a03576df8b22105'
-            '2f2a6eb2e90ba66c39e97fe94ef7e4d9105e8aaf94654c6fd7111cc1190fa07e'
+sha256sums=('3e0b4b95321abfc7c7eac048960d95136c2fe7c8c6a4f22e413dce6bfad78f5f'
 )
 
 _gitname="blender"
@@ -44,18 +44,14 @@ _slot="2.83"
 
 prepare() {
   cd "${_gitname}"
-  # Embree : static libs --> dynamic libs
-  # https://github.com/bartoszek/AUR-blender-2.8-git
-  patch -Np1 -i "${srcdir}/Fix-Embree-staticlibs-dynamiclibs.patch"
-
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "8a5a306a8313"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "c328049535a4"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1583565661|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1583402338|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

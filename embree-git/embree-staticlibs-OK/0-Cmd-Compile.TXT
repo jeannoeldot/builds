@@ -37,11 +37,6 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=embree-git               # embree ds community ?
 pkgver=3.8.0.20200205
-pkgrel=4  # AVEC patch Ofast + dynamic libs
-pkgrel=3  # SANS PATCH + dynamic libs
-
-pkgrel=2  # Avec patch Ofast floop + dynamic libs ==> Compil PAS OK
-
 pkgrel=1
 
 pkgrel=2    # Rebuild MAJ intel-tbb 2019.9-1
@@ -67,6 +62,9 @@ makedepends=('cmake')
 conflicts='embree'
 provides='embree'
 
+!!! TESTS
+options=(staticlibs)
+
 SANS PATCH
 ----------
 sha256sum embree-3.8.0.tar.gz
@@ -76,33 +74,11 @@ source=("embree-${_ver_release}.tar.gz"
 sha256sums=('... ...'
 )
 
-AVEC PATCH
-----------
-sha256sum embree-3.8.0.tar.gz
-
-sha256sum enable-optimizations-Ofast.patch
-
-source=("embree-${_ver_release}.tar.gz"
-        "enable-optimizations-Ofast.patch"
-)
-sha256sums=('... ...'
-            '... ...'
-)
-
-prepare() {
-  cd "${_name_release}"
-  # Enable optimizations Ofast
-  patch -Np1 -i "${srcdir}/enable-optimizations-Ofast.patch"
-}
-
-
 build() {
   cd "${_name_release}"
 
 package() {
   cd "${_name_release}"
-
-
 
 2-5) VERIFIER CMakeLists.txt
 ============================
@@ -118,10 +94,7 @@ tar -xzf embree-3.8.0.tar.gz -C /tmp/srcp
 
 LIGNE 97 ET ...
 ----------------
-!!! VOIR
 EMBREE_STATIC_LIB               OFF by default  ==> ON  install_deps = ON
---------
-
 EMBREE_ISPC_SUPPORT             ON by default   ==> OFF install_deps = OFF
 EMBREE_TUTORIALS                ON by default   ==> OFF install_deps = OFF
 
@@ -162,7 +135,6 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.8.0.tar.gz
--rw-r--r--  1 jnd users     832  7 mars  10:56 enable-optimizations-Ofast.patch
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -197,11 +169,6 @@ cd $HOME/05-builds/embree-git && rm -rf /tmp/build
 !!! EN USER
 
 $ mkpkg-chroot-repo
-
-  FLOOP
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m floop
 
   FAST
 -------
@@ -271,25 +238,5 @@ SI PROBLEME
 
 ANCIEN
 ======
-
-AVEC PATCH
-----------
-sha256sum embree-3.8.0.tar.gz
-
-sha256sum enable-optimizations-Ofast-floop.patch
-
-source=("embree-${_ver_release}.tar.gz"
-        "enable-optimizations-Ofast-floop.patch"
-)
-sha256sums=('... ...'
-            '... ...'
-)
-
-prepare() {
-  cd "${_name_release}"
-  # Enable optimizations Ofast et floop
-  patch -Np1 -i "${srcdir}/enable-optimizations-Ofast-floop.patch"
-}
-
 
 EMBREE_IGNORE_CMAKE_CXX_FLAGS   ON by default

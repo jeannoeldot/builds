@@ -1,80 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.83.6.20200307
+!!! VERSION = 2.83.6.20200305
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.83.6.20200307.tar.gz /tmp/srcp/
+cp -v blender-git-2.83.6.20200305.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.83.6.20200307.tar.gz
-
-1) Embree : static libs --> dynamic libs
-1) https://github.com/bartoszek/AUR-blender-2.8-git
-1a) MODIFIER blender/intern/cycles/blender/CMakeLists.txt
-=========================================================
-/!\ /!\ /!\ cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/intern/cycles/blender
-kwrite CMakeLists.txt
-
-AJOUTER LIGNES 69 A 74:
-if(WITH_CYCLES_EMBREE)
-  list(APPEND LIB
-    ${EMBREE_LIBRARIES}
-  )
-endif()
-
- 
-ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
-rm -f CMakeLists.txt~
-
-cd ../../../..
-
-1b) MODIFIER blender/build_files/cmake/Modules/FindEmbree.cmake
-===============================================================
-
-cd blender.new/build_files/cmake/Modules
-kwrite FindEmbree.cmake
-
-MODIFIER LIGNE 75:
-    libembree3
-DEVIENT
-    embree3
-
-MODIFIER LIGNE 86:
-    _embree_LIBRARIES EMBREE_INCLUDE_DIR)
-DEVIENT
-    EMBREE_LIBRARY EMBREE_INCLUDE_DIR)
-
-MODIFIER LIGNE 89:
-  SET(EMBREE_LIBRARIES ${_embree_LIBRARIES})
-DEVIENT
-  SET(EMBREE_LIBRARIES ${EMBREE_LIBRARY})
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier FindEmbree.cmake~
-rm -f FindEmbree.cmake~
-
-cd ../../../..
-
-
-diff -aur blender blender.new
-diff -aur blender blender.new > Fix-Embree-staticlibs-dynamiclibs.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/Fix-Embree-staticlibs-dynamiclibs.patch .
-
+tar -xzf blender-git-2.83.6.20200305.tar.gz
 
 
 

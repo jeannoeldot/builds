@@ -1,4 +1,25 @@
 
+V 3.8.0
+PKGBUILD AVEC Patch Ofast ==> PAS OK
+-------------------------
+[  2%] Building CXX object common/math/CMakeFiles/math.dir/constants.cpp.o
+cd /build/embree-git/src/embree-3.8.0/build/common/math &&
+/usr/bin/c++  -DEMBREE_TARGET_AVX -DEMBREE_TARGET_AVX2 -DEMBREE_TARGET_SSE2 -DEMBREE_TARGET_SSE42 -DTASKING_INTERNAL
+-Wall -Wformat -Wformat-security -fPIE -fPIC -std=c++11 -fvisibility=hidden -fvisibility-inlines-hidden -fno-strict-aliasing -fno-tree-vectorize  -DNDEBUG -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -D_FORTIFY_SOURCE=2    -msse2
+-o CMakeFiles/math.dir/constants.cpp.o -c /build/embree-git/src/embree-3.8.0/common/math/constants.cpp
+
+
+V 3.8.0
+PKGBUILD SANS Patch
+-------------------
+
+[  1%] Building CXX object common/math/CMakeFiles/math.dir/constants.cpp.o
+cd /build/embree-git/src/embree-3.8.0/build/common/math &&
+/usr/bin/c++  -DEMBREE_TARGET_AVX -DEMBREE_TARGET_AVX2 -DEMBREE_TARGET_SSE2 -DEMBREE_TARGET_SSE42 -DTASKING_INTERNAL
+-Wall -Wformat -Wformat-security -fPIE -fPIC -std=c++11 -fvisibility=hidden -fvisibility-inlines-hidden -fno-strict-aliasing -fno-tree-vectorize  -DNDEBUG -O3 -D_FORTIFY_SOURCE=2    -msse2
+-o CMakeFiles/math.dir/constants.cpp.o -c /build/embree-git/src/embree-3.8.0/common/math/constants.cpp
+
+
 V 3.6.0 (PAS OK AVEC BLENDER)
 PKGBUILD AVEC Patch
 -------------------

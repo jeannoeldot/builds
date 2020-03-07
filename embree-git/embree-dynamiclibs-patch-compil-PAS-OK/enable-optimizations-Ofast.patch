@@ -1,0 +1,12 @@
+diff -aur embree-3.8.0/common/cmake/gnu.cmake embree-3.8.0.new/common/cmake/gnu.cmake
+--- embree-3.8.0/common/cmake/gnu.cmake	2020-02-04 09:01:09.000000000 +0100
++++ embree-3.8.0.new/common/cmake/gnu.cmake	2020-03-07 10:56:18.605148077 +0100
+@@ -62,7 +62,7 @@
+ 
+ SET(CMAKE_CXX_FLAGS_RELEASE "")
+ SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")     # disable assertions
+-SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")          # enable full optimizations
++SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt")          # enable full optimizations
+ SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -D_FORTIFY_SOURCE=2") # perform extra security checks for some standard library calls
+ 
+ SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "")

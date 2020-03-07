@@ -1,13 +1,7 @@
-2) TEST AVEC EMBREE-GIT DYNAMIC LIBS
-====================================
-...
--- Found EMBREE: /usr/lib/libembree3.so
-...
-
 2) TEST AVEC USD-GIT
 =====================
 ...
--- Found USD: /usr/lib/libusd_ms.so
+-- Found USD: /usr/lib/libusd_ms.so  
 
 Blender Configuration
 =====================

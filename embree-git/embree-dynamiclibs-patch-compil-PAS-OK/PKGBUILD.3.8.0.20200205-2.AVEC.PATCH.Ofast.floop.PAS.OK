@@ -2,7 +2,7 @@
 
 pkgname=embree-git
 pkgver=3.8.0.20200205
-pkgrel=3
+pkgrel=2
 _ver_release="3.8.0"
 _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"
@@ -16,9 +16,17 @@ makedepends=('cmake'
 conflicts=('embree')
 provides=('embree')
 source=("embree-${_ver_release}.tar.gz"
+        "enable-optimizations-Ofast-floop.patch"
 )
 sha256sums=('ae42c08fe05672942083c0b272bfa6915b209eb8c76ae53c8948e2f1f7491e68'
+            '95a84fdb131c6b7ad3b8155777414f83160926564a02f2243e9145983ca54826'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # Enable optimizations Ofast et floop
+  patch -Np1 -i "${srcdir}/enable-optimizations-Ofast-floop.patch"
+}
 
 build() {
   cd "${_name_release}"
@@ -36,7 +44,7 @@ build() {
     -DEMBREE_TASKING_SYSTEM=INTERNAL \
     -DEMBREE_MAX_ISA=AVX2 \
     ..
-  make VERBOSE=1
+  make
 }
 
 package() {
