@@ -1,10 +1,16 @@
+3) TEST OPTIX
+=============
+...
+-- Found OptiX: /build/blender-git/src/include  
+...
+
 2) TEST AVEC EMBREE-GIT DYNAMIC LIBS
 ====================================
 ...
 -- Found EMBREE: /usr/lib/libembree3.so
 ...
 
-2) TEST AVEC USD-GIT
+1) TEST AVEC USD-GIT
 =====================
 ...
 -- Found USD: /usr/lib/libusd_ms.so

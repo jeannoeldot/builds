@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.83.6.20200307
+!!! VERSION = 2.83.9.20200314
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.83.6.20200307.tar.gz /tmp/srcp/
+cp -v blender-git-2.83.9.20200314.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.83.6.20200307.tar.gz
+tar -xzf blender-git-2.83.9.20200314.tar.gz
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git

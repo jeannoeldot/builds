@@ -1,0 +1,75 @@
+/build/blender-git/src/blender/intern/cycles/render/image.cpp: In member function ‘int ccl::ImageHandle::svm_slot(int) const’:
+/build/blender-git/src/blender/intern/cycles/render/image.cpp:153:34: error: could not convert ‘ccl::ImageLoader::osl_filepath()’ from ‘OpenImageIO_v2_1::ustring’ to ‘bool’
+  153 |     if (img->loader->osl_filepath()) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~^~
+      |                                  |
+      |                                  OpenImageIO_v2_1::ustring
+/build/blender-git/src/blender/intern/cycles/render/image.cpp: In member function ‘int ccl::ImageManager::add_image_slot(ccl::ImageLoader*, const ccl::ImageParams&, bool)’:
+/build/blender-git/src/blender/intern/cycles/render/image.cpp:397:41: error: no match for ‘operator&&’ (operand types are ‘void*’ and ‘OpenImageIO_v2_1::ustring’)
+  397 |   img->need_load = !(osl_texture_system && img->loader->osl_filepath());
+      |                      ~~~~~~~~~~~~~~~~~~ ^~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                      |                                              |
+      |                      void*                                          OpenImageIO_v2_1::ustring
+/build/blender-git/src/blender/intern/cycles/render/image.cpp:397:41: note: candidate: ‘operator&&(bool, bool)’ <built-in>
+  397 |   img->need_load = !(osl_texture_system && img->loader->osl_filepath());
+      |                      ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/build/blender-git/src/blender/intern/cycles/render/image.cpp:397:41: note:   no known conversion for argument 2 from ‘OpenImageIO_v2_1::ustring’ to ‘bool’
+/build/blender-git/src/blender/intern/cycles/render/image.cpp: In member function ‘void ccl::ImageManager::device_free_image(ccl::Device*, int)’:
+/build/blender-git/src/blender/intern/cycles/render/image.cpp:797:9: error: could not convert ‘filepath’ from ‘OpenImageIO_v2_1::ustring’ to ‘bool’
+  797 |     if (filepath) {
+      |         ^~~~~~~~
+      |         |
+      |         OpenImageIO_v2_1::ustring
+[ 82%] Building CXX object source/blender/compositor/CMakeFiles/bf_compositor.dir/nodes/COM_GammaNode.cpp.o
+[ 82%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/BPy_StrokeShader.cpp.o
+make[2]: Entering directory '/build/blender-git/src/blender/build'
+[ 82%] Building CXX object intern/cycles/render/CMakeFiles/cycles_render.dir/light.cpp.o
+[ 82%] Building CXX object source/blender/compositor/CMakeFiles/bf_compositor.dir/nodes/COM_HueSaturationValueCorrectNode.cpp.o
+Scanning dependencies of target makesrna
+make[2]: Leaving directory '/build/blender-git/src/blender/build'
+make[2]: Entering directory '/build/blender-git/src/blender/build'
+[ 82%] Building C object source/blender/makesrna/intern/CMakeFiles/makesrna.dir/makesrna.c.o
+make[2]: *** [intern/cycles/render/CMakeFiles/cycles_render.dir/build.make:232: intern/cycles/render/CMakeFiles/cycles_render.dir/image.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+make[2]: Leaving directory '/build/blender-git/src/blender/build'
+make[1]: *** [CMakeFiles/Makefile2:3773: intern/cycles/render/CMakeFiles/cycles_render.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:163: all] Error 2
+======================================================
+PATCH
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/f130c5ddb640dd7dda61d6a382259c4c89bd6822..75be60a66755f96e6d1d9b7e98bd0836784769f6:/intern/cycles/render/image.cpp
+
+diff --git a/intern/cycles/render/image.cpp b/intern/cycles/render/image.cpp
+index b4539b5ce3c2bfb7490000acaca9ba845363056e..692f6683e1bbb4a0205f6ecefdf338c266601577 100644 (file)
+--- a/intern/cycles/render/image.cpp
++++ b/intern/cycles/render/image.cpp
+@@ -150,7 +150,7 @@ int ImageHandle::svm_slot(const int tile_index) const
+ 
+   if (manager->osl_texture_system) {
+     ImageManager::Image *img = manager->images[tile_slots[tile_index]];
+-    if (img->loader->osl_filepath()) {
++    if (!img->loader->osl_filepath().empty()) {
+       return -1;
+     }
+   }
+@@ -394,7 +394,7 @@ int ImageManager::add_image_slot(ImageLoader *loader,
+   img->params = params;
+   img->loader = loader;
+   img->need_metadata = true;
+-  img->need_load = !(osl_texture_system && img->loader->osl_filepath());
++  img->need_load = !(osl_texture_system && !img->loader->osl_filepath().empty());
+   img->builtin = builtin;
+   img->users = 1;
+   img->mem = NULL;
+@@ -794,7 +794,7 @@ void ImageManager::device_free_image(Device *, int slot)
+   if (osl_texture_system) {
+ #ifdef WITH_OSL
+     ustring filepath = img->loader->osl_filepath();
+-    if (filepath) {
++    if (!filepath.empty()) {
+       ((OSL::TextureSystem *)osl_texture_system)->invalidate(filepath);
+     }
+ #endif
+
