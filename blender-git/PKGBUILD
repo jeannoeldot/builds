@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.83.10.20200322
+pkgver=2.83.11.20200329
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,10 +35,12 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "Fix-Embree-staticlibs-dynamiclibs.patch"
         "OptiX-7.0.0-include.zip"
+        "Enable-Optix-7-for-non-RTX-card.patch"
 )
-sha256sums=('095b9228713df95d90ddf4b11bc51ec6a3aba2834286423aa84aec3f5415ec48'
+sha256sums=('b47c0ab7e55c8e7fc0383271259022197c5e2216a75b35495b8740e962d553c0'
             '2f2a6eb2e90ba66c39e97fe94ef7e4d9105e8aaf94654c6fd7111cc1190fa07e'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
+            '7642600f05ced7140b15416f09ac9e49bea878b3c88c5fc215e2501b73b454fd'
 )
 
 _gitname="blender"
@@ -49,15 +51,18 @@ prepare() {
   # Embree : static libs --> dynamic libs
   # https://github.com/bartoszek/AUR-blender-2.8-git
   patch -Np1 -i "${srcdir}/Fix-Embree-staticlibs-dynamiclibs.patch"
+  # Enabling Optix 7 for non-RTX card
+  # https://devtalk.blender.org/t/blender-2-8-cycles-optix-on-non-rtx-card/11224/1
+  patch -Np1 -i "${srcdir}/Enable-Optix-7-for-non-RTX-card.patch"
 
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "ad7bb8e42c38"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e8dd6128b58b"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1584839845|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1585468717|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.83.10.20200322
+!!! VERSION = 2.83.11.20200329
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.83.10.20200322.tar.gz /tmp/srcp/
+cp -v blender-git-2.83.11.20200329.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.83.10.20200322.tar.gz
+tar -xzf blender-git-2.83.11.20200329.tar.gz
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
@@ -75,6 +75,44 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/Fix-Embree-staticlibs-dynamiclibs.patch .
 
+
+2) Enabling Optix 7 for non-RTX card
+2) https://devtalk.blender.org/t/blender-2-8-cycles-optix-on-non-rtx-card/11224/1
+2) MODIFIER intern/cycles/device/device_optix.cpp
+=================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/intern/cycles/device
+kwrite device_optix.cpp
+
+MODIFIER LIGNES 1561 À 1563 :
+    if (rtcore_version == 0 && !getenv("CYCLES_OPTIX_TEST"))
+      it = cuda_devices.erase(it);
+    else
+ 
+DEVIENNENT
+COMMENTER LIGNES 1561 À 1563:
+    //if (rtcore_version == 0 && !getenv("CYCLES_OPTIX_TEST"))
+    //  it = cuda_devices.erase(it);
+    //else
+
+ 
+ENREGISTRER et Quitter Kwrite & EFFACER fichier device_optix.cpp~
+rm -f device_optix.cpp~
+
+cd ../../../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Enable-Optix-7-for-non-RTX-card.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Enable-Optix-7-for-non-RTX-card.patch .
 
 
 

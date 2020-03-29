@@ -1,0 +1,16 @@
+diff -aur blender/intern/cycles/device/device_optix.cpp blender.new/intern/cycles/device/device_optix.cpp
+--- blender/intern/cycles/device/device_optix.cpp	2020-03-29 11:01:32.000000000 +0200
++++ blender.new/intern/cycles/device/device_optix.cpp	2020-03-29 11:32:32.515191408 +0200
+@@ -1558,9 +1558,9 @@
+     }
+ 
+     // Only add devices with RTX support
+-    if (rtcore_version == 0 && !getenv("CYCLES_OPTIX_TEST"))
+-      it = cuda_devices.erase(it);
+-    else
++    //if (rtcore_version == 0 && !getenv("CYCLES_OPTIX_TEST"))
++    //  it = cuda_devices.erase(it);
++    //else
+       ++it;
+   }
+ 
