@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.83.11.20200329
+!!! VERSION = 2.83.13.20200408
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.83.11.20200329.tar.gz /tmp/srcp/
+cp -v blender-git-2.83.13.20200408.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.83.11.20200329.tar.gz
+tar -xzf blender-git-2.83.13.20200408.tar.gz
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
@@ -25,7 +25,7 @@ cp -R blender blender.new
 cd blender.new/intern/cycles/blender
 kwrite CMakeLists.txt
 
-AJOUTER LIGNES 69 A 74:
+AJOUTER LIGNES 70 A 75:
 if(WITH_CYCLES_EMBREE)
   list(APPEND LIB
     ${EMBREE_LIBRARIES}

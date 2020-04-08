@@ -1,6 +1,6 @@
 diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_files/cmake/Modules/FindEmbree.cmake
 --- blender/build_files/cmake/Modules/FindEmbree.cmake	2020-02-09 11:20:25.000000000 +0100
-+++ blender.new/build_files/cmake/Modules/FindEmbree.cmake	2020-03-07 11:39:23.986832305 +0100
++++ blender.new/build_files/cmake/Modules/FindEmbree.cmake	2020-04-08 11:44:56.850060302 +0200
 @@ -72,7 +72,7 @@
  
  FIND_LIBRARY(EMBREE_LIBRARY
@@ -24,9 +24,9 @@ diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_f
  ENDIF(EMBREE_FOUND)
  
 diff -aur blender/intern/cycles/blender/CMakeLists.txt blender.new/intern/cycles/blender/CMakeLists.txt
---- blender/intern/cycles/blender/CMakeLists.txt	2020-02-09 11:20:25.000000000 +0100
-+++ blender.new/intern/cycles/blender/CMakeLists.txt	2020-03-07 11:28:16.044675178 +0100
-@@ -66,6 +66,12 @@
+--- blender/intern/cycles/blender/CMakeLists.txt	2020-03-22 10:55:23.000000000 +0100
++++ blender.new/intern/cycles/blender/CMakeLists.txt	2020-04-08 11:43:40.707021829 +0200
+@@ -67,6 +67,12 @@
    )
  endif()
  
