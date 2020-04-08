@@ -602,6 +602,10 @@ $ rm -f .config/blender/2.83/cache/bvh_*
 # SUPPRINE VERSION N-2
 $ rm -rf .config/blender/2.81
 
+!!! MODIFIER FICHIERS sm_52.cubin (blender Cuda 10.1 -> moi Cuda 10.2)
+!!! VOIR 00-Copie-fichiers-sm_52.cubin.TXT
+
+
 ================================================================
 TESTS
 ========

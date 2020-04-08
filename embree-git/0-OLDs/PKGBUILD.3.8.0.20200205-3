@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git
-pkgver=3.9.0.20200407
-pkgrel=1
-_ver_release="3.9.0"
+pkgver=3.8.0.20200205
+pkgrel=3
+_ver_release="3.8.0"
 _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"
 url="https://github.com/embree"
@@ -17,7 +17,7 @@ conflicts=('embree')
 provides=('embree')
 source=("embree-${_ver_release}.tar.gz"
 )
-sha256sums=('53855e2ceb639289b20448ae9deab991151aa5f0bc7f9cc02f2af4dd6199d5d1'
+sha256sums=('ae42c08fe05672942083c0b272bfa6915b209eb8c76ae53c8948e2f1f7491e68'
 )
 
 build() {
