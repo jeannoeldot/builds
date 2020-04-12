@@ -2,7 +2,7 @@
 
 pkgname=openimagedenoise-git
 pkgver=1.2.0.20200409
-pkgrel=1
+pkgrel=2
 _ver_release="1.2.0"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
@@ -32,6 +32,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_SKIP_RPATH=ON \
+    -DOIDN_APPS=OFF \
     ..
   make
 }

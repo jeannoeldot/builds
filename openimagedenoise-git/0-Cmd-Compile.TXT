@@ -36,7 +36,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-git
 pkgver=1.2.0.20200409
-pkgrel=1
+pkgrel=2  # Rebuild OIDN_APPS=OFF
 
 pkgrel=2  # Rebuild MAJ python 3.8
 
@@ -52,7 +52,8 @@ depends=('intel-tbb' 'python'
 )
 
 
-makedepends=('cmake')
+makedepends=('cmake' 'ispc'
+)
 
 
 conflicts='openimagedenoise' 'oidn'
@@ -88,13 +89,18 @@ tar -xzf oidn-1.2.0.src.tar.gz -C /tmp/srcp
 !!! LIGNES 2597 et ...
 2659     cmake_d="-D CMAKE_BUILD_TYPE=Release"
 2660     cmake_d="$cmake_d -D CMAKE_INSTALL_PREFIX=$_inst"
+
 2661     cmake_d="$cmake_d -D WITH_EXAMPLE=OFF"
 2662     cmake_d="$cmake_d -D WITH_TEST=OFF"
+
 2663     cmake_d="$cmake_d -D OIDN_STATIC_LIB=ON"
 
-LIGNE 48 ET ...
+LIGNES 42 ET ...
+
 CMAKE_BUILD_TYPE "Release"
 
+LIGNE 180
+option(OIDN_APPS "Enable building example and test apps." ON) ==> OFF
 
 
 rm -rf /tmp/srcp
@@ -169,6 +175,7 @@ rm -f *~
 usr/lib/libOpenImageDenoise.so.1.2.0
 
 namcap openimagedenoise-git-*-x86_64.pkg.tar.*
+openimagedenoise-git W: Dependency included and not needed ('python')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -193,7 +200,6 @@ $ rm -i oidn-1.2.0.src.tar.gz
 
 $ cd && maj-repolocal
 $ sync
-
 
 !!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
 ===================================================================================
