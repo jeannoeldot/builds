@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimagedenoise-git
-pkgver=1.2.0.20200409
-pkgrel=1
-_ver_release="1.2.0"
+pkgver=1.1.0.20191015
+pkgrel=2
+_ver_release="1.1.0"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
 url="http://www.openimagedenoise.org/"
@@ -11,14 +11,14 @@ arch=('x86_64')
 license=('Apache')
 depends=('intel-tbb' 'python'
 )
-makedepends=('cmake' 'ispc'
+makedepends=('cmake'
 )
 conflicts=('openimagedenoise' 'oidn')
 provides=('openimagedenoise' 'oidn')
 #options=(staticlibs)
 source=("oidn-${_ver_release}.src.tar.gz"
 )
-sha256sums=('041f59758e79f4ea29a9b7a952f2c096426820678a5a713880b6d8a6519a75d0'
+sha256sums=('4dd484abea8a0b3d12d346343fcb1ab7abef8f94318d8c537f69a20c2a75c4eb'
 )
 
 build() {

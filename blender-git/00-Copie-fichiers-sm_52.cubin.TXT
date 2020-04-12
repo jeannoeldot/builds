@@ -7,31 +7,33 @@ DE BLENDER BUILD AVEC CUDA 10.1
 
 Télécharger blender (linux 64 bit:
 https://builder.blender.org/download/
-==> https://builder.blender.org/download/blender-2.83-a24f52c51cff-linux64.tar.xz
+==> https://builder.blender.org/download/blender-2.83-a3c16055819f-linux64.tar.xz
 dans $HOME/99-dwl-temp/
 
 VERSION: 2.83
-HASH: a24f52c51cff
+HASH: a3c16055819f
 
 cd $HOME/99-dwl-temp
+
+wget https://builder.blender.org/download/blender-2.83-a3c16055819f-linux64.tar.xz
 
 rm -rf blender-28x
 
 ls | grep blender
 ==> 
-blender-2.83-a24f52c51cff-linux64.tar.xz
+blender-2.83-a3c16055819f-linux64.tar.xz
 
 mkdir blender-28x
 
 mv -v blender-*-linux64.tar.xz blender-28x/
 ==> 
-renommé'blender-2.83-a24f52c51cff-linux64.tar.xz' -> 'blender-28x/blender-2.83-a24f52c51cff-linux64.tar.xz'
+renommé'blender-2.83-a3c16055819f-linux64.tar.xz' -> 'blender-28x/blender-2.83-a3c16055819f-linux64.tar.xz'
 
 cd blender-28x
 
-tar -xJf blender-2.83-a24f52c51cff-linux64.tar.xz
+tar -xJf blender-2.83-a3c16055819f-linux64.tar.xz
 
-cd blender-2.83-a24f52c51cff-linux64/2.83/scripts/addons/cycles/lib/
+cd blender-2.83-a3c16055819f-linux64/2.83/scripts/addons/cycles/lib/
 
 ls | grep sm_52
 
