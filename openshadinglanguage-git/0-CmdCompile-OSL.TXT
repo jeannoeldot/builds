@@ -44,8 +44,9 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.9.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.9.20200202
-pkgrel=4    # Rebuild OIIO + opencv 4.3.0
+pkgrel=5    # Rebuild MAJ LLVM 10.0.0-1 + PATCH
 
+pkgrel=4    # Rebuild OIIO + opencv 4.3.0
 pkgrel=3    # TEST Rebuild MAJ OIIO 2.1.11.2
 
 pkgrel=2    # TEST /usr/share/OSL/shaders
@@ -78,11 +79,11 @@ _name_release="OpenShadingLanguage-Release-1.10.9"
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-!!! LLVM 9.0
+!!! LLVM 10.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/llvm 9.0.1-1 [installé]
-extra/llvm-libs 9.0.1-1 [installé]
+extra/llvm 10.0.0-1 [installé]
+extra/llvm-libs 10.0.0-1 [installé]
 
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
@@ -104,6 +105,26 @@ sha256sums=(...
          ...
 )
 
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("$_name_release.tar.gz"
+        '0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch'
+)
+
+sha256sum OpenShadingLanguage-Release-1.10.9.tar.gz
+
+sha256sum 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
+
+sha256sums=('123456789'
+            '112233445566778899'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # https://git.archlinux.org/svntogit/community.git/plain/trunk/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch?h=packages/openshadinglanguage
+  patch -Np1 -i "${srcdir}/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch"
+}
+
 
 !!! VERSION 1.10.9
 build() {
@@ -111,7 +132,7 @@ build() {
   # Install lib*.so par défaut dans lib64 au lieu de lib
       -DCMAKE_INSTALL_LIBDIR=lib \
   ...
-
+      -DCMAKE_CXX_STANDARD=14 \         # Pour llvm 10
 
 package() {
 ...
@@ -231,7 +252,7 @@ set (INSTALL_FONTS "Install default fonts" OFF)
 
 4) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.9/src/cmake/modules/FindLLVM.cmake
 
-!!! LLVM 9.0
+!!! LLVM 10.0
 ------------------------------------
 LIGNE 90 ET ...
   LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
@@ -246,6 +267,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.10.9.tar.gz
+-rw-r--r--  1 jnd users     3453 19 avril 10:48 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
 
 
 !!! A MODIFIER SI PAS OK !

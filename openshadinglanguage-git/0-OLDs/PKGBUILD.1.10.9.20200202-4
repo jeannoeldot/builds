@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.9.20200202
-pkgrel=5
+pkgrel=4
 _name_release="OpenShadingLanguage-Release-1.10.9"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
@@ -18,17 +18,9 @@ makedepends=('boost' 'cmake' 'llvm' 'clang' 'python')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
-        '0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch'
 )
 sha256sums=('3f061831e3541068ce080fa96fa682df3ee93aa2505bad00dc34522b11af20f9'
-            '49cc50763d9910cd616028e718a30a687f5d87acc3f261344aa72d266c079d1b'
 )
-
-prepare() {
-  cd "${_name_release}"
-  # https://git.archlinux.org/svntogit/community.git/plain/trunk/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch?h=packages/openshadinglanguage
-  patch -Np1 -i "${srcdir}/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch"
-}
 
 build() {
   cd "${_name_release}"
@@ -41,7 +33,6 @@ build() {
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
-      -DCMAKE_CXX_STANDARD=14 \
       -DLLVM_STATIC=OFF \
       -DVERBOSE=ON \
       -DOSL_BUILD_TESTS=OFF \
