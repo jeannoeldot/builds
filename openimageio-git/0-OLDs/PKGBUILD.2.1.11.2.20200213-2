@@ -2,14 +2,14 @@
 
 pkgname=openimageio-git
 pkgver=2.1.11.2.20200213
-pkgrel=3
+pkgrel=2
 _name_release="oiio-Release-2.1.11.2"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
 license=('custom')
 depends=('openexr' 'boost-libs' 'libtiff' 'opencolorio' 'intel-tbb'
-         'libjpeg-turbo' 'openjpeg2' 'libraw'
+         'libjpeg-turbo' 'openjpeg' 'libraw'
          'ffmpeg'
          'opencv'
          'qt5-base'

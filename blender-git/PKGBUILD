@@ -1,14 +1,14 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.90.0.20200418
+pkgver=2.90.0.20200425
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
 url="http://blender.org/"
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
-          'libjpeg' 'libpng' 'openjpeg' 'libtiff' 'openexr' 
+          'libjpeg' 'libpng' 'openjpeg2' 'libtiff' 'openexr' 
           'python'
           'libsamplerate' 'ffmpeg' 'fftw'
           'openal' 'freetype2' 'libsndfile'
@@ -37,7 +37,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.0.0-include.zip"
         "Enable-Optix-7-for-non-RTX-card.patch"
 )
-sha256sums=('cd7fed13b8bb61a762132cc3880c784ce75cc890f5119a6365e42f8c8db28d4b'
+sha256sums=('9d7ff4cd69153d586183afa668e1d357b5f6e223c79575e6a44b50c22bde9e66'
             '0cf01e8501a28a3f720c5d9576f81c58bff2a650351195f042be729bf7d13c02'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
             '7642600f05ced7140b15416f09ac9e49bea878b3c88c5fc215e2501b73b454fd'
@@ -60,9 +60,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "1f1520a04503"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "8d8414cd21a4"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1587228520|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1587836572|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
