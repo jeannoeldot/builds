@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.90.0.20200425
+!!! VERSION = 2.90.0.20200503
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.90.0.20200425.tar.gz /tmp/srcp/
+cp -v blender-git-2.90.0.20200503.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.90.0.20200425.tar.gz
+tar -xzf blender-git-2.90.0.20200503.tar.gz
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
@@ -78,7 +78,7 @@ mv -vf /tmp/srcp/Fix-Embree-staticlibs-dynamiclibs.patch .
 
 2) Enabling Optix 7 for non-RTX card
 2) https://devtalk.blender.org/t/blender-2-8-cycles-optix-on-non-rtx-card/11224/1
-2) MODIFIER intern/cycles/device/device_optix.cpp
+2) MODIFIER blender/intern/cycles/device/device_optix.cpp
 =================================================
 /!\ /!\ /!\ cd /tmp/srcp
 
