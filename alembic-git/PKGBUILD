@@ -2,14 +2,14 @@
 
 pkgname=alembic-git
 pkgver=1.7.12.20191026
-pkgrel=1
+pkgrel=2
 _ver_release="1.7.12"
 _name_release="alembic-${_ver_release}"
 pkgdesc="A open framework for storing and sharing scene data"
 url="http://www.alembic.io/"
 arch=('x86_64')
 license=('BSD')
-depends=('openexr'
+depends=('gcc-libs' 'openexr'
 )
 makedepends=('cmake'
 )

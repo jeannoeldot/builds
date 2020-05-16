@@ -38,6 +38,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=alembic-git               # alembic ds community
 pkgver=1.7.12.20191026
+pkgrel=2          # rebuild MAJ openexr 2.5.1
+
 pkgrel=1
 
 pkgrel=4          # rebuild MAJ openexr 2.4
@@ -58,7 +60,7 @@ _name_release="alembic-${_ver_release}"
 license=('BSD')
 
 !!! TESTS = OK
-depends=('openexr'
+depends=('gcc-libs' 'openexr'
 )
 
 makedepends=('cmake')
@@ -185,7 +187,6 @@ rm -f *~
 Checking alembic-git-1.7.12.20191026-1-x86_64.pkg.tar.xz
 
 namcap alembic-git-*-x86_64.pkg.tar.*
-alembic-git E: Dependency gcc-libs detected and not included (libraries ['usr/lib/libgcc_s.so.1', 'usr/lib/libstdc++.so.6'] needed in files ['usr/lib/libAlembic.so.1.7.12'])
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -232,6 +233,9 @@ SI PROBLEME
 
 ANCIEN
 ======
+namcap alembic-git-*-x86_64.pkg.tar.*
+alembic-git E: Dependency gcc-libs detected and not included (libraries ['usr/lib/libgcc_s.so.1', 'usr/lib/libstdc++.so.6'] needed in files ['usr/lib/libAlembic.so.1.7.12'])
+
 !!! ORIGINAL
 depends=('openexr' 'boost-libs'
           'hdf5'
