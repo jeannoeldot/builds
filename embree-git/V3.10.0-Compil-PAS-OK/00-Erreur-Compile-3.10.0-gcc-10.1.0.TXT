@@ -1,0 +1,206 @@
+==> Starting build()...
+-- The C compiler identification is GNU 10.1.0
+-- The CXX compiler identification is GNU 10.1.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc - works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ - works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/embree-git/src/embree-3.10.0/build
+Scanning dependencies of target math
+[  0%] Generating ../bvh/bvh_intersector_stream_filters.cpp.sse42.cpp
+Scanning dependencies of target simd
+Scanning dependencies of target tasking
+[  1%] Generating ../bvh/bvh_intersector_stream_bvh8.cpp.avx.cpp
+[  1%] Building CXX object common/math/CMakeFiles/math.dir/constants.cpp.o
+[  1%] Building CXX object common/simd/CMakeFiles/simd.dir/sse.cpp.o
+Scanning dependencies of target algorithms
+[  1%] Building CXX object common/tasking/CMakeFiles/tasking.dir/taskschedulerinternal.cpp.o
+Scanning dependencies of target sys
+[  1%] Generating ../geometry/instance_intersector.cpp.sse42.cpp
+[  1%] Building CXX object common/algorithms/CMakeFiles/algorithms.dir/parallel_for.cpp.o
+[  2%] Generating ../geometry/instance_intersector.cpp.avx.cpp
+[  3%] Building CXX object common/sys/CMakeFiles/sys.dir/sysinfo.cpp.o
+[  3%] Generating ../geometry/curve_intersector_virtual.cpp.sse42.cpp
+[  3%] Generating ../geometry/curve_intersector_virtual.cpp.avx.cpp
+[  4%] Generating ../geometry/curve_intersector_virtual2.cpp.sse42.cpp
+[  5%] Generating ../geometry/curve_intersector_virtual2.cpp.avx.cpp
+[  5%] Generating ../bvh/bvh_intersector1_bvh4.cpp.sse42.cpp
+[  5%] Generating ../bvh/bvh_intersector1_bvh4.cpp.avx.cpp
+[  5%] Generating ../common/scene_subdiv_mesh.cpp.sse42.cpp
+[  5%] Generating ../geometry/primitive8.cpp.avx.cpp
+[  6%] Generating ../geometry/grid_soa.cpp.sse42.cpp
+[  7%] Generating ../common/scene_user_geometry.cpp.avx.cpp
+[  7%] Generating ../subdiv/subdivpatch1base_eval.cpp.sse42.cpp
+[  7%] Generating ../common/scene_instance.cpp.avx.cpp
+[  8%] Generating ../bvh/bvh_intersector_hybrid4_bvh4.cpp.sse42.cpp
+[  9%] Generating ../common/scene_triangle_mesh.cpp.avx.cpp
+[  9%] Generating ../bvh/bvh_intersector_stream_bvh4.cpp.sse42.cpp
+[  9%] Generating ../common/scene_quad_mesh.cpp.avx.cpp
+[  9%] Generating ../common/scene_curves.cpp.avx.cpp
+[ 10%] Generating ../common/scene_line_segments.cpp.avx.cpp
+[ 10%] Generating ../common/scene_grid_mesh.cpp.avx.cpp
+Scanning dependencies of target embree_sse42
+[ 10%] Generating ../common/scene_points.cpp.avx.cpp
+[ 11%] Building CXX object kernels/CMakeFiles/embree_sse42.dir/__/geometry/instance_intersector.cpp.sse42.cpp.o
+[ 12%] Generating ../bvh/bvh_collider.cpp.avx.cpp
+[ 12%] Generating ../bvh/bvh_refit.cpp.avx.cpp
+[ 13%] Generating ../bvh/bvh_builder.cpp.avx.cpp
+[ 13%] Generating ../bvh/bvh_builder_hair.cpp.avx.cpp
+[ 13%] Generating ../bvh/bvh_builder_hair_mb.cpp.avx.cpp
+[ 14%] Generating ../bvh/bvh_builder_sah.cpp.avx.cpp
+[ 14%] Generating ../bvh/bvh_builder_sah_spatial.cpp.avx.cpp
+[ 15%] Generating ../bvh/bvh_builder_sah_mb.cpp.avx.cpp
+[ 15%] Generating ../bvh/bvh_builder_twolevel.cpp.avx.cpp
+[ 15%] Generating ../bvh/bvh_builder_subdiv.cpp.avx.cpp
+[ 16%] Generating ../bvh/bvh_builder_morton.cpp.avx.cpp
+[ 16%] Generating ../bvh/bvh_rotate.cpp.avx.cpp
+[ 17%] Generating ../builders/primrefgen.cpp.avx.cpp
+[ 17%] Generating ../bvh/bvh_intersector1_bvh8.cpp.avx.cpp
+[ 17%] Generating ../bvh/bvh.cpp.avx.cpp
+[ 18%] Generating ../bvh/bvh_statistics.cpp.avx.cpp
+[ 18%] Generating ../common/scene_subdiv_mesh.cpp.avx.cpp
+[ 18%] Generating ../geometry/grid_soa.cpp.avx.cpp
+[ 19%] Linking CXX static library ../../libmath.a
+[ 20%] Generating ../subdiv/subdivpatch1base_eval.cpp.avx.cpp
+[ 20%] Generating ../bvh/bvh_intersector_hybrid4_bvh4.cpp.avx.cpp
+[ 21%] Generating ../bvh/bvh_intersector_stream_bvh4.cpp.avx.cpp
+[ 21%] Generating ../bvh/bvh_intersector_stream_filters.cpp.avx.cpp
+[ 21%] Generating ../bvh/bvh_intersector_hybrid8_bvh4.cpp.avx.cpp
+[ 21%] Built target math
+[ 22%] Generating ../bvh/bvh_intersector_hybrid4_bvh8.cpp.avx.cpp
+[ 22%] Generating ../bvh/bvh_intersector_hybrid8_bvh8.cpp.avx.cpp
+[ 22%] Building CXX object common/sys/CMakeFiles/sys.dir/alloc.cpp.o
+Scanning dependencies of target embree_avx
+[ 22%] Building CXX object kernels/CMakeFiles/embree_avx.dir/__/geometry/instance_intersector.cpp.avx.cpp.o
+In file included from /build/embree-git/src/embree-3.10.0/common/tasking/taskschedulerinternal.cpp:4:
+/build/embree-git/src/embree-3.10.0/common/tasking/taskschedulerinternal.h: In member function ‘void embree::TaskScheduler::TaskQueue::push_right(embree::TaskScheduler::Thread&, size_t, const Closure&)’:
+/build/embree-git/src/embree-3.10.0/common/tasking/taskschedulerinternal.h:140:26: internal compiler error: unexpected expression ‘(std::__atomic_base<long unsigned int>::__int_type)((embree::TaskScheduler::TaskQueue*)this)->embree::TaskScheduler::TaskQueue::right’ of kind implicit_conv_expr
+  140 |         new (&tasks[right]) Task(func,thread.task,oldStackPtr,size);
+      |                          ^
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [common/tasking/CMakeFiles/tasking.dir/build.make:83: common/tasking/CMakeFiles/tasking.dir/taskschedulerinternal.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:408: common/tasking/CMakeFiles/tasking.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+In file included from /build/embree-git/src/embree-3.10.0/common/algorithms/../tasking/taskscheduler.h:7,
+                 from /build/embree-git/src/embree-3.10.0/common/algorithms/parallel_for.h:6,
+                 from /build/embree-git/src/embree-3.10.0/common/algorithms/parallel_for.cpp:4:
+/build/embree-git/src/embree-3.10.0/common/algorithms/../tasking/taskschedulerinternal.h: In member function ‘void embree::TaskScheduler::TaskQueue::push_right(embree::TaskScheduler::Thread&, size_t, const Closure&)’:
+/build/embree-git/src/embree-3.10.0/common/algorithms/../tasking/taskschedulerinternal.h:140:26: internal compiler error: unexpected expression ‘(std::__atomic_base<long unsigned int>::__int_type)((embree::TaskScheduler::TaskQueue*)this)->embree::TaskScheduler::TaskQueue::right’ of kind implicit_conv_expr
+  140 |         new (&tasks[right]) Task(func,thread.task,oldStackPtr,size);
+      |                          ^
+[ 23%] Building CXX object common/sys/CMakeFiles/sys.dir/filename.cpp.o
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [common/algorithms/CMakeFiles/algorithms.dir/build.make:83: common/algorithms/CMakeFiles/algorithms.dir/parallel_for.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:435: common/algorithms/CMakeFiles/algorithms.dir/all] Error 2
+[ 23%] Building CXX object kernels/CMakeFiles/embree_sse42.dir/__/geometry/curve_intersector_virtual.cpp.sse42.cpp.o
+In file included from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskscheduler.h:7,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/default.h:38,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/primitive.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/instance.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/instance_intersector.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/instance_intersector.cpp:4,
+                 from /build/embree-git/src/embree-3.10.0/build/geometry/instance_intersector.cpp.sse42.cpp:1:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h: In member function ‘void embree::TaskScheduler::TaskQueue::push_right(embree::TaskScheduler::Thread&, size_t, const Closure&)’:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h:140:26: internal compiler error: unexpected expression ‘(std::__atomic_base<long unsigned int>::__int_type)((embree::TaskScheduler::TaskQueue*)this)->embree::TaskScheduler::TaskQueue::right’ of kind implicit_conv_expr
+  140 |         new (&tasks[right]) Task(func,thread.task,oldStackPtr,size);
+      |                          ^
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [kernels/CMakeFiles/embree_sse42.dir/build.make:123: kernels/CMakeFiles/embree_sse42.dir/__/geometry/instance_intersector.cpp.sse42.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[ 23%] Building CXX object kernels/CMakeFiles/embree_avx.dir/__/geometry/curve_intersector_virtual.cpp.avx.cpp.o
+[ 23%] Linking CXX static library ../../libsimd.a
+[ 23%] Building CXX object common/sys/CMakeFiles/sys.dir/library.cpp.o
+[ 23%] Built target simd
+[ 23%] Building CXX object common/sys/CMakeFiles/sys.dir/thread.cpp.o
+[ 24%] Building CXX object common/sys/CMakeFiles/sys.dir/string.cpp.o
+[ 24%] Building CXX object common/sys/CMakeFiles/sys.dir/regression.cpp.o
+In file included from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskscheduler.h:7,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/default.h:38,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/primitive.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/instance.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/instance_intersector.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/instance_intersector.cpp:4,
+                 from /build/embree-git/src/embree-3.10.0/build/geometry/instance_intersector.cpp.avx.cpp:1:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h: In member function ‘void embree::TaskScheduler::TaskQueue::push_right(embree::TaskScheduler::Thread&, size_t, const Closure&)’:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h:140:26: internal compiler error: unexpected expression ‘(std::__atomic_base<long unsigned int>::__int_type)((embree::TaskScheduler::TaskQueue*)this)->embree::TaskScheduler::TaskQueue::right’ of kind implicit_conv_expr
+  140 |         new (&tasks[right]) Task(func,thread.task,oldStackPtr,size);
+      |                          ^
+[ 25%] Building CXX object common/sys/CMakeFiles/sys.dir/mutex.cpp.o
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [kernels/CMakeFiles/embree_avx.dir/build.make:239: kernels/CMakeFiles/embree_avx.dir/__/geometry/instance_intersector.cpp.avx.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[ 25%] Building CXX object common/sys/CMakeFiles/sys.dir/condition.cpp.o
+In file included from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskscheduler.h:7,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/default.h:38,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/primitive.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/curve_intersector_virtual.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/curve_intersector_virtual.cpp:4,
+                 from /build/embree-git/src/embree-3.10.0/build/geometry/curve_intersector_virtual.cpp.sse42.cpp:1:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h: In member function ‘void embree::TaskScheduler::TaskQueue::push_right(embree::TaskScheduler::Thread&, size_t, const Closure&)’:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h:140:26: internal compiler error: unexpected expression ‘(std::__atomic_base<long unsigned int>::__int_type)((embree::TaskScheduler::TaskQueue*)this)->embree::TaskScheduler::TaskQueue::right’ of kind implicit_conv_expr
+  140 |         new (&tasks[right]) Task(func,thread.task,oldStackPtr,size);
+      |                          ^
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [kernels/CMakeFiles/embree_sse42.dir/build.make:136: kernels/CMakeFiles/embree_sse42.dir/__/geometry/curve_intersector_virtual.cpp.sse42.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:489: kernels/CMakeFiles/embree_sse42.dir/all] Error 2
+[ 25%] Building CXX object common/sys/CMakeFiles/sys.dir/barrier.cpp.o
+In file included from /build/embree-git/src/embree-3.10.0/common/sys/../algorithms/../tasking/taskscheduler.h:7,
+                 from /build/embree-git/src/embree-3.10.0/common/sys/../algorithms/parallel_for.h:6,
+                 from /build/embree-git/src/embree-3.10.0/common/sys/mutex.cpp:6:
+/build/embree-git/src/embree-3.10.0/common/sys/../algorithms/../tasking/taskschedulerinternal.h: In member function ‘void embree::TaskScheduler::TaskQueue::push_right(embree::TaskScheduler::Thread&, size_t, const Closure&)’:
+/build/embree-git/src/embree-3.10.0/common/sys/../algorithms/../tasking/taskschedulerinternal.h:140:26: internal compiler error: unexpected expression ‘(std::__atomic_base<long unsigned int>::__int_type)((embree::TaskScheduler::TaskQueue*)this)->embree::TaskScheduler::TaskQueue::right’ of kind implicit_conv_expr
+  140 |         new (&tasks[right]) Task(func,thread.task,oldStackPtr,size);
+      |                          ^
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [common/sys/CMakeFiles/sys.dir/build.make:174: common/sys/CMakeFiles/sys.dir/mutex.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+In file included from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskscheduler.h:7,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/../common/default.h:38,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/primitive.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/curve_intersector_virtual.h:6,
+                 from /build/embree-git/src/embree-3.10.0/kernels/geometry/curve_intersector_virtual.cpp:4,
+                 from /build/embree-git/src/embree-3.10.0/build/geometry/curve_intersector_virtual.cpp.avx.cpp:1:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h: In member function ‘void embree::TaskScheduler::TaskQueue::push_right(embree::TaskScheduler::Thread&, size_t, const Closure&)’:
+/build/embree-git/src/embree-3.10.0/kernels/geometry/../common/../../common/tasking/taskschedulerinternal.h:140:26: internal compiler error: unexpected expression ‘(std::__atomic_base<long unsigned int>::__int_type)((embree::TaskScheduler::TaskQueue*)this)->embree::TaskScheduler::TaskQueue::right’ of kind implicit_conv_expr
+  140 |         new (&tasks[right]) Task(func,thread.task,oldStackPtr,size);
+      |                          ^
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [kernels/CMakeFiles/embree_avx.dir/build.make:252: kernels/CMakeFiles/embree_avx.dir/__/geometry/curve_intersector_virtual.cpp.avx.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:516: kernels/CMakeFiles/embree_avx.dir/all] Error 2
+make[1]: *** [CMakeFiles/Makefile2:299: common/sys/CMakeFiles/sys.dir/all] Error 2
+make: *** [Makefile:172: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...

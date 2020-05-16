@@ -1,0 +1,46 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=embree-git
+pkgver=3.10.0.20200514
+pkgrel=1
+_ver_release="3.10.0"
+_name_release="embree-${_ver_release}"
+pkgdesc="High Performance Ray Tracing Kernels"
+url="https://github.com/embree"
+arch=('x86_64')
+license=('Apache')
+depends=('intel-tbb' 'glfw-x11'
+)
+makedepends=('cmake'
+)
+conflicts=('embree')
+provides=('embree')
+source=("embree-${_ver_release}.tar.gz"
+)
+sha256sums=('f1f7237360165fb8859bf71ee5dd8caec1fe02d4d2f49e89c11d250afa067aff'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DEMBREE_ISPC_SUPPORT=OFF \
+    -DEMBREE_TUTORIALS=OFF \
+    -DEMBREE_RAY_MASK=ON \
+    -DEMBREE_TASKING_SYSTEM=INTERNAL \
+    -DEMBREE_MAX_ISA=AVX2 \
+    ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+  
+  make DESTDIR="${pkgdir}" install
+}
