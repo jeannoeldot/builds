@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.90.0.20200503
+!!! VERSION = 2.90.2.20200515
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.90.0.20200503.tar.gz /tmp/srcp/
+cp -v blender-git-2.90.2.20200515.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.90.0.20200503.tar.gz
+tar -xzf blender-git-2.90.2.20200515.tar.gz
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
@@ -76,10 +76,21 @@ cd $HOME/05-builds/blender-git
 mv -vf /tmp/srcp/Fix-Embree-staticlibs-dynamiclibs.patch .
 
 
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
 2) Enabling Optix 7 for non-RTX card
 2) https://devtalk.blender.org/t/blender-2-8-cycles-optix-on-non-rtx-card/11224/1
 2) MODIFIER blender/intern/cycles/device/device_optix.cpp
-=================================================
+=========================================================
 /!\ /!\ /!\ cd /tmp/srcp
 
 cp -R blender blender.new
@@ -114,17 +125,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/Enable-Optix-7-for-non-RTX-card.patch .
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) Fix T74278: Image Object handles too big
 1) https://developer.blender.org/D6965

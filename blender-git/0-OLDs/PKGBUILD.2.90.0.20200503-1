@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.90.2.20200515
+pkgver=2.90.0.20200503
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,10 +35,12 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "Fix-Embree-staticlibs-dynamiclibs.patch"
         "OptiX-7.0.0-include.zip"
+        "Enable-Optix-7-for-non-RTX-card.patch"
 )
-sha256sums=('3885a21656bfcfb723478732b4bcddab5f9a1cc8b342cb3919f0a978f3b0b6e2'
+sha256sums=('c5dadcc083e899758071b0b8d5b84cc19513ccf8ff846d9650644441de7445d6'
             '0cf01e8501a28a3f720c5d9576f81c58bff2a650351195f042be729bf7d13c02'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
+            '7642600f05ced7140b15416f09ac9e49bea878b3c88c5fc215e2501b73b454fd'
 )
 
 _gitname="blender"
@@ -49,15 +51,18 @@ prepare() {
   # Embree : static libs --> dynamic libs
   # https://github.com/bartoszek/AUR-blender-2.8-git
   patch -Np1 -i "${srcdir}/Fix-Embree-staticlibs-dynamiclibs.patch"
+  # Enabling Optix 7 for non-RTX card
+  # https://devtalk.blender.org/t/blender-2-8-cycles-optix-on-non-rtx-card/11224/1
+  patch -Np1 -i "${srcdir}/Enable-Optix-7-for-non-RTX-card.patch"
 
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "eaf7d36d66e5"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "a6380d063f60"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1589569978|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1588493425|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
