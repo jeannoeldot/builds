@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.10.9.20200202
-pkgrel=5
-_name_release="OpenShadingLanguage-Release-1.10.9"
+pkgver=1.10.10.20200510
+pkgrel=1
+_name_release="OpenShadingLanguage-Release-1.10.10"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -18,17 +18,9 @@ makedepends=('boost' 'cmake' 'llvm' 'clang' 'python')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
-        '0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch'
 )
-sha256sums=('3f061831e3541068ce080fa96fa682df3ee93aa2505bad00dc34522b11af20f9'
-            '49cc50763d9910cd616028e718a30a687f5d87acc3f261344aa72d266c079d1b'
+sha256sums=('ce17c119c3ebdb1cc02f96e59fff4c512b4f82f12f46a5d9328a61a474ba5322'
 )
-
-prepare() {
-  cd "${_name_release}"
-  # https://git.archlinux.org/svntogit/community.git/plain/trunk/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch?h=packages/openshadinglanguage
-  patch -Np1 -i "${srcdir}/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch"
-}
 
 build() {
   cd "${_name_release}"
@@ -66,14 +58,8 @@ package() {
   mkdir "${pkgdir}"/usr/share/OSL
   mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
   
-  # Ugly hacks /usr/share/OSL/shaders/*.oso and /usr/share/OSL/shaders/MaterialX/*.oso
+  # Ugly hacks /usr/share/OSL/shaders/*.oso
   for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/*.oso -type f)
-  do
-    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/share/OSL/|g" ${_oso}
-    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/share/OSL/|g" ${_oso}
-  done
-
-  for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/MaterialX/*.oso -type f)
   do
     sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/share/OSL/|g" ${_oso}
     sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/share/OSL/|g" ${_oso}
