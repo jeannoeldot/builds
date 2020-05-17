@@ -1,0 +1,88 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 3.10.0
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/embree-git
+
+mkdir /tmp/srcp
+
+cp -v embree-3.10.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf embree-3.10.0.tar.gz
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+==========================================================
+
+1) MODIFIER embree-3.8.0/common/cmake/gnu.cmake
+===============================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R embree-3.8.0 embree-3.8.0.new
+
+cd embree-3.8.0.new/common/cmake/
+kwrite gnu.cmake
+
+MODIFIER LIGNE 65 :
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")          # enable full optimizations 
+
+DEVIENT
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt")
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier gnu.cmake~
+rm -f gnu.cmake~
+ 
+
+cd ../../..
+
+diff -aur embree-3.8.0 embree-3.8.0.new
+diff -aur embree-3.8.0 embree-3.8.0.new > enable-optimizations-Ofast.patch
+
+rm -rf embree-3.8.0.new
+
+cd $HOME/05-builds/embree-git
+
+mv -vf /tmp/srcp/enable-optimizations-Ofast.patch .
+
+1) MODIFIER embree-3.8.0/common/cmake/gnu.cmake
+===============================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R embree-3.8.0 embree-3.8.0.new
+
+cd embree-3.8.0.new/common/cmake/
+kwrite gnu.cmake
+
+MODIFIER LIGNE 65 :
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")          # enable full optimizations 
+
+DEVIENT
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -floop-interchange -floop-strip-mine -floop-block")
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier gnu.cmake~
+rm -f gnu.cmake~
+ 
+
+cd ../../..
+
+diff -aur embree-3.8.0 embree-3.8.0.new
+diff -aur embree-3.8.0 embree-3.8.0.new > enable-optimizations-Ofast-floop.patch
+
+rm -rf embree-3.8.0.new
+
+cd $HOME/05-builds/embree-git
+
+mv -vf /tmp/srcp/enable-optimizations-Ofast-floop.patch .
+
+

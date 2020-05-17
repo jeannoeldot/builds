@@ -1,0 +1,81 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openshadinglanguage-git
+pkgver=1.10.9.20200202
+pkgrel=5
+_name_release="OpenShadingLanguage-Release-1.10.9"
+pkgdesc="Advanced shading language for production GI renderers"
+arch=('x86_64')
+url="https://github.com/imageworks/OpenShadingLanguage"
+license=('custom')
+depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'openimageio-git'
+         'llvm-libs'
+         'qt5-base'
+)
+makedepends=('boost' 'cmake' 'llvm' 'clang' 'python')
+conflicts=('openshadinglanguage')
+provides=('openshadinglanguage')
+source=("$_name_release.tar.gz"
+        '0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch'
+)
+sha256sums=('3f061831e3541068ce080fa96fa682df3ee93aa2505bad00dc34522b11af20f9'
+            '49cc50763d9910cd616028e718a30a687f5d87acc3f261344aa72d266c079d1b'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # https://git.archlinux.org/svntogit/community.git/plain/trunk/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch?h=packages/openshadinglanguage
+  patch -Np1 -i "${srcdir}/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch"
+}
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DCMAKE_CXX_STANDARD=14 \
+      -DLLVM_STATIC=OFF \
+      -DVERBOSE=ON \
+      -DOSL_BUILD_TESTS=OFF \
+      -DUSE_LLVM_BITCODE=OFF \
+      -DUSE_PARTIO=OFF \
+      -DUSE_SIMD=avx2 \
+      -DSTOP_ON_WARNING=OFF \
+      -DUSE_CCACHE=OFF \
+    ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  # license
+  install -Dm644 "${pkgdir}"/usr/share/doc/OSL/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+
+  # shaders
+  mkdir "${pkgdir}"/usr/share/OSL
+  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+  
+  # Ugly hacks /usr/share/OSL/shaders/*.oso and /usr/share/OSL/shaders/MaterialX/*.oso
+  for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/share/OSL/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/share/OSL/|g" ${_oso}
+  done
+
+  for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/MaterialX/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/share/OSL/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/share/OSL/|g" ${_oso}
+  done
+}

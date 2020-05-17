@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.1.15.0.20200511
-pkgrel=1
-_name_release="oiio-Release-2.1.15.0"
+pkgver=2.1.11.2.20200213
+pkgrel=3
+_name_release="oiio-Release-2.1.11.2"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -18,7 +18,7 @@ depends=('openexr' 'boost-libs' 'libtiff' 'opencolorio' 'intel-tbb'
          'freetype2'
          'openvdb-git'
 )
-makedepends=('cmake' 'boost' 'mesa' 'fmt'
+makedepends=('cmake' 'boost' 'mesa'
              'robin-map-git'
              'pybind11' 'python-numpy'
 )
@@ -26,7 +26,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('95b90ba22b73765cbcbd9e11891769c2e78696ad24d4af77ef3f3c8674422401'
+sha256sums=('0982f46a6a3107045c06ca825cc1637e023d7e7f16075523a85b10de9acedf55'
 )
 
 build() {
@@ -56,6 +56,10 @@ package() {
   make DESTDIR="${pkgdir}" install
 
   # license
+#  mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
+#  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+#  mv -v "${pkgdir}"/usr/share/doc/OpenImageIO/LICENSE-THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE-THIRD-PARTY
+
   install -Dm644 ../LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
   install -Dm644 ../LICENSE-THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE-THIRD-PARTY
 }
