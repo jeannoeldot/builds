@@ -2,14 +2,14 @@
 
 pkgname=embree-git
 pkgver=3.10.0.20200514
-pkgrel=3
+pkgrel=2
 _ver_release="3.10.0"
 _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"
 url="https://github.com/embree"
 arch=('x86_64')
 license=('Apache')
-depends=('intel-tbb'
+depends=('intel-tbb' 'glfw-x11'
 )
 makedepends=('cmake'
 )
@@ -33,7 +33,7 @@ build() {
     -DEMBREE_ISPC_SUPPORT=OFF \
     -DEMBREE_TUTORIALS=OFF \
     -DEMBREE_RAY_MASK=ON \
-    -DEMBREE_MAX_ISA="AVX2" \
+    -DEMBREE_MAX_ISA="AVX512SKX" \
     ..
   make VERBOSE=1
 }
