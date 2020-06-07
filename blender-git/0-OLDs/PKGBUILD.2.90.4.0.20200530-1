@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.90.0.20200607
+pkgver=2.90.4.0.20200530
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -36,7 +36,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-Embree-staticlibs-dynamiclibs.patch"
         "OptiX-7.0.0-include.zip"
 )
-sha256sums=('ffaf2adebda78b9cd69260ca7c64a354950809a5d699184d08f0049142dff346'
+sha256sums=('240adef9f88b6e0ffd815272822b453371183a9f883de3a9564fea5eb82eef28'
             '0cf01e8501a28a3f720c5d9576f81c58bff2a650351195f042be729bf7d13c02'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
 )
@@ -57,7 +57,7 @@ prepare() {
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
   sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "ba711824b3ae"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1591521374|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1590873110|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -102,6 +102,4 @@ package() {
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
   python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
-  
-  install -Dm644 ../release/freedesktop/org.blender.Blender.appdata.xml "${pkgdir}/usr/share/metainfo/org.blender.Blender.appdata.xml"
 }

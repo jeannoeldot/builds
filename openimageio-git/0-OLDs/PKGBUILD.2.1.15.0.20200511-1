@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.1.16.0.20200602
+pkgver=2.1.15.0.20200511
 pkgrel=1
-_name_release="oiio-Release-2.1.16.0"
+_name_release="oiio-Release-2.1.15.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -26,7 +26,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('f44e3b3cffe9a8f47395da1ae59e972ecb26adf65f17581e6a489fdcce0cb116'
+sha256sums=('95b90ba22b73765cbcbd9e11891769c2e78696ad24d4af77ef3f3c8674422401'
 )
 
 build() {
