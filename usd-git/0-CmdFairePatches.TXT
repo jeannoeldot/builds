@@ -1,15 +1,15 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 19.11
-!!! VERSION = v19.11
+!!! VERSION = 20.02
+!!! VERSION = v20.02
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/usd-git
 
 mkdir /tmp/srcp
 
-cp -v USD-v19.11.tar.gz /tmp/srcp/
+cp -v USD-v20.02.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
@@ -17,15 +17,179 @@ OU
 ===
 mkdir -p $HOME/99-temp/usd/
 
-cp -v USD-v19.11.tar.gz $HOME/99-temp/usd/
+cp -v USD-v20.02.tar.gz $HOME/99-temp/usd/
 
 cd $HOME/99-temp/usd/
 
-tar -xzf USD-v19.11.tar.gz
+tar -xzf USD-v20.02.tar.gz
 
 
 !!! VOIR
 
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/cfff8aa0671b6860aefda4918190535494e37f05kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+!!!
+kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+
+
+1) MODIFIER USD-20.02/cmake/defaults/Packages.cmake
+=====================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+/!\ /!\ /!\ cd $HOME/99-temp/usd/
+
+cp -R USD-20.02 USD-20.02.new
+
+cd USD-20.02.new/cmake/defaults
+kwrite Packages.cmake
+
+MODIFIER LIGNE 67 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+
+2) MODIFIER USD-20.02/pxr/base/plug/initConfig.cpp
+======================================================
+
+cd USD-20.02.new/pxr/base/plug
+kwrite initConfig.cpp
+
+AJOUTER LIGNES 72 À 92
+    /* The contents of this constructor have been moved to usd_initialise_plugin_path(...) */
+}
+
+}; // end of anonymous namespace
+
+/**
+ * The contents of this function used to be in the static constructor Plug_InitConfig.
+ * This static constructor made it impossible for Blender to pass a path to the USD
+ * library at runtime, as the constructor would run before Blender's main() function.
+ *
+ * This function is wrapped in a C function of the same name (defined below),
+ * so that it can be called from Blender's main() function.
+ *
+ * The datafiles_usd_path path is used to point to the USD plugin path when Blender
+ * has been installed. The fallback_usd_path path should point to the build-time
+ * location of the USD plugin files so that Blender can be run on a development machine
+ * without requiring an installation step.
+ */
+void
+usd_initialise_plugin_path(const char *datafiles_usd_path)
+{
+
+AJOUTER LIGNES 95 À 103
+    // Add Blender-specific paths. They MUST end in a slash, or symlinks will not be treated as directory.
+    if (datafiles_usd_path != NULL && datafiles_usd_path[0] != '\0') {
+        std::string datafiles_usd_path_str(datafiles_usd_path);
+        if (datafiles_usd_path_str.back() != '/') {
+            datafiles_usd_path_str += "/";
+        }
+        result.push_back(datafiles_usd_path_str);
+    }
+
+
+
+REMPLACER LIGNES 127 À 128
+    Plug_SetPaths(result);
+}
+PAR :
+    if (!TfGetenv("PXR_PATH_DEBUG").empty()) {
+        printf("USD Plugin paths: (%zu in total):\n", result.size());
+        for(const std::string &path : result) {
+            printf("    %s\n", path.c_str());
+        }
+    }
+ 
+    Plug_SetPaths(result);
+
+AJOUTER LIGNES 139 À 148
+
+
+/* Workaround to make it possible to pass a path at runtime to USD. */
+extern "C" {
+void
+usd_initialise_plugin_path(
+    const char *datafiles_usd_path)
+{
+    PXR_NS::usd_initialise_plugin_path(datafiles_usd_path);
+}
+}
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier initConfig.cpp~
+rm -f initConfig.cpp~
+
+cd ../../../..
+
+
+3) MODIFIER USD-20.02/pxr/base/tf/preprocessorUtils.h
+=========================================================
+
+cd USD-20.02.new/pxr/base/tf
+kwrite preprocessorUtils.h
+
+MODIFIER LIGNE 192 :
+#if defined(ARCH_OS_WINDOWS)
+
+DEVIENT
+#if defined(ARCH_COMPILER_MSVC)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier preprocessorUtils.h~
+rm -f preprocessorUtils.h~
+
+cd ../../../..
+
+
+4) MODIFIER USD-20.02/cmake/macros/Public.cmake
+===============================================
+
+cd USD-20.02.new/cmake/macros
+kwrite Public.cmake
+
+AJOUTER LIGNES 990 À 995
+        # When building for blender, we do NOT want to export all symbols on windows.
+        # This is a dirty hack, but USD makes it impossible to do the right thing
+        # with the default options exposed.
+        if (WIN32)
+            list(APPEND exports "PXR_STATIC=1")
+        endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Public.cmake~
+rm -f Public.cmake~
+
+cd ../../..
+
+
+diff -aur USD-20.02 USD-20.02.new
+diff -aur USD-20.02 USD-20.02.new > blender-usd-diff.patch
+
+rm -rf USD-20.02.new
+
+cd $HOME/05-builds/usd-git
+
+mv -vf /tmp/srcp/blender-usd-diff.patch .
+OU
+mv -vf $HOME/99-temp/usd/blender-usd-diff.patch .
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+OU
+rm -rf $HOME/99-temp/usd
+
+sync
+
+=================================================================
+ANCIENS
+========
 https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob_plain/4db9562246b36d0d0d18a3f1b33b87f1d91fe146:/build_files/build_environment/patches/usd.diff
 kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
 
@@ -199,27 +363,3 @@ rm -f Public.cmake~
 
 cd ../../..
 
-
-diff -aur USD-19.11 USD-19.11.new
-diff -aur USD-19.11 USD-19.11.new > blender-usd-diff.patch
-
-rm -rf USD-19.11.new
-
-cd $HOME/05-builds/usd-git
-
-mv -vf /tmp/srcp/blender-usd-diff.patch .
-OU
-mv -vf $HOME/99-temp/usd/blender-usd-diff.patch .
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-OU
-rm -rf $HOME/99-temp/usd
-
-sync
-
-=================================================================
-ANCIENS
-========

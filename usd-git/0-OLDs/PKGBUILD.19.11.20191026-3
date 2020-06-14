@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=usd-git
-pkgver=20.02.20200125
-pkgrel=1
-_ver_release="20.02"
+pkgver=19.11.20191026
+pkgrel=3
+_ver_release="19.11"
 _name_release="USD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -18,8 +18,8 @@ provides=('usd')
 source=("USD-v${_ver_release}.tar.gz"
         "blender-usd-diff.patch"
 )
-sha256sums=('b70e2d4e21be24246215d2d2c0c90c66a2627b54e3d450fbbd6193d1284c6734'
-            '522889a0b40fe438d16b2d7349422a4f6a750a360dd01a50c7487920e8e3f76e'
+sha256sums=('84f3bb123f7950b277aace096d678c8876737add0ed0b6ccb77cabb4f32dbcb0'
+            '3cfec2b41c6f99884f0af7763651119f3904a8881e8386dc9e44ab4dc621d957'
 )
 
 prepare() {
