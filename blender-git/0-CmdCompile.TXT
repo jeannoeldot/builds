@@ -28,9 +28,9 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Bastien Montagne <bastien@blender.org>	
-	Sun, 14 Jun 2020 09:42:20 +0200 (09:42 +0200)
-commit	725cc959c7318b9860e7140951b607f7ef1db2f8
+committer	Campbell Barton <ideasman42@gmail.com>	
+	Sun, 14 Jun 2020 17:07:59 +0200 (01:07 +1000)
+commit	9464260ed786c7cd76d6c9c83590a3b13407fdcd
 
 ==> 20200614
 
@@ -58,7 +58,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 725cc959c731
+==> MY_WC_HASH = 9464260ed786
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -68,7 +68,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1592120540
+==> MY_WC_COMMIT_TIMESTAM = 1592147279
 
 cd ..
 
@@ -86,7 +86,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 725cc959c731
+==> MY_WC_HASH = 9464260ed786
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -96,7 +96,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1592120540
+==> MY_WC_COMMIT_TIMESTAM = 1592147279
 
 cd ..
 
@@ -258,9 +258,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "725cc959c731"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9464260ed786"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592120540|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592147279|' build_files/cmake/buildinfo.cmake
 }
 
 
@@ -628,11 +628,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "725cc959c731"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "9464260ed786"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592120540|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592147279|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -873,9 +873,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "725cc959c731"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9464260ed786"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592120540|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592147279|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -1084,9 +1084,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "725cc959c731"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9464260ed786"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592120540|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592147279|' build_files/cmake/buildinfo.cmake
   
 }
 
