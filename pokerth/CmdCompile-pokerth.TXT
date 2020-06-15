@@ -36,6 +36,7 @@ voir : 0-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=16     # rebuild protobuf 3.12.0-1
 pkgrel=15     # rebuild boost boost-libs 1.72.0-1
 pkgrel=14     # rebuild protobuf 3.11.1-2
 pkgrel=13     # rebuild avec patch boost 1.65-1.69. protobuf 3.5.1.1 websocketpp/boost 1.71
@@ -110,11 +111,11 @@ $ mkpkg-chroot-repo
   NATIVE
 --------
 $ rm -f *~
-$ mkpkg-tmpfs -m native -q qt
+$ mkpkg-tmpfs -m native
 
 !!! TESTS
 $ rm -f *~
-$ mkpkg-tmpfs -m native -l logs -q qt
+$ mkpkg-tmpfs -m native -l logs
 
 $ rm -rf /tmp/chrootrepo
 
@@ -163,6 +164,15 @@ OU
 ================================================================
 ANCIENS
 =======
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -q qt
+
+!!! TESTS
+$ rm -f *~
+$ mkpkg-tmpfs -m native -l logs -q qt
 
 # Verifications...
 namcap pokerth-*-x86_64.pkg.tar.*
