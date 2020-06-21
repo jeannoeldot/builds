@@ -6,15 +6,15 @@ cd $HOME/05-builds/openimagedenoise-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageDenoise/oidn/releases
-==>  atafra released this on 9 avr 2020  ==> 20200409
-==> Open Image Denoise v1.2.0  ==> 1.2.0
-==> 1.2.0.20200409
+==>  atafra released this on 15 juin 2020  ==> 20200615
+==> Open Image Denoise v1.2.1  ==> 1.2.1
+==> 1.2.1.20200615
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageDenoise/oidn/releases/download/v1.2.0/oidn-1.2.0.src.tar.gz
+wget https://github.com/OpenImageDenoise/oidn/releases/download/v1.2.1/oidn-1.2.1.src.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimagedenoise-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oidn-1.2.0.src.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oidn-1.2.1.src.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -35,7 +35,9 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimagedenoise-git
-pkgver=1.2.0.20200409
+pkgver=1.2.1.20200615
+pkgrel=1
+
 pkgrel=2  # Rebuild OIDN_APPS=OFF
 
 pkgrel=2  # Rebuild MAJ python 3.8
@@ -43,7 +45,7 @@ pkgrel=2  # Rebuild MAJ python 3.8
 pkgrel=2  # Test cmake Ofast floop
 
 !!!!!!
-_ver_release="1.2.0"
+_ver_release="1.2.1"
 _name_release="oidn-${_ver_release}"
 
 license=('Apache')
@@ -60,7 +62,7 @@ provides='openimagedenoise' 'oidn'
 
 SANS PATCH
 ----------
-sha256sum oidn-1.2.0.src.tar.gz
+sha256sum oidn-1.2.1.src.tar.gz
 
 source=("oidn-${_ver_release}.src.tar.gz"
 )
@@ -78,9 +80,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf oidn-1.2.0.src.tar.gz -C /tmp/srcp
+tar -xzf oidn-1.2.1.src.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/oidn-1.2.0/CMakeLists.txt
+1) kwrite /tmp/srcp/oidn-1.2.1/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -95,12 +97,10 @@ tar -xzf oidn-1.2.0.src.tar.gz -C /tmp/srcp
 2663     cmake_d="$cmake_d -D OIDN_STATIC_LIB=ON"
 
 LIGNES 42 ET ...
+OIDN_STATIC_LIB
 
+LIGNES 42 ET ...
 CMAKE_BUILD_TYPE "Release"
-
-LIGNE 180
-option(OIDN_APPS "Enable building example and test apps." ON) ==> OFF
-
 
 rm -rf /tmp/srcp
 
@@ -109,7 +109,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 oidn-1.2.0.src.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 oidn-1.2.1.src.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -128,7 +128,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimagedenoise-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimagedenoise-git/oidn-1.2.0.src.tar.gz . \
+&& cp -v $HOME/05-builds/openimagedenoise-git/oidn-1.2.1.src.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimagedenoise-git \
 && cp -v /tmp/build/openimagedenoise-git-*-x86_64.pkg.tar.* . \
@@ -171,10 +171,10 @@ rm -f *~
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
-usr/lib/libOpenImageDenoise.so.1.2.0
+usr/bin/oidnTest
+usr/lib/libOpenImageDenoise.so.1.2.1
 
 namcap openimagedenoise-git-*-x86_64.pkg.tar.*
-openimagedenoise-git W: Dependency included and not needed ('python')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -194,7 +194,7 @@ $ mv -v openimagedenoise-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i oidn-1.2.0.src.tar.gz
+$ rm -i oidn-1.2.1.src.tar.gz
 
 
 $ cd && maj-repolocal
@@ -223,6 +223,10 @@ depends=('intel-tbb' 'python'
 
 makedepends=('cmake' 'ispc'
 )
+
+LIGNE 180 ET ...
+option(OIDN_APPS "Enable building example and test apps." ON) ==> OFF
+
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
