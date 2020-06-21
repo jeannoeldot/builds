@@ -105,7 +105,7 @@ cd ..
 --------------------------------------------
 ==> OUI ==> CMAKELISTS.TXT = MODIFIÉ
 ==> NON ==> CMAKELISTS.TXT = NON_MODIFIÉ
-==> CMAKELISTS.TXT=NON_MODIFIÉ
+==> CMAKELISTS.TXT=MODIFIÉ
 
 
 !!!!! Vérifier VERSION : 
@@ -277,7 +277,7 @@ $ pacman -Ss python | grep 3 | grep install
 
 
 2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
-    VALEUR CMAKELISTS.TXT=NON_MODIFIÉ
+    VALEUR CMAKELISTS.TXT=MODIFIÉ
 =======================================
 kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
