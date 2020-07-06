@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.90.0.20200706
+pkgver=2.90.0.20200621
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -15,7 +15,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'sdl2'
           'libgl' 'glfw-x11'
           'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
-          'boost-libs' 'tbb'
+          'boost-libs' 'intel-tbb'
           'jemalloc'
           'opencolorio'
           'python-numpy' 'python-requests'
@@ -36,7 +36,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-Embree-staticlibs-dynamiclibs.patch"
         "OptiX-7.0.0-include.zip"
 )
-sha256sums=('9d004cc313a455f6de1f25711db2797608ac1b6f82d9c0e2a764893a6139041a'
+sha256sums=('3bf024353e2c8a2635fd10501abaa398cb8c093d48c21cb44d7de623f29f7e37'
             '0cf01e8501a28a3f720c5d9576f81c58bff2a650351195f042be729bf7d13c02'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
 )
@@ -55,9 +55,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f6f404392419"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f2b5f731d559"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1594051167|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592751316|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -80,6 +80,7 @@ build() {
         -DWITH_PYTHON_INSTALL=OFF \
         -DWITH_PYTHON_INSTALL_NUMPY=OFF \
         -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
+        -DWITH_CYCLES_EMBREE=ON \
         -DWITH_CYCLES_CUDA_BINARIES=ON \
         -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_NATIVE_ONLY=ON \

@@ -28,11 +28,11 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Hans Goudey <h.goudey@me.com>	
-	Sun, 21 Jun 2020 16:55:16 +0200 (10:55 -0400)
-commit	f2b5f731d5597547259a2601b1a8173ae42ccd84
+committer	Jacques Lucke <jacques@blender.org>	
+	Mon, 6 Jul 2020 17:59:27 +0200 (17:59 +0200)
+commit	f6f404392419f98a1fb9b8ce19b731c90a2beff3
 
-==> 20200621
+==> 20200706
 
 
 1.3 SOURCES
@@ -58,7 +58,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = f2b5f731d559
+==> MY_WC_HASH = f6f404392419
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -68,7 +68,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1592751316
+==> MY_WC_COMMIT_TIMESTAM = 1594051167
 
 cd ..
 
@@ -86,7 +86,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = f2b5f731d559
+==> MY_WC_HASH = f6f404392419
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -96,7 +96,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1592751316
+==> MY_WC_COMMIT_TIMESTAM = 1594051167
 
 cd ..
 
@@ -115,18 +115,18 @@ head -n 60 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSIO
 #define BLENDER_VERSION_PATCH 0
 #define BLENDER_VERSION_CYCLE alpha
 ....
-#define BLENDER_FILE_SUBVERSION 4
+#define BLENDER_FILE_SUBVERSION 6
 
 ==> Version = BLENDER_VERSION.BLENDER_VERSION_PATCH
 
 ==> Version = 2.90.0
 
-==> Version = 2.90.0.20200621
+==> Version = 2.90.0.20200706
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-2.90.0.20200621.tar.gz --exclude=.git blender
+tar -cvzf blender-git-2.90.0.20200706.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -134,7 +134,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.90.0.20200621.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.90.0.20200706.tar.gz .
 
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
@@ -151,7 +151,7 @@ voir CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.90.0.20200621
+pkgver=2.90.0.20200706
 pkgrel=1
 
 pkgrel=1    # TEST AVEC OPTIX
@@ -214,7 +214,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.0.0-include.zip"
 )
 
-sha256sum blender-git-2.90.0.20200621.tar.gz
+sha256sum blender-git-2.90.0.20200706.tar.gz
 
 sha256sum OptiX-7.0.0-include.zip
 
@@ -229,7 +229,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.0.0-include.zip"
 )
 
-sha256sum blender-git-2.90.0.20200621.tar.gz
+sha256sum blender-git-2.90.0.20200706.tar.gz
 
 sha256sum Fix-Embree-staticlibs-dynamiclibs.patch
 
@@ -258,9 +258,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f2b5f731d559"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f6f404392419"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592751316|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1594051167|' build_files/cmake/buildinfo.cmake
 }
 
 
@@ -311,43 +311,37 @@ option(WITH_USD                 ON  dep = usd-git
 
 Ligne 286
 # 3D format support
-286   option WITH_OPENCOLLADA	ON  dep = opencollada-git
+287   option WITH_OPENCOLLADA	ON  dep = opencollada-git
 
 # Sound output
-294   option WITH_JACK          ==> OFF         si ON  dep =  jack
+293   option WITH_JACK          ==> OFF         si ON  dep =  jack
 
 # Logging/unbit test libraries.
 
-# New object types
-326 option WITH_NEW_OBJECT_TYPES  ==> OFF
-
-# New simulation data block
-330 option WITH_NEW_SIMULATION_TYPE  ==> OFF
-
 # Misc
-337	option WITH_INPUT_NDOF		==> OFF
+328	option WITH_INPUT_NDOF		==> OFF
 
 
-339 	WITH_INSTALL_PORTABLE       ON   ==> OFF
+330 	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-347     WITH_PYTHON_INSTALL             ON   ==> OFF
+338     WITH_PYTHON_INSTALL             ON   ==> OFF
 
-357     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+348     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-360     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+351     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
         
-369 # Cycles
+360 # Cycles
 option WITH_CYCLES			ON   dep = openimageio(-git)
 option WITH_CYCLES_OSL      ON   dep = openshadinglanguage(-git)
 
 !!! -- Could NOT find EMBREE (missing: _embree_LIBRARIES)
 !!! OK si embree(-git) compilé avec DYNAMIC LIBS + PATCH
-option WITH_CYCLES_EMBREE           OFF ==> ON si ON makedepends = embree(-git)
+option WITH_CYCLES_EMBREE           ON  makedepends = embree(-git)
 
-option WITH_CYCLES_CUDA_BINARIES	==> ON dep = cuda
+option WITH_CYCLES_CUDA_BINARIES	==> ON makedepends = cuda
         
-Ligne 379
+Ligne 370
 URL  GPU et sm_??  : https://developer.nvidia.com/cuda-gpus
 https://developer.nvidia.com/cuda-gpus#collapse4
 
@@ -359,35 +353,35 @@ exemple :  GeForce GTX 980    5.2
 exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
 -DCYCLES_CUDA_BINARIES_ARCH=sm_52;sm_61
 
-Ligne 382 ????
+Ligne 373 ????
 option WITH_CYCLES_LOGGING     ON ???
         
 !!! A VOIR ???
-384 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON   (-march=native)
+375 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON   (-march=native)
 
 !!! VOIR https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/a2b52dc5716a97e5413acbd6eefc9ce3788b6456
-393 option WITH_CYCLES_DEVICE_OPTIX   OFF  ==> ON
+384 option WITH_CYCLES_DEVICE_OPTIX   OFF  ==> ON
 
 !!! A VOIR ???
-400   WITH_CUDA_DYNLOAD     ON
+391   WITH_CUDA_DYNLOAD     ON
 
 
-403 # LLVM
+394 # LLVM
 $ pacman -Ss llvm | grep install
 extra/llvm 10.0.0-2 [installé]
 extra/llvm-libs 10.0.0-2 [installé]
 
 !!! A VOIR ???
-404 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
+395 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
 ==> VOIR LIGNE 656 ET ...: # auto enable llvm for cycles_osl
 ==> VOIR LIGNE 846 ET ...:
 
 # Debug
-427 option WITH_BOOST     ON
-428 option WITH_TBB     ON  dep = intel-tbb
+423 option WITH_BOOST     ON
+424 option WITH_TBB     ON  dep = tbb
 
 # Documentation
-Lignes 442 et ...
+Lignes 438 et ...
 if(UNIX AND NOT APPLE)
         option WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
 endif()
@@ -400,16 +394,16 @@ Lignes 229 et ...
         option WITH_SYSTEM_GLEW   OFF
         option WITH_SYSTEM_GLES   ON
 
-Lignes 448 et ...
+Lignes 444 et ...
 INCHANGÉS :
 ------------
-450 WITH_OPENGL ON
+446 WITH_OPENGL ON
 
 
 # Compiler toolchain
-Lignes 477 et ...
+Lignes 473 et ...
 
-LIGNE 481 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
+LIGNE 477 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
 
 =================================================================
 
@@ -419,7 +413,7 @@ LIGNE 481 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.90.0.20200621.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-2.90.0.20200706.tar.gz
 -rw-r--r--  1 jnd users      597 29 mars  11:33 Enable-Optix-7-for-non-RTX-card.patch
 -rw-r--r--  1 jnd users     1309  7 mars  11:42 Fix-Embree-staticlibs-dynamiclibs.patch
 -rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-7.0.0-include.zip
@@ -501,7 +495,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.90.0.20200621.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.90.0.20200706.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/Fix-Embree-staticlibs-dynamiclibs.patch . \
 && cp -v $HOME/05-builds/blender-git/OptiX-7.0.0-include.zip . \
 && LC_ALL=C makepkg -s \
@@ -585,7 +579,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-2.90.0.20200621.tar.gz
+$ rm -i blender-git-2.90.0.20200706.tar.gz
 !!! OPTIX
 $ rm -i OptiX-7.0.0-include.zip
 
@@ -628,15 +622,23 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "f2b5f731d559"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "f6f404392419"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592751316|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1594051167|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
 ========
+
+# New object types
+326 option WITH_NEW_OBJECT_TYPES  ==> OFF
+
+# New simulation data block
+330 option WITH_NEW_SIMULATION_TYPE  ==> OFF
+
+428 option WITH_TBB     ON  dep = intel-tbb
 
 ==> Version = BLENDER_VERSION.BLENDER_FILE_SUBVERSION.BLENDER_VERSION_PATCH
 
@@ -652,7 +654,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Enable-Optix-7-for-non-RTX-card.patch"
 )
 
-sha256sum blender-git-2.90.0.20200621.tar.gz
+sha256sum blender-git-2.90.0.20200706.tar.gz
 
 sha256sum Fix-Embree-staticlibs-dynamiclibs.patch
 
@@ -683,7 +685,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T74278-Image-Object-handles-too-big.patch"
 )
 
-sha256sum blender-git-2.90.0.20200621.tar.gz
+sha256sum blender-git-2.90.0.20200706.tar.gz
 
 sha256sum Fix-T74278-Image-Object-handles-too-big.patch
 
@@ -873,9 +875,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f2b5f731d559"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f6f404392419"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592751316|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1594051167|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -885,7 +887,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
 )
 
-sha256sum blender-git-2.90.0.20200621.tar.gz
+sha256sum blender-git-2.90.0.20200706.tar.gz
 
 sha256sum Fix-T64463-Visual-Artifacts-with-ColorRamp.patch
 
@@ -910,7 +912,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-mesh_discombobulator.patch"
 )
 
-sha256sum blender-git-2.90.0.20200621.tar.gz
+sha256sum blender-git-2.90.0.20200706.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -1042,7 +1044,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-2.90.0.20200621.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.90.0.20200706.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
@@ -1058,7 +1060,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-2.90.0.20200621.tar.gz
+sha256sum blender-git-2.90.0.20200706.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -1084,9 +1086,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f2b5f731d559"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f6f404392419"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1592751316|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1594051167|' build_files/cmake/buildinfo.cmake
   
 }
 
