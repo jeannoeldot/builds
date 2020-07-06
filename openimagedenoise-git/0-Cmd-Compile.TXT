@@ -36,6 +36,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-git
 pkgver=1.2.1.20200615
+pkgrel=2  # Rebuild intel-tbb ==> tbb
+
 pkgrel=1
 
 pkgrel=2  # Rebuild OIDN_APPS=OFF
@@ -51,7 +53,7 @@ _name_release="oidn-${_ver_release}"
 license=('Apache')
 
 !!! https://github.com/OpenImageDenoise/oidn/issues/76
-depends=('intel-tbb'
+depends=('tbb'
 )
 
 makedepends=('cmake' 'ispc' 'python'
@@ -218,6 +220,9 @@ SI PROBLEME
 
 ANCIEN
 ======
+depends=('intel-tbb'
+)
+
 depends=('intel-tbb' 'python'
 )
 
