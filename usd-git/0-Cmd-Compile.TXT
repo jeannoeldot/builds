@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=usd-git
 pkgver=20.05.20200414
+pkgrel=2  # Rebuild intel-tbb ==> tbb
+
 pkgrel=1
 
 pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
@@ -49,7 +51,7 @@ _name_release="USD-${_ver_release}"
 
 license=('custom')
 
-depends=('boost-libs' 'intel-tbb'
+depends=('boost-libs' 'tbb'
 )
 
 makedepends=('boost' 'cmake' 'python'
@@ -261,6 +263,9 @@ SI PROBLEME
 
 ANCIEN
 ======
+depends=('boost-libs' 'intel-tbb'
+)
+
 usd-git W: Referenced library 'libusd_ms.so' is an uninstalled dependency
 usd-git W: Dependency included and not needed ('boost-libs')
 
