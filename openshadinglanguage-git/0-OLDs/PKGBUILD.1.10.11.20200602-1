@@ -1,14 +1,14 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.10.12.20200702
+pkgver=1.10.11.20200602
 pkgrel=1
-_name_release="OpenShadingLanguage-Release-1.10.12"
+_name_release="OpenShadingLanguage-Release-1.10.11"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
 license=('custom')
-depends=('boost-libs' 'openexr' 'tbb' 'freetype2' 'libpng' 'libtiff'
+depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
          'llvm-libs'
@@ -19,7 +19,7 @@ conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('f5f6df828d2cded415a5f0d51d1942d4e3b57440ba570fb266017861f68a16e8'
+sha256sums=('1622582de42f6458fff44a0f85bf90ed56b50d4ec97b7637c14ce3b5bdb666b5'
 )
 
 build() {
