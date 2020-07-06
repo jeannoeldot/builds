@@ -2,14 +2,14 @@
 
 pkgname=openvdb-git
 pkgver=7.0.0.20191206
-pkgrel=3
+pkgrel=4
 _ver_release="7.0.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
 arch=('x86_64')
 license=('MPL')
-depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
+depends=('openexr' 'boost-libs' 'tbb' 'zlib'
           'blosc' 'glfw-x11' 'glu'
           'jemalloc'
 )

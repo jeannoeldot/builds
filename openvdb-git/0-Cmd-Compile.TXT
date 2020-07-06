@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=7.0.0.20191206
+pkgrel=4  # Rebuild intel-tbb ==> tbb
 pkgrel=3          # rebuild MAJ openexr 2.5.1
 pkgrel=2          # rebuild boost boost-libs 1.72.0
 pkgrel=1
@@ -68,7 +69,7 @@ _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
 
-depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
+depends=('openexr' 'boost-libs' 'tbb' 'zlib'
           'blosc' 'glfw-x11' 'glu'
           'jemalloc'
 )
@@ -316,6 +317,10 @@ SI PROBLEME
 
 ANCIEN
 ======
+depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
+
+
+
 openvdb-git W: Dependency glu included but already satisfied
 
 LIGNE 33: !!!!!!
