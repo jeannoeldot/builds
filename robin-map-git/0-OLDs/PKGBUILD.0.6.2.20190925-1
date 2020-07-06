@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=robin-map-git
-pkgver=0.6.3.20200622
+pkgver=0.6.2.20190925
 pkgrel=1
-_ver_release="0.6.3"
+_ver_release="0.6.2"
 _name_release="robin-map-${_ver_release}"
 pkgdesc="C++ implementation of a fast hash map and hash set using robin hood hashing"
 url="https://github.com/Tessil/robin-map"
@@ -15,7 +15,7 @@ conflicts=('robin-map')
 provides=('robin-map')
 source=("robin-map-${_ver_release}.tar.gz"
 )
-sha256sums=('e6654c8c2598f63eb0b1d52ff8bdf39cfcc91d81dd5d05274a6dca91241cd72f'
+sha256sums=('c08ec4b1bf1c85eb0d6432244a6a89862229da1cb834f3f90fba8dc35d8c8ef1'
 )
 
 build() {
