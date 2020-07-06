@@ -71,6 +71,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.4.3.20200402
+pkgrel=2  # Rebuild intel-tbb ==> tbb
+
 pkgrel=1
 
 pkgrel=4    # MAJ intel-tbb 2019.9-1

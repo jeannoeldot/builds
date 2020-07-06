@@ -2,12 +2,12 @@
 
 pkgname=opensubdiv-git
 pkgver=3.4.3.20200402
-pkgrel=1
+pkgrel=2
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
 license=('custom')
 url="http://graphics.pixar.com/opensubdiv"
-depends=('glfw-x11' 'intel-tbb'
+depends=('glfw-x11' 'tbb'
 )
 makedepends=('cmake' 'mesa')
 conflicts=('opensubdiv')
