@@ -37,16 +37,14 @@ CHOST="x86_64-pc-linux-gnu"
 
 #-- Compiler and Linker Flags
 CPPFLAGS="-D_FORTIFY_SOURCE=2"
-CFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt"
-CXXFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt"
+CFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt"
+CXXFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt"
 LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
-#RUSTFLAGS="-C opt-level=2"
 #-- Make Flags: change this for DistCC/SMP systems
-MAKEFLAGS="-j13"
+MAKEFLAGS="-j7"
 #-- Debugging flags
 DEBUG_CFLAGS="-g -fvar-tracking-assignments"
 DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"
-#DEBUG_RUSTFLAGS="-C debuginfo=2"
 
 #########################################################################
 # BUILD ENVIRONMENT
@@ -132,7 +130,7 @@ PACKAGER="Name <name@fai.com>"
 COMPRESSGZ=(gzip -c -f -n)
 COMPRESSBZ2=(bzip2 -c -f)
 COMPRESSXZ=(xz -c -z -)
-COMPRESSZST=(zstd -c -z -q -)
+COMPRESSZST=(zstd -c -T0 --ultra -20 -)
 COMPRESSLRZ=(lrzip -q)
 COMPRESSLZO=(lzop -q)
 COMPRESSZ=(compress -c -f)
