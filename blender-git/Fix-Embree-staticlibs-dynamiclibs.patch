@@ -1,6 +1,6 @@
 diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_files/cmake/Modules/FindEmbree.cmake
---- blender/build_files/cmake/Modules/FindEmbree.cmake	2020-02-09 11:20:25.000000000 +0100
-+++ blender.new/build_files/cmake/Modules/FindEmbree.cmake	2020-04-08 11:44:56.850060302 +0200
+--- blender/build_files/cmake/Modules/FindEmbree.cmake	2020-07-19 11:45:53.000000000 +0200
++++ blender.new/build_files/cmake/Modules/FindEmbree.cmake	2020-07-19 11:54:15.894215915 +0200
 @@ -72,7 +72,7 @@
  
  FIND_LIBRARY(EMBREE_LIBRARY
@@ -13,7 +13,7 @@ diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_f
 @@ -83,10 +83,10 @@
  # all listed variables are TRUE
  INCLUDE(FindPackageHandleStandardArgs)
- FIND_PACKAGE_HANDLE_STANDARD_ARGS(EMBREE DEFAULT_MSG
+ FIND_PACKAGE_HANDLE_STANDARD_ARGS(Embree DEFAULT_MSG
 -    _embree_LIBRARIES EMBREE_INCLUDE_DIR)
 +    EMBREE_LIBRARY EMBREE_INCLUDE_DIR)
  
@@ -24,8 +24,8 @@ diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_f
  ENDIF(EMBREE_FOUND)
  
 diff -aur blender/intern/cycles/blender/CMakeLists.txt blender.new/intern/cycles/blender/CMakeLists.txt
---- blender/intern/cycles/blender/CMakeLists.txt	2020-03-22 10:55:23.000000000 +0100
-+++ blender.new/intern/cycles/blender/CMakeLists.txt	2020-04-08 11:43:40.707021829 +0200
+--- blender/intern/cycles/blender/CMakeLists.txt	2020-07-06 18:31:37.000000000 +0200
++++ blender.new/intern/cycles/blender/CMakeLists.txt	2020-07-19 11:52:05.931671702 +0200
 @@ -67,6 +67,12 @@
    )
  endif()
