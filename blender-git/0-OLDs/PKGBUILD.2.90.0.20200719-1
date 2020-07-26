@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.91.0.20200725
-pkgrel=2
+pkgver=2.90.0.20200719
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -34,17 +34,15 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
         "Fix-Embree-staticlibs-dynamiclibs.patch"
-        "D8063-cuda11.patch"
         "OptiX-7.0.0-include.zip"
 )
-sha256sums=('d3e425a7c54dc02b4016582f00ecd24291f5f36c33a1fc80f28de0d404629800'
+sha256sums=('accac3a0e5b461a34ace3bbc37b0a325f992a2fa15505076c10669143fc2d63a'
             '5a02ca4060bd9f3837f16c0e53dc3dc63f23450a8ca71f8d1526e00a45a03ddc'
-            '8a50008d4d6430faeb2f880e5f887cca7bea4aefee98dcb7c786f233c781edc5'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
 )
 
 _gitname="blender"
-_slot="2.91"
+_slot="2.90"
 
 prepare() {
   cd "${_gitname}"
@@ -52,18 +50,14 @@ prepare() {
   # https://github.com/bartoszek/AUR-blender-2.8-git
   patch -Np1 -i "${srcdir}/Fix-Embree-staticlibs-dynamiclibs.patch"
 
-  # Cycles: Preliminary Cuda 11 build support
-  # https://developer.blender.org/D8063
-  patch -Np1 -i "${srcdir}/D8063-cuda11.patch"
-
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "13abacaaf342"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "ccd2af43b3ab"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1595703717|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1595149154|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -87,7 +81,7 @@ build() {
         -DWITH_PYTHON_INSTALL_NUMPY=OFF \
         -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
         -DWITH_CYCLES_CUDA_BINARIES=ON \
-        -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_80" \
+        -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_CYCLES_DEVICE_OPTIX=ON \
         -DWITH_LLVM=ON \

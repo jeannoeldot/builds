@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.90.0.20200719
+!!! VERSION = 2.91.0.20200725
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.90.0.20200719.tar.gz /tmp/srcp/
+cp -v blender-git-2.91.0.20200725.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.90.0.20200719.tar.gz
+tar -xzf blender-git-2.91.0.20200725.tar.gz
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
@@ -74,6 +74,133 @@ rm -rf blender.new
 cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/Fix-Embree-staticlibs-dynamiclibs.patch .
+
+
+2) Cycles: Preliminary Cuda 11 build support
+2) https://developer.blender.org/D8063
+2) https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/D8063-cuda11.diff
+2a) MODIFIER blender/CMakeLists.txt
+===================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new
+kwrite CMakeLists.txt
+
+MODIFIER LIGNE 370:
+set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 compute_75 CACHE STRING "CUDA architectures to build binaries for")
+DEVIENT
+set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 sm_80 compute_80 CACHE STRING "CUDA architectures to build binaries for")
+
+ 
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ..
+
+2b) MODIFIER blender/build_files/cmake/config/blender_release.cmake
+===================================================================
+
+cd blender.new/build_files/cmake/config
+kwrite blender_release.cmake
+
+MODIFIER LIGNE 56:
+set(CYCLES_CUDA_BINARIES_ARCH sm_30;sm_35;sm_37;sm_50;sm_52;sm_60;sm_61;sm_70;sm_75;compute_75 CACHE STRING "" FORCE)
+
+DEVIENT
+set(CYCLES_CUDA_BINARIES_ARCH sm_30;sm_35;sm_37;sm_50;sm_52;sm_60;sm_61;sm_70;sm_75;sm_80;compute_80 CACHE STRING "" FORCE)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier blender_release.cmake~
+rm -f blender_release.cmake~
+
+cd ../../../..
+
+
+2c) MODIFIER blender/intern/cycles/CMakeLists.txt
+=================================================
+
+cd blender.new/intern/cycles
+kwrite CMakeLists.txt
+
+MODIFIER LIGNE 317:
+    elseif(${CUDA_VERSION} LESS "11.0")
+DEVIENT
+    elseif(${CUDA_VERSION} LESS "12.0")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../..
+
+
+2d) MODIFIER blender/intern/cycles/kernel/CMakeLists.txt
+========================================================
+
+cd blender.new/intern/cycles/kernel
+kwrite CMakeLists.txt
+
+AJOUTER LIGNES 476 ET 477:
+    elseif(${arch} MATCHES "sm_30" AND ${CUDA_VERSION} GREATER 109)
+      message(STATUS "CUDA binaries for ${arch} are no longer supported, skipped.")
+
+AJOUTER LIGNES 480 ET 481:
+    elseif(${arch} MATCHES "sm_8." AND ${CUDA_VERSION} LESS 110)
+      message(STATUS "CUDA binaries for ${arch} require CUDA 11.0+, skipped.")
+
+AJOUTER LIGNES 520 À 524:
+    set(OPTIX_TARGET 30)
+    if(${CUDA_VERSION} GREATER 109) #cuda 11
+      set(OPTIX_TARGET 52)
+    endif()
+
+
+MODIFIER LIGNE 551:
+            -target 52
+DEVIENT
+            -target ${OPTIX_TARGET}
+
+MODIFIER LIGNE 575:
+          -arch=sm_52
+DEVIENT
+          -arch=sm_${OPTIX_TARGET}
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../../..
+
+
+2e) MODIFIER blender/intern/cycles/kernel/kernels/cuda/kernel_config.h
+======================================================================
+
+cd blender.new/intern/cycles/kernel/kernels/cuda
+kwrite kernel_config.h
+
+MODIFIER LIGNES 73 ET 74:
+/* 7.x */
+#elif __CUDA_ARCH__ <= 799
+DEVIENNENT
+/* 7.x / 8.x */
+#elif __CUDA_ARCH__ <= 899
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier kernel_config.h~
+rm -f kernel_config.h~
+
+cd ../../../../../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > D8063-cuda11.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/D8063-cuda11.patch .
 
 
 
