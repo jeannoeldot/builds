@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.1.17.0.20200702
+pkgrel=3    # rebuild MAJ opencv 4.4.0
 pkgrel=2    # rebuild MAJ libraw 0.20.0
 
 pkgrel=1
@@ -109,7 +110,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.8.3-1 [installé]
+==> extra/python 3.8.4-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.8

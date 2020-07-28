@@ -152,7 +152,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=2.91.0.20200725
-pkgrel=1
+pkgrel=3
 
 pkgrel=1    # TEST AVEC OPTIX
 pkgrel=1    # AVEC PATCH embree dynamic libs
@@ -275,7 +275,7 @@ prepare() {
 --------------------------------------
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.8.3-1 [installé]
+==> extra/python 3.8.4-1 [installé]
 
     -DPYTHON_VERSION=3.8 \
     -DPYTHON_LIBPATH=/usr/lib \
@@ -461,32 +461,32 @@ embree-git-*-x86_64.pkg.tar.*\
   FLOOP
 --------
 $ rm -f *~
-$ mkpkg-tmpfs -m floop -g 16G
+$ mkpkg-tmpfs -m floop -g 18G
 
   FAST
 -------
 $ rm -f *~
-$ mkpkg-tmpfs -m fast -g 16G
+$ mkpkg-tmpfs -m fast -g 18G
 OU
 $ rm -f *~
-$ mkpkg-tmpfs -m fast -g 16G -l logs
+$ mkpkg-tmpfs -m fast -g 18G -l logs
 
 
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 18G
 OU
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G -l logs
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 18G -l logs
 
 -------------------------------------------------------------------
 
   NATIVE
 --------
 $ rm -f *~
-$ mkpkg-tmpfs -m native -g 16G
+$ mkpkg-tmpfs -m native -g 18G
 OU
 $ rm -f *~
-$ mkpkg-tmpfs -m native -g 16G -l logs
+$ mkpkg-tmpfs -m native -g 18G -l logs
 -------------------------------------------------------------------
 
 
