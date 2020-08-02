@@ -6,16 +6,16 @@ cd $HOME/05-builds/openshadinglanguage-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/imageworks/OpenShadingLanguage/releases
-==> 02/07/2020  ==> 20200702
-==> Release-1.10.12  ==> 1.10.12
-==> 1.10.12.20200702
+==> 01/08/2020  ==> 20200801
+==> Release-1.10.13  ==> 1.10.13
+==> 1.10.13.20200801
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenShadingLanguage-Release-1.10.12.tar.gz \
-https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.10.12.tar.gz
+wget -O OpenShadingLanguage-Release-1.10.13.tar.gz \
+https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.10.13.tar.gz
 
 1-7) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/openshadinglanguage-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.12.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.13.tar.gz .
 
 
 1-8) FAIRE PATCH
@@ -43,11 +43,11 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.12.tar.gz 
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.10.12.20200702
+pkgver=1.10.13.20200801
+pkgrel=1
+
 pkgrel=3    # Rebuild OIIO + opencv 4.4.0
 pkgrel=2    # Rebuild MAJ LLVM 10.0.1-1 REBUILD OIIO 2.1.17
-
-pkgrel=1
 
 pkgrel=5    # Rebuild MAJ LLVM 10.0.0-1 + PATCH
 
@@ -77,7 +77,7 @@ pkgrel=3    # Rebuild MAJ LLVM 6.0.0 et CMAKE_INSTALL_LIBDIR=lib
 
 
 !!!!!!
-_name_release="OpenShadingLanguage-Release-1.10.12"
+_name_release="OpenShadingLanguage-Release-1.10.13"
 
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
@@ -102,14 +102,14 @@ makedepends=('boost' 'cmake' 'llvm' 'clang')
 source=("$_name_release.tar.gz"
 )
 
-sha256sum OpenShadingLanguage-Release-1.10.12.tar.gz
+sha256sum OpenShadingLanguage-Release-1.10.13.tar.gz
 
 sha256sums=(...
          ...
 )
 
 
-!!! VERSION 1.10.12
+!!! VERSION 1.10.13
 build() {
       ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -144,9 +144,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenShadingLanguage-Release-1.10.12.tar.gz -C /tmp/srcp
+tar -xzf OpenShadingLanguage-Release-1.10.13.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.12/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.13/CMakeLists.txt
 
 LIGNE 44
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
@@ -189,7 +189,7 @@ LIGNE 110
   !!! A VOIR
   OSL_NO_DEFAULT_TEXTURESYSTEM OFF
 
-2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.12/src/cmake/compiler.cmake
+2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.13/src/cmake/compiler.cmake
 
 LIGNE 7
 /!\ /!\ /!\
@@ -218,7 +218,7 @@ LIGNE 18
 LIGNE 24
 set (GLIBCXX_USE_CXX11_ABI "" CACHE STRING "For gcc, use the new C++11 library ABI (0|1)")
 
-3) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.12/src/cmake/install.cmake
+3) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.13/src/cmake/install.cmake
   !!! A VOIR : 
 LIGNE 3
 set (INSTALL_DOCS "Install documentation" ON)
@@ -226,7 +226,7 @@ LIGNE 4
 set (INSTALL_FONTS "Install default fonts" OFF)
 
 
-4) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.12/src/cmake/modules/FindLLVM.cmake
+4) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.10.13/src/cmake/modules/FindLLVM.cmake
 
 !!! LLVM 10.0
 ------------------------------------
@@ -242,7 +242,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.10.12.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-Release-1.10.13.tar.gz
 -rw-r--r--  1 jnd users     3453 19 avril 10:48 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
 
 
@@ -259,7 +259,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-Release-1.10.12.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-Release-1.10.13.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
 && cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \
@@ -324,9 +324,9 @@ rm -f *~
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
 usr/bin/osltoy
-usr/lib/liboslcomp.so.1.10.12
-usr/lib/liboslquery.so.1.10.12
-usr/lib/liboslexec.so.1.10.12
+usr/lib/liboslcomp.so.1.10.13
+usr/lib/liboslquery.so.1.10.13
+usr/lib/liboslexec.so.1.10.13
 usr/lib/osl.imageio.so
 
 namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
@@ -349,7 +349,7 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenShadingLanguage-Release-1.10.12.tar.gz
+$ rm -i OpenShadingLanguage-Release-1.10.13.tar.gz
 
 
 $ cd && maj-repolocal
@@ -398,15 +398,15 @@ done
 
 $HOME/99-dwl-temp/emitter.oso
 #sed -i "s|-pipe -fPIC -funsigned-char -fno-strict-aliasing|-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
-sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.12/src/|/usr/|g" $HOME/99-dwl-temp/emitter.oso
+sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.13/src/|/usr/|g" $HOME/99-dwl-temp/emitter.oso
 
 $HOME/99-temp/OSL/usr/shaders/
-sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.12/src/|/usr/|g" \
+sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.13/src/|/usr/|g" \
 $HOME/99-temp/OSL/usr/shaders/*.oso
-sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.12/src/|/usr/|g" \
+sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.13/src/|/usr/|g" \
 $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 
-/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.12/build/src/shaders/emitter.oso
+/build/openshadinglanguage-git/src/OpenShadingLanguage-Release-1.10.13/build/src/shaders/emitter.oso
 
 ================================================================
 ANCIENS
@@ -420,7 +420,7 @@ source=("$_name_release.tar.gz"
         '0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch'
 )
 
-sha256sum OpenShadingLanguage-Release-1.10.12.tar.gz
+sha256sum OpenShadingLanguage-Release-1.10.13.tar.gz
 
 sha256sum 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
 
@@ -488,7 +488,7 @@ source=("$_name_release.tar.gz"
         'clang7.patch'
 )
 
-sha256sum OpenShadingLanguage-Release-1.10.12.tar.gz
+sha256sum OpenShadingLanguage-Release-1.10.13.tar.gz
 
 sha256sum clang7.patch
 
@@ -546,7 +546,7 @@ source=("$_name_release.tar.gz"
         'llvm50-Make-OSL-work-with-llvm5.patch'
 )
 
-sha256sum OpenShadingLanguage-Release-1.10.12.tar.gz
+sha256sum OpenShadingLanguage-Release-1.10.13.tar.gz
 
 sha256sum llvm50-Make-OSL-work-with-llvm5.patch
 
@@ -600,13 +600,13 @@ LIGNE 90 ET ...
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.10.12.tar.gz
-wget -O OpenShadingLanguage-Release-1.10.12.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-1.10.12.tar.gz
+wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.10.13.tar.gz
+wget -O OpenShadingLanguage-Release-1.10.13.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-1.10.13.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-1.10.12.tar.gz OpenShadingLanguage-Release-1.10.12.tar.gz
+mv -v Release-1.10.13.tar.gz OpenShadingLanguage-Release-1.10.13.tar.gz
 
 
 voir 0-CmdFairePatches-LLVM35.STATIC.TXT
@@ -617,7 +617,7 @@ source=("$_name_release.tar.gz"
         'llvm35-static-system-libs.patch'
 )
 
-sha256sum OpenShadingLanguage-Release-1.10.12.tar.gz
+sha256sum OpenShadingLanguage-Release-1.10.13.tar.gz
 
 sha256sum llvm35-static-system-libs.patch
 
