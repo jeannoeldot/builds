@@ -1,7 +1,7 @@
 diff -aur blender/build_files/cmake/config/blender_release.cmake blender.new/build_files/cmake/config/blender_release.cmake
---- blender/build_files/cmake/config/blender_release.cmake	2020-08-02 11:40:19.000000000 +0200
-+++ blender.new/build_files/cmake/config/blender_release.cmake	2020-08-02 11:48:49.428290041 +0200
-@@ -54,7 +54,7 @@
+--- blender/build_files/cmake/config/blender_release.cmake	2020-07-25 11:46:42.000000000 +0200
++++ blender.new/build_files/cmake/config/blender_release.cmake	2020-07-26 11:42:39.718983419 +0200
+@@ -53,7 +53,7 @@
  set(WITH_MEM_JEMALLOC          ON  CACHE BOOL "" FORCE)
  set(WITH_CYCLES_CUDA_BINARIES  ON  CACHE BOOL "" FORCE)
  set(WITH_CYCLES_CUBIN_COMPILER OFF CACHE BOOL "" FORCE)
@@ -11,9 +11,9 @@ diff -aur blender/build_files/cmake/config/blender_release.cmake blender.new/bui
  
  # platform dependent options
 diff -aur blender/CMakeLists.txt blender.new/CMakeLists.txt
---- blender/CMakeLists.txt	2020-08-02 11:40:19.000000000 +0200
-+++ blender.new/CMakeLists.txt	2020-08-02 11:47:32.322093384 +0200
-@@ -369,7 +369,7 @@
+--- blender/CMakeLists.txt	2020-07-25 11:46:42.000000000 +0200
++++ blender.new/CMakeLists.txt	2020-07-26 11:41:43.935850969 +0200
+@@ -367,7 +367,7 @@
  option(WITH_CYCLES_CUBIN_COMPILER   "Build cubins with nvrtc based compiler instead of nvcc" OFF)
  option(WITH_CYCLES_CUDA_BUILD_SERIAL "Build cubins one after another (useful on machines with limited RAM)" OFF)
  mark_as_advanced(WITH_CYCLES_CUDA_BUILD_SERIAL)
@@ -24,7 +24,7 @@ diff -aur blender/CMakeLists.txt blender.new/CMakeLists.txt
  option(WITH_CYCLES_LOGGING  "Build Cycles with logging support" ON)
 diff -aur blender/intern/cycles/CMakeLists.txt blender.new/intern/cycles/CMakeLists.txt
 --- blender/intern/cycles/CMakeLists.txt	2020-07-06 18:31:37.000000000 +0200
-+++ blender.new/intern/cycles/CMakeLists.txt	2020-08-02 11:49:32.574694921 +0200
++++ blender.new/intern/cycles/CMakeLists.txt	2020-07-26 11:43:22.542165764 +0200
 @@ -314,7 +314,7 @@
        set(MAX_MSVC 1910)
      elseif(${CUDA_VERSION} EQUAL "9.1")
@@ -35,8 +35,8 @@ diff -aur blender/intern/cycles/CMakeLists.txt blender.new/intern/cycles/CMakeLi
      endif()
      if(NOT MSVC_VERSION LESS ${MAX_MSVC} OR CMAKE_C_COMPILER_ID MATCHES "Clang")
 diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/kernel/CMakeLists.txt
---- blender/intern/cycles/kernel/CMakeLists.txt	2020-08-02 11:40:19.000000000 +0200
-+++ blender.new/intern/cycles/kernel/CMakeLists.txt	2020-08-02 11:53:23.663304755 +0200
+--- blender/intern/cycles/kernel/CMakeLists.txt	2020-07-25 11:46:42.000000000 +0200
++++ blender.new/intern/cycles/kernel/CMakeLists.txt	2020-07-26 11:47:16.721380587 +0200
 @@ -473,8 +473,12 @@
    foreach(arch ${CYCLES_CUDA_BINARIES_ARCH})
      if(${arch} MATCHES "sm_2.")
@@ -66,7 +66,7 @@ diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/
            ${SRC_UTIL_HEADERS}
          COMMAND ${CUBIN_CC_ENV}
              "$<TARGET_FILE:cycles_cubin_cc>"
--            -target 50
+-            -target 52
 +            -target ${OPTIX_TARGET}
              -ptx
              -i ${CMAKE_CURRENT_SOURCE_DIR}/${input}
@@ -75,14 +75,14 @@ diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/
          COMMAND
            ${CUDA_NVCC_EXECUTABLE}
            --ptx
--          -arch=sm_50
+-          -arch=sm_52
 +          -arch=sm_${OPTIX_TARGET}
            ${cuda_flags}
            ${input}
          WORKING_DIRECTORY
 diff -aur blender/intern/cycles/kernel/kernels/cuda/kernel_config.h blender.new/intern/cycles/kernel/kernels/cuda/kernel_config.h
 --- blender/intern/cycles/kernel/kernels/cuda/kernel_config.h	2019-05-05 10:06:17.000000000 +0200
-+++ blender.new/intern/cycles/kernel/kernels/cuda/kernel_config.h	2020-08-02 11:54:08.373037683 +0200
++++ blender.new/intern/cycles/kernel/kernels/cuda/kernel_config.h	2020-07-26 11:54:08.423442422 +0200
 @@ -70,8 +70,8 @@
  #  endif
  #  define CUDA_KERNEL_BRANCHED_MAX_REGISTERS 63
