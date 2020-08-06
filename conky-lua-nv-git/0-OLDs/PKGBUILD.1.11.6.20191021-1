@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=conky-lua-nv-git
-pkgver=1.11.7.20200727
+pkgver=1.11.6.20191021
 pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
@@ -22,7 +22,7 @@ optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('c21096b887dc3b5b97ccb92a4240591c59f8e7e2c6b70ba5742894d1258a6f7d'
+sha256sums=('e8234b2394b895a403e0231f36705ca72e5413a40bb4b454b037ad4a91297568'
 )
 #options=('!strip' 'debug')
 
