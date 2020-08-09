@@ -1,20 +1,16 @@
 diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_files/cmake/Modules/FindEmbree.cmake
---- blender/build_files/cmake/Modules/FindEmbree.cmake	2020-08-09 10:38:49.000000000 +0200
-+++ blender.new/build_files/cmake/Modules/FindEmbree.cmake	2020-08-09 11:50:22.527546960 +0200
-@@ -66,15 +66,23 @@
-   LIST(APPEND _embree_LIBRARIES "${EMBREE_${UPPERCOMPONENT}_LIBRARY}")
- ENDFOREACH()
+--- blender/build_files/cmake/Modules/FindEmbree.cmake	2020-07-19 11:45:53.000000000 +0200
++++ blender.new/build_files/cmake/Modules/FindEmbree.cmake	2020-07-19 11:54:15.894215915 +0200
+@@ -72,7 +72,7 @@
  
-+FIND_LIBRARY(EMBREE_LIBRARY
-+  NAMES
+ FIND_LIBRARY(EMBREE_LIBRARY
+   NAMES
+-    libembree3
 +    embree3
-+  HINTS
-+    ${_embree_SEARCH_DIRS}
-+  PATH_SUFFIXES
-+    lib64 lib
-+)
- 
- # handle the QUIETLY and REQUIRED arguments and set EMBREE_FOUND to TRUE if
+   HINTS
+     ${_embree_SEARCH_DIRS}
+   PATH_SUFFIXES
+@@ -83,10 +83,10 @@
  # all listed variables are TRUE
  INCLUDE(FindPackageHandleStandardArgs)
  FIND_PACKAGE_HANDLE_STANDARD_ARGS(Embree DEFAULT_MSG
@@ -29,7 +25,7 @@ diff -aur blender/build_files/cmake/Modules/FindEmbree.cmake blender.new/build_f
  
 diff -aur blender/intern/cycles/blender/CMakeLists.txt blender.new/intern/cycles/blender/CMakeLists.txt
 --- blender/intern/cycles/blender/CMakeLists.txt	2020-07-06 18:31:37.000000000 +0200
-+++ blender.new/intern/cycles/blender/CMakeLists.txt	2020-08-09 11:44:36.063166943 +0200
++++ blender.new/intern/cycles/blender/CMakeLists.txt	2020-07-19 11:52:05.931671702 +0200
 @@ -67,6 +67,12 @@
    )
  endif()
