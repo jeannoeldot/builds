@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.13.20200801
-pkgrel=1
+pkgrel=2
 _name_release="OpenShadingLanguage-Release-1.10.13"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')

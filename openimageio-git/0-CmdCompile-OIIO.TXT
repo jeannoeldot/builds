@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.1.18.1.20200801
+pkgrel=2    # rebuild MAJ openvdb 7.1.0 et openexr 2.5.3
 pkgrel=1
 
 pkgrel=3    # rebuild MAJ opencv 4.4.0

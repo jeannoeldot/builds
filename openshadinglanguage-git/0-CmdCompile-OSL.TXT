@@ -44,6 +44,8 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.10.13.tar.gz 
 
 pkgname=openshadinglanguage-git
 pkgver=1.10.13.20200801
+pkgrel=2    # Rebuild OIIO + MAJ openvdb 7.1.0 et openexr 2.5.3
+
 pkgrel=1
 
 pkgrel=3    # Rebuild OIIO + opencv 4.4.0
