@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.91.0.20200809
+!!! VERSION = 2.91.0.20200819
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.91.0.20200809.tar.gz /tmp/srcp/
+cp -v blender-git-2.91.0.20200819.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.91.0.20200809.tar.gz
+tar -xzf blender-git-2.91.0.20200819.tar.gz
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
@@ -44,7 +44,7 @@ cd ../../../..
 cd blender.new/build_files/cmake/Modules
 kwrite FindEmbree.cmake
 
-AJOUTER LIGNES 69 A 77:
+AJOUTER LIGNES 65 A 73:
 FIND_LIBRARY(EMBREE_LIBRARY
   NAMES
     embree3
@@ -55,12 +55,12 @@ FIND_LIBRARY(EMBREE_LIBRARY
 )
 
 
-MODIFIER LIGNE 82:
+MODIFIER LIGNE 79:
     _embree_LIBRARIES EMBREE_INCLUDE_DIR)
 DEVIENT
     EMBREE_LIBRARY EMBREE_INCLUDE_DIR)
 
-MODIFIER LIGNE 85:
+MODIFIER LIGNE 82:
   SET(EMBREE_LIBRARIES ${_embree_LIBRARIES})
 DEVIENT
   SET(EMBREE_LIBRARIES ${EMBREE_LIBRARY})
