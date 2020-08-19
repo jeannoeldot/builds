@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git
-pkgver=7.1.0.20200813
-pkgrel=1
-_ver_release="7.1.0"
+pkgver=7.0.0.20191206
+pkgrel=4
+_ver_release="7.0.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
@@ -19,7 +19,7 @@ conflicts=('openvdb')
 provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
-sha256sums=('0c3588c1ca6e647610738654ec2c6aaf41a203fd797f609fbeab1c9f7c3dc116'
+sha256sums=('97bc8ae35ef7ccbf49a4e25cb73e8c2eccae6b235bac86f2150707efcd1e910d'
 )
 
 build() {
@@ -32,6 +32,7 @@ build() {
     -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
+    -DOPENVDB_BUILD_PYTHON_MODULE=OFF \
     -DOPENVDB_ENABLE_RPATH=OFF \
     -DUSE_EXR=ON \
     -DUSE_CCACHE=OFF \
