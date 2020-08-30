@@ -1,85 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.91.0.20200823
+!!! VERSION = 2.91.0.20200830
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.91.0.20200823.tar.gz /tmp/srcp/
+cp -v blender-git-2.91.0.20200830.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.91.0.20200823.tar.gz
-
-1) Embree : static libs --> dynamic libs
-1) https://github.com/bartoszek/AUR-blender-2.8-git
-1a) MODIFIER blender/intern/cycles/blender/CMakeLists.txt
-=========================================================
-/!\ /!\ /!\ cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/intern/cycles/blender
-kwrite CMakeLists.txt
-
-AJOUTER LIGNES 70 A 75:
-if(WITH_CYCLES_EMBREE)
-  list(APPEND LIB
-    ${EMBREE_LIBRARIES}
-  )
-endif()
-
- 
-ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
-rm -f CMakeLists.txt~
-
-cd ../../../..
-
-1b) MODIFIER blender/build_files/cmake/Modules/FindEmbree.cmake
-===============================================================
-
-cd blender.new/build_files/cmake/Modules
-kwrite FindEmbree.cmake
-
-AJOUTER LIGNES 65 A 73:
-FIND_LIBRARY(EMBREE_LIBRARY
-  NAMES
-    embree3
-  HINTS
-    ${_embree_SEARCH_DIRS}
-  PATH_SUFFIXES
-    lib64 lib
-)
-
-
-MODIFIER LIGNE 79:
-    _embree_LIBRARIES EMBREE_INCLUDE_DIR)
-DEVIENT
-    EMBREE_LIBRARY EMBREE_INCLUDE_DIR)
-
-MODIFIER LIGNE 82:
-  SET(EMBREE_LIBRARIES ${_embree_LIBRARIES})
-DEVIENT
-  SET(EMBREE_LIBRARIES ${EMBREE_LIBRARY})
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier FindEmbree.cmake~
-rm -f FindEmbree.cmake~
-
-cd ../../../..
-
-
-diff -aur blender blender.new
-diff -aur blender blender.new > Fix-Embree-staticlibs-dynamiclibs.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/Fix-Embree-staticlibs-dynamiclibs.patch .
+tar -xzf blender-git-2.91.0.20200830.tar.gz
 
 
 2) Cycles: Preliminary Cuda 11 build support
@@ -94,7 +27,7 @@ cp -R blender blender.new
 cd blender.new
 kwrite CMakeLists.txt
 
-MODIFIER LIGNE 372:
+MODIFIER LIGNE 378:
 set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 compute_75 CACHE STRING "CUDA architectures to build binaries for")
 DEVIENT
 set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 sm_80 compute_80 CACHE STRING "CUDA architectures to build binaries for")
@@ -111,7 +44,7 @@ cd ..
 cd blender.new/build_files/cmake/config
 kwrite blender_release.cmake
 
-MODIFIER LIGNE 57:
+MODIFIER LIGNE 58:
 set(CYCLES_CUDA_BINARIES_ARCH sm_30;sm_35;sm_37;sm_50;sm_52;sm_60;sm_61;sm_70;sm_75;compute_75 CACHE STRING "" FORCE)
 DEVIENT
 set(CYCLES_CUDA_BINARIES_ARCH sm_30;sm_35;sm_37;sm_50;sm_52;sm_60;sm_61;sm_70;sm_75;sm_80;compute_80 CACHE STRING "" FORCE)
@@ -215,6 +148,73 @@ sync
 =================================================================
 ANCIENS
 ========
+
+1) Embree : static libs --> dynamic libs
+1) https://github.com/bartoszek/AUR-blender-2.8-git
+1a) MODIFIER blender/intern/cycles/blender/CMakeLists.txt
+=========================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/intern/cycles/blender
+kwrite CMakeLists.txt
+
+AJOUTER LIGNES 70 A 75:
+if(WITH_CYCLES_EMBREE)
+  list(APPEND LIB
+    ${EMBREE_LIBRARIES}
+  )
+endif()
+
+ 
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../../..
+
+1b) MODIFIER blender/build_files/cmake/Modules/FindEmbree.cmake
+===============================================================
+
+cd blender.new/build_files/cmake/Modules
+kwrite FindEmbree.cmake
+
+AJOUTER LIGNES 65 A 73:
+FIND_LIBRARY(EMBREE_LIBRARY
+  NAMES
+    embree3
+  HINTS
+    ${_embree_SEARCH_DIRS}
+  PATH_SUFFIXES
+    lib64 lib
+)
+
+
+MODIFIER LIGNE 79:
+    _embree_LIBRARIES EMBREE_INCLUDE_DIR)
+DEVIENT
+    EMBREE_LIBRARY EMBREE_INCLUDE_DIR)
+
+MODIFIER LIGNE 82:
+  SET(EMBREE_LIBRARIES ${_embree_LIBRARIES})
+DEVIENT
+  SET(EMBREE_LIBRARIES ${EMBREE_LIBRARY})
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindEmbree.cmake~
+rm -f FindEmbree.cmake~
+
+cd ../../../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-Embree-staticlibs-dynamiclibs.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Fix-Embree-staticlibs-dynamiclibs.patch .
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
