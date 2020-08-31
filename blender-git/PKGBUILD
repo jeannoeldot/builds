@@ -33,12 +33,10 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
-        "Fix-Embree-staticlibs-dynamiclibs.patch"
         "D8063-cuda11.patch"
         "OptiX-7.0.0-include.zip"
 )
 sha256sums=('eb5249bf4bb2cf001d77ad8b928d2172043d7fe313075ebb0cda3e2ab4dcf972'
-            'd46a0e6fe40cc61848287d52f6491cfa0b53ee195cd09c8654793d8243f366cd'
             '2c572b00a3055dafaaeb502340031457f43bbcaddd9b74330dff0586b069dd21'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
 )
@@ -48,10 +46,6 @@ _slot="2.91"
 
 prepare() {
   cd "${_gitname}"
-#  # Embree : static libs --> dynamic libs
-#  # https://github.com/bartoszek/AUR-blender-2.8-git
-#  patch -Np1 -i "${srcdir}/Fix-Embree-staticlibs-dynamiclibs.patch"
-
   # Cycles: Preliminary Cuda 11 build support
   # https://developer.blender.org/D8063
   patch -Np1 -i "${srcdir}/D8063-cuda11.patch"
