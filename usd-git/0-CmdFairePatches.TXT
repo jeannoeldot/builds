@@ -26,6 +26,119 @@ tar -xzf USD-v20.05.tar.gz
 
 !!! VOIR
 
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob/b351607996e467f89ce841630a84244fab6fe3f5:/build_files/build_environment/patches/usd.diff
+kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+!!!
+kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+
+
+1) MODIFIER USD-20.05/cmake/defaults/Packages.cmake
+===================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+/!\ /!\ /!\ cd $HOME/99-temp/usd/
+
+cp -R USD-20.05 USD-20.05.new
+
+cd USD-20.05.new/cmake/defaults
+kwrite Packages.cmake
+
+MODIFIER LIGNE 112 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+2) MODIFIER USD-20.05/cmake/macros/Public.cmake
+===============================================
+
+cd USD-20.05.new/cmake/macros
+kwrite Public.cmake
+
+AJOUTER LIGNES 1038 À 1043
+        # When building for blender, we do NOT want to export all symbols on windows.
+        # This is a dirty hack, but USD makes it impossible to do the right thing
+        # with the default options exposed.
+        if (WIN32)
+            list(APPEND exports "PXR_STATIC=1")
+        endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Public.cmake~
+rm -f Public.cmake~
+
+cd ../../..
+
+3) MODIFIER USD-20.05/pxr/base/arch/align.h
+===========================================
+
+cd USD-20.05.new/pxr/base/arch
+kwrite align.h
+
+REMPLACER LIGNE 80 :
+#define ARCH_CACHE_LINE_SIZE 64
+
+PAR :
+#if defined(ARCH_OS_DARWIN) && defined(ARCH_CPU_ARM)
+#define ARCH_CACHE_LINE_SIZE 128
+#else
+#define ARCH_CACHE_LINE_SIZE 64
+#endif
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier align.h~
+rm -f align.h~
+
+cd ../../../..
+
+4) MODIFIER USD-20.05/pxr/base/arch/math.h
+===========================================
+
+cd USD-20.05.new/pxr/base/arch
+kwrite math.h
+
+REMPLACER LIGNE 45 :
+#if defined (ARCH_CPU_INTEL) || defined(doxygen)
+
+PAR :
+#if defined (ARCH_CPU_INTEL) || defined(ARCH_CPU_ARM) || defined(doxygen)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier math.h~
+rm -f math.h~
+
+cd ../../../..
+
+
+diff -aur USD-20.05 USD-20.05.new
+diff -aur USD-20.05 USD-20.05.new > blender-usd-diff.patch
+
+rm -rf USD-20.05.new
+
+cd $HOME/05-builds/usd-git
+
+mv -vf /tmp/srcp/blender-usd-diff.patch .
+OU
+mv -vf $HOME/99-temp/usd/blender-usd-diff.patch .
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+OU
+rm -rf $HOME/99-temp/usd
+
+sync
+
+=================================================================
+ANCIENS
+========
+!!! VOIR
+
 https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/71363dd79c49e0ebd656d5eb61ae5ccb62ece499..334e5005f4361f3beaaca155d1f68002b01455cb:/build_files/build_environment/patches/usd.diff
 kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
 
@@ -149,29 +262,6 @@ rm -f Public.cmake~
 cd ../../..
 
 
-diff -aur USD-20.05 USD-20.05.new
-diff -aur USD-20.05 USD-20.05.new > blender-usd-diff.patch
-
-rm -rf USD-20.05.new
-
-cd $HOME/05-builds/usd-git
-
-mv -vf /tmp/srcp/blender-usd-diff.patch .
-OU
-mv -vf $HOME/99-temp/usd/blender-usd-diff.patch .
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-OU
-rm -rf $HOME/99-temp/usd
-
-sync
-
-=================================================================
-ANCIENS
-========
 https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/cfff8aa0671b6860aefda4918190535494e37f05kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
 
 /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff

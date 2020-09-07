@@ -2,7 +2,7 @@
 
 pkgname=usd-git
 pkgver=20.05.20200414
-pkgrel=2
+pkgrel=3
 _ver_release="20.05"
 _name_release="USD-${_ver_release}"
 pkgdesc="Universal Scene Description"
@@ -19,7 +19,7 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd-diff.patch"
 )
 sha256sums=('622403872f530fe7d9d291dc8a98132c5bc979f64b82b834718d4e26aacfb9fd'
-            'db24d6aa9362222a6959bd9e0c05284ffd05a42e38fb7d53ecec7a11ad5dfe67'
+            '465038315327b375004f1ee8c9d24db9294a216a90da28341b190980aad3d784'
 )
 
 prepare() {
