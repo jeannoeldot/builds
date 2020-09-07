@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.91.0.20200830
+!!! VERSION = 2.91.0.20200907
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.91.0.20200830.tar.gz /tmp/srcp/
+cp -v blender-git-2.91.0.20200907.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.91.0.20200830.tar.gz
+tar -xzf blender-git-2.91.0.20200907.tar.gz
 
 
 2) Cycles: Preliminary Cuda 11 build support
@@ -60,7 +60,7 @@ cd ../../../..
 cd blender.new/intern/cycles
 kwrite CMakeLists.txt
 
-MODIFIER LIGNE 317:
+MODIFIER LIGNE 347:
     elseif(${CUDA_VERSION} LESS "11.0")
 DEVIENT
     elseif(${CUDA_VERSION} LESS "12.0")
@@ -77,27 +77,27 @@ cd ../../..
 cd blender.new/intern/cycles/kernel
 kwrite CMakeLists.txt
 
-AJOUTER LIGNES 476 ET 477:
+AJOUTER LIGNES 490 ET 491:
     elseif(${arch} MATCHES "sm_30" AND ${CUDA_VERSION} GREATER 109)
       message(STATUS "CUDA binaries for ${arch} are no longer supported, skipped.")
 
-AJOUTER LIGNES 480 ET 481:
+AJOUTER LIGNES 494 ET 495:
     elseif(${arch} MATCHES "sm_8." AND ${CUDA_VERSION} LESS 110)
       message(STATUS "CUDA binaries for ${arch} require CUDA 11.0+, skipped.")
 
-AJOUTER LIGNES 520 À 524:
+AJOUTER LIGNES 534 À 538:
     set(OPTIX_TARGET 30)
     if(${CUDA_VERSION} GREATER 109) #cuda 11
       set(OPTIX_TARGET 52)
     endif()
 
 
-MODIFIER LIGNE 551:
+MODIFIER LIGNE 565:
             -target 50
 DEVIENT
             -target ${OPTIX_TARGET}
 
-MODIFIER LIGNE 575:
+MODIFIER LIGNE 589:
           -arch=sm_50
 DEVIENT
           -arch=sm_${OPTIX_TARGET}
