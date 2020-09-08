@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.2.6.1.20200830
-pkgrel=1
-_name_release="oiio-Release-2.2.6.1"
+pkgver=2.1.18.1.20200801
+pkgrel=2
+_name_release="oiio-Release-2.1.18.1"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -19,14 +19,14 @@ depends=('openexr' 'boost-libs' 'libtiff' 'opencolorio' 'tbb'
          'openvdb-git'
 )
 makedepends=('cmake' 'boost' 'mesa' 'fmt'
-             'robin-map'
+             'robin-map-git'
              'pybind11' 'python-numpy'
 )
 conflicts=('openimageio')
 provides=('openimageio')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('adc245c9b2fa2bce1dd2decbdd1d03974e1e9818219d267d1da3dd1bd91216df'
+sha256sums=('e2cf54f5b28e18fc88e76e1703f2e39bf144c88378334527e4a1246974659a85'
 )
 
 build() {
@@ -43,7 +43,6 @@ build() {
       -DVERBOSE=ON \
       -DOIIO_BUILD_TESTS=OFF \
       -DINSTALL_FONTS=OFF \
-      -DSTOP_ON_WARNING=OFF \
       -DUSE_CCACHE=OFF \
       -DUSE_SIMD=avx2 \
       -DPYTHON_VERSION=3.8 \
@@ -58,5 +57,5 @@ package() {
 
   # license
   install -Dm644 ../LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
-  install -Dm644 ../THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/THIRD-PARTY
+  install -Dm644 ../LICENSE-THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE-THIRD-PARTY
 }
