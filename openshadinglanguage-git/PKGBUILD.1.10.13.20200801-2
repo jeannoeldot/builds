@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.11.7.3.20200901
-pkgrel=1
-_name_release="OpenShadingLanguage-Release-1.11.7.3"
+pkgver=1.10.13.20200801
+pkgrel=2
+_name_release="OpenShadingLanguage-Release-1.10.13"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -13,15 +13,13 @@ depends=('boost-libs' 'openexr' 'tbb' 'freetype2' 'libpng' 'libtiff'
          'openimageio-git'
          'llvm-libs'
          'qt5-base'
-         'clang'
-         'pugixml' 'pybind11'
 )
-makedepends=('boost' 'cmake' 'llvm' 'python')
+makedepends=('boost' 'cmake' 'llvm' 'clang' 'python')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('6ecc451f2b9b0301548d53f6a6c5425c5db8c4fa26d61479daba37e7183c8df5'
+sha256sums=('c716b0743a9eec706f69c80dc55d2fcedbb53062dd6a1313f3822665b2ab9f5f'
 )
 
 build() {
@@ -40,7 +38,9 @@ build() {
       -DVERBOSE=ON \
       -DOSL_BUILD_TESTS=OFF \
       -DUSE_LLVM_BITCODE=OFF \
+      -DUSE_PARTIO=OFF \
       -DUSE_SIMD=avx2 \
+      -DSTOP_ON_WARNING=OFF \
       -DUSE_CCACHE=OFF \
     ..
   make
@@ -52,9 +52,12 @@ package() {
   make DESTDIR="${pkgdir}" install
 
   # license
-  install -Dm644 ../LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  install -Dm644 "${pkgdir}"/usr/share/doc/OSL/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
 
   # shaders
+  mkdir "${pkgdir}"/usr/share/OSL
+  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+  
   # Ugly hacks /usr/share/OSL/shaders/*.oso
   for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/*.oso -type f)
   do
