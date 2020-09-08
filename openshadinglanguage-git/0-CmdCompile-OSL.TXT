@@ -130,7 +130,7 @@ mkdir /tmp/srcp
 
 tar -xzf OpenShadingLanguage-Release-1.11.7.3.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.11.7.3/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.11.7.3/CMakeLists.txt &
 
 LIGNE 21
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
@@ -149,12 +149,6 @@ LIGNE 74
   !!! A VOIR
   OSL_BUILD_PLUGINS ON
 
-  !!! A VOIR
-https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/02f44049a8c978186e557ce56b3a02662525d15b
-Fix make deps OSL build on some systems with Qt libraries
-LIGNE 100
-  USE_QT "Include Qt support" ON  Blender ==> -DUSE_QT=OFF \
-
 LIGNE 77
   USE_OPTIX OFF
 
@@ -166,7 +160,16 @@ LIGNE 89
   !!! A VOIR
   OSL_NO_DEFAULT_TEXTURESYSTEM OFF
 
-2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.11.7.3/src/cmake/compiler.cmake
+  !!! A VOIR
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/02f44049a8c978186e557ce56b3a02662525d15b
+Fix make deps OSL build on some systems with Qt libraries
+LIGNE 173
+  USE_QT "Include Qt support" ON  Blender ==> -DUSE_QT=OFF \
+
+LIGNE 184
+INSTALL_DOCS "Install documentation" ON
+
+2) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.11.7.3/src/cmake/compiler.cmake &
 
 LIGNE 30
       -DCMAKE_CXX_STANDARD=14 \
@@ -187,12 +190,16 @@ LIGNE 257
   !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
   USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
   
-3) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.11.7.3/src/cmake/modules/FindLLVM.cmake
+3) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.11.7.3/src/cmake/modules/FindLLVM.cmake &
 
 !!! LLVM 10.0
 ------------------------------------
 LIGNE 120 ET ...
   LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
+
+4) kwrite /tmp/srcp/OpenShadingLanguage-Release-1.11.7.3/src/liboslexec/CMakeLists.txt &
+LIGNE 187/189
+  USE_PARTIO=1
 
 
 rm -rf /tmp/srcp
