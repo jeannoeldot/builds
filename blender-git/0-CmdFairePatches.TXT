@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.91.0.20200907
+!!! VERSION = 2.91.0.20200912
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.91.0.20200907.tar.gz /tmp/srcp/
+cp -v blender-git-2.91.0.20200912.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.91.0.20200907.tar.gz
+tar -xzf blender-git-2.91.0.20200912.tar.gz
 
 
 2) Cycles: Preliminary Cuda 11 build support
@@ -27,7 +27,7 @@ cp -R blender blender.new
 cd blender.new
 kwrite CMakeLists.txt
 
-MODIFIER LIGNE 378:
+MODIFIER LIGNE 380:
 set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 compute_75 CACHE STRING "CUDA architectures to build binaries for")
 DEVIENT
 set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 sm_80 compute_80 CACHE STRING "CUDA architectures to build binaries for")
