@@ -22,33 +22,6 @@ diff -aur blender/CMakeLists.txt blender.new/CMakeLists.txt
  mark_as_advanced(CYCLES_CUDA_BINARIES_ARCH)
  unset(PLATFORM_DEFAULT)
  option(WITH_CYCLES_LOGGING  "Build Cycles with logging support" ON)
-@@ -546,14 +546,14 @@
-         [HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\LLVM\\LLVM;]/lib/clang/6.0.0/lib/windows
-       )
-     elseif(APPLE)
--      execute_process(COMMAND ${CMAKE_CXX_COMPILER} 
--        -print-file-name=lib 
-+      execute_process(COMMAND ${CMAKE_CXX_COMPILER}
-+        -print-file-name=lib
-         OUTPUT_VARIABLE CLANG_LIB_DIR
-       )
-       string(STRIP "${CLANG_LIB_DIR}" CLANG_LIB_DIR)
-       find_library(
-         COMPILER_ASAN_LIBRARY NAMES libclang_rt.asan_osx_dynamic.dylib
--        PATHS 
-+        PATHS
-         "${CLANG_LIB_DIR}/darwin/"
-       )
-       unset(CLANG_LIB_DIR)
-@@ -1610,7 +1610,7 @@
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
-   # Make MSVC properly report the value of the __cplusplus preprocessor macro
-   # Available MSVC 15.7 (1914) and up, without this it reports 199711L regardless
--  # of the C++ standard chosen above 
-+  # of the C++ standard chosen above
-   if(MSVC_VERSION GREATER 1913)
-     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus")
-   endif()
 diff -aur blender/intern/cycles/CMakeLists.txt blender.new/intern/cycles/CMakeLists.txt
 --- blender/intern/cycles/CMakeLists.txt	2020-09-07 11:41:45.000000000 +0200
 +++ blender.new/intern/cycles/CMakeLists.txt	2020-09-12 11:51:37.113008070 +0200
