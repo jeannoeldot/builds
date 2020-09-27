@@ -1,6 +1,6 @@
 diff -aur blender/build_files/cmake/config/blender_release.cmake blender.new/build_files/cmake/config/blender_release.cmake
---- blender/build_files/cmake/config/blender_release.cmake	2020-09-27 11:25:14.000000000 +0200
-+++ blender.new/build_files/cmake/config/blender_release.cmake	2020-09-27 11:32:11.170092082 +0200
+--- blender/build_files/cmake/config/blender_release.cmake	2020-09-07 11:41:45.000000000 +0200
++++ blender.new/build_files/cmake/config/blender_release.cmake	2020-09-12 11:50:48.186706237 +0200
 @@ -55,7 +55,7 @@
  set(WITH_MEM_JEMALLOC          ON  CACHE BOOL "" FORCE)
  set(WITH_CYCLES_CUDA_BINARIES  ON  CACHE BOOL "" FORCE)
@@ -11,9 +11,9 @@ diff -aur blender/build_files/cmake/config/blender_release.cmake blender.new/bui
  
  # platform dependent options
 diff -aur blender/CMakeLists.txt blender.new/CMakeLists.txt
---- blender/CMakeLists.txt	2020-09-27 11:25:14.000000000 +0200
-+++ blender.new/CMakeLists.txt	2020-09-27 11:31:12.044256958 +0200
-@@ -376,7 +376,7 @@
+--- blender/CMakeLists.txt	2020-09-12 11:44:24.000000000 +0200
++++ blender.new/CMakeLists.txt	2020-09-12 11:49:12.744099307 +0200
+@@ -377,7 +377,7 @@
  option(WITH_CYCLES_CUBIN_COMPILER   "Build cubins with nvrtc based compiler instead of nvcc" OFF)
  option(WITH_CYCLES_CUDA_BUILD_SERIAL "Build cubins one after another (useful on machines with limited RAM)" OFF)
  mark_as_advanced(WITH_CYCLES_CUDA_BUILD_SERIAL)
@@ -23,8 +23,8 @@ diff -aur blender/CMakeLists.txt blender.new/CMakeLists.txt
  unset(PLATFORM_DEFAULT)
  option(WITH_CYCLES_LOGGING  "Build Cycles with logging support" ON)
 diff -aur blender/intern/cycles/CMakeLists.txt blender.new/intern/cycles/CMakeLists.txt
---- blender/intern/cycles/CMakeLists.txt	2020-09-27 11:25:14.000000000 +0200
-+++ blender.new/intern/cycles/CMakeLists.txt	2020-09-27 11:32:45.793005890 +0200
+--- blender/intern/cycles/CMakeLists.txt	2020-09-07 11:41:45.000000000 +0200
++++ blender.new/intern/cycles/CMakeLists.txt	2020-09-12 11:51:37.113008070 +0200
 @@ -344,7 +344,7 @@
        set(MAX_MSVC 1910)
      elseif(${CUDA_VERSION} EQUAL "9.1")
@@ -36,7 +36,7 @@ diff -aur blender/intern/cycles/CMakeLists.txt blender.new/intern/cycles/CMakeLi
      if(NOT MSVC_VERSION LESS ${MAX_MSVC} OR CMAKE_C_COMPILER_ID MATCHES "Clang")
 diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/kernel/CMakeLists.txt
 --- blender/intern/cycles/kernel/CMakeLists.txt	2020-09-07 11:41:45.000000000 +0200
-+++ blender.new/intern/cycles/kernel/CMakeLists.txt	2020-09-27 11:35:06.711636263 +0200
++++ blender.new/intern/cycles/kernel/CMakeLists.txt	2020-09-12 11:54:06.778584548 +0200
 @@ -487,8 +487,12 @@
    foreach(arch ${CYCLES_CUDA_BINARIES_ARCH})
      if(${arch} MATCHES "sm_2.")
@@ -50,7 +50,7 @@ diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/
      else()
        # Compile regular kernel
        CYCLES_CUDA_KERNEL_ADD(${arch} ${prev_arch} filter "" "${cuda_filter_sources}" FALSE)
-@@ -527,6 +531,10 @@
+@@ -527,6 +531,11 @@
        set(cuda_flags ${cuda_flags}
          -D __KERNEL_DEBUG__)
      endif()
@@ -58,10 +58,11 @@ diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/
 +    if(${CUDA_VERSION} GREATER 109) #cuda 11
 +      set(OPTIX_TARGET 52)
 +    endif()
++
      if(WITH_CYCLES_CUBIN_COMPILER)
  
        # Needed to find libnvrtc-builtins.so. Can't do it from inside
-@@ -553,7 +561,7 @@
+@@ -553,7 +562,7 @@
            ${SRC_UTIL_HEADERS}
          COMMAND ${CUBIN_CC_ENV}
              "$<TARGET_FILE:cycles_cubin_cc>"
@@ -70,7 +71,7 @@ diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/
              -ptx
              -i ${CMAKE_CURRENT_SOURCE_DIR}/${input}
              ${cuda_flags}
-@@ -577,7 +585,7 @@
+@@ -577,7 +586,7 @@
          COMMAND
            ${CUDA_NVCC_EXECUTABLE}
            --ptx
@@ -81,7 +82,7 @@ diff -aur blender/intern/cycles/kernel/CMakeLists.txt blender.new/intern/cycles/
          WORKING_DIRECTORY
 diff -aur blender/intern/cycles/kernel/kernels/cuda/kernel_config.h blender.new/intern/cycles/kernel/kernels/cuda/kernel_config.h
 --- blender/intern/cycles/kernel/kernels/cuda/kernel_config.h	2019-05-05 10:06:17.000000000 +0200
-+++ blender.new/intern/cycles/kernel/kernels/cuda/kernel_config.h	2020-09-27 11:35:46.711304173 +0200
++++ blender.new/intern/cycles/kernel/kernels/cuda/kernel_config.h	2020-09-12 11:54:58.168217949 +0200
 @@ -70,8 +70,8 @@
  #  endif
  #  define CUDA_KERNEL_BRANCHED_MAX_REGISTERS 63

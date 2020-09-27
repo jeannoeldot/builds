@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.91.0.5.20200926
+pkgver=2.91.0.20200913
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -20,7 +20,6 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opencolorio'
           'python-numpy' 'python-requests'
           'llvm-libs'
-          'potrace' 'pugixml'
           'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
           'embree-git' 'openimagedenoise-git' 'usd-git'
@@ -37,8 +36,8 @@ source=("$pkgname-$pkgver.tar.gz"
         "D8063-cuda11.patch"
         "OptiX-7.0.0-include.zip"
 )
-sha256sums=('c9d8bbbcd30644f282222cc69cc30fed995e5525e1cc441dbb7a67b1c11491f3'
-            'ab37514704a67b8d18e26034f6b13bf9cc101e676876a571c40fdbe1dbdf68ed'
+sha256sums=('a5af29864506ad7d1e8c59d8d343379c536c2ae415d36adcb3d57fa125f052b5'
+            '32ef2ad781e1a2092eab238e98f5c9f2c5d9ff83e016321cb06be152f96c56e8'
             '2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74'
 )
 
@@ -56,9 +55,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "8c81b3fb8b9c"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f5ccf8727f30"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1601150685|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1599988537|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -75,6 +74,7 @@ build() {
         -DCMAKE_SKIP_RPATH=ON \
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
+        -DWITH_GMP=ON \
         -DWITH_JACK=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \
