@@ -1,0 +1,212 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/ispc-git
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/ispc/ispc/releases
+==> dbabokin released this on 29 Aug  ==> 20200829
+==> ispc v1.14.1  ==> 1.14.1
+==> 1.14.1.20200829
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget https://github.com/ispc/ispc/archive/v1.14.1/ispc-1.14.1.tar.gz
+
+wget -O ispc-1.14.1.tar.gz \
+https://github.com/ispc/ispc/archive/v1.14.1.tar.gz
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/ispc-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/ispc-1.14.1.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=ispc-git
+pkgver=1.14.1.20200829
+pkgrel=1
+
+!!!!!!
+_ver_release="1.14.1"
+_name_release="ispc-${_ver_release}"
+
+license=('BSD')
+
+depends=('ncurses' 'zlib' 'llvm-libs' 'clang')
+)
+
+makedepends=('llvm' 'python' 'lib32-glibc' 'cmake'
+)
+
+conflicts=('ispc')
+provides=('ispc')
+
+AVEC PATCH
+----------
+sha256sum ispc-1.14.1.tar.gz
+sha256sum ispc-libclang-cpp.patch
+
+source=("ispc-${_ver_release}.tar.gz"
+        "ispc-libclang-cpp.patch"
+)
+sha256sums=('... ...'
+'... ...'
+)
+
+prepare() {
+  cd "${_name_release}"
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}/build"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf ispc-1.14.1.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/ispc-1.14.1/CMakeLists.txt
+
+LIGNES 52 ET ...
+ARM_ENABLED             ON  =>  OFF
+
+ISPC_INCLUDE_EXAMPLES   ON  =>  OFF
+ISPC_INCLUDE_TESTS      ON  =>  OFF
+
+ISPC_INCLUDE_UTILS      ON
+
+ISPC_NO_DUMPS           OFF  =>  ON
+
+LIGNE 157
+CMAKE_BUILD_TYPE "Release"
+
+rm -rf /tmp/srcp
+
+  
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 19454189 29 sept. 15:17 ispc-1.14.1.tar.gz
+-rw-r--r--  1 jnd users      603 29 sept. 15:57 ispc-libclang-cpp.patch
+-rw-r--r--  1 jnd users     1423 29 sept. 16:01 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/ispc-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/ispc-git/ispc-1.14.1.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/ispc-git \
+&& cp -v /tmp/build/ispc-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/ispc-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+==> WARNING: Package contains reference to $srcdir
+usr/bin/ispc
+
+namcap ispc-git-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/ispc-git-*-x86_64.pkg.tar.*
+
+$ cp -v ispc-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/ispc-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v ispc-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i ispc-1.14.1.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# pacman -Syu
+
+# pacman -Syu ispc-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -Rdd ispc-git
+# rm /var/cache/pacman/pkg/ispc-git-*
+# pacman -S ispc-git
+
+
+ANCIEN
+======

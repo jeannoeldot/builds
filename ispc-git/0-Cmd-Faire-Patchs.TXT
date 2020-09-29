@@ -1,0 +1,57 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.14.1
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/ispc-git
+
+mkdir /tmp/srcp
+
+cp -v ispc-1.14.1.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf ispc-1.14.1.tar.gz
+
+1) MODIFIER ispc-1.14.1/CMakeLists.txt
+======================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R ispc-1.14.1 ispc-1.14.1.new
+
+cd ispc-1.14.1.new/
+kwrite CMakeLists.txt
+
+MODIFIER LIGNE 232 :
+set(CLANG_LIBRARY_LIST clangFrontend clangDriver clangSerialization clangParse clangSema clangAnalysis clangAST clangBasic clangEdit clangLex)
+
+DEVIENT
+set(CLANG_LIBRARY_LIST clang-cpp)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+ 
+
+cd ..
+
+diff -aur ispc-1.14.1 ispc-1.14.1.new
+diff -aur ispc-1.14.1 ispc-1.14.1.new > ispc-libclang-cpp.patch
+
+rm -rf ispc-1.14.1.new
+
+cd $HOME/05-builds/ispc-git
+
+mv -vf /tmp/srcp/ispc-libclang-cpp.patch .
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+==========================================================
+

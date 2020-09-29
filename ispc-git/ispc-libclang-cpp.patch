@@ -1,0 +1,12 @@
+diff -aur ispc-1.14.1/CMakeLists.txt ispc-1.14.1.new/CMakeLists.txt
+--- ispc-1.14.1/CMakeLists.txt	2020-08-28 21:43:13.000000000 +0200
++++ ispc-1.14.1.new/CMakeLists.txt	2020-09-29 15:56:25.240179616 +0200
+@@ -229,7 +229,7 @@
+     list(APPEND ISPC_TARGETS wasm-i32x4)
+ endif()
+ 
+-set(CLANG_LIBRARY_LIST clangFrontend clangDriver clangSerialization clangParse clangSema clangAnalysis clangAST clangBasic clangEdit clangLex)
++set(CLANG_LIBRARY_LIST clang-cpp)
+ set(LLVM_COMPONENTS engine ipo bitreader bitwriter instrumentation linker option)
+ 
+ if (${LLVM_VERSION_NUMBER} VERSION_GREATER_EQUAL "10.0.0")

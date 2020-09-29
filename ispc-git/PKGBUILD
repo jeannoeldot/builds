@@ -1,0 +1,58 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=ispc-git
+pkgver=1.14.1.20200829
+pkgrel=1
+_ver_release="1.14.1"
+_name_release="ispc-${_ver_release}"
+pkgdesc="A compiler for high-performance SIMD programming on the CPU"
+arch=(x86_64)
+url="https://ispc.github.io/"
+license=('BSD')
+depends=('ncurses' 'zlib' 'llvm-libs' 'clang'
+)
+makedepends=('llvm' 'python' 'lib32-glibc' 'cmake'
+)
+conflicts=('ispc')
+provides=('ispc')
+source=("ispc-${_ver_release}.tar.gz"
+        "ispc-libclang-cpp.patch"
+)
+sha256sums=('3a7ee9ab90b9e9932b7b4effc9bb3ef45ca271d60d9ec6bc8c335242b5ec097b'
+            '2b3248bb839623a6a5a5ef975ff19caa309249ed28f989325e55bc86e5ad476d'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # Build with unified libclang-cpp.so
+  patch -Np1 -i "${srcdir}/ispc-libclang-cpp.patch"
+  # Remove tests that requires DUMPS (https://github.com/ispc/ispc/issues/1752)
+  sed -i '/debug-phase/d' tests/lit-tests/arg_parsing_errors.ispc 
+}
+
+build() {
+  cd "${_name_release}"
+  
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DISPC_INCLUDE_EXAMPLES=OFF \
+    -DISPC_INCLUDE_TESTS=OFF \
+    -DISPC_NO_DUMPS=ON \
+    ..
+  make VERBOSE=1
+}
+
+#check() {
+#  make -C build check-all
+#}
+
+package() {
+  cd "${_name_release}/build"
+  
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 ../LICENSE.txt -t "${pkgdir}"/usr/share/licenses/${pkgname}
+}
