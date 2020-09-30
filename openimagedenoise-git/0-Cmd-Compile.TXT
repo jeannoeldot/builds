@@ -58,6 +58,11 @@ depends=('tbb'
 
 makedepends=('cmake' 'ispc' 'python'
 )
+!!!!! OIDN 1.2.3 need ispc 1.14.1
+!!!!! ispc community = 1.13.0
+makedepends=('cmake' 'python'
+             'ispc-git'
+ )
 
 conflicts='openimagedenoise' 'oidn'
 provides='openimagedenoise' 'oidn'
@@ -146,6 +151,10 @@ cd $HOME/05-builds/openimagedenoise-git && rm -rf /tmp/build
 !!! EN USER
 
 $ mkpkg-chroot-repo
+
+SI makedepends= 'ispc-git'
+==========================
+$ cp -v $HOME/00-repolocal/ispc-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
   FLOOP
 --------

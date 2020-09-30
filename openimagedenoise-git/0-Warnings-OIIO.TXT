@@ -1,0 +1,7 @@
+
+
+-- OpenImageIO not found in your environment. You can 1) install
+                              via your OS package manager, or 2) install it
+                              somewhere on your machine and point OPENIMAGEIO_ROOT to it. (missing: OPENIMAGEIO_INCLUDE_DIR OPENIMAGEIO_LIBRARY) 
+-- Configuring done
+-- Generating done

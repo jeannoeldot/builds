@@ -11,7 +11,8 @@ arch=('x86_64')
 license=('Apache')
 depends=('tbb'
 )
-makedepends=('cmake' 'ispc' 'python'
+makedepends=('cmake' 'python'
+             'ispc-git'
 )
 conflicts=('openimagedenoise' 'oidn')
 provides=('openimagedenoise' 'oidn')
