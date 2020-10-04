@@ -5,3 +5,27 @@
                               somewhere on your machine and point OPENIMAGEIO_ROOT to it. (missing: OPENIMAGEIO_INCLUDE_DIR OPENIMAGEIO_LIBRARY) 
 -- Configuring done
 -- Generating done
+
+
+
+jnd ( ~ )
+└─> $ grep -lR "openimageio" /tmp/oidn/oidn-1.2.3/
+/tmp/oidn/oidn-1.2.3/README.md
+/tmp/oidn/oidn-1.2.3/doc/training.md
+/tmp/oidn/oidn-1.2.3/doc/compilation.md
+
+┌jnd ( ~ )
+└─> $ grep -lR "OpenImageIO" /tmp/oidn/oidn-1.2.3/
+/tmp/oidn/oidn-1.2.3/training/image.py
+/tmp/oidn/oidn-1.2.3/training/split_exr.py
+/tmp/oidn/oidn-1.2.3/cmake/FindOpenImageIO.cmake
+/tmp/oidn/oidn-1.2.3/apps/utils/image_io.cpp
+/tmp/oidn/oidn-1.2.3/apps/utils/CMakeLists.txt
+
+/tmp/oidn/oidn-1.2.3/README.md
+/tmp/oidn/oidn-1.2.3/CHANGELOG.md
+
+/tmp/oidn/oidn-1.2.3/doc/training.md
+/tmp/oidn/oidn-1.2.3/doc/examples.md
+/tmp/oidn/oidn-1.2.3/doc/compilation.md
+

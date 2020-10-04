@@ -3,8 +3,8 @@
 !!! EN USER
 cd $HOME/05-builds/blender-git
 
-0) OPTIX
-=========
+0) OPTIX 7.0.0
+==============
 https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/PKGBUILD
 ==> https://developer.download.nvidia.com/redist/optix/v7.0/OptiX-7.0.0-include.zip
 ==> b2cff73def3757d4259f4b4d318a8ccfe166bf7c215cbb2124f1c81bd6e742f96207285b24eb4d99b527b7b97dc6d5e8fdf2f16d78d5d1e2684c26d681328491
@@ -18,6 +18,41 @@ b2cff73def3757d4259f4b4d318a8ccfe166bf7c215cbb2124f1c81bd6e742f96207285b24eb4d99
 
 sha256sum OptiX-7.0.0-include.zip
 2a26613f227453b133a0be70f10658562ed8e373e78536f15afc1dc8ef357a74
+
+0) OPTIX 7.1.0
+==============
+https://developer.nvidia.com/designworks/optix/download
+NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
+mkdir /tmp/optix
+
+TÉLÉCHARGER NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh  ==> ~/99-dwl-temp/
+RENDRE ÉXÉCUTABLE .sh
+
+cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh /tmp/optix/
+cd /tmp/optix
+./NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
+Do you accept the license? [yN]: y
+Saying no will install in: "/tmp/optix" [Yn]:Y
+
+DANS DOLDHIN, OUVRIR /tmp/optix/NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64/
+CLIC DROIT SUR include -> Compresser -> Ici (en ZIP) ==> include.zip (70.0 Kio)
+RENOMMER include.zip EN OptiX-7.1.0-include.zip
+
+cd NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64/
+mv -v OptiX-7.1.0-include.zip /0-DataLinux/05-builds-dir-git/
+cd ..
+mv -v NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
+
+cd ..
+rm -rf optix
+
+cd /0-DataLinux/05-builds-dir-git/
+
+sha512sum OptiX-7.1.0-include.zip
+e8c22441fefd867a3071061aabb751c7a3528d3e908402a7633730a5bdda34b9eb05672f08836054baae3bfb94f0523a0b2cac7231be6dabb627e44104a049ce
+
+sha256sum OptiX-7.1.0-include.zip
+c555b98471e48909abd5b8289412110c1572af99ad787fcf8ae35261e910690a
 
 cd
 
