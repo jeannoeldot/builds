@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.11.8.0.20201001
+pkgver=1.11.7.3.20200901
 pkgrel=1
-_name_release="OpenShadingLanguage-Release-1.11.8.0"
+_name_release="OpenShadingLanguage-Release-1.11.7.3"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/imageworks/OpenShadingLanguage"
@@ -21,7 +21,7 @@ conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
 )
-sha256sums=('bdda3089ea2071f19d8103c68c24d9924a98fc2f5f89512ff5a9c2c3e22a98b2'
+sha256sums=('6ecc451f2b9b0301548d53f6a6c5425c5db8c4fa26d61479daba37e7183c8df5'
 )
 
 build() {
