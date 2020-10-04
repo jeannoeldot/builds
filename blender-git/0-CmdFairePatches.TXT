@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.91.0.5.20200926
+!!! VERSION = 2.91.0.7.20201004
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.91.0.5.20200926.tar.gz /tmp/srcp/
+cp -v blender-git-2.91.0.7.20201004.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.91.0.5.20200926.tar.gz
+tar -xzf blender-git-2.91.0.7.20201004.tar.gz
 
 
 2) Cycles: Preliminary Cuda 11 build support
@@ -108,25 +108,6 @@ rm -f CMakeLists.txt~
 
 cd ../../../..
 
-2e) MODIFIER blender/intern/cycles/kernel/kernels/cuda/kernel_config.h
-======================================================================
-
-cd blender.new/intern/cycles/kernel/kernels/cuda
-kwrite kernel_config.h
-
-MODIFIER LIGNES 73 ET 74:
-/* 7.x */
-#elif __CUDA_ARCH__ <= 799
-DEVIENNENT
-/* 7.x / 8.x */
-#elif __CUDA_ARCH__ <= 899
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier kernel_config.h~
-rm -f kernel_config.h~
-
-cd ../../../../../..
-
 
 diff -aur blender blender.new
 diff -aur blender blender.new > D8063-cuda11.patch
@@ -148,6 +129,25 @@ sync
 =================================================================
 ANCIENS
 ========
+
+2e) MODIFIER blender/intern/cycles/kernel/kernels/cuda/kernel_config.h
+======================================================================
+
+cd blender.new/intern/cycles/kernel/kernels/cuda
+kwrite kernel_config.h
+
+MODIFIER LIGNES 73 ET 74:
+/* 7.x */
+#elif __CUDA_ARCH__ <= 799
+DEVIENNENT
+/* 7.x / 8.x */
+#elif __CUDA_ARCH__ <= 899
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier kernel_config.h~
+rm -f kernel_config.h~
+
+cd ../../../../../..
 
 1) Embree : static libs --> dynamic libs
 1) https://github.com/bartoszek/AUR-blender-2.8-git
