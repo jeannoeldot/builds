@@ -10,19 +10,18 @@ NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
 mkdir /tmp/optix
 
 TÉLÉCHARGER NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh  ==> ~/99-dwl-temp/
-RENDRE ÉXÉCUTABLE .sh
 
 cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh /tmp/optix/
 cd /tmp/optix
+chmod +x NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
 ./NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
 Do you accept the license? [yN]: y
 Saying no will install in: "/tmp/optix" [Yn]:Y
 
-DANS DOLDHIN, OUVRIR /tmp/optix/NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64/
-CLIC DROIT SUR include -> Compresser -> Ici (en ZIP) ==> include.zip (70.0 Kio)
-RENOMMER include.zip EN OptiX-7.1.0-include.zip
-
 cd NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64/
+ls ==> include
+zip -r OptiX-7.1.0-include.zip include
+
 mv -v OptiX-7.1.0-include.zip /0-DataLinux/05-builds-dir-git/
 cd ..
 mv -v NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
@@ -31,9 +30,6 @@ cd ..
 rm -rf optix
 
 cd /0-DataLinux/05-builds-dir-git/
-
-sha512sum OptiX-7.1.0-include.zip
-e8c22441fefd867a3071061aabb751c7a3528d3e908402a7633730a5bdda34b9eb05672f08836054baae3bfb94f0523a0b2cac7231be6dabb627e44104a049ce
 
 sha256sum OptiX-7.1.0-include.zip
 c555b98471e48909abd5b8289412110c1572af99ad787fcf8ae35261e910690a

@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.7.0.20201001
+pkgrel=2    # rebuild MAJ opencv 4.5.0
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ openvdb 7.1.0 et openexr 2.5.3
@@ -93,9 +94,9 @@ depends=(...
         ...
          'qt5-base'
          'python'
-         'openvdb-git'
          'libwebp'
          'fmt' 'pugixml' 'pybind11' 'python-numpy'
+         'openvdb-git'
 
 !!!!!! SUPPRIMÉ
         'jasper'
@@ -111,7 +112,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.8.5-2 [installé]
+==> extra/python 3.8.6-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.8
