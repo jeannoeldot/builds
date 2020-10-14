@@ -1,19 +1,31 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.91.0.7.20201004
+!!! VERSION = 2.91.0.7.20201014
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.91.0.7.20201004.tar.gz /tmp/srcp/
+cp -v blender-git-2.91.0.7.20201014.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.91.0.7.20201004.tar.gz
+tar -xzf blender-git-2.91.0.7.20201014.tar.gz
 
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 2) Cycles: Preliminary Cuda 11 build support
 2) https://developer.blender.org/D8063
@@ -117,18 +129,6 @@ rm -rf blender.new
 cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/D8063-cuda11.patch .
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 2e) MODIFIER blender/intern/cycles/kernel/kernels/cuda/kernel_config.h
 ======================================================================
