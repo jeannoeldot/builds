@@ -3,40 +3,6 @@
 !!! EN USER
 cd $HOME/05-builds/blender-git
 
-0-1) OPTIX 7.1.0
-================
-https://developer.nvidia.com/designworks/optix/download
-NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
-mkdir /tmp/optix
-
-TÉLÉCHARGER NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh  ==> ~/99-dwl-temp/
-
-cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh /tmp/optix/
-cd /tmp/optix
-chmod +x NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
-./NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh
-Do you accept the license? [yN]: y
-Saying no will install in: "/tmp/optix" [Yn]:Y
-
-cd NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64/
-ls ==> include
-zip -r OptiX-7.1.0-include.zip include
-
-mv -v OptiX-7.1.0-include.zip /0-DataLinux/05-builds-dir-git/
-cd ..
-mv -v NVIDIA-OptiX-SDK-7.1.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
-
-cd ..
-rm -rf optix
-
-cd /0-DataLinux/05-builds-dir-git/
-
-sha256sum OptiX-7.1.0-include.zip
-c555b98471e48909abd5b8289412110c1572af99ad787fcf8ae35261e910690a
-
-cd
-
-
 1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 AM = matin  PM = après-midi

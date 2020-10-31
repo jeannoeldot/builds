@@ -1,0 +1,249 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/nanovdb-git
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/AcademySoftwareFoundation/openvdb/commits/feature/nanovdb
+==> kmuseth committed 22 oct 2020
+DATE ==> 20201022
+NANOVDB_GIT_UID=1c306bcaf7e9f7d52525bab716202bd4f7fff5d1
+
+https://github.com/AcademySoftwareFoundation/openvdb/blob/feature/nanovdb/nanovdb/nanovdb/NanoVDB.h
+Lignes 100 et ...
+#define NANOVDB_MAJOR_VERSION_NUMBER 28 // reflects changes to the ABI
+#define NANOVDB_MINOR_VERSION_NUMBER 0 // reflects changes to the API but not ABI
+#define NANOVDB_PATCH_VERSION_NUMBER 0 // reflects bug-fixes with no ABI or API changes
+==> 28.0.0
+
+==> 28.0.0.20201022
+
+1.3 SOURCES
+==============
+mkdir -p /tmp/nanovdb
+cd /tmp/nanovdb
+
+wget \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/${NANOVDB_GIT_UID}.tar.gz
+==> 1c306bcaf7e9f7d52525bab716202bd4f7fff5d1.tar.gz
+
+tar -xzf 1c306bcaf7e9f7d52525bab716202bd4f7fff5d1.tar.gz
+==> openvdb-1c306bcaf7e9f7d52525bab716202bd4f7fff5d1
+
+mv -v openvdb-${NANOVDB_GIT_UID} nanovdb
+
+tar -cvzf nanovdb-28.0.0.20201022.tar.gz --exclude=.git nanovdb
+
+cd /0-DataLinux/05-builds-dir-git
+
+mv -vf /tmp/nanovdb/nanovdb-28.0.0.20201022.tar.gz .
+
+rm -rf /tmp/nanovdb
+
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/nanovdb-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/nanovdb-28.0.0.20201022.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=nanovdb-git
+pkgver=28.0.0.20201022
+pkgrel=1
+
+
+license=('MPL')
+
+depends=(
+)
+
+makedepends=('cmake')
+
+conflicts='nanovdb'
+provides='nanovdb'
+
+SANS PATCH
+----------
+sha256sum nanovdb-28.0.0.20201022.tar.gz
+
+source=("nanovdb-${pkgver}"
+)
+sha256sums=('... ...'
+)
+
+!!!!!!
+_gitname="nanovdb"
+
+prepare() {
+  cd "${_gitname}"
+
+build() {
+  cd "${_gitname}"
+
+package() {
+  cd "${_gitname}/build"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf nanovdb-28.0.0.20201022.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/nanovdb/nanovdb/CMakeLists.txt
+
+LIGNES 30 ET ...:
+------------------
+CMAKE_BUILD_TYPE  => Release
+
+!!! VOIR build_files/build_environment/cmake/nanovdb.cmake
+LIGNES 50 ET ...:
+------------------
+NANOVDB_BUILD_UNITTESTS "Build Unit tests" ON ==> OFF
+NANOVDB_BUILD_EXAMPLES "Build examples" ON ==> OFF
+NANOVDB_BUILD_BENCHMARK "Build benchmark" ON ==> OFF
+
+NANOVDB_BUILD_DOCS "Build docs" OFF
+
+NANOVDB_BUILD_TOOLS "Build command-line tools" ON ==> OFF
+
+NANOVDB_CUDA_KEEP_PTX "Keep CUDA PTX" OFF
+
+LIGNE 57:
+---------
+NANOVDB_USE_INTRINSICS "Build with hardware intrinsics support" ON
+
+LIGNES 58 ET ...:
+------------------
+NANOVDB_USE_OPENVDB "Build with OpenVDB support" ON ==> OFF
+NANOVDB_USE_OPENGL "Build with OpenGL support" ON ==> OFF
+NANOVDB_USE_OPENCL "Build with OpenCL support" ON ==> OFF
+NANOVDB_USE_CUDA "Build with CUDA support" ON ==> OFF
+NANOVDB_USE_TBB "Build with TBB support" ON ==> OFF
+NANOVDB_USE_BLOSC "Build with BLOSC support" ON ==> OFF
+NANOVDB_USE_ZLIB "Build with ZLIB support" ON ==> OFF
+NANOVDB_USE_OPTIX "Build with OptiX support" ON ==> OFF
+
+NANOVDB_ALLOW_FETCHCONTENT
+       "Allow FetchContent to download missing dependencies" ON ==> OFF
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 nanovdb-28.0.0.20201022.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/nanovdb-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/nanovdb-git/nanovdb-28.0.0.20201022.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/nanovdb-git \
+&& cp -v /tmp/build/nanovdb-git-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/nanovdb-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap nanovdb-git-*-any.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/nanovdb-git-*-any.pkg.tar.*
+
+$ cp -v nanovdb-git-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/nanovdb-git-*-any.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v nanovdb-git-*-any.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i nanovdb-28.0.0.20201022.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu nanovdb-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# pacman -Rdd nanovdb-git
+# rm /var/cache/pacman/pkg/nanovdb-git-*
+# pacman -S nanovdb-git
+
+
+ANCIEN
+======
