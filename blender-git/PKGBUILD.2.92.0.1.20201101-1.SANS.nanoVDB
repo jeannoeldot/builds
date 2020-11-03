@@ -1,0 +1,101 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=blender-git
+pkgver=2.92.0.1.20201101
+pkgrel=1
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('x86_64')
+license=('GPL')
+url="http://blender.org/"
+depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
+          'libjpeg' 'libpng' 'openjpeg2' 'libtiff' 'openexr' 
+          'python'
+          'libsamplerate' 'ffmpeg' 'fftw'
+          'openal' 'freetype2' 'libsndfile'
+          'sdl2'
+          'libgl' 'glfw-x11'
+          'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
+          'boost-libs' 'tbb'
+          'jemalloc'
+          'opencolorio'
+          'python-numpy' 'python-requests'
+          'llvm-libs'
+          'potrace' 'pugixml'
+          'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
+          'opensubdiv-git' 'openvdb-git' 'alembic-git'
+          'embree-git' 'openimagedenoise-git' 'usd-git'
+)
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
+             'cuda'
+             'git'
+)
+optdepends=('cuda: cycles renderer cuda support')
+conflicts=('blender')
+provides=('blender')
+#options=('!strip')
+source=("$pkgname-$pkgver.tar.gz"
+        "OptiX-7.2.0-include.zip"
+)
+sha256sums=('5646a682fa2c890f78433cbc074d8127c27f7b820bf14a83b8348458d71cf5bc'
+            '52d76228ca2758786d524666130eb94d883809aed246a8ad92c50a4d901f900f'
+)
+
+_gitname="blender"
+_slot="2.92"
+
+prepare() {
+  cd "${_gitname}"
+  # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
+  # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
+  sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
+  
+  # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "a1f46ac9dc71"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1604218268|' build_files/cmake/buildinfo.cmake
+}
+
+build() {
+  cd "${_gitname}"
+  
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+  
+  cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+        -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DOPTIX_ROOT_DIR="${srcdir}"/include \
+        -DWITH_XR_OPENXR=OFF \
+        -DWITH_JACK=OFF \
+        -DWITH_INPUT_NDOF=OFF \
+        -DWITH_INSTALL_PORTABLE=OFF \
+        -DWITH_PYTHON_INSTALL=OFF \
+        -DWITH_PYTHON_INSTALL_NUMPY=OFF \
+        -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
+        -DWITH_CYCLES_CUDA_BINARIES=ON \
+        -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_86" \
+        -DWITH_CYCLES_NATIVE_ONLY=ON \
+        -DWITH_CYCLES_DEVICE_OPTIX=ON \
+        -DWITH_LLVM=ON \
+        -DPYTHON_VERSION=3.8 \
+        -DPYTHON_LIBPATH=/usr/lib \
+        -DPYTHON_LIBRARY=python3.8 \
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python3.8 \
+        ..
+  make
+}
+
+package() {
+  # Blender
+  cd "${_gitname}/build"
+  make DESTDIR="${pkgdir}" install
+
+  # voir Community
+  python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+  python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+  
+  install -Dm644 ../release/freedesktop/org.blender.Blender.appdata.xml "${pkgdir}/usr/share/metainfo/org.blender.Blender.appdata.xml"
+}

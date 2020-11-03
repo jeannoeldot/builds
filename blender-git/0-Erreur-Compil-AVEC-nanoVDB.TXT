@@ -1,0 +1,57 @@
+
+======================================================================
+VERSION 25.0.0.20200925-1
+UID e62f7a0bf1e27397223c61ddeaaf57edf111b77f
+
+
+
+======================================================================
+VERSION 28.0.0.20201022-1
+UID 1c306bcaf7e9f7d52525bab716202bd4f7fff5d1
+
+-- Found NanoVDB: /usr/include  
+
+
+
+/usr/include/bits/stdint-uintn.h(27): error: invalid redeclaration of type name "uint64_t"
+/build/blender-git/src/blender/intern/cycles/kernel/../kernel/kernel_compat_optix.h(35): here
+
+[  3%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/BLI_linklist.c.o
+[  3%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/BLI_memarena.c.o
+[  3%] Building CXX object intern/itasc/CMakeFiles/bf_intern_itasc.dir/ControlledObject.cpp.o
+[  3%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/BLI_mempool.c.o
+kernels/optix/../cuda/kernel_cuda_image.h(144): error: no instance of constructor "nanovdb::SampleFromVoxels<TreeOrAccT, 1, false>::SampleFromVoxels [with TreeOrAccT=nanovdb::ReadAccessor<nanovdb::NanoRoot<float>, -1, -1, -1>]" matches the argument list
+            argument types are: (const nanovdb::NanoRoot<float>)
+          detected during instantiation of "T kernel_tex_image_interp_nanovdb<T>(const TextureInfo &, float, float, float, uint) [with T=float]" 
+(205): here
+
+kernels/optix/../cuda/kernel_cuda_image.h(146): error: no instance of constructor "nanovdb::SampleFromVoxels<TreeOrAccT, 0, false>::SampleFromVoxels [with TreeOrAccT=nanovdb::ReadAccessor<nanovdb::NanoRoot<float>, -1, -1, -1>]" matches the argument list
+            argument types are: (const nanovdb::NanoRoot<float>)
+          detected during instantiation of "T kernel_tex_image_interp_nanovdb<T>(const TextureInfo &, float, float, float, uint) [with T=float]" 
+(205): here
+
+kernels/optix/../cuda/kernel_cuda_image.h(148): error: no instance of constructor "nanovdb::SampleFromVoxels<TreeOrAccT, 3, false>::SampleFromVoxels [with TreeOrAccT=nanovdb::ReadAccessor<nanovdb::NanoRoot<float>, -1, -1, -1>]" matches the argument list
+            argument types are: (const nanovdb::NanoRoot<float>)
+          detected during instantiation of "T kernel_tex_image_interp_nanovdb<T>(const TextureInfo &, float, float, float, uint) [with T=float]" 
+(205): here
+
+kernels/optix/../cuda/kernel_cuda_image.h(144): error: no instance of constructor "nanovdb::SampleFromVoxels<TreeOrAccT, 1, false>::SampleFromVoxels [with TreeOrAccT=nanovdb::ReadAccessor<nanovdb::NanoRoot<nanovdb::Vec3f>, -1, -1, -1>]" matches the argument list
+            argument types are: (const nanovdb::NanoRoot<nanovdb::Vec3f>)
+          detected during instantiation of "T kernel_tex_image_interp_nanovdb<T>(const TextureInfo &, float, float, float, uint) [with T=nanovdb::Vec3f]" 
+(209): here
+
+kernels/optix/../cuda/kernel_cuda_image.h(146): error: no instance of constructor "nanovdb::SampleFromVoxels<TreeOrAccT, 0, false>::SampleFromVoxels [with TreeOrAccT=nanovdb::ReadAccessor<nanovdb::NanoRoot<nanovdb::Vec3f>, -1, -1, -1>]" matches the argument list
+            argument types are: (const nanovdb::NanoRoot<nanovdb::Vec3f>)
+          detected during instantiation of "T kernel_tex_image_interp_nanovdb<T>(const TextureInfo &, float, float, float, uint) [with T=nanovdb::Vec3f]" 
+(209): here
+
+kernels/optix/../cuda/kernel_cuda_image.h(148): error: no instance of constructor "nanovdb::SampleFromVoxels<TreeOrAccT, 3, false>::SampleFromVoxels [with TreeOrAccT=nanovdb::ReadAccessor<nanovdb::NanoRoot<nanovdb::Vec3f>, -1, -1, -1>]" matches the argument list
+            argument types are: (const nanovdb::NanoRoot<nanovdb::Vec3f>)
+          detected during instantiation of "T kernel_tex_image_interp_nanovdb<T>(const TextureInfo &, float, float, float, uint) [with T=nanovdb::Vec3f]" 
+(209): here
+
+7 errors detected in the compilation of "kernels/optix/kernel_optix.cu".
+make[2]: *** [intern/cycles/kernel/CMakeFiles/cycles_kernel_optix.dir/build.make:273: intern/cycles/kernel/kernel_optix.ptx] Error 1
+make[1]: *** [CMakeFiles/Makefile2:3788: intern/cycles/kernel/CMakeFiles/cycles_kernel_optix.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+

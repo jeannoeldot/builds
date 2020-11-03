@@ -133,9 +133,9 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=2.92.0.1.20201101
-pkgrel=1
-pkgrel=1    # TEST AVEC nanovdb PAS OK
+pkgrel=2    # TEST AVEC nanovdb PAS OK
 
+pkgrel=1
 pkgrel=1    # TEST AVEC OPTIX
 pkgrel=1    # AVEC PATCH embree dynamic libs
 pkgrel=1    # Avec OIIO 2.1.11.2
@@ -401,6 +401,26 @@ $ ls -la
 !!! EN USER
 
 $ mkpkg-chroot-repo
+
+SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
+            'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'
+            'embree-git' 'usd-git'
+SI makedepends= 'nanovdb-git'
+================================================================================
+$ cp -v $HOME/00-repolocal/\
+{\
+openshadinglanguage-git-*-x86_64.pkg.tar.*,\
+openimageio-git-*-x86_64.pkg.tar.*,\
+opencollada-git-*-x86_64.pkg.tar.*,\
+opensubdiv-git-*-x86_64.pkg.tar.*,\
+openvdb-git-*-x86_64.pkg.tar.*,\
+alembic-git-*-x86_64.pkg.tar.*,\
+openimagedenoise-git-*-x86_64.pkg.tar.*,\
+usd-git-*-x86_64.pkg.tar.*,\
+embree-git-*-x86_64.pkg.tar.*,\
+nanovdb-git-*-any.pkg.tar.*\
+} \
+/tmp/chrootrepo/
 
 SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
             'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'

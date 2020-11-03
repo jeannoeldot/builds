@@ -1,0 +1,53 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=nanovdb-git
+pkgver=28.0.0.20201022
+pkgrel=1
+pkgdesc='A lightweight GPU friendly version of VDB initially targeting rendering applications'
+url='https://github.com/AcademySoftwareFoundation/openvdb/tree/feature/nanovdb/nanovdb'
+arch=('any')
+license=('MPL')
+depends=(
+)
+makedepends=('cmake'
+)
+conflicts=('nanovdb')
+provides=('nanovdb')
+source=("nanovdb-${pkgver}.tar.gz"
+)
+sha256sums=('0302a00d7bd5d42922d9f2dbe942c33999e11b0eae20511227aae20ddb73eec7'
+)
+
+_gitname="nanovdb"
+
+build() {
+  cd "${_gitname}/nanovdb"
+
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr/include \
+    -DNANOVDB_BUILD_UNITTESTS=OFF \
+    -DNANOVDB_BUILD_EXAMPLES=OFF \
+    -DNANOVDB_BUILD_BENCHMARK=OFF \
+    -DNANOVDB_BUILD_TOOLS=OFF \
+    -DNANOVDB_USE_OPENVDB=OFF \
+    -DNANOVDB_USE_OPENGL=OFF \
+    -DNANOVDB_USE_OPENCL=OFF \
+    -DNANOVDB_USE_CUDA=OFF \
+    -DNANOVDB_USE_TBB=OFF \
+    -DNANOVDB_USE_BLOSC=OFF \
+    -DNANOVDB_USE_ZLIB=OFF \
+    -DNANOVDB_USE_OPTIX=OFF \
+    -DNANOVDB_ALLOW_FETCHCONTENT=OFF \
+    ..
+
+  make VERBOSE=1
+}
+
+package() {
+  cd "${_gitname}/nanovdb/build"
+
+  make DESTDIR="${pkgdir}" install
+}

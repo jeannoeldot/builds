@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 28.0.0.20201022
+!!! VERSION = 25.0.0.20200925
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/nanovdb-git
 
 mkdir /tmp/srcp
 
-cp -v nanovdb-28.0.0.20201022.tar.gz /tmp/srcp/
+cp -v nanovdb-25.0.0.20200925.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf nanovdb-28.0.0.20201022.tar.gz
+tar -xzf nanovdb-25.0.0.20200925.tar.gz
 
 
 
