@@ -1,6 +1,31 @@
 FAIRE PATCHS
 ====================================
 
+!!! VERSION = 28.1.2.20201111
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/nanovdb-git
+
+mkdir /tmp/srcp
+
+cp -v nanovdb-28.1.2.20201111.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf nanovdb-28.1.2.20201111.tar.gz
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
 !!! VERSION = 25.0.0.20200925
 
 
@@ -16,12 +41,3 @@ tar -xzf nanovdb-25.0.0.20200925.tar.gz
 
 
 
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========

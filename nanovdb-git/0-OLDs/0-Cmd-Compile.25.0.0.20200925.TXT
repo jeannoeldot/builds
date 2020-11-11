@@ -5,40 +5,41 @@ cd $HOME/05-builds/nanovdb-git
 
 1.0 SOURCES
 ==============
-1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+1-2) ATTENTION A VERSION ET DATE
 ============================================
-https://github.com/AcademySoftwareFoundation/openvdb/commits/feature/nanovdb
-==> kmuseth committed 11 Nov 2020
-DATE ==> 20201111
-NANOVDB_GIT_UID=135374fad73423a0c220fb3d22f64cbb6d6e6429
+VOIR build_files/build_environment/cmake/versions.cmake
+
+NANOVDB_GIT_UID=e62f7a0bf1e27397223c61ddeaaf57edf111b77f
+DATE ==> 20200925
 
 mkdir -p /tmp/nanovdb
 cd /tmp/nanovdb
 
 wget \
 https://github.com/AcademySoftwareFoundation/openvdb/archive/${NANOVDB_GIT_UID}.tar.gz
-==> 135374fad73423a0c220fb3d22f64cbb6d6e6429.tar.gz
+==> e62f7a0bf1e27397223c61ddeaaf57edf111b77f.tar.gz
 
 tar -xzf ${NANOVDB_GIT_UID}.tar.gz
-==> openvdb-135374fad73423a0c220fb3d22f64cbb6d6e6429
+==> openvdb-e62f7a0bf1e27397223c61ddeaaf57edf111b77f
 
 mv -v openvdb-${NANOVDB_GIT_UID} nanovdb
 
 cat nanovdb/nanovdb/nanovdb/NanoVDB.h | grep VERSION
-#define NANOVDB_MAJOR_VERSION_NUMBER 28// reflects changes to the ABI
-#define NANOVDB_MINOR_VERSION_NUMBER  1// reflects changes to the API but not ABI
-#define NANOVDB_PATCH_VERSION_NUMBER  2// reflects bug-fixes with no ABI or API changes
-==> 28.1.2
+#define NANOVDB_MAJOR_VERSION_NUMBER 25// reflects changes to the ABI
+#define NANOVDB_MINOR_VERSION_NUMBER  0// reflects changes to the API but not ABI
+#define NANOVDB_PATCH_VERSION_NUMBER  0// reflects bug-fixes with no ABI or API changes
+==> 25.0.0
 
-==> 28.1.2.20201111
+==> 25.0.0.20200925
 
-tar -cvzf nanovdb-28.1.2.20201111.tar.gz --exclude=.git nanovdb
+tar -cvzf nanovdb-25.0.0.20200925.tar.gz --exclude=.git nanovdb
 
 cd /0-DataLinux/05-builds-dir-git
 
-mv -vf /tmp/nanovdb/nanovdb-28.1.2.20201111.tar.gz .
+mv -vf /tmp/nanovdb/nanovdb-25.0.0.20200925.tar.gz .
 
 rm -rf /tmp/nanovdb
+
 
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
@@ -47,7 +48,7 @@ cd $HOME/05-builds/nanovdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/nanovdb-28.1.2.20201111.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/nanovdb-25.0.0.20200925.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -60,7 +61,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=nanovdb-git
-pkgver=28.1.2.20201111
+pkgver=25.0.0.20200925
 pkgrel=1
 
 
@@ -76,7 +77,7 @@ provides='nanovdb'
 
 SANS PATCH
 ----------
-sha256sum nanovdb-28.1.2.20201111.tar.gz
+sha256sum nanovdb-25.0.0.20200925.tar.gz
 
 source=("nanovdb-${pkgver}"
 )
@@ -100,7 +101,7 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf nanovdb-28.1.2.20201111.tar.gz -C /tmp/srcp
+tar -xzf nanovdb-25.0.0.20200925.tar.gz -C /tmp/srcp
 
 1) kwrite /tmp/srcp/nanovdb/nanovdb/CMakeLists.txt
 
@@ -147,7 +148,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 2270318  3 nov.  15:22 nanovdb-28.1.2.20201111.tar.gz
+-rw-r--r--  1 jnd users 2270318  3 nov.  15:22 nanovdb-25.0.0.20200925.tar.gz
 -rw-r--r--  1 jnd users    1227  3 nov.  15:23 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -166,7 +167,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/nanovdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/nanovdb-git/nanovdb-28.1.2.20201111.tar.gz . \
+&& cp -v $HOME/05-builds/nanovdb-git/nanovdb-25.0.0.20200925.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/nanovdb-git \
 && cp -v /tmp/build/nanovdb-git-*-any.pkg.tar.* . \
@@ -219,7 +220,7 @@ $ mv -v nanovdb-git-*-any.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i nanovdb-28.1.2.20201111.tar.gz
+$ rm -i nanovdb-25.0.0.20200925.tar.gz
 
 
 $ cd && maj-repolocal
