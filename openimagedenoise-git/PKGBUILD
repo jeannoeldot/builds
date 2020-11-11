@@ -2,7 +2,7 @@
 
 pkgname=openimagedenoise-git
 pkgver=1.2.4.20201002
-pkgrel=1
+pkgrel=2
 _ver_release="1.2.4"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
@@ -11,8 +11,7 @@ arch=('x86_64')
 license=('Apache')
 depends=('tbb'
 )
-makedepends=('cmake' 'python'
-             'ispc-git'
+makedepends=('cmake' 'python' 'ispc'
 )
 conflicts=('openimagedenoise' 'oidn')
 provides=('openimagedenoise' 'oidn')

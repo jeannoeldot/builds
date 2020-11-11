@@ -36,6 +36,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-git
 pkgver=1.2.4.20201002
+pkgrel=2  # Rebuild ispc-git ==> ispc
+
 pkgrel=1
 
 pkgrel=2  # Rebuild intel-tbb ==> tbb
@@ -58,11 +60,6 @@ depends=('tbb'
 
 makedepends=('cmake' 'ispc' 'python'
 )
-!!!!! OIDN 1.2.4 need ispc 1.14.1
-!!!!! ispc community = 1.13.0
-makedepends=('cmake' 'python'
-             'ispc-git'
- )
 
 conflicts='openimagedenoise' 'oidn'
 provides='openimagedenoise' 'oidn'
@@ -152,10 +149,6 @@ cd $HOME/05-builds/openimagedenoise-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-SI makedepends= 'ispc-git'
-==========================
-$ cp -v $HOME/00-repolocal/ispc-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
-
   FLOOP
 --------
 $ rm -f *~
@@ -229,6 +222,15 @@ SI PROBLEME
 
 ANCIEN
 ======
+!!!!! OIDN 1.2.4 need ispc 1.14.1
+!!!!! ispc community = 1.13.0
+makedepends=('cmake' 'python'
+             'ispc-git'
+)
+SI makedepends= 'ispc-git'
+==========================
+$ cp -v $HOME/00-repolocal/ispc-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
 depends=('intel-tbb'
 )
 
