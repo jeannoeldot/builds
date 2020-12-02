@@ -14,9 +14,9 @@ depends=('boost-libs' 'openexr' 'tbb' 'freetype2' 'libpng' 'libtiff'
          'llvm-libs'
          'qt5-base'
          'clang'
-         'python' 'pugixml' 'pybind11'
+         'pugixml' 'pybind11'
 )
-makedepends=('boost' 'cmake' 'llvm')
+makedepends=('boost' 'cmake' 'llvm' 'python')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("$_name_release.tar.gz"
