@@ -1,0 +1,17 @@
+
+
+CMake Error at /usr/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:281 (message):
+  find_package_check_version(): Cannot be used outside a 'Find Module'
+Call Stack (most recent call first):
+  /usr/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:530 (find_package_check_version)
+  cmake/OpenVDBGLFW3Setup.cmake:113 (find_package_handle_standard_args)
+  openvdb/cmd/CMakeLists.txt:181 (include)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/build/openvdb-git/src/openvdb-7.1.0/build/CMakeFiles/CMakeOutput.log".
+See also "/build/openvdb-git/src/openvdb-7.1.0/build/CMakeFiles/CMakeError.log".
+
+VOIR
+https://github.com/AcademySoftwareFoundation/openvdb/commit/b93e304cf0d43e04f5f412ed09c7b6a060585e18
+

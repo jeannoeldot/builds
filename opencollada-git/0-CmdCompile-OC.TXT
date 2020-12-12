@@ -257,15 +257,15 @@ OU
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd opencollada-git
+# LC_ALL=C pacman -Rdd opencollada-git
 # rm /var/cache/pacman/pkg/opencollada-git-*
-# pacman -S opencollada-git
+# LC_ALL=C pacman -S opencollada-git
 
 POUR REMETTRE opencollada Community
 ===================================
-# pacman -Rdd opencollada-git
+# LC_ALL=C pacman -Rdd opencollada-git
 # rm /var/cache/pacman/pkg/opencollada-git-*
-# pacman -Syu opencollada
+# LC_ALL=C pacman -Syu opencollada
 
 ==================================================================================================
 ANCIEN

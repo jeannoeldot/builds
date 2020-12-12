@@ -239,9 +239,9 @@ OU
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd nanovdb-git
+# LC_ALL=C pacman -Rdd nanovdb-git
 # rm /var/cache/pacman/pkg/nanovdb-git-*
-# pacman -S nanovdb-git
+# LC_ALL=C pacman -S nanovdb-git
 
 
 ANCIEN

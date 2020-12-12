@@ -226,9 +226,9 @@ OU
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd alembic-git
+# LC_ALL=C pacman -Rdd alembic-git
 # rm /var/cache/pacman/pkg/alembic-git-*
-# pacman -S alembic-git
+# LC_ALL=C pacman -S alembic-git
 
 
 ANCIEN

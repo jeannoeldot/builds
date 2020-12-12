@@ -245,16 +245,16 @@ $ sync
 ===================================================================================
 !!! EN ROOT
 # cd
-# pacman -Syu
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu embree-git
+# LC_ALL=C pacman -Syu embree-git
 
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd embree-git
+# LC_ALL=C pacman -Rdd embree-git
 # rm /var/cache/pacman/pkg/embree-git-*
-# pacman -S embree-git
+# LC_ALL=C pacman -S embree-git
 
 
 ANCIEN

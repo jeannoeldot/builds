@@ -6,16 +6,16 @@ cd $HOME/05-builds/openvdb-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/AcademySoftwareFoundation/openvdb/releases
-==> danrbailey released this 6 days ago : 13 août 2020 ==> 20200813
-==> v7.1.0  ==> 7.1.0
-==> 7.1.0.20200813
+==> ldclip released this 3 days ago : 09 dec 2020 ==> 20201209
+==> v7.2.0  ==> 7.2.0
+==> 7.2.0.20201209
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenVDB-v7.1.0.tar.gz \
-https://github.com/AcademySoftwareFoundation/openvdb/archive/v7.1.0.tar.gz
+wget -O OpenVDB-v7.2.0.tar.gz \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/v7.2.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v7.1.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v7.2.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,9 +36,10 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=7.1.0.20200813
+pkgver=7.2.0.20201209
 pkgrel=1
 
+pkgrel=2          # rebuild boost boost-libs 1.74.0
 pkgrel=4  # Rebuild intel-tbb ==> tbb
 pkgrel=3          # rebuild MAJ openexr 2.5.1
 pkgrel=2          # rebuild boost boost-libs 1.72.0
@@ -64,7 +65,7 @@ pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 pkgrel=3          # SANS doc, SANS ABI=3
 
 !!!!!!
-_ver_release="7.1.0"
+_ver_release="7.2.0"
 _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
@@ -82,7 +83,7 @@ provides='openvdb'
 
 SANS PATCH
 ----------
-sha256sum OpenVDB-v7.1.0.tar.gz
+sha256sum OpenVDB-v7.2.0.tar.gz
 
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
@@ -101,9 +102,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenVDB-v7.1.0.tar.gz -C /tmp/srcp
+tar -xzf OpenVDB-v7.2.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openvdb-7.1.0/CMakeLists.txt
+1) kwrite /tmp/srcp/openvdb-7.2.0/CMakeLists.txt
 
 LIGNES 61 ET 62:
 ---------------
@@ -122,70 +123,68 @@ LIGNE 65:
 ---------
 OPENVDB_BUILD_DOCS "Build the OpenVDB documentation" OFF
 
-LIGNES 66, 67 ET 68:
---------------------
+LIGNES 66 ET 67
+---------------
 OPENVDB_BUILD_HOUDINI_PLUGIN "Build the Houdini plugin" OFF
 OPENVDB_BUILD_HOUDINI_ABITESTS "Build the Houdini ABI tests" OFF
+
+LIGNES 69 À 71
+---------------
+OPENVDB_BUILD_AX "Build the OpenVDB AX library" OFF
+OPENVDB_BUILD_AX_BINARIES "Build the OpenVDB AX command line binary" OFF
+OPENVDB_BUILD_AX_UNITTESTS "Build the OpenVDB AX unit tests" OFF
+
+LIGNE 73:
+---------
 OPENVDB_INSTALL_HOUDINI_PYTHONRC OFF
 
-LIGNE 70:
+LIGNE 75:
 ---------
 OPENVDB_BUILD_MAYA_PLUGIN "Build the Maya plugin" OFF
 
-LIGNE 71: !!!!!!
+LIGNE 76: !!!!!!
 ----------------
 OPENVDB_ENABLE_RPATH "Build with RPATH information" ON ==> OFF
 
-LIGNE 74:
+LIGNE 79:
 ---------
 OPENVDB_INSTALL_CMAKE_MODULES ON
 
 
-LIGNE 78:
+LIGNE 82:
 ---------
 USE_HOUDINI OFF
 
-LIGNE 82:
+LIGNE 86:
 ---------
 USE_MAYA  OFF
 
-LIGNE 85:
+LIGNE 89:
 ---------
 USE_BLOSC ON
 
-LIGNE 89:
+LIGNE 93:
+----------
+USE_ZLIB ON
+
+LIGNE 96:
 ----------
 USE_LOG4CPLUS OFF
 
-LIGNE 93:
+LIGNE 100:
 ----------
 USE_EXR OFF ==> ON
 
-LIGNE 99:
+LIGNE 106:
 ----------
 USE_CCACHE  ON ==> OFF
 
-LIGNE 100:
+LIGNE 107:
 ----------
 USE_STATIC_DEPENDENCIES OFF
 
-LIGNE 156:
-----------
-VOIR: BLENDER
-OpenVDB: Fix compilation error against OpenVDB 4
-author	Sergey Sharybin <sergey.vfx@gmail.com>	
-	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
-commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
 
-Build: add WITH_OPENVDB_3_ABI_COMPATIBLE option.
-author	Brecht Van Lommel <brechtvanlommel@gmail.com>	
-	Mon, 2 Apr 2018 18:55:10 +0200 (18:55 +0200)
-commit	71d7d6cd8c431b7f4fac8d65a4eaedf3cff6c8f6
-
-OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" OFF
-
-
-2) kwrite /tmp/srcp/openvdb-7.1.0/openvdb/CMakeLists.txt
+2) kwrite /tmp/srcp/openvdb-7.2.0/openvdb/openvdb/CMakeLists.txt
 
 LIGNE 20:
 ---------
@@ -195,7 +194,7 @@ LIGNE 21:
 OPENVDB_CORE_STATIC "Build statically linked version of the core library." ON ==> OFF
 
 
-3) kwrite /tmp/srcp/openvdb-7.1.0/openvdb/cmd/CMakeLists.txt
+3) kwrite /tmp/srcp/openvdb-7.2.0/openvdb/openvdb/cmd/CMakeLists.txt
 
 LIGNE 20 À 23:
 --------------
@@ -213,7 +212,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v7.1.0.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v7.2.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -231,7 +230,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v7.1.0.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v7.2.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -295,7 +294,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenVDB-v7.1.0.tar.gz
+$ rm -i OpenVDB-v7.2.0.tar.gz
 
 
 $ cd && maj-repolocal
@@ -315,15 +314,30 @@ OU
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd openvdb-git
+# LC_ALL=C pacman -Rdd openvdb-git
 # rm /var/cache/pacman/pkg/openvdb-git-*
-# pacman -S openvdb-git
+# LC_ALL=C pacman -S openvdb-git
 
 
 ANCIEN
 ======
-depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
+LIGNE 156:
+----------
+VOIR: BLENDER
+OpenVDB: Fix compilation error against OpenVDB 4
+author	Sergey Sharybin <sergey.vfx@gmail.com>	
+	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
+commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
 
+Build: add WITH_OPENVDB_3_ABI_COMPATIBLE option.
+author	Brecht Van Lommel <brechtvanlommel@gmail.com>	
+	Mon, 2 Apr 2018 18:55:10 +0200 (18:55 +0200)
+commit	71d7d6cd8c431b7f4fac8d65a4eaedf3cff6c8f6
+
+OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" OFF
+
+
+depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
 
 
 openvdb-git W: Dependency glu included but already satisfied
@@ -338,7 +352,7 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
         'fix-error-boost-egal-sup-1.67.patch'
 )
 
-sha256sum OpenVDB-v7.1.0.tar.gz
+sha256sum OpenVDB-v7.2.0.tar.gz
 
 sha256sum fix-error-boost-egal-sup-1.67.patch
 

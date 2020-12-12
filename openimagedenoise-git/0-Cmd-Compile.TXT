@@ -208,16 +208,16 @@ $ sync
 ===================================================================================
 !!! EN ROOT
 # cd
-# pacman -Syu
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu openimagedenoise-git
+# LC_ALL=C pacman -Syu openimagedenoise-git
 
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd openimagedenoise-git
+# LC_ALL=C pacman -Rdd openimagedenoise-git
 # rm /var/cache/pacman/pkg/openimagedenoise-git-*
-# pacman -S openimagedenoise-git
+# LC_ALL=C pacman -S openimagedenoise-git
 
 
 ANCIEN

@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=usd-git
 pkgver=20.05.20200414
+pkgrel=4  # Rebuild maj boost boost-libs 1.74.0
+
 pkgrel=3  # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 pkgrel=2  # Rebuild intel-tbb ==> tbb
@@ -252,16 +254,16 @@ $ sync
 ===================================================================================
 !!! EN ROOT
 # cd
-# pacman -Syu
+# LC_ALL=C pacman -Syu
 
-# pacman -Syu usd-git
+# LC_ALL=C pacman -Syu usd-git
 
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd usd-git
+# LC_ALL=C pacman -Rdd usd-git
 # rm /var/cache/pacman/pkg/usd-git-*
-# pacman -S usd-git
+# LC_ALL=C pacman -S usd-git
 
 
 ANCIEN

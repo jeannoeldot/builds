@@ -36,6 +36,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.11.10.0.tar.g
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.10.0.20201201
+pkgrel=2    # rebuild boost boost-libs 1.74.0
 pkgrel=1
 
 pkgrel=2    # Rebuild MAJ LLVM 11.0.0-1
@@ -82,9 +83,9 @@ provides=('openshadinglanguage')
 !!! LLVM 10.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 11.0.0-3 [installé]
-extra/llvm 11.0.0-3 [installé]
-extra/llvm-libs 11.0.0-3 [installé]
+extra/clang 11.0.0-4 [installé]
+extra/llvm 11.0.0-4 [installé]
+extra/llvm-libs 11.0.0-4 [installé]
 
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
@@ -342,17 +343,15 @@ OU
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd openshadinglanguage-git
+# LC_ALL=C pacman -Rdd openshadinglanguage-git
 # rm /var/cache/pacman/pkg/openshadinglanguage-git-*
-# pacman -S openshadinglanguage-git
-
-
+# LC_ALL=C pacman -S openshadinglanguage-git
 
 POUR REMETTRE openshadinglanguage EXTRA
 ========================================
-# pacman -Rdd openshadinglanguage-git
+# LC_ALL=C pacman -Rdd openshadinglanguage-git
 # rm /var/cache/pacman/pkg/openshadinglanguage-git-*
-# pacman -Syu openshadinglanguage
+# LC_ALL=C pacman -Syu openshadinglanguage
 
 ================================================================
 TESTS

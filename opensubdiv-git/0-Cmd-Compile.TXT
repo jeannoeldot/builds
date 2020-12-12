@@ -340,9 +340,9 @@ OU
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd opensubdiv-git
+# LC_ALL=C pacman -Rdd opensubdiv-git
 # rm /var/cache/pacman/pkg/opensubdiv-git-*
-# pacman -S opensubdiv-git
+# LC_ALL=C pacman -S opensubdiv-git
 
 
 

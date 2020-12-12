@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.9.0.20201201
+pkgrel=2    # rebuild boost boost-libs 1.74.0
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ opencv 4.5.0
@@ -383,15 +384,15 @@ OU
 SI PROBLEME
 ==============
 !!! EN ROOT
-# pacman -Rdd openimageio-git
+# LC_ALL=C pacman -Rdd openimageio-git
 # rm /var/cache/pacman/pkg/openimageio-git-*
-# pacman -S openimageio-git
+# LC_ALL=C pacman -S openimageio-git
 
 POUR REMETTRE openimageio EXTRA
 ================================
-# pacman -Rdd openimageio-git
+# LC_ALL=C pacman -Rdd openimageio-git
 # rm /var/cache/pacman/pkg/openimageio-git-*
-# pacman -Syu openimageio
+# LC_ALL=C pacman -Syu openimageio
 
 ==================================================================================================
 ANCIEN
