@@ -1,19 +1,64 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 7.2.0
-!!! VERSION = v7.2.0
+!!! VERSION = 7.1.0
+!!! VERSION = v7.1.0
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openvdb-git
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v7.2.0.tar.gz /tmp/srcp/
+cp -v OpenVDB-v7.1.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v7.2.0.tar.gz
+tar -xzf OpenVDB-v7.1.0.tar.gz
+
+VOIR
+https://github.com/AcademySoftwareFoundation/openvdb/commit/b93e304cf0d43e04f5f412ed09c7b6a060585e18
+
+1) MODIFIER openvdb-7.1.0/openvdb/CMakeLists.txt
+================================================
+cp -R openvdb-7.1.0 openvdb-7.1.0.new
+
+cd openvdb-7.1.0.new/cmake
+
+kwrite OpenVDBGLFW3Setup.cmake
+
+MODIFIER LIGNES 112 À 116
+find_package(PackageHandleStandardArgs)
+find_package_handle_standard_args(glfw3
+  REQUIRED_VARS glfw3_DIR glfw3_FOUND
+  VERSION_VAR glfw3_VERSION
+)
+
+DEVIENNENT:
+# We only use find_package_handle_standard_args to verify and print
+# appropriate messages. This now explicitly errors in 3.19...
+# @todo Improve this entire GLFW3 search
+#  https://gitlab.kitware.com/cmake/cmake/-/issues/21505
+if(${CMAKE_VERSION} VERSION_LESS 3.19)
+  find_package(PackageHandleStandardArgs)
+  find_package_handle_standard_args(glfw3
+    REQUIRED_VARS glfw3_DIR glfw3_FOUND
+    VERSION_VAR glfw3_VERSION
+  )
+endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier OpenVDBGLFW3Setup.cmake~
+rm -f OpenVDBGLFW3Setup.cmake~
+ 
+cd ../..
+
+diff -aur openvdb-7.1.0 openvdb-7.1.0.new
+diff -aur openvdb-7.1.0 openvdb-7.1.0.new > fix-CMake-Error.patch
+
+rm -rf openvdb-7.1.0.new
+
+cd $HOME/05-builds/openvdb-git
+
+mv -vf /tmp/srcp/fix-CMake-Error.patch .
 
 
 

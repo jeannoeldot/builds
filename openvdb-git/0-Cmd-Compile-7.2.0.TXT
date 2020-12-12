@@ -6,16 +6,16 @@ cd $HOME/05-builds/openvdb-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/AcademySoftwareFoundation/openvdb/releases
-==> danrbailey released this on 13 Aug ==> 20200813
-==> v7.1.0  ==> 7.1.0
-==> 7.1.0.20200813
+==> ldclip released this 3 days ago : 09 dec 2020 ==> 20201209
+==> v7.2.0  ==> 7.2.0
+==> 7.2.0.20201209
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenVDB-v7.1.0.tar.gz \
-https://github.com/AcademySoftwareFoundation/openvdb/archive/v7.1.0.tar.gz
+wget -O OpenVDB-v7.2.0.tar.gz \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/v7.2.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v7.1.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v7.2.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,10 +36,10 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=7.1.0.20200813
-pkgrel=2          # rebuild boost boost-libs 1.74.0 + patch
+pkgver=7.2.0.20201209
 pkgrel=1
 
+pkgrel=2          # rebuild boost boost-libs 1.74.0
 pkgrel=4  # Rebuild intel-tbb ==> tbb
 pkgrel=3          # rebuild MAJ openexr 2.5.1
 pkgrel=2          # rebuild boost boost-libs 1.72.0
@@ -65,7 +65,7 @@ pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 pkgrel=3          # SANS doc, SANS ABI=3
 
 !!!!!!
-_ver_release="7.1.0"
+_ver_release="7.2.0"
 _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
@@ -83,32 +83,13 @@ provides='openvdb'
 
 SANS PATCH
 ----------
-sha256sum OpenVDB-v7.1.0.tar.gz
+sha256sum OpenVDB-v7.2.0.tar.gz
 
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
 sha256sums=('... ...'
 )
 
-AVEC PATCH
-----------
-source=("OpenVDB-v${_ver_release}.tar.gz"
-        'fix-CMake-Error.patch'
-)
-
-sha256sum OpenVDB-v7.1.0.tar.gz
-
-sha256sum fix-CMake-Error.patch
-
-sha256sums=('...'
-            '...'
-)
-
-prepare() {
-  cd "${_name_release}"
-  # Fix CMake Error
-  patch -Np1 -i "${srcdir}/fix-CMake-Error.patch"
-}
 
 build() {
   cd "${_name_release}"
@@ -121,9 +102,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenVDB-v7.1.0.tar.gz -C /tmp/srcp
+tar -xzf OpenVDB-v7.2.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openvdb-7.1.0/CMakeLists.txt
+1) kwrite /tmp/srcp/openvdb-7.2.0/CMakeLists.txt
 
 LIGNES 61 ET 62:
 ---------------
@@ -203,7 +184,7 @@ LIGNE 107:
 USE_STATIC_DEPENDENCIES OFF
 
 
-2) kwrite /tmp/srcp/openvdb-7.1.0/openvdb/openvdb/CMakeLists.txt
+2) kwrite /tmp/srcp/openvdb-7.2.0/openvdb/openvdb/CMakeLists.txt
 
 LIGNE 20:
 ---------
@@ -213,7 +194,7 @@ LIGNE 21:
 OPENVDB_CORE_STATIC "Build statically linked version of the core library." ON ==> OFF
 
 
-3) kwrite /tmp/srcp/openvdb-7.1.0/openvdb/openvdb/cmd/CMakeLists.txt
+3) kwrite /tmp/srcp/openvdb-7.2.0/openvdb/openvdb/cmd/CMakeLists.txt
 
 LIGNE 20 À 23:
 --------------
@@ -231,7 +212,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v7.1.0.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v7.2.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -249,7 +230,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v7.1.0.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v7.2.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -313,7 +294,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenVDB-v7.1.0.tar.gz
+$ rm -i OpenVDB-v7.2.0.tar.gz
 
 
 $ cd && maj-repolocal
@@ -371,7 +352,7 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
         'fix-error-boost-egal-sup-1.67.patch'
 )
 
-sha256sum OpenVDB-v7.1.0.tar.gz
+sha256sum OpenVDB-v7.2.0.tar.gz
 
 sha256sum fix-error-boost-egal-sup-1.67.patch
 
