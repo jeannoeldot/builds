@@ -37,7 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=usd-git
 pkgver=20.11.20201015
-pkgrel=2
+pkgrel=2  # Rebuild maj boost boost-libs 1.75.0
 
 pkgrel=4  # Rebuild maj boost boost-libs 1.74.0
 
@@ -264,6 +264,8 @@ SI PROBLEME
 
 ANCIEN
 ======
+
+
 
 LIGNE 42  PXR_ENABLE_GL_SUPPORT     ON ==> OFF  ???
 

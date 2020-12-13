@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.2.9.0.20201201
-pkgrel=2
+pkgrel=3
 _name_release="oiio-Release-2.2.9.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
@@ -17,6 +17,7 @@ depends=('openexr' 'boost-libs' 'libtiff' 'opencolorio' 'tbb'
          'libwebp' 'libheif'
          'freetype2'
          'fmt' 'pugixml' 'pybind11' 'python-numpy'
+         'openvdb-git'
 )
 makedepends=('cmake' 'boost' 'mesa'
              'robin-map'
