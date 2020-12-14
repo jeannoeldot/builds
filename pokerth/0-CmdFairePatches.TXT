@@ -14,8 +14,8 @@ cd /tmp/srcp
 
 tar -xzf pokerth-1.1.2.tar.gz
 
-1) PATCH BOOST VERSION >= 1.65/1.66/1.67/1.68/1.69
-==================================================
+1) PATCH BOOST VERSION >= 1.65/1.66/1.67/1.68/1.69/1.74/1.75
+============================================================
 1-1) MODIFIER pokerth-1.1.2-rc/src/gui/qt/gametable/gametableimpl.cpp
 ---------------------------------------------------------------------
 cp -R pokerth-1.1.2-rc pokerth-1.1.2-rc.new
@@ -65,6 +65,20 @@ ENREGISTRER et Quitter Kwrite & EFFACER fichier serveraccepthelper.h~
 rm -f serveraccepthelper.h~
 
 cd ../../..
+
+1-4) MODIFIER pokerth-1.1.2-rc/src/net/common/serveracceptwebhelper.cpp
+-----------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net/common
+kwrite serveracceptwebhelper.cpp
+
+RAJOUTER LIGNES 32 ET 33 :
+#include <boost/bind.hpp>
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier serveracceptwebhelper.cpp~
+rm -f serveracceptwebhelper.cpp~
+ 
+cd ../../../..
 
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-boost.patch
