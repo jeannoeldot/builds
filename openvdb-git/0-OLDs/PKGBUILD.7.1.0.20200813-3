@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git
-pkgver=7.2.1.20201224
-pkgrel=1
-_ver_release="7.2.1"
+pkgver=7.1.0.20200813
+pkgrel=3
+_ver_release="7.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
@@ -18,9 +18,17 @@ makedepends=('doxygen' 'boost' 'cmake' 'mesa'
 conflicts=('openvdb')
 provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
+        'fix-CMake-Error.patch'
 )
-sha256sums=('bff324756ceb5608f2ee787f058ac573ccff5aa3a42467d18c17d22235b73dca'
+sha256sums=('0c3588c1ca6e647610738654ec2c6aaf41a203fd797f609fbeab1c9f7c3dc116'
+            'e52b345ee33558eb791d01f82974bdff4d5cde9b202bdbee0b80102dd74ceed8'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # Fix CMake Error
+  patch -Np1 -i "${srcdir}/fix-CMake-Error.patch"
+}
 
 build() {
   cd "${_name_release}"

@@ -1,4 +1,53 @@
 
+VERSION 7.2.1-1
+===============
+==> Starting build()...
+-- The CXX compiler identification is GNU 10.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.7.3") 
+-- Configuring for OpenVDB Version 7.2.1
+-- Configuring for OpenVDB ABI Version 7
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: Half Iex IexMath IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: IlmImf IlmImfUtil 
+-- Found TBB: /usr/include (found suitable version "2020.3", minimum required is "2017.0") found components: tbb 
+-- Found Blosc: /usr/lib/libblosc.so (found suitable version "1.20.1", minimum required is "1.5.0") 
+CMake Warning at openvdb/openvdb/CMakeLists.txt:87 (message):
+  The version of Blosc located is greater than 1.5.0.  There have been
+  reported issues with using later versions of Blosc with OpenVDB.  OpenVDB
+  has been tested fully against Blosc 1.5.0, it is recommended that you use
+  this version where possible.
+
+
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7") 
+-- Found Boost: /usr/lib64/cmake/Boost-1.75.0/BoostConfig.cmake (found suitable version "1.75.0", minimum required is "1.61") found components: iostreams system 
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so  
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: Half Iex IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: IlmImf 
+-- Found OpenGL: /usr/lib/libOpenGL.so   
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openvdb-git/src/openvdb-7.2.1/build
+
+
+
 VERSION 6.1.0-6
 ===============
 ==> Starting build()...

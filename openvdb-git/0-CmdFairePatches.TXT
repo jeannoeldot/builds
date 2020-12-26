@@ -1,20 +1,31 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 7.1.0
-!!! VERSION = v7.1.0
+!!! VERSION = 7.2.1
+!!! VERSION = v7.2.1
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openvdb-git
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v7.1.0.tar.gz /tmp/srcp/
+cp -v OpenVDB-v7.2.1.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v7.1.0.tar.gz
+tar -xzf OpenVDB-v7.2.1.tar.gz
 
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 VOIR
 https://github.com/AcademySoftwareFoundation/openvdb/commit/b93e304cf0d43e04f5f412ed09c7b6a060585e18
 
@@ -61,16 +72,6 @@ cd $HOME/05-builds/openvdb-git
 mv -vf /tmp/srcp/fix-CMake-Error.patch .
 
 
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 1) MODIFIER openvdb-6.1.0/openvdb/CMakeLists.txt
 ================================================
 cp -R openvdb-6.1.0 openvdb-6.1.0.new
