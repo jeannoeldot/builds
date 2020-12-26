@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=nanovdb-git
-pkgver=29.3.0.20201218
+pkgver=28.1.2.20201111
 pkgrel=1
 pkgdesc='A lightweight GPU friendly version of VDB initially targeting rendering applications'
 url='https://github.com/AcademySoftwareFoundation/openvdb/tree/feature/nanovdb/nanovdb'
@@ -15,7 +15,7 @@ conflicts=('nanovdb')
 provides=('nanovdb')
 source=("nanovdb-${pkgver}.tar.gz"
 )
-sha256sums=('6ab281c3161ce49c33bab9dad940739bf38187737458d7451263a2b569acc8e6'
+sha256sums=('5578e28e2f918f1f638a8d570ca0d25c2ebd87489ce5d49d0d27fec482f73849'
 )
 
 _gitname="nanovdb"
