@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.92.0.9.20201226
+pkgver=2.92.0.8.20201220
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,11 +35,9 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
-        "fix-gltf-import-python3.9.patch"
         "OptiX-7.2.0-include.zip"
 )
-sha256sums=('085d127c638ceb173584db6062b55900ed323d4586cfd5370ea08f85e0270c47'
-            'd57a6e67b4f9b50e9da97ff9e81a262b3cd358845608940d719ce8cfce2d3438'
+sha256sums=('c0cced8c4a37e45c18740583388d8f665e5e3021b901ccec6295f3601e2e2e13'
             '52d76228ca2758786d524666130eb94d883809aed246a8ad92c50a4d901f900f'
 )
 
@@ -48,23 +46,18 @@ _slot="2.92"
 
 prepare() {
   cd "${_gitname}"
-  # Fix GLTF import avec python 3.9
-  patch -Np1 -i "${srcdir}/fix-gltf-import-python3.9.patch"
-
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7916c593048b"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5a69f707516e"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1609023044|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1608441788|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
   cd "${_gitname}"
-  
-  local PYTHON_VER=3.9
   
   [[ -d build ]] && rm -r build
   mkdir build && cd build
@@ -88,10 +81,10 @@ build() {
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_CYCLES_DEVICE_OPTIX=ON \
         -DWITH_LLVM=ON \
-        -DPYTHON_VERSION=${PYTHON_VER} \
+        -DPYTHON_VERSION=3.9 \
         -DPYTHON_LIBPATH=/usr/lib \
-        -DPYTHON_LIBRARY=python${PYTHON_VER} \
-        -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER} \
+        -DPYTHON_LIBRARY=python3.9 \
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python3.9 \
         ..
   make
 }

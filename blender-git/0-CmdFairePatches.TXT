@@ -1,19 +1,50 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.92.0.8.20201220
+!!! VERSION = 2.92.0.9.20201226
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.92.0.8.20201220.tar.gz /tmp/srcp/
+cp -v blender-git-2.92.0.9.20201226.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.92.0.8.20201220.tar.gz
+tar -xzf blender-git-2.92.0.9.20201226.tar.gz
 
+https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/gltf-import-fix.patch
+1) MODIFIER blender/release/scripts/addons/io_scene_gltf2/io/imp/gltf2_io_gltf.py
+=================================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/release/scripts/addons/io_scene_gltf2/io/imp
+kwrite gltf2_io_gltf.py
+
+MODIFIER LIGNE 64 :
+            return json.loads(bytes(content), encoding='utf-8', parse_constant=bad_constant)
+ 
+DEVIENT
+            return json.loads(bytes(content), parse_constant=bad_constant)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier gltf2_io_gltf.py~
+rm -f gltf2_io_gltf.py~
+ 
+
+cd ../../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-gltf-import-python3.9.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-gltf-import-python3.9.patch .
 
 
 
