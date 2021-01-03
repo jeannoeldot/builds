@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.92.0.9.20201226
+!!! VERSION = 2.92.0.9.20210103
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.92.0.9.20201226.tar.gz /tmp/srcp/
+cp -v blender-git-2.92.0.9.20210103.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.92.0.9.20201226.tar.gz
+tar -xzf blender-git-2.92.0.9.20210103.tar.gz
 
 https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/gltf-import-fix.patch
 1) MODIFIER blender/release/scripts/addons/io_scene_gltf2/io/imp/gltf2_io_gltf.py
