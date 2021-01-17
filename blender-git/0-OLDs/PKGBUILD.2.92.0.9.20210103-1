@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.93.0.1.20210117
+pkgver=2.92.0.9.20210103
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,25 +35,30 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
+        "fix-gltf-import-python3.9.patch"
         "OptiX-7.2.0-include.zip"
 )
-sha256sums=('e9d246aab992b1de5dcbae47a1b96637023550e1540c92d5c03c79b853fe6033'
+sha256sums=('a59847956c55e98045654cef0fd6f021f4083ab668b4fd44b6f4a52ee20c6402'
+            'd57a6e67b4f9b50e9da97ff9e81a262b3cd358845608940d719ce8cfce2d3438'
             '52d76228ca2758786d524666130eb94d883809aed246a8ad92c50a4d901f900f'
 )
 
 _gitname="blender"
-_slot="2.93"
+_slot="2.92"
 
 prepare() {
   cd "${_gitname}"
+  # Fix GLTF import avec python 3.9
+  patch -Np1 -i "${srcdir}/fix-gltf-import-python3.9.patch"
+
   # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "14bb9f09ab98"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "1e8f2665916c"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1610868614|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1609635865|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -79,7 +84,7 @@ build() {
         -DWITH_PYTHON_INSTALL_NUMPY=OFF \
         -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
         -DWITH_CYCLES_CUDA_BINARIES=ON \
-        -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_52" \
+        -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_86" \
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_CYCLES_DEVICE_OPTIX=ON \
         -DWITH_LLVM=ON \

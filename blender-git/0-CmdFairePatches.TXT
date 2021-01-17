@@ -1,18 +1,29 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.92.0.9.20210103
+!!! VERSION = 2.93.0.1.20210117
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.92.0.9.20210103.tar.gz /tmp/srcp/
+cp -v blender-git-2.93.0.1.20210117.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.92.0.9.20210103.tar.gz
+tar -xzf blender-git-2.93.0.1.20210117.tar.gz
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/gltf-import-fix.patch
 1) MODIFIER blender/release/scripts/addons/io_scene_gltf2/io/imp/gltf2_io_gltf.py
@@ -47,16 +58,6 @@ cd $HOME/05-builds/blender-git
 mv -vf /tmp/srcp/fix-gltf-import-python3.9.patch .
 
 
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 2) Cycles: Preliminary Cuda 11 build support
 2) https://developer.blender.org/D8063
