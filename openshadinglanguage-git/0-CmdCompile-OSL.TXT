@@ -36,6 +36,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-Release-1.11.10.0.tar.g
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.10.0.20201201
+pkgrel=6    # Rebuild MAJ OIIO 2.2.10.1 + MAJ openvdb 8.0.0
 pkgrel=5    # Rebuild MAJ OIIO 2.2.10.0
 pkgrel=4    # Rebuild OIIO + MAJ openvdb 7.2.1
 pkgrel=3    # rebuild boost boost-libs 1.75.0
@@ -83,12 +84,12 @@ _name_release="OpenShadingLanguage-Release-1.11.10.0"
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-!!! LLVM 10.0
+!!! LLVM 11.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 11.0.0-4 [installé]
-extra/llvm 11.0.0-4 [installé]
-extra/llvm-libs 11.0.0-4 [installé]
+extra/clang 11.0.1-1 [installé]
+extra/llvm 11.0.1-1 [installé]
+extra/llvm-libs 11.0.1-1 [installé]
 
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
