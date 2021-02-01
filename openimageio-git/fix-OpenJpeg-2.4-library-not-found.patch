@@ -1,0 +1,33 @@
+diff -aur oiio-2.2.10.1/src/cmake/modules/FindOpenJpeg.cmake oiio-2.2.10.1.new/src/cmake/modules/FindOpenJpeg.cmake
+--- oiio-2.2.10.1/src/cmake/modules/FindOpenJpeg.cmake	2021-01-08 08:41:40.000000000 +0100
++++ oiio-2.2.10.1.new/src/cmake/modules/FindOpenJpeg.cmake	2021-02-01 11:55:27.952720059 +0100
+@@ -56,18 +56,21 @@
+ 
+ # Generic search paths
+ set (OpenJpeg_include_paths
++     /usr/local/include/openjpeg-2.4
+      /usr/local/include/openjpeg-2.3
+      /usr/local/include/openjpeg-2.2
+      /usr/local/include/openjpeg-2.1
+      /usr/local/include/openjpeg-2.0
+      /usr/local/include/openjpeg
+      /usr/local/include
++     /usr/include/openjpeg-2.4
+      /usr/include/openjpeg-2.3
+      /usr/include/openjpeg-2.2
+      /usr/include/openjpeg-2.1
+      /usr/include/openjpeg
+      /usr/include
+      /opt/local/include
++     /opt/local/include/openjpeg-2.4
+      /opt/local/include/openjpeg-2.3
+      /opt/local/include/openjpeg-2.2
+      /opt/local/include/openjpeg-2.1
+@@ -88,6 +91,7 @@
+        ${OpenJpeg_library_paths}
+       )
+   set (OpenJpeg_include_paths
++       ${OpenJpeg_ROOT}/include/openjpeg-2.4
+        ${OpenJpeg_ROOT}/include/openjpeg-2.3
+        ${OpenJpeg_ROOT}/include/openjpeg-2.2
+        ${OpenJpeg_ROOT}/include/openjpeg-2.1

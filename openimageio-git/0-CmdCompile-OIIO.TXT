@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.10.1.20210108
+pkgrel=2    # rebuild against opencolorio1 et openjpeg2 2.4
 pkgrel=1
 
 pkgrel=4    # rebuild MAJ openvdb 7.2.1
@@ -94,6 +95,27 @@ sha256sums=('...'
             '...'
 )
 
+AVEC PATCH
+----------
+source=("oiio-${_ver_release}.tar.gz"
+        "fix-OpenJpeg-2.4-library-not-found.patch"
+)
+
+sha256sum oiio-v2.2.10.1.tar.gz
+
+sha256sum fix-OpenJpeg-2.4-library-not-found.patch
+
+
+sha256sums=('123...'
+            '456...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # Fix OpenJpeg library not found 
+  patch -Np1 -i "${srcdir}/fix-OpenJpeg-2.4-library-not-found.patch"
+}
+
 !!!!!!
 depends=(...
         ...
@@ -102,6 +124,8 @@ depends=(...
          'libwebp'
          'fmt' 'pugixml' 'pybind11' 'python-numpy'
          'openvdb-git'
+!!!!!!
+         'opencolorio1'
 
 !!!!!! SUPPRIMÉ
         'jasper'
@@ -261,6 +285,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
+-rw-r--r--  1 jnd users     1254  1 févr. 12:02 fix-OpenJpeg-2.4-library-not-found.patch
 -rw-r--r--  1 jnd users 27821011 26 nov.  15:36 oiio-v2.2.10.1.tar.gz
 -rw-r--r--  1 jnd users     1748 26 nov.  16:01 PKGBUILD
 
@@ -278,6 +303,7 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
+&& cp -v $HOME/05-builds/openimageio-git/fix-OpenJpeg-2.4-library-not-found.patch . \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openimageio-git/oiio-v2.2.10.1.tar.gz . \
 && LC_ALL=C makepkg -s \
