@@ -1,15 +1,26 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = oiio-v2.2.10.1
+!!! VERSION = oiio-v2.2.11.1
 
 mkdir /tmp/srcp
 
-cp -v oiio-v2.2.10.1.tar.gz /tmp/srcp/
+cp -v oiio-v2.2.11.1.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf oiio-v2.2.10.1.tar.gz
+tar -xzf oiio-v2.2.11.1.tar.gz
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
 
 1) MODIFIER oiio-2.2.10.1/src/cmake/modules/FindOpenJpeg.cmake
 ==============================================================
@@ -44,15 +55,4 @@ diff -aur oiio-2.2.10.1 oiio-2.2.10.1.new > fix-OpenJpeg-2.4-library-not-found.p
 cd $HOME/05-builds/openimageio-git
 
 mv -vf /tmp/srcp/fix-OpenJpeg-2.4-library-not-found.patch .
-
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-sync
-
-==============================================================================
-ANCIENS OU PAS OK
-=================
 

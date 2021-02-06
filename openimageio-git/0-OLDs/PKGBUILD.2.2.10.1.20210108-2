@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.2.11.1.20210202
-pkgrel=1
-_name_release="oiio-2.2.11.1"
-_ver_release="v2.2.11.1"
+pkgver=2.2.10.1.20210108
+pkgrel=2
+_name_release="oiio-2.2.10.1"
+_ver_release="v2.2.10.1"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -27,9 +27,17 @@ makedepends=('cmake' 'boost' 'mesa'
 conflicts=('openimageio')
 provides=('openimageio')
 source=("oiio-${_ver_release}.tar.gz"
+        "fix-OpenJpeg-2.4-library-not-found.patch"
 )
-sha256sums=('7d43dc4eb4338259eb9ac0edbf38f8c71cdd6b57f9f8977bdb572d5a7b674b58'
+sha256sums=('66408e4e1959c0f7b3dabfa9e9ae682c6fdff34c892434b6e201bd5c969bcbe1'
+            'db86147237d27c4943cacd54135631adc437331d2b70a20f9dab48aaeba56287'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # Fix OpenJpeg library not found 
+  patch -Np1 -i "${srcdir}/fix-OpenJpeg-2.4-library-not-found.patch"
+}
 
 build() {
   cd "${_name_release}"
