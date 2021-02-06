@@ -1,13 +1,12 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.11.11.0.20210202
-pkgrel=1
-_name_release="OpenShadingLanguage-1.11.11.0"
-_ver_release="v1.11.11.0"
+pkgver=1.11.10.0.20201201
+pkgrel=7
+_name_release="OpenShadingLanguage-Release-1.11.10.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
-url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
+url="https://github.com/imageworks/OpenShadingLanguage"
 license=('custom')
 depends=('boost-libs' 'openexr' 'tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
@@ -20,9 +19,9 @@ depends=('boost-libs' 'openexr' 'tbb' 'freetype2' 'libpng' 'libtiff'
 makedepends=('boost' 'cmake' 'llvm')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
-source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+source=("$_name_release.tar.gz"
 )
-sha256sums=('a62f5aa5f18d441a76424c44d4bc6491e8228b482983664b65fc047302cb817e'
+sha256sums=('e60b049b666f7eff519a64608ca166946c3de5db49515a36d379837f82310f05'
 )
 
 build() {
@@ -39,6 +38,7 @@ build() {
       -DCMAKE_CXX_STANDARD=14 \
       -DLLVM_STATIC=OFF \
       -DVERBOSE=ON \
+      -DOSL_BUILD_TESTS=OFF \
       -DUSE_LLVM_BITCODE=OFF \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF \
