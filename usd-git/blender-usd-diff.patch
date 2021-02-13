@@ -1,7 +1,7 @@
-diff -aur USD-20.11/cmake/defaults/Packages.cmake USD-20.11.new/cmake/defaults/Packages.cmake
---- USD-20.11/cmake/defaults/Packages.cmake	2020-10-14 20:25:19.000000000 +0200
-+++ USD-20.11.new/cmake/defaults/Packages.cmake	2020-12-12 14:40:37.017731910 +0100
-@@ -126,7 +126,7 @@
+diff -aur USD-21.02/cmake/defaults/Packages.cmake USD-21.02.new/cmake/defaults/Packages.cmake
+--- USD-21.02/cmake/defaults/Packages.cmake	2021-01-20 01:13:57.000000000 +0100
++++ USD-21.02.new/cmake/defaults/Packages.cmake	2021-02-13 11:41:18.310973507 +0100
+@@ -132,7 +132,7 @@
  endif()
  
  # --TBB
@@ -10,10 +10,10 @@ diff -aur USD-20.11/cmake/defaults/Packages.cmake USD-20.11.new/cmake/defaults/P
  add_definitions(${TBB_DEFINITIONS})
  
  # --math
-diff -aur USD-20.11/cmake/macros/Public.cmake USD-20.11.new/cmake/macros/Public.cmake
---- USD-20.11/cmake/macros/Public.cmake	2020-10-14 20:25:19.000000000 +0200
-+++ USD-20.11.new/cmake/macros/Public.cmake	2020-12-12 14:41:36.276626373 +0100
-@@ -1030,6 +1030,12 @@
+diff -aur USD-21.02/cmake/macros/Public.cmake USD-21.02.new/cmake/macros/Public.cmake
+--- USD-21.02/cmake/macros/Public.cmake	2021-01-20 01:13:57.000000000 +0100
++++ USD-21.02.new/cmake/macros/Public.cmake	2021-02-13 11:44:02.049970001 +0100
+@@ -1042,6 +1042,12 @@
      foreach(lib ${PXR_OBJECT_LIBS})
          string(TOUPPER ${lib} uppercaseName)
          list(APPEND exports "${uppercaseName}_EXPORTS=1")
@@ -26,3 +26,30 @@ diff -aur USD-20.11/cmake/macros/Public.cmake USD-20.11.new/cmake/macros/Public.
      endforeach()
      foreach(lib ${PXR_OBJECT_LIBS})
          set(objects "${objects};\$<TARGET_OBJECTS:${lib}>")
+diff -aur USD-21.02/pxr/base/tf/pxrLZ4/lz4.cpp USD-21.02.new/pxr/base/tf/pxrLZ4/lz4.cpp
+--- USD-21.02/pxr/base/tf/pxrLZ4/lz4.cpp	2021-01-20 01:13:57.000000000 +0100
++++ USD-21.02.new/pxr/base/tf/pxrLZ4/lz4.cpp	2021-02-13 11:53:22.446466997 +0100
+@@ -614,6 +614,15 @@
+ /*-************************************
+ *  Internal Definitions used in Tests
+ **************************************/
++
++/*******************************************************************
++ * Disabled in Blender. The BLOSC library also exposes these
++ * functions, and this causes 'duplicate symbol' linker errors.
++ *
++ * This problem has been reported upstream at
++ * https://github.com/PixarAnimationStudios/USD/issues/1447
++ *
++ *******************************************************************
+ #if defined (__cplusplus)
+ extern "C" {
+ #endif
+@@ -627,6 +636,7 @@
+ #if defined (__cplusplus)
+ }
+ #endif
++********************************************************************/
+ 
+ /*-******************************
+ *  Compression functions

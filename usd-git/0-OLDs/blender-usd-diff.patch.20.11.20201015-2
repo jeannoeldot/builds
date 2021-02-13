@@ -1,0 +1,28 @@
+diff -aur USD-20.11/cmake/defaults/Packages.cmake USD-20.11.new/cmake/defaults/Packages.cmake
+--- USD-20.11/cmake/defaults/Packages.cmake	2020-10-14 20:25:19.000000000 +0200
++++ USD-20.11.new/cmake/defaults/Packages.cmake	2020-12-12 14:40:37.017731910 +0100
+@@ -126,7 +126,7 @@
+ endif()
+ 
+ # --TBB
+-find_package(TBB REQUIRED COMPONENTS tbb)
++find_package(TBB)
+ add_definitions(${TBB_DEFINITIONS})
+ 
+ # --math
+diff -aur USD-20.11/cmake/macros/Public.cmake USD-20.11.new/cmake/macros/Public.cmake
+--- USD-20.11/cmake/macros/Public.cmake	2020-10-14 20:25:19.000000000 +0200
++++ USD-20.11.new/cmake/macros/Public.cmake	2020-12-12 14:41:36.276626373 +0100
+@@ -1030,6 +1030,12 @@
+     foreach(lib ${PXR_OBJECT_LIBS})
+         string(TOUPPER ${lib} uppercaseName)
+         list(APPEND exports "${uppercaseName}_EXPORTS=1")
++        # When building for blender, we do NOT want to export all symbols on windows.
++        # This is a dirty hack, but USD makes it impossible to do the right thing
++        # with the default options exposed.
++        if (WIN32)
++            list(APPEND exports "PXR_STATIC=1")
++        endif()
+     endforeach()
+     foreach(lib ${PXR_OBJECT_LIBS})
+         set(objects "${objects};\$<TARGET_OBJECTS:${lib}>")
