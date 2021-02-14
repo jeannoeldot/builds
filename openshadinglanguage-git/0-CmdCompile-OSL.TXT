@@ -36,6 +36,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.11.11.0.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.11.0.20210202
+pkgrel=2    # Rebuild against OIIO + opencolorio 2.0.0
 pkgrel=1
 
 pkgrel=7    # Rebuild against OIIO + opencolorio1 et openjpeg2 2.4
