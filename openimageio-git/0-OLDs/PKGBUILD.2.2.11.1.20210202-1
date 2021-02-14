@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.2.11.1.20210202
-pkgrel=2
+pkgrel=1
 _name_release="oiio-2.2.11.1"
 _ver_release="v2.2.11.1"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
@@ -18,7 +18,7 @@ depends=('openexr' 'boost-libs' 'libtiff' 'tbb'
          'libwebp' 'libheif'
          'freetype2'
          'fmt' 'pugixml' 'pybind11' 'python-numpy'
-         'opencolorio'
+         'opencolorio1'
          'openvdb-git'
 )
 makedepends=('cmake' 'boost' 'mesa'
@@ -42,7 +42,6 @@ build() {
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
-      -DCMAKE_CXX_STANDARD=14 \
       -DVERBOSE=ON \
       -DOIIO_BUILD_TESTS=OFF \
       -DINSTALL_FONTS=OFF \

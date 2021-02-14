@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.11.1.20210202
+pkgrel=2    # rebuild against opencolorio 2.0.0
 pkgrel=1
 
 pkgrel=2    # rebuild against opencolorio1 et openjpeg2 2.4
@@ -104,7 +105,7 @@ depends=(...
          'fmt' 'pugixml' 'pybind11' 'python-numpy'
          'openvdb-git'
 !!!!!!
-         'opencolorio1'
+         'opencolorio'  # blender OK avec opencolorio 2.0.0
 
 !!!!!! SUPPRIMÉ
         'jasper'
@@ -120,7 +121,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.9.1-1 [installé]
+==> extra/python 3.9.1-2 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.9
@@ -130,6 +131,10 @@ build() {
       ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
       -DCMAKE_INSTALL_LIBDIR=lib \
+      
+https://github.com/OpenImageIO/oiio/commit/a99000fee4bbbcd4ed80674d77b14597a8f4e202
+      -DCMAKE_CXX_STANDARD=14 \ # POUR openVDB 8.0.1
+
   ...
 
 2-3) VERIFIER CMakeLists.txt
