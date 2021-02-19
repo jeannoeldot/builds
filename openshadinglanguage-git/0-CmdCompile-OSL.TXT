@@ -36,9 +36,11 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.11.11.0.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.11.0.20210202
-pkgrel=2    # Rebuild against OIIO + opencolorio 2.0.0
+pkgrel=3    # Rebuild MAJ clang 11.1.0-1
+
 pkgrel=1
 
+pkgrel=2    # Rebuild against OIIO + opencolorio 2.0.0
 pkgrel=7    # Rebuild against OIIO + opencolorio1 et openjpeg2 2.4
 pkgrel=6    # Rebuild MAJ OIIO 2.2.10.1 + MAJ openvdb 8.0.0
 pkgrel=5    # Rebuild MAJ OIIO 2.2.10.0
@@ -90,9 +92,9 @@ provides=('openshadinglanguage')
 !!! LLVM 11.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 11.0.1-1 [installé]
-extra/llvm 11.0.1-2 [installé]
-extra/llvm-libs 11.0.1-2 [installé]
+extra/clang 11.1.0-1 [installé]
+extra/llvm 11.1.0-1 [installé]
+extra/llvm-libs 11.1.0-1 [installé]
 
 depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
