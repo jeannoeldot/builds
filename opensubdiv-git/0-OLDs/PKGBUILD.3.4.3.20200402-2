@@ -1,10 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=opensubdiv-git
-pkgver=3.4.4.20210216
-pkgrel=1
-_ver_release="3_4_4"
-_name_release="OpenSubdiv-${_ver_release}"
+pkgver=3.4.3.20200402
+pkgrel=2
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
 license=('custom')
@@ -14,13 +12,15 @@ depends=('glfw-x11' 'tbb'
 makedepends=('cmake' 'mesa')
 conflicts=('opensubdiv')
 provides=('opensubdiv')
-source=("OpenSubdiv-v${_ver_release}.tar.gz"
+source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('20d49f80a2b778ad4d01f091ad88d8c2f91cf6c7363940c6213241ce6f1048fb'
+sha256sums=('87bd058e527b691012281d2ee16ead7f8a62e230593d1fac82721a20e273b545'
 )
 
+_gitname="opensubdiv"
+
 build() {
-  cd "${_name_release}"
+  cd "${_gitname}"
   
   [[ -d build ]] && rm -r build
   mkdir build && cd build
@@ -44,7 +44,7 @@ build() {
 }
 
 package() {
-  cd "${_name_release}/build"
+  cd "${_gitname}/build"
   make DESTDIR="${pkgdir}" install
 
   #license

@@ -5,11 +5,11 @@ cd $HOME/05-builds/opensubdiv-git
 
 mkdir /tmp/srcp
 
-cp -v opensubdiv-git-3.4.3.20200402.tar.gz /tmp/srcp/
+cp -v OpenSubdiv-v3_4_4.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf opensubdiv-git-3.4.3.20200402.tar.gz
+tar -xzf OpenSubdiv-v3_4_4.tar.gz
 
 1) MODIFIER opensubdiv/CMakeLists.txt
 ====================================================================================

@@ -4,14 +4,330 @@
 !!! EN USER
 cd $HOME/05-builds/opensubdiv-git
 
+1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+https://github.com/PixarAnimationStudios/OpenSubdiv/releases
+==> 16 fev 2021 ==> 20210216
+==> v3_4_4 ==> 3.4.4
+==> 3.4.4.20210216
 
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O OpenSubdiv-v3_4_4.tar.gz \
+https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v3_4_4.tar.gz
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/opensubdiv-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/OpenSubdiv-v3_4_4.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=opensubdiv-git               # opensubdiv ds community
+pkgver=3.4.4.20210216
+pkgrel=1
+
+pkgrel=2  # Rebuild intel-tbb ==> tbb
+
+pkgrel=4    # MAJ intel-tbb 2019.9-1
+pkgrel=3    # find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+pkgrel=2    # sed -i -e "s/-O3 //g" $(find . -name flags.make)
+
+pkgrel=2    # Rebuild nouveau PC 
+
+pkgrel=2    # gcc 8.1.0
+
+
+!!!!!!
+_ver_release="3_4_4"
+_name_release="OpenSubdiv-${_ver_release}"
+
+
+license=('custom')
+
+conflicts='opensubdiv'
+provides='opensubdiv'
+
+
+SANS CUDA
+=========
+makedepends=('cmake' 'mesa')
+
+source=("OpenSubdiv-v${_ver_release}.tar.gz"
+)
+
+sha256sum OpenSubdiv-v3_4_4.tar.gz
+
+sha256sums=('... ...'
+)
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}/build"
+
+===================================================================
+AVEC CUDA
+=========
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+             'gcc5'
+)
+    -D CMAKE_C_COMPILER='/usr/bin/gcc-5' \
+    -D CMAKE_CXX_COMPILER='/usr/bin/g++-5' \
+
+makedepends=('cmake' 'mesa' 'cuda'
+             'opencl-headers'
+)
+
+source=("$pkgname-$pkgver.tar.gz"
+        'fix-Erreur-compil-cmake-nvcc.patch'
+)
+
+sha256sum OpenSubdiv-v3_4_4.tar.gz
+
+sha256sum fix-Erreur-compil-cmake-nvcc.patch
+
+sha256sums=('...'
+            '...'
+)
+
+prepare() {
+  cd "${_gitname}"
+  # Syntax Warning in cmake code at column 63
+  # Argument not separated from preceding token by whitespace.
+  # This warning is for project developers.  Use -Wno-dev to suppress it.
+  patch -Np1 -i "${srcdir}/fix-Erreur-compil-cmake-nvcc.patch"
+}
+===================================================================
+
+!!! INUTILE SI
+$ find . -name \*.py
+./regression/far_regression/example_createMesh.py
+./examples/common/export_obj.py
+./documentation/processHtml.py
+./documentation/processTutorials.py
+
+-D NO_DOC=1 \
+-D NO_TUTORIALS=1 \
+-D NO_REGRESSION=1 \
+-D NO_EXAMPLES=1 \
+
+prepare() {
+    cd "OpenSubdiv-${pkgver//./_}"
+
+    find . -name \*.py | xargs sed -i "s/env python/env python2/g"
+}
+!!!
+
+
+2-2) VERIFIER CMakeLists.txt
+==============================
+mkdir /tmp/srcp
+
+tar -xzf OpenSubdiv-v3_4_4.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/OpenSubdiv-3_4_4/CMakeLists.txt
+
+!!! CLONER BLENDER AVANT
+!!! VOIR 0-CmdCompile-blender.TXT LIGNE 21
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
+
+-DCUDA_TOOLKIT_ROOT_DIR=[path to CUDA Toolkit]
+
+-DGLEW_LOCATION=[path to GLEW]
+
+
+!!! VOIR PTEX
+!!! VOIR PKGBUILD DE BLENDER DS COMMUNITY
+
+SANS CUDA
+=========
+LIGNES 302 ET SUIVANTES
+-----------------------
+# ptex is only needed when nicholas bishop is ready
+-D NO_PTEX=1 \
+
+-D NO_CLEW=1 \
+-D NO_CUDA=1 \
+-D NO_OPENCL=1 \
+
+# docs, tutorials, regression tests and examples are not needed
+-D NO_DOC=1 \
+-D NO_TUTORIALS=1 \
+-D NO_REGRESSION=1 \
+-D NO_EXAMPLES=1 \
+
+# LIGNE 314
+-D NO_METAL=1 \
+
+!!! VOIR LIGNE 308 OpenMP
+option(NO_OMP "Disable OpenMP backend" OFF)
+
+!!! VOIR LIGNE 318 GLEW
+option(NO_GLEW "Disable use of GLEW" ON)  ==> SUPPR dep 'glew'
+
+# LIGNE 324
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+
+AVEC CUDA
+=========
+LIGNES 302 ET SUIVANTES
+-----------------------
+# ptex is only needed when nicholas bishop is ready
+-D NO_PTEX=1 \
+-D NO_CLEW=1 \
+# docs, tutorials, regression tests and examples are not needed
+-D NO_DOC=1 \
+-D NO_TUTORIALS=1 \
+-D NO_REGRESSION=1 \
+-D NO_EXAMPLES=1 \
+
+LIGNES 577 ET SUIVANTES
+-----------------------
+!!! VOIR commit du 30/09/2016 : Fixed CUDA build with newer SDKs
+OSD_CUDA_NVCC_FLAGS
+-D OSD_CUDA_NVCC_FLAGS="--gpu-architecture compute_52" \
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r-- 1 jnd users     1282  9 août  10:20 PKGBUILD
+-rw-r--r-- 1 jnd users 15825430  9 août  09:43 OpenSubdiv-v3_4_4.tar.gz
+-rw-r--r-- 1 jnd users      499  2 févr. 17:00 fix-Erreur-compil-cmake-nvcc.patch
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/opensubdiv-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/opensubdiv-git/OpenSubdiv-v3_4_4.tar.gz . \
+&& cp -v $HOME/05-builds/opensubdiv-git/fix-Erreur-compil-cmake-nvcc.patch . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/opensubdiv-git \
+&& cp -v /tmp/build/opensubdiv-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/opensubdiv-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap opensubdiv-git-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.*
+
+$ cp -v opensubdiv-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v opensubdiv-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i OpenSubdiv-v3_4_4.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu opensubdiv-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd opensubdiv-git
+# rm /var/cache/pacman/pkg/opensubdiv-git-*
+# LC_ALL=C pacman -S opensubdiv-git
+
+
+
+================================================================
+ANCIENS
+========
 1) SOURCES
 ==============
 https://github.com/PixarAnimationStudios/OpenSubdiv/releases
 ==> VERSION = v3_4_3
 
-1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
-======================================================
 https://github.com/PixarAnimationStudios/OpenSubdiv/commits/master
 ==> Commits on Apr 2, 2020
 ==> 20200402
@@ -49,303 +365,15 @@ $ head -n 46 opensubdiv/opensubdiv/version.h | grep VERSION
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
-tar -cvzf opensubdiv-git-3.4.3.20200402.tar.gz --exclude=.git opensubdiv
-
-1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
-==========================================
-cd $HOME/05-builds/opensubdiv-git
-
-!!! CONSERVE VERSION DANS 05-builds-dir-git
--------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/opensubdiv-git-3.4.3.20200402.tar.gz .
-sync
-
-1-8) FAIRE PATCH
-===============================
-voir 0-CmdFairePatches.TXT
-
-
-2-1) MODIFIER LE PKGBUILD
-=========================
-# Maintainer: Name <name@fai.com>
-
-pkgname=opensubdiv-git               # opensubdiv ds community
-pkgver=3.4.3.20200402
-pkgrel=2  # Rebuild intel-tbb ==> tbb
-
-pkgrel=1
-
-pkgrel=4    # MAJ intel-tbb 2019.9-1
-pkgrel=3    # find . -type f -exec sed -i -e 's/\-O3//g' {} \;
-pkgrel=2    # sed -i -e "s/-O3 //g" $(find . -name flags.make)
-
-pkgrel=2    # Rebuild nouveau PC 
-
-pkgrel=2    # gcc 8.1.0
-
-
-license=('custom')
-
-conflicts='opensubdiv'
-provides='opensubdiv'
+tar -cvzf OpenSubdiv-v3_4_4.tar.gz --exclude=.git opensubdiv
 
 !!!!!!
 _gitname="opensubdiv"
 
-
-SANS CUDA
-=========
-makedepends=('cmake' 'mesa')
-
-source=("$pkgname-$pkgver.tar.gz"
-)
-
-sha256sum opensubdiv-git-3.4.3.20200402.tar.gz
-
-sha256sums=('... ...'
-)
-
-
-AVEC CUDA
-=========
-makedepends=('cmake' 'mesa' 'cuda'
-             'opencl-headers'
-             'gcc5'
-)
-    -D CMAKE_C_COMPILER='/usr/bin/gcc-5' \
-    -D CMAKE_CXX_COMPILER='/usr/bin/g++-5' \
-
-makedepends=('cmake' 'mesa' 'cuda'
-             'opencl-headers'
-)
-
-source=("$pkgname-$pkgver.tar.gz"
-        'fix-Erreur-compil-cmake-nvcc.patch'
-)
-
-sha256sum opensubdiv-git-3.4.3.20200402.tar.gz
-
-sha256sum fix-Erreur-compil-cmake-nvcc.patch
-
-sha256sums=('...'
-            '...'
-)
-
-prepare() {
-  cd "${_gitname}"
-  # Syntax Warning in cmake code at column 63
-  # Argument not separated from preceding token by whitespace.
-  # This warning is for project developers.  Use -Wno-dev to suppress it.
-  patch -Np1 -i "${srcdir}/fix-Erreur-compil-cmake-nvcc.patch"
-}
-
-!!! INUTILE SI
-$ find . -name \*.py
-./regression/far_regression/example_createMesh.py
-./examples/common/export_obj.py
-./documentation/processHtml.py
-./documentation/processTutorials.py
-
--D NO_DOC=1 \
--D NO_TUTORIALS=1 \
--D NO_REGRESSION=1 \
--D NO_EXAMPLES=1 \
-
-prepare() {
-    cd "OpenSubdiv-${pkgver//./_}"
-
-    find . -name \*.py | xargs sed -i "s/env python/env python2/g"
-}
-!!!
-
-
-2-2) VERIFIER CMakeLists.txt
-==============================
  kwrite /0-DataLinux/05-builds-dir-git/opensubdiv/CMakeLists.txt &
 
-!!! CLONER BLENDER AVANT
-!!! VOIR 0-CmdCompile-blender.TXT LIGNE 21
-/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
-
--DCUDA_TOOLKIT_ROOT_DIR=[path to CUDA Toolkit]
-
--DGLEW_LOCATION=[path to GLEW]
-
-
-!!! VOIR PTEX
-!!! VOIR PKGBUILD DE BLENDER DS COMMUNITY
-
-SANS CUDA
-=========
-LIGNES 293 ET SUIVANTES
------------------------
-# ptex is only needed when nicholas bishop is ready
--D NO_PTEX=1 \
-
--D NO_CLEW=1 \
--D NO_CUDA=1 \
--D NO_OPENCL=1 \
-
-# docs, tutorials, regression tests and examples are not needed
--D NO_DOC=1 \
--D NO_TUTORIALS=1 \
--D NO_REGRESSION=1 \
--D NO_EXAMPLES=1 \
-
-# LIGNE 305
--D NO_METAL=1 \
-
-!!! VOIR LIGNE 299 OpenMP
-option(NO_OMP "Disable OpenMP backend" OFF)
-
-!!! VOIR LIGNE 309 GLEW
-option(NO_GLEW "Disable use of GLEW" ON)  ==> SUPPR dep 'glew'
-
-# LIGNE 315
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
-
-AVEC CUDA
-=========
-LIGNES 284 ET SUIVANTES
------------------------
-# ptex is only needed when nicholas bishop is ready
--D NO_PTEX=1 \
--D NO_CLEW=1 \
-# docs, tutorials, regression tests and examples are not needed
--D NO_DOC=1 \
--D NO_TUTORIALS=1 \
--D NO_REGRESSION=1 \
--D NO_EXAMPLES=1 \
-
-LIGNES 507 ET SUIVANTES
------------------------
-!!! VOIR commit du 30/09/2016 : Fixed CUDA build with newer SDKs
-OSD_CUDA_NVCC_FLAGS
--D OSD_CUDA_NVCC_FLAGS="--gpu-architecture compute_52" \
-
-
-
-!!! ATTENTION : ATTRIBUTS FICHIERS
-==================================
-$ ls -la
-==> 
--rw-r--r-- 1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r-- 1 jnd users 15825430  9 août  09:43 opensubdiv-git-3.4.3.20200402.tar.gz
--rw-r--r-- 1 jnd users      499  2 févr. 17:00 fix-Erreur-compil-cmake-nvcc.patch
-
-!!! A MODIFIER SI PAS OK !
-===============================
-
-
-3) MAKEPKG DANS TMP EN USER
-====================================
-!!! EN ROOT
-# pacman -Syu
-
-!!! EN USER
-
-rm -f *~ \
-&& rm -rf /tmp/build \
-&& mkdir /tmp/build \
-&& cd /tmp/build \
-&& cp -v $HOME/05-builds/opensubdiv-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/opensubdiv-git/opensubdiv-git-3.4.3.20200402.tar.gz . \
-&& cp -v $HOME/05-builds/opensubdiv-git/fix-Erreur-compil-cmake-nvcc.patch . \
-&& LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/opensubdiv-git \
-&& cp -v /tmp/build/opensubdiv-git-*-x86_64.pkg.tar.* . \
-&& rm -rf /tmp/build
-
-SI ERREUR :
-------------
-cd $HOME/05-builds/opensubdiv-git && rm -rf /tmp/build
-
-
-3-1) MAKEPKG TMPFS en CHROOT EN USER
-====================================
-!!! EN USER
-
-$ mkpkg-chroot-repo
-
-  FLOOP
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m floop
-
 $ $HOME/bin/mkpkg-tmpfs -m floop
-
-  FAST
--------
-$ rm -f *~
-$ mkpkg-tmpfs -m fast
-
 $ $HOME/bin/mkpkg-tmpfs -m fast
 
-  NATIVE
---------
 $ rm -f *~
 $ $HOME/bin/mkpkg-tmpfs -m native
-
-$ rm -f *~
-$ mkpkg-tmpfs -m native
-
-
-$ rm -rf /tmp/chrootrepo
-
-4)
-===========================
-# Nettoyage...
-!!! EN USER
-rm -f *~
-
-# Verifications...
-
-namcap opensubdiv-git-*-x86_64.pkg.tar.*
-
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
--------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.*
-
-$ cp -v opensubdiv-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
-----------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
-
-$ mv -v opensubdiv-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
-
-
-# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
---------------------------------------------
-$ rm -f *~
-$ rm -f *.log
-$ rm -i opensubdiv-git-3.4.3.20200402.tar.gz
-
-
-$ cd && maj-repolocal
-$ sync
-
-
-!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
-===================================================================================
-!!! EN ROOT
-# cd
-# maj
-OU
-# LC_ALL=C pacman -Syu
-
-# LC_ALL=C pacman -Syu opensubdiv-git
-
-SI PROBLEME
-==============
-!!! EN ROOT
-# LC_ALL=C pacman -Rdd opensubdiv-git
-# rm /var/cache/pacman/pkg/opensubdiv-git-*
-# LC_ALL=C pacman -S opensubdiv-git
-
-
-
-================================================================
-ANCIENS
-========

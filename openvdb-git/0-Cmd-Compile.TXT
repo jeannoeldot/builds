@@ -96,7 +96,7 @@ build() {
   cd "${_name_release}"
 
 package() {
-  cd "${_name_release}"
+  cd "${_name_release}/build"
 
 
 2-5) VERIFIER CMakeLists.txt
