@@ -1,0 +1,14 @@
+
+-- Found LLVM: /usr/lib/libLLVM-11.1.0.so  
+-- Could NOT find Clang (missing: _CLANG_LIBRARIES) 
+-- Clang not found
+
+  - WITH_CLANG                  OFF
+
+  build_files/build_environment/cmake/clang.cmake                               |   104 -
+delete mode 100644 build_files/build_environment/cmake/clang.cmake
+  
+create mode 100644 build_files/cmake/Modules/FindClang.cmake
+  build_files/cmake/Modules/FindClang.cmake                                     |   111 +
+ 
+  
