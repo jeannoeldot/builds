@@ -5,10 +5,35 @@
 
   - WITH_CLANG                  OFF
 
-  build_files/build_environment/cmake/clang.cmake                               |   104 -
-delete mode 100644 build_files/build_environment/cmake/clang.cmake
-  
 create mode 100644 build_files/cmake/Modules/FindClang.cmake
   build_files/cmake/Modules/FindClang.cmake                                     |   111 +
  
+
+A TESTER :
+PAS OK : 2.93.0.9.20210228-2
+------------------------------
+
+  -DCLANG_LIBRARIES=/usr/lib \
+  -DCLANG_INCLUDE_DIRS=/usr/include/clang \
+
+-- Configuring done
+WARNING: Target "cycles_bvh" requests linking to directory "/usr/lib".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_device" requests linking to directory "/usr/lib".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_kernel" requests linking to directory "/usr/lib".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_kernel_osl" requests linking to directory "/usr/lib".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_render" requests linking to directory "/usr/lib".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "blender" requests linking to directory "/usr/lib".  Targets may link only to libraries.  CMake is dropping the item.
   
+  CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CLANG_INCLUDE_DIRS
+
+A TESTER :
+PAS OK : : 2.93.0.9.20210228-3
+------------------------------
+
+      -DCMAKE_CXX_STANDARD=14 \
+
+NE COMPILE PAS
+
