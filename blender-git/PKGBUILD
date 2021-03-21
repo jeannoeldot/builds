@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=2.93.0.11.20210314
-pkgrel=2
+pkgver=2.93.0.13.20210321
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -11,7 +11,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libjpeg' 'libpng' 'openjpeg2' 'libtiff' 'openexr' 
           'python'
           'ffmpeg' 'fftw'
-          'openal' 'freetype2' 'libsndfile' 'jack'
+          'openal' 'freetype2' 'libsndfile' 'jack' 'pulseaudio'
           'sdl2'
           'libgl' 'glfw-x11'
           'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
@@ -38,7 +38,7 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.2.0-include.zip"
 )
-sha256sums=('f6fad39730dc0f020b1035bc344de17e9addd9035cdefe2c7977000ee0805e79'
+sha256sums=('fd37932b98d22163d30ffbfa215095acaf03f8b831d23b3070028901e139af7e'
             '52d76228ca2758786d524666130eb94d883809aed246a8ad92c50a4d901f900f'
 )
 
@@ -52,9 +52,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo :2.93.0.5.20210131 Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "2919c4bf9df4"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "dcf1a1045dfe"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1615705685|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1616298697|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -73,6 +73,7 @@ build() {
         -DCMAKE_SKIP_RPATH=ON \
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DCLANG_ROOT_DIR=/usr/lib/clang \
+        -DCLANG_LIBRARIES=/usr/lib/clang \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \

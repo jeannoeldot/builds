@@ -1,5 +1,4 @@
 
--- Found LLVM: /usr/lib/libLLVM-11.1.0.so  
 -- Could NOT find Clang (missing: _CLANG_LIBRARIES) 
 -- Clang not found
 
@@ -9,8 +8,26 @@ create mode 100644 build_files/cmake/Modules/FindClang.cmake
   build_files/cmake/Modules/FindClang.cmake                                     |   111 +
  
 
-A TESTER :
- 2.93.0.11.20210314
+2.93.0.13.20210321
+------------------------------
+  -DCLANG_ROOT_DIR=/usr/lib/clang \
+  -DCLANG_LIBRARIES=/usr/lib/clang \
+
+-- Could NOT find Clang (missing: _CLANG_LIBRARIES) 
+-- Clang not found
+
+  - WITH_CLANG                  OFF
+
+-- Configuring done
+WARNING: Target "cycles_bvh" requests linking to directory "/usr/lib/clang".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_device" requests linking to directory "/usr/lib/clang".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_kernel" requests linking to directory "/usr/lib/clang".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_kernel_osl" requests linking to directory "/usr/lib/clang".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "cycles_render" requests linking to directory "/usr/lib/clang".  Targets may link only to libraries.  CMake is dropping the item.
+WARNING: Target "blender" requests linking to directory "/usr/lib/clang".  Targets may link only to libraries.  CMake is dropping the item.
+
+
+2.93.0.11.20210314 : PAS OK
 ------------------------------
   -DCLANG_ROOT_DIR=/usr/lib/clang \
   
@@ -20,8 +37,7 @@ A TESTER :
   - WITH_CLANG                  OFF
   
  
-A TESTER :
-PAS OK : 2.93.0.9.20210228-2
+2.93.0.9.20210228-2 : PAS OK
 ------------------------------
 
   -DCLANG_LIBRARIES=/usr/lib \
@@ -40,8 +56,8 @@ WARNING: Target "blender" requests linking to directory "/usr/lib".  Targets may
 
     CLANG_INCLUDE_DIRS
 
-A TESTER :
-PAS OK : : 2.93.0.9.20210228-3
+
+2.93.0.9.20210228-3 : PAS OK
 ------------------------------
 
       -DCMAKE_CXX_STANDARD=14 \

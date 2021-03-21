@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.93.0.11.20210314
+!!! VERSION = 2.93.0.13.20210321
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-2.93.0.11.20210314.tar.gz /tmp/srcp/
+cp -v blender-git-2.93.0.13.20210321.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-2.93.0.11.20210314.tar.gz
+tar -xzf blender-git-2.93.0.13.20210321.tar.gz
 
 
 99) QUAND PATCHES FINIS
