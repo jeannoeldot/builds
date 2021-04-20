@@ -601,15 +601,15 @@ OU
 !!! MODIFIER FICHIERS
 !!! EN USER
 
-!!! SI CHANGEMENT DE VERSION ( 2.92 -> 2.93  ... )
+!!! SI CHANGEMENT DE VERSION ( 2.93 -> 3.0  ... )
 
 $ cd
-$ cp -r .config/blender/2.92 .config/blender/2.93
-# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.93/cache
-$ rm -f .config/blender/2.93/cache/bvh_*
+$ cp -r .config/blender/2.93 .config/blender/3.0
+# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/3.0/cache
+$ rm -f .config/blender/3.0/cache/bvh_*
 
 # SUPPRINE VERSION N-2
-$ rm -rf .config/blender/2.91
+$ rm -rf .config/blender/2.92
 
 !!! MODIFIER FICHIERS sm_52.cubin (blender Cuda 10.1 -> moi Cuda 10.2)
 !!! VOIR 00-Copie-fichiers-sm_52.cubin.TXT
@@ -1090,15 +1090,15 @@ sha256sum fix-SyntaxError-io_scene_cod.patch
 !!! ERREUR Compile avec embree 3.5.2
          'embree-git'
 
-blender-git E: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
-blender-git E: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
-blender-git W: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git E: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
+blender-git E: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
+blender-git W: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
 blender-git W: ELF file ('usr/bin/blender') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
-blender-git W: ELF file ('usr/share/blender/2.92/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
+blender-git W: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
+blender-git W: ELF file ('usr/share/blender/2.93/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
 
         "fix-SyntaxError-io_convert_image_to_mesh_img.patch"
 sha256sum fix-SyntaxError-io_convert_image_to_mesh_img.patch
@@ -1111,7 +1111,7 @@ Lignes 547 et ...
 WITH_LEGACY_DEPSGRAPH ON
 
 /!\ /!\ /!\ UTILITÉ ???
-!!! SI CHANGEMENT DE VERSION (ex de 2.91 à 2.92)
+!!! SI CHANGEMENT DE VERSION (ex de 2.92 à 2.93)
 
 ==> Modifier blender.install
 

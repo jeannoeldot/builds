@@ -1,0 +1,15 @@
+diff -aur OpenShadingLanguage-1.11.13.0/src/liboslexec/llvm_util.cpp OpenShadingLanguage-1.11.13.0.new/src/liboslexec/llvm_util.cpp
+--- OpenShadingLanguage-1.11.13.0/src/liboslexec/llvm_util.cpp	2021-04-02 04:38:51.000000000 +0200
++++ OpenShadingLanguage-1.11.13.0.new/src/liboslexec/llvm_util.cpp	2021-04-20 10:55:40.387662535 +0200
+@@ -2448,8 +2448,9 @@
+ #endif
+     //llvm_gen_debug_printf (std::string("start ") + std::string(name));
+ #if OSL_LLVM_VERSION >= 110
+-    OSL_DASSERT(llvm::isa<llvm::Function>(func));
+-    llvm::Value *r = builder().CreateCall(llvm::cast<llvm::Function>(func), llvm::ArrayRef<llvm::Value *>(args.data(), args.size()));
++    llvm::Value* r = builder().CreateCall(
++        llvm::cast<llvm::FunctionType>(func->getType()->getPointerElementType()), func,
++        llvm::ArrayRef<llvm::Value*>(args.data(), args.size()));
+ #else
+     llvm::Value *r = builder().CreateCall (func, llvm::ArrayRef<llvm::Value *>(args.data(), args.size()));
+ #endif

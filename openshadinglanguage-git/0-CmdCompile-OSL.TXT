@@ -28,7 +28,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.11.13.0.tar.gz .
 
 1-8) FAIRE PATCH
 ===============================
-
+VOIR 0-CmdFairePatches.TXT
 
 2-1) MODIFIER LE PKGBUILD
 ========================
@@ -36,6 +36,8 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.11.13.0.tar.gz .
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.13.0.20210402
+pkgrel=3    # Avec Patch Fix crash generating closure functions calls with LLVM 11
+
 pkgrel=2    # Rebuild MAJ OIIO 2.2.13.1
 
 pkgrel=1
@@ -109,6 +111,27 @@ depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
 depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
 
 makedepends=('boost' 'cmake' 'llvm')
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        'Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch'
+)
+
+sha256sum OpenShadingLanguage-v1.11.13.0.tar.gz
+
+sha256sum Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch
+
+sha256sums=('....'
+            '....'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/pull/1361/files
+  # Fix crash generating closure functions calls with LLVM 11
+  patch -Np1 -i "${srcdir}/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch"
+}
 
 
 2-2) PKGBUILD SANS PATCH
