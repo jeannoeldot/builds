@@ -36,17 +36,13 @@ CARCH="x86_64"
 CHOST="x86_64-pc-linux-gnu"
 
 #-- Compiler and Linker Flags
-#CPPFLAGS=""
-CFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -fexceptions \
-        -Wp,-D_FORTIFY_SOURCE=2,-D_GLIBCXX_ASSERTIONS \
-        -Wformat -Werror=format-security \
-        -fstack-clash-protection -fcf-protection \
-        -floop-interchange -floop-strip-mine -floop-block"
-CXXFLAGS="$CFLAGS"
+CPPFLAGS="-D_FORTIFY_SOURCE=2"
+CFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt"
+CXXFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt"
 LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 #RUSTFLAGS="-C opt-level=2"
 #-- Make Flags: change this for DistCC/SMP systems
-MAKEFLAGS="-j13"
+MAKEFLAGS="-j7"
 #-- Debugging flags
 DEBUG_CFLAGS="-g -fvar-tracking-assignments"
 DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"
@@ -93,7 +89,7 @@ BUILDENV=(!distcc color !ccache check !sign)
 #
 OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug)
 
-#-- File integrity checks to use. Valid: md5, sha1, sha256, sha384, sha512, b2
+#-- File integrity checks to use. Valid: md5, sha1, sha256, sha384, sha512
 INTEGRITY_CHECK=(md5)
 #-- Options to be used when stripping binaries. See `man strip' for details.
 STRIP_BINARIES="--strip-all"
