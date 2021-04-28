@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=8.0.1.20210205
+pkgrel=2          # rebuild MAJ openexr/imath 3.0.1
+
 pkgrel=1
 
 pkgrel=3          # rebuild boost boost-libs 1.75.0 + patch
@@ -71,9 +73,9 @@ _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
 
-depends=('openexr' 'boost-libs' 'tbb' 'zlib'
+depends=('boost-libs' 'tbb' 'zlib'
           'blosc' 'glfw-x11' 'glu'
-          'jemalloc'
+          'jemalloc' 'imath'
 )
 
 !!! VOIR : cppunit python
@@ -81,6 +83,25 @@ makedepends=('boost' 'mesa' 'doxygen' 'cmake')
 
 conflicts='openvdb'
 provides='openvdb'
+
+AVEC PATCH
+----------
+source=("OpenVDB-v${_ver_release}.tar.gz"
+        'openvdb-openexr3.patch'
+)
+
+sha256sum OpenVDB-v8.0.1.tar.gz
+
+sha256sum openvdb-openexr3.patch
+
+sha256sums=('...'
+            '...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  patch -Np1 -i "${srcdir}/openvdb-openexr3.patch"
+}
 
 SANS PATCH
 ----------
@@ -200,9 +221,6 @@ OPENVDB_CORE_STATIC "Build statically linked version of the core library." ON ==
 LIGNE 21 À 24:
 --------------
 OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
-OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF ==> ON
-OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF ==> ON
-OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF ==> ON
 
 
 rm -rf /tmp/srcp
@@ -212,6 +230,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
+-rw-r--r--  1 jnd users    3983 28 avril 11:20 openvdb-openexr3.patch
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v8.0.1.tar.gz
 
@@ -232,6 +251,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openvdb-git/OpenVDB-v8.0.1.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/openvdb-openexr3.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -276,6 +296,7 @@ rm -f *~
 
 namcap openvdb-git-*-x86_64.pkg.tar.*
 openvdb-git W: Dependency zlib included but already satisfied
+openvdb-git W: Dependency imath included but already satisfied
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -322,6 +343,17 @@ SI PROBLEME
 
 ANCIEN
 ======
+3) kwrite /tmp/srcp/openvdb-8.0.1/openvdb/openvdb/cmd/CMakeLists.txt
+
+LIGNE 21 À 24:
+--------------
+OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
+
+OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF ==> ON
+OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF ==> ON
+OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF ==> ON
+
+
 AVEC PATCH
 ----------
 source=("OpenVDB-v${_ver_release}.tar.gz"

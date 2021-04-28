@@ -1,18 +1,89 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.0.0.0.20210425
+!!! VERSION = 3.0.0.0.20210428
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-3.0.0.0.20210425.tar.gz /tmp/srcp/
+cp -v blender-git-3.0.0.0.20210428.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-3.0.0.0.20210425.tar.gz
+tar -xzf blender-git-3.0.0.0.20210428.tar.gz
+
+blender-openexr3.patch
+VOIR:
+https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/blender-openexr3.patch
+
+1) MODIFIER blender/build_files/cmake/Modules/FindOpenEXR.cmake
+===============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/build_files/cmake/Modules
+kwrite FindOpenEXR.cmake
+
+MODIFIER LIGNES 37 À 41 :
+  Half
+  Iex
+  IlmImf
+  IlmThread
+  Imath
+ 
+DEVIENNENT
+  Iex
+  Imath
+  OpenEXR
+  IlmThread
+
+
+MODIFIER LIGNE 122 :
+  SET(OPENEXR_INCLUDE_DIRS ${OPENEXR_INCLUDE_DIR} ${OPENEXR_INCLUDE_DIR}/OpenEXR)
+ 
+DEVIENT
+  SET(OPENEXR_INCLUDE_DIRS ${OPENEXR_INCLUDE_DIR} ${OPENEXR_INCLUDE_DIR}/OpenEXR ${OPENEXR_INCLUDE_DIR}/Imath)
+
+ENREGISTRER et Quitter Kwrite & EFFACER FindOpenEXR.cmake~
+rm -f FindOpenEXR.cmake~
+ 
+cd ../../../..
+
+
+2) MODIFIER blender/source/blender/imbuf/intern/openexr/openexr_api.cpp
+=======================================================================
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/imbuf/intern/openexr
+kwrite openexr_api.cpp
+
+AJOUTER LIGNE 41 :
+#include <ImfFrameBuffer.h>
+
+AJOUTER LIGNE 44 :
+#include <ImfInt64.h>
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER openexr_api.cpp~
+rm -f openexr_api.cpp~
+
+cd ../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > blender-openexr3.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/blender-openexr3.patch .
+
+
+
 
 
 99) QUAND PATCHES FINIS

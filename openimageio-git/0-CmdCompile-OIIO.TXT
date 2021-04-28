@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.13.1.20210407
+pkgrel=2    # rebuild MAJ openexr 3.0.1
+
 pkgrel=1
 
 pkgrel=2    # rebuild against opencolorio 2.0.0
@@ -121,7 +123,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.9.2-1 [installé]
+==> extra/python 3.9.4-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.9
@@ -372,6 +374,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
+$ rm -f *.log
 $ rm -i oiio-v2.2.13.1.tar.gz
 
 

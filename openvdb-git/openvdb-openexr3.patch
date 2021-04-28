@@ -1,0 +1,118 @@
+diff -aur openvdb-8.0.1/cmake/FindOpenVDB.cmake openvdb-8.0.1.new/cmake/FindOpenVDB.cmake
+--- openvdb-8.0.1/cmake/FindOpenVDB.cmake	2021-02-05 20:21:38.000000000 +0100
++++ openvdb-8.0.1.new/cmake/FindOpenVDB.cmake	2021-04-28 10:59:29.771966990 +0200
+@@ -444,7 +444,7 @@
+ 
+ # Add standard dependencies
+ 
+-find_package(IlmBase REQUIRED COMPONENTS Half)
++find_package(Imath CONFIG REQUIRED)
+ find_package(TBB REQUIRED COMPONENTS tbb)
+ find_package(ZLIB REQUIRED)
+ 
+@@ -596,8 +596,7 @@
+ endif()
+ 
+ if(OpenVDB_USES_EXR)
+-  find_package(IlmBase REQUIRED)
+-  find_package(OpenEXR REQUIRED)
++  find_package(OpenEXR CONFIG REQUIRED)
+ endif()
+ 
+ if(UNIX)
+@@ -608,7 +607,7 @@
+   # @note OPENVDB_OPENEXR_STATICLIB is old functionality from the makefiles
+   #       used in PlatformConfig.h to configure EXR exports. Once this file
+   #       is completely removed, this define can be too
+-  get_target_property(ILMBASE_LIB_TYPE IlmBase::Half TYPE)
++  get_target_property(ILMBASE_LIB_TYPE Imath::Imath TYPE)
+   if(OPENEXR_USE_STATIC_LIBS OR (${ILMBASE_LIB_TYPE} STREQUAL STATIC_LIBRARY))
+     list(APPEND OpenVDB_DEFINITIONS OPENVDB_OPENEXR_STATICLIB)
+   endif()
+@@ -623,7 +622,7 @@
+ set(_OPENVDB_VISIBLE_DEPENDENCIES
+   Boost::iostreams
+   Boost::system
+-  IlmBase::Half
++  Imath::Imath
+ )
+ 
+ if(OpenVDB_ABI)
+@@ -632,10 +631,7 @@
+ 
+ if(OpenVDB_USES_EXR)
+   list(APPEND _OPENVDB_VISIBLE_DEPENDENCIES
+-    IlmBase::IlmThread
+-    IlmBase::Iex
+-    IlmBase::Imath
+-    OpenEXR::IlmImf
++    OpenEXR::OpenEXR
+   )
+   list(APPEND OpenVDB_DEFINITIONS OPENVDB_TOOLS_RAYTRACER_USE_EXR)
+ endif()
+diff -aur openvdb-8.0.1/openvdb/openvdb/CMakeLists.txt openvdb-8.0.1.new/openvdb/openvdb/CMakeLists.txt
+--- openvdb-8.0.1/openvdb/openvdb/CMakeLists.txt	2021-02-05 20:21:38.000000000 +0100
++++ openvdb-8.0.1.new/openvdb/openvdb/CMakeLists.txt	2021-04-28 11:12:26.596559909 +0200
+@@ -46,8 +46,8 @@
+ # Collect and configure lib dependencies
+ 
+ if(USE_EXR)
+-  find_package(IlmBase ${MINIMUM_ILMBASE_VERSION} REQUIRED)
+-  find_package(OpenEXR ${MINIMUM_OPENEXR_VERSION} REQUIRED)
++  find_package(Imath CONFIG REQUIRED)
++  find_package(OpenEXR CONFIG REQUIRED)
+   if(OPENVDB_FUTURE_DEPRECATION AND FUTURE_MINIMUM_OPENEXR_VERSION)
+     if(${OpenEXR_VERSION} VERSION_LESS FUTURE_MINIMUM_OPENEXR_VERSION)
+       message(DEPRECATION "Support for OpenEXR versions < ${FUTURE_MINIMUM_OPENEXR_VERSION} "
+@@ -55,7 +55,7 @@
+     endif()
+   endif()
+ else()
+-  find_package(IlmBase ${MINIMUM_ILMBASE_VERSION} REQUIRED COMPONENTS Half)
++  find_package(Imath CONFIG REQUIRED)
+ endif()
+ 
+ if(OPENVDB_FUTURE_DEPRECATION AND FUTURE_MINIMUM_ILMBASE_VERSION)
+@@ -129,7 +129,7 @@
+ set(OPENVDB_CORE_DEPENDENT_LIBS
+   Boost::iostreams
+   Boost::system
+-  IlmBase::Half
++  Imath::Imath
+ )
+ 
+ if(WIN32)
+@@ -147,10 +147,8 @@
+ 
+ if(USE_EXR)
+   list(APPEND OPENVDB_CORE_DEPENDENT_LIBS
+-    IlmBase::IlmThread
+-    IlmBase::Iex
+-    IlmBase::Imath
+-    OpenEXR::IlmImf
++    Imath::Imath
++    OpenEXR::OpenEXR
+   )
+ endif()
+ 
+@@ -413,7 +411,7 @@
+   # @note OPENVDB_OPENEXR_STATICLIB is old functionality from the makefiles
+   #       used in PlatformConfig.h to configure EXR exports. Once this file
+   #       is completely removed, this define can be too
+-  get_target_property(ILMBASE_LIB_TYPE IlmBase::Half TYPE)
++  get_target_property(ILMBASE_LIB_TYPE Imath::Imath TYPE)
+   if(OPENEXR_USE_STATIC_LIBS OR (${ILMBASE_LIB_TYPE} STREQUAL STATIC_LIBRARY))
+     list(APPEND OPENVDB_CORE_PUBLIC_DEFINES -DOPENVDB_OPENEXR_STATICLIB)
+   endif()
+diff -aur openvdb-8.0.1/openvdb/openvdb/Types.h openvdb-8.0.1.new/openvdb/openvdb/Types.h
+--- openvdb-8.0.1/openvdb/openvdb/Types.h	2021-02-05 20:21:38.000000000 +0100
++++ openvdb-8.0.1.new/openvdb/openvdb/Types.h	2021-04-28 11:17:32.200969663 +0200
+@@ -7,7 +7,7 @@
+ #include "version.h"
+ #include "Platform.h"
+ #include "TypeList.h" // backwards compat
+-#include <OpenEXR/half.h>
++#include <Imath/half.h>
+ #include <openvdb/math/Math.h>
+ #include <openvdb/math/BBox.h>
+ #include <openvdb/math/Quat.h>

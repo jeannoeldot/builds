@@ -36,6 +36,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.13.0.20210402
+pkgrel=4    # Rebuild openexr/imath 3.0.1
+
 pkgrel=3    # Avec Patch Fix crash generating closure functions calls with LLVM 11
 
 pkgrel=2    # Rebuild MAJ OIIO 2.2.13.1
@@ -254,6 +256,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.11.13.0.tar.gz
+-rw-r--r--  1 jnd users      975 20 avril 10:56 Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch
 
 
 !!! A MODIFIER SI PAS OK !
@@ -270,6 +273,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-v1.11.13.0.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
 && cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \

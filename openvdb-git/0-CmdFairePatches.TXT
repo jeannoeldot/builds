@@ -1,19 +1,158 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 8.0.0
-!!! VERSION = v8.0.0
+!!! VERSION = 8.0.1
+!!! VERSION = v8.0.1
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openvdb-git
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v8.0.0.tar.gz /tmp/srcp/
+cp -v OpenVDB-v8.0.1.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v8.0.0.tar.gz
+tar -xzf OpenVDB-v8.0.1.tar.gz
+
+openexr/imath 3.0.1
+===================
+VOIR:
+https://github.com/archlinux/svntogit-community/blob/packages/openvdb/trunk/openvdb-openexr3.patch
+
+1) MODIFIER openvdb-8.0.1/cmake/FindOpenVDB.cmake
+=================================================
+cp -R openvdb-8.0.1 openvdb-8.0.1.new
+
+cd openvdb-8.0.1.new/cmake
+
+kwrite FindOpenVDB.cmake
+
+MODIFIER LIGNE 447:
+find_package(IlmBase REQUIRED COMPONENTS Half)
+
+DEVIENT:
+find_package(Imath CONFIG REQUIRED)
+
+
+MODIFIER LIGNES 599 ET 600:
+  find_package(IlmBase REQUIRED)
+  find_package(OpenEXR REQUIRED)
+
+DEVIENNENT :
+  find_package(OpenEXR CONFIG REQUIRED)
+
+
+MODIFIER LIGNE 610:
+  get_target_property(ILMBASE_LIB_TYPE IlmBase::Half TYPE)
+
+DEVIENT:
+  get_target_property(ILMBASE_LIB_TYPE Imath::Imath TYPE)
+
+
+MODIFIER LIGNE 625:
+  IlmBase::Half
+
+DEVIENT:
+  Imath::Imath
+
+
+MODIFIER LIGNES 634 À 637:
+    IlmBase::IlmThread
+    IlmBase::Iex
+    IlmBase::Imath
+    OpenEXR::IlmImf
+
+DEVIENNENT :
+    OpenEXR::OpenEXR
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindOpenVDB.cmake~
+rm -f FindOpenVDB.cmake~
+ 
+cd ../..
+
+
+2) MODIFIER openvdb-8.0.1/openvdb/openvdb/CMakeLists.txt
+========================================================
+cd openvdb-8.0.1.new/openvdb/openvdb
+
+kwrite CMakeLists.txt
+
+MODIFIER LIGNES 49 À 50:
+  find_package(IlmBase ${MINIMUM_ILMBASE_VERSION} REQUIRED)
+  find_package(OpenEXR ${MINIMUM_OPENEXR_VERSION} REQUIRED)
+
+DEVIENNENT :
+  find_package(Imath CONFIG REQUIRED)
+  find_package(OpenEXR CONFIG REQUIRED)
+
+
+MODIFIER LIGNE 58:
+  find_package(IlmBase ${MINIMUM_ILMBASE_VERSION} REQUIRED COMPONENTS Half)
+
+DEVIENT:
+  find_package(Imath CONFIG REQUIRED)
+
+
+MODIFIER LIGNE 132:
+  IlmBase::Half
+
+DEVIENT:
+  Imath::Imath
+
+
+MODIFIER LIGNES 150 À 153:
+    IlmBase::IlmThread
+    IlmBase::Iex
+    IlmBase::Imath
+    OpenEXR::IlmImf
+
+DEVIENNENT :
+    Imath::Imath
+    OpenEXR::OpenEXR
+
+
+MODIFIER LIGNE 414:
+  get_target_property(ILMBASE_LIB_TYPE IlmBase::Half TYPE)
+
+DEVIENT:
+  get_target_property(ILMBASE_LIB_TYPE Imath::Imath TYPE)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+ 
+cd ../../..
+
+
+3) MODIFIER openvdb-8.0.1/openvdb/openvdb/Types.h
+========================================================
+cd openvdb-8.0.1.new/openvdb/openvdb
+
+kwrite Types.h
+
+MODIFIER LIGNE 10:
+#include <OpenEXR/half.h>
+
+DEVIENT:
+#include <Imath/half.h>
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Types.h~
+rm -f Types.h~
+ 
+cd ../../..
+
+
+diff -aur openvdb-8.0.1 openvdb-8.0.1.new
+diff -aur openvdb-8.0.1 openvdb-8.0.1.new > openvdb-openexr3.patch
+
+rm -rf openvdb-8.0.1.new
+
+cd $HOME/05-builds/openvdb-git
+
+mv -vf /tmp/srcp/openvdb-openexr3.patch .
 
 
 

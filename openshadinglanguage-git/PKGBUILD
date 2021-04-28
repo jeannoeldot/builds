@@ -2,14 +2,14 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.13.0.20210402
-pkgrel=3
+pkgrel=4
 _name_release="OpenShadingLanguage-1.11.13.0"
 _ver_release="v1.11.13.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
 license=('custom')
-depends=('boost-libs' 'openexr' 'tbb' 'freetype2' 'libpng' 'libtiff'
+depends=('boost-libs' 'imath' 'tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
          'llvm-libs'

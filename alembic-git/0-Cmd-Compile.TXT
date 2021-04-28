@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=alembic-git               # alembic ds community
 pkgver=1.8.0.20210417
+pkgrel=2          # rebuild MAJ openexr 3.0.1 + dep = imath
+
 pkgrel=1
 
 pkgrel=2          # rebuild MAJ openexr 2.5.3
@@ -58,8 +60,7 @@ _name_release="alembic-${_ver_release}"
 
 license=('BSD')
 
-!!! TESTS = OK
-depends=('gcc-libs' 'openexr'
+depends=('gcc-libs' 'imath'
 )
 
 makedepends=('cmake')
@@ -232,6 +233,10 @@ SI PROBLEME
 
 ANCIEN
 ======
+
+!!! TESTS = OK
+depends=('gcc-libs' 'openexr'
+
 
 wget -O alembic-1.8.0.tar.gz \
 https://github.com/alembic/alembic/archive/1.8.0.tar.gz
