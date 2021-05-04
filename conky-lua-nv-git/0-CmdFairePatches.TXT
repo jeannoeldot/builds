@@ -5,11 +5,11 @@ FAIRE PATCHS
 
 mkdir /tmp/srcp
 
-cp -v conky-lua-nv-git-1.11.7.20200727.tar.gz /tmp/srcp/
+cp -v conky-lua-nv-git-1.12.3.20210426.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf conky-lua-nv-git-1.11.7.20200727.tar.gz
+tar -xzf conky-lua-nv-git-1.12.3.20210426.tar.gz
 
 /!\ /!\ /!\   cd $HOME/05-builds/conky-lua-nv-git
 
