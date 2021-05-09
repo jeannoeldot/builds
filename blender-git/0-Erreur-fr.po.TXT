@@ -1,0 +1,16 @@
+
+┌jnd ( ~ )
+└─> $ grep -lR "la curseur" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/release/datafiles/locale/po/fr.po
+Ligne 44314
+
+
+jnd ( ~ )
+└─> $ grep -lR "claque" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/release/datafiles/locale/po/fr.po
+Ligne 19893
+Ligne 63957
+Ligne 70320
+Ligne 76291
+
+
