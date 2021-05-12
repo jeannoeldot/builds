@@ -1,15 +1,15 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.11.14.0.20210510
-pkgrel=1
-_name_release="OpenShadingLanguage-1.11.14.0"
-_ver_release="v1.11.14.0"
+pkgver=1.11.13.0.20210402
+pkgrel=4
+_name_release="OpenShadingLanguage-1.11.13.0"
+_ver_release="v1.11.13.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
 license=('custom')
-depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
+depends=('boost-libs' 'imath' 'tbb' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
          'llvm-libs'
@@ -21,9 +21,18 @@ makedepends=('boost' 'cmake' 'llvm')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        'Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch'
 )
-sha256sums=('530acd0e74da27ad2265c3331165e481d9717885ea2fad82091aa804680fa1d5'
+sha256sums=('5fface4b487b9bf9448ac5f5a370dbe2075d2941dd11c396448a86ac11663002'
+            'e7e4a832876874284c4be01490f47502f8befd7cd3bd74d005aebef2c0124ead'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/pull/1361/files
+  # Fix crash generating closure functions calls with LLVM 11
+  patch -Np1 -i "${srcdir}/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch"
+}
 
 build() {
   cd "${_name_release}"
