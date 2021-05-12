@@ -1,4 +1,54 @@
 
+0-3) OPTIX 7.3.0
+================
+https://developer.nvidia.com/designworks/optix/download
+
+TÉLÉCHARGER NVIDIA-OptiX-SDK-7.3.0-linux64-x86_64.sh  ==> ~/99-dwl-temp/
+
+mkdir /tmp/optix
+cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-7.3.0-linux64-x86_64.sh /tmp/optix/
+cd /tmp/optix
+chmod +x NVIDIA-OptiX-SDK-7.3.0-linux64-x86_64.sh
+./NVIDIA-OptiX-SDK-7.3.0-linux64-x86_64.sh
+Do you accept the license? [yN]: y
+Saying no will install in: "/tmp/optix" [Yn]:Y
+
+cd NVIDIA-OptiX-SDK-7.3.0-linux64-x86_64/
+ls ==> include
+zip -r OptiX-7.3.0-include.zip include
+  adding: include/ (stored 0%)
+  adding: include/optix_types.h (deflated 53%)
+  adding: include/optix_device.h (deflated 54%)
+  adding: include/optix_stubs.h (deflated 80%)
+  adding: include/optix.h (deflated 49%)
+  adding: include/optix_7_device.h (deflated 86%)
+  adding: include/optix_stack_size.h (deflated 83%)
+  adding: include/optix_function_table.h (deflated 83%)
+  adding: include/optix_denoiser_tiling.h (deflated 77%)
+  adding: include/optix_7_host.h (deflated 76%)
+  adding: include/optix_function_table_definition.h (deflated 50%)
+  adding: include/optix_7_types.h (deflated 75%)
+  adding: include/optix_host.h (deflated 52%)
+  adding: include/internal/ (stored 0%)
+  adding: include/internal/optix_7_device_impl_transformations.h (deflated 77%)
+  adding: include/internal/optix_7_device_impl_exception.h (deflated 80%)
+  adding: include/internal/optix_7_device_impl.h (deflated 91%)
+
+mv -v OptiX-7.3.0-include.zip /0-DataLinux/05-builds-dir-git/
+cd ..
+mv -v NVIDIA-OptiX-SDK-7.3.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
+
+cd ..
+rm -rf optix
+
+cd /0-DataLinux/05-builds-dir-git/
+
+sha256sum OptiX-7.3.0-include.zip
+ed62b562cba4b44a3a2d4676a21bfebd63b11aaa29901f7d8be11705d7a82c52
+
+cd
+
+
 0-2) OPTIX 7.2.0
 ================
 https://developer.nvidia.com/designworks/optix/download
