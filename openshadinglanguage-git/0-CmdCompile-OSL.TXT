@@ -36,6 +36,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.14.0.20210510
+pkgrel=2    # Rebuild against OIIO + opencolorio2=2.0.0
+
 pkgrel=1
 
 pkgrel=4    # Rebuild openexr/imath 3.0.1
@@ -232,7 +234,6 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.11.14.0.tar.gz
--rw-r--r--  1 jnd users      975 20 avril 10:56 Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch
 
 
 !!! A MODIFIER SI PAS OK !
@@ -249,7 +250,6 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-v1.11.14.0.tar.gz . \
-&& cp -v $HOME/05-builds/openshadinglanguage-git/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-git \
 && cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \
@@ -265,11 +265,12 @@ cd $HOME/05-builds/openshadinglanguage-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-SI depends= 'openimageio-git' ==> + openvdb-git
-===============================================
+SI depends= 'openimageio-git' ==> + openvdb-git + opencolorio2
+==============================================================
 $ cp -v $HOME/00-repolocal/\
 {\
 openvdb-git-*-x86_64.pkg.tar.*,\
+opencolorio2-*-x86_64.pkg.tar.*,\
 openimageio-git-*-x86_64.pkg.tar.*\
 } \
 /tmp/chrootrepo/
@@ -419,6 +420,9 @@ prepare() {
   # Fix crash generating closure functions calls with LLVM 11
   patch -Np1 -i "${srcdir}/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch"
 }
+
+-rw-r--r--  1 jnd users      975 20 avril 10:56 Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch
+&& cp -v $HOME/05-builds/openshadinglanguage-git/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch . \
 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.11.14.0.tar.gz

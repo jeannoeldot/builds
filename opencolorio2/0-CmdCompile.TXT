@@ -1,0 +1,240 @@
+0) REPERTOIRE
+==============
+cd $HOME/05-builds/opencolorio2
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/AcademySoftwareFoundation/OpenColorIO/releases
+==> 29/01/2021  ==> 20210129
+==> v2.0.0  ==> 2.0.0
+==> 2.0.0.20210129
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O OpenColorIO-v2.0.0.tar.gz \
+https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.0.0.tar.gz
+
+1-7) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/opencolorio2
+
+!!! CONSERVE Release DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/OpenColorIO-v2.0.0.tar.gz .
+
+
+1-8) FAIRE PATCHES
+=====================
+
+voir : CmdFairePatches.TXT
+---------------------------
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=opencolorio2
+pkgver=2.0.0.20210129
+pkgrel=1    # opencolorio 2.0.1 : incompatible avec OIIO
+
+!!!!!!
+_name_release="OpenColorIO-2.0.0"
+_ver_release="v2.0.0"
+
+conflicts=('opencolorio')
+provides=('opencolorio=2')
+
+!!!!!!
+depends=(...
+)
+
+makedepends=(...
+)
+
+!!!!!! SUPPRIMÉ
+optdepends=(
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("OpenColorIO-${_ver_release}.tar.gz"
+)
+
+sha512sum OpenColorIO-v2.0.0.tar.gz
+
+sha512sum opencolorio-openexr3.patch
+
+sha256sums=('...'
+            '...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  patch -d OpenColorIO-$pkgver -p1 < opencolorio-openexr3.patch
+}
+
+
+!!!!!!
+!!! VÉRIFIER VERSION PYTHON INSTALLÉE
+$ pacman -Ss python | grep 3 | grep install
+==> extra/python 3.9.5-1 [installé]
+
+ATTENTION AUX VERSIONS DE PYTHON
+PYTHON_VERSION=3.9
+
+!!! VERSION 2.0.0
+build() {
+  ...
+
+2-3) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf OpenColorIO-v2.0.0.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/OpenColorIO-2.0.0/CMakeLists.txt &
+
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users    5717 16 mai   10:48 opencolorio-openexr3.patch
+-rw-r--r--  1 jnd users 9892414 16 mai   15:18 OpenColorIO-v2.0.0.tar.gz
+-rw-r--r--  1 jnd users    1269 16 mai   15:26 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!!! PAS DE COMPILATION DANS /tmp : ==> PROBLÈME AVEC GIF
+---------------------------------------------------------
+!!! EN ROOT
+# pacman -Syu
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/opencolorio2/PKGBUILD . \
+&& cp -v $HOME/05-builds/opencolorio2/OpenColorIO-v2.0.0.tar.gz . \
+&& cp -v $HOME/05-builds/opencolorio2/opencolorio-openexr3.patch . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/opencolorio2 \
+&& cp -v /tmp/build/opencolorio2-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/opencolorio2 && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ mkpkg-tmpfs -m fast -l logs
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER sur SSD
+=============================
+!!! EN USER
+cd $HOME/05-builds/opencolorio2
+
+$ rm -f *~
+
+makepkg -s
+
+OU : makepkg -f
+
+# Nettoyage...
+!!! EN USER
+
+rm -f *~
+
+# Verifications...
+
+namcap opencolorio2-*-x86_64.pkg.tar.*
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/opencolorio2-*-x86_64.pkg.tar.*
+
+$ cp -v opencolorio2-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
+-----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/opencolorio2-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v opencolorio2-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i OpenColorIO-v2.0.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada opencolorio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu opencolorio2
+
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd opencolorio2
+# rm /var/cache/pacman/pkg/opencolorio2-*
+# LC_ALL=C pacman -S opencolorio2
+
+POUR REMETTRE opencolorio EXTRA
+================================
+# LC_ALL=C pacman -Rdd opencolorio2
+# rm /var/cache/pacman/pkg/opencolorio2-*
+# LC_ALL=C pacman -Syu opencolorio
+
+==================================================================================================
+ANCIEN
+=======
+
