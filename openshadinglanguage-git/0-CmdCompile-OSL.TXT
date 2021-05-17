@@ -36,6 +36,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.14.0.20210510
+pkgrel=3    # Rebuild against OIIO + opencolorio-git=2.0.1
 pkgrel=2    # Rebuild against OIIO + opencolorio2=2.0.0
 
 pkgrel=1
@@ -265,12 +266,12 @@ cd $HOME/05-builds/openshadinglanguage-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-SI depends= 'openimageio-git' ==> + openvdb-git + opencolorio2
-==============================================================
+SI depends= 'openimageio-git' ==> + openvdb-git + opencolorio-git
+=================================================================
 $ cp -v $HOME/00-repolocal/\
 {\
 openvdb-git-*-x86_64.pkg.tar.*,\
-opencolorio2-*-x86_64.pkg.tar.*,\
+opencolorio-git-*-x86_64.pkg.tar.*,\
 openimageio-git-*-x86_64.pkg.tar.*\
 } \
 /tmp/chrootrepo/

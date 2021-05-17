@@ -1,0 +1,48 @@
+
+==========================================
+AVEC CUDA ET SANS OPTIX
+==========================================
+[  3%] Generating filter_sm_52.cubin
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: argument list for class template "std::pair" is missing
+
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: expected a ")"
+
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: template parameter "_T1" may not be redeclared in this scope
+
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: expected a ";"
+
+[  3%] Building CXX object intern/cycles/util/CMakeFiles/cycles_util.dir/util_debug.cpp.o
+4 errors detected in the compilation of "/build/blender-git/src/blender/intern/cycles/kernel/kernels/cuda/filter.cu".
+make[2]: *** [intern/cycles/kernel/CMakeFiles/cycles_kernel_cuda.dir/build.make:288: intern/cycles/kernel/filter_sm_52.cubin] Error 1
+make[1]: *** [CMakeFiles/Makefile2:3420: intern/cycles/kernel/CMakeFiles/cycles_kernel_cuda.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+
+
+==========================================
+AVEC OPTIX ET CUDA
+==========================================
+[  2%] Generating kernel_optix.ptx
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+[  2%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/BLI_ghash_utils.c.o
+[  2%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/BLI_linklist.c.o
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: argument list for class template "std::pair" is missing
+
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: expected a ")"
+
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: template parameter "_T1" may not be redeclared in this scope
+
+/usr/include/c++/11.1.0/bits/stl_pair.h(460): error: expected a ";"
+
+[  2%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/BLI_memarena.c.o
+[  2%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/BLI_mempool.c.o
+[  2%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/endian_switch.c.o
+[  2%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/hash_mm2a.c.o
+[  2%] Building C object source/blender/makesdna/intern/CMakeFiles/bf_dna_blenlib.dir/__/__/blenlib/intern/listbase.c.o
+4 errors detected in the compilation of "kernels/optix/kernel_optix.cu".
+make[2]: *** [intern/cycles/kernel/CMakeFiles/cycles_kernel_optix.dir/build.make:268: intern/cycles/kernel/kernel_optix.ptx] Error 1
+make[1]: *** [CMakeFiles/Makefile2:3396: intern/cycles/kernel/CMakeFiles/cycles_kernel_optix.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+============================================================================
