@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.14.0.20210501
+pkgrel=4    # rebuild MAJ openexr 3.0.3
+
 pkgrel=3    # rebuild against opencolorio-git = 2.0.1
 pkgrel=2    # rebuild against opencolorio2 = 2.0.0. NE COMPIL PAS AVEC 2.0.1
 pkgrel=1

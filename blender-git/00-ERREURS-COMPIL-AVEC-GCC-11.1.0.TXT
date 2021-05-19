@@ -1,0 +1,26 @@
+
+
+[ 60%] 
+/build/blender-git/src/blender/intern/cycles/render/alembic_read.cpp:609:41: internal compiler error: in build_target_expr_with_type, at cp/tree.c:845
+  609 |   static constexpr TypeDesc type_desc = TypeFloat;
+      |                                         ^~~~~~~~~
+0x1797368 internal_error(char const*, ...)
+        ???:0
+0x67f8f9 fancy_abort(char const*, int, char const*)
+        ???:0
+0x850ba4 store_init_value(tree_node*, tree_node*, vec<tree_node*, va_gc, vl_embed>**, int)
+        ???:0
+0x70773d cp_finish_decl(tree_node*, tree_node*, bool, tree_node*, int)
+        ???:0
+0x7128bc grokfield(cp_declarator const*, cp_decl_specifier_seq*, tree_node*, bool, tree_node*, tree_node*)
+        ???:0
+0x7ce2fe c_parse_file()
+        ???:0
+0x8a252d c_common_parse_file()
+        ???:0
+Please submit a full bug report,
+with preprocessed source if appropriate.
+Please include the complete backtrace with any bug report.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [intern/cycles/render/CMakeFiles/cycles_render.dir/build.make:90: intern/cycles/render/CMakeFiles/cycles_render.dir/alembic_read.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....

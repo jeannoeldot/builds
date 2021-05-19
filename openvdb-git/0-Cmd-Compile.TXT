@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=8.0.1.20210205
+pkgrel=4          # rebuild MAJ openexr/imath 3.0.3
 pkgrel=3          # + PATCHS MAJ openexr/imath 3.0.1
 pkgrel=2          # rebuild MAJ openexr/imath 3.0.1
 

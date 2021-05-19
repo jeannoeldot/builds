@@ -6,16 +6,16 @@ cd $HOME/05-builds/usd-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==>  tallytalwar released this on 20 janv 2021  ==> 20210120
-==> v21.02  ==> 21.02
-==> 21.02.20210120
+==>  tallytalwar released this on 13 avr 2021  ==> 20210413
+==> v21.05  ==> 21.05
+==> 21.05.20210413
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O USD-v21.02.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v21.02.tar.gz
+wget -O USD-v21.05.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v21.05.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/usd-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/USD-v21.02.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/USD-v21.05.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,7 +36,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=usd-git
-pkgver=21.02.20210120
+pkgver=21.05.20210413
 pkgrel=1
 
 pkgrel=2  # Rebuild maj boost boost-libs 1.75.0
@@ -52,7 +52,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="21.02"
+_ver_release="21.05"
 _name_release="USD-${_ver_release}"
 
 license=('custom')
@@ -72,7 +72,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum USD-v21.02.tar.gz
+sha256sum USD-v21.05.tar.gz
 
 sha256sum blender-usd-diff.patch
 
@@ -96,7 +96,7 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf USD-v21.02.tar.gz -C /tmp/srcp
+tar -xzf USD-v21.05.tar.gz -C /tmp/srcp
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -114,9 +114,9 @@ tar -xzf USD-v21.02.tar.gz -C /tmp/srcp
     cmake_d="$cmake_d -DPXR_BUILD_USD_TOOLS=OFF"  /!\/!\/!\ ATTENTION
     cmake_d="$cmake_d -DCMAKE_DEBUG_POSTFIX=_d"
 
-1) kwrite /tmp/srcp/USD-21.02/CMakeLists.txt
+1) kwrite /tmp/srcp/USD-21.05/CMakeLists.txt
 
-2) kwrite /tmp/srcp/USD-21.02/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/USD-21.05/cmake/defaults/Options.cmake
 
 LIGNE 27  PXR_BUILD_TESTS           ON ==> OFF
 
@@ -136,12 +136,12 @@ LIGNE 115 BUILD_SHARED_LIBS         ON
 LIGNE 116 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/USD-21.02/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/USD-21.05/cmake/defaults/ProjectDefaults.cmake
 
 LIGNE 45  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/USD-21.02/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/USD-21.05/cmake/defaults/CXXDefaults.cmake
 
 LIGNE 67  PXR_SET_INTERNAL_NAMESPACE
 
@@ -155,7 +155,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     4222 28 déc.  11:55 blender-usd-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 USD-v21.02.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 USD-v21.05.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -174,7 +174,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/usd-git/PKGBUILD . \
 && cp -v $HOME/05-builds/usd-git/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/usd-git/USD-v21.02.tar.gz . \
+&& cp -v $HOME/05-builds/usd-git/USD-v21.05.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/usd-git \
 && cp -v /tmp/build/usd-git-*-x86_64.pkg.tar.* . \
@@ -241,7 +241,7 @@ $ mv -v usd-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i USD-v21.02.tar.gz
+$ rm -i USD-v21.05.tar.gz
 
 
 $ cd && maj-repolocal

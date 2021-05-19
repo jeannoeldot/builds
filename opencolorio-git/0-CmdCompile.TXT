@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=opencolorio-git
 pkgver=2.0.1.20210507
+pkgrel=2    # rebuild MAJ openexr 3.0.3
+
 pkgrel=1    # opencolorio 2.0.1 : incompatible avec OIIO
 
 !!!!!!

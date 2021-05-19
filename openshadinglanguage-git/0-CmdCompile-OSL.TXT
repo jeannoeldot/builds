@@ -36,6 +36,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.14.0.20210510
+pkgrel=4    # Rebuild openexr/imath 3.0.3
 pkgrel=3    # Rebuild against OIIO + opencolorio-git=2.0.1
 pkgrel=2    # Rebuild against OIIO + opencolorio2=2.0.0
 
