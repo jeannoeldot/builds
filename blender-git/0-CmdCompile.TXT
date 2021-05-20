@@ -485,6 +485,7 @@ nanovdb-git-*-any.pkg.tar.*\
   FLOOP
 --------
 $ rm -f *~
+$ mkpkg-tmpfs -m floop -g 20G
 $ mkpkg-tmpfs -m floop -g 18G
 
   FAST
