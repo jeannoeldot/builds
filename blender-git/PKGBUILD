@@ -1,7 +1,15 @@
 # Maintainer: Name <name@fai.com>
 
+# # fix gcc:11 regression: https://bugs.archlinux.org/task/70930
+
+# makedepends+=('gcc10')
+
+# -DCMAKE_C_COMPILER=gcc-10
+# -DCMAKE_CXX_COMPILER=g++-10
+
+
 pkgname=blender-git
-pkgver=3.0.0.1.20210519
+pkgver=3.0.0.1.20210520
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -26,7 +34,8 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
           'embree-git' 'openimagedenoise-git' 'usd-git'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm'
+makedepends=('gcc10'
+             'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
              'nanovdb-git'
@@ -39,7 +48,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
         "blender-openexr3.patch"
 )
-sha256sums=('cc6b344f2a83b834a46b39eb20a050ee008a0677ccc548b055e1b167862adf88'
+sha256sums=('85e4e9b415ed1e1df7a0c5d9a71fe7ca14c4ccfa9a7578a48495d22b83b0ff2f'
             'ed62b562cba4b44a3a2d4676a21bfebd63b11aaa29901f7d8be11705d7a82c52'
             '133e98d37b21e014565982d0b5243999078f2ad2f33fc4a11a8c58ef10deb985'
 )
@@ -56,9 +65,9 @@ prepare() {
   sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "afb66b3c3a83"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9fef934530b8"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1621422252|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1621527605|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -70,6 +79,8 @@ build() {
   mkdir build && cd build
   
   cmake \
+        -DCMAKE_C_COMPILER=gcc-10 \
+        -DCMAKE_CXX_COMPILER=g++-10 \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
