@@ -16,13 +16,14 @@
 #GPGDir      = /etc/pacman.d/gnupg/
 #HookDir     = /etc/pacman.d/hooks/
 HoldPkg     = pacman glibc
-#XferCommand = /usr/bin/curl -C - -f %u > %o
+#XferCommand = /usr/bin/curl -L -C - -f -o %o %u
 #XferCommand = /usr/bin/wget --passive-ftp -c -O %o %u
 #CleanMethod = KeepInstalled
 Architecture = auto
 
 # Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup
-#IgnorePkg   = 
+#IgnorePkg   = cuda
+#IgnorePkg   = linux-lts linux-lts-headers nvidia-lts
 #IgnoreGroup =
 
 #NoUpgrade   =
@@ -31,9 +32,10 @@ Architecture = auto
 # Misc options
 #UseSyslog
 Color
-#TotalDownload
+#NoProgressBar
 CheckSpace
 VerbosePkgLists
+ParallelDownloads = 5
 
 # By default, pacman accepts packages signed by keys that its local keyring
 # trusts (see pacman-key and its man page), as well as unsigned packages.
@@ -102,8 +104,8 @@ Include = /etc/pacman.d/mirrorlist
 SigLevel = Optional TrustAll
 Server = file:///home/jnd/00-repolocal
 
-[xyne-x86_64]
-SigLevel = Required
-#Server = https://xyne.archlinux.ca/repos/xyne
-# Workaround
-Server = https://xyne.archlinux.ca/bin/repo.php?file=
+#[xyne-x86_64]
+#SigLevel = Required
+##Server = http://xyne.archlinux.ca/repos/xyne
+## Workaround
+#Server = https://xyne.archlinux.ca/bin/repo.php?file=

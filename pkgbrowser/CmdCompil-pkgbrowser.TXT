@@ -39,6 +39,8 @@ md5sum pkgbrowser-0.24.tar.gz
 # Maintainer: Name <name@fai.com>
 
 pkgver=0.24
+pkgrel=2    # MAJ pacman 6.0
+
 pkgrel=1
 
 pkgrel=2    # MAJ python 3.8
@@ -51,7 +53,13 @@ pkgrel=2    # MAJ pacman 5.1
 depends=('pacman>=4.1' 'pacman<5.3' 'python>=3.2' 'python<3.10' 'python-pyqt5'
          'hicolor-icon-theme'
 )
-         
+
+/!\/!\/!\ PACMAN 6.0
+!!! AJOUTER 'hicolor-icon-theme'
+depends=('pacman>=6.0' 'pacman<6.1' 'python>=3.2' 'python<3.10' 'python-pyqt5'
+         'hicolor-icon-theme'
+)
+      
 /!\/!\/!\
 !!! À COMMENTER
 #install="$pkgname.install"

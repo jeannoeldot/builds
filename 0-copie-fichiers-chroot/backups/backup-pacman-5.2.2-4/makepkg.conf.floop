@@ -24,7 +24,6 @@ DLAGENTS=('file::/usr/bin/curl -gqC - -o %o %u'
 #-- The package required by makepkg to download VCS sources
 #  Format: 'protocol::package'
 VCSCLIENTS=('bzr::bzr'
-            'fossil::fossil'
             'git::git'
             'hg::mercurial'
             'svn::subversion')
@@ -39,14 +38,15 @@ CHOST="x86_64-pc-linux-gnu"
 #-- Compiler and Linker Flags
 #CPPFLAGS=""
 CFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -fexceptions \
-        -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security \
+        -Wp,-D_FORTIFY_SOURCE=2,-D_GLIBCXX_ASSERTIONS \
+        -Wformat -Werror=format-security \
         -fstack-clash-protection -fcf-protection \
         -floop-interchange -floop-strip-mine -floop-block"
-CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
+CXXFLAGS="$CFLAGS"
 LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now"
 #RUSTFLAGS="-C opt-level=2"
 #-- Make Flags: change this for DistCC/SMP systems
-MAKEFLAGS="-j7"
+MAKEFLAGS="-j13"
 #-- Debugging flags
 DEBUG_CFLAGS="-g -fvar-tracking-assignments"
 DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"
@@ -79,7 +79,7 @@ BUILDENV=(!distcc color !ccache check !sign)
 #   These are default values for the options=() settings
 #########################################################################
 #
-# Makepkg defaults: OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug !lto)
+# Default: OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug)
 #  A negated option will do the opposite of the comments below.
 #
 #-- strip:      Strip symbols from binaries/libraries
@@ -90,12 +90,11 @@ BUILDENV=(!distcc color !ccache check !sign)
 #-- zipman:     Compress manual (man and info) pages in MAN_DIRS with gzip
 #-- purge:      Remove files specified by PURGE_TARGETS
 #-- debug:      Add debugging flags as specified in DEBUG_* variables
-#-- lto:        Add compile flags for building with link time optimization
 #
-OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug !lto)
+OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug)
 
 #-- File integrity checks to use. Valid: md5, sha1, sha224, sha256, sha384, sha512, b2
-INTEGRITY_CHECK=(sha256)
+INTEGRITY_CHECK=(md5)
 #-- Options to be used when stripping binaries. See `man strip' for details.
 STRIP_BINARIES="--strip-all"
 #-- Options to be used when stripping shared libraries. See `man strip' for details.
@@ -150,10 +149,3 @@ COMPRESSLZ=(lzip -c -f)
 #
 PKGEXT='.pkg.tar.zst'
 SRCEXT='.src.tar.gz'
-
-#########################################################################
-# OTHER
-#########################################################################
-#
-#-- Command used to run pacman as root, instead of trying sudo and su
-#PACMAN_AUTH=()
