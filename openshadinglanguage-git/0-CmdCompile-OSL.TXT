@@ -36,6 +36,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.14.1.20210601
+pkgrel=2    # Rebuild MAJ LLVM 12.0.0
+
 pkgrel=1
 
 pkgrel=4    # Rebuild openexr/imath 3.0.3
@@ -46,7 +48,7 @@ pkgrel=4    # Rebuild openexr/imath 3.0.1
 pkgrel=3    # Avec Patch Fix crash generating closure functions calls with LLVM 11
 pkgrel=2    # Rebuild MAJ OIIO 2.2.13.1
 
-pkgrel=3    # Rebuild MAJ clang 11.1.0-1
+pkgrel=3    # Rebuild MAJ clang 12.0.0-1
 pkgrel=2    # Rebuild against OIIO + opencolorio 2.0.0
 pkgrel=7    # Rebuild against OIIO + opencolorio1 et openjpeg2 2.4
 pkgrel=6    # Rebuild MAJ OIIO 2.2.10.1 + MAJ openvdb 8.0.0
@@ -96,12 +98,12 @@ _ver_release="v1.11.14.1"
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-!!! LLVM 11.0
+!!! LLVM 12.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 11.1.0-1 [installé]
-extra/llvm 11.1.0-1 [installé]
-extra/llvm-libs 11.1.0-1 [installé]
+extra/clang 12.0.0-1 [installé]
+extra/llvm 12.0.0-1 [installé]
+extra/llvm-libs 12.0.0-1 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'

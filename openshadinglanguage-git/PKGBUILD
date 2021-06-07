@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.14.1.20210601
-pkgrel=1
+pkgrel=2
 _name_release="OpenShadingLanguage-1.11.14.1"
 _ver_release="v1.11.14.1"
 pkgdesc="Advanced shading language for production GI renderers"
