@@ -1,19 +1,19 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 21.05
-!!! VERSION = v21.05
+!!! VERSION = 21.02
+!!! VERSION = v21.02
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/usd-git
 
 mkdir /tmp/srcp
 
-cp -v USD-v21.05.tar.gz /tmp/srcp/
+cp -v USD-v21.02.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf USD-v21.05.tar.gz
+tar -xzf USD-v21.02.tar.gz
 
 
 !!! VOIR
@@ -28,13 +28,13 @@ kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
 kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
 
 
-1) MODIFIER USD-21.05/cmake/defaults/Packages.cmake
+1) MODIFIER USD-21.02/cmake/defaults/Packages.cmake
 ===================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R USD-21.05 USD-21.05.new
+cp -R USD-21.02 USD-21.02.new
 
-cd USD-21.05.new/cmake/defaults
+cd USD-21.02.new/cmake/defaults
 kwrite Packages.cmake
 
 MODIFIER LIGNE 135 :
@@ -48,10 +48,10 @@ rm -f Packages.cmake~
 
 cd ../../..
 
-2) MODIFIER USD-21.05/cmake/macros/Public.cmake
+2) MODIFIER USD-21.02/cmake/macros/Public.cmake
 ===============================================
 
-cd USD-21.05.new/cmake/macros
+cd USD-21.02.new/cmake/macros
 kwrite Public.cmake
 
 AJOUTER LIGNES 1045 À 1050
@@ -68,15 +68,66 @@ rm -f Public.cmake~
 cd ../../..
 
 
+diff -aur USD-21.02 USD-21.02.new
+diff -aur USD-21.02 USD-21.02.new > blender-usd-diff.patch
 
-diff -aur USD-21.05 USD-21.05.new
-diff -aur USD-21.05 USD-21.05.new > blender-usd-diff.patch
+rm -rf USD-21.02.new
+------------------------------------------------------------------
 
-rm -rf USD-21.05.new
+!!! VOIR
+!!! Fix build with GCC 11
+https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/demangle-fix.patch
+https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/gcc11.patch
+
+1) MODIFIER USD-21.02/pxr/base/arch/demangle.cpp
+================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R USD-21.02 USD-21.02.new
+
+cd USD-21.02.new/pxr/base/arch
+kwrite demangle.cpp
+
+SUPPRIMER LIGNE 141 :
+#include <cxxabi.h>
+
+AJOUTER LIGNE 39
+#include <cxxabi.h>
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier demangle.cpp~
+rm -f demangle.cpp~
+
+cd ../../../..
+
+2) MODIFIER USD-21.02/pxr/base/work/singularTask.h
+==================================================
+
+cd USD-21.02.new/pxr/base/work
+kwrite singularTask.h
+
+REMPLACER LIGNE 123 :
+                    size_t old = count;
+
+
+PAR :
+                    std::size_t old = count;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier singularTask.h~
+rm -f singularTask.h~
+
+cd ../../../..
+
+
+diff -aur USD-21.02 USD-21.02.new
+diff -aur USD-21.02 USD-21.02.new > Fix-build-with-GCC11.patch
+
+rm -rf USD-21.02.new
+
 
 cd $HOME/05-builds/usd-git
 
-mv -vf /tmp/srcp/blender-usd-diff.patch .
+mv -vf /tmp/srcp/Fix-build-with-GCC11.patch .
 
 
 99) QUAND PATCHES FINIS
@@ -89,10 +140,10 @@ sync
 ANCIENS
 ========
 
-3) MODIFIER USD-21.05/pxr/base/tf/pxrLZ4/lz4.cpp
+3) MODIFIER USD-21.02/pxr/base/tf/pxrLZ4/lz4.cpp
 ================================================
 
-cd USD-21.05.new/pxr/base/tf/pxrLZ4
+cd USD-21.02.new/pxr/base/tf/pxrLZ4
 kwrite lz4.cpp
 
 AJOUTER LIGNES 617 À 625
@@ -119,7 +170,7 @@ OU
 ===
 mkdir -p $HOME/99-temp/usd/
 
-cp -v USD-v21.05.tar.gz $HOME/99-temp/usd/
+cp -v USD-v21.02.tar.gz $HOME/99-temp/usd/
 
 cd $HOME/99-temp/usd/
 =============================================
@@ -133,10 +184,10 @@ OU
 rm -rf $HOME/99-temp/usd
 
 
-3) MODIFIER USD-21.05/pxr/base/arch/align.h
+3) MODIFIER USD-21.02/pxr/base/arch/align.h
 ===========================================
 
-cd USD-21.05.new/pxr/base/arch
+cd USD-21.02.new/pxr/base/arch
 kwrite align.h
 
 REMPLACER LIGNE 83 :
@@ -154,10 +205,10 @@ rm -f align.h~
 
 cd ../../../..
 
-4) MODIFIER USD-21.05/pxr/base/arch/math.h
+4) MODIFIER USD-21.02/pxr/base/arch/math.h
 ===========================================
 
-cd USD-21.05.new/pxr/base/arch
+cd USD-21.02.new/pxr/base/arch
 kwrite math.h
 
 REMPLACER LIGNE 45 :
@@ -181,15 +232,15 @@ kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
 kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
 
 
-1) MODIFIER USD-21.05/cmake/defaults/Packages.cmake
+1) MODIFIER USD-21.02/cmake/defaults/Packages.cmake
 =====================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
 /!\ /!\ /!\ cd $HOME/99-temp/usd/
 
-cp -R USD-21.05 USD-21.05.new
+cp -R USD-21.02 USD-21.02.new
 
-cd USD-21.05.new/cmake/defaults
+cd USD-21.02.new/cmake/defaults
 kwrite Packages.cmake
 
 MODIFIER LIGNE 112 :
@@ -204,10 +255,10 @@ rm -f Packages.cmake~
 cd ../../..
 
 
-2) MODIFIER USD-21.05/pxr/base/plug/initConfig.cpp
+2) MODIFIER USD-21.02/pxr/base/plug/initConfig.cpp
 ======================================================
 
-cd USD-21.05.new/pxr/base/plug
+cd USD-21.02.new/pxr/base/plug
 kwrite initConfig.cpp
 
 AJOUTER LIGNES 72 À 92
@@ -276,10 +327,10 @@ rm -f initConfig.cpp~
 cd ../../../..
 
 
-3) MODIFIER USD-21.05/cmake/macros/Public.cmake
+3) MODIFIER USD-21.02/cmake/macros/Public.cmake
 ===============================================
 
-cd USD-21.05.new/cmake/macros
+cd USD-21.02.new/cmake/macros
 kwrite Public.cmake
 
 AJOUTER LIGNES 1038 À 1043

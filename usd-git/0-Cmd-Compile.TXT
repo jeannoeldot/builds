@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=usd-git
 pkgver=21.02.20210120
+pkgrel=2  # Rebuild maj boost boost-libs 1.76.0 + Patchs GCC 11
+
 pkgrel=1
 
 pkgrel=2  # Rebuild maj boost boost-libs 1.75.0
@@ -70,11 +72,14 @@ AVEC PATCH
 ----------
 source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
+        'Fix-build-with-GCC11.patch'
 
 )
 sha256sum USD-v21.02.tar.gz
 
 sha256sum blender-usd-diff.patch
+
+sha256sum Fix-build-with-GCC11.patch
 
 sha256sums=('... ...'
 )
@@ -83,6 +88,8 @@ prepare() {
   cd "${_name_release}"
   # 
   patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
+  # 
+  patch -Np1 -i "${srcdir}/Fix-build-with-GCC11.patch"
 }
 
 build() {
@@ -154,6 +161,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     4222 28 déc.  11:55 blender-usd-diff.patch
+-rw-r--r--  1 jnd users     1352 10 juin  11:54 Fix-build-with-GCC11.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
 -rw-r--r--  1 jnd users 37563211 29 déc.  10:50 USD-v21.02.tar.gz
 

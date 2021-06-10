@@ -36,6 +36,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.14.1.20210601
+pkgrel=3    # rebuild boost boost-libs 1.76.0
+
 pkgrel=2    # Rebuild MAJ LLVM 12.0.0
 
 pkgrel=1
@@ -268,6 +270,15 @@ cd $HOME/05-builds/openshadinglanguage-git && rm -rf /tmp/build
 !!! EN USER
 
 $ mkpkg-chroot-repo
+
+SI depends= 'openimageio-git' ==> + openvdb-git
+================================================
+$ cp -v $HOME/00-repolocal/\
+{\
+openvdb-git-*-x86_64.pkg.tar.*,\
+openimageio-git-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
 
 SI depends= 'openimageio-git' ==> + openvdb-git + opencolorio-git
 =================================================================

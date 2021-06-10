@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.15.1.20210604
+pkgrel=2    # rebuild boost boost-libs 1.76.0
+
 pkgrel=1
 
 pkgrel=4    # rebuild MAJ openexr 3.0.3
@@ -111,13 +113,6 @@ depends=(...
          'libwebp'
          'fmt' 'pugixml' 'pybind11' 'python-numpy'
          'openvdb-git'
-!!!!!!
-         'opencolorio2'  # blender OK avec opencolorio 2.0.0
-                        # OIIO NE COMPILE PAS AVEC opencolorio 2.0.1
-!!!!!!
-          'opencolorio-git'   = opencolorio 2.0.1
-!!!!!!
-
 !!!!!! SUPPRIMÉ
         'jasper'
  
@@ -312,10 +307,9 @@ cd $HOME/05-builds/openimageio-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-SI depends= 'openvdb-git' et 'opencolorio-git'
-==============================================
+SI depends= 'openvdb-git'
+=========================
 $ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
-$ cp -v $HOME/00-repolocal/opencolorio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
 
   FLOOP
@@ -419,6 +413,20 @@ POUR REMETTRE openimageio EXTRA
 ==================================================================================================
 ANCIEN
 =======
+
+!!!!!!
+         'opencolorio2'  # blender OK avec opencolorio 2.0.0
+                        # OIIO NE COMPILE PAS AVEC opencolorio 2.0.1
+!!!!!!
+          'opencolorio-git'   = opencolorio 2.0.1
+!!!!!!
+
+SI depends= 'openvdb-git' et 'opencolorio-git'
+==============================================
+$ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+$ cp -v $HOME/00-repolocal/opencolorio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
 
 LIGNE 83 
   STOP_ON_WARNING = OFF   =>    -DSTOP_ON_WARNING=OFF \
