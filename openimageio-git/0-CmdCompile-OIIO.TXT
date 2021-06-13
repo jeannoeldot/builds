@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.15.1.20210604
+pkgrel=3    # rebuild MAJ openvdb 8.1.0
 pkgrel=2    # rebuild boost boost-libs 1.76.0
 
 pkgrel=1

@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git
-pkgver=8.1.0.20210611
-pkgrel=1
-_ver_release="8.1.0"
+pkgver=8.0.1.20210205
+pkgrel=5
+_ver_release="8.0.1"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
@@ -18,10 +18,19 @@ makedepends=('doxygen' 'boost' 'cmake' 'mesa'
 conflicts=('openvdb')
 provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
+        'openvdb-openexr3.patch'
+        'openvdb-cmd-openexr3.patch'
 )
-sha256sums=('3e09d47331429be7409a3a3c27fdd3c297f96d31d2153febe194e664a99d6183'
+sha256sums=('a6845da7c604d2c72e4141c898930ac8a2375521e535f696c2cd92bebbe43c4f'
+            '50c3ed210d57a392dc425d4613e8a9c748a529018bfbc69c9060c25622f9ef73'
+            '390407362bdc08df8d0d1d736f0d5fd89eed3a4a789fd60a6727b163ad862261'
 )
 
+prepare() {
+  cd "${_name_release}"
+  patch -Np1 -i "${srcdir}/openvdb-openexr3.patch"
+  patch -Np1 -i "${srcdir}/openvdb-cmd-openexr3.patch"
+}
 
 build() {
   cd "${_name_release}"
@@ -34,8 +43,12 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
     -DOPENVDB_ENABLE_RPATH=OFF \
+    -DUSE_EXR=ON \
     -DUSE_CCACHE=OFF \
     -DOPENVDB_CORE_STATIC=OFF \
+    -DOPENVDB_BUILD_VDB_LOD=ON \
+    -DOPENVDB_BUILD_VDB_RENDER=ON \
+    -DOPENVDB_BUILD_VDB_VIEW=ON \
     ..
 
   sed -i "s/isystem/I/g" $(find . -name flags.make)

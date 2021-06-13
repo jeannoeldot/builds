@@ -1,4 +1,29 @@
 
+============================================================
+8.1.0
+=====
+ERREURS AVEC PATCH ET DEPS = '...,  'openexr' 'imath'
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so  
+CMake Error at /usr/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find IlmBase (missing: IlmBase_INCLUDE_DIR Half) (Required is at
+  least version "2.2")
+Call Stack (most recent call first):
+  /usr/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake:594 (_FPHSA_FAILURE_MESSAGE)
+  cmake/FindIlmBase.cmake:327 (find_package_handle_standard_args)
+  openvdb/openvdb/cmd/CMakeLists.txt:119 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/build/openvdb-git/src/openvdb-8.1.0/build/CMakeFiles/CMakeOutput.log".
+See also "/build/openvdb-git/src/openvdb-8.1.0/build/CMakeFiles/CMakeError.log".
+
+
+============================================================
+8.0.1
+=====
 ERREURS SANS PATCH ET DEPS = '...,  'openexr'
 
 -- ----------------------------------------------------
