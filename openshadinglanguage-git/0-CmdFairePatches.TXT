@@ -1,17 +1,17 @@
 FAIRE PATCHS
 ====================================
-!!! VERSION = OpenShadingLanguage-v1.11.14.1
+!!! VERSION = OpenShadingLanguage-v1.11.14.2
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openshadinglanguage-git
 
 mkdir /tmp/srcp
 
-cp -v OpenShadingLanguage-v1.11.14.1.tar.gz /tmp/srcp/
+cp -v OpenShadingLanguage-v1.11.14.2.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenShadingLanguage-v1.11.14.1.tar.gz
+tar -xzf OpenShadingLanguage-v1.11.14.2.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git
 
