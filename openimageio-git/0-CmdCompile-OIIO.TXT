@@ -5,16 +5,16 @@ cd $HOME/05-builds/openimageio-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageIO/oiio/releases
-==> 04/06/2021  ==> 20210604
-==> v2.2.15.1  ==> 2.2.15.1
-==> 2.2.15.1.20210604
+==> 01/07/2021  ==> 20210701
+==> v2.2.16.0  ==> 2.2.16.0
+==> 2.2.16.0.20210701
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O oiio-v2.2.15.1.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/refs/tags/v2.2.15.1.tar.gz
+wget -O oiio-v2.2.16.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/refs/tags/v2.2.16.0.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oiio-v2.2.15.1.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oiio-v2.2.16.0.tar.gz .
 
 
 1-8) FAIRE PATCHES
@@ -37,11 +37,11 @@ voir : CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.2.15.1.20210604
+pkgver=2.2.16.0.20210701
+pkgrel=1
+
 pkgrel=3    # rebuild MAJ openvdb 8.1.0
 pkgrel=2    # rebuild boost boost-libs 1.76.0
-
-pkgrel=1
 
 pkgrel=4    # rebuild MAJ openexr 3.0.3
 
@@ -89,8 +89,8 @@ pkgrel=2    # rebuild CMAKE_INSTALL_LIBDIR=lib
 pkgrel=2    # rebuild LICENSE
 
 !!!!!!
-_name_release="oiio-2.2.15.1"
-_ver_release="v2.2.15.1"
+_name_release="oiio-2.2.16.0"
+_ver_release="v2.2.16.0"
 
 conflicts=('openimageio')
 provides=('openimageio')
@@ -100,7 +100,7 @@ provides=('openimageio')
 source=("oiio-${_ver_release}.tar.gz"
 )
 
-sha256sum oiio-v2.2.15.1.tar.gz
+sha256sum oiio-v2.2.16.0.tar.gz
 
 sha256sums=('...'
             '...'
@@ -133,7 +133,7 @@ $ pacman -Ss python | grep 3 | grep install
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.9
 
-!!! VERSION 2.2.15.1
+!!! VERSION 2.2.16.0
 build() {
       ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -148,9 +148,9 @@ https://github.com/OpenImageIO/oiio/commit/a99000fee4bbbcd4ed80674d77b14597a8f4e
 ============================
 mkdir /tmp/srcp
 
-tar -xzf oiio-v2.2.15.1.tar.gz -C /tmp/srcp
+tar -xzf oiio-v2.2.16.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/oiio-2.2.15.1/CMakeLists.txt &
+1) kwrite /tmp/srcp/oiio-2.2.16.0/CMakeLists.txt &
 
 LIGNE 35
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
@@ -172,7 +172,7 @@ LIGNE 73
 option (INSTALL_CMAKE_HELPER "If On, install FindOpenImageIO.cmake" ON)
 
 
-2) kwrite /tmp/srcp/oiio-2.2.15.1/src/cmake/compiler.cmake &
+2) kwrite /tmp/srcp/oiio-2.2.16.0/src/cmake/compiler.cmake &
 
 LIGNE 30
   CMAKE_CXX_STANDARD 11   =>  14
@@ -202,7 +202,7 @@ LIGNE 523
 LINKSTATIC = OFF
 
 
-3) kwrite /tmp/srcp/oiio-2.2.15.1/src/cmake/externalpackages.cmake &
+3) kwrite /tmp/srcp/oiio-2.2.16.0/src/cmake/externalpackages.cmake &
 
 LIGNE 114
   USE_JPEG_TURBO=1      depends= ... 'libjpeg-turbo'
@@ -256,7 +256,7 @@ LIGNE 282
          depends=...  'fmt'
 
 
-4) kwrite /tmp/srcp/oiio-2.2.15.1/src/cmake/pythonutils.cmake &
+4) kwrite /tmp/srcp/oiio-2.2.16.0/src/cmake/pythonutils.cmake &
 
 LIGNES 6 ET 7
   USE_PYTHON ON         depends= 'python' 'pybind11' 'python-numpy'
@@ -273,7 +273,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 27821011 26 nov.  15:36 oiio-v2.2.15.1.tar.gz
+-rw-r--r--  1 jnd users 27821011 26 nov.  15:36 oiio-v2.2.16.0.tar.gz
 -rw-r--r--  1 jnd users     1748 26 nov.  16:01 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -291,7 +291,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/oiio-v2.2.15.1.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/oiio-v2.2.16.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -356,8 +356,8 @@ rm -f *~
 usr/bin/idiff
 usr/bin/oiiotool
 usr/lib/python3.9/site-packages/OpenImageIO.cpython-39-x86_64-linux-gnu.so
-usr/lib/libOpenImageIO_Util.so.2.2.15
-usr/lib/libOpenImageIO.so.2.2.15
+usr/lib/libOpenImageIO_Util.so.2.2.16
+usr/lib/libOpenImageIO.so.2.2.16
 
 namcap openimageio-git-*-x86_64.pkg.tar.*
 
@@ -380,7 +380,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i oiio-v2.2.15.1.tar.gz
+$ rm -i oiio-v2.2.16.0.tar.gz
 
 
 $ cd && maj-repolocal
@@ -438,7 +438,7 @@ source=("oiio-${_ver_release}.tar.gz"
         "fix-OpenJpeg-2.4-library-not-found.patch"
 )
 
-sha256sum oiio-v2.2.15.1.tar.gz
+sha256sum oiio-v2.2.16.0.tar.gz
 
 sha256sum fix-OpenJpeg-2.4-library-not-found.patch
 
@@ -460,16 +460,16 @@ prepare() {
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageIO/oiio/releases
-==> 04/06/2021  ==> 20210604
-==> Release-2.2.15.1
-==> 2.2.15.1.20210604
+==> 01/07/2021  ==> 20210701
+==> Release-2.2.16.0
+==> 2.2.16.0.20210701
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O oiio-Release-2.2.15.1.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.2.15.1.tar.gz
+wget -O oiio-Release-2.2.16.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.2.16.0.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -477,7 +477,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.2.15.1.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.2.16.0.tar.gz .
 
 
 
@@ -522,7 +522,7 @@ SI depends=( 'openvdb-git' )
 ==========================================================
 $ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
-!!! VERSION 2.2.15.1
+!!! VERSION 2.2.16.0
 package() {
   ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -543,11 +543,11 @@ pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageIO/oiio/archive/Release-2.2.15.1.tar.gz
-wget -O oiio-Release-2.2.15.1.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.2.15.1.tar.gz
+wget https://github.com/OpenImageIO/oiio/archive/Release-2.2.16.0.tar.gz
+wget -O oiio-Release-2.2.16.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.2.16.0.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-2.2.15.1.tar.gz oiio-Release-2.2.15.1.tar.gz
+mv -v Release-2.2.16.0.tar.gz oiio-Release-2.2.16.0.tar.gz
 
