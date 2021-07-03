@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=8.1.0.20210611
+pkgrel=2          # SUPPR déps openexr et imath
+
 pkgrel=1
 
 pkgrel=5          # rebuild boost boost-libs 1.76.0
@@ -203,9 +205,9 @@ LIGNE 21 À 24:
 --------------
 OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
 
-OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF ==> ON
-OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF ==> ON
-OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF ==> ON
+OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF
+OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF
+OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF
 
 
 rm -rf /tmp/srcp
@@ -279,7 +281,6 @@ rm -f *~
 
 namcap openvdb-git-*-x86_64.pkg.tar.*
 openvdb-git W: Dependency zlib included but already satisfied
-openvdb-git W: Dependency imath included but already satisfied
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -326,6 +327,17 @@ SI PROBLEME
 
 ANCIEN
 ======
+
+openvdb-git W: Dependency imath included but already satisfied
+
+LIGNE 21 À 24:
+--------------
+OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
+
+OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF ==> ON
+OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF ==> ON
+OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF ==> ON
+
 
 AVEC PATCH
 ----------
