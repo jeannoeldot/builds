@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.0.0.9.20210711
+!!! VERSION = 3.0.0.12.20210716
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-3.0.0.9.20210711.tar.gz /tmp/srcp/
+cp -v blender-git-3.0.0.12.20210716.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-3.0.0.9.20210711.tar.gz
+tar -xzf blender-git-3.0.0.12.20210716.tar.gz
 
 blender-openexr3.patch
 VOIR:

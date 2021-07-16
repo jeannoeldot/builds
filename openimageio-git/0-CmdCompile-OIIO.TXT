@@ -39,6 +39,7 @@ voir : CmdFairePatches.TXT
 pkgname=openimageio-git
 pkgver=2.2.16.0.20210701
 pkgrel=1
+pkgrel=2    # rebuild MAJ openexr 3.0.5-2/imath 3.1.0
 
 pkgrel=3    # rebuild MAJ openvdb 8.1.0
 pkgrel=2    # rebuild boost boost-libs 1.76.0

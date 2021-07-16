@@ -38,6 +38,7 @@ voir 0-CmdFairePatches.TXT
 pkgname=alembic-git               # alembic ds community
 pkgver=1.8.2.20210609
 pkgrel=1
+pkgrel=2          # rebuild MAJ openexr 3.1.0
 
 pkgrel=2          # rebuild MAJ openexr 3.0.1 + dep = imath
 
