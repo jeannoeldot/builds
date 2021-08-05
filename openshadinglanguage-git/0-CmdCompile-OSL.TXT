@@ -36,6 +36,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.14.2.20210701
+pkgrel=4    # Rebuild MAJ OIIO 2.2.17.0
+
 pkgrel=3    # Rebuild openexr/imath 3.1.0
 
 pkgrel=2    # Rebuild MAJ LLVM 12.0.1
@@ -109,8 +111,8 @@ provides=('openshadinglanguage')
 ------------------------------------
 $ pacman -Ss llvm | grep install
 extra/clang 12.0.1-1 [installé]
-extra/llvm 12.0.1-1 [installé]
-extra/llvm-libs 12.0.1-1 [installé]
+extra/llvm 12.0.1-2 [installé]
+extra/llvm-libs 12.0.1-2 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
@@ -324,6 +326,7 @@ rm -f *~
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
+usr/bin/testrender
 usr/lib/liboslcomp.so.1.11.14
 usr/lib/liboslquery.so.1.11.14
 usr/lib/liboslexec.so.1.11.14
