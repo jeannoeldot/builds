@@ -1,7 +1,0 @@
- 
-┌jnd ( ~ )
-└─> $ cd /0-DataLinux/05-builds-dir-git/blender/
-
-┌jnd ( /0-DataLinux/05-builds-dir-git/blender )
-└─> $ grep -lR "_embree_LIBRARIES" *
-build_files/cmake/Modules/FindEmbree.cmake

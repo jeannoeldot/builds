@@ -359,6 +359,9 @@ exemples :  GeForce GTX 980     5.2
             GeForce RTX 2080    7.5
             GeForce RTX 3080    8.6
   -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH=sm_52
+  
+!!! VOIR: https://devtalk.blender.org/t/setting-sm-vs-compute-for-cycles-cuda-binaries-arch/19869
+!!! ==> SUPPR compute_XX
 !!! OU
   -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_52"
 !!! OU
