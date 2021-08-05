@@ -9,11 +9,11 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Hans Goudey <h.goudey@me.com>	
-	Sun, 1 Aug 2021 05:22:36 +0200 (23:22 -0400)
-commit	79277986c299eaa3df9364e6d9f2b88d2b4f2dea
+author	Julian Eisel <julian@blender.org>
+	Thu, 5 Aug 2021 12:10:49 +0200 (12:10 +0200)
+committer	Julian Eisel <julian@blender.org>
 
-==> 20210801
+==> 20210805
 
 
 1.3 SOURCES
@@ -39,7 +39,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 79277986c299
+==> MY_WC_HASH = 02e0c6f42e76
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -49,7 +49,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1627788156
+==> MY_WC_COMMIT_TIMESTAM = 1628158451
 
 cd ..
 
@@ -67,7 +67,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = 79277986c299
+==> MY_WC_HASH = 02e0c6f42e76
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -77,7 +77,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1627788156
+==> MY_WC_COMMIT_TIMESTAM = 1628158451
 
 cd ..
 
@@ -96,18 +96,18 @@ head -n 60 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSIO
 #define BLENDER_VERSION_PATCH 0       ==>   0
 #define BLENDER_VERSION_CYCLE alpha
 ....
-#define BLENDER_FILE_SUBVERSION 3     ==>   15
+#define BLENDER_FILE_SUBVERSION 3     ==>   16
 
 ==> Version = BLENDER_VERSION.BLENDER_VERSION_PATCH.BLENDER_FILE_SUBVERSION
 
-==> Version = 3.0.0.15
+==> Version = 3.0.0.16
 
-==> Version = 3.0.0.15.20210801
+==> Version = 3.0.0.16.20210805
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf blender-git-3.0.0.15.20210801.tar.gz --exclude=.git blender
+tar -cvzf blender-git-3.0.0.16.20210805.tar.gz --exclude=.git blender
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -115,7 +115,7 @@ cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-3.0.0.15.20210801.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-3.0.0.16.20210805.tar.gz .
 
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
@@ -132,7 +132,7 @@ voir CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.0.0.15.20210801
+pkgver=3.0.0.16.20210805
 pkgrel=1
 
 pkgrel=1    # MAJ + Rebuild MAJ boost boost-libs 1.76.0
@@ -208,7 +208,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum OptiX-7.3.0-include.zip
 
@@ -223,7 +223,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "blender-openexr3.patch"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum OptiX-7.3.0-include.zip
 
@@ -246,16 +246,18 @@ prepare() {
   #Build with opnexr/imath 3.0.1
   patch -Np1 -i "${srcdir}/blender-openexr3.patch"
 
-  # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
-  # Commit 1febc860609c060603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
-  sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
+/!\/!\/!\/!\/!\
+AU 05/08/2021: RTX 3080 TI ==> INUTILES ???
+  ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
+  ## Commit 1febc860609c060603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
+  #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "79277986c299"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "02e0c6f42e76"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1627788156|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1628158451|' build_files/cmake/buildinfo.cmake
 }
 
 
@@ -280,65 +282,65 @@ $ pacman -Ss python | grep 3 | grep install
 kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
 # Blender internal features
-169 option WITH_BUILDINFO   ON   makedepends = git
+173 option WITH_BUILDINFO   ON   makedepends = git
 
-Ligne 188/191
+Ligne 192/195
 "Enable VR features through the OpenXR specification"
   option(WITH_XR_OPENXR    ON ==> OFF
 
-Ligne 193
+Ligne 197
 option(WITH_GMP "Enable features depending on GMP (Exact Boolean)" ON)
 
 # Compositor
-197 option WITH_OPENIMAGEDENOISE  ON   dep = openimagedenoise-git
-199 option WITH_OPENSUBDIV        ON   dep = opensubdiv-git
-201 option WITH_POTRACE           ON   dep = potrace
-202 option WITH_OPENVDB           ON   dep = openvdb-git
-206 option WITH_NANOVDB           ON   si ON make dep = nanovdb-git
-207 option WITH_HARU              ON   dep = libharu
+201 option WITH_OPENIMAGEDENOISE  ON   dep = openimagedenoise-git
+203 option WITH_OPENSUBDIV        ON   dep = opensubdiv-git
+205 option WITH_POTRACE           ON   dep = potrace
+206 option WITH_OPENVDB           ON   dep = openvdb-git
+210 option WITH_NANOVDB           ON   si ON make dep = nanovdb-git
+211 option WITH_HARU              ON   dep = libharu
 
-220 WITH_GHOST_WAYLAND    OFF
+224 WITH_GHOST_WAYLAND    OFF
 
-255     !!! VOIR
+268     !!! VOIR
 if(UNIX AND NOT APPLE)
 	option WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
 endif()
 
-Lignes 278 et ...
+Lignes 293 et ...
 # Alembic support
 option WITH_ALEMBIC             ON  dep = alembic-git
 
-Lignes 281
+Lignes 296
 # Universal Scene Description support
 option(WITH_USD                 ON  dep = usd-git
 
-Ligne 284
+Ligne 298
 # 3D format support
-298   option WITH_OPENCOLLADA	ON  dep = opencollada-git
+300   option WITH_OPENCOLLADA	ON  dep = opencollada-git
 
 # Sound output
-297   option WITH_JACK          ==> ON         dep =  jack2
+311   option WITH_JACK          ==> ON         dep =  jack2
 
-308   option WITH_PULSEAUDIO    ==> ON          dep = pulseaudio
+322   option WITH_PULSEAUDIO    ==> ON          dep = pulseaudio
 
 # Logging/unbit test libraries.
 
 # Misc
-345	option WITH_INPUT_NDOF		==> OFF
+359	option WITH_INPUT_NDOF		==> OFF
 
 
-347 	WITH_INSTALL_PORTABLE       ON   ==> OFF
+361 	WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-355     WITH_PYTHON_INSTALL             ON   ==> OFF
+369     WITH_PYTHON_INSTALL             ON   ==> OFF
 
-358     WITH_PYTHON_NUMPY       ON  dep = python-numpy
+372     WITH_PYTHON_NUMPY       ON  dep = python-numpy
 
-370     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+384     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-373     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+367     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
         
-382 # Cycles
+396 # Cycles
 option WITH_CYCLES			ON   dep = openimageio(-git)
 option WITH_CYCLES_OSL      ON   dep = openshadinglanguage(-git)
 
@@ -348,74 +350,68 @@ option WITH_CYCLES_EMBREE           ON  makedepends = embree(-git)
 
 option WITH_CYCLES_CUDA_BINARIES	==> ON makedepends = cuda
 
-Ligne 392 ????
+Ligne 406 ????
 CYCLES_TEST_DEVICES CPU
 
-Ligne 393
+Ligne 407
 URL  GPU et sm_??  : https://developer.nvidia.com/cuda-gpus
 https://developer.nvidia.com/cuda-gpus#collapse4
 
 exemples :  GeForce GTX 980     5.2
             GeForce RTX 2080    7.5
             GeForce RTX 3080    8.6
-  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH=sm_52
+  -DCYCLES_CUDA_ARCH=sm_52
+  -DCYCLES_CUDA_BINARIES_ARCH=sm_52
+
+!!! RTX 3080 TI
+  -DCYCLES_CUDA_ARCH=sm_86
+  -DCYCLES_CUDA_BINARIES_ARCH=sm_86
+
   
-!!! VOIR: https://devtalk.blender.org/t/setting-sm-vs-compute-for-cycles-cuda-binaries-arch/19869
-!!! ==> SUPPR compute_XX
-!!! OU
-  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_52"
-!!! OU
-  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_86"
-!!! A VOIR ???
-  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_80"
-
-
 !!! SI PLUSIEURS CUDA BINARIES:
 ================================
-exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
--DCYCLES_CUDA_BINARIES_ARCH="sm_52;sm_61"
-!!! A VOIR ???
--DCYCLES_CUDA_BINARIES_ARCH="sm_52;sm_61;compute_80"
+exemple : GeForce GTX 980 5.2 ET GeForce RTX 3080TI 8.6
+-DCYCLES_CUDA_BINARIES_ARCH="sm_52;sm_86"
 
-Ligne 396 ????
+Ligne 410 ????
 option WITH_CYCLES_LOGGING     ON ???
         
 !!! A VOIR ???
-398 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON   (-march=native)
+412 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON   (-march=native)
 
 !!! VOIR https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/a2b52dc5716a97e5413acbd6eefc9ce3788b6456
-407 option WITH_CYCLES_DEVICE_OPTIX   OFF  ==> ON
+421 option WITH_CYCLES_DEVICE_OPTIX   OFF  ==> ON
 
 !!! A VOIR ???
-414   WITH_CUDA_DYNLOAD     ON
+428   WITH_CUDA_DYNLOAD     ON
 
-417 # LLVM
+431 # LLVM
 $ pacman -Ss llvm | grep install
 extra/clang 12.0.1-1 [installé]
-extra/llvm 12.0.1-1 [installé]
-extra/llvm-libs 12.0.1-1 [installé]
+extra/llvm 12.0.1-2 [installé]
+extra/llvm-libs 12.0.1-2 [installé]
 
 !!! A VOIR ???
-418 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
-425 option WITH_CLANG   OFF  ==> ON : Voir LIGNE 746 : dep = 'clang'
+432 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
+439 option WITH_CLANG   OFF  ==> ON : Voir LIGNE 746 : dep = 'clang'
 ==> VOIR LIGNE 759 ET ...: # auto enable llvm for cycles_osl
 
 ==> VOIR LIGNE 864 ET ...:
 
 # Debug
-447 option WITH_BOOST     ON
-448 option WITH_TBB     ON  dep = tbb
+461 option WITH_BOOST     ON
+462 option WITH_TBB     ON  dep = tbb
 
-Lignes 455 et ...
+Lignes 469 et ...
 # This should be turned off when Blender enter beta/rc/release
 option WITH_EXPERIMENTAL_FEATURES  ON
 
-Lignes 463 et ...
+Lignes 477 et ...
 # Unit testsing
 OFF
 
 # Documentation
-Lignes 470 et ...
+Lignes 484 et ...
 if(UNIX AND NOT APPLE)
         option WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
 endif()
@@ -424,20 +420,20 @@ endif()
 # OpenGL
 # OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
 ---------------------------------------------------
-Lignes 476 et ...
+Lignes 258 et ...
         option WITH_SYSTEM_GLEW   OFF
         option WITH_SYSTEM_GLES   ON
 
-Lignes 486 et ...
+Lignes 492 et ...
 INCHANGÉS :
 ------------
-497 WITH_OPENGL ON
+492 WITH_OPENGL ON
 
 
 # Compiler toolchain
-Lignes 522 et ...
+Lignes 519 et ...
 
-LIGNE 526 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
+LIGNE 523 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
 
 =================================================================
 
@@ -447,7 +443,7 @@ LIGNE 526 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-3.0.0.15.20210801.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-3.0.0.16.20210805.tar.gz
 -rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-7.3.0-include.zip
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 -rw-r--r--  1 jnd users     1626 28 avril 14:33 blender-openexr3.patch
@@ -530,7 +526,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-3.0.0.15.20210801.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-3.0.0.16.20210805.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/OptiX-7.3.0-include.zip . \
 && cp -v $HOME/05-builds/blender-git/blender-openexr3.patch . \
 && LC_ALL=C makepkg -s \
@@ -579,14 +575,14 @@ usr/share/blender/3.0/scripts/addons/cycles/shader/node_add_closure.oso
 
 namcap blender-git-*-x86_64.pkg.tar.*
 
-blender-git E: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_52.cubin') outside of a valid path.
-blender-git E: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_52.cubin') outside of a valid path.
-blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_52.cubin') is unstripped.
-blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_52.cubin') lacks PIE.
-blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_52.cubin') lacks PIE.
+blender-git E: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_86.cubin') outside of a valid path.
+blender-git E: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_86.cubin') outside of a valid path.
+blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_86.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_86.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_86.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_86.cubin') is unstripped.
+blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/filter_sm_86.cubin') lacks PIE.
+blender-git W: ELF file ('usr/share/blender/3.0/scripts/addons/cycles/lib/kernel_sm_86.cubin') lacks PIE.
 
 blender-git W: unneeded dependency on a package run when needed by hooks.
 blender-git W: Dependency included and not needed ('desktop-file-utils')
@@ -613,7 +609,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-3.0.0.15.20210801.tar.gz
+$ rm -i blender-git-3.0.0.16.20210805.tar.gz
 !!! OPTIX
 $ rm -i OptiX-7.3.0-include.zip
 
@@ -656,15 +652,35 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "79277986c299"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "02e0c6f42e76"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1627788156|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1628158451|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
 ========
+
+!!! VOIR: https://devtalk.blender.org/t/setting-sm-vs-compute-for-cycles-cuda-binaries-arch/19869
+!!! ==> SUPPR compute_XX
+!!! OU
+  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_52"
+!!! OU
+  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_86"
+!!! A VOIR ???
+  -DCYCLES_CUDA_ARCH=sm_52    -DCYCLES_CUDA_BINARIES_ARCH="sm_52;compute_80"
+
+
+!!! SI PLUSIEURS CUDA BINARIES:
+================================
+exemple : GeForce GTX 980 5.2 ET GeForce GTX 1080TI 6.1
+-DCYCLES_CUDA_BINARIES_ARCH="sm_52;sm_61"
+!!! A VOIR ???
+-DCYCLES_CUDA_BINARIES_ARCH="sm_52;sm_61;compute_80"
+
+
+
 
 !!!!!!!!
          'opencolorio2'  # OK avec opencolorio=2.0.0
@@ -716,7 +732,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum fix-gltf-import-python3.9.patch
 
@@ -769,7 +785,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum D8063-cuda11.patch
 
@@ -818,7 +834,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.0.0-include.zip"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum Fix-Embree-staticlibs-dynamiclibs.patch
 
@@ -863,7 +879,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Enable-Optix-7-for-non-RTX-card.patch"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum Fix-Embree-staticlibs-dynamiclibs.patch
 
@@ -894,7 +910,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T74278-Image-Object-handles-too-big.patch"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum Fix-T74278-Image-Object-handles-too-big.patch
 
@@ -1084,9 +1100,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "79277986c299"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "02e0c6f42e76"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1627788156|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1628158451|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -1096,7 +1112,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum Fix-T64463-Visual-Artifacts-with-ColorRamp.patch
 
@@ -1121,7 +1137,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-mesh_discombobulator.patch"
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -1253,7 +1269,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-3.0.0.15.20210801.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-3.0.0.16.20210805.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
@@ -1269,7 +1285,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-3.0.0.15.20210801.tar.gz
+sha256sum blender-git-3.0.0.16.20210805.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
@@ -1295,9 +1311,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "79277986c299"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "02e0c6f42e76"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1627788156|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1628158451|' build_files/cmake/buildinfo.cmake
   
 }
 
