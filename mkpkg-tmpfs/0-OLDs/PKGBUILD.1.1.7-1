@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com
 
 pkgname=mkpkg-tmpfs
-pkgver=1.1.8
+pkgver=1.1.7
 pkgrel=1
 pkgdesc='Creation paquets en RAM.'
 arch=('any')
@@ -9,7 +9,7 @@ url='http://www.club-internet.fr/jeannoeldot/'
 license=('GPL2')
 depends=('devtools')
 source=("${pkgname}-${pkgver}.tar.gz")
-sha256sums=('cfee82e3f89907b54f01accc3f83b5add99a70379cb0b041d8a95725170e8eab')
+sha256sums=('567df2f6c00821cb6378ae6911c2dc1d32914cbe1589e59c8eb0c9263523b58a')
 
 build() {
     cd "${pkgname}-${pkgver}"

@@ -481,32 +481,32 @@ nanovdb-git-*-any.pkg.tar.*\
   FLOOP
 --------
 $ rm -f *~
-$ mkpkg-tmpfs -m floop -g 20G
+$ mkpkg-tmpfs -m floop -g 24G
 
   FAST
 -------
 $ rm -f *~
-$ mkpkg-tmpfs -m fast -g 20G
+$ mkpkg-tmpfs -m fast -g 24G
 OU
 $ rm -f *~
-$ mkpkg-tmpfs -m fast -g 20G -l logs
+$ mkpkg-tmpfs -m fast -g 24G -l logs
 
 
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 20G
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 24G
 OU
 $ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 20G -l logs
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 24G -l logs
 
 -------------------------------------------------------------------
 
   NATIVE
 --------
 $ rm -f *~
-$ mkpkg-tmpfs -m native -g 20G
+$ mkpkg-tmpfs -m native -g 24G
 OU
 $ rm -f *~
-$ mkpkg-tmpfs -m native -g 20G -l logs
+$ mkpkg-tmpfs -m native -g 24G -l logs
 -------------------------------------------------------------------
 
 

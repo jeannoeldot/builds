@@ -1,0 +1,235 @@
+In file included from /build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:17:0:
+/build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:31:66: error: expected ‘,’ or ‘...’ before ‘xml_node’
+ void xml_read_node(XMLReader& reader, Node *node, pugi::xml_node xml_node);
+                                                                  ^~~~~~~~
+/build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:32:1: error: reference to ‘pugi’ is ambiguous
+ pugi::xml_node xml_write_node(Node *node, pugi::xml_node xml_root);
+ ^~~~
+In file included from /build/blender-git/src/blender/intern/cycles/graph/../util/util_xml.h:22:0,
+                 from /build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:23,
+                 from /build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:17:
+/usr/include/OpenImageIO/pugixml.hpp:109:28: note: candidates are: namespace pugi = OpenImageIO_v1_8::OpenImageIO_v1_8::pugi;
+ namespace pugi = OIIO::pugi;
+                            ^
+/usr/include/OpenImageIO/pugixml.hpp:107:11: note:                 namespace OpenImageIO_v1_8::pugi { }
+ namespace pugi {}
+           ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:36:44: error: reference to ‘pugi’ is ambiguous
+ static void xml_read_float_array(T& value, pugi::xml_attribute attr)
+                                            ^~~~
+In file included from /build/blender-git/src/blender/intern/cycles/graph/../util/util_xml.h:22:0,
+                 from /build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:23,
+                 from /build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:17:
+/usr/include/OpenImageIO/pugixml.hpp:109:28: note: candidates are: namespace pugi = OpenImageIO_v1_8::OpenImageIO_v1_8::pugi;
+ namespace pugi = OIIO::pugi;
+                            ^
+/usr/include/OpenImageIO/pugixml.hpp:107:11: note:                 namespace OpenImageIO_v1_8::pugi { }
+ namespace pugi {}
+           ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:36:64: error: expected ‘,’ or ‘...’ before ‘attr’
+ static void xml_read_float_array(T& value, pugi::xml_attribute attr)
+                                                                ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp: In function ‘void ccl::xml_read_float_array(T&, int)’:
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:39:23: error: ‘attr’ was not declared in this scope
+  string_split(tokens, attr.value());
+                       ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:39:23: note: suggested alternative: ‘atol’
+  string_split(tokens, attr.value());
+                       ^~~~
+                       atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp: At global scope:
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:54:51: error: reference to ‘pugi’ is ambiguous
+ void xml_read_node(XMLReader& reader, Node *node, pugi::xml_node xml_node)
+                                                   ^~~~
+In file included from /build/blender-git/src/blender/intern/cycles/graph/../util/util_xml.h:22:0,
+                 from /build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:23,
+                 from /build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:17:
+/usr/include/OpenImageIO/pugixml.hpp:109:28: note: candidates are: namespace pugi = OpenImageIO_v1_8::OpenImageIO_v1_8::pugi;
+ namespace pugi = OIIO::pugi;
+                            ^
+/usr/include/OpenImageIO/pugixml.hpp:107:11: note:                 namespace OpenImageIO_v1_8::pugi { }
+ namespace pugi {}
+           ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:54:66: error: expected ‘,’ or ‘...’ before ‘xml_node’
+ void xml_read_node(XMLReader& reader, Node *node, pugi::xml_node xml_node)
+                                                                  ^~~~~~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp: In function ‘void ccl::xml_read_node(ccl::XMLReader&, ccl::Node*, int)’:
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:56:2: error: reference to ‘pugi’ is ambiguous
+  pugi::xml_attribute name_attr = xml_node.attribute("name");
+  ^~~~
+In file included from /build/blender-git/src/blender/intern/cycles/graph/../util/util_xml.h:22:0,
+                 from /build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:23,
+                 from /build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:17:
+/usr/include/OpenImageIO/pugixml.hpp:109:28: note: candidates are: namespace pugi = OpenImageIO_v1_8::OpenImageIO_v1_8::pugi;
+ namespace pugi = OIIO::pugi;
+                            ^
+/usr/include/OpenImageIO/pugixml.hpp:107:11: note:                 namespace OpenImageIO_v1_8::pugi { }
+ namespace pugi {}
+           ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:57:5: error: ‘name_attr’ was not declared in this scope
+  if(name_attr) {
+     ^~~~~~~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:69:3: error: reference to ‘pugi’ is ambiguous
+   pugi::xml_attribute attr = xml_node.attribute(socket.name.c_str());
+   ^~~~
+In file included from /build/blender-git/src/blender/intern/cycles/graph/../util/util_xml.h:22:0,
+                 from /build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:23,
+                 from /build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:17:
+/usr/include/OpenImageIO/pugixml.hpp:109:28: note: candidates are: namespace pugi = OpenImageIO_v1_8::OpenImageIO_v1_8::pugi;
+ namespace pugi = OIIO::pugi;
+                            ^
+/usr/include/OpenImageIO/pugixml.hpp:107:11: note:                 namespace OpenImageIO_v1_8::pugi { }
+ namespace pugi {}
+           ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:71:7: error: ‘attr’ was not declared in this scope
+   if(!attr) {
+       ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:71:7: note: suggested alternative: ‘atol’
+   if(!attr) {
+       ^~~~
+       atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:79:40: error: ‘attr’ was not declared in this scope
+     node->set(socket, xml_read_boolean(attr.value()));
+                                        ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:79:40: note: suggested alternative: ‘atol’
+     node->set(socket, xml_read_boolean(attr.value()));
+                                        ^~~~
+                                        atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:85:26: error: ‘attr’ was not declared in this scope
+     string_split(tokens, attr.value());
+                          ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:85:26: note: suggested alternative: ‘atol’
+     string_split(tokens, attr.value());
+                          ^~~~
+                          atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:96:35: error: ‘attr’ was not declared in this scope
+     node->set(socket, (float)atof(attr.value()));
+                                   ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:96:35: note: suggested alternative: ‘atol’
+     node->set(socket, (float)atof(attr.value()));
+                                   ^~~~
+                                   atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:102:36: error: ‘attr’ was not declared in this scope
+     xml_read_float_array<1>(value, attr);
+                                    ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:102:36: note: suggested alternative: ‘atol’
+     xml_read_float_array<1>(value, attr);
+                                    ^~~~
+                                    atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:108:33: error: ‘attr’ was not declared in this scope
+     node->set(socket, (int)atoi(attr.value()));
+                                 ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:108:33: note: suggested alternative: ‘atol’
+     node->set(socket, (int)atoi(attr.value()));
+                                 ^~~~
+                                 atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:113:34: error: ‘attr’ was not declared in this scope
+     node->set(socket, (uint)atoi(attr.value()));
+                                  ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:113:34: note: suggested alternative: ‘atol’
+     node->set(socket, (uint)atoi(attr.value()));
+                                  ^~~~
+                                  atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:119:26: error: ‘attr’ was not declared in this scope
+     string_split(tokens, attr.value());
+                          ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:119:26: note: suggested alternative: ‘atol’
+     string_split(tokens, attr.value());
+                          ^~~~
+                          atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:135:36: error: ‘attr’ was not declared in this scope
+     xml_read_float_array<3>(value, attr);
+                                    ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:135:36: note: suggested alternative: ‘atol’
+     xml_read_float_array<3>(value, attr);
+                                    ^~~~
+                                    atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:147:36: error: ‘attr’ was not declared in this scope
+     xml_read_float_array<3>(value, attr);
+                                    ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:147:36: note: suggested alternative: ‘atol’
+     xml_read_float_array<3>(value, attr);
+                                    ^~~~
+                                    atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:154:36: error: ‘attr’ was not declared in this scope
+     xml_read_float_array<2>(value, attr);
+                                    ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:154:36: note: suggested alternative: ‘atol’
+     xml_read_float_array<2>(value, attr);
+                                    ^~~~
+                                    atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:163:36: error: ‘attr’ was not declared in this scope
+     xml_read_float_array<2>(value, attr);
+                                    ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:163:36: note: suggested alternative: ‘atol’
+     xml_read_float_array<2>(value, attr);
+                                    ^~~~
+                                    atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:169:23: error: ‘attr’ was not declared in this scope
+     node->set(socket, attr.value());
+                       ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:169:23: note: suggested alternative: ‘atol’
+     node->set(socket, attr.value());
+                       ^~~~
+                       atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:174:19: error: ‘attr’ was not declared in this scope
+     ustring value(attr.value());
+                   ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:174:19: note: suggested alternative: ‘atol’
+     ustring value(attr.value());
+                   ^~~~
+                   atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:186:26: error: ‘attr’ was not declared in this scope
+     string_split(tokens, attr.value());
+                          ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:186:26: note: suggested alternative: ‘atol’
+     string_split(tokens, attr.value());
+                          ^~~~
+                          atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:199:37: error: ‘attr’ was not declared in this scope
+     xml_read_float_array<16>(value, attr);
+                                     ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:199:37: note: suggested alternative: ‘atol’
+     xml_read_float_array<16>(value, attr);
+                                     ^~~~
+                                     atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:208:37: error: ‘attr’ was not declared in this scope
+     xml_read_float_array<16>(value, attr);
+                                     ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:208:37: note: suggested alternative: ‘atol’
+     xml_read_float_array<16>(value, attr);
+                                     ^~~~
+                                     atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:214:19: error: ‘attr’ was not declared in this scope
+     ustring value(attr.value());
+                   ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:214:19: note: suggested alternative: ‘atol’
+     ustring value(attr.value());
+                   ^~~~
+                   atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:227:26: error: ‘attr’ was not declared in this scope
+     string_split(tokens, attr.value());
+                          ^~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:227:26: note: suggested alternative: ‘atol’
+     string_split(tokens, attr.value());
+                          ^~~~
+                          atol
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:54:57: warning: unused parameter ‘xml_node’ [-Wunused-parameter]
+ void xml_read_node(XMLReader& reader, Node *node, pugi::xml_node xml_node)
+                                                         ^~~~~~~~
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp: At global scope:
+/build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:257:1: error: reference to ‘pugi’ is ambiguous
+ pugi::xml_node xml_write_node(Node *node, pugi::xml_node xml_root)
+ ^~~~
+In file included from /build/blender-git/src/blender/intern/cycles/graph/../util/util_xml.h:22:0,
+                 from /build/blender-git/src/blender/intern/cycles/graph/../graph/node_xml.h:23,
+                 from /build/blender-git/src/blender/intern/cycles/graph/node_xml.cpp:17:
+/usr/include/OpenImageIO/pugixml.hpp:109:28: note: candidates are: namespace pugi = OpenImageIO_v1_8::OpenImageIO_v1_8::pugi;
+ namespace pugi = OIIO::pugi;
+                            ^
+/usr/include/OpenImageIO/pugixml.hpp:107:11: note:                 namespace OpenImageIO_v1_8::pugi { }
+ namespace pugi {}
+           ^~~~
+make: *** [Makefile:163: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...

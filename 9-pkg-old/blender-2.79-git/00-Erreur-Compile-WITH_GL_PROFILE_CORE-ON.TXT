@@ -1,0 +1,62 @@
+In file included from /tmp/build/src/blender/intern/glew-mx/glew-mx.h:89:0,
+                 from /tmp/build/src/blender/source/blender/gpu/GPU_glew.h:35,
+                 from /tmp/build/src/blender/source/blender/editors/include/BIF_gl.h:36,
+                 from /tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c:77:
+/tmp/build/src/blender/source/blender/editors/include/BIF_gl.h: In function 'glTranslate3iv':
+/tmp/build/src/blender/intern/glew-mx/intern/gl-deprecated.h:504:22: error: implicit declaration of function 'DO_NOT_USE_glTranslatef' [-Werror=implicit-function-declaration]
+ #define glTranslatef DO_NOT_USE_glTranslatef
+                      ^
+/tmp/build/src/blender/source/blender/editors/include/BIF_gl.h:90:55: note: in expansion of macro 'glTranslatef'
+ BLI_INLINE void glTranslate3iv(const int vec[3])    { glTranslatef(UNPACK3_EX((const float), vec, ));       }
+                                                       ^
+/tmp/build/src/blender/source/blender/editors/include/BIF_gl.h: In function 'glScale3fv':
+/tmp/build/src/blender/intern/glew-mx/intern/gl-deprecated.h:412:18: error: implicit declaration of function 'DO_NOT_USE_glScalef' [-Werror=implicit-function-declaration]
+ #define glScalef DO_NOT_USE_glScalef
+                  ^
+/tmp/build/src/blender/source/blender/editors/include/BIF_gl.h:97:51: note: in expansion of macro 'glScalef'
+ BLI_INLINE void glScale3fv(const float vec[3])  { glScalef(UNPACK3(vec));      }
+                                                   ^
+/tmp/build/src/blender/source/blender/editors/include/BIF_gl.h: In function 'glRotate3fv':
+/tmp/build/src/blender/intern/glew-mx/intern/gl-deprecated.h:408:19: error: implicit declaration of function 'DO_NOT_USE_glRotatef' [-Werror=implicit-function-declaration]
+ #define glRotatef DO_NOT_USE_glRotatef
+                   ^
+/tmp/build/src/blender/source/blender/editors/include/BIF_gl.h:101:72: note: in expansion of macro 'glRotatef'
+ BLI_INLINE void glRotate3fv(const float angle, const float vec[3])   { glRotatef(angle, UNPACK3(vec)); }
+                                                                        ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c: In function 'acf_generic_root_backdrop':
+/tmp/build/src/blender/intern/glew-mx/intern/gl-deprecated.h:66:20: error: implicit declaration of function 'DO_NOT_USE_glColor3fv' [-Werror=implicit-function-declaration]
+ #define glColor3fv DO_NOT_USE_glColor3fv
+                    ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c:121:2: note: in expansion of macro 'glColor3fv'
+  glColor3fv(color);
+  ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c: In function 'acf_generic_dataexpand_backdrop':
+/tmp/build/src/blender/intern/glew-mx/intern/gl-deprecated.h:392:17: error: implicit declaration of function 'DO_NOT_USE_glRectf' [-Werror=implicit-function-declaration]
+ #define glRectf DO_NOT_USE_glRectf
+                 ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c:149:2: note: in expansion of macro 'glRectf'
+  glRectf(offset, yminc,  v2d->cur.xmax + EXTRA_SCROLL_PAD, ymaxc);
+  ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c: In function 'acf_nlaaction_backdrop':
+/tmp/build/src/blender/intern/glew-mx/intern/gl-deprecated.h:96:19: error: implicit declaration of function 'DO_NOT_USE_glColor4f' [-Werror=implicit-function-declaration]
+ #define glColor4f DO_NOT_USE_glColor4f
+                   ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c:3242:3: note: in expansion of macro 'glColor4f'
+   glColor4f(color[0], color[1], color[2], alpha);
+   ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c: In function 'ANIM_channel_draw':
+/tmp/build/src/blender/intern/glew-mx/intern/gl-deprecated.h:64:19: error: implicit declaration of function 'DO_NOT_USE_glColor3f' [-Werror=implicit-function-declaration]
+ #define glColor3f DO_NOT_USE_glColor3f
+                   ^
+/tmp/build/src/blender/source/blender/editors/animation/anim_channels_defines.c:3718:4: note: in expansion of macro 'glColor3f'
+    glColor3f(1.0f, 0.0f, 0.0f);
+    ^
+[ 24%] Building CXX object intern/cycles/kernel/CMakeFiles/cycles_kernel.dir/kernels/cpu/kernel_avx.cpp.o
+[ 24%] Building CXX object extern/bullet2/CMakeFiles/extern_bullet.dir/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.cpp.o
+[ 24%] Building CXX object extern/ceres/CMakeFiles/extern_ceres.dir/internal/ceres/corrector.cc.o
+cc1: some warnings being treated as errors
+source/blender/editors/animation/CMakeFiles/bf_editor_animation.dir/build.make:62: recipe for target 'source/blender/editors/animation/CMakeFiles/bf_editor_animation.dir/anim_channels_defines.c.o' failed
+make[2]: *** [source/blender/editors/animation/CMakeFiles/bf_editor_animation.dir/anim_channels_defines.c.o] Error 1
+CMakeFiles/Makefile2:3173: recipe for target 'source/blender/editors/animation/CMakeFiles/bf_editor_animation.dir/all' failed
+make[1]: *** [source/blender/editors/animation/CMakeFiles/bf_editor_animation.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....

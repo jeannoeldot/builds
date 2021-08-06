@@ -1,0 +1,122 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=blender-git
+pkgver=2.79.6.20181202
+pkgrel=1
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('x86_64')
+license=('GPL')
+url="http://blender.org/"
+depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
+          'libjpeg' 'libpng' 'openjpeg' 'libtiff' 'openexr' 
+          'python'
+          'libsamplerate' 'ffmpeg' 'fftw'
+          'openal' 'freetype2' 'libsndfile'
+          'sdl2'
+          'glew' 'glfw-x11'
+          'libxi' 'libxmu' 'libxxf86vm'
+          'boost-libs'
+          'jemalloc'
+          'opencolorio'
+          'python-numpy'
+          'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
+          'opensubdiv-git' 'openvdb-git' 'alembic-git'
+          'llvm-libs'
+)
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
+             'cuda'
+             'git'
+)
+optdepends=('cuda: cycles renderer cuda support')
+conflicts=('blender')
+provides=('blender')
+options=('!strip')
+install="blender.install"
+source=("$pkgname-$pkgver.tar.gz"
+        'fix-SyntaxError-object_facemap_auto.patch'
+        'fix-Error-python3.7-io_mesh_stl.patch'
+)
+sha256sums=('afd70333adf6e885222a5ca70a38a3a1ab7c9d7a005e71d5bd445dd19f0d6743'
+            'a86b8c6b605586ed5339908c61435a0d8cf6f8e4162c2310bc42800451bf810d'
+            '0ffe824c6108c208e2497e8eae1157ddd231524f8dcf4146640591ca7dac04f8'
+)
+
+_gitname="blender"
+_slot="2.79"
+
+prepare() {
+  cd "${_gitname}"
+  # fix erreur : SyntaxError: Generator expression must be parenthesized (auto_fmap_widgets.py, line 327)
+  patch -Np1 -i "${srcdir}/fix-SyntaxError-object_facemap_auto.patch"
+  
+  # fix BUG : https://bugs.archlinux.org/task/60249?project=5&string=blender
+  # FS#60249 - [blender] Exporting STL fails since linking against python3.7
+  patch -Np1 -i "${srcdir}/fix-Error-python3.7-io_mesh_stl.patch"
+  
+  # fix erreur : Referenced library 'python3.5' is an uninstalled dependency
+  sed -i -e "s/python3.5/python/" release/scripts/addons/io_blend_utils/install_whl.py
+
+  # Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
+  # Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
+  sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
+  
+  # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "335e1b507b1"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1543721394|' build_files/cmake/buildinfo.cmake
+}
+
+build() {
+  cd "${_gitname}"
+  
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+  
+  cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DWITH_BUILDINFO=ON \
+        -DWITH_FFTW3=ON \
+        -DWITH_GAMEENGINE=OFF \
+        -DWITH_OPENCOLORIO=ON \
+        -DWITH_OPENSUBDIV=ON \
+        -DWITH_OPENVDB=ON \
+        -DWITH_OPENVDB_BLOSC=ON \
+        -DWITH_MOD_OCEANSIM=ON \
+        -DWITH_OPENIMAGEIO=ON \
+        -DWITH_IMAGE_OPENEXR=ON \
+        -DWITH_IMAGE_FRAMESERVER=OFF \
+        -DWITH_CODEC_FFMPEG=ON \
+        -DWITH_CODEC_SNDFILE=ON \
+        -DWITH_ALEMBIC=ON \
+        -DWITH_OPENCOLLADA=ON \
+        -DWITH_SDL=ON \
+        -DWITH_INPUT_NDOF=OFF \
+        -DWITH_INSTALL_PORTABLE=OFF \
+        -DWITH_PYTHON_INSTALL=OFF \
+        -DWITH_PYTHON_INSTALL_NUMPY=OFF \
+        -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
+        -DWITH_CYCLES_OSL=ON \
+        -DWITH_CYCLES_CUDA_BINARIES=ON \
+        -DCYCLES_CUDA_BINARIES_ARCH=sm_52 \
+        -DWITH_CYCLES_LOGGING=OFF \
+        -DWITH_LLVM=ON \
+        -DWITH_DOC_MANPAGE=ON \
+        -DPYTHON_VERSION=3.7 \
+        -DPYTHON_LIBPATH=/usr/lib \
+        -DPYTHON_LIBRARY=python3.7m \
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python3.7m \
+        ..
+  make ${MAKEFLAGS}
+}
+
+package() {
+  # Blender
+  cd "${_gitname}/build"
+  make DESTDIR="${pkgdir}" install
+
+  # voir Community
+  python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+  python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+}

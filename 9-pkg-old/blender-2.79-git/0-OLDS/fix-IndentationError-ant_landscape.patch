@@ -1,0 +1,10 @@
+diff -aur blender/release/scripts/addons/ant_landscape/test.py blender.new/release/scripts/addons/ant_landscape/test.py
+--- blender/release/scripts/addons/ant_landscape/test.py	2017-06-25 10:09:36.000000000 +0200
++++ blender.new/release/scripts/addons/ant_landscape/test.py	2017-06-25 11:22:10.096924095 +0200
+@@ -18,4 +18,4 @@
+     print(stats.memory())
+     a = cos(a)**2+sin(a)**2
+     print(stats.time())
+- print(stats.memory())
+\ Pas de fin de ligne à la fin du fichier
++    print(stats.memory())

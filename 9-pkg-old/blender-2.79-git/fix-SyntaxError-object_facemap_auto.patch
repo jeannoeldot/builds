@@ -1,0 +1,14 @@
+diff -aur blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py blender.new/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py
+--- blender/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py	2017-11-12 16:27:38.000000000 +0100
++++ blender.new/release/scripts/addons_contrib/object_facemap_auto/auto_fmap_widgets.py	2018-08-07 15:29:56.796008764 +0200
+@@ -323,9 +323,7 @@
+         mpr.select = fmap.select
+ 
+         # foo;bar=baz;bonzo=bingo --> {"bar": baz", "bonzo": bingo}
+-        mpr.fmap_target_rules = dict(
+-            item.partition("=")[::2] for item in fmap_rules,
+-        )
++        mpr.fmap_target_rules = dict(item.partition("=")[::2] for item in fmap_rules)
+ 
+         # XXX, we might want to have some way to extract a 'center' from a face-map
+         # for now use the pose-bones location.

@@ -1,0 +1,889 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/blender-git
+
+
+1-1) ATTENTION A LA DATE DE MAJ SUR LE SITE
+======================================================
+
+http://git.blender.org/gitweb/gitweb.cgi/blender.git
+
+==> last change    Sat, 20 Aug 2016 16:03:33 +0200 (16:03 +0200)
+==> 20160820
+
+
+1.2 REVISION
+==============
+http://git.blender.org/gitweb/gitweb.cgi/blender.git/shortlog
+
+
+1.3 SOURCES
+==============
+!!! Répertoire clone de blender dans : /0-DataLinux/05-builds-dir-git/blender
+------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep blender :
+--------------------------------
+ls
+
+!!! SI REP blender N'EXISTE PAS
+-------------------------------
+git clone http://git.blender.org/blender.git
+cd blender
+git submodule update --init --recursive
+git submodule foreach git checkout master
+git submodule foreach git pull --rebase origin master
+cd ..
+
+!!! SI REP blender EXISTE
+-------------------------
+cd blender
+git pull --rebase
+git submodule foreach git pull --rebase origin master
+cd ..
+
+!!!!! Vérifier VERSION : 
+$ head -n 45 blender/source/blender/blenkernel/BKE_blender_version.h
+ ==> #define BLENDER_VERSION                 277
+ ==> #define BLENDER_SUBVERSION              3
+ 
+ ==> #define BLENDER_VERSION_CHAR
+ 
+ ==> #define BLENDER_VERSION_CYCLE   alpha
+ 
+==> Version = 2.77.3.20160820
+
+!!! SI CHANGEMENT DE VERSION (ex de 2.76 à 2.77)
+!!! EN ROOT
+==> DESINSTALLER blender-addons-yafaray-git
+==> # pacman -R blender-addons-yafaray-git
+==> DESINSTALLER blender-addons-matlib-git
+==> # pacman -R blender-addons-matlib-git
+
+==> Modifier blender.install
+
+1-7) FAIRE ARCHIVE TAR.GZ
+=================================
+
+tar -cvzf blender-git-2.77.3.20160820.tar.gz --exclude=.git blender
+
+1-7-1) Move ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/blender-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-2.77.3.20160820.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir CmdFairePatches.TXT
+
+
+1-9) MODIFIER blender.install
+=================================
+
+!!! Version = 2.77
+!!! LE 01/05/2016 : MODIFS SUITE HOOKS PACMAN
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Jean-Noel Dot <jean.noel.dot AT sfr DOT fr>
+
+pkgname=blender-git
+!!!!!!
+pkgver=2.77.3.20160820
+pkgrel=1
+
+LE 12/07/2016
+TEST COMPIL DS CHROOT
+AVEC GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5.18-4 / GCC5 5.4.0 COMMUNITY
+ SANS PATCH fix-isfinite-was-not-declared-in-this-scope.patch
+pkgver=2.77.3.20160627
+pkgrel=2
+---------------------------------------------------------------------------
+!!! OK DANS CHROOT
+!!! -------------------------------------------------------
+
+depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info' 'xdg-utils'
+          ...
+         'nvidia-libgl'
+         ...
+         'jemalloc'
+         'opencolorio'
+!!!!!!
+         'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
+!!!!!!
+         'opensubdiv-git'
+!!!!!!
+         'openvdb-git'
+)
+
+!!!!!!
+makedepends=('cmake' 'boost' 'mesa' 'llvm35'
+             'cuda'
+)
+!!!!!!
+VOIR RAJOUT DE opencl-headers
+makedepends=('cmake' 'boost' 'mesa' 'llvm35'
+             'cuda'
+             'opencl-headers'
+!!! POUR BUILDINFO
+             'git'
+)
+
+!!!!!!
+_gitname="blender"
+
+source=("$pkgname-$pkgver.tar.gz"
+)
+
+sha256sum blender-git-2.77.3.20160820.tar.gz
+
+sha256sums=(...
+         ...
+)
+
+# LLVM : VOIR PKGBUILD sur COMMUNITY
+---------------------------
+        -DWITH_LLVM=ON \
+        -DLLVM_VERSION=3.5 \
+        
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    LLVM_VERSION
+
+        -DLLVM_STATIC=OFF \ ==> -DLLVM_STATIC=ON
+
+2-2) VERIFIER CMakeLists.txt
+==========================
+  kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
+
+Lignes 168 et ...
+# customize...
+if(UNIX AND NOT APPLE)
+        # some of these libraries are problematic on Linux
+        # disable less important dependencies by default
+        set(_init_CODEC_FFMPEG                   OFF)   ==> ON
+        set(_init_CYCLES_OSL                     OFF)   ==> ON
+        set(_init_IMAGE_OPENEXR                  OFF)   ==> ON
+        set(_init_JACK                           OFF)
+        set(_init_OPENCOLLADA                    OFF)   ==> ON
+        set(_init_OPENCOLORIO                    OFF)   ==> ON
+        set(_init_SDL                            OFF)   ==> ON
+        set(_init_FFTW3                          OFF)   ==> ON
+        set(_init_OPENSUBDIV                     OFF)   ==> ON
+endif()
+
+# Blender internal features
+216 option(WITH_BUILDINFO   ==> ON   si ON makedepends = git
+
+231 option(WITH_GAMEENGINE   ==> OFF
+
+# Compositor
+244 option(WITH_OPENSUBDIV   ==> ON   si ON dep = opensubdiv-git
+246 option(WITH_OPENVDB   ==> ON   si ON dep = openvdb-git
+247 option(WITH_OPENVDB_BLOSC   ==> ON
+
+# GHOST Windowing Library Options
+????
+257 option(WITH_GHOST_XDND    "Enable drag'n'drop support on X11 using XDND protocol" ON)
+
+# Misc...
+273 option(WITH_OPENMP  ON
+
+296 WITH_SYSTEM_OPENJPEG      ==> ON
+
+298     !!! VOIR
+if(UNIX AND NOT APPLE)
+	option(WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
+endif()
+
+
+# Modifiers
+308 option WITH_MOD_CLOTH_ELTOPO    NON : disabled
+310 option WITH_MOD_OCEANSIM	==> ON
+
+# Image format support
+314 option(WITH_IMAGE_OPENEXR	==> ON
+
+320 option WITH_IMAGE_FRAMESERVER    ==> OFF
+
+# Audio/Video format support
+324	option WITH_CODEC_FFMPEG	==> ON
+325	option WITH_CODEC_SNDFILE	==> ON
+
+Lignes 327 et ...
+# Alembic support
+!!! ????
+option(WITH_ALEMBIC             "Enable Alembic Support" OFF)
+option(WITH_ALEMBIC_HDF5        "Enable Legacy Alembic Support (not officially supported)" OFF)
+
+Lignes 337
+# 3D format support
+option WITH_OPENCOLLADA		ON 	    si ON dep = opencollada-git
+option(WITH_OPENCOLLADA   "Enable OpenCollada Support (http://www.opencollada.org)" ${_init_OPENCOLLADA})
+
+# Sound output
+340   option(WITH_SDL   	==> ON
+342   option WITH_JACK          ==> OFF         si ON  dep =  jack
+
+# Compression
+
+# Camera/motion tracking
+359   option(WITH_LIBMV_SCHUR_SPECIALIZATIONS   	==> ON
+
+# Freestyle
+
+# Misc
+369	option WITH_INPUT_NDOF		==> OFF
+
+372	WITH_INSTALL_PORTABLE       ON   ==> OFF
+
+380     WITH_PYTHON_INSTALL             ON   ==> OFF
+
+382     WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+
+387     WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+
+393     WITH_CPU_SSE    ON
+        
+
+396 # Cycles
+LE 24/07/2016
+=============
+!!! ERREUR
+CUDA_TOOLKIT_ROOT_DIR not found or specified
+-- Could NOT find CUDA (missing:  CUDA_TOOLKIT_ROOT_DIR CUDA_INCLUDE_DIRS CUDA_CUDART_LIBRARY) (found version "7.5")
+-- CUDA compiler not found, disabling WITH_CYCLES_CUDA_BINARIES
+
+        -DCUDA_TOOLKIT_ROOT_DIR=/opt/cuda \
+        -DCUDA_INCLUDE_DIRS=/opt/cuda/include \
+        -DCUDA_CUDART_LIBRARY=/opt/cuda/lib64 \
+
+        option WITH_CYCLES			ON      	si ON dep = openimageio
+        option WITH_CYCLES_OSL                  OFF             si ON dep = openshadinglanguage
+        option WITH_CYCLES_CUDA_BINARIES	OFF 	        si ON dep = cuda
+        
+        Lignes 406 ????
+        option(WITH_CYCLES_LOGGING              ON   ==> OFF
+        
+URL  GPU et sm_??  : https://developer.nvidia.com/cuda-gpus
+https://developer.nvidia.com/cuda-gpus#collapse4
+
+exemple : GeForce 9800 GTX+     1.1
+  -DCYCLES_CUDA_ARCH=sm_11                      -DCYCLES_CUDA_BINARIES_ARCH=sm_11
+
+  GeForce GTX 650 Ti    3.0
+  -DCYCLES_CUDA_ARCH=sm_30                      -DCYCLES_CUDA_BINARIES_ARCH=sm_30
+
+  GeForce GTX 980    5.2
+  -DCYCLES_CUDA_ARCH=sm_52                      -DCYCLES_CUDA_BINARIES_ARCH=sm_52
+
+
+!!! A VOIR ???
+WITH_CYCLES_NATIVE_ONLY	"Build Cycles with native kernel only (which fits current CPU, use for development only)" OFF)
+   	==> ON ???
+
+!!! A VOIR ???
+413   WITH_CUDA_DYNLOAD     ON
+
+
+416 # LLVM
+option(WITH_LLVM   	==> ON
+option(LLVM_STATIC   	==> ON
+
+
+Lignes 426 et ...
+option(WITH_MEM_JEMALLOC   "Enable malloc replacement (http://www.canonware.com/jemalloc)" ON)
+  ==> depends=(... 'jemalloc' ...
+
+440 WITH_BOOST      ON
+
+# Unit testsing
+Ligne 443
+WITH_GTESTS "Enable GTest unit testing"  OFF
+  
+# Documentation
+Lignes 447 et ...
+if(UNIX AND NOT APPLE)
+        option(WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON
+endif()
+
+
+# OpenGL
+# OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
+---------------------------------------------------
+Lignes 285 et ...
+        option(WITH_SYSTEM_GLEW         ==> ON
+        option(WITH_SYSTEM_GLES         ==> ON
+
+Lignes 452 et ...
+INCHANGÉS :
+------------
+error: VOIR : 00-Erreur-Compile-WITH_GL_PROFILE_CORE-ON.TXT
+
+option(WITH_GL_PROFILE_COMPAT         ON   ==> OFF
+OpenGL core profile version string: 4.5.0 NVIDIA 367.27
+        option(WITH_GL_PROFILE_CORE         OFF  ==> ON
+OpenGL ES profile version string: OpenGL ES 3.2 NVIDIA 367.27
+        option(WITH_GL_PROFILE_ES20         OFF  ==> ON
+        
+TESTS DANS PKGBUILD
+        -DWITH_GL_PROFILE_COMPAT=OFF \
+        -DWITH_GL_PROFILE_CORE=ON \
+
+
+!!!!! VOIR
+        option(WITH_GPU_DEBUG         OFF
+INCHANGÉS :
+------------
+/build/blender-git/src/blender/source/blender/gpu/intern/gpu_debug.c:203:7: error: 'MX_profile_es20' undeclared (first use in this function)
+
+
+# Experimental support of C++11
+Lignes 491 et ...
+502 option(WITH_C11 "Build with C11 standard enabled, for development use only!" OFF)
+==> ON  : -DWITH_C11=ON \ 
+
+504 option(WITH_CXX11 "Build with C++11 standard enabled, for development use only!" OFF)
+==> ON  : -DWITH_CXX11=ON \ 
+
+# Dependency graph
+Lignes 507 et ...
+option(WITH_LEGACY_DEPSGRAPH "Build Blender with legacy dependency graph" ON)
+mark_as_advanced(WITH_LEGACY_DEPSGRAPH)
+INCHANGÉS :
+------------
+
+
+=================================================================
+
+!!!!!!!!!!
+!!! SI MODIFS ==> MODIFIER blender.install
+==========================================
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     3130 10 sept. 20:02 PKGBUILD
+-rw-r--r--  1 jnd users 58014686  9 sept. 19:49 blender-git-2.77.3.20160820.tar.gz
+-rw-r--r--  1 jnd users      783 17 août  08:16 blender.install
+-rw-r--r--  1 jnd users      900 22 mai   11:53 fix-isfinite-was-not-declared-in-this-scope.patch
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/blender-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.77.3.20160820.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/fix-isfinite-was-not-declared-in-this-scope.patch . \
+&& cp -v $HOME/05-builds/blender-git/blender.install . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/blender-git \
+&& cp -v /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/blender-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+SI depends=( 'openshadinglanguage-git' 'openimageio-git')
+==========================================================
+$ cp -v $HOME/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+$ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+SI depends=( 'opencollada-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/opencollada-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+SI depends=( 'opensubdiv-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+SI depends=( 'openvdb-git' )
+==========================================================
+$ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
+-------------------------------------------------------------------
+!!! GCC 5.3 ET FAST => OK SI LIGNE SED COMMENTÉE
+!!! GCC 5.3 ET FAST => ERREUR : INTERNAL COMPILER ERROR SI LIGNE SED DÉCOMMENTÉE
+  FAST
+-------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 16G -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 16G
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 16G -l logs
+-------------------------------------------------------------------
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -g 16G
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -g 16G -l logs
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 16G
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 16G -l logs
+-------------------------------------------------------------------
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+==> Installing missing dependencies...
+resolving dependencies...
+:: There are 3 providers available for libgl:
+:: Repository extra
+   1) mesa-libgl  2) nvidia-304xx-libgl  3) nvidia-libgl
+
+Enter a number (default=1): 
+
+
+3-2) MAKEPKG en USER sur SSD
+=============================
+!!! EN USER
+cd $HOME/05-builds/blender-git
+$ rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+# Nettoyage...
+!!! EN USER
+rm -rf pkg src
+rm -f *~
+
+# Verifications...
+
+namcap blender-git-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/blender-git-*-x86_64.pkg.tar.*
+
+$ cp -v blender-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+---------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/blender-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i blender-git-2.77.3.20160820.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!! EN ROOT
+# cd
+# pacman -Syu
+!!! OU
+# pacman -R blender-git blender-addons-yafaray-git
+# pacman -Syu blender-git
+
+
+!!! MODIFIER FICHIERS
+!!! EN USER
+
+!!! SI CHANGEMENT DE VERSION ( 2.76 -> 2.77  ... )
+
+$ cd
+$ cp -r .config/blender/2.76 .config/blender/2.77
+# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/2.77/cache
+$ rm -f .config/blender/2.77/cache/bvh_*
+
+# SUPPRINE VERSION N-2
+$ rm -rf .config/blender/2.75
+================================================================
+ANCIENS
+========
+------------------------------------------------------------
+!!!!!!! TEST LE 14/08/2016
+!!!!!!! NON : INUTILE
+set(BUILDINFO_OVERRIDE_DATE "" CACHE STRING "Use instead of the current date for reproducable builds (empty string disables this option)")
+-DBUILDINFO_OVERRIDE_DATE=2016-08-14 \
+
+set(BUILDINFO_OVERRIDE_TIME "" CACHE STRING "Use instead of the current time for reproducable builds (empty string disables this option)")
+-DBUILDINFO_OVERRIDE_TIME=12:00 \
+
+  # Cycles ebuild Gentoo			Arch
+  -DWITH_CYCLES_CUDA=ON				-DWITH_CYCLES_CUDA_BINARIES=ON
+  -DCYCLES_CUDA_ARCH=sm_30			-DCYCLES_CUDA_BINARIES_ARCH=sm_30
+  -DCUDA_INCLUDES=/opt/cuda/include		
+  -DCUDA_LIBRARIES=/opt/cuda/lib64		-DCUDA_LIBRARIES=opt/cuda/lib64
+  -DCUDA_NVCC=/opt/cuda/bin/nvcc		
+  
+CUDA 6.5 Production Release with Support for GeForce GTX9xx GPUs
+http://developer.download.nvidia.com/compute/cuda/6_5/rel/installers/cuda_6.5.19_linux_64.run
+
+!!!!!!!!
+[ 14%] Built target cycles_render
+ptxas info    : 0 bytes gmem, 1464 bytes cmem[3]
+ptxas info    : Compiling entry function 'kernel_cuda_convert_to_byte' for 'sm_30'
+
+!!!!!!!!
+ptxas info    : 0 bytes gmem, 1464 bytes cmem[3]
+ptxas info    : Compiling entry function 'kernel_cuda_convert_to_byte' for 'sm_52'
+
+
+MODIFS LE 12/07/2016
+!!! PAS OK
+!!! COMMIT DU 12/06/2016 : Fix build error with GCC 6.1
+!!! TEST COMPILE AVEC GCC 6.1.1
+!!! SUPPR 
+makedepends=('...
+             'gcc5'
+
+build() {...
+    -DCMAKE_C_COMPILER='/usr/bin/gcc-5' \
+    -DCMAKE_CXX_COMPILER='/usr/bin/g++-5' \
+!!! -------------------------------------------------------
+
+
+!!! ERREUR COMPIL GCC 6.1.1 boost boost-libs 1.60.0-5 ET CUDA 7.5
+
+pkgrel=3
+!!! TEST AVEC gcc 5.3.0-6 AUR et CUDA 7.5 et LIENS :
+    -DCMAKE_C_COMPILER='/usr/bin/gcc-5' \
+    -DCMAKE_CXX_COMPILER='/usr/bin/g++-5' \
+
+pkgrel=2    Test 1 patch isfinite-was-not-declared-in-this-scope
+pkgrel=3    Test 2 patch isfinite-was-not-declared-in-this-scope
+!!! GCC5 5.3.0 AUR
+             'gcc5'
+source=("$pkgname-$pkgver.tar.gz"
+        'fix-isfinite-was-not-declared-in-this-scope.patch'
+)
+
+sha256sum blender-git-2.77.3.20160820.tar.gz
+
+sha256sum fix-isfinite-was-not-declared-in-this-scope.patch
+
+prepare() {
+  cd "${_gitname}"
+   ...
+  # fix erreur : ‘isfinite’ was not declared in this scope
+  patch -Np1 -i "${srcdir}/fix-isfinite-was-not-declared-in-this-scope.patch"
+------------------------------------------------------------------------------
+# PYTHON : VOIR PKGBUILD sur COMMUNITY
+--------------------------------------
+/!\ /!\ VOIR COMMIT DU 18/05/2016
+        SEMBLE INUTILE
+!!! VÉRIFIER VERSION PYTHON INSTALLÉE
+$ pacman -Ss python | grep 3 | grep install
+==> extra/python 3.5.1-2 [installé]
+
+    -DPYTHON_VERSION=3.5 \
+    -DPYTHON_LIBPATH=/usr/lib \
+    -DPYTHON_LIBRARY=python3.5m \
+    -DPYTHON_INCLUDE_DIRS=/usr/include/python3.5m
+
+
+PAS MIS DANS PKGBUILD
+        -DWITH_GL_PROFILE_COMPAT=OFF \
+        -DWITH_GL_PROFILE_CORE=ON \
+        -DWITH_GL_PROFILE_ES20=ON \
+
+!!! GCC 5.2 ET FAST => OK SI LIGNE SED COMMENTÉE
+!!! GCC 5.2 ET FAST => ERREUR : INTERNAL COMPILER ERROR SI LIGNE SED DÉCOMMENTÉE
+
+-  01/01/2016 : TEST SANS PATCH
+source=($pkgname-$pkgver.tar.gz
+        'fix-redefinitions-cpp11-gcc5.2.0.patch'
+)
+
+sha256sum fix-redefinitions-cpp11-gcc5.2.0.patch
+
+prepare() {
+  cd "${srcdir}/${_gitname}"
+   ...
+
+  # fix redefinitions cpp11 gcc 5.2.0
+  patch -Np1 -i "${srcdir}/fix-redefinitions-cpp11-gcc5.2.0.patch"
+  
+-rw-r--r--  1 jnd users      627 10 août  12:36 fix-redefinitions-cpp11-gcc5.2.0.patch
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/blender-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-2.77.3.20160820.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/fix-redefinitions-cpp11-gcc5.2.0.patch . \
+&& cp -v $HOME/05-builds/blender-git/blender.install . \
+&& makepkg -s \
+&& cd $HOME/05-builds/blender-git \
+&& cp -v /tmp/build/blender-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+-  20/09/2015 : TEST SANS PATCH : VOIR COMMIT COLLADA DU 10/09/2015 
+        'fix-error-no-matching-function-for-call-to-COLLADASW-Scene.patch'
+sha256sum fix-error-no-matching-function-for-call-to-COLLADASW-Scene.patch
+
+  # fix  error: no matching function for call to 'COLLADASW::Scene::Scene(COLLADASW::StreamWriter*, COLLADASW::URI)'
+  patch -Np1 -i "${srcdir}/fix-error-no-matching-function-for-call-to-COLLADASW-Scene.patch"
+
+-rw-r--r--  1 jnd users      662  2 août  10:25 fix-error-no-matching-function-for-call-to-COLLADASW-Scene.patch
+
+  !!! AVEC 1 PATCH
+INCHANGÉS :
+------------
+/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include/lzcntintrin.h: In function 'unsigned int __lzcnt32(unsigned int)':
+/build/blender-git/src/blender/intern/cycles/bvh/../util/util_simd.h:66:20: error: redefinition of 'unsigned int __lzcnt32(unsigned int)'
+ #define _lzcnt_u32 __lzcnt32
+ 
+--------------------------
+!!! AU 19/04/2015
+ERREUR mesa dépend de lvm 3.6 en conflit avec llvm35
+
+Options enlevées :
+        -DWITH_CYCLES_OSL=ON \
+        ...
+        -DWITH_LLVM=ON \
+        -DLLVM_VERSION=3.5 \
+        -DLLVM_STATIC=ON \
+
+
+
+        'fix-commit-2015.03.15-Remove-version-from-readme-replace-on-install.patch'
+sha256sum fix-commit-2015.03.15-Remove-version-from-readme-replace-on-install.patch
+
+-rw-r--r--  1 jnd users    10383 11 nov.  09:21 fix-commit-2015.03.15-Remove-version-from-readme-replace-on-install.patch
+
+# Fix Commit du 12/03/2015 : Campbell Barton : Remove version from readme, (replace on install).  
+  patch -Np1 -i "${srcdir}/fix-commit-2015.03.15-Remove-version-from-readme-replace-on-install.patch"
+&& cp -v $HOME/05-builds/blender-git/fix-commit-2015.03.15-Remove-version-from-readme-replace-on-install.patch . \
+
+
+depends=(...
+         'opencolorio' 'opencollada' 'llvm' 'jemalloc'
+         'openshadinglanguage-git' 'openimageio-git'
+)
+
+!!!!!!
+makedepends=('cmake' 'boost' 'mesa'
+             'cuda')
+
+!!!!!!
+makedepends=('cmake' 'boost' 'mesa'
+             'cuda980')
+
+SI makedepends=( ... 'cuda980')
+===============================
+$ cp -v $HOME/00-repolocal/cuda980-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
+
+'fix-Linking-OSLCompiler-compile.patch'
+sha256sum fix-Linking-OSLCompiler-compile.patch
+
+  # fix error: no matching function for call to 'OSL::OSLCompiler::compile(...
+  # fix undefined reference to `OSL::OSLCompiler::create()
+  patch -Np1 -i "${srcdir}/fix-Linking-OSLCompiler-compile.patch"
+
+
+        'fix-redefinitions-gcc5.2.0.patch'
+sha256sum fix-redefinitions-gcc5.2.0.patch
+
+  # fix redefinitions gcc 5.2.0
+  patch -Np1 -i "${srcdir}/fix-redefinitions-gcc5.2.0.patch"
+
+-rw-r--r--  1 jnd users      627 10 août  12:36 fix-redefinitions-gcc5.2.0.patch
+
+&& cp -v $HOME/05-builds/blender-git/fix-redefinitions-gcc5.2.0.patch . \
+
+SI makedepends=( ... 'cuda980')
+===============================
+
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/cuda980-*-x86_64.pkg.tar.*
+sync
+cp -v $HOME/00-repolocal/cuda980-*-x86_64.pkg.tar.* \
+$HOME/05-builds/0-copie-fichiers-chroot/repo/
+sync
+
+SI depends=( 'openshadinglanguage-git' 'openimageio-git')
+==========================================================
+
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/openshadinglanguage-git-*-x86_64.pkg.tar.*
+sync
+cp -v $HOME/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.* \
+$HOME/05-builds/0-copie-fichiers-chroot/repo/
+sync
+
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/openimageio-git-*-x86_64.pkg.tar.*
+sync
+cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* \
+$HOME/05-builds/0-copie-fichiers-chroot/repo/
+sync
+
+# Nettoyage fichiers ds 0-copie-fichiers-chroot/repo
+=====================================================
+SI makedepends=( ... 'cuda980')
+===============================
+ rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/cuda980-*-x86_64.pkg.tar.*
+ sync
+
+SI depends=( 'openshadinglanguage-git' 'openimageio-git')
+==========================================================
+ rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/openshadinglanguage-git-*-x86_64.pkg.tar.*
+ rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/openimageio-git-*-x86_64.pkg.tar.*
+ sync
+
+
+
+par exemple :
+        option WITH_FFTW3               ==> ON
+
+
+# Fix Commit du 08/11/2014 : cmake buildfiles Cleanup / Refactor, no functional changes.
+# BUG T42553
+git revert 8f8321bfdb431f4c44b1878543fffb309a2610c8
+
+sha256sum fix-commit-2014-11-08-cmake-buildfiles-Cleanup-Refactor.patch
+
+        'fix-commit-2014-11-08-cmake-buildfiles-Cleanup-Refactor.patch'
+        
+  # Fix Commit du 08/11/2014 : cmake buildfiles Cleanup / Refactor, no functional changes.
+  # BUG T42553
+  patch -Np1 -i "${srcdir}/fix-commit-2014-11-08-cmake-buildfiles-Cleanup-Refactor.patch"
+
+-rw-r--r--  1 jnd users    10383 11 nov.  09:21 fix-commit-2014-11-08-cmake-buildfiles-Cleanup-Refactor.patch
+
+&& cp -v $HOME/05-builds/blender-git/fix-commit-2014-11-08-cmake-buildfiles-Cleanup-Refactor.patch . \
+
+
+
+_slot="2.72"
+
+
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CUDA_INCLUDES
+    CUDA_NVCC
+
+Lignes ds build()
+        -DCMAKE_{SHARED,MODULE,EXE}_LINKER_FLAGS='-Wl,--no-undefined -Wl,--as-needed' \
+
+        -DCUDA_INCLUDES=opt/cuda-toolkit/include \
+        -DCUDA_NVCC=opt/cuda-toolkit/bin/nvcc \
+
+semblent inutiles (voir 0-Blender-configuration.txt) ==> A SUPPRIMER
+
+!!! OK
+!!! VOIR 0-Blender-2.67-configuration.txt
+
+-- Could NOT find OpenJPEG (missing:  OPENJPEG_INCLUDE_DIR) 
+   * WITH_IMAGE_OPENJPEG        OFF
+
+!!! OK : INUTILE
+   ==> RAJOUTER DANS PKGBUILD
+        -DOPENJPEG_INCLUDE_DIR=/usr/include/openjpeg-1.5 \
+
+
+Features no includes:
+!!! CYCLES WITH OSL
+
+  !!! TEST CAR ERREUR COMPILE AVEC OSL
+!!! ATTENDRE MAJ openshadinglanguage et OpenImageIO
+
+    -DWITH_CYCLES_OSL=OFF \
+    
+cp -v blender-SANS-OSL.install blender.install
+
+cp -v PKGBUILD-SANS-OSL PKGBUILD
+
+
+   
+rm -f *.log
+
+!!! PAS OBLIGATOIRE SI GIT
+rm -rf blender
+
+
+cp -r .config/blender/2.69 .config/blender/2.70
+!!! SI CHANGEMENT DE VERSION ( 2.61 -> 2.62 -> 2.63 -> 2.64 -> 2.65 ... )
+
+cd
+maj-repolocal
+sync
+
+1-4) MODIF blender/CMakeLists.txt
+=====================================
+!!! Mis ds PKGBUILD
+
+$ kwrite blender/CMakeLists.txt
+
+LIGNES 923 à 924
+        # GNU Compiler
+        if(CMAKE_COMPILER_IS_GNUCC)
+                set(PLATFORM_CFLAGS "-pipe -fPIC -funsigned-char -fno-strict-aliasing")
+
+DEVIENNENT :
+        if(CMAKE_COMPILER_IS_GNUCC)
+                set(PLATFORM_CFLAGS "-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block")
+
+ENREGISTRER et QUITTER kwrite
+SUPPRIMER blender/CMakeLists.txt~
+$ rm blender/CMakeLists.txt~
+
+!!! Cuda et gcc 4.9 ==> ERREUR
+$ sudo mv -v /opt/cuda/include/host_config.h /opt/cuda/include/host_config.h.backup.moi
+$ sudo cp -v $HOME/05-builds/blender-git/0-opt-cuda-include/host_config.h /opt/cuda/include/host_config.h
+
+!!! Cuda et gcc 4.9 ==> ERREUR
+$ sudo mv -v /opt/cuda/include/host_config.h.backup.moi /opt/cuda/include/host_config.h
+
+!!! Cuda et gcc 4.9 ==> ERREUR
+
+---------------------------------------------------------------------------
+!!! PASSAGE SVN --> GIT
+mv $HOME/00-repolocal/blender-svn-*-x86_64.pkg.tar.* $HOME/00-repolocal/pkg-OLD/
+
+cp -r .config/blender/2.68 .config/blender/2.69
+
