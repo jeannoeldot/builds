@@ -1,0 +1,49 @@
+# Le répertoire
+===============
+!!! EN USER
+mkdir -p $HOME/99-temp/nanovdb
+cd $HOME/99-temp/nanovdb
+
+1.1 SOURCES
+==============
+
+1) MAJ 22 oct 2020
+---------------------------
+NANOVDB_GIT_UID=1c306bcaf7e9f7d52525bab716202bd4f7fff5d1
+
+wget \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/${NANOVDB_GIT_UID}.tar.gz
+==> 1c306bcaf7e9f7d52525bab716202bd4f7fff5d1.tar.gz
+
+tar -xzf ${NANOVDB_GIT_UID}.tar.gz
+==> openvdb-1c306bcaf7e9f7d52525bab716202bd4f7fff5d1
+
+mv -v openvdb-${NANOVDB_GIT_UID} nanovdb-20201022
+
+1) MAJ 25 sept 2020
+---------------------------
+NANOVDB_GIT_UID=e62f7a0bf1e27397223c61ddeaaf57edf111b77f
+
+wget \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/${NANOVDB_GIT_UID}.tar.gz
+==> e62f7a0bf1e27397223c61ddeaaf57edf111b77f.tar.gz
+
+tar -xzf ${NANOVDB_GIT_UID}.tar.gz
+==> openvdb-e62f7a0bf1e27397223c61ddeaaf57edf111b77f
+
+mv -v openvdb-${NANOVDB_GIT_UID} nanovdb-20200925
+
+
+2.1 DIFF
+==============
+
+diff -aur nanovdb-20200925 nanovdb-20201022 > diff-blender-moi.patch
+
+
+3.1
+==============
+
+cd $HOME/05-builds/nanovdb-git
+
+mv -vf $HOME/99-temp/nanovdb/diff-blender-moi.patch .
+
