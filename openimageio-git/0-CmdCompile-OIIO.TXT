@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.18.0.20210901
+pkgrel=2    # rebuild against opencolorio 2.1.0
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ openexr 3.0.5-2/imath 3.1.0
