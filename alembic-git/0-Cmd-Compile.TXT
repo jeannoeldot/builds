@@ -6,16 +6,16 @@ cd $HOME/05-builds/alembic-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/alembic/alembic/releases
-==> lamiller0 released this on 09 juin 2021 ==> 20210609
-==> Alembic 1.8.2  ==> 1.8.2
-==> 1.8.2.20210609
+==> lamiller0 released this on 11 sept 2021 ==> 20210911
+==> Alembic 1.8.3  ==> 1.8.3
+==> 1.8.3.20210911
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O alembic-1.8.2.tar.gz \
-https://github.com/alembic/alembic/archive/refs/tags/1.8.2.tar.gz
+wget -O alembic-1.8.3.tar.gz \
+https://github.com/alembic/alembic/archive/refs/tags/1.8.3.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/alembic-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/alembic-1.8.2.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/alembic-1.8.3.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,7 +36,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=alembic-git               # alembic ds community
-pkgver=1.8.2.20210609
+pkgver=1.8.3.20210911
 pkgrel=1
 pkgrel=2          # rebuild MAJ openexr 3.1.0
 
@@ -56,7 +56,7 @@ pkgrel=2  # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
 pkgrel=2    # Rebuild nouveau PC 
 
 !!!!!!
-_ver_release="1.8.2"
+_ver_release="1.8.3"
 _name_release="alembic-${_ver_release}"
 
 license=('BSD')
@@ -72,7 +72,7 @@ provides='alembic'
 
 SANS PATCH
 ----------
-sha256sum alembic-1.8.2.tar.gz
+sha256sum alembic-1.8.3.tar.gz
 
 source=("alembic-${_ver_release}.tar.gz"
 )
@@ -90,9 +90,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf alembic-1.8.2.tar.gz -C /tmp/srcp
+tar -xzf alembic-1.8.3.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/alembic-1.8.2/CMakeLists.txt
+1) kwrite /tmp/srcp/alembic-1.8.3/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -124,7 +124,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 alembic-1.8.2.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 alembic-1.8.3.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -142,7 +142,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/alembic-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/alembic-git/alembic-1.8.2.tar.gz . \
+&& cp -v $HOME/05-builds/alembic-git/alembic-1.8.3.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/alembic-git \
 && cp -v /tmp/build/alembic-git-*-x86_64.pkg.tar.* . \
@@ -185,7 +185,7 @@ rm -f *~
 
 # Verifications...
 
-Checking alembic-git-1.8.2.20210609-1-x86_64.pkg.tar.xz
+Checking alembic-git-1.8.3.20210911-1-x86_64.pkg.tar.xz
 
 namcap alembic-git-*-x86_64.pkg.tar.*
 
@@ -207,7 +207,7 @@ $ mv -v alembic-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i alembic-1.8.2.tar.gz
+$ rm -i alembic-1.8.3.tar.gz
 
 
 $ cd && maj-repolocal
@@ -239,15 +239,15 @@ ANCIEN
 depends=('gcc-libs' 'openexr'
 
 
-wget -O alembic-1.8.2.tar.gz \
-https://github.com/alembic/alembic/archive/1.8.2.tar.gz
+wget -O alembic-1.8.3.tar.gz \
+https://github.com/alembic/alembic/archive/1.8.3.tar.gz
 
 ALEMBIC_LIB_USES_BOOST OFF
 ALEMBIC_LIB_USES_TR1 OFF
 
 
 namcap alembic-git-*-x86_64.pkg.tar.*
-alembic-git E: Dependency gcc-libs detected and not included (libraries ['usr/lib/libgcc_s.so.1', 'usr/lib/libstdc++.so.6'] needed in files ['usr/lib/libAlembic.so.1.8.2'])
+alembic-git E: Dependency gcc-libs detected and not included (libraries ['usr/lib/libgcc_s.so.1', 'usr/lib/libstdc++.so.6'] needed in files ['usr/lib/libAlembic.so.1.8.3'])
 
 !!! ORIGINAL
 depends=('openexr' 'boost-libs'
