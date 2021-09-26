@@ -1,20 +1,17 @@
-Seulement dans blender.new: blender
 diff -aur blender/build_files/cmake/Modules/FindOpenEXR.cmake blender.new/build_files/cmake/Modules/FindOpenEXR.cmake
 --- blender/build_files/cmake/Modules/FindOpenEXR.cmake	2020-08-19 12:06:57.000000000 +0200
-+++ blender.new/build_files/cmake/Modules/FindOpenEXR.cmake	2021-04-28 14:25:24.778667825 +0200
++++ blender.new/build_files/cmake/Modules/FindOpenEXR.cmake	2021-09-26 10:46:52.223198180 +0200
 @@ -34,11 +34,10 @@
  SET(_openexr_libs_ver_init "2.0")
  
  SET(_openexr_FIND_COMPONENTS
 -  Half
--  Iex
+   Iex
 -  IlmImf
 -  IlmThread
--  Imath
-+   Iex
-+   Imath
-+   OpenEXR
-+   IlmThread
+   Imath
++  OpenEXR
++  IlmThread
  )
  
  SET(_openexr_SEARCH_DIRS
@@ -28,8 +25,8 @@ diff -aur blender/build_files/cmake/Modules/FindOpenEXR.cmake blender.new/build_
  
  MARK_AS_ADVANCED(
 diff -aur blender/source/blender/imbuf/intern/openexr/openexr_api.cpp blender.new/source/blender/imbuf/intern/openexr/openexr_api.cpp
---- blender/source/blender/imbuf/intern/openexr/openexr_api.cpp	2021-04-11 10:34:57.000000000 +0200
-+++ blender.new/source/blender/imbuf/intern/openexr/openexr_api.cpp	2021-04-28 14:31:09.689307246 +0200
+--- blender/source/blender/imbuf/intern/openexr/openexr_api.cpp	2021-09-26 10:32:53.000000000 +0200
++++ blender.new/source/blender/imbuf/intern/openexr/openexr_api.cpp	2021-09-26 10:51:09.655042479 +0200
 @@ -38,8 +38,10 @@
  #include <ImfChannelList.h>
  #include <ImfCompression.h>

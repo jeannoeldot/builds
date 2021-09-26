@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.0.0.25.20210925
+pkgver=3.0.0.22.20210919
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -39,31 +39,27 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
         "blender-openexr3.patch"
-        "fix-T91697-Eevee-Generated-texture.patch"
 )
-sha256sums=('6ccb26b4e18ec79d0a22d82527fc1738d5ea59b0d2a70e14b1877766ea83522c'
+sha256sums=('5e3c78e5a4cd60d5e58607a921a5ead214cf74cf061eaef794a08f928bb49f9b'
             'ed62b562cba4b44a3a2d4676a21bfebd63b11aaa29901f7d8be11705d7a82c52'
-            'a4dbc6a70b2fa21e97111a2ceeb9d731b83207118682bf285b08ecf2b99f40c3'
-            'e301c61d300d8305fc3ea7fa78411c566ebb2dca6f1ce02dfd5cbf01af2828da'
+            '133e98d37b21e014565982d0b5243999078f2ad2f33fc4a11a8c58ef10deb985'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
-  # Build with opnexr/imath 3.0.1
+  #Build with opnexr/imath 3.0.1
   patch -Np1 -i "${srcdir}/blender-openexr3.patch"
-  # FIX: T91697 Eevee Generated texture coordinates completly missing
-  patch -Np1 -i "${srcdir}/fix-T91697-Eevee-Generated-texture.patch"
-
+  
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "505422220d6e"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "257c7753e9be"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1632555060|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1632032406|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -91,6 +87,7 @@ build() {
         -DWITH_CYCLES_CUDA_BINARIES=ON \
         -DCYCLES_CUDA_BINARIES_ARCH="sm_86" \
         -DWITH_CYCLES_NATIVE_ONLY=ON \
+        -DWITH_CYCLES_DEVICE_OPTIX=ON \
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
         -DPYTHON_VERSION=${PYTHON_VER} \

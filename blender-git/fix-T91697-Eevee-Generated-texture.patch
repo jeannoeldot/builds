@@ -1,0 +1,12 @@
+diff -aur blender/source/blender/gpu/intern/gpu_codegen.c blender.new/source/blender/gpu/intern/gpu_codegen.c
+--- blender/source/blender/gpu/intern/gpu_codegen.c	2021-09-26 10:32:52.000000000 +0200
++++ blender.new/source/blender/gpu/intern/gpu_codegen.c	2021-09-26 11:00:51.085055920 +0200
+@@ -718,7 +718,7 @@
+       BLI_dynstr_append(ds, datatoc_gpu_shader_common_obinfos_lib_glsl);
+       BLI_dynstr_append(ds, "DEFINE_ATTR(vec4, orco);\n");
+     }
+-    if (attr->type == CD_HAIRLENGTH) {
++    else if (attr->type == CD_HAIRLENGTH) {
+       BLI_dynstr_append(ds, datatoc_gpu_shader_common_obinfos_lib_glsl);
+       BLI_dynstr_append(ds, "DEFINE_ATTR(float, hairLen);\n");
+     }
