@@ -1,25 +1,25 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.0.0.25.20210925
+!!! VERSION = 3.0.0.32.20211003
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-3.0.0.25.20210925.tar.gz /tmp/srcp/
+cp -v blender-git-3.0.0.32.20211003.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-3.0.0.25.20210925.tar.gz
+tar -xzf blender-git-3.0.0.32.20211003.tar.gz
 
 blender-openexr3.patch
 VOIR:
 https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/blender-openexr3.patch
 
 1-1) MODIFIER blender/build_files/cmake/Modules/FindOpenEXR.cmake
-===============================================================
+=================================================================
 /!\ /!\ /!\ cd /tmp/srcp
 
 cp -R blender blender.new
@@ -54,7 +54,7 @@ cd ../../../..
 
 
 1-2) MODIFIER blender/source/blender/imbuf/intern/openexr/openexr_api.cpp
-=======================================================================
+=========================================================================
 
 /!\ /!\ /!\ cp -R blender blender.new
 
@@ -82,6 +82,18 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/blender-openexr3.patch .
 
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 VOIR:
 https://developer.blender.org/D12634
@@ -116,17 +128,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/fix-T91697-Eevee-Generated-texture.patch .
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/gltf-import-fix.patch
 1) MODIFIER blender/release/scripts/addons/io_scene_gltf2/io/imp/gltf2_io_gltf.py
