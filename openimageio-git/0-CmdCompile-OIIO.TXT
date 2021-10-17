@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.18.0.20210901
+pkgrel=3    # rebuild MAJ opencv 4.5.4
 pkgrel=2    # rebuild against opencolorio 2.1.0
 
 pkgrel=1

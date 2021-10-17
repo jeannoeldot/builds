@@ -36,6 +36,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.15.0.20210901
+pkgrel=3    # Rebuild OIIO + opencv 4.5.4
 pkgrel=2    # Rebuild against OIIO + opencolorio=2.1.0
 
 pkgrel=1
@@ -113,8 +114,8 @@ provides=('openshadinglanguage')
 ------------------------------------
 $ pacman -Ss llvm | grep install
 extra/clang 12.0.1-1 [installé]
-extra/llvm 12.0.1-3 [installé]
-extra/llvm-libs 12.0.1-3 [installé]
+extra/llvm 12.0.1-4 [installé]
+extra/llvm-libs 12.0.1-4 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
