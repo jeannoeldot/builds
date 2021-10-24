@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.0.0.38.20211024
+pkgver=3.0.0.33.20211017
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -17,7 +17,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
           'boost-libs' 'tbb'
           'jemalloc'
-          'python-numpy' 'python-requests' 'python-zstandard'
+          'python-numpy' 'python-requests'
           'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu'
           'opencolorio'
@@ -40,7 +40,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
         "blender-openexr3.patch"
 )
-sha256sums=('d97763dcb5624e714a62d9de36090a8f3cdaeda5447867f436e2c7c57af63c27'
+sha256sums=('023eae6278be70b833d321ea4b8b3da5f42ad538fbbaad807cb8bbf73dc48340'
             'ed62b562cba4b44a3a2d4676a21bfebd63b11aaa29901f7d8be11705d7a82c52'
             'a4dbc6a70b2fa21e97111a2ceeb9d731b83207118682bf285b08ecf2b99f40c3'
 )
@@ -57,9 +57,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "dc2524eaaeb1"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "3c3680318932"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1635068634|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1634443110|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -101,8 +101,6 @@ package() {
   # Blender
   cd "${_gitname}/build"
   make DESTDIR="${pkgdir}" install
-  # move new thumbnailer to default location
-  mv "${pkgdir}"/usr/blender-thumbnailer "${pkgdir}"/usr/bin/
 
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
