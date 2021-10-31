@@ -1,5 +1,40 @@
 
 =============================================================================================
+VERSION 32.3.3.20211020
+-----------------------
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/CNanoVDB.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/NanoVDB.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/PNanoVDB.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/CSampleFromVoxels.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/CudaDeviceBuffer.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/DitherLUT.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/ForEach.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/GridBuilder.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/GridChecksum.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/GridHandle.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/GridStats.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/GridValidator.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/HDDA.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/HostBuffer.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/IO.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/Invoke.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/NanoToOpenVDB.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/NodeManager.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/OpenToNanoVDB.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/Primitives.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/Range.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/Ray.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/Reduce.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/SampleFromVoxels.h
+-- Installing: /build/nanovdb-git/pkg/nanovdb-git/usr/include/.//nanovdb/util/Stencils.h
+
+
+
+=============================================================================================
 VERSION 32.3.0.20210720
 -----------------------
 Install the project...

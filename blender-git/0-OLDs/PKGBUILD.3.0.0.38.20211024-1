@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.1.0.0.20211030
+pkgver=3.0.0.38.20211024
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -40,7 +40,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
         "blender-openexr3.patch"
 )
-sha256sums=('47b3f0b8f8a0cce39f5e6e1a6bb727795ece55fe16e239feb4136de9680c48af'
+sha256sums=('d97763dcb5624e714a62d9de36090a8f3cdaeda5447867f436e2c7c57af63c27'
             'ed62b562cba4b44a3a2d4676a21bfebd63b11aaa29901f7d8be11705d7a82c52'
             'a4dbc6a70b2fa21e97111a2ceeb9d731b83207118682bf285b08ecf2b99f40c3'
 )
@@ -57,15 +57,16 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "ae9052a33e64"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "dc2524eaaeb1"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1635632778|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1635068634|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
   cd "${_gitname}"
   
   local PYTHON_VER=3.9
+  export PYTHONHASHSEED=0
   
   [[ -d build ]] && rm -r build
   mkdir build && cd build
@@ -88,7 +89,6 @@ build() {
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
-        -DCLANG_LIBRARIES=/usr/lib/libclang-cpp.so \
         -DPYTHON_VERSION=${PYTHON_VER} \
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
@@ -101,6 +101,8 @@ package() {
   # Blender
   cd "${_gitname}/build"
   make DESTDIR="${pkgdir}" install
+  # move new thumbnailer to default location
+  mv "${pkgdir}"/usr/blender-thumbnailer "${pkgdir}"/usr/bin/
 
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"

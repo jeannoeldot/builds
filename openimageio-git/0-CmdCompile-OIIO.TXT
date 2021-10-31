@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.2.18.0.20210901
+pkgrel=4    # rebuild SUPPR DÉPS opencv et openvdb
 pkgrel=3    # rebuild MAJ opencv 4.5.4
 pkgrel=2    # rebuild against opencolorio 2.1.0
 
@@ -112,14 +113,17 @@ sha256sums=('...'
 )
 
 !!!!!!
+# TODO: Consider adding these deps: 'openvdb' 'ptex' 'opencv'
+!!!!!!
 depends=(...
         ...
          'qt5-base'
          'python'
          'libwebp'
          'fmt' 'pugixml' 'pybind11' 'python-numpy'
-         'openvdb-git'
+
 !!!!!! SUPPRIMÉ
+         'openvdb-git' 'opencv'
         'jasper'
  
 makedepends=('cmake' 'boost' 'mesa'
@@ -133,7 +137,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep 3 | grep install
-==> extra/python 3.9.6-1 [installé]
+==> extra/python 3.9.7-2 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.9
@@ -220,7 +224,7 @@ LIGNE 148
   USE_FREETYPE=1    =>       dépends = ... 'freetype2'
 
 LIGNE 155
-  USE_OPENCV=1         depends= ... 'opencv'
+  USE_OPENCV=1      => depends= ... 'opencv'  SUPPR le 31/10/2021 2.2.18.0.20210901-4
 
 LIGNE 160
   USE_TBB=1        dépends 'tbb'
@@ -238,7 +242,7 @@ LIGNE 174
   Libheif 1.3       ==> dépends = ... 'libheif'
 
 LIGNE 191
-  USE_OPENVDB=1      =>       dépends = ... 'openvdb-git' 
+  USE_OPENVDB=1      => dépends = ... 'openvdb-git'   SUPPR le 31/10/2021 2.2.18.0.20210901-4
 
 LIGNE 205
   PTEX ?

@@ -1,4 +1,42 @@
 
+VERSION 9.0.0-1
+===============
+==> Starting build()...
+-- The CXX compiler identification is GNU 11.1.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.0")
+-- Configuring for OpenVDB Version 9.0.0
+-- Configuring for OpenVDB ABI Version 9
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found Boost: /usr/lib64/cmake/Boost-1.76.0/BoostConfig.cmake (found suitable version "1.76.0", minimum required is "1.70") found components: iostreams system
+-- Found TBB: /usr/include (found suitable version "2020.3", minimum required is "2019.0") found components: tbb
+-- Found Blosc: /usr/lib/libblosc.so (found suitable version "1.21.1", minimum required is "1.5.0")
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7")
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openvdb-git/src/openvdb-9.0.0/build
+
+
+
+
 VERSION 7.2.1-1
 ===============
 ==> Starting build()...

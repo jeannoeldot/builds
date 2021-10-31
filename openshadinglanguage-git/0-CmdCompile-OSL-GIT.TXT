@@ -18,6 +18,31 @@ wget -O OpenShadingLanguage-v1.11.15.0.tar.gz \
 https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/archive/refs/tags/v1.11.15.0.tar.gz
 
 
+
+1.3 BIS SOURCES
+===============
+cd /0-DataLinux/05-builds-dir-git
+
+!!!!! Vérifier VERSION :
+https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/blob/master/CMakeLists.txt
+==> LIGNE 6: project (OSL VERSION 1.12.3.0
+
+Vérifier existence rep OpenShadingLanguage-1.12.3.0 :
+-----------------------------------------------------
+ls | grep OpenShadingLanguage-1.12.3.0
+
+!!! SI REP OpenShadingLanguage-1.12.3.0 N'EXISTE PAS
+-----------------------------------------------------
+git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.12.3.0
+
+
+1-4) FAIRE ARCHIVE TAR.GZ
+=================================
+
+tar -cvzf OpenShadingLanguage-v1.12.3.0.tar.gz --exclude=.git OpenShadingLanguage-1.12.3.0
+
+
+
 1-7) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
 cd $HOME/05-builds/openshadinglanguage-git
@@ -37,8 +62,6 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.15.0.20210901
-pkgrel=5    # Rebuild OIIO SANS opencv et openvdb
-
 pkgrel=4    # Avec Patch Fix compatibility with LLVM 12 and up (#1412)
 
 pkgrel=3    # Rebuild OIIO + opencv 4.5.4
@@ -307,9 +330,14 @@ cd $HOME/05-builds/openshadinglanguage-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
-SI depends= 'openimageio-git'
-=============================
-$ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+SI depends= 'openimageio-git' ==> + openvdb-git
+================================================
+$ cp -v $HOME/00-repolocal/\
+{\
+openvdb-git-*-x86_64.pkg.tar.*,\
+openimageio-git-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
 
 
   FLOOP
@@ -436,15 +464,6 @@ $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 ================================================================
 ANCIENS
 ========
-
-SI depends= 'openimageio-git' ==> + openvdb-git
-================================================
-$ cp -v $HOME/00-repolocal/\
-{\
-openvdb-git-*-x86_64.pkg.tar.*,\
-openimageio-git-*-x86_64.pkg.tar.*\
-} \
-/tmp/chrootrepo/
 
 
 SI depends= 'openimageio-git' ==> + openvdb-git + opencolorio-git
