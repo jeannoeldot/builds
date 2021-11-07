@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.11.16.0.20211101
-pkgrel=1
-_name_release="OpenShadingLanguage-1.11.16.0"
-_ver_release="v1.11.16.0"
+pkgver=1.11.15.0.20210901
+pkgrel=5
+_name_release="OpenShadingLanguage-1.11.15.0"
+_ver_release="v1.11.15.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
@@ -21,9 +21,18 @@ makedepends=('boost' 'cmake' 'llvm')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "llvm13.patch"
 )
-sha256sums=('61f518a6e37cce50b3ab44e4358a2fc0530c10d21c8941e030b6a5e422550a98'
+sha256sums=('62482b4f1751cd209ad0dd82c2d1505b4921e851fc2a0eb105aba31a03bef9c3'
+            'd12f2f97565b619a25b243cf9ed67af9a31dbd4bd75262e300bdc89797135ca2'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/pull/1412
+  # Fix compatibility with LLVM 12 and up (#1412)
+  patch -Np1 -i "${srcdir}/llvm13.patch"
+}
 
 build() {
   cd "${_name_release}"
