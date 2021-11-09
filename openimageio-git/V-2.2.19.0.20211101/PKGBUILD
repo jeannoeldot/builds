@@ -1,0 +1,65 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openimageio-git
+pkgver=2.2.19.0.20211101
+pkgrel=1
+_name_release="oiio-2.2.19.0"
+_ver_release="v2.2.19.0"
+pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
+arch=('x86_64')
+url="http://www.openimageio.org/"
+license=('custom')
+# TODO: Consider adding these deps: 'openvdb' 'ptex' 'opencv'
+depends=('openexr' 'boost-libs' 'libtiff' 'tbb'
+         'libjpeg-turbo' 'openjpeg2' 'libraw'
+         'ffmpeg'
+         'qt5-base'
+         'python'
+         'libwebp' 'libheif'
+         'freetype2'
+         'fmt' 'pugixml' 'pybind11' 'python-numpy'
+         'opencolorio'
+)
+makedepends=('cmake' 'boost' 'mesa'
+             'robin-map'
+)
+conflicts=('openimageio')
+provides=('openimageio')
+source=("oiio-${_ver_release}.tar.gz"
+)
+sha256sums=('adab27dc50f02753167366eaea18d542106df8139c8d956fcbfd6568573ee10d'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
+  cmake \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DCMAKE_CXX_STANDARD=14 \
+      -DVERBOSE=ON \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DINSTALL_FONTS=OFF \
+      -DUSE_CCACHE=OFF \
+      -DUSE_SIMD=avx2 \
+      -DPYTHON_VERSION=3.9 \
+      -DBUILD_MISSING_FMT=OFF \
+      -DUSE_EXTERNAL_PUGIXML=ON \
+      ..
+  make
+}
+
+package() {
+  cd "${_name_release}/build"
+
+  make DESTDIR="${pkgdir}" install
+
+  # license
+  install -Dm644 ../LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  install -Dm644 ../THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/THIRD-PARTY
+}

@@ -1,0 +1,872 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/openshadinglanguage-git
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/releases
+==> 01/11/2021  ==> 20211101
+==> v1.11.16.0  ==> 1.11.16.0
+==> 1.11.16.0.20211101
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O OpenShadingLanguage-v1.11.16.0.tar.gz \
+https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/archive/refs/tags/v1.11.16.0.tar.gz
+
+
+1-7) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/openshadinglanguage-git
+
+!!! CONSERVE Release DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.11.16.0.tar.gz .
+
+
+1-8) FAIRE PATCH
+===============================
+VOIR 0-CmdFairePatches.TXT
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=openshadinglanguage-git
+pkgver=1.11.16.0.20211101
+pkgrel=1
+
+pkgrel=5    # Rebuild OIIO SANS opencv et openvdb
+
+pkgrel=4    # Avec Patch Fix compatibility with LLVM 12 and up (#1412)
+
+pkgrel=3    # Rebuild OIIO + opencv 4.5.4
+pkgrel=2    # Rebuild against OIIO + opencolorio=2.1.0
+
+pkgrel=4    # Rebuild MAJ OIIO 2.2.17.0
+
+pkgrel=3    # Rebuild openexr/imath 3.1.0
+
+pkgrel=2    # Rebuild MAJ LLVM 12.0.1
+
+pkgrel=4    # Rebuild MAJ OIIO 2.2.15.1 + MAJ openvdb 8.1.0
+pkgrel=3    # rebuild boost boost-libs 1.76.0
+
+pkgrel=2    # Rebuild MAJ LLVM 12.0.0
+
+pkgrel=4    # Rebuild openexr/imath 3.0.3
+pkgrel=3    # Rebuild against OIIO + opencolorio-git=2.0.1
+pkgrel=2    # Rebuild against OIIO + opencolorio2=2.0.0
+
+pkgrel=4    # Rebuild openexr/imath 3.0.1
+pkgrel=3    # Avec Patch Fix crash generating closure functions calls with LLVM 11
+pkgrel=2    # Rebuild MAJ OIIO 2.2.13.1
+
+pkgrel=3    # Rebuild MAJ clang 12.0.0-1
+pkgrel=2    # Rebuild against OIIO + opencolorio 2.0.0
+pkgrel=7    # Rebuild against OIIO + opencolorio1 et openjpeg2 2.4
+pkgrel=6    # Rebuild MAJ OIIO 2.2.10.1 + MAJ openvdb 8.0.0
+pkgrel=5    # Rebuild MAJ OIIO 2.2.10.0
+pkgrel=4    # Rebuild OIIO + MAJ openvdb 7.2.1
+pkgrel=3    # rebuild boost boost-libs 1.75.0
+pkgrel=2    # rebuild boost boost-libs 1.74.0
+pkgrel=2    # Rebuild MAJ LLVM 11.0.0-1
+
+pkgrel=2    # Rebuild OIIO + opencv 4.5.0
+pkgrel=2    # Rebuild OIIO + MAJ openvdb 7.1.0 et openexr 2.5.3
+
+pkgrel=3    # Rebuild OIIO + opencv 4.4.0
+pkgrel=2    # Rebuild MAJ LLVM 10.0.1-1 REBUILD OIIO 2.1.17
+
+pkgrel=5    # Rebuild MAJ LLVM 10.0.0-1 + PATCH
+
+pkgrel=4    # Rebuild OIIO + opencv 4.3.0
+pkgrel=3    # TEST Rebuild MAJ OIIO 2.1.11.2
+
+pkgrel=2    # TEST /usr/share/OSL/shaders
+
+pkgrel=4    # rebuild boost boost-libs 1.72.0
+pkgrel=3    # Rebuild MAJ OIIO 2.0.13 + opencv 4.2.0
+
+pkgrel=2    # Rebuild MAJ OIIO 2.0.13 + openvdb 7.0.0
+
+pkgrel=7    # Rebuild MAJ OIIO 2.0.12 + python 3.8
+pkgrel=6    # Rebuild MAJ OIIO 2.0.12
+pkgrel=5    # rebuild MAJ openexr 2.4
+pkgrel=4    # Rebuild MAJ intel-tbb 2019.9-1
+pkgrel=3    # Rebuild MAJ LLVM 9.0.0
+pkgrel=2    # rebuild boost boost-libs 1.71.0
+
+pkgrel=5    # Voir install_deps.sh
+
+pkgrel=4    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+              -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+
+pkgrel=3    # Rebuild MAJ LLVM 6.0.0 et CMAKE_INSTALL_LIBDIR=lib
+
+
+!!!!!!
+_name_release="OpenShadingLanguage-1.11.16.0"
+_ver_release="v1.11.16.0"
+
+conflicts=('openshadinglanguage')
+provides=('openshadinglanguage')
+
+!!! LLVM 12.0
+------------------------------------
+$ pacman -Ss llvm | grep install
+extra/clang 12.0.1-1 [installé]
+extra/llvm 12.0.1-4 [installé]
+extra/llvm-libs 12.0.1-4 [installé]
+
+depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'openimageio-git'
+         'llvm-libs'
+         'qt5-base'
+         'clang'
+         'python' 'pugixml' 'pybind11'
+)
+depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
+
+makedepends=('boost' 'cmake' 'llvm')
+
+
+2-2) PKGBUILD SANS PATCH
+========================
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+)
+
+sha256sum OpenShadingLanguage-v1.11.16.0.tar.gz
+
+sha256sums=(...
+         ...
+)
+
+
+!!! VERSION 1.11.16.0
+build() {
+      ...
+  # Install lib*.so par défaut dans lib64 au lieu de lib
+      -DCMAKE_INSTALL_LIBDIR=lib \
+  ...
+      -DCMAKE_CXX_STANDARD=14 \         # Pour llvm 10
+
+package() {
+...
+
+  # shaders
+  # Ugly hacks /usr/shaders/*.oso
+  for _oso in $(find "${pkgdir}"/usr/shaders/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/|g" ${_oso}
+  done
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf OpenShadingLanguage-v1.11.16.0.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/OpenShadingLanguage-v1.11.16.0/CMakeLists.txt &
+
+LIGNE 21
+  CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
+  
+LIGNES 60
+  VERBOSE OFF   =>      -DVERBOSE=ON \
+
+!!! PAS OK AVEC 1.11.16.0 DU 01/11/2021
+LIGNE 68
+  OSL_BUILD_TESTS ON    =>      -DOSL_BUILD_TESTS=OFF \
+
+!!! SUITE https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/162c320a75b02fcb747ea1b0eab77435396d7e89..3d1cb783362722d9567289b150aeaf37573f1393:/build_files/build_environment/install_deps.sh
+LIGNE 72
+  USE_LLVM_BITCODE ON   =>  -DUSE_LLVM_BITCODE=OFF \ 
+  
+LIGNE 74
+  !!! A VOIR
+  OSL_BUILD_PLUGINS ON
+
+LIGNE 77
+  USE_OPTIX OFF
+
+LIGNE 80
+  !!! A VOIR
+  CUDA_TARGET_ARCH
+
+LIGNE 88
+  !!! A VOIR
+  OSL_NO_DEFAULT_TEXTURESYSTEM OFF
+
+  !!! A VOIR
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/02f44049a8c978186e557ce56b3a02662525d15b
+Fix make deps OSL build on some systems with Qt libraries
+LIGNE 174
+  USE_QT "Include Qt support" ON  Blender ==> -DUSE_QT=OFF \
+
+LIGNE 185
+INSTALL_DOCS "Install documentation" ON
+
+2) kwrite /tmp/srcp/OpenShadingLanguage-v1.11.16.0/src/cmake/compiler.cmake &
+
+LIGNE 30
+      -DCMAKE_CXX_STANDARD=14 \
+
+LIGNE 83
+  STOP_ON_WARNING OFF
+  
+LIGNE 208
+  USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
+
+LIGNE 241
+set (GLIBCXX_USE_CXX11_ABI "" CACHE STRING "For gcc, use the new C++11 library ABI (0|1)")
+
+LIGNE 257
+  !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
+  USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
+
+LIGNE 319
+  CODECOV OFF
+
+3) kwrite /tmp/srcp/OpenShadingLanguage-v1.11.16.0/src/cmake/modules/FindLLVM.cmake &
+
+!!! LLVM 10.0
+------------------------------------
+LIGNE 108 ET ...
+  LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
+
+4) kwrite /tmp/srcp/OpenShadingLanguage-v1.11.16.0/src/liboslexec/CMakeLists.txt &
+LIGNE 192
+  USE_PARTIO=1
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.11.16.0.tar.gz
+
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/openshadinglanguage-git/OpenShadingLanguage-v1.11.16.0.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/openshadinglanguage-git \
+&& cp -v /tmp/build/openshadinglanguage-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/openshadinglanguage-git && rm -rf /tmp/build
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+SI depends= 'openimageio-git'
+=============================
+$ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ mkpkg-tmpfs -m fast -l logs
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+3-2) MAKEPKG en USER sur SSD
+=============================
+!!! EN USER
+cd $HOME/05-builds/openshadinglanguage-git
+
+$ rm -f *~
+
+makepkg -s
+
+makepkg -f
+
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+==> WARNING: Package contains reference to $srcdir
+usr/bin/testrender
+usr/lib/liboslcomp.so.1.11.16
+usr/lib/liboslquery.so.1.11.16
+usr/lib/liboslexec.so.1.11.16
+
+namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.*
+
+$ cp -v openshadinglanguage-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
+-----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i OpenShadingLanguage-v1.11.16.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu openshadinglanguage-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd openshadinglanguage-git
+# rm /var/cache/pacman/pkg/openshadinglanguage-git-*
+# LC_ALL=C pacman -S openshadinglanguage-git
+
+POUR REMETTRE openshadinglanguage EXTRA
+========================================
+# LC_ALL=C pacman -Rdd openshadinglanguage-git
+# rm /var/cache/pacman/pkg/openshadinglanguage-git-*
+# LC_ALL=C pacman -Syu openshadinglanguage
+
+================================================================
+TESTS
+========
+
+#!!! OK
+for _oso in $(find $HOME/99-temp/OSL/usr/shaders/*.oso -type f)
+do
+  sed -i "s|/usr/|/chemin/test/for/find/|g" ${_oso}
+done
+
+for _oso in $(find $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso -type f)
+do
+  sed -i "s|/usr/|/chemin/test/for/find/|g" ${_oso}
+done
+
+$HOME/99-dwl-temp/emitter.oso
+#sed -i "s|-pipe -fPIC -funsigned-char -fno-strict-aliasing|-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
+sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-v1.11.16.0/src/|/usr/|g" $HOME/99-dwl-temp/emitter.oso
+
+$HOME/99-temp/OSL/usr/shaders/
+sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-v1.11.16.0/src/|/usr/|g" \
+$HOME/99-temp/OSL/usr/shaders/*.oso
+sed -i "s|/build/openshadinglanguage-git/src/OpenShadingLanguage-v1.11.16.0/src/|/usr/|g" \
+$HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
+
+/build/openshadinglanguage-git/src/OpenShadingLanguage-v1.11.16.0/build/src/shaders/emitter.oso
+
+================================================================
+ANCIENS
+========
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "llvm13.patch"
+)
+
+sha256sum OpenShadingLanguage-v1.11.16.0.tar.gz
+
+sha256sum llvm13.patch
+
+sha256sums=('....'
+            '....'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/pull/1412
+  # Fix compatibility with LLVM 12 and up (#1412)
+  patch -Np1 -i "${srcdir}/llvm13.patch"
+}
+
+-rw-r--r--  1 jnd users     1979 26 oct.  14:13 llvm13.patch
+
+
+SI depends= 'openimageio-git' ==> + openvdb-git
+================================================
+$ cp -v $HOME/00-repolocal/\
+{\
+openvdb-git-*-x86_64.pkg.tar.*,\
+openimageio-git-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
+
+
+SI depends= 'openimageio-git' ==> + openvdb-git + opencolorio-git
+=================================================================
+$ cp -v $HOME/00-repolocal/\
+{\
+openvdb-git-*-x86_64.pkg.tar.*,\
+opencolorio-git-*-x86_64.pkg.tar.*,\
+openimageio-git-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
+
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        'Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch'
+)
+
+sha256sum OpenShadingLanguage-v1.11.16.0.tar.gz
+
+sha256sum Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch
+
+sha256sums=('....'
+            '....'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/pull/1361/files
+  # Fix crash generating closure functions calls with LLVM 11
+  patch -Np1 -i "${srcdir}/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch"
+}
+
+-rw-r--r--  1 jnd users      975 20 avril 10:56 Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch
+&& cp -v $HOME/05-builds/openshadinglanguage-git/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch . \
+
+-rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.11.16.0.tar.gz
+-rw-r--r--  1 jnd users     3453 19 avril 10:48 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
+
+!!! TESTS AVEC /usr/shaders
+========================================
+
+  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+==>
+# mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+
+# TEST /usr/share/OSL/shaders
+  # license
+#   mkdir -p "${pkgdir}"/usr/share/licenses/${pkgname}
+#   mv -v "${pkgdir}"/usr/share/doc/OSL/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}
+  install -Dm644 "${pkgdir}"/usr/share/doc/OSL/LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+
+  # shaders
+  mkdir "${pkgdir}"/usr/share/OSL
+  mv "${pkgdir}"/usr/shaders "${pkgdir}"/usr/share/OSL/shaders
+# FIN TEST /usr/share/OSL/shaders
+
+...
+LIGNE 92
+  USE_PARTIO ON    =>      -DUSE_PARTIO=OFF \
+  
+LIGNE 99
+  !!! A VOIR
+  USE_BOOST_WAVE OFF
+
+
+3) kwrite /tmp/srcp/OpenShadingLanguage-v1.11.16.0/src/cmake/install.cmake
+  !!! A VOIR : 
+LIGNE 3
+set (INSTALL_DOCS "Install documentation" ON)
+LIGNE 4
+set (INSTALL_FONTS "Install default fonts" OFF)
+
+# Verifications...
+==> WARNING: Package contains reference to $srcdir
+usr/bin/osltoy
+usr/lib/liboslcomp.so.1.11.16.0
+usr/lib/liboslquery.so.1.11.16.0
+usr/lib/liboslexec.so.1.11.16.0
+usr/lib/osl.imageio.so
+
+
+depends=('boost-libs' 'openexr' 'intel-tbb' 'freetype2' 'libpng' 'libtiff'
+
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("$_name_release.tar.gz"
+        '0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch'
+)
+
+sha256sum OpenShadingLanguage-v1.11.16.0.tar.gz
+
+sha256sum 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
+
+sha256sums=('123456789'
+            '112233445566778899'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # https://git.archlinux.org/svntogit/community.git/plain/trunk/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch?h=packages/openshadinglanguage
+  patch -Np1 -i "${srcdir}/0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch"
+}
+
+  # Ugly hacks /usr/shaders/*.oso and /usr/shaders/MaterialX/*.oso
+  for _oso in $(find "${pkgdir}"/usr/shaders/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/|g" ${_oso}
+  done
+
+  for _oso in $(find "${pkgdir}"/usr/shaders/MaterialX/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/|g" ${_oso}
+  done
+
+pkgrel=5    # Rebuild MAJ OIIO 2.0.4
+pkgrel=4    # Rebuild MAJ OIIO 2.0.3 et MAJ openvdb 6.0.0
+pkgrel=3    # Rebuild MAJ LLVM 7.0.1
+pkgrel=2    # Rebuild MAJ OIIO 2.0.3
+
+pkgrel=2    # Rebuild MAJ OIIO 1.8.16 et MAJ opencv 4.0.0
+
+pkgrel=3    # rebuild boost boost-libs 1.68.0
+pkgrel=2    # Rebuild SUPPR WARNING Référence à BBUILDIR
+
+pkgrel=7    # Rebuild MAJ libraw 0.19.0 ilmbase/openexr 2.3
+pkgrel=6    # Rebuild MAJ OIIO 1.8.13
+pkgrel=5    # rebuild boost boost-libs 1.67.0-4
+pkgrel=4    # Rebuild MAJ OIIO 1.8.12
+
+pkgrel=3    # Rebuild MAJ OIIO et MAJ ffmpeg 4.0
+pkgrel=2    # gcc 8.1.0
+pkgrel=1
+
+pkgrel=2    # Rebuild MAJ OIIO 1.8.9 et MAJ opencv ilmbase/openexr 2.2.1
+pkgrel=1
+
+pkgrel=3    # Rebuild MAJ OIIO 1.8.6 et MAJ opencv
+pkgrel=2    # Rebuild avec OIIO 1.8.6
+
+
+openshadinglanguage-git E: Dependency qt5-base detected and not included (libraries ['usr/lib/libQt5Widgets.so.5', 'usr/lib/libQt5Core.so.5', 'usr/lib/libQt5Gui.so.5'] needed in files ['usr/bin/osltoy'])
+
+SI depends=("openimageio-git") + openvdb-git
+============================================================
+$ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+$ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
+2-3) PKGBUILD AVEC PATCH
+========================
+source=("$_name_release.tar.gz"
+        'clang7.patch'
+)
+
+sha256sum OpenShadingLanguage-v1.11.16.0.tar.gz
+
+sha256sum clang7.patch
+
+sha256sums=(...
+         ...
+)
+
+prepare() {
+  cd "${_name_release}"
+   
+  patch -Np1 -i "${srcdir}/clang7.patch"
+}
+
+
+!!! LLVM 5.0
+------------------------------------
+$ pacman -Ss llvm | grep install
+extra/llvm 5.0.1-2
+extra/llvm-libs 5.0.1-2
+
+  # Install lib*.so par défaut dans lib64 au lieu de lib
+  mv -v "${pkgdir}/usr/lib64" "${pkgdir}/usr/lib"
+  ...
+
+
+  # Ugly hacks /usr/shaders/*.oso and /usr/shaders/MaterialX/*.oso
+  sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" "${pkgdir}"/usr/shaders/*.oso
+  sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/|g" "${pkgdir}"/usr/shaders/MaterialX/*.oso
+
+
+build() {
+      ...
+      -DCMAKE_SKIP_RPATH=ON \   !!! PAS OK
+
+
+pkgrel=2    # Rebuild avec OIIO 1.7.17
+
+voir 0-CmdFairePatches-LLVM50.STATIC.TXT
+
+pkgrel=7          # rebuild AVEC llvm35 + Patch
+pkgrel=8          # rebuild boost boost-libs 1.65.1-1
+pkgrel=9          # rebuild llvm 5.0.0
+
+pkgrel=2          # rebuild llvm 4.0.1-5
+pkgrel=3          # rebuild oiio 1.7.16.20170802
+pkgrel=4          # rebuild oiio opencv 3.3.0-1
+pkgrel=5          # rebuild oiio 1.7.17.20170831
+!!!
+pkgrel=6          # rebuild llvm 5.0.0 => PAS OK
+
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("$_name_release.tar.gz"
+        'llvm50-Make-OSL-work-with-llvm5.patch'
+)
+
+sha256sum OpenShadingLanguage-v1.11.16.0.tar.gz
+
+sha256sum llvm50-Make-OSL-work-with-llvm5.patch
+
+sha256sums=(...
+         ...
+)
+
+prepare() {
+  cd "${_name_release}"
+   
+  # Make OSL work with clang5/llvm5 (#787)
+  # Commit 104bd26e7153b0ae9e12fd1a98112e3697836f5d
+  #  lgritz committed on GitHub on 18 Aug
+  patch -Np1 -i "${srcdir}/llvm50-Make-OSL-work-with-llvm5.patch"
+}
+
+
+
+
+
+pkgrel=2          # rebuild boost boost-libs 1.64.0-1
+
+pkgrel=2          # rebuild libwebp 0.6.0-1
+
+pkgrel=2    # rebuild avec /usr/shaders
+pkgrel=3          # rebuild oiio
+
+pkgrel=6          # rebuild oiio
+pkgrel=4          # rebuild boost boost-libs 1.63.0-1
+pkgrel=2          # rebuild boost boost-libs 1.61.0-2
+
+
+!!! LLVM 4.0
+------------------------------------
+$ pacman -Ss llvm
+extra/llvm 4.0.1-5
+extra/llvm-libs 4.0.1-5
+
+2-2) PKGBUILD SANS PATCH LLVM 4.0
+=================================
+!!! LLVM 4.0
+------------------------------------
+LIGNE 90 ET ...
+  LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
+
+
+-rw-r--r--  1 jnd users      842 28 févr. 09:46 llvm35-static-system-libs.patch
+&& cp -v $HOME/05-builds/openshadinglanguage-git/llvm35-static-system-libs.patch . \
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget https://github.com/imageworks/OpenShadingLanguage/archive/v1.11.16.0.tar.gz
+wget -O OpenShadingLanguage-v1.11.16.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/v1.11.16.0.tar.gz
+
+1-4) RENOMMER ARCHIVE TAR.GZ
+=================================
+mv -v v1.11.16.0.tar.gz OpenShadingLanguage-v1.11.16.0.tar.gz
+
+
+voir 0-CmdFairePatches-LLVM35.STATIC.TXT
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("$_name_release.tar.gz"
+        'llvm35-static-system-libs.patch'
+)
+
+sha256sum OpenShadingLanguage-v1.11.16.0.tar.gz
+
+sha256sum llvm35-static-system-libs.patch
+
+sha256sums=(...
+         ...
+)
+
+prepare() {
+  cd "${_name_release}"
+   
+  # Add system libraries needed to link against LLVM components (zlib, ncurses)
+  # This is required in order to statically link against LLVM
+  # VOIR Community
+  patch -Np1 -i "${srcdir}/llvm35-static-system-libs.patch"
+}
+
+
+
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+SI depends=("openimageio-git")
+==============================
+$ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+!!! EN USER
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+$ mkpkg-tmpfs -m fast -l logs
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+pkgrel=2          # nvidia-libgl 367.35
+pkgrel=2    # maj oiio
+pkgrel=2          # maj NVidia 370.23-1
+
+pkgrel=5    # maj oiio + gcc 6.1.1
+
+-rw-r--r--  1 jnd users      828 17 mars  18:39 fix-error-compile-llvm35-llvm36.patch
+&& cp -v $HOME/05-builds/openshadinglanguage-git/fix-error-compile-llvm35-llvm36.patch . \
+-rw-r--r--  1 jnd users      828 17 mars  18:39 confusion-oiio-osl.patch
+&& cp -v $HOME/05-builds/openshadinglanguage-git/confusion-oiio-osl.patch . \
+
+!!! AU 06/09/2015, 13/09/2015, 26/09/2015
+!!! OSL DU 25/09/2015 INCOMPATIBLE AVEC OIIO COMMIT DU 27 ET 31 /08/2015
+!!! OSL DU 25/09/2015 INCOMPATIBLE AVEC OIIO COMMIT DU 11 ET 26 /09/2015
+!!! OSL DU 30/10/2015 INCOMPATIBLE AVEC OIIO COMMIT DU 27/10/2015
+!!! OSL DU 21/11/2015 INCOMPATIBLE AVEC OIIO COMMIT DU 22/11/2015
+==> CONSERVER OIIO COMMIT DU 24/08/2015 => Version OIIO = 1.6.4.20150824-5
+
+!!! OSL DU 28/11/2015 OK AVEC OIIO COMMIT DU 27/11/2015 => Version OIIO = 1.6.6.20151127-1
+!!! OSL DU 09/12/2015 OK AVEC OIIO COMMIT DU 10/12/2015 => Version OIIO = 1.7.0.20151210-1
+
+
+!!! TESTS COMPILATION AVEC OIIO 1.6.6.20151127
+$ cp -v /0-DataLinux/05-builds-dir-git/0-Test-openimageio-git/openimageio-git-1.6.6.20151127-1-x86_64.pkg.tar.* /tmp/chrootrepo/
+
+
+  
+        'confusion-oiio-osl.patch'
+sha256sum confusion-oiio-osl.patch
+
+  # Confusion entre OSL el OIIO ds CMakeLists.txt
+  patch -Np1 -i "${srcdir}/confusion-oiio-osl.patch"
+
+  !!! A VOIR : NON : ERREUR COMPILATION ( redefinition )
+  !!! OK 27/12/2014
+  USE_CPP11 OFF CACHE BOOL "Compile in C++11 mode")     ==>     -DUSE_CPP11=ON \
+
+!!! AU 25/12/2014 : blender ne compile plus avec git du 17/12/2014
+2-1) MODIFIER LE PKGBUILD
+========================
+
+pkgname=openshadinglanguage-git
+pkgver=1.6.4.20141213
+pkgrel=2
+
+provides=('openshadinglanguage')
+conflicts=('openshadinglanguage')
+
+source=($pkgname-$pkgver.tar.gz
+)
+
+sha256sum openshadinglanguage-git-1.6.4.20141213.tar.gz
+
+sha256sums=(...
+         ...
+)
+
+!!!!!!
+_gitname="osl"
+
+
+!!! PAS OBLIGATOIRE SI GIT
+rm -rf osl
+
+
+# Nettoyage fichiers ds 0-copie-fichiers-chroot/repo
+=====================================================
+rm -f $HOME/05-builds/0-copie-fichiers-chroot/repo/openimageio-git-*-x86_64.pkg.tar.*
+ sync
+
+1-1) ATTENTION A LA VERSION DE LA MAJ SUR LE SITE
+======================================================
+
+https://github.com/imageworks/OpenShadingLanguage/releases
+==> Release-1.5.10RC3
+
+wget https://github.com/imageworks/OpenShadingLanguage/archive/Release-1.5.10RC3.tar.gz
+
+ls
+
