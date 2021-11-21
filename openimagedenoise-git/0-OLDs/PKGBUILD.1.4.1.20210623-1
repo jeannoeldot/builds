@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimagedenoise-git
-pkgver=1.4.2.20211103
+pkgver=1.4.1.20210623
 pkgrel=1
-_ver_release="1.4.2"
+_ver_release="1.4.1"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
 url="http://www.openimagedenoise.org/"
@@ -18,7 +18,7 @@ provides=('openimagedenoise' 'oidn')
 #options=(staticlibs)
 source=("oidn-${_ver_release}.src.tar.gz"
 )
-sha256sums=('e70d27ce24b41364782376c1b3b4f074f77310ccfe5f8ffec4a13a347e48a0ea'
+sha256sums=('9088966685a78adf24b8de075d66e4c0019bd7b2b9d29c6e45aaf35d294e3f6f'
 )
 
 build() {
