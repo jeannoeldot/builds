@@ -37,6 +37,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.16.0.20211101
+pkgrel=3    # Rebuild against OIIO 2.3.10.0
+
 pkgrel=2    # Rebuild MAJ LLVM 13.0.0
 
 pkgrel=1

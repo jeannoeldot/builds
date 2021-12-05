@@ -1,41 +1,21 @@
 FAIRE PATCHS
 ====================================
-!!! VERSION = OpenShadingLanguage-v1.11.15.0
+!!! VERSION = OpenShadingLanguage-v1.11.16.0
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openshadinglanguage-git
 
 mkdir /tmp/srcp
 
-cp -v OpenShadingLanguage-v1.11.15.0.tar.gz /tmp/srcp/
+cp -v OpenShadingLanguage-v1.11.16.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenShadingLanguage-v1.11.15.0.tar.gz
+tar -xzf OpenShadingLanguage-v1.11.16.0.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git
 
 
-1) Fix compatibility with LLVM 12 and up
-https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/commit/8682211d0bfe5c4be63a4a003d06037ff9721e66
-1) MODIFIER OpenShadingLanguage-1.11.15.0/src/liboslexec/llvm_util.cpp
-======================================================================
-/!\ cd /tmp/srcp
-
-cp -R OpenShadingLanguage-1.11.15.0 OpenShadingLanguage-1.11.15.0.new
-
-cd OpenShadingLanguage-1.11.15.0.new/src/liboslexec
-
-kwrite llvm_util.cpp
-
-RAJOUTER LIGNE 1231 :
-
-MODIFIER LIGNE 2992 :
-
-RAJOUTER LIGNE 3054 :
-
-
-cd ../../..
 
 
 

@@ -1,0 +1,410 @@
+==> Starting build()...
+-- The CXX compiler identification is GNU 11.1.0
+-- The C compiler identification is GNU 11.1.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring OpenImageIO 2.3.10.0
+-- CMake 3.22.0
+-- CMake system           = Linux-5.15.5-arch1-1
+-- CMake system name      = Linux
+-- Project source dir     = /build/openimageio-git/src/oiio-2.3.10.0
+-- Project build dir      = /build/openimageio-git/src/oiio-2.3.10.0/build
+-- Project install prefix = /usr
+-- Configuration types    =
+-- Build type             = Release
+-- Setting Namespace to: OpenImageIO_v2_3
+-- CMAKE_SYSTEM_NAME      = Linux
+-- CMAKE_SYSTEM_VERSION   = 5.15.5-arch1-1
+-- CMAKE_SYSTEM_PROCESSOR = x86_64
+-- CMAKE_CXX_COMPILER     = /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID  = GNU
+-- Building for C++14
+-- Using gcc 11.1.0 as the compiler
+-- Compiling with SIMD level avx2
+-- SIMD feature: avx2
+-- Performing Test COMPILER_SUPPORTS_ATOMIC_WITHOUT_LIBATOMIC
+-- Performing Test COMPILER_SUPPORTS_ATOMIC_WITHOUT_LIBATOMIC - Success
+-- Compiler supports std::atomic, no libatomic necessary
+-- clang-format not found.
+-- Setting SOVERSION to: 2.3
+--
+-- * Checking for dependencies...
+-- *   - Missing a dependency 'Package'?
+-- *     Try cmake -DPackage_ROOT=path or set environment var Package_ROOT=path
+-- *     For many dependencies, we supply src/build-scripts/build_Package.bash
+-- *   - To exclude an optional dependency (even if found),
+-- *     -DUSE_Package=OFF or set environment var USE_Package=OFF
+--
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE
+-- Found Boost: /usr/include (found version "1.76.0") found components: filesystem system thread chrono date_time atomic
+-- Found Boost 107600
+--     Boost_INCLUDE_DIR = /usr/include
+--     Boost_INCLUDE_DIRS = /usr/include
+--     Boost_LIBRARIES = /usr/lib/libboost_filesystem.so;/usr/lib/libboost_system.so;/usr/lib/libboost_thread.so;-lpthread;/usr/lib/libboost_chrono.so;/usr/lib/libboost_date_time.so;/usr/lib/libboost_atomic.so
+-- Found ZLIB: /usr/lib/libz.so (found version "1.2.11")
+-- Found ZLIB 1.2.11
+--     ZLIB_INCLUDE_DIR = /usr/include
+--     ZLIB_INCLUDE_DIRS = /usr/include
+--     ZLIB_LIBRARIES = /usr/lib/libz.so
+-- Found TIFF: /usr/lib/libtiff.so (found version "4.3.0")
+-- Found TIFF 4.3.0
+--     TIFF_INCLUDE_DIR = /usr/include
+--     TIFF_INCLUDE_DIRS = /usr/include
+--     TIFF_LIBRARIES = /usr/lib/libtiff.so
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found CONFIG for OpenEXR 3 (OPENEXR_VERSION=3.1.3)
+-- Found OpenEXR 3.1.3
+--     OPENEXR_INCLUDES = /usr/include
+--     OPENEXR_LIBRARIES = OpenEXR::IlmThreadConfig;Imath::Imath;OpenEXR::IlmThreadConfig;OpenEXR::Iex;OpenEXR::IlmThread;ZLIB::ZLIB;OpenEXR::IlmThreadConfig;OpenEXR::IlmThreadConfig;OpenEXR::IlmThreadConfig;OpenEXR::IlmThreadConfig;OpenEXR::Iex;Threads::Threads;Imath::ImathConfig;m
+--     IMATH_INCLUDES = /usr/include
+CMake Warning (dev) at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:438 (message):
+  The package name passed to `find_package_handle_standard_args` (JPEG) does
+  not match the name of the calling package (JPEGTurbo).  This can lead to
+  problems in calling code that expects `find_package` result variables
+  (e.g., `_FOUND`) to follow a certain pattern.
+Call Stack (most recent call first):
+  src/cmake/modules/FindJPEGTurbo.cmake:42 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
+  src/cmake/checked_find_package.cmake:127 (find_package)
+  src/cmake/externalpackages.cmake:123 (checked_find_package)
+  CMakeLists.txt:141 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found JPEG: /usr/lib/libjpeg.so
+-- Found JPEGTurbo
+--     JPEG_INCLUDE_DIRS = /usr/include
+--     JPEG_LIBRARIES = /usr/lib/libjpeg.so
+--     JPEG_VERSION = 80
+-- Found CONFIG for pugixml (>=1.11)
+-- Found pugixml 1.11
+--     PUGIXML_INCLUDES = /usr/include
+--     PUGIXML_LIBRARIES = pugixml::shared
+-- Found Python: /usr/bin/python3.9 (found suitable exact version "3.9.9") found components: Interpreter Development Development.Module Development.Embed
+-- Found Python 3.9.9
+--     Python_INCLUDE_DIRS = /usr/include/python3.9
+--     Python_LIBRARIES = /usr/lib/libpython3.9.so
+--     Python_VERSION = 3.9.9
+--     Python_EXECUTABLE = /usr/bin/python3.9
+--     Python_Development_FOUND = TRUE
+--     Python_Interpreter_FOUND = TRUE
+--     Python site packages dir lib/python3.9/site-packages
+--     Python to include 'lib' prefix: OFF
+--     Python to include SO version: OFF
+-- Found PNG: /usr/lib/libpng.so (found version "1.6.37")
+-- Found PNG 1.6.37
+--     PNG_INCLUDE_DIR = /usr/include;/usr/include
+--     PNG_INCLUDE_DIRS = /usr/include;/usr/include
+--     PNG_LIBRARIES = /usr/lib/libpng.so;/usr/lib/libz.so
+-- Found BZip2: /usr/lib/libbz2.so (found version "1.0.8")
+-- Looking for BZ2_bzCompressInit
+-- Looking for BZ2_bzCompressInit - found
+-- Found BZip2 1.0.8
+--     BZIP2_INCLUDE_DIR = /usr/include
+--     BZIP2_INCLUDE_DIRS = /usr/include
+--     BZIP2_LIBRARIES = /usr/lib/libbz2.so
+-- Found Freetype: /usr/lib/libfreetype.so (found version "2.11.0")
+-- Found Freetype 2.11.0
+--     FREETYPE_INCLUDE_DIRS = /usr/include/freetype2
+--     FREETYPE_LIBRARIES = /usr/lib/libfreetype.so
+-- Found OpenColorIO: /usr/include (found version "2.1.0")
+-- Found OpenColorIO 2.1.0
+--     OPENCOLORIO_INCLUDES = /usr/include
+--     OPENCOLORIO_INCLUDE_DIR = /usr/include
+--     OPENCOLORIO_LIBRARIES = /usr/lib/libOpenColorIO.so
+-- Could NOT find OpenCV (missing: OpenCV_LIBS OpenCV_INCLUDE_DIR OpenCV_VERSION) (Required is at least version "3.0")
+-- OpenCV library not found
+--     Try setting OpenCV_ROOT ?
+-- Could NOT find TBB (missing: TBB_DIR)
+-- Could NOT find TBB (missing: TBB_INCLUDE_DIRS TBB_LIBRARIES) (Required is at least version "2017")
+-- TBB library not found
+--     Try setting TBB_ROOT ?
+-- Could NOT find DCMTK (missing: DCMTK_INCLUDE_DIR DCMTK_LIBRARIES)
+-- DCMTK library not found
+--     Try setting DCMTK_ROOT ?
+-- Found PkgConfig: /usr/bin/pkgconf (found version "1.8.0")
+-- Found FFmpeg: /usr/lib/libavcodec.so
+-- Found FFmpeg 4.4
+--     FFMPEG_INCLUDES = /usr/include
+--     FFMPEG_INCLUDE_DIR = /usr/include
+--     FFMPEG_LIBRARIES = /usr/lib/libavcodec.so;/usr/lib/libavformat.so;/usr/lib/libavutil.so;/usr/lib/libswscale.so
+-- Found GIF: /usr/lib/libgif.so (found version "5.2.1")
+-- Found GIF 5.2.1
+--     GIF_INCLUDE_DIR = /usr/include
+--     GIF_INCLUDE_DIRS = /usr/include
+--     GIF_LIBRARIES = /usr/lib/libgif.so
+-- Found Libheif: /usr/include
+-- Found Libheif 1.12.0
+--     LIBHEIF_INCLUDES = /usr/include
+--     LIBHEIF_INCLUDE_DIR = /usr/include
+--     LIBHEIF_LIBRARIES = /usr/lib/libheif.so
+-- Found LibRaw: /usr/lib/libraw.so (found version "0.20.2")
+-- Found LibRaw 0.20.2
+--     LibRaw_INCLUDE_DIR = /usr/include
+--     LibRaw_LIBRARIES = /usr/lib/libraw.so
+--     LibRaw_r_LIBRARIES = /usr/lib/libraw_r.so
+-- Found OpenJPEG: /usr/include/openjpeg-2.4 (found version "2.4")
+-- Found OpenJpeg: v2.4 /usr/lib/libopenjp2.so
+-- Found OpenJPEG 2.4
+--     OPENJPEG_INCLUDES = /usr/include/openjpeg-2.4
+--     OPENJPEG_INCLUDE_DIR = /usr/include/openjpeg-2.4
+--     OPENJPEG_LIBRARIES = /usr/lib/libopenjp2.so
+CMake Warning (dev) at src/cmake/checked_find_package.cmake:105 (set):
+  Cannot set "ENABLE_OpenVDB": current scope has no parent.
+Call Stack (most recent call first):
+  src/cmake/externalpackages.cmake:226 (checked_find_package)
+  CMakeLists.txt:141 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Not using OpenVDB -- disabled (because TBB was not found)
+-- Could NOT find Ptex (missing: Ptex_DIR)
+-- Could NOT find Ptex (missing: PTEX_INCLUDE_DIR PTEX_LIBRARY)
+-- Ptex library not found
+--     Try setting Ptex_ROOT ?
+--     Maybe this will help:  src/build-scripts/build_Ptex.bash
+-- Could NOT find Ptex (missing: PTEX_INCLUDE_DIR PTEX_LIBRARY)
+-- Ptex library not found
+--     Try setting Ptex_ROOT ?
+--     Maybe this will help:  src/build-scripts/build_Ptex.bash
+-- Found WebP: /usr/include
+-- Found WebP
+--     WEBP_INCLUDES = /usr/include
+--     WEBP_INCLUDE_DIR = /usr/include
+--     WEBP_LIBRARIES = /usr/lib/libwebp.so;/usr/lib/libwebpdemux.so
+-- Not using R3DSDK -- disabled
+-- Could NOT find Nuke (missing: NUKE_DDIMAGE_LIBRARY NUKE_INCLUDE_DIR NUKE_LIBRARY_DIRS NUKE_EXECUTABLE)
+-- Nuke library not found
+--     Try setting Nuke_ROOT ?
+-- Found OpenGL: /usr/lib/libOpenGL.so
+-- Found OpenGL
+--     OPENGL_INCLUDE_DIR = /usr/include
+--     OPENGL_LIBRARIES = /usr/lib/libOpenGL.so;/usr/lib/libGLX.so;/usr/lib/libGLU.so
+-- Found Qt5 5.15.2
+-- Could NOT find Libsquish (missing: LIBSQUISH_INCLUDE_DIR LIBSQUISH_LIBRARY)
+-- Libsquish library not found
+--     Try setting Libsquish_ROOT ?
+-- Found fmt 80001
+--     FMT_INCLUDES = /usr/include
+--     FMT_INCLUDE_DIR = /usr/include
+-- Found Robinmap
+--     ROBINMAP_INCLUDES = /usr/include
+--     ROBINMAP_INCLUDE_DIR = /usr/include
+CMake Warning at src/dicom.imageio/CMakeLists.txt:11 (message):
+  DICOM plugin will not be built, no DCMTK
+
+
+-- Create imagio_pvt.h from imageio_pvt.h.in
+-- Performing Test HAS_FLTO
+-- Performing Test HAS_FLTO - Success
+-- Found pybind11: /usr/include (found version "2.8.1" )
+-- Found pybind11 2.8.1
+--     pybind11_INCLUDE_DIR = /usr/include
+--     pybind11_INCLUDE_DIRS = /usr/include;/usr/include/python3.9
+-- Create oiioversion.h from oiioversion.h.in
+-- Create Imath.h from Imath.h.in
+-- Cloning oiio-images from https://github.com/OpenImageIO/oiio-images.git
+CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find Git (missing: GIT_EXECUTABLE)
+Call Stack (most recent call first):
+  /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:594 (_FPHSA_FAILURE_MESSAGE)
+  /usr/share/cmake-3.22/Modules/FindGit.cmake:128 (find_package_handle_standard_args)
+  src/cmake/testing.cmake:346 (find_package)
+  src/cmake/testing.cmake:357 (oiio_get_test_data)
+  CMakeLists.txt:289 (oiio_setup_test_data)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/build/openimageio-git/src/oiio-2.3.10.0/build/CMakeFiles/CMakeOutput.log".
+See also "/build/openimageio-git/src/oiio-2.3.10.0/build/CMakeFiles/CMakeError.log".
+==> ERROR: A failure occurred in build().
+    Aborting...
+==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build
+------------------------------------------
+-- Cloning oiio-images from https://github.com/OpenImageIO/oiio-images.git
+-- Found Git: /usr/bin/git (found version "2.34.1")
+Cloning into '/build/openimageio-git/src/oiio-2.3.10.0/build/testsuite/oiio-images'...
+-- Cloning openexr-images from https://github.com/AcademySoftwareFoundation/openexr-images.git
+Cloning into '/build/openimageio-git/src/oiio-2.3.10.0/build/testsuite/openexr-images'...
+-- TESTS: gpsread;oiiotool;oiiotool-attribs;oiiotool-copy;oiiotool-xform;maketx;oiiotool-maketx;misnamed-file;texture-crop;texture-cropover;texture-filtersize;texture-filtersize-stochastic;texture-overscan;texture-wrapfill;texture-res;texture-maxres
+-- TESTS: cmake-consumer;nonwhole-tiles;oiiotool-composite;oiiotool-fixnan;oiiotool-pattern;oiiotool-readerror;oiiotool-subimage;oiiotool-text;diff;dither;dup-channels;jpeg-corrupt;missingcolor;null;rational;texture-derivs;texture-fill;texture-flipt;texture-gettexels;texture-gray;texture-interp-bicubic;texture-blurtube;texture-half;texture-uint16;texture-interp-bilinear;texture-interp-closest;texture-mip-nomip;texture-mip-onelevel;texture-mip-trilinear;texture-mip-stochastictrilinear;texture-mip-stochasticaniso;texture-missing;texture-pointsample;texture-udim;texture-udim2;texture-uint8;texture-width0blur;texture-fat;texture-skinny
+-- TESTS: python-typedesc;python-paramlist;python-imagespec;python-roi;python-deep;python-colorconfig;python-imageinput;python-imageoutput;python-imagebuf;python-imagebufalgo;python-texturesys
+-- TESTS: oiiotool-color
+-- TESTS: texture-icwrite
+-- TESTS: bmp
+-- TESTS: dpx
+-- TESTS: dds
+--
+
+Did not find /build/openimageio-git/src/oiio-2.3.10.0/build/testsuite/fits-images
+--   -> Will not run tests fits
+--   -> You can find it at http://www.cv.nrao.edu/fits/data/tests/
+
+-- TESTS: gif
+-- TESTS: heif
+-- TESTS: ico
+-- TESTS: iff
+--
+
+Did not find /build/openimageio-git/src/oiio-2.3.10.0/build/testsuite/j2kp4files_v1_5
+--   -> Will not run tests jpeg2000
+--   -> You can find it at http://www.itu.int/net/ITU-T/sigdb/speimage/ImageForm-s.aspx?val=10100803
+
+-- TESTS: openexr-suite;openexr-multires;openexr-chroma;openexr-v2;openexr-window;perchannel;oiiotool-deep
+-- TESTS: openexr-damaged
+-- TESTS: openvdb;texture-texture3d
+-- TESTS: png
+-- TESTS: pnm
+-- TESTS: psd;psd-colormodes
+-- TESTS: ptex
+-- TESTS: raw
+-- TESTS: rla
+-- TESTS: sgi
+-- TESTS: targa
+-- TESTS: tiff-suite;tiff-depths;tiff-misc
+-- TESTS: webp
+-- TESTS: zfile
+----------------------------------------------------------------------
+┌jnd ( ~/05-builds/openimageio-git )
+└─> $ mkdir /tmp/srcp
+┌jnd ( ~/05-builds/openimageio-git )
+└─> $ tar -xzf oiio-v2.3.10.0.tar.gz -C /tmp/srcp
+┌jnd ( ~/05-builds/openimageio-git )
+└─> $ grep -lR "oiio-images" /tmp/srcp/oiio-2.3.10.0/
+/tmp/srcp/oiio-2.3.10.0/testsuite/webp/ref/out-webp1.1.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/tiff-suite/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/tiff-suite/ref/out-jpeg9d-alt.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/tiff-suite/ref/out-jpeg9b.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/tiff-suite/ref/out-alt2.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/tiff-suite/ref/out-alt.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/tiff-depths/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/texture-filtersize/run.py
+/tmp/srcp/oiio-2.3.10.0/testsuite/texture-blurtube/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/targa/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/runtest.py
+/tmp/srcp/oiio-2.3.10.0/testsuite/rla/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/rla/ref/out.err.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-oldlibraw0.15.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.21.0-mac.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.21.0-gh.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.20.0.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.20.0-gh.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.19.5-gh.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.18.8-gh2.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.18.8-gh.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.18.11.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw0.17.1.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw-0.20.2.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/out-libraw-0.20.2-gh.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_SONY_A300.ARW.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_PENTAX_K200D.PEF.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_PENTAX_K200D.PEF-libraw0.18.11.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_PANASONIC_G1.RW2.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_PANASONIC_G1.RW2-libraw0.18.11.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_OLYMPUS_E3.ORF.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_OLYMPUS_E3.ORF-libraw0.20.0.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_NIKON_D3X.NEF.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_FUJI_F700.RAF.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_FUJI_F700.RAF-libraw0.21.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_FUJI_F700.RAF-libraw0.20.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_CANON_EOS_7D.CR2.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/raw/ref/RAW_CANON_EOS_7D.CR2-libraw0.20.0.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageoutput/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/src/test_imageinput.py
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out-travis.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out-travis-py2.7-pybind2.3.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out-python3.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out-python3-win.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out-py37-jpeg9d.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out-alt2.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/python-imageinput/ref/out-alt.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/psd/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/pnm/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/png/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool/src/tahoe-small.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool/ref/tahoe-filled.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool/ref/hole.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool/ref/grid-clamped.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-xform/ref/resize64.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-xform/ref/resize512.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-xform/ref/resize2.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-xform/ref/resize.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-xform/ref/resample.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-xform/ref/fit2.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-xform/ref/fit.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-maketx/run.py
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-copy/ref/pasted.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-copy/ref/cut.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/oiiotool-copy/ref/crop.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/maketx/run.py
+/tmp/srcp/oiio-2.3.10.0/testsuite/iff/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/ico/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/gpsread/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/gpsread/ref/out-jpeg9d.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/gpsread/ref/out-alt.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/gif/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/dpx/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/dpx/ref/grey.tif
+/tmp/srcp/oiio-2.3.10.0/testsuite/dds/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/testsuite/bmp/ref/out.txt
+/tmp/srcp/oiio-2.3.10.0/src/doc/makefigures.bash
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/textshadowed.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-small.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-sigmoid.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-sat2.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-sat0.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-pepper.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-pepper-median.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-lincontrast.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-laplacian.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-inverse.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-gauss.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-ccmatrix.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/tahoe-blur.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/rotate90.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/rotate45.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/rotate270.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/rotate180.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/mulc.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/invert.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/grid-small.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/flop.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/flipflop.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/flip.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/fitv-width.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/fitv-letterbox.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/fitv-height.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/fit-width.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/fit-letterbox.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/fit-height.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/cut.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/cshift.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/crop.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/figures/addc.jpg
+/tmp/srcp/oiio-2.3.10.0/src/doc/CHANGES-1.x.md
+/tmp/srcp/oiio-2.3.10.0/src/cmake/testing.cmake
+/tmp/srcp/oiio-2.3.10.0/src/build-scripts/install_test_images.bash
+/tmp/srcp/oiio-2.3.10.0/INSTALL.md
+/tmp/srcp/oiio-2.3.10.0/CHANGES.md
+/tmp/srcp/oiio-2.3.10.0/.github/workflows/ci.yml
+
+
+
+
+

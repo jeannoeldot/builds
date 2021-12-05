@@ -9,8 +9,8 @@ pkgdesc="A library for reading and writing images, including classes, utilities,
 arch=('x86_64')
 url="http://www.openimageio.org/"
 license=('custom')
-# TODO: Consider adding these deps: 'openvdb' 'ptex' 'opencv'
-depends=('openexr' 'boost-libs' 'libtiff' 'tbb'
+# TODO: Consider adding these deps: 'openvdb' 'tbb' 'ptex' 'opencv'
+depends=('openexr' 'boost-libs' 'libtiff'
          'libjpeg-turbo' 'openjpeg2' 'libraw'
          'ffmpeg'
          'qt5-base'
