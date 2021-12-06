@@ -133,6 +133,8 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=3.1.0.4.20211204
+pkgrel=2    # TEST AVEC blender-oiio-2.3.patch
+
 pkgrel=1
 
 pkgrel=1    # MAJ + Rebuild MAJ LLVM 13.0.0
@@ -238,6 +240,8 @@ sha256sum OptiX-7.3.0-include.zip
 
 sha256sum blender-openexr3.patch
 
+sha256sum blender-oiio-2.3.patch
+
 sha256sums=('123...'
             '456...'
             '789...'
@@ -253,6 +257,8 @@ _gitname="blender"
 !!!!!
 prepare() {
   cd "${_gitname}"
+  # Fix build with OIIO 2.3.x.x
+  patch -Np1 -i "${srcdir}/blender-oiio-2.3.patch"
   # Build with opnexr/imath 3.0.1
   patch -Np1 -i "${srcdir}/blender-openexr3.patch"
 
@@ -494,6 +500,22 @@ nanovdb-git-*-any.pkg.tar.*\
 } \
 /tmp/chrootrepo/
 
+
+$ cp -v $HOME/00-repolocal/\
+{\
+opencollada-git-*-x86_64.pkg.tar.*,\
+opensubdiv-git-*-x86_64.pkg.tar.*,\
+openvdb-git-*-x86_64.pkg.tar.*,\
+alembic-git-*-x86_64.pkg.tar.*,\
+openimagedenoise-git-*-x86_64.pkg.tar.*,\
+usd-git-*-x86_64.pkg.tar.*,\
+embree-git-*-x86_64.pkg.tar.*,\
+nanovdb-git-*-any.pkg.tar.*\
+} \
+/tmp/chrootrepo/
+
+$ cp -v /0-DataLinux/00-repolocal/openshadinglanguage-git-1.11.16.0.20211101-3-x86_64.pkg.tar.zst /tmp/chrootrepo/
+$ cp -v /0-DataLinux/00-repolocal/openimageio-git-2.3.10.0.20211201-1-x86_64.pkg.tar.zst /tmp/chrootrepo/
 
   FLOOP
 --------

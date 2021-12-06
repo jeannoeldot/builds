@@ -1,0 +1,28 @@
+diff -aur blender/build_files/cmake/Modules/FindOpenImageIO.cmake blender.new/build_files/cmake/Modules/FindOpenImageIO.cmake
+--- blender/build_files/cmake/Modules/FindOpenImageIO.cmake	2020-08-19 12:06:57.000000000 +0200
++++ blender.new/build_files/cmake/Modules/FindOpenImageIO.cmake	2021-12-06 12:01:06.440591095 +0100
+@@ -48,6 +48,15 @@
+     lib64 lib
+   )
+ 
++FIND_LIBRARY(OPENIMAGEIO_UTIL_LIBRARY
++  NAMES
++    OpenImageIO_Util
++  HINTS
++    ${_openimageio_SEARCH_DIRS}
++  PATH_SUFFIXES
++    lib64 lib
++  )
++
+ FIND_FILE(OPENIMAGEIO_IDIFF
+   NAMES
+     idiff
+@@ -64,7 +73,7 @@
+     OPENIMAGEIO_LIBRARY OPENIMAGEIO_INCLUDE_DIR)
+ 
+ IF(OPENIMAGEIO_FOUND)
+-  SET(OPENIMAGEIO_LIBRARIES ${OPENIMAGEIO_LIBRARY})
++  SET(OPENIMAGEIO_LIBRARIES ${OPENIMAGEIO_LIBRARY} ${OPENIMAGEIO_UTIL_LIBRARY})
+   SET(OPENIMAGEIO_INCLUDE_DIRS ${OPENIMAGEIO_INCLUDE_DIR})
+   IF(EXISTS ${OPENIMAGEIO_INCLUDE_DIR}/OpenImageIO/pugixml.hpp)
+     SET(OPENIMAGEIO_PUGIXML_FOUND TRUE)

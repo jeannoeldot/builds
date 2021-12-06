@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=3.1.0.4.20211204
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -39,20 +39,16 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.3.0-include.zip"
         "blender-openexr3.patch"
-        "blender-oiio-2.3.patch"
 )
 sha256sums=('ce28635b9dea4d7ab447bd868419b9d4fa2a8e936ec86b4c30eb4b4e730c5d3a'
             'ed62b562cba4b44a3a2d4676a21bfebd63b11aaa29901f7d8be11705d7a82c52'
             'a4dbc6a70b2fa21e97111a2ceeb9d731b83207118682bf285b08ecf2b99f40c3'
-            '918e921930bb1b57f3ef896b7bde9ce84b455328f505bbeacb4e88278bd3534b'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
-  # Fix build with OIIO 2.3.x.x
-  patch -Np1 -i "${srcdir}/blender-oiio-2.3.patch"
   # Build with opnexr/imath 3.0.1
   patch -Np1 -i "${srcdir}/blender-openexr3.patch"
 
