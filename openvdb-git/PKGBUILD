@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=9.0.0.20211030
-pkgrel=1
+pkgrel=2
 _ver_release="9.0.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'

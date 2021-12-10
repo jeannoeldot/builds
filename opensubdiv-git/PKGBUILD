@@ -2,7 +2,7 @@
 
 pkgname=opensubdiv-git
 pkgver=3.4.4.20210216
-pkgrel=1
+pkgrel=2
 _ver_release="3_4_4"
 _name_release="OpenSubdiv-${_ver_release}"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
@@ -15,9 +15,19 @@ makedepends=('cmake' 'mesa')
 conflicts=('opensubdiv')
 provides=('opensubdiv')
 source=("OpenSubdiv-v${_ver_release}.tar.gz"
+        "opensubdiv-tbb2021.patch"
 )
 sha256sums=('20d49f80a2b778ad4d01f091ad88d8c2f91cf6c7363940c6213241ce6f1048fb'
+            'ba5218bb42efb5ab11b2217742337825cb6369f760637e18787cf790c9a147ce'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # Support TBB 2021.4
+  # https://github.com/archlinux/svntogit-community/blob/packages/opensubdiv/trunk/PKGBUILD
+  # https://github.com/PixarAnimationStudios/OpenSubdiv/commit/9079a517.patch
+  patch -Np1 -i "${srcdir}/opensubdiv-tbb2021.patch"
+}
 
 build() {
   cd "${_name_release}"

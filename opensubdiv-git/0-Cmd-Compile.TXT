@@ -39,6 +39,7 @@ voir 0-CmdFairePatches.TXT
 pkgname=opensubdiv-git               # opensubdiv ds community
 pkgver=3.4.4.20210216
 pkgrel=1
+pkgrel=2  # Rebuild MAJ tbb 2021.4 + Patch
 
 pkgrel=2  # Rebuild intel-tbb ==> tbb
 
@@ -73,6 +74,30 @@ sha256sum OpenSubdiv-v3_4_4.tar.gz
 
 sha256sums=('... ...'
 )
+
+AVEC PATCH TBB 2021.4
+=====================
+makedepends=('cmake' 'mesa')
+
+source=("OpenSubdiv-v${_ver_release}.tar.gz"
+        "opensubdiv-tbb2021.patch"
+)
+
+sha256sum OpenSubdiv-v3_4_4.tar.gz
+
+sha256sum opensubdiv-tbb2021.patch
+
+sha256sums=('... ...'
+            '... ...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # Support TBB 2021.4
+  # https://github.com/archlinux/svntogit-community/blob/packages/opensubdiv/trunk/PKGBUILD
+  # https://github.com/PixarAnimationStudios/OpenSubdiv/commit/9079a517.patch
+  patch -Np1 -i "${srcdir}/opensubdiv-tbb2021.patch"
+}
 
 build() {
   cd "${_name_release}"
@@ -213,6 +238,7 @@ $ ls -la
 -rw-r--r-- 1 jnd users     1282  9 août  10:20 PKGBUILD
 -rw-r--r-- 1 jnd users 15825430  9 août  09:43 OpenSubdiv-v3_4_4.tar.gz
 -rw-r--r-- 1 jnd users      499  2 févr. 17:00 fix-Erreur-compil-cmake-nvcc.patch
+-rw-r--r--  1 jnd users     1158 10 déc.  14:28 opensubdiv-tbb2021.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================

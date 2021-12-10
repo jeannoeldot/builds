@@ -38,6 +38,7 @@ voir 0-CmdFairePatches.TXT
 pkgname=embree-git               # embree ds community ?
 pkgver=3.13.2.20211029
 pkgrel=1
+pkgrel=2    # Rebuild MAJ tbb 2021.4
 
 pkgrel=4  # AVEC patch Ofast + dynamic libs
 pkgrel=3  # SANS PATCH + dynamic libs

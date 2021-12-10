@@ -2,7 +2,7 @@
 
 pkgname=embree-git
 pkgver=3.13.2.20211029
-pkgrel=1
+pkgrel=2
 _ver_release="3.13.2"
 _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"

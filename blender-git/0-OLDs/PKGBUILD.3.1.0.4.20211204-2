@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.1.0.4.20211210
-pkgrel=1
+pkgver=3.1.0.4.20211204
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -24,7 +24,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opencollada-git' 'openimageio-git'
           'openshadinglanguage-git' 'clang'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
-          'embree-git' 'openimagedenoise-git'
+          'embree-git' 'openimagedenoise-git' 'usd-git'
           'zstd'
 )
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
@@ -37,12 +37,12 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
-        "OptiX-7.4.0-include.zip"
+        "OptiX-7.3.0-include.zip"
         "blender-openexr3.patch"
         "blender-oiio-2.3.patch"
 )
-sha256sums=('bd51008918083d1e3b68189ee32df7009e4f9a7a36063d40563edb88f8df6d43'
-            '283ceb65d47a697d8776bb3d56273bf78b53d57110cfd1a4cac4456888687713'
+sha256sums=('ce28635b9dea4d7ab447bd868419b9d4fa2a8e936ec86b4c30eb4b4e730c5d3a'
+            'ed62b562cba4b44a3a2d4676a21bfebd63b11aaa29901f7d8be11705d7a82c52'
             'a4dbc6a70b2fa21e97111a2ceeb9d731b83207118682bf285b08ecf2b99f40c3'
             '918e921930bb1b57f3ef896b7bde9ce84b455328f505bbeacb4e88278bd3534b'
 )
@@ -61,9 +61,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "37e799e299d5"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5ef5a9fc2466"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1639135728|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1638581198|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -82,7 +82,6 @@ build() {
         -DCMAKE_SKIP_RPATH=ON \
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
-        -DWITH_USD=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \
         -DWITH_PYTHON_INSTALL=OFF \
