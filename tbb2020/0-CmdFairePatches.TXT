@@ -1,0 +1,46 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = OpenColorIO-v2.0.0
+
+mkdir /tmp/srcp
+
+cp -v OpenColorIO-v2.0.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf OpenColorIO-v2.0.0.tar.gz
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
+
+1) MODIFIER OpenColorIO-2.0.0/xxx
+==================================================================
+cp -R OpenColorIO-2.0.0 OpenColorIO-2.0.0.new
+
+cd OpenColorIO-2.0.0.new/.......
+
+kwrite ....
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier xxx~
+rm -f xxx~
+ 
+cd ../../../..
+
+diff -aur OpenColorIO-2.0.0 OpenColorIO-2.0.0.new
+
+diff -aur OpenColorIO-2.0.0 OpenColorIO-2.0.0.new > fix-error.patch
+
+cd $HOME/05-builds/opencolorio2
+
+mv -vf /tmp/srcp/fix-error.patch .
+

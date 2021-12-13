@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.3.10.0.20211201
+pkgrel=2    # rebuild MAJ python 3.10
 pkgrel=1
 
 pkgrel=4    # rebuild SUPPR DÉPS opencv et openvdb
