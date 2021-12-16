@@ -2,14 +2,14 @@
 
 pkgname=usd-git
 pkgver=21.02.20210120
-pkgrel=3
+pkgrel=2
 _ver_release="21.02"
 _name_release="USD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
 arch=('x86_64')
 license=('custom')
-depends=('boost-libs' 'tbb2020'
+depends=('boost-libs' 'tbb'
 )
 makedepends=('boost' 'cmake' 'python'
 )
@@ -41,8 +41,6 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
-    -DTBB_INCLUDE_DIR=/usr/include/tbb2020 \
-    -DTBB_LIBRARY=/usr/lib/tbb2020 \
     -DPXR_SET_INTERNAL_NAMESPACE=usdBlender \
     -DPXR_ENABLE_PYTHON_SUPPORT=OFF \
     -DPXR_BUILD_IMAGING=OFF \

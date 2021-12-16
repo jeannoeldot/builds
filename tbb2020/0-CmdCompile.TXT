@@ -73,7 +73,7 @@ mkdir /tmp/srcp
 
 tar -xzf oneTBB-2020.3.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenColorIO-2020.3/CMakeLists.txt &
+1) kwrite /tmp/srcp/oneTBB-2020.3/Makefile &
 
 
 
@@ -84,7 +84,6 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users    5717 16 mai   10:48 opencolorio-openexr3.patch
 -rw-r--r--  1 jnd users 9892414 16 mai   15:18 oneTBB-2020.3.tar.gz
 -rw-r--r--  1 jnd users    1269 16 mai   15:26 PKGBUILD
 
@@ -93,8 +92,6 @@ $ ls -la
 
 3) MAKEPKG DANS TMP EN USER
 ====================================
-!!!! PAS DE COMPILATION DANS /tmp : ==> PROBLÈME AVEC GIF
----------------------------------------------------------
 !!! EN ROOT
 # pacman -Syu
 
@@ -104,10 +101,9 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/tbb2020/PKGBUILD . \
 && cp -v $HOME/05-builds/tbb2020/oneTBB-2020.3.tar.gz . \
-&& cp -v $HOME/05-builds/tbb2020/opencolorio-openexr3.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/tbb2020 \
-&& cp -v /tmp/build/opencolorio2-*-x86_64.pkg.tar.* . \
+&& cp -v /tmp/build/tbb2020-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
@@ -161,21 +157,21 @@ rm -f *~
 
 # Verifications...
 
-namcap opencolorio2-*-x86_64.pkg.tar.*
+namcap tbb2020-*-x86_64.pkg.tar.*
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/opencolorio2-*-x86_64.pkg.tar.*
+$ rm /0-DataLinux/00-repolocal/tbb2020-*-x86_64.pkg.tar.*
 
-$ cp -v opencolorio2-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+$ cp -v tbb2020-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 # DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
 -----------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/opencolorio2-*-x86_64.pkg.tar.* \
+$ mv -v $HOME/00-repolocal/tbb2020-*-x86_64.pkg.tar.* \
 $HOME/00-repolocal/pkg-OLD/
 
-$ mv -v opencolorio2-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v tbb2020-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
@@ -189,29 +185,24 @@ $ cd && maj-repolocal
 $ sync
 
 
-!!!! PAS OBLIGATOIRE SI COMPILE opencollada opencolorio openshadinglanguage BLENDER
-===================================================================================
+!!!! PAS OBLIGATOIRE
+====================
 !!! EN ROOT
 # cd
 # maj
 OU
 # LC_ALL=C pacman -Syu
 
-# LC_ALL=C pacman -Syu opencolorio2
+# LC_ALL=C pacman -Syu tbb2020
 
 
 SI PROBLEME
 ==============
 !!! EN ROOT
-# LC_ALL=C pacman -Rdd opencolorio2
-# rm /var/cache/pacman/pkg/opencolorio2-*
-# LC_ALL=C pacman -S opencolorio2
+# LC_ALL=C pacman -Rdd tbb2020
+# rm /var/cache/pacman/pkg/tbb2020-*
+# LC_ALL=C pacman -S tbb2020
 
-POUR REMETTRE opencolorio EXTRA
-================================
-# LC_ALL=C pacman -Rdd opencolorio2
-# rm /var/cache/pacman/pkg/opencolorio2-*
-# LC_ALL=C pacman -Syu opencolorio
 
 ==================================================================================================
 ANCIEN

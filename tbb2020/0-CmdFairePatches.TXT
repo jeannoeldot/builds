@@ -1,15 +1,15 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = OpenColorIO-v2.0.0
+!!! VERSION = oneTBB-2020.3
 
 mkdir /tmp/srcp
 
-cp -v OpenColorIO-v2.0.0.tar.gz /tmp/srcp/
+cp -v oneTBB-2020.3.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenColorIO-v2.0.0.tar.gz
+tar -xzf oneTBB-2020.3.tar.gz
 
 
 
@@ -22,11 +22,11 @@ sync
 ANCIENS OU PAS OK
 =================
 
-1) MODIFIER OpenColorIO-2.0.0/xxx
+1) MODIFIER oneTBB-2020.3/xxx
 ==================================================================
-cp -R OpenColorIO-2.0.0 OpenColorIO-2.0.0.new
+cp -R oneTBB-2020.3 oneTBB-2020.3.new
 
-cd OpenColorIO-2.0.0.new/.......
+cd oneTBB-2020.3.new/.......
 
 kwrite ....
 
@@ -36,11 +36,11 @@ rm -f xxx~
  
 cd ../../../..
 
-diff -aur OpenColorIO-2.0.0 OpenColorIO-2.0.0.new
+diff -aur oneTBB-2020.3 oneTBB-2020.3.new
 
-diff -aur OpenColorIO-2.0.0 OpenColorIO-2.0.0.new > fix-error.patch
+diff -aur oneTBB-2020.3 oneTBB-2020.3.new > fix-error.patch
 
-cd $HOME/05-builds/opencolorio2
+cd $HOME/05-builds/tbb2020
 
 mv -vf /tmp/srcp/fix-error.patch .
 
