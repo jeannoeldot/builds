@@ -2,7 +2,7 @@
 
 pkgname=usd-git
 pkgver=21.02.20210120
-pkgrel=3
+pkgrel=4
 _ver_release="21.02"
 _name_release="USD-${_ver_release}"
 pkgdesc="Universal Scene Description"

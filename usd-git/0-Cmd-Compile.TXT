@@ -45,6 +45,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=usd-git
 pkgver=21.02.20210120
+pkgrel=4      # Rebuild maj boost boost-libs 1.78.0
 pkgrel=3      # Rebuild tbb ==> tbb2020
 
 pkgrel=2  # Rebuild maj boost boost-libs 1.76.0 + Patchs GCC 11
