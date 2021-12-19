@@ -37,8 +37,9 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=9.0.0.20211030
-pkgrel=1
+pkgrel=3          # rebuild boost boost-libs 1.78.0
 pkgrel=2    # Rebuild MAJ tbb 2021.4
+pkgrel=1
 
 pkgrel=2          # SUPPR déps openexr et imath
 

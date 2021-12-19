@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.3.10.0.20211201
+pkgrel=3    # rebuild boost boost-libs 1.78.0
 pkgrel=2    # rebuild MAJ python 3.10
 pkgrel=1
 
@@ -114,7 +115,7 @@ sha256sums=('...'
 )
 
 !!!!!!
-# TODO: Consider adding these deps: 'openvdb' 'ptex' 'opencv'
+# TODO: Consider adding these deps: 'openvdb' 'tbb' 'ptex' 'opencv'
 !!!!!!
 depends=(...
         ...
@@ -138,10 +139,10 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
-==> extra/python 3.9.9-1 [installé]
+==> extra/python 3.10.1-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
-PYTHON_VERSION=3.9
+PYTHON_VERSION=3.10
 
 !!! VERSION 2.3.10.0
 build() {
@@ -361,7 +362,7 @@ rm -f *~
 ==> WARNING: Package contains reference to $srcdir
 usr/bin/idiff
 usr/bin/oiiotool
-usr/lib/python3.9/site-packages/OpenImageIO.cpython-39-x86_64-linux-gnu.so
+usr/lib/python3.10/site-packages/OpenImageIO.cpython-39-x86_64-linux-gnu.so
 usr/lib/libOpenImageIO_Util.so.2.3.10
 usr/lib/libOpenImageIO.so.2.3.10
 
