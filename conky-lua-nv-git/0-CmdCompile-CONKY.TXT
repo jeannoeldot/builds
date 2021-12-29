@@ -68,6 +68,7 @@ voir CmdFairePatches.TXT
 
 pkgname=conky-lua-nv-git
 pkgver=1.12.3.20210426
+pkgrel=2  # Rebuild, fix static libs with LTO
 pkgrel=1
 
 pkgrel=5  # TEST Ofast floop
@@ -99,7 +100,13 @@ prepare() {
 
 build() {
   cd "${_gitname}"
-  
+
+  # fix static libs with LTO
+  CFLAGS+=" -ffat-lto-objects"
+  CXXFLAGS+=" -ffat-lto-objects"
+
+  cmake \
+
 package() {
   cd "${_gitname}"
 
