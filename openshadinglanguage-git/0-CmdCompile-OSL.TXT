@@ -37,6 +37,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.16.0.20211101
+pkgrel=6    # Rebuild against OIIO 2.3.11.0
 pkgrel=5    # rebuild boost boost-libs 1.78.0
 pkgrel=4    # Rebuild MAJ python 3.10
 pkgrel=3    # Rebuild against OIIO 2.3.10.0
@@ -341,6 +342,19 @@ usr/lib/liboslquery.so.1.11.16
 usr/lib/liboslexec.so.1.11.16
 
 namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
+openshadinglanguage-git W: Unused shared library '/usr/lib/libpthread.so.0' by file ('usr/lib/liboslnoise.so.1.11.16')
+openshadinglanguage-git W: Dependency boost-libs included but already satisfied
+openshadinglanguage-git W: Dependency imath included but already satisfied
+openshadinglanguage-git W: Dependency freetype2 included but already satisfied
+openshadinglanguage-git W: Dependency libpng included but already satisfied
+openshadinglanguage-git W: Dependency libtiff included but already satisfied
+openshadinglanguage-git W: Dependency zlib included but already satisfied
+openshadinglanguage-git W: Dependency ncurses included but already satisfied
+openshadinglanguage-git W: Dependency llvm-libs included but already satisfied
+openshadinglanguage-git W: Dependency qt5-base included but already satisfied
+openshadinglanguage-git W: Dependency python included but already satisfied
+openshadinglanguage-git W: Dependency pugixml included but already satisfied
+openshadinglanguage-git W: Dependency pybind11 included but already satisfied
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
