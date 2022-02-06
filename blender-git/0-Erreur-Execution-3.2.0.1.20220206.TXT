@@ -1,0 +1,24 @@
+
+
+$ blender
+Read prefs: /home/jnd/.config/blender/3.2/config/userpref.blend
+Traceback (most recent call last):
+  File "/usr/share/blender/3.2/scripts/modules/addon_utils.py", line 351, in enable
+    mod = __import__(module_name)
+ModuleNotFoundError: No module named 'io_scene_obj'
+Read blend: /home/jnd/00-3D/3D-blender/blender/Benchmarks-Cycles/3-bmw27_gpu.blend
+Invalid graphics context in cuGraphicsUnregisterResource(cu_graphics_resource_) (intern/cycles/device/cuda/graphics_interop.cpp:36)
+
+Refer to the Cycles GPU rendering documentation for possible solutions:
+https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html
+
+Invalid graphics context in cuGraphicsUnregisterResource(cu_graphics_resource_) (intern/cycles/device/cuda/graphics_interop.cpp:36)
+
+Refer to the Cycles GPU rendering documentation for possible solutions:
+https://docs.blender.org/manual/en/latest/render/cycles/gpu_rendering.html
+
+Saved session recovery to '/tmp/quit.blend'
+Writing userprefs: '/home/jnd/.config/blender/3.2/config/userpref.blend' ok
+Info: Préférences enregistrées
+
+Blender quit
