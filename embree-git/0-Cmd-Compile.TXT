@@ -6,16 +6,16 @@ cd $HOME/05-builds/embree-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/embree/embree/releases
-==> svenwoop  released this 29 oct 2021 ==> 20211029
-==> Embree v3.13.2  ==> 3.13.2
-==> 3.13.2.20211029
+==> svenwoop  released this 11 fev 2022 ==> 20220211
+==> Embree v3.13.3  ==> 3.13.3
+==> 3.13.3.20220211
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O embree-3.13.2.tar.gz \
-https://github.com/embree/embree/archive/refs/tags/v3.13.2.tar.gz
+wget -O embree-3.13.3.tar.gz \
+https://github.com/embree/embree/archive/refs/tags/v3.13.3.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/embree-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/embree-3.13.2.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/embree-3.13.3.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,7 +36,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git               # embree ds community ?
-pkgver=3.13.2.20211029
+pkgver=3.13.3.20220211
 pkgrel=1
 pkgrel=2    # Rebuild MAJ tbb 2021.4
 
@@ -53,7 +53,7 @@ pkgrel=2    # static libs
 
 
 !!!!!!
-_ver_release="3.13.2"
+_ver_release="3.13.3"
 _name_release="embree-${_ver_release}"
 
 license=('Apache')
@@ -69,7 +69,7 @@ provides='embree'
 
 SANS PATCH
 ----------
-sha256sum embree-3.13.2.tar.gz
+sha256sum embree-3.13.3.tar.gz
 
 source=("embree-${_ver_release}.tar.gz"
 )
@@ -89,9 +89,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf embree-3.13.2.tar.gz -C /tmp/srcp
+tar -xzf embree-3.13.3.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/embree-3.13.2/CMakeLists.txt
+1) kwrite /tmp/srcp/embree-3.13.3/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -116,7 +116,7 @@ LIGNE 114 ET ...
 ----------------
 EMBREE_ISPC_SUPPORT             ON by default   ==> OFF install_deps = OFF
 
-LIGNE 123 ET ...
+LIGNE 127 ET ...
 ----------------
 EMBREE_STACK_PROTECTOR          OFF by default
 
@@ -140,7 +140,7 @@ EMBREE_CURVE_SELF_INTERSECTION_AVOIDANCE_FACTOR   2.0f is the default value
 
 EMBREE_TASKING_SYSTEM           TBB by default    install_deps = INTERNAL
 
-LIGNE 230 ET ...
+LIGNE 235 ET ...
 ----------------
 !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
 EMBREE_MAX_ISA                  AVX2 by default   install_deps = AVX2
@@ -153,7 +153,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.13.2.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.13.3.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -172,7 +172,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/embree-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/embree-git/embree-3.13.2.tar.gz . \
+&& cp -v $HOME/05-builds/embree-git/embree-3.13.3.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/embree-git \
 && cp -v /tmp/build/embree-git-*-x86_64.pkg.tar.* . \
@@ -235,7 +235,7 @@ $ mv -v embree-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i embree-3.13.2.tar.gz
+$ rm -i embree-3.13.3.tar.gz
 
 
 $ cd && maj-repolocal
@@ -277,7 +277,7 @@ embree-git W: Dependency included and not needed ('glfw-x11')
 
 AVEC PATCH
 ----------
-sha256sum embree-3.13.2.tar.gz
+sha256sum embree-3.13.3.tar.gz
 
 sha256sum enable-optimizations-Ofast.patch
 
@@ -296,7 +296,7 @@ prepare() {
 
 AVEC PATCH
 ----------
-sha256sum embree-3.13.2.tar.gz
+sha256sum embree-3.13.3.tar.gz
 
 sha256sum enable-optimizations-Ofast-floop.patch
 

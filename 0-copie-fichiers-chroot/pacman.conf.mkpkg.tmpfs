@@ -105,7 +105,8 @@ SigLevel = Optional TrustAll
 Server = file:///home/jnd/00-repolocal
 
 #[xyne-x86_64]
+# A repo for Xyne's own projects: https://xyne.dev/projects/
+# Packages for the "x86_64" architecture.
+# Note that this includes all packages in [xyne-any].
 #SigLevel = Required
-##Server = http://xyne.archlinux.ca/repos/xyne
-## Workaround
-#Server = https://xyne.archlinux.ca/bin/repo.php?file=
+#Server = https://xyne.dev/repos/xyne
