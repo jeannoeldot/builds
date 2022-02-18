@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.2.0.3.20220218
+pkgver=3.2.0.3.20220216
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -10,7 +10,7 @@ url="https://blender.org/"
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libjpeg' 'libpng' 'openjpeg2' 'libtiff' 'openexr' 
           'python'
-          'ffmpeg4.4' 'fftw'
+          'ffmpeg' 'fftw'
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pulseaudio'
           'sdl2'
           'libgl' 'glfw-x11'
@@ -38,24 +38,32 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.4.0-include.zip"
+        "blender-openexr3.patch"
+        "blender-oiio-2.3.patch"
 )
-sha256sums=('b5c21c53953744840b600c53b76059fa5b67b0649524671725421bd5af9bb591'
+sha256sums=('2b1de54ca0dc13716d9242a02f7c847687221a3fe860c4d469de5200363aca86'
             '283ceb65d47a697d8776bb3d56273bf78b53d57110cfd1a4cac4456888687713'
+            'a4dbc6a70b2fa21e97111a2ceeb9d731b83207118682bf285b08ecf2b99f40c3'
+            '918e921930bb1b57f3ef896b7bde9ce84b455328f505bbeacb4e88278bd3534b'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+  # Fix build with OIIO 2.3.x.x
+  patch -Np1 -i "${srcdir}/blender-oiio-2.3.patch"
+  # Build with opnexr/imath 3.0.1
+  patch -Np1 -i "${srcdir}/blender-openexr3.patch"
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5f16e24cc9ac"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "3f0e63fcca02"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1645180273|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1645006582|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -69,6 +77,8 @@ build() {
   cmake \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+        -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_SKIP_RPATH=ON \
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
@@ -89,8 +99,6 @@ build() {
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
         -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER} \
-        -DCMAKE_C_FLAGS="-I /usr/include/ffmpeg4.4" \
-        -DCMAKE_CXX_FLAGS="-I /usr/include/python${PYTHON_VER} -I /usr/include/ffmpeg4.4 -L /usr/lib/ffmpeg4.4" \
         ..
   make
 }

@@ -1,18 +1,31 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.2.0.3.20220216
+!!! VERSION = 3.2.0.3.20220218
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-3.2.0.3.20220216.tar.gz /tmp/srcp/
+cp -v blender-git-3.2.0.3.20220218.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-3.2.0.3.20220216.tar.gz
+tar -xzf blender-git-3.2.0.3.20220218.tar.gz
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 blender-openexr3.patch
 VOIR:
@@ -33,7 +46,7 @@ MODIFIER LIGNES 37 À 41 :
   IlmImf
   IlmThread
   Imath
- 
+
 DEVIENNENT
   Iex
   Imath
@@ -43,13 +56,13 @@ DEVIENNENT
 
 MODIFIER LIGNE 122 :
   SET(OPENEXR_INCLUDE_DIRS ${OPENEXR_INCLUDE_DIR} ${OPENEXR_INCLUDE_DIR}/OpenEXR)
- 
+
 DEVIENT
   SET(OPENEXR_INCLUDE_DIRS ${OPENEXR_INCLUDE_DIR} ${OPENEXR_INCLUDE_DIR}/OpenEXR ${OPENEXR_INCLUDE_DIR}/Imath)
 
 ENREGISTRER et Quitter Kwrite & EFFACER FindOpenEXR.cmake~
 rm -f FindOpenEXR.cmake~
- 
+
 cd ../../../..
 
 
@@ -127,17 +140,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/blender-oiio-2.3.patch .
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 VOIR:
 https://developer.blender.org/D12634

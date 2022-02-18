@@ -1,4 +1,19 @@
 
+
+
+18/02/2022
+----------
+PKGBUILD AVEC   -DCMAKE_C_FLAGS="-I /usr/include/ffmpeg4.4" \
+                -DCMAKE_CXX_FLAGS="-I /usr/include/python${PYTHON_VER} -I /usr/include/ffmpeg4.4 -L /usr/lib/ffmpeg4.4" \
+         SANS   -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+                -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+----------------------------------------------------------------
+
+
+
+
+
+
 [  0%] Building CXX object intern/memutil/CMakeFiles/bf_intern_memutil.dir/intern/MEM_CacheLimiterC-Api.cpp.o
 cd /build/blender-git/src/blender/build/intern/memutil &&
 /usr/bin/c++  -DNDEBUG -DWITH_ASSERT_ABORT -DWITH_OPENGL -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE -D__LITTLE_ENDIAN__ -D__MMX__ -D__SSE2__ -D__SSE__ 

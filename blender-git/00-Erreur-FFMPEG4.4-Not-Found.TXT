@@ -1,0 +1,56 @@
+
+FFMPEG4.4.1-3
+-------------
+
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:59 (message):
+  Could NOT find FFmpeg AVCODEC.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_unix.cmake:200 (find_package)
+  CMakeLists.txt:988 (include)
+
+
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:59 (message):
+  Could NOT find FFmpeg AVDEVICE.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_unix.cmake:200 (find_package)
+  CMakeLists.txt:988 (include)
+
+
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:59 (message):
+  Could NOT find FFmpeg AVFILTER.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_unix.cmake:200 (find_package)
+  CMakeLists.txt:988 (include)
+
+
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:59 (message):
+  Could NOT find FFmpeg AVFORMAT.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_unix.cmake:200 (find_package)
+  CMakeLists.txt:988 (include)
+
+
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:59 (message):
+  Could NOT find FFmpeg AVUTIL.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_unix.cmake:200 (find_package)
+  CMakeLists.txt:988 (include)
+
+
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:59 (message):
+  Could NOT find FFmpeg SWSCALE.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_unix.cmake:200 (find_package)
+  CMakeLists.txt:988 (include)
+
+
+CMake Warning at build_files/cmake/Modules/FindFFmpeg.cmake:59 (message):
+  Could NOT find FFmpeg SWRESAMPLE.
+Call Stack (most recent call first):
+  build_files/cmake/platform/platform_unix.cmake:200 (find_package)
+  CMakeLists.txt:988 (include)
+
+
+-- Could NOT find FFmpeg (missing: _ffmpeg_LIBRARIES _ffmpeg_INCLUDE_DIR)
+-- FFmpeg not found, disabling it
+
