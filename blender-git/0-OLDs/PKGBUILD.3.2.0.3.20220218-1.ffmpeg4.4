@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.2.0.3.20220219
+pkgver=3.2.0.3.20220218
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -10,7 +10,7 @@ url="https://blender.org/"
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libjpeg' 'libpng' 'openjpeg2' 'libtiff' 'openexr' 
           'python'
-          'ffmpeg' 'fftw'
+          'ffmpeg4.4' 'fftw'
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pulseaudio'
           'sdl2'
           'libgl' 'glfw-x11'
@@ -39,7 +39,7 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.4.0-include.zip"
 )
-sha256sums=('c8e2d6c5ce083d97833b799a3feac7d6ad5c9ace385a30490de83c887f6b1bf9'
+sha256sums=('b5c21c53953744840b600c53b76059fa5b67b0649524671725421bd5af9bb591'
             '283ceb65d47a697d8776bb3d56273bf78b53d57110cfd1a4cac4456888687713'
 )
 
@@ -53,9 +53,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "385d9488e606"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "5f16e24cc9ac"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1645251814|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1645180273|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -69,8 +69,6 @@ build() {
   cmake \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
-        -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_SKIP_RPATH=ON \
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
@@ -91,6 +89,8 @@ build() {
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
         -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER} \
+        -DCMAKE_C_FLAGS="-I /usr/include/ffmpeg4.4" \
+        -DCMAKE_CXX_FLAGS="-I /usr/include/python${PYTHON_VER} -I /usr/include/ffmpeg4.4 -L /usr/lib/ffmpeg4.4" \
         ..
   make
 }
