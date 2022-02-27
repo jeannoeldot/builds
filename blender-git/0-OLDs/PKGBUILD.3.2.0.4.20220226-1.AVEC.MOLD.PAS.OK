@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=3.2.0.4.20220226
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -31,6 +31,7 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
              'nanovdb-git'
+             'mold'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -91,6 +92,7 @@ build() {
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
         -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER} \
+        -DWITH_LINKER_MOLD=ON \
         ..
   make
 }
