@@ -1,17 +1,17 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.3.13.0.20220301
+pkgver=2.3.12.0.20220201
 pkgrel=1
-_name_release="oiio-2.3.13.0"
-_ver_release="v2.3.13.0"
+_name_release="oiio-2.3.12.0"
+_ver_release="v2.3.12.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
 license=('custom')
-# TODO: Consider adding these deps: 'openvdb' 'tbb' 'ptex' 'opencv'
+# TODO: Consider adding these deps: 'openvdb' 'tbb' 'ffmpeg' 'ptex' 'opencv'
 depends=('openexr' 'boost-libs' 'libtiff'
-         'libjpeg-turbo' 'openjpeg2' 'libraw' 'ffmpeg'
+         'libjpeg-turbo' 'openjpeg2' 'libraw'
          'qt5-base'
          'python'
          'libwebp' 'libheif'
@@ -26,7 +26,7 @@ conflicts=('openimageio')
 provides=('openimageio')
 source=("oiio-${_ver_release}.tar.gz"
 )
-sha256sums=('78f5754f1a9eb8215d66ca62a2963b87fc2b91465cb181dfc4ef73ca3ed76adb'
+sha256sums=('6556df7e9c426994ba00290bfbf6e72c04f0eb0b56c06242442603e67205ea59'
 )
 
 build() {
