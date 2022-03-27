@@ -1,4 +1,93 @@
 
+9)
+
+Blender Configuration
+=====================
+
+  Build Options:
+  - WITH_ALEMBIC                    ON
+  - WITH_BULLET                     ON
+  - WITH_CLANG                      OFF
+  - WITH_CYCLES                     ON
+  - WITH_FFTW3                      ON
+  - WITH_FREESTYLE                  ON
+  - WITH_GMP                        ON
+  - WITH_HARU                       ON
+  - WITH_IK_ITASC                   ON
+  - WITH_IK_SOLVER                  ON
+  - WITH_INPUT_NDOF                 OFF
+  - WITH_INPUT_IME
+  - WITH_INTERNATIONAL              ON
+  - WITH_OPENCOLLADA                ON
+  - WITH_OPENCOLORIO                ON
+  - WITH_OPENIMAGEDENOISE           ON
+  - WITH_OPENVDB                    ON
+  - WITH_POTRACE                    ON
+  - WITH_PUGIXML                    ON
+  - WITH_QUADRIFLOW                 ON
+  - WITH_TBB                        ON
+  - WITH_USD                        OFF
+  - WITH_XR_OPENXR                  OFF
+
+  Compiler Options:
+  - WITH_BUILDINFO                  ON
+  - WITH_OPENMP                     ON
+
+  System Options:
+  - WITH_INSTALL_PORTABLE           OFF
+  - WITH_MEM_JEMALLOC               ON
+  - WITH_MEM_VALGRIND               OFF
+  - WITH_SYSTEM_GLEW                OFF
+  - WITH_X11_ALPHA                  ON
+  - WITH_X11_XF86VMODE              ON
+  - WITH_X11_XFIXES                 ON
+  - WITH_X11_XINPUT                 ON
+
+  Image Formats:
+  - WITH_IMAGE_CINEON               ON
+  - WITH_IMAGE_DDS                  ON
+  - WITH_IMAGE_HDR                  ON
+  - WITH_IMAGE_OPENEXR              ON
+  - WITH_IMAGE_OPENJPEG             ON
+  - WITH_IMAGE_TIFF                 ON
+  - WITH_OPENIMAGEIO                ON
+
+  Audio:
+  - WITH_CODEC_AVI                  ON
+  - WITH_CODEC_FFMPEG               ON
+  - WITH_CODEC_SNDFILE              ON
+  - WITH_COREAUDIO                  OFF
+  - WITH_JACK                       ON
+  - WITH_JACK_DYNLOAD               OFF
+  - WITH_OPENAL                     ON
+  - WITH_PULSEAUDIO                 ON
+  - WITH_PULSEAUDIO_DYNLOAD         OFF
+  - WITH_SDL                        ON
+  - WITH_SDL_DYNLOAD                OFF
+  - WITH_WASAPI                     OFF
+
+  Compression:
+  - WITH_LZMA                       ON
+  - WITH_LZO                        ON
+
+  Python:
+  - WITH_PYTHON_INSTALL             OFF
+  - WITH_PYTHON_INSTALL_NUMPY       OFF
+  - WITH_PYTHON_INSTALL_ZSTANDARD   OFF
+  - WITH_PYTHON_MODULE              OFF
+  - WITH_PYTHON_SAFETY              OFF
+
+  Modifiers:
+  - WITH_MOD_FLUID                  ON
+  - WITH_MOD_OCEANSIM               ON
+  - WITH_MOD_REMESH                 ON
+
+  OpenGL:
+  - WITH_GL_EGL                     OFF
+  - WITH_GL_PROFILE_ES20            OFF
+  - WITH_GLEW_ES                    OFF
+
+
 8) AVEC WITH_GL_EGL
 
 Blender Configuration
