@@ -1,4 +1,54 @@
 
+VERSION 9.0.0-1 AVEC nanoVDB
+============================
+==> Starting build()...
+-- The CXX compiler identification is GNU 11.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.0")
+-- Configuring for OpenVDB Version 9.0.0
+-- Configuring for OpenVDB ABI Version 9
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found Boost: /usr/lib64/cmake/Boost-1.78.0/BoostConfig.cmake (found suitable version "1.78.0", minimum required is "1.70") found components: iostreams system
+-- Found TBB: /usr/include (found suitable version "2021.5", minimum required is "2019.0") found components: tbb
+-- Found Blosc: /usr/lib/libblosc.so (found suitable version "1.21.1", minimum required is "1.5.0")
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.12", minimum required is "1.2.7")
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so
+-- The C compiler identification is GNU 11.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- ----------------------------------------------------
+-- --------------- Configuring NanoVDB ----------------
+-- ----------------------------------------------------
+-- Found TBB: /usr/include (found version "2021.5") found components: tbb tbbmalloc tbbmalloc_proxy
+-- Found Blosc: /usr/lib/libblosc.so (found version "1.21.1")
+-- Found ZLIB: /usr/lib/libz.so (found version "1.2.12")
+-- ----------------------------------------------------
+-- --------- Configuring NanoVDB Cmd Tools ------------
+-- ----------------------------------------------------
+CMake Warning at nanovdb/nanovdb/cmd/CMakeLists.txt:31 (message):
+   - OpenVDB required to build nanovdb_convert. Skipping.
+
+
+
+
 VERSION 9.0.0-1
 ===============
 ==> Starting build()...

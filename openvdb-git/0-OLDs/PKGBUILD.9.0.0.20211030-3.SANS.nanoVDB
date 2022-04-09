@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=9.0.0.20211030
-pkgrel=4
+pkgrel=3
 _ver_release="9.0.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
@@ -34,7 +34,6 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
     -DOPENVDB_ENABLE_RPATH=OFF \
-    -DUSE_NANOVDB=ON \
     -DUSE_CCACHE=OFF \
     -DOPENVDB_CORE_STATIC=OFF \
     ..

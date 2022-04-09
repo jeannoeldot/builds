@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=9.0.0.20211030
+pkgrel=4        # include nanovdb
+
 pkgrel=3          # rebuild boost boost-libs 1.78.0
 pkgrel=2    # Rebuild MAJ tbb 2021.4
 pkgrel=1
@@ -145,8 +147,8 @@ OPENVDB_BUILD_AX "Build the OpenVDB AX library" OFF
 OPENVDB_BUILD_AX_BINARIES "Build the OpenVDB AX command line binary" OFF
 OPENVDB_BUILD_AX_UNITTESTS "Build the OpenVDB AX unit tests" OFF
 
-LIGNE 80: !!!!!!
-----------------
+LIGNE 80: VOIR LIGNE 120
+------------------------
 OPENVDB_BUILD_NANOVDB "Build the NanoVDB library. Turns ON if USE_NANOVDB is ON." ${USE_NANOVDB}
 
 LIGNE 82:
@@ -196,11 +198,14 @@ LIGNE 113:
 ----------
 USE_IMATH_HALF OFF  ON ???????
 
-LIGNE 113:
+LIGNE 118:
 ----------
 USE_PNG OFF  ON ???????
 USE_AX  ???????
-USE_NANOVDB  ???????
+
+LIGNE 120:
+----------
+USE_NANOVDB  ==> ON
 
 
 LIGNE 124:
