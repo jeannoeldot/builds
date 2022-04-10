@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.2.0.12.20220410
+pkgver=3.2.0.8.20220403
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -17,7 +17,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
           'boost-libs' 'tbb'
           'jemalloc'
-          'python-numpy' 'python-requests' 'python-zstandard' 'pystring'
+          'python-numpy' 'python-requests' 'python-zstandard'
           'fmt'
           'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu'
@@ -31,6 +31,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
+             'nanovdb-git'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -39,7 +40,7 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.4.0-include.zip"
 )
-sha256sums=('0da106036ed77bc179c3686c9cb84748b82216c1ccb87b7ef7f4f054dd1e6068'
+sha256sums=('140f0ba68e6c2aaa52eea73322520e3e3142032a2d6d892912d9b26de96e1c53'
             '283ceb65d47a697d8776bb3d56273bf78b53d57110cfd1a4cac4456888687713'
 )
 
@@ -53,9 +54,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "1db3e26c743a"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "1cdf8b19e588"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1649575746|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1648975760|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

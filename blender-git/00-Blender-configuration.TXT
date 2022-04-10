@@ -1,4 +1,10 @@
 
+
+-- Found NanoVDB: /usr/include
+
+-- Found WebP: /usr/lib/libwebp.so;/usr/lib/libwebpmux.so;/usr/lib/libwebpdemux.so
+
+
 9)
 
 Blender Configuration
