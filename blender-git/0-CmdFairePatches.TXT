@@ -1,19 +1,54 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.2.0.12.20220410
+!!! VERSION = 3.2.0.12.20220416
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-3.2.0.12.20220410.tar.gz /tmp/srcp/
+cp -v blender-git-3.2.0.12.20220416.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-3.2.0.12.20220410.tar.gz
+tar -xzf blender-git-3.2.0.12.20220416.tar.gz
 
+
+VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commitdiff/869a46df2980818644db4823fb1d29e9d525b645
+
+1-1) MODIFIER blender/intern/cycles/integrator/path_trace.cpp
+=============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/intern/cycles/integrator
+kwrite path_trace.cpp
+
+MODIFIER LIGNES 358 ET 359 :
+  tbb::task_group_context *tbb_ctx = tbb::task::self().group();
+  tbb_ctx->capture_fp_settings();
+
+DEVIENNENT
+  /* tbb::task_group_context *tbb_ctx = tbb::task::self().group();
+     tbb_ctx->capture_fp_settings(); */
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER path_trace.cpp~
+rm -f path_trace.cpp~
+
+cd ../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-Erreur-Compile-self-not-a-member-of-tbb_v1_task.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Fix-Erreur-Compile-self-not-a-member-of-tbb_v1_task.patch .
 
 
 

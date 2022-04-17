@@ -1,0 +1,15 @@
+/build/blender-git/src/blender/intern/cycles/integrator/path_trace.cpp: In member function ‘void ccl::PathTrace::path_trace(ccl::RenderWork&)’:
+/build/blender-git/src/blender/intern/cycles/integrator/path_trace.cpp:358:49: error: ‘self’ is not a member of ‘tbb::v1::task’
+  358 |   tbb::task_group_context *tbb_ctx = tbb::task::self().group();
+      |                                                 ^~~~
+
+
+make[2]: *** [intern/cycles/integrator/CMakeFiles/cycles_integrator.dir/build.make:146: intern/cycles/integrator/CMakeFiles/cycles_integrator.dir/path_trace.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+make[1]: *** [CMakeFiles/Makefile2:3581: intern/cycles/integrator/CMakeFiles/cycles_integrator.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+make: *** [Makefile:166: all] Error 2
+
