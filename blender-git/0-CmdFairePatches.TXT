@@ -14,7 +14,40 @@ cd /tmp/srcp
 
 tar -xzf blender-git-3.2.0.12.20220424.tar.gz
 
+VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commitdiff/869a46df2980818644db4823fb1d29e9d525b645
+VOIR COMMIT Fix Cycles build error with latest TBB after recent changes
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commitdiff/41b3feea85cd8c323c1c5030f1ab0bc90438df4f
 
+1-1) MODIFIER blender/intern/cycles/integrator/path_trace.cpp
+=============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/intern/cycles/integrator
+kwrite path_trace.cpp
+
+MODIFIER LIGNE 358 :
+  thread_capture_fp_settings();
+
+DEVIENNENT
+  /* thread_capture_fp_settings(); */
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER path_trace.cpp~
+rm -f path_trace.cpp~
+
+cd ../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-Erreur-de-segmentation.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Fix-Erreur-de-segmentation.patch .
 
 
 99) QUAND PATCHES FINIS

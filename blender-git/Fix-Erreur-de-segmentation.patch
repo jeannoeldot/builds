@@ -1,0 +1,12 @@
+diff -aur blender/intern/cycles/integrator/path_trace.cpp blender.new/intern/cycles/integrator/path_trace.cpp
+--- blender/intern/cycles/integrator/path_trace.cpp	2022-04-24 12:03:05.000000000 +0200
++++ blender.new/intern/cycles/integrator/path_trace.cpp	2022-04-24 18:43:38.187295760 +0200
+@@ -355,7 +355,7 @@
+ 
+   const int num_works = path_trace_works_.size();
+ 
+-  thread_capture_fp_settings();
++  /* thread_capture_fp_settings(); */
+ 
+   parallel_for(0, num_works, [&](int i) {
+     const double work_start_time = time_dt();

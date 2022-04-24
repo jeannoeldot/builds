@@ -9,9 +9,9 @@ AM = matin  PM = après-midi
 ---------------------------
 http://git.blender.org/gitweb/gitweb.cgi/blender.git
 
-committer	Campbell Barton <campbell@blender.org>
-	Sun, 24 Apr 2022 05:41:03 +0200 (13:41 +1000)
-commit	bba757ef81abd93a2ec33dbf6858fa4bf398c7d6
+committer	Jacques Lucke <jacques@blender.org>
+	Sun, 24 Apr 2022 14:33:33 +0200 (14:33 +0200)
+commit	17eb8a9cebd57258a33924e02b7bae58bbba5c4a
 
 ==> 20220424
 
@@ -39,7 +39,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = bba757ef81ab
+==> MY_WC_HASH = 17eb8a9cebd5
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -49,7 +49,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1650771663
+==> MY_WC_COMMIT_TIMESTAM = 1650803613
 
 cd ..
 
@@ -67,7 +67,7 @@ git submodule foreach git pull --rebase origin master
 !!! LIRE MY_WC_HASH
 -------------------
 git rev-parse --short=12 HEAD
-==> MY_WC_HASH = bba757ef81ab
+==> MY_WC_HASH = 17eb8a9cebd5
 
 !!! LIRE MY_WC_BRANCH
 ---------------------
@@ -77,7 +77,7 @@ git rev-parse --abbrev-ref HEAD
 !!! LIRE MY_WC_COMMIT_TIMESTAMP
 -------------------------------
 git log -1 --format=%ct
-==> MY_WC_COMMIT_TIMESTAM = 1650771663
+==> MY_WC_COMMIT_TIMESTAM = 1650803613
 
 cd ..
 
@@ -133,6 +133,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=3.2.0.12.20220424
+pkgrel=2    # AVEC PATCH Fix-Erreur-de-segmentation.patch
 pkgrel=1
 
 pkgrel=1    # MAJ + Rebuild MAJ boost boost-libs 1.78.0
@@ -244,7 +245,7 @@ AVEC PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.4.0-include.zip"
-        "...
+        "Fix-Erreur-de-segmentation.patch"
         "..."
 )
 
@@ -252,7 +253,7 @@ sha256sum blender-git-3.2.0.12.20220424.tar.gz
 
 sha256sum OptiX-7.4.0-include.zip
 
-sha256sum ...
+sha256sum Fix-Erreur-de-segmentation.patch
 
 sha256sum ...
 
@@ -271,6 +272,7 @@ _gitname="blender"
 !!!!!
 prepare() {
   cd "${_gitname}"
+
   # Fix build ...
   patch -Np1 -i "${srcdir}/..."
   # Build ...
@@ -285,9 +287,9 @@ AU 05/08/2021: RTX 3080 TI ==> INUTILES ???
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "bba757ef81ab"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "17eb8a9cebd5"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650771663|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650803613|' build_files/cmake/buildinfo.cmake
 }
 
 
@@ -713,11 +715,11 @@ sed -i "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 6
 
 
 /home/jnd/99-temp/blender/buildinfo.cmake
-sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "bba757ef81ab"|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_HASH "unknown"|MY_WC_HASH "17eb8a9cebd5"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 sed -i 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' /home/jnd/99-temp/blender/buildinfo.cmake
 
-sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650771663|' /home/jnd/99-temp/blender/buildinfo.cmake
+sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650803613|' /home/jnd/99-temp/blender/buildinfo.cmake
 
 ================================================================
 ANCIENS
@@ -828,9 +830,9 @@ AU 05/08/2021: RTX 3080 TI ==> INUTILES ???
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "bba757ef81ab"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "17eb8a9cebd5"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650771663|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650803613|' build_files/cmake/buildinfo.cmake
 }
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -1328,9 +1330,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "bba757ef81ab"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "17eb8a9cebd5"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650771663|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650803613|' build_files/cmake/buildinfo.cmake
   
 }
 
@@ -1539,9 +1541,9 @@ prepare() {
 /!\/!\/!\/!\/!\
 !!!!! VOIR LIGNES 50 - 60 - 60
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "bba757ef81ab"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "17eb8a9cebd5"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650771663|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650803613|' build_files/cmake/buildinfo.cmake
   
 }
 
