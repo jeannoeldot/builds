@@ -1,0 +1,38 @@
+
+CUDA : Erreur de segmentation (core dumped)
+# Blender 3.2.0, Commit date: 2022-04-24 03:41, Hash bba757ef81ab
+
+# backtrace
+blender(+0xf2e4f3) [0x563fb79e04f3]
+/usr/lib/libc.so.6(+0x42560) [0x7f58a3a6e560]
+/usr/lib/libtbb.so.12(_ZN3tbb6detail2r119capture_fp_settingsERNS0_2d118task_group_contextE+0) [0x7f58afd86640]
+blender(_ZN3ccl9PathTrace10path_traceERNS_10RenderWorkE+0x108) [0x563fb98ad308]
+blender(_ZN3ccl9PathTrace15render_pipelineENS_10RenderWorkE+0xcd) [0x563fb98bac0d]
+blender(_ZN3ccl7Session20run_main_render_loopEv+0x217) [0x563fb98681a7]
+blender(_ZN3ccl7Session13thread_renderEv+0x333) [0x563fb98689e3]
+blender(_ZN3ccl7Session10thread_runEv+0x93) [0x563fb9868b13]
+blender(_ZN3ccl6thread3runEPv+0x12) [0x563fb98d3612]
+/usr/lib/libstdc++.so.6(+0xd54d4) [0x7f58a3ef14d4]
+/usr/lib/libc.so.6(+0x8d5c2) [0x7f58a3ab95c2]
+/usr/lib/libc.so.6(clone+0x44) [0x7f58a3b3e584]
+
+# Python backtrace
+
+OPTIX : Erreur de segmentation (core dumped)
+# Blender 3.2.0, Commit date: 2022-04-24 03:41, Hash bba757ef81ab
+
+# backtrace
+blender(+0xf2e4f3) [0x55f64acf14f3]
+/usr/lib/libc.so.6(+0x42560) [0x7fd1c2bb7560]
+/usr/lib/libtbb.so.12(_ZN3tbb6detail2r119capture_fp_settingsERNS0_2d118task_group_contextE+0) [0x7fd1ceecf640]
+blender(_ZN3ccl9PathTrace10path_traceERNS_10RenderWorkE+0x108) [0x55f64cbbe308]
+blender(_ZN3ccl9PathTrace15render_pipelineENS_10RenderWorkE+0xcd) [0x55f64cbcbc0d]
+blender(_ZN3ccl7Session20run_main_render_loopEv+0x217) [0x55f64cb791a7]
+blender(_ZN3ccl7Session13thread_renderEv+0x333) [0x55f64cb799e3]
+blender(_ZN3ccl7Session10thread_runEv+0x93) [0x55f64cb79b13]
+blender(_ZN3ccl6thread3runEPv+0x12) [0x55f64cbe4612]
+/usr/lib/libstdc++.so.6(+0xd54d4) [0x7fd1c303a4d4]
+/usr/lib/libc.so.6(+0x8d5c2) [0x7fd1c2c025c2]
+/usr/lib/libc.so.6(clone+0x44) [0x7fd1c2c87584]
+
+# Python backtrace

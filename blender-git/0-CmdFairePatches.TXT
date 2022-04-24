@@ -1,19 +1,31 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.2.0.12.20220416
+!!! VERSION = 3.2.0.12.20220424
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-3.2.0.12.20220416.tar.gz /tmp/srcp/
+cp -v blender-git-3.2.0.12.20220424.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-3.2.0.12.20220416.tar.gz
+tar -xzf blender-git-3.2.0.12.20220424.tar.gz
 
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
 https://git.blender.org/gitweb/gitweb.cgi/blender.git/commitdiff/869a46df2980818644db4823fb1d29e9d525b645
@@ -50,17 +62,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/Fix-Erreur-Compile-self-not-a-member-of-tbb_v1_task.patch .
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 blender-openexr3.patch
 VOIR:

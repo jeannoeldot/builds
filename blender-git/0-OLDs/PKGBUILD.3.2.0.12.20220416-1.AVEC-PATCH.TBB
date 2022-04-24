@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.2.0.12.20220424
+pkgver=3.2.0.12.20220416
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -38,9 +38,11 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.4.0-include.zip"
+        "Fix-Erreur-Compile-self-not-a-member-of-tbb_v1_task.patch"
 )
-sha256sums=('18896d444e95ea51c5643deb001ca59eac17bb6bf65fd2cf31989a4adb9eab12'
+sha256sums=('979fc9b2282a7cfc4202e019244546b3098e891ed7587ec271c1ed0d31a722d4'
             '283ceb65d47a697d8776bb3d56273bf78b53d57110cfd1a4cac4456888687713'
+            '5e4ffcad3285cfcc944447fb38195f2b92aa2dc70ee78751367436c289162d2e'
 )
 
 _gitname="blender"
@@ -48,14 +50,17 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  # Fix build with Cycles fp consistency for Apple Silicon CPUs
+  patch -Np1 -i "${srcdir}/Fix-Erreur-Compile-self-not-a-member-of-tbb_v1_task.patch"
+
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
   
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "bba757ef81ab"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b9f1b6480121"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650771663|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650144768|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -75,6 +80,7 @@ build() {
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
+        -DWITH_IMAGE_WEBP=ON \
         -DWITH_USD=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \
@@ -85,7 +91,6 @@ build() {
         -DWITH_CYCLES_CUDA_BINARIES=ON \
         -DCYCLES_CUDA_BINARIES_ARCH="sm_86" \
         -DWITH_CYCLES_NATIVE_ONLY=ON \
-        -DWITH_CYCLES_DEVICE_HIP=OFF \
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
         -DPYTHON_VERSION=${PYTHON_VER} \
