@@ -36,6 +36,7 @@ voir : 0-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=24     # rebuild protobuf 3.20.1-1
 pkgrel=23     # rebuild protobuf 3.19.1-1
 pkgrel=22     # rebuild boost boost-libs 1.78.0-1
 pkgrel=21     # rebuild protobuf 3.17.3-1
