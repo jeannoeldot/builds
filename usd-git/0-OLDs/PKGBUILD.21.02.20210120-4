@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=usd-git
-pkgver=22.03.20220218
-pkgrel=1
-_ver_release="22.03"
+pkgver=21.02.20210120
+pkgrel=4
+_ver_release="21.02"
 _name_release="USD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -19,9 +19,9 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd-diff.patch"
         "Fix-build-with-GCC11.patch"
 )
-sha256sums=('594910eab72168e47f48b5b02dbbdaf77084b1de717091b1104b6527e75d327a'
-            '3a35ab44c7083f4d73a095bb12eae5c81098ad26123da899d2418329f48d7d31'
-            '14c13162d29f5c0351abc337bc9e3290952b4fe75a46d028c1e0df38e57537a4'
+sha256sums=('97bbae5d86d6e4db357645db183be03afe28fe024b242f27bd4f62b4e2eade53'
+            '42f5aa80b5055a3ce0c139059a0e260fed709d82af736dec2e8e22ee4fffeb9c'
+            '46e35b82e04c1b589256b29cceacd2e6fdf3cbee0d12ff64379e8344bf763e47'
 )
 
 prepare() {
@@ -44,14 +44,14 @@ build() {
     -DTBB_INCLUDE_DIR=/usr/include/tbb2020 \
     -DTBB_LIBRARY=/usr/lib/tbb2020 \
     -DPXR_SET_INTERNAL_NAMESPACE=usdBlender \
+    -DPXR_ENABLE_PYTHON_SUPPORT=OFF \
+    -DPXR_BUILD_IMAGING=OFF \
     -DPXR_BUILD_TESTS=OFF \
     -DPXR_BUILD_EXAMPLES=OFF \
     -DPXR_BUILD_TUTORIALS=OFF \
-    -DPXR_BUILD_USD_TOOLS=OFF \
-    -DPXR_BUILD_IMAGING=OFF \
-    -DPXR_ENABLE_PYTHON_SUPPORT=OFF \
     -DBUILD_SHARED_LIBS=ON \
     -DPXR_BUILD_MONOLITHIC=ON \
+    -DPXR_BUILD_USD_TOOLS=OFF \
     -DCMAKE_DEBUG_POSTFIX=_d \
     ..
   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
