@@ -3,12 +3,12 @@ cd $HOME/05-builds/pkgbrowser
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.0.24-2
+cp -v PKGBUILD PKGBUILD.0.25-2
 
-mv -vf PKGBUILD.0.24-2 0-Olds/
+mv -vf PKGBUILD.0.25-2 0-Olds/
 
 
-NOUVELLE VERSION = 0.25
+NOUVELLE VERSION = 0.27
 
 1) TÉLÉCHARGER SOURCES
 ======================
@@ -28,21 +28,21 @@ mv -vf /tmp/0-AUR/pkgbrowser/PKGBUILD .
 
 1-2) Download source
 ----------------------
-wget https://osdn.net/dl/pkgbrowser/pkgbrowser-0.25.tar.gz
+wget https://osdn.net/dl/pkgbrowser/pkgbrowser-0.27.tar.gz
 
 ls
 
-md5sum pkgbrowser-0.25.tar.gz
+md5sum pkgbrowser-0.27.tar.gz
 
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Name <name@fai.com>
 
-pkgver=0.25
+pkgver=0.27
+pkgrel=1
+
 pkgrel=2    # MAJ python 3.10
 pkgrel=2    # MAJ pacman 6.0
-
-pkgrel=1
 
 pkgrel=2    # MAJ python 3.8
 pkgrel=3    # MAJ python 3.7
@@ -76,7 +76,7 @@ md5sums=(... ...)
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 pkgbrowser-0.25.tar.gz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 pkgbrowser-0.27.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -90,7 +90,7 @@ $ rm -f *~
 rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.25.tar.gz} . \
+&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.27.tar.gz} . \
 && makepkg -s \
 && cd $HOME/05-builds/pkgbrowser \
 && cp -v /tmp/build/pkgbrowser-*-x86_64.pkg.tar.* . \
@@ -156,7 +156,7 @@ $ mv -v pkgbrowser-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i pkgbrowser-0.25.tar.gz
+$ rm -i pkgbrowser-0.27.tar.gz
 $ rm -rf /tmp/0-AUR
 
 
@@ -186,11 +186,11 @@ $ mkpkg-tmpfs -m native -q qt
 
 1-2) Download source
 ----------------------
-wget https://bitbucket.org/kachelaqa/pkgbrowser/downloads/pkgbrowser-0.25.tar.gz
+wget https://bitbucket.org/kachelaqa/pkgbrowser/downloads/pkgbrowser-0.27.tar.gz
 
 ls
 
-md5sum pkgbrowser-0.25.tar.gz
+md5sum pkgbrowser-0.27.tar.gz
 
 AJOUTER : hicolor-icon-theme
 SUPPRIMER :
@@ -221,7 +221,7 @@ mv -vf 0-AUR/pkgbrowser/pkgbrowser.install .
 $ rm -f 0-AUR/pkgbrowser.tar.gz
 $ rm -rf 0-AUR/pkgbrowser
 
-&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.25.tar.gz,pkgbrowser.install} . \
+&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.27.tar.gz,pkgbrowser.install} . \
 
 $ rm -i pkgbrowser.install
 mv -vf /tmp/0-AUR/pkgbrowser/pkgbrowser.install .
