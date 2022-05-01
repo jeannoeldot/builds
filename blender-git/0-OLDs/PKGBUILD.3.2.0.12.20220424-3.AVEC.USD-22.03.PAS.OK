@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.2.0.14.20220501
-pkgrel=1
+pkgver=3.2.0.12.20220424
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -25,7 +25,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opencollada-git' 'openimageio-git'
           'openshadinglanguage-git' 'clang'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
-          'embree-git' 'openimagedenoise-git'
+          'embree-git' 'openimagedenoise-git' 'usd-git'
           'zstd'
 )
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
@@ -38,9 +38,11 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.4.0-include.zip"
+        "Fix-Erreur-de-segmentation.patch"
 )
-sha256sums=('b1cd769bb6cd589f9483ffd24177c3bada6018e31fdc6afa05befd95aef30c8e'
+sha256sums=('6c7fa831f15189c49746cc005fd49d2e42b238f8e7ef3cc613619700182daef4'
             '283ceb65d47a697d8776bb3d56273bf78b53d57110cfd1a4cac4456888687713'
+            '80b8a0ede268ed73ef43954811419b31f2fb63d848dd17949282039246e0b1e2'
 )
 
 _gitname="blender"
@@ -48,14 +50,17 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  # Fix Erreur de segmentation
+  patch -Np1 -i "${srcdir}/Fix-Erreur-de-segmentation.patch"
+
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "df0616bcd0c3"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "17eb8a9cebd5"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1651393642|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1650803613|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -75,7 +80,6 @@ build() {
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
-        -DWITH_USD=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \
         -DWITH_PYTHON_INSTALL=OFF \

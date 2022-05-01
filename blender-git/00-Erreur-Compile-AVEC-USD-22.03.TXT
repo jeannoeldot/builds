@@ -1,0 +1,16 @@
+
+In file included from /usr/include/pxr/usd/sdf/path.h:1396,
+                 from /build/blender-git/src/blender/source/blender/io/usd/intern/usd_exporter_context.h:7,
+                 from /build/blender-git/src/blender/source/blender/io/usd/intern/usd_hierarchy_iterator.h:7,
+                 from /build/blender-git/src/blender/source/blender/io/usd/intern/usd_capi_export.cc:6:
+/usr/include/pxr/usd/sdf/pathNode.h:36:10: fatal error: tbb/atomic.h: No such file or directory
+   36 | #include <tbb/atomic.h>
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+make[2]: *** [source/blender/io/usd/CMakeFiles/bf_usd.dir/build.make:76: source/blender/io/usd/CMakeFiles/bf_usd.dir/intern/usd_capi_export.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:6637: source/blender/io/usd/CMakeFiles/bf_usd.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:166: all] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
