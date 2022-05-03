@@ -20,6 +20,7 @@ sha256sum v0.2.1.tar.gz
 
 pkgname=jndqrami-qt5
 pkgver=0.2.1
+pkgrel=7    # Rebuild REVU DEPS 'sdl' 'sdl_mixer'
 pkgrel=6    # Rebuild Qt 5.14.1 et .zst
 
 pkgrel=5    # Rebuild nouveau PC Qt 5.12.1

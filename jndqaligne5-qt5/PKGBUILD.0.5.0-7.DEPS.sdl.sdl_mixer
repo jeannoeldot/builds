@@ -2,13 +2,13 @@
 
 pkgname=jndqaligne5-qt5
 pkgver=0.5.0
-pkgrel=8
+pkgrel=7
 pkgdesc="Variante du Morpion"
 arch=('i686' 'x86_64')
 url="https://github.com/jeannoeldot/jndqaligne5-qt5"
 license=('GPL2')
-depends=('qt5-base' 'sdl_mixer' 'desktop-file-utils')
-makedepends=('qt5-base' 'sdl_mixer')
+depends=('qt5-base' 'sdl' 'sdl_mixer' 'desktop-file-utils')
+makedepends=('qt5-base' 'sdl' 'sdl_mixer')
 provides=('jndqaligne5')
 conflicts=('jndqaligne5')
 source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
