@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.3.16.0.20220601
+pkgrel=2    # rebuild boost boost-libs 1.79.0
 pkgrel=1
 
 pkgrel=3    # rebuild boost boost-libs 1.78.0
@@ -141,7 +142,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
-==> extra/python 3.10.4-1 [installé]
+==> extra/python 3.10.5-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.10

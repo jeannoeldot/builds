@@ -37,6 +37,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.17.0.20220110
+pkgrel=7    # rebuild boost boost-libs 1.79.0
 pkgrel=6    # Rebuild against OIIO 2.3.16.0
 pkgrel=5    # Rebuild against OIIO 2.3.15.0
 pkgrel=4    # Rebuild against OIIO 2.3.14.0
