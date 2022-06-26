@@ -5,17 +5,16 @@ cd $HOME/05-builds/openpgl-git
 
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
-https://github.com/embree/embree/releases
-==> svenwoop  released this 22 juin 2022 ==> 20220622
-==> Embree v3.13.4  ==> 3.13.4
-==> 3.13.4.20220622
+https://github.com/OpenPathGuidingLibrary/openpgl/releases
+==> sherholz  released this 22 juin 2022 ==> 20220622
+==> Open PGL 0.3.1  ==> 0.3.1
+==> 0.3.1.20220622
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O embree-3.13.4.tar.gz \
-https://github.com/embree/embree/archive/refs/tags/v3.13.4.tar.gz
+wget -O openpgl-0.3.1.tar.gz \
 https://github.com/OpenPathGuidingLibrary/openpgl/archive/refs/tags/v0.3.1-beta.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
@@ -24,7 +23,7 @@ cd $HOME/05-builds/openpgl-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/embree-3.13.4.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openpgl-0.3.1.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,43 +35,31 @@ voir 0-CmdFairePatches.TXT
 =========================
 # Maintainer: Moi <name AT fai DOT fr>
 
-pkgname=openpgl-git               # embree ds community ?
-pkgver=3.13.4.20220622
+pkgname=openpgl-git               # openpgl ds community ?
+pkgver=0.3.1.20220622
 pkgrel=1
-pkgrel=2    # Rebuild MAJ tbb 2021.4
-
-pkgrel=4  # AVEC patch Ofast + dynamic libs
-pkgrel=3  # SANS PATCH + dynamic libs
-
-pkgrel=2  # Avec patch Ofast floop + dynamic libs ==> Compil PAS OK
-
-pkgrel=2    # Rebuild MAJ intel-tbb 2019.9-1
-!!! Erreur compil blender
-pkgrel=3  # Avec patch Ofast floop
-
-pkgrel=2    # static libs
 
 
 !!!!!!
-_ver_release="3.13.4"
-_name_release="embree-${_ver_release}"
+_ver_release="0.3.1"
+_name_release="openpgl-${_ver_release}"
 
 license=('Apache')
 
-depends=('tbb'
+depends=('embree' 'tbb'
 )
 
 makedepends=('cmake')
 
 
-conflicts='embree'
-provides='embree'
+conflicts='openpgl'
+provides='openpgl'
 
 SANS PATCH
 ----------
-sha256sum embree-3.13.4.tar.gz
+sha256sum openpgl-0.3.1.tar.gz
 
-source=("embree-${_ver_release}.tar.gz"
+source=("openpgl-${_ver_release}.tar.gz"
 )
 sha256sums=('... ...'
 )
@@ -90,9 +77,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf embree-3.13.4.tar.gz -C /tmp/srcp
+tar -xzf openpgl-0.3.1.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/embree-3.13.4/CMakeLists.txt
+1) kwrite /tmp/srcp/openpgl-0.3.1/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -157,7 +144,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.13.4.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 openpgl-0.3.1.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -176,7 +163,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openpgl-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openpgl-git/embree-3.13.4.tar.gz . \
+&& cp -v $HOME/05-builds/openpgl-git/openpgl-0.3.1.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openpgl-git \
 && cp -v /tmp/build/openpgl-git-*-x86_64.pkg.tar.* . \
@@ -239,7 +226,7 @@ $ mv -v openpgl-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i embree-3.13.4.tar.gz
+$ rm -i openpgl-0.3.1.tar.gz
 
 
 $ cd && maj-repolocal
@@ -281,11 +268,11 @@ openpgl-git W: Dependency included and not needed ('glfw-x11')
 
 AVEC PATCH
 ----------
-sha256sum embree-3.13.4.tar.gz
+sha256sum openpgl-0.3.1.tar.gz
 
 sha256sum enable-optimizations-Ofast.patch
 
-source=("embree-${_ver_release}.tar.gz"
+source=("openpgl-${_ver_release}.tar.gz"
         "enable-optimizations-Ofast.patch"
 )
 sha256sums=('... ...'
@@ -300,11 +287,11 @@ prepare() {
 
 AVEC PATCH
 ----------
-sha256sum embree-3.13.4.tar.gz
+sha256sum openpgl-0.3.1.tar.gz
 
 sha256sum enable-optimizations-Ofast-floop.patch
 
-source=("embree-${_ver_release}.tar.gz"
+source=("openpgl-${_ver_release}.tar.gz"
         "enable-optimizations-Ofast-floop.patch"
 )
 sha256sums=('... ...'
