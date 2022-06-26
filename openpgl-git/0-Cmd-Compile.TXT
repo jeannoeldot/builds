@@ -1,7 +1,7 @@
 # Le répertoire
 ===============
 !!! EN USER
-cd $HOME/05-builds/embree-git
+cd $HOME/05-builds/openpgl-git
 
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
@@ -16,10 +16,11 @@ cd /0-DataLinux/05-builds-dir-git
 
 wget -O embree-3.13.4.tar.gz \
 https://github.com/embree/embree/archive/refs/tags/v3.13.4.tar.gz
+https://github.com/OpenPathGuidingLibrary/openpgl/archive/refs/tags/v0.3.1-beta.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/embree-git
+cd $HOME/05-builds/openpgl-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
@@ -35,7 +36,7 @@ voir 0-CmdFairePatches.TXT
 =========================
 # Maintainer: Moi <name AT fai DOT fr>
 
-pkgname=embree-git               # embree ds community ?
+pkgname=openpgl-git               # embree ds community ?
 pkgver=3.13.4.20220622
 pkgrel=1
 pkgrel=2    # Rebuild MAJ tbb 2021.4
@@ -174,16 +175,16 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/embree-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/embree-git/embree-3.13.4.tar.gz . \
+&& cp -v $HOME/05-builds/openpgl-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/openpgl-git/embree-3.13.4.tar.gz . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/embree-git \
-&& cp -v /tmp/build/embree-git-*-x86_64.pkg.tar.* . \
+&& cd $HOME/05-builds/openpgl-git \
+&& cp -v /tmp/build/openpgl-git-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/embree-git && rm -rf /tmp/build
+cd $HOME/05-builds/openpgl-git && rm -rf /tmp/build
 
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
@@ -218,20 +219,20 @@ rm -f *~
 
 # Verifications...
 
-namcap embree-git-*-x86_64.pkg.tar.*
+namcap openpgl-git-*-x86_64.pkg.tar.*
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/embree-git-*-x86_64.pkg.tar.*
+$ rm /0-DataLinux/00-repolocal/openpgl-git-*-x86_64.pkg.tar.*
 
-$ cp -v embree-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+$ cp -v openpgl-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 # DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
 ----------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/embree-git-*-x86_64.pkg.tar.* \
+$ mv -v $HOME/00-repolocal/openpgl-git-*-x86_64.pkg.tar.* \
 $HOME/00-repolocal/pkg-OLD/
 
-$ mv -v embree-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v openpgl-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
@@ -251,20 +252,20 @@ $ sync
 # cd
 # LC_ALL=C pacman -Syu
 
-# LC_ALL=C pacman -Syu embree-git
+# LC_ALL=C pacman -Syu openpgl-git
 
 SI PROBLEME
 ==============
 !!! EN ROOT
-# LC_ALL=C pacman -Rdd embree-git
-# rm /var/cache/pacman/pkg/embree-git-*
-# LC_ALL=C pacman -S embree-git
+# LC_ALL=C pacman -Rdd openpgl-git
+# rm /var/cache/pacman/pkg/openpgl-git-*
+# LC_ALL=C pacman -S openpgl-git
 
 
 ANCIEN
 ======
 
-embree-git W: Dependency included and not needed ('intel-tbb')
+openpgl-git W: Dependency included and not needed ('intel-tbb')
 
 depends=('intel-tbb'
 )
@@ -275,7 +276,7 @@ depends=('intel-tbb' 'glfw-x11'
 
 EMBREE_TASKING_SYSTEM           TBB by default  ==> INTERNAL  install_deps = INTERNAL
 
-embree-git W: Dependency included and not needed ('glfw-x11')
+openpgl-git W: Dependency included and not needed ('glfw-x11')
 
 
 AVEC PATCH
