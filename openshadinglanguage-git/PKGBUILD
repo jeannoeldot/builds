@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.17.0.20220110
-pkgrel=7
+pkgrel=8
 _name_release="OpenShadingLanguage-1.11.17.0"
 _ver_release="v1.11.17.0"
 pkgdesc="Advanced shading language for production GI renderers"
@@ -21,9 +21,18 @@ makedepends=('boost' 'cmake' 'llvm')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "llvm14.patch"
 )
 sha256sums=('ab7e17fde3f759b94efcc159d8f4ccc6cc92f40cba76e4f88a8133a00587738f'
+            '0c47cc64bea838a7893441b1ab6ad760ad6b86f50ef9fbdf7c69eb16b27e415a'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/pull/1492
+  # Support for LLVM 14 #1492
+  patch -Np1 -i "${srcdir}/llvm14.patch"
+}
 
 build() {
   cd "${_name_release}"

@@ -37,6 +37,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.17.0.20220110
+pkgrel=8    # Rebuild MAJ OIIO 2.3.17.0 LLVM 14.0.0 + PATCH
 pkgrel=7    # rebuild boost boost-libs 1.79.0
 pkgrel=6    # Rebuild against OIIO 2.3.16.0
 pkgrel=5    # Rebuild against OIIO 2.3.15.0
@@ -46,75 +47,6 @@ pkgrel=2    # Rebuild against OIIO 2.3.12.0
 
 pkgrel=1
 
-pkgrel=6    # Rebuild against OIIO 2.3.11.0
-pkgrel=5    # rebuild boost boost-libs 1.78.0
-pkgrel=4    # Rebuild MAJ python 3.10
-pkgrel=3    # Rebuild against OIIO 2.3.10.0
-
-pkgrel=2    # Rebuild MAJ LLVM 13.0.0
-
-pkgrel=5    # Rebuild OIIO SANS opencv et openvdb
-
-pkgrel=4    # Avec Patch Fix compatibility with LLVM 12 and up (#1412)
-
-pkgrel=3    # Rebuild OIIO + opencv 4.5.4
-pkgrel=2    # Rebuild against OIIO + opencolorio=2.1.0
-
-pkgrel=4    # Rebuild MAJ OIIO 2.2.17.0
-
-pkgrel=3    # Rebuild openexr/imath 3.1.0
-
-pkgrel=2    # Rebuild MAJ LLVM 12.0.1
-
-pkgrel=4    # Rebuild MAJ OIIO 2.2.15.1 + MAJ openvdb 8.1.0
-pkgrel=3    # rebuild boost boost-libs 1.76.0
-
-pkgrel=2    # Rebuild MAJ LLVM 12.0.0
-
-pkgrel=4    # Rebuild openexr/imath 3.0.3
-pkgrel=3    # Rebuild against OIIO + opencolorio-git=2.0.1
-pkgrel=2    # Rebuild against OIIO + opencolorio2=2.0.0
-
-pkgrel=4    # Rebuild openexr/imath 3.0.1
-pkgrel=3    # Avec Patch Fix crash generating closure functions calls with LLVM 11
-pkgrel=2    # Rebuild MAJ OIIO 2.2.13.1
-
-pkgrel=3    # Rebuild MAJ clang 12.0.0-1
-pkgrel=2    # Rebuild against OIIO + opencolorio 2.0.0
-pkgrel=7    # Rebuild against OIIO + opencolorio1 et openjpeg2 2.4
-pkgrel=6    # Rebuild MAJ OIIO 2.2.10.1 + MAJ openvdb 8.0.0
-pkgrel=5    # Rebuild MAJ OIIO 2.2.10.0
-pkgrel=4    # Rebuild OIIO + MAJ openvdb 7.2.1
-pkgrel=3    # rebuild boost boost-libs 1.75.0
-pkgrel=2    # rebuild boost boost-libs 1.74.0
-pkgrel=2    # Rebuild MAJ LLVM 11.0.0-1
-
-pkgrel=2    # Rebuild OIIO + opencv 4.5.0
-pkgrel=2    # Rebuild OIIO + MAJ openvdb 7.1.0 et openexr 2.5.3
-
-pkgrel=3    # Rebuild OIIO + opencv 4.4.0
-pkgrel=2    # Rebuild MAJ LLVM 10.0.1-1 REBUILD OIIO 2.1.17
-
-pkgrel=5    # Rebuild MAJ LLVM 10.0.0-1 + PATCH
-
-pkgrel=4    # Rebuild OIIO + opencv 4.3.0
-pkgrel=3    # TEST Rebuild MAJ OIIO 2.1.11.2
-
-pkgrel=2    # TEST /usr/share/OSL/shaders
-
-pkgrel=4    # rebuild boost boost-libs 1.72.0
-pkgrel=3    # Rebuild MAJ OIIO 2.0.13 + opencv 4.2.0
-
-pkgrel=2    # Rebuild MAJ OIIO 2.0.13 + openvdb 7.0.0
-
-pkgrel=7    # Rebuild MAJ OIIO 2.0.12 + python 3.8
-pkgrel=6    # Rebuild MAJ OIIO 2.0.12
-pkgrel=5    # rebuild MAJ openexr 2.4
-pkgrel=4    # Rebuild MAJ intel-tbb 2019.9-1
-pkgrel=3    # Rebuild MAJ LLVM 9.0.0
-pkgrel=2    # rebuild boost boost-libs 1.71.0
-
-pkgrel=5    # Voir install_deps.sh
 
 pkgrel=4    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
               -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
@@ -129,12 +61,12 @@ _ver_release="v1.11.17.0"
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-!!! LLVM 13.0
+!!! LLVM 14.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 13.0.1-2 [installé]
-extra/llvm 13.0.1-6 [installé]
-extra/llvm-libs 13.0.1-6 [installé]
+extra/clang 14.0.6-1 [installé]
+extra/llvm 14.0.6-1 [installé]
+extra/llvm-libs 14.0.6-1 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
@@ -160,6 +92,26 @@ sha256sums=(...
          ...
 )
 
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "llvm14.patch"
+)
+
+sha256sum OpenShadingLanguage-v1.11.17.0.tar.gz
+
+sha256sum llvm14.patch
+
+sha256sums=('....'
+            '....'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/pull/1492
+  # Support for LLVM 14 #1492
+  patch -Np1 -i "${srcdir}/llvm14.patch"
+}
 
 !!! VERSION 1.11.17.0
 build() {
@@ -272,6 +224,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.11.17.0.tar.gz
+-rw-r--r--  1 jnd users      680  3 juil. 14:50 llvm14.patch
 
 
 !!! A MODIFIER SI PAS OK !
@@ -445,6 +398,76 @@ $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 ================================================================
 ANCIENS
 ========
+
+pkgrel=6    # Rebuild against OIIO 2.3.11.0
+pkgrel=5    # rebuild boost boost-libs 1.78.0
+pkgrel=4    # Rebuild MAJ python 3.10
+pkgrel=3    # Rebuild against OIIO 2.3.10.0
+
+pkgrel=2    # Rebuild MAJ LLVM 13.0.0
+
+pkgrel=5    # Rebuild OIIO SANS opencv et openvdb
+
+pkgrel=4    # Avec Patch Fix compatibility with LLVM 12 and up (#1412)
+
+pkgrel=3    # Rebuild OIIO + opencv 4.5.4
+pkgrel=2    # Rebuild against OIIO + opencolorio=2.1.0
+
+pkgrel=4    # Rebuild MAJ OIIO 2.2.17.0
+
+pkgrel=3    # Rebuild openexr/imath 3.1.0
+
+pkgrel=2    # Rebuild MAJ LLVM 12.0.1
+
+pkgrel=4    # Rebuild MAJ OIIO 2.2.15.1 + MAJ openvdb 8.1.0
+pkgrel=3    # rebuild boost boost-libs 1.76.0
+
+pkgrel=2    # Rebuild MAJ LLVM 12.0.0
+
+pkgrel=4    # Rebuild openexr/imath 3.0.3
+pkgrel=3    # Rebuild against OIIO + opencolorio-git=2.0.1
+pkgrel=2    # Rebuild against OIIO + opencolorio2=2.0.0
+
+pkgrel=4    # Rebuild openexr/imath 3.0.1
+pkgrel=3    # Avec Patch Fix crash generating closure functions calls with LLVM 11
+pkgrel=2    # Rebuild MAJ OIIO 2.2.13.1
+
+pkgrel=3    # Rebuild MAJ clang 12.0.0-1
+pkgrel=2    # Rebuild against OIIO + opencolorio 2.0.0
+pkgrel=7    # Rebuild against OIIO + opencolorio1 et openjpeg2 2.4
+pkgrel=6    # Rebuild MAJ OIIO 2.2.10.1 + MAJ openvdb 8.0.0
+pkgrel=5    # Rebuild MAJ OIIO 2.2.10.0
+pkgrel=4    # Rebuild OIIO + MAJ openvdb 7.2.1
+pkgrel=3    # rebuild boost boost-libs 1.75.0
+pkgrel=2    # rebuild boost boost-libs 1.74.0
+pkgrel=2    # Rebuild MAJ LLVM 11.0.0-1
+
+pkgrel=2    # Rebuild OIIO + opencv 4.5.0
+pkgrel=2    # Rebuild OIIO + MAJ openvdb 7.1.0 et openexr 2.5.3
+
+pkgrel=3    # Rebuild OIIO + opencv 4.4.0
+pkgrel=2    # Rebuild MAJ LLVM 10.0.1-1 REBUILD OIIO 2.1.17
+
+pkgrel=5    # Rebuild MAJ LLVM 10.0.0-1 + PATCH
+
+pkgrel=4    # Rebuild OIIO + opencv 4.3.0
+pkgrel=3    # TEST Rebuild MAJ OIIO 2.1.11.2
+
+pkgrel=2    # TEST /usr/share/OSL/shaders
+
+pkgrel=4    # rebuild boost boost-libs 1.72.0
+pkgrel=3    # Rebuild MAJ OIIO 2.0.13 + opencv 4.2.0
+
+pkgrel=2    # Rebuild MAJ OIIO 2.0.13 + openvdb 7.0.0
+
+pkgrel=7    # Rebuild MAJ OIIO 2.0.12 + python 3.8
+pkgrel=6    # Rebuild MAJ OIIO 2.0.12
+pkgrel=5    # rebuild MAJ openexr 2.4
+pkgrel=4    # Rebuild MAJ intel-tbb 2019.9-1
+pkgrel=3    # Rebuild MAJ LLVM 9.0.0
+pkgrel=2    # rebuild boost boost-libs 1.71.0
+
+pkgrel=5    # Voir install_deps.sh
 
 2-2) PKGBUILD AVEC PATCH
 ========================

@@ -15,8 +15,41 @@ tar -xzf OpenShadingLanguage-v1.11.17.0.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git
 
+1) MODIFIER OpenShadingLanguage-1.11.17.0/src/liboslexec/llvm_util.cpp
+======================================================================
+
+/!\ cd /tmp/srcp
+
+cp -R OpenShadingLanguage-1.11.17.0 OpenShadingLanguage-1.11.17.0.new
+
+cd OpenShadingLanguage-1.11.17.0.new/src/liboslexec
+
+kwrite llvm_util.cpp
+
+MODIFIER LIGNE 40
+#include <llvm/Support/TargetRegistry.h>
+
+DEVIENT :
+#if OSL_LLVM_VERSION < 140
+#include <llvm/Support/TargetRegistry.h>
+#else
+#include <llvm/MC/TargetRegistry.h>
+#endif
 
 
+ENREGISTRER et Quitter Kwrite & EFFACER fichier llvm_util.cpp~
+rm -f llvm_util.cpp~
+
+cd ../../..
+
+diff -aur OpenShadingLanguage-1.11.17.0 OpenShadingLanguage-1.11.17.0.new
+diff -aur OpenShadingLanguage-1.11.17.0 OpenShadingLanguage-1.11.17.0.new > llvm14.patch
+
+rm -rf OpenShadingLanguage-1.11.17.0.new
+
+cd $HOME/05-builds/openshadinglanguage-git
+
+mv -v /tmp/srcp/llvm14.patch .
 
 
 5) QUAND PATCHES FINIS
