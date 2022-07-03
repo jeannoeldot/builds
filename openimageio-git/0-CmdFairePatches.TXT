@@ -1,15 +1,15 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = oiio-v2.3.16.0
+!!! VERSION = oiio-v2.3.17.0
 
 mkdir /tmp/srcp
 
-cp -v oiio-v2.3.16.0.tar.gz /tmp/srcp/
+cp -v oiio-v2.3.17.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf oiio-v2.3.16.0.tar.gz
+tar -xzf oiio-v2.3.17.0.tar.gz
 
 
 
