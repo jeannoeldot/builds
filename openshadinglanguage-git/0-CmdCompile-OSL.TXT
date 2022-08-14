@@ -37,6 +37,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.11.17.0.20220110
+pkgrel=9    # Rebuild MAJ OIIO 2.3.18.0
 pkgrel=8    # Rebuild MAJ OIIO 2.3.17.0 LLVM 14.0.0 + PATCH
 pkgrel=7    # rebuild boost boost-libs 1.79.0
 pkgrel=6    # Rebuild against OIIO 2.3.16.0
@@ -64,9 +65,9 @@ provides=('openshadinglanguage')
 !!! LLVM 14.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 14.0.6-1 [installé]
-extra/llvm 14.0.6-1 [installé]
-extra/llvm-libs 14.0.6-1 [installé]
+extra/clang 14.0.6-2 [installé]
+extra/llvm 14.0.6-3 [installé]
+extra/llvm-libs 14.0.6-3 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
