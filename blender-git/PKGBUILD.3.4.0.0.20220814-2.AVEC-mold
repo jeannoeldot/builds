@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=3.4.0.0.20220814
-pkgrel=3
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -31,7 +31,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
-             'ninja'
+             'mold'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -63,10 +63,11 @@ build() {
   cd "${_gitname}"
   
   local PYTHON_VER=3.10
-
+  
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+  
   cmake \
-        -Bbuild \
-        -GNinja \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
@@ -92,18 +93,20 @@ build() {
         -DPYTHON_VERSION=${PYTHON_VER} \
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
-        -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER}
-  ninja -C build
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER} \
+        -DWITH_LINKER_MOLD=ON \
+        ..
+  make
 }
 
 package() {
   # Blender
-  cd "${_gitname}"
-  DESTDIR="${pkgdir}" ninja -C build install
+  cd "${_gitname}/build"
+  make DESTDIR="${pkgdir}" install
 
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
   python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
   
-  install -Dm644 release/freedesktop/org.blender.Blender.appdata.xml "${pkgdir}/usr/share/metainfo/org.blender.Blender.appdata.xml"
+  install -Dm644 ../release/freedesktop/org.blender.Blender.appdata.xml "${pkgdir}/usr/share/metainfo/org.blender.Blender.appdata.xml"
 }
