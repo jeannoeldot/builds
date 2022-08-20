@@ -2,7 +2,7 @@
 
 pkgname=opensubdiv-git
 pkgver=3.4.4.20210216
-pkgrel=3
+pkgrel=2
 _ver_release="3_4_4"
 _name_release="OpenSubdiv-${_ver_release}"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
@@ -32,8 +32,10 @@ prepare() {
 build() {
   cd "${_name_release}"
   
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+  
   cmake \
-        -B build \
         -D CMAKE_BUILD_TYPE=Release \
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D CMAKE_SKIP_RPATH=ON \
@@ -45,15 +47,17 @@ build() {
         -D NO_TUTORIALS=1 \
         -D NO_REGRESSION=1 \
         -D NO_EXAMPLES=1 \
-        -D NO_METAL=1
+        -D NO_METAL=1 \
+        ..
   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
-  make -C build
+  make
 }
 
 package() {
-  cd "${_name_release}"
-  DESTDIR="${pkgdir}" make -C build install
+  cd "${_name_release}/build"
+  make DESTDIR="${pkgdir}" install
 
   #license
+  cd ..
   install -Dm644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

@@ -132,6 +132,8 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=3.4.0.0.20220814
+pkgrel=5    # mkpkg-tmpfs -m fast
+pkgrel=4    # mkpkg-tmpfs -m native : OK
 pkgrel=3    # Test Avec ninja
 pkgrel=2    # Test Avec mold
 pkgrel=1
@@ -561,7 +563,19 @@ embree-git-*-x86_64.pkg.tar.*\
 /tmp/chrootrepo/
 
 
-  FLOOP
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 24G
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 24G -l logs
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+BLENDER 3.4.0 : FLOOP et FAST : PAS OK
+-------------------------------------------------------------------
+FLOOP
 --------
 $ rm -f *~
 $ mkpkg-tmpfs -m floop -g 24G
@@ -573,23 +587,6 @@ $ mkpkg-tmpfs -m fast -g 24G
 OU
 $ rm -f *~
 $ mkpkg-tmpfs -m fast -g 24G -l logs
-
-
-$ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 24G
-OU
-$ rm -f *~
-$ $HOME/bin/mkpkg-tmpfs -m fast -g 24G -l logs
-
--------------------------------------------------------------------
-
-  NATIVE
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m native -g 24G
-OU
-$ rm -f *~
-$ mkpkg-tmpfs -m native -g 24G -l logs
 -------------------------------------------------------------------
 
 
@@ -840,6 +837,16 @@ sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1660444451|' /home/jnd
 ================================================================
 ANCIENS
 ========
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 24G
+OU
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m fast -g 24G -l logs
+
+
+
+
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
 !!! POUR BUILDINFO

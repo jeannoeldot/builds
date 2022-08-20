@@ -17,6 +17,8 @@ cd /0-DataLinux/05-builds-dir-git
 wget -O openpgl-0.3.1.tar.gz \
 https://github.com/OpenPathGuidingLibrary/openpgl/archive/refs/tags/v0.3.1-beta.tar.gz
 
+Nom Archive ==> openpgl-0.3.1-beta
+
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
 cd $HOME/05-builds/openpgl-git
@@ -42,11 +44,12 @@ pkgrel=1
 
 !!!!!!
 _ver_release="0.3.1"
-_name_release="openpgl-${_ver_release}"
+_name_release="openpgl-${_ver_release}-beta"
 
 license=('Apache')
 
-depends=('embree' 'tbb'
+depends=('tbb'
+         'embree-git'
 )
 
 makedepends=('cmake')
@@ -79,62 +82,19 @@ mkdir /tmp/srcp
 
 tar -xzf openpgl-0.3.1.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openpgl-0.3.1/CMakeLists.txt
+1) kwrite /tmp/srcp/openpgl-0.3.1-beta/CMakeLists.txt
 
 !!! VOIR
-!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
-!!! LIGNES 2564 et ...
+!!! https://developer.blender.org/rB71a5a0f412b499def11806b68982f75548fd8100
 
-LIGNE 89
---------
-BUILD_DOC                      OFF by default
-
-LIGNE 94
---------
-EMBREE_TUTORIALS                ON by default   ==> OFF install_deps = OFF
-
-
-LIGNE 100 ET ...
+LIGNES 31 ET ...
 ----------------
-!!! VOIR ???
-EMBREE_STATIC_LIB               OFF by default  ==> OFF  install_deps = ON
---------
+OPENPGL_BUILD_PYTHON        OFF by default
+OPENPGL_USE_OMP_THREADING   OFF by default
+OPENPGL_BUILD_STATIC        OFF by default
 
-LIGNE 115 ET ...
-----------------
-EMBREE_ISPC_SUPPORT             ON by default   ==> OFF install_deps = OFF
+OPENPGL_ISA_AVX512          OFF by default
 
-LIGNE 127 ET ...
-----------------
-EMBREE_STACK_PROTECTOR          OFF by default
-
-EMBREE_RAY_MASK                 OFF by default  ==> ON  install_deps = ON
-EMBREE_BACKFACE_CULLING         OFF by default          install_deps = OFF
-EMBREE_FILTER_FUNCTION          ON by default           install_deps = ON
-EMBREE_IGNORE_INVALID_RAYS      OFF by default
-EMBREE_COMPACT_POLYS            OFF by default
-
-EMBREE_GEOMETRY_TRIANGLE        ON by default
-EMBREE_GEOMETRY_QUAD            ON by default
-EMBREE_GEOMETRY_CURVE           ON by default
-EMBREE_GEOMETRY_SUBDIVISION     ON by default
-EMBREE_GEOMETRY_USER            ON by default
-EMBREE_GEOMETRY_INSTANCE        ON by default
-EMBREE_GEOMETRY_GRID            ON by default
-EMBREE_GEOMETRY_POINT           ON by default
-EMBREE_RAY_PACKETS              ON by default
-
-EMBREE_CURVE_SELF_INTERSECTION_AVOIDANCE_FACTOR   2.0f is the default value
-
-LIGNE 170 ET 171
-----------------
-EMBREE_TASKING_SYSTEM           TBB by default    install_deps = INTERNAL
-EMBREE_TBB_COMPONENT            tbb by default
-
-LIGNE 272 ET ...
-----------------
-!!! A VOIR : $ cat /proc/cpuinfo | grep avx2
-EMBREE_MAX_ISA                  AVX2 by default   install_deps = AVX2
 
 
 rm -rf /tmp/srcp
@@ -180,6 +140,10 @@ cd $HOME/05-builds/openpgl-git && rm -rf /tmp/build
 
 $ mkpkg-chroot-repo
 
+SI depends= 'embree-git'
+=============================
+$ cp -v $HOME/00-repolocal/embree-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
+
   FLOOP
 --------
 $ rm -f *~
@@ -207,6 +171,8 @@ rm -f *~
 # Verifications...
 
 namcap openpgl-git-*-x86_64.pkg.tar.*
+openpgl-git W: Dependency tbb included but already satisfied
+
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
@@ -251,58 +217,3 @@ SI PROBLEME
 
 ANCIEN
 ======
-
-openpgl-git W: Dependency included and not needed ('intel-tbb')
-
-depends=('intel-tbb'
-)
-
-!!! TESTS = OK
-depends=('intel-tbb' 'glfw-x11'
-)
-
-EMBREE_TASKING_SYSTEM           TBB by default  ==> INTERNAL  install_deps = INTERNAL
-
-openpgl-git W: Dependency included and not needed ('glfw-x11')
-
-
-AVEC PATCH
-----------
-sha256sum openpgl-0.3.1.tar.gz
-
-sha256sum enable-optimizations-Ofast.patch
-
-source=("openpgl-${_ver_release}.tar.gz"
-        "enable-optimizations-Ofast.patch"
-)
-sha256sums=('... ...'
-            '... ...'
-)
-
-prepare() {
-  cd "${_name_release}"
-  # Enable optimizations Ofast
-  patch -Np1 -i "${srcdir}/enable-optimizations-Ofast.patch"
-}
-
-AVEC PATCH
-----------
-sha256sum openpgl-0.3.1.tar.gz
-
-sha256sum enable-optimizations-Ofast-floop.patch
-
-source=("openpgl-${_ver_release}.tar.gz"
-        "enable-optimizations-Ofast-floop.patch"
-)
-sha256sums=('... ...'
-            '... ...'
-)
-
-prepare() {
-  cd "${_name_release}"
-  # Enable optimizations Ofast et floop
-  patch -Np1 -i "${srcdir}/enable-optimizations-Ofast-floop.patch"
-}
-
-
-EMBREE_IGNORE_CMAKE_CXX_FLAGS   ON by default

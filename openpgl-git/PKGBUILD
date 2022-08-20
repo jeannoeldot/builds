@@ -1,45 +1,40 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
-pkgname=embree-git
-pkgver=3.13.4.20220622
+pkgname=openpgl-git
+pkgver=0.3.1.20220622
 pkgrel=1
-_ver_release="3.13.4"
-_name_release="embree-${_ver_release}"
-pkgdesc="High Performance Ray Tracing Kernels"
-url="https://github.com/embree"
+_ver_release="0.3.1"
+_name_release="openpgl-${_ver_release}-beta"
+pkgdesc="Intel(R) Open Path Guiding Library"
+url="http://www.openpgl.org/"
 arch=('x86_64')
 license=('Apache')
 depends=('tbb'
+         'embree-git'
 )
 makedepends=('cmake'
 )
-conflicts=('embree')
-provides=('embree')
-source=("embree-${_ver_release}.tar.gz"
+conflicts=('openpgl')
+provides=('openpgl')
+source=("openpgl-${_ver_release}.tar.gz"
 )
-sha256sums=('e6a8d1d4742f60ae4d936702dd377bc4577a3b034e2909adb2197d0648b1cb35'
+sha256sums=('3830098c485c962018932766199527aab453a8029528dbbc04d4454d82431e2c'
 )
 
 build() {
   cd "${_name_release}"
 
-  [[ -d build ]] && rm -rf build
-  mkdir build && cd build
   cmake \
+    -Bbuild \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_SKIP_RPATH=ON \
-    -DEMBREE_ISPC_SUPPORT=OFF \
-    -DEMBREE_TUTORIALS=OFF \
-    -DEMBREE_RAY_MASK=ON \
-    -DEMBREE_MAX_ISA="AVX2" \
-    ..
-  make
+    -DCMAKE_SKIP_RPATH=ON
+  make -C build
 }
 
 package() {
-  cd "${_name_release}/build"
+  cd "${_name_release}"
   
-  make DESTDIR="${pkgdir}" install
+  DESTDIR="${pkgdir}" make -C build install
 }
