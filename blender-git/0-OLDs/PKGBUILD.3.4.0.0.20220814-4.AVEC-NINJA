@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.4.0.0.20220821
-pkgrel=1
+pkgver=3.4.0.0.20220814
+pkgrel=4
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -21,7 +21,6 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'fmt'
           'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu'
-          'libepoxy'
           'opencolorio'
           'opencollada-git' 'openimageio-git'
           'openshadinglanguage-git' 'clang'
@@ -32,6 +31,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
+             'ninja'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -40,7 +40,7 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.4.0-include.zip"
 )
-sha256sums=('d7907d286936881b8845bbba3a6fc902184335f5a4af1def5e6712967ce96a99'
+sha256sums=('9f089355e44aef75e49bfc273bc53f9eaf6d664d3a631560b8f6b9113b916706'
             '283ceb65d47a697d8776bb3d56273bf78b53d57110cfd1a4cac4456888687713'
 )
 
@@ -54,9 +54,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "563404d8ad44"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "64f0c25a4655"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1661070017|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1660444451|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -66,6 +66,7 @@ build() {
 
   cmake \
         -Bbuild \
+        -GNinja \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
@@ -92,13 +93,13 @@ build() {
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
         -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER}
-  make -C build
+  ninja -C build
 }
 
 package() {
   # Blender
   cd "${_gitname}"
-  DESTDIR="${pkgdir}" make -C build install
+  DESTDIR="${pkgdir}" ninja -C build install
 
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
