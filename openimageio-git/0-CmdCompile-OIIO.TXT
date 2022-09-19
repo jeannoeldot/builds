@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.3.19.0.20220901
+pkgrel=3    # rebuild fmt 9.1.0 PAS OK
+pkgrel=2    # rebuild boost boost-libs 1.80.0
 pkgrel=1
 
 pkgrel=2    # rebuild boost boost-libs 1.79.0
@@ -142,7 +144,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
-==> extra/python 3.10.6-1 [installé]
+==> extra/python 3.10.7-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.10
@@ -259,9 +261,10 @@ LIGNE 265
 # Tessil/robin-map
          makedepends=...  'robin-map'
 
-LIGNE 315
+LIGNE 319
 # fmtlib
          depends=...  'fmt'
+option BUILD_FMT_FORCE    =>  ON
 
 
 4) kwrite /tmp/srcp/oiio-2.3.19.0/src/cmake/pythonutils.cmake &

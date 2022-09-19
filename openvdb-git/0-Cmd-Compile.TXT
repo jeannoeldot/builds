@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=9.1.0.20220609
+pkgrel=2          # rebuild boost boost-libs 1.80.0
 pkgrel=1
 
 pkgrel=4        # include nanovdb

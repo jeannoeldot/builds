@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.3.19.0.20220901
-pkgrel=1
+pkgrel=3
 _name_release="oiio-2.3.19.0"
 _ver_release="v2.3.19.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
@@ -21,6 +21,7 @@ depends=('openexr' 'boost-libs' 'libtiff'
 )
 makedepends=('cmake' 'boost' 'mesa'
              'robin-map'
+             'git'
 )
 conflicts=('openimageio')
 provides=('openimageio')
@@ -32,10 +33,11 @@ sha256sums=('602c146aebee775f123459a6c6be753054144b8d82777de26965f2cc3e88113a'
 build() {
   cd "${_name_release}"
 
-  [[ -d build ]] && rm -r build
-  mkdir build && cd build
+# FIXME: BUILD_FMT_FORCE=ON is used below to bundle fmt 8 so OSL builds
+# TODO: test without this and remove it if OSL (1.12?) works with fmt 9
 
   cmake \
+      -Bbuild \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=lib \
@@ -46,18 +48,18 @@ build() {
       -DUSE_CCACHE=OFF \
       -DUSE_SIMD=avx2 \
       -DPYTHON_VERSION=3.10 \
-      -DBUILD_MISSING_FMT=OFF \
-      -DUSE_EXTERNAL_PUGIXML=ON \
-      ..
-  make
+      -DBUILD_FMT_FORCE=ON \
+      -DOIIO_DOWNLOAD_MISSING_TESTDATA=OFF \
+      -DUSE_EXTERNAL_PUGIXML=ON
+  make -C build
 }
 
 package() {
-  cd "${_name_release}/build"
+  cd "${_name_release}"
 
-  make DESTDIR="${pkgdir}" install
+  DESTDIR="${pkgdir}" make -C build install
 
   # license
-  install -Dm644 ../LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
-  install -Dm644 ../THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/THIRD-PARTY
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  install -Dm644 THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/THIRD-PARTY
 }

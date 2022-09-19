@@ -2,7 +2,7 @@
 
 pkgname=openvdb-git
 pkgver=9.1.0.20220609
-pkgrel=2
+pkgrel=1
 _ver_release="9.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
@@ -26,8 +26,9 @@ sha256sums=('914ee417b4607c75c95b53bc73a0599de4157c7d6a32e849e80f24e40fb64181'
 build() {
   cd "${_name_release}"
 
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
   cmake \
-    -Bbuild \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
     -DCMAKE_INSTALL_PREFIX=/usr \
@@ -35,13 +36,16 @@ build() {
     -DOPENVDB_ENABLE_RPATH=OFF \
     -DUSE_NANOVDB=ON \
     -DUSE_CCACHE=OFF \
-    -DOPENVDB_CORE_STATIC=OFF
+    -DOPENVDB_CORE_STATIC=OFF \
+    ..
+
+  sed -i "s/isystem/I/g" $(find . -name flags.make)
   
-  make -C build
+  make
 }
 
 package() {
-  cd "${_name_release}"
+  cd "${_name_release}/build"
 
-  DESTDIR="${pkgdir}" make -C build install
+  make DESTDIR="${pkgdir}" install
 }
