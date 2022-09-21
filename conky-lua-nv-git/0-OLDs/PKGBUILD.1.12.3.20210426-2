@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=conky-lua-nv-git
-pkgver=1.13.1.20220920
-pkgrel=1
+pkgver=1.12.3.20210426
+pkgrel=2
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
 url="https://github.com/brndnmtthws/conky"
@@ -22,7 +22,7 @@ optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('b65942d83cd151bf61434752db8ef9b2e3666fa0557e22b18b993a0aa1227300'
+sha256sums=('9918af7a8616dee2f0cf3c882fd2ac4af85c80546221605969d64f51d325aa57'
 )
 #options=('!strip' 'debug')
 
@@ -40,7 +40,6 @@ build() {
   CFLAGS+=" -ffat-lto-objects"
   CXXFLAGS+=" -ffat-lto-objects"
   cmake \
-    -D MAINTAINER_MODE=OFF \
     -D CMAKE_SKIP_RPATH=ON \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
