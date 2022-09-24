@@ -69,6 +69,7 @@ voir CmdFairePatches.TXT
 
 pkgname=conky-lua-nv-git
 pkgver=1.13.1.20220920
+pkgrel=2  # Rebuild suite maj libxnvctrl 515.76-1
 pkgrel=1
 
 pkgrel=2  # Rebuild, fix static libs with LTO
