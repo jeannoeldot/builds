@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=embree-git               # embree ds community ?
 pkgver=3.13.5.20220914
+pkgrel=2  # Rebuild avec cmake -Bbuild
 pkgrel=1
 
 pkgrel=2    # Rebuild MAJ tbb 2021.4
