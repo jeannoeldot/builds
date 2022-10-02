@@ -1,13 +1,13 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=opensubdiv-git
-pkgver=3.5.0.20220926
-pkgrel=1
-_ver_release="3_5_0"
+pkgver=3.4.4.20210216
+pkgrel=3
+_ver_release="3_4_4"
 _name_release="OpenSubdiv-${_ver_release}"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
-license=('APACHE')
+license=('custom')
 url="http://graphics.pixar.com/opensubdiv"
 depends=('glfw-x11' 'tbb'
 )
@@ -17,7 +17,7 @@ provides=('opensubdiv')
 source=("OpenSubdiv-v${_ver_release}.tar.gz"
         "opensubdiv-tbb2021.patch"
 )
-sha256sums=('8f5044f453b94162755131f77c08069004f25306fd6dc2192b6d49889efb8095'
+sha256sums=('20d49f80a2b778ad4d01f091ad88d8c2f91cf6c7363940c6213241ce6f1048fb'
             'ba5218bb42efb5ab11b2217742337825cb6369f760637e18787cf790c9a147ce'
 )
 
@@ -53,4 +53,7 @@ build() {
 package() {
   cd "${_name_release}"
   DESTDIR="${pkgdir}" make -C build install
+
+  #license
+  install -Dm644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
