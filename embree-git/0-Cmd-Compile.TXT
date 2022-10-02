@@ -6,16 +6,16 @@ cd $HOME/05-builds/embree-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/embree/embree/releases
-==> svenwoop  released this 22 juin 2022 ==> 20220622
-==> Embree v3.13.4  ==> 3.13.4
-==> 3.13.4.20220622
+==> svenwoop  released this 14 sept 2022 ==> 20220914
+==> Embree v3.13.5  ==> 3.13.5
+==> 3.13.5.20220914
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O embree-3.13.4.tar.gz \
-https://github.com/embree/embree/archive/refs/tags/v3.13.4.tar.gz
+wget -O embree-3.13.5.tar.gz \
+https://github.com/embree/embree/archive/refs/tags/v3.13.5.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/embree-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/embree-3.13.4.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/embree-3.13.5.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,8 +36,9 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git               # embree ds community ?
-pkgver=3.13.4.20220622
+pkgver=3.13.5.20220914
 pkgrel=1
+
 pkgrel=2    # Rebuild MAJ tbb 2021.4
 
 pkgrel=4  # AVEC patch Ofast + dynamic libs
@@ -53,7 +54,7 @@ pkgrel=2    # static libs
 
 
 !!!!!!
-_ver_release="3.13.4"
+_ver_release="3.13.5"
 _name_release="embree-${_ver_release}"
 
 license=('Apache')
@@ -69,7 +70,7 @@ provides='embree'
 
 SANS PATCH
 ----------
-sha256sum embree-3.13.4.tar.gz
+sha256sum embree-3.13.5.tar.gz
 
 source=("embree-${_ver_release}.tar.gz"
 )
@@ -89,9 +90,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf embree-3.13.4.tar.gz -C /tmp/srcp
+tar -xzf embree-3.13.5.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/embree-3.13.4/CMakeLists.txt
+1) kwrite /tmp/srcp/embree-3.13.5/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -156,7 +157,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.13.4.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.13.5.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -175,7 +176,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/embree-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/embree-git/embree-3.13.4.tar.gz . \
+&& cp -v $HOME/05-builds/embree-git/embree-3.13.5.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/embree-git \
 && cp -v /tmp/build/embree-git-*-x86_64.pkg.tar.* . \
@@ -238,7 +239,7 @@ $ mv -v embree-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i embree-3.13.4.tar.gz
+$ rm -i embree-3.13.5.tar.gz
 
 
 $ cd && maj-repolocal
@@ -280,7 +281,7 @@ embree-git W: Dependency included and not needed ('glfw-x11')
 
 AVEC PATCH
 ----------
-sha256sum embree-3.13.4.tar.gz
+sha256sum embree-3.13.5.tar.gz
 
 sha256sum enable-optimizations-Ofast.patch
 
@@ -299,7 +300,7 @@ prepare() {
 
 AVEC PATCH
 ----------
-sha256sum embree-3.13.4.tar.gz
+sha256sum embree-3.13.5.tar.gz
 
 sha256sum enable-optimizations-Ofast-floop.patch
 
