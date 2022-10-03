@@ -1,19 +1,30 @@
 FAIRE PATCHS
 ====================================
-!!! VERSION = OpenShadingLanguage-v1.11.17.0
+!!! VERSION = OpenShadingLanguage-v1.12.6.2
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openshadinglanguage-git
 
 mkdir /tmp/srcp
 
-cp -v OpenShadingLanguage-v1.11.17.0.tar.gz /tmp/srcp/
+cp -v OpenShadingLanguage-v1.12.6.2.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenShadingLanguage-v1.11.17.0.tar.gz
+tar -xzf OpenShadingLanguage-v1.12.6.2.tar.gz
 
 /!\ cd $HOME/05-builds/openshadinglanguage-git
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
 
 1) MODIFIER OpenShadingLanguage-1.11.17.0/src/liboslexec/llvm_util.cpp
 ======================================================================
@@ -50,16 +61,6 @@ rm -rf OpenShadingLanguage-1.11.17.0.new
 cd $HOME/05-builds/openshadinglanguage-git
 
 mv -v /tmp/srcp/llvm14.patch .
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-sync
-
-==============================================================================
-ANCIENS OU PAS OK
-=================
 
 1) MODIFIER OpenShadingLanguage-1.11.13.0/src/liboslexec/llvm_util.cpp
 ======================================================================
