@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=3.4.0.3.20221009
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -22,7 +22,6 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu'
           'libepoxy'
-          'libdecor' 'wayland-protocols'
           'opencolorio'
           'opencollada-git' 'openimageio-git'
           'openshadinglanguage-git' 'clang'
@@ -76,6 +75,9 @@ build() {
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
+        -DWITH_GHOST_WAYLAND=OFF \
+        -DWITH_GHOST_WAYLAND_LIBDECOR=OFF \
+        -DWITH_GHOST_WAYLAND_DYNLOAD=OFF \
         -DWITH_USD=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \

@@ -37,7 +37,6 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.6.2.20221001
-pkgrel=2    # Rebuild with fmt9 oiio
 pkgrel=1
 
 pkgrel=11    # rebuild boost boost-libs 1.80.0

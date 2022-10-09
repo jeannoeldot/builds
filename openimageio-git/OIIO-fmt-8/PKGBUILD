@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.4.4.2.20221003
-pkgrel=2
+pkgrel=1
 _name_release="oiio-2.4.4.2"
 _ver_release="v2.4.4.2"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
@@ -21,7 +21,7 @@ depends=('openexr' 'boost-libs' 'libtiff'
 )
 makedepends=('cmake' 'boost' 'mesa'
              'robin-map'
-             'fmt'
+             'git'
 )
 conflicts=('openimageio')
 provides=('openimageio')
@@ -32,6 +32,9 @@ sha256sums=('1ae437e1178f53a972d8b42147d7571c5463652a638b36526f25d5719becbb55'
 
 build() {
   cd "${_name_release}"
+
+# FIXME: BUILD_FMT_FORCE=ON is used below to bundle fmt 8 so OSL builds
+# TODO: test without this and remove it if OSL (1.12?) works with fmt 9
 
   cmake \
       -Bbuild \
@@ -45,6 +48,7 @@ build() {
       -DUSE_CCACHE=OFF \
       -DUSE_SIMD=avx2 \
       -DPYTHON_VERSION=3.10 \
+      -DBUILD_FMT_FORCE=ON \
       -DOIIO_DOWNLOAD_MISSING_TESTDATA=OFF \
       -DUSE_EXTERNAL_PUGIXML=ON
   make -C build

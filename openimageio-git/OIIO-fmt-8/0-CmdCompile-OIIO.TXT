@@ -38,7 +38,6 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.4.4.2.20221003
-pkgrel=2    # rebuild avec makedepends fmt 9.1.0
 pkgrel=1
 
 pkgrel=3    # rebuild fmt 9.1.0 PAS OK
@@ -259,7 +258,9 @@ LIGNE 267
 
 LIGNE 307
 # fmtlib
-option BUILD_FMT_FORCE = OFF
+# FIXME: BUILD_FMT_FORCE=ON is used below to bundle fmt 8 so OSL builds
+# TODO: test without this and remove it if OSL (1.12?) works with fmt 9
+option BUILD_FMT_FORCE    =>  ON
 
 
 4) kwrite /tmp/srcp/oiio-2.4.4.2/src/cmake/pythonutils.cmake &
