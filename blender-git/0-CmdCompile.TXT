@@ -342,10 +342,10 @@ option(WITH_GMP "Enable features depending on GMP (Exact Boolean)" ON)
 208 option WITH_NANOVDB           ON   dep = openvdb-git
 209 option WITH_HARU              ON   dep = libharu
 
-245 WITH_GHOST_WAYLAND            ON ==> OFF
-249 WITH_GHOST_WAYLAND_LIBDECOR   ON ==> OFF
+245 WITH_GHOST_WAYLAND            ON   dep = 'libdecor' 'wayland-protocols'
+249 WITH_GHOST_WAYLAND_LIBDECOR   ON
 252 WITH_GHOST_WAYLAND_DBUS       OFF
-255 WITH_GHOST_WAYLAND_DYNLOAD    ON ==> OFF
+255 WITH_GHOST_WAYLAND_DYNLOAD    ON
 
 # Misc...
 290 option WITH_SYSTEM_FREETYPE   ON    dep = freetype2

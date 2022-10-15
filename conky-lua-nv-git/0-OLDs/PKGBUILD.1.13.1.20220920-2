@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=conky-lua-nv-git
-pkgver=1.14.1.20221015
-pkgrel=1
+pkgver=1.13.1.20220920
+pkgrel=2
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
 url="https://github.com/brndnmtthws/conky"
@@ -15,13 +15,14 @@ depends=('libxml2' 'curl' 'cairo' 'wireless_tools'
           'hicolor-icon-theme'
           'libpulse'
 )
-makedepends=('cmake'  'git' 'man-db'
+makedepends=('docbook2x' 'perl-xml-libxml'
+             'docbook-xml' 'docbook-xsl' 'cmake'  'git' 'man-db'
 )
 optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('78a2b1aa46cd98d11f236c108eda9359882d330b0303cf814fa66911f82060f5'
+sha256sums=('b65942d83cd151bf61434752db8ef9b2e3666fa0557e22b18b993a0aa1227300'
 )
 #options=('!strip' 'debug')
 
@@ -39,12 +40,12 @@ build() {
   CFLAGS+=" -ffat-lto-objects"
   CXXFLAGS+=" -ffat-lto-objects"
   cmake \
-    -B build \
     -D MAINTAINER_MODE=OFF \
     -D CMAKE_SKIP_RPATH=ON \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
     -D CMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -D BUILD_DOCS=ON \
     -D BUILD_NVIDIA=ON \
     -D BUILD_WLAN=ON \
     -D BUILD_LUA_CAIRO=ON \
@@ -54,18 +55,21 @@ build() {
     -D BUILD_MOC=OFF \
     -D BUILD_CURL=ON \
     -D BUILD_RSS=ON \
+    -D BUILD_WEATHER_METAR=OFF \
     -D BUILD_CMUS=OFF \
-    -D CMAKE_INSTALL_PREFIX=/usr
-  make -C build VERBOSE=1
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    .
+
+  make VERBOSE=1
 }
 
 package() {
   cd "${_gitname}"
-  DESTDIR="${pkgdir}" make -C build install
+  make DESTDIR="${pkgdir}" install
 #  install -D -m644 COPYING "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
 #  install -D -m644 LICENSE.BSD "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE.BSD
   install -D -m644 extras/gedit/conky.lang "${pkgdir}"/usr/share/gtksourceview-3.0/language-specs/conky.lang
-  install -D -m644 extras/nano/conky.nanorc.j2 "${pkgdir}"/usr/share/nano/conky.nanorc
-  install -D -m644 extras/vim/syntax/conkyrc.vim.j2 "${pkgdir}"/usr/share/vim/vimfiles/syntax/conkyrc.vim
+  install -D -m644 extras/nano/conky.nanorc "${pkgdir}"/usr/share/nano/conky.nanorc
+  install -D -m644 extras/vim/syntax/conkyrc.vim "${pkgdir}"/usr/share/vim/vimfiles/syntax/conkyrc.vim
   install -D -m644 extras/vim/ftdetect/conkyrc.vim "${pkgdir}"/usr/share/vim/vimfiles/ftdetect/conkyrc.vim
 }
