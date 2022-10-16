@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openpgl-git
-pkgver=0.4.0.20221014
+pkgver=0.3.1.20220622
 pkgrel=1
-_ver_release="0.4.0"
+_ver_release="0.3.1"
 _name_release="openpgl-${_ver_release}-beta"
 pkgdesc="Intel(R) Open Path Guiding Library"
 url="http://www.openpgl.org/"
@@ -18,7 +18,7 @@ conflicts=('openpgl')
 provides=('openpgl')
 source=("openpgl-${_ver_release}.tar.gz"
 )
-sha256sums=('58d5b65c533ce6cac3f7e1d51cf169a5411adf356abcd85f04049bbcaecc2e77'
+sha256sums=('3830098c485c962018932766199527aab453a8029528dbbc04d4454d82431e2c'
 )
 
 build() {
