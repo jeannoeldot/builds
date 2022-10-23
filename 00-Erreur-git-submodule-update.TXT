@@ -1,0 +1,54 @@
+
+
+
+    Index
+    » AUR Issues, Discussion & PKGBUILD Requests
+    » [Solved]Installing AUR pkgs (Cemu and Wine-ge-custom) prepare() fails
+
+https://bbs.archlinux.org/viewtopic.php?pid=2063063#p2063063
+
+
+loqs:
+Does replacing
+
+  git submodule update
+
+with
+
+  git submodule--helper update
+
+help?
+
+yochananmarqos:
+@loqs: Yes,
+
+git submodule--helper update
+
+works. Time to update a whole bunch of PKGBUILDs--including appimagelauncher.
+
+doskoi:
+What does this command do that git submodule update doesn't?
+
+loqs:
+git submodule uses /usr/lib/git-core/git-submodule
+which is the shell script
+https://github.com/git/git/blob/v2.38.1/git-submodule.sh
+which sets GIT_PROTOCOL_FROM_USER=0 [1] internally it uses git submodule--helper [2].
+
+[1] https://github.com/git/git/blob/v2.38.1/git-submodule.sh#L29
+[2] https://github.com/git/git/blob/v2.38.1/git-submodule.sh#L338
+
+loqs:
+For some reason the setting seems to only be respected when it is set in the global config.
+No idea if this is a bug or intended.
+
+
+benjarobin:
+You just have to replace
+
+git submodule update ...
+
+by
+
+git -c protocol.file.allow=always submodule update ...
+
