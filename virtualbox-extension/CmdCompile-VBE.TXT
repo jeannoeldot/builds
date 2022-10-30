@@ -2,8 +2,8 @@
 
 cd $HOME/05-builds/virtualbox-extension
 
-VERSION = 6.1.40
-BUILD = 154048
+VERSION = 7.0.2
+BUILD = 154219
 
 1) TÉLÉCHARGER SOURCES
 ======================
@@ -25,25 +25,25 @@ mv -vf /tmp/0-AUR/virtualbox-ext-oracle/virtualbox-ext-oracle.install .
 
 1-2) Download source
 ----------------------
-wget https://download.virtualbox.org/virtualbox/6.1.40/Oracle_VM_VirtualBox_Extension_Pack-6.1.40-154048.vbox-extpack
-https://www.virtualbox.org/download/hashes/6.1.40/SHA256SUMS
-sha256sum = 29cf8410e2514ea4393f63f5e955b8311787873679fc23ae9a897fb70ef3f84a
+wget https://download.virtualbox.org/virtualbox/7.0.2/Oracle_VM_VirtualBox_Extension_Pack-7.0.2-154219.vbox-extpack
+https://www.virtualbox.org/download/hashes/7.0.2/SHA256SUMS
+sha256sum = f692008df0fe03c4d7397b3104e0ef71464385eb911858611c628fa32eb610a4
 
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Name <name@fai.com>
 
 pkgname=virtualbox-extension
-pkgver=6.1.40
-_build=154048
+pkgver=7.0.2
+_build=154219
 pkgrel=1
 
 !!! ATTENTION AU N° VERSION !!!!
 source=(... ... ...)
 
 !!! ATTENTION AU N° VERSION !!!!
-sha256sum Oracle_VM_VirtualBox_Extension_Pack-6.1.40-154048.vbox-extpack
-sha256sum Oracle_VM_VirtualBox_Extension_Pack-6.1.40.vbox-extpack
+sha256sum Oracle_VM_VirtualBox_Extension_Pack-7.0.2-154219.vbox-extpack
+sha256sum Oracle_VM_VirtualBox_Extension_Pack-7.0.2.vbox-extpack
 
 sha256sums=(... ... ...)
 
@@ -67,7 +67,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/virtualbox-extension/PKGBUILD . \
-&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VM_VirtualBox_Extension_Pack-6.1.40-154048.vbox-extpack . \
+&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VM_VirtualBox_Extension_Pack-7.0.2-154219.vbox-extpack . \
 && cp -v $HOME/05-builds/virtualbox-extension/virtualbox-extension.install . \
 && makepkg -s \
 && cd $HOME/05-builds/virtualbox-extension \
@@ -113,7 +113,7 @@ $ mv -v virtualbox-extension-*-any.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i Oracle_VM_VirtualBox_Extension_Pack-6.1.40-154048.vbox-extpack
+$ rm -i Oracle_VM_VirtualBox_Extension_Pack-7.0.2-154219.vbox-extpack
 $ rm -rf /tmp/0-AUR
 
 
@@ -135,7 +135,7 @@ sha256sum PUEL
 
 -rw-r--r--  1 jnd users     9324 24 juin  20:13 PUEL
 
-&& cp -v $HOME/05-builds/virtualbox-extension/{PKGBUILD,Oracle_VM_VirtualBox_Extension_Pack-6.1.40-154048.vbox-extpack,virtualbox-extension.install,PUEL} . \
+&& cp -v $HOME/05-builds/virtualbox-extension/{PKGBUILD,Oracle_VM_VirtualBox_Extension_Pack-7.0.2-154219.vbox-extpack,virtualbox-extension.install,PUEL} . \
 
 3) MAKEPKG en CHROOT
 ====================
