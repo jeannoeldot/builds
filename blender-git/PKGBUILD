@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.4.0.5.20221023
+pkgver=3.4.0.5.20221030
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -17,7 +17,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
           'boost-libs' 'tbb'
           'jemalloc'
-          'python-numpy' 'python-requests' 'python-zstandard' 'pystring'
+          'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
           'fmt'
           'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu'
@@ -42,7 +42,7 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.5.0-include.zip"
 )
-sha256sums=('42e828f9c01c597d0d1f504f805d7869173bbd3613c8666669afbdb41fcb5fca'
+sha256sums=('8d9a47553400f4b16aee3843324c2b9955ee2440192f744fa11c6a7c1f496c99'
             '7553b276c9e2314eba2b48f409bda0659ea63f4d16a7ab902ed2974877813c08'
 )
 
@@ -56,9 +56,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "da36efdf487b"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9bd38750b396"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "master"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1666507264|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1667105788|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

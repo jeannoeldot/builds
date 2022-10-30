@@ -6,16 +6,16 @@ cd $HOME/05-builds/openvdb-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/AcademySoftwareFoundation/openvdb/releases
-==>  richhones released this on 09 juin 2022 ==> 20220609
-==> v9.1.0  ==> 9.1.0
-==> 9.1.0.20220609
+==> apradhana  released this on 28 oct 2022 ==> 20221028
+==> v10.0.0  ==> 10.0.0
+==> 10.0.0.20221028
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenVDB-v9.1.0.tar.gz \
-https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v9.1.0.tar.gz
+wget -O OpenVDB-v10.0.0.tar.gz \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v10.0.0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -23,7 +23,7 @@ cd $HOME/05-builds/openvdb-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v9.1.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v10.0.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -36,9 +36,10 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git               # openvdb ds community
-pkgver=9.1.0.20220609
-pkgrel=2          # rebuild boost boost-libs 1.80.0
+pkgver=10.0.0.20221028
 pkgrel=1
+
+pkgrel=2          # rebuild boost boost-libs 1.80.0
 
 pkgrel=4        # include nanovdb
 
@@ -80,7 +81,7 @@ pkgrel=2          # rebuild boost boost-libs 1.65.1-1
 pkgrel=3          # SANS doc, SANS ABI=3
 
 !!!!!!
-_ver_release="9.1.0"
+_ver_release="10.0.0"
 _name_release="openvdb-${_ver_release}"
 
 license=('MPL')
@@ -99,7 +100,7 @@ provides='openvdb'
 
 SANS PATCH
 ----------
-sha256sum OpenVDB-v9.1.0.tar.gz
+sha256sum OpenVDB-v10.0.0.tar.gz
 
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
@@ -118,9 +119,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenVDB-v9.1.0.tar.gz -C /tmp/srcp
+tar -xzf OpenVDB-v10.0.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openvdb-9.1.0/CMakeLists.txt
+1) kwrite /tmp/srcp/openvdb-10.0.0/CMakeLists.txt
 
 LIGNES 68 ET 69:
 ---------------
@@ -144,25 +145,28 @@ LIGNES 73 ET 74
 OPENVDB_BUILD_HOUDINI_PLUGIN "Build the Houdini plugin" OFF
 OPENVDB_BUILD_HOUDINI_ABITESTS "Build the Houdini ABI tests" OFF
 
-LIGNES 76 À 78
+LIGNES 76 À 77
 ---------------
 OPENVDB_BUILD_AX "Build the OpenVDB AX library" OFF
-OPENVDB_BUILD_AX_BINARIES "Build the OpenVDB AX command line binary" OFF
 OPENVDB_BUILD_AX_UNITTESTS "Build the OpenVDB AX unit tests" OFF
 
-LIGNE 80: VOIR LIGNE 120
+LIGNE 79: VOIR LIGNE 120
 ------------------------
 OPENVDB_BUILD_NANOVDB "Build the NanoVDB library. Turns ON if USE_NANOVDB is ON." ${USE_NANOVDB}
 
-LIGNE 82:
+LIGNE 81:
 ---------
 OPENVDB_BUILD_MAYA_PLUGIN "Build the Maya plugin" OFF
+
+LIGNE 82: !!!!!!
+----------------
+OPENVDB_USE_DELAYED_LOADING "Build the core OpenVDB library with delayed-loading." ON
 
 LIGNE 83: !!!!!!
 ----------------
 OPENVDB_ENABLE_RPATH "Build with RPATH information" ON ==> OFF
 
-LIGNE 84:
+LIGNE 86:
 ---------
 OPENVDB_INSTALL_CMAKE_MODULES ON
 
@@ -225,7 +229,7 @@ LIGNE 659:
 OPENVDB_ABI_VERSION_NUMBER=N  ==> 8 ???????
 
 
-2) kwrite /tmp/srcp/openvdb-9.1.0/openvdb/openvdb/CMakeLists.txt
+2) kwrite /tmp/srcp/openvdb-10.0.0/openvdb/openvdb/CMakeLists.txt
 
 LIGNE 17:
 ---------
@@ -235,16 +239,17 @@ LIGNE 18:
 OPENVDB_CORE_STATIC "Build statically linked version of the core library." ON ==> OFF
 
 
-3) kwrite /tmp/srcp/openvdb-9.1.0/openvdb/openvdb/cmd/CMakeLists.txt
+3) kwrite /tmp/srcp/openvdb-10.0.0/openvdb_cmd/CMakeLists.txt
 
-LIGNE 21 À 24:
+LIGNE 15 À 22:
 --------------
 OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
 
 OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF
 OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF
 OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF
-
+OPENVDB_BUILD_VDB_TOOL "Build vdb_tool" OFF
+OPENVDB_BUILD_VDB_AX "Build the OpenVDB AX command line binary" OFF
 
 rm -rf /tmp/srcp
 
@@ -254,7 +259,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v9.1.0.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v10.0.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -272,7 +277,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openvdb-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v9.1.0.tar.gz . \
+&& cp -v $HOME/05-builds/openvdb-git/OpenVDB-v10.0.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openvdb-git \
 && cp -v /tmp/build/openvdb-git-*-x86_64.pkg.tar.* . \
@@ -338,7 +343,7 @@ $ mv -v openvdb-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenVDB-v9.1.0.tar.gz
+$ rm -i OpenVDB-v10.0.0.tar.gz
 
 
 $ cd && maj-repolocal
@@ -384,7 +389,7 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
         'openvdb-cmd-openexr3.patch'
 )
 
-sha256sum OpenVDB-v9.1.0.tar.gz
+sha256sum OpenVDB-v10.0.0.tar.gz
 
 sha256sum openvdb-openexr3.patch
 
@@ -423,7 +428,7 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
         'fix-CMake-Error.patch'
 )
 
-sha256sum OpenVDB-v9.1.0.tar.gz
+sha256sum OpenVDB-v10.0.0.tar.gz
 
 sha256sum fix-CMake-Error.patch
 
@@ -468,7 +473,7 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
         'fix-error-boost-egal-sup-1.67.patch'
 )
 
-sha256sum OpenVDB-v9.1.0.tar.gz
+sha256sum OpenVDB-v10.0.0.tar.gz
 
 sha256sum fix-error-boost-egal-sup-1.67.patch
 
