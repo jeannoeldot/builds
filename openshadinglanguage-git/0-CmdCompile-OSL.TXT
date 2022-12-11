@@ -37,6 +37,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.7.1.20221201
+pkgrel=2    # Rebuild against OIIO 2.4.6.1
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ opencolorio 2.2.0
