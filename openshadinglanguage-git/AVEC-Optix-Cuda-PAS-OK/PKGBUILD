@@ -1,0 +1,67 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openshadinglanguage-git
+pkgver=1.12.7.1.20221201
+pkgrel=3
+_name_release="OpenShadingLanguage-1.12.7.1"
+_ver_release="v1.12.7.1"
+pkgdesc="Advanced shading language for production GI renderers"
+arch=('x86_64')
+url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
+license=('custom')
+depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'openimageio-git'
+         'llvm-libs'
+         'qt5-base'
+         'clang'
+         'python' 'pugixml' 'pybind11'
+)
+makedepends=('boost' 'cmake' 'llvm'
+             'cuda'
+)
+conflicts=('openshadinglanguage')
+provides=('openshadinglanguage')
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "OptiX-7.5.0-include.zip"
+)
+sha256sums=('a06e4d1c6743cee83365ce600440c4e98e666dedb826b9f4e9bb1288ec769845'
+            '7553b276c9e2314eba2b48f409bda0659ea63f4d16a7ab902ed2974877813c08'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+      -Bbuild \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DUSE_OPTIX=ON \
+      -DOPTIX_INCLUDE_DIR="${srcdir}"/include \
+      -DCUDA_TARGET_ARCH="sm_86" \
+      -DCMAKE_CXX_STANDARD=14 \
+      -DLLVM_STATIC=OFF \
+      -DVERBOSE=ON \
+      -DUSE_SIMD=avx2 \
+      -DUSE_CCACHE=OFF
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+
+  DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+
+  # shaders
+  # Ugly hacks /usr/share/OSL/shaders/*.oso
+  for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/share/OSL/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/share/OSL/|g" ${_oso}
+  done
+}
