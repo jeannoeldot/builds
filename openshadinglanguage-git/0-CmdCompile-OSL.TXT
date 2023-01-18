@@ -37,6 +37,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.8.0.20230103
+pkgrel=2    # rebuild MAJ LLVM 15
+
 pkgrel=1
 
 pkgrel=2    # Rebuild against OIIO 2.4.6.1
@@ -71,9 +73,9 @@ provides=('openshadinglanguage')
 !!! LLVM 14.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 14.0.6-4 [installé]
-extra/llvm 14.0.6-4 [installé]
-extra/llvm-libs 14.0.6-4 [installé]
+extra/clang 15.0.7-1 [installé]
+extra/llvm 15.0.7-1 [installé]
+extra/llvm-libs 15.0.7-1 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
