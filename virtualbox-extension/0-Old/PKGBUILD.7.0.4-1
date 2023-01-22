@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=virtualbox-extension
-pkgver=7.0.6
-_build=155176
+pkgver=7.0.4
+_build=154605
 pkgrel=1
 pkgdesc="Oracle VM VirtualBox Extension Pack"
 arch=('any')
@@ -13,16 +13,16 @@ depends=("virtualbox")
 optdepends=('rdesktop: client to connect vm via RDP')
 options=('!strip')
 
-source=("https://download.virtualbox.org/virtualbox/$pkgver/Oracle_VM_VirtualBox_Extension_Pack-$pkgver.vbox-extpack"
+source=("https://download.virtualbox.org/virtualbox/$pkgver/Oracle_VM_VirtualBox_Extension_Pack-$pkgver-$_build.vbox-extpack"
 )
 
-sha256sums=('292961aa8723b54f96f89f6d8abf7d8e29259d94b7de831dbffb9ae15d346434'
+sha256sums=('bf22f698075685e1d71845d76c3b393b45d72e4b0206d7d434338a99d610e14c'
 )
 
 install="virtualbox-extension.install"
 
 package() {
-  install -Dm 644 "Oracle_VM_VirtualBox_Extension_Pack-$pkgver.vbox-extpack" \
+  install -Dm 644 "Oracle_VM_VirtualBox_Extension_Pack-$pkgver-$_build.vbox-extpack" \
 		  "$pkgdir/usr/share/virtualbox/extensions/Oracle_VM_VirtualBox_Extension_Pack-$pkgver.vbox-extpack"
   install -Dm 644 "ExtPack-license.txt" \
                   "$pkgdir/usr/share/licenses/$pkgname/PUEL"
