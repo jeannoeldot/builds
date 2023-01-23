@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.4.7.1.20230103
+pkgrel=2    # rebuild boost boost-libs 1.81.0
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ libraw 0.21.0
