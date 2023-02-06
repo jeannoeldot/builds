@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.12.9.0.20230103
-pkgrel=1
+pkgver=1.12.9.0.20230201
+pkgrel=2
 _name_release="OpenShadingLanguage-1.12.9.0"
 _ver_release="v1.12.9.0"
 pkgdesc="Advanced shading language for production GI renderers"
