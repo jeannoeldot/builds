@@ -1,0 +1,15 @@
+
+
+CMake Error at /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find Embree (missing: _embree_LIBRARIES EMBREE_INCLUDE_DIR)
+  (Required is at least version "3.8.0")
+Call Stack (most recent call first):
+  /usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake:600 (_FPHSA_FAILURE_MESSAGE)
+  build_files/cmake/Modules/FindEmbree.cmake:78 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
+  build_files/cmake/platform/platform_unix.cmake:478 (find_package)
+  CMakeLists.txt:1087 (include)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/build/blender-git/src/blender/build/CMakeFiles/CMakeOutput.log".
+See also "/build/blender-git/src/blender/build/CMakeFiles/CMakeError.log".
