@@ -129,10 +129,6 @@ cp -v /0-DataLinux/05-builds-dir-git/blender-git-3.6.0.0.20230227.tar.gz .
 -------------------------------------------------
 cp -v /0-DataLinux/05-builds-dir-git/OptiX-7.5.0-include.zip .
 
-!!! LIB ASSETS PUBLISH CONSERVE VERSION DANS 05-builds-dir-git
---------------------------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/LibAssetsPublish.zip .
-
 
 1-8) FAIRE PATCH
 ===============================
@@ -145,7 +141,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=3.6.0.0.20230227
-pkgrel=2    # AVEC ASSETS
+pkgrel=1
 
 pkgrel=1    # MAJ + Rebuild MAJ boost boost-libs 1.81.0
 
@@ -260,19 +256,14 @@ SANS PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.5.0-include.zip"
-        "LibAssetsPublish.zip"
 )
 
 sha256sum blender-git-3.6.0.0.20230227.tar.gz
 
 sha256sum OptiX-7.5.0-include.zip
 
-sha256sum LibAssetsPublish.zip
-
-
 sha256sums=('123...'
             '456...'
-            '789...'
 )
 
 AVEC PATCH
@@ -545,10 +536,6 @@ Lignes 829 et ...
 831 option WITH_STRICT_BUILD_OPTIONS  OFF
 =================================================================
 
-source/creator/CMakeLists.txt
-1487 ASSET_BUNDLE_DIR="${srcdir}"/lib/assets/publish/
-
-
 3-1) MAKEPKG TMPFS en CHROOT EN USER
 ====================================
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -556,7 +543,6 @@ source/creator/CMakeLists.txt
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-3.6.0.0.20230227.tar.gz
--rw-r--r--  1 jnd users  2779743 27 févr. 21:09 LibAssetsPublish.zip
 -rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-7.5.0-include.zip
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 
@@ -846,8 +832,6 @@ $ rm -f *.log
 $ rm -i blender-git-3.6.0.0.20230227.tar.gz
 !!! OPTIX
 $ rm -i OptiX-7.5.0-include.zip
-!!! ASSETS
-$ rm -i LibAssetsPublish.zip
 
 $ cd && maj-repolocal
 $ sync

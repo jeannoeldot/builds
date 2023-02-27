@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=3.6.0.0.20230227
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -41,11 +41,9 @@ provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.5.0-include.zip"
-        "LibAssetsPublish.zip"
 )
 sha256sums=('a873f5168002ea267a86570267d8c120d1f108ef5d884e5a90429d9009c8669c'
             '7553b276c9e2314eba2b48f409bda0659ea63f4d16a7ab902ed2974877813c08'
-            'db5295bcf57b5fd383e2dd89c004f1c0714ee6d7e9db1e8f025f18e3d3372329'
 )
 
 _gitname="blender"
@@ -75,7 +73,6 @@ build() {
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_SKIP_RPATH=ON \
-        -DASSET_BUNDLE_DIR="${srcdir}"/lib/assets/publish \
         -DOPTIX_ROOT_DIR="${srcdir}"/include \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
