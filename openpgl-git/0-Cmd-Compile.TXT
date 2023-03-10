@@ -3,21 +3,23 @@
 !!! EN USER
 cd $HOME/05-builds/openpgl-git
 
+AU 10/03/2023 : OPENPGL 0.5.0 PAS OK AVEC BLENDER 3.6.x.x
+
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenPathGuidingLibrary/openpgl/releases
-==> sherholz-intel released this 31 oct 2022 ==> 20221031
-==> Open PGL 0.4.1  ==> 0.4.1
-==> 0.4.1.20221031
+==> sherholz-intel Mar 10 2023 ==> 20230310
+==> Open PGL 0.5.0  ==> 0.5.0
+==> 0.5.0.20230310
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O openpgl-0.4.1.tar.gz \
-https://github.com/OpenPathGuidingLibrary/openpgl/archive/refs/tags/v0.4.1-beta.tar.gz
+wget -O openpgl-0.5.0.tar.gz \
+https://github.com/OpenPathGuidingLibrary/openpgl/archive/refs/tags/v0.5.0.tar.gz
 
-Nom Archive ==> openpgl-0.4.1-beta
+Nom Archive ==> openpgl-0.5.0
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -25,7 +27,7 @@ cd $HOME/05-builds/openpgl-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/openpgl-0.4.1.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/openpgl-0.5.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -38,12 +40,12 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openpgl-git               # openpgl ds community ?
-pkgver=0.4.1.20221031
+pkgver=0.5.0.20230310
 pkgrel=1
 
 
 !!!!!!
-_ver_release="0.4.1"
+_ver_release="0.5.0"
 _name_release="openpgl-${_ver_release}-beta"
 
 license=('Apache')
@@ -60,7 +62,7 @@ provides='openpgl'
 
 SANS PATCH
 ----------
-sha256sum openpgl-0.4.1.tar.gz
+sha256sum openpgl-0.5.0.tar.gz
 
 source=("openpgl-${_ver_release}.tar.gz"
 )
@@ -80,9 +82,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf openpgl-0.4.1.tar.gz -C /tmp/srcp
+tar -xzf openpgl-0.5.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/openpgl-0.4.1-beta/CMakeLists.txt
+1) kwrite /tmp/srcp/openpgl-0.5.0/CMakeLists.txt
 
 !!! VOIR
 !!! https://developer.blender.org/rB71a5a0f412b499def11806b68982f75548fd8100
@@ -103,7 +105,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 openpgl-0.4.1.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 openpgl-0.5.0.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -122,7 +124,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openpgl-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openpgl-git/openpgl-0.4.1.tar.gz . \
+&& cp -v $HOME/05-builds/openpgl-git/openpgl-0.5.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openpgl-git \
 && cp -v /tmp/build/openpgl-git-*-x86_64.pkg.tar.* . \
@@ -192,7 +194,7 @@ $ mv -v openpgl-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i openpgl-0.4.1.tar.gz
+$ rm -i openpgl-0.5.0.tar.gz
 
 
 $ cd && maj-repolocal

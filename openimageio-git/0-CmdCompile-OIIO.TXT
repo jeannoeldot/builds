@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.4.9.0.20230301
+pkgrel=2    # rebuild MAJ openexr 3.1.5-2/imath 3.1.7-1 ffmpeg 2:6.0-3
+
 pkgrel=1
 
 pkgrel=2    # rebuild boost boost-libs 1.81.0

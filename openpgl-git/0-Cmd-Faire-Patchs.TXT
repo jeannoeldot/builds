@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 0.4.1
+!!! VERSION = 0.5.0
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openpgl-git
 
 mkdir /tmp/srcp
 
-cp -v openpgl-0.4.1.tar.gz /tmp/srcp/
+cp -v openpgl-0.5.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openpgl-0.4.1.tar.gz
+tar -xzf openpgl-0.5.0.tar.gz
 
 
 
@@ -25,13 +25,13 @@ sync
 
 ==========================================================
 
-1) MODIFIER openpgl-0.4.1/common/cmake/gnu.cmake
+1) MODIFIER openpgl-0.5.0/common/cmake/gnu.cmake
 ===============================================
 /!\ /!\ /!\ cd /tmp/srcp
 
-cp -R openpgl-0.4.1 openpgl-0.4.1.new
+cp -R openpgl-0.5.0 openpgl-0.5.0.new
 
-cd openpgl-0.4.1.new/common/cmake/
+cd openpgl-0.5.0.new/common/cmake/
 kwrite gnu.cmake
 
 MODIFIER LIGNE 65 :
@@ -46,22 +46,22 @@ rm -f gnu.cmake~
 
 cd ../../..
 
-diff -aur openpgl-0.4.1 openpgl-0.4.1.new
-diff -aur openpgl-0.4.1 openpgl-0.4.1.new > enable-optimizations-Ofast.patch
+diff -aur openpgl-0.5.0 openpgl-0.5.0.new
+diff -aur openpgl-0.5.0 openpgl-0.5.0.new > enable-optimizations-Ofast.patch
 
-rm -rf openpgl-0.4.1.new
+rm -rf openpgl-0.5.0.new
 
 cd $HOME/05-builds/openpgl-git
 
 mv -vf /tmp/srcp/enable-optimizations-Ofast.patch .
 
-1) MODIFIER openpgl-0.4.1/common/cmake/gnu.cmake
+1) MODIFIER openpgl-0.5.0/common/cmake/gnu.cmake
 ===============================================
 /!\ /!\ /!\ cd /tmp/srcp
 
-cp -R openpgl-0.4.1 openpgl-0.4.1.new
+cp -R openpgl-0.5.0 openpgl-0.5.0.new
 
-cd openpgl-0.4.1.new/common/cmake/
+cd openpgl-0.5.0.new/common/cmake/
 kwrite gnu.cmake
 
 MODIFIER LIGNE 65 :
@@ -76,10 +76,10 @@ rm -f gnu.cmake~
 
 cd ../../..
 
-diff -aur openpgl-0.4.1 openpgl-0.4.1.new
-diff -aur openpgl-0.4.1 openpgl-0.4.1.new > enable-optimizations-Ofast-floop.patch
+diff -aur openpgl-0.5.0 openpgl-0.5.0.new
+diff -aur openpgl-0.5.0 openpgl-0.5.0.new > enable-optimizations-Ofast-floop.patch
 
-rm -rf openpgl-0.4.1.new
+rm -rf openpgl-0.5.0.new
 
 cd $HOME/05-builds/openpgl-git
 

@@ -2,6 +2,52 @@
 =================================================================
 Install the project...
 -- Install configuration: "Release"
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/cmake/openpgl-0.5.0/openpglConfig.cmake
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/cmake/openpgl-0.5.0/openpglConfigVersion.cmake
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/libopenpgl.so.0.5.0
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/libopenpgl.so.0
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/cmake/openpgl-0.5.0/openpgl_Exports.cmake
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/cmake/openpgl-0.5.0/openpgl_Exports-release.cmake
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/libopenpgl.so
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/volumesamplingdistribution.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/types.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/surfacesamplingdistribution.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/samplestorage.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/region.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/pathsegmentstorage.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/openpgl.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/field.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/distribution.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/device.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/data.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/VolumeSamplingDistribution.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/SurfaceSamplingDistribution.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/SampleStorage.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/SampleData.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/Region.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/PathSegmentStorage.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/PathSegment.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/OpenPGL.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/Field.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/Distribution.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/Device.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/cpp/Common.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/config.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/common.h
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/share/doc/openpgl/LICENSE.txt
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/share/doc/openpgl/third-party-programs.txt
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/share/doc/openpgl/third-party-programs-Embree.txt
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/share/doc/openpgl/third-party-programs-TBB.txt
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/share/doc/openpgl/README.md
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/share/doc/openpgl/CHANGELOG.md
+-- Installing: /build/openpgl-git/pkg/openpgl-git/usr/include/openpgl/version.h
+
+
+=================================================================
+Install the project...
+-- Install configuration: "Release"
 -- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/cmake/openpgl-0.3.1/openpglConfig.cmake
 -- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/cmake/openpgl-0.3.1/openpglConfigVersion.cmake
 -- Installing: /build/openpgl-git/pkg/openpgl-git/usr/lib/libopenpgl.so.0.3.1

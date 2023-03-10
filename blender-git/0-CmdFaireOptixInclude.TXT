@@ -1,4 +1,20 @@
 
+0-6) OPTIX 7.6
+================
+VOIR PKGBUILD community blender
+https://github.com/archlinux/svntogit-community/blob/packages/blender/trunk/PKGBUILD
+LIGNE 34:
+
+cd /0-DataLinux/05-builds-dir-git/
+
+https://developer.download.nvidia.com/redist/optix/v7.6/OptiX-7.6-Include.zip
+
+sha256sum OptiX-7.6-Include.zip
+f4c6b2a33d8ed14af8ad6d0fea3a9d60e544fba540c05055a754e06c2f8097b3
+
+cd
+
+
 0-5) OPTIX 7.5.0
 ================
 https://developer.nvidia.com/designworks/optix/download

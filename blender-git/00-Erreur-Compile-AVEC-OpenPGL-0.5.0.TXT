@@ -1,0 +1,53 @@
+
+In file included from /build/blender-git/src/blender/intern/cycles/kernel/../kernel/integrator/intersect_closest.h:10,
+                 from /build/blender-git/src/blender/intern/cycles/kernel/../kernel/device/cpu/kernel_arch_impl.h:25,
+                 from /build/blender-git/src/blender/intern/cycles/kernel/device/cpu/kernel.cpp:53:
+/build/blender-git/src/blender/intern/cycles/kernel/../kernel/integrator/guiding.h: In function ‘bool ccl::guiding_bsdf_init(KernelGlobals, IntegratorState, float3, float3, float&)’:
+/build/blender-git/src/blender/intern/cycles/kernel/../kernel/integrator/guiding.h:457:51: error: no matching function for call to ‘openpgl::cpp::SurfaceSamplingDistribution::Init(openpgl::cpp::Field* const&, pgl_point3f, float&, bool)’
+  457 |   if (kg->opgl_surface_sampling_distribution->Init(
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+  458 |           kg->opgl_guiding_field, guiding_point3f(P), rand, true)) {
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/openpgl/cpp/OpenPGL.h:18,
+                 from /build/blender-git/src/blender/intern/cycles/kernel/../util/guiding.h:7,
+                 from /build/blender-git/src/blender/intern/cycles/kernel/../kernel/device/cpu/globals.h:12,
+                 from /build/blender-git/src/blender/intern/cycles/kernel/../kernel/device/cpu/kernel_arch_impl.h:16:
+/usr/include/openpgl/cpp/SurfaceSamplingDistribution.h:216:21: note: candidate: ‘bool openpgl::cpp::SurfaceSamplingDistribution::Init(const openpgl::cpp::Field*, const pgl_point3f&, float&)’
+  216 | OPENPGL_INLINE bool SurfaceSamplingDistribution::Init(const Field* field, const pgl_point3f& pos, float& sample1D)
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/openpgl/cpp/SurfaceSamplingDistribution.h:216:21: note:   candidate expects 3 arguments, 4 provided
+/build/blender-git/src/blender/intern/cycles/kernel/../kernel/integrator/guiding.h: In function ‘bool ccl::guiding_phase_init(KernelGlobals, IntegratorState, float3, float3, float, float&)’:
+/build/blender-git/src/blender/intern/cycles/kernel/../kernel/integrator/guiding.h:509:50: error: no matching function for call to ‘openpgl::cpp::VolumeSamplingDistribution::Init(openpgl::cpp::Field* const&, pgl_point3f, float&, bool)’
+  509 |   if (kg->opgl_volume_sampling_distribution->Init(
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+  510 |           kg->opgl_guiding_field, guiding_point3f(P), rand, true)) {
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/openpgl/cpp/OpenPGL.h:19:
+/usr/include/openpgl/cpp/VolumeSamplingDistribution.h:232:21: note: candidate: ‘bool openpgl::cpp::VolumeSamplingDistribution::Init(const openpgl::cpp::Field*, const pgl_point3f&, float&)’
+  232 | OPENPGL_INLINE bool VolumeSamplingDistribution::Init(const Field* field, const pgl_point3f& pos, float& sample1D)
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/openpgl/cpp/VolumeSamplingDistribution.h:232:21: note:   candidate expects 3 arguments, 4 provided
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_ChainPredicateIterator.cpp.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_ChainSilhouetteIterator.cpp.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_ChainingIterator.cpp.o
+[ 94%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/lib_override_proxy_conversion.c.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_CurvePointIterator.cpp.o
+[ 94%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/lib_query.c.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_Interface0DIterator.cpp.o
+[ 94%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/lib_remap.c.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_SVertexIterator.cpp.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_StrokeVertexIterator.cpp.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_ViewEdgeIterator.cpp.o
+[ 94%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/library.c.o
+[ 94%] Building C object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/light.c.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/Iterator/BPy_orientedViewEdgeIterator.cpp.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/StrokeShader/BPy_BackboneStretcherShader.cpp.o
+[ 94%] Building CXX object source/blender/freestyle/CMakeFiles/bf_freestyle.dir/intern/python/StrokeShader/BPy_BezierCurveShader.cpp.o
+make[2]: *** [intern/cycles/kernel/CMakeFiles/cycles_kernel.dir/build.make:76: intern/cycles/kernel/CMakeFiles/cycles_kernel.dir/device/cpu/kernel.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:3688: intern/cycles/kernel/CMakeFiles/cycles_kernel.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/blender-git/src/blender/build'
+
+
