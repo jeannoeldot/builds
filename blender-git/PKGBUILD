@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=3.6.0.2.20230310
+pkgver=3.6.0.4.20230328
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -15,7 +15,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'sdl2'
           'libgl' 'glfw-x11'
           'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
-          'boost-libs' 'tbb'
+          'boost-libs' 'onetbb'
           'jemalloc'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
           'fmt'
@@ -40,11 +40,11 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 source=("$pkgname-$pkgver.tar.gz"
-        "LibAssetsPublish-3.6.0.2.20230310.zip"
+        "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.6-Include.zip"
 )
-sha256sums=('38de2ba66ae608122874bcfdae1fc154b87fd4be0209e3901f205d384ee4ac10'
-            'f23413b55cbf6e233e12ba3d2af2166319843028a039e89fa3e89f82f2b834b7'
+sha256sums=('181d8ff154cd8e47cbf20f43d0ed7d2340a6d15a08bbe70f2a7c5cd45f9e41b6'
+            '1ea54061e9d2822f944c4057f35a25cd940e92cbdf9abbf4f59d352850086294'
             'f4c6b2a33d8ed14af8ad6d0fea3a9d60e544fba540c05055a754e06c2f8097b3'
 )
 
@@ -58,9 +58,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4805a54525ea"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "aa69ec7f80fb"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1678445295|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1679997092|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

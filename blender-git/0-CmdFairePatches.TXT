@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.6.0.1.20230304
+!!! VERSION = 3.6.0.4.20230328
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-3.6.0.1.20230304.tar.gz /tmp/srcp/
+cp -v blender-git-3.6.0.4.20230328.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-3.6.0.1.20230304.tar.gz
+tar -xzf blender-git-3.6.0.4.20230328.tar.gz
 
 
 
