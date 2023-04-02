@@ -37,6 +37,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.10.0.20230301
+pkgrel=3    # Rebuild against OIIO 2.4.10.0-1
 pkgrel=2    # Rebuild against OIIO 2.4.9.0-2
 
 pkgrel=1
@@ -79,7 +80,7 @@ provides=('openshadinglanguage')
 !!! LLVM 15.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 15.0.7-1 [installé]
+extra/clang 15.0.7-2 [installé]
 extra/llvm 15.0.7-2 [installé]
 extra/llvm-libs 15.0.7-2 [installé]
 
@@ -167,7 +168,6 @@ LIGNES 83
 LIGNE 86
   OSL_BUILD_TESTS ON    =>      -DOSL_BUILD_TESTS=OFF \
 
-!!! SUITE https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/162c320a75b02fcb747ea1b0eab77435396d7e89..3d1cb783362722d9567289b150aeaf37573f1393:/build_files/build_environment/install_deps.sh
 LIGNE 88, 90
   USE_LLVM_BITCODE ON   =>  -DUSE_LLVM_BITCODE=OFF \ 
   
@@ -415,6 +415,9 @@ $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 ================================================================
 ANCIENS
 ========
+
+!!! SUITE https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/162c320a75b02fcb747ea1b0eab77435396d7e89..3d1cb783362722d9567289b150aeaf37573f1393:/build_files/build_environment/install_deps.sh
+
 
 2-2) PKGBUILD AVEC PATCH
 ========================

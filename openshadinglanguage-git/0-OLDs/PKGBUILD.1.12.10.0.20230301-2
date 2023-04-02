@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.10.0.20230301
-pkgrel=3
+pkgrel=2
 _name_release="OpenShadingLanguage-1.12.10.0"
 _ver_release="v1.12.10.0"
 pkgdesc="Advanced shading language for production GI renderers"
@@ -36,6 +36,7 @@ build() {
       -DCMAKE_SKIP_RPATH=ON \
       -DCMAKE_CXX_STANDARD=14 \
       -DLLVM_STATIC=OFF \
+      -DVERBOSE=ON \
       -DUSE_LLVM_BITCODE=OFF \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
