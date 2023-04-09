@@ -8,16 +8,16 @@ AU 19/02/2023 : EMBREE 4.0.0 PAS OK AVEC BLENDER 3.6.x.x
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/embree/embree/releases
-==> svenwoop  released this 08 fev 2023 ==> 20230208
-==> Embree v4.0.0  ==> 4.0.0
-==> 4.0.0.20230208
+==> svenwoop  released this 14 sept 2022 ==> 20220914
+==> Embree v3.13.5  ==> 3.13.5
+==> 3.13.5.20220914
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O embree-4.0.0.tar.gz \
-https://github.com/embree/embree/archive/refs/tags/v4.0.0.tar.gz
+wget -O embree-3.13.5.tar.gz \
+https://github.com/embree/embree/archive/refs/tags/v3.13.5.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -25,7 +25,7 @@ cd $HOME/05-builds/embree-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/embree-4.0.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/embree-3.13.5.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -38,10 +38,9 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git               # embree ds community ?
-pkgver=4.0.0.20230208
-pkgrel=1
-
+pkgver=3.13.5.20220914
 pkgrel=2  # Rebuild avec cmake -Bbuild
+
 pkgrel=2    # Rebuild MAJ tbb 2021.4
 
 pkgrel=4  # AVEC patch Ofast + dynamic libs
@@ -57,7 +56,8 @@ pkgrel=2    # static libs
 
 
 !!!!!!
-_ver_release="4.0.0"
+_ver_release="3.13.5"
+
 _name_release="embree-${_ver_release}"
 
 license=('Apache')
@@ -73,7 +73,7 @@ provides='embree'
 
 SANS PATCH
 ----------
-sha256sum embree-4.0.0.tar.gz
+sha256sum embree-3.13.5.tar.gz
 
 source=("embree-${_ver_release}.tar.gz"
 )
@@ -93,9 +93,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf embree-4.0.0.tar.gz -C /tmp/srcp
+tar -xzf embree-3.13.5.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/embree-4.0.0/CMakeLists.txt
+1) kwrite /tmp/srcp/embree-3.13.5/CMakeLists.txt
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
@@ -118,13 +118,13 @@ EMBREE_STATIC_LIB               OFF by default  ==> OFF  install_deps = ON
 
 LIGNE 122 ET ...
 ----------------
-EMBREE_ISPC_SUPPORT             OFF by default   ==> OFF install_deps = OFF
+EMBREE_ISPC_SUPPORT             ON by default   ==> OFF install_deps = OFF
 
 LIGNE 135 ET ...
 ----------------
 EMBREE_STACK_PROTECTOR          OFF by default
 
-EMBREE_RAY_MASK                 ON by default  ==> ON  install_deps = ON
+EMBREE_RAY_MASK                 OFF by default  ==> ON  install_deps = ON
 EMBREE_BACKFACE_CULLING         OFF by default          install_deps = OFF
 EMBREE_FILTER_FUNCTION          ON by default           install_deps = ON
 EMBREE_IGNORE_INVALID_RAYS      OFF by default
@@ -160,7 +160,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-4.0.0.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 embree-3.13.5.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -179,7 +179,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/embree-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/embree-git/embree-4.0.0.tar.gz . \
+&& cp -v $HOME/05-builds/embree-git/embree-3.13.5.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/embree-git \
 && cp -v /tmp/build/embree-git-*-x86_64.pkg.tar.* . \
@@ -242,7 +242,7 @@ $ mv -v embree-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i embree-4.0.0.tar.gz
+$ rm -i embree-3.13.5.tar.gz
 
 
 $ cd && maj-repolocal
@@ -284,7 +284,7 @@ embree-git W: Dependency included and not needed ('glfw-x11')
 
 AVEC PATCH
 ----------
-sha256sum embree-4.0.0.tar.gz
+sha256sum embree-3.13.5.tar.gz
 
 sha256sum enable-optimizations-Ofast.patch
 
@@ -303,7 +303,7 @@ prepare() {
 
 AVEC PATCH
 ----------
-sha256sum embree-4.0.0.tar.gz
+sha256sum embree-3.13.5.tar.gz
 
 sha256sum enable-optimizations-Ofast-floop.patch
 
