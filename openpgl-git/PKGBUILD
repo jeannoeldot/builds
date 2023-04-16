@@ -9,7 +9,7 @@ pkgdesc="Intel(R) Open Path Guiding Library"
 url="http://www.openpgl.org/"
 arch=('x86_64')
 license=('Apache')
-depends=('tbb'
+depends=('onetbb'
          'embree-git'
 )
 makedepends=('cmake'

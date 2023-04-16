@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.12.7.1.20221201
-pkgrel=3
-_name_release="OpenShadingLanguage-1.12.7.1"
-_ver_release="v1.12.7.1"
+pkgver=1.12.11.0.20230406
+pkgrel=2
+_name_release="OpenShadingLanguage-1.12.11.0"
+_ver_release="v1.12.11.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
@@ -23,10 +23,10 @@ makedepends=('boost' 'cmake' 'llvm'
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-7.5.0-include.zip"
+        "OptiX-7.6-Include.zip"
 )
-sha256sums=('a06e4d1c6743cee83365ce600440c4e98e666dedb826b9f4e9bb1288ec769845'
-            '7553b276c9e2314eba2b48f409bda0659ea63f4d16a7ab902ed2974877813c08'
+sha256sums=('760dc4df5c23867e92f58080e9d907da137325099d1a8bf95063785d63e550d5'
+            'f4c6b2a33d8ed14af8ad6d0fea3a9d60e544fba540c05055a754e06c2f8097b3'
 )
 
 build() {
@@ -39,11 +39,10 @@ build() {
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
       -DUSE_OPTIX=ON \
-      -DOPTIX_INCLUDE_DIR="${srcdir}"/include \
+      -DOPTIX_INCLUDE_DIR="${srcdir}" \
       -DCUDA_TARGET_ARCH="sm_86" \
       -DCMAKE_CXX_STANDARD=14 \
       -DLLVM_STATIC=OFF \
-      -DVERBOSE=ON \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
   make -C build

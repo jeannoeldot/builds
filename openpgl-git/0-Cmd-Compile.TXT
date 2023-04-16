@@ -50,7 +50,7 @@ _name_release="openpgl-${_ver_release}-beta"
 
 license=('Apache')
 
-depends=('tbb'
+depends=('onetbb'
          'embree-git'
 )
 
@@ -87,7 +87,8 @@ tar -xzf openpgl-0.5.0.tar.gz -C /tmp/srcp
 1) kwrite /tmp/srcp/openpgl-0.5.0/CMakeLists.txt
 
 !!! VOIR
-!!! https://developer.blender.org/rB71a5a0f412b499def11806b68982f75548fd8100
+https://projects.blender.org/blender/blender/src/branch/main
+/build_files/build_environment/cmake/openpgl.cmake
 
 LIGNES 31 ET ...
 ----------------
@@ -172,7 +173,6 @@ rm -f *~
 # Verifications...
 
 namcap openpgl-git-*-x86_64.pkg.tar.*
-openpgl-git W: Dependency tbb included but already satisfied
 openpgl-git W: Dependency included and not needed ('embree-git')
 
 
@@ -219,4 +219,10 @@ SI PROBLEME
 
 ANCIEN
 ======
+
+!!! https://developer.blender.org/rB71a5a0f412b499def11806b68982f75548fd8100
+
+openpgl-git W: Dependency tbb included but already satisfied
+
+
 OPENPGL_BUILD_PYTHON        OFF by default
