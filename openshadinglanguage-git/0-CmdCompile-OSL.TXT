@@ -37,6 +37,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.12.0.20230501
+pkgrel=2    # rebuild MAJ python 3.11
+
 pkgrel=1
 
 pkgrel=3    # Rebuild against OIIO 2.4.10.0-1

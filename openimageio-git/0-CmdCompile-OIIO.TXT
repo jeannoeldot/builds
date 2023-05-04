@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.4.11.0.20230501
+pkgrel=2    # rebuild MAJ python 3.11
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ openexr 3.1.5-2/imath 3.1.7-1 ffmpeg 2:6.0-3
@@ -374,7 +376,7 @@ rm -f *~
 usr/bin/testtex
 usr/bin/idiff
 usr/bin/oiiotool
-usr/lib/python3.10/site-packages/OpenImageIO.cpython-310-x86_64-linux-gnu.so
+usr/lib/python3.11/site-packages/OpenImageIO.cpython-311-x86_64-linux-gnu.so
 usr/lib/libOpenImageIO_Util.so.2.4.11
 usr/lib/libOpenImageIO.so.2.4.11
 
