@@ -41,6 +41,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openpgl-git               # openpgl ds community ?
 pkgver=0.5.0.20230310
+pkgrel=2    # Rebuild maj embree 4.1.0
+
 pkgrel=1
 
 

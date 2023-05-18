@@ -2,7 +2,7 @@
 
 pkgname=openpgl-git
 pkgver=0.5.0.20230310
-pkgrel=1
+pkgrel=2
 _ver_release="0.5.0"
 _name_release="openpgl-${_ver_release}"
 pkgdesc="Intel(R) Open Path Guiding Library"

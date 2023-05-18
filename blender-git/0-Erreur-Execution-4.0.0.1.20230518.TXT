@@ -1,0 +1,30 @@
+
+┌jnd ( ~ )
+└─> $ blender
+Read prefs: "/home/jnd/.config/blender/4.0/config/userpref.blend"
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:68: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(filteredVerts) is 0: return
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:69: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(filteredVerts) is 1:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:76: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(selFaces) is 0:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:141: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  len(targetFace.verts) is not 4):
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:169: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if len(corners) is not 4:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:250: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(filteredVerts) is 1:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:278: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if len(f.verts) is not 4:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:293: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(edgeVerts) is 0:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:297: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(selFaces) is 0:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:640: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if axis is 'Y':
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:691: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if img is not None and img.size[0] is not 0:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:770: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(selFaces) is 0:
+/home/jnd/.config/blender/4.0/scripts/addons/UvSquares-master/uv_squares.py:834: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if min is not 1:
