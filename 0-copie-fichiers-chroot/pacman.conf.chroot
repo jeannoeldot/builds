@@ -22,7 +22,7 @@ HoldPkg     = pacman glibc
 Architecture = auto
 
 # Pacman won't upgrade packages listed in IgnorePkg and members of IgnoreGroup
-#IgnorePkg   = 
+#IgnorePkg   =
 #IgnoreGroup =
 
 #NoUpgrade   =
@@ -33,7 +33,7 @@ Architecture = auto
 Color
 #NoProgressBar
 CheckSpace
-#VerbosePkgLists
+VerbosePkgLists
 #ParallelDownloads = 5
 
 # By default, pacman accepts packages signed by keys that its local keyring
@@ -69,8 +69,7 @@ LocalFileSigLevel = Optional
 # repo name header and Include lines. You can add preferred servers immediately
 # after the header, and they will be used before the default mirrors.
 
-#[testing]
-#SigLevel = Never
+#[core-testing]
 #Include = /etc/pacman.d/mirrorlist
 
 [chroot-repolocal]
@@ -83,15 +82,10 @@ Server = file://PATHTOREPOLOCAL/chrootrepolocal
 SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
-[extra]
-SigLevel = Never
-Include = /etc/pacman.d/mirrorlist
-
-#[community-testing]
-#SigLevel = PackageRequired
+#[extra-testing]
 #Include = /etc/pacman.d/mirrorlist
 
-[community]
+[extra]
 SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
@@ -99,7 +93,6 @@ Include = /etc/pacman.d/mirrorlist
 # enable the multilib repositories as required here.
 
 #[multilib-testing]
-#SigLevel = PackageRequired
 #Include = /etc/pacman.d/mirrorlist
 
 [multilib]
@@ -113,8 +106,8 @@ Include = /etc/pacman.d/mirrorlist
 #Server = file:///home/custompkgs
 
 #[xyne-x86_64]
-# A repo for Xyne's own projects: https://xyne.dev/projects/
-# Packages for the "x86_64" architecture.
-# Note that this includes all packages in [xyne-any].
+## A repo for Xyne's own projects: https://xyne.dev/projects/
+## Packages for the "x86_64" architecture.
+## Note that this includes all packages in [xyne-any].
 #SigLevel = Never
 #Server = https://xyne.dev/repos/xyne

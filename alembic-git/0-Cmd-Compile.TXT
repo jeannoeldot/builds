@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=alembic-git               # alembic ds community
 pkgver=1.8.5.20230313
+pkgrel=2          # rebuild MAJ imath 3.1.8
+
 pkgrel=1
 
 pkgrel=2          # rebuild MAJ imath 3.1.7
