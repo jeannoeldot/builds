@@ -37,6 +37,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.12.0.20230501
+pkgrel=3    # rebuild MAJ openexr 3.1.7-2/imath 3.1.8
+
 pkgrel=2    # rebuild MAJ python 3.11
 
 pkgrel=1
@@ -82,9 +84,9 @@ provides=('openshadinglanguage')
 !!! LLVM 15.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 15.0.7-8 [installé]
-extra/llvm 15.0.7-2 [installé]
-extra/llvm-libs 15.0.7-2 [installé]
+extra/clang 15.0.7-9 [installé]
+extra/llvm 15.0.7-3 [installé]
+extra/llvm-libs 15.0.7-3 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'

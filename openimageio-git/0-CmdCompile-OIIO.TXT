@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.4.11.0.20230501
+pkgrel=3    # rebuild MAJ openexr 3.1.7-2/imath 3.1.8
+
 pkgrel=2    # rebuild MAJ python 3.11
 
 pkgrel=1

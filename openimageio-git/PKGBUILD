@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.4.11.0.20230501
-pkgrel=2
+pkgrel=3
 _name_release="oiio-2.4.11.0"
 _ver_release="v2.4.11.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
