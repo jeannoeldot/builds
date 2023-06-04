@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=alembic-git               # alembic ds community
 pkgver=1.8.5.20230313
+pkgrel=3          # rebuild MAJ imath 3.1.9
 pkgrel=2          # rebuild MAJ imath 3.1.8
 
 pkgrel=1
@@ -194,6 +195,7 @@ rm -f *~
 Checking alembic-git-1.8.5.20230313-1-x86_64.pkg.tar.xz
 
 namcap alembic-git-*-x86_64.pkg.tar.*
+alembic-git W: Dependency included, but may not be needed ('imath')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------

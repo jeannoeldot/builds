@@ -2,7 +2,7 @@
 
 pkgname=alembic-git
 pkgver=1.8.5.20230313
-pkgrel=2
+pkgrel=3
 _ver_release="1.8.5"
 _name_release="alembic-${_ver_release}"
 pkgdesc="An open framework for storing and sharing scene data"
