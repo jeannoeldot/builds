@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=conky-lua-nv-git
-pkgver=1.19.3.20230530
+pkgver=1.14.1.20221015
 pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
 arch=('i686' 'x86_64')
@@ -15,17 +15,23 @@ depends=('libxml2' 'curl' 'cairo' 'wireless_tools'
           'hicolor-icon-theme'
           'libpulse'
 )
-makedepends=('cmake' 'git' 'man-db'
+makedepends=('cmake'  'git' 'man-db'
 )
 optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('50e1be063cd40254637e6c2609a1c7a0578635e12e2d25bea67726d85aee61f7'
+sha256sums=('78a2b1aa46cd98d11f236c108eda9359882d330b0303cf814fa66911f82060f5'
 )
 #options=('!strip' 'debug')
 
 _gitname="conky"
+
+prepare() {
+  cd "${_gitname}"
+  # Use our CFLAGS / CXXFLAGS
+  sed -i '/set(CMAKE_C_FLAGS/,+5d' cmake/ConkyBuildOptions.cmake
+}
 
 build() {
   cd "${_gitname}"
