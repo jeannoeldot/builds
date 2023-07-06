@@ -25,9 +25,11 @@ sync
 1-3) FAIRE PATCHES
 =====================
 
-voir : 0-CmdFairePatches.TXT
+voir : 01-CmdFairePatches.TXT
 -----------------------------
 
+voir : 02-CmdFairePatches.TXT
+-----------------------------
 
 2) MODIFIER LE PKGBUILD
 ========================
@@ -69,6 +71,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-build-with-boost.patch"
         "fix-build-with-protobuf.patch"
         "fix-build-websocketpp-with-boost.patch"
+        "fix-build-to-explicitly-link.patch"
 )
 
 sha512sum pokerth-1.1.2.tar.gz
@@ -76,6 +79,7 @@ sha512sum pokerth-1.1.2.tar.gz
 sha512sum fix-build-with-boost.patch
 sha512sum fix-build-with-protobuf.patch
 sha512sum fix-build-websocketpp-with-boost.patch
+sha512sum fix-build-to-explicitly-link.patch
 
 sha512sums=("..."
             "..."
@@ -84,6 +88,7 @@ sha512sums=("..."
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
 $ ls -la
+-rw-r--r--  1 jnd users      525  6 juil. 11:13 fix-build-to-explicitly-link.patch
 -rw-r--r--  1 jnd users     4360 30 oct.  15:14 fix-build-websocketpp-with-boost.patch
 -rw-r--r--  1 jnd users     2143 12 déc.   2018 fix-build-with-boost.patch
 -rw-r--r--  1 jnd users     1861 12 déc.   2018 fix-build-with-protobuf.patch
@@ -134,10 +139,10 @@ $ rm -rf /tmp/chrootrepo
 
 # Verifications...
 namcap pokerth-*-x86_64.pkg.tar.*
-pokerth W: Dependency curl included but already satisfied
-pokerth W: Dependency gnutls included but already satisfied
-pokerth W: Dependency libxkbcommon-x11 included but already satisfied
-pokerth W: Dependency included and not needed ('libircclient')
+...
+pokerth W: Dependency included, but may not be needed ('gnutls')
+pokerth W: Dependency included, but may not be needed ('libxkbcommon-x11')
+pokerth W: Dependency included, but may not be needed ('libircclient')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
@@ -178,6 +183,11 @@ OU
 ================================================================
 ANCIENS
 =======
+
+pokerth W: Dependency curl included but already satisfied
+pokerth W: Dependency gnutls included but already satisfied
+pokerth W: Dependency libxkbcommon-x11 included but already satisfied
+pokerth W: Dependency included and not needed ('libircclient')
 
   NATIVE
 --------
