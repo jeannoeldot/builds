@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.0.0.7.20230702
+pkgver=4.0.0.9.20230709
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -45,8 +45,8 @@ source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.6-Include.zip"
 )
-sha256sums=('2b6394ce515a96213657a11675c33d6f648a7c37d57b370c03ce4081bb781872'
-            '13e69fe4007072db169ac8c77742e4d65fc3ef3ec964239ec3b6833a1830e0c0'
+sha256sums=('3509c995ae27287186ea95f6afecdfd5af6b28ec013c939b7614773e04f0a0c6'
+            'bfdf5647210d7fa0f4b0040bd6936b158ae3f78bc40db310f673e0c25cce2efa'
             'f4c6b2a33d8ed14af8ad6d0fea3a9d60e544fba540c05055a754e06c2f8097b3'
 )
 
@@ -60,9 +60,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4f3e2ee857b5"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7bc806ff25e9"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1688291667|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1688891033|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
