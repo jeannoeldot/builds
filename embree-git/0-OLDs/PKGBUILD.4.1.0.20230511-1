@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=embree-git
-pkgver=4.2.0.20230801
+pkgver=4.1.0.20230511
 pkgrel=1
-_ver_release="4.2.0"
+_ver_release="4.1.0"
 _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"
 url="https://github.com/embree"
@@ -17,7 +17,7 @@ conflicts=('embree')
 provides=('embree')
 source=("embree-${_ver_release}.tar.gz"
 )
-sha256sums=('b0479ce688045d17aa63ce6223c84b1cdb5edbf00d7eda71c06b7e64e21f53a0'
+sha256sums=('117efd87d6dddbf7b164edd94b0bc057da69d6422a25366283cded57ed94738b'
 )
 
 build() {
@@ -30,6 +30,7 @@ build() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_SKIP_RPATH=ON \
     -DEMBREE_TUTORIALS=OFF \
+    -DEMBREE_NO_SPLASH=ON \
     -DEMBREE_RAY_MASK=ON \
     -DEMBREE_MAX_ISA="AVX2"
   make -C build
