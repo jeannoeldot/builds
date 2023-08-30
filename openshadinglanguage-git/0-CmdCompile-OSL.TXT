@@ -37,6 +37,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.13.0.20230701
+pkgrel=3    # rebuild AVEC LLVM 15 suite maj LLVM 16
 pkgrel=2    # Rebuild against OIIO 2.4.14.0
 
 pkgrel=1
@@ -88,22 +89,22 @@ provides=('openshadinglanguage')
 
 !!! LLVM 15.0
 ------------------------------------
-$ pacman -Ss llvm | grep install
-extra/clang 15.0.7-9 [installé]
-extra/llvm 15.0.7-3 [installé]
-extra/llvm-libs 15.0.7-3 [installé]
+$ pacman -Ss llvm15 | grep install
+extra/clang15 15.0.7-1 [installé]
+extra/llvm15 15.0.7-1 [installé]
+extra/llvm15-libs 15.0.7-1 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
-         'llvm-libs'
+         'llvm15-libs'
          'qt5-base'
-         'clang'
+         'clang15'
          'python' 'pugixml' 'pybind11'
 )
 depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
 
-makedepends=('boost' 'cmake' 'llvm')
+makedepends=('boost' 'cmake' 'llvm15')
 
 
 2-2) PKGBUILD SANS PATCH
@@ -142,6 +143,8 @@ build() {
   # Install lib*.so par défaut dans lib64 au lieu de lib
       -DCMAKE_INSTALL_LIBDIR=lib \
   ...
+      -DLLVM_DIRECTORY=/usr/lib/llvm15 \  # Pour llvm 15
+
       -DCMAKE_CXX_STANDARD=14 \         # Pour llvm 10
 
 package() {

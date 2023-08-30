@@ -173,6 +173,8 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=4.0.0.18.20230827
+pkgrel=2    # Rebuild AVEC LLVM 15 suite maj LLVM 16
+
 pkgrel=1
 
 pkgrel=1    # AVEC NEW DEPS
@@ -553,10 +555,17 @@ Cycles: Increase the compute model for the PTX kernel
             ==> OFF
 
 703 # LLVM
-$ pacman -Ss llvm | grep install
-extra/clang 15.0.7-9 [installé]
-extra/llvm 15.0.7-3 [installé]
-extra/llvm-libs 15.0.7-3 [installé]
+$ pacman -Ss llvm15 | grep install
+extra/clang15 15.0.7-1 [installé]
+extra/llvm15 15.0.7-1 [installé]
+extra/llvm15-libs 15.0.7-1 [installé]
+
+depends=(...
+          'llvm15-libs' 'clang15'
+makedepends=(...
+              'llvm15'
+        -DLLVM_VERSION=15 \
+
 
 !!! A VOIR ???
 704 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'

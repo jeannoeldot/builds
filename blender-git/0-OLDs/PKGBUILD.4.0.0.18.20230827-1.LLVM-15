@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=4.0.0.18.20230827
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -19,7 +19,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'jemalloc'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
           'fmt'
-          'llvm15-libs' 'clang15'
+          'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu'
           'libepoxy'
           'libdecor' 'wayland-protocols' 'libxkbcommon'
@@ -33,7 +33,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openpgl-git'
           'zstd'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm15'
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
              'mold'
@@ -98,7 +98,6 @@ build() {
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_CYCLES_DEVICE_HIP=OFF \
         -DWITH_CYCLES_DEVICE_METAL=OFF \
-        -DLLVM_VERSION=15 \
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
         -DWITH_LINKER_GOLD=OFF \

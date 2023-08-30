@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.12.13.0.20230701
-pkgrel=3
+pkgrel=2
 _name_release="OpenShadingLanguage-1.12.13.0"
 _ver_release="v1.12.13.0"
 pkgdesc="Advanced shading language for production GI renderers"
@@ -12,12 +12,12 @@ license=('custom')
 depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
-         'llvm15-libs'
+         'llvm-libs'
          'qt5-base'
-         'clang15'
+         'clang'
          'python' 'pugixml' 'pybind11'
 )
-makedepends=('boost' 'cmake' 'llvm15')
+makedepends=('boost' 'cmake' 'llvm')
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
@@ -35,7 +35,6 @@ build() {
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
       -DCMAKE_CXX_STANDARD=14 \
-      -DLLVM_DIRECTORY=/usr/lib/llvm15 \
       -DLLVM_STATIC=OFF \
       -DUSE_LLVM_BITCODE=OFF \
       -DUSE_SIMD=avx2 \
