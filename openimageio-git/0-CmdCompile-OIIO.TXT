@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.4.15.0.20230901
+pkgrel=2    # rebuild boost boost-libs 1.83.0
+
 pkgrel=1     # MAJ openexr 3.2.0-2
 
 pkgrel=3    # rebuild MAJ openexr 3.1.7-2/imath 3.1.8
