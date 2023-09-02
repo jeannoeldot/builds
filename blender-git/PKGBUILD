@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.0.0.18.20230827
-pkgrel=2
+pkgver=4.0.0.21.20230902
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -27,7 +27,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
           'opencolorio'
           'opencollada-git' 'openimageio-git'
-          'openshadinglanguage-git' 'clang'
+          'openshadinglanguage-git'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
           'embree-git' 'openimagedenoise-git'
           'openpgl-git'
@@ -46,8 +46,8 @@ source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.6-Include.zip"
 )
-sha256sums=('8f890a8d6af3f53c82bbf9ba72933def71ce7639bd91f0eb31ac9ad31f6fe5d1'
-            'c5d4090f1ff3156722789c9ce448b433565b1ac25ade873078686c9446a5ebd4'
+sha256sums=('af827f1c4082ac361f007b7aaa7ff28908e7c5afe22948a34b7578f1d551aa80'
+            'dbdf396442fd94ef3d8c915c56ed12a29c0b56326b904575d098572cbcda2cba'
             'f4c6b2a33d8ed14af8ad6d0fea3a9d60e544fba540c05055a754e06c2f8097b3'
 )
 
@@ -61,9 +61,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "0e2f4046c642"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b0d5f3dc224f"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1693121165|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1693643903|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

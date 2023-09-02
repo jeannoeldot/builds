@@ -1,0 +1,10 @@
+Exception in module register(): /usr/share/blender/4.0/scripts/addons/node_wrangler/__init__.py
+Traceback (most recent call last):
+  File "/usr/share/blender/4.0/scripts/modules/addon_utils.py", line 400, in enable
+    mod.register()
+  File "/usr/share/blender/4.0/scripts/addons/node_wrangler/__init__.py", line 53, in register
+    interface.register()
+  File "/usr/share/blender/4.0/scripts/addons/node_wrangler/interface.py", line 501, in register
+    bpy.types.NODE_MT_category_SH_NEW_INPUT.prepend(attr_nodes_menu_func)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'module' object has no attribute 'NODE_MT_category_SH_NEW_INPUT'
