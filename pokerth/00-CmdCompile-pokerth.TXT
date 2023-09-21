@@ -38,6 +38,7 @@ voir : 02-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=32     # rebuild MAJ abseil-cpp-20230802.1
 pkgrel=31     # rebuild boost boost-libs 1.83.0-1
 pkgrel=30     # rebuild protobuf 24.2-1
 pkgrel=29     # rebuild protobuf 23.3-2
