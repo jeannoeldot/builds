@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=alembic-git
-pkgver=1.8.5.20230313
-pkgrel=3
-_ver_release="1.8.5"
+pkgver=1.8.6.20230926
+pkgrel=1
+_ver_release="1.8.6"
 _name_release="alembic-${_ver_release}"
 pkgdesc="An open framework for storing and sharing scene data"
 url="http://www.alembic.io/"
@@ -17,7 +17,7 @@ conflicts=('alembic')
 provides=('alembic')
 source=("alembic-${_ver_release}.tar.gz"
 )
-sha256sums=('180a12f08d391cd89f021f279dbe3b5423b1db751a9898540c8059a45825c2e9'
+sha256sums=('c572ebdea3a5f0ce13774dd1fceb5b5815265cd1b29d142cf8c144b03c131c8c'
 )
 
 build() {
