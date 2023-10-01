@@ -7,19 +7,19 @@ cd $HOME/05-builds/opensubdiv-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/PixarAnimationStudios/OpenSubdiv/tags
-==> 26 sept 2022 ==> 20220926
-==> v3_5_0 ==> 3.5.0
-==> 3.5.0.20220926
+==> 21 sept 2023 ==> 20230921
+==> v3_6_0 ==> 3.6.0
+==> 3.6.0.20230921
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenSubdiv-v3_5_0.tar.gz \
-https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v3_5_0.tar.gz
+wget -O OpenSubdiv-v3_6_0.tar.gz \
+https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v3_6_0.tar.gz
 OU
-wget -O OpenSubdiv-v3_5_0.tar.gz \
-https://github.com/PixarAnimationStudios/OpenSubdiv/archive/refs/tags/v3_5_0.tar.gz
+wget -O OpenSubdiv-v3_6_0.tar.gz \
+https://github.com/PixarAnimationStudios/OpenSubdiv/archive/refs/tags/v3_6_0.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -27,7 +27,7 @@ cd $HOME/05-builds/opensubdiv-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenSubdiv-v3_5_0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenSubdiv-v3_6_0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -40,7 +40,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=opensubdiv-git               # opensubdiv ds community
-pkgver=3.5.0.20220926
+pkgver=3.6.0.20230921
 pkgrel=1
 
 pkgrel=3  # Rebuild avec cmake -Bbuild
@@ -74,7 +74,7 @@ makedepends=('cmake' 'mesa')
 source=("OpenSubdiv-v${_ver_release}.tar.gz"
 )
 
-sha256sum OpenSubdiv-v3_5_0.tar.gz
+sha256sum OpenSubdiv-v3_6_0.tar.gz
 
 sha256sums=('... ...'
 )
@@ -87,7 +87,7 @@ source=("OpenSubdiv-v${_ver_release}.tar.gz"
         "opensubdiv-tbb2021.patch"
 )
 
-sha256sum OpenSubdiv-v3_5_0.tar.gz
+sha256sum OpenSubdiv-v3_6_0.tar.gz
 
 sha256sum opensubdiv-tbb2021.patch
 
@@ -127,7 +127,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-Erreur-compil-cmake-nvcc.patch'
 )
 
-sha256sum OpenSubdiv-v3_5_0.tar.gz
+sha256sum OpenSubdiv-v3_6_0.tar.gz
 
 sha256sum fix-Erreur-compil-cmake-nvcc.patch
 
@@ -168,7 +168,7 @@ prepare() {
 ==============================
 mkdir /tmp/srcp
 
-tar -xzf OpenSubdiv-v3_5_0.tar.gz -C /tmp/srcp
+tar -xzf OpenSubdiv-v3_6_0.tar.gz -C /tmp/srcp
 
 1) kwrite /tmp/srcp/OpenSubdiv-3_4_4/CMakeLists.txt
 
@@ -240,7 +240,7 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r-- 1 jnd users     1282  9 août  10:20 PKGBUILD
--rw-r--r-- 1 jnd users 15825430  9 août  09:43 OpenSubdiv-v3_5_0.tar.gz
+-rw-r--r-- 1 jnd users 15825430  9 août  09:43 OpenSubdiv-v3_6_0.tar.gz
 -rw-r--r-- 1 jnd users      499  2 févr. 17:00 fix-Erreur-compil-cmake-nvcc.patch
 -rw-r--r--  1 jnd users     1158 10 déc.  14:28 opensubdiv-tbb2021.patch
 
@@ -260,7 +260,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/opensubdiv-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/opensubdiv-git/OpenSubdiv-v3_5_0.tar.gz . \
+&& cp -v $HOME/05-builds/opensubdiv-git/OpenSubdiv-v3_6_0.tar.gz . \
 && cp -v $HOME/05-builds/opensubdiv-git/fix-Erreur-compil-cmake-nvcc.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/opensubdiv-git \
@@ -324,7 +324,7 @@ $ mv -v opensubdiv-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenSubdiv-v3_5_0.tar.gz
+$ rm -i OpenSubdiv-v3_6_0.tar.gz
 
 
 $ cd && maj-repolocal
@@ -398,7 +398,7 @@ $ head -n 46 opensubdiv/opensubdiv/version.h | grep VERSION
 
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
-tar -cvzf OpenSubdiv-v3_5_0.tar.gz --exclude=.git opensubdiv
+tar -cvzf OpenSubdiv-v3_6_0.tar.gz --exclude=.git opensubdiv
 
 !!!!!!
 _gitname="opensubdiv"

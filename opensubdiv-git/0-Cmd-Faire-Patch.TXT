@@ -5,20 +5,20 @@ cd $HOME/05-builds/opensubdiv-git
 
 mkdir /tmp/srcp
 
-cp -v OpenSubdiv-v3_5_0.tar.gz /tmp/srcp/
+cp -v OpenSubdiv-v3_6_0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenSubdiv-v3_5_0.tar.gz
+tar -xzf OpenSubdiv-v3_6_0.tar.gz
 
-1) MODIFIER opensubdiv/CMakeLists.txt
+1) MODIFIER opensubdiv/osd/tbbEvaluator.cpp
 ====================================================================================
-cp -R opensubdiv opensubdiv.new
+cp -R OpenSubdiv-3_6_0 OpenSubdiv-3_6_0.new
 
-cd opensubdiv.new
-kwrite CMakeLists.txt
+cd OpenSubdiv-3_6_0.new/opensubdiv/osd/
+kwrite tbbEvaluator.cpp
 
-!!! VOIR : https://github.com/PixarAnimationStudios/OpenSubdiv/issues/922
+!!! VOIR : opensubdiv-tbb2021.patch
 
 MODIFIER LIGNE 51 : DEVIENT
         -DOPENSUBDIV_VERSION_STRING=${OSD_SONAME}
@@ -50,4 +50,31 @@ sync
 ANCIENS
 ========
 
- 
+1) MODIFIER opensubdiv/CMakeLists.txt
+====================================================================================
+cp -R opensubdiv opensubdiv.new
+
+cd opensubdiv.new
+kwrite CMakeLists.txt
+
+!!! VOIR : https://github.com/PixarAnimationStudios/OpenSubdiv/issues/922
+
+MODIFIER LIGNE 51 : DEVIENT
+        -DOPENSUBDIV_VERSION_STRING=${OSD_SONAME}
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ..
+
+diff -aur opensubdiv opensubdiv.new
+diff -aur opensubdiv opensubdiv.new > fix-Erreur-compil-cmake-nvcc.patch
+
+rm -rf opensubdiv.new
+
+cd $HOME/05-builds/opensubdiv-git
+
+mv -vf /tmp/srcp/fix-Erreur-compil-cmake-nvcc.patch .
+
+
