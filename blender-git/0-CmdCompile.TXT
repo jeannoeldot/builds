@@ -876,9 +876,9 @@ OU
 !!! SI CHANGEMENT DE VERSION ( 3.0 -> 4.x  ... )
 
 $ cd
-$ cp -r .config/blender/3.6 .config/blender/4.0
-# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/4.0/cache
-$ rm -f .config/blender/4.0/cache/bvh_*
+$ cp -r .config/blender/4.0 .config/blender/4.1
+# SUPPRIME FICHIERS bvh_XXXX DANS .config/blender/4.1/cache
+$ rm -f .config/blender/4.1/cache/bvh_*
 
 # SUPPRINE VERSION N-2
 $ rm -rf .config/blender/3.5
