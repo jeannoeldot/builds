@@ -36,6 +36,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
 makedepends=('cmake' 'boost' 'mesa' 'llvm15'
              'cuda'
              'git'
+             'mold'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -100,6 +101,8 @@ build() {
         -DLLVM_VERSION=15 \
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
+        -DWITH_LINKER_GOLD=OFF \
+        -DWITH_LINKER_MOLD=ON \
         -DPYTHON_VERSION=${PYTHON_VER} \
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
