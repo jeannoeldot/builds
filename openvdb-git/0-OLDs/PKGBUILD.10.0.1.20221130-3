@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git
-pkgver=10.1.0.20231011
-pkgrel=1
-_ver_release="10.1.0"
+pkgver=10.0.1.20221130
+pkgrel=3
+_ver_release="10.0.1"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
@@ -13,13 +13,13 @@ depends=('boost-libs' 'onetbb' 'zlib'
           'blosc' 'glfw-x11' 'glu'
           'jemalloc'
 )
-makedepends=('doxygen' 'boost' 'cmake' 'mesa' 'pybind11'
+makedepends=('doxygen' 'boost' 'cmake' 'mesa'
 )
 conflicts=('openvdb')
 provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
-sha256sums=('2746236e29659a0d35ab90d832f7c7987dd2537587a1a2f9237d9c98afcd5817'
+sha256sums=('887a3391fbd96b20c77914f4fb3ab4b33d26e5fc479aa036d395def5523c622f'
 )
 
 
