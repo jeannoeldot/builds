@@ -1,0 +1,772 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 22.03
+!!! VERSION = v22.03
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/usd-git
+
+mkdir /tmp/srcp
+
+cp -v USD-v22.03.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf USD-v22.03.tar.gz
+
+
+!!! VOIR
+
+https://developer.blender.org/D10367
+
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/c196ca37407d4dacb832d4c888ac87e66d7094c5..75a9830d84f68c8f1e1d4d132def28ef25b5cabd:/build_files/build_environment/patches/usd.diff
+
+kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+
+
+1) MODIFIER USD-22.03/cmake/defaults/Packages.cmake
+===================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R USD-22.03 USD-22.03.new
+
+cd USD-22.03.new/cmake/defaults
+kwrite Packages.cmake
+
+MODIFIER LIGNE 135 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+2) MODIFIER USD-22.03/cmake/defaults/msvcdefaults.cmake
+=======================================================
+
+cd USD-22.03.new/cmake/defaults
+kwrite msvcdefaults.cmake
+
+SUPPRIMER LIGNES 123 À 125
+# Enable PDB generation.
+set(_PXR_CXX_FLAGS "${_PXR_CXX_FLAGS} /Zi")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier msvcdefaults.cmake~
+rm -f msvcdefaults.cmake~
+
+cd ../../..
+
+
+diff -aur USD-22.03 USD-22.03.new
+diff -aur USD-22.03 USD-22.03.new > blender-usd-diff.patch
+
+rm -rf USD-22.03.new
+------------------------------------------------------------------
+
+!!! VOIR
+!!! Fix build with GCC 11
+
+https://aur.archlinux.org/cgit/aur.git/tree/demangle-fix.patch?h=usd21
+https://aur.archlinux.org/cgit/aur.git/tree/gcc11.patch?h=usd21
+
+1) MODIFIER USD-22.03/pxr/base/work/singularTask.h
+==================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R USD-22.03 USD-22.03.new
+
+cd USD-22.03.new/pxr/base/work
+kwrite singularTask.h
+
+MODIFIER LIGNE 111 :
+                    size_t old = count;
+
+
+DEVIENT :
+                    std::size_t old = count;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier singularTask.h~
+rm -f singularTask.h~
+
+cd ../../../..
+
+
+2) MODIFIER USD-22.03/pxr/usd/sdr/shaderMetadataHelpers.h
+=========================================================
+
+cd USD-22.03.new/pxr/usd/sdr
+kwrite shaderMetadataHelpers.h
+
+AJOUTER LIGNES 35 ET 36 :
+
+#include <limits>
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier shaderMetadataHelpers.h~
+rm -f shaderMetadataHelpers.h~
+
+cd ../../../..
+
+
+diff -aur USD-22.03 USD-22.03.new
+diff -aur USD-22.03 USD-22.03.new > Fix-build-with-GCC11.patch
+
+rm -rf USD-22.03.new
+
+
+cd $HOME/05-builds/usd-git
+
+mv -vf /tmp/srcp/blender-usd-diff.patch .
+mv -vf /tmp/srcp/Fix-build-with-GCC11.patch .
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/demangle-fix.patch
+https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/gcc11.patch
+
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob/b351607996e467f89ce841630a84244fab6fe3f5:/build_files/build_environment/patches/usd.diff
+kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+!!!
+
+
+1) MODIFIER USD-22.03/cmake/defaults/Packages.cmake
+===================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R USD-22.03 USD-22.03.new
+
+cd USD-22.03.new/cmake/defaults
+kwrite Packages.cmake
+
+MODIFIER LIGNE 135 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+2) MODIFIER USD-22.03/cmake/macros/Public.cmake
+===============================================
+
+cd USD-22.03.new/cmake/macros
+kwrite Public.cmake
+
+AJOUTER LIGNES 1045 À 1050
+        # When building for blender, we do NOT want to export all symbols on windows.
+        # This is a dirty hack, but USD makes it impossible to do the right thing
+        # with the default options exposed.
+        if (WIN32)
+            list(APPEND exports "PXR_STATIC=1")
+        endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Public.cmake~
+rm -f Public.cmake~
+
+cd ../../..
+
+
+diff -aur USD-22.03 USD-22.03.new
+diff -aur USD-22.03 USD-22.03.new > blender-usd-diff.patch
+
+rm -rf USD-22.03.new
+------------------------------------------------------------------
+
+!!! VOIR
+!!! Fix build with GCC 11
+https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/demangle-fix.patch
+https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/gcc11.patch
+
+1) MODIFIER USD-22.03/pxr/base/arch/demangle.cpp
+================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R USD-22.03 USD-22.03.new
+
+cd USD-22.03.new/pxr/base/arch
+kwrite demangle.cpp
+
+SUPPRIMER LIGNE 141 :
+#include <cxxabi.h>
+
+AJOUTER LIGNE 39
+#include <cxxabi.h>
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier demangle.cpp~
+rm -f demangle.cpp~
+
+cd ../../../..
+
+2) MODIFIER USD-22.03/pxr/base/work/singularTask.h
+==================================================
+
+cd USD-22.03.new/pxr/base/work
+kwrite singularTask.h
+
+REMPLACER LIGNE 123 :
+                    size_t old = count;
+
+
+PAR :
+                    std::size_t old = count;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier singularTask.h~
+rm -f singularTask.h~
+
+cd ../../../..
+
+
+diff -aur USD-22.03 USD-22.03.new
+diff -aur USD-22.03 USD-22.03.new > Fix-build-with-GCC11.patch
+
+rm -rf USD-22.03.new
+
+
+cd $HOME/05-builds/usd-git
+
+mv -vf /tmp/srcp/Fix-build-with-GCC11.patch .
+
+
+
+
+3) MODIFIER USD-22.03/pxr/base/tf/pxrLZ4/lz4.cpp
+================================================
+
+cd USD-22.03.new/pxr/base/tf/pxrLZ4
+kwrite lz4.cpp
+
+AJOUTER LIGNES 617 À 625
+
+/*******************************************************************
+ * Disabled in Blender. The BLOSC library also exposes these
+ * functions, and this causes 'duplicate symbol' linker errors.
+ *
+ * This problem has been reported upstream at
+ * https://github.com/PixarAnimationStudios/USD/issues/1447
+ *
+ *******************************************************************
+
+AJOUTER LIGNES 639 À 640
+********************************************************************/
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier lz4.cpp~
+rm -f lz4.cpp~
+
+cd ../../../../..
+
+OU
+===
+mkdir -p $HOME/99-temp/usd/
+
+cp -v USD-v22.03.tar.gz $HOME/99-temp/usd/
+
+cd $HOME/99-temp/usd/
+=============================================
+
+/!\ /!\ /!\ cd $HOME/99-temp/usd/
+
+OU
+mv -vf $HOME/99-temp/usd/blender-usd-diff.patch .
+
+OU
+rm -rf $HOME/99-temp/usd
+
+
+3) MODIFIER USD-22.03/pxr/base/arch/align.h
+===========================================
+
+cd USD-22.03.new/pxr/base/arch
+kwrite align.h
+
+REMPLACER LIGNE 83 :
+#define ARCH_CACHE_LINE_SIZE 64
+
+PAR :
+#if defined(ARCH_OS_DARWIN) && defined(ARCH_CPU_ARM)
+#define ARCH_CACHE_LINE_SIZE 128
+#else
+#define ARCH_CACHE_LINE_SIZE 64
+#endif
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier align.h~
+rm -f align.h~
+
+cd ../../../..
+
+4) MODIFIER USD-22.03/pxr/base/arch/math.h
+===========================================
+
+cd USD-22.03.new/pxr/base/arch
+kwrite math.h
+
+REMPLACER LIGNE 45 :
+#if defined (ARCH_CPU_INTEL) || defined(doxygen)
+
+PAR :
+#if defined (ARCH_CPU_INTEL) || defined(ARCH_CPU_ARM) || defined(doxygen)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier math.h~
+rm -f math.h~
+
+cd ../../../..
+
+!!! VOIR
+
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/71363dd79c49e0ebd656d5eb61ae5ccb62ece499..334e5005f4361f3beaaca155d1f68002b01455cb:/build_files/build_environment/patches/usd.diff
+kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+!!!
+kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+
+
+1) MODIFIER USD-22.03/cmake/defaults/Packages.cmake
+=====================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+/!\ /!\ /!\ cd $HOME/99-temp/usd/
+
+cp -R USD-22.03 USD-22.03.new
+
+cd USD-22.03.new/cmake/defaults
+kwrite Packages.cmake
+
+MODIFIER LIGNE 112 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+
+2) MODIFIER USD-22.03/pxr/base/plug/initConfig.cpp
+======================================================
+
+cd USD-22.03.new/pxr/base/plug
+kwrite initConfig.cpp
+
+AJOUTER LIGNES 72 À 92
+    /* The contents of this constructor have been moved to usd_initialise_plugin_path(...) */
+}
+
+}; // end of anonymous namespace
+
+/**
+ * The contents of this function used to be in the static constructor Plug_InitConfig.
+ * This static constructor made it impossible for Blender to pass a path to the USD
+ * library at runtime, as the constructor would run before Blender's main() function.
+ *
+ * This function is wrapped in a C function of the same name (defined below),
+ * so that it can be called from Blender's main() function.
+ *
+ * The datafiles_usd_path path is used to point to the USD plugin path when Blender
+ * has been installed. The fallback_usd_path path should point to the build-time
+ * location of the USD plugin files so that Blender can be run on a development machine
+ * without requiring an installation step.
+ */
+void
+usd_initialise_plugin_path(const char *datafiles_usd_path)
+{
+
+AJOUTER LIGNES 97 À 105
+    // Add Blender-specific paths. They MUST end in a slash, or symlinks will not be treated as directory.
+    if (datafiles_usd_path != NULL && datafiles_usd_path[0] != '\0') {
+        std::string datafiles_usd_path_str(datafiles_usd_path);
+        if (datafiles_usd_path_str.back() != '/') {
+            datafiles_usd_path_str += "/";
+        }
+        result.push_back(datafiles_usd_path_str);
+    }
+
+
+
+REMPLACER LIGNES 147 À 148
+    Plug_SetPaths(result, debugMessages);
+}
+PAR :
+    if (!TfGetenv("PXR_PATH_DEBUG").empty()) {
+        printf("USD Plugin paths: (%zu in total):\n", result.size());
+        for(const std::string &path : result) {
+            printf("    %s\n", path.c_str());
+        }
+    }
+
+    Plug_SetPaths(result, debugMessages);
+
+AJOUTER LIGNES 159 À 168
+
+/* Workaround to make it possible to pass a path at runtime to USD. */
+extern "C" {
+void
+usd_initialise_plugin_path(
+    const char *datafiles_usd_path)
+{
+    PXR_NS::usd_initialise_plugin_path(datafiles_usd_path);
+}
+}
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier initConfig.cpp~
+rm -f initConfig.cpp~
+
+cd ../../../..
+
+
+3) MODIFIER USD-22.03/cmake/macros/Public.cmake
+===============================================
+
+cd USD-22.03.new/cmake/macros
+kwrite Public.cmake
+
+AJOUTER LIGNES 1038 À 1043
+        # When building for blender, we do NOT want to export all symbols on windows.
+        # This is a dirty hack, but USD makes it impossible to do the right thing
+        # with the default options exposed.
+        if (WIN32)
+            list(APPEND exports "PXR_STATIC=1")
+        endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Public.cmake~
+rm -f Public.cmake~
+
+cd ../../..
+
+
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/cfff8aa0671b6860aefda4918190535494e37f05kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+!!!
+kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+
+
+1) MODIFIER USD-20.02/cmake/defaults/Packages.cmake
+=====================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+/!\ /!\ /!\ cd $HOME/99-temp/usd/
+
+cp -R USD-20.02 USD-20.02.new
+
+cd USD-20.02.new/cmake/defaults
+kwrite Packages.cmake
+
+MODIFIER LIGNE 67 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+
+2) MODIFIER USD-20.02/pxr/base/plug/initConfig.cpp
+======================================================
+
+cd USD-20.02.new/pxr/base/plug
+kwrite initConfig.cpp
+
+AJOUTER LIGNES 72 À 92
+    /* The contents of this constructor have been moved to usd_initialise_plugin_path(...) */
+}
+
+}; // end of anonymous namespace
+
+/**
+ * The contents of this function used to be in the static constructor Plug_InitConfig.
+ * This static constructor made it impossible for Blender to pass a path to the USD
+ * library at runtime, as the constructor would run before Blender's main() function.
+ *
+ * This function is wrapped in a C function of the same name (defined below),
+ * so that it can be called from Blender's main() function.
+ *
+ * The datafiles_usd_path path is used to point to the USD plugin path when Blender
+ * has been installed. The fallback_usd_path path should point to the build-time
+ * location of the USD plugin files so that Blender can be run on a development machine
+ * without requiring an installation step.
+ */
+void
+usd_initialise_plugin_path(const char *datafiles_usd_path)
+{
+
+AJOUTER LIGNES 95 À 103
+    // Add Blender-specific paths. They MUST end in a slash, or symlinks will not be treated as directory.
+    if (datafiles_usd_path != NULL && datafiles_usd_path[0] != '\0') {
+        std::string datafiles_usd_path_str(datafiles_usd_path);
+        if (datafiles_usd_path_str.back() != '/') {
+            datafiles_usd_path_str += "/";
+        }
+        result.push_back(datafiles_usd_path_str);
+    }
+
+
+
+REMPLACER LIGNES 127 À 128
+    Plug_SetPaths(result);
+}
+PAR :
+    if (!TfGetenv("PXR_PATH_DEBUG").empty()) {
+        printf("USD Plugin paths: (%zu in total):\n", result.size());
+        for(const std::string &path : result) {
+            printf("    %s\n", path.c_str());
+        }
+    }
+ 
+    Plug_SetPaths(result);
+
+AJOUTER LIGNES 139 À 148
+
+
+/* Workaround to make it possible to pass a path at runtime to USD. */
+extern "C" {
+void
+usd_initialise_plugin_path(
+    const char *datafiles_usd_path)
+{
+    PXR_NS::usd_initialise_plugin_path(datafiles_usd_path);
+}
+}
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier initConfig.cpp~
+rm -f initConfig.cpp~
+
+cd ../../../..
+
+
+3) MODIFIER USD-20.02/pxr/base/tf/preprocessorUtils.h
+=========================================================
+
+cd USD-20.02.new/pxr/base/tf
+kwrite preprocessorUtils.h
+
+MODIFIER LIGNE 192 :
+#if defined(ARCH_OS_WINDOWS)
+
+DEVIENT
+#if defined(ARCH_COMPILER_MSVC)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier preprocessorUtils.h~
+rm -f preprocessorUtils.h~
+
+cd ../../../..
+
+
+4) MODIFIER USD-20.02/cmake/macros/Public.cmake
+===============================================
+
+cd USD-20.02.new/cmake/macros
+kwrite Public.cmake
+
+AJOUTER LIGNES 990 À 995
+        # When building for blender, we do NOT want to export all symbols on windows.
+        # This is a dirty hack, but USD makes it impossible to do the right thing
+        # with the default options exposed.
+        if (WIN32)
+            list(APPEND exports "PXR_STATIC=1")
+        endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Public.cmake~
+rm -f Public.cmake~
+
+cd ../../..
+
+
+https://git.blender.org/gitweb/gitweb.cgi/blender.git/blob_plain/4db9562246b36d0d0d18a3f1b33b87f1d91fe146:/build_files/build_environment/patches/usd.diff
+kwrite $HOME/99-dwl-temp/build_files_build_environment_patches_usd.diff &
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff
+!!!
+kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+
+
+1-A) MODIFIER USD-19.11/cmake/defaults/Options.cmake
+====================================================
+/!\ /!\ /!\ cd /tmp/srcp
+/!\ /!\ /!\ cd $HOME/99-temp/usd/
+
+cp -R USD-19.11 USD-19.11.new
+
+cd USD-19.11.new/cmake/defaults
+kwrite Options.cmake
+
+AJOUTER LIGNE 28
+option(PXR_BUILD_USD_TOOLS "Build commandline tools" ON)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Options.cmake~
+rm -f Options.cmake~
+ 
+1-B) MODIFIER USD-19.11/cmake/defaults/Packages.cmake
+=====================================================
+
+kwrite Packages.cmake
+
+MODIFIER LIGNE 67 :
+find_package(TBB REQUIRED COMPONENTS tbb)
+
+DEVIENT
+find_package(TBB)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
+rm -f Packages.cmake~
+
+cd ../../..
+
+
+2) MODIFIER USD-19.11/pxr/base/lib/plug/initConfig.cpp
+======================================================
+
+cd USD-19.11.new/pxr/base/lib/plug
+kwrite initConfig.cpp
+
+AJOUTER LIGNES 72 À 92
+    /* The contents of this constructor have been moved to usd_initialise_plugin_path(...) */
+}
+
+}; // end of anonymous namespace
+
+/**
+ * The contents of this function used to be in the static constructor Plug_InitConfig.
+ * This static constructor made it impossible for Blender to pass a path to the USD
+ * library at runtime, as the constructor would run before Blender's main() function.
+ *
+ * This function is wrapped in a C function of the same name (defined below),
+ * so that it can be called from Blender's main() function.
+ *
+ * The datafiles_usd_path path is used to point to the USD plugin path when Blender
+ * has been installed. The fallback_usd_path path should point to the build-time
+ * location of the USD plugin files so that Blender can be run on a development machine
+ * without requiring an installation step.
+ */
+void
+usd_initialise_plugin_path(const char *datafiles_usd_path)
+{
+
+AJOUTER LIGNES 95 À 103
+    // Add Blender-specific paths. They MUST end in a slash, or symlinks will not be treated as directory.
+    if (datafiles_usd_path != NULL && datafiles_usd_path[0] != '\0') {
+        std::string datafiles_usd_path_str(datafiles_usd_path);
+        if (datafiles_usd_path_str.back() != '/') {
+            datafiles_usd_path_str += "/";
+        }
+        result.push_back(datafiles_usd_path_str);
+    }
+
+
+
+REMPLACER LIGNES 127 À 128
+    Plug_SetPaths(result);
+}
+PAR :
+    if (!TfGetenv("PXR_PATH_DEBUG").empty()) {
+        printf("USD Plugin paths: (%zu in total):\n", result.size());
+        for(const std::string &path : result) {
+            printf("    %s\n", path.c_str());
+        }
+    }
+ 
+    Plug_SetPaths(result);
+
+AJOUTER LIGNES 139 À 148
+
+
+/* Workaround to make it possible to pass a path at runtime to USD. */
+extern "C" {
+void
+usd_initialise_plugin_path(
+    const char *datafiles_usd_path)
+{
+    PXR_NS::usd_initialise_plugin_path(datafiles_usd_path);
+}
+}
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier initConfig.cpp~
+rm -f initConfig.cpp~
+
+cd ../../../../..
+
+
+3) MODIFIER USD-19.11/pxr/usd/CMakeLists.txt
+============================================
+
+cd USD-19.11.new/pxr/usd
+kwrite CMakeLists.txt
+
+SUPPRIMER LIGNE 3 :
+    bin
+
+AJOUTER LIGNES 10 À 14
+if (PXR_BUILD_USD_TOOLS)
+    add_subdirectory(bin)
+else()
+    message(STATUS "Skipping commandline tools because PXR_BUILD_USD_TOOLS=OFF")
+endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../..
+
+
+4) MODIFIER USD-19.11/pxr/base/lib/tf/preprocessorUtils.h
+=========================================================
+
+cd USD-19.11.new/pxr/base/lib/tf
+kwrite preprocessorUtils.h
+
+MODIFIER LIGNE 192 :
+#if defined(ARCH_OS_WINDOWS)
+
+DEVIENT
+#if defined(ARCH_COMPILER_MSVC)
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier preprocessorUtils.h~
+rm -f preprocessorUtils.h~
+
+cd ../../../../..
+
+
+5) MODIFIER USD-19.11/cmake/macros/Public.cmake
+===============================================
+
+cd USD-19.11.new/cmake/macros
+kwrite Public.cmake
+
+AJOUTER LIGNES 999 À 1004
+        # When building for blender, we do NOT want to export all symbols on windows.
+        # This is a dirty hack, but USD makes it impossible to do the right thing
+        # with the default options exposed.
+        if (WIN32)
+            list(APPEND exports "PXR_STATIC=1")
+        endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Public.cmake~
+rm -f Public.cmake~
+
+cd ../../..
+

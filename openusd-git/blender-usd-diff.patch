@@ -1,0 +1,25 @@
+diff -aur USD-22.03/cmake/defaults/Packages.cmake USD-22.03.new/cmake/defaults/Packages.cmake
+--- USD-22.03/cmake/defaults/Packages.cmake	2022-02-18 22:49:09.000000000 +0100
++++ USD-22.03.new/cmake/defaults/Packages.cmake	2022-04-25 14:18:02.303728650 +0200
+@@ -132,7 +132,7 @@
+ endif()
+ 
+ # --TBB
+-find_package(TBB REQUIRED COMPONENTS tbb)
++find_package(TBB)
+ add_definitions(${TBB_DEFINITIONS})
+ 
+ # --math
+diff -aur USD-22.03/cmake/defaults/msvcdefaults.cmake USD-22.03.new/cmake/defaults/msvcdefaults.cmake
+--- USD-22.03/cmake/defaults/msvcdefaults.cmake	2022-02-18 22:49:09.000000000 +0100
++++ USD-22.03.new/cmake/defaults/msvcdefaults.cmake	2022-04-25 14:21:54.032837506 +0200
+@@ -120,9 +120,6 @@
+ # for all translation units.
+ set(_PXR_CXX_FLAGS "${_PXR_CXX_FLAGS} /bigobj")
+ 
+-# Enable PDB generation.
+-set(_PXR_CXX_FLAGS "${_PXR_CXX_FLAGS} /Zi")
+-
+ # Enable multiprocessor builds.
+ set(_PXR_CXX_FLAGS "${_PXR_CXX_FLAGS} /MP")
+ set(_PXR_CXX_FLAGS "${_PXR_CXX_FLAGS} /Gm-")

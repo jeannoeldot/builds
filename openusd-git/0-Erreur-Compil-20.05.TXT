@@ -1,0 +1,21 @@
+
+/build/usd-git/src/USD-20.05/pxr/usd/ar/packageUtils.cpp:202:41: error: ‘find_if’ is not a member of ‘std’; did you mean ‘find’?
+  202 |         auto innermostCloseRevIt = std::find_if(
+      |                                         ^~~~~~~
+      |                                         find
+
+make[2]: *** [pxr/usd/ar/CMakeFiles/ar.dir/build.make:219: pxr/usd/ar/CMakeFiles/ar.dir/packageUtils.cpp.o] Error 1
+
+
+make[1]: *** [CMakeFiles/Makefile2:1561: pxr/usd/ar/CMakeFiles/ar.dir/all] Error 2
+make[1]: Leaving directory '/build/usd-git/src/USD-20.05/build'
+make: *** [Makefile:149: all] Error 2
+
+
+
+
+
+Did you include the header
+
+#include <algorithm> 
+
