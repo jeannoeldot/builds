@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git
-pkgver=11.0.0.20231102
+pkgver=10.1.0.20231011
 pkgrel=1
-_ver_release="11.0.0"
+_ver_release="10.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
@@ -19,7 +19,7 @@ conflicts=('openvdb')
 provides=('openvdb')
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
-sha256sums=('6314ff1db057ea90050763e7b7d7ed86d8224fcd42a82cdbb9c515e001b96c74'
+sha256sums=('2746236e29659a0d35ab90d832f7c7987dd2537587a1a2f9237d9c98afcd5817'
 )
 
 

@@ -1,19 +1,19 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 10.0.1
-!!! VERSION = v10.0.1
+!!! VERSION = 11.0.0
+!!! VERSION = v11.0.0
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openvdb-git
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v10.0.1.tar.gz /tmp/srcp/
+cp -v OpenVDB-v11.0.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v10.0.1.tar.gz
+tar -xzf OpenVDB-v11.0.0.tar.gz
 
 
 
