@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=4.1.0.7.20231116
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL')
@@ -122,4 +122,6 @@ package() {
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
   python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+  
+  install -Dm644 release/freedesktop/org.blender.Blender.appdata.xml "${pkgdir}/usr/share/metainfo/org.blender.Blender.appdata.xml"
 }
