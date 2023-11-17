@@ -1,0 +1,37 @@
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp: In member function ‘bool ccl::ToNanoOp::operator()(const openvdb::v11_0::GridBase::ConstPtr&)’:
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:58:33: error: ‘openToNanoVDB’ is not a member of ‘nanovdb’
+   58 |             nanogrid = nanovdb::openToNanoVDB<nanovdb::HostBuffer,
+      |                                 ^~~~~~~~~~~~~
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:58:66: error: expected primary-expression before ‘,’ token
+   58 |             nanogrid = nanovdb::openToNanoVDB<nanovdb::HostBuffer,
+      |                                                                  ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:59:79: error: expected ‘(’ before ‘,’ token
+   59 |                                               typename FloatGridType::TreeType,
+      |                                                                               ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:60:59: error: expected primary-expression before ‘>’ token
+   60 |                                               nanovdb::FpN>(floatgrid);
+      |                                                           ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:64:33: error: ‘openToNanoVDB’ is not a member of ‘nanovdb’
+   64 |             nanogrid = nanovdb::openToNanoVDB<nanovdb::HostBuffer,
+      |                                 ^~~~~~~~~~~~~
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:64:66: error: expected primary-expression before ‘,’ token
+   64 |             nanogrid = nanovdb::openToNanoVDB<nanovdb::HostBuffer,
+      |                                                                  ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:65:79: error: expected ‘(’ before ‘,’ token
+   65 |                                               typename FloatGridType::TreeType,
+      |                                                                               ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:66:60: error: expected primary-expression before ‘>’ token
+   66 |                                               nanovdb::Fp16>(floatgrid);
+      |                                                            ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:71:29: error: ‘openToNanoVDB’ is not a member of ‘nanovdb’
+   71 |         nanogrid = nanovdb::openToNanoVDB(floatgrid);
+      |                             ^~~~~~~~~~~~~
+
+make[2]: *** [intern/cycles/scene/CMakeFiles/cycles_scene.dir/build.make:328: intern/cycles/scene/CMakeFiles/cycles_scene.dir/image_vdb.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+make[1]: *** [CMakeFiles/Makefile2:3870: intern/cycles/scene/CMakeFiles/cycles_scene.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:166: all] Error 2
+
