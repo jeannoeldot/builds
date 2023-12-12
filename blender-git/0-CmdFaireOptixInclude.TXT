@@ -1,4 +1,23 @@
 
+0-7) OPTIX 7.7
+================
+VOIR PKGBUILD community blender
+https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/blob/main/PKGBUILD?ref_type=heads
+LIGNE 38:
+
+cd /0-DataLinux/05-builds-dir-git/
+
+https://developer.download.nvidia.com/redist/optix/v7.7/OptiX-7.7-Include.zip
+
+sha256sum OptiX-7.7-Include.zip
+b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab
+
+sha512sum OptiX-7.7-Include.zip
+55caea5beccdc0adebdba8a825f3cfee083015311de5602cfcf215139ccbf9fed62f10ee1dcdf7e31a3557aabbc1fa872eeed67bc46f59fb4e5abd18331c0aca
+
+cd
+
+
 0-6) OPTIX 7.6
 ================
 VOIR PKGBUILD community blender
