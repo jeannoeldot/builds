@@ -1,0 +1,9 @@
+┌jnd ( ~ )
+└─> $ blender
+Read prefs: "/home/jnd/.config/blender/4.1/config/userpref.blend"
+Missing icons: /home/jnd/.config/blender/4.1/datafiles/assets/ops.generic.select_box.dat Unable to load from file
+Read blend: "/home/jnd/00-3D/Blender/Benchmarks-Cycles/3-bmw27_gpu.blend"
+Saved session recovery to "/tmp/quit.blend"
+
+Blender quit
+Error: Not freed memory blocks: 1, total unfreed memory 0.000313 MB

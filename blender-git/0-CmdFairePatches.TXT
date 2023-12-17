@@ -1,19 +1,50 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.1.0.9.20231212
+!!! VERSION = 4.1.0.9.20231217
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.1.0.9.20231212.tar.gz /tmp/srcp/
+cp -v blender-git-4.1.0.9.20231217.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.1.0.9.20231212.tar.gz
+tar -xzf blender-git-4.1.0.9.20231217.tar.gz
 
+1-1) MODIFIER blender/scripts/startup/bl_ui/node_add_menu_shader.py
+===================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/scripts/startup/bl_ui
+kwrite node_add_menu_shader.py
+
+MODIFIER LIGNES 39 ET 40 :
+    return context.engine == 'BLENDER_EEVEE' or
+    context.engine == 'BLENDER_EEVEE_NEXT'
+
+DEVIENNENT
+    return (context.engine == 'BLENDER_EEVEE' or
+            context.engine == 'BLENDER_EEVEE_NEXT')
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER node_add_menu_shader.py~
+rm -f node_add_menu_shader.py~
+
+cd ../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-SyntaxError-invalid-syntax.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/Fix-SyntaxError-invalid-syntax.patch .
 
 
 99) QUAND PATCHES FINIS

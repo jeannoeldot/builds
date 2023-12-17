@@ -1,0 +1,14 @@
+diff -aur blender/scripts/startup/bl_ui/node_add_menu_shader.py blender.new/scripts/startup/bl_ui/node_add_menu_shader.py
+--- blender/scripts/startup/bl_ui/node_add_menu_shader.py	2023-12-17 16:45:35.000000000 +0100
++++ blender.new/scripts/startup/bl_ui/node_add_menu_shader.py	2023-12-17 19:34:00.565261736 +0100
+@@ -36,8 +36,8 @@
+ 
+ 
+ def eevee_shader_nodes_poll(context):
+-    return context.engine == 'BLENDER_EEVEE' or
+-    context.engine == 'BLENDER_EEVEE_NEXT'
++    return (context.engine == 'BLENDER_EEVEE' or
++            context.engine == 'BLENDER_EEVEE_NEXT')
+ 
+ 
+ def object_cycles_shader_nodes_poll(context):
