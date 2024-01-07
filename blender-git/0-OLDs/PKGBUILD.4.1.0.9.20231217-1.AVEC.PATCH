@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.1.0.9.20240107
+pkgver=4.1.0.9.20231217
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -44,10 +44,12 @@ provides=('blender')
 source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
+        "Fix-SyntaxError-invalid-syntax.patch"
 )
-sha256sums=('b6a29c4f41eb9f37556a3106ada1497687b820152322fa138f429d25f1938873'
-            'f8979bcd4212feffc4ee84390f0ce5a8e946f4d8396e0c9bfe3d9b83a9fa4d8d'
+sha256sums=('720242564438a39123e030c45e0ee45f38c9ca7f631226302dece01f1bf7175e'
+            'bdd428150054eace19c1fa5c40224e55ca94e584d9dda284443f02c2450d7569'
             'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
+            '6ab5d589cd80e0613af784af019b0c51777ae3d6ab819b52ae20b14520e64905'
 )
 
 _gitname="blender"
@@ -55,14 +57,20 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  # Fix build ***   File "/usr/share/blender/4.1/scripts/startup/bl_ui/node_add_menu_shader.py", line 39
+  # return context.engine == 'BLENDER_EEVEE' or
+  #                                            ^
+  # SyntaxError: invalid syntax
+  patch -Np1 -i "${srcdir}/Fix-SyntaxError-invalid-syntax.patch"
+
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e983e47616e5"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "84591ac1a727"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1704621798|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1702826301|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
