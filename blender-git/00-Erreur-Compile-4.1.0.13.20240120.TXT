@@ -1,0 +1,35 @@
+
+In file included from /build/blender-git/src/blender/source/blender/nodes/NOD_socket_declarations.hh:7,
+                 from /build/blender-git/src/blender/source/blender/nodes/geometry/node_geometry_util.hh:14,
+                 from /build/blender-git/src/blender/source/blender/nodes/geometry/nodes/node_geo_curve_primitive_quadratic_bezier.cc:6,
+                 from /build/blender-git/src/blender/build/source/blender/nodes/geometry/CMakeFiles/bf_nodes_geometry.dir/Unity/unity_2_cxx.cxx:4:
+/build/blender-git/src/blender/source/blender/nodes/NOD_node_declaration.hh:504:3: internal compiler error: in ggc_set_mark, at ggc-page.cc:1551
+  504 |   }
+      |   ^
+0x1ad33c8 internal_error(char const*, ...)
+        ???:0
+0x6b7b63 fancy_abort(char const*, int, char const*)
+        ???:0
+0x8b7c67 gt_ggc_mx_lang_tree_node(void*)
+        ???:0
+0xba04a6 gt_ggc_mx_line_maps(void*)
+        ???:0
+0xb31404 ggc_mark_roots()
+        ???:0
+0x970ea5 ggc_collect(ggc_collect)
+        ???:0
+0x9f2856 cgraph_node::finalize_function(tree_node*, bool)
+        ???:0
+0x9443d0 c_common_parse_file()
+        ???:0
+Please submit a full bug report, with preprocessed source (by using -freport-bug).
+Please include the complete backtrace with any bug report.
+See <https://bugs.archlinux.org/> for instructions.
+make[2]: *** [source/blender/nodes/geometry/CMakeFiles/bf_nodes_geometry.dir/build.make:286: source/blender/nodes/geometry/CMakeFiles/bf_nodes_geometry.dir/Unity/unity_2_cxx.cxx.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+make[1]: *** [CMakeFiles/Makefile2:7251: source/blender/nodes/geometry/CMakeFiles/bf_nodes_geometry.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:166: all] Error 2
+

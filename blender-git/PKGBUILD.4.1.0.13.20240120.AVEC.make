@@ -36,7 +36,6 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm15'
              'cuda'
              'git'
              'mold'
-             'ninja'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -77,7 +76,6 @@ build() {
 
   cmake \
         -Bbuild \
-        -GNinja \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
@@ -114,13 +112,13 @@ build() {
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
         -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER}
-  cmake --build build
+  make -C build
 }
 
 package() {
   # Blender
   cd "${_gitname}"
-  DESTDIR="${pkgdir}" cmake --install build
+  DESTDIR="${pkgdir}" make -C build install
 
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"

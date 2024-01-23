@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.1.0.9.20240107
+!!! VERSION = 4.1.0.13.20240120
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.1.0.9.20240107.tar.gz /tmp/srcp/
+cp -v blender-git-4.1.0.13.20240120.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.1.0.9.20240107.tar.gz
+tar -xzf blender-git-4.1.0.13.20240120.tar.gz
 
 1-1) MODIFIER blender/scripts/startup/bl_ui/node_add_menu_shader.py
 ===================================================================
