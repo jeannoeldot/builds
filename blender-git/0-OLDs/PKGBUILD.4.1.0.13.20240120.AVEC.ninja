@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.1.0.15.20240127
+pkgver=4.1.0.13.20240120
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -36,6 +36,7 @@ makedepends=('cmake' 'boost' 'mesa' 'llvm15'
              'cuda'
              'git'
              'mold'
+             'ninja'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -45,8 +46,8 @@ source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
 )
-sha256sums=('1723421248de669b67c9f6c7f1b7b50f01723bf183f00c7c767865aa3079d108'
-            '64a52105ea4f887516043000970900b458f37ecd9a8f678c2f0191f88a35bd7f'
+sha256sums=('fd413ee40e1649852729a68df94da17d371acbc2056426df372627bf747974f3'
+            '33f76106997afb330772aa72036006bdfdcb6143499101195bff914573f9ba32'
             'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
 )
 
@@ -60,9 +61,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d4bc3bd08d66"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "af5731ce03a2"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1706395124|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1705774656|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -76,6 +77,7 @@ build() {
 
   cmake \
         -Bbuild \
+        -GNinja \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
@@ -112,13 +114,13 @@ build() {
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
         -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER}
-  make -C build
+  cmake --build build
 }
 
 package() {
   # Blender
   cd "${_gitname}"
-  DESTDIR="${pkgdir}" make -C build install
+  DESTDIR="${pkgdir}" cmake --install build
 
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
