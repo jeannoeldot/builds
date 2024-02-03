@@ -18,12 +18,15 @@ depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
          'python' 'pugixml' 'pybind11'
 )
 makedepends=('boost' 'cmake' 'llvm'
+              'cuda'
 )
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "OptiX-7.7-Include.zip"
 )
 sha256sums=('2fb555fdc50539d0f06e8d1b399172f756d390a7261da19f5d6a9c3fecc424e0'
+            'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
 )
 
 build() {
@@ -37,7 +40,10 @@ build() {
       -DCMAKE_SKIP_RPATH=ON \
       -DCMAKE_CXX_STANDARD=17 \
       -DLLVM_STATIC=OFF \
-      -DUSE_LLVM_BITCODE=OFF \
+      -DOSL_USE_OPTIX=ON \
+      -DOPTIX_INCLUDE_DIR="${srcdir}" \
+      -DCUDA_HOST_COMPILER=/usr/bin/gcc-12 \
+      -DCUDA_TARGET_ARCH="sm_86" \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
   make -C build

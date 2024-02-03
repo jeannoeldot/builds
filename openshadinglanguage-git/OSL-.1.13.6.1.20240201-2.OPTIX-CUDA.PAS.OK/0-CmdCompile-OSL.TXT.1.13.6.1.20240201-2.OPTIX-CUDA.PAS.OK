@@ -41,7 +41,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.6.1.20240201
-pkgrel=3
+pkgrel=2
 pkgrel=1
 
 pkgrel=2    # Rebuild against OIIO 2.5.7.0
@@ -117,9 +117,12 @@ makedepends=('boost' 'cmake' 'llvm')
 2-2) PKGBUILD SANS PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "OptiX-7.7-Include.zip"
 )
 
 sha256sum OpenShadingLanguage-v1.13.6.1.tar.gz
+
+sha256sum OptiX-7.7-Include.zip
 
 sha256sums=(...
          ...
@@ -187,7 +190,7 @@ LIGNE 98
   OSL_BUILD_TESTS ON
 
 LIGNE 102
-  USE_LLVM_BITCODE ON   =>  -DUSE_LLVM_BITCODE=OFF \ : ON si Optix (COMPILE PAS OK)
+  USE_LLVM_BITCODE ON   =>  -DUSE_LLVM_BITCODE=OFF \ : ON si Optix
   
 LIGNE 104
   !!! A VOIR
@@ -197,12 +200,12 @@ LIGNE 105
   OSL_BUILD_SHADERS ON
 
 LIGNE 106
-  OSL_USE_OPTIX OFF   =>  -DOSL_USE_OPTIX=ON \ : COMPILE PAS OK
+  OSL_USE_OPTIX OFF   =>  -DOSL_USE_OPTIX=ON \
   Enabling OptiX requires USE_LLVM_BITCODE=1 and USE_FAST_MATH=1
 
 LIGNE 110
   !!! A VOIR
-  CUDA_TARGET_ARCH   =>  -DCUDA_TARGET_ARCH="sm_86" \ : COMPILE PAS OK
+  CUDA_TARGET_ARCH   =>  -DCUDA_TARGET_ARCH="sm_86" \
 
 LIGNE 119
   !!! A VOIR
@@ -384,6 +387,8 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 $ rm -f *~
 $ rm -f *.log
 $ rm -i OpenShadingLanguage-v1.13.6.1.tar.gz
+!!! OPTIX
+$ rm -i OptiX-7.7-Include.zip
 
 
 $ cd && maj-repolocal
