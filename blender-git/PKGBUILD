@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.1.0.15.20240127
+pkgver=4.1.0.17.20240203
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -19,7 +19,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'jemalloc'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
           'fmt'
-          'llvm15-libs' 'clang15'
+          'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu' 'libepoxy'
           'libdecor' 'wayland-protocols' 'libxkbcommon'
           'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
@@ -32,7 +32,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openpgl-git'
           'zstd'
 )
-makedepends=('cmake' 'boost' 'mesa' 'llvm15'
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'git'
              'mold'
@@ -45,8 +45,8 @@ source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
 )
-sha256sums=('1723421248de669b67c9f6c7f1b7b50f01723bf183f00c7c767865aa3079d108'
-            '64a52105ea4f887516043000970900b458f37ecd9a8f678c2f0191f88a35bd7f'
+sha256sums=('df72fa178beaea8e79af0b4562d09a5a1eead9bca5f2d1cad4ededc316b13796'
+            'bb09742a880dd4102a193a0995d80e9fa7e38bab9cea9820740f6dd23407dc3e'
             'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
 )
 
@@ -60,9 +60,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d4bc3bd08d66"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "82d9b384e426"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1706395124|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1706957654|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -101,11 +101,11 @@ build() {
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_CYCLES_DEVICE_HIP=OFF \
         -DWITH_CYCLES_DEVICE_METAL=OFF \
-        -DLLVM_VERSION=15 \
+        -DLLVM_VERSION=16 \
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
-        -DCLANG_INCLUDE_DIR=/usr/lib/llvm15/include/clang \
-        -DCLANG_LIBRARIES=/usr/lib/llvm15/lib \
+        -DCLANG_INCLUDE_DIR=/usr/include/clang \
+        -D_CLANG_LIBRARIES=/usr/lib \
         -DWITH_LINKER_GOLD=OFF \
         -DWITH_LINKER_MOLD=ON \
         -DPYTHON_VERSION=${PYTHON_VER} \
