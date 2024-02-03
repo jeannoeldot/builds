@@ -5,6 +5,8 @@ VOIR :
 /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/
   usd.diff
   usd_core_profile.diff
+  usd_hydra.diff
+  usd_pull_1965.diff
 
 !!!!!!!!!!!!!!!
 
@@ -285,11 +287,6 @@ SI PROBLEME
 ========================================================================
 ANCIEN
 ======
-
-  usd_hydra.diff
-  usd_pull_1965.diff
-
-
         'Fix-build-with-GCC11.patch'
 sha256sum Fix-build-with-GCC11.patch
   #
