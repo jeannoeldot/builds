@@ -1,3 +1,125 @@
+
+v1.13.6.1
+=========
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/accum.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/batched_rendererservices.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/batched_shaderglobals.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/batched_texture.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/device_ptr.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/device_string.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/dual.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/dual_vec.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/encodedtypes.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/export.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/fmt_util.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/genclosure.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/journal.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/llvm_util.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/mask.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/matrix22.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/optautomata.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/oslclosure.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/oslcomp.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/oslexec.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/oslnoise.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/oslquery.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/platform.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/rendererservices.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/rs_free_function.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/sfm_simplex.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/sfm_staticmatrix.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/sfmath.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/shaderglobals.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/strdecls.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/variant.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/wide.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/oslversion.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/oslconfig.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/Imathx/ImathColor.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/Imathx/ImathFun.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/Imathx/ImathLimits.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/Imathx/ImathMatrix.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/Imathx/ImathVec.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/Imathx/Imathx.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslcomp.so.1.13.6
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslcomp.so.1.13
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslcomp.so
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslquery.so.1.13.6
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslquery.so.1.13
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslquery.so
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/python3.11/site-packages/oslquery.so
+-- Set non-toolchain portion of runtime path of "/build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/python3.11/site-packages/oslquery.so" to ""
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslexec.so.1.13.6
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslexec.so.1.13
+-- Set non-toolchain portion of runtime path of "/build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslexec.so.1.13.6" to ""
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslexec.so
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslnoise.so.1.13.6
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslnoise.so.1.13
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/liboslnoise.so
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/bin/oslc
+-- Set non-toolchain portion of runtime path of "/build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/bin/oslc" to ""
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/bin/oslinfo
+-- Set non-toolchain portion of runtime path of "/build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/bin/oslinfo" to ""
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/osl.imageio.so
+-- Set non-toolchain portion of runtime path of "/build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/osl.imageio.so" to ""
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/bin/osltoy
+-- Set non-toolchain portion of runtime path of "/build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/bin/osltoy" to ""
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/color2.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/color4.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/matrix33.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/oslutil.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/stdosl.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/vector2.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/vector4.h
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/emitter.osl
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/glass.osl
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/image.osl
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/mandelbrot.osl
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/matte.osl
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/metal.osl
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/ubersurface.osl
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/emitter.oso
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/glass.oso
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/image.oso
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/mandelbrot.oso
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/matte.oso
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/metal.oso
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/OSL/shaders/ubersurface.oso
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/osl-languagespec.pdf
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/testshade.md.html
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/osltoy.md.html
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/markdeep.min.js
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/docs.css
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/LICENSE.md
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/INSTALL.md
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/CHANGES.md
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/README.md
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/fBm_default.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/fBm_freq.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/fBm_gain.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/fBm_lac.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/fBm_octaves.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/makenoise.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/noisetex.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/testshade/show_uv.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/osltoy/osltoy-error.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/osltoy/osltoy-fbm.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/Figures/osltoy/osltoy-start.jpg
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/OSLQuery.md.html
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/share/doc/OSL/docdeep.md.html
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/pkgconfig/oslexec.pc
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/pkgconfig/oslcomp.pc
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/pkgconfig/oslquery.pc
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/cmake/OSL/OSLConfig.cmake
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/cmake/OSL/OSLConfigVersion.cmake
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/cmake/llvm_macros.cmake
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/build-scripts/serialize-bc.py
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/cmake/OSL/OSLTargets.cmake
+-- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/lib/cmake/OSL/OSLTargets-release.cmake
+
+---------------------------------------------------------------------------------------
 Install the project...
 -- Install configuration: "Release"
 -- Installing: /build/openshadinglanguage-git/pkg/openshadinglanguage-git/usr/include/OSL/ImathMatrix_cuda.h

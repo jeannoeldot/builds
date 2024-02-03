@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.12.14.0.20231101
-pkgrel=2
-_name_release="OpenShadingLanguage-1.12.14.0"
-_ver_release="v1.12.14.0"
+pkgver=1.13.6.1.20240201
+pkgrel=1
+_name_release="OpenShadingLanguage-1.13.6.1"
+_ver_release="v1.13.6.1"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
@@ -12,17 +12,21 @@ license=('custom')
 depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
-         'llvm15-libs'
+         'llvm-libs'
          'qt5-base'
-         'clang15'
+         'clang'
          'python' 'pugixml' 'pybind11'
 )
-makedepends=('boost' 'cmake' 'llvm15')
+makedepends=('boost' 'cmake' 'llvm'
+              'cuda'
+)
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "OptiX-7.7-Include.zip"
 )
-sha256sums=('6562a3fa10b80b8d328951004258ab6d12a6a23c23143f46a86d2f48f55354d3'
+sha256sums=('2fb555fdc50539d0f06e8d1b399172f756d390a7261da19f5d6a9c3fecc424e0'
+            'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
 )
 
 build() {
@@ -34,10 +38,12 @@ build() {
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
-      -DCMAKE_CXX_STANDARD=14 \
-      -DLLVM_DIRECTORY=/usr/lib/llvm15 \
+      -DCMAKE_CXX_STANDARD=17 \
       -DLLVM_STATIC=OFF \
+      -DOSL_BUILD_TESTS=OFF \
       -DUSE_LLVM_BITCODE=OFF \
+      -DOSL_USE_OPTIX=ON \
+      -DCUDA_TARGET_ARCH="sm_86" \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
   make -C build

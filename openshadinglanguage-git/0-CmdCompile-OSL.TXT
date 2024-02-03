@@ -26,6 +26,10 @@ cd $HOME/05-builds/openshadinglanguage-git
 -------------------------------------------
 cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.13.6.1.tar.gz .
 
+!!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/OptiX-7.7-Include.zip .
+
 
 1-8) FAIRE PATCH
 ===============================
@@ -37,9 +41,9 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.6.1.20240201
-pkgrel=2    # Rebuild against OIIO 2.5.7.0
 pkgrel=1
 
+pkgrel=2    # Rebuild against OIIO 2.5.7.0
 pkgrel=6    # Rebuild against OIIO 2.4.16.0
 pkgrel=5    # rebuild boost boost-libs 1.83.0
 pkgrel=4    # rebuild MAJ OIIO 2.4.15.0-1 openexr 3.2.0-2
@@ -91,32 +95,35 @@ _ver_release="v1.13.6.1"
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
 
-!!! LLVM 15.0
+!!! LLVM 16.0
 ------------------------------------
-$ pacman -Ss llvm15 | grep install
-extra/clang15 15.0.7-1 [installé]
-extra/llvm15 15.0.7-1 [installé]
-extra/llvm15-libs 15.0.7-1 [installé]
+$ pacman -Ss llvm | grep install
+extra/clang 16.0.6-2 [installé]
+extra/llvm 16.0.6-1 [installé]
+extra/llvm-libs 16.0.6-1 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
-         'llvm15-libs'
+         'llvm5-libs'
          'qt5-base'
-         'clang15'
+         'clang'
          'python' 'pugixml' 'pybind11'
 )
 depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
 
-makedepends=('boost' 'cmake' 'llvm15')
+makedepends=('boost' 'cmake' 'llvm')
 
 
 2-2) PKGBUILD SANS PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "OptiX-7.7-Include.zip"
 )
 
 sha256sum OpenShadingLanguage-v1.13.6.1.tar.gz
+
+sha256sum OptiX-7.7-Include.zip
 
 sha256sums=(...
          ...
@@ -171,61 +178,64 @@ tar -xzf OpenShadingLanguage-v1.13.6.1.tar.gz -C /tmp/srcp
 
 1) kwrite /tmp/srcp/OpenShadingLanguage-1.13.6.1/CMakeLists.txt &
 
-LIGNE 16,17
+LIGNE 25,26
   ${PROJECT_NAME}_SUPPORTED_RELEASE      =>      ON
 
-LIGNE 36
+LIGNE 43
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
   
-LIGNES 83
+LIGNES 90
   VERBOSE OFF   =>      -DVERBOSE=ON \
 
 !!! PAS OK AVEC 1.13.6.1 DU 01/05/2023
-LIGNE 86
+LIGNE 98
   OSL_BUILD_TESTS ON    =>      -DOSL_BUILD_TESTS=OFF \
 
-LIGNE 88, 90
+LIGNE 102
   USE_LLVM_BITCODE ON   =>  -DUSE_LLVM_BITCODE=OFF \ 
   
-LIGNE 92
+LIGNE 104
   !!! A VOIR
   OSL_BUILD_PLUGINS ON
 
-LIGNE 94
-  USE_OPTIX OFF
-
-LIGNE 97
-  !!! A VOIR
-  CUDA_TARGET_ARCH
-
 LIGNE 105
+  OSL_BUILD_SHADERS ON
+
+LIGNE 106
+  OSL_USE_OPTIX OFF   =>  -DOSL_USE_OPTIX=ON \
+
+LIGNE 110
+  !!! A VOIR
+  CUDA_TARGET_ARCH   =>  -DCUDA_TARGET_ARCH="sm_86" \
+
+LIGNE 119
   !!! A VOIR
   OSL_NO_DEFAULT_TEXTURESYSTEM OFF
 
   !!! A VOIR
 https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/02f44049a8c978186e557ce56b3a02662525d15b
 Fix make deps OSL build on some systems with Qt libraries
-LIGNE 217
+LIGNE 231
   USE_QT "Include Qt support" ON  Blender ==> -DUSE_QT=OFF \
 
-LIGNE 225
+LIGNE 239
 INSTALL_DOCS "Install documentation" ON
 
 2) kwrite /tmp/srcp/OpenShadingLanguage-1.13.6.1/src/cmake/compiler.cmake &
 
-LIGNE 30
-      -DCMAKE_CXX_STANDARD=14 \
+LIGNE 28
+      -DCMAKE_CXX_STANDARD=17 \
 
-LIGNE 95/99
+LIGNE 83/87
   STOP_ON_WARNING OFF
   
-LIGNE 240
+LIGNE 229
   USE_CCACHE ON           =>      -DUSE_CCACHE=OFF \
 
-LIGNE 291
+LIGNE 280
 set (GLIBCXX_USE_CXX11_ABI "" CACHE STRING "For gcc, use the new C++11 library ABI (0|1)")
 
-LIGNE 307
+LIGNE 296
   !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
   USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
 
@@ -234,9 +244,9 @@ LIGNE 376
 
 3) kwrite /tmp/srcp/OpenShadingLanguage-1.13.6.1/src/cmake/modules/FindLLVM.cmake &
 
-!!! LLVM 10.0
+!!! LLVM 16.0
 ------------------------------------
-LIGNE 79 ET ...
+LIGNE 83 ET ...
   LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
 
 4) kwrite /tmp/srcp/OpenShadingLanguage-1.13.6.1/src/liboslexec/CMakeLists.txt &
@@ -288,10 +298,25 @@ SI depends= 'openimageio-git'
 $ cp -v $HOME/00-repolocal/openimageio-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
 
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 32G
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 32G -l logs
+-------------------------------------------------------------------
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 32G
+
   FLOOP
 --------
 $ rm -f *~
 $ mkpkg-tmpfs -m floop
+-------------------------------------------------------------------
 
   FAST
 -------
@@ -299,11 +324,6 @@ $ rm -f *~
 $ mkpkg-tmpfs -m fast
 
 $ mkpkg-tmpfs -m fast -l logs
-
-  NATIVE
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m native
 
 
 $ rm -rf /tmp/chrootrepo
@@ -326,12 +346,9 @@ rm -f *~
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
-usr/lib/liboslcomp.so.1.12.14
-usr/lib/liboslquery.so.1.12.14
-usr/lib/liboslexec.so.1.12.14
-usr/lib/libtestshade.so.1.12.14
-usr/bin/testshade
-usr/bin/testrender
+usr/lib/liboslcomp.so.1.13.6
+usr/lib/liboslquery.so.1.13.6
+usr/lib/liboslexec.so.1.13.6
 
 namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
 openshadinglanguage-git W: Dependency boost-libs included but already satisfied
@@ -368,6 +385,8 @@ $ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 $ rm -f *~
 $ rm -f *.log
 $ rm -i OpenShadingLanguage-v1.13.6.1.tar.gz
+!!! OPTIX
+$ rm -i OptiX-7.7-Include.zip
 
 
 $ cd && maj-repolocal
@@ -431,6 +450,30 @@ $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 ================================================================
 ANCIENS
 ========
+
+!!! LLVM 15.0
+------------------------------------
+$ pacman -Ss llvm15 | grep install
+extra/clang15 15.0.7-1 [installé]
+extra/llvm15 15.0.7-1 [installé]
+extra/llvm15-libs 15.0.7-1 [installé]
+
+depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'openimageio-git'
+         'llvm15-libs'
+         'qt5-base'
+         'clang15'
+         'python' 'pugixml' 'pybind11'
+)
+depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
+
+makedepends=('boost' 'cmake' 'llvm15')
+
+
+
+
+
 
 !!! SUITE https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/162c320a75b02fcb747ea1b0eab77435396d7e89..3d1cb783362722d9567289b150aeaf37573f1393:/build_files/build_environment/install_deps.sh
 
