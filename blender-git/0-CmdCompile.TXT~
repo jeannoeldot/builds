@@ -908,7 +908,7 @@ $ cp -r .config/blender/4.1 .config/blender/4.2
 $ rm -f .config/blender/4.2/cache/bvh_*
 
 # SUPPRINE VERSION N-2
-$ rm -rf .config/blender/4.0
+$ rm -rf .config/blender/3.5
 
 
 ================================================================
