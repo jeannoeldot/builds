@@ -28,17 +28,21 @@ mv -vf /tmp/0-AUR/pkgbrowser/PKGBUILD .
 
 1-2) Download source
 ----------------------
-wget https://osdn.net/dl/pkgbrowser/pkgbrowser-0.28.tar.gz
+wget https://codeberg.org/kachelaqa/pkgbrowser/releases/download/v0.28/pkgbrowser-0.28.tar.gz
 
 ls
 
 md5sum pkgbrowser-0.28.tar.gz
+==> 0d10a01c6cc64ba0057f38e528c5778b  pkgbrowser-0.28.tar.gz
+
 
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Name <name@fai.com>
 
 pkgver=0.28
+pkgrel=2    # MAJ URL source
+
 pkgrel=1
 
 pkgrel=2    # MAJ python 3.10
@@ -60,7 +64,13 @@ depends=('pacman>=4.1' 'pacman<6.1' 'python>=3.2' 'python<3.11' 'python-pyqt5'
 depends=('pacman>=6.0' 'pacman<6.1' 'python>=3.2' 'python<3.12' 'python-pyqt5'
          'hicolor-icon-theme'
 )
-      
+/!\/!\/!\ PACMAN 6.0.2-9 Modifs makepkg.conf.pacnew debug
+options=('!debug')
+SINON : ==> Création terminée : pkgbrowser 0.28-2 (mar. 13 févr. 2024 15:18:33)
+'/tmp/build/pkgbrowser-0.28-2-x86_64.pkg.tar.zst' -> './pkgbrowser-0.28-2-x86_64.pkg.tar.zst'
+'/tmp/build/pkgbrowser-debug-0.28-2-x86_64.pkg.tar.zst' -> './pkgbrowser-debug-0.28-2-x86_64.pkg.tar.zst'
+
+
 /!\/!\/!\
 !!! À COMMENTER
 #install="$pkgname.install"
@@ -85,8 +95,7 @@ $ ls -la
 ====================================
 !!! EN USER
 
-$ rm -f *~
-
+rm -f *~ \
 rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
@@ -176,6 +185,9 @@ OU
 =========================================================================
 ANCIEN
 ======
+
+wget https://osdn.net/dl/pkgbrowser/pkgbrowser-0.28.tar.gz
+
 
 pkgbrowser W: Dependency included and not needed ('python')
 pkgbrowser W: Dependency included and not needed ('python')
