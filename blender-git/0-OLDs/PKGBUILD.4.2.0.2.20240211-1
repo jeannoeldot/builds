@@ -1,11 +1,11 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.2.0.3.20240218
+pkgver=4.2.0.2.20240211
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
-license=('GPL-3.0-or-later')
+license=('GPL')
 url="https://blender.org/"
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libjpeg' 'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp'
@@ -45,12 +45,10 @@ options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
-        "118328-openpgl-0.6.0.patch"
 )
-sha256sums=('0793d3ef1ca656bcb5e51341714b2234007b6b16799bde4b61eec0630cf5d8c8'
-            '94ef564b655899ec444bb4a5a79afe6b1ca4c420e40a52cd8bc50b9bee3565ce'
+sha256sums=('81516b662acd492ce4fa55644a48fb7792c395ea9a33a81256967831f68c876e'
+            '0d2b10005d6eaed59ff258b1bbc8c6d7b1994b01d761228a9a3abf537a7b9f5c'
             'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
-            'aad7bd6e9214c97c3f6ce4c1ddfecdfafb604741355ed512e347fdd5f15cc9bb'
 )
 
 _gitname="blender"
@@ -58,17 +56,14 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
-  # Fix build avec openpgl 0.6.0
-  patch -Np1 -i "${srcdir}/118328-openpgl-0.6.0.patch"
-
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "203f5f9f097b"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "835b9a506d44"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1708237976|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1707632367|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
