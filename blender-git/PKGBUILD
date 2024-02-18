@@ -41,6 +41,7 @@ optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
 provides=('blender')
 #options=('!strip')
+options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
