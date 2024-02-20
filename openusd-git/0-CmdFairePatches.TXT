@@ -1,19 +1,19 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 22.03
-!!! VERSION = v22.03
+!!! VERSION = 23.11
+!!! VERSION = v23.11
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/usd-git
 
 mkdir /tmp/srcp
 
-cp -v USD-v22.03.tar.gz /tmp/srcp/
+cp -v USD-v23.11.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf USD-v22.03.tar.gz
+tar -xzf USD-v23.11.tar.gz
 
 
 !!! VOIR

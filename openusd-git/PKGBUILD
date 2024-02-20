@@ -8,24 +8,70 @@ _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
 arch=('x86_64')
-license=('custom')
-depends=('boost-libs' 'onetbb'
+license=('Apache-2.0')
+depends=('boost-libs' 'glfw-x11'
+         'onetbb'
+         'materialx'
+         'openexr'
+         'opensubdiv-git'
+         'openimageio-git'
+         'openvdb-git'
+         'python'
+         'python-jinja'
 )
-makedepends=('boost' 'cmake' 'python'
+makedepends=('boost' 'cmake'
 )
 conflicts=('usd' 'openusd')
 provides=('usd' 'openusd')
+options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "blender-usd-diff.patch"
+        "blender-usd_core_profile-diff.patch"
+        "usd-tbb.patch"
 )
 sha256sums=('2add389b121568f3dfb9b7e4f4551a6c8445ae353f1725a0753c8ce5639c4f83'
-            '3a35ab44c7083f4d73a095bb12eae5c81098ad26123da899d2418329f48d7d31'
+            'eeac5135796c180f78a45abb381dfff7c7784b71bc06c4b2882def6c79f397d1'
+            'd082557c30083bfd4244f040dd4c14a643039284f34e0841ffe03d97a0213777'
+            'e4a1378a2ce34edbd65f016689cbca0dc37dc2b1c2ddfd837724078ed231063c'
 )
 
 prepare() {
   cd "${_name_release}"
+  # Compatible avec onetbb 2021.11.0
+  patch -Np1 -i "${srcdir}/usd-tbb.patch"
   # blender/build_files/build_environment/patches/usd.diff
   patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
+  # blender/build_files/build_environment/patches/usd_core_profile.diff
+  patch -Np1 -i "${srcdir}/blender-usd_core_profile-diff.patch"
+
+  _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+
+  # Change directories to standard
+  sed -i 's|plugin/usd|lib/usd/plugin|g' \
+      cmake/macros/{Private,Public}.cmake
+  sed -i 's|/python|/python'$_pyver'/site-packages|g' \
+      cmake/macros/Private.cmake
+  sed -i 's|lib/python/pxr|/usr/lib/python'$_pyver'/site-packages/pxr|' \
+      cmake/macros/{Private,Public}.cmake pxr/usdImaging/usdviewq/CMakeLists.txt
+
+  sed -i 's|/pxrConfig.cmake|/lib/cmake/pxr/pxrConfig.cmake|g' \
+      pxr/CMakeLists.txt
+  sed -i 's|${CMAKE_INSTALL_PREFIX}|${CMAKE_INSTALL_PREFIX}/lib/cmake/pxr|g' \
+      pxr/CMakeLists.txt
+  sed -i 's|"cmake"|"lib/cmake/pxr"|g' \
+      pxr/CMakeLists.txt
+  sed -i 's|${PXR_CMAKE_DIR}/cmake|${PXR_CMAKE_DIR}|g' \
+      pxr/pxrConfig.cmake.in
+  sed -i 's|${PXR_CMAKE_DIR}/include|/usr/include|g' \
+      pxr/pxrConfig.cmake.in
+  sed -i 's|EXACT COMPONENTS|COMPONENTS|g' \
+      pxr/pxrConfig.cmake.in
+
+  # Further drop shebangs line for some py files
+  sed -r -i '1{/^#!/d}' \
+      pxr/usd/sdr/shaderParserTestUtils.py \
+      pxr/usd/usdUtils/updateSchemaWithSdrNode.py \
+      pxr/usdImaging/usdviewq/usdviewApi.py
 }
 
 build() {
@@ -36,18 +82,26 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
-    -DTBB_INCLUDE_DIR=/usr/include/tbb2020 \
-    -DTBB_LIBRARY=/usr/lib/tbb2020 \
-    -DPXR_SET_INTERNAL_NAMESPACE=usdBlender \
+    -DPXR_ENABLE_PYTHON_SUPPORT=ON \
+    -DPXR_USE_PYTHON_3=ON \
+    -DPXR_BUILD_IMAGING=ON \
     -DPXR_BUILD_TESTS=OFF \
     -DPXR_BUILD_EXAMPLES=OFF \
     -DPXR_BUILD_TUTORIALS=OFF \
-    -DPXR_BUILD_USD_TOOLS=OFF \
-    -DPXR_BUILD_IMAGING=OFF \
-    -DPXR_ENABLE_PYTHON_SUPPORT=OFF \
-    -DBUILD_SHARED_LIBS=ON \
+    -DPXR_BUILD_USDVIEW=OFF \
+    -DPXR_ENABLE_HDF5_SUPPORT=OFF \
+    -DPXR_ENABLE_MATERIALX_SUPPORT=ON \
+    -DPXR_ENABLE_OPENVDB_SUPPORT=ON \
+    -DPYTHON_EXECUTABLE=/usr/bin/python \
     -DPXR_BUILD_MONOLITHIC=ON \
-    -DCMAKE_DEBUG_POSTFIX=_d
+    -DPXR_ENABLE_OSL_SUPPORT=OFF \
+    -DPXR_ENABLE_GL_SUPPORT=ON \
+    -DPXR_BUILD_OPENIMAGEIO_PLUGIN=ON \
+    -DPXR_BUILD_OPENCOLORIO_PLUGIN=OFF \
+    -DPXR_ENABLE_PTEX_SUPPORT=OFF \
+    -DPXR_BUILD_USD_TOOLS=OFF \
+    -DCMAKE_DEBUG_POSTFIX=_d \
+    -DBUILD_SHARED_LIBS=ON \
 
   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
   make -C build
@@ -56,15 +110,12 @@ build() {
 package() {
   cd "${_name_release}"
   DESTDIR="${pkgdir}" make -C build install
-  
-  # pxrConfig.cmake
-  mkdir -p "${pkgdir}"/usr/lib/cmake/pxr
-  mv "${pkgdir}"/usr/pxrConfig.cmake "${pkgdir}"/usr/lib/cmake/pxr
-  # plugin
-  mkdir -p "${pkgdir}"/usr/share/usd
-  mv "${pkgdir}"/usr/plugin "${pkgdir}"/usr/share/usd/plugin
-  
+
+  sed -i 's|${PXR_CMAKE_DIR}/cmake|${PXR_CMAKE_DIR}|g' \
+    ${pkgdir}/usr/lib/cmake/pxr/pxrConfig.cmake
+  sed -i 's/_IMPORT_PREFIX ""/_IMPORT_PREFIX "\/usr"/' \
+    ${pkgdir}/usr/lib/cmake/pxr/pxrTargets.cmake
+
   #license
-  cd ..
   install -Dm644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

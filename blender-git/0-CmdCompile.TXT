@@ -675,7 +675,7 @@ $ ls -la
 
 $ mkpkg-chroot-repo
 
-SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
+SI depends= 'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
             'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'
             'embree-git' 'openpgl-git' 'openusd-git'
 SI makedepends=
@@ -698,7 +698,7 @@ openpgl-git-*-x86_64.pkg.tar.*\
 !!!!!!!!!!!!!!!!!!!!!!!!!
 SANS usd-git
 -------------
-SI depends= ,opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
+SI depends= 'opencollada-git' 'openshadinglanguage-git' 'openimageio-git'
             'opensubdiv-git' 'openvdb-git' 'alembic-git' 'openimagedenoise-git'
             'embree-git' 'openpgl-git'
 SI makedepends=
