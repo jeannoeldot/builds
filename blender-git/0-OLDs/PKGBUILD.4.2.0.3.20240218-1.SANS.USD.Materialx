@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.2.0.5.20240220
+pkgver=4.2.0.3.20240218
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -29,7 +29,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openshadinglanguage-git'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
           'embree-git' 'openimagedenoise-git'
-          'openpgl-git' 'materialx' 'openusd-git'
+          'openpgl-git'
           'zstd'
 )
 makedepends=('cmake' 'boost' 'mesa' 'llvm'
@@ -45,10 +45,12 @@ options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
+        "118328-openpgl-0.6.0.patch"
 )
-sha256sums=('95421a9f9147284131ac6c9b3939dec454ce9f8f163f783b9fafa7515b4f039c'
-            '0f86b420db5557c6d97d54f46ae719c6a887241b66ecd50dd718a2d62e9994b4'
+sha256sums=('0793d3ef1ca656bcb5e51341714b2234007b6b16799bde4b61eec0630cf5d8c8'
+            '94ef564b655899ec444bb4a5a79afe6b1ca4c420e40a52cd8bc50b9bee3565ce'
             'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
+            'aad7bd6e9214c97c3f6ce4c1ddfecdfafb604741355ed512e347fdd5f15cc9bb'
 )
 
 _gitname="blender"
@@ -56,20 +58,27 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  # Fix build avec openpgl 0.6.0
+  patch -Np1 -i "${srcdir}/118328-openpgl-0.6.0.patch"
+
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "148cad93e364"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "203f5f9f097b"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1708431496|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1708237976|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
   cd "${_gitname}"
   
   local PYTHON_VER=3.11
+
+#  # Who even knows why this is needed
+#  export CFLAGS="$CFLAGS -lSPIRV -lSPIRV-Tools -lSPIRV-Tools-opt -lSPIRV-Tools-link -lSPIRV-Tools-reduce -lSPIRV-Tools-shared -lglslang"
+#  export CXXFLAGS="$CXXFLAGS -lSPIRV -lSPIRV-Tools -lSPIRV-Tools-opt -lSPIRV-Tools-link -lSPIRV-Tools-reduce -lSPIRV-Tools-shared -lglslang"
 
   cmake \
         -Bbuild \
@@ -82,6 +91,8 @@ build() {
         -DOPTIX_ROOT_DIR="${srcdir}" \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
+        -DWITH_USD=OFF \
+        -DWITH_MATERIALX=OFF \
         -DWITH_HYDRA=OFF \
         -DWITH_LIBS_PRECOMPILED=OFF \
         -DWITH_INPUT_NDOF=OFF \
