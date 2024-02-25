@@ -1,31 +1,27 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.2.0.6.20240225
+pkgver=4.2.0.5.20240220
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
 url="https://blender.org/"
-
-# 'fmt'
-# 'libxmu' 'libxxf86vm' 'libxfixes'  'libxrender'
-# 'libgl' ==> 'libglvnd'
-# 'libjpeg' ==> 'libjpeg-turbo'
-
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
-          'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp' 'libjpeg-turbo'
+          'libjpeg' 'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp'
           'python'
           'ffmpeg' 'fftw'
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse'
           'sdl2'
-          'libglvnd' 'glfw-x11' 'libxi'
+          'libgl' 'glfw-x11'
+          'libxi' 'libxmu' 'libxxf86vm' 'libxfixes' 'libxrender'
           'boost-libs' 'onetbb'
           'jemalloc'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
+          'fmt'
           'llvm-libs' 'clang'
           'potrace' 'pugixml' 'libharu' 'libepoxy'
-          'libdecor' 'libxkbcommon'
+          'libdecor' 'wayland-protocols' 'libxkbcommon'
           'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
           'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
           'opencolorio' 'libdeflate'
@@ -36,9 +32,9 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openpgl-git' 'materialx' 'openusd-git'
           'zstd'
 )
-makedepends=('git' 'cmake' 'boost' 'mesa' 'llvm'
+makedepends=('cmake' 'boost' 'mesa' 'llvm'
              'cuda'
-             'wayland-protocols'
+             'git'
              'mold'
 )
 optdepends=('cuda: cycles renderer cuda support')
@@ -50,8 +46,8 @@ source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
 )
-sha256sums=('10991fadb55c5b355b078b1c345d285a0cae24c78c47a130452616b63a490aeb'
-            '6c24634ff74dcca39ae7c793dbf0c4e2800150ea0d25b344e1325d2039a17184'
+sha256sums=('95421a9f9147284131ac6c9b3939dec454ce9f8f163f783b9fafa7515b4f039c'
+            '0f86b420db5557c6d97d54f46ae719c6a887241b66ecd50dd718a2d62e9994b4'
             'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
 )
 
@@ -65,9 +61,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "2bad37a2199a"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "148cad93e364"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1708845599|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1708431496|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
