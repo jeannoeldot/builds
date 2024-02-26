@@ -6,15 +6,15 @@ cd $HOME/05-builds/openimagedenoise-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageDenoise/oidn/releases
-==>  atafra released this on Oct 11 2023  ==> 20231011
-==> Open Image Denoise v2.1.0  ==> 2.1.0
-==> 2.1.0.20231011
+==>  atafra released this on feb 16 2024  ==> 20240216
+==> Open Image Denoise v2.2.0  ==> 2.2.0
+==> 2.2.0.20240216
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageDenoise/oidn/releases/download/v2.1.0/oidn-2.1.0.src.tar.gz
+wget https://github.com/OpenImageDenoise/oidn/releases/download/v2.2.0/oidn-2.2.0.src.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimagedenoise-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oidn-2.1.0.src.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oidn-2.2.0.src.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -35,7 +35,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimagedenoise-git
-pkgver=2.1.0.20231011
+pkgver=2.2.0.20240216
 pkgrel=1
 
 pkgrel=2  # Rebuild MAJ tbb 2021.4
@@ -51,7 +51,7 @@ pkgrel=2  # Rebuild MAJ python 3.8
 pkgrel=2  # Test cmake Ofast floop
 
 !!!!!!
-_ver_release="2.1.0"
+_ver_release="2.2.0"
 _name_release="oidn-${_ver_release}"
 
 license=('Apache')
@@ -68,7 +68,7 @@ provides='openimagedenoise' 'oidn'
 
 SANS PATCH
 ----------
-sha256sum oidn-2.1.0.src.tar.gz
+sha256sum oidn-2.2.0.src.tar.gz
 
 source=("oidn-${_ver_release}.src.tar.gz"
 )
@@ -84,72 +84,52 @@ package() {
 
 2-5) VERIFIER CMakeLists.txt
 ============================
-#mkdir /tmp/srcp
-#tar -xzf oidn-2.1.0.src.tar.gz -C /tmp/srcp
-#1) kwrite /tmp/srcp/oidn-2.1.0/CMakeLists.txt &
-#2) kwrite /tmp/srcp/oidn-2.1.0/devices/CMakeLists.txt &
-#3) kwrite /tmp/srcp/oidn-2.1.0/devices/cuda/CMakeLists.txt &
-#rm -rf /tmp/srcp
+mkdir /tmp/srcp
 
+tar -xzf oidn-2.2.0.src.tar.gz -C /tmp/srcp
 
-mkdir $HOME/99-temp/srcp
-
-tar -xzf oidn-2.1.0.src.tar.gz -C $HOME/99-temp/srcp
-
-1) kwrite $HOME/99-temp/srcp/oidn-2.1.0/CMakeLists.txt &
-
+1) kwrite /tmp/srcp/oidn-2.2.0/CMakeLists.txt &
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/openimagedenoise.cmake
-!!! LIGNES 879
-!!! LIGNES 2597 et ...
-2659     cmake_d="-D CMAKE_BUILD_TYPE=Release"
-2660     cmake_d="$cmake_d -D CMAKE_INSTALL_PREFIX=$_inst"
 
-2661     cmake_d="$cmake_d -D WITH_EXAMPLE=OFF"
-2662     cmake_d="$cmake_d -D WITH_TEST=OFF"
-
-2663     cmake_d="$cmake_d -D OIDN_STATIC_LIB=ON"
-
-
-# Devices
 27 OIDN_DEVICE_CPU   ON
 
 32 OIDN_DEVICE_CUDA   OFF ==> ON
 33 OIDN_DEVICE_HIP    OFF
+35 OIDN_DEVICE_METAL  OFF
 
 # Filters
-37 OIDN_FILTER_RT          ON
-38 OIDN_FILTER_RTLIGHTMAP   ON
+39 OIDN_FILTER_RT          ON
+40 OIDN_FILTER_RTLIGHTMAP   ON
 
 # Install
-41 OIDN_INSTALL_DEPENDENCIES    OFF
+43 OIDN_INSTALL_DEPENDENCIES    OFF
 
 # Misc
-44 OIDN_WARN_AS_ERRORS      OFF
+46 OIDN_WARN_AS_ERRORS      OFF
 
-LIGNES 48 ET ...
+LIGNES 50 ET ...
 ## Weights
 
-LIGNES 81 ET ...
+LIGNES 84 ET ...
 ## Libraries
 
-LIGNES 95 ET ...
+LIGNES 98 ET ...
 ## Apps
 98 OIDN_APPS    ON : openimagedenoise.cmake = OFF
 
+2) kwrite /tmp/srcp/oidn-2.2.0/devices/CMakeLists.txt &
 
-2) kwrite $HOME/99-temp/srcp/oidn-2.1.0/devices/CMakeLists.txt &
+3) kwrite /tmp/srcp/oidn-2.2.0/devices/cuda/CMakeLists.txt &
 
-3) kwrite $HOME/99-temp/srcp/oidn-2.1.0/devices/cuda/CMakeLists.txt &
+rm -rf /tmp/srcp
 
 
-rm -rf $HOME/99-temp/srcp
-  
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 oidn-2.1.0.src.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 oidn-2.2.0.src.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -168,7 +148,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimagedenoise-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimagedenoise-git/oidn-2.1.0.src.tar.gz . \
+&& cp -v $HOME/05-builds/openimagedenoise-git/oidn-2.2.0.src.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimagedenoise-git \
 && cp -v /tmp/build/openimagedenoise-git-*-x86_64.pkg.tar.* . \
@@ -212,7 +192,6 @@ rm -f *~
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
 usr/bin/oidnTest
-usr/lib/libOpenImageDenoise_device_cpu.so.2.1.0
 
 namcap openimagedenoise-git-*-x86_64.pkg.tar.*
 
@@ -234,7 +213,7 @@ $ mv -v openimagedenoise-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i oidn-2.1.0.src.tar.gz
+$ rm -i oidn-2.2.0.src.tar.gz
 
 
 $ cd && maj-repolocal
@@ -258,7 +237,51 @@ SI PROBLEME
 
 ANCIEN
 ======
-!!!!! OIDN 2.1.0 need ispc 1.14.1
+
+usr/lib/libOpenImageDenoise_device_cpu.so.2.2.0
+
+mkdir $HOME/99-temp/srcp
+
+tar -xzf oidn-2.2.0.src.tar.gz -C $HOME/99-temp/srcp
+
+1) kwrite $HOME/99-temp/srcp/oidn-2.2.0/CMakeLists.txt &
+
+!!! VOIR
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/openimagedenoise.cmake
+!!! LIGNES 879
+!!! LIGNES 2597 et ...
+2659     cmake_d="-D CMAKE_BUILD_TYPE=Release"
+2660     cmake_d="$cmake_d -D CMAKE_INSTALL_PREFIX=$_inst"
+
+2661     cmake_d="$cmake_d -D WITH_EXAMPLE=OFF"
+2662     cmake_d="$cmake_d -D WITH_TEST=OFF"
+
+2663     cmake_d="$cmake_d -D OIDN_STATIC_LIB=ON"
+
+
+# Devices
+27 OIDN_DEVICE_CPU   ON
+
+32 OIDN_DEVICE_CUDA   OFF ==> ON
+33 OIDN_DEVICE_HIP    OFF
+
+# Filters
+39 OIDN_FILTER_RT          ON
+40 OIDN_FILTER_RTLIGHTMAP   ON
+
+# Install
+43 OIDN_INSTALL_DEPENDENCIES    OFF
+
+
+2) kwrite $HOME/99-temp/srcp/oidn-2.2.0/devices/CMakeLists.txt &
+
+3) kwrite $HOME/99-temp/srcp/oidn-2.2.0/devices/cuda/CMakeLists.txt &
+
+
+rm -rf $HOME/99-temp/srcp
+
+
+!!!!! OIDN 2.2.0 need ispc 1.14.1
 !!!!! ispc community = 1.13.0
 makedepends=('cmake' 'python'
              'ispc-git'

@@ -8,13 +8,14 @@ _name_release="embree-${_ver_release}"
 pkgdesc="High Performance Ray Tracing Kernels"
 url="https://github.com/embree"
 arch=('x86_64')
-license=('Apache')
+license=('Apache-2.0')
 depends=('onetbb'
 )
 makedepends=('cmake'
 )
 conflicts=('embree')
 provides=('embree')
+options=('!debug')
 source=("embree-${_ver_release}.tar.gz"
 )
 sha256sums=('baf0a57a45837fc055ba828a139467bce0bc0c6a9a5f2dccb05163d012c12308'
