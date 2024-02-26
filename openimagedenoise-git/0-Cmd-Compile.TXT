@@ -54,10 +54,10 @@ pkgrel=2  # Test cmake Ofast floop
 _ver_release="2.2.0"
 _name_release="oidn-${_ver_release}"
 
-license=('Apache')
+license=('Apache-2.0')
 
 !!! https://github.com/OpenImageDenoise/oidn/issues/76
-depends=('tbb'
+depends=('onetbb'
 )
 
 makedepends=('cmake' 'ispc' 'python'
@@ -65,6 +65,8 @@ makedepends=('cmake' 'ispc' 'python'
 
 conflicts='openimagedenoise' 'oidn'
 provides='openimagedenoise' 'oidn'
+
+options=('!debug')
 
 SANS PATCH
 ----------

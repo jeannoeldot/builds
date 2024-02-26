@@ -1,12 +1,18 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.2.0.6.20240226
+pkgver=4.2.0.6.20240225
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
 url="https://blender.org/"
+
+# 'fmt'
+# 'libxmu' 'libxxf86vm' 'libxfixes'  'libxrender'
+# 'libgl' ==> 'libglvnd'
+# 'libjpeg' ==> 'libjpeg-turbo'
+
 depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp' 'libjpeg-turbo'
           'python'
@@ -30,7 +36,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openpgl-git' 'materialx' 'openusd-git'
           'zstd'
 )
-makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
+makedepends=('git' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'wayland-protocols'
              'mold'
@@ -41,9 +47,11 @@ provides=('blender')
 #options=('!strip')
 options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
+        "LibAssetsPublish-$pkgver.zip"
         "OptiX-7.7-Include.zip"
 )
-sha256sums=('937ded32147a74c74bf3a50e64884cd929f02a48def0f2f5807205006b51d9ac'
+sha256sums=('10991fadb55c5b355b078b1c345d285a0cae24c78c47a130452616b63a490aeb'
+            '6c24634ff74dcca39ae7c793dbf0c4e2800150ea0d25b344e1325d2039a17184'
             'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
 )
 
@@ -57,9 +65,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "065ba92c5460"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "2bad37a2199a"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1708952887|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1708845599|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -74,6 +82,7 @@ build() {
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_SKIP_RPATH=ON \
+        -DASSET_BUNDLE_DIR="${srcdir}"/lib/assets/publish \
         -DOPTIX_ROOT_DIR="${srcdir}" \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \

@@ -58,7 +58,7 @@ pkgrel=2    # static libs
 _ver_release="4.3.1"
 _name_release="embree-${_ver_release}"
 
-license=('Apache')
+license=('Apache-2.0')
 
 depends=('onetbb'
 )
@@ -68,6 +68,8 @@ makedepends=('cmake')
 
 conflicts='embree'
 provides='embree'
+
+options=('!debug')
 
 SANS PATCH
 ----------

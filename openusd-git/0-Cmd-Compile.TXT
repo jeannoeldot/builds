@@ -88,6 +88,8 @@ makedepends=('boost' 'cmake'
 conflicts=('usd' 'openusd')
 provides=('usd' 'openusd')
 
+options=('!debug')
+
 AVEC PATCH
 ----------
 source=("USD-v${_ver_release}.tar.gz"
