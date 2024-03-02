@@ -5,16 +5,16 @@ cd $HOME/05-builds/openimageio-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageIO/oiio/releases
-==> 01/02/2024  ==> 20240201
-==> v2.5.8.0  ==> 2.5.8.0
-==> 2.5.8.0.20240201
+==> 01/03/2024  ==> 20240301
+==> v2.5.9.0  ==> 2.5.9.0
+==> 2.5.9.0.20240301
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenImageIO-v2.5.8.0.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/refs/tags/v2.5.8.0.tar.gz
+wget -O OpenImageIO-v2.5.9.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/refs/tags/v2.5.9.0.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenImageIO-v2.5.8.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenImageIO-v2.5.9.0.tar.gz .
 
 
 1-8) FAIRE PATCHES
@@ -37,7 +37,7 @@ voir : CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.5.8.0.20240201
+pkgver=2.5.9.0.20240301
 pkgrel=1
 
 pkgrel=2    # rebuild boost boost-libs 1.83.0
@@ -118,18 +118,21 @@ pkgrel=2    # rebuild CMAKE_INSTALL_LIBDIR=lib
 pkgrel=2    # rebuild LICENSE
 
 !!!!!!
-_name_release="oiio-2.5.8.0"
-_ver_release="v2.5.8.0"
+_name_release="oiio-2.5.9.0"
+_ver_release="v2.5.9.0"
 
 conflicts=('openimageio')
 provides=('openimageio')
+
+options=('!debug')
+
 
 2-2) PKGBUILD SANS PATCH
 ========================
 source=("oiio-${_ver_release}.tar.gz"
 )
 
-sha256sum OpenImageIO-v2.5.8.0.tar.gz
+sha256sum OpenImageIO-v2.5.9.0.tar.gz
 
 sha256sums=('...'
             '...'
@@ -166,7 +169,7 @@ $ pacman -Ss python | grep core/python | grep install
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.11
 
-!!! VERSION 2.5.8.0
+!!! VERSION 2.5.9.0
 build() {
       ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -181,9 +184,9 @@ https://github.com/OpenImageIO/oiio/commit/a99000fee4bbbcd4ed80674d77b14597a8f4e
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenImageIO-v2.5.8.0.tar.gz -C /tmp/srcp
+tar -xzf OpenImageIO-v2.5.9.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/oiio-2.5.8.0/CMakeLists.txt &
+1) kwrite /tmp/srcp/oiio-2.5.9.0/CMakeLists.txt &
 
 LIGNE 45
   CMAKE_BUILD_TYPE      =>      -DCMAKE_BUILD_TYPE=Release
@@ -202,7 +205,7 @@ LIGNE 91
   INSTALL_FONTS "If ON, install default fonts" ON) => -DINSTALL_FONTS=OFF \
 
 
-2) kwrite /tmp/srcp/oiio-2.5.8.0/src/cmake/compiler.cmake &
+2) kwrite /tmp/srcp/oiio-2.5.9.0/src/cmake/compiler.cmake &
 
 LIGNE 238
   USE_CCACHE = ON           =>      -DUSE_CCACHE=OFF \
@@ -229,7 +232,7 @@ LIGNE 582
 LINKSTATIC = OFF
 
 
-3) kwrite /tmp/srcp/oiio-2.5.8.0/src/cmake/externalpackages.cmake &
+3) kwrite /tmp/srcp/oiio-2.5.9.0/src/cmake/externalpackages.cmake &
 
 LIGNE 81
 option OIIO_DISABLE_BOOST_STACKTRACE = OFF
@@ -280,7 +283,7 @@ LIGNE 307
 option BUILD_FMT_FORCE = OFF
 
 
-4) kwrite /tmp/srcp/oiio-2.5.8.0/src/cmake/pythonutils.cmake &
+4) kwrite /tmp/srcp/oiio-2.5.9.0/src/cmake/pythonutils.cmake &
 
 LIGNES 6 ET 7
   USE_PYTHON ON         depends= 'python' 'pybind11' 'python-numpy'
@@ -290,7 +293,7 @@ LIGNE 64
 # pybind11
 
 
-5) kwrite /tmp/srcp/oiio-2.5.8.0/src/cmake/testing.cmake
+5) kwrite /tmp/srcp/oiio-2.5.9.0/src/cmake/testing.cmake
 
 LIGNE 334
 option OIIO_DOWNLOAD_MISSING_TESTDATA "Try to download any missing test data" ON  => OFF
@@ -304,7 +307,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 27821011 26 nov.  15:36 OpenImageIO-v2.5.8.0.tar.gz
+-rw-r--r--  1 jnd users 27821011 26 nov.  15:36 OpenImageIO-v2.5.9.0.tar.gz
 -rw-r--r--  1 jnd users     1748 26 nov.  16:01 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -322,7 +325,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimageio-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimageio-git/OpenImageIO-v2.5.8.0.tar.gz . \
+&& cp -v $HOME/05-builds/openimageio-git/OpenImageIO-v2.5.9.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimageio-git \
 && cp -v /tmp/build/openimageio-git-*-x86_64.pkg.tar.* . \
@@ -379,8 +382,8 @@ rm -f *~
 # Verifications...
 
 ==> WARNING: Package contains reference to $srcdir
-usr/lib/libOpenImageIO_Util.so.2.5.8
-usr/lib/libOpenImageIO.so.2.5.8
+usr/lib/libOpenImageIO_Util.so.2.5.9
+usr/lib/libOpenImageIO.so.2.5.9
 usr/lib/python3.11/site-packages/OpenImageIO/OpenImageIO.cpython-311-x86_64-linux-gnu.so
 usr/bin/iconvert
 usr/bin/idiff
@@ -418,7 +421,7 @@ $ mv -v openimageio-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenImageIO-v2.5.8.0.tar.gz
+$ rm -i OpenImageIO-v2.5.9.0.tar.gz
 
 
 $ cd && maj-repolocal
@@ -511,7 +514,7 @@ source=("oiio-${_ver_release}.tar.gz"
         "fix-OpenJpeg-2.4-library-not-found.patch"
 )
 
-sha256sum OpenImageIO-v2.5.8.0.tar.gz
+sha256sum OpenImageIO-v2.5.9.0.tar.gz
 
 sha256sum fix-OpenJpeg-2.4-library-not-found.patch
 
@@ -533,16 +536,16 @@ prepare() {
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageIO/oiio/releases
-==> 01/03/2022  ==> 20240201
-==> Release-2.5.8.0
-==> 2.5.8.0.20240201
+==> 01/03/2022  ==> 20240301
+==> Release-2.5.9.0
+==> 2.5.9.0.20240301
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O oiio-Release-2.5.8.0.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.5.8.0.tar.gz
+wget -O oiio-Release-2.5.9.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.5.9.0.tar.gz
 
 1-7) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -550,7 +553,7 @@ cd $HOME/05-builds/openimageio-git
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.5.8.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oiio-Release-2.5.9.0.tar.gz .
 
 
 
@@ -595,7 +598,7 @@ SI depends=( 'openvdb-git' )
 ==========================================================
 $ cp -v $HOME/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
-!!! VERSION 2.5.8.0
+!!! VERSION 2.5.9.0
 package() {
   ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -616,11 +619,11 @@ pkgrel=2          # rebuild boost boost-libs 1.63.0-1
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageIO/oiio/archive/Release-2.5.8.0.tar.gz
-wget -O oiio-Release-2.5.8.0.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/Release-2.5.8.0.tar.gz
+wget https://github.com/OpenImageIO/oiio/archive/Release-2.5.9.0.tar.gz
+wget -O oiio-Release-2.5.9.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/Release-2.5.9.0.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v Release-2.5.8.0.tar.gz oiio-Release-2.5.8.0.tar.gz
+mv -v Release-2.5.9.0.tar.gz oiio-Release-2.5.9.0.tar.gz
 
