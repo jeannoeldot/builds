@@ -2,14 +2,14 @@
 
 pkgname=openusd-git
 pkgver=23.11.20231027
-pkgrel=1
+pkgrel=2
 _ver_release="23.11"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
 arch=('x86_64')
 license=('Apache-2.0')
-depends=('boost-libs' 'glfw-x11'
+depends=('boost-libs' 'glfw'
          'onetbb'
          'materialx'
          'openexr'

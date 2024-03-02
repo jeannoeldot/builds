@@ -48,6 +48,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-git
 pkgver=23.11.20231027
+pkgrel=2  # Rebuild maj openimageio-git-2.5.9.0.20240301
+
 pkgrel=1
 
 pkgrel=4      # Rebuild maj boost boost-libs 1.78.0
@@ -73,7 +75,7 @@ _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
 
-depends=('boost-libs'
+depends=('boost-libs' 'glfw'
          'onetbb'
          'materialx'
          'openexr'
