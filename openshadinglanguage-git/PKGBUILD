@@ -1,14 +1,14 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-git
-pkgver=1.13.6.1.20240201
-pkgrel=2
-_name_release="OpenShadingLanguage-1.13.6.1"
-_ver_release="v1.13.6.1"
+pkgver=1.13.7.0.20240301
+pkgrel=1
+_name_release="OpenShadingLanguage-1.13.7.0"
+_ver_release="v1.13.7.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
-license=('custom')
+license=('BSD-3-Clause')
 depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
@@ -21,9 +21,10 @@ makedepends=('boost' 'cmake' 'llvm'
 )
 conflicts=('openshadinglanguage')
 provides=('openshadinglanguage')
+options=('!debug')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
 )
-sha256sums=('2fb555fdc50539d0f06e8d1b399172f756d390a7261da19f5d6a9c3fecc424e0'
+sha256sums=('56ea21310e9e5417c34535a630c096a4a260cd614655fee567e0e45559f7f248'
 )
 
 build() {
