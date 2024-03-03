@@ -1,0 +1,28 @@
+
+
+during IPA pass: static-var
+lto1: internal compiler error: in copy_function_or_variable, at lto-streamer-out.cc:2591
+0x1851644 internal_error(char const*, ...)
+        ???:0
+0x67856f fancy_abort(char const*, int, char const*)
+        ???:0
+0xaf35e1 ipa_write_optimization_summaries(lto_symtab_encoder_d*)
+        ???:0
+0x6d93ac lto_main()
+        ???:0
+Please submit a full bug report, with preprocessed source (by using -freport-bug).
+Please include the complete backtrace with any bug report.
+See <https://bugs.archlinux.org/> for instructions.
+lto1: fatal error: streaming subprocess failed
+compilation terminated.
+lto-wrapper: fatal error: /usr/bin/c++ returned 1 exit status
+compilation terminated.
+mold: fatal: lto-wrapper failed
+collect2: error: ld returned 1 exit status
+make[2]: *** [source/creator/CMakeFiles/blender.dir/build.make:478: bin/blender] Error 1
+make[1]: *** [CMakeFiles/Makefile2:8484: source/creator/CMakeFiles/blender.dir/all] Error 2
+make: *** [Makefile:166: all] Error 2
+make: INTERNAL: Exiting with 3 jobserver tokens available; should be 7!
+make: Leaving directory '/build/blender-git/src/blender/build'
+==> ERROR: A failure occurred in build().
+    Aborting...

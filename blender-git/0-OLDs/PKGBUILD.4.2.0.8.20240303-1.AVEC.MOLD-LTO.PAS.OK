@@ -33,6 +33,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'wayland-protocols'
+             'mold'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
@@ -95,6 +96,8 @@ build() {
         -DWITH_CLANG=ON \
         -DCLANG_INCLUDE_DIR=/usr/include/clang \
         -D_CLANG_LIBRARIES=/usr/lib \
+        -DWITH_LINKER_GOLD=OFF \
+        -DWITH_LINKER_MOLD=ON \
         -DPYTHON_VERSION=${PYTHON_VER} \
         -DPYTHON_LIBPATH=/usr/lib \
         -DPYTHON_LIBRARY=python${PYTHON_VER} \
