@@ -1,4 +1,23 @@
 
+0-8) OPTIX 8.0
+================
+VOIR PKGBUILD community blender
+https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/blob/main/PKGBUILD?ref_type=heads
+LIGNE 122:
+
+cd /0-DataLinux/05-builds-dir-git/
+
+wget https://developer.download.nvidia.com/redist/optix/v8.0/OptiX-8.0-Include.zip
+
+sha256sum OptiX-8.0-Include.zip
+ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c
+
+sha512sum OptiX-8.0-Include.zip
+5502d9df847de12badc702c0444bd4f1f7620460b2235026df2c3133da1e04c148af0f1fc7f345e9a0c009c32f905f66c8d427743445e8864d3a797cdce6a483
+
+cd
+
+
 0-7) OPTIX 7.7
 ================
 VOIR PKGBUILD community blender
