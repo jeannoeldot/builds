@@ -41,6 +41,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.7.0.20240301
+pkgrel=2    # rebuild MAJ LLVM 17
+
 pkgrel=1
 
 pkgrel=3    # TEST AVEC OPTIX
@@ -97,12 +99,12 @@ provides=('openshadinglanguage')
 
 options=('!debug')
 
-!!! LLVM 16.0
+!!! LLVM 17.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 16.0.6-2 [installé]
-extra/llvm 16.0.6-1 [installé]
-extra/llvm-libs 16.0.6-1 [installé]
+extra/clang 17.0.6-1 [installé]
+extra/llvm 17.0.6-2 [installé]
+extra/llvm-libs 17.0.6-2 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
