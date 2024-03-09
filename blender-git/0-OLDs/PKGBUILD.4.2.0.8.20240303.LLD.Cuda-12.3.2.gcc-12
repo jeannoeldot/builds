@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.2.0.9.20240309
-pkgrel=2
+pkgver=4.2.0.8.20240303
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -33,18 +33,17 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'wayland-protocols'
-             'mold'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender')
 provides=('blender')
 #options=('!strip')
-options=('!lto' '!debug')
+options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
-        "OptiX-8.0-Include.zip"
+        "OptiX-7.7-Include.zip"
 )
-sha256sums=('6d3b0cc922ed6cf14a7acf7a7af549ce07d99d80106ce0dd951b93c1542027e2'
-            'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
+sha256sums=('61d002a0d502e77a8f74cbe092d9560a6e99390a00d619e0636e3916639c3228'
+            'b11eb06327d7f20dcfac413af720411112adb086b06b4f035c4994df0e5f99ab'
 )
 
 _gitname="blender"
@@ -57,15 +56,15 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e33f5e36acb9"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "62bb346af911"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1709988057|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1709422847|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
   cd "${_gitname}"
   
-  local _python_ver=3.11
+  local PYTHON_VER=3.11
 
   cmake \
         -Bbuild \
@@ -85,22 +84,21 @@ build() {
         -DWITH_PYTHON_INSTALL_NUMPY=OFF \
         -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
         -DWITH_PYTHON_INSTALL_ZSTANDARD=OFF \
-        -DCUDA_HOST_COMPILER=/usr/bin/gcc \
+        -DCUDA_HOST_COMPILER=/usr/bin/gcc-12 \
         -DWITH_CYCLES_CUDA_BINARIES=ON \
         -DCYCLES_CUDA_BINARIES_ARCH="sm_86;compute_86" \
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_CYCLES_DEVICE_HIP=OFF \
         -DWITH_CYCLES_DEVICE_METAL=OFF \
+        -DLLVM_VERSION=16 \
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
         -DCLANG_INCLUDE_DIR=/usr/include/clang \
-        -D_clang_LIBRARIES=/usr/lib \
-        -DWITH_LINKER_GOLD=OFF \
-        -DWITH_LINKER_MOLD=ON \
-        -DPYTHON_VERSION=${_python_ver} \
+        -D_CLANG_LIBRARIES=/usr/lib \
+        -DPYTHON_VERSION=${PYTHON_VER} \
         -DPYTHON_LIBPATH=/usr/lib \
-        -DPYTHON_LIBRARY=python${_python_ver} \
-        -DPYTHON_INCLUDE_DIRS=/usr/include/python${_python_ver}
+        -DPYTHON_LIBRARY=python${PYTHON_VER} \
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER}
   make -C build
 }
 
