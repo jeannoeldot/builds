@@ -128,7 +128,14 @@ set(ASSET_BUNDLE_DIR ${CMAKE_SOURCE_DIR}/release/datafiles/assets/publish/)
 
 1-7) FAIRE ARCHIVE TAR.GZ DE BLENDER
 =====================================
+
+tar -c -v --zstd -f blender-git-4.2.0.9.20240312.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 580.9 Mio
+
+
+
 tar -cvzf blender-git-4.2.0.9.20240312.tar.gz --exclude={.git,.gitea,.github}  blender
+==> 583.1 Mio
 
 sha256sum blender-git-4.2.0.9.20240312.tar.gz
 3fa9e4afd687fed97997c35472bf1c4590ee2ac21dcbce652197ae259a5c1ace
