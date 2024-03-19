@@ -2,12 +2,12 @@
 
 pkgname='pkgbrowser'
 pkgver=0.28
-pkgrel=2
+pkgrel=3
 pkgdesc='A utility for browsing pacman databases and the AUR'
 arch=('x86_64')
 url="https://osdn.net/projects/$pkgname"
 license=('GPL-2.0-only')
-depends=('pacman>=6.0' 'pacman<6.1' 'python>=3.2' 'python<3.12' 'python-pyqt5'
+depends=('pacman>=6.0' 'pacman<6.2' 'python>=3.2' 'python<3.12' 'python-pyqt5'
          'hicolor-icon-theme'
 )
 options=('!debug')

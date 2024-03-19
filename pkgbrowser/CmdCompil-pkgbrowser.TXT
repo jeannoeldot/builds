@@ -3,9 +3,9 @@ cd $HOME/05-builds/pkgbrowser
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.0.25-2
+cp -v PKGBUILD PKGBUILD.0.28-2
 
-mv -vf PKGBUILD.0.25-2 0-Olds/
+mv -vf PKGBUILD.0.28-2 0-Olds/
 
 
 NOUVELLE VERSION = 0.28
@@ -41,6 +41,7 @@ md5sum pkgbrowser-0.28.tar.gz
 # Maintainer: Name <name@fai.com>
 
 pkgver=0.28
+pkgrel=3    # MAJ pacman 6.1
 pkgrel=2    # MAJ URL source
 
 pkgrel=1
@@ -55,13 +56,13 @@ pkgrel=2    # MAJ pacman 5.1
 /!\/!\/!\
 !!! À MODIFIER
 !!! AJOUTER 'hicolor-icon-theme'
-depends=('pacman>=4.1' 'pacman<6.1' 'python>=3.2' 'python<3.11' 'python-pyqt5'
+depends=('pacman>=4.1' 'pacman<6.2' 'python>=3.2' 'python<3.11' 'python-pyqt5'
          'hicolor-icon-theme'
 )
 
-/!\/!\/!\ PACMAN 6.0
+/!\/!\/!\ PACMAN 6.1
 !!! AJOUTER 'hicolor-icon-theme'
-depends=('pacman>=6.0' 'pacman<6.1' 'python>=3.2' 'python<3.12' 'python-pyqt5'
+depends=('pacman>=6.0' 'pacman<6.2' 'python>=3.2' 'python<3.12' 'python-pyqt5'
          'hicolor-icon-theme'
 )
 /!\/!\/!\ PACMAN 6.0.2-9 Modifs makepkg.conf.pacnew debug
