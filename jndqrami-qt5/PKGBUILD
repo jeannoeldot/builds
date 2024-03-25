@@ -6,11 +6,12 @@ pkgrel=7
 pkgdesc="Variante du Rami Kaluki"
 arch=('i686' 'x86_64')
 url="https://github.com/jeannoeldot/jndqrami-qt5"
-license=('GPL2')
+license=('GPL-2.0-only')
 depends=('qt5-base' 'sdl_mixer' 'desktop-file-utils')
 makedepends=('qt5-base' 'sdl_mixer')
 provides=('jndqrami')
 conflicts=('jndqrami')
+options=('!debug')
 source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
 sha256sums=('b0c2c69351f91dd02fb8777e51b5caf6fe9ba0bd508b456a833033f227df39e5')
 
