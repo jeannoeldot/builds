@@ -8,11 +8,11 @@ FAIRE PATCHS
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.2.0.12.20240324.tar.gz /tmp/srcp/
+cp -v blender-git-4.2.0.12.20240324.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.2.0.12.20240324.tar.gz
+tar -x --zstd -f blender-git-4.2.0.12.20240324.tar.zst
 
 1-1) MODIFIER blender/scripts/startup/bl_ui/node_add_menu_shader.py
 ===================================================================
@@ -56,6 +56,15 @@ sync
 =================================================================
 ANCIENS
 ========
+
+mkdir /tmp/srcp
+
+cp -v blender-git-4.2.0.12.20240324.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf blender-git-4.2.0.12.20240324.tar.gz
+
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
 https://git.blender.org/gitweb/gitweb.cgi/blender.git/commitdiff/869a46df2980818644db4823fb1d29e9d525b645

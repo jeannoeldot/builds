@@ -1,0 +1,87 @@
+
+cd /0-DataLinux/05-builds-dir-git
+
+=====================================================
+Original
+============
+tar -cvzf blender-git-4.2.0.12.20240324.tar.gz --exclude={.git,.gitea,.github}  blender
+
+sha256sum blender-git-4.2.0.12.20240324.tar.gz
+
+
+=====================================================
+Test
+============
+
+zstd -c -z -q -
+COMPRESSZST=(zstd -c -T0 --ultra -20 -)
+
+tar -I 'zstd --ultra -22' -cf example.tar.zst example/
+
+============
+
+rm -i blender-git-4.2.0.12.20240324.tar.zst
+time tar -c -v --zstd -f blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 581.1 Mio
+real    0m1,977s
+user    0m2,262s
+sys     0m0,865s
+
+
+=====================================================
+Meilleur rapport Temps/Taille
+=====================================================
+rm -i blender-git-4.2.0.12.20240324.tar.zst
+time tar -I 'zstd -T0 -5' -cvf blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 574.6 Mio
+real    0m1,512s
+user    0m7,475s
+sys     0m1,221s
+=====================================================
+
+rm -i blender-git-4.2.0.12.20240324.tar.zst
+time tar -I 'zstd -c -T0 -5' -cvf blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 574.6 Mio
+real    0m1,609s
+user    0m7,632s
+sys     0m1,327s
+
+rm -i blender-git-4.2.0.12.20240324.tar.zst
+time tar -I 'zstd -T0 -10' -cvf blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 565.1 Mio
+real    0m5,000s
+user    0m26,641s
+sys     0m1,894s
+
+rm -i blender-git-4.2.0.12.20240324.tar.zst
+time tar -I 'zstd -T0 -15' -cvf blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 561.1 Mio
+real    0m17,366s
+user    1m24,759s
+sys     0m1,140s
+
+rm -i blender-git-4.2.0.12.20240324.tar.zst
+time tar -I 'zstd -T0 -19' -cvf blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 538.0 Mio
+real    0m53,213s
+user    4m48,514s
+sys     0m1,133s
+
+rm -i blender-git-4.2.0.12.20240324.tar.zst
+time tar -I 'zstd -c -T0 --ultra -20' -cvf blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 411.8 Mio
+real    1m7,358s
+user    4m27,852s
+sys     0m1,173s
+
+
+rm -i blender-git-4.2.0.12.20240324.tar.gz
+time tar -cvzf blender-git-4.2.0.12.20240324.tar.gz --exclude={.git,.gitea,.github}  blender
+==> 583.8 Mio
+real    0m49,872s
+user    0m29,814s
+sys     0m1,821s
+
+
+
+

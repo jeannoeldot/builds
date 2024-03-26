@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=4.2.0.12.20240324
-pkgrel=2
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -40,10 +40,10 @@ conflicts=('blender')
 provides=('blender')
 #options=('!strip')
 options=('!lto' '!debug')
-source=("$pkgname-$pkgver.tar.zst"
+source=("$pkgname-$pkgver.tar.gz"
         "OptiX-8.0-Include.zip"
 )
-sha256sums=('78a0acac51aa4d154ba72cfd88112c6a42c77a867da3f00f2b57a07407424cfc'
+sha256sums=('0c66b2d5f93385da83a202e5efda45d87f07c6e422b0d9668e7e271e91f6185c'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
 )
 

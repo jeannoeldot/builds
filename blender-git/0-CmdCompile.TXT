@@ -126,27 +126,20 @@ VOIR LIGNE 1704: /0-DataLinux/05-builds-dir-git/blender/source/creator/CMakeList
 set(ASSET_BUNDLE_DIR ${CMAKE_SOURCE_DIR}/release/datafiles/assets/publish/)
 
 
-1-7) FAIRE ARCHIVE TAR.GZ DE BLENDER
-=====================================
+1-7-1) FAIRE ARCHIVE TAR.ZST DE BLENDER
+=======================================
+tar -I 'zstd -T0 -5' -cvf blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
 
-tar -c -v --zstd -f blender-git-4.2.0.12.20240324.tar.zst --exclude={.git,.gitea,.github}  blender
-==> 580.9 Mio
+sha256sum blender-git-4.2.0.12.20240324.tar.zst
+78a0acac51aa4d154ba72cfd88112c6a42c77a867da3f00f2b57a07407424cfc
 
-
-
-tar -cvzf blender-git-4.2.0.12.20240324.tar.gz --exclude={.git,.gitea,.github}  blender
-==> 583.1 Mio
-
-sha256sum blender-git-4.2.0.12.20240324.tar.gz
-0c66b2d5f93385da83a202e5efda45d87f07c6e422b0d9668e7e271e91f6185c
-
-1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
-==========================================
+1-7-5) Copie ARCHIVE TAR.GZ / TAR.ZST ds rep compile
+====================================================
 cd $HOME/05-builds/blender-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-4.2.0.12.20240324.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-4.2.0.12.20240324.tar.zst .
 
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
@@ -164,7 +157,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=4.2.0.12.20240324
-pkgrel=1
+pkgrel=2    # TEST AVEC ZST
 
 pkgrel=1    # TEST AVEC USD 23.11
 
@@ -298,13 +291,13 @@ strip: Unable to recognise the format of the input file `./usr/share/blender/2.9
 
 options=('!debug')
 
-SANS PATCH
-----------
-source=("$pkgname-$pkgver.tar.gz"
+SANS PATCH TAR.ZST
+------------------
+source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
 )
 
-sha256sum blender-git-4.2.0.12.20240324.tar.gz
+sha256sum blender-git-4.2.0.12.20240324.tar.zst
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -313,15 +306,15 @@ sha256sums=('123...'
             '789...'
 )
 
-AVEC PATCH
-----------
-source=("$pkgname-$pkgver.tar.gz"
+AVEC PATCH TAR.ZST
+------------------
+source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
         "118328-openpgl-0.6.0.patch"
         "..."
 )
 
-sha256sum blender-git-4.2.0.12.20240324.tar.gz
+sha256sum blender-git-4.2.0.12.20240324.tar.zst
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -626,7 +619,7 @@ source/creator/CMakeLists.txt
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.2.0.12.20240324.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.2.0.12.20240324.tar.zst
 -rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-8.0-Include.zip
 -rw-r--r--  1 jnd users      568 17 déc.  18:47 xxxxxxxxxxxxxx.patch
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
@@ -842,7 +835,7 @@ $ mv -v blender-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-4.2.0.12.20240324.tar.gz
+$ rm -i blender-git-4.2.0.12.20240324.tar.zst
 !!! OPTIX
 $ rm -i OptiX-8.0-Include.zip
 
@@ -891,6 +884,56 @@ sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1711266767|' /home/jnd
 ================================================================
 ANCIENS
 ========
+
+1-7-2) FAIRE ARCHIVE TAR.GZ DE BLENDER
+======================================
+tar -cvzf blender-git-4.2.0.12.20240324.tar.gz --exclude={.git,.gitea,.github}  blender
+
+sha256sum blender-git-4.2.0.12.20240324.tar.gz
+0c66b2d5f93385da83a202e5efda45d87f07c6e422b0d9668e7e271e91f6185c
+
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-4.2.0.12.20240324.tar.gz .
+
+SANS PATCH TAR.GZ
+-----------------
+source=("$pkgname-$pkgver.tar.gz"
+        "OptiX-8.0-Include.zip"
+)
+
+sha256sum blender-git-4.2.0.12.20240324.tar.gz
+
+sha256sum OptiX-8.0-Include.zip
+
+sha256sums=('123...'
+            '456...'
+            '789...'
+)
+
+AVEC PATCH TAR.GZ
+-----------------
+source=("$pkgname-$pkgver.tar.gz"
+        "OptiX-8.0-Include.zip"
+        "118328-openpgl-0.6.0.patch"
+        "..."
+)
+
+sha256sum blender-git-4.2.0.12.20240324.tar.gz
+
+sha256sum OptiX-8.0-Include.zip
+
+sha256sum 118328-openpgl-0.6.0.patch
+
+sha256sum ...
+
+sha256sums=('123...'
+            '456...'
+            '789...'
+            '012...'
+)
+
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.2.0.12.20240324.tar.gz
+$ rm -i blender-git-4.2.0.12.20240324.tar.gz
+
 
 runningllvm-config-16
 -- Found LLVM: /usr/lib/libLLVM-16.so
