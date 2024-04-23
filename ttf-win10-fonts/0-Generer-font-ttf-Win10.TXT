@@ -1,5 +1,71 @@
 
 1) INSTALLER wimlib pour wimextract
+[root@archkde ~]# LC_ALL=C pacman -Syu wimlib
+...
+extra/wimlib  1.14.4-1       0.81 MiB       0.33 MiB
+...
+
+
+SI ISO de Win10 ds 99-Isos:
+ ==> Win10_22H2_French_x64.iso
+
+$ cd
+
+$ mkdir 99-temp/win10
+
+$ cp -v $HOME/99-Isos/Win10_22H2_French_x64.iso \
+99-temp/win10/
+
+$ sync
+
+$ cd 99-temp/win10
+
+$ 7z x Win10_22H2_French_x64.iso
+
+$ cd sources
+
+$ wimextract install.wim 1 /Windows/{Fonts/"*".{ttf,ttc},System32/Licenses/neutral/"*"/"*"/license.rtf} --dest-dir fonts
+
+$ cd fonts
+
+$ ls | grep ttf
+
+$ ls | grep ttc
+
+$ cd ..
+
+$ tar -cvzf win10-fonts.tar.gz fonts
+
+$ mv -v win10-fonts.tar.gz $HOME/05-builds/ttf-win10-fonts/
+
+$ sync
+
+$ cd ../..
+
+$ rm -rf win10
+
+$ sync
+
+
+
+
+
+
+SI ISO de Win10 ds 99-Isos
+
+$ mkdir 99-temp/win10
+$ cp -v $HOME/99-Isos/Win10_22H2_French_x64.iso 99-temp/win10/
+$ sync
+
+$ cd 99-temp/win10
+$ 7z x Win10_22H2_French_x64.iso
+
+$ cd sources
+
+===============================================================================
+ANCIENS
+=======
+1) INSTALLER wimlib pour wimextract
 
 
 
@@ -57,6 +123,10 @@ $ cd 99-temp/win10
 $ 7z x Win10_1511_French_x64.iso
 
 $ cd sources
+
+
+
+
 
 
 ================================================================================
