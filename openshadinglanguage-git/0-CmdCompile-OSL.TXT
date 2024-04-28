@@ -41,6 +41,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.8.0.20240401
+pkgrel=2    # rebuild MAJ python 3.12
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ LLVM 17
@@ -102,9 +104,9 @@ options=('!debug')
 !!! LLVM 17.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 17.0.6-1 [installé]
-extra/llvm 17.0.6-2 [installé]
-extra/llvm-libs 17.0.6-2 [installé]
+extra/clang 17.0.6-2 [installé]
+extra/llvm 17.0.6-3 [installé]
+extra/llvm-libs 17.0.6-3 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
