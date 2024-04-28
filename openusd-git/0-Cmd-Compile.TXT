@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-git
 pkgver=23.11.20231027
+pkgrel=4      # rebuild MAJ python 3.12
 pkgrel=3      # Rebuild MAJ materialx 1.38.10-1
 pkgrel=2      # Rebuild maj openimageio-git-2.5.9.0.20240301
 
