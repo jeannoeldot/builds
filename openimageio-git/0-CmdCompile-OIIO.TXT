@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.5.10.1.20240401
+pkgrel=2    # rebuild MAJ python 3.12
+
 pkgrel=1
 
 pkgrel=2    # rebuild boost boost-libs 1.83.0
@@ -46,7 +48,7 @@ pkgrel=1     # MAJ openexr 3.2.0-2
 
 pkgrel=3    # rebuild MAJ openexr 3.1.7-2/imath 3.1.8
 
-pkgrel=2    # rebuild MAJ python 3.11
+pkgrel=2    # rebuild MAJ python 3.12
 
 pkgrel=2    # rebuild MAJ openexr 3.1.5-2/imath 3.1.7-1 ffmpeg 2:6.0-3
 
@@ -164,10 +166,10 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
-==> extra/python 3.11.8-1 [installé]
+==> extra/python 3.12.3-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
-PYTHON_VERSION=3.11
+PYTHON_VERSION=3.12
 
 !!! VERSION 2.5.10.1
 build() {
@@ -287,7 +289,7 @@ option BUILD_FMT_FORCE = OFF
 
 LIGNES 6 ET 7
   USE_PYTHON ON         depends= 'python' 'pybind11' 'python-numpy'
-  PYTHON_VERSION ""  =>     -DPYTHON_VERSION=3.10 \
+  PYTHON_VERSION ""  =>     -DPYTHON_VERSION=3.12 \
 
 LIGNE 64
 # pybind11
@@ -384,7 +386,7 @@ rm -f *~
 ==> WARNING: Package contains reference to $srcdir
 usr/lib/libOpenImageIO_Util.so.2.5.10
 usr/lib/libOpenImageIO.so.2.5.10
-usr/lib/python3.11/site-packages/OpenImageIO/OpenImageIO.cpython-311-x86_64-linux-gnu.so
+usr/lib/python3.12/site-packages/OpenImageIO/OpenImageIO.cpython-311-x86_64-linux-gnu.so
 usr/bin/iconvert
 usr/bin/idiff
 usr/bin/iinfo
