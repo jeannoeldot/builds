@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.2.0.22.20240428
+!!! VERSION = 4.2.0.27.20240505
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.2.0.22.20240428.tar.zst /tmp/srcp/
+cp -v blender-git-4.2.0.27.20240505.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.2.0.22.20240428.tar.zst
+tar -x --zstd -f blender-git-4.2.0.27.20240505.tar.zst
 
 1-1) MODIFIER blender/scripts/startup/bl_ui/node_add_menu_shader.py
 ===================================================================
@@ -59,11 +59,11 @@ ANCIENS
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.2.0.22.20240428.tar.gz /tmp/srcp/
+cp -v blender-git-4.2.0.27.20240505.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.2.0.22.20240428.tar.gz
+tar -xzf blender-git-4.2.0.27.20240505.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
