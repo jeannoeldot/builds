@@ -3,12 +3,12 @@ cd $HOME/05-builds/pkgbrowser
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.0.28-2
+cp -v PKGBUILD PKGBUILD.0.28-3
 
-mv -vf PKGBUILD.0.28-2 0-Olds/
+mv -vf PKGBUILD.0.28-3 0-Olds/
 
 
-NOUVELLE VERSION = 0.28
+NOUVELLE VERSION = 0.28.1
 
 1) TÉLÉCHARGER SOURCES
 ======================
@@ -28,23 +28,23 @@ mv -vf /tmp/0-AUR/pkgbrowser/PKGBUILD .
 
 1-2) Download source
 ----------------------
-wget https://codeberg.org/kachelaqa/pkgbrowser/releases/download/v0.28/pkgbrowser-0.28.tar.gz
+wget https://codeberg.org/kachelaqa/pkgbrowser/releases/download/v0.28.1/pkgbrowser-0.28.1.tar.gz
 
 ls
 
-md5sum pkgbrowser-0.28.tar.gz
-==> 0d10a01c6cc64ba0057f38e528c5778b  pkgbrowser-0.28.tar.gz
+md5sum pkgbrowser-0.28.1.tar.gz
+==> 122c2dcecf5492723bb64b5f13233d50  pkgbrowser-0.28.1.tar.gz
 
 
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Name <name@fai.com>
 
-pkgver=0.28
+pkgver=0.28.1
+pkgrel=1
+
 pkgrel=3    # MAJ pacman 6.1
 pkgrel=2    # MAJ URL source
-
-pkgrel=1
 
 pkgrel=2    # MAJ python 3.10
 pkgrel=2    # MAJ pacman 6.0
@@ -53,12 +53,13 @@ pkgrel=2    # MAJ python 3.8
 pkgrel=3    # MAJ python 3.7
 pkgrel=2    # MAJ pacman 5.1
 
-/!\/!\/!\
+/!\/!\/!\ python 3.12
 !!! À MODIFIER
 !!! AJOUTER 'hicolor-icon-theme'
-depends=('pacman>=4.1' 'pacman<6.2' 'python>=3.2' 'python<3.11' 'python-pyqt5'
+depends=('pacman>=4.1' 'pacman<6.2' 'python>=3.2' 'python<3.13' 'python-pyqt5'
          'hicolor-icon-theme'
 )
+makedepends=('python-setuptools')
 
 /!\/!\/!\ PACMAN 6.1
 !!! AJOUTER 'hicolor-icon-theme'
@@ -87,7 +88,7 @@ md5sums=(... ...)
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 pkgbrowser-0.28.tar.gz
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 pkgbrowser-0.28.1.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -100,7 +101,7 @@ rm -f *~ \
 rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.28.tar.gz} . \
+&& cp -v $HOME/05-builds/pkgbrowser/{PKGBUILD,pkgbrowser-0.28.1.tar.gz} . \
 && makepkg -s \
 && cd $HOME/05-builds/pkgbrowser \
 && cp -v /tmp/build/pkgbrowser-*-x86_64.pkg.tar.* . \
@@ -165,7 +166,7 @@ $ mv -v pkgbrowser-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i pkgbrowser-0.28.tar.gz
+$ rm -i pkgbrowser-0.28.1.tar.gz
 $ rm -rf /tmp/0-AUR
 
 
