@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.2.0.43.20240526
+pkgver=4.2.0.42.20240522
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -42,11 +42,9 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
-        "blender-4.11-mantaflow-python-3.12.patch"
 )
-sha256sums=('56af2abe48a87d916df4bebbbdc3cd47a064dfb0423d5d587d2077ccf75be140'
+sha256sums=('bb58f8d0b23fba3e5dff6d55e16e363588ff0d00ea560734f353a409bee2d58a'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
-            '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
 )
 
 _gitname="blender"
@@ -54,18 +52,14 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
-  # fix fluid sim domain with python 3.12
-  # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18
-  patch -p1 -i "$srcdir"/blender-4.11-mantaflow-python-3.12.patch
-
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f93360b3bb29"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "54cf0f7f4c6c"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1716715970|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1716354132|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -91,7 +85,7 @@ build() {
         -DWITH_PYTHON_INSTALL_NUMPY=OFF \
         -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
         -DWITH_PYTHON_INSTALL_ZSTANDARD=OFF \
-        -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
+        -DCUDA_HOST_COMPILER=/usr/bin/gcc-13 \
         -DWITH_CYCLES_CUDA_BINARIES=ON \
         -DCYCLES_CUDA_BINARIES_ARCH="sm_86;compute_86" \
         -DWITH_CYCLES_NATIVE_ONLY=ON \
