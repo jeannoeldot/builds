@@ -16,6 +16,8 @@ Test
 zstd -c -z -q -
 COMPRESSZST=(zstd -c -T0 --ultra -20 -)
 
+COMPRESSZST=(zstd -c -T0 --fast -)
+
 tar -I 'zstd --ultra -22' -cf example.tar.zst example/
 
 ============
@@ -65,10 +67,19 @@ Test le 02/06/2024
 =====================================================
 rm -i blender-git-4.2.0.12.20240324.tar.zst
 time tar -I 'zstd -T0 -18' -cvf blender-git-4.2.0.43.20240526.tar.zst --exclude={.git,.gitea,.github}  blender
-==> 536.8 Mio Au lieu de 572.1 Mio
+==> 536.8 Mio
 real    0m45,129s
 user    3m42,669s
 sys     0m1,846s
+
+Test le 03/06/2024
+=====================================================
+rm -i blender-git-4.2.0.50.20240602.tar.zst
+time tar -I 'zstd -T0 -18' -cvf blender-git-4.2.0.50.20240602.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 567.1 Mio
+real    0m41,378s
+user    3m40,368s
+sys     0m1,111s
 =====================================================
 
 rm -i blender-git-4.2.0.12.20240324.tar.zst
@@ -93,6 +104,23 @@ time tar -I 'zstd -c -T0 --ultra -20' -cvf blender-git-4.2.0.43.20240526.tar.zst
 real    1m54,872s
 user    5m26,049s
 sys     0m1,180s
+
+Test le 03/06/2024
+=====================================================
+rm -i blender-git-4.2.0.50.20240602.tar.zst
+time tar -I 'zstd -c -T0 --ultra -20' -cvf blender-git-4.2.0.50.20240602.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 405.9 Mio
+real    1m21,863s
+user    4m28,109s
+sys     0m2,444s
+
+rm -i blender-git-4.2.0.50.20240602.tar.zst
+time tar -I 'zstd -c -T0 --fast' -cvf blender-git-4.2.0.50.20240602.tar.zst --exclude={.git,.gitea,.github}  blender
+==> 604.4 Mio
+real    0m0,617s
+user    0m1,658s
+sys     0m0,906s
+
 =====================================================
 
 
