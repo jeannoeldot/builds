@@ -25,13 +25,17 @@ conflicts=('usd' 'openusd')
 provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
-        "usd-tbb.patch"
+        "usd-tbb_part_1.patch"
+        "usd-tbb_part_2.patch"
+        "usd-tbb_part_3.patch"
         "blender-usd-diff.patch"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
 sha256sums=('0352619895588efc8f9d4aa7004c92be4e4fa70e1ccce77e474ce23941c05828'
-            '2bcc7e82bd93ca64b439eba787d1ba710b12bb1115cc9fc330ad802d9a054a9e'
+            '3e9b5e5083b39aa91ced4ea44442efad87a8be75bd6c0147b109f4d928aa9290'
+            'ea1de829931c3023fb6af294544e6010c7c396c081ac33b6484f6991fe9b25a5'
+            'f364daaf66edb2ee8fd61ced28582617559b021e69f7f259c0d50af0ed4ee0d4'
             '1bc24c433036159b227eb849ab1ac1425143ef4a338d2661f9dd8fb936c47e09'
             'f54eeb061c8d01efd15ad6ab12ba08553729f21060cd01e91f3b48896db7aeeb'
             '9afaa8dd57c40a8fc5722ded4de4938420c8002a010d33d51506501b7a04b8b8'
@@ -40,12 +44,20 @@ sha256sums=('0352619895588efc8f9d4aa7004c92be4e4fa70e1ccce77e474ce23941c05828'
 prepare() {
   cd "${_name_release}"
   # Compatible avec onetbb 2021.11.0
-  patch -Np1 -i "${srcdir}/usd-tbb.patch"
+  msg "Patch usd-tbb_part_1"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_1.patch"
+  msg "Patch usd-tbb_part_2"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_2.patch"
+  msg "Patch usd-tbb_part_3"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_3.patch"
   # blender/build_files/build_environment/patches/usd.diff
+  msg "Patch blender-usd-diff"
   patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
   # blender/build_files/build_environment/patches/usd_core_profile.diff
+  msg "Patch blender-usd_core_profile-diff"
   patch -Np1 -i "${srcdir}/blender-usd_core_profile-diff.patch"
   # blender/build_files/build_environment/patches/usd_metal_edf.diff
+  msg "Patch blender-usd_metal_edf-diff"
   patch -Np1 -i "${srcdir}/blender-usd_metal_edf-diff.patch"
 
   _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')

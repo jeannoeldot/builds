@@ -97,14 +97,20 @@ options=('!debug')
 AVEC PATCH
 ----------
 source=("USD-v${_ver_release}.tar.gz"
-        "usd-tbb.patch"
-        'blender-usd-diff.patch'
+        "usd-tbb_part_1.patch"
+        "usd-tbb_part_2.patch"
+        "usd-tbb_part_3.patch"
+        "blender-usd-diff.patch"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
 sha256sum OpenUSD-v24.05.tar.gz
 
-sha256sum usd-tbb.patch
+sha256sum usd-tbb_part_1.patch
+
+sha256sum usd-tbb_part_2.patch
+
+sha256sum usd-tbb_part_3.patch
 
 sha256sum blender-usd-diff.patch
 
@@ -122,7 +128,9 @@ sha256sums=('... ...'
 prepare() {
   cd "${_name_release}"
   # Compatible avec onetbb 2021.11.0
-  patch -Np1 -i "${srcdir}/usd-tbb.patch"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_1.patch"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_2.patch"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_3.patch"
   # blender/build_files/build_environment/patches/usd.diff
   patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
   # blender/build_files/build_environment/patches/usd_core_profile.diff
@@ -210,8 +218,9 @@ $ ls -la
 -rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
 -rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.05.tar.gz
--rw-r--r--  1 jnd users      2463 20 févr. 10:42 usd-ocio230.patch
--rw-r--r--  1 jnd users     67521 20 févr. 10:23 usd-tbb.patch
+-rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
+-rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
+-rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -289,7 +298,7 @@ rm -f *~
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
 usr/lib/libusd_ms.so
-usr/lib/python3.11/site-packages/pxr/...
+usr/lib/python3.12/site-packages/pxr/...
 ...
 
 namcap openusd-git-*-x86_64.pkg.tar.*

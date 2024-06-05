@@ -1,0 +1,94 @@
+--- a/build_scripts/build_usd.py	2024-04-19 21:39:02.000000000 +0200
++++ b/build_scripts/build_usd.py	2024-06-05 18:15:49.872064397 +0200
+@@ -955,15 +955,21 @@
+     TBB_INTEL_URL = "https://github.com/oneapi-src/oneTBB/archive/refs/tags/2018_U1.zip"
+ else:
+     # Use point release with fix https://github.com/oneapi-src/oneTBB/pull/833
+-    TBB_URL = "https://github.com/oneapi-src/oneTBB/archive/refs/tags/v2020.3.1.zip"
++    TBB_URL = "https://github.com/oneapi-src/oneTBB/archive/refs/tags/2019_U6.zip"
++
++    TBB_2021_URL = "https://github.com/oneapi-src/oneTBB/archive/refs/tags/v2021.9.0.zip"
+ 
+ def InstallTBB(context, force, buildArgs):
+-    if Windows():
+-        InstallTBB_Windows(context, force, buildArgs)
+-    elif MacOS():
+-        InstallTBB_MacOS(context, force, buildArgs)
++    if context.tbbVersion == "2021":
++        with CurrentWorkingDirectory(DownloadURL(TBB_2021_URL, context, force)):
++            RunCMake(context, force, buildArgs)
+     else:
+-        InstallTBB_Linux(context, force, buildArgs)
++        if Windows():
++            InstallTBB_Windows(context, force, buildArgs)
++        elif MacOS():
++            InstallTBB_MacOS(context, force, buildArgs)
++        else:
++            InstallTBB_Linux(context, force, buildArgs)
+ 
+ def InstallTBB_Windows(context, force, buildArgs):
+     with CurrentWorkingDirectory(DownloadURL(TBB_URL, context, force, 
+@@ -1219,19 +1225,12 @@
+ ############################################################
+ # OpenVDB
+ 
+-OPENVDB_URL = "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v9.1.0.zip"
+-
+-# OpenVDB v9.1.0 requires TBB 2019.0 or above, but this script installs
+-# TBB 2018 on macOS Intel systems for reasons documented above. So we
+-# keep OpenVDB at the version specified for the VFX Reference Platform
+-# CY2021, which is the last version that supported 2018.
+-OPENVDB_INTEL_URL = "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v8.2.0.zip"
++OPENVDB_7_URL = "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v7.1.0.zip"
++OPENVDB_10_URL = "https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v10.0.1.zip"
+ 
+ def InstallOpenVDB(context, force, buildArgs):
+-    openvdb_url = OPENVDB_URL
+-    if MacOS() and not apple_utils.IsTargetArm(context):
+-        openvdb_url = OPENVDB_INTEL_URL
+-
++    # oneTBB requires new OpenVDB
++    openvdb_url = OPENVDB_10_URL if context.tbbVersion == "2021" else OPENVDB_7_URL
+     with CurrentWorkingDirectory(DownloadURL(openvdb_url, context, force)):
+         extraArgs = [
+             '-DOPENVDB_BUILD_PYTHON_MODULE=OFF',
+@@ -1982,6 +1981,13 @@
+                       action="store_false",
+                       help="Disable OpenVDB support in imaging (default)")
+ subgroup = group.add_mutually_exclusive_group()
++subgroup.add_argument("--onetbb", dest="enable_onetbb", action="store_true",
++                      default=False,
++                      help="Use new oneAPI TBB version")
++subgroup.add_argument("--no-onetbb", dest="enable_onetbb",
++                      action="store_false",
++                      help="Use old TBB version (default)")
++subgroup = group.add_mutually_exclusive_group()
+ subgroup.add_argument("--usdview", dest="build_usdview",
+                       action="store_true", default=True,
+                       help="Build usdview (default)")
+@@ -2181,6 +2187,9 @@
+         self.buildHtmlDocs = args.build_docs
+         self.buildPythonDocs = args.build_python_docs
+ 
++        # - TBB
++        self.tbbVersion = "2021" if args.enable_onetbb else "2019"
++
+         # - Imaging
+         self.buildImaging = (args.build_imaging == IMAGING or
+                              args.build_imaging == USD_IMAGING)
+@@ -2472,6 +2481,7 @@
+     Python support              {buildPython}
+       Python Debug:             {debugPython}
+       Python docs:              {buildPythonDocs}
++    TBB version:                {tbbVersion}
+     Documentation               {buildHtmlDocs}
+     Tests                       {buildTests}
+       Mayapy Tests:             {buildMayapyTests}
+@@ -2535,6 +2545,7 @@
+     buildPython=("On" if context.buildPython else "Off"),
+     debugPython=("On" if context.debugPython else "Off"),
+     buildPythonDocs=("On" if context.buildPythonDocs else "Off"),
++    tbbVersion=context.tbbVersion,
+     buildHtmlDocs=("On" if context.buildHtmlDocs else "Off"),
+     buildTests=("On" if context.buildTests else "Off"),
+     buildExamples=("On" if context.buildExamples else "Off"),
