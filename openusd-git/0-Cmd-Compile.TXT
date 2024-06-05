@@ -5,7 +5,7 @@ VOIR :
 /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/
   usd.diff
   usd_core_profile.diff
-
+  usd_metal_edf.diff
 !!!!!!!!!!!!!!!
 
 
@@ -17,16 +17,16 @@ cd $HOME/05-builds/openusd-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==>  sunyab released this on 27 oct 2023  ==> 20231027
-==> v23.11  ==> 23.11
-==> 23.11.20231027
+==>  tallytalwar  released this on 19 April 2024  ==> 20240419
+==> v24.05  ==> 24.05
+==> 24.05.20240419
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenUSD-v23.11.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v23.11.tar.gz
+wget -O OpenUSD-v24.05.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v24.05.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -34,7 +34,7 @@ cd $HOME/05-builds/openusd-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v23.11.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v24.05.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -47,12 +47,12 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-git
-pkgver=23.11.20231027
+pkgver=24.05.20240419
+pkgrel=1
+
 pkgrel=4      # rebuild MAJ python 3.12
 pkgrel=3      # Rebuild MAJ materialx 1.38.10-1
 pkgrel=2      # Rebuild maj openimageio-git-2.5.9.0.20240301
-
-pkgrel=1
 
 pkgrel=4      # Rebuild maj boost boost-libs 1.78.0
 pkgrel=3      # Rebuild tbb ==> tbb2020
@@ -72,7 +72,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="23.11"
+_ver_release="24.05"
 _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
@@ -97,19 +97,26 @@ options=('!debug')
 AVEC PATCH
 ----------
 source=("USD-v${_ver_release}.tar.gz"
+        "usd-tbb.patch"
         'blender-usd-diff.patch'
         "blender-usd_core_profile-diff.patch"
-        "usd-tbb.patch"
+        "blender-usd_metal_edf-diff.patch"
 )
-sha256sum OpenUSD-v23.11.tar.gz
+sha256sum OpenUSD-v24.05.tar.gz
+
+sha256sum usd-tbb.patch
 
 sha256sum blender-usd-diff.patch
 
 sha256sum blender-usd_core_profile-diff.patch
 
-sha256sum usd-tbb.patch
+sha256sum blender-usd_metal_edf-diff.patch
 
 sha256sums=('... ...'
+            '... ...'
+            '... ...'
+            '... ...'
+            '... ...'
 )
 
 prepare() {
@@ -120,6 +127,8 @@ prepare() {
   patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
   # blender/build_files/build_environment/patches/usd_core_profile.diff
   patch -Np1 -i "${srcdir}/blender-usd_core_profile-diff.patch"
+  # blender/build_files/build_environment/patches/usd_metal_edf.diff
+  patch -Np1 -i "${srcdir}/blender-usd_metal_edf-diff.patch"
 }
 
 build() {
@@ -136,11 +145,11 @@ VOIR :
 
 mkdir /tmp/srcp
 
-tar -xzf OpenUSD-v23.11.tar.gz -C /tmp/srcp
+tar -xzf OpenUSD-v24.05.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenUSD-23.11/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenUSD-24.05/CMakeLists.txt
 
-2) kwrite /tmp/srcp/OpenUSD-23.11/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/OpenUSD-24.05/cmake/defaults/Options.cmake
 
 LIGNE 27  PXR_BUILD_TESTS           ON ==> OFF
 
@@ -179,12 +188,12 @@ LIGNE 120 BUILD_SHARED_LIBS         ON
 LIGNE 121 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/OpenUSD-23.11/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/OpenUSD-24.05/cmake/defaults/ProjectDefaults.cmake
 
 LIGNE 55  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/OpenUSD-23.11/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/OpenUSD-24.05/cmake/defaults/CXXDefaults.cmake
 
 LIGNE 74  PXR_SET_INTERNAL_NAMESPACE
 
@@ -198,8 +207,9 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users      3221  7 janv. 11:09 blender-usd-diff.patch
 -rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
+-rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v23.11.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.05.tar.gz
 -rw-r--r--  1 jnd users      2463 20 févr. 10:42 usd-ocio230.patch
 -rw-r--r--  1 jnd users     67521 20 févr. 10:23 usd-tbb.patch
 
@@ -220,7 +230,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openusd-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openusd-git/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v23.11.tar.gz . \
+&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v24.05.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openusd-git \
 && cp -v /tmp/build/openusd-git-*-x86_64.pkg.tar.* . \
@@ -310,7 +320,7 @@ $ mv -v openusd-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenUSD-v23.11.tar.gz
+$ rm -i OpenUSD-v24.05.tar.gz
 
 
 $ cd && maj-repolocal
@@ -342,7 +352,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum OpenUSD-v23.11.tar.gz
+sha256sum OpenUSD-v24.05.tar.gz
 
 sha256sum blender-usd-diff.patch
 

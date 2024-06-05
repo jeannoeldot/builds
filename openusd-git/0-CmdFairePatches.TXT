@@ -1,28 +1,36 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 23.11
-!!! VERSION = v23.11
+!!! VERSION = 24.05
+!!! VERSION = v24.05
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/usd-git
 
 mkdir /tmp/srcp
 
-cp -v USD-v23.11.tar.gz /tmp/srcp/
+cp -v USD-v24.05.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf USD-v23.11.tar.gz
+tar -xzf USD-v24.05.tar.gz
 
 
-!!! VOIR
+!!! VOIR :
 
-https://developer.blender.org/D10367
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/cmake/usd.cmake
 
-https://git.blender.org/gitweb/gitweb.cgi/blender.git/blobdiff/c196ca37407d4dacb832d4c888ac87e66d7094c5..75a9830d84f68c8f1e1d4d132def28ef25b5cabd:/build_files/build_environment/patches/usd.diff
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/
+  usd.diff
+  usd_core_profile.diff
+  usd_metal_edf.diff
 
-kwrite /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/usd.diff &
+https://projects.blender.org/blender/blender/src/branch/main/build_files/build_environment/patches
+  usd.diff
+  usd_core_profile.diff
+  usd_metal_edf.diff
+
+https://gitlab.archlinux.org/archlinux/packaging/packages/usd/-/blob/main/usd-tbb.patch
 
 
 1) MODIFIER USD-22.03/cmake/defaults/Packages.cmake

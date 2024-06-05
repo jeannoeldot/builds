@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-git
-pkgver=24.05.20240419
-pkgrel=1
-_ver_release="24.05"
+pkgver=23.11.20231027
+pkgrel=4
+_ver_release="23.11"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -25,16 +25,14 @@ conflicts=('usd' 'openusd')
 provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
-        "usd-tbb.patch"
         "blender-usd-diff.patch"
         "blender-usd_core_profile-diff.patch"
-        "blender-usd_metal_edf-diff.patch"
+        "usd-tbb.patch"
 )
-sha256sums=('0352619895588efc8f9d4aa7004c92be4e4fa70e1ccce77e474ce23941c05828'
-            '2bcc7e82bd93ca64b439eba787d1ba710b12bb1115cc9fc330ad802d9a054a9e'
-            '1bc24c433036159b227eb849ab1ac1425143ef4a338d2661f9dd8fb936c47e09'
-            'f54eeb061c8d01efd15ad6ab12ba08553729f21060cd01e91f3b48896db7aeeb'
-            '9afaa8dd57c40a8fc5722ded4de4938420c8002a010d33d51506501b7a04b8b8'
+sha256sums=('2add389b121568f3dfb9b7e4f4551a6c8445ae353f1725a0753c8ce5639c4f83'
+            'eeac5135796c180f78a45abb381dfff7c7784b71bc06c4b2882def6c79f397d1'
+            'd082557c30083bfd4244f040dd4c14a643039284f34e0841ffe03d97a0213777'
+            'e4a1378a2ce34edbd65f016689cbca0dc37dc2b1c2ddfd837724078ed231063c'
 )
 
 prepare() {
@@ -45,8 +43,6 @@ prepare() {
   patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
   # blender/build_files/build_environment/patches/usd_core_profile.diff
   patch -Np1 -i "${srcdir}/blender-usd_core_profile-diff.patch"
-  # blender/build_files/build_environment/patches/usd_metal_edf.diff
-  patch -Np1 -i "${srcdir}/blender-usd_metal_edf-diff.patch"
 
   _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
