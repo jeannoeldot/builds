@@ -1,43 +1,53 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=opencollada-git
-pkgver=1.6.20240527
-pkgrel=1
-epoch=1
+pkgver=1.6.68.20181127
+pkgrel=3
 pkgdesc="Stream based reader and writer library for COLLADA files"
 arch=('x86_64')
 url="https://github.com/KhronosGroup/OpenCOLLADA"
-license=('LGPL-2.0-or-later')
-depends=('libxml2')
+license=('GPL')
+depends=('libxml2' 'pcre')
 makedepends=('cmake')
 conflicts=('opencollada')
 provides=('opencollada')
-options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
+        'fix-conflicting-declaration-pcre-gcc810.patch'
         'opencollada.conf'
 )
-sha256sums=('5f2e93301b3e1a193fe363003e36d90369b077f69c0e8f6b9058147d0e9cc6a8'
+sha256sums=('1246fb7f4726bddd7b0628f2f01c7916286a965449c6a0866d71f187c55b7a3f'
+            '8706faf6b3e5592f20122604f6a082bf70003cb1a7ee9d83a756211a40420260'
             '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
 )
 
 _gitname="opencollada"
 
+prepare() {
+  cd "${_gitname}"
+  # fix erreur : conflicting declaration ‘typedef struct real_pcre8_or_16 pcre’
+  patch -Np1 -i "${srcdir}/fix-conflicting-declaration-pcre-gcc810.patch"
+}
+
 build() {
   cd "${_gitname}"
 
+  [[ -d build ]] && rm -r build
+  mkdir build && cd build
+
   cmake \
-    -Bbuild \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
     -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
     -DUSE_STATIC=OFF \
-    -DUSE_SHARED=ON
-  make -C build
+    -DUSE_SHARED=ON \
+     .. 
+  make VERBOSE=1
 }
 
 package() {
-  cd "${_gitname}"
-  DESTDIR="${pkgdir}" make -C build install
+  cd "${_gitname}/build"
+
+  make DESTDIR="${pkgdir}" install
 
   install -Dm644 "${srcdir}"/opencollada.conf "${pkgdir}"/etc/ld.so.conf.d/opencollada.conf
 }

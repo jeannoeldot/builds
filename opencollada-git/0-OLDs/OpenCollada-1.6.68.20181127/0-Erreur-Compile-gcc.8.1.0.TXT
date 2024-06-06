@@ -1,0 +1,8 @@
+In file included from /build/opencollada-git/src/opencollada/COLLADABaseUtils/src/COLLADABUURI.cpp:18:
+/usr/include/pcre.h:325:33: error: conflicting declaration ‘typedef struct real_pcre8_or_16 pcre’
+ typedef struct real_pcre8_or_16 pcre;
+                                 ^~~~
+In file included from /build/opencollada-git/src/opencollada/COLLADABaseUtils/src/COLLADABUURI.cpp:14:
+/build/opencollada-git/src/opencollada/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h:17:26: note: previous declaration as ‘typedef struct real_pcre pcre’
+ typedef struct real_pcre pcre;
+                          ^~~~

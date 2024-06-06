@@ -1,31 +1,19 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 1.6.20240527
+!!! VERSION = 1.6.67.20181114
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/opencollada-git
 
 mkdir /tmp/srcp
 
-cp -v opencollada-git-1.6.20240527.tar.gz /tmp/srcp/
+cp -v opencollada-git-1.6.67.20181114.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf opencollada-git-1.6.20240527.tar.gz
+tar -xzf opencollada-git-1.6.67.20181114.tar.gz
 
-
-
-
-5) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) MODIFIER opencollada/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h
 ===============================================================================
@@ -43,7 +31,7 @@ PAR :
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier COLLADABUPcreCompiledPattern.h~
 rm -f COLLADABUPcreCompiledPattern.h~
-
+ 
 
 cd ../../..
 
@@ -56,4 +44,16 @@ cd $HOME/05-builds/opencollada-git
 
 mv -vf /tmp/srcp/fix-conflicting-declaration-pcre-gcc810.patch .
 
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
