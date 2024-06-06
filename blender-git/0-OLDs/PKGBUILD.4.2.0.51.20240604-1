@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.3.0.0.20240606
+pkgver=4.2.0.51.20240604
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -42,9 +42,9 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
-        "blender-4.3-mantaflow-python-3.12.patch"
+        "blender-4.11-mantaflow-python-3.12.patch"
 )
-sha256sums=('e4bbc7fcf3b9e055253e212064e8b73c301604256b43034c31b45edd38980c05'
+sha256sums=('d0026f9483e41f7f56ef06dcba6afdab3c2fc6011c369207808bb9c613bac895'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
 )
@@ -56,16 +56,16 @@ prepare() {
 
   # fix fluid sim domain with python 3.12
   # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18
-  patch -p1 -i "$srcdir"/blender-4.3-mantaflow-python-3.12.patch
+  patch -p1 -i "$srcdir"/blender-4.11-mantaflow-python-3.12.patch
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "a28540cb1316"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "a4aa5faa2008"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1717663681|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1717487376|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
