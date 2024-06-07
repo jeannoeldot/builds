@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com
 
 pkgname=mkpkg-tmpfs
-pkgver=1.1.9
+pkgver=1.2.0
 pkgrel=1
 pkgdesc='Creation paquets en RAM.'
 arch=('any')
@@ -10,7 +10,7 @@ license=('GPL-2.0-only')
 depends=('devtools')
 options=('!debug')
 source=("${pkgname}-${pkgver}.tar.gz")
-sha256sums=('9de5cb19034f0baa7700400846457c9724d844cd57a21afaf858370205437f73')
+sha256sums=('7d0267685094d49b31d3edd9d08dc8ca47b30eaa4875dea1cda2e6f7c887a7f1')
 
 build() {
     cd "${pkgname}-${pkgver}"
