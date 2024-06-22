@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.3.0.3.20240622
+pkgver=4.3.0.2.20240616
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -43,14 +43,10 @@ options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
         "blender-4.3-mantaflow-python-3.12.patch"
-        "ffmpeg-7-1.patch"
-        "ffmpeg-7-2.patch"
 )
-sha256sums=('f167d6bd7ce75fcae508505d271b7e9aa4075b81c9de8d96516bb48f6c1a5d6b'
+sha256sums=('bcc0137394aa3ee3ec7b1203863011223be4ecb1a680386c35074d0fd91f6c6e'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
-            '17d5fb1c4ddb9e95da590d2e43ae3f7ce2b02c3ec698b16ed2752e3b3e7840c0'
-            '499a9ec9a1aa7c5ef26ce5bb26f48576cccf1fc5906e966f92e25506405e9ad0'
 )
 
 _gitname="blender"
@@ -62,18 +58,14 @@ prepare() {
   # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18
   patch -p1 -i "$srcdir"/blender-4.3-mantaflow-python-3.12.patch
 
-  # fix build with ffmpeg 7
-  patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
-  patch -p1 -i "$srcdir"/ffmpeg-7-2.patch
-
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b32f3ae53839"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "71b14a7abe14"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1719048134|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1718516114|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
