@@ -1,4 +1,38 @@
 
+V 2.3.0
+=======
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/libOpenImageDenoise_core.so.2.3.0
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/libOpenImageDenoise.so.2.3.0
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/libOpenImageDenoise.so.2
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/libOpenImageDenoise.so
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/libOpenImageDenoise_device_cpu.so.2.3.0
+-- Up-to-date: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/.
+-- Up-to-date: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/./lib
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/./lib/libOpenImageDenoise_device_cuda.so.2.3.0
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/bin/oidnDenoise
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/bin/oidnBenchmark
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/bin/oidnTest
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/include/OpenImageDenoise
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/include/OpenImageDenoise/oidn.h
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/include/OpenImageDenoise/oidn.hpp
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/include/OpenImageDenoise/config.h
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/README.md
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/readme.pdf
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/CHANGELOG.md
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/third-party-programs.txt
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/third-party-programs-DPCPP.txt
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/third-party-programs-oneDNN.txt
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/third-party-programs-oneTBB.txt
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/share/doc/OpenImageDenoise/LICENSE.txt
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/cmake/OpenImageDenoise-2.3.0/OpenImageDenoiseTargets.cmake
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/cmake/OpenImageDenoise-2.3.0/OpenImageDenoiseTargets-release.cmake
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/cmake/OpenImageDenoise-2.3.0/OpenImageDenoiseConfig.cmake
+-- Installing: /build/openimagedenoise-git/pkg/openimagedenoise-git/usr/lib/cmake/OpenImageDenoise-2.3.0/OpenImageDenoiseConfigVersion.cmake
+
+
+
 V 2.0.0
 =======
 Install the project...
