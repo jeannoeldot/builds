@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.5.12.0.20240601
+pkgrel=2    # rebuild MAJ ffmpeg 7.0
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ python 3.12
@@ -166,7 +168,7 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
-==> extra/python 3.12.3-1 [installé]
+==> extra/python 3.12.4-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
 PYTHON_VERSION=3.12
