@@ -1,0 +1,39 @@
+
+VOIR
+https://projects.blender.org/blender/blender/commit/783fa03d9a4612fc1d8640358dc9d6a0efd5ab50
+Fix #122651: USD Export: Use solid color texture for DomeLights
+
+When the World material has no texture input, create a solid color .hdr
+texture from the Background color instead. This is currently requried
+for the Hydra Storm render engine[1]
+
+[1] https://forum.aousd.org/t/usdluxdomelight-without-a-texture-file-attribute/1573
+
+Co-authored-by: kiki <charles@skeletalstudios.com>
+Pull Request: #123933
+
+
+
+
+mold: error: undefined symbol: blender::io::hydra::cache_image_color[abi:cxx11](float*)
+>>> referenced by usd_light_convert.cc
+>>>               ../../lib/libbf_io_usd.a(usd_light_convert.cc.o):(blender::io::usd::world_material_to_dome_light(blender::io::usd::USDExportParams const&, Scene const*, pxrInternal_v0_24__pxrReserved__::TfRefPtr<pxrInternal_v0_24__pxrReserved__::UsdStage>))
+collect2: error: ld returned 1 exit status
+make[2]: *** [source/creator/CMakeFiles/blender.dir/build.make:480: bin/blender] Error 1
+make[1]: *** [CMakeFiles/Makefile2:8478: source/creator/CMakeFiles/blender.dir/all] Error 2
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/blender-git/src/blender/build'
+==> ERROR: A failure occurred in build().
+    Aborting...
+==> ERROR: Build failed, check /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build
+==> ERREUR: Fabrication du paquet « blender-git » impossible.
+      !!! =>  Faire : cd /home/jnd/05-builds/0-chroot/00-tmpfs-chroot/jnd/build pour inspection.
+      !!! =>  Quand fini :
+      !!! =>  ==> fermer tous les fichiers ouverts.
+      !!! =>  ==> appuyer sur une touche pour quitter le script.
+...
+==> ERREUR: Terminé.
+
+OK AVEC
+        -DWITH_HYDRA=ON \       Défaut
+

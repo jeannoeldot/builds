@@ -142,6 +142,7 @@ BUILD_X11 "Build X11 support" true
 
 LIGNES 212 ET ...
 BUILD_LUA_CAIRO  false ==> ON
+BUILD_LUA_CAIRO_XLIB   true
 BUILD_LUA_IMLIB2  false ==> ON
 BUILD_LUA_RSVG  false ==> ON
 

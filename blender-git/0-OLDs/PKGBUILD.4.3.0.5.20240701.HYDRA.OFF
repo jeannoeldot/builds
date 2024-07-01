@@ -70,9 +70,6 @@ prepare() {
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
-  # Workaround for python-numpy 2.0.0
-  sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
-
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
   sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "862028f4dc8a"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
@@ -94,6 +91,7 @@ build() {
         -DOPTIX_ROOT_DIR="${srcdir}" \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
+        -DWITH_HYDRA=OFF \
         -DWITH_LIBS_PRECOMPILED=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \

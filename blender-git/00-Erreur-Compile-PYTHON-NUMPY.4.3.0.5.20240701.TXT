@@ -1,0 +1,28 @@
+
+
+-- numpy found at '/usr/lib/python3.12/site-packages'
+CMake Warning at build_files/cmake/macros.cmake:1156 (message):
+  Python package 'numpy' include dir path could not be found in:
+
+  '/usr/lib/python3.12/site-packages/numpy/core/include',
+  '/usr/lib/python3/site-packages/numpy/core/include',
+  '/usr/lib/python3.12/dist-packages/numpy/core/include',
+  '/usr/lib/python3/dist-packages/numpy/core/include',
+  '/usr/lib/python3.12/vendor-packages/numpy/core/include',
+  '/usr/lib/python3/vendor-packages/numpy/core/include',
+
+  The 'WITH_PYTHON_NUMPY' option will be disabled.
+
+  The build will be usable, only add-ons that depend on this package won't be
+  functional.
+Call Stack (most recent call first):
+  CMakeLists.txt:2435 (find_python_package)
+
+
+....
+
+
+CMake Warning at extern/audaspace/CMakeLists.txt:758 (message):
+  Python & NumPy libraries not found, language binding will not be built.
+
+
