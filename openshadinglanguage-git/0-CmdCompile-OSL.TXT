@@ -26,9 +26,12 @@ cd $HOME/05-builds/openshadinglanguage-git
 -------------------------------------------
 cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.13.10.0.tar.gz .
 
+/!\/!\/!\/!\/!\
+!!! NON
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
 cp -v /0-DataLinux/05-builds-dir-git/OptiX-7.7-Include.zip .
+/!\/!\/!\/!\/!\
 
 
 1-8) FAIRE PATCH
@@ -41,11 +44,11 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.10.0.20240601
+pkgrel=2    # rebuild MAJ LLVM 18 + MAJ OIIO 2.5.13.0
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ python 3.12
-
-pkgrel=2    # rebuild MAJ LLVM 17
 
 pkgrel=3    # TEST AVEC OPTIX
 pkgrel=2    # SANS OPTIX
@@ -101,12 +104,12 @@ provides=('openshadinglanguage')
 
 options=('!debug')
 
-!!! LLVM 17.0
+!!! LLVM 18.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 17.0.6-2 [installé]
-extra/llvm 17.0.6-5 [installé]
-extra/llvm-libs 17.0.6-5 [installé]
+extra/clang 18.1.8-1 [installé]
+extra/llvm 18.1.8-3 [installé]
+extra/llvm-libs 18.1.8-3 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
