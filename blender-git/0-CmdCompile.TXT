@@ -157,7 +157,7 @@ voir CmdFairePatches.TXT
 
 pkgname=blender-git
 pkgver=4.3.0.7.20240707
-pkgrel=1    # MAJ + Rebuild MAJ LLVM 18
+pkgrel=3    # MAJ + Rebuild MAJ LLVM 18
 
 pkgrel=1
 
@@ -584,6 +584,7 @@ makedepends=(...
 -- Found LLVM: /usr/lib/libLLVM-17.0.6.so
 -- Found Clang: /usr/lib
 
+----------------------------------------------------------------------------------
 # LLVM 18.1.8                   # LLVM 17.0.6
 /usr/lib/libLLVM-18.so          /usr/lib/libLLVM-17.0.6.so
 $ llvm-config --version => 18.1.8
@@ -617,6 +618,17 @@ runningllvm-config-18
         -DLLVM_INCLUDE_DIRS=/usr/include \
 
 -- Found LLVM: /usr/lib/libLLVM-18
+-- Found Clang: /usr/lib
+
+----------------------------------------------------------------------------------
+  local _llvm_libs_ver=18
+
+        -DLLVM_ROOT_DIR=/usr \
+        -DLLVM_LIBPATH=/usr/lib \
+        -DLLVM_LIBRARY=/usr/lib/libLLVM-${_llvm_libs_ver}.so \
+        -DLLVM_INCLUDE_DIRS=/usr/include \
+
+-- Found LLVM: /usr/lib/libLLVM-18.so
 -- Found Clang: /usr/lib
 
 
