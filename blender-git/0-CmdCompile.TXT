@@ -560,7 +560,7 @@ Cycles: Increase the compute model for the PTX kernel
 704 # oneAPI
             ==> OFF
 
-737 # LLVM
+754 # LLVM
 $ pacman -Ss llvm | grep install
 extra/clang 18.1.8-1 [installé]
 extra/llvm 18.1.8-3 [installé]
@@ -573,8 +573,8 @@ makedepends=(...
 
 
 !!! A VOIR ???
-738 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
-741 option WITH_CLANG   OFF  ==> ON : Voir LIGNE 746 : dep = 'clang'
+755 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
+758 option WITH_CLANG   OFF  ==> ON : Voir LIGNE 746 : dep = 'clang'
 
         -DWITH_LLVM=ON \
         -DWITH_CLANG=ON \
@@ -582,6 +582,41 @@ makedepends=(...
         -D_clang_LIBRARIES=/usr/lib \
 
 -- Found LLVM: /usr/lib/libLLVM-17.0.6.so
+-- Found Clang: /usr/lib
+
+# LLVM 18.1.8                   # LLVM 17.0.6
+/usr/lib/libLLVM-18.so          /usr/lib/libLLVM-17.0.6.so
+$ llvm-config --version => 18.1.8
+
+  local _llvm_libs_ver=18
+
+        -DLLVM_VERSION=${_llvm_libs_ver} \
+        -DLLVM_LIBPATH=/usr/lib \
+        -DLLVM_LIBRARY=libLLVM-${_llvm_libs_ver} \
+        -DLLVM_INCLUDE_DIRS=/usr/include \
+
+runningllvm-config-18
+-- Found LLVM: /build/blender-git/src/blender/libLLVM-18
+-- Found Clang: /usr/lib
+----------------------------------------------------------------------------------
+  local _llvm_libs_ver=18
+
+        -DLLVM_ROOT_DIR=/usr \
+        -DLLVM_LIBPATH=/usr/lib \
+        -DLLVM_LIBRARY=libLLVM-${_llvm_libs_ver} \
+        -DLLVM_INCLUDE_DIRS=/usr/include \
+
+-- Found LLVM: /build/blender-git/src/blender/libLLVM-18
+-- Found Clang: /usr/lib
+----------------------------------------------------------------------------------
+  local _llvm_libs_ver=18
+
+        -DLLVM_ROOT_DIR=/usr \
+        -DLLVM_LIBPATH=/usr/lib \
+        -DLLVM_LIBRARY=/usr/lib/libLLVM-${_llvm_libs_ver} \
+        -DLLVM_INCLUDE_DIRS=/usr/include \
+
+-- Found LLVM: /usr/lib/libLLVM-18
 -- Found Clang: /usr/lib
 
 
