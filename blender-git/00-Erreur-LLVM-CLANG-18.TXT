@@ -1,0 +1,15 @@
+
+-- Could NOT find LLVM (missing: LLVM_LIBRARY)
+-- LLVM not found, disabling WITH_LLVM
+
+
+
+  - WITH_CLANG                      ON
+
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CLANG_INCLUDE_DIR
+    _clang_LIBRARIES
+
+
