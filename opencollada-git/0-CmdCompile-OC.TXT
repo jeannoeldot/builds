@@ -14,7 +14,7 @@ cd $HOME/05-builds/opencollada-git
 1-2) ATTENTION A LA DATE DE MAJ SUR LE SITE
 ======================================================
 https://github.com/aras-p/OpenCOLLADA
-==> 20240527
+==> 20240719
 
 1.3 SOURCES
 ==============
@@ -25,7 +25,7 @@ cd /0-DataLinux/05-builds-dir-git
 
 Vérifier existence rep opencollada :
 --------------------------------
-ls
+ls | grep opencollada
 
 !!! SI REP opencollada N'EXISTE PAS
 -----------------------------------
@@ -51,7 +51,7 @@ $ head -n 12 opencollada/COLLADABaseUtils/include/COLLADABUVersionInfo.h
 1-7) FAIRE ARCHIVE TAR.GZ
 =================================
 
-tar -cvzf opencollada-git-1.6.20240527.tar.gz --exclude={.git,.gitignore} opencollada
+tar -cvzf opencollada-git-1.6.20240719.tar.gz --exclude={.git,.gitignore,gitattributes} opencollada
 
 1-7-1) Move ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -59,7 +59,7 @@ cd $HOME/05-builds/opencollada-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/opencollada-git-1.6.20240527.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/opencollada-git-1.6.20240719.tar.gz .
 sync
 
 
@@ -75,7 +75,7 @@ voir : CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=opencollada-git
-pkgver=1.6.20240527
+pkgver=1.6.20240719
 pkgrel=1
 epoch=1     # Nouveau fork
 
@@ -94,7 +94,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'opencollada.conf'
 )
 
-sha256sum opencollada-git-1.6.20240527.tar.gz
+sha256sum opencollada-git-1.6.20240719.tar.gz
 
 sha256sum opencollada.conf
 
@@ -128,7 +128,7 @@ option(USE_STATIC_MSVC_RUNTIME "Use static version of the MSVC run-time library"
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users       21 11 mai   19:52 opencollada.conf
--rw-r--r--  1 jnd users 11800644 12 mai   18:38 opencollada-git-1.6.20240527.tar.gz
+-rw-r--r--  1 jnd users 11800644 12 mai   18:38 opencollada-git-1.6.20240719.tar.gz
 -rw-r--r--  1 jnd users      833 12 mai   18:38 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -146,7 +146,7 @@ rm -f *~ \
 && cp -v $HOME/05-builds/opencollada-git/PKGBUILD . \
 && cp -v $HOME/05-builds/opencollada-git/opencollada.conf . \
 && cp -v $HOME/05-builds/opencollada-git/fix-conflicting-declaration-pcre-gcc810.patch . \
-&& cp -v $HOME/05-builds/opencollada-git/opencollada-git-1.6.20240527.tar.gz . \
+&& cp -v $HOME/05-builds/opencollada-git/opencollada-git-1.6.20240719.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/opencollada-git \
 && cp -v /tmp/build/opencollada-git-*-x86_64.pkg.tar.* . \
@@ -221,7 +221,7 @@ $ mv -v opencollada-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i opencollada-git-1.6.20240527.tar.gz
+$ rm -i opencollada-git-1.6.20240719.tar.gz
 
 
 $ cd && maj-repolocal
@@ -263,7 +263,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'opencollada.conf'
 )
 
-sha256sum opencollada-git-1.6.20240527.tar.gz
+sha256sum opencollada-git-1.6.20240719.tar.gz
 
 sha256sum fix-conflicting-declaration-pcre-gcc810.patch
 
@@ -283,7 +283,7 @@ prepare() {
 
 -rw-r--r--  1 jnd users      531 11 mai   16:43 fix-conflicting-declaration-pcre-gcc810.patch
 -rw-r--r--  1 jnd users       21 11 mai   19:52 opencollada.conf
--rw-r--r--  1 jnd users 11800644 12 mai   18:38 opencollada-git-1.6.20240527.tar.gz
+-rw-r--r--  1 jnd users 11800644 12 mai   18:38 opencollada-git-1.6.20240719.tar.gz
 -rw-r--r--  1 jnd users      833 12 mai   18:38 PKGBUILD
 
 

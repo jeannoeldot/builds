@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=opencollada-git
-pkgver=1.6.20240527
+pkgver=1.6.20240719
 pkgrel=1
 epoch=1
 pkgdesc="Stream based reader and writer library for COLLADA files"
@@ -16,7 +16,7 @@ options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
         'opencollada.conf'
 )
-sha256sums=('5f2e93301b3e1a193fe363003e36d90369b077f69c0e8f6b9058147d0e9cc6a8'
+sha256sums=('699474d337c30d9debe51d36075afbf934c990aba8a97ae3ddea6c7d1ebd73cb'
             '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
 )
 
