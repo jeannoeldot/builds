@@ -2,7 +2,7 @@
 
 pkgname=blender-git
 pkgver=4.3.0.15.20240806
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -14,7 +14,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse'
           'sdl2'
           'libglvnd' 'glfw' 'libxi'
-          'boost-libs' 'onetbb'
+          'boost-libs' 'onetbb' 'draco'
           'jemalloc'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
           'llvm-libs' 'clang'
@@ -42,12 +42,16 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
+        "force-draco1.patch"
+        "force-draco2.patch"
         "blender-4.3-mantaflow-python-3.12.patch"
         "ffmpeg-7-1.patch"
         "ffmpeg-7-2.patch"
 )
 sha256sums=('3771f7bc8e4ca17f9f917be3bd025d2e305ec266e57a25f2ab01ed3d01ddba41'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
+            '11111111111111111'
+            '22222222222222222'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
             '17d5fb1c4ddb9e95da590d2e43ae3f7ce2b02c3ec698b16ed2752e3b3e7840c0'
             '499a9ec9a1aa7c5ef26ce5bb26f48576cccf1fc5906e966f92e25506405e9ad0'
@@ -57,6 +61,10 @@ _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+
+  # fix draco
+  patch -p1 -i "$srcdir"/force-draco1.patch
+  patch -p1 -d scripts/addons_core -i "$srcdir"/force-draco2.patch
 
   # fix fluid sim domain with python 3.12
   # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18

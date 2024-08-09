@@ -319,6 +319,8 @@ AVEC PATCH TAR.ZST
 ------------------
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
+        "force-draco1.patch"
+        "force-draco2.patch"
         "blender-4.3-mantaflow-python-3.12.patch"
         "ffmpeg-7-1.patch"
         "ffmpeg-7-2.patch"
@@ -329,6 +331,10 @@ source=("$pkgname-$pkgver.tar.zst"
 sha256sum blender-git-4.3.0.15.20240806.tar.zst
 
 sha256sum OptiX-8.0-Include.zip
+
+sha256sum force-draco1.patch
+
+sha256sum force-draco2.patch
 
 sha256sum blender-4.3-mantaflow-python-3.12.patch
 
@@ -478,7 +484,7 @@ option WITH_OPENCOLLADA	ON  dep = opencollada-git   dep = pcre
 487   option WITH_PULSEAUDIO    ==> ON          dep = pulseaudio ou pipewire-pulse
 
 # Compression
-504 option WITH_DRACO   ==> ON ??? À VOIR
+521 option WITH_DRACO   ==> ON ??? À VOIR : AVEC PATCH
 
 # Logging/unbit test libraries.
 

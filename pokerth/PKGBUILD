@@ -3,7 +3,7 @@
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=35
+pkgrel=36
 pkgdesc="Open source Texas Hold'em Poker simulator"
 arch=('i686' 'x86_64')
 url="http://www.pokerth.net/"
