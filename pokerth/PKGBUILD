@@ -55,6 +55,8 @@ package() {
 
   make INSTALL_ROOT="$pkgdir" install
 
+  install -Dm644 pokerth.png "$pkgdir/usr/share/icons/hicolor/128x128/apps/pokerth.png"
+  install -Dm644 pokerth.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/pokerth.svg"
   install -Dm644 "docs/pokerth.1" "$pkgdir/usr/share/man/man1/pokerth.1"
   install -Dm644 "data/data-copyright.txt" "$pkgdir/usr/share/licenses/pokerth/data-copyright.txt"
   rm -f "$pkgdir/usr/share/pokerth/data/data-copyright.txt"
