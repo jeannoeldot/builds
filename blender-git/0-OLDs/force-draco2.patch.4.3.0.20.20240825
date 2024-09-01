@@ -1,7 +1,7 @@
-diff --git a/io_scene_gltf2/io/com/draco.py b/io_scene_gltf2/io/com/draco.py
+diff --git a/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py b/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py
 index e7518ac4..c0d78564 100644
---- a/io_scene_gltf2/io/com/draco.py
-+++ b/io_scene_gltf2/io/com/draco.py
+--- a/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py
++++ b/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py
 @@ -13,6 +13,7 @@
  # limitations under the License.
  

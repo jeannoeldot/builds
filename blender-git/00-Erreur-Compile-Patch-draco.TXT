@@ -1,0 +1,16 @@
+==> Starting prepare()...
+patching file CMakeLists.txt
+Hunk #1 succeeded at 1228 with fuzz 2 (offset 474 lines).
+can't find file to patch at input line 5
+Perhaps you used the wrong -p or --strip option?
+The text leading up to this was:
+--------------------------
+|diff --git a/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py b/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py
+|index e7518ac4..c0d78564 100644
+|--- a/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py
+|+++ b/io_scene_gltf2/io/com/gltf2_io_draco_compression_extension.py
+--------------------------
+File to patch:
+Skip this patch? [y]
+Skipping patch.
+2 out of 2 hunks ignored
