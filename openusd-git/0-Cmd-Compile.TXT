@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-git
 pkgver=24.05.20240419
+pkgrel=2    # rebuild MAJ OIIO 2.5.15.0 + boost boost-libs 1.86.0
 pkgrel=1
 
 pkgrel=4      # rebuild MAJ python 3.12
