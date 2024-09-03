@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.10.0.20240601
-pkgrel=4
+pkgrel=3
 _name_release="OpenShadingLanguage-1.13.10.0"
 _ver_release="v1.13.10.0"
 pkgdesc="Advanced shading language for production GI renderers"
@@ -13,7 +13,7 @@ depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
          'llvm-libs'
-         'qt6-base'
+         'qt5-base'
          'clang'
          'python' 'pugixml' 'pybind11'
 )

@@ -44,6 +44,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.10.0.20240601
+pkgrel=4    # rebuild MAJ OIIO 2.5.15.0 + boost boost-libs 1.86.0
 pkgrel=3    # rebuild MAJ OIIO 2.5.14.0
 pkgrel=2    # rebuild MAJ LLVM 18 + MAJ OIIO 2.5.13.0
 
@@ -116,7 +117,7 @@ depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'openimageio-git'
          'llvm-libs'
-         'qt5-base'
+         'qt6-base'
          'clang'
          'python' 'pugixml' 'pybind11'
 )
@@ -359,8 +360,16 @@ rm -f *~
 usr/lib/liboslcomp.so.1.13.10
 usr/lib/liboslquery.so.1.13.10
 usr/lib/liboslexec.so.1.13.10
+usr/lib/libtestshade.so.1.13.10
+usr/bin/testshade
+usr/bin/testrender
 
 namcap openshadinglanguage-git-*-x86_64.pkg.tar.*
+openshadinglanguage-git W: File (usr/build-scripts/) exists in a non-standard directory.
+openshadinglanguage-git W: File (usr/build-scripts/serialize-bc.py) exists in a non-standard directory.
+openshadinglanguage-git W: File (usr/cmake/) exists in a non-standard directory.
+openshadinglanguage-git W: File (usr/cmake/llvm_macros.cmake) exists in a non-standard directory.
+
 openshadinglanguage-git W: Dependency boost-libs included but already satisfied
 openshadinglanguage-git W: Dependency included and not needed ('imath')
 openshadinglanguage-git W: Dependency included and not needed ('freetype2')
