@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-git               # openvdb ds community
 pkgver=11.0.0.20231102
+pkgrel=2          # rebuild boost boost-libs 1.86.0
+
 pkgrel=1
 
 pkgrel=3          # rebuild boost boost-libs 1.83.0
