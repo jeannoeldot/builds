@@ -1,0 +1,43 @@
+In file included from src/engine/handinterface.h:39,
+                 from src/engine/handinterface.cpp:32:
+src/engine/log.h: In member function ‘std::string Log::getMySqliteLogFileName()’:
+src/engine/log.h:76:44: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+   76 |                 return mySqliteLogFileName.directory_string();
+      |                                            ^~~~~~~~~~~~~~~~
+In file included from src/engine/handinterface.h:39,
+                 from src/engine/enginefactory.h:36,
+                 from src/engine/game.cpp:34:
+src/engine/log.h: In member function ‘std::string Log::getMySqliteLogFileName()’:
+src/engine/log.h:76:44: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+   76 |                 return mySqliteLogFileName.directory_string();
+      |                                            ^~~~~~~~~~~~~~~~
+g++ -c -pipe -march=native -O2 -pipe -fdiagnostics-color=always -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wp,-D_GLIBCXX_ASSERTIONS -flto=auto -fPIC -Wall -Wextra -frtti -D_REENTRANT -flto -fno-fat-lto-objects -DBOOST_BIND_GLOBAL_PLACEHOLDERS -DENABLE_IPV6 -DTIXML_USE_STL -DBOOST_FILESYSTEM_DEPRECATED -DQT_NO_DEBUG -I. -I. -Isrc -Isrc/engine -Isrc/gui -Isrc/gui/qt -Isrc/gui/qt/qttools -Isrc/net -Isrc/engine/local_engine -Isrc/engine/network_engine -Isrc/config -Isrc/core -Isrc/third_party/websocketpp -I/usr/include -I/opt/gsasl/include -I/usr/lib/qt/mkspecs/linux-g++ -o obj/berointerface.o src/engine/berointerface.cpp
+In file included from src/engine/handinterface.h:39,
+                 from src/engine/playerinterface.h:35,
+                 from src/engine/playerinterface.cpp:32:
+src/engine/log.h: In member function ‘std::string Log::getMySqliteLogFileName()’:
+src/engine/log.h:76:44: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+   76 |                 return mySqliteLogFileName.directory_string();
+      |                                            ^~~~~~~~~~~~~~~~
+In file included from src/engine/handinterface.h:39,
+                 from src/engine/enginefactory.h:36,
+                 from src/engine/enginefactory.cpp:32:
+src/engine/log.h: In member function ‘std::string Log::getMySqliteLogFileName()’:
+src/engine/log.h:76:44: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+   76 |                 return mySqliteLogFileName.directory_string();
+      |                                            ^~~~~~~~~~~~~~~~
+make[1]: *** [Makefile.pokerth_lib:804: obj/handinterface.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: *** [Makefile.pokerth_lib:697: obj/game.o] Error 1
+make[1]: *** [Makefile.pokerth_lib:779: obj/enginefactory.o] Error 1
+make[1]: *** [Makefile.pokerth_lib:829: obj/playerinterface.o] Error 1
+In file included from src/session.cpp:35:
+src/engine/log.h: In member function ‘std::string Log::getMySqliteLogFileName()’:
+src/engine/log.h:76:44: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+   76 |                 return mySqliteLogFileName.directory_string();
+      |                                            ^~~~~~~~~~~~~~~~
+make[1]: *** [Makefile.pokerth_lib:738: obj/session.o] Error 1
+make[1]: Leaving directory '/build/pokerth/src/pokerth-1.1.2-rc'
+make: *** [Makefile:105: sub-pokerth_lib-pro-make_first-ordered] Error 2
+==> ERROR: A failure occurred in build().
+    Aborting...
