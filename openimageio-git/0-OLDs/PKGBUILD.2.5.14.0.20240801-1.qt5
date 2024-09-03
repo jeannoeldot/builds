@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-git
-pkgver=2.5.15.0.20240902
+pkgver=2.5.14.0.20240801
 pkgrel=1
-_name_release="OpenImageIO-2.5.15.0"
-_ver_release="v2.5.15.0"
+_name_release="OpenImageIO-2.5.14.0"
+_ver_release="v2.5.14.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -12,7 +12,7 @@ license=('Apache-2.0')
 # TODO: Consider adding these deps: 'openvdb' 'opentbb' 'ptex' 'opencv'
 depends=('openexr' 'boost-libs' 'libtiff'
          'libjpeg-turbo' 'openjpeg2' 'libraw' 'ffmpeg'
-         'qt6-base'
+         'qt5-base'
          'python'
          'libwebp' 'libheif'
          'freetype2'
@@ -28,7 +28,7 @@ provides=('openimageio')
 options=('!debug')
 source=("OpenImageIO-${_ver_release}.tar.gz"
 )
-sha256sums=('7779ef2c3d03c5ed95e13ff292de85c3f8cee301cd46baad0d2dc83c93bfe85c'
+sha256sums=('0e74372c658f083820872311d126867f10d59b526a856672746de7b2c772034d'
 )
 
 build() {
