@@ -31,6 +31,9 @@ voir : 01-CmdFairePatches.TXT
 voir : 02-CmdFairePatches.TXT
 -----------------------------
 
+voir : 03-CmdFairePatches.TXT
+-----------------------------
+
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Name <name@fai.com
@@ -38,7 +41,7 @@ voir : 02-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=37     # rebuild boost boost-libs 1.86.0-1
+pkgrel=37     # rebuild boost boost-libs 1.86.0-1 + patch
 pkgrel=36     # rebuild protobuf 27.3-1 et abseil-cpp 20240722.0-1
 pkgrel=35     # rebuild protobuf 27.1-2
 pkgrel=34     # rebuild MAJ abseil-cpp-20240116.1
@@ -80,6 +83,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-build-with-protobuf.patch"
         "fix-build-websocketpp-with-boost.patch"
         "fix-build-to-explicitly-link.patch"
+        "fix-build-with-boost-1.86.0.patch"
 )
 
 sha512sum pokerth-1.1.2.tar.gz
@@ -88,6 +92,7 @@ sha512sum fix-build-with-boost.patch
 sha512sum fix-build-with-protobuf.patch
 sha512sum fix-build-websocketpp-with-boost.patch
 sha512sum fix-build-to-explicitly-link.patch
+sha512sum fix-build-with-boost-1.86.0.patch
 
 sha512sums=("..."
             "..."
@@ -98,6 +103,7 @@ sha512sums=("..."
 $ ls -la
 -rw-r--r--  1 jnd users      525  6 juil. 11:13 fix-build-to-explicitly-link.patch
 -rw-r--r--  1 jnd users     4360 30 oct.  15:14 fix-build-websocketpp-with-boost.patch
+-rw-r--r--  1 jnd users      403  4 sept. 10:51 fix-build-with-boost-1.86.0.patch
 -rw-r--r--  1 jnd users     2143 12 déc.   2018 fix-build-with-boost.patch
 -rw-r--r--  1 jnd users     1861 12 déc.   2018 fix-build-with-protobuf.patch
 -rw-r--r--  1 jnd users     2194 30 oct.  15:23 PKGBUILD
@@ -147,6 +153,7 @@ $ rm -rf /tmp/chrootrepo
 
 # Verifications...
 namcap pokerth-*-x86_64.pkg.tar.*
+pokerth E: Dependency hicolor-icon-theme detected and not included (needed for hicolor theme hierarchy)
 ...
 pokerth W: Dependency included, but may not be needed ('gnutls')
 pokerth W: Dependency included, but may not be needed ('libxkbcommon-x11')

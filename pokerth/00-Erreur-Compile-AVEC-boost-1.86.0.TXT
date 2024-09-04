@@ -1,3 +1,130 @@
+
+==========================================================================================================
+
+
+
+
+==========================================================================================================
+src/net/common/uploaderthread.cpp:97:76: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
+   97 |                                         m_uploadHelper->Init(url, filepath.file_string(), data.user, data.pwd, data.filesize, data.httpPost);
+      |                                                                            ^~~~~~~~~~~
+
+==========================================================================================================
+FAIT
+src/net/common/serverlobbythread.cpp: In member function ‘void ServerLobbyThread::Init(const std::string&)’:
+src/net/common/serverlobbythread.cpp:278:56: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  278 |                         m_statisticsFileName = logPath.directory_string();
+      |                                                        ^~~~~~~~~~~~~~~~
+
+src/net/common/serverlobbythread.cpp:1264:92: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
+ 1264 |                                                 << boost::filesystem::path(avatarFileName).file_string() << "\".");
+      |                                                                                            ^~~~~~~~~~~
+
+==========================================================================================================
+FAIT
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateStartServerListDownload::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:214:93: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  214 |                 downloader->Init(client->GetContext().GetServerListUrl(), tmpServerListPath.directory_string());
+      |                                                                                             ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateReadingServerList::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:306:13: error: ‘extension’ was not declared in this scope
+  306 |         if (extension(zippedServerListPath) == ".z") {
+      |             ^~~~~~~~~
+src/net/common/clientstate.cpp:307:37: error: ‘change_extension’ was not declared in this scope; did you mean ‘__has_extension’?
+  307 |                 xmlServerListPath = change_extension(zippedServerListPath, "");
+      |                                     ^~~~~~~~~~~~~~~~
+      |                                     __has_extension
+src/net/common/clientstate.cpp:311:67: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  311 |                         std::ifstream inFile(zippedServerListPath.directory_string().c_str(), ios_base::in | ios_base::binary);
+      |                                                                   ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp:312:65: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  312 |                         std::ofstream outFile(xmlServerListPath.directory_string().c_str(), ios_base::out | ios_base::trunc);
+      |                                                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp:324:45: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  324 |         TiXmlDocument doc(xmlServerListPath.directory_string());
+      |                                             ^~~~~~~~~~~~~~~~
+
+==========================================================================================================
+FAIT
+src/net/common/clientthread.cpp: In member function ‘std::string ClientThread::GetCacheServerListFileName()’:
+src/net/common/clientthread.cpp:980:46: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  980 |                 fileName = tmpServerListPath.directory_string();
+      |                                              ^~~~~~~~~~~~~~~~
+
+==========================================================================================================
+FAIT
+src/net/common/downloaderthread.cpp:99:73: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
+   99 |                                         std::ifstream instream(filepath.file_string().c_str(), ios_base::in | ios_base::binary);
+      |                                                                         ^~~~~~~~~~~
+src/net/common/downloaderthread.cpp:135:101: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
+  135 |                                         m_downloadHelper->Init(m_curDownloadData->address, filepath.file_string());
+      |                                                                                                     ^~~~~~~~~~~
+
+==========================================================================================================
+FAIT
+src/engine/log.cpp: In member function ‘void Log::init()’:
+src/engine/log.cpp:87:66: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+   87 |                                 sqlite3_open(mySqliteLogFileName.directory_string().c_str(), &mySqliteLogDb);
+      |                                                                  ^~~~~~~~~~~~~~~~
+
+
+==========================================================================================================
+FAIT
+src/core/common/avatarmanager.cpp: In member function ‘bool AvatarManager::Init(const std::string&, const std::string&)’:
+src/core/common/avatarmanager.cpp:90:43: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+   90 |                 m_cacheDir = tmpCachePath.directory_string();
+      |                                           ^~~~~~~~~~~~~~~~
+src/core/common/avatarmanager.cpp:94:94: error: ‘using std::enable_if<true, boost::filesystem::path>::type = class boost::filesystem::path’ {aka ‘class boost::filesystem::path’} has no member named ‘directory_string’
+   94 |                 tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/people/").directory_string(), m_avatars);
+      |                                                                                              ^~~~~~~~~~~~~~~~
+src/core/common/avatarmanager.cpp:96:92: error: ‘using std::enable_if<true, boost::filesystem::path>::type = class boost::filesystem::path’ {aka ‘class boost::filesystem::path’} has no member named ‘directory_string’
+   96 |                 tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/misc/").directory_string(), m_avatars);
+      |                                                                                            ^~~~~~~~~~~~~~~~
+src/core/common/avatarmanager.cpp:103:61: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  103 |                 tmpRet = InternalReadDirectory(tmpCachePath.directory_string(), m_cachedAvatars);
+      |                                                             ^~~~~~~~~~~~~~~~
+src/core/common/avatarmanager.cpp: In member function ‘bool AvatarManager::AddSingleAvatar(const std::string&)’:
+src/core/common/avatarmanager.cpp:116:37: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
+  116 |         string tmpFileName(filePath.file_string());
+      |                                     ^~~~~~~~~~~
+
+src/core/common/avatarmanager.cpp: In static member function ‘static AvatarFileType AvatarManager::GetAvatarFileType(const std::string&)’:
+src/core/common/avatarmanager.cpp:243:20: error: ‘extension’ was not declared in this scope
+  243 |         string ext(extension(filePath));
+      |                    ^~~~~~~~~
+
+src/core/common/avatarmanager.cpp: In member function ‘bool AvatarManager::StoreAvatarInCache(const MD5Buf&, AvatarFileType, const unsigned char*, size_t, bool)’:
+src/core/common/avatarmanager.cpp:365:57: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
+  365 |                                 string fileName(tmpPath.file_string());
+      |                                                         ^~~~~~~~~~~
+src/core/common/avatarmanager.cpp: In member function ‘void AvatarManager::RemoveOldAvatarCacheEntries()’:
+src/core/common/avatarmanager.cpp:429:38: error: ‘class boost::filesystem::path’ has no member named ‘directory_string’
+  429 |                 cacheDir = cachePath.directory_string();
+      |                                      ^~~~~~~~~~~~~~~~
+src/core/common/avatarmanager.cpp:444:68: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
+  444 |                                         string fileString(filePath.file_string());
+      |                                                                    ^~~~~~~~~~~
+
+src/core/common/avatarmanager.cpp:449:99: error: no matching function for call to ‘basename(boost::filesystem::path&)’
+  449 |                                                 if (exists(filePath) && tmpBuf.FromString(basename(filePath))) {
+      |                                                                                           ~~~~~~~~^~~~~~~~~~
+
+src/core/common/avatarmanager.cpp:523:37: error: ‘is_regular’ was not declared in this scope
+  523 |                                 if (is_regular(i->status())) {
+      |                                     ^~~~~~~~~~
+
+src/core/common/avatarmanager.cpp:524:63: error: no matching function for call to ‘basename(const boost::filesystem::path&)’
+  524 |                                         string md5sum(basename(i->path()));
+      |                                                       ~~~~~~~~^~~~~~~~~~~
+
+
+src/core/common/avatarmanager.cpp:526:67: error: ‘const class boost::filesystem::path’ has no member named ‘file_string’
+  526 |                                         string fileName(i->path().file_string());
+      |                                                                   ^~~~~~~~~~~
+
+
+==================================================================================================
+FAIT
 In file included from src/engine/handinterface.h:39,
                  from src/engine/handinterface.cpp:32:
 src/engine/log.h: In member function ‘std::string Log::getMySqliteLogFileName()’:

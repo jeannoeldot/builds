@@ -1,0 +1,223 @@
+diff -aur pokerth-1.1.2-rc/src/core/common/avatarmanager.cpp pokerth-1.1.2-rc.new/src/core/common/avatarmanager.cpp
+--- pokerth-1.1.2-rc/src/core/common/avatarmanager.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/core/common/avatarmanager.cpp	2024-09-04 18:42:01.468760702 +0200
+@@ -87,20 +87,20 @@
+ 	path tmpDataPath(dataDir);
+ 	{
+ 		boost::mutex::scoped_lock lock(m_cacheDirMutex);
+-		m_cacheDir = tmpCachePath.directory_string();
++		m_cacheDir = tmpCachePath.string();
+ 	}
+ 	{
+ 		boost::mutex::scoped_lock lock(m_avatarsMutex);
+-		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/people/").directory_string(), m_avatars);
++		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/people/").string(), m_avatars);
+ 		retVal = retVal && tmpRet;
+-		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/misc/").directory_string(), m_avatars);
++		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/misc/").string(), m_avatars);
+ 		retVal = retVal && tmpRet;
+ 	}
+ 	if (cacheDir.empty() || tmpCachePath.empty())
+ 		LOG_ERROR("Cache directory was not set!");
+ 	else {
+ 		boost::mutex::scoped_lock lock(m_cachedAvatarsMutex);
+-		tmpRet = InternalReadDirectory(tmpCachePath.directory_string(), m_cachedAvatars);
++		tmpRet = InternalReadDirectory(tmpCachePath.string(), m_cachedAvatars);
+ 		retVal = retVal && tmpRet;
+ 	}
+ 
+@@ -113,7 +113,7 @@
+ {
+ 	bool retVal = false;
+ 	path filePath(fileName);
+-	string tmpFileName(filePath.file_string());
++	string tmpFileName(filePath.string());
+ 
+ 	if (!fileName.empty() && !tmpFileName.empty()) {
+ 		unsigned outFileSize = 0;
+@@ -240,7 +240,7 @@
+ 	AvatarFileType fileType;
+ 
+ 	path filePath(fileName);
+-	string ext(extension(filePath));
++	string ext(filePath.extension().string());
+ 	if (boost::algorithm::iequals(ext, ".png"))
+ 		fileType = AVATAR_FILE_TYPE_PNG;
+ 	else if (boost::algorithm::iequals(ext, ".jpg") || boost::algorithm::iequals(ext, ".jpeg"))
+@@ -362,7 +362,7 @@
+ 			if (IsValidAvatarFileType(avatarFileType, data, size)) {
+ 				path tmpPath(cacheDir);
+ 				tmpPath /= (md5buf.ToString() + ext);
+-				string fileName(tmpPath.file_string());
++				string fileName(tmpPath.string());
+ 				std::ofstream o(fileName.c_str(), ios_base::out | ios_base::binary | ios_base::trunc);
+ 				if (!o.fail()) {
+ 					o.write((const char *)data, size);
+@@ -426,7 +426,7 @@
+ 	}
+ 	try {
+ 		path cachePath(cacheDir);
+-		cacheDir = cachePath.directory_string();
++		cacheDir = cachePath.string();
+ 		// Never delete anything if we do not have a special cache dir set.
+ 		if (!cacheDir.empty()) {
+ 			boost::mutex::scoped_lock lock(m_cachedAvatarsMutex);
+@@ -441,12 +441,12 @@
+ 				while (i != end) {
+ 					bool keepFile = false;
+ 					path filePath(i->second);
+-					string fileString(filePath.file_string());
++					string fileString(filePath.string());
+ 					// Only consider files which are definitely in the cache dir.
+ 					if (fileString.size() > cacheDir.size() && fileString.substr(0, cacheDir.size()) == cacheDir) {
+ 						// Only consider files with MD5 as file name.
+ 						MD5Buf tmpBuf;
+-						if (exists(filePath) && tmpBuf.FromString(basename(filePath))) {
++						if (exists(filePath) && tmpBuf.FromString(filePath.stem().string())) {
+ 							timeMap.insert(TimeAvatarMap::value_type(last_write_time(filePath), i->first));
+ 							keepFile = true;
+ 						}
+@@ -520,10 +520,10 @@
+ 			directory_iterator end;
+ 
+ 			while (i != end) {
+-				if (is_regular(i->status())) {
+-					string md5sum(basename(i->path()));
++				if (is_regular_file(i->status())) {
++					string md5sum(i->path().stem().string());
+ 					MD5Buf md5buf;
+-					string fileName(i->path().file_string());
++					string fileName(i->path().string());
+ 					if (md5buf.FromString(md5sum)) {
+ 						// Only consider files with md5sum as name.
+ 						avatars.insert(AvatarMap::value_type(md5buf, fileName));
+diff -aur pokerth-1.1.2-rc/src/engine/log.cpp pokerth-1.1.2-rc.new/src/engine/log.cpp
+--- pokerth-1.1.2-rc/src/engine/log.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/engine/log.cpp	2024-09-04 18:37:28.833631843 +0200
+@@ -84,7 +84,7 @@
+ 				mySqliteLogFileName /= string("pokerth-log-") + curDateTime + ".pdb";
+ 
+ 				// open sqlite-db
+-				sqlite3_open(mySqliteLogFileName.directory_string().c_str(), &mySqliteLogDb);
++				sqlite3_open(mySqliteLogFileName.string().c_str(), &mySqliteLogDb);
+ 				if( mySqliteLogDb != 0 ) {
+ 
+ 					int i;
+diff -aur pokerth-1.1.2-rc/src/engine/log.h pokerth-1.1.2-rc.new/src/engine/log.h
+--- pokerth-1.1.2-rc/src/engine/log.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/engine/log.h	2024-09-04 18:36:47.883868618 +0200
+@@ -73,7 +73,7 @@
+ 
+ 	std::string getMySqliteLogFileName()
+ 	{
+-		return mySqliteLogFileName.directory_string();
++		return mySqliteLogFileName.string();
+ 	}
+ 
+ private:
+diff -aur pokerth-1.1.2-rc/src/net/common/clientstate.cpp pokerth-1.1.2-rc.new/src/net/common/clientstate.cpp
+--- pokerth-1.1.2-rc/src/net/common/clientstate.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/common/clientstate.cpp	2024-09-04 19:11:46.961908750 +0200
+@@ -211,7 +211,7 @@
+ 	} else {
+ 		// Download the server list.
+ 		boost::shared_ptr<DownloadHelper> downloader(new DownloadHelper);
+-		downloader->Init(client->GetContext().GetServerListUrl(), tmpServerListPath.directory_string());
++		downloader->Init(client->GetContext().GetServerListUrl(), tmpServerListPath.string());
+ 		ClientStateDownloadingServerList::Instance().SetDownloadHelper(downloader);
+ 		client->SetState(ClientStateDownloadingServerList::Instance());
+ 	}
+@@ -303,13 +303,14 @@
+ 	path zippedServerListPath(context.GetCacheDir());
+ 	zippedServerListPath /= context.GetServerListUrl().substr(context.GetServerListUrl().find_last_of('/') + 1);
+ 	path xmlServerListPath;
+-	if (extension(zippedServerListPath) == ".z") {
+-		xmlServerListPath = change_extension(zippedServerListPath, "");
++	if (zippedServerListPath.extension().string() == ".z") {
++		xmlServerListPath = zippedServerListPath;
++		xmlServerListPath.replace_extension("");
+ 
+ 		// Unzip the file using zlib.
+ 		try {
+-			std::ifstream inFile(zippedServerListPath.directory_string().c_str(), ios_base::in | ios_base::binary);
+-			std::ofstream outFile(xmlServerListPath.directory_string().c_str(), ios_base::out | ios_base::trunc);
++			std::ifstream inFile(zippedServerListPath.string().c_str(), ios_base::in | ios_base::binary);
++			std::ofstream outFile(xmlServerListPath.string().c_str(), ios_base::out | ios_base::trunc);
+ 			boost::iostreams::filtering_streambuf<boost::iostreams::input> in;
+ 			in.push(boost::iostreams::zlib_decompressor());
+ 			in.push(inFile);
+@@ -321,7 +322,7 @@
+ 		xmlServerListPath = zippedServerListPath;
+ 
+ 	// Parse the server address.
+-	TiXmlDocument doc(xmlServerListPath.directory_string());
++	TiXmlDocument doc(xmlServerListPath.string());
+ 
+ 	if (doc.LoadFile()) {
+ 		client->ClearServerInfoMap();
+diff -aur pokerth-1.1.2-rc/src/net/common/clientthread.cpp pokerth-1.1.2-rc.new/src/net/common/clientthread.cpp
+--- pokerth-1.1.2-rc/src/net/common/clientthread.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/common/clientthread.cpp	2024-09-04 21:17:52.578091297 +0200
+@@ -977,7 +977,7 @@
+ 	size_t pos = serverListUrl.find_last_of('/');
+ 	if (!GetContext().GetCacheDir().empty() && !serverListUrl.empty() && pos != string::npos && ++pos < serverListUrl.length()) {
+ 		tmpServerListPath /= serverListUrl.substr(pos);
+-		fileName = tmpServerListPath.directory_string();
++		fileName = tmpServerListPath.string();
+ 	}
+ 	return fileName;
+ }
+diff -aur pokerth-1.1.2-rc/src/net/common/downloaderthread.cpp pokerth-1.1.2-rc.new/src/net/common/downloaderthread.cpp
+--- pokerth-1.1.2-rc/src/net/common/downloaderthread.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/common/downloaderthread.cpp	2024-09-04 21:22:52.463197674 +0200
+@@ -96,7 +96,7 @@
+ 				// Previous download was finished.
+ 				if (m_curDownloadData) {
+ 					path filepath(m_curDownloadData->filename);
+-					std::ifstream instream(filepath.file_string().c_str(), ios_base::in | ios_base::binary);
++					std::ifstream instream(filepath.string().c_str(), ios_base::in | ios_base::binary);
+ 					// Find out file size.
+ 					// Not fully portable, but works on win/linux/mac.
+ 					instream.seekg(0, ios_base::beg);
+@@ -132,7 +132,7 @@
+ 				}
+ 				if (m_curDownloadData && !m_curDownloadData->filename.empty()) {
+ 					path filepath(m_curDownloadData->filename);
+-					m_downloadHelper->Init(m_curDownloadData->address, filepath.file_string());
++					m_downloadHelper->Init(m_curDownloadData->address, filepath.string());
+ 					m_downloadInProgress = true;
+ 				}
+ 			}
+diff -aur pokerth-1.1.2-rc/src/net/common/serverlobbythread.cpp pokerth-1.1.2-rc.new/src/net/common/serverlobbythread.cpp
+--- pokerth-1.1.2-rc/src/net/common/serverlobbythread.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/common/serverlobbythread.cpp	2024-09-04 21:33:52.209029359 +0200
+@@ -275,7 +275,7 @@
+ 		boost::filesystem::path logPath(logDir);
+ 		if (!logDir.empty()) {
+ 			logPath /= SERVER_STATISTICS_FILE_NAME;
+-			m_statisticsFileName = logPath.directory_string();
++			m_statisticsFileName = logPath.string();
+ 			ReadStatisticsFile();
+ 		}
+ 	}
+@@ -1261,7 +1261,7 @@
+ 				// Init finished - start session.
+ 				EstablishSession(session);
+ 				LOG_MSG("Client \"" << session->GetClientAddr() << "\" uploaded avatar \""
+-						<< boost::filesystem::path(avatarFileName).file_string() << "\".");
++						<< boost::filesystem::path(avatarFileName).string() << "\".");
+ 			} else
+ 				SessionError(session, ERR_NET_WRONG_AVATAR_SIZE);
+ 		}
+diff -aur pokerth-1.1.2-rc/src/net/common/uploaderthread.cpp pokerth-1.1.2-rc.new/src/net/common/uploaderthread.cpp
+--- pokerth-1.1.2-rc/src/net/common/uploaderthread.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/common/uploaderthread.cpp	2024-09-04 21:43:07.009332412 +0200
+@@ -94,7 +94,7 @@
+ 						url += filepath.filename().string();
+ #endif
+ 					}
+-					m_uploadHelper->Init(url, filepath.file_string(), data.user, data.pwd, data.filesize, data.httpPost);
++					m_uploadHelper->Init(url, filepath.string(), data.user, data.pwd, data.filesize, data.httpPost);
+ 					m_uploadInProgress = true;
+ 				}
+ 			}

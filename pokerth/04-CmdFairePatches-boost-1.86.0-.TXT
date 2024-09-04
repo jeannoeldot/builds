@@ -1,0 +1,370 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.1.2
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/pokerth
+
+/!\ /!\ /!\ rm -rf $HOME/99-temp/srcp
+
+mkdir -p $HOME/99-temp/srcp
+
+cp -v pokerth-1.1.2.tar.gz $HOME/99-temp/srcp/
+
+cd $HOME/99-temp/srcp
+
+tar -xzf pokerth-1.1.2.tar.gz
+
+ls $HOME/99-temp/srcp
+/!\ /!\ /!\
+
+
+https://www.boost.org/doc/libs/1_85_0/libs/filesystem/doc/deprecated.html
+
+1) PATCH BOOST VERSION >= 1.86.0
+================================
+1-1) MODIFIER pokerth-1.1.2-rc/src/engine/log.h
+-----------------------------------------------
+cp -R pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+cd pokerth-1.1.2-rc.new/src/engine
+kwrite log.h
+
+MODIFIER LIGNE 76 :
+		return mySqliteLogFileName.directory_string();
+DEVIENT :
+		return mySqliteLogFileName.string();
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier log.h~
+rm -f log.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-2) MODIFIER pokerth-1.1.2-rc/src/engine/log.cpp
+-------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/engine
+kwrite log.cpp
+
+MODIFIER LIGNE 87 :
+				sqlite3_open(mySqliteLogFileName.directory_string().c_str(), &mySqliteLogDb);
+DEVIENT :
+				sqlite3_open(mySqliteLogFileName.string().c_str(), &mySqliteLogDb);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier log.cpp~
+rm -f log.cpp~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-3) MODIFIER pokerth-1.1.2-rc/src/core/common/avatarmanager.cpp
+----------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/core/common
+kwrite avatarmanager.cpp
+
+MODIFIER LIGNE 90 :
+		m_cacheDir = tmpCachePath.directory_string();
+DEVIENT :
+		m_cacheDir = tmpCachePath.string();
+
+MODIFIER LIGNE 94 :
+		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/people/").directory_string(), m_avatars);
+DEVIENT :
+		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/people/").string(), m_avatars);
+
+MODIFIER LIGNE 96 :
+		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/misc/").directory_string(), m_avatars);
+DEVIENT :
+		tmpRet = InternalReadDirectory((tmpDataPath / "gfx/avatars/default/misc/").string(), m_avatars);
+
+MODIFIER LIGNE 103 :
+		tmpRet = InternalReadDirectory(tmpCachePath.directory_string(), m_cachedAvatars);
+DEVIENT :
+		tmpRet = InternalReadDirectory(tmpCachePath.string(), m_cachedAvatars);
+
+MODIFIER LIGNE 116 :
+	string tmpFileName(filePath.file_string());
+DEVIENT :
+	string tmpFileName(filePath.string());
+
+MODIFIER LIGNE 243 :
+	string ext(extension(filePath));
+DEVIENT :
+	string ext(filePath.extension().string());
+
+MODIFIER LIGNE 365 :
+				string fileName(tmpPath.file_string());
+DEVIENT :
+				string fileName(tmpPath.string());
+
+MODIFIER LIGNE 429 :
+		cacheDir = cachePath.directory_string();
+DEVIENT :
+		cacheDir = cachePath.string();
+
+MODIFIER LIGNE 444 :
+					string fileString(filePath.file_string());
+DEVIENT :
+					string fileString(filePath.string());
+
+MODIFIER LIGNE 449 :
+						if (exists(filePath) && tmpBuf.FromString(basename(filePath))) {
+DEVIENT :
+						if (exists(filePath) && tmpBuf.FromString(filePath.stem().string())) {
+
+MODIFIER LIGNE 523 :
+				if (is_regular(i->status())) {
+DEVIENT :
+				if (is_regular_file(i->status())) {
+
+MODIFIER LIGNE 524 :
+					string md5sum(basename(i->path()));
+DEVIENT :
+					string md5sum(i->path().stem().string());
+
+MODIFIER LIGNE 526 :
+					string fileName(i->path().file_string());
+DEVIENT :
+					string fileName(i->path().string());
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier avatarmanager.cpp~
+rm -f avatarmanager.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-4) MODIFIER pokerth-1.1.2-rc/src/net/common/clientstate.cpp
+-------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net/common
+kwrite clientstate.cpp
+
+MODIFIER LIGNE 214 :
+		downloader->Init(client->GetContext().GetServerListUrl(), tmpServerListPath.directory_string());
+DEVIENT :
+		downloader->Init(client->GetContext().GetServerListUrl(), tmpServerListPath.string());
+
+MODIFIER LIGNE 306 :
+	if (extension(zippedServerListPath) == ".z") {
+DEVIENT :
+	if (zippedServerListPath.extension().string() == ".z") {
+
+MODIFIER LIGNE 307 :
+		xmlServerListPath = change_extension(zippedServerListPath, "");
+DEVIENT :
+		xmlServerListPath = zippedServerListPath;
+		xmlServerListPath.replace_extension("");
+
+MODIFIER LIGNE 311 :
+			std::ifstream inFile(zippedServerListPath.directory_string().c_str(), ios_base::in | ios_base::binary);
+DEVIENT :
+			std::ifstream inFile(zippedServerListPath.string().c_str(), ios_base::in | ios_base::binary);
+
+MODIFIER LIGNE 312 :
+			std::ofstream outFile(xmlServerListPath.directory_string().c_str(), ios_base::out | ios_base::trunc);
+DEVIENT :
+			std::ofstream outFile(xmlServerListPath.string().c_str(), ios_base::out | ios_base::trunc);
+
+MODIFIER LIGNE 324 :
+	TiXmlDocument doc(xmlServerListPath.directory_string());
+DEVIENT :
+	TiXmlDocument doc(xmlServerListPath.string());
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier clientstate.cpp~
+rm -f clientstate.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-5) MODIFIER pokerth-1.1.2-rc/src/net/common/clientthread.cpp
+--------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net/common
+kwrite clientthread.cpp
+
+MODIFIER LIGNE 980 :
+		fileName = tmpServerListPath.directory_string();
+DEVIENT :
+		fileName = tmpServerListPath.string();
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier clientthread.cpp~
+rm -f clientthread.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-6) MODIFIER pokerth-1.1.2-rc/src/net/common/downloaderthread.cpp
+------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net/common
+kwrite downloaderthread.cpp
+
+MODIFIER LIGNE 99 :
+					std::ifstream instream(filepath.file_string().c_str(), ios_base::in | ios_base::binary);
+DEVIENT :
+					std::ifstream instream(filepath.string().c_str(), ios_base::in | ios_base::binary);
+
+MODIFIER LIGNE 135 :
+					m_downloadHelper->Init(m_curDownloadData->address, filepath.file_string());
+DEVIENT :
+					m_downloadHelper->Init(m_curDownloadData->address, filepath.string());
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier downloaderthread.cpp~
+rm -f downloaderthread.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-7) MODIFIER pokerth-1.1.2-rc/src/net/common/serverlobbythread.cpp
+-------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net/common
+kwrite serverlobbythread.cpp
+
+MODIFIER LIGNE 278 :
+			m_statisticsFileName = logPath.directory_string();
+DEVIENT :
+			m_statisticsFileName = logPath.string();
+
+MODIFIER LIGNE 1264 :
+						<< boost::filesystem::path(avatarFileName).file_string() << "\".");
+DEVIENT :
+						<< boost::filesystem::path(avatarFileName).string() << "\".");
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier serverlobbythread.cpp~
+rm -f serverlobbythread.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-8) MODIFIER pokerth-1.1.2-rc/src/net/common/uploaderthread.cpp
+-------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net/common
+kwrite uploaderthread.cpp
+
+MODIFIER LIGNE 97 :
+					m_uploadHelper->Init(url, filepath.file_string(), data.user, data.pwd, data.filesize, data.httpPost);
+DEVIENT :
+					m_uploadHelper->Init(url, filepath.string(), data.user, data.pwd, data.filesize, data.httpPost);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier uploaderthread.cpp~
+rm -f uploaderthread.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+
+
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-boost-1.86.0.patch
+
+
+!!! NON QUAND PATCHES FINIS !!! rm -rf pokerth-1.1.2-rc.new
+
+
+cd $HOME/05-builds/pokerth
+
+mv -vf $HOME/99-temp/srcp/fix-build-with-boost-1.86.0.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf $HOME/99-temp/srcp
+
+sync
+
+=================================================================
+EXPLICATIONS LIGNES 243 449 524 306
+===============================
+
+src/core/common/avatarmanager.cpp: In static member function ‘static AvatarFileType AvatarManager::GetAvatarFileType(const std::string&)’:
+src/core/common/avatarmanager.cpp:243:20: error: ‘extension’ was not declared in this scope
+  243 |         string ext(extension(filePath));
+      |                    ^~~~~~~~~
+
+
+std::string extension(const path& p)
+
+Replace extension(p) with p.extension().string()
+extension(filePath) ==> filePath.extension().string()
+
+
+
+
+src/core/common/avatarmanager.cpp:449:99: error: no matching function for call to ‘basename(boost::filesystem::path&)’
+  449 |                                                 if (exists(filePath) && tmpBuf.FromString(basename(filePath))) {
+      |                                                                                           ~~~~~~~~^~~~~~~~~~
+
+
+src/core/common/avatarmanager.cpp:524:63: error: no matching function for call to ‘basename(const boost::filesystem::path&)’
+  524 |                                         string md5sum(basename(i->path()));
+      |                                                       ~~~~~~~~^~~~~~~~~~~
+
+
+
+std::string basename(const path& p)
+
+Replace basename(p) with p.stem().string()
+basename(filePath) ==> filePath.stem().string()
+
+basename(i->path()) ==> i->path().stem().string()
+
+src/net/common/clientstate.cpp:307:37: error: ‘change_extension’ was not declared in this scope; did you mean ‘__has_extension’?
+  307 |                 xmlServerListPath = change_extension(zippedServerListPath, "");
+      |                                     ^~~~~~~~~~~~~~~~
+
+path change_extension(const path& p, const path& new_extension)
+
+Replace path new_p = change_extension(p, ext); with path new_p = p; new_p.replace_extension(ext);
+
+xmlServerListPath = zippedServerListPath; xmlServerListPath.replace_extension("");
+
+
+=================================================================
+ANCIENS
+========
+
+cp -R pokerth-1.1.2-rc $HOME/99-temp/srcp/pokerth-1.1.2-rc
+cp -R pokerth-1.1.2-rc.new $HOME/99-temp/srcp/pokerth-1.1.2-rc.new
+
+mkdir /tmp/srcp
+
+cp -v pokerth-1.1.2.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf pokerth-1.1.2.tar.gz
+
+
+/!\ /!\ /!\
+VOIR : $HOME/99-temp/srcp/
+/!\ /!\ /!\
+
