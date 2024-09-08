@@ -5,6 +5,7 @@
 
 
 ==========================================================================================================
+FAIT
 src/net/common/uploaderthread.cpp:97:76: error: ‘class boost::filesystem::path’ has no member named ‘file_string’
    97 |                                         m_uploadHelper->Init(url, filepath.file_string(), data.user, data.pwd, data.filesize, data.httpPost);
       |                                                                            ^~~~~~~~~~~
