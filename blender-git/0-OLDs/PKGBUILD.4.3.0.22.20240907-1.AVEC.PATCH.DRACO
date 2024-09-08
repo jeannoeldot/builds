@@ -63,7 +63,7 @@ prepare() {
   cd "${_gitname}"
 
   # fix draco
-  #patch -p1 -i "$srcdir"/force-draco1.patch
+  patch -p1 -i "$srcdir"/force-draco1.patch
   patch -p1 -d scripts/addons_core -i "$srcdir"/force-draco2.patch
 
   # fix fluid sim domain with python 3.12
