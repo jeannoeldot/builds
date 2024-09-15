@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.5.15.0.20240902
+pkgrel=2    # rebuild MAJ fmt 11.0.2
+
 pkgrel=1
 
 pkgrel=3    # rebuild MAJ python-numpy 2.0.0
