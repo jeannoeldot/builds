@@ -1,0 +1,27 @@
+====================================
+!!! VERSION = HyperFluent-GRUB-Theme-Arch-v1.0.1
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/hyperfluent-grub-theme-arch
+
+mkdir /tmp/srcp
+
+cp -v HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz
+
+/!\ cd $HOME/05-builds/hyperfluent-grub-theme-arch
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
+

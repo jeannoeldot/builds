@@ -1,0 +1,25 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname="hyperfluent-grub-theme-arch"
+pkgver=1.0.1
+pkgrel=1
+_name_release="HyperFluent-GRUB-Theme-Arch-v1.0.1"
+_ver_release="v1.0.1"
+pkgdesc="Arch hyperfluent grub theme."
+arch=(any)
+url="https://github.com/Coopydood/HyperFluent-GRUB-Theme"
+license=('GPL-2.0-or-later')
+depends=(
+)
+makedepends=(
+)
+options=('!debug')
+source=("HyperFluent-GRUB-Theme-Arch-${_ver_release}.tar.gz")
+sha256sums=("158e1c32f6d1be50e5672fa8ee6e8279631c364717def43ebc6ebd4586c7f7db")
+
+package(){
+  cd "${srcdir}"
+  install -d -m 755 "${pkgdir}"/usr/share/grub/themes/${pkgname}
+  cp -r * "${pkgdir}"/usr/share/grub/themes/${pkgname}
+  rm "${pkgdir}"/usr/share/grub/themes/${pkgname}/HyperFluent-GRUB-Theme-Arch-${_ver_release}.tar.gz
+}

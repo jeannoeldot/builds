@@ -1,0 +1,154 @@
+# Le répertoire
+!!! EN USER
+cd $HOME/05-builds/hyperfluent-grub-theme-arch
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/Coopydood/HyperFluent-GRUB-Theme/releases
+==> 15/04/2024  ==> 20240415
+==> v1.0.1  ==> 1.0.1
+==> 1.0.1.20240415
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz \
+https://github.com/Coopydood/HyperFluent-GRUB-Theme/releases/download/v1.0.1/hyperfluent-arch.tar.gz
+
+1-4) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/hyperfluent-grub-theme-arch
+
+!!! CONSERVE Release DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz .
+
+1-5) FAIRE PATCH
+===============================
+VOIR 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=hyperfluent-grub-theme-arch
+pkgver=1.0.1
+pkgrel=1
+
+!!!!!!
+_name_release=""
+_ver_release="v1.0.1"
+
+conflicts=('')
+provides=('')
+
+depends=(
+)
+makedepends=(
+)
+
+options=('!debug')
+
+2-2) PKGBUILD SANS PATCH
+========================
+source=("HyperFluent-GRUB-Theme-Arch-${_ver_release}.tar.gz"
+)
+
+sha256sum HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz
+
+sha256sums=(........
+)
+
+
+3) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 6186511 17 sept. 14:28 HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz
+-rw-r--r--  1 jnd users     686 17 sept. 14:35 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN USER
+
+rm -f *~ \
+rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/hyperfluent-grub-theme-arch/{PKGBUILD,HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz} . \
+&& makepkg -s \
+&& cd $HOME/05-builds/hyperfluent-grub-theme-arch \
+&& cp -v /tmp/build/hyperfluent-grub-theme-arch-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/hyperfluent-grub-theme-arch && rm -rf /tmp/build
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+!!! EN USER
+
+rm -f *~
+makepkg -s
+
+makepkg -f
+
+rm -rf pkg src
+rm -f *~
+
+
+4-1) Verifications...
+=====================
+
+namcap hyperfluent-grub-theme-arch-*-any.pkg.tar.*
+...
+
+4-1) SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ sudo rm /00-repolocal/hyperfluent-grub-theme-arch-*-any.pkg.tar.*
+
+$ sudo cp -v hyperfluent-grub-theme-arch-*-any.pkg.tar.* /00-repolocal/
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/hyperfluent-grub-theme-arch-*-any.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v hyperfluent-grub-theme-arch-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i HyperFluent-GRUB-Theme-Arch-v1.0.1.tar.gz
+$ rm -rf /tmp/0-AUR
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+
+!!! EN ROOT
+========
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+OU
+# LC_ALL=C pacman -Syu hyperfluent-grub-theme-arch
+
+=========================================================================
+ANCIEN
+======
+
