@@ -35,8 +35,8 @@ Color
 CheckSpace
 VerbosePkgLists
 ParallelDownloads = 2
-DownloadUser = alpm
-#DisableSandbox
+#DownloadUser = alpm
+DisableSandbox
 
 # By default, pacman accepts packages signed by keys that its local keyring
 # trusts (see pacman-key and its man page), as well as unsigned packages.
@@ -78,9 +78,10 @@ LocalFileSigLevel = Optional
 SigLevel = Never
 #Server = file:///chrootrepolocal
 #Suite MAJ devtools 20190821-1
-#Server = file://PATHTOREPOLOCAL/chrootrepolocal
+Server = file://PATHTOREPOLOCAL/chrootrepolocal
 #Suite MAJ pacman 7.0
-Server = file://PATHTOREPOLOCAL
+# PAS OK
+#Server = file://PATHTOREPOLOCAL
 
 [core]
 SigLevel = Never

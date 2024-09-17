@@ -345,6 +345,16 @@ $ rm -f *~
 $ mkpkg-tmpfs -m fast
 
 $ mkpkg-tmpfs -m fast -l logs
+-------------------------------------------------------------------
+
+!!! EN USER
+
+  NATIVE
+--------
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m floop
+$ $HOME/bin/mkpkg-tmpfs -m native
+-------------------------------------------------------------------
 
 
 $ rm -rf /tmp/chrootrepo
