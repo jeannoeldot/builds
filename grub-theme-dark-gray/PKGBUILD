@@ -1,0 +1,23 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname="grub-theme-dark-gray"
+pkgver=1.0
+pkgrel=1
+_name_release="themes-grub-main"
+pkgdesc="Grub theme Darx Gray."
+arch=(any)
+url="https://github.com/jeannoeldot/themes-grub"
+license=('GPL-3.0-or-later')
+depends=(
+)
+makedepends=(
+)
+options=('!debug')
+source=("grub-theme-dark-gray.zip")
+sha256sums=("7d25b40c50892790b840ee0eddcc98bceaed5e93a63f0e7743e3472b1d31a3c1")
+
+package(){
+  cd "${srcdir}/${_name_release}"
+  install -d -m 755 "${pkgdir}"/usr/share/grub/themes/${pkgname}
+  cp -r ${pkgname}/* "${pkgdir}"/usr/share/grub/themes/${pkgname}
+}

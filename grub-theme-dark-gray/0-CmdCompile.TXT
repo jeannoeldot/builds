@@ -1,0 +1,152 @@
+# Le répertoire
+!!! EN USER
+cd $HOME/05-builds/grub-theme-dark-gray
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/jeannoeldot/themes-grub
+==> 20/09/2024  ==> 20240920
+==> v1.0  ==> 1.0
+==> 1.0.20240920
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+https://github.com/jeannoeldot/themes-grub.git
+
+wget -O grub-theme-dark-gray.zip \
+https://github.com/jeannoeldot/themes-grub/archive/refs/heads/main.zip
+
+1-4) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/grub-theme-dark-gray
+
+!!! CONSERVE Release DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/grub-theme-dark-gray.zip .
+
+1-5) FAIRE PATCH
+===============================
+VOIR 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=grub-theme-dark-gray
+pkgver=1.0
+pkgrel=1
+
+_name_release="themes-grub-main"
+
+arch=(any)
+
+depends=(
+)
+makedepends=(
+)
+
+options=('!debug')
+
+2-2) PKGBUILD SANS PATCH
+========================
+source=("grub-theme-dark-gray.zip"
+)
+
+sha256sum grub-theme-dark-gray.zip
+
+sha256sums=(........
+)
+
+
+3) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users    580 20 sept. 19:11 PKGBUILD
+-rw-r--r--  1 jnd users 737574 20 sept. 18:59 grub-theme-dark-gray.zip
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN USER
+
+rm -f *~ \
+rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/grub-theme-dark-gray/{PKGBUILD,grub-theme-dark-gray.zip} . \
+&& makepkg -s \
+&& cd $HOME/05-builds/grub-theme-dark-gray \
+&& cp -v /tmp/build/grub-theme-dark-gray-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/grub-theme-dark-gray && rm -rf /tmp/build
+
+
+3-3) MAKEPKG en USER SUR SSD
+=============================
+!!! EN USER
+
+rm -f *~
+makepkg -s
+
+makepkg -f
+
+rm -rf pkg src
+rm -f *~
+
+
+4-1) Verifications...
+=====================
+
+namcap grub-theme-dark-gray-*-any.pkg.tar.*
+...
+
+4-1) SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ sudo rm /00-repolocal/grub-theme-dark-gray-*-any.pkg.tar.*
+
+$ sudo cp -v grub-theme-dark-gray-*-any.pkg.tar.* /00-repolocal/
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/grub-theme-dark-gray-*-any.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v grub-theme-dark-gray-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i grub-theme-dark-gray.zip
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+
+!!! EN ROOT
+========
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+OU
+# LC_ALL=C pacman -Syu grub-theme-dark-gray
+
+=========================================================================
+ANCIEN
+======
+
