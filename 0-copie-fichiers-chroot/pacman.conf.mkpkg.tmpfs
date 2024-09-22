@@ -36,7 +36,7 @@ CheckSpace
 VerbosePkgLists
 ParallelDownloads = 2
 #DownloadUser = alpm
-#DisableSandbox
+DisableSandbox
 
 # By default, pacman accepts packages signed by keys that its local keyring
 # trusts (see pacman-key and its man page), as well as unsigned packages.
@@ -98,13 +98,17 @@ Include = /etc/pacman.d/mirrorlist
 #SigLevel = Optional TrustAll
 #Server = file:///home/custompkgs
 
+#[repolocal]
+#SigLevel = Optional TrustAll
+#Server = file:///home/jnd/00-repolocal
+
 [repolocal]
 SigLevel = Optional TrustAll
-Server = file:///home/jnd/00-repolocal
+Server = file:///00-repolocal
 
 #[xyne-x86_64]
 ## A repo for Xyne's own projects: https://xyne.dev/projects/
-## Packages for the "x86_64" architecture.
+## Packages for the x86_64 architecture.
 ## Note that this includes all packages in [xyne-any].
 #SigLevel = Required
 #Server = https://xyne.dev/repos/xyne

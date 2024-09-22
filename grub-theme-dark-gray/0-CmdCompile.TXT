@@ -5,15 +5,17 @@ cd $HOME/05-builds/grub-theme-dark-gray
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/jeannoeldot/themes-grub
-==> 20/09/2024  ==> 20240920
-==> v1.0  ==> 1.0
-==> 1.0.20240920
+==> 21/09/2024  ==> 20240921
+==> v1.1  ==> 1.1
+==> 1.1.20240921
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
 https://github.com/jeannoeldot/themes-grub.git
+
+rm -i grub-theme-dark-gray.zip
 
 wget -O grub-theme-dark-gray.zip \
 https://github.com/jeannoeldot/themes-grub/archive/refs/heads/main.zip
@@ -36,7 +38,7 @@ VOIR 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=grub-theme-dark-gray
-pkgver=1.0
+pkgver=1.1
 pkgrel=1
 
 _name_release="themes-grub-main"
@@ -111,13 +113,13 @@ rm -f *~
 namcap grub-theme-dark-gray-*-any.pkg.tar.*
 ...
 
-4-1) SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal/
 -------------------------------------------------------------------
 $ sudo rm /00-repolocal/grub-theme-dark-gray-*-any.pkg.tar.*
 
 $ sudo cp -v grub-theme-dark-gray-*-any.pkg.tar.* /00-repolocal/
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
 $ mv -v /0-DataLinux/00-repolocal/grub-theme-dark-gray-*-any.pkg.tar.* \
 /0-DataLinux/00-repolocal/pkg-OLD/

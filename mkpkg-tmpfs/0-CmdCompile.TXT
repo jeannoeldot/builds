@@ -67,13 +67,13 @@ makepkg -f
 rm -rf pkg src
 rm -f *~
 
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
 $ sudo rm /00-repolocal/mkpkg-tmpfs-*-any.pkg.tar.*
 
 $ sudo cp -v mkpkg-tmpfs-*-any.pkg.tar.* /00-repolocal/
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
 $ mv -v /0-DataLinux/00-repolocal/mkpkg-tmpfs-*-any.pkg.tar.* \
 /0-DataLinux/00-repolocal/pkg-OLD/

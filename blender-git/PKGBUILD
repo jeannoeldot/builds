@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.3.0.23.20240915
+pkgver=4.3.0.23.20240922
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -48,7 +48,7 @@ source=("$pkgname-$pkgver.tar.zst"
         "ffmpeg-7-1.patch"
         "ffmpeg-7-2.patch"
 )
-sha256sums=('c5110fa572cec2ea76c3bfffd2d4ef1623c550fcbde1577997d7c7d71044393c'
+sha256sums=('3f41fb4e70a6d5aa087f302ea772e6bd9f36aaf5cf0d9abf1dda0a7b930e076a'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
             '0d954ea85a646822d8bc0eeba688f6e10a98db0ca9d3564241dc1b595aca41c0'
             'd2a001f1538531d134eb395a6d3e30c7b8736b829b60aaeacedd6ee662864ad9'
@@ -82,9 +82,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "35bb4f4711d6"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b302f379526c"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1726354613|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1726993540|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
