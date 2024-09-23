@@ -1,16 +1,16 @@
 ====================================
-!!! VERSION = grub-theme-dark-gray.zip
+!!! VERSION = 1.2
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/grub-theme-dark-gray
 
 mkdir /tmp/srcp
 
-cp -v grub-theme-dark-gray.zip.tar.gz /tmp/srcp/
+cp -v grub-theme-dark-gray-1.2.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf grub-theme-dark-gray.zip.tar.gz
+tar -xzf grub-theme-dark-gray-1.2.tar.gz
 
 /!\ cd $HOME/05-builds/grub-theme-dark-gray
 

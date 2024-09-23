@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname="grub-theme-dark-gray"
-pkgver=1.2
+pkgver=1.1
 pkgrel=1
-_name_release="themes-grub-1.2"
+_name_release="themes-grub-main"
 pkgdesc="Grub theme Darx Gray."
 arch=(any)
 url="https://github.com/jeannoeldot/themes-grub"
@@ -13,8 +13,8 @@ depends=(
 makedepends=(
 )
 options=('!debug')
-source=("${pkgname}-${pkgver}.tar.gz")
-sha256sums=("ca13fcfbf1676b464d78ac10cc20e8e58cc407c5e9b1f961b1413a6cc445497b")
+source=("grub-theme-dark-gray.zip")
+sha256sums=("0b5e044e068ea38877b63fe57d89b2c1689c5a70001ad400c16727def77591db")
 
 package(){
   cd "${srcdir}/${_name_release}"
