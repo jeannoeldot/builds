@@ -2,12 +2,12 @@
 cd $HOME/05-builds/jndqaligne5-qt5
 
 !!!!! Vérifier VERSION : 
-https://github.com/jeannoeldot/jndqaligne5-qt5/releases
+https://github.com/jeannoeldot/jndqaligne5-qt5/tags
 ==> VERSION = 0.5.0
 
 1) ARCHIVE TAR.GZ
 =================================
-wget https://github.com/jeannoeldot/jndqaligne5-qt5/archive/v0.5.0.tar.gz
+wget https://github.com/jeannoeldot/jndqaligne5-qt5/archive/refs/tags/v0.5.0.tar.gz
 
 ls
 
@@ -33,7 +33,7 @@ depends=(... 'desktop-file-utils')
 provides=('jndqaligne5')
 conflicts=('jndqaligne5')
 
-source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+source=("https://github.com/jeannoeldot/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('... ...')
 
 
@@ -108,18 +108,18 @@ rm -f *~
 rm -rf src pkg
 
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/jndqaligne5-qt5-*-x86_64.pkg.tar.*
+$ sudo rm /00-repolocal/jndqaligne5-qt5-*-x86_64.pkg.tar.*
 
-$ cp -v jndqaligne5-qt5-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+$ sudo cp -v jndqaligne5-qt5-*-x86_64.pkg.tar.* /00-repolocal/
 
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
----------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/jndqaligne5-qt5-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /0-DataLinux/00-repolocal
+------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/jndqaligne5-qt5-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
 
-$ mv -v jndqaligne5-qt5-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v jndqaligne5-qt5-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
@@ -142,6 +142,14 @@ OU
 
 ==============================================================================
 ANCIEN
+
+https://github.com/jeannoeldot/jndqaligne5-qt5/releases
+
+wget https://github.com/jeannoeldot/jndqaligne5-qt5/archive/v0.5.0.tar.gz
+
+source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+
+
 
 $ rm -f *~
 $ $HOME/bin/mkpkg-tmpfs -m native -q qt

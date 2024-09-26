@@ -12,7 +12,7 @@ makedepends=('qt5-base' 'sdl_mixer')
 provides=('jndqaligne5')
 conflicts=('jndqaligne5')
 options=('!debug')
-source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+source=("https://github.com/jeannoeldot/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('54dcf6e39ad3db8ff3354b7e85e8e4819bdf081f3cffd0603c3836e55ad403f6')
 
 build() {

@@ -2,13 +2,13 @@
 cd $HOME/05-builds/jndqcbgrd-qt5
 
 !!!!! Vérifier VERSION : 
-https://github.com/jeannoeldot/jndqcbgrd-qt5/releases
+https://github.com/jeannoeldot/jndqcbgrd-qt5/tags
 
 ==> VERSION = 0.2.1
 
 1) ARCHIVE TAR.GZ
 =================================
-wget https://github.com/jeannoeldot/jndqcbgrd-qt5/archive/v0.2.1.tar.gz
+wget https://github.com/jeannoeldot/jndqcbgrd-qt5/archive/refs/tags/v0.2.1.tar.gz
 
 ls
 
@@ -35,7 +35,7 @@ depends=(... 'desktop-file-utils')
 provides=('jndqcbgrd')
 conflicts=('jndqcbgrd')
 
-source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+source=("https://github.com/jeannoeldot/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('... ...')
 
 
@@ -105,18 +105,18 @@ rm -f *~
 
 rm -rf src pkg
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/jndqcbgrd-qt5-*-x86_64.pkg.tar.*
+$ sudo rm /00-repolocal/jndqcbgrd-qt5-*-x86_64.pkg.tar.*
 
-$ cp -v jndqcbgrd-qt5-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+$ sudo cp -v jndqcbgrd-qt5-*-x86_64.pkg.tar.* /00-repolocal/
 
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /0-DataLinux/00-repolocal
 ---------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/jndqcbgrd-qt5-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
+$ mv -v /0-DataLinux/00-repolocal/jndqcbgrd-qt5-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
 
-$ mv -v jndqcbgrd-qt5-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v jndqcbgrd-qt5-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
@@ -140,6 +140,14 @@ OU
 
 =========================================================================================
 ANCIEN
+
+https://github.com/jeannoeldot/jndqcbgrd-qt5/releases
+
+wget https://github.com/jeannoeldot/jndqcbgrd-qt5/archive/v0.2.1.tar.gz
+
+source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+
+
 $ rm -f *~
 $ $HOME/bin/mkpkg-tmpfs -m native -q qt
 

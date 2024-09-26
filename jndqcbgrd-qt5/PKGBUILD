@@ -12,7 +12,7 @@ makedepends=('qt5-base' 'qt5-translations' 'ttf-linux-libertine')
 provides=('jndqcbgrd')
 conflicts=('jndqcbgrd')
 options=('!debug')
-source=("https://github.com/jeannoeldot/${pkgname}/archive/v${pkgver}.tar.gz")
+source=("https://github.com/jeannoeldot/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('4c656e27abb4db31499c46f00adb1fe320dc2ae1a541860e8def2fb29447d40a')
 
 build() {
