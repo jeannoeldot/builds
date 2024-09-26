@@ -41,6 +41,7 @@ voir : 03-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=40     # rebuild protobuf 28.2-1
 pkgrel=39     # rebuild protobuf 28.1-1
 pkgrel=38     # rebuild protobuf 28.0-2
 pkgrel=37     # rebuild boost boost-libs 1.86.0-1 + patch
@@ -162,18 +163,18 @@ pokerth W: Dependency included, but may not be needed ('libxkbcommon-x11')
 pokerth W: Dependency included, but may not be needed ('libircclient')
 
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/pokerth-*-x86_64.pkg.tar.*
+$ sudo rm /00-repolocal/pokerth-*-x86_64.pkg.tar.*
 
-$ cp -v pokerth-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+$ sudo cp -v pokerth-*-x86_64.pkg.tar.* /00-repolocal/
 
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
------------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/pokerth-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /0-DataLinux/00-repolocal/pkg-OLD
+---------------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/pokerth-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
 
-$ mv -v pokerth-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v pokerth-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE

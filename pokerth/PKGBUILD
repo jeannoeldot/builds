@@ -3,13 +3,15 @@
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
-pkgrel=39
+pkgrel=40
 pkgdesc="Open source Texas Hold'em Poker simulator"
 arch=('i686' 'x86_64')
 url="http://www.pokerth.net/"
 license=('GPL-2.0-only' 'LicenseRef-custom')
 depends=('curl' 'boost-libs' 'gsasl' 'gnutls' 'protobuf' 'libxkbcommon-x11'
-         'qt5-base' 'sdl_mixer' 'libircclient' 'tinyxml')
+         'qt5-base' 'sdl_mixer' 'libircclient' 'tinyxml'
+         'hicolor-icon-theme'
+)
 makedepends=('boost')
 options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
