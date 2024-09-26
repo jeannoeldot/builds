@@ -1,50 +1,81 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.3.0.23.20240922
+!!! VERSION = 4.3.0.26.20240926
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.3.0.23.20240922.tar.zst /tmp/srcp/
+cp -v blender-git-4.3.0.26.20240926.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.3.0.23.20240922.tar.zst
+tar -x --zstd -f blender-git-4.3.0.26.20240926.tar.zst
 
-1-1) MODIFIER blender/scripts/startup/bl_ui/node_add_menu_shader.py
+1-1) MODIFIER blender/CMakeLists.txt
 ===================================================================
 /!\ /!\ /!\ cd /tmp/srcp
 
 cp -R blender blender.new
 
-cd blender.new/scripts/startup/bl_ui
-kwrite node_add_menu_shader.py
+cd blender.new
+kwrite CMakeLists.txt
 
-MODIFIER LIGNES 39 ET 40 :
-    return context.engine == 'BLENDER_EEVEE' or
-    context.engine == 'BLENDER_EEVEE_NEXT'
+SUPPRIMER LIGNES 1231 À 1236 :
+if(NOT WITH_PYTHON_MODULE)
+  if(WITH_DRACO AND NOT WITH_PYTHON_INSTALL)
+    message(STATUS "WITH_DRACO requires WITH_PYTHON_INSTALL to be ON, disabling WITH_DRACO for now")
+    set(WITH_DRACO OFF)
+  endif()
+endif()
 
-DEVIENNENT
-    return (context.engine == 'BLENDER_EEVEE' or
-            context.engine == 'BLENDER_EEVEE_NEXT')
 
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+rm -f CMakeLists.txt~
 
-ENREGISTRER et Quitter Kwrite & EFFACER node_add_menu_shader.py~
-rm -f node_add_menu_shader.py~
-
-cd ../../../..
+cd ..
 
 diff -aur blender blender.new
-diff -aur blender blender.new > Fix-SyntaxError-invalid-syntax.patch
+diff -aur blender blender.new > force-draco1.patch
 
 rm -rf blender.new
 
 cd $HOME/05-builds/blender-git
 
-mv -vf /tmp/srcp/Fix-SyntaxError-invalid-syntax.patch .
+mv -vf /tmp/srcp/force-draco1.patch .
+
+1-2) MODIFIER blender/io_scene_gltf2/io/com/draco.py
+=============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/scripts/addons_core/io_scene_gltf2/io/com/
+kwrite draco.py
+
+MODIFIER LIGNE 21 :
+    path = os.environ.get('BLENDER_EXTERN_DRACO_LIBRARY_PATH')
+
+DEVIENT
+    path = f"{site.getsitepackages()[0]}/libextern_draco.so"
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER draco.py~
+rm -f draco.py~
+
+cd ../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > force-draco2.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/force-draco2.patch .
+
 
 
 99) QUAND PATCHES FINIS
@@ -59,11 +90,11 @@ ANCIENS
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.3.0.23.20240922.tar.gz /tmp/srcp/
+cp -v blender-git-4.3.0.26.20240926.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.3.0.23.20240922.tar.gz
+tar -xzf blender-git-4.3.0.26.20240926.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

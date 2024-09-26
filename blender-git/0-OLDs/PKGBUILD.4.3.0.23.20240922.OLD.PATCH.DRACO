@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.3.0.26.20240926
+pkgver=4.3.0.23.20240922
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -12,6 +12,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'python'
           'ffmpeg' 'fftw'
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse'
+          'sdl2'
           'libglvnd' 'glfw' 'libxi'
           'boost-libs' 'onetbb' 'draco'
           'jemalloc'
@@ -47,10 +48,10 @@ source=("$pkgname-$pkgver.tar.zst"
         "ffmpeg-7-1.patch"
         "ffmpeg-7-2.patch"
 )
-sha256sums=('c064064a0a22c6612a3b74de7428097f99ae9613c419dc64ead96407b9466d6d'
+sha256sums=('3f41fb4e70a6d5aa087f302ea772e6bd9f36aaf5cf0d9abf1dda0a7b930e076a'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
-            '9bfc7c9f520ecf391cc8f76f489c90c39e092d0bec74e9f182e52d85de965589'
-            '8d085d73aea76676123539e9194a8b1ea8207945347ab1ebe29aabcc9ee31a5c'
+            '0d954ea85a646822d8bc0eeba688f6e10a98db0ca9d3564241dc1b595aca41c0'
+            'd2a001f1538531d134eb395a6d3e30c7b8736b829b60aaeacedd6ee662864ad9'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
             '17d5fb1c4ddb9e95da590d2e43ae3f7ce2b02c3ec698b16ed2752e3b3e7840c0'
             '499a9ec9a1aa7c5ef26ce5bb26f48576cccf1fc5906e966f92e25506405e9ad0'
@@ -62,8 +63,8 @@ prepare() {
   cd "${_gitname}"
 
   # fix draco
-  patch -p1 -i "$srcdir"/force-draco1.patch
-  patch -p1 -i "$srcdir"/force-draco2.patch
+  #patch -p1 -i "$srcdir"/force-draco1.patch
+  patch -p1 -d scripts/addons_core -i "$srcdir"/force-draco2.patch
 
   # fix fluid sim domain with python 3.12
   # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18
@@ -81,9 +82,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "c0a864aaa32d"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "b302f379526c"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1727354649|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1726993540|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
