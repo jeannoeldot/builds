@@ -97,18 +97,19 @@ rm -rf pkg src
 # Verifications...
 namcap virtualbox-extension-*-any.pkg.tar.*
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
--------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/virtualbox-extension-*-any.pkg.tar.*
 
-$ cp -v virtualbox-extension-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/virtualbox-extension-*-any.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
+$ sudo rm /00-repolocal/virtualbox-extension-*-any.pkg.tar.*
 
-$ mv -v virtualbox-extension-*-any.pkg.tar.* $HOME/00-repolocal/
+$ sudo cp -v virtualbox-extension-*-any.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/virtualbox-extension-*-any.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v virtualbox-extension-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE

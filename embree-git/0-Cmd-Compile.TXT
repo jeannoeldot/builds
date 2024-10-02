@@ -233,18 +233,19 @@ rm -f *~
 
 namcap embree-git-*-x86_64.pkg.tar.*
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/embree-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v embree-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/embree-git-*-x86_64.pkg.tar.*
+$ mv -v /0-DataLinux/00-repolocal/embree-git-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
 
-$ cp -v embree-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
-----------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/embree-git-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
-
-$ mv -v embree-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v embree-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE

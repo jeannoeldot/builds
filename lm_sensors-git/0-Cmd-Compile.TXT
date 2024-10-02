@@ -214,18 +214,19 @@ lm_sensors-git W: Directory (etc/sensors.d) is empty
 lm_sensors-git E: Dependency lm_sensors detected and not included (libraries ['usr/lib/libsensors.so.5'] needed in files ['usr/bin/sensors'])
 lm_sensors-git W: Dependency rrdtool detected but optional (libraries ['usr/lib/librrd.so.8'] needed in files ['usr/bin/sensord'])
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/lm_sensors-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v lm_sensors-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/lm_sensors-git-*-x86_64.pkg.tar.*
+$ mv -v /0-DataLinux/00-repolocal/lm_sensors-git-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
 
-$ cp -v lm_sensors-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
-----------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/lm_sensors-git-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
-
-$ mv -v lm_sensors-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v lm_sensors-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE

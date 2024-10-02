@@ -877,6 +877,7 @@ $ mv -v /0-DataLinux/00-repolocal/blender-git-*-x86_64.pkg.tar.* /0-DataLinux/00
 
 $ mv -v blender-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
+
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~

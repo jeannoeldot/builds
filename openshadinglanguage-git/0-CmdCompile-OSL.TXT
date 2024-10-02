@@ -401,18 +401,18 @@ openshadinglanguage-git W: Dependency pugixml included but already satisfied
 openshadinglanguage-git W: Dependency included and not needed ('pybind11')
 
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v openshadinglanguage-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.*
+$ mv -v /0-DataLinux/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
 
-$ cp -v openshadinglanguage-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  $HOME/00-repolocal/pkg-OLD
------------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/openshadinglanguage-git-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
-
-$ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v openshadinglanguage-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE

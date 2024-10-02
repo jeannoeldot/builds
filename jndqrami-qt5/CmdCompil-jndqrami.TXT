@@ -107,6 +107,7 @@ rm -f *~
 
 rm -rf src pkg
 
+
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal/
 -------------------------------------------------------------------
 $ sudo rm /00-repolocal/jndqrami-qt5-*-x86_64.pkg.tar.*

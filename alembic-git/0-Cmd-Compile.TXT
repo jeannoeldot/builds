@@ -197,18 +197,19 @@ Checking alembic-git-1.8.6.20230926-1-x86_64.pkg.tar.xz
 namcap alembic-git-*-x86_64.pkg.tar.*
 alembic-git W: Dependency included, but may not be needed ('imath')
 
-# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/alembic-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v alembic-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ rm /0-DataLinux/00-repolocal/alembic-git-*-x86_64.pkg.tar.*
+$ mv -v /0-DataLinux/00-repolocal/alembic-git-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
 
-$ cp -v alembic-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
-
-# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
-----------------------------------------------------------------------
-$ mv -v $HOME/00-repolocal/alembic-git-*-x86_64.pkg.tar.* \
-$HOME/00-repolocal/pkg-OLD/
-
-$ mv -v alembic-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+$ mv -v alembic-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
