@@ -1,19 +1,21 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.3.0.26.20240926
+!!! VERSION = 4.4.0.0.20241003
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.3.0.26.20240926.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.0.20241003.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.3.0.26.20240926.tar.zst
+tar -x --zstd -f blender-git-4.4.0.0.20241003.tar.zst
 
+1) DRACO
+=========
 1-1) MODIFIER blender/CMakeLists.txt
 ===================================================================
 /!\ /!\ /!\ cd /tmp/srcp
@@ -77,6 +79,70 @@ cd $HOME/05-builds/blender-git
 mv -vf /tmp/srcp/force-draco2.patch .
 
 
+2) FFMPEG
+==========
+2-1) MODIFIER blender/intern/ffmpeg/ffmpeg_compat.h
+===================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/intern/ffmpeg
+kwrite ffmpeg_compat.h
+
+AJOUTER LIGNES 164 À 172 :
+FFMPEG_INLINE
+bool av_get_cur_key_frame_pts(const AVFrame *picture) {
+#if LIBAVUTIL_VERSION_INT >= AV_VERSION_INT(58, 29, 100)
+  return (picture->flags & AV_FRAME_FLAG_KEY);
+#else
+  return (picture->key_frame);
+#endif
+}
+
+ENREGISTRER et Quitter Kwrite & EFFACER ffmpeg_compat.h~
+rm -f ffmpeg_compat.h~
+
+cd ../../..
+
+2-2) MODIFIER blender/source/blender/imbuf/intern/anim_movie.cc
+===================================================================
+cd blender.new/source/blender/imbuf/intern
+kwrite anim_movie.cc
+
+MODIFIER LIGNE 659 :
+  if (anim->pFrame->key_frame) {
+DEVIENT
+  if (av_get_cur_key_frame_pts(anim->pFrame)) {
+
+MODIFIER LIGNES 1038 À 1042 :
+    if (format_ctx->iformat->read_seek2 || format_ctx->iformat->read_seek) {
+      ret = av_seek_frame(anim->pFormatCtx, anim->videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
+    }
+    else {
+      ret = ffmpeg_generic_seek_workaround(anim, &seek_pos, pts_to_search);
+DEVIENNENT
+    int ret = av_seek_frame(anim->pFormatCtx, anim->videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
+
+    if (ret < 0) {
+      ret = ffmpeg_generic_seek_workaround(anim, &seek_pos, pts_to_search);\
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER anim_movie.cc~
+rm -f anim_movie.cc~
+
+cd ../../../../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > ffmpeg-7-1.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/ffmpeg-7-1.patch .
+
 
 99) QUAND PATCHES FINIS
 =======================
@@ -90,11 +156,11 @@ ANCIENS
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.3.0.26.20240926.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.0.20241003.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.3.0.26.20240926.tar.gz
+tar -xzf blender-git-4.4.0.0.20241003.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

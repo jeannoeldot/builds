@@ -1,15 +1,15 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = OpenImageIO-v2.5.15.0.tar.gz
+!!! VERSION = OpenImageIO-v2.5.16.0.tar.gz
 
 mkdir /tmp/srcp
 
-cp -v OpenImageIO-v2.5.15.0.tar.gz.tar.gz /tmp/srcp/
+cp -v OpenImageIO-v2.5.16.0.tar.gz.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenImageIO-v2.5.15.0.tar.gz.tar.gz
+tar -xzf OpenImageIO-v2.5.16.0.tar.gz.tar.gz
 
 
 
