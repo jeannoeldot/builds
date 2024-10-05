@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=virtualbox-extension
-pkgver=7.1.0
-_build=164728
+pkgver=7.1.2
+_build=164945
 pkgrel=1
-pkgdesc="Oracle VirtualBox Extension Pack"
+pkgdesc="Oracle VM VirtualBox Extension Pack"
 arch=('any')
 url="http://www.virtualbox.org/"
 license=('LicenseRef-custom:PUEL')
@@ -16,7 +16,7 @@ options=('!strip' '!debug')
 source=("https://download.virtualbox.org/virtualbox/$pkgver/Oracle_VirtualBox_Extension_Pack-$pkgver.vbox-extpack"
 )
 
-sha256sums=('14f384053368ce5e806a808a07e66a38c6cbb141033e21de4768e670ff0df3ce'
+sha256sums=('afd7a79ce2bd0142a890ac01f580534f1a96f1ffbaa1ad17d7512751cde19f08'
 )
 
 install="virtualbox-extension.install"
