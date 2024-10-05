@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openpgl-git
-pkgver=0.7.0.20240927
+pkgver=0.6.0.20240209
 pkgrel=1
-_ver_release="0.7.0"
+_ver_release="0.6.0"
 _name_release="openpgl-${_ver_release}"
 pkgdesc="Intel(R) Open Path Guiding Library"
 url="http://www.openpgl.org/"
@@ -18,7 +18,7 @@ provides=('openpgl')
 options=('!debug')
 source=("openpgl-${_ver_release}.tar.gz"
 )
-sha256sums=('58be6ac86e3bcf8a787e9c1332d1527e6d18f4b1403b96bb02c909e20af2ca94'
+sha256sums=('4192a4096ee3e3d31878cd013f8de23418c8037c576537551f946c4811931c5e'
 )
 
 build() {

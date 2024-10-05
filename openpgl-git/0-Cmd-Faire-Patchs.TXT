@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 0.6.0
+!!! VERSION = 0.7.0
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openpgl-git
 
 mkdir /tmp/srcp
 
-cp -v openpgl-0.6.0.tar.gz /tmp/srcp/
+cp -v openpgl-0.7.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf openpgl-0.6.0.tar.gz
+tar -xzf openpgl-0.7.0.tar.gz
 
 
 
@@ -24,6 +24,8 @@ rm -rf /tmp/srcp
 sync
 
 ==========================================================
+ANCIEN
+======
 
 1) MODIFIER openpgl-0.6.0/common/cmake/gnu.cmake
 ===============================================
