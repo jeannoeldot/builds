@@ -3,9 +3,9 @@ cd $HOME/05-builds/pkgbrowser
 
 0) SAUVEGARDER PKGBUILD PRÉCÉDENT
 =================================
-cp -v PKGBUILD PKGBUILD.0.28-3
+cp -v PKGBUILD PKGBUILD.0.28.1-3
 
-mv -vf PKGBUILD.0.28-3 0-Olds/
+mv -vf PKGBUILD.0.28.1-3 0-Olds/
 
 
 NOUVELLE VERSION = 0.28.1
@@ -41,6 +41,8 @@ md5sum pkgbrowser-0.28.1.tar.gz
 # Maintainer: Name <name@fai.com>
 
 pkgver=0.28.1
+pkgrel=3    # MAJ pacman 7.0
+
 pkgrel=1
 
 pkgrel=3    # MAJ pacman 6.1
@@ -56,7 +58,7 @@ pkgrel=2    # MAJ pacman 5.1
 /!\/!\/!\ python 3.12
 !!! À MODIFIER
 !!! AJOUTER 'hicolor-icon-theme'
-depends=('pacman>=4.1' 'pacman<6.2' 'python>=3.2' 'python<3.13' 'python-pyqt5'
+depends=('pacman>=4.1' 'pacman<7.1' 'python>=3.2' 'python<3.13' 'python-pyqt5'
          'hicolor-icon-theme'
 )
 makedepends=('python-setuptools')
