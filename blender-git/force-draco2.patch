@@ -1,7 +1,15 @@
 diff -aur blender/scripts/addons_core/io_scene_gltf2/io/com/draco.py blender.new/scripts/addons_core/io_scene_gltf2/io/com/draco.py
 --- blender/scripts/addons_core/io_scene_gltf2/io/com/draco.py	2024-09-01 10:48:53.000000000 +0200
-+++ blender.new/scripts/addons_core/io_scene_gltf2/io/com/draco.py	2024-09-26 15:10:53.300219286 +0200
-@@ -18,7 +18,7 @@
++++ blender.new/scripts/addons_core/io_scene_gltf2/io/com/draco.py	2024-10-06 11:07:31.471961128 +0200
+@@ -3,6 +3,7 @@
+ # SPDX-License-Identifier: Apache-2.0
+ 
+ import os
++import site
+ import sys
+ from pathlib import Path
+ import bpy
+@@ -18,7 +19,7 @@
      python_lib = Path('{v[0]}.{v[1]}/python/lib'.format(v=bpy.app.version))
      python_version = 'python{v[0]}.{v[1]}'.format(v=sys.version_info)
  
