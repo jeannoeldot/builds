@@ -2,7 +2,7 @@
 
 pkgname=openusd-git
 pkgver=24.05.20240419
-pkgrel=2
+pkgrel=3
 _ver_release="24.05"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
@@ -13,6 +13,7 @@ depends=('boost-libs' 'glfw'
          'onetbb'
          'materialx'
          'openexr'
+         'opencolorio'
          'opensubdiv-git'
          'openimageio-git'
          'openvdb-git'

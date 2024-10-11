@@ -48,7 +48,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-git
 pkgver=24.05.20240419
-pkgrel=2    # rebuild MAJ OIIO 2.5.15.0 + boost boost-libs 1.86.0
+pkgrel=3      # Rebuild maj opencolorio 2.4.0 + dep opencolorio
+pkgrel=2      # rebuild MAJ OIIO 2.5.15.0 + boost boost-libs 1.86.0
 pkgrel=1
 
 pkgrel=4      # rebuild MAJ python 3.12
@@ -82,10 +83,12 @@ depends=('boost-libs' 'glfw'
          'onetbb'
          'materialx'
          'openexr'
+         'opencolorio'
          'opensubdiv-git'
          'openimageio-git'
          'openvdb-git'
          'python'
+         'python-jinja'
 )
 makedepends=('boost' 'cmake'
 )
@@ -263,7 +266,7 @@ SI depends= 'opensubdiv-git'
 
 SI makedepends=
 ================================================================================
-$ cp -v $HOME/00-repolocal/\
+$ cp -v /00-repolocal/\
 {\
 opensubdiv-git-*-x86_64.pkg.tar.*,\
 openimageio-git-*-x86_64.pkg.tar.*,\
@@ -303,12 +306,9 @@ usr/lib/python3.12/site-packages/pxr/...
 ...
 
 namcap openusd-git-*-x86_64.pkg.tar.*
-openusd-git E: ELF file ('usr/share/usd/examples/plugin/hdTiny.so') outside of a valid path.
-
-openusd-git W: Dependency included, but may not be needed ('glfw-x11')
-openusd-git W: Dependency included, but may not be needed ('onetbb')
-openusd-git W: Dependency included, but may not be needed ('materialx')
+openusd-git W: Dependency included, but may not be needed ('glfw')
 openusd-git W: Dependency included, but may not be needed ('openexr')
+openusd-git W: Dependency included, but may not be needed ('opencolorio')
 openusd-git W: Dependency included, but may not be needed ('python-jinja')
 
 
@@ -355,6 +355,15 @@ SI PROBLEME
 ========================================================================
 ANCIEN
 ======
+
+namcap openusd-git-*-x86_64.pkg.tar.*
+openusd-git E: ELF file ('usr/share/usd/examples/plugin/hdTiny.so') outside of a valid path.
+
+openusd-git W: Dependency included, but may not be needed ('glfw-x11')
+openusd-git W: Dependency included, but may not be needed ('onetbb')
+openusd-git W: Dependency included, but may not be needed ('materialx')
+openusd-git W: Dependency included, but may not be needed ('openexr')
+openusd-git W: Dependency included, but may not be needed ('python-jinja')
 
 AVEC PATCH
 ----------
