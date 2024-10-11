@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.5.16.0.20241002
+pkgrel=2    # Rebuild maj opencolorio 2.4.0
+
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ fmt 11.0.2
