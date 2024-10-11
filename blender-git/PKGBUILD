@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.1.20241005
+pkgver=4.4.0.1.20241011
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -47,7 +47,7 @@ source=("$pkgname-$pkgver.tar.zst"
         "ffmpeg-7-1.patch"
         "ffmpeg-7-2.patch"
 )
-sha256sums=('0bed099a40023a4b4df5ea4fec0ca9ea2c15b8d98d257de7a0d7489f92d1a4ec'
+sha256sums=('c30276455493aee1aa64c2fb6f0cd406db2a1ad45d7b3f556e6818ab477a9bd2'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
             '9bfc7c9f520ecf391cc8f76f489c90c39e092d0bec74e9f182e52d85de965589'
             '505a6be3b417d9a380673898e03dd84d8ed1ab2ddf8bf8be1dc553b0c452522c'
