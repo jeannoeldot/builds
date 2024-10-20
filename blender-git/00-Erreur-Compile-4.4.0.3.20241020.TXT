@@ -1,0 +1,40 @@
+
+PyAPI: support Python 3.13
+https://projects.blender.org/blender/blender/commit/d9f38fca5ffe29136cd6f390e318ad8455864582
+Campbell Barton
+18/10/2024 08:22
+d9f38fca5ffe29136cd6f390e318ad8455864582
+
+- `_PySet_NextEntry` has been removed, use generic iterator access
+  which will has some additional overhead as it needs to create
+  an iterator to access the values.
+
+- Add v3.13 compatibility defines to account for renaming:
+  _PyObject_LookupAttr -> PyObject_GetOptionalAttr
+  _PyLong_AsInt -> PyLong_AsInt
+
+- Unfortunately use of Python's internal API needs to be used to
+  inspect op-codes in `bpy_driver.cc`.
+
+
+
+[ 61%] Building CXX object source/blender/functions/CMakeFiles/bf_functions.dir/intern/multi_function.cc.o
+In file included from /build/blender-git/src/blender/source/blender/python/generic/bgl.cc:25:
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.hh: In function ‘int32_t PyC_Long_AsI32(PyObject*)’:
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.hh:345:19: error: ‘PyLong_AsInt’ was not declared in this scope; did you mean ‘PyLong_AsLong’?
+  345 |   return (int32_t)PyLong_AsInt(value);
+      |                   ^~~~~~~~~~~~
+      |                   PyLong_AsLong
+make[2]: *** [source/blender/python/generic/CMakeFiles/bf_python_ext.dir/build.make:76: source/blender/python/generic/CMakeFiles/bf_python_ext.dir/bgl.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:8371: source/blender/python/generic/CMakeFiles/bf_python_ext.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+[ 62%] Linking CXX static library ../../lib/libextern_ceres.a
+[ 62%] Built target extern_ceres
+[ 62%] Generating kernel_sm_86.cubin.zst
+[ 62%] Built target cycles_kernel_cuda
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/blender-git/src/blender/build'
+==> ERROR: A failure occurred in build().
+    Aborting...
