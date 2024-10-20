@@ -147,6 +147,39 @@ cd $HOME/05-builds/blender-git
 mv -vf /tmp/srcp/ffmpeg-7-1.patch .
 
 
+2) PYTON 3.12 <-> 3.13
+=======================
+2-1) MODIFIER blender/source/blender/python/generic/py_capi_utils.hh
+=====================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/python/generic
+kwrite py_capi_utils.hh
+
+MODIFIER LIGNE 345 :
+  return (int32_t)PyLong_AsInt(value);
+DEVIENT
+  return (int32_t)_PyLong_AsInt(value);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER py_capi_utils.hh~
+rm -f py_capi_utils.hh~
+
+cd ../../../../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > python312-313.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/python312-313.patch .
+
+
 99) QUAND PATCHES FINIS
 =======================
 rm -rf /tmp/srcp

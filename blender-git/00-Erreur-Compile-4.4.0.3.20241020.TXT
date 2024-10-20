@@ -30,6 +30,34 @@ make[1]: *** [CMakeFiles/Makefile2:8371: source/blender/python/generic/CMakeFile
 make[1]: *** Waiting for unfinished jobs....
 
 
+
+[ 62%] Building CXX object source/blender/python/gpu/CMakeFiles/bf_python_gpu.dir/gpu_py_batch.cc.o
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.cc: In function ‘int PyC_Long_AsBool(PyObject*)’:
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.cc:1739:20: error: ‘PyLong_AsInt’ was not declared in this scope; did you mean ‘PyLong_AsLong’?
+ 1739 |   const int test = PyLong_AsInt(value);
+      |                    ^~~~~~~~~~~~
+      |                    PyLong_AsLong
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.cc: In function ‘int8_t PyC_Long_AsI8(PyObject*)’:
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.cc:1752:20: error: ‘PyLong_AsInt’ was not declared in this scope; did you mean ‘PyLong_AsLong’?
+ 1752 |   const int test = PyLong_AsInt(value);
+      |                    ^~~~~~~~~~~~
+      |                    PyLong_AsLong
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.cc: In function ‘int16_t PyC_Long_AsI16(PyObject*)’:
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.cc:1765:20: error: ‘PyLong_AsInt’ was not declared in this scope; did you mean ‘PyLong_AsLong’?
+ 1765 |   const int test = PyLong_AsInt(value);
+      |                    ^~~~~~~~~~~~
+      |                    PyLong_AsLong
+[ 62%] Building CXX object source/blender/gpu/CMakeFiles/bf_gpu.dir/vulkan/vk_vertex_buffer.cc.o
+make[2]: *** [source/blender/python/generic/CMakeFiles/bf_python_ext.dir/build.make:188: source/blender/python/generic/CMakeFiles/bf_python_ext.dir/py_capi_utils.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:8371: source/blender/python/generic/CMakeFiles/bf_python_ext.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+
+
+
+
+
 [ 62%] Linking CXX static library ../../lib/libextern_ceres.a
 [ 62%] Built target extern_ceres
 [ 62%] Generating kernel_sm_86.cubin.zst

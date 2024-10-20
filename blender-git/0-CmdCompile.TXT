@@ -333,7 +333,7 @@ source=("$pkgname-$pkgver.tar.zst"
         "blender-4.3-mantaflow-python-3.12.patch"
         "ffmpeg-7-1.patch"
         "ffmpeg-7-2.patch"
-
+        "python312-313.patch"
         "..."
 )
 
@@ -350,6 +350,8 @@ sha256sum blender-4.3-mantaflow-python-3.12.patch
 sha256sum ffmpeg-7-1.patch
 
 sha256sum ffmpeg-7-2.patch
+
+sha256sum python312-313.patch
 
 sha256sums=('123...'
             '456...'
