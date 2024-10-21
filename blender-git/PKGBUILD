@@ -55,7 +55,7 @@ sha256sums=('ea6b9c170aa67f8675b3fa23b019ef94d49840992a37a7d92bb40594da0356ed'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
             '3087b454d574e748363ba5b22a7fb94e5025b263cf311cac009be99402cd9974'
             '499a9ec9a1aa7c5ef26ce5bb26f48576cccf1fc5906e966f92e25506405e9ad0'
-            'eee6509b3db6db412c147fc6707cdcbbb15cd0be2c86b66352e41e0b9770dc5c'
+            'ad8bb233f0ddb22f1503028ca996b0f62401499062643f5afacffcfdb8c0f4a4'
 )
 
 _gitname="blender"
@@ -75,7 +75,10 @@ prepare() {
   patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
   patch -p1 -i "$srcdir"/ffmpeg-7-2.patch
 
-  # fix error: ‘PyLong_AsInt’ was not declared in this scope : PyAPI: support Python 3.13
+  # fix error: ‘PyLong_AsInt’ was not declared in this scope
+  # PyAPI: support Python 3.13
+  # https://projects.blender.org/blender/blender/commit/d9f38fca5ffe29136cd6f390e318ad8455864582#diff-571faefbca137d4101deb46ccdf9ad651aab10fd
+  # Campbell Barton 18/10/2024 08:22
   patch -p1 -i "$srcdir"/python312-313.patch
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.

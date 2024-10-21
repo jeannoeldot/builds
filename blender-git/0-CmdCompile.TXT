@@ -402,12 +402,12 @@ LIGNE 2435 : find_python_package(numpy "core/include")
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
 ==> core/python 3.12.7-1 [installé]
-  local PYTHON_VER=3.12
+  local _python_ver=3.12
 
-    -DPYTHON_VERSION=${PYTHON_VER} \
-    -DPYTHON_LIBPATH=/usr/lib \
-    -DPYTHON_LIBRARY=python${PYTHON_VER} \
-    -DPYTHON_INCLUDE_DIRS=/usr/include/python${PYTHON_VER} \
+        -DPYTHON_VERSION=${_python_ver} \
+        -DPYTHON_LIBPATH=/usr/lib \
+        -DPYTHON_LIBRARY=python${_python_ver} \
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python${_python_ver}
 
 !!! VÉRIFIER VERSION LLVM INSTALLÉE
 $ pacman -Ss llvm | grep install

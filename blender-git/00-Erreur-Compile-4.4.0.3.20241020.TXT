@@ -53,11 +53,6 @@ make[1]: *** [CMakeFiles/Makefile2:8371: source/blender/python/generic/CMakeFile
 make[1]: *** Waiting for unfinished jobs....
 
 
-
-
-
-
-
 [ 62%] Linking CXX static library ../../lib/libextern_ceres.a
 [ 62%] Built target extern_ceres
 [ 62%] Generating kernel_sm_86.cubin.zst
@@ -66,3 +61,30 @@ make: *** [Makefile:166: all] Error 2
 make: Leaving directory '/build/blender-git/src/blender/build'
 ==> ERROR: A failure occurred in build().
     Aborting...
+======================================================================================================
+APRÈS PATCH python312-313.patch
+
+In file included from /build/blender-git/src/blender/source/blender/python/generic/bgl.cc:25:
+/build/blender-git/src/blender/source/blender/python/generic/py_capi_utils.hh:18:11: warning: "PY_VERSION_HEX" redefined
+   18 | #  define PY_VERSION_HEX 0x030c0000
+      |           ^~~~~~~~~~~~~~
+In file included from /usr/include/python3.12/Python.h:11,
+                 from /build/blender-git/src/blender/source/blender/python/generic/bgl.cc:15:
+/usr/include/python3.12/patchlevel.h:31:9: note: this is the location of the previous definition
+   31 | #define PY_VERSION_HEX ((PY_MAJOR_VERSION << 24) | \
+      |         ^~~~~~~~~~~~~~
+
+...
+
+======================================================================================================
+┌jnd ( ~ )
+└─> $ grep -lR "PY_VERSION_HEX" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/extern/mantaflow/helper/pwrapper/numpyWrap.cpp
+/0-DataLinux/05-builds-dir-git/blender/source/blender/python/intern/bpy_capi_utils.hh
+/0-DataLinux/05-builds-dir-git/blender/source/blender/python/intern/bpy_driver.cc
+/0-DataLinux/05-builds-dir-git/blender/source/blender/python/intern/bpy_interface.cc
+/0-DataLinux/05-builds-dir-git/blender/source/blender/python/generic/py_capi_utils.cc
+/0-DataLinux/05-builds-dir-git/blender/source/blender/python/generic/python_compat.hh
+/0-DataLinux/05-builds-dir-git/blender/source/blender/python/generic/py_capi_utils.hh
+/0-DataLinux/05-builds-dir-git/blender/source/blender/freestyle/intern/python/BPy_Convert.cpp
+

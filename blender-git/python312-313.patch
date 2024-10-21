@@ -1,12 +1,24 @@
+diff -aur blender/source/blender/python/generic/py_capi_utils.cc blender.new/source/blender/python/generic/py_capi_utils.cc
+--- blender/source/blender/python/generic/py_capi_utils.cc	2024-10-20 11:16:28.000000000 +0200
++++ blender.new/source/blender/python/generic/py_capi_utils.cc	2024-10-21 10:51:11.982447583 +0200
+@@ -39,6 +39,8 @@
+ #  include "BLI_math_base.h" /* isfinite() */
+ #endif
+ 
++#  define PY_VERSION_HEX 0x030c0000
++
+ #if PY_VERSION_HEX <= 0x030c0000 /* <=3.12 */
+ #  define PyLong_AsInt _PyLong_AsInt
+ #  define PyUnicode_CompareWithASCIIString _PyUnicode_EqualToASCIIString
 diff -aur blender/source/blender/python/generic/py_capi_utils.hh blender.new/source/blender/python/generic/py_capi_utils.hh
 --- blender/source/blender/python/generic/py_capi_utils.hh	2024-10-20 11:16:28.000000000 +0200
-+++ blender.new/source/blender/python/generic/py_capi_utils.hh	2024-10-20 14:51:48.791295817 +0200
-@@ -342,7 +342,7 @@
- #if PY_VERSION_HEX <= 0x030c0000 /* <=3.12 */
-   return (int32_t)_PyLong_AsInt(value);
- #else
--  return (int32_t)PyLong_AsInt(value);
-+  return (int32_t)_PyLong_AsInt(value);
- #endif
- }
- Py_LOCAL_INLINE(int64_t) PyC_Long_AsI64(PyObject *value)
++++ blender.new/source/blender/python/generic/py_capi_utils.hh	2024-10-21 10:48:15.583363225 +0200
+@@ -15,6 +15,8 @@
+ #include "BLI_sys_types.h"
+ #include "BLI_utildefines_variadic.h"
+ 
++#  define PY_VERSION_HEX 0x030c0000
++
+ /** Useful to print Python objects while debugging. */
+ void PyC_ObSpit(const char *name, PyObject *var);
+ /**
