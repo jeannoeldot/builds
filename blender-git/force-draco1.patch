@@ -1,7 +1,7 @@
 diff -aur blender/CMakeLists.txt blender.new/CMakeLists.txt
---- blender/CMakeLists.txt	2024-09-26 14:51:31.000000000 +0200
-+++ blender.new/CMakeLists.txt	2024-09-26 14:59:26.876803310 +0200
-@@ -1228,13 +1228,6 @@
+--- blender/CMakeLists.txt	2024-10-22 11:16:58.000000000 +0200
++++ blender.new/CMakeLists.txt	2024-10-22 11:24:29.917808217 +0200
+@@ -1214,13 +1214,6 @@
  set_and_warn_dependency(WITH_PYTHON WITH_DRACO         OFF)
  set_and_warn_dependency(WITH_PYTHON WITH_MOD_FLUID     OFF)
  

@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.3.20241022
+pkgver=4.4.0.3.20241020
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -46,14 +46,16 @@ source=("$pkgname-$pkgver.tar.zst"
         "blender-4.3-mantaflow-python-3.12.patch"
         "ffmpeg-7-1.patch"
         "ffmpeg-7-2.patch"
+        "python312-313.patch"
 )
-sha256sums=('2b83fd81781be50453a62e030adcb65a0d667707c6dcd5f8b2507f67de2e26db'
+sha256sums=('ea6b9c170aa67f8675b3fa23b019ef94d49840992a37a7d92bb40594da0356ed'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
-            'c9dc4a964f6e871176ce1ae9f9a0db8d84d83bcd6e01a877526893d5f8183ceb'
+            '9bfc7c9f520ecf391cc8f76f489c90c39e092d0bec74e9f182e52d85de965589'
             '505a6be3b417d9a380673898e03dd84d8ed1ab2ddf8bf8be1dc553b0c452522c'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
             '3087b454d574e748363ba5b22a7fb94e5025b263cf311cac009be99402cd9974'
             '499a9ec9a1aa7c5ef26ce5bb26f48576cccf1fc5906e966f92e25506405e9ad0'
+            'ad8bb233f0ddb22f1503028ca996b0f62401499062643f5afacffcfdb8c0f4a4'
 )
 
 _gitname="blender"
@@ -72,6 +74,12 @@ prepare() {
   # fix build with ffmpeg 7
   patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
   patch -p1 -i "$srcdir"/ffmpeg-7-2.patch
+
+  # fix error: ‘PyLong_AsInt’ was not declared in this scope
+  # PyAPI: support Python 3.13
+  # https://projects.blender.org/blender/blender/commit/d9f38fca5ffe29136cd6f390e318ad8455864582#diff-571faefbca137d4101deb46ccdf9ad651aab10fd
+  # Campbell Barton 18/10/2024 08:22
+  patch -p1 -i "$srcdir"/python312-313.patch
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
