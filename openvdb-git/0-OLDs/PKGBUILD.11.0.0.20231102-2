@@ -1,14 +1,14 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-git
-pkgver=12.0.0.20241101
-pkgrel=1
-_ver_release="12.0.0"
+pkgver=11.0.0.20231102
+pkgrel=2
+_ver_release="11.0.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
 arch=('x86_64')
-license=('Apache-2.0')
+license=('MPL-2.0')
 depends=('boost-libs' 'onetbb' 'zlib'
           'blosc' 'glfw-x11' 'glu'
           'jemalloc'
@@ -20,7 +20,7 @@ provides=('openvdb')
 options=('!debug')
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
-sha256sums=('23ceb5b18a851f45af118f718a9dd3001efaee364e3f623c37ffbdad03b8905f'
+sha256sums=('6314ff1db057ea90050763e7b7d7ed86d8224fcd42a82cdbb9c515e001b96c74'
 )
 
 
