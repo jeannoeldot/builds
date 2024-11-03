@@ -1,0 +1,12 @@
+diff -aur blender/intern/cycles/scene/image_vdb.h blender.new/intern/cycles/scene/image_vdb.h
+--- blender/intern/cycles/scene/image_vdb.h	2024-05-19 12:21:31.000000000 +0200
++++ blender.new/intern/cycles/scene/image_vdb.h	2024-11-02 13:59:30.339306905 +0100
+@@ -9,7 +9,7 @@
+ #  include <openvdb/openvdb.h>
+ #endif
+ #ifdef WITH_NANOVDB
+-#  include <nanovdb/util/GridHandle.h>
++#  include <nanovdb/GridHandle.h>
+ #endif
+ 
+ #include "scene/image.h"

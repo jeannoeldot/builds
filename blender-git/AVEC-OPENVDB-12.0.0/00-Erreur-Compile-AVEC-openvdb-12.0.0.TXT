@@ -1,0 +1,65 @@
+
+[ 57%] Building CXX object extern/mantaflow/CMakeFiles/extern_mantaflow.dir/helper/util/simpleimage.cpp.o
+In file included from /build/blender-git/src/blender/intern/cycles/scene/image.cpp:9:
+/build/blender-git/src/blender/intern/cycles/scene/../scene/image_vdb.h:12:12: fatal error: nanovdb/util/GridHandle.h: No such file or directory
+   12 | #  include <nanovdb/util/GridHandle.h>
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+make[2]: *** [intern/cycles/scene/CMakeFiles/cycles_scene.dir/build.make:286: intern/cycles/scene/CMakeFiles/cycles_scene.dir/image.cpp.o] Error 1
+
+In file included from /build/blender-git/src/blender/intern/cycles/blender/volume.cpp:8:
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.h:12:12: fatal error: nanovdb/util/GridHandle.h: No such file or directory
+   12 | #  include <nanovdb/util/GridHandle.h>
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+make[2]: *** [intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/build.make:370: intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/volume.cpp.o] Error 1
+
+$ grep -lR "util/GridHandle.h" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/intern/cycles/scene/image_vdb.h
+
+-----------------------------------------------------------------------------------------------------------
+[ 65%] Building CXX object intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/camera.cpp.o
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp: In member function ‘bool ccl::ToNanoOp::operator()(const openvdb::v12_0::GridBase::ConstPtr&)’:
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:62:33: error: ‘createNanoGrid’ is not a member of ‘nanovdb’; did you mean ‘callNanoGrid’?
+   62 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, nanovdb::FpN>(floatgrid);
+      |                                 ^~~~~~~~~~~~~~
+      |                                 callNanoGrid
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:62:66: error: expected primary-expression before ‘,’ token
+   62 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, nanovdb::FpN>(floatgrid);
+      |                                                                  ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:62:80: error: expected primary-expression before ‘>’ token
+   62 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, nanovdb::FpN>(floatgrid);
+      |                                                                                ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:65:33: error: ‘createNanoGrid’ is not a member of ‘nanovdb’; did you mean ‘callNanoGrid’?
+   65 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, nanovdb::Fp16>(floatgrid);
+      |                                 ^~~~~~~~~~~~~~
+      |                                 callNanoGrid
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:65:66: error: expected primary-expression before ‘,’ token
+   65 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, nanovdb::Fp16>(floatgrid);
+      |                                                                  ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:65:81: error: expected primary-expression before ‘>’ token
+   65 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, nanovdb::Fp16>(floatgrid);
+      |                                                                                 ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:68:33: error: ‘createNanoGrid’ is not a member of ‘nanovdb’; did you mean ‘callNanoGrid’?
+   68 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, float>(floatgrid);
+      |                                 ^~~~~~~~~~~~~~
+      |                                 callNanoGrid
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:68:66: error: expected primary-expression before ‘,’ token
+   68 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, float>(floatgrid);
+      |                                                                  ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:68:68: error: expected primary-expression before ‘float’
+   68 |             nanogrid = nanovdb::createNanoGrid<openvdb::FloatGrid, float>(floatgrid);
+      |                                                                    ^~~~~
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:73:31: error: ‘createNanoGrid’ is not a member of ‘nanovdb’; did you mean ‘callNanoGrid’?
+   73 |           nanogrid = nanovdb::createNanoGrid<openvdb::Vec3fGrid, nanovdb::Vec3f>(
+      |                               ^~~~~~~~~~~~~~
+      |                               callNanoGrid
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:73:64: error: expected primary-expression before ‘,’ token
+   73 |           nanogrid = nanovdb::createNanoGrid<openvdb::Vec3fGrid, nanovdb::Vec3f>(
+      |                                                                ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:73:80: error: expected primary-expression before ‘>’ token
+   73 |           nanogrid = nanovdb::createNanoGrid<openvdb::Vec3fGrid, nanovdb::Vec3f>(
+      |                                                                                ^
+/build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:74:35: error: ‘nanovdb::StatsMode’ has not been declared
+   74 |               floatgrid, nanovdb::StatsMode::Disable);
+      |                                   ^~~~~~~~~

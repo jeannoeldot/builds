@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0.3.20241026
+!!! VERSION = 4.4.0.4.20241103
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.3.20241026.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.4.20241103.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.4.0.3.20241026.tar.zst
+tar -x --zstd -f blender-git-4.4.0.4.20241103.tar.zst
 
 1) DRACO
 =========
@@ -25,7 +25,7 @@ cp -R blender blender.new
 cd blender.new
 kwrite CMakeLists.txt
 
-SUPPRIMER LIGNES 1217 À 1223 :
+SUPPRIMER LIGNES 1216 À 1222 :
 if(NOT WITH_PYTHON_MODULE)
   if(WITH_DRACO AND NOT WITH_PYTHON_INSTALL)
     message(STATUS "WITH_DRACO requires WITH_PYTHON_INSTALL to be ON, disabling WITH_DRACO for now")
@@ -60,7 +60,7 @@ kwrite draco.py
 AJOUTER LIGNE 6
 import site
 
-MODIFIER LIGNE 22 :
+MODIFIER LIGNE 39 :
     path = os.environ.get('BLENDER_EXTERN_DRACO_LIBRARY_PATH')
 
 DEVIENT
@@ -148,6 +148,7 @@ mv -vf /tmp/srcp/ffmpeg-7-1.patch .
 
 
 
+
 99) QUAND PATCHES FINIS
 =======================
 rm -rf /tmp/srcp
@@ -157,6 +158,40 @@ sync
 =================================================================
 ANCIENS
 ========
+
+
+3) OPENVDB 11.0.0 -> 12.0.0
+===========================
+3-1) MODIFIER blender/intern/cycles/scene/image_vdb.h
+=====================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/intern/cycles/scene
+kwrite image_vdb.h
+
+MODIFIER LIGNE 12 :
+#  include <nanovdb/util/GridHandle.h>
+DEVIENT
+#  include <nanovdb/GridHandle.h>
+
+ENREGISTRER et Quitter Kwrite & EFFACER image_vdb.h~
+rm -f image_vdb.h~
+
+cd ../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-build-with-openvdb-12.0.0.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/fix-build-with-openvdb-12.0.0.patch .
+
+
+
 
 3) PYTON 3.12 <-> 3.13
 =======================
@@ -205,11 +240,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.3.20241026.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.4.20241103.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.4.0.3.20241026.tar.gz
+tar -xzf blender-git-4.4.0.4.20241103.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

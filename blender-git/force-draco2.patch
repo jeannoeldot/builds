@@ -1,6 +1,6 @@
 diff -aur blender/scripts/addons_core/io_scene_gltf2/io/com/draco.py blender.new/scripts/addons_core/io_scene_gltf2/io/com/draco.py
---- blender/scripts/addons_core/io_scene_gltf2/io/com/draco.py	2024-09-01 10:48:53.000000000 +0200
-+++ blender.new/scripts/addons_core/io_scene_gltf2/io/com/draco.py	2024-10-06 11:07:31.471961128 +0200
+--- blender/scripts/addons_core/io_scene_gltf2/io/com/draco.py	2024-11-03 10:38:55.000000000 +0100
++++ blender.new/scripts/addons_core/io_scene_gltf2/io/com/draco.py	2024-11-03 10:45:54.864192283 +0100
 @@ -3,6 +3,7 @@
  # SPDX-License-Identifier: Apache-2.0
  
@@ -9,12 +9,12 @@ diff -aur blender/scripts/addons_core/io_scene_gltf2/io/com/draco.py blender.new
  import sys
  from pathlib import Path
  import bpy
-@@ -18,7 +19,7 @@
+@@ -35,7 +36,7 @@
      python_lib = Path('{v[0]}.{v[1]}/python/lib'.format(v=bpy.app.version))
      python_version = 'python{v[0]}.{v[1]}'.format(v=sys.version_info)
  
 -    path = os.environ.get('BLENDER_EXTERN_DRACO_LIBRARY_PATH')
 +    path = f"{site.getsitepackages()[0]}/libextern_draco.so"
-     if path is None:
-         path = {
-             'win32': blender_root / python_lib / 'site-packages',
+     if path is not None:
+         return Path(path)
+ 
