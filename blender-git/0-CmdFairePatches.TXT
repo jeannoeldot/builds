@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0.4.20241103
+!!! VERSION = 4.4.0.5.20241106
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.4.20241103.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.5.20241106.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.4.0.4.20241103.tar.zst
+tar -x --zstd -f blender-git-4.4.0.5.20241106.tar.zst
 
 1) DRACO
 =========
@@ -113,12 +113,12 @@ cd ../../..
 cd blender.new/source/blender/imbuf/intern
 kwrite anim_movie.cc
 
-MODIFIER LIGNE 659 :
+MODIFIER LIGNE 703 :
   if (anim->pFrame->key_frame) {
 DEVIENT
   if (av_get_cur_key_frame_pts(anim->pFrame)) {
 
-MODIFIER LIGNES 1038 À 1042 :
+MODIFIER LIGNES 1082 À 1086 :
     if (format_ctx->iformat->read_seek2 || format_ctx->iformat->read_seek) {
       ret = av_seek_frame(anim->pFormatCtx, anim->videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
     }
@@ -240,11 +240,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.4.20241103.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.5.20241106.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.4.0.4.20241103.tar.gz
+tar -xzf blender-git-4.4.0.5.20241106.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
