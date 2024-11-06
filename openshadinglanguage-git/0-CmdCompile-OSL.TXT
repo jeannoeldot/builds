@@ -44,6 +44,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.11.0.20240903
+pkgrel=5    # rebuild MAJ OIIO 2.5.17.0
 pkgrel=4    # rebuild MAJ opencolorio 2.4.0
 pkgrel=3    # rebuild MAJ OIIO 2.5.16.0
 pkgrel=2    # rebuild MAJ OIIO 2.5.15.0 + fmt 11.0.2
@@ -115,7 +116,7 @@ options=('!debug')
 !!! LLVM 18.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 18.1.8-3 [installé]
+extra/clang 18.1.8-4 [installé]
 extra/llvm 18.1.8-4 [installé]
 extra/llvm-libs 18.1.8-4 [installé]
 
