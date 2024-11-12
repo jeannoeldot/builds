@@ -1,0 +1,41 @@
+
+# OPENVDB 12 ==> DANS  /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/openvdb-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v /0-DataLinux/00-repolocal/pkg-PAS-OK/openvdb-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+
+# OPENUSD AVEC OPENVDB 12 ==> DANS  /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/openusd-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v /0-DataLinux/00-repolocal/pkg-PAS-OK/openusd-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+
+$ cd && maj-repolocal
+
+
+-----------------------------------------------------------------------------------------------------
+SI COMPILE AVEC OPENVDB 12 PAS OK
+---------------------------------
+
+# OPENVDB 11 ==> DANS  /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/openvdb-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v /0-DataLinux/00-repolocal/openvdb-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+
+# OPENUSD AVEC OPENVDB 11 ==> DANS  /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/openusd-git-*-x86_64.pkg.tar.*
+
+$ sudo cp -v /0-DataLinux/00-repolocal/openusd-git-*-x86_64.pkg.tar.* /00-repolocal/
+
+
+$ cd && maj-repolocal
+
+
+
+

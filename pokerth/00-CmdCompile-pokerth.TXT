@@ -41,6 +41,7 @@ voir : 03-CmdFairePatches.TXT
 pkgname=pokerth
 pkgver=1.1.2
 _pkgver=1.1.2-rc
+pkgrel=41     # rebuild protobuf 28.3-1
 pkgrel=40     # rebuild protobuf 28.2-1
 pkgrel=39     # rebuild protobuf 28.1-1
 pkgrel=38     # rebuild protobuf 28.0-2

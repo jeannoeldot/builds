@@ -6,11 +6,31 @@ $ grep -lR "include <nanovdb/" /0-DataLinux/05-builds-dir-git/blender/
 /0-DataLinux/05-builds-dir-git/blender/intern/cycles/scene/image_vdb.h
 /0-DataLinux/05-builds-dir-git/blender/intern/cycles/scene/image_vdb.cpp
 
+$ grep -lR "createNanoGrid" /home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/
+/home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/usr/include/nanovdb/NanoVDB.h
+/home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/usr/include/nanovdb/tools/CreateNanoGrid.h
+/home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/usr/include/nanovdb/tools/cuda/IndexToGrid.cuh
+
+$ grep -lR "StatsMode" /home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/
+/home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/usr/include/nanovdb/tools/CreatePrimitives.h
+/home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/usr/include/nanovdb/tools/CreateNanoGrid.h
+/home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/usr/include/nanovdb/tools/cuda/GridStats.cuh
+/home/jnd/99-temp/openvdb-git-12.0.0.20241101-1-x86_64.pkg/usr/include/nanovdb/tools/GridStats.h
+
+
+
+
 
 /usr/include/nanovdb/NanoVDB.h:
 #define NANOVDB_MAJOR_VERSION_NUMBER 32 // reflects changes to the ABI and hence also the file format
 #define NANOVDB_MINOR_VERSION_NUMBER 7 //  reflects changes to the API but not ABI
 #define NANOVDB_PATCH_VERSION_NUMBER 0 //  reflects changes that does not affect the ABI or API
+
+
+
+
+
+
 
 DANS /blender/intern/cycles/scene/image_vdb.cpp
 LIGNE 15:
@@ -88,3 +108,5 @@ make[2]: *** [intern/cycles/blender/CMakeFiles/bf_intern_cycles.dir/build.make:3
 /build/blender-git/src/blender/intern/cycles/scene/image_vdb.cpp:74:35: error: ‘nanovdb::StatsMode’ has not been declared
    74 |               floatgrid, nanovdb::StatsMode::Disable);
       |                                   ^~~~~~~~~
+-----------------------------------------------------------------------------------------------------------
+

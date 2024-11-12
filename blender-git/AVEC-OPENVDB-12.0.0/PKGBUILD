@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.3.20241026
+pkgver=4.4.0.5.20241110
 pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -48,14 +48,14 @@ source=("$pkgname-$pkgver.tar.zst"
         "ffmpeg-7-2.patch"
         "fix-build-with-openvdb-12.0.0.patch"
 )
-sha256sums=('3af4f90698b20dd408785fb88e604de6f5f633255d5ef7538aa245750f9e988c'
+sha256sums=('c61eb3bac737466e14a86ae416a981dd4b984dd4a6d461c42dd6ad059eabb417'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
-            'c9dc4a964f6e871176ce1ae9f9a0db8d84d83bcd6e01a877526893d5f8183ceb'
-            '505a6be3b417d9a380673898e03dd84d8ed1ab2ddf8bf8be1dc553b0c452522c'
+            '9140f3cc9f3a6de6a51efa704c54d8fc5cb786f3c0c1d547a9b4e962b8422c4a'
+            'de4a5fb00721e9698fd22ec00d3781d1a25a884387820e8639f65f32308be86a'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
-            '3087b454d574e748363ba5b22a7fb94e5025b263cf311cac009be99402cd9974'
+            '20b888982a813775fc299c29f5cbb9bf6e728c8fe58bc948d6767362c6aea51a'
             '499a9ec9a1aa7c5ef26ce5bb26f48576cccf1fc5906e966f92e25506405e9ad0'
-            '547fafa22da19d947a887cc45acad8d98affd6a9ef04c1637b3aee5b0c404c30'
+            '553a93af949e6729d3b959f9edfa2fb23d58227426f8377594e71fe2eb7dc39f'
 )
 
 _gitname="blender"
@@ -86,9 +86,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e9298dced494"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "079ccd87c56f"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1729943505|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1731221303|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
