@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0.5.20241110
+!!! VERSION = 4.4.0.5.20241113
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.5.20241110.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.5.20241113.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.4.0.5.20241110.tar.zst
+tar -x --zstd -f blender-git-4.4.0.5.20241113.tar.zst
 
 1) DRACO
 =========
@@ -240,11 +240,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.5.20241110.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.5.20241113.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.4.0.5.20241110.tar.gz
+tar -xzf blender-git-4.4.0.5.20241113.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

@@ -48,7 +48,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-git
 pkgver=24.05.20240419
-pkgrel=4      # rebuild MAJ openvdb 12.0.0
+pkgrel=5      # rebuild MAJ openèxr 3.3.2
+pkgrel=4      # rebuild MAJ openvdb 12.0.0: OK MAIS BLENDER PAS OK
 pkgrel=3      # Rebuild maj opencolorio 2.4.0 + dep opencolorio
 pkgrel=2      # rebuild MAJ OIIO 2.5.15.0 + boost boost-libs 1.86.0
 pkgrel=1
