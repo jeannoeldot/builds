@@ -1,0 +1,61 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openimageio-git
+pkgver=3.0.0.3.20241108
+pkgrel=1
+_name_release="OpenImageIO-3.0.0.3"
+_ver_release="v3.0.0.3"
+pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
+arch=('x86_64')
+url="http://www.openimageio.org/"
+license=('Apache-2.0')
+# TODO: Consider adding these deps: 'openvdb' 'opentbb' 'ptex' 'opencv'
+depends=('ffmpeg' 'freetype2'
+         'giflib' 'libheif'
+         'libraw' 'libtiff'
+         'libpng' 'libwebp'
+         'opencolorio' 'openexr'
+         'libjpeg-turbo' 'openjpeg2' 'libjxl'
+         'qt6-base'
+         'python'
+         'pugixml' 'pybind11' 'python-numpy'
+)
+makedepends=('cmake' 'mesa'
+             'robin-map'
+             'fmt'
+)
+conflicts=('openimageio')
+provides=('openimageio')
+options=('!debug')
+source=("OpenImageIO-${_ver_release}.tar.gz"
+)
+sha256sums=('fe96d2f39435f1585fe2ede4279a303e2cef3b28df351e8331fed46bbb251f35'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+      -Bbuild \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DINSTALL_FONTS=OFF \
+      -DUSE_CCACHE=OFF \
+      -DUSE_EXTERNAL_PUGIXML=ON \
+      -DUSE_SIMD=avx2 \
+      -DPYTHON_VERSION=3.12
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+
+  DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  install -Dm644 THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/THIRD-PARTY
+}
