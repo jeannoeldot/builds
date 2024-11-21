@@ -1,0 +1,14 @@
+
+[ 46%] Building CXX object pxr/base/work/CMakeFiles/work.dir/threadLimits.cpp.o
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp: In member function ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::_GetInternalWaitContext()’:
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp:36:12: error: ‘m_wait_ctx’ was not declared in this scope; did you mean ‘m_wait_vertex’?
+   36 |     return m_wait_ctx;
+      |            ^~~~~~~~~~
+      |            m_wait_vertex
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:152: pxr/base/work/CMakeFiles/work.dir/dispatcher.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+make[1]: *** [CMakeFiles/Makefile2:3083: pxr/base/work/CMakeFiles/work.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:136: all] Error 2

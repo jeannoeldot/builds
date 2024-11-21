@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-git
-pkgver=24.08.20240725
-pkgrel=1
-_ver_release="24.08"
+pkgver=24.05.20240419
+pkgrel=5
+_ver_release="24.05"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -19,7 +19,6 @@ depends=('boost-libs' 'glfw'
          'openvdb-git'
          'python'
          'python-jinja'
-         'jemalloc'
 )
 makedepends=('boost' 'cmake'
 )
@@ -27,12 +26,40 @@ conflicts=('usd' 'openusd')
 provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
+        "usd-tbb_part_1.patch"
+        "usd-tbb_part_2.patch"
+        "usd-tbb_part_3.patch"
+        "blender-usd-diff.patch"
+        "blender-usd_core_profile-diff.patch"
+        "blender-usd_metal_edf-diff.patch"
 )
-sha256sums=('6640bb184bf602c6df14fa4a83af6ac5ae1ab8d1d38cf7bb7decfaa9a7ad5d06'
+sha256sums=('0352619895588efc8f9d4aa7004c92be4e4fa70e1ccce77e474ce23941c05828'
+            '3e9b5e5083b39aa91ced4ea44442efad87a8be75bd6c0147b109f4d928aa9290'
+            'ea1de829931c3023fb6af294544e6010c7c396c081ac33b6484f6991fe9b25a5'
+            'f364daaf66edb2ee8fd61ced28582617559b021e69f7f259c0d50af0ed4ee0d4'
+            '1bc24c433036159b227eb849ab1ac1425143ef4a338d2661f9dd8fb936c47e09'
+            'f54eeb061c8d01efd15ad6ab12ba08553729f21060cd01e91f3b48896db7aeeb'
+            '9afaa8dd57c40a8fc5722ded4de4938420c8002a010d33d51506501b7a04b8b8'
 )
 
 prepare() {
   cd "${_name_release}"
+  # Compatible avec onetbb 2021.11.0
+  msg "Patch usd-tbb_part_1"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_1.patch"
+  msg "Patch usd-tbb_part_2"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_2.patch"
+  msg "Patch usd-tbb_part_3"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_3.patch"
+  # blender/build_files/build_environment/patches/usd.diff
+  msg "Patch blender-usd-diff"
+  patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
+  # blender/build_files/build_environment/patches/usd_core_profile.diff
+  msg "Patch blender-usd_core_profile-diff"
+  patch -Np1 -i "${srcdir}/blender-usd_core_profile-diff.patch"
+  # blender/build_files/build_environment/patches/usd_metal_edf.diff
+  msg "Patch blender-usd_metal_edf-diff"
+  patch -Np1 -i "${srcdir}/blender-usd_metal_edf-diff.patch"
 
   _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
@@ -72,21 +99,26 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
-    -DPXR_MALLOC_LIBRARY=/usr/lib/libjemalloc.so \
+    -DPXR_ENABLE_PYTHON_SUPPORT=ON \
     -DPXR_USE_PYTHON_3=ON \
+    -DPXR_BUILD_IMAGING=ON \
     -DPXR_BUILD_TESTS=OFF \
     -DPXR_BUILD_EXAMPLES=OFF \
     -DPXR_BUILD_TUTORIALS=OFF \
-    -DPXR_BUILD_USD_TOOLS=OFF \
-    -DPXR_BUILD_OPENIMAGEIO_PLUGIN=ON \
     -DPXR_BUILD_USDVIEW=OFF \
+    -DPXR_ENABLE_HDF5_SUPPORT=OFF \
     -DPXR_ENABLE_MATERIALX_SUPPORT=ON \
     -DPXR_ENABLE_OPENVDB_SUPPORT=ON \
-    -DBUILD_SHARED_LIBS=ON \
-    -DPXR_BUILD_MONOLITHIC=ON \
     -DPYTHON_EXECUTABLE=/usr/bin/python \
+    -DPXR_BUILD_MONOLITHIC=ON \
+    -DPXR_ENABLE_OSL_SUPPORT=OFF \
     -DPXR_ENABLE_GL_SUPPORT=ON \
+    -DPXR_BUILD_OPENIMAGEIO_PLUGIN=ON \
+    -DPXR_BUILD_OPENCOLORIO_PLUGIN=OFF \
+    -DPXR_ENABLE_PTEX_SUPPORT=OFF \
+    -DPXR_BUILD_USD_TOOLS=OFF \
     -DCMAKE_DEBUG_POSTFIX=_d \
+    -DBUILD_SHARED_LIBS=ON \
 
   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
   make -C build
@@ -95,11 +127,6 @@ build() {
 package() {
   cd "${_name_release}"
   DESTDIR="${pkgdir}" make -C build install
-
-  # Preload jemalloc in scripts to prevent python using glibc's malloc
-  for cmd in "$pkgdir/usr/bin/"*; do
-    sed -r -i '1 s|(#!)(.*python.*)|\1/usr/bin/env -S LD_PRELOAD=/usr/lib/libjemalloc.so \2|' "$cmd"
-  done
 
   sed -i 's|${PXR_CMAKE_DIR}/cmake|${PXR_CMAKE_DIR}|g' \
     ${pkgdir}/usr/lib/cmake/pxr/pxrConfig.cmake

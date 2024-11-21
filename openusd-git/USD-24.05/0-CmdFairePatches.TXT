@@ -1,19 +1,19 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 24.08
-!!! VERSION = v24.08
+!!! VERSION = 24.05
+!!! VERSION = v24.05
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/usd-git
 
 mkdir /tmp/srcp
 
-cp -v USD-v24.08.tar.gz /tmp/srcp/
+cp -v USD-v24.05.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf USD-v24.08.tar.gz
+tar -xzf USD-v24.05.tar.gz
 
 
 !!! VOIR :
@@ -32,18 +32,6 @@ https://projects.blender.org/blender/blender/src/branch/main/build_files/build_e
 
 https://gitlab.archlinux.org/archlinux/packaging/packages/usd/-/blob/main/usd-tbb.patch
 
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) MODIFIER USD-22.03/cmake/defaults/Packages.cmake
 ===================================================
@@ -146,8 +134,15 @@ mv -vf /tmp/srcp/blender-usd-diff.patch .
 mv -vf /tmp/srcp/Fix-build-with-GCC11.patch .
 
 
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
 
+sync
 
+=================================================================
+ANCIENS
+========
 https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/demangle-fix.patch
 https://github.com/archlinux/svntogit-community/blob/packages/usd/trunk/gcc11.patch
 

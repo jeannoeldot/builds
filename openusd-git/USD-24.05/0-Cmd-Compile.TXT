@@ -17,16 +17,16 @@ cd $HOME/05-builds/openusd-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==>  sunyab  released this on 25 juil 2024  ==> 20240725
-==> v24.08  ==> 24.08
-==> 24.08.20240725
+==>  tallytalwar  released this on 19 April 2024  ==> 20240419
+==> v24.05  ==> 24.05
+==> 24.05.20240419
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenUSD-v24.08.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v24.08.tar.gz
+wget -O OpenUSD-v24.05.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v24.05.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -34,7 +34,7 @@ cd $HOME/05-builds/openusd-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v24.08.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v24.05.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -47,13 +47,13 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-git
-pkgver=24.08.20240725
-pkgrel=1
-
+pkgver=24.05.20240419
 pkgrel=5      # rebuild MAJ openèxr 3.3.2
 pkgrel=4      # rebuild MAJ openvdb 12.0.0: OK MAIS BLENDER PAS OK
 pkgrel=3      # Rebuild maj opencolorio 2.4.0 + dep opencolorio
 pkgrel=2      # rebuild MAJ OIIO 2.5.15.0 + boost boost-libs 1.86.0
+pkgrel=1
+
 pkgrel=4      # rebuild MAJ python 3.12
 pkgrel=3      # Rebuild MAJ materialx 1.38.10-1
 pkgrel=2      # Rebuild maj openimageio-git-2.5.9.0.20240301
@@ -76,7 +76,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="24.08"
+_ver_release="24.05"
 _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
@@ -100,15 +100,6 @@ provides=('usd' 'openusd')
 
 options=('!debug')
 
-SANS PATCH
-----------
-source=("USD-v${_ver_release}.tar.gz"
-)
-
-sha256sum OpenUSD-v24.08.tar.gz
-
-
-
 AVEC PATCH
 ----------
 source=("USD-v${_ver_release}.tar.gz"
@@ -119,7 +110,7 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
-sha256sum OpenUSD-v24.08.tar.gz
+sha256sum OpenUSD-v24.05.tar.gz
 
 sha256sum usd-tbb_part_1.patch
 
@@ -154,7 +145,6 @@ prepare() {
   patch -Np1 -i "${srcdir}/blender-usd_metal_edf-diff.patch"
 }
 
-
 build() {
   cd "${_name_release}"
 
@@ -169,64 +159,57 @@ VOIR :
 
 mkdir /tmp/srcp
 
-tar -xzf OpenUSD-v24.08.tar.gz -C /tmp/srcp
+tar -xzf OpenUSD-v24.05.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenUSD-24.08/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenUSD-24.05/CMakeLists.txt
 
-2) kwrite /tmp/srcp/OpenUSD-24.08/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/OpenUSD-24.05/cmake/defaults/Options.cmake
 
-LIGNE 10  PXR_BUILD_TESTS           ON ==> OFF
+LIGNE 27  PXR_BUILD_TESTS           ON ==> OFF
 
-LIGNE 11  PXR_BUILD_EXAMPLES "Build examples" ON ==> OFF
-LIGNE 12  PXR_BUILD_TUTORIALS "Build tutorials" ON ==> OFF
+LIGNE 28  PXR_BUILD_EXAMPLES "Build examples" ON ==> OFF
+LIGNE 29  PXR_BUILD_TUTORIALS "Build tutorials" ON ==> OFF
 
-LIGNE 13  PXR_BUILD_USD_TOOLS       ON ==> OFF
-LIGNE 14  PXR_BUILD_IMAGING         ON
+LIGNE 30  PXR_BUILD_USD_TOOLS       ON ==> OFF
+LIGNE 31  PXR_BUILD_IMAGING         ON ==> OFF
 
-LIGNE 15  PXR_BUILD_EMBREE_PLUGIN "Build embree imaging plugin" OFF
-LIGNE 16  PXR_BUILD_OPENIMAGEIO_PLUGIN "Build OpenImageIO plugin" OFF ==> ON
-LIGNE 17  PXR_BUILD_OPENCOLORIO_PLUGIN "Build OpenColorIO plugin" OFF
+LIGNE 32  PXR_BUILD_EMBREE_PLUGIN "Build embree imaging plugin" OFF
+LIGNE 33  PXR_BUILD_OPENIMAGEIO_PLUGIN "Build OpenImageIO plugin" OFF ==> ON
+LIGNE 34  PXR_BUILD_OPENCOLORIO_PLUGIN "Build OpenColorIO plugin" OFF
 
-LIGNE 18  PXR_BUILD_USD_IMAGING     ON
-LIGNE 19  PXR_BUILD_USDVIEW         ON ==> OFF
+LIGNE 35  PXR_BUILD_USD_IMAGING     ON
+LIGNE 36  PXR_BUILD_USDVIEW         ON ==> OFF
 
-LIGNE 20  PXR_BUILD_ALEMBIC_PLUGIN "Build the Alembic plugin for USD" OFF
-LIGNE 21  PXR_BUILD_DRACO_PLUGIN "Build the Draco plugin for USD" OFF
-LIGNE 22  PXR_BUILD_PRMAN_PLUGIN "Build the PRMan imaging plugin" OFF
+LIGNE 37  PXR_BUILD_ALEMBIC_PLUGIN "Build the Alembic plugin for USD" OFF
+LIGNE 38  PXR_BUILD_DRACO_PLUGIN "Build the Draco plugin for USD" OFF
+LIGNE 39  PXR_BUILD_PRMAN_PLUGIN "Build the PRMan imaging plugin" OFF
+LIGNE 40  PXR_ENABLE_MATERIALX_SUPPORT "Enable MaterialX support" OFF ==> ON
+LIGNE 41  PXR_BUILD_DOCUMENTATION "Generate doxygen documentation" OFF
+LIGNE 42  PXR_BUILD_PYTHON_DOCUMENTATION "Generate Python documentation" OFF
 
-LIGNE 23  PXR_ENABLE_MATERIALX_SUPPORT "Enable MaterialX support" OFF ==> ON
+LIGNE 43  PXR_ENABLE_PYTHON_SUPPORT ON
+LIGNE 44  PXR_USE_DEBUG_PYTHON "Build with debug python" OFF
 
-LIGNE 24  PXR_BUILD_DOCUMENTATION "Generate doxygen documentation" OFF
-LIGNE 25  PXR_BUILD_PYTHON_DOCUMENTATION "Generate Python documentation" OFF
-LIGNE 26  PXR_BUILD_HTML_DOCUMENTATION "Generate HTML documentation if PXR_BUILD_DOCUMENTATION is ON" ON
+LIGNE 45  PXR_ENABLE_HDF5_SUPPORT   OFF
 
-LIGNE 27  PXR_ENABLE_PYTHON_SUPPORT ON
-LIGNE 28  PXR_USE_DEBUG_PYTHON "Build with debug python" OFF
+LIGNE 46  PXR_ENABLE_OSL_SUPPORT "Enable OSL (OpenShadingLanguage) based components" OFF
+LIGNE 47  PXR_ENABLE_PTEX_SUPPORT "Enable Ptex support" OFF
+LIGNE 48  PXR_ENABLE_OPENVDB_SUPPORT "Enable OpenVDB support" OFF ==> ON
 
-LIGNE 29  PXR_ENABLE_HDF5_SUPPORT   OFF
-LIGNE 30  PXR_ENABLE_OSL_SUPPORT "Enable OSL (OpenShadingLanguage) based components" OFF
-LIGNE 31  PXR_ENABLE_PTEX_SUPPORT "Enable Ptex support" OFF
-LIGNE 32  PXR_ENABLE_OPENVDB_SUPPORT "Enable OpenVDB support" OFF ==> ON
+LIGNE 48  PXR_ENABLE_NAMESPACES     ON ???
 
-LIGNE 33  PXR_BUILD_MAYAPY_TESTS   OFF
-LIGNE 34  PXR_BUILD_ANIMX_TESTS   OFF
-
-LIGNE 35  PXR_ENABLE_NAMESPACES     ON ???
-
-LIGNE 36  PXR_PREFER_SAFETY_OVER_SPEED  ON
-
-LIGNE 137 BUILD_SHARED_LIBS         ON
-LIGNE 138 PXR_BUILD_MONOLITHIC      OFF ==> ON
+LIGNE 120 BUILD_SHARED_LIBS         ON
+LIGNE 121 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/OpenUSD-24.08/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/OpenUSD-24.05/cmake/defaults/ProjectDefaults.cmake
 
-LIGNE 38  CMAKE_BUILD_TYPE "Release"
+LIGNE 55  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/OpenUSD-24.08/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/OpenUSD-24.05/cmake/defaults/CXXDefaults.cmake
 
-LIGNE 67  PXR_SET_INTERNAL_NAMESPACE
+LIGNE 74  PXR_SET_INTERNAL_NAMESPACE
 
 
 rm -rf /tmp/srcp
@@ -240,7 +223,7 @@ $ ls -la
 -rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
 -rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.08.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.05.tar.gz
 -rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
 -rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
 -rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
@@ -262,7 +245,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openusd-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openusd-git/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v24.08.tar.gz . \
+&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v24.05.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openusd-git \
 && cp -v /tmp/build/openusd-git-*-x86_64.pkg.tar.* . \
@@ -349,7 +332,7 @@ $ mv -v openusd-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenUSD-v24.08.tar.gz
+$ rm -i OpenUSD-v24.05.tar.gz
 
 
 $ cd && maj-repolocal
@@ -390,7 +373,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum OpenUSD-v24.08.tar.gz
+sha256sum OpenUSD-v24.05.tar.gz
 
 sha256sum blender-usd-diff.patch
 
