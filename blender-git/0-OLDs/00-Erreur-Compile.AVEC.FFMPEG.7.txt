@@ -1,0 +1,14 @@
+
+
+[ 84%] Building CXX object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/curves_attributes.cc.o
+/build/blender-git/src/blender/source/blender/imbuf/intern/anim_movie.cc: In function ‘int ffmpeg_seek_to_key_frame(ImBufAnim*, int, ImBufAnimIndex*, int64_t)’:
+/build/blender-git/src/blender/source/blender/imbuf/intern/anim_movie.cc:1030:30: error: ‘const struct AVInputFormat’ has no member named ‘read_seek2’
+ 1030 |     if (format_ctx->iformat->read_seek2 || format_ctx->iformat->read_seek) {
+      |                              ^~~~~~~~~~
+/build/blender-git/src/blender/source/blender/imbuf/intern/anim_movie.cc:1030:65: error: ‘const struct AVInputFormat’ has no member named ‘read_seek’
+ 1030 |     if (format_ctx->iformat->read_seek2 || format_ctx->iformat->read_seek) {
+      |                                                                 ^~~~~~~~~
+[ 84%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/tools/bmesh_bevel.cc.o
+make[2]: *** [source/blender/imbuf/CMakeFiles/bf_imbuf.dir/build.make:93: source/blender/imbuf/CMakeFiles/bf_imbuf.dir/intern/anim_movie.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:8894: source/blender/imbuf/CMakeFiles/bf_imbuf.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....

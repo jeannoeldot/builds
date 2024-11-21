@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0.5.20241113
+!!! VERSION = 4.4.0.6.20241120
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.5.20241113.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.6.20241120.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.4.0.5.20241113.tar.zst
+tar -x --zstd -f blender-git-4.4.0.6.20241120.tar.zst
 
 1) DRACO
 =========
@@ -25,7 +25,7 @@ cp -R blender blender.new
 cd blender.new
 kwrite CMakeLists.txt
 
-SUPPRIMER LIGNES 1216 À 1222 :
+SUPPRIMER LIGNES 1240 À 1246 :
 if(NOT WITH_PYTHON_MODULE)
   if(WITH_DRACO AND NOT WITH_PYTHON_INSTALL)
     message(STATUS "WITH_DRACO requires WITH_PYTHON_INSTALL to be ON, disabling WITH_DRACO for now")
@@ -93,7 +93,7 @@ cp -R blender blender.new
 cd blender.new/intern/ffmpeg
 kwrite ffmpeg_compat.h
 
-AJOUTER LIGNES 164 À 172 :
+AJOUTER LIGNES 171 À 179 :
 FFMPEG_INLINE
 bool av_get_cur_key_frame_pts(const AVFrame *picture) {
 #if LIBAVUTIL_VERSION_INT >= AV_VERSION_INT(58, 29, 100)
@@ -113,12 +113,12 @@ cd ../../..
 cd blender.new/source/blender/imbuf/intern
 kwrite anim_movie.cc
 
-MODIFIER LIGNE 703 :
+MODIFIER LIGNE 708 :
   if (anim->pFrame->key_frame) {
 DEVIENT
   if (av_get_cur_key_frame_pts(anim->pFrame)) {
 
-MODIFIER LIGNES 1082 À 1086 :
+MODIFIER LIGNES 1030 À 1034 :
     if (format_ctx->iformat->read_seek2 || format_ctx->iformat->read_seek) {
       ret = av_seek_frame(anim->pFormatCtx, anim->videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
     }
@@ -240,11 +240,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.5.20241113.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.6.20241120.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.4.0.5.20241113.tar.gz
+tar -xzf blender-git-4.4.0.6.20241120.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

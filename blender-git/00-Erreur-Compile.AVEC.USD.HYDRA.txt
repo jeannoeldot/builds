@@ -1,0 +1,44 @@
+
+
+=============================================================
+SANS HYDRA
+==========
+In file included from /usr/include/pxr/usd/sdf/layer.h:46,
+                 from /build/blender-git/src/blender/source/blender/io/usd/intern/usd_precomp.hh:6,
+                 from /build/blender-git/src/blender/build/source/blender/io/usd/CMakeFiles/bf_io_usd.dir/cmake_pch.hxx:5,
+                 from <command-line>:
+/usr/include/pxr/base/work/dispatcher.h: In member function ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::get_internal_wait_context()’:
+/usr/include/pxr/base/work/dispatcher.h:219:20: error: ‘m_wait_ctx’ was not declared in this scope; did you mean ‘m_wait_vertex’?
+  219 |             return m_wait_ctx;
+      |                    ^~~~~~~~~~
+      |                    m_wait_vertex
+
+make[2]: *** [source/blender/io/usd/CMakeFiles/bf_io_usd.dir/build.make:80: source/blender/io/usd/CMakeFiles/bf_io_usd.dir/cmake_pch.hxx.gch] Error 1
+make[1]: *** [CMakeFiles/Makefile2:9691: source/blender/io/usd/CMakeFiles/bf_io_usd.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+=============================================================
+AVEC HYDRA
+==========
+In file included from /usr/include/pxr/usd/sdf/layer.h:46,
+                 from /usr/include/pxr/usd/pcp/types.h:30,
+                 from /usr/include/pxr/usd/pcp/node.h:29,
+                 from /usr/include/pxr/usd/usd/editTarget.h:31,
+                 from /usr/include/pxr/usd/usd/stage.h:32,
+                 from /build/blender-git/src/blender/source/blender/render/hydra/engine.hh:15,
+                 from /build/blender-git/src/blender/source/blender/render/hydra/engine.cc:5:
+/usr/include/pxr/base/work/dispatcher.h: In member function ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::get_internal_wait_context()’:
+/usr/include/pxr/base/work/dispatcher.h:219:20: error: ‘m_wait_ctx’ was not declared in this scope; did you mean ‘m_wait_vertex’?
+  219 |             return m_wait_ctx;
+      |                    ^~~~~~~~~~
+      |                    m_wait_vertex
+[ 81%] Building CXX object source/blender/editors/transform/CMakeFiles/bf_editor_transform.dir/transform_ops.cc.o
+[ 81%] Building CXX object source/blender/draw/CMakeFiles/bf_draw.dir/intern/mesh_extractors/extract_mesh_vbo_sculpt_data.cc.o
+[ 81%] Building CXX object source/blender/editors/transform/CMakeFiles/bf_editor_transform.dir/transform_orientations.cc.o
+[ 81%] Building CXX object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/colorband.cc.o
+[ 81%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/intern/bmesh_iterators.cc.o
+[ 81%] Building CXX object source/blender/editors/sculpt_paint/CMakeFiles/bf_editor_sculpt_paint.dir/sculpt_pose.cc.o
+[ 81%] Building CXX object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/colortools.cc.o
+make[2]: *** [source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/build.make:93: source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/engine.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:8532: source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/all] Error 2

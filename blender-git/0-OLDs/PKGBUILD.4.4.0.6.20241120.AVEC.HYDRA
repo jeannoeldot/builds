@@ -26,7 +26,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openshadinglanguage-git'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
           'embree-git' 'openimagedenoise-git'
-          'openpgl-git' 'materialx'
+          'openpgl-git' 'materialx' 'openusd-git'
           'zstd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
@@ -44,14 +44,12 @@ source=("$pkgname-$pkgver.tar.zst"
         "force-draco1.patch"
         "force-draco2.patch"
         "blender-4.3-mantaflow-python-3.12.patch"
-        "ffmpeg-7-1.patch"
 )
 sha256sums=('c0f29017c13e341c7d9032c99e14e58d1adca86e14e1d466d824bfc6dcfa96b1'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
             '70464fb901abe81326e20c92f4dfef0d13bb8f20dcaee1903b292d0dc46bb091'
             'de4a5fb00721e9698fd22ec00d3781d1a25a884387820e8639f65f32308be86a'
             '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
-            'd74af453b7364065c496f1904fcb41ec3d14c71c01e8f7ad38f97b716dcf93f2'
 )
 
 _gitname="blender"
@@ -66,9 +64,6 @@ prepare() {
   # fix fluid sim domain with python 3.12
   # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18
   patch -p1 -i "$srcdir"/blender-4.3-mantaflow-python-3.12.patch
-
-  # fix build with ffmpeg 7
-  patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
@@ -100,8 +95,6 @@ build() {
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
         -DWITH_LIBS_PRECOMPILED=OFF \
-        -DWITH_USD=OFF \
-        -DWITH_HYDRA=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \
         -DWITH_PYTHON_INSTALL=OFF \

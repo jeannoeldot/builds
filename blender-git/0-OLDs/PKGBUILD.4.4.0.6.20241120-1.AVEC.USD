@@ -26,7 +26,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openshadinglanguage-git'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
           'embree-git' 'openimagedenoise-git'
-          'openpgl-git' 'materialx'
+          'openpgl-git' 'materialx' 'openusd-git'
           'zstd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
@@ -100,7 +100,6 @@ build() {
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
         -DWITH_LIBS_PRECOMPILED=OFF \
-        -DWITH_USD=OFF \
         -DWITH_HYDRA=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \

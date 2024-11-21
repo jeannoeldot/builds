@@ -1,7 +1,7 @@
 diff -aur blender/intern/ffmpeg/ffmpeg_compat.h blender.new/intern/ffmpeg/ffmpeg_compat.h
---- blender/intern/ffmpeg/ffmpeg_compat.h	2024-10-03 18:27:32.000000000 +0200
-+++ blender.new/intern/ffmpeg/ffmpeg_compat.h	2024-11-06 11:33:09.283443702 +0100
-@@ -161,6 +161,15 @@
+--- blender/intern/ffmpeg/ffmpeg_compat.h	2024-11-20 14:13:20.000000000 +0100
++++ blender.new/intern/ffmpeg/ffmpeg_compat.h	2024-11-21 09:21:58.710574759 +0100
+@@ -168,6 +168,15 @@
    return align;
  }
  
@@ -18,18 +18,18 @@ diff -aur blender/intern/ffmpeg/ffmpeg_compat.h blender.new/intern/ffmpeg/ffmpeg
  /** \name Deinterlace code block
   *
 diff -aur blender/source/blender/imbuf/intern/anim_movie.cc blender.new/source/blender/imbuf/intern/anim_movie.cc
---- blender/source/blender/imbuf/intern/anim_movie.cc	2024-11-06 11:27:28.000000000 +0100
-+++ blender.new/source/blender/imbuf/intern/anim_movie.cc	2024-11-06 11:36:53.905716785 +0100
-@@ -700,7 +700,7 @@
- {
+--- blender/source/blender/imbuf/intern/anim_movie.cc	2024-11-20 14:13:20.000000000 +0100
++++ blender.new/source/blender/imbuf/intern/anim_movie.cc	2024-11-21 09:27:56.978595575 +0100
+@@ -705,7 +705,7 @@
    anim->cur_pts = av_get_pts_from_frame(anim->pFrame);
  
+ #  ifdef FFMPEG_OLD_KEY_FRAME_QUERY_METHOD
 -  if (anim->pFrame->key_frame) {
 +  if (av_get_cur_key_frame_pts(anim->pFrame)) {
-     anim->cur_key_frame_pts = anim->cur_pts;
-   }
- 
-@@ -1079,11 +1079,10 @@
+ #  else
+   if (anim->pFrame->flags & AV_FRAME_FLAG_KEY) {
+ #  endif
+@@ -1027,11 +1027,10 @@
  
      AVFormatContext *format_ctx = anim->pFormatCtx;
  
