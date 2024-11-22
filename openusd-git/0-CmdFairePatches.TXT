@@ -9,11 +9,11 @@ FAIRE PATCHS
 
 mkdir /tmp/srcp
 
-cp -v USD-v24.08.tar.gz /tmp/srcp/
+cp -v OpenUSD-v24.08.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf USD-v24.08.tar.gz
+tar -xzf OpenUSD-v24.08.tar.gz
 
 
 !!! VOIR :
@@ -31,6 +31,39 @@ https://projects.blender.org/blender/blender/src/branch/main/build_files/build_e
   usd_metal_edf.diff
 
 https://gitlab.archlinux.org/archlinux/packaging/packages/usd/-/blob/main/usd-tbb.patch
+
+
+1) MODIFIER OpenUSD-24.08/pxr/base/work/dispatcher.h
+=====================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R OpenUSD-24.08 OpenUSD-24.08.new
+
+cd OpenUSD-24.08.new/pxr/base/work
+kwrite dispatcher.h
+
+MODIFIER LIGNE 202 :
+         inline tbb::detail::d1::wait_context& _GetInternalWaitContext();
+
+DEVIENT
+         inline tbb::detail::d1::wait_context& _GetInternalWaitContext() {
+                return m_wait_ctx;
+          }
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier dispatcher.h~
+rm -f dispatcher.h~
+
+cd ../../../..
+
+diff -aur OpenUSD-24.08 OpenUSD-24.08.new
+diff -aur OpenUSD-24.08 OpenUSD-24.08.new > fix-error-m_wait_ctx-was-not-declared.patch
+
+rm -rf OpenUSD-24.08.new
+
+
+cd $HOME/05-builds/openusd-git
+
+mv -vf /tmp/srcp/fix-error-m_wait_ctx-was-not-declared.patch .
 
 
 

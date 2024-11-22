@@ -111,6 +111,29 @@ sha256sum OpenUSD-v24.08.tar.gz
 
 AVEC PATCH
 ----------
+source=("OpenUSD-v${_ver_release}.tar.gz"
+        "fix-error-m_wait_ctx-was-not-declared.patch"
+)
+
+sha256sum OpenUSD-v24.08.tar.gz
+
+sha256sum fix-error-m_wait_ctx-was-not-declared.patch
+
+sha256sums=('6640bb184bf602c6df14fa4a83af6ac5ae1ab8d1d38cf7bb7decfaa9a7ad5d06'
+            '7dcee852cfa063a1105ab414a1b50fddeb230d719dd12b1a4d5fcc6b4a3e7309'
+)
+
+prepare() {
+  cd "${_name_release}"
+
+  # Compatible avec onetbb 2022.0.0
+  # Fixe: error: ‘m_wait_ctx’ was not declared in this scope
+  patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
+
+
+
+
+
 source=("USD-v${_ver_release}.tar.gz"
         "usd-tbb_part_1.patch"
         "usd-tbb_part_2.patch"

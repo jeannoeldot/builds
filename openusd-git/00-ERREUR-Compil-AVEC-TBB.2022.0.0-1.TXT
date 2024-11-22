@@ -12,3 +12,46 @@ make[1]: *** [CMakeFiles/Makefile2:3083: pxr/base/work/CMakeFiles/work.dir/all] 
 make[1]: *** Waiting for unfinished jobs....
 
 make: *** [Makefile:136: all] Error 2
+
+==================================================================================
+APRÉS PATCH fix-error-m_wait_ctx-was-not-declared.patch
+========================================================
+[ 46%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/streamOut.cpp.o
+In file included from /build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp:9:
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.h: In member function ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::_GetInternalWaitContext()’:
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.h:203:21: error: ‘m_wait_ctx’ was not declared in this scope; did you mean ‘m_wait_vertex’?
+  203 |              return m_wait_ctx;
+      |                     ^~~~~~~~~~
+      |                     m_wait_vertex
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp: At global scope:
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp:35:1: error: redefinition of ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::_GetInternalWaitContext()’
+   35 | WorkDispatcher::_TaskGroup::_GetInternalWaitContext() {
+      | ^~~~~~~~~~~~~~
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.h:202:48: note: ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::_GetInternalWaitContext()’ previously defined here
+  202 |          inline tbb::detail::d1::wait_context& _GetInternalWaitContext() {
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~~
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp:35:1: error: ‘class pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup’ is private within this context
+   35 | WorkDispatcher::_TaskGroup::_GetInternalWaitContext() {
+      | ^~~~~~~~~~~~~~
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.h:199:11: note: declared private here
+  199 |     class _TaskGroup : public tbb::task_group {
+      |           ^~~~~~~~~~
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:152: pxr/base/work/CMakeFiles/work.dir/dispatcher.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[ 46%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/types.cpp.o
+[ 46%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/value.cpp.o
+In file included from /build/openusd-git/src/OpenUSD-24.08/pxr/base/work/detachedTask.h:15,
+                 from /build/openusd-git/src/OpenUSD-24.08/pxr/base/work/detachedTask.cpp:9:
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.h: In member function ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::_GetInternalWaitContext()’:
+/build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.h:203:21: error: ‘m_wait_ctx’ was not declared in this scope; did you mean ‘m_wait_vertex’?
+  203 |              return m_wait_ctx;
+      |                     ^~~~~~~~~~
+      |                     m_wait_vertex
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:138: pxr/base/work/CMakeFiles/work.dir/detachedTask.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:3083: pxr/base/work/CMakeFiles/work.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:136: all] Error 2
+
+
+

@@ -1,0 +1,22 @@
+Seulement dans OpenUSD-24.08/pxr/base/work: dispatcher.cpp~
+diff -aur OpenUSD-24.08/pxr/base/work/dispatcher.h OpenUSD-24.08.new/pxr/base/work/dispatcher.h
+--- OpenUSD-24.08/pxr/base/work/dispatcher.h	2024-07-25 00:34:34.000000000 +0200
++++ OpenUSD-24.08.new/pxr/base/work/dispatcher.h	2024-11-22 11:47:46.097724936 +0100
+@@ -199,7 +199,9 @@
+     class _TaskGroup : public tbb::task_group {
+     public:
+         _TaskGroup(tbb::task_group_context& ctx) : tbb::task_group(ctx) {}
+-         inline tbb::detail::d1::wait_context& _GetInternalWaitContext();
++         inline tbb::detail::d1::wait_context& _GetInternalWaitContext() {
++             return m_wait_ctx;
++         }
+     };
+ 
+     _TaskGroup _taskGroup;
+@@ -255,4 +257,4 @@
+ 
+ PXR_NAMESPACE_CLOSE_SCOPE
+ 
+-#endif // PXR_BASE_WORK_DISPATCHER_H
+\ Pas de fin de ligne à la fin du fichier
++#endif // PXR_BASE_WORK_DISPATCHER_H
