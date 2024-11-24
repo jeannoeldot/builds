@@ -1,4 +1,16 @@
 
+
+┌jnd ( ~ )
+└─> $ grep -lR "m_wait_ctx" /home/jnd/99-dwl-temp/onetbb-2022.0.0/oneTBB-2022.0.0/
+/home/jnd/99-dwl-temp/onetbb-2022.0.0/oneTBB-2022.0.0/include/oneapi/tbb/collaborative_call_once.h
+/home/jnd/99-dwl-temp/onetbb-2022.0.0/oneTBB-2022.0.0/src/tbb/arena.cpp
+
+
+
+
+==================================================================================
+SANS PATCH
+==========
 [ 46%] Building CXX object pxr/base/work/CMakeFiles/work.dir/threadLimits.cpp.o
 /build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp: In member function ‘tbb::detail::d1::wait_context& pxrInternal_v0_24__pxrReserved__::WorkDispatcher::_TaskGroup::_GetInternalWaitContext()’:
 /build/openusd-git/src/OpenUSD-24.08/pxr/base/work/dispatcher.cpp:36:12: error: ‘m_wait_ctx’ was not declared in this scope; did you mean ‘m_wait_vertex’?
