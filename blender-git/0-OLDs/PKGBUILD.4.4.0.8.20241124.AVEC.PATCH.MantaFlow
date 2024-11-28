@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.8.20241128
+pkgver=4.4.0.8.20241124
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -43,13 +43,15 @@ source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
         "force-draco1.patch"
         "force-draco2.patch"
+        "blender-4.3-mantaflow-python-3.12.patch"
         "ffmpeg-7-1.patch"
 )
-sha256sums=('f19ec330d09004caf492dce229e2852895f342b3efb590a41dc63747275348b8'
+sha256sums=('ce6dd2652cd3f0fd13a10f009e6b7d03fa52417819cf773bbbeb4e4f700dbc43'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
             '70464fb901abe81326e20c92f4dfef0d13bb8f20dcaee1903b292d0dc46bb091'
             'de4a5fb00721e9698fd22ec00d3781d1a25a884387820e8639f65f32308be86a'
-            'af525f163bffab870b749b2cfd0d5a168224a3b8f9ace963a11dc34cd39dc1af'
+            '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
+            'd74af453b7364065c496f1904fcb41ec3d14c71c01e8f7ad38f97b716dcf93f2'
 )
 
 _gitname="blender"
@@ -60,6 +62,10 @@ prepare() {
   # fix draco
   patch -p1 -i "$srcdir"/force-draco1.patch
   patch -p1 -i "$srcdir"/force-draco2.patch
+
+  # fix fluid sim domain with python 3.12
+  # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18
+  patch -p1 -i "$srcdir"/blender-4.3-mantaflow-python-3.12.patch
 
   # fix build with ffmpeg 7
   patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
@@ -72,9 +78,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "8b233f36db7c"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "f1812626341d"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1732790529|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1732427980|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

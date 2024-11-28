@@ -42,13 +42,8 @@ cp -R OpenUSD-24.08 OpenUSD-24.08.new
 cd OpenUSD-24.08.new/pxr/base/work
 kwrite dispatcher.h
 
-MODIFIER LIGNE 202 :
-         inline tbb::detail::d1::wait_context& _GetInternalWaitContext();
-
-DEVIENT
-         inline tbb::detail::d1::wait_context& _GetInternalWaitContext() {
-                return m_wait_ctx;
-          }
+AJOUTER LIGNE 24 :
+#include <tbb/collaborative_call_once.h>
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier dispatcher.h~
 rm -f dispatcher.h~
@@ -77,6 +72,41 @@ sync
 =================================================================
 ANCIENS
 ========
+
+1) MODIFIER OpenUSD-24.08/pxr/base/work/dispatcher.h
+=====================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R OpenUSD-24.08 OpenUSD-24.08.new
+
+cd OpenUSD-24.08.new/pxr/base/work
+kwrite dispatcher.h
+
+MODIFIER LIGNE 202 :
+         inline tbb::detail::d1::wait_context& _GetInternalWaitContext();
+
+DEVIENT
+         inline tbb::detail::d1::wait_context& _GetInternalWaitContext() {
+                return m_wait_ctx;
+          }
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier dispatcher.h~
+rm -f dispatcher.h~
+
+cd ../../../..
+
+diff -aur OpenUSD-24.08 OpenUSD-24.08.new
+diff -aur OpenUSD-24.08 OpenUSD-24.08.new > fix-error-m_wait_ctx-was-not-declared.patch
+
+rm -rf OpenUSD-24.08.new
+
+
+cd $HOME/05-builds/openusd-git
+
+mv -vf /tmp/srcp/fix-error-m_wait_ctx-was-not-declared.patch .
+
+
+
 
 1) MODIFIER USD-22.03/cmake/defaults/Packages.cmake
 ===================================================

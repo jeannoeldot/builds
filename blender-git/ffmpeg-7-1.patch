@@ -1,7 +1,7 @@
 diff -aur blender/intern/ffmpeg/ffmpeg_compat.h blender.new/intern/ffmpeg/ffmpeg_compat.h
---- blender/intern/ffmpeg/ffmpeg_compat.h	2024-11-20 14:13:20.000000000 +0100
-+++ blender.new/intern/ffmpeg/ffmpeg_compat.h	2024-11-21 09:21:58.710574759 +0100
-@@ -168,6 +168,15 @@
+--- blender/intern/ffmpeg/ffmpeg_compat.h	2024-11-28 11:51:59.000000000 +0100
++++ blender.new/intern/ffmpeg/ffmpeg_compat.h	2024-11-28 12:21:52.912991812 +0100
+@@ -169,6 +169,15 @@
    return align;
  }
  
@@ -14,22 +14,22 @@ diff -aur blender/intern/ffmpeg/ffmpeg_compat.h blender.new/intern/ffmpeg/ffmpeg
 +  #endif
 +}
 +
- /* -------------------------------------------------------------------- */
- /** \name Deinterlace code block
-  *
+ FFMPEG_INLINE void ffmpeg_copy_display_matrix(const AVStream *src, AVStream *dst)
+ {
+ #if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(60, 29, 100)
 diff -aur blender/source/blender/imbuf/intern/anim_movie.cc blender.new/source/blender/imbuf/intern/anim_movie.cc
---- blender/source/blender/imbuf/intern/anim_movie.cc	2024-11-20 14:13:20.000000000 +0100
-+++ blender.new/source/blender/imbuf/intern/anim_movie.cc	2024-11-21 09:27:56.978595575 +0100
-@@ -705,7 +705,7 @@
+--- blender/source/blender/imbuf/intern/anim_movie.cc	2024-11-28 11:51:59.000000000 +0100
++++ blender.new/source/blender/imbuf/intern/anim_movie.cc	2024-11-28 12:31:14.130492280 +0100
+@@ -712,7 +712,7 @@
    anim->cur_pts = av_get_pts_from_frame(anim->pFrame);
  
  #  ifdef FFMPEG_OLD_KEY_FRAME_QUERY_METHOD
--  if (anim->pFrame->key_frame) {
-+  if (av_get_cur_key_frame_pts(anim->pFrame)) {
+-  if (anim->pFrame->key_frame)
++  if (av_get_cur_key_frame_pts(anim->pFrame))
  #  else
-   if (anim->pFrame->flags & AV_FRAME_FLAG_KEY) {
+   if (anim->pFrame->flags & AV_FRAME_FLAG_KEY)
  #  endif
-@@ -1027,11 +1027,10 @@
+@@ -1035,11 +1035,10 @@
  
      AVFormatContext *format_ctx = anim->pFormatCtx;
  

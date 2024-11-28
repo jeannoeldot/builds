@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0.6.20241120
+!!! VERSION = 4.4.0.8.20241128
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.6.20241120.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.8.20241128.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.4.0.6.20241120.tar.zst
+tar -x --zstd -f blender-git-4.4.0.8.20241128.tar.zst
 
 1) DRACO
 =========
@@ -93,7 +93,7 @@ cp -R blender blender.new
 cd blender.new/intern/ffmpeg
 kwrite ffmpeg_compat.h
 
-AJOUTER LIGNES 171 À 179 :
+AJOUTER LIGNES 172 À 180 :
 FFMPEG_INLINE
 bool av_get_cur_key_frame_pts(const AVFrame *picture) {
 #if LIBAVUTIL_VERSION_INT >= AV_VERSION_INT(58, 29, 100)
@@ -113,12 +113,12 @@ cd ../../..
 cd blender.new/source/blender/imbuf/intern
 kwrite anim_movie.cc
 
-MODIFIER LIGNE 708 :
-  if (anim->pFrame->key_frame) {
+MODIFIER LIGNE 715 :
+  if (anim->pFrame->key_frame)
 DEVIENT
-  if (av_get_cur_key_frame_pts(anim->pFrame)) {
+  if (av_get_cur_key_frame_pts(anim->pFrame))
 
-MODIFIER LIGNES 1030 À 1034 :
+MODIFIER LIGNES 1038 À 1042 :
     if (format_ctx->iformat->read_seek2 || format_ctx->iformat->read_seek) {
       ret = av_seek_frame(anim->pFormatCtx, anim->videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
     }
@@ -240,11 +240,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.6.20241120.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.8.20241128.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.4.0.6.20241120.tar.gz
+tar -xzf blender-git-4.4.0.8.20241128.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
