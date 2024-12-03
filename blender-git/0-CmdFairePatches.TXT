@@ -1,86 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0.8.20241201
+!!! VERSION = 4.4.0.9.20241203
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.8.20241201.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.9.20241203.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.4.0.8.20241201.tar.zst
-
-1) DRACO
-=========
-1-1) MODIFIER blender/CMakeLists.txt
-===================================================================
-/!\ /!\ /!\ cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new
-kwrite CMakeLists.txt
-
-SUPPRIMER LIGNES 1240 À 1246 :
-if(NOT WITH_PYTHON_MODULE)
-  if(WITH_DRACO AND NOT WITH_PYTHON_INSTALL)
-    message(STATUS "WITH_DRACO requires WITH_PYTHON_INSTALL to be ON, disabling WITH_DRACO for now")
-    set(WITH_DRACO OFF)
-  endif()
-endif()
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
-rm -f CMakeLists.txt~
-
-cd ..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > force-draco1.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/force-draco1.patch .
-
-1-2) MODIFIER blender/io_scene_gltf2/io/com/draco.py
-=============================================================
-/!\ /!\ /!\ cd /tmp/srcp
-
-cp -R blender blender.new
-
-cd blender.new/scripts/addons_core/io_scene_gltf2/io/com/
-kwrite draco.py
-
-AJOUTER LIGNE 6
-import site
-
-MODIFIER LIGNE 39 :
-    path = os.environ.get('BLENDER_EXTERN_DRACO_LIBRARY_PATH')
-
-DEVIENT
-    path = f"{site.getsitepackages()[0]}/libextern_draco.so"
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER draco.py~
-rm -f draco.py~
-
-cd ../../../../../..
-
-diff -aur blender blender.new
-diff -aur blender blender.new > force-draco2.patch
-
-rm -rf blender.new
-
-cd $HOME/05-builds/blender-git
-
-mv -vf /tmp/srcp/force-draco2.patch .
-
+tar -x --zstd -f blender-git-4.4.0.9.20241203.tar.zst
 
 2) FFMPEG
 ==========
@@ -158,6 +90,74 @@ sync
 =================================================================
 ANCIENS
 ========
+
+1) DRACO
+=========
+1-1) MODIFIER blender/CMakeLists.txt
+===================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new
+kwrite CMakeLists.txt
+
+SUPPRIMER LIGNES 1240 À 1246 :
+if(NOT WITH_PYTHON_MODULE)
+  if(WITH_DRACO AND NOT WITH_PYTHON_INSTALL)
+    message(STATUS "WITH_DRACO requires WITH_PYTHON_INSTALL to be ON, disabling WITH_DRACO for now")
+    set(WITH_DRACO OFF)
+  endif()
+endif()
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > force-draco1.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/force-draco1.patch .
+
+1-2) MODIFIER blender/io_scene_gltf2/io/com/draco.py
+=============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/scripts/addons_core/io_scene_gltf2/io/com/
+kwrite draco.py
+
+AJOUTER LIGNE 6
+import site
+
+MODIFIER LIGNE 39 :
+    path = os.environ.get('BLENDER_EXTERN_DRACO_LIBRARY_PATH')
+
+DEVIENT
+    path = f"{site.getsitepackages()[0]}/libextern_draco.so"
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER draco.py~
+rm -f draco.py~
+
+cd ../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > force-draco2.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git
+
+mv -vf /tmp/srcp/force-draco2.patch .
+
 
 
 3) OPENVDB 11.0.0 -> 12.0.0
@@ -240,11 +240,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.8.20241201.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.9.20241203.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.4.0.8.20241201.tar.gz
+tar -xzf blender-git-4.4.0.9.20241203.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

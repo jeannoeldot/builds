@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.9.20241203
+pkgver=4.4.0.8.20241201
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -26,7 +26,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openshadinglanguage-git'
           'opensubdiv-git' 'openvdb-git' 'alembic-git'
           'embree-git' 'openimagedenoise-git'
-          'openpgl-git' 'materialx' 'openusd-git'
+          'openpgl-git' 'materialx'
           'zstd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
@@ -41,10 +41,14 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
+        "force-draco1.patch"
+        "force-draco2.patch"
         "ffmpeg-7-1.patch"
 )
-sha256sums=('c559bec4d5ad29d7e515da7b96ab97b634a5749eb8f4226ff69784eb83181eef'
+sha256sums=('be1885e3136d2cf3202174739e1b5332c142692634eb2692b74cc37da840ab09'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
+            '70464fb901abe81326e20c92f4dfef0d13bb8f20dcaee1903b292d0dc46bb091'
+            'de4a5fb00721e9698fd22ec00d3781d1a25a884387820e8639f65f32308be86a'
             'af525f163bffab870b749b2cfd0d5a168224a3b8f9ace963a11dc34cd39dc1af'
 )
 
@@ -52,6 +56,10 @@ _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+
+  # fix draco
+  patch -p1 -i "$srcdir"/force-draco1.patch
+  patch -p1 -i "$srcdir"/force-draco2.patch
 
   # fix build with ffmpeg 7
   patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
@@ -64,9 +72,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "be22fcf42531"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "74f212fae2c5"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1733234690|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1733035026|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -86,6 +94,7 @@ build() {
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
         -DWITH_LIBS_PRECOMPILED=OFF \
+        -DWITH_USD=OFF \
         -DWITH_INPUT_NDOF=OFF \
         -DWITH_INSTALL_PORTABLE=OFF \
         -DWITH_PYTHON_INSTALL=OFF \
@@ -123,4 +132,10 @@ package() {
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
   python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+
+  # Manually install draco bindings (See FS#73415)
+  mkdir -p "${pkgdir}/usr/lib/python${_python_ver}"/
+  mv "${pkgdir}"/usr/share/blender/4*/python/lib/* "${pkgdir}"/usr/lib/
+  rm -r "${pkgdir}"/usr/share/blender/4*/python
+  rm -r "${pkgdir}"/usr/lib/python
 }
