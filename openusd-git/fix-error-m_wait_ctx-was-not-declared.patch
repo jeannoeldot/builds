@@ -1,18 +1,15 @@
-diff -aur OpenUSD-24.08/pxr/base/work/dispatcher.h OpenUSD-24.08.new/pxr/base/work/dispatcher.h
---- OpenUSD-24.08/pxr/base/work/dispatcher.h	2024-07-25 00:34:34.000000000 +0200
-+++ OpenUSD-24.08.new/pxr/base/work/dispatcher.h	2024-11-24 14:45:10.426650090 +0100
-@@ -21,6 +21,7 @@
- #include <tbb/blocked_range.h>
- #include <tbb/concurrent_vector.h>
+diff -aur OpenUSD-24.08/pxr/base/work/dispatcher.cpp OpenUSD-24.08.new/pxr/base/work/dispatcher.cpp
+--- OpenUSD-24.08/pxr/base/work/dispatcher.cpp	2024-07-25 00:34:34.000000000 +0200
++++ OpenUSD-24.08.new/pxr/base/work/dispatcher.cpp	2024-12-03 14:39:40.850677580 +0100
+@@ -33,7 +33,11 @@
  #if TBB_INTERFACE_VERSION_MAJOR >= 12
-+#include <tbb/collaborative_call_once.h>
- #include <tbb/task_group.h>
- #else
- #include <tbb/task.h>
-@@ -255,4 +256,4 @@
+ inline tbb::detail::d1::wait_context& 
+ WorkDispatcher::_TaskGroup::_GetInternalWaitContext() {
++#if TBB_INTERFACE_VERSION_MINOR >= 14
++    return m_wait_vertex.get_context();
++#else
+     return m_wait_ctx;
++#endif
+ }
+ #endif
  
- PXR_NAMESPACE_CLOSE_SCOPE
- 
--#endif // PXR_BASE_WORK_DISPATCHER_H
-\ Pas de fin de ligne à la fin du fichier
-+#endif // PXR_BASE_WORK_DISPATCHER_H

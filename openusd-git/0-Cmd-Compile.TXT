@@ -120,7 +120,7 @@ sha256sum OpenUSD-v24.08.tar.gz
 sha256sum fix-error-m_wait_ctx-was-not-declared.patch
 
 sha256sums=('6640bb184bf602c6df14fa4a83af6ac5ae1ab8d1d38cf7bb7decfaa9a7ad5d06'
-            '7dcee852cfa063a1105ab414a1b50fddeb230d719dd12b1a4d5fcc6b4a3e7309'
+            '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
 )
 
 prepare() {
@@ -130,52 +130,6 @@ prepare() {
   # Fixe: error: ‘m_wait_ctx’ was not declared in this scope
   patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
 
-
-
-
-
-source=("USD-v${_ver_release}.tar.gz"
-        "usd-tbb_part_1.patch"
-        "usd-tbb_part_2.patch"
-        "usd-tbb_part_3.patch"
-        "blender-usd-diff.patch"
-        "blender-usd_core_profile-diff.patch"
-        "blender-usd_metal_edf-diff.patch"
-)
-sha256sum OpenUSD-v24.08.tar.gz
-
-sha256sum usd-tbb_part_1.patch
-
-sha256sum usd-tbb_part_2.patch
-
-sha256sum usd-tbb_part_3.patch
-
-sha256sum blender-usd-diff.patch
-
-sha256sum blender-usd_core_profile-diff.patch
-
-sha256sum blender-usd_metal_edf-diff.patch
-
-sha256sums=('... ...'
-            '... ...'
-            '... ...'
-            '... ...'
-            '... ...'
-)
-
-prepare() {
-  cd "${_name_release}"
-  # Compatible avec onetbb 2021.11.0
-  patch -Np1 -i "${srcdir}/usd-tbb_part_1.patch"
-  patch -Np1 -i "${srcdir}/usd-tbb_part_2.patch"
-  patch -Np1 -i "${srcdir}/usd-tbb_part_3.patch"
-  # blender/build_files/build_environment/patches/usd.diff
-  patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
-  # blender/build_files/build_environment/patches/usd_core_profile.diff
-  patch -Np1 -i "${srcdir}/blender-usd_core_profile-diff.patch"
-  # blender/build_files/build_environment/patches/usd_metal_edf.diff
-  patch -Np1 -i "${srcdir}/blender-usd_metal_edf-diff.patch"
-}
 
 
 build() {
@@ -397,6 +351,54 @@ SI PROBLEME
 ========================================================================
 ANCIEN
 ======
+
+
+
+
+source=("USD-v${_ver_release}.tar.gz"
+        "usd-tbb_part_1.patch"
+        "usd-tbb_part_2.patch"
+        "usd-tbb_part_3.patch"
+        "blender-usd-diff.patch"
+        "blender-usd_core_profile-diff.patch"
+        "blender-usd_metal_edf-diff.patch"
+)
+sha256sum OpenUSD-v24.08.tar.gz
+
+sha256sum usd-tbb_part_1.patch
+
+sha256sum usd-tbb_part_2.patch
+
+sha256sum usd-tbb_part_3.patch
+
+sha256sum blender-usd-diff.patch
+
+sha256sum blender-usd_core_profile-diff.patch
+
+sha256sum blender-usd_metal_edf-diff.patch
+
+sha256sums=('... ...'
+            '... ...'
+            '... ...'
+            '... ...'
+            '... ...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # Compatible avec onetbb 2021.11.0
+  patch -Np1 -i "${srcdir}/usd-tbb_part_1.patch"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_2.patch"
+  patch -Np1 -i "${srcdir}/usd-tbb_part_3.patch"
+  # blender/build_files/build_environment/patches/usd.diff
+  patch -Np1 -i "${srcdir}/blender-usd-diff.patch"
+  # blender/build_files/build_environment/patches/usd_core_profile.diff
+  patch -Np1 -i "${srcdir}/blender-usd_core_profile-diff.patch"
+  # blender/build_files/build_environment/patches/usd_metal_edf.diff
+  patch -Np1 -i "${srcdir}/blender-usd_metal_edf-diff.patch"
+}
+
+
 
 namcap openusd-git-*-x86_64.pkg.tar.*
 openusd-git E: ELF file ('usr/share/usd/examples/plugin/hdTiny.so') outside of a valid path.

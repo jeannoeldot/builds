@@ -32,21 +32,31 @@ https://projects.blender.org/blender/blender/src/branch/main/build_files/build_e
 
 https://gitlab.archlinux.org/archlinux/packaging/packages/usd/-/blob/main/usd-tbb.patch
 
+https://github.com/PixarAnimationStudios/OpenUSD/pull/3392/files
 
-1) MODIFIER OpenUSD-24.08/pxr/base/work/dispatcher.h
-=====================================================
+
+1) MODIFIER OpenUSD-24.08/pxr/base/work/dispatcher.cpp
+======================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
 cp -R OpenUSD-24.08 OpenUSD-24.08.new
 
 cd OpenUSD-24.08.new/pxr/base/work
-kwrite dispatcher.h
+kwrite dispatcher.cpp
 
-AJOUTER LIGNE 24 :
-#include <tbb/collaborative_call_once.h>
+REMPLACER LIGNE 36 :
+    return m_wait_ctx;
 
-ENREGISTRER et Quitter Kwrite & EFFACER fichier dispatcher.h~
-rm -f dispatcher.h~
+DEVIENT
+#if TBB_INTERFACE_VERSION_MINOR >= 14
+    return m_wait_vertex.get_context();
+#else
+    return m_wait_ctx;
+#endif
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier dispatcher.cpp~
+rm -f dispatcher.cpp~
 
 cd ../../../..
 
