@@ -1,18 +1,31 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0.9.20241203
+!!! VERSION = 4.4.0.11.20241208
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git/0-AVEC-USD
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.9.20241203.tar.zst /tmp/srcp/
+cp -v blender-git-4.4.0.11.20241208.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.4.0.9.20241203.tar.zst
+tar -x --zstd -f blender-git-4.4.0.11.20241208.tar.zst
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 2) FFMPEG
 ==========
@@ -78,18 +91,6 @@ cd $HOME/05-builds/blender-git
 
 mv -vf /tmp/srcp/ffmpeg-7-1.patch .
 
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) DRACO
 =========
@@ -240,11 +241,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.4.0.9.20241203.tar.gz /tmp/srcp/
+cp -v blender-git-4.4.0.11.20241208.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.4.0.9.20241203.tar.gz
+tar -xzf blender-git-4.4.0.11.20241208.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

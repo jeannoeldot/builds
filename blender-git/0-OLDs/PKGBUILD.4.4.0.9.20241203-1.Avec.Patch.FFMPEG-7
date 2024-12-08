@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.11.20241208
+pkgver=4.4.0.9.20241203
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -11,7 +11,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp' 'libjpeg-turbo'
           'python'
           'ffmpeg' 'fftw'
-          'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
+          'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse'
           'libglvnd' 'glfw' 'libxi'
           'boost-libs' 'onetbb' 'draco'
           'jemalloc'
@@ -41,15 +41,20 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
+        "ffmpeg-7-1.patch"
 )
-sha256sums=('bf48e68b1c93414d8dc8f1367ec4d3c7737ea95faec1571d1f1eddb23ff12982'
+sha256sums=('c559bec4d5ad29d7e515da7b96ab97b634a5749eb8f4226ff69784eb83181eef'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
+            'af525f163bffab870b749b2cfd0d5a168224a3b8f9ace963a11dc34cd39dc1af'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+
+  # fix build with ffmpeg 7
+  patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
@@ -59,9 +64,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "793c9a8984b0"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "be22fcf42531"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1733615313|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1733234690|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
