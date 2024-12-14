@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.12.20241212
+pkgver=4.4.0.13.20241214
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -41,15 +41,20 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
+        "131867.patch"
 )
-sha256sums=('a87e0f0c63a6ab69a3f626eb83800a308245794760b07ce3a31e74565e4125ac'
+sha256sums=('9402e5631b9e3bc418cb2c3b7877cec6e4daabc2927a24b91966131b9769fac3'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
+            '40315a32730e2262006c25cc8c1cff55ea4b311dca2a793d78ad35940a348101'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+
+  # Cleanup: Fix warning from deprecated header with OpenVDB 12 #131867
+  patch -p1 -i "${srcdir}/131867.patch"
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner

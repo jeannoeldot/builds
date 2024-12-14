@@ -1,0 +1,31 @@
+From f8693b920d4e7e55d0d878c854224ec314b52ea0 Mon Sep 17 00:00:00 2001
+From: Brecht Van Lommel <brecht@blender.org>
+Date: Fri, 13 Dec 2024 17:19:49 +0100
+Subject: [PATCH] Cleanup: Fix warning from deprected header with OpenVDB 12
+
+---
+ intern/cycles/scene/image_vdb.cpp | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/intern/cycles/scene/image_vdb.cpp b/intern/cycles/scene/image_vdb.cpp
+index 42964fac81d..57efc6178be 100644
+--- a/intern/cycles/scene/image_vdb.cpp
++++ b/intern/cycles/scene/image_vdb.cpp
+@@ -12,7 +12,13 @@
+ #endif
+ #ifdef WITH_NANOVDB
+ #  define NANOVDB_USE_OPENVDB
+-#  include <nanovdb/util/OpenToNanoVDB.h>
++#  include <nanovdb/NanoVDB.h>
++#  if NANOVDB_MAJOR_VERSION_NUMBER > 32 || \
++      (NANOVDB_MAJOR_VERSION_NUMBER == 32 && NANOVDB_MINOR_VERSION_NUMBER >= 7)
++#    include <nanovdb/tools/CreateNanoGrid.h>
++#  else
++#    include <nanovdb/util/OpenToNanoVDB.h>
++#  endif
+ #endif
+ 
+ CCL_NAMESPACE_BEGIN
+-- 
+2.30.2
+
