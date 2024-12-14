@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-git
 pkgver=24.08.20240725
+pkgrel=2      # rebuild MAJ openvdb 12.0.0: OK
 pkgrel=1
 
 pkgrel=5      # rebuild MAJ openèxr 3.3.2
@@ -213,14 +214,9 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users      3221  7 janv. 11:09 blender-usd-diff.patch
--rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
--rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
--rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.08.tar.gz
--rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
--rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
--rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v24.08.tar.gz
+-rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
+-rw-r--r--  1 jnd users       557  3 déc.  14:40 fix-error-m_wait_ctx-was-not-declared.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -302,9 +298,11 @@ usr/lib/python3.12/site-packages/pxr/...
 ...
 
 namcap openusd-git-*-x86_64.pkg.tar.*
+......
 openusd-git W: Dependency included, but may not be needed ('glfw')
 openusd-git W: Dependency included, but may not be needed ('openexr')
 openusd-git W: Dependency included, but may not be needed ('opencolorio')
+openusd-git W: Dependency included, but may not be needed ('openvdb-git')
 openusd-git W: Dependency included, but may not be needed ('python-jinja')
 
 
@@ -353,6 +351,19 @@ ANCIEN
 ======
 
 
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==>
+-rw-r--r--  1 jnd users      3221  7 janv. 11:09 blender-usd-diff.patch
+-rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
+-rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
+-rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.08.tar.gz
+-rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
+-rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
+-rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
 
 
 source=("USD-v${_ver_release}.tar.gz"
