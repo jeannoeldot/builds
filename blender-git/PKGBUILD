@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.13.20241214
+pkgver=4.4.0.15.20241221
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -41,20 +41,15 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
-        "131867.patch"
 )
-sha256sums=('9402e5631b9e3bc418cb2c3b7877cec6e4daabc2927a24b91966131b9769fac3'
+sha256sums=('92d4cb0f6ecc4dcdbed13e4b73dae224aa47acd064070254f7eb1d5f4e6cd71e'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
-            '40315a32730e2262006c25cc8c1cff55ea4b311dca2a793d78ad35940a348101'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
-
-  # Cleanup: Fix warning from deprecated header with OpenVDB 12 #131867
-  patch -p1 -i "${srcdir}/131867.patch"
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
@@ -64,9 +59,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7e1db7de1943"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "c62a032fab09"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1733998795|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1734740958|' build_files/cmake/buildinfo.cmake
 }
 
 build() {

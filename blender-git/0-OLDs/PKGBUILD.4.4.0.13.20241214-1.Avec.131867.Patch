@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.5.20241110
-pkgrel=2
+pkgver=4.4.0.13.20241214
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -11,7 +11,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp' 'libjpeg-turbo'
           'python'
           'ffmpeg' 'fftw'
-          'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse'
+          'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
           'libglvnd' 'glfw' 'libxi'
           'boost-libs' 'onetbb' 'draco'
           'jemalloc'
@@ -41,21 +41,11 @@ provides=('blender')
 options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
-        "force-draco1.patch"
-        "force-draco2.patch"
-        "blender-4.3-mantaflow-python-3.12.patch"
-        "ffmpeg-7-1.patch"
-        "ffmpeg-7-2.patch"
-        "fix-build-with-openvdb-12.0.0.patch"
+        "131867.patch"
 )
-sha256sums=('c61eb3bac737466e14a86ae416a981dd4b984dd4a6d461c42dd6ad059eabb417'
+sha256sums=('9402e5631b9e3bc418cb2c3b7877cec6e4daabc2927a24b91966131b9769fac3'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
-            '9140f3cc9f3a6de6a51efa704c54d8fc5cb786f3c0c1d547a9b4e962b8422c4a'
-            'de4a5fb00721e9698fd22ec00d3781d1a25a884387820e8639f65f32308be86a'
-            '53594d1f7fbbd56de184de87ae4939078a30eba8af061c8039865a1d51149a25'
-            '20b888982a813775fc299c29f5cbb9bf6e728c8fe58bc948d6767362c6aea51a'
-            '499a9ec9a1aa7c5ef26ce5bb26f48576cccf1fc5906e966f92e25506405e9ad0'
-            '553a93af949e6729d3b959f9edfa2fb23d58227426f8377594e71fe2eb7dc39f'
+            '40315a32730e2262006c25cc8c1cff55ea4b311dca2a793d78ad35940a348101'
 )
 
 _gitname="blender"
@@ -63,20 +53,8 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
-  # fix draco
-  patch -p1 -i "$srcdir"/force-draco1.patch
-  patch -p1 -i "$srcdir"/force-draco2.patch
-
-  # fix fluid sim domain with python 3.12
-  # https://gitlab.archlinux.org/archlinux/packaging/packages/blender/-/issues/18
-  patch -p1 -i "$srcdir"/blender-4.3-mantaflow-python-3.12.patch
-
-  # fix build with ffmpeg 7
-  patch -p1 -i "$srcdir"/ffmpeg-7-1.patch
-  patch -p1 -i "$srcdir"/ffmpeg-7-2.patch
-
-  # fix build with openvdb 12.0.0
-  patch -p1 -i "$srcdir"/fix-build-with-openvdb-12.0.0.patch
+  # Cleanup: Fix warning from deprecated header with OpenVDB 12 #131867
+  patch -p1 -i "${srcdir}/131867.patch"
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
@@ -86,9 +64,9 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "079ccd87c56f"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7e1db7de1943"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1731221303|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1733998795|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -145,10 +123,4 @@ package() {
   # voir Community
   python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
   python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
-
-  # Manually install draco bindings (See FS#73415)
-  mkdir -p "${pkgdir}/usr/lib/python${_python_ver}"/
-  mv "${pkgdir}"/usr/share/blender/4*/python/lib/* "${pkgdir}"/usr/lib/
-  rm -r "${pkgdir}"/usr/share/blender/4*/python
-  rm -r "${pkgdir}"/usr/lib/python
 }
