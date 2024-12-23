@@ -36,6 +36,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-git
 pkgver=2.3.1.20241112
+pkgrel=2  # Rebuild MAJ python 3.13
 pkgrel=1
 
 pkgrel=2  # Rebuild MAJ tbb 2021.4
