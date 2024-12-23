@@ -44,6 +44,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.12.0.20241205
+pkgrel=2    # rebuild MAJ python 3.13
+
 pkgrel=1
 
 pkgrel=6    # rebuild MAJ OIIO 2.5.17.0 + openexr 3.3.2
@@ -118,9 +120,9 @@ options=('!debug')
 !!! LLVM 18.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 18.1.8-4 [installé]
-extra/llvm 18.1.8-4 [installé]
-extra/llvm-libs 18.1.8-4 [installé]
+extra/clang 18.1.8-5 [installé]
+extra/llvm 18.1.8-5 [installé]
+extra/llvm-libs 18.1.8-5 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
