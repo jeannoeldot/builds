@@ -2,7 +2,7 @@
 
 pkgname=openusd-git
 pkgver=24.08.20240725
-pkgrel=2
+pkgrel=3
 _ver_release="24.08"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
