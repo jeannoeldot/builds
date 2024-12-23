@@ -2,7 +2,7 @@
 
 pkgname=openimageio-git
 pkgver=2.5.17.0.20241101
-pkgrel=2
+pkgrel=3
 _name_release="OpenImageIO-2.5.17.0"
 _ver_release="v2.5.17.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
@@ -44,7 +44,7 @@ build() {
       -DINSTALL_FONTS=OFF \
       -DUSE_CCACHE=OFF \
       -DUSE_SIMD=avx2 \
-      -DPYTHON_VERSION=3.12 \
+      -DPYTHON_VERSION=3.13 \
       -DOIIO_DOWNLOAD_MISSING_TESTDATA=OFF \
       -DUSE_EXTERNAL_PUGIXML=ON
   make -C build

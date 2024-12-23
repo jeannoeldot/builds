@@ -38,6 +38,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-git
 pkgver=2.5.17.0.20241101
+pkgrel=3    # rebuild MAJ python 3.13
+
 pkgrel=2     # MAJ openexr 3.3.2
 
 pkgrel=1
@@ -175,10 +177,10 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
-==> extra/python 3.12.6-1 [installé]
+==> extra/python 3.13.1-1 [installé]
 
 ATTENTION AUX VERSIONS DE PYTHON
-PYTHON_VERSION=3.12
+PYTHON_VERSION=3.13
 
 !!! VERSION 2.5.17.0
 build() {
