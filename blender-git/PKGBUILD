@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git
-pkgver=4.4.0.15.20241221
+pkgver=4.4.0.15.20241223
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -42,7 +42,7 @@ options=('!lto' '!debug')
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
 )
-sha256sums=('92d4cb0f6ecc4dcdbed13e4b73dae224aa47acd064070254f7eb1d5f4e6cd71e'
+sha256sums=('fa5889f650569779543cdd3e87676ea0888010de65c001d3d22a53ca8b084bd3'
             'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
 )
 
@@ -59,15 +59,15 @@ prepare() {
   sed -i -e 's|numpy "core/include"|numpy "_core/include"|' CMakeLists.txt
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "c62a032fab09"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "1b806891a683"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1734740958|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1734950389|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
   cd "${_gitname}"
   
-  local _python_ver=3.12
+  local _python_ver=3.13
   local _llvm_libs_ver=18
 
   cmake \
