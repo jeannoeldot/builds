@@ -16,6 +16,8 @@ tar -xzf pokerth-1.1.2.tar.gz
 
 1) PATCH explicitly link /usr/lib/libabsl_log_internal_message.so and
                          /usr/lib/libabsl_log_internal_check_op.so
+                         ET AU 24/12/2024
+                         /usr/lib/libabsl_log_internal_nullguard.so
 ======================================================================
 1-1) MODIFIER pokerth-1.1.2-rc/pokerth_game.pro
 -----------------------------------------------
@@ -29,7 +31,8 @@ LIGNE 527 :
 DEVIENT :
 				-lprotobuf \
 				/usr/lib/libabsl_log_internal_message.so \
-				/usr/lib/libabsl_log_internal_check_op.so
+				/usr/lib/libabsl_log_internal_check_op.so \
+				/usr/lib/libabsl_log_internal_nullguard.so
 
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier pokerth_game.pro~
