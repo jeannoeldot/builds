@@ -1,0 +1,29 @@
+https://download.blender.org/release/Blender4.3/blender-4.3.1.md5
+
+https://download.blender.org/release/Blender4.3/blender-4.3.1.sha256
+
+Bonjour
+
+Juste pour vous signaler que les fichiers de signatures md5 et sha256 correspondent à la version 4.31 et non à la version 4.32
+
+
+Merci pour votre travail.
+
+
+Hello
+On the website https://www.blender.org/download/
+Just to let you know that the md5 and sha256 signature files correspond to version 4.31 and not to version 4.32.
+
+
+Thanks for your work.
+
+
+https://www.blender.org/download/
+
+Signature files in Version 4.32
+Hello
+
+Just to point out that the md5 and sha256 signature files correspond to version 4.31 and not version 4.32.
+
+
+Thank you for your work.
