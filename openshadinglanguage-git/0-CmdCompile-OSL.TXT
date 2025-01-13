@@ -44,6 +44,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-git
 pkgver=1.13.12.0.20241205
+pkgrel=4    # rebuild MAJ LLVM 19
 pkgrel=3    # rebuild MAJ OIIO 2.5.18.0
 pkgrel=2    # rebuild MAJ python 3.13
 
@@ -118,12 +119,12 @@ provides=('openshadinglanguage')
 
 options=('!debug')
 
-!!! LLVM 18.0
+!!! LLVM 19.0
 ------------------------------------
 $ pacman -Ss llvm | grep install
-extra/clang 18.1.8-5 [installé]
-extra/llvm 18.1.8-5 [installé]
-extra/llvm-libs 18.1.8-5 [installé]
+extra/clang 19.1.6-1 [installé]
+extra/llvm 19.1.6-3 [installé]
+extra/llvm-libs 19.1.6-3 [installé]
 
 depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
