@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-git
-pkgver=24.11.20241025
-pkgrel=1
-_ver_release="24.11"
+pkgver=24.08.20240725
+pkgrel=3
+_ver_release="24.08"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -28,11 +28,9 @@ provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "fix-error-m_wait_ctx-was-not-declared.patch"
-        "usd-cmake-find-dependency.patch"
 )
-sha256sums=('1ab3dc387c8ce8c650d66143c86fb44ed6fe5c9638522bcb3226e85a401c4f69'
+sha256sums=('6640bb184bf602c6df14fa4a83af6ac5ae1ab8d1d38cf7bb7decfaa9a7ad5d06'
             '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
-            '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
 )
 
 prepare() {
@@ -41,9 +39,6 @@ prepare() {
   # Compatible avec onetbb 2022.0.0
   # Fixe: error: ‘m_wait_ctx’ was not declared in this scope
   patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
-  #
-  patch -Np1 -i "${srcdir}/usd-cmake-find-dependency.patch"
-
 
   _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
@@ -55,24 +50,24 @@ prepare() {
   sed -i 's|lib/python/pxr|/usr/lib/python'$_pyver'/site-packages/pxr|' \
       cmake/macros/{Private,Public}.cmake pxr/usdImaging/usdviewq/CMakeLists.txt
 
-  sed -i \
-    -e 's|/pxrConfig.cmake|/lib/cmake/pxr/pxrConfig.cmake|g' \
-    -e 's|${CMAKE_INSTALL_PREFIX}|${CMAKE_INSTALL_PREFIX}/lib/cmake/pxr|g' \
-    -e 's|"cmake"|"lib/cmake/pxr"|g' \
-        pxr/CMakeLists.txt
-  sed -i \
-    -e 's|${PXR_CMAKE_DIR}/cmake|${PXR_CMAKE_DIR}|g' \
-    -e 's|${PXR_CMAKE_DIR}/include|/usr/include|g' \
-    -e 's|EXACT COMPONENTS|COMPONENTS|g' \
-        pxr/pxrConfig.cmake.in
+  sed -i 's|/pxrConfig.cmake|/lib/cmake/pxr/pxrConfig.cmake|g' \
+      pxr/CMakeLists.txt
+  sed -i 's|${CMAKE_INSTALL_PREFIX}|${CMAKE_INSTALL_PREFIX}/lib/cmake/pxr|g' \
+      pxr/CMakeLists.txt
+  sed -i 's|"cmake"|"lib/cmake/pxr"|g' \
+      pxr/CMakeLists.txt
+  sed -i 's|${PXR_CMAKE_DIR}/cmake|${PXR_CMAKE_DIR}|g' \
+      pxr/pxrConfig.cmake.in
+  sed -i 's|${PXR_CMAKE_DIR}/include|/usr/include|g' \
+      pxr/pxrConfig.cmake.in
+  sed -i 's|EXACT COMPONENTS|COMPONENTS|g' \
+      pxr/pxrConfig.cmake.in
 
   # Further drop shebangs line for some py files
   sed -r -i '1{/^#!/d}' \
       pxr/usd/sdr/shaderParserTestUtils.py \
       pxr/usd/usdUtils/updateSchemaWithSdrNode.py \
       pxr/usdImaging/usdviewq/usdviewApi.py
-
-  rm -r docs/doxygen/doxygen-awesome-css/
 }
 
 build() {
@@ -84,6 +79,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
     -DPXR_MALLOC_LIBRARY=/usr/lib/libjemalloc.so \
+    -DPXR_USE_PYTHON_3=ON \
     -DPXR_BUILD_TESTS=OFF \
     -DPXR_BUILD_EXAMPLES=OFF \
     -DPXR_BUILD_TUTORIALS=OFF \
@@ -96,6 +92,7 @@ build() {
     -DPXR_BUILD_MONOLITHIC=ON \
     -DPYTHON_EXECUTABLE=/usr/bin/python \
     -DPXR_ENABLE_GL_SUPPORT=ON \
+    -DCMAKE_DEBUG_POSTFIX=_d \
 
   find . -type f -exec sed -i -e 's/\-O3//g' {} \;
   make -C build

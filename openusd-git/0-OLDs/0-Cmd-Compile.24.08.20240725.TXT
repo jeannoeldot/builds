@@ -17,16 +17,16 @@ cd $HOME/05-builds/openusd-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==>  tallytalwar released this on 25 oct 2024  ==> 20241025
-==> v24.11  ==> 24.11
-==> 24.11.20241025
+==>  sunyab  released this on 25 juil 2024  ==> 20240725
+==> v24.08  ==> 24.08
+==> 24.08.20240725
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenUSD-v24.11.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v24.11.tar.gz
+wget -O OpenUSD-v24.08.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v24.08.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -34,7 +34,7 @@ cd $HOME/05-builds/openusd-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v24.11.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v24.08.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -47,11 +47,11 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-git
-pkgver=24.11.20241025
-pkgrel=1
-
+pkgver=24.08.20240725
 pkgrel=3      # rebuild MAJ python 3.13
 pkgrel=2      # rebuild MAJ openvdb 12.0.0: OK
+pkgrel=1
+
 pkgrel=5      # rebuild MAJ openèxr 3.3.2
 pkgrel=4      # rebuild MAJ openvdb 12.0.0: OK MAIS BLENDER PAS OK
 pkgrel=3      # Rebuild maj opencolorio 2.4.0 + dep opencolorio
@@ -78,7 +78,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="24.11"
+_ver_release="24.08"
 _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
@@ -107,7 +107,7 @@ SANS PATCH
 source=("USD-v${_ver_release}.tar.gz"
 )
 
-sha256sum OpenUSD-v24.11.tar.gz
+sha256sum OpenUSD-v24.08.tar.gz
 
 
 
@@ -115,18 +115,14 @@ AVEC PATCH
 ----------
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "fix-error-m_wait_ctx-was-not-declared.patch"
-        "usd-cmake-find-dependency.patch"
 )
 
-sha256sum OpenUSD-v24.11.tar.gz
+sha256sum OpenUSD-v24.08.tar.gz
 
 sha256sum fix-error-m_wait_ctx-was-not-declared.patch
 
-sha256sum usd-cmake-find-dependency.patch
-
-sha256sums=('1ab3dc387c8ce8c650d66143c86fb44ed6fe5c9638522bcb3226e85a401c4f69'
+sha256sums=('6640bb184bf602c6df14fa4a83af6ac5ae1ab8d1d38cf7bb7decfaa9a7ad5d06'
             '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
-            '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
 )
 
 prepare() {
@@ -152,11 +148,11 @@ VOIR :
 
 mkdir /tmp/srcp
 
-tar -xzf OpenUSD-v24.11.tar.gz -C /tmp/srcp
+tar -xzf OpenUSD-v24.08.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenUSD-24.11/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenUSD-24.08/CMakeLists.txt
 
-2) kwrite /tmp/srcp/OpenUSD-24.11/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/OpenUSD-24.08/cmake/defaults/Options.cmake
 
 LIGNE 10  PXR_BUILD_TESTS           ON ==> OFF
 
@@ -185,58 +181,43 @@ LIGNE 26  PXR_BUILD_HTML_DOCUMENTATION "Generate HTML documentation if PXR_BUILD
 
 LIGNE 27  PXR_ENABLE_PYTHON_SUPPORT ON
 LIGNE 28  PXR_USE_DEBUG_PYTHON "Build with debug python" OFF
-LIGNE 29  PXR_USE_BOOST_PYTHON "Use boost::python for Python bindings (deprecated)" OFF
 
-LIGNE 30  PXR_ENABLE_HDF5_SUPPORT   OFF
-LIGNE 31  PXR_ENABLE_OSL_SUPPORT "Enable OSL (OpenShadingLanguage) based components" OFF
-LIGNE 32  PXR_ENABLE_PTEX_SUPPORT "Enable Ptex support" OFF
-LIGNE 33  PXR_ENABLE_OPENVDB_SUPPORT "Enable OpenVDB support" OFF ==> ON
+LIGNE 29  PXR_ENABLE_HDF5_SUPPORT   OFF
+LIGNE 30  PXR_ENABLE_OSL_SUPPORT "Enable OSL (OpenShadingLanguage) based components" OFF
+LIGNE 31  PXR_ENABLE_PTEX_SUPPORT "Enable Ptex support" OFF
+LIGNE 32  PXR_ENABLE_OPENVDB_SUPPORT "Enable OpenVDB support" OFF ==> ON
 
-LIGNE 34  PXR_BUILD_MAYAPY_TESTS   OFF
-LIGNE 35  PXR_BUILD_ANIMX_TESTS   OFF
+LIGNE 33  PXR_BUILD_MAYAPY_TESTS   OFF
+LIGNE 34  PXR_BUILD_ANIMX_TESTS   OFF
 
-LIGNE 36  PXR_ENABLE_NAMESPACES     ON ???
+LIGNE 35  PXR_ENABLE_NAMESPACES     ON ???
 
-LIGNE 37  PXR_PREFER_SAFETY_OVER_SPEED  ON
+LIGNE 36  PXR_PREFER_SAFETY_OVER_SPEED  ON
 
-LIGNE 78  PXR_ENABLE_METAL_SUPPORT "Enable Metal based components" "${pxr_enable_metal}" OFF
-LIGNE 79  PXR_ENABLE_VULKAN_SUPPORT "Enable Vulkan based components" OFF
-LIGNE 80  PXR_ENABLE_GL_SUPPORT "Enable OpenGL based components" ON
-
-LIGNE 146 BUILD_SHARED_LIBS         ON
-LIGNE 147 PXR_BUILD_MONOLITHIC      OFF ==> ON
+LIGNE 137 BUILD_SHARED_LIBS         ON
+LIGNE 138 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/OpenUSD-24.11/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/OpenUSD-24.08/cmake/defaults/ProjectDefaults.cmake
 
 LIGNE 38  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/OpenUSD-24.11/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/OpenUSD-24.08/cmake/defaults/CXXDefaults.cmake
 
 LIGNE 67  PXR_SET_INTERNAL_NAMESPACE
 
 
 rm -rf /tmp/srcp
 
-CMake Warning:
-  Manually-specified variables were not used by the project:
-
-    CMAKE_DEBUG_POSTFIX
-    PXR_USE_PYTHON_3
-
-
-
-
   
 !!! ATTENTION : ATTRIBUTS FICHIERS
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v24.11.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v24.08.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users       557  3 déc.  14:40 fix-error-m_wait_ctx-was-not-declared.patch
--rw-r--r--  1 jnd users      1539 15 janv. 14:26 usd-cmake-find-dependency.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -255,7 +236,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openusd-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openusd-git/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v24.11.tar.gz . \
+&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v24.08.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openusd-git \
 && cp -v /tmp/build/openusd-git-*-x86_64.pkg.tar.* . \
@@ -319,10 +300,10 @@ usr/lib/python3.12/site-packages/pxr/...
 
 namcap openusd-git-*-x86_64.pkg.tar.*
 ......
-openusd-git W: Dependency included, but may not be needed ('boost-libs')
 openusd-git W: Dependency included, but may not be needed ('glfw')
 openusd-git W: Dependency included, but may not be needed ('openexr')
 openusd-git W: Dependency included, but may not be needed ('opencolorio')
+openusd-git W: Dependency included, but may not be needed ('openvdb-git')
 openusd-git W: Dependency included, but may not be needed ('python-jinja')
 
 
@@ -344,7 +325,7 @@ $ mv -v openusd-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenUSD-v24.11.tar.gz
+$ rm -i OpenUSD-v24.08.tar.gz
 
 
 $ cd && maj-repolocal
@@ -380,7 +361,7 @@ $ ls -la
 -rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
 -rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.11.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.08.tar.gz
 -rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
 -rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
 -rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
@@ -394,7 +375,7 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
-sha256sum OpenUSD-v24.11.tar.gz
+sha256sum OpenUSD-v24.08.tar.gz
 
 sha256sum usd-tbb_part_1.patch
 
@@ -446,7 +427,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum OpenUSD-v24.11.tar.gz
+sha256sum OpenUSD-v24.08.tar.gz
 
 sha256sum blender-usd-diff.patch
 
