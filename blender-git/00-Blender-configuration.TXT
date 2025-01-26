@@ -1,4 +1,108 @@
 
+16) 4.4.0.27.20250126
+
+Blender Configuration
+=====================
+
+  Build Options:
+  - WITH_ALEMBIC                    ON
+  - WITH_BULLET                     ON
+  - WITH_CLANG                      ON
+  - WITH_CYCLES                     ON
+  - WITH_FFTW3                      ON
+  - WITH_FREESTYLE                  ON
+  - WITH_GMP                        ON
+  - WITH_HARU                       ON
+  - WITH_IK_ITASC                   ON
+  - WITH_IK_SOLVER                  ON
+  - WITH_INPUT_NDOF                 OFF
+  - WITH_INPUT_IME                  ON
+  - WITH_INTERNATIONAL              ON
+  - WITH_OPENCOLLADA                ON
+  - WITH_OPENCOLORIO                ON
+  - WITH_OPENIMAGEDENOISE           ON
+  - WITH_OPENSUBDIV                 ON
+  - WITH_OPENVDB                    ON
+  - WITH_POTRACE                    ON
+  - WITH_PUGIXML                    ON
+  - WITH_QUADRIFLOW                 ON
+  - WITH_TBB                        ON
+  - WITH_USD                        ON
+  - WITH_MATERIALX                  ON
+  - WITH_XR_OPENXR                  OFF
+
+  Compiler Options:
+  - WITH_BUILDINFO                  ON
+  - WITH_OPENMP                     ON
+
+  System Options:
+  - WITH_INSTALL_PORTABLE           OFF
+  - WITH_MEM_JEMALLOC               ON
+  - WITH_MEM_VALGRIND               OFF
+
+  GHOST Options:
+  - WITH_GHOST_DEBUG                OFF
+  - WITH_GHOST_SDL                  OFF
+  - WITH_GHOST_X11                  ON
+  - WITH_GHOST_WAYLAND              ON
+  - WITH_GHOST_XDND                 ON
+  - WITH_X11_XF86VMODE              ON
+  - WITH_X11_XFIXES                 ON
+  - WITH_X11_XINPUT                 ON
+  - WITH_GHOST_WAYLAND_DYNLOAD      ON
+  - WITH_GHOST_WAYLAND_LIBDECOR     ON
+
+  Image Formats:
+  - WITH_IMAGE_CINEON               ON
+  - WITH_IMAGE_OPENEXR              ON
+  - WITH_IMAGE_OPENJPEG             ON
+
+  Audio:
+  - WITH_AUDASPACE                  ON
+  - WITH_CODEC_FFMPEG               ON
+  - WITH_CODEC_SNDFILE              ON
+  - WITH_COREAUDIO                  OFF
+  - WITH_JACK                       ON
+  - WITH_JACK_DYNLOAD               OFF
+  - WITH_OPENAL                     ON
+  - WITH_PULSEAUDIO                 ON
+  - WITH_PULSEAUDIO_DYNLOAD         OFF
+  - WITH_SDL                        OFF
+  - WITH_WASAPI                     OFF
+
+  Compression:
+  - WITH_LZMA                       ON
+  - WITH_LZO                        ON
+
+  Python:
+  - WITH_PYTHON_INSTALL             OFF
+  - WITH_PYTHON_INSTALL_NUMPY       OFF
+  - WITH_PYTHON_INSTALL_ZSTANDARD   OFF
+  - WITH_PYTHON_MODULE              OFF
+  - WITH_PYTHON_SAFETY              OFF
+
+  Modifiers:
+  - WITH_MOD_FLUID                  ON
+  - WITH_MOD_OCEANSIM               ON
+  - WITH_MOD_REMESH                 ON
+
+  Rendering:
+  - WITH_HYDRA                      ON
+
+  Rendering (Cycles):
+  - WITH_CYCLES_OSL                 ON
+  - WITH_CYCLES_EMBREE              ON
+  - WITH_CYCLES_PATH_GUIDING        ON
+  - WITH_CYCLES_DEVICE_OPTIX        ON
+  - WITH_CYCLES_DEVICE_CUDA         ON
+  - WITH_CYCLES_CUDA_BINARIES       ON
+  - WITH_CYCLES_DEVICE_ONEAPI       OFF
+  - WITH_CYCLES_ONEAPI_BINARIES     OFF
+  - WITH_CYCLES_DEVICE_HIP          OFF
+  - WITH_CYCLES_HIP_BINARIES        OFF
+  - WITH_CYCLES_DEVICE_HIPRT        OFF
+
+
 15) 4.3.0.7.20240707 AVEC WITH_HYDRA=ON
 
 Blender Configuration
