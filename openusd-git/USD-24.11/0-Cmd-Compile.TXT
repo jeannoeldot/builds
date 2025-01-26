@@ -17,16 +17,16 @@ cd $HOME/05-builds/openusd-git
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==>  sunyab released this on 21 jan 2025  ==> 20250121
-==> v25.02  ==> 25.02
-==> 25.02.20250121
+==>  tallytalwar released this on 25 oct 2024  ==> 20241025
+==> v24.11  ==> 24.11
+==> 24.11.20241025
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenUSD-v25.02.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v25.02.tar.gz
+wget -O OpenUSD-v24.11.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v24.11.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -34,7 +34,7 @@ cd $HOME/05-builds/openusd-git
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v25.02.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v24.11.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -47,7 +47,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-git
-pkgver=25.02.20250121
+pkgver=24.11.20241025
 pkgrel=1
 
 pkgrel=3      # rebuild MAJ python 3.13
@@ -78,7 +78,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="25.02"
+_ver_release="24.11"
 _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
@@ -107,7 +107,7 @@ SANS PATCH
 source=("USD-v${_ver_release}.tar.gz"
 )
 
-sha256sum OpenUSD-v25.02.tar.gz
+sha256sum OpenUSD-v24.11.tar.gz
 
 
 
@@ -118,13 +118,13 @@ source=("OpenUSD-v${_ver_release}.tar.gz"
         "usd-cmake-find-dependency.patch"
 )
 
-sha256sum OpenUSD-v25.02.tar.gz
+sha256sum OpenUSD-v24.11.tar.gz
 
 sha256sum fix-error-m_wait_ctx-was-not-declared.patch
 
 sha256sum usd-cmake-find-dependency.patch
 
-sha256sums=('e06f67522cc4ff1a3ce99bc28075b049a15869792b41d33b0d4387fb22122cfe'
+sha256sums=('1ab3dc387c8ce8c650d66143c86fb44ed6fe5c9638522bcb3226e85a401c4f69'
             '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
             '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
 )
@@ -152,11 +152,11 @@ VOIR :
 
 mkdir /tmp/srcp
 
-tar -xzf OpenUSD-v25.02.tar.gz -C /tmp/srcp
+tar -xzf OpenUSD-v24.11.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenUSD-25.02/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenUSD-24.11/CMakeLists.txt
 
-2) kwrite /tmp/srcp/OpenUSD-25.02/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/OpenUSD-24.11/cmake/defaults/Options.cmake
 
 LIGNE 10  PXR_BUILD_TESTS           ON ==> OFF
 
@@ -207,17 +207,25 @@ LIGNE 146 BUILD_SHARED_LIBS         ON
 LIGNE 147 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/OpenUSD-25.02/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/OpenUSD-24.11/cmake/defaults/ProjectDefaults.cmake
 
 LIGNE 38  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/OpenUSD-25.02/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/OpenUSD-24.11/cmake/defaults/CXXDefaults.cmake
 
 LIGNE 67  PXR_SET_INTERNAL_NAMESPACE
 
 
 rm -rf /tmp/srcp
+
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_DEBUG_POSTFIX
+    PXR_USE_PYTHON_3
+
+
 
 
   
@@ -225,7 +233,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.02.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v24.11.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users       557  3 déc.  14:40 fix-error-m_wait_ctx-was-not-declared.patch
 -rw-r--r--  1 jnd users      1539 15 janv. 14:26 usd-cmake-find-dependency.patch
@@ -247,7 +255,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openusd-git/PKGBUILD . \
 && cp -v $HOME/05-builds/openusd-git/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v25.02.tar.gz . \
+&& cp -v $HOME/05-builds/openusd-git/OpenUSD-v24.11.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openusd-git \
 && cp -v /tmp/build/openusd-git-*-x86_64.pkg.tar.* . \
@@ -306,7 +314,7 @@ rm -f *~
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
 usr/lib/libusd_ms.so
-usr/lib/python3.13/site-packages/pxr/...
+usr/lib/python3.12/site-packages/pxr/...
 ...
 
 namcap openusd-git-*-x86_64.pkg.tar.*
@@ -336,7 +344,7 @@ $ mv -v openusd-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenUSD-v25.02.tar.gz
+$ rm -i OpenUSD-v24.11.tar.gz
 
 
 $ cd && maj-repolocal
@@ -362,14 +370,6 @@ SI PROBLEME
 ANCIEN
 ======
 
-CMake Warning:
-  Manually-specified variables were not used by the project:
-
-    CMAKE_DEBUG_POSTFIX
-    PXR_USE_PYTHON_3
-
-
-
 
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -380,7 +380,7 @@ $ ls -la
 -rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
 -rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v25.02.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v24.11.tar.gz
 -rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
 -rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
 -rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
@@ -394,7 +394,7 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
-sha256sum OpenUSD-v25.02.tar.gz
+sha256sum OpenUSD-v24.11.tar.gz
 
 sha256sum usd-tbb_part_1.patch
 
@@ -446,7 +446,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum OpenUSD-v25.02.tar.gz
+sha256sum OpenUSD-v24.11.tar.gz
 
 sha256sum blender-usd-diff.patch
 

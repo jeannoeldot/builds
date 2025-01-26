@@ -1,19 +1,19 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 25.02
-!!! VERSION = v25.02
+!!! VERSION = 24.11
+!!! VERSION = v24.11
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openusd-git
 
 mkdir /tmp/srcp
 
-cp -v OpenUSD-v25.02.tar.gz /tmp/srcp/
+cp -v OpenUSD-v24.11.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenUSD-v25.02.tar.gz
+tar -xzf OpenUSD-v24.11.tar.gz
 
 
 !!! VOIR :
@@ -39,13 +39,13 @@ https://github.com/PixarAnimationStudios/OpenUSD/pull/3392/files
 
 ==> fix-error-m_wait_ctx-was-not-declared.patch
 
-1) MODIFIER OpenUSD-25.02/pxr/base/work/dispatcher.cpp
+1) MODIFIER OpenUSD-24.11/pxr/base/work/dispatcher.cpp
 ======================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R OpenUSD-25.02 OpenUSD-25.02.new
+cp -R OpenUSD-24.11 OpenUSD-24.11.new
 
-cd OpenUSD-25.02.new/pxr/base/work
+cd OpenUSD-24.11.new/pxr/base/work
 kwrite dispatcher.cpp
 
 REMPLACER LIGNE 36 :
@@ -64,10 +64,10 @@ rm -f dispatcher.cpp~
 
 cd ../../../..
 
-diff -aur OpenUSD-25.02 OpenUSD-25.02.new
-diff -aur OpenUSD-25.02 OpenUSD-25.02.new > fix-error-m_wait_ctx-was-not-declared.patch
+diff -aur OpenUSD-24.11 OpenUSD-24.11.new
+diff -aur OpenUSD-24.11 OpenUSD-24.11.new > fix-error-m_wait_ctx-was-not-declared.patch
 
-rm -rf OpenUSD-25.02.new
+rm -rf OpenUSD-24.11.new
 
 
 cd $HOME/05-builds/openusd-git
@@ -84,13 +84,13 @@ https://gitlab.archlinux.org/archlinux/packaging/packages/usd/-/blob/main/usd-fi
 
 ==> usd-cmake-find-dependency.patch
 
-2) MODIFIER OpenUSD-25.02/pxr/pxrConfig.cmake.in
+2) MODIFIER OpenUSD-24.11/pxr/pxrConfig.cmake.in
 ================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R OpenUSD-25.02 OpenUSD-25.02.new
+cp -R OpenUSD-24.11 OpenUSD-24.11.new
 
-cd OpenUSD-25.02.new/pxr
+cd OpenUSD-24.11.new/pxr
 kwrite pxrConfig.cmake.in
 
 AJOUTER LIGNES 19 A 20 :
@@ -129,10 +129,10 @@ rm -f pxrConfig.cmake.in~
 
 cd ../..
 
-diff -aur OpenUSD-25.02 OpenUSD-25.02.new
-diff -aur OpenUSD-25.02 OpenUSD-25.02.new > usd-cmake-find-dependency.patch
+diff -aur OpenUSD-24.11 OpenUSD-24.11.new
+diff -aur OpenUSD-24.11 OpenUSD-24.11.new > usd-cmake-find-dependency.patch
 
-rm -rf OpenUSD-25.02.new
+rm -rf OpenUSD-24.11.new
 
 
 cd $HOME/05-builds/openusd-git
@@ -153,13 +153,13 @@ ANCIENS
 
 https://gitlab.archlinux.org/archlinux/packaging/packages/usd/-/blob/main/usd-tbb.patch
 
-1) MODIFIER OpenUSD-25.02/pxr/base/work/dispatcher.h
+1) MODIFIER OpenUSD-24.11/pxr/base/work/dispatcher.h
 =====================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R OpenUSD-25.02 OpenUSD-25.02.new
+cp -R OpenUSD-24.11 OpenUSD-24.11.new
 
-cd OpenUSD-25.02.new/pxr/base/work
+cd OpenUSD-24.11.new/pxr/base/work
 kwrite dispatcher.h
 
 MODIFIER LIGNE 202 :
@@ -175,10 +175,10 @@ rm -f dispatcher.h~
 
 cd ../../../..
 
-diff -aur OpenUSD-25.02 OpenUSD-25.02.new
-diff -aur OpenUSD-25.02 OpenUSD-25.02.new > fix-error-m_wait_ctx-was-not-declared.patch
+diff -aur OpenUSD-24.11 OpenUSD-24.11.new
+diff -aur OpenUSD-24.11 OpenUSD-24.11.new > fix-error-m_wait_ctx-was-not-declared.patch
 
-rm -rf OpenUSD-25.02.new
+rm -rf OpenUSD-24.11.new
 
 
 cd $HOME/05-builds/openusd-git
