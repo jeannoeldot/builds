@@ -1,0 +1,50 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=embree-jnd
+pkgver=4.3.3.20240722
+pkgrel=1
+_ver_release="4.3.3"
+_name_release="embree-${_ver_release}"
+pkgdesc="High Performance Ray Tracing Kernels"
+url="https://github.com/embree"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('onetbb'
+)
+makedepends=('cmake'
+)
+conflicts=('embree' 'embree-git')
+provides=('embree')
+options=('!debug')
+source=("embree-${_ver_release}.tar.gz"
+)
+sha256sums=('8a3bc3c3e21aa209d9861a28f8ba93b2f82ed0dc93341dddac09f1f03c36ef2d'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DEMBREE_TUTORIALS=OFF \
+    -DEMBREE_RAY_MASK=ON \
+    -DEMBREE_BACKFACE_CULLING_CURVES=ON \
+    -DEMBREE_BACKFACE_CULLING_SPHERES=ON \
+    -DEMBREE_MAX_ISA="AVX2"
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  
+  DESTDIR="${pkgdir}" make -C build install
+
+  # embree-vars.sh embree-vars.csh
+  mkdir -p "${pkgdir}"/usr/share/embree4
+  mv "${pkgdir}"/usr/./embree-vars.sh "${pkgdir}"/usr/share/embree4
+  mv "${pkgdir}"/usr/./embree-vars.csh "${pkgdir}"/usr/share/embree4
+}
