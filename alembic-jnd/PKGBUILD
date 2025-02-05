@@ -1,0 +1,43 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=alembic-jnd
+pkgver=1.8.8.20241202
+pkgrel=1
+_ver_release="1.8.8"
+_name_release="alembic-${_ver_release}"
+pkgdesc="An open framework for storing and sharing scene data"
+url="http://www.alembic.io/"
+arch=('x86_64')
+license=('BSD-2-Clause')
+depends=('gcc-libs' 'imath'
+)
+makedepends=('cmake'
+)
+conflicts=('alembic' 'alembic-git')
+provides=('alembic')
+options=('!debug')
+source=("alembic-${_ver_release}.tar.gz"
+)
+sha256sums=('ba1f34544608ef7d3f68cafea946ec9cc84792ddf9cda3e8d5590821df71f6c6'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DUSE_TESTS=OFF
+  sed -i "s/\-O3//g" $(find . -name flags.make)
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  install -Dm644 LICENSE.txt "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  
+  DESTDIR="${pkgdir}" make -C build install
+}

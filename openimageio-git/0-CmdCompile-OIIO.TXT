@@ -291,16 +291,19 @@ LIGNE 267
 # Tessil/robin-map
          makedepends=...  'robin-map'
 
-LIGNE 307
+VOIR BUG : https://gitlab.archlinux.org/archlinux/packaging/packages/openimageio/-/issues/3
+LIGNE 334
 # fmtlib
 option BUILD_FMT_FORCE = OFF
+option BUILD_MISSING_FMT ON  => OFF
+option INTERNALIZE_FMT ON  => OFF
 
 
 4) kwrite /tmp/srcp/oiio-2.5.18.0/src/cmake/pythonutils.cmake &
 
 LIGNES 6 ET 7
   USE_PYTHON ON         depends= 'python' 'pybind11' 'python-numpy'
-  PYTHON_VERSION ""  =>     -DPYTHON_VERSION=3.12 \
+  PYTHON_VERSION ""  =>     -DPYTHON_VERSION=3.13 \
 
 LIGNE 64
 # pybind11

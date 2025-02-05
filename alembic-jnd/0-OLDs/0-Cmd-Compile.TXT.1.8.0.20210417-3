@@ -1,0 +1,259 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/alembic-git
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/alembic/alembic/releases
+==> lamiller0 released this on 17 avr 2021 ==> 20210417
+==> Alembic 1.8.0  ==> 1.8.0
+==> 1.8.0.20210417
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O alembic-1.8.0.tar.gz \
+https://github.com/alembic/alembic/archive/refs/tags/1.8.0.tar.gz
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/alembic-git
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/alembic-1.8.0.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=alembic-git               # alembic ds community
+pkgver=1.8.0.20210417
+pkgrel=3          # rebuild MAJ openexr 3.0.3
+
+pkgrel=1
+
+pkgrel=2          # rebuild MAJ openexr 3.0.1 + dep = imath
+
+pkgrel=2          # rebuild MAJ openexr 2.5.3
+
+pkgrel=4          # rebuild MAJ openexr 2.4
+
+pkgrel=3  #   sed -i "s/\-O3//g" $(find . -name flags.make)
+            -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+            -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+
+pkgrel=2  # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+            -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+
+pkgrel=2    # Rebuild nouveau PC 
+
+!!!!!!
+_ver_release="1.8.0"
+_name_release="alembic-${_ver_release}"
+
+license=('BSD')
+
+depends=('gcc-libs' 'imath'
+)
+
+makedepends=('cmake')
+
+
+conflicts='alembic'
+provides='alembic'
+
+SANS PATCH
+----------
+sha256sum alembic-1.8.0.tar.gz
+
+source=("alembic-${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf alembic-1.8.0.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/alembic-1.8.0/CMakeLists.txt
+
+!!! VOIR
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/install_deps.sh
+!!! LIGNES 2280 et ...
+
+LIGNE 55 ET ...
+----------------
+USE_ARNOLD OFF
+USE_BINARIES ON
+USE_EXAMPLES OFF
+USE_HDF5 OFF
+USE_MAYA OFF
+USE_PRMAN OFF
+USE_PYALEMBIC OFF
+USE_STATIC_BOOST OFF
+USE_STATIC_HDF5 OFF
+USE_TESTS "Include Alembic tests" ON ==> OFF
+ALEMBIC_BUILD_LIBS ON
+ALEMBIC_ILMBASE_LINK_STATIC OFF
+ALEMBIC_SHARED_LIBS ON
+PYALEMBIC_PYTHON_MAJOR 3
+DOCS_PATH OFF
+
+rm -rf /tmp/srcp
+
+  
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 alembic-1.8.0.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/alembic-git/PKGBUILD . \
+&& cp -v $HOME/05-builds/alembic-git/alembic-1.8.0.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/alembic-git \
+&& cp -v /tmp/build/alembic-git-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/alembic-git && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+Checking alembic-git-1.8.0.20210417-1-x86_64.pkg.tar.xz
+
+namcap alembic-git-*-x86_64.pkg.tar.*
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ rm /0-DataLinux/00-repolocal/alembic-git-*-x86_64.pkg.tar.*
+
+$ cp -v alembic-git-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS $HOME/00-repolocal/pkg-OLD
+----------------------------------------------------------------------
+$ mv -v $HOME/00-repolocal/alembic-git-*-x86_64.pkg.tar.* \
+$HOME/00-repolocal/pkg-OLD/
+
+$ mv -v alembic-git-*-x86_64.pkg.tar.* $HOME/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i alembic-1.8.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu alembic-git
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd alembic-git
+# rm /var/cache/pacman/pkg/alembic-git-*
+# LC_ALL=C pacman -S alembic-git
+
+
+ANCIEN
+======
+
+!!! TESTS = OK
+depends=('gcc-libs' 'openexr'
+
+
+wget -O alembic-1.8.0.tar.gz \
+https://github.com/alembic/alembic/archive/1.8.0.tar.gz
+
+ALEMBIC_LIB_USES_BOOST OFF
+ALEMBIC_LIB_USES_TR1 OFF
+
+
+namcap alembic-git-*-x86_64.pkg.tar.*
+alembic-git E: Dependency gcc-libs detected and not included (libraries ['usr/lib/libgcc_s.so.1', 'usr/lib/libstdc++.so.6'] needed in files ['usr/lib/libAlembic.so.1.8.0'])
+
+!!! ORIGINAL
+depends=('openexr' 'boost-libs'
+          'hdf5'
+)
+
+makedepends=('boost' 'cmake')
+

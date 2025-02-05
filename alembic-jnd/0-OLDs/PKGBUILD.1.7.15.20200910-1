@@ -1,0 +1,47 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=alembic-git
+pkgver=1.7.15.20200910
+pkgrel=1
+_ver_release="1.7.15"
+_name_release="alembic-${_ver_release}"
+pkgdesc="An open framework for storing and sharing scene data"
+url="http://www.alembic.io/"
+arch=('x86_64')
+license=('BSD')
+depends=('gcc-libs' 'openexr'
+)
+makedepends=('cmake'
+)
+conflicts=('alembic')
+provides=('alembic')
+source=("alembic-${_ver_release}.tar.gz"
+)
+sha256sums=('4151aba7fd669f3493ee44d26c70465f1d1498e373ac13507709d27571de183d'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DUSE_TESTS=OFF \
+    ..
+  sed -i "s/\-O3//g" $(find . -name flags.make)
+  make
+}
+
+package() {
+  cd "${_name_release}"
+  install -Dm644 LICENSE.txt "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  
+  cd build
+
+  make DESTDIR="${pkgdir}" install
+}

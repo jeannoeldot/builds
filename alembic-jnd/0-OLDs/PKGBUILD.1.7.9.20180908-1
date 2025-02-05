@@ -1,0 +1,44 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=alembic-git
+pkgver=1.7.9.20180908
+pkgrel=1
+_ver_release="1.7.9"
+_name_release="alembic-${_ver_release}"
+pkgdesc="A open framework for storing and sharing scene data"
+url="http://www.alembic.io/"
+arch=('x86_64')
+license=('BSD')
+depends=('openexr'
+)
+makedepends=('cmake'
+)
+conflicts=('alembic')
+provides=('alembic')
+source=("alembic-${_ver_release}.tar.gz"
+)
+sha256sums=('04012fb37c02fd1ba8e4d4f37f5b1e7a3d78151c6368718c4be07f89a99c8148'
+)
+
+build() {
+  cd "${_name_release}"
+
+  [[ -d build ]] && rm -rf build
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DUSE_TESTS=OFF \
+    ..
+  make
+}
+
+package() {
+  cd "${_name_release}"
+  install -Dm644 LICENSE.txt "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  
+  cd build
+
+  make DESTDIR="${pkgdir}" install
+}
