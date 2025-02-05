@@ -1,0 +1,46 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=openimagedenoise-jnd
+pkgver=2.3.2.20250114
+pkgrel=1
+_ver_release="2.3.2"
+_name_release="oidn-${_ver_release}"
+pkgdesc="Intel(R) Open Image Denoise library"
+url="http://www.openimagedenoise.org/"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('onetbb' 'nvidia-utils'
+)
+makedepends=('cmake' 'python' 'ispc'
+              'cuda'
+)
+conflicts=('openimagedenoise' 'openimagedenoise-git' 'oidn')
+provides=('openimagedenoise' 'oidn')
+#options=(staticlibs)
+options=('!debug')
+source=("oidn-${_ver_release}.src.tar.gz"
+)
+sha256sums=('0ca50e621294e8be238bee2d814fb0391e252e3f3c93fdd4bc253a60e0d00c68'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DOIDN_DEVICE_CUDA=ON
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  
+  DESTDIR="${pkgdir}" make -C build install
+
+  rm -rf "${pkgdir}"/build
+}

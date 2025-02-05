@@ -1,0 +1,32 @@
+
+V 2.3.2
+=======
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/libOpenImageDenoise_core.so.2.3.2
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/libOpenImageDenoise.so.2.3.2
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/libOpenImageDenoise.so.2
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/libOpenImageDenoise.so
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/libOpenImageDenoise_device_cpu.so.2.3.2
+-- Up-to-date: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/.
+-- Up-to-date: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/./lib
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/./lib/libOpenImageDenoise_device_cuda.so.2.3.2
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/bin/oidnDenoise
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/bin/oidnBenchmark
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/bin/oidnTest
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/include/OpenImageDenoise
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/include/OpenImageDenoise/config.h
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/include/OpenImageDenoise/oidn.hpp
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/include/OpenImageDenoise/oidn.h
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/README.md
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/readme.pdf
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/CHANGELOG.md
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/third-party-programs.txt
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/third-party-programs-DPCPP.txt
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/third-party-programs-oneDNN.txt
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/third-party-programs-oneTBB.txt
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/share/doc/OpenImageDenoise/LICENSE.txt
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/cmake/OpenImageDenoise-2.3.2/OpenImageDenoiseTargets.cmake
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/cmake/OpenImageDenoise-2.3.2/OpenImageDenoiseTargets-release.cmake
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/cmake/OpenImageDenoise-2.3.2/OpenImageDenoiseConfig.cmake
+-- Installing: /build/openimagedenoise-jnd/pkg/openimagedenoise-jnd/usr/lib/cmake/OpenImageDenoise-2.3.2/OpenImageDenoiseConfigVersion.cmake
