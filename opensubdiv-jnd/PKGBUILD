@@ -1,0 +1,47 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=opensubdiv-jnd
+pkgver=3.6.0.20230921
+pkgrel=1
+_ver_release="3_6_0"
+_name_release="OpenSubdiv-${_ver_release}"
+pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
+arch=('x86_64')
+license=('APACHE-2.0')
+url="http://graphics.pixar.com/opensubdiv"
+depends=('glfw-x11' 'onetbb' 'libxcursor' 'xorg-xrandr' 'libxinerama' 'libxi'
+)
+makedepends=('cmake' 'mesa' 'python')
+conflicts=('opensubdiv' 'opensubdiv-git')
+provides=('opensubdiv')
+options=('!debug')
+source=("OpenSubdiv-v${_ver_release}.tar.gz"
+)
+sha256sums=('bebfd61ab6657a4f4ff27845fb66a167d00395783bfbd253254d87447ed1d879'
+)
+
+build() {
+  cd "${_name_release}"
+  
+  cmake \
+        -B build \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D CMAKE_SKIP_RPATH=ON \
+        -D NO_PTEX=1 \
+        -D NO_CLEW=1 \
+        -D NO_CUDA=1 \
+        -D NO_OPENCL=1 \
+        -D NO_DOC=1 \
+        -D NO_TUTORIALS=1 \
+        -D NO_REGRESSION=1 \
+        -D NO_EXAMPLES=1 \
+        -D NO_METAL=1
+  find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  DESTDIR="${pkgdir}" make -C build install
+}
