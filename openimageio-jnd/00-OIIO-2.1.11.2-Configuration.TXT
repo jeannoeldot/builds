@@ -1,0 +1,183 @@
+
+==> Starting build()...
+-- The CXX compiler identification is GNU 9.2.1
+-- The C compiler identification is GNU 9.2.1
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Building OpenImageIO 2.1.11.2
+-- CMake version is 3.16.4
+-- Configuring OpenImageIO 2.1.11.2
+-- CMake 3.16.4
+-- CMake system           = Linux-5.5.6-arch1-1
+-- CMake system name      = Linux
+-- Project source dir     = /build/openimageio-git/src/oiio-Release-2.1.11.2
+-- Project build dir      = /build/openimageio-git/src/oiio-Release-2.1.11.2/build
+-- Project install prefix = /usr
+-- Configuration types    = 
+-- Build type             = Release
+-- Setting Namespace to: OpenImageIO_v2_1
+-- CMAKE_SYSTEM_NAME      = Linux
+-- CMAKE_SYSTEM_VERSION   = 5.5.6-arch1-1
+-- CMAKE_SYSTEM_PROCESSOR = x86_64
+-- CMAKE_CXX_COMPILER     = /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID  = GNU
+-- Building for C++11
+-- Using gcc 9.2.1 as the compiler
+-- Compiling with SIMD level avx2
+-- SIMD feature: avx2
+-- Performing Test USE_STD_REGEX
+-- Performing Test USE_STD_REGEX - Success
+-- Performing Test COMPILER_SUPPORTS_ATOMIC_WITHOUT_LIBATOMIC
+-- Performing Test COMPILER_SUPPORTS_ATOMIC_WITHOUT_LIBATOMIC - Success
+-- Compiler supports std::atomic, no libatomic necessary
+-- clang-format not found.
+-- 
+-- * Checking for dependencies...
+-- *   - Missing a dependency 'Package'?
+-- *     Try cmake -DPackage_ROOT=path or set environment var Package_ROOT=path
+-- *   - To exclude an optional dependency (even if found),
+-- *     -DUSE_Package=OFF or set environment var USE_Package=OFF 
+-- 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found Boost: /usr/include (found suitable version "1.72.0", minimum required is "1.53") found components: filesystem system thread chrono date_time atomic 
+-- Found Boost 107200 
+--     Boost_LIBRARIES = /usr/lib/libboost_filesystem.so;/usr/lib/libboost_system.so;/usr/lib/libboost_thread.so;-lpthread;/usr/lib/libboost_chrono.so;/usr/lib/libboost_date_time.so;/usr/lib/libboost_atomic.so
+--     Boost_INCLUDE_DIRS = /usr/include
+-- Found ZLIB: /usr/lib/libz.so (found version "1.2.11") 
+-- Found ZLIB 1.2.11 
+--     ZLIB_INCLUDE_DIRS = /usr/include
+--     ZLIB_LIBRARIES = /usr/lib/libz.so
+-- Found PNG: /usr/lib/libpng.so (found version "1.6.37") 
+-- Found PNG 1.6.37 
+--     PNG_INCLUDE_DIRS = /usr/include;/usr/include
+--     PNG_LIBRARIES = /usr/lib/libpng.so;/usr/lib/libz.so
+-- Found TIFF: /usr/lib/libtiff.so (found suitable version "4.1.0", minimum required is "3.0") 
+-- Found TIFF 4.1.0 
+--     TIFF_INCLUDE_DIRS = /usr/include
+--     TIFF_LIBRARIES = /usr/lib/libtiff.so
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.6.3") 
+-- Found OpenEXR: /usr/include (found suitable version "2.4.1", minimum required is "2.0") 
+-- Found OpenEXR 2.4.1 
+--     OPENEXR_INCLUDES = /usr/include
+--     OPENEXR_LIBRARIES = /lib/libIlmImf-2_4.so;/lib/libImath-2_4.so;/lib/libIex-2_4.so;/lib/libHalf-2_4.so;/lib/libIlmThread-2_4.so;-lpthread;/usr/lib/libz.so
+-- Found JPEG: /usr/lib/libjpeg.so  
+-- Found JPEGTurbo  
+--     JPEG_LIBRARIES = /usr/lib/libjpeg.so
+-- Found BZip2: /usr/lib/libbz2.so (found version "1.0.8") 
+-- Looking for BZ2_bzCompressInit
+-- Looking for BZ2_bzCompressInit - found
+-- Found BZip2 1.0.8 
+--     BZIP2_INCLUDE_DIRS = /usr/include
+--     BZIP2_LIBRARIES = /usr/lib/libbz2.so
+-- Found Freetype: /usr/lib/libfreetype.so (found version "2.10.1") 
+-- Found Freetype 2.10.1 
+--     FREETYPE_INCLUDE_DIRS = /usr/include/freetype2
+--     FREETYPE_LIBRARIES = /usr/lib/libfreetype.so
+-- Could NOT find HDF5 (missing: HDF5_LIBRARIES HDF5_INCLUDE_DIRS) (found version "")
+-- HDF5 library not found 
+--     Try setting HDF5_ROOT ? 
+-- Found OpenColorIO: /usr/include  
+-- Found OpenColorIO  
+--     OPENCOLORIO_INCLUDES = /usr/include
+--     OPENCOLORIO_LIBRARIES = /usr/lib/libOpenColorIO.so
+-- Found OpenCV: /usr/lib/libopencv_core.so;/usr/lib/libopencv_imgproc.so;/usr/lib/libopencv_videoio.so (found version "4.2.0") 
+-- Found OpenCV 4.2.0 
+--     OpenCV_INCLUDES = /usr/include/opencv4
+--     OpenCV_LIBRARIES = /usr/lib/libopencv_core.so;/usr/lib/libopencv_imgproc.so;/usr/lib/libopencv_videoio.so
+-- Found TBB: /usr/include (found suitable version "2020.1", minimum required is "2017")  
+-- Found TBB 2020.1 
+--     TBB_INCLUDE_DIRS = /usr/include
+--     TBB_LIBRARIES = /usr/lib/libtbbmalloc.so;/usr/lib/libtbb.so
+-- Could NOT find DCMTK (missing: DCMTK_INCLUDE_DIR DCMTK_LIBRARIES) (Required is at least version "3.6.1")
+-- DCMTK library not found 
+--     Try setting DCMTK_ROOT ? 
+-- Found FFMPEG: /usr/include  
+-- Found FFmpeg  
+--     FFMPEG_LIBRARIES = /usr/lib/libavcodec.so;/usr/lib/libavformat.so;/usr/lib/libavutil.so;/usr/lib/libswscale.so
+-- Not using Field3D -- disabled (because HDF5 was not found) 
+-- Found GIF: /usr/lib/libgif.so (found suitable version "5.2.1", minimum required is "4") 
+-- Found GIF 5.2.1 
+--     GIF_INCLUDE_DIRS = /usr/include
+--     GIF_LIBRARIES = /usr/lib/libgif.so
+-- Could NOT find LIBHEIF (missing: LIBHEIF_INCLUDES LIBHEIF_LIBRARIES) 
+-- Libheif library not found 
+--     Try setting Libheif_ROOT ? 
+-- Found LibRaw: /usr/lib/libraw.so (found version "0.19.5") 
+-- Found LibRaw 0.19.5 
+--     LibRaw_LIBRARIES = /usr/lib/libraw.so
+-- Found OpenJpeg: /usr/include/openjpeg-2.3  
+-- Found OpenJpeg: v2.3 /usr/lib/libopenjp2.so
+-- Found OpenJpeg 2.3 
+--     OPENJPEG_INCLUDES = /usr/include/openjpeg-2.3
+--     OPENJPEG_LIBRARIES = /usr/lib/libopenjp2.so
+-- Found OPENVDB: /usr/lib/libopenvdb.so (found version "7.0.0") 
+-- Found OpenVDB 7.0.0 
+--     OPENVDB_INCLUDE_DIRS = /usr/include
+--     OPENVDB_LIBRARIES = /usr/lib/libopenvdb.so
+-- Could NOT find PTex (missing: PTEX_INCLUDE_DIR PTEX_LIBRARY) 
+-- PTex library not found 
+--     Try setting PTex_ROOT ? 
+-- Found WEBP: /usr/include  
+-- Found Webp  
+--     WEBP_INCLUDES = /usr/include
+--     WEBP_LIBRARIES = /usr/lib/libwebp.so
+-- Not using R3DSDK -- disabled  
+-- Could NOT find Nuke (missing: NUKE_DDIMAGE_LIBRARY NUKE_INCLUDE_DIR NUKE_LIBRARY_DIRS NUKE_EXECUTABLE) 
+-- Nuke library not found 
+--     Try setting Nuke_ROOT ? 
+-- Found OpenGL: /usr/lib/libOpenGL.so   
+-- Found OpenGL  
+--     OPENGL_LIBRARIES = /usr/lib/libOpenGL.so;/usr/lib/libGLX.so;/usr/lib/libGLU.so
+-- Found Qt5 5.14.1 
+-- Could NOT find LIBSQUISH (missing: LIBSQUISH_INCLUDE_DIR LIBSQUISH_LIBRARY) 
+-- Libsquish library not found 
+--     Try setting Libsquish_ROOT ? 
+-- Setting SOVERSION to: 2.1
+-- Found Robinmap: /usr/include  
+-- Found Robinmap  
+--     ROBINMAP_INCLUDES = /usr/include
+CMake Warning at src/dicom.imageio/CMakeLists.txt:11 (message):
+  DICOM plugin will not be built, no DCMTK
+
+
+CMake Warning at src/heif.imageio/CMakeLists.txt:11 (message):
+  heif plugin will not be built
+
+
+-- Create imagio_pvt.h from imageio_pvt.h.in
+-- Setting SOVERSION to: 2.1
+-- Found Pybind11: /usr/include (found suitable version "2.4.3", minimum required is "2.4.2") 
+-- Found Pybind11 2.4.3 
+--     PYBIND11_INCLUDES = /usr/include
+-- Found PythonInterp: /usr/bin/python3.8 (found suitable version "3.8.1", minimum required is "3.8") 
+-- Found PythonInterp  
+-- Found PythonLibs: /usr/lib/libpython3.8.so (found suitable version "3.8.1", minimum required is "3.8") 
+-- Found PythonLibs 3.8.1 
+--     Python include dirs /usr/include/python3.8
+--     Python libraries    /usr/lib/libpython3.8.so
+--     Python site packages dir 
+--     Python to include 'lib' prefix: OFF
+--     Python to include SO version: OFF
+--     Python version 3.8.1
+--     Python version major: 3 minor: 8
+-- Create oiioversion.h from oiioversion.h.in
+-- Found PythonInterp: /usr/bin/python3.8 (found version "3.8.1") 
+-- 
