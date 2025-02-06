@@ -1,0 +1,51 @@
+
+-- Could NOT find LLVM (missing: LLVM_LIBRARY)
+-- LLVM not found, disabling WITH_LLVM
+
+
+┌jnd ( ~ )
+└─> $ grep -lR "LLVM_LIBRARY" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/platform/platform_win32.cmake
+/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/Modules/FindLLVM.cmake
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/ispc.diff
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/cmake/ispc.cmake
+/0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt
+
+
+/0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt : LIGNE 2536
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/Modules/FindLLVM.cmake
+
+$ llvm-config --includedir      ==> LLVM_INCLUDE_DIRS
+/usr/include
+
+$ llvm-config --version
+18.1.8
+
+$ llvm-config --prefix          ==> LLVM_ROOT_DIR
+/usr
+
+$ llvm-config --libdir          ==> LLVM_LIBPATH
+/usr/lib
+
+
+=======================================================================
+
+
+  - WITH_CLANG                      ON
+
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CLANG_INCLUDE_DIR
+    _clang_LIBRARIES
+
+
+/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/Modules/FindClang.cmake
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/patches/ispc.diff
+/0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/cmake/ispc.cmake
+
+
+
+
+=======================================================================

@@ -1,0 +1,19 @@
+
+
+cd /0-DataLinux/05-builds-dir-git/
+
+ls | grep lib
+
+zip -r LibAssetsPublish.zip lib/assets/publish
+  adding: lib/assets/publish/ (stored 0%)
+  adding: lib/assets/publish/blender_assets.cats.txt (deflated 38%)
+  adding: lib/assets/publish/geometry_nodes/ (stored 0%)
+  adding: lib/assets/publish/geometry_nodes/procedural_hair_node_assets.blend (deflated 0%)
+  adding: lib/assets/publish/LICENSE (deflated 62%)
+
+
+sha256sum LibAssetsPublish.zip
+db5295bcf57b5fd383e2dd89c004f1c0714ee6d7e9db1e8f025f18e3d3372329
+
+cd
+

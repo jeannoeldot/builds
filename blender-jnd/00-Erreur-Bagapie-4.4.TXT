@@ -1,0 +1,23 @@
+└─> $ blender
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_import_op.py:36: SyntaxWarning: invalid escape sequence '\B'
+  file_path = os.path.dirname(os.path.abspath(__file__)) + "\Bagapieassets_database.blend"
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:79: SyntaxWarning: invalid escape sequence '\{'
+  path_to_file = "{path}\{name}.blend".format(path = asset_library.path, name=ob.name)
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:88: SyntaxWarning: invalid escape sequence '\{'
+  path_to_file = "{path}\{name}.blend".format(path = asset_library.path, name=ob.name + '_' + str(idx))
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:108: SyntaxWarning: invalid escape sequence '\{'
+  if Path("{path}\{name}.blend".format(path = asset_library.path, name=self.new_name)).is_file():
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:139: SyntaxWarning: invalid escape sequence '\{'
+  path_to_file = "{path}\{name}.blend".format(path = asset_library.path, name=ob.name)
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:156: SyntaxWarning: invalid escape sequence '\{'
+  bpy.data.libraries.write("{path}\{name}.blend".format(path = asset_library.path, name=name),set([ob]),fake_user=True)
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:253: SyntaxWarning: invalid escape sequence '\{'
+  path_to_file = "{path}\{name}.blend".format(path = asset_library.path, name=mat.name)
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:261: SyntaxWarning: invalid escape sequence '\{'
+  path_to_file = "{path}\{name}.blend".format(path = asset_library.path, name=mat.name + '_' + str(idx))
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:281: SyntaxWarning: invalid escape sequence '\{'
+  if Path("{path}\{name}.blend".format(path = asset_library.path, name=self.new_name)).is_file():
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:312: SyntaxWarning: invalid escape sequence '\{'
+  path_to_file = "{path}\{name}.blend".format(path = asset_library.path, name=mat.name)
+/home/jnd/.config/blender/4.4/extensions/user_default/Bagapie/bagapie_saveasset_op.py:327: SyntaxWarning: invalid escape sequence '\{'
+  bpy.data.libraries.write("{path}\{name}.blend".format(path = asset_library.path, name=name),set([mat]),fake_user=True)

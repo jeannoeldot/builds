@@ -1,6 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
-pkgname=blender-git
+pkgname=blender-jnd
+_pkgname_git=blender-git
 pkgver=4.4.0.27.20250202
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
@@ -22,11 +23,12 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
           'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
           'opencolorio' 'libdeflate'
-          'pcre' 'opencollada-git' 'openimageio-git'
-          'openshadinglanguage-git'
-          'opensubdiv-git' 'openvdb-git' 'alembic-git'
-          'embree-git' 'openimagedenoise-git'
-          'openpgl-git' 'materialx' 'openusd-git'
+          'pcre' 'opencollada-git'
+          'openimageio-jnd' 'fmt'
+          'openshadinglanguage-jnd'
+          'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
+          'embree-jnd' 'openimagedenoise-jnd'
+          'openpgl-jnd' 'materialx' 'openusd-jnd'
           'zstd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
@@ -39,7 +41,7 @@ conflicts=('blender' 'blender-git')
 provides=('blender')
 #options=('!strip')
 options=('!lto' '!debug')
-source=("$pkgname-$pkgver.tar.zst"
+source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
 )
 sha256sums=('64527a6057b1781732004814edddbbf53f7287bdf1da98f8497185758ffc8ff2'
