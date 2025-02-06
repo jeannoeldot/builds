@@ -1,0 +1,44 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=opencollada-git-jnd
+_pkgname_git=opencollada-git
+pkgver=1.6.20250130
+pkgrel=1
+epoch=1
+pkgdesc="Stream based reader and writer library for COLLADA files"
+arch=('x86_64')
+url="https://github.com/KhronosGroup/OpenCOLLADA"
+license=('LGPL-2.0-or-later')
+depends=('libxml2')
+makedepends=('cmake')
+conflicts=('opencollada' 'opencollada-git')
+provides=('opencollada')
+options=('!debug')
+source=("$_pkgname_git-$pkgver.tar.gz"
+        'opencollada.conf'
+)
+sha256sums=('e781fc2cfb236bc63eabc50b6723187d82e87616727ef01e4ef9b8f2eaf9824a'
+            '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
+)
+
+_gitname="opencollada"
+
+build() {
+  cd "${_gitname}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DUSE_STATIC=OFF \
+    -DUSE_SHARED=ON
+  make -C build
+}
+
+package() {
+  cd "${_gitname}"
+  DESTDIR="${pkgdir}" make -C build install
+
+  install -Dm644 "${srcdir}"/opencollada.conf "${pkgdir}"/etc/ld.so.conf.d/opencollada.conf
+}

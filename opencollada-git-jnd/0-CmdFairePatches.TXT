@@ -1,0 +1,59 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.6.20240719
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/opencollada-git-jnd
+
+mkdir /tmp/srcp
+
+cp -v opencollada-git-1.6.20240719.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf opencollada-git-1.6.20240719.tar.gz
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
+1) MODIFIER opencollada/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h
+===============================================================================
+cp -R opencollada opencollada.new
+
+cd opencollada.new/COLLADABaseUtils/include
+kwrite COLLADABUPcreCompiledPattern.h
+
+REMPLACER LIGNES 16 ET 17 :
+struct real_pcre;
+typedef struct real_pcre pcre;
+
+PAR :
+#include "pcre.h"
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier COLLADABUPcreCompiledPattern.h~
+rm -f COLLADABUPcreCompiledPattern.h~
+
+
+cd ../../..
+
+diff -aur opencollada opencollada.new
+diff -aur opencollada opencollada.new > fix-conflicting-declaration-pcre-gcc810.patch
+
+rm -rf opencollada.new
+
+cd $HOME/05-builds/opencollada-git
+
+mv -vf /tmp/srcp/fix-conflicting-declaration-pcre-gcc810.patch .
+
+
