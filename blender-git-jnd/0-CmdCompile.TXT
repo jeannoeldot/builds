@@ -130,7 +130,7 @@ sha256sum blender-git-4.4.0.27.20250202.tar.zst
 
 1-7-5) Copie ARCHIVE TAR.GZ / TAR.ZST ds rep compile
 ====================================================
-cd $HOME/05-builds/blender-jnd
+cd $HOME/05-builds/blender-git-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
@@ -149,7 +149,8 @@ voir CmdFairePatches.TXT
 ========================
 # Maintainer: Name <name@fai.com>
 
-pkgname=blender-jnd
+_pkgname_git=blender-git
+pkgname=blender-git-jnd
 pkgver=4.4.0.27.20250202
 pkgrel=1
 
@@ -472,7 +473,7 @@ option WITH_HYDRA "Enable Hydra render engine" ON
 
 Lignes 456
 # 3D format support
-option WITH_OPENCOLLADA	ON  dep = opencollada-git   dep = pcre
+option WITH_OPENCOLLADA	ON  dep = opencollada-git-jnd   dep = pcre
 
 # Sound output
 477   option WITH_JACK          ==> _option_default ON         dep =  jack2
@@ -676,7 +677,7 @@ $ mkpkg-chroot-repo
 !!!!!!!!!!!!!!!!!!!!!!!!!
 AVEC openusd-jnd
 ----------------
-SI depends= 'opencollada-git' 'openshadinglanguage-jnd' 'openimageio-jnd'
+SI depends= 'opencollada-git-jnd' 'openshadinglanguage-jnd' 'openimageio-jnd'
             'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd' 'openimagedenoise-jnd'
             'embree-jnd' 'openpgl-jnd' 'openusd-jnd'
 SI makedepends=
@@ -685,7 +686,7 @@ $ cp -v /00-repolocal/\
 {\
 openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
 openimageio-jnd-*-x86_64.pkg.tar.*,\
-opencollada-git-*-x86_64.pkg.tar.*,\
+opencollada-git-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*,\
 alembic-jnd-*-x86_64.pkg.tar.*,\
@@ -699,7 +700,7 @@ openpgl-jnd-*-x86_64.pkg.tar.*\
 !!!!!!!!!!!!!!!!!!!!!!!!!
 SANS openusd-jnd
 ----------------
-SI depends= 'opencollada-git' 'openshadinglanguage-jnd' 'openimageio-jnd'
+SI depends= 'opencollada-git-jnd' 'openshadinglanguage-jnd' 'openimageio-jnd'
             'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd' 'openimagedenoise-jnd'
             'embree-jnd' 'openpgl-jnd'
 SI makedepends=
@@ -708,7 +709,7 @@ $ cp -v /00-repolocal/\
 {\
 openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
 openimageio-jnd-*-x86_64.pkg.tar.*,\
-opencollada-git-*-x86_64.pkg.tar.*,\
+opencollada-git-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*,\
 alembic-jnd-*-x86_64.pkg.tar.*,\
@@ -773,19 +774,19 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/blender-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-jnd/blender-git-4.4.0.27.20250202.tar.gz . \
-&& cp -v $HOME/05-builds/blender-jnd/OptiX-8.0-Include.zip . \
-&& cp -v $HOME/05-builds/blender-jnd/blender-openexr3.patch . \
+&& cp -v $HOME/05-builds/blender-git-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/blender-git-jnd/blender-git-4.4.0.27.20250202.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git-jnd/OptiX-8.0-Include.zip . \
+&& cp -v $HOME/05-builds/blender-git-jnd/blender-openexr3.patch . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/blender-jnd \
-&& cp -v -f /tmp/build/blender-jnd-*-x86_64.pkg.tar.* . \
+&& cd $HOME/05-builds/blender-git-jnd \
+&& cp -v -f /tmp/build/blender-git-jnd-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build \
 && sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/blender-jnd \
+cd $HOME/05-builds/blender-git-jnd \
 && rm -rf /tmp/build \
 && sudo mv -v -f /etc/makepkg.conf.backup.build.blender /etc/makepkg.conf
 
@@ -801,7 +802,7 @@ Enter a number (default=1):
 3-2) MAKEPKG en USER sur SSD
 =============================
 !!! EN USER
-cd $HOME/05-builds/blender-jnd
+cd $HOME/05-builds/blender-git-jnd
 $ rm -f *~
 
 makepkg -s
@@ -821,58 +822,57 @@ usr/share/blender/4.4/scripts/addons/cycles/shader/node_rgb_to_bw.oso
 ......
 usr/share/blender/4.4/scripts/addons/cycles/shader/node_add_closure.oso
 
-namcap blender-jnd-*-x86_64.pkg.tar.*
+namcap blender-git-jnd-*-x86_64.pkg.tar.*
 
-blender-jnd E: ELF file ('usr/share/blender/4.4/scripts/addons_core/io_scene_gltf2/libextern_draco.so') outside of a valid path.
+blender-git-jnd E: ELF file ('usr/share/blender/4.4/scripts/addons_core/io_scene_gltf2/libextern_draco.so') outside of a valid path.
 
-blender-jnd E: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') outside of a valid path.
-blender-jnd W: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') lacks FULL RELRO, check LDFLAGS.
-blender-jnd W: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') is unstripped.
-blender-jnd W: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') lacks PIE.
+blender-git-jnd E: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') outside of a valid path.
+blender-git-jnd W: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') lacks FULL RELRO, check LDFLAGS.
+blender-git-jnd W: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') is unstripped.
+blender-git-jnd W: ELF file ('usr/share/blender/4.4/scripts/addons/cycles/lib/kernel_sm_86.cubin') lacks PIE.
 
-blender-jnd W: unneeded dependency on a package (desktop-file-utils) run when needed by hooks.
+blender-git-jnd W: unneeded dependency on a package (desktop-file-utils) run when needed by hooks.
 
-blender-jnd W: Referenced python module ... is an uninstalled dependency (needed in files ...
+blender-git-jnd W: Referenced python module ... is an uninstalled dependency (needed in files ...
 ...
-blender-jnd W: Referenced python module ... is an uninstalled dependency (needed in files ...
+blender-git-jnd W: Referenced python module ... is an uninstalled dependency (needed in files ...
 
-blender-jnd W: Unused shared library '/usr/lib/libpng16.so.16' by file ('usr/bin/blender')
-blender-jnd W: Unused shared library '/usr/lib/libm.so.6' by file ('usr/bin/blender-thumbnailer')
+blender-git-jnd W: Unused shared library '/usr/lib/libpng16.so.16' by file ('usr/bin/blender')
+blender-git-jnd W: Unused shared library '/usr/lib/libm.so.6' by file ('usr/bin/blender-thumbnailer')
 
-blender-jnd W: Dependency included, but may not be needed ('desktop-file-utils')
-blender-jnd W: Dependency included, but may not be needed ('shared-mime-info')
-blender-jnd W: Dependency included, but may not be needed ('pipewire-pulse')
-blender-jnd W: Dependency included, but may not be needed ('libglvnd')
-blender-jnd W: Dependency included, but may not be needed ('glfw')
-blender-jnd W: Dependency included, but may not be needed ('draco')
-blender-jnd W: Dependency included, but may not be needed ('python-psutil')
-blender-jnd W: Dependency included, but may not be needed ('python-requests')
-blender-jnd W: Dependency included, but may not be needed ('llvm-libs')
-blender-jnd W: Dependency included, but may not be needed ('clang')
-blender-jnd W: Dependency included, but may not be needed ('pugixml')
-blender-jnd W: Dependency included, but may not be needed ('libdecor')
-blender-jnd W: Dependency included, but may not be needed ('fribidi')
-blender-jnd W: Dependency included, but may not be needed ('harfbuzz')
-blender-jnd W: Dependency included, but may not be needed ('minizip-ng')
-blender-jnd W: Dependency included, but may not be needed ('pybind11')
-blender-jnd W: Dependency included, but may not be needed ('vulkan-headers')
-blender-jnd W: Dependency included, but may not be needed ('vulkan-driver')
-blender-jnd W: Dependency included, but may not be needed ('libdeflate')
-blender-jnd W: Dependency included, but may not be needed ('pcre')
+blender-git-jnd W: Dependency included, but may not be needed ('desktop-file-utils')
+blender-git-jnd W: Dependency included, but may not be needed ('shared-mime-info')
+blender-git-jnd W: Dependency included, but may not be needed ('pipewire-pulse')
+blender-git-jnd W: Dependency included, but may not be needed ('libglvnd')
+blender-git-jnd W: Dependency included, but may not be needed ('glfw')
+blender-git-jnd W: Dependency included, but may not be needed ('draco')
+blender-git-jnd W: Dependency included, but may not be needed ('python-psutil')
+blender-git-jnd W: Dependency included, but may not be needed ('python-requests')
+blender-git-jnd W: Dependency included, but may not be needed ('llvm-libs')
+blender-git-jnd W: Dependency included, but may not be needed ('clang')
+blender-git-jnd W: Dependency included, but may not be needed ('pugixml')
+blender-git-jnd W: Dependency included, but may not be needed ('libdecor')
+blender-git-jnd W: Dependency included, but may not be needed ('fribidi')
+blender-git-jnd W: Dependency included, but may not be needed ('harfbuzz')
+blender-git-jnd W: Dependency included, but may not be needed ('minizip-ng')
+blender-git-jnd W: Dependency included, but may not be needed ('pybind11')
+blender-git-jnd W: Dependency included, but may not be needed ('vulkan-headers')
+blender-git-jnd W: Dependency included, but may not be needed ('vulkan-driver')
+blender-git-jnd W: Dependency included, but may not be needed ('libdeflate')
+blender-git-jnd W: Dependency included, but may not be needed ('pcre')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS  /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/blender-git-*-x86_64.pkg.tar.*
-$ sudo rm /00-repolocal/blender-jnd-*-x86_64.pkg.tar.*
+$ sudo rm /00-repolocal/blender-git-jnd-*-x86_64.pkg.tar.*
 
-$ sudo cp -v blender-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+$ sudo cp -v blender-git-jnd-*-x86_64.pkg.tar.* /00-repolocal/
 
 # DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ mv -v /0-DataLinux/00-repolocal/blender-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/pkg-OLD/
+$ mv -v /0-DataLinux/00-repolocal/blender-git-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/pkg-OLD/
 
-$ mv -v blender-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+$ mv -v blender-git-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
@@ -892,7 +892,7 @@ $ sync
 OU
 # LC_ALL=C pacman -Syu
 
-# LC_ALL=C pacman -Syu blender-jnd
+# LC_ALL=C pacman -Syu blender-git-jnd
 
 
 !!! MODIFIER FICHIERS

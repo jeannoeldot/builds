@@ -1,6 +1,6 @@
 # Maintainer: Name <name@fai.com>
 
-pkgname=blender-jnd
+pkgname=blender-git-jnd
 _pkgname_git=blender-git
 pkgver=4.4.0.27.20250202
 pkgrel=1
@@ -23,7 +23,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
           'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
           'opencolorio' 'libdeflate'
-          'pcre' 'opencollada-git'
+          'pcre' 'opencollada-git-jnd'
           'openimageio-jnd' 'fmt'
           'openshadinglanguage-jnd'
           'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
