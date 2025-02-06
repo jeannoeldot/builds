@@ -1,0 +1,536 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/openvdb-jnd
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/AcademySoftwareFoundation/openvdb/releases
+==>  danrbailey released this on 01 nov 2024 ==> 20241101
+==> v12.0.0  ==> 12.0.0
+==> 12.0.0.20241101
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O OpenVDB-v12.0.0.tar.gz \
+https://github.com/AcademySoftwareFoundation/openvdb/archive/refs/tags/v12.0.0.tar.gz
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/openvdb-jnd
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/OpenVDB-v12.0.0.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=openvdb-jnd               # openvdb ds community
+pkgver=12.0.0.20241101
+pkgrel=1
+
+pkgrel=2          # rebuild MAJ python 3.13
+pkgrel=2          # rebuild boost boost-libs 1.86.0
+
+pkgrel=3          # rebuild boost boost-libs 1.83.0
+pkgrel=2          # rebuild boost boost-libs 1.81.0
+
+pkgrel=2          # rebuild boost boost-libs 1.80.0
+
+pkgrel=4        # include nanovdb
+
+pkgrel=3          # rebuild boost boost-libs 1.78.0
+pkgrel=2    # Rebuild MAJ tbb 2021.4
+pkgrel=1
+
+pkgrel=2          # SUPPR déps openexr et imath
+
+pkgrel=5          # rebuild boost boost-libs 1.76.0
+pkgrel=4          # rebuild MAJ openexr/imath 3.0.3
+pkgrel=3          # + PATCHS MAJ openexr/imath 3.0.1
+pkgrel=2          # rebuild MAJ openexr/imath 3.0.1
+
+pkgrel=3          # rebuild boost boost-libs 1.75.0 + patch
+pkgrel=2          # rebuild boost boost-libs 1.74.0 + patch
+pkgrel=4  # Rebuild intel-tbb ==> tbb
+pkgrel=3          # rebuild MAJ openexr 2.5.1
+pkgrel=2          # rebuild boost boost-libs 1.72.0
+pkgrel=4          # rebuild MAJ openexr 2.4
+pkgrel=3    # Rebuild MAJ intel-tbb 2019.9-1
+pkgrel=2          # rebuild boost boost-libs 1.71.0
+pkgrel=6    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+              -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+              sed -i "s/isystem/I/g" $(find . -name flags.make)
+
+pkgrel=3          # Rebuild nouveau PC
+pkgrel=2          # rebuild boost boost-libs 1.69.0
+pkgrel=2          # rebuild boost boost-libs 1.68.0
+
+pkgrel=3          # rebuild MAJ ilmbase/openexr 2.3
+pkgrel=2          # rebuild boost boost-libs 1.67.0-4
+
+pkgrel=6          # rebuild ilmbase/openexr 2.2.1
+pkgrel=5          # rebuild boost boost-libs 1.66.0-1
+pkgrel=4
+
+pkgrel=2          # rebuild boost boost-libs 1.65.1-1
+pkgrel=3          # SANS doc, SANS ABI=3
+
+!!!!!!
+_ver_release="12.0.0"
+_name_release="openvdb-${_ver_release}"
+
+license=('Apache-2.0')
+
+depends=('boost-libs' 'tbb' 'zlib'
+          'blosc' 'glfw-x11' 'glu'
+          'jemalloc' 'imath'
+)
+
+!!! VOIR : cppunit python
+makedepends=('boost' 'mesa' 'doxygen' 'cmake' 'pybind11'
+)
+
+conflicts=('openvdb' 'openvdb-git')
+provides=('openvdb')
+
+
+SANS PATCH
+----------
+sha256sum OpenVDB-v12.0.0.tar.gz
+
+source=("OpenVDB-v${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}/build"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf OpenVDB-v12.0.0.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/openvdb-12.0.0/CMakeLists.txt
+
+LIGNES 68 ET 69:
+----------------
+OPENVDB_BUILD_CORE  ON      Both static and shared versions are enabled by default
+OPENVDB_BUILD_BINARIES  ON  Only vdb_print is enabled by default
+
+LIGNE 70:
+---------
+OPENVDB_BUILD_PYTHON_MODULE "Build the pyopenvdb Python module" OFF
+
+LIGNE 71:
+---------
+OPENVDB_BUILD_UNITTESTS "Build the OpenVDB unit tests" OFF
+
+LIGNE 72:
+---------
+OPENVDB_BUILD_DOCS "Build the OpenVDB documentation" OFF
+
+LIGNES 73 ET 74:
+----------------
+OPENVDB_BUILD_HOUDINI_PLUGIN "Build the Houdini plugin" OFF
+OPENVDB_BUILD_HOUDINI_ABITESTS "Build the Houdini ABI tests" OFF
+
+LIGNE 75:
+---------
+OPENVDB_BUILD_MAYA_PLUGIN "Build the Maya plugin" OFF
+
+LIGNES 76 À 77:
+----------------
+OPENVDB_BUILD_AX "Build the OpenVDB AX library. Turns ON if USE_AX is ON." ${USE_AX})
+OPENVDB_BUILD_AX_UNITTESTS "Build the OpenVDB AX unit tests" OFF
+
+LIGNE 79: VOIR LIGNE 133:
+-------------------------
+OPENVDB_BUILD_NANOVDB "Build the NanoVDB library. Turns ON if USE_NANOVDB is ON." ${USE_NANOVDB}
+
+LIGNE 81: !!!!!!
+----------------
+OPENVDB_ENABLE_RPATH "Build with RPATH information" ON ==> OFF
+
+LIGNE 82:
+----------
+OPENVDB_ENABLE_ASSERTS "Build with asserts in OpenVDB code enabled" OFF
+
+LIGNE 83: !!!!!!
+----------------
+OPENVDB_USE_DELAYED_LOADING "Build the core OpenVDB library with delayed-loading." ON
+
+LIGNE 85:
+---------
+OPENVDB_INSTALL_CMAKE_MODULES ON
+
+LIGNE 88:
+---------
+USE_CCACHE  ON ==> OFF
+
+LIGNE 93:
+---------
+USE_EXPLICIT_INSTANTIATION  ON
+
+LIGNE 97:
+---------
+OPENVDB_FUTURE_DEPRECATION  ON
+
+LIGNE 98:
+---------
+OPENVDB_ENABLE_UNINSTALL  ON
+
+LIGNE 99:
+---------
+USE_COLORED_OUTPUT  OFF
+
+LIGNE 102:
+----------
+USE_PKGCONFIG ON
+
+LIGNE 103:
+----------
+USE_HOUDINI OFF
+
+LIGNE 107:
+----------
+USE_MAYA  OFF
+
+LIGNE 110:
+----------
+USE_TBB ON Use TBB in building the NanoVDB library
+
+LIGNE 112:
+----------
+USE_BLOSC ON
+
+LIGNE 116:
+----------
+USE_ZLIB ON
+
+LIGNE 119:
+----------
+USE_LOG4CPLUS OFF
+
+LIGNE 123:
+----------
+USE_EXR OFF  ON ???????
+
+LIGNE 126:
+----------
+USE_IMATH_HALF OFF  ON ???????
+
+LIGNE 131:
+----------
+USE_PNG OFF  ON ???????
+
+LIGNE 132:
+----------
+USE_AX  ???????
+
+LIGNE 133:
+----------
+USE_NANOVDB  ==> ON
+
+LIGNE 135:
+----------
+OPENVDB_DISABLE_BOOST_IMPLICIT_LINKING  ON
+
+LIGNE 137:
+----------
+USE_STATIC_DEPENDENCIES OFF
+
+LIGNE 142:
+----------
+DISABLE_DEPENDENCY_VERSION_CHECKS OFF
+
+LIGNE 145:
+----------
+DISABLE_CMAKE_SEARCH_PATHS  OFF
+
+!!!!!!!!!!!!
+LIGNE 564:
+----------
+OPENVDB_ABI_VERSION_NUMBER=N  ==> 11 ???????
+
+
+2) kwrite /tmp/srcp/openvdb-12.0.0/openvdb/openvdb/CMakeLists.txt
+
+LIGNE 17:
+---------
+OPENVDB_CORE_SHARED "Build dynamically linked version  ON
+
+LIGNE 18:
+---------
+OPENVDB_CORE_STATIC "Build statically linked version of the core library." ON ==> OFF
+
+
+3) kwrite /tmp/srcp/openvdb-12.0.0/openvdb_cmd/CMakeLists.txt
+
+LIGNE 17 À 22:
+--------------
+OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
+
+OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF
+OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF
+OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF
+OPENVDB_BUILD_VDB_TOOL "Build vdb_tool" OFF
+OPENVDB_BUILD_VDB_AX "Build the OpenVDB AX command line binary" OFF
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v12.0.0.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/openvdb-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/openvdb-jnd/OpenVDB-v12.0.0.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/openvdb-jnd \
+&& cp -v /tmp/build/openvdb-jnd-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/openvdb-jnd && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap openvdb-jnd-*-x86_64.pkg.tar.*
+openvdb-jnd W: Dependency zlib included but already satisfied
+openvdb-jnd W: Dependency included and not needed ('glfw-x11')
+openvdb-jnd W: Dependency included and not needed ('glu')
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/openvdb-git-*-x86_64.pkg.tar.*
+$ sudo rm /00-repolocal/openvdb-jnd-*-x86_64.pkg.tar.*
+
+$ sudo cp -v openvdb-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/openvdb-jnd-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v openvdb-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i OpenVDB-v12.0.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# maj
+OU
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu openvdb-jnd
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd openvdb-jnd
+# rm /var/cache/pacman/pkg/openvdb-jnd-*
+# LC_ALL=C pacman -S openvdb-jnd
+
+
+===================================================================================
+ANCIEN
+======
+
+openvdb-git W: Dependency imath included but already satisfied
+
+LIGNE 21 À 24:
+--------------
+OPENVDB_BUILD_VDB_PRINT "Build vdb_print" ON
+
+OPENVDB_BUILD_VDB_LOD "Build vdb_lod" OFF ==> ON
+OPENVDB_BUILD_VDB_RENDER "Build vdb_render" OFF ==> ON
+OPENVDB_BUILD_VDB_VIEW "Build vdb_view" OFF ==> ON
+
+
+AVEC PATCH
+----------
+source=("OpenVDB-v${_ver_release}.tar.gz"
+        'openvdb-openexr3.patch'
+        'openvdb-cmd-openexr3.patch'
+)
+
+sha256sum OpenVDB-v12.0.0.tar.gz
+
+sha256sum openvdb-openexr3.patch
+
+sha256sum openvdb-cmd-openexr3.patch
+
+sha256sums=('...'
+            '...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  patch -Np1 -i "${srcdir}/openvdb-openexr3.patch"
+  patch -Np1 -i "${srcdir}/openvdb-cmd-openexr3.patch"
+}
+
+
+
+LIGNE 73:
+---------
+OPENVDB_INSTALL_HOUDINI_PYTHONRC OFF
+
+LIGNE 100:
+----------
+USE_EXR OFF ==> ON
+
+-rw-r--r--  1 jnd users     970 29 avril 10:56 openvdb-cmd-openexr3.patch
+-rw-r--r--  1 jnd users    3983 28 avril 11:20 openvdb-openexr3.patch
+
+&& cp -v $HOME/05-builds/openvdb-git/openvdb-openexr3.patch . \
+&& cp -v $HOME/05-builds/openvdb-git/openvdb-cmd-openexr3.patch . \
+
+
+AVEC PATCH
+----------
+source=("OpenVDB-v${_ver_release}.tar.gz"
+        'fix-CMake-Error.patch'
+)
+
+sha256sum OpenVDB-v12.0.0.tar.gz
+
+sha256sum fix-CMake-Error.patch
+
+sha256sums=('...'
+            '...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # Fix CMake Error
+  patch -Np1 -i "${srcdir}/fix-CMake-Error.patch"
+}
+
+LIGNE 156:
+----------
+VOIR: BLENDER
+OpenVDB: Fix compilation error against OpenVDB 4
+author	Sergey Sharybin <sergey.vfx@gmail.com>	
+	Mon, 25 Sep 2017 11:41:30 +0200 (14:41 +0500)
+commit	0d4e519b748c33f3f48fa4dcc4aa31ae398ed13a
+
+Build: add WITH_OPENVDB_3_ABI_COMPATIBLE option.
+author	Brecht Van Lommel <brechtvanlommel@gmail.com>	
+	Mon, 2 Apr 2018 18:55:10 +0200 (18:55 +0200)
+commit	71d7d6cd8c431b7f4fac8d65a4eaedf3cff6c8f6
+
+OPENVDB_ENABLE_3_ABI_COMPATIBLE "Build with OpenVDB v3 ABI" OFF
+
+
+depends=('openexr' 'boost-libs' 'intel-tbb' 'zlib'
+
+
+openvdb-git W: Dependency glu included but already satisfied
+
+LIGNE 33: !!!!!!
+----------------
+ENABLE_TESTING()
+
+AVEC PATCH
+----------
+source=("OpenVDB-v${_ver_release}.tar.gz"
+        'fix-error-boost-egal-sup-1.67.patch'
+)
+
+sha256sum OpenVDB-v12.0.0.tar.gz
+
+sha256sum fix-error-boost-egal-sup-1.67.patch
+
+sha256sums=('...'
+            '...'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # Fix erreur : undefined reference to symbol 'pthread_condattr_setclock@@GLIBC_2.3.3'
+  patch -Np1 -i "${srcdir}/fix-error-boost-egal-sup-1.67.patch"
+
+-rw-r--r--  1 jnd users     457 30 déc.  10:36 fix-error-boost-egal-sup-1.67.patch
+&& cp -v $HOME/05-builds/openvdb-git/fix-error-boost-egal-sup-1.67.patch . \

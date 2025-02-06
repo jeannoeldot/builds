@@ -1,0 +1,48 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openvdb-jnd
+pkgver=12.0.0.20241101
+pkgrel=1
+_ver_release="12.0.0"
+_name_release="openvdb-${_ver_release}"
+pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
+url='https://www.openvdb.org/'
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('boost-libs' 'onetbb' 'zlib'
+          'blosc' 'glfw-x11' 'glu'
+          'jemalloc'
+)
+makedepends=('doxygen' 'boost' 'cmake' 'mesa' 'pybind11'
+)
+conflicts=('openvdb' 'openvdb-git')
+provides=('openvdb')
+options=('!debug')
+source=("OpenVDB-v${_ver_release}.tar.gz"
+)
+sha256sums=('23ceb5b18a851f45af118f718a9dd3001efaee364e3f623c37ffbdad03b8905f'
+)
+
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DOPENVDB_ENABLE_RPATH=OFF \
+    -DUSE_NANOVDB=ON \
+    -DUSE_CCACHE=OFF \
+    -DOPENVDB_CORE_STATIC=OFF
+  
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+
+  DESTDIR="${pkgdir}" make -C build install
+}

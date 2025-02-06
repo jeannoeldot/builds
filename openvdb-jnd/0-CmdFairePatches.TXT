@@ -1,0 +1,381 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 12.0.0
+!!! VERSION = v12.0.0
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/openvdb-jnd
+
+mkdir /tmp/srcp
+
+cp -v OpenVDB-v12.0.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf OpenVDB-v12.0.0.tar.gz
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+openexr/imath 3.0.1
+===================
+openvdb-openexr3.patch
+VOIR:
+https://github.com/archlinux/svntogit-community/blob/packages/openvdb/trunk/openvdb-openexr3.patch
+
+1) MODIFIER openvdb-8.0.1/cmake/FindOpenVDB.cmake
+=================================================
+cp -R openvdb-8.0.1 openvdb-8.0.1.new
+
+cd openvdb-8.0.1.new/cmake
+
+kwrite FindOpenVDB.cmake
+
+MODIFIER LIGNE 447:
+find_package(IlmBase REQUIRED COMPONENTS Half)
+
+DEVIENT:
+find_package(Imath CONFIG REQUIRED)
+
+
+MODIFIER LIGNES 599 ET 600:
+  find_package(IlmBase REQUIRED)
+  find_package(OpenEXR REQUIRED)
+
+DEVIENNENT :
+  find_package(OpenEXR CONFIG REQUIRED)
+
+
+MODIFIER LIGNE 610:
+  get_target_property(ILMBASE_LIB_TYPE IlmBase::Half TYPE)
+
+DEVIENT:
+  get_target_property(ILMBASE_LIB_TYPE Imath::Imath TYPE)
+
+
+MODIFIER LIGNE 625:
+  IlmBase::Half
+
+DEVIENT:
+  Imath::Imath
+
+
+MODIFIER LIGNES 634 À 637:
+    IlmBase::IlmThread
+    IlmBase::Iex
+    IlmBase::Imath
+    OpenEXR::IlmImf
+
+DEVIENNENT :
+    OpenEXR::OpenEXR
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindOpenVDB.cmake~
+rm -f FindOpenVDB.cmake~
+ 
+cd ../..
+
+
+2) MODIFIER openvdb-8.0.1/openvdb/openvdb/CMakeLists.txt
+========================================================
+cd openvdb-8.0.1.new/openvdb/openvdb
+
+kwrite CMakeLists.txt
+
+MODIFIER LIGNES 49 À 50:
+  find_package(IlmBase ${MINIMUM_ILMBASE_VERSION} REQUIRED)
+  find_package(OpenEXR ${MINIMUM_OPENEXR_VERSION} REQUIRED)
+
+DEVIENNENT :
+  find_package(Imath CONFIG REQUIRED)
+  find_package(OpenEXR CONFIG REQUIRED)
+
+
+MODIFIER LIGNE 58:
+  find_package(IlmBase ${MINIMUM_ILMBASE_VERSION} REQUIRED COMPONENTS Half)
+
+DEVIENT:
+  find_package(Imath CONFIG REQUIRED)
+
+
+MODIFIER LIGNE 132:
+  IlmBase::Half
+
+DEVIENT:
+  Imath::Imath
+
+
+MODIFIER LIGNES 150 À 153:
+    IlmBase::IlmThread
+    IlmBase::Iex
+    IlmBase::Imath
+    OpenEXR::IlmImf
+
+DEVIENNENT :
+    Imath::Imath
+    OpenEXR::OpenEXR
+
+
+MODIFIER LIGNE 414:
+  get_target_property(ILMBASE_LIB_TYPE IlmBase::Half TYPE)
+
+DEVIENT:
+  get_target_property(ILMBASE_LIB_TYPE Imath::Imath TYPE)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+ 
+cd ../../..
+
+
+3) MODIFIER openvdb-8.0.1/openvdb/openvdb/Types.h
+========================================================
+cd openvdb-8.0.1.new/openvdb/openvdb
+
+kwrite Types.h
+
+MODIFIER LIGNE 10:
+#include <OpenEXR/half.h>
+
+DEVIENT:
+#include <Imath/half.h>
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Types.h~
+rm -f Types.h~
+ 
+cd ../../..
+
+
+diff -aur openvdb-8.0.1 openvdb-8.0.1.new
+diff -aur openvdb-8.0.1 openvdb-8.0.1.new > openvdb-openexr3.patch
+
+rm -rf openvdb-8.0.1.new
+
+cd $HOME/05-builds/openvdb-git
+
+mv -vf /tmp/srcp/openvdb-openexr3.patch .
+
+
+openvdb-cmd-openexr3.patch
+
+1) MODIFIER openvdb-8.0.1/openvdb/openvdb/cmd/CMakeLists.txt
+============================================================
+cp -R openvdb-8.0.1 openvdb-8.0.1.new
+
+cd openvdb-8.0.1.new/openvdb/openvdb/cmd
+
+kwrite CMakeLists.txt
+
+MODIFIER LIGNES 119 À 120:
+  find_package(IlmBase ${MINIMUM_ILMBASE_VERSION} REQUIRED COMPONENTS Half Iex IlmThread Imath)
+  find_package(OpenEXR ${MINIMUM_OPENEXR_VERSION} REQUIRED COMPONENTS IlmImf)
+
+DEVIENNENT :
+  find_package(Imath CONFIG REQUIRED)
+  find_package(OpenEXR CONFIG REQUIRED)
+
+
+MODIFIER LIGNES 132 À 135:
+    OpenEXR::IlmImf
+    IlmBase::IlmThread
+    IlmBase::Iex
+    IlmBase::Imath
+
+DEVIENNENT :
+    OpenEXR::OpenEXR
+    Imath::Imath
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+ 
+cd ../../../..
+
+diff -aur openvdb-8.0.1 openvdb-8.0.1.new
+diff -aur openvdb-8.0.1 openvdb-8.0.1.new > openvdb-cmd-openexr3.patch
+
+rm -rf openvdb-8.0.1.new
+
+cd $HOME/05-builds/openvdb-git
+
+mv -vf /tmp/srcp/openvdb-cmd-openexr3.patch .
+
+
+VOIR
+https://github.com/AcademySoftwareFoundation/openvdb/commit/b93e304cf0d43e04f5f412ed09c7b6a060585e18
+
+1) MODIFIER openvdb-7.1.0/openvdb/CMakeLists.txt
+================================================
+cp -R openvdb-7.1.0 openvdb-7.1.0.new
+
+cd openvdb-7.1.0.new/cmake
+
+kwrite OpenVDBGLFW3Setup.cmake
+
+MODIFIER LIGNES 112 À 116
+find_package(PackageHandleStandardArgs)
+find_package_handle_standard_args(glfw3
+  REQUIRED_VARS glfw3_DIR glfw3_FOUND
+  VERSION_VAR glfw3_VERSION
+)
+
+DEVIENNENT:
+# We only use find_package_handle_standard_args to verify and print
+# appropriate messages. This now explicitly errors in 3.19...
+# @todo Improve this entire GLFW3 search
+#  https://gitlab.kitware.com/cmake/cmake/-/issues/21505
+if(${CMAKE_VERSION} VERSION_LESS 3.19)
+  find_package(PackageHandleStandardArgs)
+  find_package_handle_standard_args(glfw3
+    REQUIRED_VARS glfw3_DIR glfw3_FOUND
+    VERSION_VAR glfw3_VERSION
+  )
+endif()
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier OpenVDBGLFW3Setup.cmake~
+rm -f OpenVDBGLFW3Setup.cmake~
+ 
+cd ../..
+
+diff -aur openvdb-7.1.0 openvdb-7.1.0.new
+diff -aur openvdb-7.1.0 openvdb-7.1.0.new > fix-CMake-Error.patch
+
+rm -rf openvdb-7.1.0.new
+
+cd $HOME/05-builds/openvdb-git
+
+mv -vf /tmp/srcp/fix-CMake-Error.patch .
+
+
+1) MODIFIER openvdb-6.1.0/openvdb/CMakeLists.txt
+================================================
+cp -R openvdb-6.1.0 openvdb-6.1.0.new
+
+cd openvdb-6.1.0.new/openvdb
+
+kwrite CMakeLists.txt
+
+LIGNE 278 : RAJOUTER :
+    ${CMAKE_THREAD_LIBS_INIT}
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+ 
+cd ../..
+
+diff -aur openvdb-6.1.0 openvdb-6.1.0.new
+diff -aur openvdb-6.1.0 openvdb-6.1.0.new > fix-error-boost-egal-sup-1.67.patch
+
+rm -rf openvdb-6.1.0.new
+
+cd $HOME/05-builds/openvdb-git
+
+mv -vf /tmp/srcp/fix-error-boost-egal-sup-1.67.patch .
+
+
+
+
+
+=================================================================
+TESTS SED PKGBUILD
+==================
+
+cd $HOME/05-builds/openvdb-git
+
+mkdir /tmp/srcp
+
+cp -v OpenVDB-v6.1.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf OpenVDB-v6.1.0.tar.gz
+
+cd openvdb
+
+cp -v Makefile Makefile.original
+
+1) TESTS SED DÉPENDANCES
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "/^DESTDIR := /c\DESTDIR := ${pkgdir}/usr" \
+          -e "/^BOOST_INCL_DIR := /c\BOOST_INCL_DIR := /usr/include/boost" \
+          -e "/^BOOST_LIB_DIR := /c\BOOST_LIB_DIR := /usr/lib" \
+          -e "/^EXR_INCL_DIR := /c\EXR_INCL_DIR := /usr/include/OpenEXR" \
+          -e "/^EXR_LIB_DIR := /c\EXR_LIB_DIR := /usr/lib" \
+          -e "/^ILMBASE_INCL_DIR := /c\ILMBASE_INCL_DIR := /usr/include/OpenEXR" \
+          -e "/^ILMBASE_LIB_DIR := /c\ILMBASE_LIB_DIR := /usr/lib" \
+          -e "/^TBB_INCL_DIR := /c\TBB_INCL_DIR := /usr/include/tbb" \
+          -e "/^TBB_LIB_DIR := /c\TBB_LIB_DIR := /usr/lib" \
+          -e "/^BLOSC_INCL_DIR := /c\BLOSC_INCL_DIR := /usr/include" \
+          -e "/^BLOSC_LIB_DIR := /c\BLOSC_LIB_DIR := /usr/lib" \
+          -e "/^BLOSC_LIB := /c\BLOSC_LIB := -lblosc -lz" \
+          -e "/^CONCURRENT_MALLOC_LIB_DIR := /c\CONCURRENT_MALLOC_LIB_DIR := /usr/lib" \
+          -e "/^CPPUNIT_INCL_DIR := /c\CPPUNIT_INCL_DIR :=" \
+          -e "/^CPPUNIT_LIB_DIR := /c\CPPUNIT_LIB_DIR :=" \
+          -e "/^CPPUNIT_LIB := /c\CPPUNIT_LIB :=" \
+          -e "/^LOG4CPLUS_INCL_DIR := /c\LOG4CPLUS_INCL_DIR :=" \
+          -e "/^LOG4CPLUS_LIB_DIR := /c\LOG4CPLUS_LIB_DIR :=" \
+          -e "/^LOG4CPLUS_LIB := /c\LOG4CPLUS_LIB :=" \
+          -e "/^GLFW_INCL_DIR := /c\GLFW_INCL_DIR := /usr/include/GLFW" \
+          -e "/^GLFW_LIB_DIR := /c\GLFW_LIB_DIR := /usr/lib" \
+          -e "/^PYTHON_VERSION := /c\PYTHON_VERSION :=" \
+          -e "/^PYTHON_INCL_DIR := /c\PYTHON_INCL_DIR :=" \
+          -e "/^PYCONFIG_INCL_DIR := /c\PYCONFIG_INCL_DIR :=" \
+          -e "/^PYTHON_LIB_DIR := /c\PYTHON_LIB_DIR :=" \
+          -e "/^PYTHON_LIB := /c\PYTHON_LIB :=" \
+          -e "/^BOOST_PYTHON_LIB_DIR := /c\BOOST_PYTHON_LIB_DIR :=" \
+          -e "/^BOOST_PYTHON_LIB := /c\BOOST_PYTHON_LIB :=" \
+          -e "/^NUMPY_INCL_DIR := /c\NUMPY_INCL_DIR :=" \
+          -e "/^EPYDOC := /c\EPYDOC :=" \
+          Makefile
+
+head -n 182 Makefile
+
+2) TESTS SED -isystem
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-isystem/-I/g" Makefile
+
+cat Makefile
+
+
+
+!!! ==> COMPIL PAS OK
+
+2) TESTS SED -isystem
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-isystem //g" Makefile
+
+cat Makefile
+
+3) TESTS SED -I . -I .. 
+========================
+cp -v Makefile.original Makefile
+
+  sed -i  -e "s/-I . -I .. //g" Makefile
+
+cat Makefile
+
+5) QUAND TESTS FINIS
+=======================
+cd $HOME/05-builds/openvdb-git
+
+rm -rf /tmp/srcp
+
+sync
