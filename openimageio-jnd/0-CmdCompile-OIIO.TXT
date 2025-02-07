@@ -166,6 +166,15 @@ sha256sums=('...'
             '...'
 )
 
+
+prepare() {
+  cd "${_name_release}"
+
+  # https://projects.blender.org/blender/blender/pulls/133770/files
+  # Build: Apply OpenImageIO patch for PSD reading crash #133770
+  patch -Np1 -i "${srcdir}/fix.PSD.reading.crash.patch"
+}
+
 !!!!!!
 # TODO: Consider adding these deps: 'openvdb' 'tbb' 'ptex' 'opencv'
 !!!!!!

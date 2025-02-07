@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.02.20250121
+pkgrel=2      # rebuild MAJ boost boost-libs 1.87.0
 pkgrel=1
 
 pkgrel=3      # rebuild MAJ python 3.13
@@ -320,7 +321,6 @@ openusd-jnd W: Dependency included, but may not be needed ('python-jinja')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/openusd-git-*-x86_64.pkg.tar.*
 $ sudo rm /00-repolocal/openusd-jnd-*-x86_64.pkg.tar.*
 
 $ sudo cp -v openusd-jnd-*-x86_64.pkg.tar.* /00-repolocal/
