@@ -152,6 +152,7 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=4.4.0.27.20250202
+pkgrel=2    # Rebuild MAJ boost boost-libs 1.87.0
 pkgrel=1
 
 pkgrel=1    # MAJ + Rebuild MAJ LLVM 19

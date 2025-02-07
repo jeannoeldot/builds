@@ -3,7 +3,7 @@
 pkgname=blender-git-jnd
 _pkgname_git=blender-git
 pkgver=4.4.0.27.20250202
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
