@@ -38,6 +38,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-jnd
 pkgver=2.5.18.0.20250101
+pkgrel=2    # rebuild boost boost-libs 1.87.0 + Patch PSD
 pkgrel=1
 
 pkgrel=3    # rebuild MAJ python 3.13
@@ -142,10 +143,24 @@ options=('!debug')
 
 2-2) PKGBUILD SANS PATCH
 ========================
-source=("oiio-${_ver_release}.tar.gz"
+source=("OpenImageIO-${_ver_release}.tar.gz"
 )
 
 sha256sum OpenImageIO-v2.5.18.0.tar.gz
+
+sha256sums=('...'
+            '...'
+)
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("OpenImageIO-${_ver_release}.tar.gz"
+        "fix.PSD.reading.crash.patch"
+)
+
+sha256sum OpenImageIO-v2.5.18.0.tar.gz
+
+sha256sum fix.PSD.reading.crash.patch
 
 sha256sums=('...'
             '...'
@@ -325,6 +340,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 27821011 26 nov.  15:36 OpenImageIO-v2.5.18.0.tar.gz
 -rw-r--r--  1 jnd users     1748 26 nov.  16:01 PKGBUILD
+-rw-r--r--  1 jnd users      908  7 févr. 11:19 fix.PSD.reading.crash.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -421,7 +437,6 @@ openimageio-jnd W: Dependency included and not needed ('python-numpy')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/openimageio-git-*-x86_64.pkg.tar.*
 $ sudo rm /00-repolocal/openimageio-jnd-*-x86_64.pkg.tar.*
 
 $ sudo cp -v openimageio-jnd-*-x86_64.pkg.tar.* /00-repolocal/

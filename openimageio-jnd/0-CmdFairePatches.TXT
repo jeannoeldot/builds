@@ -5,11 +5,48 @@ FAIRE PATCHS
 
 mkdir /tmp/srcp
 
-cp -v OpenImageIO-v2.5.18.0.tar.gz.tar.gz /tmp/srcp/
+cp -v OpenImageIO-v2.5.18.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenImageIO-v2.5.18.0.tar.gz.tar.gz
+tar -xzf OpenImageIO-v2.5.18.0.tar.gz
+
+https://projects.blender.org/blender/blender/pulls/133770/files
+Build: Apply OpenImageIO patch for PSD reading crash #133770
+
+1) MODIFIER OpenImageIO-2.5.18.0/src/psd.imageio/psdinput.cpp
+=============================================================
+cp -R OpenImageIO-2.5.18.0 OpenImageIO-2.5.18.0.new
+
+cd OpenImageIO-2.5.18.0.new/src/psd.imageio
+
+kwrite psdinput.cpp
+
+AJOUTER LIGNE 2237
+    char* dst_start = dst;
+
+
+MODIFIER LIGNES 2280 ET 2281
+        case 16: swap_endian((uint16_t*)dst, m_spec.width); break;
+        case 32: swap_endian((uint32_t*)dst, m_spec.width); break;
+
+DEVIENNENT
+        case 16: swap_endian((uint16_t*)dst_start, m_spec.width); break;
+        case 32: swap_endian((uint32_t*)dst_start, m_spec.width); break;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier psdinput.cpp~
+rm -f psdinput.cpp~
+
+cd ../../..
+
+diff -aur OpenImageIO-2.5.18.0 OpenImageIO-2.5.18.0.new
+
+diff -aur OpenImageIO-2.5.18.0 OpenImageIO-2.5.18.0.new > fix.PSD.reading.crash.patch
+
+cd $HOME/05-builds/openimageio-jnd
+
+mv -vf /tmp/srcp/fix.PSD.reading.crash.patch .
 
 
 
