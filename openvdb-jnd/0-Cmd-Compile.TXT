@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-jnd               # openvdb ds community
 pkgver=12.0.0.20241101
+pkgrel=2          # rebuild boost boost-libs 1.87.0
 pkgrel=1
 
 pkgrel=2          # rebuild MAJ python 3.13
@@ -371,7 +372,6 @@ openvdb-jnd W: Dependency included and not needed ('glu')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/openvdb-git-*-x86_64.pkg.tar.*
 $ sudo rm /00-repolocal/openvdb-jnd-*-x86_64.pkg.tar.*
 
 $ sudo cp -v openvdb-jnd-*-x86_64.pkg.tar.* /00-repolocal/
