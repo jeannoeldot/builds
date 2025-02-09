@@ -108,25 +108,25 @@ cd ..
 !!!!! Vérifier VERSION : 
 head -n 60 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSION
 
-#define BLENDER_VERSION 404           ==>   4.4
+#define BLENDER_VERSION 405           ==>   4.5
 #define BLENDER_VERSION_PATCH 0       ==>   0
 #define BLENDER_VERSION_CYCLE alpha
 ....
-#define BLENDER_FILE_SUBVERSION 27     ==>   27
+#define BLENDER_FILE_SUBVERSION 1     ==>   1
 
 ==> Version = BLENDER_VERSION.BLENDER_VERSION_PATCH.BLENDER_FILE_SUBVERSION
 
-==> Version = 4.4.0.27
+==> Version = 4.5.0.1
 
-==> Version = 4.4.0.27.20250208
+==> Version = 4.5.0.1.20250208
 
 1-7-1) FAIRE ARCHIVE TAR.ZST DE BLENDER
 =======================================
-tar -I 'zstd -T0 -5' -cvf blender-git-4.4.0.27.20250208.tar.zst --exclude={.git,.gitea,.github}  blender
+tar -I 'zstd -T0 -5' -cvf blender-git-4.5.0.1.20250208.tar.zst --exclude={.git,.gitea,.github}  blender
 
-sha256sum blender-git-4.4.0.27.20250208.tar.zst
+sha256sum blender-git-4.5.0.1.20250208.tar.zst
 
-64527a6057b1781732004814edddbbf53f7287bdf1da98f8497185758ffc8ff2
+88c884c7412f40ddea6108bbdf223a548fa6aa196e72301541e0879a2eaaeaa4
 
 1-7-5) Copie ARCHIVE TAR.GZ / TAR.ZST ds rep compile
 ====================================================
@@ -134,7 +134,7 @@ cd $HOME/05-builds/blender-git-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-4.4.0.27.20250208.tar.zst .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-4.5.0.1.20250208.tar.zst .
 
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
@@ -151,10 +151,10 @@ voir CmdFairePatches.TXT
 
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
-pkgver=4.4.0.27.20250208
-pkgrel=2    # Rebuild MAJ boost boost-libs 1.87.0
-pkgrel=1
+pkgver=4.5.0.1.20250208
+pkgrel=1    # MAJ + Rebuild MAJ OIIO 3.0.3.1 + OSL 1.14.4.0
 
+pkgrel=2    # Rebuild MAJ boost boost-libs 1.87.0
 pkgrel=1    # MAJ + Rebuild MAJ LLVM 19
 pkgrel=1    # MAJ + Rebuild MAJ python 3.13
 
@@ -316,7 +316,7 @@ source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.0-Include.zip"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.zst
+sha256sum blender-git-4.5.0.1.20250208.tar.zst
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -333,7 +333,7 @@ source=("$pkgname-$pkgver.tar.zst"
         "..."
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.zst
+sha256sum blender-git-4.5.0.1.20250208.tar.zst
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -415,38 +415,39 @@ makedepends=(...
 kwrite /0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt &
 
 !!! A VOIR ???
-176 CMAKE_OPTIMIZE_DEPENDENCIES ON
+198 CMAKE_OPTIMIZE_DEPENDENCIES ON
 
 # Blender internal features
 200 option WITH_BLENDER_THUMBNAILER   _option_default ON
 
-231 option WITH_BUILDINFO   ON   makedepends = git
+251 option WITH_BUILDINFO   ON   makedepends = git
 
-251 option WITH_UNITY_BUILD   ON
+271 option WITH_UNITY_BUILD   ON
 
-Ligne 308
+Ligne 328
 "Enable VR features through the OpenXR specification"
   option(WITH_XR_OPENXR    _option_default ON ==> OFF
 
-Ligne 314
+Ligne 334
 option(WITH_GMP "Enable features depending on GMP (Exact Boolean)" ON)
 
 # Compositor
-318 option WITH_OPENIMAGEDENOISE  ON   dep = openimagedenoise-jnd
-320 option WITH_OPENSUBDIV        ON   dep = opensubdiv-jnd
-322 option WITH_POTRACE           ON   dep = potrace
-323 option WITH_OPENVDB           ON   dep = openvdb-jnd
-333 option WITH_NANOVDB           ON   dep = openvdb-jnd
-334 option WITH_HARU              ON   dep = libharu
+336 option WITH_OPENIMAGEDENOISE  ON   dep = openimagedenoise-jnd
+338 option WITH_OPENSUBDIV        ON   dep = opensubdiv-jnd
+340 option WITH_POTRACE           ON   dep = potrace
+341 option WITH_OPENVDB           ON   dep = openvdb-jnd
+351 option WITH_NANOVDB           ON   dep = openvdb-jnd
+352 option WITH_HARU              ON   dep = libharu
 
-350 WITH_GHOST_WAYLAND            ON   dep = 'libdecor' 'wayland-protocols'
-354 WITH_GHOST_WAYLAND_LIBDECOR   ON
-357 WITH_GHOST_WAYLAND_DYNLOAD    ON
+365 WITH_GHOST_X11                ON
+368 WITH_GHOST_WAYLAND            ON   dep = 'libdecor' 'wayland-protocols'
+372 WITH_GHOST_WAYLAND_LIBDECOR   ON
+375 WITH_GHOST_WAYLAND_DYNLOAD    ON
 
 # Misc...
-405 option WITH_SYSTEM_FREETYPE   ON    dep = freetype2
+427 option WITH_SYSTEM_FREETYPE   ON    dep = freetype2
 
-406     !!! VOIR
+428     !!! VOIR
 if(UNIX AND NOT APPLE)
 	option WITH_SYSTEM_EIGEN3 "Use the systems Eigen3 library" OFF)
 endif()
@@ -454,92 +455,93 @@ endif()
 # Modifiers
 
 # Image format support
-434 WITH_IMAGE_WEBP         ON : dep = libwebp
+459 WITH_IMAGE_WEBP         ON : dep = libwebp
 
-Lignes 441 et ...
+Lignes 465 et ...
 # Alembic support
 option WITH_ALEMBIC             ON  dep = alembic-jnd
 
-Lignes 444
+Lignes 468
 # Universal Scene Description support
 option WITH_USD                 ON  dep = openusd-jnd ==> OFF : COMPILE PAS OK
 
-Lignes 447
+Lignes 471
 # MaterialX
 option WITH_MATERIALX     "Enable MaterialX Support" ON
 
-Lignes 479
+Lignes 474
 # Hydra render engine
 option WITH_HYDRA "Enable Hydra render engine" ON
 
-Lignes 456
+Lignes 481
 # 3D format support
 option WITH_OPENCOLLADA	ON  dep = opencollada-git-jnd   dep = pcre
 
 # Sound output
-477   option WITH_JACK          ==> _option_default ON         dep =  jack2
+502   option WITH_JACK          ==> _option_default ON         dep =  jack2
 
-487   option WITH_PULSEAUDIO    ==> ON          dep = pulseaudio ou pipewire-pulse
+509   option WITH_PULSEAUDIO    ==> ON          dep = pulseaudio ou pipewire-pulse
+511   option WITH_PIPEWIRE	ON   dep = pipewire
 
 # Compression
-521 option WITH_DRACO   ==> ON ??? À VOIR : AVEC PATCH
+529 option WITH_DRACO   ==> ON ??? À VOIR : AVEC PATCH
 
 # Logging/unbit test libraries.
 
 # Libraries.
 -- Unable to find LIBDIR: , system libraries may be used (disable WITH_LIBS_PRECOMPILED to suppress this message).
-525 WITH_LIBS_PRECOMPILED   ON   ==> OFF
-533 WITH_STATIC_LIBS        OFF
+550 WITH_LIBS_PRECOMPILED   ON   ==> OFF
+558 WITH_STATIC_LIBS        OFF
 
 # Misc
-553	option WITH_INPUT_NDOF  ON ==> OFF
+571	option WITH_INPUT_NDOF  ON ==> OFF
 
 
-557 WITH_INSTALL_PORTABLE       ON   ==> OFF
+575 WITH_INSTALL_PORTABLE       ON   ==> OFF
 
-563 WITH_PYTHON_INSTALL             ON   ==> OFF
+581 WITH_PYTHON_INSTALL             ON   ==> OFF
 
-565 WITH_INSTALL_COPYRIGHT    OFF
+583 WITH_INSTALL_COPYRIGHT    OFF
 
-572 WITH_PYTHON_NUMPY       ON  dep = python-numpy
+590 WITH_PYTHON_NUMPY       ON  dep = python-numpy
 /!\/!\/!\/!\/!\
 python-numpy 2.0.0-1:
 LIGNE 2435 : find_python_package(numpy "core/include")
 ==> find_python_package(numpy "_core/include")
 
-586 WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
+604 WITH_PYTHON_INSTALL_NUMPY       ON   ==> OFF
 
-589 WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
+607 WITH_PYTHON_INSTALL_REQUESTS       ON   ==> OFF
 
-596 WITH_PYTHON_INSTALL_ZSTANDARD       ON   ==> OFF
+617 WITH_PYTHON_INSTALL_ZSTANDARD       ON   ==> OFF
 
 
-606 # Cycles
+627 # Cycles
 option WITH_CYCLES			ON   dep = openimageio(-jnd)
 option WITH_CYCLES_OSL      ON   dep = openshadinglanguage(-jnd)
 option WITH_CYCLES_PATH_GUIDING      ON   dep = openpgl(-jnd)
 
 !!! -- Could NOT find EMBREE (missing: _embree_LIBRARIES)
 !!! OK si embree(-jnd) compilé avec DYNAMIC LIBS + PATCH
-610 option WITH_CYCLES_EMBREE           ON  makedepends = embree(-jnd)
+631 option WITH_CYCLES_EMBREE           ON  makedepends = embree(-jnd)
 
-611 option WITH_CYCLES_LOGGING     ON
+632 option WITH_CYCLES_LOGGING     ON
 
-624 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON   (-march=native)
+645 WITH_CYCLES_NATIVE_ONLY	OFF   	==> ON   (-march=native)
 
-Ligne 632 ????
+Ligne 653 ????
 CYCLES_TEST_DEVICES CPU
 
 !!! CUDA et GCC 13 PAS OK
 ==> -DCUDA_HOST_COMPILER=/usr/bin/gcc-12
 
-642 # NVIDIA CUDA & OptiX
-644 option WITH_CYCLES_DEVICE_CUDA   ON
-645 option WITH_CYCLES_DEVICE_OPTIX   ON
+668 # NVIDIA CUDA & OptiX
+670 option WITH_CYCLES_DEVICE_CUDA   ON
+671 option WITH_CYCLES_DEVICE_OPTIX   ON
 
-648 option WITH_CYCLES_CUDA_BINARIES	==> ON makedepends = cuda
+674 option WITH_CYCLES_CUDA_BINARIES	==> ON makedepends = cuda
 
-Ligne 649
+Ligne 675
 URL  GPU et sm_??  : https://developer.nvidia.com/cuda-gpus
 https://developer.nvidia.com/cuda-gpus#collapse4
 
@@ -559,27 +561,27 @@ exemple : GeForce GTX 980 5.2 ET GeForce RTX 3080TI 8.6
 -DCYCLES_CUDA_BINARIES_ARCH="sm_52;sm_86"
 
 Cycles: Increase the compute model for the PTX kernel
-649 set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 sm_86 sm_89 compute_89 CACHE STRING "CUDA architectures to build binaries for")
+675 set(CYCLES_CUDA_BINARIES_ARCH sm_30 sm_35 sm_37 sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 sm_86 sm_89 compute_89 CACHE STRING "CUDA architectures to build binaries for")
 -DCYCLES_CUDA_BINARIES_ARCH="sm_86;compute_86"
 
-657 option WITH_CUDA_DYNLOAD     ON
+683 option WITH_CUDA_DYNLOAD     ON
 
-662 OPTIX_ROOT_DIR="${srcdir}"
+688 OPTIX_ROOT_DIR="${srcdir}"
 
-677 # AMD HIP
-679 option WITH_CYCLES_DEVICE_HIP   ON   ==> OFF
-649 option WITH_CYCLES_HIP_BINARIES   OFF
+703 # AMD HIP
+705 option WITH_CYCLES_DEVICE_HIP   ON   ==> OFF
+706 option WITH_CYCLES_HIP_BINARIES   OFF
 
-699 # Apple Metal
-701 WITH_CYCLES_DEVICE_METAL   ON   ==> OFF
+721 # Apple Metal
+723 WITH_CYCLES_DEVICE_METAL   ON   ==> OFF
 
-704 # oneAPI
+726 # oneAPI
             ==> OFF
 
-754 # LLVM
+758 # LLVM
 !!! A VOIR ???
-755 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
-758 option WITH_CLANG   OFF  ==> ON : Voir LIGNE 746 : dep = 'clang'
+759 option WITH_LLVM   	OFF  ==> ON   ==> OFF : SUPPR makedeps 'llvm' et dep 'llvm-libs'
+762 option WITH_CLANG   OFF  ==> ON : Voir LIGNE 746 : dep = 'clang'
 
 /!\/!\/!\/!\/!\/!\/!\
 # LLVM 18.1.8                       # LLVM 17.0.6
@@ -601,20 +603,19 @@ $ llvm-config --version => 18.1.8
 -- Found Clang: /usr/lib
 
 
-# Debug
-773 option WITH_BOOST     ON
-774 option WITH_TBB     ON  dep = onetbb
+787 option WITH_BOOST     ON
+788 option WITH_TBB     ON  dep = onetbb
 
-784 option WITH_EXPERIMENTAL_FEATURES  ON
-Lignes 786 et ...
+802 option WITH_EXPERIMENTAL_FEATURES  ON
+Lignes 800 et ...
 # This should be turned off when Blender enter beta/rc/release
 
-Lignes 793 et ...
+Lignes 807 et ...
 # Unit testsing
-794 WITH_GTEST  OFF
+808 WITH_GTEST  OFF
 
 # Documentation
-Lignes 830 et ...
+Lignes 890 et ...
 if(UNIX AND NOT APPLE)
         option WITH_DOC_MANPAGE "Create a manual page (Unix manpage)" OFF)    ==> ON ???
 endif()
@@ -623,31 +624,31 @@ endif()
 # OpenGL
 # OpenGL : VOIR sortie cmd $ glxinfo | grep OpenGL
 ---------------------------------------------------
-Lignes 846 et ...
-848 WITH_OPENGL_BACKEND ON
+Lignes 922 et ...
+924 WITH_OPENGL_BACKEND ON
 
 # Vulkan
 Lignes 854 et ...
-856 WITH_VULKAN_BACKEND ON
+931 WITH_VULKAN_BACKEND ON
 
 # Metal
-Lignes 870 et ...
+Lignes 948 et ...
 
 # Compiler toolchain
-Lignes 892 et ...
+Lignes 970 et ...
 
-LIGNE 895 WITH_LINKER_GOLD: SI ON ==> makedepends ???
+LIGNE 973 WITH_LINKER_GOLD: SI ON ==> makedepends ???
 
-LIGNE 899 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
+LIGNE 977 WITH_LINKER_LLD: SI ON ==> makedepends 'lld'
 
 !!!!!! mold does not support LTO
-LIGNE 901 WITH_LINKER_MOLD: SI ON ==> makedepends 'mold' ==> options=('!lto' '!debug')
+LIGNE 979 WITH_LINKER_MOLD: SI ON ==> makedepends 'mold' ==> options=('!lto' '!debug')
 
 
 # Check for Conflicting/Unsupported Configurations
-Lignes 1122 et ...
+Lignes 1244 et ...
 
-1124 option WITH_STRICT_BUILD_OPTIONS  OFF
+1246 option WITH_STRICT_BUILD_OPTIONS  OFF
 
 =================================================================
 
@@ -661,7 +662,7 @@ source/creator/CMakeLists.txt
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.4.0.27.20250208.tar.zst
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.5.0.1.20250208.tar.zst
 -rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-8.0-Include.zip
 -rw-r--r--  1 jnd users      568 17 déc.  18:47 xxxxxxxxxxxxxx.patch
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
@@ -776,7 +777,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git-jnd/blender-git-4.4.0.27.20250208.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git-jnd/blender-git-4.5.0.1.20250208.tar.gz . \
 && cp -v $HOME/05-builds/blender-git-jnd/OptiX-8.0-Include.zip . \
 && cp -v $HOME/05-builds/blender-git-jnd/blender-openexr3.patch . \
 && LC_ALL=C makepkg -s \
@@ -880,7 +881,7 @@ $ mv -v blender-git-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i blender-git-4.4.0.27.20250208.tar.zst
+$ rm -i blender-git-4.5.0.1.20250208.tar.zst
 !!! OPTIX
 $ rm -i OptiX-8.0-Include.zip
 
@@ -1029,12 +1030,12 @@ runningllvm-config-18
 
 -7-2) FAIRE ARCHIVE TAR.GZ DE BLENDER
 ======================================
-tar -cvzf blender-git-4.4.0.27.20250208.tar.gz --exclude={.git,.gitea,.github}  blender
+tar -cvzf blender-git-4.5.0.1.20250208.tar.gz --exclude={.git,.gitea,.github}  blender
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 0c66b2d5f93385da83a202e5efda45d87f07c6e422b0d9668e7e271e91f6185c
 
-cp -v /0-DataLinux/05-builds-dir-git/blender-git-4.4.0.27.20250208.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/blender-git-4.5.0.1.20250208.tar.gz .
 
 SANS PATCH TAR.GZ
 -----------------
@@ -1042,7 +1043,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-8.0-Include.zip"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -1059,7 +1060,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "..."
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -1073,8 +1074,8 @@ sha256sums=('123...'
             '012...'
 )
 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.4.0.27.20250208.tar.gz
-$ rm -i blender-git-4.4.0.27.20250208.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.5.0.1.20250208.tar.gz
+$ rm -i blender-git-4.5.0.1.20250208.tar.gz
 
 
 runningllvm-config-16
@@ -1110,7 +1111,7 @@ VOIR LIGNE 187: /0-DataLinux/05-builds-dir-git/blender/build_files/utils/make_so
 ===============================================
 ls | grep lib
 
-zip -r LibAssetsPublish-4.4.0.27.20250208.zip lib/assets/publish
+zip -r LibAssetsPublish-4.5.0.1.20250208.zip lib/assets/publish
   adding: lib/assets/publish/ (stored 0%)
   adding: lib/assets/publish/blender_assets.cats.txt (deflated 38%)
   adding: lib/assets/publish/geometry_nodes/ (stored 0%)
@@ -1118,13 +1119,13 @@ zip -r LibAssetsPublish-4.4.0.27.20250208.zip lib/assets/publish
   adding: lib/assets/publish/geometry_nodes/procedural_hair_node_assets.blend (deflated 0%)
   adding: lib/assets/publish/LICENSE (deflated 62%)
 
-sha256sum LibAssetsPublish-4.4.0.27.20250208.zip
+sha256sum LibAssetsPublish-4.5.0.1.20250208.zip
 27cdbd62d6c6ae5eaafd29047054befed66ee539c542e118ea2250149fd2ee0c
 
 
 !!! LIB ASSETS PUBLISH CONSERVE VERSION DANS 05-builds-dir-git
 --------------------------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/LibAssetsPublish-4.4.0.27.20250208.zip .
+cp -v /0-DataLinux/05-builds-dir-git/LibAssetsPublish-4.5.0.1.20250208.zip .
 
 
 SANS PATCH
@@ -1134,9 +1135,9 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-8.0-Include.zip"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
-sha256sum LibAssetsPublish-4.4.0.27.20250208.zip
+sha256sum LibAssetsPublish-4.5.0.1.20250208.zip
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -1154,9 +1155,9 @@ source=("$pkgname-$pkgver.tar.gz"
         "..."
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
-sha256sum LibAssetsPublish-4.4.0.27.20250208.zip
+sha256sum LibAssetsPublish-4.5.0.1.20250208.zip
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -1171,10 +1172,10 @@ sha256sums=('123...'
 )
 
 
--rw-r--r--  1 jnd users  2779743 27 févr. 21:09 LibAssetsPublish-4.4.0.27.20250208.zip
+-rw-r--r--  1 jnd users  2779743 27 févr. 21:09 LibAssetsPublish-4.5.0.1.20250208.zip
 
 !!! ASSETS
-$ rm -i LibAssetsPublish-4.4.0.27.20250208.zip
+$ rm -i LibAssetsPublish-4.5.0.1.20250208.zip
 
 
 !!!!!!!!
@@ -1480,11 +1481,11 @@ git log -1 --format=%ct
 cd ..
 
 
-tar -cvzf blender-git-4.4.0.27.20250208.tar.gz --exclude=.git blender
+tar -cvzf blender-git-4.5.0.1.20250208.tar.gz --exclude=.git blender
 
 
 
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.4.0.27.20250208.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.5.0.1.20250208.tar.gz
 -rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-8.0-Include.zip
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 -rw-r--r--  1 jnd users      671 17 avril 12:31 Fix-Erreur-Compile-self-not-a-member-of-tbb_v1_task.patch
@@ -1571,7 +1572,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "blender-oiio-2.3.patch"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum OptiX-8.0-Include.zip
 
@@ -1617,7 +1618,7 @@ AU 05/08/2021: RTX 3080 TI ==> INUTILES ???
 ==================================
 $ ls -la
 ==>
--rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.4.0.27.20250208.tar.gz
+-rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-4.5.0.1.20250208.tar.gz
 -rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-8.0-Include.zip
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 -rw-r--r--  1 jnd users     1626 28 avril 14:33 blender-openexr3.patch
@@ -1740,7 +1741,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-8.0-Include.zip"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum fix-gltf-import-python3.9.patch
 
@@ -1793,7 +1794,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-8.0-Include.zip"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum D8063-cuda11.patch
 
@@ -1842,7 +1843,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "OptiX-7.0.0-include.zip"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum Fix-Embree-staticlibs-dynamiclibs.patch
 
@@ -1877,7 +1878,7 @@ prepare() {
 
 ==> Version = 2.93.4.3
 
-==> Version = 2.94.4.0.270200530
+==> Version = 2.94.5.0.10200530
 
 AVEC PATCH
 ----------
@@ -1887,7 +1888,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Enable-Optix-7-for-non-RTX-card.patch"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum Fix-Embree-staticlibs-dynamiclibs.patch
 
@@ -1918,7 +1919,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T74278-Image-Object-handles-too-big.patch"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum Fix-T74278-Image-Object-handles-too-big.patch
 
@@ -2120,7 +2121,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "Fix-T64463-Visual-Artifacts-with-ColorRamp.patch"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum Fix-T64463-Visual-Artifacts-with-ColorRamp.patch
 
@@ -2145,7 +2146,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-TypeError-mesh_discombobulator.patch"
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum fix-TypeError-node_wrangler.patch
 sha256sum fix-TypeError-mesh_discombobulator.patch
@@ -2277,7 +2278,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git/PKGBUILD . \
-&& cp -v $HOME/05-builds/blender-git/blender-git-4.4.0.27.20250208.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git/blender-git-4.5.0.1.20250208.tar.gz . \
 && cp -v $HOME/05-builds/blender-git/blender.install . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git \
@@ -2293,7 +2294,7 @@ source=("$pkgname-$pkgver.tar.gz"
         'fix-SyntaxError-object_facemap_auto.patch'
 )
 
-sha256sum blender-git-4.4.0.27.20250208.tar.gz
+sha256sum blender-git-4.5.0.1.20250208.tar.gz
 
 sha256sum fix-SyntaxError-object_facemap_auto.patch
 
