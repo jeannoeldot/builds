@@ -110,7 +110,7 @@ extra/clang 19.1.7-1 [installé]
 extra/llvm 19.1.7-1 [installé]
 extra/llvm-libs 19.1.7-1 [installé]
 
-depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
+depends=('openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'llvm-libs'
          'qt6-base'
@@ -120,7 +120,7 @@ depends=('boost-libs' 'openexr' 'freetype2' 'libpng' 'libtiff'
 )
 depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
 
-makedepends=('boost' 'cmake' 'llvm' 'robin-map')
+makedepends=('cmake' 'llvm' 'robin-map')
 
 
 2-2) PKGBUILD SANS PATCH
@@ -207,6 +207,8 @@ LIGNE 126
 
 LIGNE 127
   OSL_BUILD_SHADERS ON
+
+VOIR https://projects.blender.org/blender/blender/src/branch/main/build_files/build_environment/cmake/osl.cmake
 
 LIGNE 128
   OSL_USE_OPTIX OFF   =>  -DOSL_USE_OPTIX=ON \ : COMPILE PAS OK

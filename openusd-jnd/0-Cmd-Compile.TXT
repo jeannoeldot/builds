@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.02.20250121
+pkgrel=3      # rebuild MAJ OIIO 3.0.3.1
 pkgrel=2      # rebuild MAJ boost boost-libs 1.87.0
 pkgrel=1
 

@@ -9,7 +9,7 @@ pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
 license=('BSD-3-Clause')
-depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
+depends=('imath' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
          'llvm-libs'
          'qt6-base'
@@ -17,7 +17,7 @@ depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
          'python' 'pugixml' 'pybind11'
          'openimageio-jnd' 'fmt'
 )
-makedepends=('boost' 'cmake' 'llvm'
+makedepends=('cmake' 'llvm'
              'robin-map'
 )
 conflicts=('openshadinglanguage' 'openshadinglanguage-git')
