@@ -1,0 +1,95 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = OpenImageIO-v2.5.18.0.tar.gz
+
+mkdir /tmp/srcp
+
+cp -v OpenImageIO-v2.5.18.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf OpenImageIO-v2.5.18.0.tar.gz
+
+https://projects.blender.org/blender/blender/pulls/133770/files
+Build: Apply OpenImageIO patch for PSD reading crash #133770
+
+1) MODIFIER OpenImageIO-2.5.18.0/src/psd.imageio/psdinput.cpp
+=============================================================
+cp -R OpenImageIO-2.5.18.0 OpenImageIO-2.5.18.0.new
+
+cd OpenImageIO-2.5.18.0.new/src/psd.imageio
+
+kwrite psdinput.cpp
+
+AJOUTER LIGNE 2237
+    char* dst_start = dst;
+
+
+MODIFIER LIGNES 2280 ET 2281
+        case 16: swap_endian((uint16_t*)dst, m_spec.width); break;
+        case 32: swap_endian((uint32_t*)dst, m_spec.width); break;
+
+DEVIENNENT
+        case 16: swap_endian((uint16_t*)dst_start, m_spec.width); break;
+        case 32: swap_endian((uint32_t*)dst_start, m_spec.width); break;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier psdinput.cpp~
+rm -f psdinput.cpp~
+
+cd ../../..
+
+diff -aur OpenImageIO-2.5.18.0 OpenImageIO-2.5.18.0.new
+
+diff -aur OpenImageIO-2.5.18.0 OpenImageIO-2.5.18.0.new > fix.PSD.reading.crash.patch
+
+cd $HOME/05-builds/openimageio-jnd
+
+mv -vf /tmp/srcp/fix.PSD.reading.crash.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+sync
+
+==============================================================================
+ANCIENS OU PAS OK
+=================
+
+1) MODIFIER oiio-2.2.10.1/src/cmake/modules/FindOpenJpeg.cmake
+==============================================================
+cp -R oiio-2.2.10.1 oiio-2.2.10.1.new
+
+cd oiio-2.2.10.1.new/src/cmake/modules
+
+kwrite FindOpenJpeg.cmake
+
+AJOUTER LIGNE 59
+     /usr/local/include/openjpeg-2.4
+
+AJOUTER LIGNE 66
+     /usr/include/openjpeg-2.4
+
+AJOUTER LIGNE 73
+     /opt/local/include/openjpeg-2.4
+
+AJOUTER LIGNE 94
+       ${OpenJpeg_ROOT}/include/openjpeg-2.4
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindOpenJpeg.cmake~
+rm -f FindOpenJpeg.cmake~
+ 
+cd ../../../..
+
+diff -aur oiio-2.2.10.1 oiio-2.2.10.1.new
+
+diff -aur oiio-2.2.10.1 oiio-2.2.10.1.new > fix-OpenJpeg-2.4-library-not-found.patch
+
+cd $HOME/05-builds/openimageio-git
+
+mv -vf /tmp/srcp/fix-OpenJpeg-2.4-library-not-found.patch .
+

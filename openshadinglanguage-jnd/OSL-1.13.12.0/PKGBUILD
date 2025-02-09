@@ -1,0 +1,66 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openshadinglanguage-jnd
+pkgver=1.13.12.0.20241205
+pkgrel=2
+_name_release="OpenShadingLanguage-1.13.12.0"
+_ver_release="v1.13.12.0"
+pkgdesc="Advanced shading language for production GI renderers"
+arch=('x86_64')
+url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
+license=('BSD-3-Clause')
+depends=('boost-libs' 'imath' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'llvm-libs'
+         'qt6-base'
+         'clang'
+         'python' 'pugixml' 'pybind11'
+         'openimageio-jnd' 'fmt'
+)
+makedepends=('boost' 'cmake' 'llvm'
+)
+conflicts=('openshadinglanguage' 'openshadinglanguage-git')
+provides=('openshadinglanguage')
+options=('!debug')
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+)
+sha256sums=('a1d359b236a691a1cc0d4a241de3081ce137a0d54be0d2db43f415802291ea88'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+      -Bbuild \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DCMAKE_CXX_STANDARD=17 \
+      -DLLVM_STATIC=OFF \
+      -DUSE_LLVM_BITCODE=OFF \
+      -DUSE_SIMD=avx2 \
+      -DUSE_CCACHE=OFF
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+
+  DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+
+  # shaders
+  # Ugly hacks /usr/share/OSL/shaders/*.oso
+  for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/share/OSL/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/share/OSL/|g" ${_oso}
+  done
+
+  # Fix <File> exists in a non-standard directory
+  rm -rf "${pkgdir}"/usr/build-scripts
+  rm -rf "${pkgdir}"/usr/cmake
+}

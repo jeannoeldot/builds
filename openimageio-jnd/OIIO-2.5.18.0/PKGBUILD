@@ -1,36 +1,45 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-jnd
-pkgver=3.0.3.1.20250202
-pkgrel=1
-_name_release="OpenImageIO-3.0.3.1"
-_ver_release="v3.0.3.1"
+pkgver=2.5.18.0.20250101
+pkgrel=2
+_name_release="OpenImageIO-2.5.18.0"
+_ver_release="v2.5.18.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
 license=('Apache-2.0')
 # TODO: Consider adding these deps: 'openvdb' 'opentbb' 'ptex' 'opencv'
-depends=('ffmpeg' 'freetype2'
-         'giflib' 'libheif'
-         'libraw' 'libtiff'
-         'libpng' 'libwebp'
-         'opencolorio' 'openexr'
-         'libjpeg-turbo' 'openjpeg2' 'libjxl'
+depends=('openexr' 'boost-libs' 'libtiff'
+         'libjpeg-turbo' 'openjpeg2' 'libraw' 'ffmpeg'
          'qt6-base'
          'python'
+         'libwebp' 'libheif'
+         'freetype2'
          'pugixml' 'pybind11' 'python-numpy'
-         'fmt'
+         'opencolorio'
 )
-makedepends=('cmake' 'mesa'
+makedepends=('cmake' 'boost' 'mesa'
              'robin-map'
+             'fmt'
 )
 conflicts=('openimageio' 'openimageio-git')
 provides=('openimageio')
 options=('!debug')
 source=("OpenImageIO-${_ver_release}.tar.gz"
+        "fix.PSD.reading.crash.patch"
 )
-sha256sums=('487482aca8c335007c2d764698584beeceeb55475616c91b8e3bb3c3b37e54ea'
+sha256sums=('f57481435cec18633d3eba9b2e8c483fc1df6f0a01c5c9f98cbae6d1c52928e5'
+            'ce1739c4dd75ebbd0e27665730a9d867cb006b7e8093aada65aee9f0d66813b7'
 )
+
+prepare() {
+  cd "${_name_release}"
+
+  # https://projects.blender.org/blender/blender/pulls/133770/files
+  # Build: Apply OpenImageIO patch for PSD reading crash #133770
+  patch -Np1 -i "${srcdir}/fix.PSD.reading.crash.patch"
+}
 
 build() {
   cd "${_name_release}"
@@ -44,10 +53,12 @@ build() {
       -DOIIO_BUILD_TESTS=OFF \
       -DINSTALL_FONTS=OFF \
       -DUSE_CCACHE=OFF \
-      -DUSE_EXTERNAL_PUGIXML=ON \
       -DUSE_SIMD=avx2 \
-      -DOIIO_INTERNALIZE_FMT=OFF \
-      -DPYTHON_VERSION=3.13
+      -DBUILD_MISSING_FMT=OFF \
+      -DINTERNALIZE_FMT=OFF \
+      -DPYTHON_VERSION=3.13 \
+      -DOIIO_DOWNLOAD_MISSING_TESTDATA=OFF \
+      -DUSE_EXTERNAL_PUGIXML=ON
   make -C build
 }
 

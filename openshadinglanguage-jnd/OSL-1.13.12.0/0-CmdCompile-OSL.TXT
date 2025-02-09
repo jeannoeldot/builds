@@ -10,37 +10,12 @@ https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/releases
 ==> v1.13.12.0  ==> 1.13.12.0
 ==> 1.13.12.0.20241205
 
-1.3) SOURCES
+1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
 wget -O OpenShadingLanguage-v1.13.12.0.tar.gz \
 https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/archive/refs/tags/v1.13.12.0.tar.gz
-
-
-1.5) GIT SOURCES
-================
-cd /0-DataLinux/05-builds-dir-git
-
-1.5.1) Vérifier VERSION :
--------------------------
-https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/blob/main/CMakeLists.txt
-==> LIGNE 7: project (OSL VERSION "1.14.4.0")
-
-1.5.2) Vérifier existence REP OpenShadingLanguage-1.14.4.0 :
-------------------------------------------------------------
-ls | grep OpenShadingLanguage-1.14.4.0
-
-!!! SI REP OpenShadingLanguage-1.14.4.0 N'EXISTE PAS :
-git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.14.4.0
-
-!!! SI REP OpenShadingLanguage-1.14.4.0 EXISTE :
-rm -rf OpenShadingLanguage-1.14.4.0
-git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.14.4.0
-
-1.5.5) Faire archivi tar.gz :
------------------------------
-tar -cvzf OpenShadingLanguage-v1.14.4.0.tar.gz --exclude={.git,.github} OpenShadingLanguage-1.14.4.0
 
 
 1-7) Copie ARCHIVE TAR.GZ ds rep compile
