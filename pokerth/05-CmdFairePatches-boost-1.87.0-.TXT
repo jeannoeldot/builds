@@ -1,0 +1,231 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.1.2
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/pokerth
+
+/!\ /!\ /!\ rm -rf $HOME/99-temp/srcp
+
+mkdir -p $HOME/99-temp/srcp
+
+cp -v pokerth-1.1.2.tar.gz $HOME/99-temp/srcp/
+
+cd $HOME/99-temp/srcp
+
+tar -xzf pokerth-1.1.2.tar.gz
+
+ls $HOME/99-temp/srcp
+/!\ /!\ /!\
+
+
+https://github.com/PointCloudLibrary/pcl/issues/6202
+https://github.com/PointCloudLibrary/pcl/commit/0932486c52a2cf4f0821e25d5ea2d5767fff8381#diff-0648e12faefb09b55f716000a1cf2641de888cfd255b87bd3d22925da0513d70
+boost::asio::io_service io_service; ==> boost::asio::io_context io_service;
+
+Reference
+post
+
+    Requirements
+
+Header: boost/asio/post.hpp Convenience header: boost/asio.hpp
+
+1) PATCH BOOST VERSION >= 1.87.0
+================================
+1-1) MODIFIER pokerth-1.1.2-rc/src/db/serverdbgeneric.h
+-------------------------------------------------------
+cp -R pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+cd pokerth-1.1.2-rc.new/src/db
+kwrite serverdbgeneric.h
+
+MODIFIER LIGNE 44 :
+	ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
+DEVIENT :
+	ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService);
+
+MODIFIER LIGNE 69 :
+	boost::shared_ptr<boost::asio::io_service> m_ioService;
+DEVIENT :
+	boost::shared_ptr<boost::asio::io_context> m_ioService;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier serverdbgeneric.h~
+rm -f serverdbgeneric.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-2) MODIFIER pokerth-1.1.2-rc/src/db/common/serverdbgeneric.cpp
+----------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/db/common
+kwrite serverdbgeneric.cpp
+
+RAJOUTER LIGNE 32 :
+#include <boost/asio/post.hpp>
+
+MODIFIER LIGNE 39 :
+ServerDBGeneric::ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
+DEVIENT :
+ServerDBGeneric::ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier serverdbgeneric.cpp~
+rm -f serverdbgeneric.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-3) MODIFIER pokerth-1.1.2-rc/src/db/serverdbfactory.h
+-------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/db
+kwrite serverdbfactory.h
+
+MODIFIER LIGNE 47 :
+		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService) = 0;
+DEVIENT :
+		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService) = 0;
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier serverdbfactory.h~
+rm -f serverdbfactory.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-4) MODIFIER pokerth-1.1.2-rc/src/db/common/serverdbfactorygeneric.cpp
+-----------------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/db/common
+kwrite serverdbfactorygeneric.cpp
+
+MODIFIER LIGNE 45 :
+ServerDBFactoryGeneric::CreateServerDBObject(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
+DEVIENT :
+ServerDBFactoryGeneric::CreateServerDBObject(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService)
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier serverdbfactorygeneric.cpp~
+rm -f serverdbfactorygeneric.cpp~
+
+cd ../../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-5) MODIFIER pokerth-1.1.2-rc/src/db/serverdbfactorygeneric.h
+--------------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/db
+kwrite serverdbfactorygeneric.h
+
+MODIFIER LIGNE 48 :
+		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
+DEVIENT :
+		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier serverdbfactorygeneric.h~
+rm -f serverdbfactorygeneric.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-boost-1.87.0.patch
+
+
+!!! NON QUAND PATCHES FINIS !!! rm -rf pokerth-1.1.2-rc.new
+
+
+cd $HOME/05-builds/pokerth
+
+mv -vf $HOME/99-temp/srcp/fix-build-with-boost-1.87.0.patch .
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf $HOME/99-temp/srcp
+
+sync
+
+=================================================================
+EXPLICATIONS LIGNES 243 449 524 306
+===============================
+
+src/core/common/avatarmanager.cpp: In static member function ‘static AvatarFileType AvatarManager::GetAvatarFileType(const std::string&)’:
+src/core/common/avatarmanager.cpp:243:20: error: ‘extension’ was not declared in this scope
+  243 |         string ext(extension(filePath));
+      |                    ^~~~~~~~~
+
+
+std::string extension(const path& p)
+
+Replace extension(p) with p.extension().string()
+extension(filePath) ==> filePath.extension().string()
+
+
+
+
+src/core/common/avatarmanager.cpp:449:99: error: no matching function for call to ‘basename(boost::filesystem::path&)’
+  449 |                                                 if (exists(filePath) && tmpBuf.FromString(basename(filePath))) {
+      |                                                                                           ~~~~~~~~^~~~~~~~~~
+
+
+src/core/common/avatarmanager.cpp:524:63: error: no matching function for call to ‘basename(const boost::filesystem::path&)’
+  524 |                                         string md5sum(basename(i->path()));
+      |                                                       ~~~~~~~~^~~~~~~~~~~
+
+
+
+std::string basename(const path& p)
+
+Replace basename(p) with p.stem().string()
+basename(filePath) ==> filePath.stem().string()
+
+basename(i->path()) ==> i->path().stem().string()
+
+src/net/common/clientstate.cpp:307:37: error: ‘change_extension’ was not declared in this scope; did you mean ‘__has_extension’?
+  307 |                 xmlServerListPath = change_extension(zippedServerListPath, "");
+      |                                     ^~~~~~~~~~~~~~~~
+
+path change_extension(const path& p, const path& new_extension)
+
+Replace path new_p = change_extension(p, ext); with path new_p = p; new_p.replace_extension(ext);
+
+xmlServerListPath = zippedServerListPath; xmlServerListPath.replace_extension("");
+
+
+=================================================================
+ANCIENS
+========
+
+cp -R pokerth-1.1.2-rc $HOME/99-temp/srcp/pokerth-1.1.2-rc
+cp -R pokerth-1.1.2-rc.new $HOME/99-temp/srcp/pokerth-1.1.2-rc.new
+
+mkdir /tmp/srcp
+
+cp -v pokerth-1.1.2.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf pokerth-1.1.2.tar.gz
+
+
+/!\ /!\ /!\
+VOIR : $HOME/99-temp/srcp/
+/!\ /!\ /!\
+

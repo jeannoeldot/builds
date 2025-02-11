@@ -1,5 +1,29 @@
 
+src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGeneric::AsyncPlayerLogin(unsigned int, const std::string&)’:
+src/db/common/serverdbgeneric.cpp:66:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+   66 |         m_ioService->post(boost::bind(&ServerDBCallback::PlayerLoginFailed, &m_callback, requestId));
+      |                      ^~~~
+src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGeneric::AsyncCheckAvatarBlacklist(unsigned int, const std::string&)’:
+src/db/common/serverdbgeneric.cpp:72:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+   72 |         m_ioService->post(boost::bind(&ServerDBCallback::AvatarIsBlacklisted, &m_callback, requestId));
+      |                      ^~~~
+src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGeneric::AsyncCreateGame(unsigned int, const std::string&)’:
+src/db/common/serverdbgeneric.cpp:88:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+   88 |         m_ioService->post(boost::bind(&ServerDBCallback::CreateGameFailed, &m_callback, requestId));
+      |                      ^~~~
+src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGeneric::AsyncReportAvatar(unsigned int, unsigned int, DB_id, const std::string&, const std::string&, DB_id*)’:
+src/db/common/serverdbgeneric.cpp:104:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  104 |         m_ioService->post(boost::bind(&ServerDBCallback::ReportAvatarFailed, &m_callback, requestId, replyId));
+      |                      ^~~~
+src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGeneric::AsyncReportGame(unsigned int, unsigned int, DB_id*, unsigned int, const std::string&, DB_id*)’:
+src/db/common/serverdbgeneric.cpp:110:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  110 |         m_ioService->post(boost::bind(&ServerDBCallback::ReportGameFailed, &m_callback, requestId, replyId));
+      |                      ^~~~
 
+
+==========================================================================================================
+FAIT
+====
 In file included from src/db/common/serverdbgeneric.cpp:33:
 src/db/serverdbgeneric.h:44:78: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
    44 |         ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
@@ -15,6 +39,7 @@ src/db/serverdbgeneric.h:69:40: error: ‘io_service’ is not a member of ‘bo
 src/db/serverdbgeneric.h:69:50: error: template argument 1 is invalid
    69 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
       |                                                  ^
+--------------------------------------------
 src/db/common/serverdbgeneric.cpp:38:87: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
    38 | ServerDBGeneric::ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
       |                                                                                       ^~~~~~~~~~
@@ -26,6 +51,7 @@ src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGe
 src/db/common/serverdbgeneric.cpp:66:20: error: base operand of ‘->’ is not a pointer
    66 |         m_ioService->post(boost::bind(&ServerDBCallback::PlayerLoginFailed, &m_callback, requestId));
       |                    ^~
+--------------------------------------------
 In file included from src/db/common/serverdbfactory.cpp:32:
 src/db/serverdbfactory.h:47:70: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
    47 |                 ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService) = 0;
@@ -34,6 +60,7 @@ src/db/serverdbfactory.h:47:70: error: ‘io_service’ is not a member of ‘bo
 src/db/serverdbfactory.h:47:80: error: template argument 1 is invalid
    47 |                 ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService) = 0;
       |                                                                                ^
+--------------------------------------------
 src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGeneric::AsyncCheckAvatarBlacklist(unsigned int, const std::string&)’:
 src/db/common/serverdbgeneric.cpp:72:20: error: base operand of ‘->’ is not a pointer
    72 |         m_ioService->post(boost::bind(&ServerDBCallback::AvatarIsBlacklisted, &m_callback, requestId));
@@ -50,6 +77,7 @@ src/db/common/serverdbgeneric.cpp: In member function ‘virtual void ServerDBGe
 src/db/common/serverdbgeneric.cpp:110:20: error: base operand of ‘->’ is not a pointer
   110 |         m_ioService->post(boost::bind(&ServerDBCallback::ReportGameFailed, &m_callback, requestId, replyId));
       |                    ^~
+--------------------------------------------
 In file included from src/db/common/serverdbfactorygeneric.cpp:32:
 src/db/serverdbfactorygeneric.h:48:70: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
    48 |                 ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
@@ -58,6 +86,7 @@ src/db/serverdbfactorygeneric.h:48:70: error: ‘io_service’ is not a member o
 src/db/serverdbfactorygeneric.h:48:80: error: template argument 1 is invalid
    48 |                 ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
       |                                                                                ^
+--------------------------------------------
 In file included from src/db/common/serverdbfactorygeneric.cpp:33:
 src/db/serverdbgeneric.h:44:78: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
    44 |         ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
@@ -73,6 +102,7 @@ src/db/serverdbgeneric.h:69:40: error: ‘io_service’ is not a member of ‘bo
 src/db/serverdbgeneric.h:69:50: error: template argument 1 is invalid
    69 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
       |                                                  ^
+--------------------------------------------
 src/db/common/serverdbfactorygeneric.cpp:45:99: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
    45 | ServerDBFactoryGeneric::CreateServerDBObject(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
       |                                                                                                   ^~~~~~~~~~

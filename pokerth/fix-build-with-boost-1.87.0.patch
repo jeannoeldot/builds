@@ -1,0 +1,77 @@
+diff -aur pokerth-1.1.2-rc/src/db/common/serverdbfactorygeneric.cpp pokerth-1.1.2-rc.new/src/db/common/serverdbfactorygeneric.cpp
+--- pokerth-1.1.2-rc/src/db/common/serverdbfactorygeneric.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/db/common/serverdbfactorygeneric.cpp	2025-02-10 14:52:12.918579484 +0100
+@@ -42,7 +42,7 @@
+ }
+ 
+ boost::shared_ptr<ServerDBInterface>
+-ServerDBFactoryGeneric::CreateServerDBObject(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
++ServerDBFactoryGeneric::CreateServerDBObject(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService)
+ {
+ 	return boost::shared_ptr<ServerDBInterface>(new ServerDBGeneric(cb, ioService));
+ }
+diff -aur pokerth-1.1.2-rc/src/db/common/serverdbgeneric.cpp pokerth-1.1.2-rc.new/src/db/common/serverdbgeneric.cpp
+--- pokerth-1.1.2-rc/src/db/common/serverdbgeneric.cpp	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/db/common/serverdbgeneric.cpp	2025-02-10 18:13:39.059139808 +0100
+@@ -29,13 +29,14 @@
+  * as that of the covered work.                                              *
+  *****************************************************************************/
+ 
++#include <boost/asio/post.hpp>
+ #include <boost/bind.hpp>
+ #include <db/serverdbgeneric.h>
+ 
+ using namespace std;
+ 
+ 
+-ServerDBGeneric::ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
++ServerDBGeneric::ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService)
+ 	: m_ioService(ioService), m_callback(cb)
+ {
+ }
+Seulement dans pokerth-1.1.2-rc.new/src/db/common: serverdbgeneric.cpp~
+diff -aur pokerth-1.1.2-rc/src/db/serverdbfactory.h pokerth-1.1.2-rc.new/src/db/serverdbfactory.h
+--- pokerth-1.1.2-rc/src/db/serverdbfactory.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/db/serverdbfactory.h	2025-02-10 14:42:47.791246287 +0100
+@@ -44,7 +44,7 @@
+ 	virtual ~ServerDBFactory();
+ 
+ 	virtual boost::shared_ptr<ServerDBInterface> CreateServerDBObject(
+-		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService) = 0;
++		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService) = 0;
+ };
+ 
+ #endif
+diff -aur pokerth-1.1.2-rc/src/db/serverdbfactorygeneric.h pokerth-1.1.2-rc.new/src/db/serverdbfactorygeneric.h
+--- pokerth-1.1.2-rc/src/db/serverdbfactorygeneric.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/db/serverdbfactorygeneric.h	2025-02-10 14:55:14.904718851 +0100
+@@ -45,7 +45,7 @@
+ 	virtual ~ServerDBFactoryGeneric();
+ 
+ 	virtual boost::shared_ptr<ServerDBInterface> CreateServerDBObject(
+-		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
++		ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService);
+ };
+ 
+ typedef ServerDBFactoryGeneric DBFactory;
+diff -aur pokerth-1.1.2-rc/src/db/serverdbgeneric.h pokerth-1.1.2-rc.new/src/db/serverdbgeneric.h
+--- pokerth-1.1.2-rc/src/db/serverdbgeneric.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/db/serverdbgeneric.h	2025-02-10 14:30:31.195364419 +0100
+@@ -41,7 +41,7 @@
+ class ServerDBGeneric : public ServerDBInterface
+ {
+ public:
+-	ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
++	ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService);
+ 	virtual ~ServerDBGeneric();
+ 
+ 	virtual void Init(const std::string &host, const std::string &user, const std::string &pwd,
+@@ -66,7 +66,7 @@
+ 	virtual void AsyncBlockPlayer(unsigned requestId, unsigned replyId, DB_id playerId, int valid, int active);
+ 
+ private:
+-	boost::shared_ptr<boost::asio::io_service> m_ioService;
++	boost::shared_ptr<boost::asio::io_context> m_ioService;
+ 	ServerDBCallback &m_callback;
+ };
+ 

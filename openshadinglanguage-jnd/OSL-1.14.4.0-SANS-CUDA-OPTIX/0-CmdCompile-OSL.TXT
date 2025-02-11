@@ -61,9 +61,11 @@ cd $HOME/05-builds/openshadinglanguage-jnd
 cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.14.4.0.tar.gz .
 
 /!\/!\/!\/!\/!\
+!!! NON
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OptiX-8.0-Include.zip .
+cp -v /0-DataLinux/05-builds-dir-git/OptiX-7.7-Include.zip .
+/!\/!\/!\/!\/!\
 
 
 1-8) FAIRE PATCH
@@ -76,8 +78,6 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.14.4.0.20250207
-pkgrel=2    # rebuild AVEC CUDA et OPTIX
-
 pkgrel=1    # build MAJ OIIO 3.0.3.1
 
 pkgrel=2    # rebuild boost boost-libs 1.87.0
@@ -120,20 +120,15 @@ depends=('openexr' 'freetype2' 'libpng' 'libtiff'
 )
 depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
 
-makedepends=('cmake' 'llvm' 'robin-map'
-             'cuda'
-)
+makedepends=('cmake' 'llvm' 'robin-map')
 
 
 2-2) PKGBUILD SANS PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.0-Include.zip"
 )
 
 sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
-
-sha256sum OptiX-8.0-Include.zip
 
 sha256sums=(...
          ...
@@ -142,13 +137,10 @@ sha256sums=(...
 2-2) PKGBUILD AVEC PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.0-Include.zip"
         "xxxxx.patch"
 )
 
 sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
-
-sha256sum OptiX-8.0-Include.zip
 
 sha256sum xxxxx.patch
 
@@ -223,13 +215,6 @@ LIGNE 128
   Enabling OptiX requires USE_LLVM_BITCODE=1 and USE_FAST_MATH=1
 LIGNE 130
   OPTIX_EXTRA_LIBS ?
-
-LIGNE 133
-set (OSL_SHADER_INSTALL_DIR "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}/shaders" => /usr/share/OSL/shaders
-     CACHE STRING "Directory where shaders will be installed")
-LIGNE 135
-set (OSL_PTX_INSTALL_DIR "${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}/ptx" => /usr/share/OSL/ptx
-     CACHE STRING "Directory where OptiX PTX files will be installed")
 
 LIGNE 131
   CUDA_EXTRA_LIBS ?
@@ -329,7 +314,6 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.14.4.0.tar.gz
--rw-r--r--  1 jnd users    85220 11 févr. 14:16 OptiX-8.0-Include.zip
 
 
 !!! A MODIFIER SI PAS OK !
@@ -378,8 +362,6 @@ $ rm -f *~
 $ mkpkg-tmpfs -m floop -g 32G
 -------------------------------------------------------------------
 
-SI CUDA ET OPTIX
-================
   NATIVE
 --------
 $ rm -f *~
@@ -436,16 +418,19 @@ usr/bin/testrender
 
 namcap openshadinglanguage-jnd-*-x86_64.pkg.tar.*
 
-openshadinglanguage-jnd E: Dependency cuda detected and not included
-
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('imath')
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('freetype2')
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('libpng')
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('libtiff')
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('zlib')
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('ncurses')
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('pybind11')
-openshadinglanguage-jnd W: Dependency included, but may not be needed ('fmt')
+openshadinglanguage-jnd W: Dependency boost-libs included but already satisfied
+openshadinglanguage-jnd W: Dependency included and not needed ('imath')
+openshadinglanguage-jnd W: Dependency included and not needed ('freetype2')
+openshadinglanguage-jnd W: Dependency libpng included but already satisfied
+openshadinglanguage-jnd W: Dependency libtiff included but already satisfied
+openshadinglanguage-jnd W: Dependency zlib included but already satisfied
+openshadinglanguage-jnd W: Dependency ncurses included but already satisfied
+openshadinglanguage-jnd W: Dependency included and not needed ('openimageio-git')
+openshadinglanguage-jnd W: Dependency llvm-libs included but already satisfied
+openshadinglanguage-jnd W: Dependency qt5-base included but already satisfied
+openshadinglanguage-jnd W: Dependency python included but already satisfied
+openshadinglanguage-jnd W: Dependency pugixml included but already satisfied
+openshadinglanguage-jnd W: Dependency included and not needed ('pybind11')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
@@ -467,9 +452,6 @@ $ mv -v openshadinglanguage-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 $ rm -f *~
 $ rm -f *.log
 $ rm -i OpenShadingLanguage-v1.14.4.0.tar.gz
-!!! OPTIX
-$ rm -i OptiX-8.0-Include.zip
-
 
 
 $ cd && maj-repolocal
@@ -533,20 +515,6 @@ $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 ================================================================
 ANCIENS
 ========
-
-openshadinglanguage-jnd W: Dependency boost-libs included but already satisfied
-openshadinglanguage-jnd W: Dependency included and not needed ('imath')
-openshadinglanguage-jnd W: Dependency included and not needed ('freetype2')
-openshadinglanguage-jnd W: Dependency libpng included but already satisfied
-openshadinglanguage-jnd W: Dependency libtiff included but already satisfied
-openshadinglanguage-jnd W: Dependency zlib included but already satisfied
-openshadinglanguage-jnd W: Dependency ncurses included but already satisfied
-openshadinglanguage-jnd W: Dependency included and not needed ('openimageio-git')
-openshadinglanguage-jnd W: Dependency llvm-libs included but already satisfied
-openshadinglanguage-jnd W: Dependency qt5-base included but already satisfied
-openshadinglanguage-jnd W: Dependency python included but already satisfied
-openshadinglanguage-jnd W: Dependency pugixml included but already satisfied
-openshadinglanguage-jnd W: Dependency included and not needed ('pybind11')
 
 
 LIGNES 112

@@ -20,6 +20,7 @@ source=("$pkgname-$pkgver.tar.gz"
         "fix-build-websocketpp-with-boost.patch"
         "fix-build-to-explicitly-link.patch"
         "fix-build-with-boost-1.86.0.patch"
+        "fix-build-with-boost-1.87.0.patch"
 )
 sha512sums=('d54c84f199636eb5a53580213e5e4ccc828cf565bf4b055797daa82e2ad54d8c52c7a16a781b82c8cc89d184a2b3c4105922394d08c7d2e06383b96963c36b5a'
             'b02e368dd6cc20e247c4297d3f9a9adcb8d062158ecc7c592d753b4beba737598971983b525313e8a6d5f20c9b0b8f9ce6c9fd37203d111d61ce15068e2408ae'
@@ -27,6 +28,7 @@ sha512sums=('d54c84f199636eb5a53580213e5e4ccc828cf565bf4b055797daa82e2ad54d8c52c
             '264f53197abcc0bc336f1a5f04392f866c9f629c3d07d6bcb110f7b0553a0659be014281b92f22d2a48e457bbbee9a75b672e4fe56a20e1e439b25abc99ef889'
             '14b77e423d5b8dee7f1a36dd11eec9ad8f2f2a2eb8ed979a622c7af9c83842e0b52e9617cbb4c2244c94a2fe8175becf4c998d658db521dedb08da28ab6cd5f8'
             '7f257729214a30bd3e1718e80f8706e4ed32e66213181792ea8cb78d656958e8c430ffd0fd71fab66977a3127eb27d99af73faf612a7922bc5b12657e65965d9'
+            'd126e1102b606293c60f78096b02bb8552fa1613ebb754ed0d68afff251d71354652779eed3377b46650f2453409ff701f6c17c0e2ad1726dbad4ad40ecb5822'
 )
 
 prepare() {
@@ -44,7 +46,9 @@ prepare() {
   # Patch pour boost V 1.86.0
   # https://www.boost.org/doc/libs/1_85_0/libs/filesystem/doc/deprecated.html
   patch -Np1 < "$srcdir"/fix-build-with-boost-1.86.0.patch
-  
+  # Patch pour boost V 1.87.0
+  patch -Np1 < "$srcdir"/fix-build-with-boost-1.87.0.patch
+
   # Rebuild files protobuf
   protoc -I="$srcdir"/"$pkgname-$_pkgver"/ "$srcdir"/"$pkgname-$_pkgver"/pokerth.proto --cpp_out="$srcdir"/"$pkgname-$_pkgver"/src/third_party/protobuf/
   protoc -I="$srcdir"/"$pkgname-$_pkgver"/ "$srcdir"/"$pkgname-$_pkgver"/chatcleaner.proto --cpp_out="$srcdir"/"$pkgname-$_pkgver"/src/third_party/protobuf/

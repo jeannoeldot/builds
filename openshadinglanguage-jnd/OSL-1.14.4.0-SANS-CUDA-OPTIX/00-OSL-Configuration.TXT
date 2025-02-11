@@ -16,7 +16,7 @@ V 1.14.4.0
 -- Detecting C compile features - done
 -- Configuring OSL 1.14.4.0
 -- CMake 3.31.5
--- CMake system           = Linux-6.13.2-zen1-1-zen
+-- CMake system           = Linux-6.13.1-zen3-1-zen
 -- CMake system name      = Linux
 -- Project source dir     = /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.4.0
 -- Project build dir      = /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.4.0/build
@@ -24,7 +24,7 @@ V 1.14.4.0
 -- Configuration types    =
 -- Build type             = Release
 -- Supported release      = OFF
--- OSL_USE_OPTIX: ON
+-- OSL_USE_OPTIX: OFF
 -- Outer namespace PROJ_OUTER_NAMESPACE:   OSL
 -- Inner namespace PROJ_VERSION_NAMESPACE: v1_14_4
 -- Joint namespace PROJ_NAMESPACE_V:       OSL_v1_14_4
@@ -55,19 +55,6 @@ V 1.14.4.0
 -- Found pybind11 2.13.6
 -- Found OpenGL: /usr/lib/libOpenGL.so
 -- Found Qt6 6.8.2
--- CUDA_TOOLKIT_ROOT_DIR =
-CMake Warning (dev) at src/cmake/dependency_utils.cmake:374 (find_package):
-  Policy CMP0146 is not set: The FindCUDA module is removed.  Run "cmake
-  --help-policy CMP0146" for policy details.  Use the cmake_policy command to
-  set the policy and suppress this warning.
-
-Call Stack (most recent call first):
-  src/cmake/externalpackages.cmake:148 (checked_find_package)
-  CMakeLists.txt:211 (include)
-This warning is for project developers.  Use -Wno-dev to suppress it.
-
--- Found CUDA 12.8
--- Found OptiX 8.0.0
 -- Found Robinmap
 -- Found BISON 3.8.2
 -- Found FLEX 2.6.4
@@ -79,12 +66,10 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 --
 -- The following dependencies were found externally:
 --     BISON 3.8.2
---     CUDA 12.8
 --     FLEX 2.6.4
 --     Imath 3.1.12
 --     LLVM 19.1.7
 --     OpenImageIO 3.0.3.1
---     OptiX 8.0.0
 --     pugixml 1.15
 --     pybind11 2.13.6
 --     Python3 3.13.1
@@ -92,4 +77,6 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 --     ZLIB 1.3.1
 -- The following dependencies were not found:
 --     partio
+--
+-- =========================================================================
 --
