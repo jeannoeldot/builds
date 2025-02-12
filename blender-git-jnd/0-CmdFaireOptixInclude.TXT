@@ -1,4 +1,154 @@
 
+0-9) OPTIX 9.0.0
+==================
+https://developer.nvidia.com/designworks/optix/download
+
+TÉLÉCHARGER NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64.sh  ==> $HOME/99-dwl-temp/
+
+mkdir /tmp/optix
+cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64.sh /tmp/optix/
+cd /tmp/optix
+chmod +x NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64.sh
+./NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64.sh
+Do you accept the license? [yN]: y
+Saying no will install in: "/tmp/optix" [Yn]:Y
+
+cd NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64/
+ls ==> SDK  doc  include
+cd include
+ls
+zip -r OptiX-9.0.0-include.zip *
+  adding: internal/ (stored 0%)
+  adding: internal/optix_device_impl_transformations.h (deflated 76%)
+  adding: internal/optix_device_impl.h (deflated 91%)
+  adding: internal/optix_micromap_impl.h (deflated 64%)
+  adding: optix.h (deflated 48%)
+  adding: optix_denoiser_tiling.h (deflated 78%)
+  adding: optix_device.h (deflated 87%)
+  adding: optix_function_table.h (deflated 84%)
+  adding: optix_function_table_definition.h (deflated 51%)
+  adding: optix_host.h (deflated 77%)
+  adding: optix_micromap.h (deflated 63%)
+  adding: optix_stack_size.h (deflated 83%)
+  adding: optix_stubs.h (deflated 82%)
+  adding: optix_types.h (deflated 77%)
+
+ls
+mv -v OptiX-9.0.0-include.zip /0-DataLinux/05-builds-dir-git/
+cd ../..
+mv -v NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
+
+cd ..
+rm -rf optix
+
+cd /0-DataLinux/05-builds-dir-git/
+
+sha256sum OptiX-9.0.0-include.zip
+fb8c6c3b1a03c20cf12435327b037e0266dfc79a5ea9f021e34949486a5b940c
+
+cd
+
+
+0-8-1) OPTIX 8.1.0
+==================
+https://developer.nvidia.com/designworks/optix/download
+
+TÉLÉCHARGER NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64-35015278.sh  ==> $HOME/99-dwl-temp/
+
+mkdir /tmp/optix
+cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64-35015278.sh /tmp/optix/
+cd /tmp/optix
+chmod +x NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64-35015278.sh
+./NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64-35015278.sh
+Do you accept the license? [yN]: y
+Saying no will install in: "/tmp/optix" [Yn]:Y
+
+cd NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64/
+ls ==> SDK  doc  include
+cd include
+ls
+zip -r OptiX-8.1-include.zip *
+  adding: internal/ (stored 0%)
+  adding: internal/optix_micromap_impl.h (deflated 63%)
+  adding: internal/optix_device_impl_transformations.h (deflated 77%)
+  adding: internal/optix_device_impl.h (deflated 92%)
+  adding: optix.h (deflated 49%)
+  adding: optix_denoiser_tiling.h (deflated 78%)
+  adding: optix_device.h (deflated 87%)
+  adding: optix_function_table.h (deflated 85%)
+  adding: optix_function_table_definition.h (deflated 50%)
+  adding: optix_host.h (deflated 78%)
+  adding: optix_micromap.h (deflated 62%)
+  adding: optix_stack_size.h (deflated 82%)
+  adding: optix_stubs.h (deflated 83%)
+  adding: optix_types.h (deflated 78%)
+
+ls
+mv -v OptiX-8.1-include.zip /0-DataLinux/05-builds-dir-git/
+cd ../..
+mv -v NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64-35015278.sh /0-DataLinux/05-builds-dir-git/
+
+cd ..
+rm -rf optix
+
+cd /0-DataLinux/05-builds-dir-git/
+
+sha256sum OptiX-8.1-include.zip
+fb8c6c3b1a03c20cf12435327b037e0266dfc79a5ea9f021e34949486a5b940c
+
+cd
+
+
+0-8-0) OPTIX 8.0.0
+==================
+https://developer.nvidia.com/designworks/optix/download
+
+TÉLÉCHARGER NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64.sh  ==> $HOME/99-dwl-temp/
+
+mkdir /tmp/optix
+cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64.sh /tmp/optix/
+cd /tmp/optix
+chmod +x NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64.sh
+./NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64.sh
+Do you accept the license? [yN]: y
+Saying no will install in: "/tmp/optix" [Yn]:Y
+
+cd NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64/
+ls ==> SDK  doc  include
+cd include
+ls
+zip -r OptiX-8.0.0-include.zip *
+  adding: internal/ (stored 0%)
+  adding: internal/optix_device_impl_transformations.h (deflated 76%)
+  adding: internal/optix_device_impl.h (deflated 91%)
+  adding: internal/optix_micromap_impl.h (deflated 64%)
+  adding: optix.h (deflated 48%)
+  adding: optix_denoiser_tiling.h (deflated 78%)
+  adding: optix_device.h (deflated 87%)
+  adding: optix_function_table.h (deflated 84%)
+  adding: optix_function_table_definition.h (deflated 51%)
+  adding: optix_host.h (deflated 77%)
+  adding: optix_micromap.h (deflated 63%)
+  adding: optix_stack_size.h (deflated 83%)
+  adding: optix_stubs.h (deflated 82%)
+  adding: optix_types.h (deflated 77%)
+
+ls
+mv -v OptiX-8.0.0-include.zip /0-DataLinux/05-builds-dir-git/
+cd ../..
+mv -v NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
+
+cd ..
+rm -rf optix
+
+cd /0-DataLinux/05-builds-dir-git/
+
+sha256sum OptiX-8.0.0-include.zip
+fb8c6c3b1a03c20cf12435327b037e0266dfc79a5ea9f021e34949486a5b940c
+
+cd
+
+
 0-8) OPTIX 8.0
 ================
 VOIR PKGBUILD community blender
@@ -53,7 +203,7 @@ f4c6b2a33d8ed14af8ad6d0fea3a9d60e544fba540c05055a754e06c2f8097b3
 cd
 
 
-0-5) OPTIX 7.5.0
+0-5) OPTIX c
 ================
 https://developer.nvidia.com/designworks/optix/download
 
