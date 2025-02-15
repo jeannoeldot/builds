@@ -65,13 +65,35 @@ diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 cd pokerth-1.1.2-rc.new/src/db/common
 kwrite serverdbgeneric.cpp
 
-RAJOUTER LIGNE 32 :
-#include <boost/asio/post.hpp>
-
 MODIFIER LIGNE 39 :
 ServerDBGeneric::ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
 DEVIENT :
 ServerDBGeneric::ServerDBGeneric(ServerDBCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService)
+
+MODIFIER LIGNE 66 :
+	m_ioService->post(boost::bind(&ServerDBCallback::PlayerLoginFailed, &m_callback, requestId));
+DEVIENT :
+	boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::PlayerLoginFailed, &m_callback, requestId));
+
+MODIFIER LIGNE 72 :
+	m_ioService->post(boost::bind(&ServerDBCallback::AvatarIsBlacklisted, &m_callback, requestId));
+DEVIENT :
+	boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::AvatarIsBlacklisted, &m_callback, requestId));
+
+MODIFIER LIGNE 88 :
+	m_ioService->post(boost::bind(&ServerDBCallback::CreateGameFailed, &m_callback, requestId));
+DEVIENT :
+	boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::CreateGameFailed, &m_callback, requestId));
+
+MODIFIER LIGNE 104 :
+	m_ioService->post(boost::bind(&ServerDBCallback::ReportAvatarFailed, &m_callback, requestId, replyId));
+DEVIENT :
+	boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::ReportAvatarFailed, &m_callback, requestId, replyId));
+
+MODIFIER LIGNE 110 :
+	m_ioService->post(boost::bind(&ServerDBCallback::ReportGameFailed, &m_callback, requestId, replyId));
+DEVIENT :
+	boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::ReportGameFailed, &m_callback, requestId, replyId));
 
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier serverdbgeneric.cpp~
@@ -145,6 +167,46 @@ cd ../../..
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 
 
+1-6) MODIFIER pokerth-1.1.2-rc/src/net/clientthread.h
+-----------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net
+kwrite clientthread.h
+
+MODIFIER LIGNE 288 :
+	boost::shared_ptr<boost::asio::io_service> m_ioService;
+DEVIENT :
+	boost::shared_ptr<boost::asio::io_context> m_ioService;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier clientthread.h~
+rm -f clientthread.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-7) MODIFIER pokerth-1.1.2-rc/src/net/servermanager.h
+------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net
+kwrite servermanager.h
+
+MODIFIER LIGNE 78 :
+	boost::shared_ptr<boost::asio::io_service> m_ioService;
+DEVIENT :
+	boost::shared_ptr<boost::asio::io_context> m_ioService;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier servermanager.h~
+rm -f servermanager.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+------------------------------------------------------------------------------------
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-boost-1.87.0.patch
 
 

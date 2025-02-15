@@ -14,10 +14,13 @@ Do you accept the license? [yN]: y
 Saying no will install in: "/tmp/optix" [Yn]:Y
 
 cd NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64/
-ls ==> SDK  doc  include
+ls
+==> OptiX_EndUserLicense.pdf  OptiX_ThirdParty_Licenses.txt  SDK  doc  include  lib64  license_info.txt
+
 cd include
 ls
-zip -r OptiX-9.0.0-include.zip *
+==> GLFW  internal ...
+zip -r OptiX-9.0-include.zip *
   adding: internal/ (stored 0%)
   adding: internal/optix_device_impl_transformations.h (deflated 76%)
   adding: internal/optix_device_impl.h (deflated 91%)
@@ -34,7 +37,8 @@ zip -r OptiX-9.0.0-include.zip *
   adding: optix_types.h (deflated 77%)
 
 ls
-mv -v OptiX-9.0.0-include.zip /0-DataLinux/05-builds-dir-git/
+==> OptiX-9.0-include.zip
+mv -v OptiX-9.0-include.zip /0-DataLinux/05-builds-dir-git/
 cd ../..
 mv -v NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
 
@@ -43,8 +47,8 @@ rm -rf optix
 
 cd /0-DataLinux/05-builds-dir-git/
 
-sha256sum OptiX-9.0.0-include.zip
-fb8c6c3b1a03c20cf12435327b037e0266dfc79a5ea9f021e34949486a5b940c
+sha256sum OptiX-9.0-include.zip
+b743bed6ce028031c3983be0c42c364b67d170efcd30cbc59a3984d6a3b9361c
 
 cd
 
@@ -94,7 +98,7 @@ rm -rf optix
 cd /0-DataLinux/05-builds-dir-git/
 
 sha256sum OptiX-8.1-include.zip
-fb8c6c3b1a03c20cf12435327b037e0266dfc79a5ea9f021e34949486a5b940c
+a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99
 
 cd
 

@@ -1,0 +1,19 @@
+
+
+Bevel - CTRL + B: Options box closes when defining a profil.
+
+In object mode: Select the cube
+TAB: edit mode
+Select an (1) edge
+Bevel : CTRL + B
+In Bevel options box
+Segments: 12
+Profile type:  Custom
+Left-click on the curve to define a profile => The options box closes.
+It seems impossible to open the options box again to continue defining the profile.
+
+Thank you for all your hard work
+
+
+
+

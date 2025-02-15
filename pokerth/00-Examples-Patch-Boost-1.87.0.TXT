@@ -1,0 +1,26 @@
+
+https://github.com/jcelerier/websocketpp/commit/12d377ac47b06129ed51b08445eb059c86a349a5
+
+
+m_strand.reset(new lib::asio::io_service::strand(*io_service));
+==>
+m_strand.reset(new lib::asio::io_context::strand(*io_service));
+
+
+
+
+
+m_io_service->post(m_strand->wrap(handler));
+==>
+boost::asio::post(*m_io_service, m_strand->wrap(handler));
+
+m_io_service->post(handler);
+==>
+boost::asio::post(*m_io_service, handler);
+
+
+
+
+
+
+

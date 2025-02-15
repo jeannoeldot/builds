@@ -12,15 +12,8 @@ diff -aur pokerth-1.1.2-rc/src/db/common/serverdbfactorygeneric.cpp pokerth-1.1.
  }
 diff -aur pokerth-1.1.2-rc/src/db/common/serverdbgeneric.cpp pokerth-1.1.2-rc.new/src/db/common/serverdbgeneric.cpp
 --- pokerth-1.1.2-rc/src/db/common/serverdbgeneric.cpp	2017-08-16 14:24:03.000000000 +0200
-+++ pokerth-1.1.2-rc.new/src/db/common/serverdbgeneric.cpp	2025-02-10 18:13:39.059139808 +0100
-@@ -29,13 +29,14 @@
-  * as that of the covered work.                                              *
-  *****************************************************************************/
- 
-+#include <boost/asio/post.hpp>
- #include <boost/bind.hpp>
- #include <db/serverdbgeneric.h>
- 
++++ pokerth-1.1.2-rc.new/src/db/common/serverdbgeneric.cpp	2025-02-15 11:11:48.210854662 +0100
+@@ -35,7 +35,7 @@
  using namespace std;
  
  
@@ -29,7 +22,47 @@ diff -aur pokerth-1.1.2-rc/src/db/common/serverdbgeneric.cpp pokerth-1.1.2-rc.ne
  	: m_ioService(ioService), m_callback(cb)
  {
  }
-Seulement dans pokerth-1.1.2-rc.new/src/db/common: serverdbgeneric.cpp~
+@@ -63,13 +63,13 @@
+ void
+ ServerDBGeneric::AsyncPlayerLogin(unsigned requestId, const string &/*playerName*/)
+ {
+-	m_ioService->post(boost::bind(&ServerDBCallback::PlayerLoginFailed, &m_callback, requestId));
++  boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::PlayerLoginFailed, &m_callback, requestId));
+ }
+ 
+ void
+ ServerDBGeneric::AsyncCheckAvatarBlacklist(unsigned requestId, const std::string &/*avatarHash*/)
+ {
+-	m_ioService->post(boost::bind(&ServerDBCallback::AvatarIsBlacklisted, &m_callback, requestId));
++  boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::AvatarIsBlacklisted, &m_callback, requestId));
+ }
+ 
+ void
+@@ -85,7 +85,7 @@
+ void
+ ServerDBGeneric::AsyncCreateGame(unsigned requestId, const string &/*gameName*/)
+ {
+-	m_ioService->post(boost::bind(&ServerDBCallback::CreateGameFailed, &m_callback, requestId));
++  boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::CreateGameFailed, &m_callback, requestId));
+ }
+ 
+ void
+@@ -101,13 +101,13 @@
+ void
+ ServerDBGeneric::AsyncReportAvatar(unsigned requestId, unsigned replyId, DB_id /*reportedPlayerId*/, const std::string &/*avatarHash*/, const std::string &/*avatarType*/, DB_id * /*byPlayerId*/)
+ {
+-	m_ioService->post(boost::bind(&ServerDBCallback::ReportAvatarFailed, &m_callback, requestId, replyId));
++  boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::ReportAvatarFailed, &m_callback, requestId, replyId));
+ }
+ 
+ void
+ ServerDBGeneric::AsyncReportGame(unsigned requestId, unsigned replyId, DB_id * /*creatorPlayerId*/, unsigned /*gameId*/, const std::string &/*gameName*/, DB_id * /*byPlayerId*/)
+ {
+-	m_ioService->post(boost::bind(&ServerDBCallback::ReportGameFailed, &m_callback, requestId, replyId));
++  boost::asio::post(*m_ioService, boost::bind(&ServerDBCallback::ReportGameFailed, &m_callback, requestId, replyId));
+ }
+ 
+ void
 diff -aur pokerth-1.1.2-rc/src/db/serverdbfactory.h pokerth-1.1.2-rc.new/src/db/serverdbfactory.h
 --- pokerth-1.1.2-rc/src/db/serverdbfactory.h	2017-08-16 14:24:03.000000000 +0200
 +++ pokerth-1.1.2-rc.new/src/db/serverdbfactory.h	2025-02-10 14:42:47.791246287 +0100
@@ -75,3 +108,27 @@ diff -aur pokerth-1.1.2-rc/src/db/serverdbgeneric.h pokerth-1.1.2-rc.new/src/db/
  	ServerDBCallback &m_callback;
  };
  
+diff -aur pokerth-1.1.2-rc/src/net/clientthread.h pokerth-1.1.2-rc.new/src/net/clientthread.h
+--- pokerth-1.1.2-rc/src/net/clientthread.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/clientthread.h	2025-02-15 11:26:09.703943446 +0100
+@@ -285,7 +285,7 @@
+ 
+ private:
+ 
+-	boost::shared_ptr<boost::asio::io_service> m_ioService;
++	boost::shared_ptr<boost::asio::io_context> m_ioService;
+ 	boost::shared_ptr<Log> m_clientLog;
+ 
+ 	Gsasl *m_authContext;
+diff -aur pokerth-1.1.2-rc/src/net/servermanager.h pokerth-1.1.2-rc.new/src/net/servermanager.h
+--- pokerth-1.1.2-rc/src/net/servermanager.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/servermanager.h	2025-02-15 11:29:11.037374118 +0100
+@@ -75,7 +75,7 @@
+ 	{
+ 		return m_gui;
+ 	}
+-	boost::shared_ptr<boost::asio::io_service> m_ioService;
++	boost::shared_ptr<boost::asio::io_context> m_ioService;
+ 	boost::shared_ptr<ServerLobbyThread> m_lobbyThread;
+ 
+ private:
