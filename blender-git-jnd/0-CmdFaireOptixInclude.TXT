@@ -20,7 +20,7 @@ ls
 cd include
 ls
 ==> GLFW  internal ...
-zip -r OptiX-9.0-include.zip *
+zip -r OptiX-9.0-Include.zip *
   adding: internal/ (stored 0%)
   adding: internal/optix_device_impl_transformations.h (deflated 76%)
   adding: internal/optix_device_impl.h (deflated 91%)
@@ -37,8 +37,8 @@ zip -r OptiX-9.0-include.zip *
   adding: optix_types.h (deflated 77%)
 
 ls
-==> OptiX-9.0-include.zip
-mv -v OptiX-9.0-include.zip /0-DataLinux/05-builds-dir-git/
+==> OptiX-9.0-Include.zip
+mv -v OptiX-9.0-Include.zip /0-DataLinux/05-builds-dir-git/
 cd ../..
 mv -v NVIDIA-OptiX-SDK-9.0.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
 
@@ -47,7 +47,7 @@ rm -rf optix
 
 cd /0-DataLinux/05-builds-dir-git/
 
-sha256sum OptiX-9.0-include.zip
+sha256sum OptiX-9.0-Include.zip
 b743bed6ce028031c3983be0c42c364b67d170efcd30cbc59a3984d6a3b9361c
 
 cd
@@ -71,7 +71,7 @@ cd NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64/
 ls ==> SDK  doc  include
 cd include
 ls
-zip -r OptiX-8.1-include.zip *
+zip -r OptiX-8.1-Include.zip *
   adding: internal/ (stored 0%)
   adding: internal/optix_micromap_impl.h (deflated 63%)
   adding: internal/optix_device_impl_transformations.h (deflated 77%)
@@ -88,7 +88,7 @@ zip -r OptiX-8.1-include.zip *
   adding: optix_types.h (deflated 78%)
 
 ls
-mv -v OptiX-8.1-include.zip /0-DataLinux/05-builds-dir-git/
+mv -v OptiX-8.1-Include.zip /0-DataLinux/05-builds-dir-git/
 cd ../..
 mv -v NVIDIA-OptiX-SDK-8.1.0-linux64-x86_64-35015278.sh /0-DataLinux/05-builds-dir-git/
 
@@ -97,7 +97,7 @@ rm -rf optix
 
 cd /0-DataLinux/05-builds-dir-git/
 
-sha256sum OptiX-8.1-include.zip
+sha256sum OptiX-8.1-Include.zip
 a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99
 
 cd

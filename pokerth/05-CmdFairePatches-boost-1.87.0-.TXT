@@ -24,6 +24,8 @@ https://github.com/PointCloudLibrary/pcl/issues/6202
 https://github.com/PointCloudLibrary/pcl/commit/0932486c52a2cf4f0821e25d5ea2d5767fff8381#diff-0648e12faefb09b55f716000a1cf2641de888cfd255b87bd3d22925da0513d70
 boost::asio::io_service io_service; ==> boost::asio::io_context io_service;
 
+https://github.com/jcelerier/websocketpp/commit/12d377ac47b06129ed51b08445eb059c86a349a5
+
 Reference
 post
 
@@ -205,6 +207,69 @@ cd ../../..
 
 !!! POUR VÉRIFIER
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-8) MODIFIER pokerth-1.1.2-rc/src/net/sessiondata.h
+------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net
+kwrite sessiondata.h
+
+MODIFIER LIGNE 65 :
+	SessionData(boost::shared_ptr<boost::asio::ip::tcp::socket> sock, SessionId id, SessionDataCallback &cb, boost::asio::io_service &ioService);
+DEVIENT :
+	SessionData(boost::shared_ptr<boost::asio::ip::tcp::socket> sock, SessionId id, SessionDataCallback &cb, boost::asio::io_context &ioService);
+
+MODIFIER LIGNE 66 :
+	SessionData(boost::shared_ptr<WebSocketData> webData, SessionId id, SessionDataCallback &cb, boost::asio::io_service &ioService, int filler);
+DEVIENT :
+	SessionData(boost::shared_ptr<WebSocketData> webData, SessionId id, SessionDataCallback &cb, boost::asio::io_context &ioService, int filler);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier sessiondata.h~
+rm -f sessiondata.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+1-9) MODIFIER pokerth-1.1.2-rc/src/net/chatcleanermanager.h
+-----------------------------------------------------------
+cd pokerth-1.1.2-rc.new/src/net
+kwrite chatcleanermanager.h
+
+MODIFIER LIGNE 51 :
+	ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
+DEVIENT :
+	ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService);
+
+MODIFIER LIGNE 73 :
+	boost::shared_ptr<boost::asio::io_service> m_ioService;
+DEVIENT :
+	boost::shared_ptr<boost::asio::io_context> m_ioService;
+
+MODIFIER LIGNE 62 :
+	void HandleResolve(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
+DEVIENT :
+	void HandleResolve(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
+
+MODIFIER LIGNE 63 :
+	void HandleConnect(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
+DEVIENT :
+	void HandleConnect(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier chatcleanermanager.h~
+rm -f chatcleanermanager.h~
+
+cd ../../..
+
+!!! POUR VÉRIFIER
+diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
+
+
+
 
 ------------------------------------------------------------------------------------
 diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new > fix-build-with-boost-1.87.0.patch

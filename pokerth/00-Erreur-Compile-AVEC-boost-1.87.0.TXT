@@ -2,6 +2,9 @@
 
 
 
+==========================================================================================================
+FAIT
+====
 In file included from src/net/clientcontext.h:38,
                  from src/net/common/clientcontext.cpp:33:
 src/net/sessiondata.h:65:114: error: ‘boost::asio::io_service’ has not been declared
@@ -18,12 +21,22 @@ src/net/chatcleanermanager.h:51:84: error: ‘io_service’ is not a member of �
 src/net/chatcleanermanager.h:51:94: error: template argument 1 is invalid
    51 |         ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
       |                                                                                              ^
+
+!!!!!!!! PAS CORRIGÉ
+======================================================================================================
 src/net/chatcleanermanager.h:62:65: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
    62 |         void HandleResolve(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
       |                                                                 ^~~~~
 src/net/chatcleanermanager.h:63:65: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
    63 |         void HandleConnect(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
       |                                                                 ^~~~~
+======================================================================================================
+!!!!!!!!
+
+
+==========================================================================================================
+FAIT
+====
 src/net/chatcleanermanager.h:73:40: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
    73 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
       |                                        ^~~~~~~~~~
@@ -33,6 +46,8 @@ src/net/chatcleanermanager.h:73:50: error: template argument 1 is invalid
       |                                                  ^
 
 
+!!!!!!!! PAS CORRIGÉ
+======================================================================================================
 src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp:89:24: error: ‘io_service’ in namespace ‘websocketpp::lib::asio’ does not name a type
    89 |     typedef lib::asio::io_service * io_service_ptr;
       |                        ^~~~~~~~~~
