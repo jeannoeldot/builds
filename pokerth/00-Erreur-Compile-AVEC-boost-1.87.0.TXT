@@ -134,6 +134,7 @@ src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp: In member
 src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp:1098:47: error: ‘using std::__shared_ptr_access<boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>, __gnu_cxx::_S_atomic, false, false>::element_type = class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
  1098 |             lib::asio::is_neg(shutdown_timer->expires_from_now()))
       |                                               ^~~~~~~~~~~~~~~~
+
 In file included from src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:33:
 src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp: At global scope:
 src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp:66:24: error: ‘io_service’ in namespace ‘websocketpp::lib::asio’ does not name a type
