@@ -108,6 +108,27 @@ diff -aur pokerth-1.1.2-rc/src/db/serverdbgeneric.h pokerth-1.1.2-rc.new/src/db/
  	ServerDBCallback &m_callback;
  };
  
+diff -aur pokerth-1.1.2-rc/src/net/chatcleanermanager.h pokerth-1.1.2-rc.new/src/net/chatcleanermanager.h
+--- pokerth-1.1.2-rc/src/net/chatcleanermanager.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/chatcleanermanager.h	2025-02-16 11:16:24.759446651 +0100
+@@ -48,7 +48,7 @@
+ class ChatCleanerManager : public boost::enable_shared_from_this<ChatCleanerManager>
+ {
+ public:
+-	ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService);
++	ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_context> ioService);
+ 	virtual ~ChatCleanerManager();
+ 
+ 	void Init(const std::string &serverAddr, int port, bool ipv6,
+@@ -70,7 +70,7 @@
+ private:
+ 
+ 	ChatCleanerCallback &m_callback;
+-	boost::shared_ptr<boost::asio::io_service> m_ioService;
++	boost::shared_ptr<boost::asio::io_context> m_ioService;
+ 	boost::shared_ptr<boost::asio::ip::tcp::resolver> m_resolver;
+ 	boost::shared_ptr<boost::asio::ip::tcp::socket> m_socket;
+ 	boost::shared_ptr<AsioSendBuffer> m_sendManager;
 diff -aur pokerth-1.1.2-rc/src/net/clientthread.h pokerth-1.1.2-rc.new/src/net/clientthread.h
 --- pokerth-1.1.2-rc/src/net/clientthread.h	2017-08-16 14:24:03.000000000 +0200
 +++ pokerth-1.1.2-rc.new/src/net/clientthread.h	2025-02-15 11:26:09.703943446 +0100
@@ -132,3 +153,17 @@ diff -aur pokerth-1.1.2-rc/src/net/servermanager.h pokerth-1.1.2-rc.new/src/net/
  	boost::shared_ptr<ServerLobbyThread> m_lobbyThread;
  
  private:
+diff -aur pokerth-1.1.2-rc/src/net/sessiondata.h pokerth-1.1.2-rc.new/src/net/sessiondata.h
+--- pokerth-1.1.2-rc/src/net/sessiondata.h	2017-08-16 14:24:03.000000000 +0200
++++ pokerth-1.1.2-rc.new/src/net/sessiondata.h	2025-02-16 11:02:59.468276564 +0100
+@@ -62,8 +62,8 @@
+ public:
+ 	enum State { Init = 1, ReceivingAvatar = 2, Established = 4, Game = 8, Spectating = 16, SpectatorWaiting = 32, Closed = 128 };
+ 
+-	SessionData(boost::shared_ptr<boost::asio::ip::tcp::socket> sock, SessionId id, SessionDataCallback &cb, boost::asio::io_service &ioService);
+-	SessionData(boost::shared_ptr<WebSocketData> webData, SessionId id, SessionDataCallback &cb, boost::asio::io_service &ioService, int filler);
++	SessionData(boost::shared_ptr<boost::asio::ip::tcp::socket> sock, SessionId id, SessionDataCallback &cb, boost::asio::io_context &ioService);
++	SessionData(boost::shared_ptr<WebSocketData> webData, SessionId id, SessionDataCallback &cb, boost::asio::io_context &ioService, int filler);
+ 	~SessionData();
+ 
+ 	SessionId GetId() const;

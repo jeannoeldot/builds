@@ -1,4 +1,453 @@
 
+!!!!!!!! PAS CORRIGÉ
+======================================================================================================
+src/net/chatcleanermanager.h:62:65: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+   62 |         void HandleResolve(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
+      |                                                                 ^~~~~
+src/net/chatcleanermanager.h:63:65: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+   63 |         void HandleConnect(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator);
+      |                                                                 ^~~~~
+======================================================================================================
+!!!!!!!!
+
+
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:947:9: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  947 |         lib::asio::ip::tcp::resolver::iterator iterator)
+      |         ^~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp: In member function ‘void websocketpp::transport::asio::endpoint<config>::listen(const std::string&, const std::string&, std::error_code&)’:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:537:24: error: ‘query’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  537 |         tcp::resolver::query query(host, service);
+      |                        ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:538:24: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  538 |         tcp::resolver::iterator endpoint_iterator = r.resolve(query);
+      |                        ^~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:539:24: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  539 |         tcp::resolver::iterator end;
+      |                        ^~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:540:13: error: ‘endpoint_iterator’ was not declared in this scope
+  540 |         if (endpoint_iterator == end) {
+      |             ^~~~~~~~~~~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:540:34: error: ‘end’ was not declared in this scope; did you mean ‘std::end’?
+  540 |         if (endpoint_iterator == end) {
+      |                                  ^~~
+      |                                  std::end
+In file included from /usr/include/c++/14.2.1/string:53,
+                 from /usr/include/boost/assert/source_location.hpp:13,
+                 from /usr/include/boost/exception/exception.hpp:9,
+                 from /usr/include/boost/throw_exception.hpp:21,
+                 from /usr/include/boost/asio/detail/throw_exception.hpp:21,
+                 from /usr/include/boost/asio/detail/memory.hpp:24:
+/usr/include/c++/14.2.1/bits/range_access.h:116:37: note: ‘std::end’ declared here
+  116 |   template<typename _Tp> const _Tp* end(const valarray<_Tp>&) noexcept;
+      |                                     ^~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:546:17: error: ‘endpoint_iterator’ was not declared in this scope
+  546 |         listen(*endpoint_iterator,ec);
+      |                 ^~~~~~~~~~~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp: In member function ‘void websocketpp::transport::asio::endpoint<config>::reset()’:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:645:23: error: ‘class boost::asio::io_context’ has no member named ‘reset’; did you mean ‘restart’?
+  645 |         m_io_service->reset();
+      |                       ^~~~~
+      |                       restart
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp: In member function ‘void websocketpp::transport::asio::endpoint<config>::async_connect(transport_con_ptr, websocketpp::uri_ptr, websocketpp::transport::connect_handler)’:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:864:24: error: ‘query’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  864 |         tcp::resolver::query query(host,port);
+      |                        ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:886:17: error: ‘query’ was not declared in this scope
+  886 |                 query,
+      |                 ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:886:17: note: suggested alternatives:
+In file included from /usr/include/boost/asio/execution/blocking.hpp:23,
+                 from /usr/include/boost/asio/execution/any_executor.hpp:31:
+/usr/include/boost/asio/query.hpp:114:6: note:   ‘boost_asio_query_fn::query’
+  114 | void query();
+      |      ^~~~~
+/usr/include/boost/asio/query.hpp:263:3: note:   ‘boost::asio::{anonymous}::query’
+  263 |   query = boost_asio_query_fn::static_instance<>::instance;
+      |   ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:899:17: error: ‘query’ was not declared in this scope
+  899 |                 query,
+      |                 ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:899:17: note: suggested alternatives:
+/usr/include/boost/asio/query.hpp:114:6: note:   ‘boost_asio_query_fn::query’
+  114 | void query();
+      |      ^~~~~
+/usr/include/boost/asio/query.hpp:263:3: note:   ‘boost::asio::{anonymous}::query’
+  263 |   query = boost_asio_query_fn::static_instance<>::instance;
+      |   ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp: In member function ‘void websocketpp::transport::asio::endpoint<config>::handle_resolve(transport_con_ptr, timer_ptr, websocketpp::transport::connect_handler, const boost::system::error_code&, int)’:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:968:43: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  968 |             lib::asio::ip::tcp::resolver::iterator it, end;
+      |                                           ^~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:969:18: error: ‘it’ was not declared in this scope; did you mean ‘int’?
+  969 |             for (it = iterator; it != end; ++it) {
+      |                  ^~
+      |                  int
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:969:39: error: ‘end’ was not declared in this scope; did you mean ‘std::end’?
+  969 |             for (it = iterator; it != end; ++it) {
+      |                                       ^~~
+      |                                       std::end
+
+In file included from src/net/common/clientstate.cpp:32:
+src/net/clientstate.h:100:54: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  100 |                 const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator,
+      |                                                      ^~~~~
+src/net/clientstate.h:204:32: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  204 |         void SetRemoteEndpoint(boost::asio::ip::tcp::resolver::iterator endpointIterator);
+      |                                ^~~~~
+src/net/clientstate.h:212:44: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  212 |                                            boost::asio::ip::tcp::resolver::iterator endpoint_iterator,
+      |                                            ^~~~~
+src/net/clientstate.h:218:41: error: ‘iterator’ in ‘boost::asio::ip::tcp::resolver’ {aka ‘class boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’} does not name a type
+  218 |         boost::asio::ip::tcp::resolver::iterator m_remoteEndpointIterator;
+      |                                         ^~~~~~~~
+
+
+src/net/common/chatcleanermanager.cpp:44:96: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   44 | ChatCleanerManager::ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
+      |                                                                                                ^~~~~~~~~~
+      |                                                                                                use_service
+src/net/common/chatcleanermanager.cpp:44:106: error: template argument 1 is invalid
+   44 | ChatCleanerManager::ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
+      |                                                                                                          ^
+src/net/common/chatcleanermanager.cpp:44:1: error: no declaration matches ‘ChatCleanerManager::ChatCleanerManager(ChatCleanerCallback&, int)’
+   44 | ChatCleanerManager::ChatCleanerManager(ChatCleanerCallback &cb, boost::shared_ptr<boost::asio::io_service> ioService)
+      | ^~~~~~~~~~~~~~~~~~
+
+src/net/common/chatcleanermanager.cpp: In member function ‘void ChatCleanerManager::ReInit()’:
+src/net/common/chatcleanermanager.cpp:81:41: error: ‘query’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+   81 |         boost::asio::ip::tcp::resolver::query q(m_serverAddr, portStr.str());
+      |                                         ^~~~~
+src/net/common/chatcleanermanager.cpp:84:17: error: ‘q’ was not declared in this scope
+   84 |                 q,
+      |                 ^
+src/net/common/chatcleanermanager.cpp: At global scope:
+src/net/common/chatcleanermanager.cpp:120:67: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  120 |                                                                   boost::asio::ip::tcp::resolver::iterator endpoint_iterator)
+      |                                                                   ^~~~~
+src/net/common/chatcleanermanager.cpp: In member function ‘void ChatCleanerManager::HandleResolve(const boost::system::error_code&, int)’:
+src/net/common/chatcleanermanager.cpp:123:59: error: invalid type argument of unary ‘*’ (have ‘int’)
+  123 |                 boost::asio::ip::tcp::endpoint endpoint = *endpoint_iterator;
+      |                                                           ^~~~~~~~~~~~~~~~~~
+src/net/common/chatcleanermanager.cpp: At global scope:
+src/net/common/chatcleanermanager.cpp:137:67: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  137 |                                                                   boost::asio::ip::tcp::resolver::iterator endpoint_iterator)
+      |                                                                   ^~~~~
+src/net/common/chatcleanermanager.cpp: In member function ‘void ChatCleanerManager::HandleConnect(const boost::system::error_code&, int)’:
+src/net/common/chatcleanermanager.cpp:154:74: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  154 |                 if (endpoint_iterator != boost::asio::ip::tcp::resolver::iterator()) {
+      |                                                                          ^~~~~~~~
+src/net/common/chatcleanermanager.cpp:158:67: error: invalid type argument of unary ‘*’ (have ‘int’)
+  158 |                         boost::asio::ip::tcp::endpoint endpoint = *endpoint_iterator;
+      |                                                                   ^~~~~~~~~~~~~~~~~~
+
+In file included from src/net/common/clientthread.cpp:35:
+src/net/clientstate.h:100:54: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  100 |                 const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator,
+      |                                                      ^~~~~
+src/net/clientstate.h:204:32: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  204 |         void SetRemoteEndpoint(boost::asio::ip::tcp::resolver::iterator endpointIterator);
+      |                                ^~~~~
+src/net/clientstate.h:212:44: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  212 |                                            boost::asio::ip::tcp::resolver::iterator endpoint_iterator,
+      |                                            ^~~~~
+src/net/clientstate.h:218:41: error: ‘iterator’ in ‘boost::asio::ip::tcp::resolver’ {aka ‘class boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’} does not name a type
+  218 |         boost::asio::ip::tcp::resolver::iterator m_remoteEndpointIterator;
+      |                                         ^~~~~~~~
+In file included from src/net/common/clientstate.cpp:35:
+src/net/senderhelper.h:45:53: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   45 |         SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService);
+      |                                                     ^~~~~~~~~~
+      |                                                     use_service
+src/net/senderhelper.h:45:63: error: template argument 1 is invalid
+   45 |         SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService);
+      |                                                               ^
+src/net/senderhelper.h:55:40: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   55 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
+      |                                        ^~~~~~~~~~
+      |                                        use_service
+src/net/senderhelper.h:55:50: error: template argument 1 is invalid
+   55 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
+      |                                                  ^
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateStartResolve::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:143:41: error: ‘query’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  143 |         boost::asio::ip::tcp::resolver::query q(context.GetServerAddr(), portStr.str());
+      |                                         ^~~~~
+src/net/common/clientstate.cpp:146:17: error: ‘q’ was not declared in this scope
+  146 |                 q,
+      |                 ^
+src/net/common/clientstate.cpp: At global scope:
+src/net/common/clientstate.cpp:161:77: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  161 | ClientStateStartResolve::HandleResolve(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator,
+      |                                                                             ^~~~~
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateDownloadingServerList::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:246:33: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+  246 |         client->GetStateTimer().expires_from_now(
+      |                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘void ClientStateDownloadingServerList::TimerLoop(const boost::system::error_code&, boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:273:49: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+  273 |                         client->GetStateTimer().expires_from_now(
+      |                                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateWaitChooseServer::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:418:33: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+  418 |         client->GetStateTimer().expires_from_now(
+      |                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘void ClientStateWaitChooseServer::TimerLoop(const boost::system::error_code&, boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:441:49: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+  441 |                         client->GetStateTimer().expires_from_now(
+      |                                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateStartConnect::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:470:33: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+  470 |         client->GetStateTimer().expires_from_now(
+      |                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp:476:52: error: ‘m_remoteEndpointIterator’ was not declared in this scope
+  476 |         boost::asio::ip::tcp::endpoint endpoint = *m_remoteEndpointIterator;
+      |                                                    ^~~~~~~~~~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: At global scope:
+src/net/common/clientstate.cpp:493:1: error: variable or field ‘SetRemoteEndpoint’ declared void
+  493 | ClientStateStartConnect::SetRemoteEndpoint(boost::asio::ip::tcp::resolver::iterator endpointIterator)
+      | ^~~~~~~~~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp:493:76: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  493 | ClientStateStartConnect::SetRemoteEndpoint(boost::asio::ip::tcp::resolver::iterator endpointIterator)
+      |                                                                            ^~~~~~~~
+src/net/common/clientstate.cpp:499:77: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  499 | ClientStateStartConnect::HandleConnect(const boost::system::error_code& ec, boost::asio::ip::tcp::resolver::iterator endpoint_iterator,
+      |                                                                             ^~~~~
+src/net/common/clientstate.cpp: In member function ‘void ClientStateStartConnect::HandleConnect(const boost::system::error_code&, int, boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:506:81: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  506 |                 } else if (endpoint_iterator != boost::asio::ip::tcp::resolver::iterator()) {
+      |                                                                                 ^~~~~~~~
+src/net/common/clientstate.cpp:511:67: error: invalid type argument of unary ‘*’ (have ‘int’)
+  511 |                         boost::asio::ip::tcp::endpoint endpoint = *endpoint_iterator;
+      |                                                                   ^~~~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp:517:59: error: ‘m_remoteEndpointIterator’ was not declared in this scope
+  517 |                                                         ++m_remoteEndpointIterator,
+      |                                                           ^~~~~~~~~~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateWaitEnterLogin::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:1003:33: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+ 1003 |         client->GetStateTimer().expires_from_now(
+      |                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘void ClientStateWaitEnterLogin::TimerLoop(const boost::system::error_code&, boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:1082:49: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+ 1082 |                         client->GetStateTimer().expires_from_now(
+      |                                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘virtual void ClientStateSynchronizeStart::Enter(boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:1416:33: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+ 1416 |         client->GetStateTimer().expires_from_now(
+      |                                 ^~~~~~~~~~~~~~~~
+src/net/common/clientstate.cpp: In member function ‘void ClientStateSynchronizeStart::TimerLoop(const boost::system::error_code&, boost::shared_ptr<ClientThread>)’:
+src/net/common/clientstate.cpp:1446:49: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+ 1446 |                         client->GetStateTimer().expires_from_now(
+      |                                                 ^~~~~~~~~~~~~~~~
+
+In file included from src/net/common/clientthread.cpp:37:
+src/net/senderhelper.h:45:53: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   45 |         SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService);
+      |                                                     ^~~~~~~~~~
+      |                                                     use_service
+src/net/senderhelper.h:45:63: error: template argument 1 is invalid
+   45 |         SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService);
+      |                                                               ^
+src/net/senderhelper.h:55:40: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   55 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
+      |                                        ^~~~~~~~~~
+      |                                        use_service
+src/net/senderhelper.h:55:50: error: template argument 1 is invalid
+   55 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
+      |                                                  ^
+src/net/common/clientthread.cpp: In constructor ‘ClientThread::ClientThread(GuiInterface&, AvatarManager&, Log*)’:
+src/net/common/clientthread.cpp:76:40: error: ‘io_service’ in namespace ‘boost::asio’ does not name a type; did you mean ‘use_service’?
+   76 |         : m_ioService(new boost::asio::io_service), m_clientLog(myLog), m_curState(NULL), m_gui(gui),
+      |                                        ^~~~~~~~~~
+      |                                        use_service
+src/net/common/clientthread.cpp:83:58: error: no matching function for call to ‘SenderHelper::SenderHelper(boost::shared_ptr<boost::asio::io_context>&)’
+   83 |         m_senderHelper.reset(new SenderHelper(m_ioService));
+      |                                                          ^
+
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendKickPlayer(unsigned int)’:
+src/net/common/clientthread.cpp:135:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  135 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendLeaveCurrentGame()’:
+src/net/common/clientthread.cpp:145:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  145 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendStartEvent(bool)’:
+src/net/common/clientthread.cpp:159:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  159 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendPlayerAction()’:
+src/net/common/clientthread.cpp:185:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  185 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendGameChatMessage(const std::string&)’:
+src/net/common/clientthread.cpp:200:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  200 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendLobbyChatMessage(const std::string&)’:
+src/net/common/clientthread.cpp:214:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  214 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendPrivateChatMessage(unsigned int, const std::string&)’:
+src/net/common/clientthread.cpp:229:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  229 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendJoinFirstGame(const std::string&, bool)’:
+src/net/common/clientthread.cpp:246:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  246 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendJoinGame(unsigned int, const std::string&, bool)’:
+src/net/common/clientthread.cpp:263:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  263 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendRejoinGame(unsigned int, bool)’:
+src/net/common/clientthread.cpp:277:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  277 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendCreateGame(const GameData&, const std::string&, const std::string&, bool)’:
+src/net/common/clientthread.cpp:296:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  296 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendResetTimeout()’:
+src/net/common/clientthread.cpp:305:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  305 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendAskKickPlayer(unsigned int)’:
+src/net/common/clientthread.cpp:316:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  316 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendVoteKick(bool)’:
+src/net/common/clientthread.cpp:331:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  331 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendShowMyCards()’:
+src/net/common/clientthread.cpp:340:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  340 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendInvitePlayerToCurrentGame(unsigned int)’:
+src/net/common/clientthread.cpp:351:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  351 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendRejectGameInvitation(unsigned int, DenyGameInvitationReason)’:
+src/net/common/clientthread.cpp:362:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  362 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendReportAvatar(unsigned int, const std::string&)’:
+src/net/common/clientthread.cpp:376:30: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  376 |                 m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                              ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendReportGameName(unsigned int)’:
+src/net/common/clientthread.cpp:387:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  387 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendAdminRemoveGame(unsigned int)’:
+src/net/common/clientthread.cpp:397:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  397 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::SendAdminBanPlayer(unsigned int)’:
+src/net/common/clientthread.cpp:407:22: error: ‘class boost::asio::io_context’ has no member named ‘post’
+  407 |         m_ioService->post(boost::bind(&ClientThread::SendSessionPacket, shared_from_this(), packet));
+      |                      ^~~~
+src/net/common/clientthread.cpp: In member function ‘virtual void ClientThread::Main()’:
+src/net/common/clientthread.cpp:556:22: error: ‘boost::asio::io_service’ has not been declared
+  556 |         boost::asio::io_service::work ioWork(*m_ioService);
+      |                      ^~~~~~~~~~
+src/net/common/clientthread.cpp:565:30: error: ‘boost::asio::io_service’ has not been declared
+  565 |                 boost::asio::io_service::work ioWork(*m_ioService);
+      |                              ^~~~~~~~~~
+
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::RegisterTimers()’:
+src/net/common/clientthread.cpp:594:23: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+  594 |         m_avatarTimer.expires_from_now(
+      |                       ^~~~~~~~~~~~~~~~
+src/net/common/clientthread.cpp: In member function ‘void ClientThread::TimerCheckAvatarDownloads(const boost::system::error_code&)’:
+src/net/common/clientthread.cpp:918:31: error: ‘boost::asio::steady_timer’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
+  918 |                 m_avatarTimer.expires_from_now(
+      |                               ^~~~~~~~~~~~~~~~
+
+In file included from src/net/common/senderhelper.cpp:32:
+src/net/senderhelper.h:45:53: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   45 |         SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService);
+      |                                                     ^~~~~~~~~~
+      |                                                     use_service
+src/net/senderhelper.h:45:63: error: template argument 1 is invalid
+   45 |         SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService);
+      |                                                               ^
+src/net/senderhelper.h:55:40: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   55 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
+      |                                        ^~~~~~~~~~
+      |                                        use_service
+src/net/senderhelper.h:55:50: error: template argument 1 is invalid
+   55 |         boost::shared_ptr<boost::asio::io_service> m_ioService;
+      |                                                  ^
+
+In file included from src/third_party/websocketpp/websocketpp/config/asio_no_tls.hpp:32:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:947:9: error: ‘boost::asio::ip::resolver::iterator’ has not been declared
+  947 |         lib::asio::ip::tcp::resolver::iterator iterator)
+      |         ^~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp: In member function ‘void websocketpp::transport::asio::endpoint<config>::listen(const std::string&, const std::string&, std::error_code&)’:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:537:24: error: ‘query’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  537 |         tcp::resolver::query query(host, service);
+      |                        ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:538:24: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  538 |         tcp::resolver::iterator endpoint_iterator = r.resolve(query);
+      |                        ^~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:539:24: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  539 |         tcp::resolver::iterator end;
+      |                        ^~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:540:13: error: ‘endpoint_iterator’ was not declared in this scope
+  540 |         if (endpoint_iterator == end) {
+      |             ^~~~~~~~~~~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:540:34: error: ‘end’ was not declared in this scope
+  540 |         if (endpoint_iterator == end) {
+      |                                  ^~~
+
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:546:17: error: ‘endpoint_iterator’ was not declared in this scope
+  546 |         listen(*endpoint_iterator,ec);
+      |                 ^~~~~~~~~~~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp: In member function ‘void websocketpp::transport::asio::endpoint<config>::reset()’:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:645:23: error: ‘class boost::asio::io_context’ has no member named ‘reset’; did you mean ‘restart’?
+  645 |         m_io_service->reset();
+      |                       ^~~~~
+      |                       restart
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp: In member function ‘void websocketpp::transport::asio::endpoint<config>::async_connect(transport_con_ptr, websocketpp::uri_ptr, websocketpp::transport::connect_handler)’:
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:864:24: error: ‘query’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  864 |         tcp::resolver::query query(host,port);
+      |                        ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:886:17: error: ‘query’ was not declared in this scope
+  886 |                 query,
+      |                 ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:886:17: note: suggested alternatives:
+In file included from /usr/include/boost/asio/execution/blocking.hpp:23,
+                 from /usr/include/boost/asio/execution/any_executor.hpp:31:
+/usr/include/boost/asio/query.hpp:114:6: note:   ‘boost_asio_query_fn::query’
+  114 | void query();
+      |      ^~~~~
+/usr/include/boost/asio/query.hpp:263:3: note:   ‘boost::asio::{anonymous}::query’
+  263 |   query = boost_asio_query_fn::static_instance<>::instance;
+      |   ^~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:899:17: error: ‘query’ was not declared in this scope
+  899 |                 query,
+      |                 ^~~~~
+
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:968:43: error: ‘iterator’ is not a member of ‘boost::asio::ip::tcp::resolver’ {aka ‘boost::asio::ip::basic_resolver<boost::asio::ip::tcp>’}
+  968 |             lib::asio::ip::tcp::resolver::iterator it, end;
+      |                                           ^~~~~~~~
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:969:18: error: ‘it’ was not declared in this scope; did you mean ‘int’?
+  969 |             for (it = iterator; it != end; ++it) {
+      |                  ^~
+      |                  int
+src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:969:39: error: ‘end’ was not declared in this scope
+  969 |             for (it = iterator; it != end; ++it) {
+      |                                       ^~~
+
+src/net/common/senderhelper.cpp:43:59: error: ‘io_service’ is not a member of ‘boost::asio’; did you mean ‘use_service’?
+   43 | SenderHelper::SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService)
+      |                                                           ^~~~~~~~~~
+      |                                                           use_service
+src/net/common/senderhelper.cpp:43:69: error: template argument 1 is invalid
+   43 | SenderHelper::SenderHelper(boost::shared_ptr<boost::asio::io_service> ioService)
+      |                                                                     ^
+
 
 
 
@@ -134,6 +583,7 @@ src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp: In member
 src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp:1098:47: error: ‘using std::__shared_ptr_access<boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>, __gnu_cxx::_S_atomic, false, false>::element_type = class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’ {aka ‘class boost::asio::basic_waitable_timer<std::chrono::_V2::steady_clock>’} has no member named ‘expires_from_now’
  1098 |             lib::asio::is_neg(shutdown_timer->expires_from_now()))
       |                                               ^~~~~~~~~~~~~~~~
+======================================================================================================
 
 In file included from src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp:33:
 src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp: At global scope:

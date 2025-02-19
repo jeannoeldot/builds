@@ -58,7 +58,6 @@ DEVIENT :
 AJOUTER LIGNE 94
     using clk = lib::chrono::steady_clock;
 
-
 MODIFIER LIGNES 315-316-317 :
         timer_ptr new_timer = lib::make_shared<lib::asio::steady_timer>(
             lib::ref(*m_io_service),
@@ -75,7 +74,69 @@ MODIFIER LIGNES 466 ET 467 :
 DEVIENNENT :
             m_strand.reset(new lib::asio::io_context::strand(*io_service));
 
+MODIFIER LIGNES 576 À 581 :
+        if (ec == transport::error::operation_aborted ||
+            (post_timer && lib::asio::is_neg(post_timer->expires_from_now())))
+        {
+            m_alog.write(log::alevel::devel,"post_init cancelled");
+            return;
+        }
+DEVIENNENT :
+      if(ec == transport::error::operation_aborted
+         || (post_timer && lib::asio::is_neg(post_timer->expiry() - clk::now())))
+      {
+        m_alog->write(log::alevel::devel, "post_init cancelled");
+        return;
+      }
 
+MODIFIER LIGNES 682 ET 683 :
+        if (ec == lib::asio::error::operation_aborted ||
+            lib::asio::is_neg(m_proxy_data->timer->expires_from_now()))
+DEVIENNENT :
+        if(ec == lib::asio::error::operation_aborted
+           || lib::asio::is_neg(m_proxy_data->timer->expiry().time_since_epoch()))
+
+MODIFIER LIGNES 754 ET 755 :
+        if (ec == lib::asio::error::operation_aborted ||
+            lib::asio::is_neg(m_proxy_data->timer->expires_from_now()))
+DEVIENNENT :
+        if(ec == lib::asio::error::operation_aborted
+           || lib::asio::is_neg(m_proxy_data->timer->expiry() - clk::now()))
+
+MODIFIER LIGNE 1016 :
+            m_io_service->post(m_strand->wrap(handler));
+DEVIENT :
+          boost::asio::post(*m_io_service, m_strand->wrap(handler));
+
+MODIFIER LIGNE 1018 :
+            m_io_service->post(handler);
+DEVIENT :
+          boost::asio::post(*m_io_service, handler);
+
+MODIFIER LIGNE 1025 :
+            m_io_service->post(m_strand->wrap(handler));
+DEVIENT :
+          boost::asio::post(*m_io_service, m_strand->wrap(handler));
+
+MODIFIER LIGNE 1027 :
+            m_io_service->post(handler);
+DEVIENT :
+          boost::asio::post(*m_io_service, handler);
+
+MODIFIER LIGNES 1098 À 1103 :
+        if (ec == lib::asio::error::operation_aborted ||
+            lib::asio::is_neg(shutdown_timer->expires_from_now()))
+        {
+            m_alog.write(log::alevel::devel,"async_shutdown cancelled");
+            return;
+        }
+DEVIENNENT :
+      if(ec == lib::asio::error::operation_aborted
+         || lib::asio::is_neg(shutdown_timer->expiry() - clk::now()))
+      {
+        m_alog->write(log::alevel::devel, "async_shutdown cancelled");
+        return;
+      }
 
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier connection.hpp~
@@ -92,6 +153,76 @@ diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 cd pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio
 kwrite endpoint.hpp
 
+MODIFIER LIGNES 31 À 38 :
+#include <websocketpp/transport/base/endpoint.hpp>
+#include <websocketpp/transport/asio/connection.hpp>
+#include <websocketpp/transport/asio/security/none.hpp>
+
+#include <websocketpp/uri.hpp>
+#include <websocketpp/logger/levels.hpp>
+
+#include <websocketpp/common/functional.hpp>
+DEVIENNENT :
+#include <boost/asio/executor_work_guard.hpp>
+
+#include <websocketpp/common/asio.hpp>
+#include <websocketpp/common/functional.hpp>
+#include <websocketpp/logger/levels.hpp>
+#include <websocketpp/transport/asio/connection.hpp>
+#include <websocketpp/transport/asio/security/none.hpp>
+#include <websocketpp/transport/base/endpoint.hpp>
+#include <websocketpp/uri.hpp>
+
+MODIFIER LIGNE 81 :
+    typedef lib::asio::io_service * io_service_ptr;
+DEVIENT :
+    typedef lib::asio::io_context * io_service_ptr;
+
+MODIFIER LIGNE 89 :
+    typedef lib::shared_ptr<lib::asio::io_service::work> work_ptr;
+DEVIENT :
+    typedef lib::shared_ptr<
+        lib::asio::executor_work_guard<boost::asio::io_context::executor_type>>
+        work_ptr;
+
+AJOUTER LIGNE 93
+    using clk = lib::chrono::steady_clock;
+
+MODIFIER LIGNE 138 :
+      , m_listen_backlog(lib::asio::socket_base::max_connections)
+DEVIENT :
+      , m_listen_backlog(lib::asio::socket_base::max_listen_connections)
+
+MODIFIER LIGNE 162 :
+            rhs.m_listen_backlog = lib::asio::socket_base::max_connections;
+DEVIENT :
+            rhs.m_listen_backlog = lib::asio::socket_base::max_listen_connections;
+
+MODIFIER LIGNE 233 :
+        lib::unique_ptr<lib::asio::io_service> service(new lib::asio::io_service());
+DEVIENT :
+        lib::unique_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+
+MODIFIER LIGNE 235 :
+        lib::auto_ptr<lib::asio::io_service> service(new lib::asio::io_service());
+DEVIENT :
+        lib::auto_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+
+MODIFIER LIGNE 255 :
+        lib::unique_ptr<lib::asio::io_service> service(new lib::asio::io_service());
+DEVIENT :
+        lib::unique_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+
+MODIFIER LIGNE 257 :
+        lib::auto_ptr<lib::asio::io_service> service(new lib::asio::io_context());
+DEVIENT :
+        lib::auto_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+
+MODIFIER LIGNE 360 :
+    lib::asio::io_service & get_io_service() {
+DEVIENT :
+    lib::asio::io_context & get_io_service() {
+
 MODIFIER LIGNES 194 ET 195 :
         m_acceptor = lib::make_shared<lib::asio::ip::tcp::acceptor>(
             lib::ref(*m_io_service));
@@ -103,7 +234,9 @@ MODIFIER LIGNES 662 À 664 :
             lib::ref(*m_io_service)
         );
 DEVIENNENT :
-        m_work.reset(new lib::asio::io_service::work(*m_io_service));
+      m_work.reset(
+          new lib::asio::executor_work_guard<boost::asio::io_context::executor_type>(
+              m_io_service->get_executor()));
 
 MODIFIER LIGNES 826 À 827 :
             m_resolver = lib::make_shared<lib::asio::ip::tcp::resolver>(
@@ -111,6 +244,35 @@ MODIFIER LIGNES 826 À 827 :
 DEVIENNENT :
             m_resolver.reset(new lib::asio::ip::tcp::resolver(*m_io_service));
 
+MODIFIER LIGNES 949 À 954 :
+        if (ec == lib::asio::error::operation_aborted ||
+            lib::asio::is_neg(dns_timer->expires_from_now()))
+        {
+            m_alog->write(log::alevel::devel,"async_resolve cancelled");
+            return;
+        }
+DEVIENNENT :
+      if(ec == lib::asio::error::operation_aborted
+         || lib::asio::is_neg(dns_timer->expiry() - clk::now()))
+      {
+        m_alog->write(log::alevel::devel, "async_resolve cancelled");
+        return;
+      }
+
+MODIFIER LIGNES 1057 À 1062 :
+        if (ec == lib::asio::error::operation_aborted ||
+            lib::asio::is_neg(con_timer->expires_from_now()))
+        {
+            m_alog->write(log::alevel::devel,"async_connect cancelled");
+            return;
+        }
+DEVIENNENT :
+      if(ec == lib::asio::error::operation_aborted
+         || lib::asio::is_neg(con_timer->expiry() - clk::now()))
+      {
+        m_alog->write(log::alevel::devel, "async_connect cancelled");
+        return;
+      }
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier endpoint.hpp~
 rm -f endpoint.hpp~
@@ -124,6 +286,16 @@ diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 -------------------------------------------------------------------------------------------------------
 cd pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security
 kwrite none.hpp
+
+MODIFIER LIGNE 66 :
+    typedef lib::asio::io_service* io_service_ptr;
+DEVIENT :
+    typedef lib::asio::io_context* io_service_ptr;
+
+MODIFIER LIGNE 68 :
+    typedef lib::shared_ptr<lib::asio::io_service::strand> strand_ptr;
+DEVIENT :
+    typedef lib::shared_ptr<lib::asio::io_context::strand> strand_ptr;
 
 MODIFIER LIGNES 171 ET 172 :
         m_socket = lib::make_shared<lib::asio::ip::tcp::socket>(
@@ -143,6 +315,16 @@ diff -aur pokerth-1.1.2-rc pokerth-1.1.2-rc.new
 ------------------------------------------------------------------------------------------------------
 cd pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security
 kwrite tls.hpp
+
+MODIFIER LIGNE 75 :
+    typedef lib::asio::io_service* io_service_ptr;
+DEVIENT :
+    typedef lib::asio::io_context* io_service_ptr;
+
+MODIFIER LIGNE 77 :
+    typedef lib::shared_ptr<lib::asio::io_service::strand> strand_ptr;
+DEVIENT :
+    typedef lib::shared_ptr<lib::asio::io_context::strand> strand_ptr;
 
 MODIFIER LIGNES 196 ET 197 :
         m_socket = lib::make_shared<socket_type>(

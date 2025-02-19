@@ -1,7 +1,22 @@
 diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp
 --- pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp	2017-08-16 14:24:03.000000000 +0200
-+++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp	2019-10-30 12:00:01.520827474 +0100
-@@ -311,9 +311,10 @@
++++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/connection.hpp	2025-02-19 11:10:24.370851250 +0100
+@@ -86,11 +86,12 @@
+     typedef typename response_type::ptr response_ptr;
+ 
+     /// Type of a pointer to the Asio io_service being used
+-    typedef lib::asio::io_service * io_service_ptr;
++    typedef lib::asio::io_context * io_service_ptr;
+     /// Type of a pointer to the Asio io_service::strand being used
+-    typedef lib::shared_ptr<lib::asio::io_service::strand> strand_ptr;
++    typedef lib::shared_ptr<lib::asio::io_context::strand> strand_ptr;
+     /// Type of a pointer to the Asio timer class
+     typedef lib::shared_ptr<lib::asio::steady_timer> timer_ptr;
++    using clk = lib::chrono::steady_clock;
+ 
+     // connection is friends with its associated endpoint to allow the endpoint
+     // to call private/protected utility methods that we don't want to expose
+@@ -311,9 +312,10 @@
       * needed.
       */
      timer_ptr set_timer(long duration, timer_handler callback) {
@@ -15,20 +30,156 @@ diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asi
          );
  
          if (config::enable_multithreading) {
-@@ -461,8 +462,7 @@
+@@ -461,8 +463,7 @@
          m_io_service = io_service;
  
          if (config::enable_multithreading) {
 -            m_strand = lib::make_shared<lib::asio::io_service::strand>(
 -                lib::ref(*io_service));
-+            m_strand.reset(new lib::asio::io_service::strand(*io_service));
++            m_strand.reset(new lib::asio::io_context::strand(*io_service));
          }
  
          lib::error_code ec = socket_con_type::init_asio(io_service, m_strand,
+@@ -572,10 +573,10 @@
+     void handle_post_init(timer_ptr post_timer, init_handler callback,
+         lib::error_code const & ec)
+     {
+-        if (ec == transport::error::operation_aborted ||
+-            (post_timer && lib::asio::is_neg(post_timer->expires_from_now())))
++        if(ec == transport::error::operation_aborted
++            || (post_timer && lib::asio::is_neg(post_timer->expiry() - clk::now())))
+         {
+-            m_alog.write(log::alevel::devel,"post_init cancelled");
++            m_alog->write(log::alevel::devel, "post_init cancelled");
+             return;
+         }
+ 
+@@ -678,8 +679,8 @@
+         // Timer expired or the operation was aborted for some reason.
+         // Whatever aborted it will be issuing the callback so we are safe to
+         // return
+-        if (ec == lib::asio::error::operation_aborted ||
+-            lib::asio::is_neg(m_proxy_data->timer->expires_from_now()))
++        if(ec == lib::asio::error::operation_aborted
++            || lib::asio::is_neg(m_proxy_data->timer->expiry().time_since_epoch()))
+         {
+             m_elog.write(log::elevel::devel,"write operation aborted");
+             return;
+@@ -750,8 +751,8 @@
+         // Timer expired or the operation was aborted for some reason.
+         // Whatever aborted it will be issuing the callback so we are safe to
+         // return
+-        if (ec == lib::asio::error::operation_aborted ||
+-            lib::asio::is_neg(m_proxy_data->timer->expires_from_now()))
++        if(ec == lib::asio::error::operation_aborted
++            || lib::asio::is_neg(m_proxy_data->timer->expiry() - clk::now()))
+         {
+             m_elog.write(log::elevel::devel,"read operation aborted");
+             return;
+@@ -1012,18 +1013,18 @@
+      */
+     lib::error_code interrupt(interrupt_handler handler) {
+         if (config::enable_multithreading) {
+-            m_io_service->post(m_strand->wrap(handler));
++            boost::asio::post(*m_io_service, m_strand->wrap(handler));
+         } else {
+-            m_io_service->post(handler);
++            boost::asio::post(*m_io_service, handler);
+         }
+         return lib::error_code();
+     }
+ 
+     lib::error_code dispatch(dispatch_handler handler) {
+         if (config::enable_multithreading) {
+-            m_io_service->post(m_strand->wrap(handler));
++            boost::asio::post(*m_io_service, m_strand->wrap(handler));
+         } else {
+-            m_io_service->post(handler);
++            boost::asio::post(*m_io_service, handler);
+         }
+         return lib::error_code();
+     }
+@@ -1094,10 +1095,10 @@
+     void handle_async_shutdown(timer_ptr shutdown_timer, shutdown_handler
+         callback, lib::asio::error_code const & ec)
+     {
+-        if (ec == lib::asio::error::operation_aborted ||
+-            lib::asio::is_neg(shutdown_timer->expires_from_now()))
++        if(ec == lib::asio::error::operation_aborted
++            || lib::asio::is_neg(shutdown_timer->expiry() - clk::now()))
+         {
+-            m_alog.write(log::alevel::devel,"async_shutdown cancelled");
++            m_alog->write(log::alevel::devel, "async_shutdown cancelled");
+             return;
+         }
+ 
 diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp
 --- pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp	2017-08-16 14:24:03.000000000 +0200
-+++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp	2019-10-30 15:04:36.610228459 +0100
-@@ -191,8 +191,7 @@
++++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/endpoint.hpp	2025-02-19 15:10:21.205843060 +0100
+@@ -28,14 +28,15 @@
+ #ifndef WEBSOCKETPP_TRANSPORT_ASIO_HPP
+ #define WEBSOCKETPP_TRANSPORT_ASIO_HPP
+ 
+-#include <websocketpp/transport/base/endpoint.hpp>
++#include <boost/asio/executor_work_guard.hpp>
++
++#include <websocketpp/common/asio.hpp>
++#include <websocketpp/common/functional.hpp>
++#include <websocketpp/logger/levels.hpp>
+ #include <websocketpp/transport/asio/connection.hpp>
+ #include <websocketpp/transport/asio/security/none.hpp>
+-
++#include <websocketpp/transport/base/endpoint.hpp>
+ #include <websocketpp/uri.hpp>
+-#include <websocketpp/logger/levels.hpp>
+-
+-#include <websocketpp/common/functional.hpp>
+ 
+ #include <sstream>
+ #include <string>
+@@ -77,7 +78,7 @@
+     typedef typename transport_con_type::ptr transport_con_ptr;
+ 
+     /// Type of a pointer to the ASIO io_service being used
+-    typedef lib::asio::io_service * io_service_ptr;
++    typedef lib::asio::io_context * io_service_ptr;
+     /// Type of a shared pointer to the acceptor being used
+     typedef lib::shared_ptr<lib::asio::ip::tcp::acceptor> acceptor_ptr;
+     /// Type of a shared pointer to the resolver being used
+@@ -85,9 +86,12 @@
+     /// Type of timer handle
+     typedef lib::shared_ptr<lib::asio::steady_timer> timer_ptr;
+     /// Type of a shared pointer to an io_service work object
+-    typedef lib::shared_ptr<lib::asio::io_service::work> work_ptr;
++    typedef lib::shared_ptr<
++        lib::asio::executor_work_guard<boost::asio::io_context::executor_type>>
++        work_ptr;
+ 
+-    // generate and manage our own io_service
++    using clk = lib::chrono::steady_clock;
++        // generate and manage our own io_service
+     explicit endpoint()
+       : m_io_service(NULL)
+       , m_external_io_service(false)
+@@ -131,7 +135,7 @@
+       , m_io_service(src.m_io_service)
+       , m_external_io_service(src.m_external_io_service)
+       , m_acceptor(src.m_acceptor)
+-      , m_listen_backlog(lib::asio::socket_base::max_connections)
++      , m_listen_backlog(lib::asio::socket_base::max_listen_connections)
+       , m_reuse_addr(src.m_reuse_addr)
+       , m_elog(src.m_elog)
+       , m_alog(src.m_alog)
+@@ -155,7 +159,7 @@
+             rhs.m_io_service = NULL;
+             rhs.m_external_io_service = false;
+             rhs.m_acceptor = NULL;
+-            rhs.m_listen_backlog = lib::asio::socket_base::max_connections;
++            rhs.m_listen_backlog = lib::asio::socket_base::max_listen_connections;
+             rhs.m_state = UNINITIALIZED;
+             
+             // TODO: this needs to be updated
+@@ -191,8 +195,7 @@
  
          m_io_service = ptr;
          m_external_io_service = true;
@@ -38,18 +189,53 @@ diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asi
  
          m_state = READY;
          ec = lib::error_code();
-@@ -660,9 +659,7 @@
+@@ -227,9 +230,9 @@
+         // TODO: remove the use of auto_ptr when C++98/03 support is no longer
+         //       necessary.
+ #ifdef _WEBSOCKETPP_CPP11_MEMORY_
+-        lib::unique_ptr<lib::asio::io_service> service(new lib::asio::io_service());
++        lib::unique_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+ #else
+-        lib::auto_ptr<lib::asio::io_service> service(new lib::asio::io_service());
++        lib::auto_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+ #endif
+         init_asio(service.get(), ec);
+         if( !ec ) service.release(); // Call was successful, transfer ownership
+@@ -249,9 +252,9 @@
+         // TODO: remove the use of auto_ptr when C++98/03 support is no longer
+         //       necessary.
+ #ifdef _WEBSOCKETPP_CPP11_MEMORY_
+-        lib::unique_ptr<lib::asio::io_service> service(new lib::asio::io_service());
++        lib::unique_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+ #else
+-        lib::auto_ptr<lib::asio::io_service> service(new lib::asio::io_service());
++        lib::auto_ptr<lib::asio::io_context> service(new lib::asio::io_context());
+ #endif
+         init_asio( service.get() );
+         // If control got this far without an exception, then ownership has successfully been taken
+@@ -354,7 +357,7 @@
+      *
+      * @return A reference to the endpoint's io_service
+      */
+-    lib::asio::io_service & get_io_service() {
++    lib::asio::io_context & get_io_service() {
+         return *m_io_service;
+     }
+     
+@@ -660,9 +663,9 @@
       * @since 0.3.0
       */
      void start_perpetual() {
 -        m_work = lib::make_shared<lib::asio::io_service::work>(
 -            lib::ref(*m_io_service)
 -        );
-+        m_work.reset(new lib::asio::io_service::work(*m_io_service));
++        m_work.reset(
++            new lib::asio::executor_work_guard<boost::asio::io_context::executor_type>(
++                m_io_service->get_executor()));
      }
  
      /// Clears the endpoint's perpetual flag, allowing it to exit when empty
-@@ -826,8 +823,7 @@
+@@ -826,8 +829,7 @@
  
          // Create a resolver
          if (!m_resolver) {
@@ -59,9 +245,49 @@ diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asi
          }
  
          tcon->set_uri(u);
+@@ -944,10 +946,10 @@
+         connect_handler callback, lib::asio::error_code const & ec,
+         lib::asio::ip::tcp::resolver::iterator iterator)
+     {
+-        if (ec == lib::asio::error::operation_aborted ||
+-            lib::asio::is_neg(dns_timer->expires_from_now()))
++        if(ec == lib::asio::error::operation_aborted
++            || lib::asio::is_neg(dns_timer->expiry() - clk::now()))
+         {
+-            m_alog->write(log::alevel::devel,"async_resolve cancelled");
++            m_alog->write(log::alevel::devel, "async_resolve cancelled");
+             return;
+         }
+ 
+@@ -1052,10 +1054,10 @@
+     void handle_connect(transport_con_ptr tcon, timer_ptr con_timer,
+         connect_handler callback, lib::asio::error_code const & ec)
+     {
+-        if (ec == lib::asio::error::operation_aborted ||
+-            lib::asio::is_neg(con_timer->expires_from_now()))
++        if(ec == lib::asio::error::operation_aborted
++            || lib::asio::is_neg(con_timer->expiry() - clk::now()))
+         {
+-            m_alog->write(log::alevel::devel,"async_connect cancelled");
++            m_alog->write(log::alevel::devel, "async_connect cancelled");
+             return;
+         }
+ 
 diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp
 --- pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp	2017-08-16 14:24:03.000000000 +0200
-+++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp	2019-10-30 15:10:21.140735566 +0100
++++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security/none.hpp	2025-02-19 15:16:23.643630312 +0100
+@@ -63,9 +63,9 @@
+     typedef lib::shared_ptr<type> ptr;
+ 
+     /// Type of a pointer to the Asio io_service being used
+-    typedef lib::asio::io_service* io_service_ptr;
++    typedef lib::asio::io_context* io_service_ptr;
+     /// Type of a pointer to the Asio io_service strand being used
+-    typedef lib::shared_ptr<lib::asio::io_service::strand> strand_ptr;
++    typedef lib::shared_ptr<lib::asio::io_context::strand> strand_ptr;
+     /// Type of the ASIO socket being used
+     typedef lib::asio::ip::tcp::socket socket_type;
+     /// Type of a shared pointer to the socket being used.
 @@ -168,8 +168,7 @@
              return socket::make_error_code(socket::error::invalid_state);
          }
@@ -74,7 +300,19 @@ diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asi
  
 diff -aur pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/security/tls.hpp pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security/tls.hpp
 --- pokerth-1.1.2-rc/src/third_party/websocketpp/websocketpp/transport/asio/security/tls.hpp	2017-08-16 14:24:03.000000000 +0200
-+++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security/tls.hpp	2019-10-30 15:13:51.795858741 +0100
++++ pokerth-1.1.2-rc.new/src/third_party/websocketpp/websocketpp/transport/asio/security/tls.hpp	2025-02-19 15:18:56.880340321 +0100
+@@ -72,9 +72,9 @@
+     /// Type of a shared pointer to the ASIO socket being used
+     typedef lib::shared_ptr<socket_type> socket_ptr;
+     /// Type of a pointer to the ASIO io_service being used
+-    typedef lib::asio::io_service * io_service_ptr;
++    typedef lib::asio::io_context * io_service_ptr;
+     /// Type of a pointer to the ASIO io_service strand being used
+-    typedef lib::shared_ptr<lib::asio::io_service::strand> strand_ptr;
++    typedef lib::shared_ptr<lib::asio::io_context::strand> strand_ptr;
+     /// Type of a shared pointer to the ASIO TLS context being used
+     typedef lib::shared_ptr<lib::asio::ssl::context> context_ptr;
+ 
 @@ -193,8 +193,7 @@
          if (!m_context) {
              return socket::make_error_code(socket::error::invalid_tls_context);
