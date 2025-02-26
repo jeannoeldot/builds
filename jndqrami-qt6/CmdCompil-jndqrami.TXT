@@ -1,0 +1,163 @@
+# Le répertoire
+cd $HOME/05-builds/jndqrami-qt6
+
+!!!!! Vérifier VERSION : 
+https://github.com/jeannoeldot/jndqrami-qt6/tags
+==> VERSION = 0.6.0
+
+1) ARCHIVE TAR.GZ
+=================================
+wget https://github.com/jeannoeldot/jndqrami-qt6/archive/refs/tags/v0.6.0.tar.gz
+
+ls
+
+sha256sum v0.6.0.tar.gz
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Name <name@fai.com>
+
+pkgname=jndqrami-qt6
+pkgver=0.6.0
+pkgrel=1
+
+dpkgrel=7    # Rebuild REVU DEPS 'sdl' 'sdl_mixer'
+pkgrel=6    # Rebuild Qt 5.14.1 et .zst
+
+pkgrel=5    # Rebuild nouveau PC Qt 5.12.1
+pkgrel=4    # HOOKS PACMAN 5 : SUPPR jndqcbgrd-qt5.install + deps
+pkgrel=3
+
+depends=(... 'desktop-file-utils')
+
+provides=('jndqrami')
+conflicts=('jndqrami' 'jndqrami-qt5')
+
+source=("https://github.com/jeannoeldot/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('... ...')
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users    736 26 févr. 14:40  PKGBUILD
+-rw-r--r--  1 jnd users 700837 26 févr. 14:35  v0.6.0.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3-1) MAKEPKG DANS TMP EN USER
+==========================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/jndqrami-qt6/PKGBUILD . \
+&& cp -v $HOME/05-builds/jndqrami-qt6/v0.6.0.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/jndqrami-qt6 \
+&& cp -v /tmp/build/jndqrami-qt6-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/jndqrami-qt6 && rm -rf /tmp/build
+
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+===================================================
+!!! EN USER
+# REP_TMP_CHROOT_REPO="/tmp/chrootrepo"
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+!!! TESTS
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native -l logs
+
+$ rm -rf /tmp/chrootrepo
+
+3-3) MAKEPKG en USER
+=====================
+
+cd $HOME/05-builds/jndqrami-qt6
+
+$ rm -f *~
+makepkg -s
+
+makepkg -f
+
+# Verifications...
+==================
+
+namcap jndqrami-qt6-*-x86_64.pkg.tar.*
+jndqrami-qt6 W: unneeded dependency on a package (desktop-file-utils) run when needed by hooks.
+jndqrami-qt6 W: Dependency glibc detected and implicitly satisfied (libraries ['usr/lib/libc.so.6'] needed in files ['usr/bin/jndqrami'])
+jndqrami-qt6 W: Dependency gcc-libs detected and implicitly satisfied (libraries ['usr/lib/libgcc_s.so.1', 'usr/lib/libstdc++.so.6'] needed in files ['usr/bin/jndqrami'])
+jndqrami-qt6 W: Dependency sdl12-compat detected and implicitly satisfied (libraries ['usr/lib/libSDL-1.2.so.0'] needed in files ['usr/bin/jndqrami'])
+jndqrami-qt6 W: Dependency included, but may not be needed ('desktop-file-utils')
+
+# Nettoyage fichiers~
+=========================
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal/
+-------------------------------------------------------------------
+$ sudo rm /00-repolocal/jndqrami-qt6-*-x86_64.pkg.tar.*
+
+$ sudo cp -v jndqrami-qt6-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS  /0-DataLinux/00-repolocal
+------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/jndqrami-qt6-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v jndqrami-qt6-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -i v0.6.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+EN ROOT
+========
+# maj
+OU
+# LC_ALL=C pacman -Syu
+OU
+# LC_ALL=C pacman -Syu jndqrami-qt6
+
+
+
+TEST SIGNATURE
+===============
+# Supprime le précédent dans  $HOME/00-repos-dot-repo-al
+rm -vf $HOME/00-repos-dot-repo-al/jndqrami-qt6-*-x86_64.pkg.tar.*
+
+mv -v jndqrami-qt6-*-x86_64.pkg.tar.* $HOME/00-repos-dot-repo-al/
+
+cd && maj-repohostinger
+sync
+
+==============================================================================
+ANCIEN
+
