@@ -1,19 +1,19 @@
 # Maintainer: Name <name@fai.com>
 
-pkgname=jndqrami-qt6
-pkgver=0.6.1
+pkgname=jndqaligne5-qt6
+pkgver=0.6.0
 pkgrel=1
-pkgdesc="Variante du Rami Kaluki"
+pkgdesc="Variante du Morpion"
 arch=('x86_64')
-url="https://github.com/jeannoeldot/jndqrami-qt6"
+url="https://github.com/jeannoeldot/jndqaligne5-qt6"
 license=('GPL-2.0-only')
 depends=('qt6-base' 'sdl_mixer' 'desktop-file-utils')
 makedepends=('qt6-base' 'sdl_mixer')
-provides=('jndqrami')
-conflicts=('jndqrami' 'jndqrami-qt5')
+provides=('jndqaligne5')
+conflicts=('jndqaligne5' 'jndqaligne5-qt5')
 options=('!debug')
 source=("https://github.com/jeannoeldot/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('d4f8e5dc2a0c77041452e9888304c5c0aba878a3048c42dbb7bf63cb3466140e')
+sha256sums=('9171dc2d49d2f7114c4628bfaef7c63e157005e9389bfe2669bb8f608f08fedc')
 
 build() {
       cd "${srcdir}/${pkgname}-${pkgver}"
