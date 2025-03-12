@@ -3,15 +3,15 @@ cd $HOME/05-builds/jndqrami-qt6
 
 !!!!! Vérifier VERSION : 
 https://github.com/jeannoeldot/jndqrami-qt6/tags
-==> VERSION = 0.6.1
+==> VERSION = 0.6.5
 
 1) ARCHIVE TAR.GZ
 =================================
-wget https://github.com/jeannoeldot/jndqrami-qt6/archive/refs/tags/v0.6.1.tar.gz
+wget https://github.com/jeannoeldot/jndqrami-qt6/archive/refs/tags/v0.6.5.tar.gz
 
 ls
 
-sha256sum v0.6.1.tar.gz
+sha256sum v0.6.5.tar.gz
 
 
 2) MODIFIER LE PKGBUILD
@@ -19,7 +19,7 @@ sha256sum v0.6.1.tar.gz
 # Maintainer: Name <name@fai.com>
 
 pkgname=jndqrami-qt6
-pkgver=0.6.1
+pkgver=0.6.5
 pkgrel=1
 
 dpkgrel=7    # Rebuild REVU DEPS 'sdl' 'sdl_mixer'
@@ -43,7 +43,7 @@ sha256sums=('... ...')
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users    736 26 févr. 14:40  PKGBUILD
--rw-r--r--  1 jnd users 700837 26 févr. 14:35  v0.6.1.tar.gz
+-rw-r--r--  1 jnd users 700837 26 févr. 14:35  v0.6.5.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -56,7 +56,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/jndqrami-qt6/PKGBUILD . \
-&& cp -v $HOME/05-builds/jndqrami-qt6/v0.6.1.tar.gz . \
+&& cp -v $HOME/05-builds/jndqrami-qt6/v0.6.5.tar.gz . \
 && makepkg -s \
 && cd $HOME/05-builds/jndqrami-qt6 \
 && cp -v /tmp/build/jndqrami-qt6-*-x86_64.pkg.tar.* . \
@@ -132,7 +132,7 @@ $ mv -v jndqrami-qt6-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i v0.6.1.tar.gz
+$ rm -i v0.6.5.tar.gz
 
 
 $ cd && maj-repolocal
