@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=jndqrami-qt6
-pkgver=0.6.5
+pkgver=0.6.6
 pkgrel=1
 pkgdesc="Variante du Rami Kaluki"
 arch=('x86_64')
@@ -13,7 +13,7 @@ provides=('jndqrami')
 conflicts=('jndqrami' 'jndqrami-qt5')
 options=('!debug')
 source=("https://github.com/jeannoeldot/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('4f1871906d2be53c116ff7f3ad025448d0a97fc78ee59b2dae70b8deee27dab5')
+sha256sums=('874d599b0460a7d706183615dbbd5eb271f4b631487ea86d4004fbcbb5e4e6f8')
 
 build() {
       cd "${srcdir}/${pkgname}-${pkgver}"
