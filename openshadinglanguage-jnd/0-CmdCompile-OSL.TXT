@@ -63,7 +63,7 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.14.4.0.tar.gz .
 /!\/!\/!\/!\/!\
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OptiX-8.0-Include.zip .
+cp -v /0-DataLinux/05-builds-dir-git/OptiX-8.1-Include.zip .
 
 
 1-8) FAIRE PATCH
@@ -76,6 +76,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.14.4.0.20250207
+pkgrel=3    # rebuild MAJ OIIO 3.0.4.0  et OPTIX 8.1
+
 pkgrel=2    # rebuild AVEC CUDA et OPTIX
 
 pkgrel=1    # build MAJ OIIO 3.0.3.1
@@ -128,12 +130,12 @@ makedepends=('cmake' 'llvm' 'robin-map'
 2-2) PKGBUILD SANS PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.0-Include.zip"
+        "OptiX-8.1-Include.zip"
 )
 
 sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
 
-sha256sum OptiX-8.0-Include.zip
+sha256sum OptiX-8.1-Include.zip
 
 sha256sums=(...
          ...
@@ -142,13 +144,13 @@ sha256sums=(...
 2-2) PKGBUILD AVEC PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.0-Include.zip"
+        "OptiX-8.1-Include.zip"
         "xxxxx.patch"
 )
 
 sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
 
-sha256sum OptiX-8.0-Include.zip
+sha256sum OptiX-8.1-Include.zip
 
 sha256sum xxxxx.patch
 
@@ -367,17 +369,6 @@ SI depends= 'openimageio-jnd'
 $ cp -v /00-repolocal/openimageio-jnd-*-x86_64.pkg.tar.* /tmp/chrootrepo/
 
 
-  FLOOP
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m floop
-
-  FLOOP
---------
-$ rm -f *~
-$ mkpkg-tmpfs -m floop -g 32G
--------------------------------------------------------------------
-
 SI CUDA ET OPTIX
 ================
   NATIVE
@@ -387,6 +378,17 @@ $ mkpkg-tmpfs -m native -g 32G
 OU
 $ rm -f *~
 $ mkpkg-tmpfs -m native -g 32G -l logs
+-------------------------------------------------------------------
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop
+
+  FLOOP
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 32G
 -------------------------------------------------------------------
 
   FAST
@@ -468,8 +470,7 @@ $ rm -f *~
 $ rm -f *.log
 $ rm -i OpenShadingLanguage-v1.14.4.0.tar.gz
 !!! OPTIX
-$ rm -i OptiX-8.0-Include.zip
-
+$ rm -i OptiX-8.1-Include.zip
 
 
 $ cd && maj-repolocal

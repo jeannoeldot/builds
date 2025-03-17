@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.14.4.0.20250207
-pkgrel=2
+pkgrel=3
 _name_release="OpenShadingLanguage-1.14.4.0"
 _ver_release="v1.14.4.0"
 pkgdesc="Advanced shading language for production GI renderers"
@@ -25,10 +25,10 @@ conflicts=('openshadinglanguage' 'openshadinglanguage-git')
 provides=('openshadinglanguage')
 options=('!debug')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.0-Include.zip"
+        "OptiX-8.1-Include.zip"
 )
 sha256sums=('f98393d1fe5c6a12ca9037b4bdc8a09b447b33e48deebe8bf1d14a4f3dd014e4'
-            'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
+            'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
 )
 
 build() {
