@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=25.02.20250204
-pkgrel=1
-_ver_release="25.02a"
+pkgver=25.02.20250121
+pkgrel=3
+_ver_release="25.02"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -30,7 +30,7 @@ source=("OpenUSD-v${_ver_release}.tar.gz"
         "fix-error-m_wait_ctx-was-not-declared.patch"
         "usd-cmake-find-dependency.patch"
 )
-sha256sums=('475cd0990366a713f19d1f0701c37be17ecd9d3de7a3503a11bbdf80d3c003ce'
+sha256sums=('e06f67522cc4ff1a3ce99bc28075b049a15869792b41d33b0d4387fb22122cfe'
             '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
             '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
 )

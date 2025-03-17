@@ -3,6 +3,7 @@ FAIRE PATCHS
 
 !!! VERSION = 25.02
 !!! VERSION = v25.02
+!!! VERSION = v25.02a
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openusd-jnd
