@@ -8,7 +8,7 @@ cd $HOME/05-builds/openshadinglanguage-jnd
 https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/releases
 ==> 05/12/2024  ==> 20241205
 ==> v1.14.4.0  ==> 1.14.4.0
-==> 1.14.4.0.20250207
+==> 1.14.4.0.20250406
 
 1.3) SOURCES
 ==============
@@ -25,31 +25,31 @@ cd /0-DataLinux/05-builds-dir-git
 1.5.0) Vérifier DATE :
 -------------------------
 https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/commits/main/
-==> Commits on Feb 7, 2025  ==> 20250207
+==> Commits on Apr 6, 2025  ==> 20250406
 
 1.5.1) Vérifier VERSION :
 -------------------------
 https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/blob/main/CMakeLists.txt
-==> LIGNE 7: project (OSL VERSION "1.14.4.0")
+==> LIGNE 7: project (OSL VERSION "1.15.0.0")
 
-1.5.2) Vérifier existence REP OpenShadingLanguage-1.14.4.0 :
+1.5.2) Vérifier existence REP OpenShadingLanguage-1.15.0.0 :
 ------------------------------------------------------------
-ls | grep OpenShadingLanguage-1.14.4.0
+ls | grep OpenShadingLanguage-1.15.0.0
 
-!!! SI REP OpenShadingLanguage-1.14.4.0 N'EXISTE PAS :
-git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.14.4.0
+!!! SI REP OpenShadingLanguage-1.15.0.0 N'EXISTE PAS :
+git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.15.0.0
 
-!!! SI REP OpenShadingLanguage-1.14.4.0 EXISTE :
-rm -rf OpenShadingLanguage-1.14.4.0
-git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.14.4.0
+!!! SI REP OpenShadingLanguage-1.15.0.0 EXISTE :
+rm -rf OpenShadingLanguage-1.15.0.0
+git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.15.0.0
 
 1.5.5) Faire archive tar.gz :
 -----------------------------
-tar -cvzf OpenShadingLanguage-v1.14.4.0.tar.gz --exclude={.git,.github} OpenShadingLanguage-1.14.4.0
+tar -cvzf OpenShadingLanguage-v1.15.0.0.tar.gz --exclude={.git,.github} OpenShadingLanguage-1.15.0.0
 
 1.5.6) Version pour PKGBUILD :
 ------------------------------
-==> 1.14.4.0.20250207
+==> 1.15.0.0.20250406
 
 
 1-7) Copie ARCHIVE TAR.GZ ds rep compile
@@ -58,7 +58,7 @@ cd $HOME/05-builds/openshadinglanguage-jnd
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.14.4.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.15.0.0.tar.gz .
 
 /!\/!\/!\/!\/!\
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
@@ -75,7 +75,9 @@ VOIR 0-CmdFairePatches.TXT
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-jnd
-pkgver=1.14.4.0.20250207
+pkgver=1.15.0.0.20250406
+pkgrel=1
+
 pkgrel=3    # rebuild MAJ OIIO 3.0.4.0  et OPTIX 8.1
 
 pkgrel=2    # rebuild AVEC CUDA et OPTIX
@@ -83,8 +85,6 @@ pkgrel=2    # rebuild AVEC CUDA et OPTIX
 pkgrel=1    # build MAJ OIIO 3.0.3.1
 
 pkgrel=2    # rebuild boost boost-libs 1.87.0
-pkgrel=1
-
 pkgrel=4    # rebuild MAJ LLVM 19
 pkgrel=3    # rebuild MAJ OIIO 2.5.18.0
 pkgrel=2    # rebuild MAJ python 3.13
@@ -97,8 +97,8 @@ pkgrel=3    # Rebuild MAJ LLVM 6.0.0 et CMAKE_INSTALL_LIBDIR=lib
 
 
 !!!!!!
-_name_release="OpenShadingLanguage-1.14.4.0"
-_ver_release="v1.14.4.0"
+_name_release="OpenShadingLanguage-1.15.0.0"
+_ver_release="v1.15.0.0"
 
 conflicts=('openshadinglanguage' 'openshadinglanguage-git')
 provides=('openshadinglanguage')
@@ -133,7 +133,7 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "OptiX-8.1-Include.zip"
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum OptiX-8.1-Include.zip
 
@@ -148,7 +148,7 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "xxxxx.patch"
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum OptiX-8.1-Include.zip
 
@@ -163,7 +163,7 @@ prepare() {
   patch -Np1 -i "${srcdir}/xxxxx.patch"
 }
 
-!!! VERSION 1.14.4.0
+!!! VERSION 1.15.0.0
 build() {
       ...
   # Install lib*.so par défaut dans lib64 au lieu de lib
@@ -192,9 +192,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf OpenShadingLanguage-v1.14.4.0.tar.gz -C /tmp/srcp
+tar -xzf OpenShadingLanguage-v1.15.0.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenShadingLanguage-1.14.4.0/CMakeLists.txt &
+1) kwrite /tmp/srcp/OpenShadingLanguage-1.15.0.0/CMakeLists.txt &
 
 LIGNE 25,26
   ${PROJECT_NAME}_SUPPORTED_RELEASE      =>      ON
@@ -255,7 +255,7 @@ LIGNE 265
 LIGNE 273
 INSTALL_DOCS "Install documentation" ON
 
-2) kwrite /tmp/srcp/OpenShadingLanguage-1.14.4.0/src/cmake/compiler.cmake &
+2) kwrite /tmp/srcp/OpenShadingLanguage-1.15.0.0/src/cmake/compiler.cmake &
 
 LIGNE 28
       -DCMAKE_CXX_STANDARD=17 \
@@ -276,7 +276,7 @@ LIGNE 298
 LIGNE 365
   CODECOV OFF
 
-3) kwrite /tmp/srcp/OpenShadingLanguage-1.14.4.0/src/cmake/externalpackages.cmake &
+3) kwrite /tmp/srcp/OpenShadingLanguage-1.15.0.0/src/cmake/externalpackages.cmake &
 
 LIGNE 36
   ZLIB REQUIRED
@@ -311,14 +311,14 @@ option (BUILD_MISSING_ROBINMAP "Local download/build of robin-map if not install
  ==>          makedepends=...  'robin-map'
 
 
-4) kwrite /tmp/srcp/OpenShadingLanguage-1.14.4.0/src/cmake/modules/FindLLVM.cmake &
+4) kwrite /tmp/srcp/OpenShadingLanguage-1.15.0.0/src/cmake/modules/FindLLVM.cmake &
 
 !!! LLVM 16.0
 ------------------------------------
 LIGNE 69 ET ...
   LLVM_STATIC           =>      -DLLVM_STATIC=OFF \
 
-5) kwrite /tmp/srcp/OpenShadingLanguage-1.14.4.0/src/liboslexec/CMakeLists.txt &
+5) kwrite /tmp/srcp/OpenShadingLanguage-1.15.0.0/src/liboslexec/CMakeLists.txt &
 LIGNE 192
 
 
@@ -330,8 +330,8 @@ rm -rf /tmp/srcp
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.14.4.0.tar.gz
--rw-r--r--  1 jnd users    85220 11 févr. 14:16 OptiX-8.0-Include.zip
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.15.0.0.tar.gz
+-rw-r--r--  1 jnd users    85220 11 févr. 14:16 OptiX-8.1-Include.zip
 
 
 !!! A MODIFIER SI PAS OK !
@@ -347,7 +347,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openshadinglanguage-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/openshadinglanguage-jnd/OpenShadingLanguage-v1.14.4.0.tar.gz . \
+&& cp -v $HOME/05-builds/openshadinglanguage-jnd/OpenShadingLanguage-v1.15.0.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openshadinglanguage-jnd \
 && cp -v /tmp/build/openshadinglanguage-jnd-*-x86_64.pkg.tar.* . \
@@ -429,10 +429,10 @@ rm -f *~
 
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
-usr/lib/liboslcomp.so.1.14.4
-usr/lib/liboslquery.so.1.14.4
-usr/lib/liboslexec.so.1.14.4
-usr/lib/libtestshade.so.1.14.4
+usr/lib/liboslcomp.so.1.15.0
+usr/lib/liboslquery.so.1.15.0
+usr/lib/liboslexec.so.1.15.0
+usr/lib/libtestshade.so.1.15.0
 usr/bin/testshade
 usr/bin/testrender
 
@@ -468,7 +468,7 @@ $ mv -v openshadinglanguage-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenShadingLanguage-v1.14.4.0.tar.gz
+$ rm -i OpenShadingLanguage-v1.15.0.0.tar.gz
 !!! OPTIX
 $ rm -i OptiX-8.1-Include.zip
 
@@ -521,15 +521,15 @@ done
 
 $HOME/99-dwl-temp/emitter.oso
 #sed -i "s|-pipe -fPIC -funsigned-char -fno-strict-aliasing|-pipe -fPIC -funsigned-char -fno-strict-aliasing -floop-interchange -floop-strip-mine -floop-block|g" CMakeLists.txt
-sed -i "s|/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.14.4.0/src/|/usr/|g" $HOME/99-dwl-temp/emitter.oso
+sed -i "s|/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.15.0.0/src/|/usr/|g" $HOME/99-dwl-temp/emitter.oso
 
 $HOME/99-temp/OSL/usr/shaders/
-sed -i "s|/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.14.4.0/src/|/usr/|g" \
+sed -i "s|/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.15.0.0/src/|/usr/|g" \
 $HOME/99-temp/OSL/usr/shaders/*.oso
-sed -i "s|/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.14.4.0/src/|/usr/|g" \
+sed -i "s|/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.15.0.0/src/|/usr/|g" \
 $HOME/99-temp/OSL/usr/shaders/MaterialX/*.oso
 
-/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.14.4.0/build/src/shaders/emitter.oso
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-v1.15.0.0/build/src/shaders/emitter.oso
 
 ================================================================
 ANCIENS
@@ -636,7 +636,7 @@ depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
 makedepends=('boost' 'cmake' 'llvm15')
 
 
-!!! PAS OK AVEC 1.14.4.0 DU 01/05/2023
+!!! PAS OK AVEC 1.15.0.0 DU 01/05/2023
 LIGNE 98
   OSL_BUILD_TESTS ON    =>      -DOSL_BUILD_TESTS=OFF \
 
@@ -653,7 +653,7 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "llvm14.patch"
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum llvm14.patch
 
@@ -746,7 +746,7 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "llvm13.patch"
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum llvm13.patch
 
@@ -791,7 +791,7 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         'Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch'
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch
 
@@ -810,7 +810,7 @@ prepare() {
 && cp -v $HOME/05-builds/openshadinglanguage-git/Fix-crash-generating-closure-functions-calls-with-LLVM-11.patch . \
 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
--rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.14.4.0.tar.gz
+-rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.15.0.0.tar.gz
 -rw-r--r--  1 jnd users     3453 19 avril 10:48 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
 
 !!! TESTS AVEC /usr/shaders
@@ -840,7 +840,7 @@ LIGNE 99
   USE_BOOST_WAVE OFF
 
 
-3) kwrite /tmp/srcp/OpenShadingLanguage-v1.14.4.0/src/cmake/install.cmake
+3) kwrite /tmp/srcp/OpenShadingLanguage-v1.15.0.0/src/cmake/install.cmake
   !!! A VOIR : 
 LIGNE 3
 set (INSTALL_DOCS "Install documentation" ON)
@@ -850,9 +850,9 @@ set (INSTALL_FONTS "Install default fonts" OFF)
 # Verifications...
 ==> WARNING: Package contains reference to $srcdir
 usr/bin/osltoy
-usr/lib/liboslcomp.so.1.14.4.0
-usr/lib/liboslquery.so.1.14.4.0
-usr/lib/liboslexec.so.1.14.4.0
+usr/lib/liboslcomp.so.1.15.0.0
+usr/lib/liboslquery.so.1.15.0.0
+usr/lib/liboslexec.so.1.15.0.0
 usr/lib/osl.imageio.so
 
 
@@ -865,7 +865,7 @@ source=("$_name_release.tar.gz"
         '0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch'
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum 0001-Allow-OSL-to-compile-with-LLVM-10.x-1128.patch
 
@@ -933,7 +933,7 @@ source=("$_name_release.tar.gz"
         'clang7.patch'
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum clang7.patch
 
@@ -991,7 +991,7 @@ source=("$_name_release.tar.gz"
         'llvm50-Make-OSL-work-with-llvm5.patch'
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum llvm50-Make-OSL-work-with-llvm5.patch
 
@@ -1045,13 +1045,13 @@ LIGNE 90 ET ...
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/imageworks/OpenShadingLanguage/archive/v1.14.4.0.tar.gz
-wget -O OpenShadingLanguage-v1.14.4.0.tar.gz \
-https://github.com/OpenImageIO/oiio/archive/v1.14.4.0.tar.gz
+wget https://github.com/imageworks/OpenShadingLanguage/archive/v1.15.0.0.tar.gz
+wget -O OpenShadingLanguage-v1.15.0.0.tar.gz \
+https://github.com/OpenImageIO/oiio/archive/v1.15.0.0.tar.gz
 
 1-4) RENOMMER ARCHIVE TAR.GZ
 =================================
-mv -v v1.14.4.0.tar.gz OpenShadingLanguage-v1.14.4.0.tar.gz
+mv -v v1.15.0.0.tar.gz OpenShadingLanguage-v1.15.0.0.tar.gz
 
 
 voir 0-CmdFairePatches-LLVM35.STATIC.TXT
@@ -1062,7 +1062,7 @@ source=("$_name_release.tar.gz"
         'llvm35-static-system-libs.patch'
 )
 
-sha256sum OpenShadingLanguage-v1.14.4.0.tar.gz
+sha256sum OpenShadingLanguage-v1.15.0.0.tar.gz
 
 sha256sum llvm35-static-system-libs.patch
 
