@@ -43,7 +43,7 @@ git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenS
 rm -rf OpenShadingLanguage-1.14.4.0
 git clone https://github.com/AcademySoftwareFoundation/OpenShadingLanguage OpenShadingLanguage-1.14.4.0
 
-1.5.5) Faire archivi tar.gz :
+1.5.5) Faire archive tar.gz :
 -----------------------------
 tar -cvzf OpenShadingLanguage-v1.14.4.0.tar.gz --exclude={.git,.github} OpenShadingLanguage-1.14.4.0
 
