@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.02.20250204
+pkgrel=2      # rebuild MAJ OIIO 3.0.5.0
 pkgrel=1      # v25.02a
 
 pkgrel=3      # rebuild MAJ OIIO 3.0.3.1
