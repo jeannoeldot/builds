@@ -6,15 +6,15 @@ cd $HOME/05-builds/openimagedenoise-jnd
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageDenoise/oidn/releases
-==>  atafra released this on 14 jan 2025  ==> 20250114
-==> Open Image Denoise v2.3.2  ==> 2.3.2
-==> 2.3.2.20250114
+==>  atafra released this on apr 4 2025  ==> 20250404
+==> Open Image Denoise v2.3.3  ==> 2.3.3
+==> 2.3.3.20250404
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget https://github.com/OpenImageDenoise/oidn/releases/download/v2.3.2/oidn-2.3.2.src.tar.gz
+wget https://github.com/OpenImageDenoise/oidn/releases/download/v2.3.3/oidn-2.3.3.src.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -22,7 +22,7 @@ cd $HOME/05-builds/openimagedenoise-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/oidn-2.3.2.src.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/oidn-2.3.3.src.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -35,7 +35,7 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimagedenoise-jnd
-pkgver=2.3.2.20250114
+pkgver=2.3.3.20250404
 pkgrel=1
 
 pkgrel=2  # Rebuild MAJ python 3.13
@@ -52,7 +52,7 @@ pkgrel=2  # Rebuild MAJ python 3.8
 pkgrel=2  # Test cmake Ofast floop
 
 !!!!!!
-_ver_release="2.3.2"
+_ver_release="2.3.3"
 _name_release="oidn-${_ver_release}"
 
 license=('Apache-2.0')
@@ -71,7 +71,7 @@ options=('!debug')
 
 SANS PATCH
 ----------
-sha256sum oidn-2.3.2.src.tar.gz
+sha256sum oidn-2.3.3.src.tar.gz
 
 source=("oidn-${_ver_release}.src.tar.gz"
 )
@@ -89,9 +89,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf oidn-2.3.2.src.tar.gz -C /tmp/srcp
+tar -xzf oidn-2.3.3.src.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/oidn-2.3.2/CMakeLists.txt &
+1) kwrite /tmp/srcp/oidn-2.3.3/CMakeLists.txt &
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/openimagedenoise.cmake
 
@@ -121,9 +121,9 @@ LIGNES 110 ET ...
 ## Apps
 113 OIDN_APPS    ON : openimagedenoise.cmake = OFF
 
-2) kwrite /tmp/srcp/oidn-2.3.2/devices/CMakeLists.txt &
+2) kwrite /tmp/srcp/oidn-2.3.3/devices/CMakeLists.txt &
 
-3) kwrite /tmp/srcp/oidn-2.3.2/devices/cuda/CMakeLists.txt &
+3) kwrite /tmp/srcp/oidn-2.3.3/devices/cuda/CMakeLists.txt &
 
 rm -rf /tmp/srcp
 
@@ -132,7 +132,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 oidn-2.3.2.src.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 oidn-2.3.3.src.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -151,7 +151,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openimagedenoise-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/openimagedenoise-jnd/oidn-2.3.2.src.tar.gz . \
+&& cp -v $HOME/05-builds/openimagedenoise-jnd/oidn-2.3.3.src.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openimagedenoise-jnd \
 && cp -v /tmp/build/openimagedenoise-jnd-*-x86_64.pkg.tar.* . \
@@ -205,13 +205,12 @@ usr/bin/oidnTest
 namcap openimagedenoise-jnd-*-x86_64.pkg.tar.*
 ...
 openimagedenoise-jnd E: Dependency nvidia-utils detected and not included
-(libraries ['usr/lib/libcuda.so.1'] needed in files ['usr/lib/libOpenImageDenoise_device_cuda.so.2.3.2'])
+(libraries ['usr/lib/libcuda.so.1'] needed in files ['usr/lib/libOpenImageDenoise_device_cuda.so.2.3.3'])
 ...
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/openimagedenoise-git-*-x86_64.pkg.tar.*
 $ sudo rm /00-repolocal/openimagedenoise-jnd-*-x86_64.pkg.tar.*
 
 $ sudo cp -v openimagedenoise-jnd-*-x86_64.pkg.tar.* /00-repolocal/
@@ -228,7 +227,7 @@ $ mv -v openimagedenoise-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i oidn-2.3.2.src.tar.gz
+$ rm -i oidn-2.3.3.src.tar.gz
 
 
 $ cd && maj-repolocal
@@ -253,13 +252,13 @@ SI PROBLEME
 ANCIEN
 ======
 
-usr/lib/libOpenImageDenoise_device_cpu.so.2.3.2
+usr/lib/libOpenImageDenoise_device_cpu.so.2.3.3
 
 mkdir $HOME/99-temp/srcp
 
-tar -xzf oidn-2.3.2.src.tar.gz -C $HOME/99-temp/srcp
+tar -xzf oidn-2.3.3.src.tar.gz -C $HOME/99-temp/srcp
 
-1) kwrite $HOME/99-temp/srcp/oidn-2.3.2/CMakeLists.txt &
+1) kwrite $HOME/99-temp/srcp/oidn-2.3.3/CMakeLists.txt &
 
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/openimagedenoise.cmake
@@ -288,15 +287,15 @@ tar -xzf oidn-2.3.2.src.tar.gz -C $HOME/99-temp/srcp
 43 OIDN_INSTALL_DEPENDENCIES    OFF
 
 
-2) kwrite $HOME/99-temp/srcp/oidn-2.3.2/devices/CMakeLists.txt &
+2) kwrite $HOME/99-temp/srcp/oidn-2.3.3/devices/CMakeLists.txt &
 
-3) kwrite $HOME/99-temp/srcp/oidn-2.3.2/devices/cuda/CMakeLists.txt &
+3) kwrite $HOME/99-temp/srcp/oidn-2.3.3/devices/cuda/CMakeLists.txt &
 
 
 rm -rf $HOME/99-temp/srcp
 
 
-!!!!! OIDN 2.3.2 need ispc 1.14.1
+!!!!! OIDN 2.3.3 need ispc 1.14.1
 !!!!! ispc community = 1.13.0
 makedepends=('cmake' 'python'
              'ispc-git'
