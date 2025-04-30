@@ -1,0 +1,48 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=manifold-jnd
+pkgver=3.0.1.20241227
+pkgrel=1
+_ver_release="3.0.1"
+_name_release="manifold-${_ver_release}"
+pkgdesc="Geometry library dedicated to creating and operating on manifold triangle meshes"
+url="https://github.com/elalish/manifold"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('onetbb'
+)
+makedepends=('cmake' 'python'
+)
+conflicts=('manifold')
+provides=('manifold')
+#options=(staticlibs)
+options=('!debug')
+source=("manifold-${_ver_release}.tar.gz"
+)
+sha256sums=('5e84fdaab7933a00fb4279a9bbe2885e94db3adfc45a2ef56ae35abfe5e6ea43'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DMANIFOLD_CROSS_SECTION=OFF \
+    -DMANIFOLD_DOWNLOADS=OFF \
+    -DMANIFOLD_PAR=ON \
+    -DMANIFOLD_TEST=OFF \
+    -DMANIFOLD_CBIND=OFF \
+    -DMANIFOLD_JSBIND=OFF
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  
+  DESTDIR="${pkgdir}" make -C build install
+}
