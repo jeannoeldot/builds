@@ -76,6 +76,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=opencollada-git-jnd
 pkgver=1.6.20250130
+pkgrel=2    # MAJ libxml2 2.14.2-2
 pkgrel=1
 epoch=1     # Nouveau fork
 
@@ -204,7 +205,6 @@ namcap opencollada-git-jnd-*-x86_64.pkg.tar.*
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/opencollada-git-*-x86_64.pkg.tar.*
 $ sudo rm /00-repolocal/opencollada-git-jnd-*-x86_64.pkg.tar.*
 
 $ sudo cp -v opencollada-git-jnd-*-x86_64.pkg.tar.* /00-repolocal/
@@ -256,6 +256,10 @@ POUR REMETTRE opencollada Community
 ==================================================================================================
 ANCIEN
 =======
+
+$ sudo rm /00-repolocal/opencollada-git-*-x86_64.pkg.tar.*
+
+
 2-2) PKGBUILD AVEC PATCH
 ========================
 source=("$pkgname-$pkgver.tar.gz"

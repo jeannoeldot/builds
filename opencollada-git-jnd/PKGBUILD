@@ -3,7 +3,7 @@
 pkgname=opencollada-git-jnd
 _pkgname_git=opencollada-git
 pkgver=1.6.20250130
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Stream based reader and writer library for COLLADA files"
 arch=('x86_64')
@@ -22,6 +22,11 @@ sha256sums=('e781fc2cfb236bc63eabc50b6723187d82e87616727ef01e4ef9b8f2eaf9824a'
 )
 
 _gitname="opencollada"
+
+prepare() {
+  cd "${_gitname}"
+  sed -i -e 's|cmake_minimum_required(VERSION 2.6)|cmake_minimum_required(VERSION 3.17)|' CMakeLists.txt
+}
 
 build() {
   cd "${_gitname}"
