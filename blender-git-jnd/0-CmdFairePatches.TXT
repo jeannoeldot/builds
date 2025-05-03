@@ -1,18 +1,50 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.5.0.51.20250427
+!!! VERSION = 4.5.0.61.20250503
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.5.0.51.20250427.tar.zst /tmp/srcp/
+cp -v blender-git-4.5.0.61.20250503.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-4.5.0.51.20250427.tar.zst
+tar -x --zstd -f blender-git-4.5.0.61.20250503.tar.zst
+
+
+1) MANIFOJD
+===========================
+1-1) MODIFIER blender/build_files/cmake/platform/platform_unix.cmake
+====================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/build_files/cmake/platform
+kwrite platform_unix.cmake
+
+MODIFIER LIGNE 599 :
+    find_package(manifold)
+DEVIENT
+    find_package_wrapper(manifold)
+
+ENREGISTRER et Quitter Kwrite & EFFACER platform_unix.cmake~
+rm -f platform_unix.cmake~
+
+cd ../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > fix-build-with-manifold.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/fix-build-with-manifold.patch .
+
 
 
 
@@ -241,11 +273,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-4.5.0.51.20250427.tar.gz /tmp/srcp/
+cp -v blender-git-4.5.0.61.20250503.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-4.5.0.51.20250427.tar.gz
+tar -xzf blender-git-4.5.0.61.20250503.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

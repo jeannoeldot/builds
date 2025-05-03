@@ -2,7 +2,7 @@
 
 pkgname=blender-git-jnd
 pkgver=4.5.0.61.20250503
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -22,13 +22,14 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
           'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
           'opencolorio' 'libdeflate'
+          'zstd'
           'pcre' 'opencollada-git-jnd'
           'openimageio-jnd' 'fmt'
           'openshadinglanguage-jnd'
           'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
           'embree-jnd' 'openimagedenoise-jnd'
           'openpgl-jnd'
-          'zstd'
+          'manifold-jnd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
@@ -43,15 +44,20 @@ options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
+        "fix-build-with-manifold.patch"
 )
 sha256sums=('520781fc7c6225123a292ddcca33510137151b72d7da804c54534cd57d645078'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
+            'db3f5ed2da10995c9380ee160c660bc677d6ce0190c9b587c625c3fd56b183a8'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+
+  # Fix build avec manifold
+  patch -Np1 -i "${srcdir}/fix-build-with-manifold.patch"
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner

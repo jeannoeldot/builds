@@ -154,6 +154,8 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=4.5.0.61.20250503    # Rebuild MAJ boost boost-libs 1.88.0. SANS materialx NI OpenUsd
+pkgrel=2    # Rebuild Avec Patch manifold
+
 pkgrel=1
 pkgrel=1    # MAJ + MAJ OPTIX 8.1 (OPTIX 9.0 PAS OK)
 pkgrel=1    # MAJ + Rebuild OSL 1.14.4.0 AVEC CUDA+OPTIX
@@ -334,13 +336,15 @@ AVEC PATCH TAR.ZST
 ------------------
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
-        "xxxxxxxxxxxxxxx.patch"
+        "fix-build-with-manifold.patch"
         "..."
 )
 
 sha256sum blender-git-4.5.0.61.20250503.tar.zst
 
 sha256sum OptiX-8.1-Include.zip
+
+sha256sum fix-build-with-manifold.patch
 
 sha256sums=('123...'
             '456...'
