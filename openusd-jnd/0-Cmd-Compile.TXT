@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.02.20250204
+pkgrel=3      # rebuild MAJ boost boost-libs 1.88.0
 pkgrel=2      # rebuild MAJ OIIO 3.0.5.0
 pkgrel=1      # v25.02a
 
@@ -127,9 +128,12 @@ sha256sum fix-error-m_wait_ctx-was-not-declared.patch
 
 sha256sum usd-cmake-find-dependency.patch
 
+sha256sum Fix-Error-Compile-GCC-15.patch
+
 sha256sums=('475cd0990366a713f19d1f0701c37be17ecd9d3de7a3503a11bbdf80d3c003ce'
             '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
             '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
+            '9fda3dabde98592beae8675850db93f02842ea11f20b42dad0ceb075cff10f23'
 )
 
 prepare() {
@@ -138,7 +142,10 @@ prepare() {
   # Compatible avec onetbb 2022.0.0
   # Fixe: error: ‘m_wait_ctx’ was not declared in this scope
   patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
-
+  #
+  patch -Np1 -i "${srcdir}/usd-cmake-find-dependency.patch"
+  # Fixe: error: ‘uint16_t’ does not name a type avec GCC 15
+  patch -Np1 -i "${srcdir}/Fix-Error-Compile-GCC-15.patch"
 
 
 build() {
@@ -232,6 +239,7 @@ $ ls -la
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users       557  3 déc.  14:40 fix-error-m_wait_ctx-was-not-declared.patch
 -rw-r--r--  1 jnd users      1539 15 janv. 14:26 usd-cmake-find-dependency.patch
+-rw-r--r--  1 jnd users       372  3 mai   11:37 Fix-Error-Compile-GCC-15.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================

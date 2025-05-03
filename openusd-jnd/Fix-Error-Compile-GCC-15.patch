@@ -1,0 +1,11 @@
+diff -aur OpenUSD-25.02a/pxr/usd/usd/zipFile.h OpenUSD-25.02a.new/pxr/usd/usd/zipFile.h
+--- OpenUSD-25.02a/pxr/usd/usd/zipFile.h	2025-02-04 22:22:17.000000000 +0100
++++ OpenUSD-25.02a.new/pxr/usd/usd/zipFile.h	2025-05-03 11:34:11.524045975 +0200
+@@ -14,6 +14,7 @@
+ #include <string>
+ #include <utility>
+ #include <vector>
++#include <cstdint>
+ 
+ PXR_NAMESPACE_OPEN_SCOPE
+ 

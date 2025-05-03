@@ -1,0 +1,301 @@
+
+[ 70%] Building CXX object pxr/usd/usd/CMakeFiles/usd.dir/zipFile.cpp.o
+In file included from /build/openusd-jnd/src/OpenUSD-25.02a/pxr/usd/usd/zipFile.cpp:8:
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/usd/usd/zipFile.h:90:9: error: ‘uint16_t’ does not name a type
+   90 |         uint16_t compressionMethod = 0;
+      |         ^~~~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/usd/usd/zipFile.h:17:1: note: ‘uint16_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+   16 | #include <vector>
+  +++ |+#include <cstdint>
+   17 |
+
+[ 70%] Building CXX object pxr/imaging/hdar/CMakeFiles/hdar.dir/systemSchema.cpp.o
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/usd/usd/zipFile.cpp: In member function ‘pxrInternal_v0_25_2__pxrReserved__::UsdZipFile::FileInfo pxrInternal_v0_25_2__pxrReserved__::UsdZipFile::Iterator::GetFileInfo() const’:
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/usd/usd/zipFile.cpp:751:11: error: ‘class pxrInternal_v0_25_2__pxrReserved__::UsdZipFile::FileInfo’ has no member named ‘compressionMethod’
+  751 |         f.compressionMethod = h.f.compressionMethod;
+      |           ^~~~~~~~~~~~~~~~~
+[ 70%] Building CXX object pxr/usd/usd/CMakeFiles/usd.dir/apiSchemaBase.cpp.o
+make[2]: *** [pxr/usd/usd/CMakeFiles/usd.dir/build.make:1284: pxr/usd/usd/CMakeFiles/usd.dir/zipFile.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+
+//---------------------------------------------------------------------------------------------
+
+n file included from /usr/include/MaterialXGenShader/GenContext.h:16,
+                 from /usr/include/MaterialXGenShader/HwShaderGenerator.h:14,
+                 from /usr/include/MaterialXGenGlsl/GlslShaderGenerator.h:14,
+                 from /build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.h:12,
+                 from /build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:7:
+/usr/include/MaterialXGenShader/ShaderNode.h:115:18: error: ‘uint32_t’ does not name a type
+  115 |     static const uint32_t UNIFORM    = 1u << 0;
+      |                  ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:19:1: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+   18 | #include <MaterialXCore/Node.h>
+  +++ |+#include <cstdint>
+   19 |
+/usr/include/MaterialXGenShader/ShaderNode.h:116:18: error: ‘uint32_t’ does not name a type
+  116 |     static const uint32_t EMITTED    = 1u << 1;
+      |                  ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:116:18: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:117:18: error: ‘uint32_t’ does not name a type
+  117 |     static const uint32_t BIND_INPUT = 1u << 2;
+      |                  ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:117:18: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:202:19: error: ‘uint32_t’ has not been declared
+  202 |     void setFlags(uint32_t flags) { _flags = flags; }
+      |                   ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:202:19: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:205:5: error: ‘uint32_t’ does not name a type
+  205 |     uint32_t getFlags() const { return _flags; }
+      |     ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:205:5: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:208:18: error: ‘uint32_t’ has not been declared
+  208 |     void setFlag(uint32_t flag, bool value)
+      |                  ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:208:18: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:214:18: error: ‘uint32_t’ has not been declared
+  214 |     bool getFlag(uint32_t flag) const
+      |                  ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:214:18: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:258:5: error: ‘uint32_t’ does not name a type
+  258 |     uint32_t _flags;
+      |     ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:258:5: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘void MaterialX_v1_38_10::ShaderPort::setFlags(int)’:
+/usr/include/MaterialXGenShader/ShaderNode.h:202:37: error: ‘_flags’ was not declared in this scope; did you mean ‘flags’?
+  202 |     void setFlags(uint32_t flags) { _flags = flags; }
+      |                                     ^~~~~~
+      |                                     flags
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘void MaterialX_v1_38_10::ShaderPort::setFlag(int, bool)’:
+/usr/include/MaterialXGenShader/ShaderNode.h:210:9: error: ‘_flags’ was not declared in this scope; did you mean ‘flag’?
+  210 |         _flags = value ? (_flags | flag) : (_flags & ~flag);
+      |         ^~~~~~
+      |         flag
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘bool MaterialX_v1_38_10::ShaderPort::getFlag(int) const’:
+/usr/include/MaterialXGenShader/ShaderNode.h:216:18: error: ‘_flags’ was not declared in this scope; did you mean ‘flag’?
+  216 |         return ((_flags & flag) != 0);
+      |                  ^~~~~~
+      |                  flag
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘void MaterialX_v1_38_10::ShaderPort::setUniform()’:
+/usr/include/MaterialXGenShader/ShaderNode.h:220:25: error: ‘_flags’ was not declared in this scope
+  220 |     void setUniform() { _flags |= ShaderPortFlag::UNIFORM; }
+      |                         ^~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:220:51: error: ‘UNIFORM’ is not a member of ‘MaterialX_v1_38_10::ShaderPortFlag’
+  220 |     void setUniform() { _flags |= ShaderPortFlag::UNIFORM; }
+      |                                                   ^~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘bool MaterialX_v1_38_10::ShaderPort::isUniform() const’:
+/usr/include/MaterialXGenShader/ShaderNode.h:223:38: error: ‘_flags’ was not declared in this scope
+  223 |     bool isUniform() const { return (_flags & ShaderPortFlag::UNIFORM) != 0; }
+      |                                      ^~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:223:63: error: ‘UNIFORM’ is not a member of ‘MaterialX_v1_38_10::ShaderPortFlag’
+  223 |     bool isUniform() const { return (_flags & ShaderPortFlag::UNIFORM) != 0; }
+      |                                                               ^~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘void MaterialX_v1_38_10::ShaderPort::setEmitted()’:
+/usr/include/MaterialXGenShader/ShaderNode.h:226:25: error: ‘_flags’ was not declared in this scope
+  226 |     void setEmitted() { _flags |= ShaderPortFlag::EMITTED; }
+      |                         ^~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:226:51: error: ‘EMITTED’ is not a member of ‘MaterialX_v1_38_10::ShaderPortFlag’
+  226 |     void setEmitted() { _flags |= ShaderPortFlag::EMITTED; }
+      |                                                   ^~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘bool MaterialX_v1_38_10::ShaderPort::isEmitted() const’:
+/usr/include/MaterialXGenShader/ShaderNode.h:229:38: error: ‘_flags’ was not declared in this scope
+  229 |     bool isEmitted() const { return (_flags & ShaderPortFlag::EMITTED) != 0; }
+      |                                      ^~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:229:63: error: ‘EMITTED’ is not a member of ‘MaterialX_v1_38_10::ShaderPortFlag’
+  229 |     bool isEmitted() const { return (_flags & ShaderPortFlag::EMITTED) != 0; }
+      |                                                               ^~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘void MaterialX_v1_38_10::ShaderPort::setBindInput()’:
+/usr/include/MaterialXGenShader/ShaderNode.h:232:27: error: ‘_flags’ was not declared in this scope
+  232 |     void setBindInput() { _flags |= ShaderPortFlag::BIND_INPUT; }
+      |                           ^~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:232:53: error: ‘BIND_INPUT’ is not a member of ‘MaterialX_v1_38_10::ShaderPortFlag’
+  232 |     void setBindInput() { _flags |= ShaderPortFlag::BIND_INPUT; }
+      |                                                     ^~~~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘bool MaterialX_v1_38_10::ShaderPort::isBindInput() const’:
+/usr/include/MaterialXGenShader/ShaderNode.h:235:40: error: ‘_flags’ was not declared in this scope
+  235 |     bool isBindInput() const { return (_flags & ShaderPortFlag::BIND_INPUT) != 0; }
+      |                                        ^~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:235:65: error: ‘BIND_INPUT’ is not a member of ‘MaterialX_v1_38_10::ShaderPortFlag’
+  235 |     bool isBindInput() const { return (_flags & ShaderPortFlag::BIND_INPUT) != 0; }
+      |                                                                 ^~~~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h: At global scope:
+/usr/include/MaterialXGenShader/ShaderNode.h:335:22: error: ‘uint32_t’ does not name a type
+  335 |         static const uint32_t TEXTURE       = 1 << 0;  /// Any node that outputs floats, colors, vectors, etc.
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:335:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:336:22: error: ‘uint32_t’ does not name a type
+  336 |         static const uint32_t CLOSURE       = 1 << 1;  /// Any node that represents light integration
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:336:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:337:22: error: ‘uint32_t’ does not name a type
+  337 |         static const uint32_t SHADER        = 1 << 2;  /// Any node that outputs a shader
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:337:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:338:22: error: ‘uint32_t’ does not name a type
+  338 |         static const uint32_t MATERIAL      = 1 << 3;  /// Any node that outputs a material
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:338:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:340:22: error: ‘uint32_t’ does not name a type
+  340 |         static const uint32_t FILETEXTURE   = 1 << 4;  /// A file texture node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:340:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:341:22: error: ‘uint32_t’ does not name a type
+  341 |         static const uint32_t CONDITIONAL   = 1 << 5;  /// A conditional node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:341:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:342:22: error: ‘uint32_t’ does not name a type
+  342 |         static const uint32_t CONSTANT      = 1 << 6;  /// A constant node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:342:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:344:22: error: ‘uint32_t’ does not name a type
+  344 |         static const uint32_t BSDF          = 1 << 7;  /// A BSDF node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:344:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:345:22: error: ‘uint32_t’ does not name a type
+  345 |         static const uint32_t BSDF_R        = 1 << 8;  /// A reflection BSDF node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:345:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:346:22: error: ‘uint32_t’ does not name a type
+  346 |         static const uint32_t BSDF_T        = 1 << 9;  /// A transmission BSDF node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:346:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:347:22: error: ‘uint32_t’ does not name a type
+  347 |         static const uint32_t EDF           = 1 << 10; /// A EDF node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:347:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:348:22: error: ‘uint32_t’ does not name a type
+  348 |         static const uint32_t VDF           = 1 << 11; /// A VDF node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:348:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:349:22: error: ‘uint32_t’ does not name a type
+  349 |         static const uint32_t LAYER         = 1 << 12; /// A node for vertical layering of other closure nodes
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:349:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:350:22: error: ‘uint32_t’ does not name a type
+  350 |         static const uint32_t THINFILM      = 1 << 13; /// A node for adding thin-film over microfacet BSDF nodes
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:350:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:352:22: error: ‘uint32_t’ does not name a type
+  352 |         static const uint32_t SURFACE       = 1 << 14; /// A surface shader node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:352:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:353:22: error: ‘uint32_t’ does not name a type
+  353 |         static const uint32_t VOLUME        = 1 << 15; /// A volume shader node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:353:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:354:22: error: ‘uint32_t’ does not name a type
+  354 |         static const uint32_t LIGHT         = 1 << 16; /// A light shader node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:354:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:355:22: error: ‘uint32_t’ does not name a type
+  355 |         static const uint32_t UNLIT         = 1 << 17; /// An unlit surface shader node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:355:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:357:22: error: ‘uint32_t’ does not name a type
+  357 |         static const uint32_t SAMPLE2D      = 1 << 18; /// Can be sampled in 2D (uv space)
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:357:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:358:22: error: ‘uint32_t’ does not name a type
+  358 |         static const uint32_t SAMPLE3D      = 1 << 19; /// Can be sampled in 3D (position)
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:358:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:359:22: error: ‘uint32_t’ does not name a type
+  359 |         static const uint32_t GEOMETRIC     = 1 << 20; /// Geometric input
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:359:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:360:22: error: ‘uint32_t’ does not name a type
+  360 |         static const uint32_t DOT           = 1 << 21; /// A dot node
+      |                      ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:360:22: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:406:28: error: ‘uint32_t’ has not been declared
+  406 |     void setClassification(uint32_t c)
+      |                            ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:406:28: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:412:5: error: ‘uint32_t’ does not name a type
+  412 |     uint32_t getClassification() const
+      |     ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:412:5: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:418:28: error: ‘uint32_t’ has not been declared
+  418 |     void addClassification(uint32_t c)
+      |                            ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:418:28: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:424:28: error: ‘uint32_t’ has not been declared
+  424 |     bool hasClassification(uint32_t c) const
+      |                            ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:424:28: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:500:5: error: ‘uint32_t’ does not name a type
+  500 |     uint32_t _classification;
+      |     ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h:500:5: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+/usr/include/MaterialXGenShader/ShaderNode.h:391:79: error: ‘TEXTURE’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’
+  391 |                                 unsigned int classification = Classification::TEXTURE);
+      |                                                                               ^~~~~~~
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘void MaterialX_v1_38_10::ShaderNode::setClassification(int)’:
+/usr/include/MaterialXGenShader/ShaderNode.h:408:9: error: ‘_classification’ was not declared in this scope; did you mean ‘Classification’?
+  408 |         _classification = c;
+      |         ^~~~~~~~~~~~~~~
+      |         Classification
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘void MaterialX_v1_38_10::ShaderNode::addClassification(int)’:
+/usr/include/MaterialXGenShader/ShaderNode.h:420:9: error: ‘_classification’ was not declared in this scope; did you mean ‘Classification’?
+  420 |         _classification |= c;
+      |         ^~~~~~~~~~~~~~~
+      |         Classification
+/usr/include/MaterialXGenShader/ShaderNode.h: In member function ‘bool MaterialX_v1_38_10::ShaderNode::hasClassification(int) const’:
+/usr/include/MaterialXGenShader/ShaderNode.h:426:17: error: ‘_classification’ was not declared in this scope; did you mean ‘Classification’?
+  426 |         return (_classification & c) == c;
+      |                 ^~~~~~~~~~~~~~~
+      |                 Classification
+[ 87%] Building CXX object pxr/imaging/hdSt/CMakeFiles/hdSt.dir/bufferArrayRange.cpp.o
+In file included from /usr/include/MaterialXGenShader/HwShaderGenerator.h:15:
+/usr/include/MaterialXGenShader/ShaderGenerator.h: At global scope:
+/usr/include/MaterialXGenShader/ShaderGenerator.h:100:103: error: ‘uint32_t’ has not been declared
+  100 |     virtual void emitFunctionCalls(const ShaderGraph& graph, GenContext& context, ShaderStage& stage, uint32_t classification = 0u) const;
+      |                                                                                                       ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderGenerator.h:17:1: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+   16 | #include <MaterialXGenShader/ShaderStage.h>
+  +++ |+#include <cstdint>
+   17 | #include <MaterialXGenShader/Syntax.h>
+/usr/include/MaterialXGenShader/ShaderGenerator.h:105:110: error: ‘uint32_t’ has not been declared
+  105 |     virtual void emitDependentFunctionCalls(const ShaderNode& node, GenContext& context, ShaderStage& stage, uint32_t classification = 0u) const;
+      |                                                                                                              ^~~~~~~~
+/usr/include/MaterialXGenShader/ShaderGenerator.h:105:110: note: ‘uint32_t’ is defined in header ‘<cstdint>’; this is probably fixable by adding ‘#include <cstdint>’
+[ 87%] Building CXX object pxr/imaging/hdSt/CMakeFiles/hdSt.dir/bufferResource.cpp.o
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp: In member function ‘void pxrInternal_v0_25_2__pxrReserved__::HdStMaterialXShaderGen<Base>::_EmitMxSurfaceShader(const MaterialX_v1_38_10::ShaderGraph&, MaterialX_v1_38_10::GenContext&, MaterialX_v1_38_10::ShaderStage&) const’:
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:229:67: error: ‘CLOSURE’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  229 |     if (mxGraph.hasClassification(mx::ShaderNode::Classification::CLOSURE) &&
+      |                                                                   ^~~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:230:68: error: ‘SHADER’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  230 |         !mxGraph.hasClassification(mx::ShaderNode::Classification::SHADER)) {
+      |                                                                    ^~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:248:71: error: ‘SHADER’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  248 |         if (mxGraph.hasClassification(mx::ShaderNode::Classification::SHADER |
+      |                                                                       ^~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:249:71: error: ‘SURFACE’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  249 |                                       mx::ShaderNode::Classification::SURFACE)){
+      |                                                                       ^~~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:253:49: error: ‘TEXTURE’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  253 |                 mx::ShaderNode::Classification::TEXTURE);
+      |                                                 ^~~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:273:61: error: ‘CLOSURE’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  273 |                             mx::ShaderNode::Classification::CLOSURE) ||
+      |                                                             ^~~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:275:61: error: ‘SHADER’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  275 |                             mx::ShaderNode::Classification::SHADER))) {
+      |                                                             ^~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:305:53: error: ‘SURFACE’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  305 |                     mx::ShaderNode::Classification::SURFACE)) {
+      |                                                     ^~~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp: In member function ‘void pxrInternal_v0_25_2__pxrReserved__::HdStMaterialXShaderGen<Base>::_EmitDataStructsAndFunctionDefinitions(const MaterialX_v1_38_10::ShaderGraph&, MaterialX_v1_38_10::GenContext&, MaterialX_v1_38_10::ShaderStage&, MaterialX_v1_38_10::StringMap*) const’:
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:736:67: error: ‘SHADER’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  736 |         mxGraph.hasClassification(mx::ShaderNode::Classification::SHADER |
+      |                                                                   ^~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:737:67: error: ‘SURFACE’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  737 |                                   mx::ShaderNode::Classification::SURFACE)
+      |                                                                   ^~~~~~~
+/build/openusd-jnd/src/OpenUSD-25.02a/pxr/imaging/hdSt/materialXShaderGen.cpp:738:70: error: ‘BSDF’ is not a member of ‘MaterialX_v1_38_10::ShaderNode::Classification’ [-Wtemplate-body]
+  738 |         || mxGraph.hasClassification(mx::ShaderNode::Classification::BSDF);
+      |                                                                      ^~~~
+
+
+
+

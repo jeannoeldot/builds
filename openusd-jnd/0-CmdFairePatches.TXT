@@ -10,11 +10,11 @@ FAIRE PATCHS
 
 mkdir /tmp/srcp
 
-cp -v OpenUSD-v25.02.tar.gz /tmp/srcp/
+cp -v OpenUSD-v25.02a.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenUSD-v25.02.tar.gz
+tar -xzf OpenUSD-v25.02a.tar.gz
 
 
 !!! VOIR :
@@ -139,6 +139,32 @@ rm -rf OpenUSD-25.02.new
 cd $HOME/05-builds/openusd-jnd
 
 mv -vf /tmp/srcp/usd-cmake-find-dependency.patch .
+
+3) MODIFIER OpenUSD-25.02a/pxr/usd/usd/zipFile.h
+==================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R OpenUSD-25.02a OpenUSD-25.02a.new
+
+cd OpenUSD-25.02a.new/pxr/usd/usd
+kwrite zipFile.h
+
+AJOUTER LIGNE 17
+#include <cstdint>
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier zipFile.h~
+rm -f zipFile.h~
+
+cd ../../../..
+
+diff -aur OpenUSD-25.02a OpenUSD-25.02a.new
+diff -aur OpenUSD-25.02a OpenUSD-25.02a.new > Fix-Error-Compile-GCC-15.patch
+
+rm -rf OpenUSD-25.02a.new
+
+cd $HOME/05-builds/openusd-jnd
+
+mv -vf /tmp/srcp/Fix-Error-Compile-GCC-15.patch .
 
 
 
