@@ -1,30 +1,33 @@
-# Maintainer: Sven-Hendrik Haase <svenstaro@archlinux.org>
-# Contributor: Adrià Cabello <adro.cc79 at protonmail dot com>
-# Contributor: Fabio Loli <fabio.loli@disroot.org>
+# Maintainer: Name <name@fai.com>
 
-pkgname=materialx
-pkgver=1.38.10
-pkgrel=6
+pkgname=materialx-jnd
+pkgver=1.39.3.20250307
+pkgrel=1
+_ver_release="1.39.3"
 pkgdesc="Open standard for representing rich material and look-development content in computer graphics"
 arch=('x86_64')
 url="https://materialx.org/"
-license=('Apache')
+license=('Apache-2.0')
 depends=('glibc' 'gcc-libs' 'glfw' 'libglvnd' 'libx11' 'libxt' 'python'
          'python-setuptools' 'opencolorio' 'dos2unix' 'zenity')
 makedepends=('cmake' 'chrpath' 'libxinerama' 'libxcursor' 'pybind11' 'ninja')
-source=("https://github.com/AcademySoftwareFoundation/MaterialX/releases/download/v${pkgver}/MaterialX-${pkgver}.tar.gz"
+conflicts=('materialx')
+provides=('materialx')
+#options=(staticlibs)
+options=('!debug')
+source=("MaterialX-${_ver_release}.tar.gz"
         "materialx-grapheditor.desktop"
         "materialx-view.desktop"
         "materialx.xml")
-sha256sums=('f7f2aa7587ae63eb095cef35d202d23df341e3d67c8c458357d2a555d76c69f2'
+sha256sums=('a72ac8470dea1148c0258d63b5b34605cbac580e4a3f2c624c5bdf4df7204363'
             '88e5ecafa8088b90f799b49c36af59f8462ca7426cdec58215332ee283556ddb'
             '2f2b675540fea39a749f89083a9c341319c1f7b478fbb049a77bd66c29b2ee01'
             'd9b9426fb94121da052b796542cc74a0c5d7cef06997be70611c25f345553861')
 
-_pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+_pyver=3.13
 
 prepare() {
-  cd MaterialX-${pkgver}
+  cd MaterialX-${_ver_release}
 
   # Repath
   sed -i 's|CMAKE_INSTALL_PREFIX|CMAKE_BINARY_DIR|g' python/CMakeLists.txt
@@ -39,15 +42,13 @@ prepare() {
 }
 
 build() {
-  cmake -S MaterialX-${pkgver} -B build -G Ninja \
+  cmake -S MaterialX-${_ver_release} -B build -G Ninja \
   	-DCMAKE_INSTALL_PREFIX=/usr \
   	-DCMAKE_SKIP_INSTALL_RPATH=ON \
   	-DCMAKE_SKIP_RPATH=ON \
   	-Wno-dev \
-  	-DMATERIALX_BUILD_SHARED_LIBS=ON \
   	-DMATERIALX_BUILD_PYTHON=ON \
-  	-DMATERIALX_BUILD_VIEWER=ON \
-  	-DMATERIALX_BUILD_GRAPH_EDITOR=ON
+  	-DMATERIALX_BUILD_SHARED_LIBS=ON
 
   cmake --build build
 }
@@ -74,7 +75,7 @@ package() {
   mkdir -p ${pkgdir}/usr/lib/python$_pyver
   mv ${pkgdir}/usr/python $_/site-packages
 
-  install -Dm755 ${srcdir}/MaterialX-${pkgver}/documents/Images/MaterialXLogo_200x155.png ${pkgdir}/usr/share/icons/hicolor/256x256/apps/materialx.png
+  install -Dm755 ${srcdir}/MaterialX-${_ver_release}/documents/Images/MaterialXLogo_200x155.png ${pkgdir}/usr/share/icons/hicolor/256x256/apps/materialx.png
 
   # Fix CMake configs
   sed -i 's|libraries|share/materialx/libraries|g' ${pkgdir}/usr/lib/cmake/MaterialX/MaterialXConfig.cmake

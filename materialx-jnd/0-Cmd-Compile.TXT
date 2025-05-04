@@ -1,29 +1,28 @@
 # Le répertoire
 ===============
 !!! EN USER
-cd $HOME/05-builds/manifold-jnd
+cd $HOME/05-builds/materialx-jnd
 
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
-https://github.com/OpenImageDenoise/manifold/releases
-==>  elalish released this on dec 27 2024  ==> 20241227
-==>  v3.0.1  ==> 3.0.1
-==> 3.0.1.20241227
+https://github.com/AcademySoftwareFoundation/MaterialX/releases
+==>  jstone-lucasfilm released this on Mar 7 2025  ==> 20250307
+==>  v1.39.3  ==> 1.39.3
+==> 1.39.3.20250307
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O manifold-3.0.1.tar.gz \
-https://github.com/elalish/manifold/archive/refs/tags/v3.0.1.tar.gz
+wget https://github.com/AcademySoftwareFoundation/MaterialX/releases/download/v1.39.3/MaterialX-1.39.3.tar.gz
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/manifold-jnd
+cd $HOME/05-builds/materialx-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/manifold-3.0.1.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/MaterialX-1.39.3.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -35,79 +34,72 @@ voir 0-CmdFairePatches.TXT
 =========================
 # Maintainer: Moi <name AT fai DOT fr>
 
-pkgname=manifold-jnd
-pkgver=3.0.1.20241227
+pkgname=materialx-jnd
+pkgver=1.39.3.20250307
 pkgrel=1
 
 
 !!!!!!
-_ver_release="3.0.1"
-_name_release="manifold-${_ver_release}"
+_ver_release="1.39.3"
 
 license=('Apache-2.0')
 
-depends=('onetbb'
-)
+depends=('glibc' 'gcc-libs' 'glfw' 'libglvnd' 'libx11' 'libxt' 'python'
+         'python-setuptools' 'opencolorio' 'dos2unix' 'zenity')
+makedepends=('cmake' 'chrpath' 'libxinerama' 'libxcursor' 'pybind11' 'ninja')
 
-makedepends=('cmake' 'python'
-)
-
-conflicts=('manifold')
-provides=('manifold')
+conflicts=('materialx')
+provides=('materialx')
 
 options=('!debug')
 
 SANS PATCH
 ----------
-sha256sum manifold-3.0.1.tar.gz
+sha256sum MaterialX-1.39.3.tar.gz
+sha256sum materialx-grapheditor.desktop
+sha256sum materialx-view.desktop
+sha256sum materialx.xml
 
-source=("manifold-${_ver_release}.tar.gz"
+source=("MaterialX-${_ver_release}.tar.gz"
+        "materialx-grapheditor.desktop"
+        "materialx-view.desktop"
+        "materialx.xml")
+
+sha256sums=('a72ac8470dea1148c0258d63b5b34605cbac580e4a3f2c624c5bdf4df7204363'
+            '88e5ecafa8088b90f799b49c36af59f8462ca7426cdec58215332ee283556ddb'
+            '2f2b675540fea39a749f89083a9c341319c1f7b478fbb049a77bd66c29b2ee01'
+            'd9b9426fb94121da052b796542cc74a0c5d7cef06997be70611c25f345553861'
 )
-sha256sums=('... ...'
-)
+
+!!! VÉRIFIER VERSION PYTHON INSTALLÉE
+-------------------------------------
+$ pacman -Ss python | grep core/python | grep install
+core/python 3.13.3-1 [installé]
+_pyver=3.13
+
+
+prepare() {
+    cd MaterialX-${_ver_release}
+
 
 build() {
-  cd "${_name_release}"
 
 package() {
-  cd "${_name_release}"
 
 
 2-5) VERIFIER CMakeLists.txt
 ============================
 mkdir /tmp/srcp
 
-tar -xzf manifold-3.0.1.tar.gz -C /tmp/srcp
+tar -xzf MaterialX-1.39.3.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/manifold-3.0.1/CMakeLists.txt &
+1) kwrite /tmp/srcp/MaterialX-1.39.3/CMakeLists.txt &
 !!! VOIR
-!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/manifold.cmake
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/materialx.cmake
 
-L 38  MANIFOLD_CROSS_SECTION  ON ==> OFF
-L 39  MANIFOLD_DEBUG          OFF
-L 40  MANIFOLD_DOWNLOADS      ON ==> OFF
-L 45  MANIFOLD_EXPORT         OFF
-L 46  MANIFOLD_PAR            OFF ==> ON
-L 47  MANIFOLD_OPTIMIZED      OFF
-L 52  MANIFOLD_TEST           ON ==> OFF
-L 53  MANIFOLD_PYBIND         OFF
-L 56  MANIFOLD_CBIND          ON ==> OFF
-L 64  MANIFOLD_JSBIND         ON ==> OFF
+L 36  MATERIALX_BUILD_PYTHON            OFF ==> ON
 
-L 78  MANIFOLD_USE_BUILTIN_TBB        OFF
-L 79  MANIFOLD_USE_BUILTIN_CLIPPER2   OFF
-L 80  MANIFOLD_USE_BUILTIN_NANOBIND   OFF
-
-L 83  CMAKE_BUILD_TYPE "Build type" Release
-
-L 85  BUILD_SHARED_LIBS "Build shared library" ON
-
-L 87  MANIFOLD_FLAGS
-
-L 90  TRACY_ENABLE            OFF
-L 91  TRACY_MEMORY_USAGE      OFF
-L 92  MANIFOLD_FUZZ           OFF
-
+L 51  MATERIALX_BUILD_SHARED_LIBS       OFF ==> ON
 
 rm -rf /tmp/srcp
 
@@ -116,8 +108,11 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 manifold-3.0.1.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 MaterialX-1.39.3.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+-rw-r--r--  1 jnd users       292  4 mai   14:55 materialx-grapheditor.desktop
+-rw-r--r--  1 jnd users       249  4 mai   14:55 materialx-view.desktop
+-rw-r--r--  1 jnd users       297  4 mai   14:55 materialx.xml
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -134,16 +129,16 @@ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
-&& cp -v $HOME/05-builds/manifold-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/manifold-jnd/manifold-3.0.1.tar.gz . \
+&& cp -v $HOME/05-builds/materialx-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/materialx-jnd/MaterialX-1.39.3.tar.gz . \
 && LC_ALL=C makepkg -s \
-&& cd $HOME/05-builds/manifold-jnd \
-&& cp -v /tmp/build/manifold-jnd-*-x86_64.pkg.tar.* . \
+&& cd $HOME/05-builds/materialx-jnd \
+&& cp -v /tmp/build/materialx-jnd-*-x86_64.pkg.tar.* . \
 && rm -rf /tmp/build
 
 SI ERREUR :
 ------------
-cd $HOME/05-builds/manifold-jnd && rm -rf /tmp/build
+cd $HOME/05-builds/materialx-jnd && rm -rf /tmp/build
 
 
 3-1) MAKEPKG TMPFS en CHROOT EN USER
@@ -178,29 +173,29 @@ rm -f *~
 
 # Verifications...
 
-namcap manifold-jnd-*-x86_64.pkg.tar.*
+namcap materialx-jnd-*-x86_64.pkg.tar.*
 ...
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/manifold-jnd-*-x86_64.pkg.tar.*
+$ sudo rm /00-repolocal/materialx-jnd-*-x86_64.pkg.tar.*
 
-$ sudo cp -v manifold-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+$ sudo cp -v materialx-jnd-*-x86_64.pkg.tar.* /00-repolocal/
 
 # DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
 -------------------------------------------------------------------
-$ mv -v /0-DataLinux/00-repolocal/manifold-jnd-*-x86_64.pkg.tar.* \
+$ mv -v /0-DataLinux/00-repolocal/materialx-jnd-*-x86_64.pkg.tar.* \
 /0-DataLinux/00-repolocal/pkg-OLD/
 
-$ mv -v manifold-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+$ mv -v materialx-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 
 
 # SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i manifold-3.0.1.tar.gz
+$ rm -i MaterialX-1.39.3.tar.gz
 
 
 $ cd && maj-repolocal
@@ -212,14 +207,14 @@ $ sync
 # cd
 # LC_ALL=C pacman -Syu
 
-# LC_ALL=C pacman -Syu manifold-jnd
+# LC_ALL=C pacman -Syu materialx-jnd
 
 SI PROBLEME
 ==============
 !!! EN ROOT
-# LC_ALL=C pacman -Rdd manifold-jnd
-# rm /var/cache/pacman/pkg/manifold-jnd-*
-# LC_ALL=C pacman -S manifold-jnd
+# LC_ALL=C pacman -Rdd materialx-jnd
+# rm /var/cache/pacman/pkg/materialx-jnd-*
+# LC_ALL=C pacman -S materialx-jnd
 
 
 ANCIEN

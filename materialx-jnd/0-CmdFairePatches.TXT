@@ -4,15 +4,15 @@ FAIRE PATCHS
 !!! VERSION = 3.0.1.20241227
 
 
-/!\ /!\ /!\ $HOME/05-builds/manifold-jnd
+/!\ /!\ /!\ $HOME/05-builds/materialx-jnd
 
 mkdir /tmp/srcp
 
-cp -v manifold-3.0.1.tar.gz /tmp/srcp/
+cp -v MaterialX-1.39.3.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf manifold-3.0.1.tar.gz
+tar -xzf MaterialX-1.39.3.tar.gz
 
 
 
@@ -26,34 +26,4 @@ sync
 =================================================================
 ANCIENS
 ========
-
-1) MODIFIER opencollada/COLLADABaseUtils/include/COLLADABUPcreCompiledPattern.h
-===============================================================================
-cp -R opencollada opencollada.new
-
-cd opencollada.new/COLLADABaseUtils/include
-kwrite COLLADABUPcreCompiledPattern.h
-
-REMPLACER LIGNES 16 ET 17 :
-struct real_pcre;
-typedef struct real_pcre pcre;
-
-PAR :
-#include "pcre.h"
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier COLLADABUPcreCompiledPattern.h~
-rm -f COLLADABUPcreCompiledPattern.h~
-
-
-cd ../../..
-
-diff -aur opencollada opencollada.new
-diff -aur opencollada opencollada.new > fix-conflicting-declaration-pcre-gcc810.patch
-
-rm -rf opencollada.new
-
-cd $HOME/05-builds/opencollada-git
-
-mv -vf /tmp/srcp/fix-conflicting-declaration-pcre-gcc810.patch .
-
 
