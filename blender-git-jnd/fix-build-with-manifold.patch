@@ -1,12 +1,22 @@
 diff -aur blender/build_files/cmake/platform/platform_unix.cmake blender.new/build_files/cmake/platform/platform_unix.cmake
 --- blender/build_files/cmake/platform/platform_unix.cmake	2025-05-03 12:38:54.000000000 +0200
-+++ blender.new/build_files/cmake/platform/platform_unix.cmake	2025-05-03 15:33:27.507410393 +0200
-@@ -596,7 +596,7 @@
-     find_package(manifold REQUIRED)
++++ blender.new/build_files/cmake/platform/platform_unix.cmake	2025-05-04 14:30:15.113170352 +0200
+@@ -592,12 +592,13 @@
+ endif()
+ 
+ if(WITH_MANIFOLD)
+-  if(WITH_LIBS_PRECOMPILED OR WITH_STRICT_BUILD_OPTIONS)
+-    find_package(manifold REQUIRED)
++  find_package_wrapper(manifold)
++  if(manifold_FOUND)
++    get_target_property(MANIFOLD_LIBRARIES manifold::manifold LOCATION)
++    get_target_property(MANIFOLD_INCLUDE_DIR manifold::manifold INTERFACE_INCLUDE_DIRECTORIES)
++    message(STATUS "Found manifold: ${MANIFOLD_LIBRARIES}")
    else()
-     # This isn't a common system library, so disable if it's not found.
+-    # This isn't a common system library, so disable if it's not found.
 -    find_package(manifold)
-+    find_package_wrapper(manifold)
-     set_and_warn_library_found("MANIFOLD" MANIFOLD_FOUND WITH_MANIFOLD)
+-    set_and_warn_library_found("MANIFOLD" MANIFOLD_FOUND WITH_MANIFOLD)
++    message(STATUS "manifold not found")
    endif()
  endif()
+ 

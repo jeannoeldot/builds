@@ -1,0 +1,36 @@
+
+-- ====================================
+-- Manifold Build Configuration Summary
+-- ====================================
+--
+-- Environment: Linux
+--
+-- CMAKE_VERSION:                 4.0.1
+-- CMAKE_TOOLCHAIN_FILE:
+-- CMAKE_GENERATOR:               Unix Makefiles
+-- CPACK_CMAKE_GENERATOR:
+-- CMAKE_BUILD_TYPE:              Release
+-- CMAKE_PREFIX_PATH:
+-- CMAKE_CXX_COMPILER_ID:         GNU
+-- CMAKE_CXX_COMPILER_VERSION:    14.2.1
+-- BUILD_SHARED_LIBS:             ON
+--
+-- MANIFOLD_VERSION:              3.0.1
+-- MANIFOLD_PAR:                  ON
+-- MANIFOLD_CROSS_SECTION:        OFF
+-- MANIFOLD_EXPORT:               OFF
+-- MANIFOLD_TEST:                 OFF
+-- MANIFOLD_DEBUG:                OFF
+-- MANIFOLD_CBIND:                OFF
+-- MANIFOLD_PYBIND:               OFF
+-- MANIFOLD_JSBIND:               OFF
+-- MANIFOLD_FLAGS:                -Wall;-Wno-unknown-warning-option;-Wno-unused;-Wno-shorten-64-to-32;-Werror;-O3
+-- MANIFOLD_COMPILE_OPTIONS:      -Wall;-Wno-unknown-warning-option;-Wno-unused;-Wno-shorten-64-to-32;-Werror;-O3;-DMANIFOLD_PAR=1
+-- MANIFOLD_LINK_OPTIONS:
+-- MANIFOLD_DOWNLOADS:            OFF
+-- MANIFOLD_USE_BUILTIN_TBB:      OFF
+-- MANIFOLD_USE_BUILTIN_CLIPPER2: OFF
+-- MANIFOLD_USE_BUILTIN_NANOBIND: OFF
+-- MANIFOLD_FUZZ:                 OFF
+-- TRACY_ENABLE:                  OFF
+-- TRACY_MEMORY_USAGE:            OFF

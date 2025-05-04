@@ -26,10 +26,19 @@ cp -R blender blender.new
 cd blender.new/build_files/cmake/platform
 kwrite platform_unix.cmake
 
-MODIFIER LIGNE 599 :
-    find_package(manifold)
-DEVIENT
-    find_package_wrapper(manifold)
+MODIFIER LIGNES 594 À 682 :
+
+DEVIENNENT:
+if(WITH_MANIFOLD)
+  find_package_wrapper(manifold)
+  if(manifold_FOUND)
+    get_target_property(MANIFOLD_LIBRARIES manifold::manifold LOCATION)
+    get_target_property(MANIFOLD_INCLUDE_DIR manifold::manifold INTERFACE_INCLUDE_DIRECTORIES)
+    message(STATUS "Found manifold: ${MANIFOLD_LIBRARIES}")
+  else()
+    message(STATUS "manifold not found")
+  endif()
+endif()
 
 ENREGISTRER et Quitter Kwrite & EFFACER platform_unix.cmake~
 rm -f platform_unix.cmake~

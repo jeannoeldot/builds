@@ -1,0 +1,227 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/manifold-jnd
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/OpenImageDenoise/manifold/releases
+==>  elalish released this on dec 27 2024  ==> 20241227
+==>  v3.0.1  ==> 3.0.1
+==> 3.0.1.20241227
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O manifold-3.0.1.tar.gz \
+https://github.com/elalish/manifold/archive/refs/tags/v3.0.1.tar.gz
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/manifold-jnd
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/manifold-3.0.1.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=manifold-jnd
+pkgver=3.0.1.20241227
+pkgrel=1
+
+
+!!!!!!
+_ver_release="3.0.1"
+_name_release="manifold-${_ver_release}"
+
+license=('Apache-2.0')
+
+depends=('onetbb'
+)
+
+makedepends=('cmake' 'python'
+)
+
+conflicts=('manifold')
+provides=('manifold')
+
+options=('!debug')
+
+SANS PATCH
+----------
+sha256sum manifold-3.0.1.tar.gz
+
+source=("manifold-${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf manifold-3.0.1.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/manifold-3.0.1/CMakeLists.txt &
+!!! VOIR
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/manifold.cmake
+
+L 38  MANIFOLD_CROSS_SECTION  ON ==> OFF
+L 39  MANIFOLD_DEBUG          OFF
+L 40  MANIFOLD_DOWNLOADS      ON ==> OFF
+L 45  MANIFOLD_EXPORT         OFF
+L 46  MANIFOLD_PAR            OFF ==> ON
+L 47  MANIFOLD_OPTIMIZED      OFF
+L 52  MANIFOLD_TEST           ON ==> OFF
+L 53  MANIFOLD_PYBIND         OFF
+L 56  MANIFOLD_CBIND          ON ==> OFF
+L 64  MANIFOLD_JSBIND         ON ==> OFF
+
+L 78  MANIFOLD_USE_BUILTIN_TBB        OFF
+L 79  MANIFOLD_USE_BUILTIN_CLIPPER2   OFF
+L 80  MANIFOLD_USE_BUILTIN_NANOBIND   OFF
+
+L 83  CMAKE_BUILD_TYPE "Build type" Release
+
+L 85  BUILD_SHARED_LIBS "Build shared library" ON
+
+L 87  MANIFOLD_FLAGS
+
+L 90  TRACY_ENABLE            OFF
+L 91  TRACY_MEMORY_USAGE      OFF
+L 92  MANIFOLD_FUZZ           OFF
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 manifold-3.0.1.tar.gz
+-rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/manifold-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/manifold-jnd/manifold-3.0.1.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/manifold-jnd \
+&& cp -v /tmp/build/manifold-jnd-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/manifold-jnd && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 24G
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 24G
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 24G
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap manifold-jnd-*-x86_64.pkg.tar.*
+...
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/manifold-jnd-*-x86_64.pkg.tar.*
+
+$ sudo cp -v manifold-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/manifold-jnd-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v manifold-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i manifold-3.0.1.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu manifold-jnd
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd manifold-jnd
+# rm /var/cache/pacman/pkg/manifold-jnd-*
+# LC_ALL=C pacman -S manifold-jnd
+
+
+ANCIEN
+======
+

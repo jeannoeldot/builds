@@ -154,6 +154,7 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=4.5.0.61.20250503    # Rebuild MAJ boost boost-libs 1.88.0. SANS materialx NI OpenUsd
+pkgrel=3    # Rebuild Avec Nouveau Patch manifold
 pkgrel=2    # Rebuild Avec Patch manifold
 
 pkgrel=1

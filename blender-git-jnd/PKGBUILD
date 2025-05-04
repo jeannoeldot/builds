@@ -2,7 +2,7 @@
 
 pkgname=blender-git-jnd
 pkgver=4.5.0.61.20250503
-pkgrel=2
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -48,7 +48,7 @@ source=("$_pkgname_git-$pkgver.tar.zst"
 )
 sha256sums=('520781fc7c6225123a292ddcca33510137151b72d7da804c54534cd57d645078'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
-            'db3f5ed2da10995c9380ee160c660bc677d6ce0190c9b587c625c3fd56b183a8'
+            'da5f5bd76c6af405b53ef13eb392aa21686a0d18971ca3b957a2b9d56b673bcb'
 )
 
 _gitname="blender"

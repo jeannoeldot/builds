@@ -1,0 +1,12 @@
+
+[ 83%] Building CXX object source/blender/imbuf/CMakeFiles/bf_imbuf.dir/intern/scaling.cc.o
+/build/blender-git-jnd/src/blender/source/blender/geometry/intern/mesh_boolean_manifold.cc: In function ‘Mesh* blender::geometry::boolean::mesh_boolean_manifold(blender::Span<const Mesh*>, blender::Span<blender::MatBase<float, 4, 4> >, blender::Span<blender::Array<short int> >, BooleanOpParameters, blender::Vector<int>*, BooleanError*)’:
+/build/blender-git-jnd/src/blender/source/blender/geometry/intern/mesh_boolean_manifold.cc:1737:53: error: ‘ResultTooLarge’ is not a member of ‘manifold::Manifold::Error’
+ 1737 |         if (man_result.Status() == Manifold::Error::ResultTooLarge) {
+      |                                                     ^~~~~~~~~~~~~~
+[ 83%] Building CXX object source/blender/imbuf/CMakeFiles/bf_imbuf.dir/intern/stereoimbuf.cc.o
+[ 83%] Building CXX object source/blender/draw/CMakeFiles/bf_draw.dir/intern/draw_view.cc.o
+make[2]: *** [source/blender/geometry/CMakeFiles/bf_geometry.dir/build.make:233: source/blender/geometry/CMakeFiles/bf_geometry.dir/intern/mesh_boolean_manifold.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:9012: source/blender/geometry/CMakeFiles/bf_geometry.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
