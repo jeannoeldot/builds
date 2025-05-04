@@ -1,7 +1,7 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.0.1.20241227
+!!! VERSION = 1.39.3
 
 
 /!\ /!\ /!\ $HOME/05-builds/materialx-jnd
@@ -13,6 +13,37 @@ cp -v MaterialX-1.39.3.tar.gz /tmp/srcp/
 cd /tmp/srcp
 
 tar -xzf MaterialX-1.39.3.tar.gz
+
+
+https://github.com/AcademySoftwareFoundation/MaterialX/commit/fe5f214d381c24f693fc3b68cf3b0b41ee88fb33
+Add missing cstdint include for GCC 15 (#2338)
+
+1) MODIFIER MaterialX-1.39.3/source/MaterialXCore/Library.h
+============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R MaterialX-1.39.3 MaterialX-1.39.3.new
+
+cd MaterialX-1.39.3.new/source/MaterialXCore
+kwrite Library.h
+
+AJOUTER LIGNE 14 :
+#include <cstdint>
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier Library.h~
+rm -f Library.h~
+
+
+cd ../../..
+
+diff -aur MaterialX-1.39.3 MaterialX-1.39.3.new
+diff -aur MaterialX-1.39.3 MaterialX-1.39.3.new > Add-missing-cstdint-include-for-GCC-15.patch
+
+rm -rf MaterialX-1.39.3.new
+
+cd $HOME/05-builds/materialx-jnd
+
+mv -vf /tmp/srcp/Add-missing-cstdint-include-for-GCC-15.patch .
 
 
 

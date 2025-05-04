@@ -1,0 +1,8 @@
+CMake Error at source/MaterialXView/CMakeLists.txt:48 (message):
+  Building the MaterialX viewer requires the NanoGUI submodule to be present.
+  Update your repository by calling the following:
+
+  git submodule update --init --recursive
+
+
+-- Configuring incomplete, errors occurred!

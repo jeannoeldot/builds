@@ -18,16 +18,23 @@ options=('!debug')
 source=("MaterialX-${_ver_release}.tar.gz"
         "materialx-grapheditor.desktop"
         "materialx-view.desktop"
-        "materialx.xml")
+        "materialx.xml"
+        "Add-missing-cstdint-include-for-GCC-15.patch"
+)
 sha256sums=('a72ac8470dea1148c0258d63b5b34605cbac580e4a3f2c624c5bdf4df7204363'
             '88e5ecafa8088b90f799b49c36af59f8462ca7426cdec58215332ee283556ddb'
             '2f2b675540fea39a749f89083a9c341319c1f7b478fbb049a77bd66c29b2ee01'
-            'd9b9426fb94121da052b796542cc74a0c5d7cef06997be70611c25f345553861')
+            'd9b9426fb94121da052b796542cc74a0c5d7cef06997be70611c25f345553861'
+            '8a9bb1473966eadffd91963a33547bbdaa86ca9c5c477036771d2eec713dbf1d'
+)
 
 _pyver=3.13
 
 prepare() {
   cd MaterialX-${_ver_release}
+
+  # Add missing cstdint include for GCC 15 (#2338)
+  patch -Np1 -i "${srcdir}/Add-missing-cstdint-include-for-GCC-15.patch"
 
   # Repath
   sed -i 's|CMAKE_INSTALL_PREFIX|CMAKE_BINARY_DIR|g' python/CMakeLists.txt
@@ -48,7 +55,9 @@ build() {
   	-DCMAKE_SKIP_RPATH=ON \
   	-Wno-dev \
   	-DMATERIALX_BUILD_PYTHON=ON \
-  	-DMATERIALX_BUILD_SHARED_LIBS=ON
+  	-DMATERIALX_BUILD_SHARED_LIBS=ON \
+  	-DMATERIALX_BUILD_VIEWER=ON \
+  	-DMATERIALX_BUILD_GRAPH_EDITOR=ON
 
   cmake --build build
 }

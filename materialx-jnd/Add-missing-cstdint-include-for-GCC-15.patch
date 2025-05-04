@@ -1,0 +1,11 @@
+diff -aur MaterialX-1.39.3/source/MaterialXCore/Library.h MaterialX-1.39.3.new/source/MaterialXCore/Library.h
+--- MaterialX-1.39.3/source/MaterialXCore/Library.h	2025-03-07 22:13:25.000000000 +0100
++++ MaterialX-1.39.3.new/source/MaterialXCore/Library.h	2025-05-04 18:43:36.839573485 +0200
+@@ -11,6 +11,7 @@
+ /// any public header in the MaterialX library.
+ 
+ #include <algorithm>
++#include <cstdint>
+ #include <cstdlib>
+ #include <functional>
+ #include <memory>
