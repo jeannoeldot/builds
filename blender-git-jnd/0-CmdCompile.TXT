@@ -154,7 +154,7 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=4.5.0.61.20250503    # Rebuild MAJ boost boost-libs 1.88.0. SANS materialx NI OpenUsd
-pkgrel=3    # Rebuild Avec Nouveau Patch manifold
+pkgrel=3    # Rebuild manifold-git-jnd
 pkgrel=2    # Rebuild Avec Patch manifold
 
 pkgrel=1
@@ -409,6 +409,10 @@ depends=(...
           'llvm-libs' 'clang'
 makedepends=(...
               'llvm'
+
+
+/!\/!\/!\/!\/!\
+        -DCMAKE_CXX_STANDARD=17 \
 
 
 2-2) VERIFIER CMakeLists.txt SI MODIFIÉ
@@ -700,7 +704,7 @@ openimagedenoise-jnd-*-x86_64.pkg.tar.*,\
 openusd-jnd-*-x86_64.pkg.tar.*,\
 embree-jnd-*-x86_64.pkg.tar.*,\
 openpgl-jnd-*-x86_64.pkg.tar.*,\
-manifold-jnd-*-x86_64.pkg.tar.*\
+manifold-git-jnd-*-x86_64.pkg.tar.*\
 } \
 /tmp/chrootrepo/
 
@@ -723,7 +727,7 @@ alembic-jnd-*-x86_64.pkg.tar.*,\
 openimagedenoise-jnd-*-x86_64.pkg.tar.*,\
 embree-jnd-*-x86_64.pkg.tar.*,\
 openpgl-jnd-*-x86_64.pkg.tar.*,\
-manifold-jnd-*-x86_64.pkg.tar.*\
+manifold-git-jnd-*-x86_64.pkg.tar.*\
 } \
 /tmp/chrootrepo/
 
@@ -868,7 +872,7 @@ blender-git-jnd W: Dependency included, but may not be needed ('vulkan-headers')
 blender-git-jnd W: Dependency included, but may not be needed ('vulkan-driver')
 blender-git-jnd W: Dependency included, but may not be needed ('libdeflate')
 blender-git-jnd W: Dependency included, but may not be needed ('pcre')
-blender-git-jnd W: Dependency included, but may not be needed ('manifold-jnd')
+blender-git-jnd W: Dependency included, but may not be needed ('manifold-git-jnd')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS  /00-repolocal

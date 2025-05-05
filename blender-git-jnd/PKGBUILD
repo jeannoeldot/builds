@@ -29,7 +29,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
           'embree-jnd' 'openimagedenoise-jnd'
           'openpgl-jnd'
-          'manifold-jnd'
+          'manifold-git-jnd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
@@ -82,6 +82,7 @@ build() {
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_SKIP_RPATH=ON \
+        -DCMAKE_CXX_STANDARD=17 \
         -DOPTIX_ROOT_DIR="${srcdir}" \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
