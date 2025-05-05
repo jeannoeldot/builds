@@ -850,5 +850,6 @@ NotImplementedError: Support for egg-based install has been removed.
 -- Installing: /build/materialx-jnd/pkg/materialx-jnd/usr/lib/cmake/MaterialX/MaterialXTargets-noconfig.cmake
 -- Installing: /build/materialx-jnd/pkg/materialx-jnd/usr/lib/cmake/MaterialX/MaterialXConfigVersion.cmake
 -- Installing: /build/materialx-jnd/pkg/materialx-jnd/usr/lib/cmake/MaterialX/MaterialXConfig.cmake
-cp: target '/build/materialx-jnd/pkg/materialx-jnd/usr/bin': No such file or directory
+#####cp: target '/build/materialx-jnd/pkg/materialx-jnd/usr/bin': No such file or directory
+mv: target '/build/materialx-jnd/pkg/materialx-jnd/usr/share/licenses/materialx/': No such file or directory
 

@@ -180,9 +180,17 @@ $ rm -rf /tmp/chrootrepo
 rm -f *~
 
 # Verifications...
+==> WARNING: Package contains reference to $srcdir
+usr/lib/libMaterialXRender.so.1.39.3
+usr/lib/libMaterialXFormat.so.1.39.3
 
 namcap materialx-jnd-*-x86_64.pkg.tar.*
 ...
+materialx-jnd W: Dependency hicolor-icon-theme detected and implicitly satisfied (needed for hicolor theme hierarchy)
+materialx-jnd W: Dependency included, but may not be needed ('glfw')
+materialx-jnd W: Dependency included, but may not be needed ('python-setuptools')
+materialx-jnd W: Dependency included, but may not be needed ('dos2unix')
+materialx-jnd W: Dependency included, but may not be needed ('zenity')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
