@@ -1,0 +1,60 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 3.0.1.20241227
+
+
+/!\ /!\ /!\ $HOME/05-builds/manifold-git-jnd
+
+mkdir /tmp/srcp
+
+cp -v manifold-git-3.0.1.20250503.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf manifold-git-3.0.1.20250503.tar.gz
+
+
+Add missing cstdint include for GCC 15
+
+1) MODIFIER manifold/include/manifold/manifold.h
+============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R manifold manifold.new
+
+cd manifold.new/include/manifold
+kwrite manifold.h
+
+AJOUTER LIGNE 21 :
+#include <cstdint>
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier manifold.h~
+rm -f manifold.h~
+
+
+cd ../../..
+
+diff -aur manifold manifold.new
+diff -aur manifold manifold.new > Add-missing-cstdint-include-for-GCC-15.patch
+
+rm -rf manifold.new
+
+cd $HOME/05-builds/manifold-git-jnd
+
+mv -vf /tmp/srcp/Add-missing-cstdint-include-for-GCC-15.patch .
+
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+

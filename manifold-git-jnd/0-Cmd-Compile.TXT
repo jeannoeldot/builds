@@ -1,0 +1,272 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/manifold-git-jnd
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/elalish/manifold/commits/master/
+==> Commits on May 3, 2025
+==> 20250503
+
+1.3 SOURCES
+==============
+!!! Répertoire clone de manifold dans : /0-DataLinux/05-builds-dir-git/manifold
+-------------------------------------------------------------------------------
+
+cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep manifold :
+--------------------------------
+ls | grep manifold
+
+!!! SI REP manifold N'EXISTE PAS
+-----------------------------------
+git clone https://github.com/elalish/manifold.git manifold
+
+!!! SI REP manifold EXISTE
+-----------------------------
+cd manifold
+git pull --rebase origin master
+cd ..
+
+!!!!! Vérifier VERSION :
+head -n 38 manifold/CMakeLists.txt | grep VERSION
+set(MANIFOLD_VERSION_MAJOR 3)
+set(MANIFOLD_VERSION_MINOR 0)
+set(MANIFOLD_VERSION_PATCH 1)
+
+==> Version = 3.0.1
+
+==> Version = 3.0.1.20250503
+
+1-7-1) FAIRE ARCHIVE TAR.GZ
+=================================
+
+tar -cvzf manifold-git-3.0.1.20250503.tar.gz --exclude={.git,.github,.vscode} manifold
+sync
+
+1-7-5) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/manifold-git-jnd
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/manifold-git-3.0.1.20250503.tar.gz .
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=manifold-git-jnd
+pkgver=3.0.1.20250503
+pkgrel=1
+
+
+!!!!!!
+_pkgname_git=manifold-git
+
+
+license=('Apache-2.0')
+
+depends=('onetbb'
+)
+
+makedepends=('cmake' 'python'
+)
+
+conflicts=('manifold' 'manifold-jnd')
+provides=('manifold')
+
+options=('!debug')
+
+SANS PATCH
+----------
+sha256sum manifold-git-3.0.1.20250503.tar.gz
+
+sha256sum Add-missing-cstdint-include-for-GCC-15.patch
+
+source=(""$_pkgname_git-$pkgver.tar.gz""
+        "Add-missing-cstdint-include-for-GCC-15.patch"
+)
+sha256sums=('3e38db14404529e2813ea736acb40062568c9f62e93f4be1294a160ec1389c89'
+            '8a9bb1473966eadffd91963a33547bbdaa86ca9c5c477036771d2eec713dbf1d'
+)
+
+
+_gitname="manifold"
+
+
+prepare() {
+  cd "${_gitname}"
+
+  # Add missing cstdint include for GCC 15 (#2338)
+  patch -Np1 -i "${srcdir}/Add-missing-cstdint-include-for-GCC-15.patch"
+}
+
+build() {
+  cd "${_gitname}"
+
+package() {
+  cd "${_gitname}"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf manifold-git-3.0.1.20250503.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/manifold/CMakeLists.txt &
+!!! VOIR
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/manifold.cmake
+
+L 40  MANIFOLD_CROSS_SECTION  ON ==> OFF
+L 41  MANIFOLD_DEBUG          OFF
+L 45  MANIFOLD_DOWNLOADS      ON ==> OFF
+L 49  MANIFOLD_EXPORT         OFF
+L 50  MANIFOLD_PAR            OFF ==> ON
+L 52  MANIFOLD_OPTIMIZED      OFF
+L 56  MANIFOLD_TEST           ON ==> OFF
+L 57  MANIFOLD_PYBIND         OFF
+L 60  MANIFOLD_CBIND          ON ==> OFF
+L 68  MANIFOLD_JSBIND         ON ==> OFF
+
+L 82  MANIFOLD_USE_BUILTIN_TBB        OFF
+L 83  MANIFOLD_USE_BUILTIN_CLIPPER2   OFF
+L 84  MANIFOLD_USE_BUILTIN_NANOBIND   OFF
+
+L 87  CMAKE_BUILD_TYPE "Build type" Release
+
+L 89  BUILD_SHARED_LIBS "Build shared library" ON
+
+L 91  MANIFOLD_FLAGS
+
+L 94  TRACY_ENABLE            OFF
+L 95  TRACY_MEMORY_USAGE      OFF
+L 96  MANIFOLD_FUZZ           OFF
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 manifold-git-3.0.1.20250503.tar.gz
+-rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+-rw-r--r--  1 jnd users      374  5 mai   12:13 Add-missing-cstdint-include-for-GCC-15.patch
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/manifold-git-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/manifold-git-jnd/manifold-git-3.0.1.20250503.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/manifold-git-jnd \
+&& cp -v /tmp/build/manifold-git-jnd-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/manifold-git-jnd && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 24G
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 24G
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 24G
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+namcap manifold-git-jnd-*-x86_64.pkg.tar.*
+...
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/manifold-git-jnd-*-x86_64.pkg.tar.*
+
+$ sudo cp -v manifold-git-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/manifold-git-jnd-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v manifold-git-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i manifold-git-3.0.1.20250503.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!!! PAS OBLIGATOIRE SI COMPILE opencollada openimageio openshadinglanguage BLENDER
+===================================================================================
+!!! EN ROOT
+# cd
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu manifold-git-jnd
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd manifold-git-jnd
+# rm /var/cache/pacman/pkg/manifold-git-jnd-*
+# LC_ALL=C pacman -S manifold-git-jnd
+
+
+ANCIEN
+======
+

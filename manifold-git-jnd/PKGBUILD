@@ -1,0 +1,58 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=manifold-git-jnd
+pkgver=3.0.1.20250503
+pkgrel=1
+_pkgname_git=manifold-git
+pkgdesc="Geometry library dedicated to creating and operating on manifold triangle meshes"
+url="https://github.com/elalish/manifold"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('onetbb'
+)
+makedepends=('cmake' 'python'
+)
+conflicts=('manifold' 'manifold-jnd')
+provides=('manifold')
+#options=(staticlibs)
+options=('!debug')
+source=("$_pkgname_git-$pkgver.tar.gz"
+        "Add-missing-cstdint-include-for-GCC-15.patch"
+)
+sha256sums=('3e38db14404529e2813ea736acb40062568c9f62e93f4be1294a160ec1389c89'
+            '68e41edf299f8df27990ff73251f5cd0f8e616c010adfc49596fe5a5b77d0170'
+)
+
+_gitname="manifold"
+
+prepare() {
+  cd "${_gitname}"
+
+  # Add missing cstdint include for GCC 15 (#2338)
+  patch -Np1 -i "${srcdir}/Add-missing-cstdint-include-for-GCC-15.patch"
+}
+
+build() {
+  cd "${_gitname}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DMANIFOLD_CROSS_SECTION=OFF \
+    -DMANIFOLD_DOWNLOADS=OFF \
+    -DMANIFOLD_PAR=ON \
+    -DMANIFOLD_TEST=OFF \
+    -DMANIFOLD_CBIND=OFF \
+    -DMANIFOLD_JSBIND=OFF
+  make -C build
+}
+
+package() {
+  cd "${_gitname}"
+  
+  DESTDIR="${pkgdir}" make -C build install
+}
