@@ -48,7 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.02.20250204
-pkgrel=3      # rebuild MAJ boost boost-libs 1.88.0
+pkgrel=3      # rebuild MAJ boost boost-libs 1.88.0 + materialx-jnd
 pkgrel=2      # rebuild MAJ OIIO 3.0.5.0
 pkgrel=1      # v25.02a
 
@@ -89,7 +89,7 @@ license=('Apache-2.0')
 
 depends=('boost-libs' 'glfw'
          'onetbb'
-         'materialx'
+         'materialx-jnd'
          'openexr'
          'opencolorio'
          'opensubdiv-jnd'
@@ -120,6 +120,7 @@ AVEC PATCH
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "fix-error-m_wait_ctx-was-not-declared.patch"
         "usd-cmake-find-dependency.patch"
+        "Fix-Error-Compile-GCC-15.patch"
 )
 
 sha256sum OpenUSD-v25.02a.tar.gz
@@ -278,11 +279,13 @@ $ mkpkg-chroot-repo
 SI depends= 'opensubdiv-jnd'
          'openimageio-jnd'
          'openvdb-jnd'
+         'materialx-jnd'
 
 SI makedepends=
 ================================================================================
 $ cp -v /00-repolocal/\
 {\
+materialx-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
 openimageio-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*\

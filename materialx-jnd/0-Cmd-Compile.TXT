@@ -36,6 +36,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=materialx-jnd
 pkgver=1.39.3.20250307
+pkgrel=2      # $pkgname ==> materialx
+
 pkgrel=1
 
 

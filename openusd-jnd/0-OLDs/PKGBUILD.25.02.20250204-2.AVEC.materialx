@@ -11,7 +11,7 @@ arch=('x86_64')
 license=('Apache-2.0')
 depends=('boost-libs' 'glfw'
          'onetbb'
-         'materialx-jnd'
+         'materialx'
          'openexr'
          'opencolorio'
          'opensubdiv-jnd'
@@ -45,7 +45,6 @@ prepare() {
   patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
   #
   patch -Np1 -i "${srcdir}/usd-cmake-find-dependency.patch"
-  #
   # Fixe: error: ‘uint16_t’ does not name a type avec GCC 15
   patch -Np1 -i "${srcdir}/Fix-Error-Compile-GCC-15.patch"
 

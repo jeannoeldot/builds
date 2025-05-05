@@ -2,7 +2,7 @@
 
 pkgname=materialx-jnd
 pkgver=1.39.3.20250307
-pkgrel=1
+pkgrel=2
 _ver_release="1.39.3"
 pkgdesc="Open standard for representing rich material and look-development content in computer graphics"
 arch=('x86_64')
@@ -72,9 +72,9 @@ package() {
   	mv "$file" $name
   done
 
-  mkdir -p ${pkgdir}/usr/share/$pkgname
-  mv ${pkgdir}/usr/resources ${pkgdir}/usr/share/$pkgname/resources
-  mv ${pkgdir}/usr/libraries ${pkgdir}/usr/share/$pkgname/libraries
+  mkdir -p ${pkgdir}/usr/share/materialx
+  mv ${pkgdir}/usr/resources ${pkgdir}/usr/share/materialx/resources
+  mv ${pkgdir}/usr/libraries ${pkgdir}/usr/share/materialx/libraries
 
   mkdir -p ${pkgdir}/usr/bin
   cp ${pkgdir}/usr/python/Scripts/* ${pkgdir}/usr/bin
@@ -90,10 +90,10 @@ package() {
   sed -i 's|python|lib/python'$_pyver'/site-packages/MaterialX|g' ${pkgdir}/usr/lib/cmake/MaterialX/MaterialXConfig.cmake
   sed -i 's|resources|share/materialx/resources|g' ${pkgdir}/usr/lib/cmake/MaterialX/MaterialXConfig.cmake
 
-  mkdir -p ${pkgdir}/usr/share/{applications,mime/model,licenses/$pkgname}
+  mkdir -p ${pkgdir}/usr/share/{applications,mime/model,licenses/materialx}
   cp ${srcdir}/{materialx-grapheditor.desktop,materialx-view.desktop} ${pkgdir}/usr/share/applications
   install -Dm644 ${srcdir}/materialx.xml ${pkgdir}/usr/share/mime/model/materialx.xml
-  mv ${pkgdir}/usr/{LICENSE,THIRD-PARTY.md} ${pkgdir}/usr/share/licenses/$pkgname/
+  mv ${pkgdir}/usr/{LICENSE,THIRD-PARTY.md} ${pkgdir}/usr/share/licenses/materialx/
 
   # Remove junk
   rm -rf ${pkgdir}/build
