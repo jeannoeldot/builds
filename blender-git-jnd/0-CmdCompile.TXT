@@ -153,11 +153,13 @@ voir CmdFairePatches.TXT
 
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
-pkgver=4.5.0.61.20250503    # Rebuild MAJ boost boost-libs 1.88.0. SANS materialx NI OpenUsd
+pkgver=4.5.0.61.20250503
+pkgrel=4    # Rebuild Avec materialx et OpenUsd
 pkgrel=3    # Rebuild manifold-git-jnd
 pkgrel=2    # Rebuild Avec Patch manifold
 
 pkgrel=1
+pkgrel=1    # Rebuild MAJ boost boost-libs 1.88.0. SANS materialx NI OpenUsd
 pkgrel=1    # MAJ + MAJ OPTIX 8.1 (OPTIX 9.0 PAS OK)
 pkgrel=1    # MAJ + Rebuild OSL 1.14.4.0 AVEC CUDA+OPTIX
 pkgrel=1    # MAJ + Rebuild MAJ OIIO 3.0.3.1 + OSL 1.14.4.0
@@ -689,7 +691,7 @@ AVEC openusd-jnd
 ----------------
 SI depends= 'opencollada-git-jnd' 'openshadinglanguage-jnd' 'openimageio-jnd'
             'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd' 'openimagedenoise-jnd'
-            'embree-jnd' 'openpgl-jnd' 'openusd-jnd'
+            'embree-jnd' 'openpgl-jnd' 'openusd-jnd' 'materialx-jnd'
 SI makedepends=
 ================================================================================
 $ cp -v /00-repolocal/\
@@ -702,6 +704,7 @@ openvdb-jnd-*-x86_64.pkg.tar.*,\
 alembic-jnd-*-x86_64.pkg.tar.*,\
 openimagedenoise-jnd-*-x86_64.pkg.tar.*,\
 openusd-jnd-*-x86_64.pkg.tar.*,\
+materialx-jnd-*-x86_64.pkg.tar.*,\
 embree-jnd-*-x86_64.pkg.tar.*,\
 openpgl-jnd-*-x86_64.pkg.tar.*,\
 manifold-git-jnd-*-x86_64.pkg.tar.*\
@@ -872,7 +875,6 @@ blender-git-jnd W: Dependency included, but may not be needed ('vulkan-headers')
 blender-git-jnd W: Dependency included, but may not be needed ('vulkan-driver')
 blender-git-jnd W: Dependency included, but may not be needed ('libdeflate')
 blender-git-jnd W: Dependency included, but may not be needed ('pcre')
-blender-git-jnd W: Dependency included, but may not be needed ('manifold-git-jnd')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS  /00-repolocal

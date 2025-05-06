@@ -2,7 +2,7 @@
 
 pkgname=blender-git-jnd
 pkgver=4.5.0.61.20250503
-pkgrel=4
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -30,7 +30,6 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'embree-jnd' 'openimagedenoise-jnd'
           'openpgl-jnd'
           'manifold-git-jnd'
-          'materialx-jnd' 'openusd-jnd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
@@ -83,6 +82,7 @@ build() {
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
         -DCMAKE_SKIP_RPATH=ON \
+        -DCMAKE_CXX_STANDARD=17 \
         -DOPTIX_ROOT_DIR="${srcdir}" \
         -DWITH_XR_OPENXR=OFF \
         -DWITH_SYSTEM_FREETYPE=ON \
