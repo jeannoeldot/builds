@@ -1,4 +1,105 @@
 
+V 3.0.6.1
+==========
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/libOpenImageIO_Util.so.3.0.6
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/libOpenImageIO_Util.so.3.0
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/libOpenImageIO_Util.so
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/libOpenImageIO.so.3.0.6
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/libOpenImageIO.so.3.0
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/libOpenImageIO.so.3.0.6" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/libOpenImageIO.so
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/iconvert
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/iconvert" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/idiff
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/idiff" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/igrep
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/igrep" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/iinfo
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/iinfo" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/maketx
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/maketx" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/oiiotool
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/oiiotool" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/testtex
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/testtex" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/iv
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/bin/iv" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/python3.13/site-packages/OpenImageIO/OpenImageIO.cpython-313-x86_64-linux-gnu.so
+-- Set non-toolchain portion of runtime path of "/build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/python3.13/site-packages/OpenImageIO/OpenImageIO.cpython-313-x86_64-linux-gnu.so" to ""
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/python3.13/site-packages/OpenImageIO/__init__.py
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/Imath.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/argparse.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/atomic.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/attrdelegate.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/benchmark.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/bit.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/color.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/dassert.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/deepdata.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/errorhandler.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/export.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/filesystem.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/filter.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/fmath.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/fstream_mingw.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/function_view.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/half.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/hash.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/image_view.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/imagebuf.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/imagebufalgo.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/imagebufalgo_opencv.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/imagebufalgo_util.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/imagecache.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/imageio.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/memory.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/optparser.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/parallel.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/paramlist.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/platform.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/plugin.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/refcnt.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/simd.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/span.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/span_util.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/strided_ptr.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/string_view.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/strongparam.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/strutil.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/sysutil.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/texture.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/thread.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/tiffutils.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/timer.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/type_traits.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/typedesc.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/unittest.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/unordered_map_concurrent.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/ustring.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/vecparam.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/version.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/oiioversion.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/detail/farmhash.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/detail/fmt.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/detail/fmt/format.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/detail/fmt/ostream.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/detail/fmt/printf.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/include/OpenImageIO/detail/fmt/std.h
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/share/doc/OpenImageIO/LICENSE.md
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/share/doc/OpenImageIO/THIRD-PARTY.md
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/share/doc/OpenImageIO/CHANGES.md
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/share/doc/OpenImageIO/CHANGES-0.x.md
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/share/doc/OpenImageIO/CHANGES-1.x.md
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/share/doc/OpenImageIO/CHANGES-2.x.md
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/pkgconfig/OpenImageIO.pc
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/cmake/OpenImageIO/OpenImageIOConfig.cmake
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/cmake/OpenImageIO/OpenImageIOConfigVersion.cmake
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/cmake/OpenImageIO/OpenImageIOTargets.cmake
+-- Installing: /build/openimageio-jnd/pkg/openimageio-jnd/usr/lib/cmake/OpenImageIO/OpenImageIOTargets-release.cmake
+
+
 V 3.0.3.1
 ==========
 Install the project...

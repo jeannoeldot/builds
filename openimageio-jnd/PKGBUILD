@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-jnd
-pkgver=3.0.5.0.20250403
+pkgver=3.0.6.1.20250503
 pkgrel=1
-_name_release="OpenImageIO-3.0.5.0"
-_ver_release="v3.0.5.0"
+_name_release="OpenImageIO-3.0.6.1"
+_ver_release="v3.0.6.1"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -16,6 +16,7 @@ depends=('ffmpeg' 'freetype2'
          'libpng' 'libwebp'
          'opencolorio' 'openexr'
          'libjpeg-turbo' 'openjpeg2' 'libjxl'
+         'libultrahdr'
          'qt6-base'
          'python'
          'pugixml' 'pybind11' 'python-numpy'
@@ -29,7 +30,7 @@ provides=('openimageio')
 options=('!debug')
 source=("OpenImageIO-${_ver_release}.tar.gz"
 )
-sha256sums=('340bb14a084d94918de8d46af14e361168215430f3dd6c336b2ffb895fe9d5cb'
+sha256sums=('4d0fb92e4964f79dfaed77ac73f1a7f754c671a9f5ad29c7950c0844916ce5f5'
 )
 
 build() {
