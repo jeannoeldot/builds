@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=25.02.20250204
-pkgrel=3
-_ver_release="25.02a"
+pkgver=25.05.20250429
+pkgrel=1
+_ver_release="25.05"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -27,28 +27,12 @@ conflicts=('usd' 'openusd' 'openusd-git')
 provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
-        "fix-error-m_wait_ctx-was-not-declared.patch"
-        "usd-cmake-find-dependency.patch"
-        "Fix-Error-Compile-GCC-15.patch"
 )
-sha256sums=('475cd0990366a713f19d1f0701c37be17ecd9d3de7a3503a11bbdf80d3c003ce'
-            '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
-            '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
-            '9fda3dabde98592beae8675850db93f02842ea11f20b42dad0ceb075cff10f23'
+sha256sums=('231faca9ab71fa63d6c1e0da18bda0c365f82d9bef1cfd4b3d3d6784c8d5fb96'
 )
 
 prepare() {
   cd "${_name_release}"
-
-  # Compatible avec onetbb 2022.0.0
-  # Fixe: error: ‘m_wait_ctx’ was not declared in this scope
-  patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
-  #
-  patch -Np1 -i "${srcdir}/usd-cmake-find-dependency.patch"
-  #
-  # Fixe: error: ‘uint16_t’ does not name a type avec GCC 15
-  patch -Np1 -i "${srcdir}/Fix-Error-Compile-GCC-15.patch"
-
 
   _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 

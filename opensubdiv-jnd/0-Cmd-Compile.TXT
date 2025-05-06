@@ -41,6 +41,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=opensubdiv-jnd               # opensubdiv ds community
 pkgver=3.6.0.20230921
+pkgrel=2    # Preserve static libs + !lto staticlibs
 pkgrel=1
 
 pkgrel=3  # Rebuild avec cmake -Bbuild
@@ -310,7 +311,6 @@ namcap opensubdiv-jnd-*-x86_64.pkg.tar.*
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/opensubdiv-git-*-x86_64.pkg.tar.*
 $ sudo rm /00-repolocal/opensubdiv-jnd-*-x86_64.pkg.tar.*
 
 $ sudo cp -v opensubdiv-jnd-*-x86_64.pkg.tar.* /00-repolocal/

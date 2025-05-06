@@ -2,19 +2,19 @@
 
 pkgname=opensubdiv-jnd
 pkgver=3.6.0.20230921
-pkgrel=1
+pkgrel=2
 _ver_release="3_6_0"
 _name_release="OpenSubdiv-${_ver_release}"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
-license=('APACHE-2.0')
+license=('Apache-2.0')
 url="http://graphics.pixar.com/opensubdiv"
 depends=('glfw-x11' 'onetbb' 'libxcursor' 'xorg-xrandr' 'libxinerama' 'libxi'
 )
 makedepends=('cmake' 'mesa' 'python')
 conflicts=('opensubdiv' 'opensubdiv-git')
 provides=('opensubdiv')
-options=('!debug')
+options=('!debug' '!lto' 'staticlibs')
 source=("OpenSubdiv-v${_ver_release}.tar.gz"
 )
 sha256sums=('bebfd61ab6657a4f4ff27845fb66a167d00395783bfbd253254d87447ed1d879'
