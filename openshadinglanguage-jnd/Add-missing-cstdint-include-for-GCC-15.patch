@@ -1,0 +1,11 @@
+diff -aur OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h OpenShadingLanguage-1.14.5.1.new/src/include/OSL/platform.h
+--- OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h	2025-05-03 19:19:30.000000000 +0200
++++ OpenShadingLanguage-1.14.5.1.new/src/include/OSL/platform.h	2025-05-06 15:27:30.384430466 +0200
+@@ -20,6 +20,7 @@
+ 
+ #include <cstring>
+ #include <memory>
++#include <cstdint>
+ 
+ #include <OSL/oslversion.h>
+ 

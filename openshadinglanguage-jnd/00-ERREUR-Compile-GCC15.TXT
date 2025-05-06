@@ -1,0 +1,98 @@
+In file included from /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build/include/OSL/oslconfig.h:14:
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:539:28: error: unknown type name 'uint32_t'
+  539 | template<> OSL_FORCEINLINE uint32_t bitcast<uint32_t, float>(const float& val) noexcept {
+      |                            ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:539:45: error: use of undeclared identifier 'uint32_t'
+  539 | template<> OSL_FORCEINLINE uint32_t bitcast<uint32_t, float>(const float& val) noexcept {
+      |                                             ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:545:49: error: use of undeclared identifier 'uint32_t'
+  545 | template<> OSL_FORCEINLINE float bitcast<float, uint32_t>(const uint32_t& val) noexcept {
+      |                                                 ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:545:65: error: unknown type name 'uint32_t'
+  545 | template<> OSL_FORCEINLINE float bitcast<float, uint32_t>(const uint32_t& val) noexcept {
+      |                                                                 ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:551:28: error: unknown type name 'uint64_t'
+  551 | template<> OSL_FORCEINLINE uint64_t bitcast<uint64_t, double>(const double& val) noexcept {
+      |                            ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:551:45: error: use of undeclared identifier 'uint64_t'
+  551 | template<> OSL_FORCEINLINE uint64_t bitcast<uint64_t, double>(const double& val) noexcept {
+      |                                             ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:557:51: error: use of undeclared identifier 'uint64_t'
+  557 | template<> OSL_FORCEINLINE double bitcast<double, uint64_t>(const uint64_t& val) noexcept {
+      |                                                   ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:557:67: error: unknown type name 'uint64_t'
+  557 | template<> OSL_FORCEINLINE double bitcast<double, uint64_t>(const uint64_t& val) noexcept {
+      |                                                                   ^
+In file included from opfmt.cpp:14:
+In file included from /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/fmt_util.h:7:
+In file included from /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/rs_free_function.h:7:
+In file included from /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/encodedtypes.h:7:
+In file included from /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build/include/OSL/oslconfig.h:14:
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:539:28: error: unknown type name 'uint32_t'
+  539 | template<> OSL_FORCEINLINE uint32_t bitcast<uint32_t, float>(const float& val) noexcept {
+      |                            ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:539:45: error: use of undeclared identifier 'uint32_t'
+  539 | template<> OSL_FORCEINLINE uint32_t bitcast<uint32_t, float>(const float& val) noexcept {
+      |                                             ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:545:49: error: use of undeclared identifier 'uint32_t'
+  545 | template<> OSL_FORCEINLINE float bitcast<float, uint32_t>(const uint32_t& val) noexcept {
+      |                                                 ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:545:65: error: unknown type name 'uint32_t'
+  545 | template<> OSL_FORCEINLINE float bitcast<float, uint32_t>(const uint32_t& val) noexcept {
+      |                                                                 ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:551:28: error: unknown type name 'uint64_t'
+  551 | template<> OSL_FORCEINLINE uint64_t bitcast<uint64_t, double>(const double& val) noexcept {
+      |                            ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:551:45: error: use of undeclared identifier 'uint64_t'
+  551 | template<> OSL_FORCEINLINE uint64_t bitcast<uint64_t, double>(const double& val) noexcept {
+      |                                             ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:557:51: error: use of undeclared identifier 'uint64_t'
+  557 | template<> OSL_FORCEINLINE double bitcast<double, uint64_t>(const uint64_t& val) noexcept {
+      |                                                   ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:557:67: error: unknown type name 'uint64_t'
+  557 | template<> OSL_FORCEINLINE double bitcast<double, uint64_t>(const uint64_t& val) noexcept {
+      |                                                                   ^
+In file included from llvm_ops.cpp:80:
+In file included from /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/dual.h:11:
+In file included from /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build/include/OSL/oslconfig.h:14:
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:539:28: error: unknown type name 'uint32_t'
+  539 | template<> OSL_FORCEINLINE uint32_t bitcast<uint32_t, float>(const float& val) noexcept {
+      |                            ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:539:45: error: use of undeclared identifier 'uint32_t'
+  539 | template<> OSL_FORCEINLINE uint32_t bitcast<uint32_t, float>(const float& val) noexcept {
+      |                                             ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:545:49: error: use of undeclared identifier 'uint32_t'
+  545 | template<> OSL_FORCEINLINE float bitcast<float, uint32_t>(const uint32_t& val) noexcept {
+      |                                                 ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:545:65: error: unknown type name 'uint32_t'
+  545 | template<> OSL_FORCEINLINE float bitcast<float, uint32_t>(const uint32_t& val) noexcept {
+      |                                                                 ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:551:28: error: unknown type name 'uint64_t'
+  551 | template<> OSL_FORCEINLINE uint64_t bitcast<uint64_t, double>(const double& val) noexcept {
+      |                            ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:551:45: error: use of undeclared identifier 'uint64_t'
+  551 | template<> OSL_FORCEINLINE uint64_t bitcast<uint64_t, double>(const double& val) noexcept {
+      |                                             ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:557:51: error: use of undeclared identifier 'uint64_t'
+  557 | template<> OSL_FORCEINLINE double bitcast<double, uint64_t>(const uint64_t& val) noexcept {
+      |                                                   ^
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h:557:67: error: unknown type name 'uint64_t'
+  557 | template<> OSL_FORCEINLINE double bitcast<double, uint64_t>(const uint64_t& val) noexcept {
+      |                                                                   ^
+[ 28%] Built target pyoslquery
+[ 29%] Generating opmatrix_host_rs.bc
+8 errors generated.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:610: src/liboslexec/llvm_ops_host.bc] Error 1
+make[2]: *** Waiting for unfinished jobs....
+8 errors generated.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:668: src/liboslexec/llvm_ops_host_rs.bc] Error 1
+8 errors generated.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:726: src/liboslexec/opfmt_host_rs.bc] Error 1
+[ 29%] Built target oslcomp
+[ 29%] Building CXX object src/oslc/CMakeFiles/oslc.dir/oslcmain.cpp.o
+make[1]: *** [CMakeFiles/Makefile2:1499: src/liboslexec/CMakeFiles/oslexec.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 30%] Linking CXX executable ../../bin/oslc
+[ 30%] Built target oslc
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build'
