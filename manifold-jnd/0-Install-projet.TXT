@@ -1,4 +1,42 @@
 
+V 3.1.0
+=======
+-- Install configuration: "Release"
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/libmanifold.so.3.1.0
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/libmanifold.so.3
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/libmanifold.so
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/cmake/manifold/manifoldTargets.cmake
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/cmake/manifold/manifoldTargets-release.cmake
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/cmake/manifold/manifoldConfigVersion.cmake
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/cmake/manifold/manifoldConfig.cmake
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/common.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/linalg.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/manifold.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/optional_assert.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/polygon.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/vec_view.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/vec_view.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/polygon.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/optional_assert.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/meshIO.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/manifold.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/linalg.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/cross_section.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/common.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/vec_view.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/polygon.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/optional_assert.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/meshIO.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/manifold.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/linalg.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/cross_section.h
+-- Up-to-date: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/common.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/include/manifold/version.h
+-- Installing: /build/manifold-jnd/pkg/manifold-jnd/usr/lib/pkgconfig/manifold.pc
+
+
 V 3.0.1
 =======
 -- Install configuration: "Release"
