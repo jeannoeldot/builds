@@ -286,7 +286,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
          
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
          
-         'opencollada-git' 'openimageio-jnd'
+         'openimageio-jnd'
 !!!!!!!! ==> PAS OK
 [ALSOFT] (EE) Failed to set real-time priority for thread: Operation not permitted (1)
 [ALSOFT] (EE) Failed to set real-time priority for thread: Operation not permitted (1)
@@ -506,7 +506,6 @@ option WITH_HYDRA "Enable Hydra render engine" ON
 
 Lignes 481
 # 3D format support
-option WITH_OPENCOLLADA	ON  dep = opencollada-git-jnd   dep = pcre
 
 # Sound output
 502   option WITH_JACK          ==> _option_default ON         dep =  jack2
@@ -710,7 +709,7 @@ $ mkpkg-chroot-repo
 !!!!!!!!!!!!!!!!!!!!!!!!!
 AVEC openusd-jnd
 ----------------
-SI depends= 'opencollada-git-jnd' 'openshadinglanguage-jnd' 'openimageio-jnd'
+SI depends= 'openshadinglanguage-jnd' 'openimageio-jnd'
             'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd' 'openimagedenoise-jnd'
             'embree-jnd' 'openpgl-jnd' 'openusd-jnd' 'materialx-jnd'
 SI makedepends=
@@ -719,7 +718,6 @@ $ cp -v /00-repolocal/\
 {\
 openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
 openimageio-jnd-*-x86_64.pkg.tar.*,\
-opencollada-git-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*,\
 alembic-jnd-*-x86_64.pkg.tar.*,\
@@ -735,7 +733,7 @@ manifold-jnd-*-x86_64.pkg.tar.*\
 !!!!!!!!!!!!!!!!!!!!!!!!!
 SANS openusd-jnd
 ----------------
-SI depends= 'opencollada-git-jnd' 'openshadinglanguage-jnd' 'openimageio-jnd'
+SI depends= 'openshadinglanguage-jnd' 'openimageio-jnd'
             'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd' 'openimagedenoise-jnd'
             'embree-jnd' 'openpgl-jnd'
 SI makedepends=
@@ -744,7 +742,6 @@ $ cp -v /00-repolocal/\
 {\
 openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
 openimageio-jnd-*-x86_64.pkg.tar.*,\
-opencollada-git-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*,\
 alembic-jnd-*-x86_64.pkg.tar.*,\
@@ -965,6 +962,59 @@ sed -i 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1749379598|' /home/jnd
 ================================================================
 ANCIENS
 ========
+
+'opencollada-git'
+option WITH_OPENCOLLADA	ON  dep = opencollada-git-jnd   dep = pcre
+
+!!!!!!!!!!!!!!!!!!!!!!!!!
+AVEC openusd-jnd
+----------------
+SI depends= 'opencollada-git-jnd' 'openshadinglanguage-jnd' 'openimageio-jnd'
+            'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd' 'openimagedenoise-jnd'
+            'embree-jnd' 'openpgl-jnd' 'openusd-jnd' 'materialx-jnd'
+SI makedepends=
+================================================================================
+$ cp -v /00-repolocal/\
+{\
+openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
+openimageio-jnd-*-x86_64.pkg.tar.*,\
+opencollada-git-jnd-*-x86_64.pkg.tar.*,\
+opensubdiv-jnd-*-x86_64.pkg.tar.*,\
+openvdb-jnd-*-x86_64.pkg.tar.*,\
+alembic-jnd-*-x86_64.pkg.tar.*,\
+openimagedenoise-jnd-*-x86_64.pkg.tar.*,\
+openusd-jnd-*-x86_64.pkg.tar.*,\
+materialx-jnd-*-x86_64.pkg.tar.*,\
+embree-jnd-*-x86_64.pkg.tar.*,\
+openpgl-jnd-*-x86_64.pkg.tar.*,\
+manifold-jnd-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
+
+!!!!!!!!!!!!!!!!!!!!!!!!!
+SANS openusd-jnd
+----------------
+SI depends= 'opencollada-git-jnd' 'openshadinglanguage-jnd' 'openimageio-jnd'
+            'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd' 'openimagedenoise-jnd'
+            'embree-jnd' 'openpgl-jnd'
+SI makedepends=
+================================================================================
+$ cp -v /00-repolocal/\
+{\
+openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
+openimageio-jnd-*-x86_64.pkg.tar.*,\
+opencollada-git-jnd-*-x86_64.pkg.tar.*,\
+opensubdiv-jnd-*-x86_64.pkg.tar.*,\
+openvdb-jnd-*-x86_64.pkg.tar.*,\
+alembic-jnd-*-x86_64.pkg.tar.*,\
+openimagedenoise-jnd-*-x86_64.pkg.tar.*,\
+embree-jnd-*-x86_64.pkg.tar.*,\
+openpgl-jnd-*-x86_64.pkg.tar.*,\
+manifold-jnd-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
+
+
 
 /!\/!\/!\/!\/!\
 python-numpy 2.0.0-1:
