@@ -1,0 +1,25 @@
+
+ERREUR Real Snow
+Generate snow mesh.
+Add-on by nacioss
+
+
+
+$ blender
+Info: Deleted 1 object(s)
+Traceback (most recent call last):
+  File "/home/jnd/.config/blender/4.5/extensions/blender_org/real_snow/__init__.py", line 118, in execute
+    add_material(snow)
+    ~~~~~~~~~~~~^^^^^^
+  File "/home/jnd/.config/blender/4.5/extensions/blender_org/real_snow/__init__.py", line 281, in add_material
+    principled.inputs[9].default_value = 1          # Subsurface scale
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: bpy_struct: item.attr = val: sequence expected at dimension 1, not 'int'
+Error: Python: Traceback (most recent call last):
+  File "/home/jnd/.config/blender/4.5/extensions/blender_org/real_snow/__init__.py", line 118, in execute
+    add_material(snow)
+    ~~~~~~~~~~~~^^^^^^
+  File "/home/jnd/.config/blender/4.5/extensions/blender_org/real_snow/__init__.py", line 281, in add_material
+    principled.inputs[9].default_value = 1          # Subsurface scale
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: bpy_struct: item.attr = val: sequence expected at dimension 1, not 'int'

@@ -1,0 +1,130 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=blender-git-jnd
+pkgver=4.5.0.77.20250524
+pkgrel=1
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('x86_64')
+license=('GPL-3.0-or-later')
+url="https://blender.org/"
+depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
+          'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp' 'libjpeg-turbo'
+          'python'
+          'ffmpeg' 'fftw'
+          'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
+          'libglvnd' 'glfw' 'libxi'
+          'boost-libs' 'onetbb' 'draco'
+          'jemalloc'
+          'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
+          'llvm-libs' 'clang'
+          'potrace' 'pugixml' 'libharu' 'libepoxy'
+          'libdecor' 'libxkbcommon'
+          'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
+          'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
+          'opencolorio' 'libdeflate'
+          'zstd'
+          'pcre' 'opencollada-git-jnd'
+          'openimageio-jnd' 'fmt'
+          'openshadinglanguage-jnd'
+          'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
+          'embree-jnd' 'openimagedenoise-jnd'
+          'openpgl-jnd'
+          'manifold-jnd'
+          'materialx-jnd' 'openusd-jnd'
+)
+makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
+             'cuda'
+             'wayland-protocols'
+             'mold'
+             'gcc14'
+)
+optdepends=('cuda: cycles renderer cuda support')
+conflicts=('blender' 'blender-git')
+provides=('blender')
+#options=('!strip')
+options=('!lto' '!debug')
+_pkgname_git=blender-git
+source=("$_pkgname_git-$pkgver.tar.zst"
+        "OptiX-8.1-Include.zip"
+        "fix-build-with-manifold.patch"
+)
+sha256sums=('0650ba502849d54495c08e3cbb91776a39d00f3f7812a656c462022c1ce3578d'
+            'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
+            'da5f5bd76c6af405b53ef13eb392aa21686a0d18971ca3b957a2b9d56b673bcb'
+)
+
+_gitname="blender"
+
+prepare() {
+  cd "${_gitname}"
+
+  # Fix build avec manifold
+  patch -Np1 -i "${srcdir}/fix-build-with-manifold.patch"
+
+  ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
+  ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
+  #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
+
+  # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "64a13f4be277"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1748113265|' build_files/cmake/buildinfo.cmake
+}
+
+build() {
+  cd "${_gitname}"
+  
+  local _python_ver=3.13
+  local _llvm_libs_ver=19
+
+  cmake \
+        -Bbuild \
+        -DCMAKE_C_COMPILER='/usr/bin/gcc-14' \
+        -DCMAKE_CXX_COMPILER='/usr/bin/g++-14' \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+        -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+        -DCMAKE_SKIP_RPATH=ON \
+        -DOPTIX_ROOT_DIR="${srcdir}" \
+        -DWITH_XR_OPENXR=OFF \
+        -DWITH_SYSTEM_FREETYPE=ON \
+        -DWITH_LIBS_PRECOMPILED=OFF \
+        -DWITH_INPUT_NDOF=OFF \
+        -DWITH_INSTALL_PORTABLE=OFF \
+        -DWITH_PYTHON_INSTALL=OFF \
+        -DWITH_PYTHON_INSTALL_NUMPY=OFF \
+        -DWITH_PYTHON_INSTALL_REQUESTS=OFF \
+        -DWITH_PYTHON_INSTALL_ZSTANDARD=OFF \
+        -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
+        -DWITH_CYCLES_CUDA_BINARIES=ON \
+        -DCYCLES_CUDA_BINARIES_ARCH="sm_86;compute_86" \
+        -DWITH_CYCLES_NATIVE_ONLY=ON \
+        -DWITH_CYCLES_DEVICE_HIP=OFF \
+        -DWITH_CYCLES_DEVICE_METAL=OFF \
+        -DWITH_LLVM=ON \
+        -DLLVM_ROOT_DIR=/usr \
+        -DLLVM_LIBPATH=/usr/lib \
+        -DLLVM_LIBRARY=/usr/lib/libLLVM-${_llvm_libs_ver}.so \
+        -DLLVM_INCLUDE_DIRS=/usr/include \
+        -DWITH_CLANG=ON \
+        -DCLANG_INCLUDE_DIR=/usr/include/clang \
+        -D_clang_LIBRARIES=/usr/lib \
+        -DWITH_LINKER_GOLD=OFF \
+        -DWITH_LINKER_MOLD=ON \
+        -DPYTHON_VERSION=${_python_ver} \
+        -DPYTHON_LIBPATH=/usr/lib \
+        -DPYTHON_LIBRARY=python${_python_ver} \
+        -DPYTHON_INCLUDE_DIRS=/usr/include/python${_python_ver}
+  make -C build
+}
+
+package() {
+  # Blender
+  cd "${_gitname}"
+  DESTDIR="${pkgdir}" make -C build install
+
+  # voir Community
+  python -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+  python -O -m compileall -d /usr/share/blender "${pkgdir}/usr/share/blender"
+}
