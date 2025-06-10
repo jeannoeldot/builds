@@ -42,6 +42,8 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.14.5.1.20250503
+pkgrel=3    # rebuild SANS CUDA et OPTIX: COMPILE PAS OK
+pkgrel=2    # rebuild MAJ LLVM 20
 pkgrel=1
 
 pkgrel=3    # rebuild MAJ OIIO 3.0.4.0  et OPTIX 8.1
@@ -71,12 +73,12 @@ provides=('openshadinglanguage')
 
 options=('!debug')
 
-!!! LLVM 19.0
+!!! LLVM 20.0
 ------------------------------------
 $ pacman -Ss llvm | grep extra | grep install
-extra/clang 19.1.7-2 [installé]
-extra/llvm 19.1.7-2 [installé]
-extra/llvm-libs 19.1.7-2 [installé]
+extra/clang 20.1.6-1 [installé]
+extra/llvm 20.1.6-3 [installé]
+extra/llvm-libs 20.1.6-3 [installé]
 
 depends=('openexr' 'freetype2' 'libpng' 'libtiff'
          'zlib' 'ncurses'
@@ -111,22 +113,31 @@ sha256sums=(...
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "OptiX-8.1-Include.zip"
-        "xxxxx.patch"
+        "Add-missing-cstdint-include-for-GCC-15.patch"
+        "osl-llvm20.patch"
 )
 
 sha256sum OpenShadingLanguage-v1.14.5.1.tar.gz
 
 sha256sum OptiX-8.1-Include.zip
 
-sha256sum xxxxx.patch
+sha256sum Add-missing-cstdint-include-for-GCC-15.patch
+
+sha256sum osl-llvm20.patch
 
 sha256sums=('....'
+            '....'
+            '....'
             '....'
 )
 
 prepare() {
   cd "${_name_release}"
-  patch -Np1 -i "${srcdir}/xxxxx.patch"
+  # Add missing cstdint include for GCC 15
+  patch -Np1 -i "${srcdir}/Add-missing-cstdint-include-for-GCC-15.patch"
+  # llvm 20
+  patch -Np1 -i "${srcdir}/osl-llvm20.patch"
+
 }
 
 !!! VERSION 1.14.5.1
@@ -299,6 +310,7 @@ $ ls -la
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.14.5.1.tar.gz
 -rw-r--r--  1 jnd users    85220 11 févr. 14:16 OptiX-8.1-Include.zip
 -rw-r--r--  1 jnd users      434  6 mai   15:28 Add-missing-cstdint-include-for-GCC-15.patch
+-rw-r--r--  1 jnd users     1370  9 juin  15:09 osl-llvm20.patch
 
 
 !!! A MODIFIER SI PAS OK !

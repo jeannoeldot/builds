@@ -16,6 +16,8 @@ tar -xzf OpenShadingLanguage-v1.14.5.1.tar.gz
 /!\ cd $HOME/05-builds/openshadinglanguage-jnd
 
 
+1) PATCH GCC 15
+===============
 1) MODIFIER OpenShadingLanguage-1.14.5.1/src/include/OSL/platform.h
 ======================================================================
 
@@ -43,6 +45,254 @@ rm -rf OpenShadingLanguage-1.14.5.1.new
 cd $HOME/05-builds/openshadinglanguage-jnd
 
 mv -v /tmp/srcp/Add-missing-cstdint-include-for-GCC-15.patch .
+
+
+2) PATCH LLVM 20
+=================
+2-0) MODIFIER OpenShadingLanguage-1.14.5.1/INSTALL.md
+=====================================================
+
+/!\ cd /tmp/srcp
+
+cp -R OpenShadingLanguage-1.14.5.1 OpenShadingLanguage-1.14.5.1.new
+
+cd OpenShadingLanguage-1.14.5.1.new/
+
+kwrite INSTALL.md
+
+MODIFIER LIGNES 52 ET 53:
+* [LLVM](http://www.llvm.org) 11, 12, 13, 14, 15, 16, 17, 18, or 19, including
+  clang libraries. **LLVM 20 is not yet supported.**
+
+DEVIENT :
+* [LLVM](http://www.llvm.org) 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 including
+  clang libraries.
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier INSTALL.md~
+rm -f INSTALL.md~
+
+cd ..
+
+diff -aur OpenShadingLanguage-1.14.5.1 OpenShadingLanguage-1.14.5.1.new
+
+
+2-1) MODIFIER OpenShadingLanguage-1.14.5.1/src/cmake/externalpackages.cmake
+===========================================================================
+
+/!\ cd /tmp/srcp
+
+/!\ cp -R OpenShadingLanguage-1.14.5.1 OpenShadingLanguage-1.14.5.1.new
+
+cd OpenShadingLanguage-1.14.5.1.new/src/cmake
+
+kwrite externalpackages.cmake
+
+MODIFIER LIGNE 40:
+                      VERSION_MAX 19.9
+
+DEVIENT :
+                      VERSION_MAX 20.9
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier externalpackages.cmake~
+rm -f externalpackages.cmake~
+
+cd ../../..
+
+diff -aur OpenShadingLanguage-1.14.5.1 OpenShadingLanguage-1.14.5.1.new
+
+2-2) MODIFIER OpenShadingLanguage-1.14.5.1/src/liboslexec/llvm_util.cpp
+=======================================================================
+
+/!\ cd /tmp/srcp
+
+/!\ cp -R OpenShadingLanguage-1.14.5.1 OpenShadingLanguage-1.14.5.1.new
+
+cd OpenShadingLanguage-1.14.5.1.new/src/liboslexec
+
+kwrite llvm_util.cpp
+
+MODIFIER LIGNE 3215:
+    llvm::DataLayout target(module());
+
+DEVIENT :
+#if OSL_LLVM_VERSION >= 200
+    llvm::DataLayout target(module()->getDataLayout());
+#else
+    llvm::DataLayout target(module());
+#endif
+
+AJOUTER LIGNES 3608 À 3618 :
+
+inline llvm::Function*
+getIntrinsicDeclaration(llvm::Module* module, llvm::Intrinsic::ID id,
+                        llvm::ArrayRef<llvm::Type*> Tys = {})
+{
+#if OSL_LLVM_VERSION >= 200
+    return llvm::Intrinsic::getOrInsertDeclaration(module, id, Tys);
+#else
+    return llvm::Intrinsic::getDeclaration(module, id, Tys);
+#endif
+}
+
+MODIFIER LIGNE 3670:
+            llvm::Function* func = llvm::Intrinsic::getDeclaration(
+
+DEVIENT :
+            llvm::Function* func = getIntrinsicDeclaration(
+
+MODIFIER LIGNE 3701:
+            llvm::Function* func = llvm::Intrinsic::getDeclaration(
+
+DEVIENT :
+            llvm::Function* func = getIntrinsicDeclaration(
+
+
+MODIFIER LIGNES 3729 ET 3730:
+            llvm::Function* func = llvm::Intrinsic::getDeclaration(
+                module(), llvm::Intrinsic::x86_sse_movmsk_ps);
+
+DEVIENNENT :
+            llvm::Function* func
+                = getIntrinsicDeclaration(module(),
+                                          llvm::Intrinsic::x86_sse_movmsk_ps);
+
+
+MODIFIER LIGNES 3768 ET 3769:
+            llvm::Function* func = llvm::Intrinsic::getDeclaration(
+                module(), llvm::Intrinsic::x86_sse_movmsk_ps);
+
+DEVIENNENT :
+            llvm::Function* func
+                = getIntrinsicDeclaration(module(),
+                                          llvm::Intrinsic::x86_sse_movmsk_ps);
+
+
+MODIFIER LIGNES 3809 ET 3810:
+            llvm::Function* func = llvm::Intrinsic::getDeclaration(
+                module(), llvm::Intrinsic::x86_sse_movmsk_ps);
+
+DEVIENNENT :
+            llvm::Function* func
+                = getIntrinsicDeclaration(module(),
+                                          llvm::Intrinsic::x86_sse_movmsk_ps);
+
+
+MODIFIER LIGNES 3842 ET 3843:
+            llvm::Function* func = llvm::Intrinsic::getDeclaration(
+                module(), llvm::Intrinsic::x86_sse_movmsk_ps);
+
+DEVIENNENT :
+            llvm::Function* func
+                = getIntrinsicDeclaration(module(),
+                                          llvm::Intrinsic::x86_sse_movmsk_ps);
+
+
+MODIFIER LIGNES 3902 ET 3903:
+        llvm::Function* func = llvm::Intrinsic::getDeclaration(
+            module(), llvm::Intrinsic::x86_sse_movmsk_ps);
+
+DEVIENNENT :
+        llvm::Function* func
+            = getIntrinsicDeclaration(module(),
+                                      llvm::Intrinsic::x86_sse_movmsk_ps);
+
+MODIFIER LIGNES 4075 ET 4077:
+    llvm::Function* func_cttz
+        = llvm::Intrinsic::getDeclaration(module(), llvm::Intrinsic::cttz,
+                                          toArrayRef(types));
+
+DEVIENNENT :
+    llvm::Function* func_cttz = getIntrinsicDeclaration(module(),
+                                                        llvm::Intrinsic::cttz,
+                                                        toArrayRef(types));
+
+
+MODIFIER LIGNE 4673:
+                func_avx512_gather_pi = llvm::Intrinsic::getDeclaration(
+
+DEVIENT :
+                func_avx512_gather_pi = getIntrinsicDeclaration(
+
+
+MODIFIER LIGNE 4679:
+                func_avx512_gather_pi = llvm::Intrinsic::getDeclaration(
+
+DEVIENT :
+                func_avx512_gather_pi = getIntrinsicDeclaration(
+
+
+MODIFIER LIGNES 4693 ET 4695:
+            llvm::Function* func_avx2_gather_pi = getIntrinsicDeclaration(
+                module(), llvm::Intrinsic::x86_avx2_gather_d_d_256);
+                    module(), llvm::Intrinsic::x86_avx2_gather_d_d_256);
+
+DEVIENNENT :
+            llvm::Function* func_avx2_gather_pi = getIntrinsicDeclaration(
+                module(), llvm::Intrinsic::x86_avx2_gather_d_d_256);
+
+
+MODIFIER LIGNE 4750:
+                func_avx512_gather_pi = llvm::Intrinsic::getDeclaration(
+
+DEVIENT :
+                func_avx512_gather_ps = getIntrinsicDeclaration(
+
+
+MODIFIER LIGNE 4756:
+                func_avx512_gather_ps = llvm::Intrinsic::getDeclaration(
+
+DEVIENT :
+                func_avx512_gather_ps = getIntrinsicDeclaration(
+
+
+MODIFIER LIGNES 4772 ET 4774:
+            llvm::Function* func_avx2_gather_ps
+                = llvm::Intrinsic::getDeclaration(
+                    module(), llvm::Intrinsic::x86_avx2_gather_d_ps_256);
+
+DEVIENNENT :
+            llvm::Function* func_avx2_gather_ps = getIntrinsicDeclaration(
+                module(), llvm::Intrinsic::x86_avx2_gather_d_ps_256);
+
+MODIFIER LIGNES 4772 ET 4774:
+            llvm::Function* func_avx2_gather_ps
+                = llvm::Intrinsic::getDeclaration(
+                    module(), llvm::Intrinsic::x86_avx2_gather_d_ps_256);
+
+DEVIENNENT :
+            llvm::Function* func_avx2_gather_ps = getIntrinsicDeclaration(
+                module(), llvm::Intrinsic::x86_avx2_gather_d_ps_256);
+
+
+MODIFIER LIGNES 4834 ET 4836:
+                llvm::Function* func_avx512_gather_dpq
+                    = llvm::Intrinsic::getDeclaration(
+                        module(), llvm::Intrinsic::x86_avx512_gather_dpq_512);
+
+DEVIENNENT :
+               llvm::Function* func_avx512_gather_dpq = getIntrinsicDeclaration(
+                    module(), llvm::Intrinsic::x86_avx512_gather_dpq_512);
+
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier llvm_util.cpp~
+rm -f llvm_util.cpp~
+
+cd ../../..
+
+diff -aur OpenShadingLanguage-1.14.5.1 OpenShadingLanguage-1.14.5.1.new
+
+
+diff -aur OpenShadingLanguage-1.14.5.1 OpenShadingLanguage-1.14.5.1.new > osl-llvm20.patch
+
+rm -rf OpenShadingLanguage-1.14.5.1.new
+
+cd $HOME/05-builds/openshadinglanguage-jnd
+
+mv -v /tmp/srcp/osl-llvm20.patch .
+
 
 
 5) QUAND PATCHES FINIS

@@ -1,0 +1,20 @@
+
+/usr/bin/opt: /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build/src/testshade/linked_rend_lib_testshade.bc: error: Invalid record (Producer: 'LLVM20.1.6' Reader: 'LLVM 20.1.6')
+make[2]: *** [src/testshade/CMakeFiles/libtestshade.dir/build.make:193: src/testshade/linked_rend_lib_testshade.bc] Error 1
+make[2]: *** Deleting file 'src/testshade/linked_rend_lib_testshade.bc'
+make[1]: *** [CMakeFiles/Makefile2:1829: src/testshade/CMakeFiles/libtestshade.dir/all] Error 2
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build'
+
+==========================================================================================
+clang++: warning: CUDA version 12.8 is only partially supported [-Wunknown-cuda-version]
+[ 82%] Generating linked_rend_lib_testshade.bc, rend_lib_testshade.ptx
+[ 82%] Generating linked_rend_lib_testshade.bc, rend_lib_testshade.ptx
+/usr/bin/llc: error: /usr/bin/llc: /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build/src/testshade/linked_rend_lib_testshade.bc: error: Fixed or VBR abbrev record with size > MaxChunkData
+make[2]: *** [src/testshade/CMakeFiles/testshade.dir/build.make:194: src/testshade/linked_rend_lib_testshade.bc] Error 1
+make[2]: *** Deleting file 'src/testshade/linked_rend_lib_testshade.bc'
+make[1]: *** [CMakeFiles/Makefile2:1794: src/testshade/CMakeFiles/testshade.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+/usr/bin/opt: /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.5.1/build/src/testshade/linked_rend_lib_testshade.bc: error: Could not open input file: No such file or directory
+make[2]: *** [src/testshade/CMakeFiles/testshade_ptx.dir/build.make:122: src/testshade/linked_rend_lib_testshade.bc] Error 1
+make[1]: *** [CMakeFiles/Makefile2:1760: src/testshade/CMakeFiles/testshade_ptx.dir/all] Error 2
