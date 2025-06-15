@@ -1,7 +1,7 @@
 diff -aur blender/build_files/cmake/platform/platform_unix.cmake blender.new/build_files/cmake/platform/platform_unix.cmake
---- blender/build_files/cmake/platform/platform_unix.cmake	2025-05-03 12:38:54.000000000 +0200
-+++ blender.new/build_files/cmake/platform/platform_unix.cmake	2025-05-04 14:30:15.113170352 +0200
-@@ -592,12 +592,13 @@
+--- blender/build_files/cmake/platform/platform_unix.cmake	2025-06-10 16:49:56.000000000 +0200
++++ blender.new/build_files/cmake/platform/platform_unix.cmake	2025-06-15 14:36:48.843189354 +0200
+@@ -574,12 +574,13 @@
  endif()
  
  if(WITH_MANIFOLD)

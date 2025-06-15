@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.0.0.1.20250608
+!!! VERSION = 5.0.0.11.20250615
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.1.20250608.tar.zst /tmp/srcp/
+cp -v blender-git-5.0.0.11.20250615.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.0.0.1.20250608.tar.zst
+tar -x --zstd -f blender-git-5.0.0.11.20250615.tar.zst
 
 
 1) MANIFOJD
@@ -26,7 +26,7 @@ cp -R blender blender.new
 cd blender.new/build_files/cmake/platform
 kwrite platform_unix.cmake
 
-MODIFIER LIGNES 594 À 682 :
+MODIFIER LIGNES 576 À 584 :
 
 DEVIENNENT:
 if(WITH_MANIFOLD)
@@ -282,11 +282,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.1.20250608.tar.gz /tmp/srcp/
+cp -v blender-git-5.0.0.11.20250615.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.0.0.1.20250608.tar.gz
+tar -xzf blender-git-5.0.0.11.20250615.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
