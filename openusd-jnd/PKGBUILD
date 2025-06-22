@@ -2,7 +2,7 @@
 
 pkgname=openusd-jnd
 pkgver=25.05.01.20250520
-pkgrel=1
+pkgrel=2
 _ver_release="25.05.01"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
@@ -11,7 +11,7 @@ arch=('x86_64')
 license=('Apache-2.0')
 depends=('boost-libs' 'glfw'
          'onetbb'
-         'materialx-jnd'
+         'materialx'
          'openexr'
          'opencolorio'
          'opensubdiv-jnd'

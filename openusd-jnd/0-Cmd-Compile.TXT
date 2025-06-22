@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.05.01.20250520
+pkgrel=2      # v25.05.01: materialx-jnd ==> materialx (extra)
 pkgrel=1      # v25.05.01
 
 pkgrel=3      # rebuild MAJ boost boost-libs 1.88.0 + materialx-jnd
@@ -91,7 +92,7 @@ license=('Apache-2.0')
 
 depends=('boost-libs' 'glfw'
          'onetbb'
-         'materialx-jnd'
+         'materialx'
          'openexr'
          'opencolorio'
          'opensubdiv-jnd'
@@ -280,13 +281,11 @@ $ mkpkg-chroot-repo
 SI depends= 'opensubdiv-jnd'
          'openimageio-jnd'
          'openvdb-jnd'
-         'materialx-jnd'
 
 SI makedepends=
 ================================================================================
 $ cp -v /00-repolocal/\
 {\
-materialx-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
 openimageio-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*\
@@ -378,6 +377,23 @@ SI PROBLEME
 ========================================================================
 ANCIEN
 ======
+
+SI depends= 'opensubdiv-jnd'
+         'openimageio-jnd'
+         'openvdb-jnd'
+         'materialx-jnd'
+
+SI makedepends=
+================================================================================
+$ cp -v /00-repolocal/\
+{\
+materialx-jnd-*-x86_64.pkg.tar.*,\
+opensubdiv-jnd-*-x86_64.pkg.tar.*,\
+openimageio-jnd-*-x86_64.pkg.tar.*,\
+openvdb-jnd-*-x86_64.pkg.tar.*\
+} \
+/tmp/chrootrepo/
+
 
 -rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.05.01.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD

@@ -1,0 +1,451 @@
+From b2f20fdb5b0e39b7059c00a429ee0658d186785b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Sybren=20A=2E=20St=C3=BCvel?= <sybren@blender.org>
+Date: Fri, 20 Jun 2025 13:04:05 +0200
+Subject: [PATCH 1/2] Fix #140700: Blender 4.5 Crashes When Performing Loop Cut
+
+Correct an oversight: without proportional editing, all the transform
+data is "selected" by definition. This means that the assumption "the
+selected data is sorted first in the array" is trivially true, without
+calling any sorting function. So instead of using the sorted index map
+in these cases, just fall back to regular iteration.
+
+To make the code handle this nicely, I made two "foreach" functions. The
+first one transparently uses the sorted index map when available, and
+performs regular iteration otherwise. The second function only visits
+the selected items.
+
+This makes the usage of these functions clearer, and the fact that
+selected items are expected to be sorted first (either trivially or
+explicitly) can be documented in a central place.
+---
+ source/blender/editors/transform/transform.hh | 55 +++++++++++++++
+ .../editors/transform/transform_convert.cc    | 70 +++++++------------
+ .../transform/transform_convert_mesh.cc       | 41 ++++-------
+ .../transform/transform_convert_mesh_uv.cc    | 18 ++---
+ .../editors/transform/transform_snap.cc       | 23 ++----
+ 5 files changed, 103 insertions(+), 104 deletions(-)
+
+diff --git a/source/blender/editors/transform/transform.hh b/source/blender/editors/transform/transform.hh
+index af9c653e819..5016e2bc0f1 100644
+--- a/source/blender/editors/transform/transform.hh
++++ b/source/blender/editors/transform/transform.hh
+@@ -8,6 +8,7 @@
+ 
+ #pragma once
+ 
++#include "BLI_function_ref.hh"
+ #include "BLI_math_vector_types.hh"
+ 
+ #include "ED_numinput.hh"
+@@ -732,6 +733,60 @@ struct TransDataContainer {
+    * \see #sort_trans_data_dist Sorts by selection state and distance.
+    */
+   int *sorted_index_map;
++
++  /**
++   * Call the given function for each index in the data. This index can then be
++   * used to access the `data`, `data_ext`, and `data_2d` arrays.
++   *
++   * If there is a `sorted_index_map` (see above), this will be used. Otherwise
++   * it is assumed that the arrays can be iterated in their natural array order.
++   *
++   * \param fn: function that's called for each index. The function should
++   * return whether to keep looping (true) or break out of the loop (false).
++   *
++   * \return whether the end of the loop was reached.
++   */
++  bool foreach_index(FunctionRef<bool(int)> fn) const
++  {
++    if (this->sorted_index_map) {
++      for (const int i : Span(this->sorted_index_map, this->data_len)) {
++        if (!fn(i)) {
++          return false;
++        }
++      }
++    }
++    else {
++      for (const int i : IndexRange(this->data_len)) {
++        if (!fn(i)) {
++          return false;
++        }
++      }
++    }
++    return true;
++  }
++
++  /**
++   * Call \a fn only for indices of selected items.
++   * Apart from that, this is the same as `index_map()` above.
++   *
++   * \param fn: function that's called for each index. Contrary to the `index_map()` function, it
++   * is assumed that all selected items should be visited, and so for simplicity there is no `bool`
++   * to return.
++   */
++  void foreach_index_selected(FunctionRef<void(int)> fn) const
++  {
++    this->foreach_index([&](const int i) {
++      const bool is_selected = (this->data[i].flag & TD_SELECTED);
++      if (!is_selected) {
++        /* Selected items are sorted first. Either this is trivially true
++         * (proportional editing off, so the only transformed data is the
++         * selected data) or it's handled by `sorted_index_map`. */
++        return false;
++      }
++      fn(i);
++      return true;
++    });
++  }
+ };
+ 
+ struct TransInfo {
+diff --git a/source/blender/editors/transform/transform_convert.cc b/source/blender/editors/transform/transform_convert.cc
+index 2703c930d2b..2fe3fdcd0b8 100644
+--- a/source/blender/editors/transform/transform_convert.cc
++++ b/source/blender/editors/transform/transform_convert.cc
+@@ -215,8 +215,6 @@ static float3 prop_dist_loc_get(const TransDataContainer *tc,
+  */
+ static void set_prop_dist(TransInfo *t, const bool with_dist)
+ {
+-  int a;
+-
+   float _proj_vec[3];
+   const float *proj_vec = nullptr;
+ 
+@@ -235,16 +233,7 @@ static void set_prop_dist(TransInfo *t, const bool with_dist)
+   int td_table_len = 0;
+   FOREACH_TRANS_DATA_CONTAINER (t, tc) {
+     BLI_assert(tc->sorted_index_map);
+-    for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
+-      TransData *td = &tc->data[i];
+-      if (td->flag & TD_SELECTED) {
+-        td_table_len++;
+-      }
+-      else {
+-        /* By definition transform-data has selected items in beginning. */
+-        break;
+-      }
+-    }
++    tc->foreach_index_selected([&](const int /*i*/) { td_table_len++; });
+   }
+ 
+   /* Pointers to selected's #TransData.
+@@ -257,23 +246,16 @@ static void set_prop_dist(TransInfo *t, const bool with_dist)
+ 
+   int td_table_index = 0;
+   FOREACH_TRANS_DATA_CONTAINER (t, tc) {
+-    BLI_assert(tc->sorted_index_map);
+-    for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++    tc->foreach_index_selected([&](const int i) {
+       TransData *td = &tc->data[i];
+-      if (td->flag & TD_SELECTED) {
+-        /* Initialize, it was malloced. */
+-        td->rdist = 0.0f;
++      /* Initialize, it was malloced. */
++      td->rdist = 0.0f;
+ 
+-        const float3 vec = prop_dist_loc_get(tc, td, use_island, proj_vec);
++      const float3 vec = prop_dist_loc_get(tc, td, use_island, proj_vec);
+ 
+-        BLI_kdtree_3d_insert(td_tree, td_table_index, vec);
+-        td_table[td_table_index++] = td;
+-      }
+-      else {
+-        /* By definition transform-data has selected items in beginning. */
+-        break;
+-      }
+-    }
++      BLI_kdtree_3d_insert(td_tree, td_table_index, vec);
++      td_table[td_table_index++] = td;
++    });
+   }
+   BLI_assert(td_table_index == td_table_len);
+ 
+@@ -281,29 +263,27 @@ static void set_prop_dist(TransInfo *t, const bool with_dist)
+ 
+   /* For each non-selected vertex, find distance to the nearest selected vertex. */
+   FOREACH_TRANS_DATA_CONTAINER (t, tc) {
+-    TransData *td = tc->data;
+-    for (a = 0; a < tc->data_len; a++, td++) {
+-      if ((td->flag & TD_SELECTED) == 0) {
+-        const float3 vec = prop_dist_loc_get(tc, td, use_island, proj_vec);
++    tc->foreach_index_selected([&](const int i) {
++      TransData *td = &tc->data[i];
++      const float3 vec = prop_dist_loc_get(tc, td, use_island, proj_vec);
+ 
+-        KDTreeNearest_3d nearest;
+-        const int td_index = BLI_kdtree_3d_find_nearest(td_tree, vec, &nearest);
++      KDTreeNearest_3d nearest;
++      const int td_index = BLI_kdtree_3d_find_nearest(td_tree, vec, &nearest);
+ 
+-        td->rdist = -1.0f;
+-        if (td_index != -1) {
+-          td->rdist = nearest.dist;
+-          if (use_island) {
+-            /* Use center and axismtx of closest point found. */
+-            copy_v3_v3(td->center, td_table[td_index]->center);
+-            copy_m3_m3(td->axismtx, td_table[td_index]->axismtx);
+-          }
+-        }
+-
+-        if (with_dist) {
+-          td->dist = td->rdist;
++      td->rdist = -1.0f;
++      if (td_index != -1) {
++        td->rdist = nearest.dist;
++        if (use_island) {
++          /* Use center and axismtx of closest point found. */
++          copy_v3_v3(td->center, td_table[td_index]->center);
++          copy_m3_m3(td->axismtx, td_table[td_index]->axismtx);
+         }
+       }
+-    }
++
++      if (with_dist) {
++        td->dist = td->rdist;
++      }
++    });
+   }
+ 
+   BLI_kdtree_3d_free(td_tree);
+diff --git a/source/blender/editors/transform/transform_convert_mesh.cc b/source/blender/editors/transform/transform_convert_mesh.cc
+index 28a7a38aa64..59f5a4e0e54 100644
+--- a/source/blender/editors/transform/transform_convert_mesh.cc
++++ b/source/blender/editors/transform/transform_convert_mesh.cc
+@@ -2161,25 +2161,13 @@ Array<TransDataVertSlideVert> transform_mesh_vert_slide_data_create(
+     const TransDataContainer *tc, Vector<float3> &r_loc_dst_buffer)
+ {
+   int td_selected_len = 0;
+-  BLI_assert(tc->sorted_index_map);
+-  for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
+-    TransData *td = &tc->data[i];
+-    if (!(td->flag & TD_SELECTED)) {
+-      /* The selected ones are sorted at the beginning. */
+-      break;
+-    }
+-    td_selected_len++;
+-  }
++  tc->foreach_index_selected([&](const int /*i*/) { td_selected_len++; });
+ 
+   Array<TransDataVertSlideVert> r_sv(td_selected_len);
+ 
+   r_loc_dst_buffer.reserve(r_sv.size() * 4);
+-  for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++  tc->foreach_index_selected([&](const int i) {
+     TransData *td = &tc->data[i];
+-    if (!(td->flag & TD_SELECTED)) {
+-      /* The selected ones are sorted at the beginning. */
+-      break;
+-    }
+     const int size_prev = r_loc_dst_buffer.size();
+ 
+     BMVert *v = static_cast<BMVert *>(td->extra);
+@@ -2205,7 +2193,7 @@ Array<TransDataVertSlideVert> transform_mesh_vert_slide_data_create(
+ 
+     /* Store the buffer size temporarily in `target_curr`. */
+     sv.co_link_curr = r_loc_dst_buffer.size() - size_prev;
+-  }
++  });
+ 
+   int start = 0;
+   for (TransDataVertSlideVert &sv : r_sv) {
+@@ -2297,20 +2285,21 @@ Array<TransDataEdgeSlideVert> transform_mesh_edge_slide_data_create(const TransD
+   /* Ensure valid selection. */
+   BMIter iter;
+   BMVert *v;
+-  BLI_assert(tc->sorted_index_map);
+-  for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++  bool found_invalid_edge_selection = false;
++  tc->foreach_index_selected([&](const int i) {
+     TransData *td = &tc->data[i];
+-    if (!(td->flag & TD_SELECTED)) {
+-      /* The selected ones are sorted at the beginning. */
+-      break;
+-    }
+     v = static_cast<BMVert *>(td->extra);
+     int numsel = BM_iter_elem_count_flag(BM_EDGES_OF_VERT, v, BM_ELEM_SELECT, true);
+     if (numsel == 0 || numsel > 2) {
+       /* Invalid edge selection. */
+-      return {};
++      found_invalid_edge_selection = true;
++      return;
+     }
+     td_selected_len++;
++  });
++
++  if (found_invalid_edge_selection) {
++    return {};
+   }
+ 
+   BMEdge *e;
+@@ -2334,11 +2323,9 @@ Array<TransDataEdgeSlideVert> transform_mesh_edge_slide_data_create(const TransD
+   Array<TransDataEdgeSlideVert> r_sv(td_selected_len);
+   TransDataEdgeSlideVert *sv = r_sv.data();
+   int sv_index = 0;
+-  for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++  tc->foreach_index_selected([&](const int i) {
+     TransData *td = &tc->data[i];
+-    if (!(td->flag & TD_SELECTED)) {
+-      continue;
+-    }
++
+     sv->td = td;
+     sv->loop_nr = -1;
+     sv->dir_side[0] = float3(0);
+@@ -2349,7 +2336,7 @@ Array<TransDataEdgeSlideVert> transform_mesh_edge_slide_data_create(const TransD
+     BM_elem_index_set(v, sv_index);
+     sv_index++;
+     sv++;
+-  }
++  });
+ 
+   /* Map indicating the indexes of #TransData connected by edge. */
+   Array<int2> td_connected(tc->data_len, int2(-1, -1));
+diff --git a/source/blender/editors/transform/transform_convert_mesh_uv.cc b/source/blender/editors/transform/transform_convert_mesh_uv.cc
+index 1220cb669f2..aa2910c3ebc 100644
+--- a/source/blender/editors/transform/transform_convert_mesh_uv.cc
++++ b/source/blender/editors/transform/transform_convert_mesh_uv.cc
+@@ -502,18 +502,13 @@ struct UVGroups {
+ 
+     /* Now, count and set the index for the corners being transformed. */
+     this->sd_len = 0;
+-    BLI_assert(tc->sorted_index_map);
+-    for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++    tc->foreach_index_selected([&](const int i) {
+       TransData *td = &tc->data[i];
+-      if (!(td->flag & TD_SELECTED)) {
+-        /* The selected ones are sorted at the beginning. */
+-        break;
+-      }
+       this->sd_len++;
+ 
+       BMLoop *l = static_cast<BMLoop *>(td->extra);
+       BM_elem_index_set(l, i);
+-    }
++    });
+     bm->elem_index_dirty |= BM_LOOP;
+ 
+     /* Create the groups. */
+@@ -840,17 +835,12 @@ Array<TransDataEdgeSlideVert> transform_mesh_uv_edge_slide_data_create(const Tra
+ 
+     /* First we just need to "clean up" the neighboring loops.
+      * This way we can identify where a group of sliding edges starts and where it ends. */
+-    BLI_assert(tc->sorted_index_map);
+-    for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++    tc->foreach_index_selected([&](const int i) {
+       TransData *td = &tc->data[i];
+-      if (!(td->flag & TD_SELECTED)) {
+-        /* The selected ones are sorted at the beginning. */
+-        break;
+-      }
+       BMLoop *l = static_cast<BMLoop *>(td->extra);
+       BM_elem_index_set(l->prev, -1);
+       BM_elem_index_set(l->next, -1);
+-    }
++    });
+ 
+     /* Now set the group indexes. */
+     for (const int group_index : uv_groups->groups().index_range()) {
+diff --git a/source/blender/editors/transform/transform_snap.cc b/source/blender/editors/transform/transform_snap.cc
+index d0c351be111..d857fa524b6 100644
+--- a/source/blender/editors/transform/transform_snap.cc
++++ b/source/blender/editors/transform/transform_snap.cc
+@@ -1374,14 +1374,7 @@ void tranform_snap_target_median_calc(const TransInfo *t, float r_median[3])
+     float v[3];
+     zero_v3(v);
+ 
+-    BLI_assert(tc->sorted_index_map);
+-    for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
+-      TransData *td = &tc->data[i];
+-      if (!(td->flag & TD_SELECTED)) {
+-        break;
+-      }
+-      add_v3_v3(v, td->center);
+-    }
++    tc->foreach_index_selected([&](const int i) { add_v3_v3(v, tc->data[i].center); });
+ 
+     if (tc->data_len == 0) {
+       /* Is this possible? */
+@@ -1465,11 +1458,8 @@ static void snap_source_closest_fn(TransInfo *t)
+     if (t->options & CTX_OBJECT) {
+       FOREACH_TRANS_DATA_CONTAINER (t, tc) {
+         BLI_assert(tc->sorted_index_map);
+-        for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++        tc->foreach_index_selected([&](const int i) {
+           TransData *td = &tc->data[i];
+-          if (!(td->flag & TD_SELECTED)) {
+-            break;
+-          }
+ 
+           std::optional<Bounds<float3>> bounds;
+ 
+@@ -1518,17 +1508,14 @@ static void snap_source_closest_fn(TransInfo *t)
+               closest = td;
+             }
+           }
+-        }
++        });
+       }
+     }
+     else {
+       FOREACH_TRANS_DATA_CONTAINER (t, tc) {
+         BLI_assert(tc->sorted_index_map);
+-        for (const int i : Span(tc->sorted_index_map, tc->data_len)) {
++        tc->foreach_index_selected([&](const int i) {
+           TransData *td = &tc->data[i];
+-          if (!(td->flag & TD_SELECTED)) {
+-            break;
+-          }
+ 
+           float loc[3];
+           float dist;
+@@ -1548,7 +1535,7 @@ static void snap_source_closest_fn(TransInfo *t)
+             closest = td;
+             dist_closest = dist;
+           }
+-        }
++        });
+       }
+     }
+   }
+-- 
+2.47.2
+
+
+From ea2692ba62e5af728e3f82a52ce4616a0f7191e0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Sybren=20A=2E=20St=C3=BCvel?= <sybren@blender.org>
+Date: Fri, 20 Jun 2025 16:20:22 +0200
+Subject: [PATCH 2/2] Feedback Nathan: invert condition
+
+---
+ source/blender/editors/transform/transform_convert.cc | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/source/blender/editors/transform/transform_convert.cc b/source/blender/editors/transform/transform_convert.cc
+index 2fe3fdcd0b8..603e4ab41f1 100644
+--- a/source/blender/editors/transform/transform_convert.cc
++++ b/source/blender/editors/transform/transform_convert.cc
+@@ -263,8 +263,12 @@ static void set_prop_dist(TransInfo *t, const bool with_dist)
+ 
+   /* For each non-selected vertex, find distance to the nearest selected vertex. */
+   FOREACH_TRANS_DATA_CONTAINER (t, tc) {
+-    tc->foreach_index_selected([&](const int i) {
++    tc->foreach_index([&](const int i) {
+       TransData *td = &tc->data[i];
++      if (td->flag & TD_SELECTED) {
++        return true;
++      }
++
+       const float3 vec = prop_dist_loc_get(tc, td, use_island, proj_vec);
+ 
+       KDTreeNearest_3d nearest;
+@@ -283,6 +287,7 @@ static void set_prop_dist(TransInfo *t, const bool with_dist)
+       if (with_dist) {
+         td->dist = td->rdist;
+       }
++      return true;
+     });
+   }
+ 
+-- 
+2.47.2
+
