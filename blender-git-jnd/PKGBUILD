@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.0.0.26.20250622
+pkgver=5.0.0.30.20250628
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -46,12 +46,10 @@ _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
         "fix-build-with-manifold.patch"
-        "140720.patch"
 )
-sha256sums=('e2f1249076ac80eeb69ab83dfa0c953959d50cc1560f92724978c243d4ad7dad'
+sha256sums=('b1a3f1bb5e423ca89a0d3d62bfd54633ecc635c3b8e3f8e8727c7d346ee787e5'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
             'b623b4a94c1e04a943eef5ccee17364b25cebd29d7cf067e6b3af4fab09b3931'
-            '897a8cc3cd2846fd0959b3cf7c0e8f0979cac6966695b5701032d361ccf41c03'
 )
 
 _gitname="blender"
@@ -62,17 +60,14 @@ prepare() {
   # Fix build avec manifold
   patch -Np1 -i "${srcdir}/fix-build-with-manifold.patch"
 
-  # Fix 140720
-  patch -Np1 -i "${srcdir}/140720.patch"
-
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "98d11bf4452c"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "4bc5874e8967"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1750549324|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1751141172|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
