@@ -1,0 +1,39 @@
+From b4d7b06cdc408ca30afb38601e448f6ca1efbc2c Mon Sep 17 00:00:00 2001
+From: Guillermo Venegas <guillermovcra@gmail.com>
+Date: Sat, 5 Jul 2025 17:34:28 -0600
+Subject: [PATCH] fix
+
+---
+ source/blender/editors/io/io_drop_import_file.cc | 2 +-
+ source/blender/editors/io/io_utils.cc            | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/source/blender/editors/io/io_drop_import_file.cc b/source/blender/editors/io/io_drop_import_file.cc
+index a7fb0174472..b36ea9d4fec 100644
+--- a/source/blender/editors/io/io_drop_import_file.cc
++++ b/source/blender/editors/io/io_drop_import_file.cc
+@@ -78,7 +78,7 @@ static void file_handler_import_operator_write_ptr(
+ 
+       PointerRNA item_ptr{};
+       RNA_property_collection_add(&props, files_prop, &item_ptr);
+-      RNA_string_set(&item_ptr, "name", file);
++      RNA_string_set(&item_ptr, "name", file + 2);
+     }
+   }
+   const bool has_any_filepath_prop = filepath_prop || directory_prop || files_prop;
+diff --git a/source/blender/editors/io/io_utils.cc b/source/blender/editors/io/io_utils.cc
+index a18af9e90bb..8e236916458 100644
+--- a/source/blender/editors/io/io_utils.cc
++++ b/source/blender/editors/io/io_utils.cc
+@@ -128,7 +128,7 @@ void paths_to_operator_properties(PointerRNA *ptr, const Span<std::string> paths
+ 
+     PointerRNA itemptr{};
+     RNA_collection_add(ptr, "files", &itemptr);
+-    RNA_string_set(&itemptr, "name", file);
++    RNA_string_set(&itemptr, "name", file + 2);
+   }
+ }
+ 
+-- 
+2.47.2
+
