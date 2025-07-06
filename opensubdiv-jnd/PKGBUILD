@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=opensubdiv-jnd
-pkgver=3.6.0.20230921
-pkgrel=2
-_ver_release="3_6_0"
+pkgver=3_6_1.20250626
+pkgrel=1
+_ver_release="3_6_1"
 _name_release="OpenSubdiv-${_ver_release}"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
@@ -17,7 +17,7 @@ provides=('opensubdiv')
 options=('!debug' '!lto' 'staticlibs')
 source=("OpenSubdiv-v${_ver_release}.tar.gz"
 )
-sha256sums=('bebfd61ab6657a4f4ff27845fb66a167d00395783bfbd253254d87447ed1d879'
+sha256sums=('e9d99a480d80e999667643747c76eb0138d36c418fc154fd71b4bd65be103d52'
 )
 
 build() {
