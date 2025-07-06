@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-jnd
-pkgver=1.14.6.0.20250703
-pkgrel=1
-_name_release="OpenShadingLanguage-1.14.6.0"
-_ver_release="v1.14.6.0"
+pkgver=1.14.5.1.20250503
+pkgrel=3
+_name_release="OpenShadingLanguage-1.14.5.1"
+_ver_release="v1.14.5.1"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
@@ -19,24 +19,29 @@ depends=('imath' 'freetype2' 'libpng' 'libtiff'
 )
 makedepends=('cmake' 'llvm'
              'robin-map'
-             'cuda'
 )
 conflicts=('openshadinglanguage' 'openshadinglanguage-git')
 provides=('openshadinglanguage')
 options=('!debug')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.1-Include.zip"
+        "Add-missing-cstdint-include-for-GCC-15.patch"
+        "osl-llvm20.patch"
 )
 
-sha256sums=('5b56f6f779a092e81ea0cad1f1ad69b1c26f8ad8086e415d1608911328fe4527'
-            'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
+sha256sums=('409676f5a53a74079eb890a04cf3a2735aa869570e4462798ba974753272a786'
+            '773e997749d25076a129e004ce784e5191f94f650788c4f951ef0e3aae3c6d45'
+            '7bb89c68cc4466a70b6d32a69a94c6fcb2c9167295b06173f269bd177503ba9d'
 )
 
-# prepare() {
-#   cd "${_name_release}"
-# 
-# }
-# 
+prepare() {
+  cd "${_name_release}"
+
+  # Add missing cstdint include for GCC 15
+  patch -Np1 -i "${srcdir}/Add-missing-cstdint-include-for-GCC-15.patch"
+  # llvm 20
+  patch -Np1 -i "${srcdir}/osl-llvm20.patch"
+}
+
 build() {
   cd "${_name_release}"
 
@@ -48,10 +53,6 @@ build() {
       -DCMAKE_SKIP_RPATH=ON \
       -DCMAKE_CXX_STANDARD=17 \
       -DLLVM_STATIC=OFF \
-      -DOSL_USE_OPTIX=ON \
-      -DOPTIX_INCLUDE_DIR="${srcdir}" \
-      -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
-      -DCUDA_TARGET_ARCH="sm_86" \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
   make -C build
