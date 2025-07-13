@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.0.0.36.20250713
+pkgver=5.0.0.33.20250705
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -35,6 +35,7 @@ makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'wayland-protocols'
              'mold'
+             'gcc14'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender' 'blender-git')
@@ -45,10 +46,12 @@ _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
         "fix-build-with-manifold.patch"
+        "141498.patch"
 )
-sha256sums=('f7a6f065c8061ed6abc37a19cb6300dded5e36d25c84d816923d92888e108bfa'
+sha256sums=('98ca891edc37ecb28ccbfe3d762f105c8ea2dbcf0d39c83b2f8ac0c5705df1ce'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
             'b623b4a94c1e04a943eef5ccee17364b25cebd29d7cf067e6b3af4fab09b3931'
+            '83a5d6d34d3b46b399196251086f380141a6f1e9e1b00ef33d076707052fef63'
 )
 
 _gitname="blender"
@@ -59,14 +62,17 @@ prepare() {
   # Fix build avec manifold
   patch -Np1 -i "${srcdir}/fix-build-with-manifold.patch"
 
+  # Fix 141498
+  patch -Np1 -i "${srcdir}/141498.patch"
+
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "6eec7e3bb139"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "555b22b194c8"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1752387952|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1751672209|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -77,6 +83,8 @@ build() {
 
   cmake \
         -Bbuild \
+        -DCMAKE_C_COMPILER='/usr/bin/gcc-14' \
+        -DCMAKE_CXX_COMPILER='/usr/bin/g++-14' \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
