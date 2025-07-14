@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.0.0.36.20250714
-pkgrel=1
+pkgver=5.0.0.36.20250713
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -35,7 +35,6 @@ makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'wayland-protocols'
              'mold'
-             'gcc14'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender' 'blender-git')
@@ -47,7 +46,7 @@ source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
         "fix-build-with-manifold.patch"
 )
-sha256sums=('bc6dc56f0a9412be4edbbb41f4bee63f86184c203f4becc8b2435bb1aa8bc331'
+sha256sums=('f7a6f065c8061ed6abc37a19cb6300dded5e36d25c84d816923d92888e108bfa'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
             'b623b4a94c1e04a943eef5ccee17364b25cebd29d7cf067e6b3af4fab09b3931'
 )
@@ -65,9 +64,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "dbffebda30b3"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "6eec7e3bb139"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1752486356|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1752387952|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -78,8 +77,6 @@ build() {
 
   cmake \
         -Bbuild \
-        -DCMAKE_C_COMPILER='/usr/bin/gcc-14' \
-        -DCMAKE_CXX_COMPILER='/usr/bin/g++-14' \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \

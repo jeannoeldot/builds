@@ -37,6 +37,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=embree-jnd               # embree ds community ?
 pkgver=4.4.0.20250403
+pkgrel=2    # GCC 15
+
 pkgrel=1
 
 pkgrel=2  # Rebuild avec cmake -Bbuild
