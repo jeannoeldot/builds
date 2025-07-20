@@ -1,19 +1,31 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.0.0.36.20250714
+!!! VERSION = 5.0.0.39.20250720
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.36.20250714.tar.zst /tmp/srcp/
+cp -v blender-git-5.0.0.39.20250720.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.0.0.36.20250714.tar.zst
+tar -x --zstd -f blender-git-5.0.0.39.20250720.tar.zst
 
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) MANIFOJD
 ===========================
@@ -56,17 +68,6 @@ mv -vf /tmp/srcp/fix-build-with-manifold.patch .
 
 
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 2) FFMPEG
 ==========
@@ -282,11 +283,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.36.20250714.tar.gz /tmp/srcp/
+cp -v blender-git-5.0.0.39.20250720.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.0.0.36.20250714.tar.gz
+tar -xzf blender-git-5.0.0.39.20250720.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
