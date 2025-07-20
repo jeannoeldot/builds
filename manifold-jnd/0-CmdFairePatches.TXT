@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 3.1.1.20250601
+!!! VERSION = 3.2.0
 
 
 /!\ /!\ /!\ $HOME/05-builds/manifold-jnd
 
 mkdir /tmp/srcp
 
-cp -v manifold-3.1.1.tar.gz /tmp/srcp/
+cp -v manifold-3.2.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf manifold-3.1.1.tar.gz
+tar -xzf manifold-3.2.0.tar.gz
 
 
 
