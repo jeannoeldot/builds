@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-jnd
-pkgver=1.14.6.0.20250703
+pkgver=1.14.7.0.20250803
 pkgrel=1
-_name_release="OpenShadingLanguage-1.14.6.0"
-_ver_release="v1.14.6.0"
+_name_release="OpenShadingLanguage-1.14.7.0"
+_ver_release="v1.14.7.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
@@ -28,7 +28,7 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "OptiX-8.1-Include.zip"
 )
 
-sha256sums=('5b56f6f779a092e81ea0cad1f1ad69b1c26f8ad8086e415d1608911328fe4527'
+sha256sums=('c4c2ddd3b537cd3a90d50fdd0753614fa24100698d5632b9f1108bd8b505e56c'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
 )
 
