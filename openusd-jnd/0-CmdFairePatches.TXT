@@ -1,20 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 25.02
-!!! VERSION = v25.02
-!!! VERSION = v25.02a
+!!! VERSION = 25.08
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openusd-jnd
 
 mkdir /tmp/srcp
 
-cp -v OpenUSD-v25.02a.tar.gz /tmp/srcp/
+cp -v OpenUSD-v25.08.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenUSD-v25.02a.tar.gz
+tar -xzf OpenUSD-v25.08.tar.gz
 
 
 !!! VOIR :
@@ -33,6 +31,19 @@ https://projects.blender.org/blender/blender/src/branch/main/build_files/build_e
   usd.diff
   usd_core_profile.diff
   usd_metal_edf.diff
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1)
 https://github.com/PixarAnimationStudios/OpenUSD/pull/3392/files
@@ -167,16 +178,6 @@ cd $HOME/05-builds/openusd-jnd
 mv -vf /tmp/srcp/Fix-Error-Compile-GCC-15.patch .
 
 
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 https://gitlab.archlinux.org/archlinux/packaging/packages/usd/-/blob/main/usd-tbb.patch
 
