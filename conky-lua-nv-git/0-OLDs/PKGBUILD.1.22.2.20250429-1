@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=conky-lua-nv-git
-pkgver=1.22.3.20250807
+pkgver=1.22.2.20250429
 pkgrel=1
 pkgdesc="An advanced system monitor for X based on torsmo with lua and nvidia enabled"
-arch=('x86_64')
+arch=('i686' 'x86_64')
 url="https://github.com/brndnmtthws/conky"
 license=(
   'BSD-3-Clause'
@@ -27,7 +27,7 @@ optdepends=('nvidia: for GTxxx and newer GPUs',
 )
 source=("$pkgname-$pkgver.tar.gz"
 )
-sha256sums=('5c950bd95d7f013b6792ff57e4e80ce82d7d9a638f3eada8e2173d7cdefab9d4'
+sha256sums=('7e1bdf19831fdd28ab24237c81dacc28c8c512cf474f24312d2c08f909265c3b'
 )
 options=('!debug')
 
