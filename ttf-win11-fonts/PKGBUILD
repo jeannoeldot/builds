@@ -2,21 +2,21 @@
 # Maintainer: Doug Newgard <scimmia at archlinux dot info>
 # Contributor: reflexing <reflexing@reflexing.ru>
 
-pkgname=ttf-win10-fonts
-pkgver=10.0.22H2
+pkgname=ttf-win11-fonts
+pkgver=11.0.24H2
 pkgrel=1
-pkgdesc='Microsoft Windows 10 TrueType fonts'
+pkgdesc='Microsoft Windows 11 TrueType fonts'
 arch=('any')
 url='http://www.microsoft.com/typography/fonts/product.aspx?PID=164'
 license=('custom')
 provides=('ttf-font' 'ttf-tahoma' 'ttf-ms-fonts')
-conflicts=('ttf-vista-fonts' 'ttf-win7-fonts' 'ttf-tahoma' 'ttf-ms-fonts')
+conflicts=( 'ttf-win10-fonts' 'ttf-vista-fonts' 'ttf-win7-fonts' 'ttf-tahoma' 'ttf-ms-fonts')
 options=('!debug')
 
-source=('win10-fonts.tar.gz'
+source=('win11-fonts.tar.gz'
 )
 
-sha256sums=('ab27651bf72394428a9e14fa9341ef75881d585594215e66539e88667d4c01a3'
+sha256sums=('0bdcc6297ce7b957ec4b4c95cd60a95b865e7ddf9444a026045cf4e7490ae38c'
 )
 
 package() {
