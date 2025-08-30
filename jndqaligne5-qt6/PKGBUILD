@@ -2,7 +2,7 @@
 
 pkgname=jndqaligne5-qt6
 pkgver=0.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Variante du Morpion"
 arch=('x86_64')
 url="https://github.com/jeannoeldot/jndqaligne5-qt6"
