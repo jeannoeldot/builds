@@ -20,6 +20,7 @@ sha256sum v0.6.7.tar.gz
 
 pkgname=jndqrami-qt6
 pkgver=0.6.7
+pkgrel=2    # Rebuild nouveau PC Qt 6.9.2
 pkgrel=1
 
 dpkgrel=7    # Rebuild REVU DEPS 'sdl' 'sdl_mixer'

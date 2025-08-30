@@ -1,0 +1,33 @@
+# Maintainer: Michael Lass <bevan@bi-co.net>
+# Maintainer: Doug Newgard <scimmia at archlinux dot info>
+# Contributor: reflexing <reflexing@reflexing.ru>
+
+pkgname=ttf-win10-fonts
+pkgver=10.0.22H2
+pkgrel=1
+pkgdesc='Microsoft Windows 10 TrueType fonts'
+arch=('any')
+url='http://www.microsoft.com/typography/fonts/product.aspx?PID=164'
+license=('custom')
+provides=('ttf-font' 'ttf-tahoma' 'ttf-ms-fonts')
+conflicts=('ttf-vista-fonts' 'ttf-win7-fonts' 'ttf-tahoma' 'ttf-ms-fonts')
+options=('!debug')
+
+source=('win10-fonts.tar.gz'
+)
+
+sha256sums=('ab27651bf72394428a9e14fa9341ef75881d585594215e66539e88667d4c01a3'
+)
+
+package() {
+  cd "${srcdir}"
+
+  # Prepare destination directory
+  install -d -m 755 "${pkgdir}/usr/share/fonts/TTF"
+
+  # Install fonts
+  install -m 644 fonts/*.ttf "${pkgdir}/usr/share/fonts/TTF"
+  install -m 644 fonts/*.ttc "${pkgdir}/usr/share/fonts/TTF"
+  # Install license
+  install -D -m 644 fonts/license.rtf "${pkgdir}/usr/share/licenses/${pkgname}/license.rtf"
+}

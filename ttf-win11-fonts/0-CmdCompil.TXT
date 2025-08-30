@@ -1,0 +1,161 @@
+# Le répertoire
+cd $HOME/05-builds/ttf-win110-fonts
+
+VOIR FICHIER : 0-Generer-font-ttf-Win11.TXT
+
+
+1-4) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+
+!!! CONSERVE Release DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/win11-fonts.tar.gz .
+
+
+
+2) MODIFIER LE PKGBUILD
+========================
+# Maintainer: Name <name@fai.com
+
+pkgname=ttf-win10-fonts
+pkgver=10.0.22H2
+pkgrel=1
+
+source=('win10-fonts.tar.gz'
+)
+
+sha256sum win10-fonts.tar.gz
+
+sha256sums=(...
+)
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 win10-fonts.tar.gz
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/ttf-win10-fonts/PKGBUILD . \
+&& cp -v $HOME/05-builds/ttf-win10-fonts/win10-fonts.tar.gz . \
+&& makepkg -s \
+&& cd $HOME/05-builds/ttf-win10-fonts \
+&& cp -v /tmp/build/ttf-win10-fonts-*-any.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+!!! SI ERREUR
+==============
+cd $HOME/05-builds/ttf-win10-fonts \
+&& rm -rf /tmp/build
+
+
+3-2) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+$ rm -f *~
+$ $HOME/bin/mkpkg-tmpfs -m native
+
+$ rm -f *~
+$ mkpkg-tmpfs -m native
+
+
+$ rm -rf /tmp/chrootrepo
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/ttf-win10-fonts-*-any.pkg.tar.*
+
+$ sudo cp -v ttf-win10-fonts-*-any.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/ttf-win10-fonts-*-any.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v ttf-win10-fonts-*-any.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER SOURCE
+----------------------------------------
+$ rm -f *~
+$ mv -v win10-fonts.tar.gz /0-DataLinux/05-builds-dir-git/
+$ rm -f 0-AUR/*
+$ rm -rf 0-AUR/*
+
+cd && maj-repolocal
+sync
+
+EN ROOT
+========
+# cd
+!!! 1ERE INSTALLATION
+---------------------
+1) supprimer ttf-win10-fonts
+# LC_ALL=C pacman -Rcns ttf-win10-fonts
+# LC_ALL=C pacman -Sc
+2) installer ttf-win10-fonts
+# LC_ALL=C pacman -Syu ttf-win10-fonts
+
+!!! MAJ
+# cd
+# pacman -Syu
+
+==========================================================================================
+ANCIEN
+======
+
+-rw-r--r--  1 jnd users  2422  7 juin  00:20 ttf-win10-fonts.install
+
+&& cp -v $HOME/05-builds/ttf-win10-fonts/ttf-win10-fonts.install . \
+
+4) MAKEPKG EN USER
+===================
+!!! EN USER
+
+rm -f *~
+makepkg -s
+
+Mot de passe :
+résolution des dépendances...
+recherche des conflits entre paquets...
+
+Cibles (3) : libspiro-20071029-2  libxkbui-1.0.2-3  fontforge-20111214-3
+
+Taille totale de téléchargement :       7,82 MiB
+Taille totale installé :                27,04 MiB
+
+Procéder à l'installation ? [O/n]
+:: Récupération des paquets du dépôt extra...
+ libxkbui-1.0.2-3-x86_64                                      9,3 KiB   261K/s 00:00 [################################################] 100%
+ libspiro-20071029-2-x86_64                                   8,8 KiB   617K/s 00:00 [################################################] 100%
+ fontforge-20111214-3-x86_64                                  7,8 MiB   520K/s 00:15 [################################################] 100%
+
+
+makepkg -f
+
+# Nettoyage fichiers~
+=========================
+
+!!! EN USER
+
+rm -f *~
+
+rm -rf src pkg
+
+
+
