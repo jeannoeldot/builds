@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.08.20250731
+pkgrel=2      # Rebuild nouveau PC
 pkgrel=1      # v25.08
 
 pkgrel=3      # rebuild MAJ OIIO 3.0.8.1. OSD 3.6.1
