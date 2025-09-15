@@ -41,6 +41,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=opensubdiv-jnd               # opensubdiv ds community
 pkgver=3_6_1.20250626
+pkgrel=2    # Rebuild nouveau PC
 pkgrel=1
 
 pkgrel=2    # Preserve static libs + !lto staticlibs
@@ -51,8 +52,6 @@ pkgrel=2    # Rebuild intel-tbb ==> tbb
 pkgrel=4    # MAJ intel-tbb 2019.9-1
 pkgrel=3    # find . -type f -exec sed -i -e 's/\-O3//g' {} \;
 pkgrel=2    # sed -i -e "s/-O3 //g" $(find . -name flags.make)
-
-pkgrel=2    # Rebuild nouveau PC 
 
 pkgrel=2    # gcc 8.1.0
 

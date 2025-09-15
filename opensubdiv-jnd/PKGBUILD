@@ -2,7 +2,7 @@
 
 pkgname=opensubdiv-jnd
 pkgver=3_6_1.20250626
-pkgrel=1
+pkgrel=2
 _ver_release="3_6_1"
 _name_release="OpenSubdiv-${_ver_release}"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
