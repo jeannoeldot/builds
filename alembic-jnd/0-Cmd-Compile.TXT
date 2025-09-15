@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=alembic-jnd               # alembic ds community
 pkgver=1.8.8.20241202
+pkgrel=2          # Rebuild nouveau PC
 pkgrel=1
 
 pkgrel=3          # rebuild MAJ imath 3.1.9
@@ -203,7 +204,6 @@ alembic-jnd W: Dependency included, but may not be needed ('imath')
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
 ---------------------------------------------------------------
-$ sudo rm /00-repolocal/alembic-git-*-x86_64.pkg.tar.*
 $ sudo rm /00-repolocal/alembic-jnd-*-x86_64.pkg.tar.*
 
 $ sudo cp -v alembic-jnd-*-x86_64.pkg.tar.* /00-repolocal/
@@ -247,6 +247,8 @@ SI PROBLEME
 
 ANCIEN
 ======
+
+$ sudo rm /00-repolocal/alembic-git-*-x86_64.pkg.tar.*
 
 !!! TESTS = OK
 depends=('gcc-libs' 'openexr'

@@ -2,7 +2,7 @@
 
 pkgname=alembic-jnd
 pkgver=1.8.8.20241202
-pkgrel=1
+pkgrel=2
 _ver_release="1.8.8"
 _name_release="alembic-${_ver_release}"
 pkgdesc="An open framework for storing and sharing scene data"
