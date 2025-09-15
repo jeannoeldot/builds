@@ -2,7 +2,7 @@
 
 pkgname=openvdb-jnd
 pkgver=12.1.0.20250808
-pkgrel=1
+pkgrel=3
 _ver_release="12.1.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'

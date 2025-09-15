@@ -37,6 +37,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-jnd               # openvdb ds community
 pkgver=12.1.0.20250808
+pkgrel=3          # Rebuild nouveau PC
 pkgrel=2          # rebuild boost boost-libs 1.88.0
 pkgrel=1
 
@@ -74,7 +75,6 @@ pkgrel=6    # -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
               -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
               sed -i "s/isystem/I/g" $(find . -name flags.make)
 
-pkgrel=3          # Rebuild nouveau PC
 pkgrel=2          # rebuild boost boost-libs 1.69.0
 pkgrel=2          # rebuild boost boost-libs 1.68.0
 
