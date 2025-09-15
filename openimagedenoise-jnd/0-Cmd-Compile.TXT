@@ -36,6 +36,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-jnd
 pkgver=2.3.3.20250404
+pkgrel=2          # Rebuild nouveau PC
 pkgrel=1
 
 pkgrel=2  # Rebuild MAJ python 3.13

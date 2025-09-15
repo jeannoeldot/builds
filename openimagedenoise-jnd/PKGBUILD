@@ -2,7 +2,7 @@
 
 pkgname=openimagedenoise-jnd
 pkgver=2.3.3.20250404
-pkgrel=1
+pkgrel=2
 _ver_release="2.3.3"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"

@@ -1,50 +1,43 @@
-# Maintainer: Liganic <liganic-aur@gmx.net>
-# Maintainer: JND <jeannoeldot@club-internet.fr>
+# Maintainer: Name <name@fai.com>
 
 pkgname=opencollada-git
-pkgver=20130401
+pkgver=1.6.20240719
 pkgrel=1
+epoch=1
 pkgdesc="Stream based reader and writer library for COLLADA files"
-arch=(x86_64)
+arch=('x86_64')
 url="https://github.com/KhronosGroup/OpenCOLLADA"
-license=('GPL')
-depends=('libxml2' 'pcre')
-makedepends=('ruby' 'cmake')
-provides=('opencollada')
+license=('LGPL-2.0-or-later')
+depends=('libxml2')
+makedepends=('cmake')
 conflicts=('opencollada')
-install=opencollada.install
+provides=('opencollada')
+options=('!debug')
 source=("$pkgname-$pkgver.tar.gz"
-        "opencollada.conf"
+        'opencollada.conf'
 )
-md5sums=('60f1235455608fb03bf5a34cb44e758f'
-         '0d0ffa4d2f3b4558e11bf0e9b166972e'
+sha256sums=('699474d337c30d9debe51d36075afbf934c990aba8a97ae3ddea6c7d1ebd73cb'
+            '2fc9656a2b881ca4528416daa91fc525adaa97d73e96a18b41aa7856270eba1f'
 )
 
-_real_name="opencollada"
+_gitname="opencollada"
 
 build() {
-  cd ${srcdir}/${_real_name}
+  cd "${_gitname}"
 
-  mkdir ${srcdir}/${_real_name}-build
-  cd ${srcdir}/${_real_name}-build
-  cmake	-DCMAKE_BUILD_TYPE=RELEASE \
-	-DCMAKE_SKIP_RPATH=ON \
-	-DCMAKE_INSTALL_PREFIX=/usr \
-        -DUSE_STATIC=OFF \
-	-DUSE_SHARED=ON \
-	${srcdir}/${_real_name}
-  make ${MAKEFLAGS}
+  cmake \
+    -Bbuild \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DUSE_STATIC=OFF \
+    -DUSE_SHARED=ON
+  make -C build
 }
 
 package() {
-  cd ${srcdir}/${_real_name}-build
-  make DESTDIR=${pkgdir} install
+  cd "${_gitname}"
+  DESTDIR="${pkgdir}" make -C build install
 
-  # add opencollada library path to ld.so.conf
-  install -Dm644 "$srcdir/${_real_name}.conf" "$pkgdir/etc/ld.so.conf.d/${_real_name}.conf"
-
-  # Binary
-  install -Dm755 bin/OpenCOLLADAValidator ${pkgdir}/usr/bin/OpenCOLLADAValidator
+  install -Dm644 "${srcdir}"/opencollada.conf "${pkgdir}"/etc/ld.so.conf.d/opencollada.conf
 }
-
-# vim:set ts=2 sw=2 et:
