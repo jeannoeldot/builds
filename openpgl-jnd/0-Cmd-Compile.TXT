@@ -41,6 +41,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openpgl-jnd               # openpgl ds community ?
 pkgver=0.7.1.20250731
+pkgrel=2          # Rebuild nouveau PC
 pkgrel=1
 
 pkgrel=2    # Rebuild maj embree 4.1.0

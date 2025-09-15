@@ -2,7 +2,7 @@
 
 pkgname=openpgl-jnd
 pkgver=0.7.1.20250731
-pkgrel=1
+pkgrel=2
 _ver_release="0.7.1"
 _name_release="openpgl-${_ver_release}"
 pkgdesc="Intel(R) Open Path Guiding Library"
