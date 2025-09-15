@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.14.7.0.20250803
-pkgrel=1
+pkgrel=2
 _name_release="OpenShadingLanguage-1.14.7.0"
 _ver_release="v1.14.7.0"
 pkgdesc="Advanced shading language for production GI renderers"
@@ -51,7 +51,7 @@ build() {
       -DOSL_USE_OPTIX=ON \
       -DOPTIX_INCLUDE_DIR="${srcdir}" \
       -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
-      -DCUDA_TARGET_ARCH="sm_86" \
+      -DCUDA_TARGET_ARCH="sm_120" \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
   make -C build

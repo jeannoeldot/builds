@@ -42,6 +42,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.14.7.0.20250803
+pkgrel=2          # Rebuild nouveau PC
 pkgrel=1
 
 pkgrel=3    # rebuild SANS CUDA et OPTIX: COMPILE PAS OK
