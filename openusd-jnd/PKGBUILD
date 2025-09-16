@@ -2,7 +2,7 @@
 
 pkgname=openusd-jnd
 pkgver=25.08.20250731
-pkgrel=2
+pkgrel=3
 _ver_release="25.08"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
