@@ -205,6 +205,8 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.0.0.86.20250923
+pkgrel=3    # GCC 14
+
 pkgrel=2    # GCC 15 + cmake + ninja
 
 pkgrel=1    # GCC 15
