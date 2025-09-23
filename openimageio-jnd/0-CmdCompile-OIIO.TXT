@@ -41,6 +41,8 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-jnd
 pkgver=3.0.10.0.20250901
+pkgrel=2    # REBUILD MAJ openexr 3.4
+
 pkgrel=1
 
 
