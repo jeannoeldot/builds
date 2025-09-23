@@ -1,0 +1,76 @@
+clang++: warning: clang++CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+: clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1132: src/liboslexec/opmatrix_cuda.bc] Error 1
+make[2]: *** Waiting for unfinished jobs....
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1306: src/liboslexec/optexture_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1248: src/liboslexec/opspline_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1074: src/liboslexec/opcolor_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1016: src/liboslexec/llvm_ops_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1422: src/liboslexec/simplexnoise_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:958: src/liboslexec/gabornoise_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1364: src/liboslexec/pointcloud_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1190: src/liboslexec/opnoise_cuda.bc] Error 1
+[ 31%] Linking CXX executable ../../bin/oslnoise_test
+[ 32%] Linking CXX shared library ../../lib/liboslcomp.so
+[ 32%] Linking CXX executable ../../bin/oslinfo
+make[1]: *** [CMakeFiles/Makefile2:1499: src/liboslexec/CMakeFiles/oslexec.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 32%] Built target oslnoise_test
+[ 32%] Built target oslinfo
+[ 32%] Built target oslcomp
+[ 32%] Linking CXX shared module ../../lib/python/site-packages/oslquery.cpython-313-x86_64-linux-gnu.so
+[ 32%] Built target pyoslquery
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.7.0/build'

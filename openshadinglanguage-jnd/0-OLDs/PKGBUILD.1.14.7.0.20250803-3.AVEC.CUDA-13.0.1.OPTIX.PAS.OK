@@ -19,14 +19,17 @@ depends=('imath' 'freetype2' 'libpng' 'libtiff'
 )
 makedepends=('cmake' 'llvm'
              'robin-map'
+             'cuda'
 )
 conflicts=('openshadinglanguage' 'openshadinglanguage-git')
 provides=('openshadinglanguage')
 options=('!debug')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "OptiX-8.1-Include.zip"
 )
 
 sha256sums=('c4c2ddd3b537cd3a90d50fdd0753614fa24100698d5632b9f1108bd8b505e56c'
+            'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
 )
 
 # prepare() {
@@ -45,6 +48,10 @@ build() {
       -DCMAKE_SKIP_RPATH=ON \
       -DCMAKE_CXX_STANDARD=17 \
       -DLLVM_STATIC=OFF \
+      -DOSL_USE_OPTIX=ON \
+      -DOPTIX_INCLUDE_DIR="${srcdir}" \
+      -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
+      -DCUDA_TARGET_ARCH="sm_120" \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
   make -C build
