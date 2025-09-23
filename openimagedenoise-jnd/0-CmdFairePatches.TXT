@@ -1,0 +1,76 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 2.3.3.20250404
+
+
+/!\ /!\ /!\ cd $HOME/05-builds/openimagedenoise-jnd
+
+mkdir /tmp/srcp
+
+cp -v oidn-2.3.3.src.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf oidn-2.3.3.src.tar.gz
+
+
+!!! VOIR :
+https://gitlab.archlinux.org/archlinux/packaging/packages/openimagedenoise/-/blob/main/0001-Fix-build-with-CUDA-13.patch
+
+1) MODIFIER oidn-2.3.3/devices/cuda/CMakeLists.txt
+======================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R oidn-2.3.3 oidn-2.3.3.new
+
+cd oidn-2.3.3.new/devices/cuda
+kwrite CMakeLists.txt
+
+SUPPRIMER LIGNE 44 :
+  cutlass_conv_sm70.cu
+
+MODIFIER LIGNE 58 :
+oidn_set_cuda_sm_flags(OIDN_CUDA_SM_FLAGS 70 75 80 90 100 120)
+
+DEVIENT :
+oidn_set_cuda_sm_flags(OIDN_CUDA_SM_FLAGS 75 80 90 100 110 120)
+
+SUPPRIMER LIGNES 66 A 71 :
+sm_70 ...
+
+MODIFIER LIGNE 72 :
+oidn_set_cuda_sm_flags(OIDN_CUDA_SM80_FLAGS 80 90 100 120)
+
+DEVIENT :
+oidn_set_cuda_sm_flags(OIDN_CUDA_SM80_FLAGS 80 90 100 110 120)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../..
+
+diff -aur oidn-2.3.3 oidn-2.3.3.new
+diff -aur oidn-2.3.3 oidn-2.3.3.new > 0001-Fix-build-with-CUDA-13.patch
+
+rm -rf oidn-2.3.3.new
+
+
+cd $HOME/05-builds/openimagedenoise-jnd
+
+mv -vf /tmp/srcp/0001-Fix-build-with-CUDA-13.patch .
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+

@@ -36,6 +36,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-jnd
 pkgver=2.3.3.20250404
+pkgrel=3          # Rebuild Cuda 13 + Patch
 pkgrel=2          # Rebuild nouveau PC
 pkgrel=1
 
@@ -70,8 +71,8 @@ provides=('openimagedenoise' 'oidn')
 
 options=('!debug')
 
-SANS PATCH
-----------
+2-2) SANS PATCH
+---------------
 sha256sum oidn-2.3.3.src.tar.gz
 
 source=("oidn-${_ver_release}.src.tar.gz"
@@ -85,6 +86,27 @@ build() {
 package() {
   cd "${_name_release}/build"
 
+
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("oidn-${_ver_release}.src.tar.gz"
+        "0001-Fix-build-with-CUDA-13.patch"
+)
+
+sha256sum oidn-2.3.3.src.tar.gz
+
+sha256sum 0001-Fix-build-with-CUDA-13.patch
+
+sha256sums=('....'
+            '....'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # # Fix build with CUDA 13 https://github.com/RenderKit/oidn/issues/274
+  patch -Np1 -i "${srcdir}/0001-Fix-build-with-CUDA-13.patch"
+
+}
 
 2-5) VERIFIER CMakeLists.txt
 ============================
@@ -135,6 +157,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 4210384 21 avril 11:51 oidn-2.3.3.src.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+-rw-r--r--  1 jnd users     1619 23 sept. 11:37 0001-Fix-build-with-CUDA-13.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================
