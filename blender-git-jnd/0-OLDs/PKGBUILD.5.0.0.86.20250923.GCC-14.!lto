@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.0.0.95.20250928
-pkgrel=1
+pkgver=5.0.0.86.20250923
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -36,19 +36,19 @@ makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda'
              'wayland-protocols'
              'mold'
+             'gcc14'
 )
 optdepends=('cuda: cycles renderer cuda support')
 conflicts=('blender' 'blender-git')
 provides=('blender')
+#options=('!strip')
 options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
-        "Fix-#146910_Update-path-for-Smooth-by-Angle-asset.patch"
 )
-sha256sums=('33818f2cbd6058e00699351762254146aa47285217421630e0fc1df023b04d12'
+sha256sums=('a4b891e8d4a4e77b33e8af257fa9e1b033da15e159f0f6d970292a746974482e'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
-            '6368cfd990be520a1986371aa1974cf38ddec5f2dd3538b3f4c0b5eaa89c1b3e'
 )
 
 _gitname="blender"
@@ -56,32 +56,26 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
-  # Fix #146910: Update path for Smooth by Angle asset
-  patch -Np1 -i "${srcdir}/Fix-#146910_Update-path-for-Smooth-by-Angle-asset.patch"
-
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "182d8ef142f5"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "52c028e0b055"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1759039409|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1758625577|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
   cd "${_gitname}"
-
-  # VOIR PKGBUILD EXTRA
-  # This should fix #13.
-  export CXXFLAGS=${CXXFLAGS/-Wp,-D_GLIBCXX_ASSERTIONS/}
-  CXXFLAGS+=' --param=max-vartrack-size=640000000'
-
+  
   local _python_ver=3.13
   local _llvm_libs_ver=20
 
   cmake \
         -Bbuild \
+        -DCMAKE_C_COMPILER='/usr/bin/gcc-14' \
+        -DCMAKE_CXX_COMPILER='/usr/bin/g++-14' \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS_RELEASE:STRING=-DNDEBUG \

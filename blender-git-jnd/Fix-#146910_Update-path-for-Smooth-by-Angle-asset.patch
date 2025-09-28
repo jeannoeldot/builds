@@ -1,0 +1,12 @@
+diff -aur blender/source/blender/editors/object/object_edit.cc blender.new/source/blender/editors/object/object_edit.cc
+--- blender/source/blender/editors/object/object_edit.cc	2025-09-28 11:08:31.000000000 +0200
++++ blender.new/source/blender/editors/object/object_edit.cc	2025-09-28 11:25:55.943568109 +0200
+@@ -1835,7 +1835,7 @@
+     AssetWeakReference asset_weak_ref{};
+     asset_weak_ref.asset_library_type = ASSET_LIBRARY_ESSENTIALS;
+     asset_weak_ref.relative_asset_identifier = BLI_strdup(
+-        "geometry_nodes/smooth_by_angle.blend/NodeTree/Smooth by Angle");
++        "geometry_nodes/geometry_nodes_essentials.blend/NodeTree/Smooth by Angle");
+ 
+     const asset_system::AssetRepresentation *asset_representation =
+         asset::find_asset_from_weak_ref(*C, asset_weak_ref, op->reports);
