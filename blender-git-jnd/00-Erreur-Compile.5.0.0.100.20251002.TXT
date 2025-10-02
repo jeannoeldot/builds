@@ -1,0 +1,19 @@
+
+[ 93%] Building CXX object source/blender/gpu/CMakeFiles/bf_gpu.dir/vulkan/vk_descriptor_pools.cc.o
+/build/blender-git-jnd/src/blender/source/blender/python/mathutils/mathutils_geometry.cc: In function ‘PyObject* M_Geometry_intersect_point_line(PyObject*, PyObject* const*, Py_ssize_t)’:
+/build/blender-git-jnd/src/blender/source/blender/python/mathutils/mathutils_geometry.cc:841:8: error: ‘_PyArg_CheckPositional’ was not declared in this scope
+  841 |   if (!_PyArg_CheckPositional(error_prefix, nargs, 3, 3)) {
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+/build/blender-git-jnd/src/blender/source/blender/python/mathutils/mathutils_geometry.cc: In function ‘PyObject* M_Geometry_intersect_point_line_segment(PyObject*, PyObject* const*, Py_ssize_t)’:
+/build/blender-git-jnd/src/blender/source/blender/python/mathutils/mathutils_geometry.cc:892:8: error: ‘_PyArg_CheckPositional’ was not declared in this scope
+  892 |   if (!_PyArg_CheckPositional(error_prefix, nargs, 3, 3)) {
+      |        ^~~~~~~~~~~~~~~~~~~~~~
+[ 93%] Building CXX object source/blender/python/intern/CMakeFiles/bf_python.dir/bpy_path.cc.o
+make[2]: *** [source/blender/python/mathutils/CMakeFiles/bf_python_mathutils.dir/build.make:177: source/blender/python/mathutils/CMakeFiles/bf_python_mathutils.dir/mathutils_geometry.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:10658: source/blender/python/mathutils/CMakeFiles/bf_python_mathutils.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/blender-git-jnd/src/blender/build'
+==> ERROR: A failure occurred in build().
+    Aborting...

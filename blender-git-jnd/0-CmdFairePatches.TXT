@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.0.0.95.20250928
+!!! VERSION = 5.0.0.100.20251002
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.95.20250928.tar.zst /tmp/srcp/
+cp -v blender-git-5.0.0.100.20251002.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.0.0.95.20250928.tar.zst
+tar -x --zstd -f blender-git-5.0.0.100.20251002.tar.zst
 
 
 1) FIX #146910 Update path for Smooth by Angle asset
@@ -315,11 +315,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.95.20250928.tar.gz /tmp/srcp/
+cp -v blender-git-5.0.0.100.20251002.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.0.0.95.20250928.tar.gz
+tar -xzf blender-git-5.0.0.100.20251002.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
