@@ -48,6 +48,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.08.20250731
+pkgrel=5      # rebuild MAJ openvdb 12.1.1 et OIIO 3.0.11.0
 pkgrel=4      # rebuild MAJ openèxr 3.4
 pkgrel=3      # Rebuild MAJ materialx 1.39.4-1
 pkgrel=2      # Rebuild nouveau PC
@@ -119,7 +120,6 @@ source=("USD-v${_ver_release}.tar.gz"
 )
 
 sha256sum OpenUSD-v25.08.tar.gz
-
 
 
 AVEC PATCH
