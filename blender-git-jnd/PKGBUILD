@@ -2,7 +2,7 @@
 
 pkgname=blender-git-jnd
 pkgver=5.0.0.95.20250928
-pkgrel=2
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -33,7 +33,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'materialx' 'openusd-jnd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
-             'cuda'
+             'cuda' 'nvidia-utils'
              'wayland-protocols'
              'mold'
 )

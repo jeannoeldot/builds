@@ -205,6 +205,8 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.0.0.95.20250928
+pkgrel=3    # GCC 15 + !lto + CXXFLAGS + nvidia-utils + modifs makepkg.conf
+
 pkgrel=2    # GCC 15 + !lto + CXXFLAGS + modifs makepkg.conf
 
 pkgrel=4    # GCC 15 - !lto
