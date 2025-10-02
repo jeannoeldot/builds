@@ -1,9 +1,9 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openvdb-jnd
-pkgver=12.1.0.20250808
-pkgrel=3
-_ver_release="12.1.0"
+pkgver=12.1.1.20250930
+pkgrel=1
+_ver_release="12.1.1"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
@@ -20,7 +20,7 @@ provides=('openvdb')
 options=('!debug')
 source=("OpenVDB-v${_ver_release}.tar.gz"
 )
-sha256sums=('ebb9652ad1d67274e2c85e6736cced5f04e313c5671ae1ae548f174cc76e9e64'
+sha256sums=('ccd0ea1669a53c7c13087a08ac5a1351041c4cdd308f6d6f591074a106fcb565'
 )
 
 
