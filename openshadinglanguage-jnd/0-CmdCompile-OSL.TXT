@@ -42,6 +42,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.14.7.0.20250803
+pkgrel=5    # rebuild MAJ OIIO 3.1.6.2
 pkgrel=4    # rebuild MAJ OIIO 3.0.11.0
 pkgrel=3    # rebuild MAJ openexr 3.4
 pkgrel=3    # rebuild MAJ CUDA 13.0.1 et OPTIX openexr 3.4: COMPILE PAS OK
