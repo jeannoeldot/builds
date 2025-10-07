@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.0.0.100.20251002
+pkgver=5.0.0.102.20251007
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -44,15 +44,21 @@ options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
+        "Fix-Build-mathutils_geometry.cc-with-python-3.13.patch"
 )
-sha256sums=('e711af743676f27ee3176498873aaf0e0ab0868fb551a2ce7d57cca559eca11b'
+sha256sums=('f1fa2e58a09372b5ef122cbaee31dadd2d8ffdfc98eb0dd01c050c9e419d3102'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
+            '373da4899b4580e48186f6d127431cfaf0055254429254a41eb0b0d299d45eb7'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+
+  # Fix error: ‘_PyArg_CheckPositional’ was not declared in this scope
+  # Fix error: #error "this header requires Py_BUILD_CORE define"
+  patch -Np1 -i "${srcdir}/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch"
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner

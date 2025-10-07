@@ -1,4 +1,33 @@
 
+-----------------------------------------------------------------------------------------------
+5.0.0.102.20251007
+==================
+[ 92%] Building CXX object source/blender/python/mathutils/CMakeFiles/bf_python_mathutils.dir/mathutils_geometry.cc.o
+In file included from /usr/include/python3.13/internal/pycore_modsupport.h:4,
+                 from /build/blender-git-jnd/src/blender/source/blender/python/mathutils/mathutils_geometry.cc:10:
+/usr/include/python3.13/internal/pycore_lock.h:13:4: error: #error "this header requires Py_BUILD_CORE define"
+   13 | #  error "this header requires Py_BUILD_CORE define"
+      |    ^~~~~
+/usr/include/python3.13/internal/pycore_modsupport.h:11:4: error: #error "this header requires Py_BUILD_CORE define"
+   11 | #  error "this header requires Py_BUILD_CORE define"
+      |    ^~~~~
+
+
+make[2]: *** [source/blender/python/mathutils/CMakeFiles/bf_python_mathutils.dir/build.make:177: source/blender/python/mathutils/CMakeFiles/bf_python_mathutils.dir/mathutils_geometry.cc.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+
+make[1]: *** [CMakeFiles/Makefile2:10658: source/blender/python/mathutils/CMakeFiles/bf_python_mathutils.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/blender-git-jnd/src/blender/build'
+==> ERROR: A failure occurred in build().
+
+-----------------------------------------------------------------------------------------------
+5.0.0.100.20251002
+==================
+
 [ 93%] Building CXX object source/blender/gpu/CMakeFiles/bf_gpu.dir/vulkan/vk_descriptor_pools.cc.o
 /build/blender-git-jnd/src/blender/source/blender/python/mathutils/mathutils_geometry.cc: In function ‘PyObject* M_Geometry_intersect_point_line(PyObject*, PyObject* const*, Py_ssize_t)’:
 /build/blender-git-jnd/src/blender/source/blender/python/mathutils/mathutils_geometry.cc:841:8: error: ‘_PyArg_CheckPositional’ was not declared in this scope

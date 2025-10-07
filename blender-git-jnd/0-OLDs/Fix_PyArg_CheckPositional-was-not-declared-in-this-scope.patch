@@ -1,0 +1,11 @@
+diff -aur blender/source/blender/python/mathutils/mathutils_geometry.cc blender.new/source/blender/python/mathutils/mathutils_geometry.cc
+--- blender/source/blender/python/mathutils/mathutils_geometry.cc	2025-10-07 14:54:19.000000000 +0200
++++ blender.new/source/blender/python/mathutils/mathutils_geometry.cc	2025-10-07 15:05:06.647969909 +0200
+@@ -7,6 +7,7 @@
+  */
+ 
+ #include <Python.h>
++#include <internal/pycore_modsupport.h>
+ 
+ #include "mathutils.hh"
+ #include "mathutils_geometry.hh"

@@ -1,19 +1,59 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.0.0.100.20251002
+!!! VERSION = 5.0.0.102.20251007
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.100.20251002.tar.zst /tmp/srcp/
+cp -v blender-git-5.0.0.102.20251007.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.0.0.100.20251002.tar.zst
+tar -x --zstd -f blender-git-5.0.0.102.20251007.tar.zst
 
+
+1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
+=====================================================================
+1-1) MODIFIER source/blender/python/mathutils/mathutils_geometry.cc
+====================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/python/mathutils
+kwrite mathutils_geometry.cc
+
+AJOUTER LIGNE 10 :
+#define Py_BUILD_CORE
+#include <internal/pycore_modsupport.h>
+
+ENREGISTRER et Quitter Kwrite & EFFACER mathutils_geometry.cc~
+rm -f mathutils_geometry.cc~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-Build-mathutils_geometry.cc-with-python-3.13.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch .
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) FIX #146910 Update path for Smooth by Angle asset
 ====================================================
@@ -46,18 +86,6 @@ cd $HOME/05-builds/blender-git-jnd
 
 mv -vf /tmp/srcp/Fix-#146910_Update-path-for-Smooth-by-Angle-asset.patch .
 
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) MANIFOJD
 ===========================
@@ -315,11 +343,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.100.20251002.tar.gz /tmp/srcp/
+cp -v blender-git-5.0.0.102.20251007.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.0.0.100.20251002.tar.gz
+tar -xzf blender-git-5.0.0.102.20251007.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
