@@ -1,18 +1,103 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.0.0.102.20251007
+!!! VERSION = 5.1.0.2.20251012
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.102.20251007.tar.zst /tmp/srcp/
+cp -v blender-git-5.1.0.2.20251012.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.0.0.102.20251007.tar.zst
+tar -x --zstd -f blender-git-5.1.0.2.20251012.tar.zst
+
+
+1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
+=====================================================================
+1-1) MODIFIER source/blender/python/generic/CMakeLists.txt
+============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/python/generic
+kwrite CMakeLists.txt
+
+SUPPRIMER LIGNE 23 :
+  python_compat.cc
+
+SUPPRIMER LIGNE 31 :
+  python_compat.hh
+
+AJOUTER LIGNE 33 :
+  python_compat.hh
+
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../../../..
+
+
+1-2) MODIFIER source/blender/python/generic/python_compat.hh
+============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cd blender.new/source/blender/python/generic
+kwrite python_compat.hh
+
+SUPPRIMER LIGNES 52 ET 53 :
+#else /* >= 3.14 */
+int _PyArg_CheckPositional(const char *name, Py_ssize_t nargs, Py_ssize_t min, Py_ssize_t max);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER python_compat.hh~
+rm -f python_compat.hh~
+
+cd ../../../../..
+
+
+1-3) MODIFIER source/blender/python/mathutils/mathutils_geometry.cc
+====================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cd blender.new/source/blender/python/mathutils
+kwrite mathutils_geometry.cc
+
+SUPPRIMER LIGNE 32 :
+#include "../generic/python_compat.hh" /* IWYU pragma: keep. */
+
+AJOUTER LIGNE 10 :
+#define Py_BUILD_CORE
+#include <internal/pycore_modsupport.h>
+
+ENREGISTRER et Quitter Kwrite & EFFACER mathutils_geometry.cc~
+rm -f mathutils_geometry.cc~
+
+cd ../../../../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-Build-mathutils_geometry.cc-with-python-3.13.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch .
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 
 1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
@@ -44,16 +129,6 @@ cd $HOME/05-builds/blender-git-jnd
 
 mv -vf /tmp/srcp/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch .
 
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) FIX #146910 Update path for Smooth by Angle asset
 ====================================================
@@ -343,11 +418,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.0.0.102.20251007.tar.gz /tmp/srcp/
+cp -v blender-git-5.1.0.2.20251012.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.0.0.102.20251007.tar.gz
+tar -xzf blender-git-5.1.0.2.20251012.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
