@@ -1,19 +1,84 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.1.0.2.20251012
+!!! VERSION = 5.1.0.2.20251013
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.2.20251012.tar.zst /tmp/srcp/
+cp -v blender-git-5.1.0.2.20251013.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.1.0.2.20251012.tar.zst
+tar -x --zstd -f blender-git-5.1.0.2.20251013.tar.zst
 
+
+1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
+=====================================================================
+1-1) MODIFIER source/blender/python/generic/python_compat.cc
+============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/python/generic
+kwrite python_compat.cc
+
+MODIFIER LIGNES 17 A 19 :
+#if PY_VERSION_HEX >= 0x030e0000 /* >=3.14 */
+
+/* Removed in Python 3.14. */
+
+DEVIENT:
+#if PY_VERSION_HEX >= 0x030d0000 /* >=3.13 */
+
+/* Not declared in this scope in Python 3.13. */
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER python_compat.hh~
+rm -f python_compat.hh~
+
+cd ../../../../..
+
+
+1-2) MODIFIER source/blender/python/generic/python_compat.hh
+============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cd blender.new/source/blender/python/generic
+kwrite python_compat.hh
+
+SUPPRIMER LIGNE 52 :
+#else /* >= 3.14 */
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER python_compat.hh~
+rm -f python_compat.hh~
+
+cd ../../../../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-Build-mathutils_geometry.cc-with-python-3.13.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch .
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
 =====================================================================
@@ -88,16 +153,6 @@ cd $HOME/05-builds/blender-git-jnd
 
 mv -vf /tmp/srcp/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch .
 
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 
 1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
@@ -418,11 +473,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.2.20251012.tar.gz /tmp/srcp/
+cp -v blender-git-5.1.0.2.20251013.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.1.0.2.20251012.tar.gz
+tar -xzf blender-git-5.1.0.2.20251013.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

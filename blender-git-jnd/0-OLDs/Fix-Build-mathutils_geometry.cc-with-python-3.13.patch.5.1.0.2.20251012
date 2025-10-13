@@ -1,0 +1,52 @@
+diff -aur blender/source/blender/python/generic/CMakeLists.txt blender.new/source/blender/python/generic/CMakeLists.txt
+--- blender/source/blender/python/generic/CMakeLists.txt	2025-10-12 11:48:44.000000000 +0200
++++ blender.new/source/blender/python/generic/CMakeLists.txt	2025-10-12 14:59:53.947208833 +0200
+@@ -20,7 +20,6 @@
+   imbuf_py_api.cc
+   py_capi_rna.cc
+   py_capi_utils.cc
+-  python_compat.cc
+ 
+   bl_math_py_api.hh
+   blf_py_api.hh
+@@ -29,9 +28,9 @@
+   imbuf_py_api.hh
+   py_capi_rna.hh
+   py_capi_utils.hh
+-  python_compat.hh
+ 
+   # header-only
++  python_compat.hh
+   python_utildefines.hh
+ )
+ 
+diff -aur blender/source/blender/python/generic/python_compat.hh blender.new/source/blender/python/generic/python_compat.hh
+--- blender/source/blender/python/generic/python_compat.hh	2025-10-12 11:48:44.000000000 +0200
++++ blender.new/source/blender/python/generic/python_compat.hh	2025-10-12 15:01:43.447964806 +0200
+@@ -49,6 +49,4 @@
+ #  define Py_HashPointer _Py_HashPointer
+ #  define PyThreadState_GetUnchecked _PyThreadState_UncheckedGet
+ /* TODO: Support: `PyDict_Pop`, it has different arguments. */
+-#else /* >= 3.14 */
+-int _PyArg_CheckPositional(const char *name, Py_ssize_t nargs, Py_ssize_t min, Py_ssize_t max);
+ #endif
+diff -aur blender/source/blender/python/mathutils/mathutils_geometry.cc blender.new/source/blender/python/mathutils/mathutils_geometry.cc
+--- blender/source/blender/python/mathutils/mathutils_geometry.cc	2025-10-12 11:48:44.000000000 +0200
++++ blender.new/source/blender/python/mathutils/mathutils_geometry.cc	2025-10-12 15:03:37.526232276 +0200
+@@ -7,6 +7,8 @@
+  */
+ 
+ #include <Python.h>
++#define Py_BUILD_CORE
++#include <internal/pycore_modsupport.h>
+ 
+ #include "mathutils.hh"
+ #include "mathutils_geometry.hh"
+@@ -29,7 +31,6 @@
+ #include "BLI_utildefines.h"
+ 
+ #include "../generic/py_capi_utils.hh"
+-#include "../generic/python_compat.hh" /* IWYU pragma: keep. */
+ #include "../generic/python_utildefines.hh"
+ 
+ /* ---------------------------------INTERSECTION FUNCTIONS-------------------- */
