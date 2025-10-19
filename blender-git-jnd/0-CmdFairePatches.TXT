@@ -1,19 +1,31 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.1.0.2.20251013
+!!! VERSION = 5.1.0.3.20251018
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.2.20251013.tar.zst /tmp/srcp/
+cp -v blender-git-5.1.0.3.20251018.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.1.0.2.20251013.tar.zst
+tar -x --zstd -f blender-git-5.1.0.3.20251018.tar.zst
 
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
 =====================================================================
@@ -69,16 +81,6 @@ cd $HOME/05-builds/blender-git-jnd
 
 mv -vf /tmp/srcp/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch .
 
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
 =====================================================================
@@ -473,11 +475,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.2.20251013.tar.gz /tmp/srcp/
+cp -v blender-git-5.1.0.3.20251018.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.1.0.2.20251013.tar.gz
+tar -xzf blender-git-5.1.0.3.20251018.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.1.0.3.20251018
+pkgver=5.1.0.2.20251013
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -44,9 +44,11 @@ options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
+        "Fix-Build-mathutils_geometry.cc-with-python-3.13.patch"
 )
-sha256sums=('664a9c52ef1d52b6eb5c2acb6457c44105a47402e4dc970d3f8ae5211fa91adb'
+sha256sums=('74ebd503c44194cd5863f48c51a75d1b1a04f7fed6d4c009314c31b3eb74eaf8'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
+            'a7f94cd8468050493569875b72aa1b464b2a00eb73f1ccea638cfe06bcf79ea1'
 )
 
 _gitname="blender"
@@ -54,14 +56,18 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  # Fix error: ‘_PyArg_CheckPositional’ was not declared in this scope
+  # Fix error: #error "this header requires Py_BUILD_CORE define"
+  patch -Np1 -i "${srcdir}/Fix-Build-mathutils_geometry.cc-with-python-3.13.patch"
+
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "19e66ced2597"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "633102c219a1"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1760823390|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1760353875|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
@@ -89,7 +95,7 @@ build() {
         -DWITH_PYTHON_INSTALL_ZSTANDARD=OFF \
         -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
         -DWITH_CYCLES_CUDA_BINARIES=ON \
-        -DCYCLES_CUDA_BINARIES_ARCH="sm_120;compute_75" \
+        -DCYCLES_CUDA_BINARIES_ARCH="sm_120;compute_120" \
         -DWITH_CYCLES_NATIVE_ONLY=ON \
         -DWITH_CYCLES_DEVICE_HIP=OFF \
         -DWITH_CYCLES_DEVICE_METAL=OFF \
