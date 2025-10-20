@@ -193,6 +193,8 @@ cp -v /0-DataLinux/05-builds-dir-git/blender-git-5.1.0.3.20251018.tar.zst .
 -------------------------------------------------
 cp -v /0-DataLinux/05-builds-dir-git/OptiX-8.1-Include.zip .
 
+sync
+
 
 1-8) FAIRE PATCH
 ===============================
@@ -205,6 +207,8 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.1.0.3.20251018
+pkgrel=2    # GCC 15 + Idem Arch Extra
+
 pkgrel=1    # GCC 15
 
 pkgrel=1    # GCC 15 + nvidia-utils + Patch python 3.13 mathutils_geometry.cc
