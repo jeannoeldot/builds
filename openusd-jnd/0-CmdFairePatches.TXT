@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 25.08
+!!! VERSION = 25.11
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openusd-jnd
 
 mkdir /tmp/srcp
 
-cp -v OpenUSD-v25.08.tar.gz /tmp/srcp/
+cp -v OpenUSD-v25.11.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenUSD-v25.08.tar.gz
+tar -xzf OpenUSD-v25.11.tar.gz
 
 
 !!! VOIR :

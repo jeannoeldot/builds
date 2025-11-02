@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=25.11.20251024
-pkgrel=1
-_ver_release="25.11"
+pkgver=25.08.20250731
+pkgrel=8
+_ver_release="25.08"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -28,7 +28,7 @@ provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
 )
-sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
+sha256sums=('2a93c2390ae35a3e312f3fb66e6f403a0e046893e3f0d706be82963345a08cb3'
 )
 
 prepare() {

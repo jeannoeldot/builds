@@ -17,16 +17,21 @@ cd $HOME/05-builds/openusd-jnd
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==> sunyab released this on Jul 31, 2025  ==> 20250731
-==> v25.08  ==> 25.08
-==> 25.08.20250731
+==> tallytalwar released this on oct 24, 2025  ==> 20251024
+==> v25.11  ==> 25.11
+==> 25.11.20251024
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenUSD-v25.08.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v25.08.tar.gz
+wget -O OpenUSD-v25.11.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v25.11.tar.gz
+
+sync
+
+sha256sum OpenUSD-v25.11.tar.gz
+c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -34,7 +39,7 @@ cd $HOME/05-builds/openusd-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v25.08.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v25.11.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -47,7 +52,9 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=25.08.20250731
+pkgver=25.11.20251024
+pkgrel=1      # v25.11
+
 pkgrel=8      # Rebuild maj opencolorio 2.5.0
 pkgrel=7      # rebuild MAJ boost boost-libs 1.89.0
 pkgrel=6      # rebuild MAJ OIIO 3.1.6.2
@@ -55,10 +62,8 @@ pkgrel=5      # rebuild MAJ openvdb 12.1.1 et OIIO 3.0.11.0
 pkgrel=4      # rebuild MAJ openèxr 3.4
 pkgrel=3      # Rebuild MAJ materialx 1.39.4-1
 pkgrel=2      # Rebuild nouveau PC
-pkgrel=1      # v25.08
-
 pkgrel=3      # rebuild MAJ OIIO 3.0.8.1. OSD 3.6.1
-pkgrel=2      # v25.08: materialx-jnd ==> materialx (extra)
+pkgrel=2      # v25.11: materialx-jnd ==> materialx (extra)
 pkgrel=3      # rebuild MAJ boost boost-libs 1.88.0 + materialx-jnd
 pkgrel=2      # rebuild MAJ OIIO 3.0.5.0
 pkgrel=1      # v25.02a
@@ -93,7 +98,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="25.08"
+_ver_release="25.11"
 _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
@@ -122,7 +127,7 @@ SANS PATCH
 source=("USD-v${_ver_release}.tar.gz"
 )
 
-sha256sum OpenUSD-v25.08.tar.gz
+sha256sum OpenUSD-v25.11.tar.gz
 
 sha256sums=('2a93c2390ae35a3e312f3fb66e6f403a0e046893e3f0d706be82963345a08cb3'
 )
@@ -135,7 +140,7 @@ source=("OpenUSD-v${_ver_release}.tar.gz"
         "Fix-Error-Compile-GCC-15.patch"
 )
 
-sha256sum OpenUSD-v25.08.tar.gz
+sha256sum OpenUSD-v25.11.tar.gz
 
 sha256sum fix-error-m_wait_ctx-was-not-declared.patch
 
@@ -175,11 +180,11 @@ VOIR :
 
 mkdir /tmp/srcp
 
-tar -xzf OpenUSD-v25.08.tar.gz -C /tmp/srcp
+tar -xzf OpenUSD-v25.11.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenUSD-25.08/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenUSD-25.11/CMakeLists.txt
 
-2) kwrite /tmp/srcp/OpenUSD-25.08/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/OpenUSD-25.11/cmake/defaults/Options.cmake
 
 LIGNE 10  PXR_BUILD_TESTS           ON ==> OFF
 
@@ -232,12 +237,12 @@ LIGNE 147 BUILD_SHARED_LIBS         ON
 LIGNE 148 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/OpenUSD-25.08/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/OpenUSD-25.11/cmake/defaults/ProjectDefaults.cmake
 
 LIGNE 38  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/OpenUSD-25.08/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/OpenUSD-25.11/cmake/defaults/CXXDefaults.cmake
 
 LIGNE 67  PXR_SET_INTERNAL_NAMESPACE
 
@@ -250,7 +255,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.08.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.11.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -270,7 +275,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openusd-jnd/PKGBUILD . \
 && cp -v $HOME/05-builds/openusd-jnd/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/openusd-jnd/OpenUSD-v25.08.tar.gz . \
+&& cp -v $HOME/05-builds/openusd-jnd/OpenUSD-v25.11.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openusd-jnd \
 && cp -v /tmp/build/openusd-jnd-*-x86_64.pkg.tar.* . \
@@ -361,7 +366,7 @@ $ mv -v openusd-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenUSD-v25.08.tar.gz
+$ rm -i OpenUSD-v25.11.tar.gz
 
 
 $ cd && maj-repolocal
@@ -404,7 +409,7 @@ openvdb-jnd-*-x86_64.pkg.tar.*\
 /tmp/chrootrepo/
 
 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.08.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.11.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users       557  3 déc.  14:40 fix-error-m_wait_ctx-was-not-declared.patch
 -rw-r--r--  1 jnd users      1539 15 janv. 14:26 usd-cmake-find-dependency.patch
@@ -429,7 +434,7 @@ $ ls -la
 -rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
 -rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v25.08.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v25.11.tar.gz
 -rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
 -rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
 -rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
@@ -443,7 +448,7 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
-sha256sum OpenUSD-v25.08.tar.gz
+sha256sum OpenUSD-v25.11.tar.gz
 
 sha256sum usd-tbb_part_1.patch
 
@@ -495,7 +500,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum OpenUSD-v25.08.tar.gz
+sha256sum OpenUSD-v25.11.tar.gz
 
 sha256sum blender-usd-diff.patch
 
