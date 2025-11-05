@@ -1,19 +1,19 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 12.1.1
-!!! VERSION = v12.1.1
+!!! VERSION = 13.0.0
+!!! VERSION = v13.0.0
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openvdb-jnd
 
 mkdir /tmp/srcp
 
-cp -v OpenVDB-v12.1.1.tar.gz /tmp/srcp/
+cp -v OpenVDB-v13.0.0.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenVDB-v12.1.1.tar.gz
+tar -xzf OpenVDB-v13.0.0.tar.gz
 
 
 
