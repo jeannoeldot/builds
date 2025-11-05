@@ -1,13 +1,13 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=opensubdiv-jnd
-pkgver=3_6_1.20250626
-pkgrel=2
-_ver_release="3_6_1"
+pkgver=3_7_0.20251030
+pkgrel=1
+_ver_release="3_7_0"
 _name_release="OpenSubdiv-${_ver_release}"
 pkgdesc="High performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures"
 arch=('x86_64')
-license=('Apache-2.0')
+license=('LicenseRef-custom:TOST')
 url="http://graphics.pixar.com/opensubdiv"
 depends=('glfw-x11' 'onetbb' 'libxcursor' 'xorg-xrandr' 'libxinerama' 'libxi'
 )
@@ -17,7 +17,7 @@ provides=('opensubdiv')
 options=('!debug' '!lto' 'staticlibs')
 source=("OpenSubdiv-v${_ver_release}.tar.gz"
 )
-sha256sums=('e9d99a480d80e999667643747c76eb0138d36c418fc154fd71b4bd65be103d52'
+sha256sums=('f843eb49daf20264007d807cbc64516a1fed9cdb1149aaf84ff47691d97491f9'
 )
 
 build() {
@@ -44,4 +44,7 @@ build() {
 package() {
   cd "${_name_release}"
   DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.txt "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
 }
