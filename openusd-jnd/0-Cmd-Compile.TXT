@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.11.20251024
+pkgrel=2      # rebuild MAJ openvdb 13.0.0 et opensubdiv 3_7_0
 pkgrel=1      # v25.11
 
 pkgrel=8      # Rebuild maj opencolorio 2.5.0
@@ -129,7 +130,7 @@ source=("USD-v${_ver_release}.tar.gz"
 
 sha256sum OpenUSD-v25.11.tar.gz
 
-sha256sums=('2a93c2390ae35a3e312f3fb66e6f403a0e046893e3f0d706be82963345a08cb3'
+sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
 )
 
 AVEC PATCH
@@ -148,7 +149,7 @@ sha256sum usd-cmake-find-dependency.patch
 
 sha256sum Fix-Error-Compile-GCC-15.patch
 
-sha256sums=('475cd0990366a713f19d1f0701c37be17ecd9d3de7a3503a11bbdf80d3c003ce'
+sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
             '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
             '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
             '9fda3dabde98592beae8675850db93f02842ea11f20b42dad0ceb075cff10f23'
