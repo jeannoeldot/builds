@@ -38,11 +38,9 @@ VCSCLIENTS=('bzr::breezy'
 CARCH="x86_64"
 CHOST="x86_64-pc-linux-gnu"
 
-#NPROC=2
-
 #-- Compiler and Linker Flags
 #CPPFLAGS=""
-CFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt -fexceptions \
+CFLAGS="-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions \
         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
         -fstack-clash-protection -fcf-protection \
         -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer"
@@ -60,7 +58,7 @@ DEBUG_CXXFLAGS="$DEBUG_CFLAGS"
 # BUILD ENVIRONMENT
 #########################################################################
 #
-# Defaults: BUILDENV=(!distcc !color !ccache check !sign)
+# Makepkg defaults: BUILDENV=(!distcc !color !ccache check !sign)
 #  A negated environment option will do the opposite of the comments below.
 #
 #-- distcc:   Use the Distributed C/C++/ObjC compiler
@@ -83,8 +81,7 @@ BUILDENV=(!distcc color !ccache check !sign)
 #   These are default values for the options=() settings
 #########################################################################
 #
-# Makepkg defaults:
-# OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug !lto !autodeps)
+# Makepkg defaults: OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug !lto !autodeps)
 #  A negated option will do the opposite of the comments below.
 #
 #-- strip:      Strip symbols from binaries/libraries
@@ -145,7 +142,7 @@ PACKAGER="Name <name@fai.com>"
 COMPRESSGZ=(gzip -c -f -n)
 COMPRESSBZ2=(bzip2 -c -f)
 COMPRESSXZ=(xz -c -z -)
-COMPRESSZST=(zstd -c -T0 --ultra -18 -)
+COMPRESSZST=(zstd -c -T0 --ultra -20 -)
 COMPRESSLRZ=(lrzip -q)
 COMPRESSLZO=(lzop -q)
 COMPRESSZ=(compress -c -f)

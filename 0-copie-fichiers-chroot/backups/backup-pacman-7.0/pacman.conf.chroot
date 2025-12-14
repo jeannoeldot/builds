@@ -36,8 +36,7 @@ CheckSpace
 VerbosePkgLists
 ParallelDownloads = 2
 DownloadUser = alpm
-#DisableSandboxFilesystem
-#DisableSandboxSyscalls
+#DisableSandbox
 
 # By default, pacman accepts packages signed by keys that its local keyring
 # trusts (see pacman-key and its man page), as well as unsigned packages.
@@ -75,13 +74,24 @@ LocalFileSigLevel = Optional
 #[core-testing]
 #Include = /etc/pacman.d/mirrorlist
 
+[chroot-repolocal]
+SigLevel = Never
+#Server = file:///chrootrepolocal
+#Suite MAJ devtools 20190821-1
+Server = file://PATHTOREPOLOCAL/chrootrepolocal
+#Suite MAJ pacman 7.0
+# PAS OK
+#Server = file://PATHTOREPOLOCAL
+
 [core]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
 #[extra-testing]
 #Include = /etc/pacman.d/mirrorlist
 
 [extra]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
 # If you want to run 32 bit applications on your x86_64 system,
@@ -91,6 +101,7 @@ Include = /etc/pacman.d/mirrorlist
 #Include = /etc/pacman.d/mirrorlist
 
 [multilib]
+SigLevel = Never
 Include = /etc/pacman.d/mirrorlist
 
 # An example of a custom package repository.  See the pacman manpage for
@@ -99,17 +110,9 @@ Include = /etc/pacman.d/mirrorlist
 #SigLevel = Optional TrustAll
 #Server = file:///home/custompkgs
 
-#[repolocal]
-#SigLevel = Optional TrustAll
-#Server = file:///home/jnd/00-repolocal
-
-[repolocal]
-SigLevel = Optional TrustAll
-Server = file:///00-repolocal
-
 #[xyne-x86_64]
 ## A repo for Xyne's own projects: https://xyne.dev/projects/
-## Packages for the x86_64 architecture.
+## Packages for the "x86_64" architecture.
 ## Note that this includes all packages in [xyne-any].
-#SigLevel = Required
+#SigLevel = Never
 #Server = https://xyne.dev/repos/xyne

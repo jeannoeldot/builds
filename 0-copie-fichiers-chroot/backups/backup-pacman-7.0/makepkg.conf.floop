@@ -38,14 +38,13 @@ VCSCLIENTS=('bzr::breezy'
 CARCH="x86_64"
 CHOST="x86_64-pc-linux-gnu"
 
-#NPROC=2
-
 #-- Compiler and Linker Flags
 #CPPFLAGS=""
-CFLAGS="-march=native -O2 -pipe -fdiagnostics-color=always -fno-plt -fexceptions \
+CFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -fexceptions \
         -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security \
         -fstack-clash-protection -fcf-protection \
-        -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer"
+        -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer \
+        -floop-interchange -floop-strip-mine -floop-block"
 CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
 LDFLAGS="-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now \
          -Wl,-z,pack-relative-relocs"
@@ -83,8 +82,7 @@ BUILDENV=(!distcc color !ccache check !sign)
 #   These are default values for the options=() settings
 #########################################################################
 #
-# Makepkg defaults:
-# OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug !lto !autodeps)
+# Makepkg defaults: OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug !lto !autodeps)
 #  A negated option will do the opposite of the comments below.
 #
 #-- strip:      Strip symbols from binaries/libraries

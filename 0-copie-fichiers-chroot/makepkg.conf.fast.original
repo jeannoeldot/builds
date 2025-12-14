@@ -38,6 +38,8 @@ VCSCLIENTS=('bzr::breezy'
 CARCH="x86_64"
 CHOST="x86_64-pc-linux-gnu"
 
+#NPROC=2
+
 #-- Compiler and Linker Flags
 #CPPFLAGS=""
 CFLAGS="-march=native -Ofast -pipe -fdiagnostics-color=always -fno-plt -fexceptions \
@@ -81,7 +83,8 @@ BUILDENV=(!distcc color !ccache check !sign)
 #   These are default values for the options=() settings
 #########################################################################
 #
-# Makepkg defaults: OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug lto !autodeps)
+# Makepkg defaults:
+# OPTIONS=(!strip docs libtool staticlibs emptydirs !zipman !purge !debug lto !autodeps)
 #  A negated option will do the opposite of the comments below.
 #
 #-- strip:      Strip symbols from binaries/libraries
