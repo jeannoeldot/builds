@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.11.20251024
+pkgrel=3      # rebuild MAJ OIIO 3.1.9.0
 pkgrel=2      # rebuild MAJ openvdb 13.0.0 et opensubdiv 3_7_0
 pkgrel=1      # v25.11
 
