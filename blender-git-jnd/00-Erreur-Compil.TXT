@@ -1,0 +1,14 @@
+[ 59%] Built target cycles_kernel_cuda
+[ 59%] Generating kernel_optix.ptx
+nvcc fatal   : Unsupported gpu architecture 'compute_50'
+make[2]: *** [intern/cycles/kernel/device/optix/CMakeFiles/cycles_kernel_optix.dir/build.make:304: intern/cycles/kernel/device/optix/kernel_optix.ptx] Error 1
+make[1]: *** [CMakeFiles/Makefile2:5339: intern/cycles/kernel/device/optix/CMakeFiles/cycles_kernel_optix.dir/all] Error 2
+make[1]: *** Attente des tâches non terminées....
+...
+...
+[ 59%] Linking CXX static library ../../lib/libextern_ceres.a
+[ 59%] Built target extern_ceres
+make: *** [Makefile:166: all] Error 2
+make : on quitte le répertoire « /home/jnd/05-builds/blender-git-jnd/src/blender/build »
+==> ERREUR : Une erreur s’est produite dans build().
+    Abandon…

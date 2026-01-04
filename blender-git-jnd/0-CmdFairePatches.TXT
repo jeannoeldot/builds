@@ -1,18 +1,71 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.1.0.16.20251228
+!!! VERSION = 5.1.0.16.20260102
 
 
-/!\ /!\ /!\ cd $HOME/05-builds/blender-jnd
+/!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.16.20251228.tar.zst /tmp/srcp/
+cp -v blender-git-5.1.0.16.20260102.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.1.0.16.20251228.tar.zst
+tar -x --zstd -f blender-git-5.1.0.16.20260102.tar.zst
+
+1) FIX error: nvcc fatal   : Unsupported gpu architecture 'compute_50'
+======================================================================
+1-1) MODIFIER blender/intern/cycles/kernel/device/optix/CMakeLists.txt
+======================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+sync
+
+cd blender.new/intern/cycles/kernel/device/optix
+kwrite CMakeLists.txt
+
+MODIFIER LIGNE 54 :
+    set(arch compute_50)
+DEVIENT:
+    set(arch compute_120)
+
+MODIFIER LIGNES 58 A 64 :
+      if(DEFINED CUDA11_NVCC_EXECUTABLE)
+        # Use CUDA 11 for the OptiX PTX kernel, to retain support for older architectures.
+        set(cuda_nvcc_executable ${CUDA11_NVCC_EXECUTABLE})
+        set(cuda_version 110)
+      else()
+        set(arch compute_75)
+      endif()
+DEVIENNENT:
+      set(arch compute_120)
+      else()
+        if(DEFINED CUDA11_NVCC_EXECUTABLE)
+          # Use CUDA 11 for the OptiX PTX kernel, to retain support for older architectures.
+          set(cuda_nvcc_executable ${CUDA11_NVCC_EXECUTABLE})
+          set(cuda_version 110)
+        else()
+          set(arch compute_75)
+        endif()
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-Unsupported-gpu-architecture-compute_50.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/Fix-Unsupported-gpu-architecture-compute_50.patch .
+
 
 
 
@@ -475,11 +528,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.16.20251228.tar.gz /tmp/srcp/
+cp -v blender-git-5.1.0.16.20260102.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.1.0.16.20251228.tar.gz
+tar -xzf blender-git-5.1.0.16.20260102.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

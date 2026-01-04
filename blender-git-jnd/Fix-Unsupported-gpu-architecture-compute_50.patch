@@ -1,0 +1,30 @@
+diff -aur blender/intern/cycles/kernel/device/optix/CMakeLists.txt blender.new/intern/cycles/kernel/device/optix/CMakeLists.txt
+--- blender/intern/cycles/kernel/device/optix/CMakeLists.txt	2026-01-04 11:42:58.000000000 +0100
++++ blender.new/intern/cycles/kernel/device/optix/CMakeLists.txt	2026-01-04 14:58:01.708992912 +0100
+@@ -51,17 +51,19 @@
+         -D OSL_LIBRARY_VERSION_CODE=${OSL_LIBRARY_VERSION_CODE})
+     endif()
+ 
+-    set(arch compute_50)
++    set(arch compute_120)
+     set(cuda_nvcc_executable ${CUDA_NVCC_EXECUTABLE})
+     set(cuda_version ${CUDA_VERSION})
+     if("${CUDA_VERSION}" GREATER_EQUAL 130) # Support for Maxwell, Pascal and Volta was dropped in CUDA 13
+-      if(DEFINED CUDA11_NVCC_EXECUTABLE)
+-        # Use CUDA 11 for the OptiX PTX kernel, to retain support for older architectures.
+-        set(cuda_nvcc_executable ${CUDA11_NVCC_EXECUTABLE})
+-        set(cuda_version 110)
++      set(arch compute_120)
+       else()
+-        set(arch compute_75)
+-      endif()
++        if(DEFINED CUDA11_NVCC_EXECUTABLE)
++          # Use CUDA 11 for the OptiX PTX kernel, to retain support for older architectures.
++          set(cuda_nvcc_executable ${CUDA11_NVCC_EXECUTABLE})
++          set(cuda_version 110)
++        else()
++          set(arch compute_75)
++        endif()
+     endif()
+ 
+     cuda_add_common_flags(${cuda_version} ${arch} "${cuda_flags}" cuda_flags)
