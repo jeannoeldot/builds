@@ -1,18 +1,32 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.1.0.16.20260102
+!!! VERSION = 5.1.0.16.20260111
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.16.20260102.tar.zst /tmp/srcp/
+cp -v blender-git-5.1.0.16.20260111.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.1.0.16.20260102.tar.zst
+tar -x --zstd -f blender-git-5.1.0.16.20260111.tar.zst
+
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) FIX error: nvcc fatal   : Unsupported gpu architecture 'compute_50'
 ======================================================================
@@ -66,19 +80,6 @@ cd $HOME/05-builds/blender-git-jnd
 
 mv -vf /tmp/srcp/Fix-Unsupported-gpu-architecture-compute_50.patch .
 
-
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) FIX error: ‘_PyArg_CheckPositional’ was not declared in this scope
 =====================================================================
@@ -528,11 +529,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.1.0.16.20260102.tar.gz /tmp/srcp/
+cp -v blender-git-5.1.0.16.20260111.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.1.0.16.20260102.tar.gz
+tar -xzf blender-git-5.1.0.16.20260111.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

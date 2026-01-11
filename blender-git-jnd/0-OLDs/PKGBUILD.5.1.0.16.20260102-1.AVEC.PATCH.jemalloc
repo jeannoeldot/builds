@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.1.0.16.20260111
+pkgver=5.1.0.16.20260102
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -14,6 +14,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
           'libglvnd' 'glfw' 'libxi'
           'boost-libs' 'onetbb' 'draco' 'openxr'
+          'jemalloc'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
           'python-fastjsonschema' 'python-cattrs'
           'llvm-libs'
@@ -43,9 +44,11 @@ options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
+        "Fix-Unsupported-gpu-architecture-compute_50.patch"
 )
-sha256sums=('98aa1958c812751aed31e26c28bfb89b7d9492d5315703bbefcc231b8d6eafc5'
+sha256sums=('9d9753b75c414ccfd5dea4ad70fd6b1a96dd3b7cc70943edaf89536aeef2995d'
             'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
+            '7e36ab3b76fa6fa8b69043bb5636ffd2e39dcc39e1fd37c7d9cc8f8d89451b42'
 )
 
 _gitname="blender"
@@ -53,20 +56,23 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  # Fix nvcc fatal   : Unsupported gpu architecture 'compute_50'
+  patch -Np1 -i "${srcdir}/Fix-Unsupported-gpu-architecture-compute_50.patch"
+
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7ddd9123166f"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7178bae1d1be"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1768087489|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1767389360|' build_files/cmake/buildinfo.cmake
 }
 
 build() {
   cd "${_gitname}"
 
-  local _python_ver=3.14
+  local _python_ver=3.13
 
   cmake \
         -B build \
