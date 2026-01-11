@@ -2,7 +2,7 @@
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.15.0.0.20260101
-pkgrel=1
+pkgrel=2
 _name_release="OpenShadingLanguage-1.15.0.0"
 _ver_release="v1.15.0.0"
 pkgdesc="Advanced shading language for production GI renderers"
