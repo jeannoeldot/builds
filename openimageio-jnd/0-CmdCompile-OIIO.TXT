@@ -41,6 +41,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-jnd
 pkgver=3.1.9.0.20260101
+pkgrel=2    # REBUILD MAJ python 3.14
 pkgrel=1
 
 pkgrel=3    # REBUILD MAJ opencolorio 2.5.0
@@ -97,10 +98,11 @@ optdepends=(
 !!!!!!
 !!! VÉRIFIER VERSION PYTHON INSTALLÉE
 $ pacman -Ss python | grep core/python | grep install
-==> extra/python 3.13.7-1 [installé]
+==> core/python 3.14.2-2 [installé]
+
 
 ATTENTION AUX VERSIONS DE PYTHON
-PYTHON_VERSION=3.13
+PYTHON_VERSION=3.14
 
 !!! VERSION 3.1.9.0
 build() {
@@ -147,7 +149,7 @@ LIGNE 246
 LIGNE 297
 set (GLIBCXX_USE_CXX11_ABI "" CACHE STRING "For gcc, use the new C++11 library ABI (0|1)")
 
-LIGNE 313
+LIGNE 314
   !!! A VOIR : $ cat /proc/cpuinfo | grep avx2
   USE_SIMD ""         =>      -DUSE_SIMD=avx2 \
   
@@ -230,7 +232,7 @@ LIGNE 229
 
 LIGNES 6 ET 7
   USE_PYTHON ON         depends= 'python' 'pybind11' 'python-numpy'
-  PYTHON_VERSION ""  =>     -DPYTHON_VERSION=3.13 \
+  PYTHON_VERSION ""  =>     -DPYTHON_VERSION=3.14 \
 
 LIGNE 74
 # pybind11
@@ -328,7 +330,7 @@ rm -f *~
 usr/bin/testtex
 usr/bin/oiiotool
 usr/bin/idiff
-usr/lib/python3.13/site-packages/OpenImageIO/OpenImageIO.cpython-313-x86_64-linux-gnu.so
+usr/lib/python3.14/site-packages/OpenImageIO/OpenImageIO.cpython-314-x86_64-linux-gnu.so
 usr/lib/libOpenImageIO.so.3.1.9
 usr/lib/libOpenImageIO_Util.so.3.1.9
 
