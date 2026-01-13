@@ -36,6 +36,8 @@ sha256sums=('2788627298d10da946546e7e57c6d622d91ed44d110180583dfe8210c7188983'
 build() {
   cd "${_name_release}"
 
+  local python_version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+
   cmake \
       -Bbuild \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
@@ -48,7 +50,7 @@ build() {
       -DUSE_EXTERNAL_PUGIXML=ON \
       -DUSE_SIMD=avx2 \
       -DOIIO_INTERNALIZE_FMT=OFF \
-      -DPYTHON_VERSION=3.14
+      -DPYTHON_VERSION=$python_version
   make -C build
 }
 

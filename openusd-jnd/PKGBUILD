@@ -34,7 +34,7 @@ sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
 prepare() {
   cd "${_name_release}"
 
-  _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+  local _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
   # Change directories to standard
   sed -i 's|plugin/usd|lib/usd/plugin|g' \

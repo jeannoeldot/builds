@@ -32,7 +32,6 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'materialx' 'openusd-jnd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
-             'cuda' 'nvidia-utils'
              'wayland-protocols'
              'mold'
 )
@@ -42,10 +41,8 @@ provides=('blender')
 options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
-        "OptiX-8.1-Include.zip"
 )
 sha256sums=('fb151738e25fea8fe696c9ce9005a4fde2f8d140e0561a74bb22723f9e219a63'
-            'a6486b6c5a7e53816bce75c4b26d3d5a4d44f48648785a0f14b68a52b43f2f99'
 )
 
 _gitname="blender"
@@ -63,8 +60,7 @@ prepare() {
   sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1768299372|' build_files/cmake/buildinfo.cmake
 }
 
-_get_pyver() {
-  python -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))'
+_get_pyver() {   python -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))'
 }
 
 build() {
@@ -76,10 +72,10 @@ build() {
         -D CMAKE_BUILD_TYPE=Release \
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D WITH_LINKER_MOLD=ON \
-        -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
-        -D CYCLES_CUDA_BINARIES_ARCH="sm_120;compute_120" \
-        -D OPTIX_ROOT_DIR="${srcdir}" \
         -D WITH_DOC_MANPAGE=OFF \
+        -D WITH_CYCLES_DEVICE_OPTIX=OFF \
+        -D WITH_CYCLES_DEVICE_CUDA=OFF \
+        -D WITH_CYCLES_CUDA_BINARIES=OFF \
         -D WITH_CYCLES_DEVICE_HIP=OFF \
         -D WITH_CYCLES_DEVICE_HIPRT=OFF \
         -D WITH_CYCLES_HIP_BINARIES=OFF \
