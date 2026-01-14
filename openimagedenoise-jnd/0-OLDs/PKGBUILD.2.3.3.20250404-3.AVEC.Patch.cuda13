@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimagedenoise-jnd
-pkgver=2.4.1.20260114
-pkgrel=1
-_ver_release="2.4.1"
+pkgver=2.3.3.20250404
+pkgrel=3
+_ver_release="2.3.3"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
 url="http://www.openimagedenoise.org/"
@@ -19,9 +19,18 @@ provides=('openimagedenoise' 'oidn')
 #options=(staticlibs)
 options=('!debug')
 source=("oidn-${_ver_release}.src.tar.gz"
+        "0001-Fix-build-with-CUDA-13.patch"
 )
-sha256sums=('9c7c77ae0d57e004479cddb7aaafd405c2cc745153bed4805413c21be610e17b'
+sha256sums=('ccf221535b4007607fb53d3ff5afa74de25413bb8ef5d03d215f46c7cc2f96cf'
+            'a7c3c933675c837af8284d357c0abbb6d6c6b21e6738a06ce2db8ce4cc6f449a'
 )
+
+prepare() {
+  cd "${_name_release}"
+  # # Fix build with CUDA 13 https://github.com/RenderKit/oidn/issues/274
+  patch -Np1 -i "${srcdir}/0001-Fix-build-with-CUDA-13.patch"
+
+}
 
 build() {
   cd "${_name_release}"

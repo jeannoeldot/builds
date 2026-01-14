@@ -1,30 +1,40 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.3.3.20250404
+!!! VERSION = 2.4.1.20260114
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openimagedenoise-jnd
 
 mkdir /tmp/srcp
 
-cp -v oidn-2.3.3.src.tar.gz /tmp/srcp/
+cp -v oidn-2.4.1.src.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf oidn-2.3.3.src.tar.gz
+tar -xzf oidn-2.4.1.src.tar.gz
 
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 !!! VOIR :
 https://gitlab.archlinux.org/archlinux/packaging/packages/openimagedenoise/-/blob/main/0001-Fix-build-with-CUDA-13.patch
 
-1) MODIFIER oidn-2.3.3/devices/cuda/CMakeLists.txt
+1) MODIFIER oidn-2.4.1/devices/cuda/CMakeLists.txt
 ======================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R oidn-2.3.3 oidn-2.3.3.new
+cp -R oidn-2.4.1 oidn-2.4.1.new
 
-cd oidn-2.3.3.new/devices/cuda
+cd oidn-2.4.1.new/devices/cuda
 kwrite CMakeLists.txt
 
 SUPPRIMER LIGNE 44 :
@@ -51,26 +61,13 @@ rm -f CMakeLists.txt~
 
 cd ../../..
 
-diff -aur oidn-2.3.3 oidn-2.3.3.new
-diff -aur oidn-2.3.3 oidn-2.3.3.new > 0001-Fix-build-with-CUDA-13.patch
+diff -aur oidn-2.4.1 oidn-2.4.1.new
+diff -aur oidn-2.4.1 oidn-2.4.1.new > 0001-Fix-build-with-CUDA-13.patch
 
-rm -rf oidn-2.3.3.new
+rm -rf oidn-2.4.1.new
 
 
 cd $HOME/05-builds/openimagedenoise-jnd
 
 mv -vf /tmp/srcp/0001-Fix-build-with-CUDA-13.patch .
-
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 

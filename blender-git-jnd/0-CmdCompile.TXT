@@ -207,6 +207,7 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.1.0.16.20260113
+pkgrel=2    # GCC 15 + Idem Arch Extra : OK + Rebuild MAJ python 3.14 + Patch cuda 13+
 pkgrel=1    # GCC 15 + Idem Arch Extra : OK + Rebuild MAJ python 3.14
 
 pkgrel=1    # GCC 15 + Idem Arch Extra + Rebuild MAJ opencolorio 2.5.0
@@ -330,8 +331,7 @@ AVEC PATCH TAR.ZST
 ------------------
 source=("$pkgname-$pkgver.tar.zst"
         "OptiX-8.1-Include.zip"
-        "Fix-Unsupported-gpu-architecture-compute_50.patch"
-        "140720.patch"
+        "Cycles-Fix-runtime-kernel-compilation-of-OptiX-kernels-with-CUDA-13+_152789.patch"
         "..."
 )
 
@@ -339,7 +339,7 @@ sha256sum blender-git-5.1.0.16.20260113.tar.zst
 
 sha256sum OptiX-8.1-Include.zip
 
-sha256sum Fix-Unsupported-gpu-architecture-compute_50.patch
+sha256sum Cycles-Fix-runtime-kernel-compilation-of-OptiX-kernels-with-CUDA-13+_152789.patch
 
 sha256sums=('123...'
             '456...'
