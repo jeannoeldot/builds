@@ -39,6 +39,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openimagedenoise-jnd
 pkgver=2.4.1.20260114
+pkgrel=2  # Rebuild suite erreur ds Pkg
+
 pkgrel=1
 
 pkgrel=3          # Rebuild Cuda 13 + Patch
@@ -90,26 +92,6 @@ package() {
   cd "${_name_release}/build"
 
 
-2-2) PKGBUILD AVEC PATCH
-========================
-source=("oidn-${_ver_release}.src.tar.gz"
-        "0001-Fix-build-with-CUDA-13.patch"
-)
-
-sha256sum oidn-2.4.1.src.tar.gz
-
-sha256sum 0001-Fix-build-with-CUDA-13.patch
-
-sha256sums=('....'
-            '....'
-)
-
-prepare() {
-  cd "${_name_release}"
-  # # Fix build with CUDA 13 https://github.com/RenderKit/oidn/issues/274
-  patch -Np1 -i "${srcdir}/0001-Fix-build-with-CUDA-13.patch"
-
-}
 
 2-5) VERIFIER CMakeLists.txt
 ============================
@@ -254,10 +236,6 @@ usr/bin/oidnTest
 
 namcap openimagedenoise-jnd-*-x86_64.pkg.tar.*
 ...
-openimagedenoise-jnd E: Dependency nvidia-utils detected and not included
-(libraries ['usr/lib/libcuda.so.1'] needed in files ['usr/lib/libOpenImageDenoise_device_cuda.so.2.4.1'])
-...
-openimagedenoise-jnd E: ELF file ('home/jnd/05-builds/openimagedenoise-jnd/src/oidn-2.4.1/build/devices/cuda/preinstall/lib/libOpenImageDenoise_device_cuda.so.2.4.1') outside of a valid path.
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
@@ -303,6 +281,33 @@ SI PROBLEME
 ANCIEN
 ======
 
+openimagedenoise-jnd E: Dependency nvidia-utils detected and not included
+(libraries ['usr/lib/libcuda.so.1'] needed in files ['usr/lib/libOpenImageDenoise_device_cuda.so.2.4.1'])
+...
+openimagedenoise-jnd E: ELF file ('home/jnd/05-builds/openimagedenoise-jnd/src/oidn-2.4.1/build/devices/cuda/preinstall/lib/libOpenImageDenoise_device_cuda.so.2.4.1') outside of a valid path.
+-------------------------------------------------
+2-2) PKGBUILD AVEC PATCH
+========================
+source=("oidn-${_ver_release}.src.tar.gz"
+        "0001-Fix-build-with-CUDA-13.patch"
+)
+
+sha256sum oidn-2.4.1.src.tar.gz
+
+sha256sum 0001-Fix-build-with-CUDA-13.patch
+
+sha256sums=('....'
+            '....'
+)
+
+prepare() {
+  cd "${_name_release}"
+  # # Fix build with CUDA 13 https://github.com/RenderKit/oidn/issues/274
+  patch -Np1 -i "${srcdir}/0001-Fix-build-with-CUDA-13.patch"
+
+}
+
+-------------------------------------------------
 usr/lib/libOpenImageDenoise_device_cpu.so.2.4.1
 
 mkdir $HOME/99-temp/srcp

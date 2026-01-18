@@ -2,7 +2,7 @@
 
 pkgname=openimagedenoise-jnd
 pkgver=2.4.1.20260114
-pkgrel=1
+pkgrel=2
 _ver_release="2.4.1"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
@@ -43,4 +43,6 @@ package() {
   DESTDIR="${pkgdir}" make -C build install
 
   rm -rf "${pkgdir}"/build
+  # A SUPPRIMER DANS CHROOT
+  rm -rf "${pkgdir}"/home
 }
