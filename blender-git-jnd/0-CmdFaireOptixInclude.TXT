@@ -1,4 +1,64 @@
 
+0-9-1) OPTIX 9.1.0
+==================
+https://developer.nvidia.com/designworks/optix/download
+
+TÉLÉCHARGER NVIDIA-OptiX-SDK-9.1.0-linux64-x86_64.sh  ==> $HOME/99-dwl-temp/
+
+mkdir /tmp/optix
+
+cp -v $HOME/99-dwl-temp/NVIDIA-OptiX-SDK-9.1.0-linux64-x86_64.sh /tmp/optix/
+cd /tmp/optix
+chmod +x NVIDIA-OptiX-SDK-9.1.0-linux64-x86_64.sh
+./NVIDIA-OptiX-SDK-9.1.0-linux64-x86_64.sh
+Do you accept the license? [yN]: y
+Saying no will install in: "/tmp/optix" [Yn]:Y
+
+cd NVIDIA-OptiX-SDK-9.1.0-linux64-x86_64/
+ls
+==> OptiX_EndUserLicense.pdf  OptiX_ThirdParty_Licenses.txt  SDK  doc  include  lib64  license_info.txt
+
+cd include
+ls
+==> GLFW  optix.h   optix_device.h    optix_function_table_definition.h   optix_micromap.h    optix_stubs.h
+    internal    optix_denoiser_tiling.h   optix_function_table.h    optix_host.h    optix_stack_size.h    optix_types.h
+
+zip -r OptiX-9.1-Include.zip *
+  adding: GLFW/ (stored 0%)
+  adding: GLFW/glfw3native.h (deflated 83%)
+  adding: GLFW/glfw3.h (deflated 82%)
+  adding: internal/ (stored 0%)
+  adding: internal/optix_device_impl.h (deflated 93%)
+  adding: internal/optix_micromap_impl.h (deflated 63%)
+  adding: internal/optix_device_impl_transformations.h (deflated 77%)
+  adding: internal/optix_device_impl_coop_vec.h (deflated 89%)
+  adding: optix.h (deflated 49%)
+  adding: optix_denoiser_tiling.h (deflated 78%)
+  adding: optix_device.h (deflated 88%)
+  adding: optix_function_table.h (deflated 86%)
+  adding: optix_function_table_definition.h (deflated 50%)
+  adding: optix_host.h (deflated 78%)
+  adding: optix_micromap.h (deflated 62%)
+  adding: optix_stack_size.h (deflated 82%)
+  adding: optix_stubs.h (deflated 84%)
+  adding: optix_types.h (deflated 78%)
+
+ls
+==> OptiX-9.1-Include.zip
+mv -v OptiX-9.1-Include.zip /0-DataLinux/05-builds-dir-git/
+cd ../..
+mv -v NVIDIA-OptiX-SDK-9.1.0-linux64-x86_64.sh /0-DataLinux/05-builds-dir-git/
+
+cd ..
+rm -rf optix
+
+cd /0-DataLinux/05-builds-dir-git/
+
+sha256sum OptiX-9.1-Include.zip
+ff2da3939b52673ca9ac976e099dfcbf1ba195af66c2704d21d0eaeafd57ee57
+
+cd
+
 0-9) OPTIX 9.0.0
 ==================
 https://developer.nvidia.com/designworks/optix/download
