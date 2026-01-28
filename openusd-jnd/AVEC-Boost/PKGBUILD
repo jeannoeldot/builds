@@ -2,14 +2,14 @@
 
 pkgname=openusd-jnd
 pkgver=25.11.20251024
-pkgrel=5
+pkgrel=4
 _ver_release="25.11"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
 arch=('x86_64')
 license=('Apache-2.0')
-depends=('glfw'
+depends=('boost-libs' 'glfw'
          'onetbb'
          'materialx'
          'openexr'
@@ -21,23 +21,18 @@ depends=('glfw'
          'python-jinja'
          'jemalloc'
 )
-makedepends=('cmake'
+makedepends=('boost' 'cmake'
 )
 conflicts=('usd' 'openusd' 'openusd-git')
 provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
-        "usd_noboost.patch"
 )
 sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
-            'f3686a5213a6d00b9c4253ce03bf48561bf0d9c664641e409c106def5d226c7d'
 )
 
 prepare() {
   cd "${_name_release}"
-
-  # Sans Boost : Voir blender
-  patch -Np1 -i "${srcdir}/usd_noboost.patch"
 
   local _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 

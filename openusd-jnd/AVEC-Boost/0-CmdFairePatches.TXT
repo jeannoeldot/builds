@@ -33,45 +33,6 @@ https://projects.blender.org/blender/blender/src/branch/main/build_files/build_e
   usd_metal_edf.diff
 
 
-SANS BOOST
-==========
-https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f3293537a7f91af35b4d/build_files/build_environment/cmake/usd.cmake
-
-https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f3293537a7f91af35b4d/build_files/build_environment/patches/usd_noboost.diff
-
-1) MODIFIER OpenUSD-25.11/cmake/defaults/Packages.cmake
-=======================================================
-
-/!\ /!\ /!\ cd /tmp/srcp
-cp -R OpenUSD-25.11 OpenUSD-25.11.new
-
-cd OpenUSD-25.11.new/cmake/defaults
-kwrite Packages.cmake
-
-COMMENTER LIGNES 23 A 33
-#if(PXR_ENABLE_OPENVDB_SUPPORT)
-#...
-#...
-#endif()
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
-rm -f Packages.cmake~
-
-cd ../../..
-
-diff -aur OpenUSD-25.11 OpenUSD-25.11.new
-diff -aur OpenUSD-25.11 OpenUSD-25.11.new > usd_noboost.patch
-
-rm -rf OpenUSD-25.11.new
-
-
-cd $HOME/05-builds/openusd-jnd
-
-mv -vf /tmp/srcp/usd_noboost.patch .
-
-
-
 
 
 99) QUAND PATCHES FINIS

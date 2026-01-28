@@ -53,7 +53,6 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.11.20251024
-pkgrel=5      # Rebuild SANS boost boost-libs
 pkgrel=4      # REBUILD MAJ python 3.14
 pkgrel=3      # rebuild MAJ OIIO 3.1.9.0
 pkgrel=2      # rebuild MAJ openvdb 13.0.0 et opensubdiv 3_7_0
@@ -107,13 +106,7 @@ _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
 
-!!!!!!
-SANS boost boost-libs
-https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f3293537a7f91af35b4d/build_files/build_environment/cmake/usd.cmake
-https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f3293537a7f91af35b4d/build_files/build_environment/patches/usd_noboost.diff
-!!!!!!
-
-depends=('glfw'
+depends=('boost-libs' 'glfw'
          'onetbb'
          'materialx'
          'openexr'
@@ -124,7 +117,7 @@ depends=('glfw'
          'python'
          'python-jinja'
 )
-makedepends=('cmake'
+makedepends=('boost' 'cmake'
 )
 
 conflicts=('usd' 'openusd' 'openusd-git')
@@ -145,23 +138,35 @@ sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
 AVEC PATCH
 ----------
 source=("OpenUSD-v${_ver_release}.tar.gz"
-        "usd_noboost.patch"
+        "fix-error-m_wait_ctx-was-not-declared.patch"
+        "usd-cmake-find-dependency.patch"
+        "Fix-Error-Compile-GCC-15.patch"
 )
 
 sha256sum OpenUSD-v25.11.tar.gz
 
-sha256sum usd_noboost.patch
+sha256sum fix-error-m_wait_ctx-was-not-declared.patch
+
+sha256sum usd-cmake-find-dependency.patch
+
+sha256sum Fix-Error-Compile-GCC-15.patch
 
 sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
-            'f3686a5213a6d00b9c4253ce03bf48561bf0d9c664641e409c106def5d226c7d'
+            '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
+            '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
+            '9fda3dabde98592beae8675850db93f02842ea11f20b42dad0ceb075cff10f23'
 )
 
 prepare() {
   cd "${_name_release}"
 
-  # Sans Boost : Voir blender
-  patch -Np1 -i "${srcdir}/usd_noboost.patch"
-
+  # Compatible avec onetbb 2022.0.0
+  # Fixe: error: ‘m_wait_ctx’ was not declared in this scope
+  patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
+  #
+  patch -Np1 -i "${srcdir}/usd-cmake-find-dependency.patch"
+  # Fixe: error: ‘uint16_t’ does not name a type avec GCC 15
+  patch -Np1 -i "${srcdir}/Fix-Error-Compile-GCC-15.patch"
 
 
 build() {
@@ -337,7 +342,9 @@ usr/lib/python3.13/site-packages/pxr/...
 
 namcap openusd-jnd-*-x86_64.pkg.tar.*
 ......
+openusd-jnd W: Dependency included, but may not be needed ('boost-libs')
 openusd-jnd W: Dependency included, but may not be needed ('glfw')
+openusd-jnd W: Dependency included, but may not be needed ('materialx-jnd')
 openusd-jnd W: Dependency included, but may not be needed ('openexr')
 openusd-jnd W: Dependency included, but may not be needed ('opencolorio')
 openusd-jnd W: Dependency included, but may not be needed ('fmt')
@@ -387,54 +394,6 @@ SI PROBLEME
 ========================================================================
 ANCIEN
 ======
-depends=('boost-libs' 'glfw'
-         'onetbb'
-         'materialx'
-         'openexr'
-         'opencolorio'
-         'opensubdiv-jnd'
-         'openimageio-jnd' 'fmt'
-         'openvdb-jnd'
-         'python'
-         'python-jinja'
-)
-makedepends=('boost' 'cmake'
-)
-
-
-        "fix-error-m_wait_ctx-was-not-declared.patch"
-        "usd-cmake-find-dependency.patch"
-        "Fix-Error-Compile-GCC-15.patch"
-
-sha256sum usd-cmake-find-dependency.patch
-
-sha256sum Fix-Error-Compile-GCC-15.patch
-
-sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
-            '0c56c3a4727d9fbce8064d5a601b0ef22f83450f78bbf21557db67038ad6033b'
-            '56af122cae27382c28d9eeed89b5d666bccfd76c4a5e9ac5eddf4059bbf58826'
-            '9fda3dabde98592beae8675850db93f02842ea11f20b42dad0ceb075cff10f23'
-)
-
-prepare() {
-  cd "${_name_release}"
-
-  # Compatible avec onetbb 2022.0.0
-  # Fixe: error: ‘m_wait_ctx’ was not declared in this scope
-  patch -Np1 -i "${srcdir}/fix-error-m_wait_ctx-was-not-declared.patch"
-  #
-  patch -Np1 -i "${srcdir}/usd-cmake-find-dependency.patch"
-  # Fixe: error: ‘uint16_t’ does not name a type avec GCC 15
-  patch -Np1 -i "${srcdir}/Fix-Error-Compile-GCC-15.patch"
-
-openusd-jnd W: Dependency included, but may not be needed ('boost-libs')
-openusd-jnd W: Dependency included, but may not be needed ('glfw')
-openusd-jnd W: Dependency included, but may not be needed ('materialx-jnd')
-openusd-jnd W: Dependency included, but may not be needed ('openexr')
-openusd-jnd W: Dependency included, but may not be needed ('opencolorio')
-openusd-jnd W: Dependency included, but may not be needed ('fmt')
-openusd-jnd W: Dependency included, but may not be needed ('python-jinja')
-
 
 SI depends= 'opensubdiv-jnd'
          'openimageio-jnd'
