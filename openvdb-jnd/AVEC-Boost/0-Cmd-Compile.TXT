@@ -40,8 +40,6 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-jnd               # openvdb ds community
 pkgver=13.0.0.20251104
-pkgrel=2          # Rebuild SANS boost boost-libs
-
 pkgrel=1
 
 pkgrel=2          # rebuild boost boost-libs 1.89.0
@@ -100,18 +98,13 @@ _name_release="openvdb-${_ver_release}"
 
 license=('Apache-2.0')
 
-!!!!!!
-SANS boost boost-libs
-https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f3293537a7f91af35b4d/build_files/build_environment/cmake/openvdb.cmake
-!!!!!!
-
-depends=('tbb' 'zlib'
+depends=('boost-libs' 'tbb' 'zlib'
           'blosc' 'glfw-x11' 'glu'
           'jemalloc' 'imath'
 )
 
 !!! VOIR : cppunit python
-makedepends=('mesa' 'doxygen' 'cmake' 'pybind11'
+makedepends=('boost' 'mesa' 'doxygen' 'cmake' 'pybind11'
 )
 
 conflicts=('openvdb' 'openvdb-git')
@@ -188,7 +181,7 @@ OPENVDB_ENABLE_ASSERTS "Build with asserts in OpenVDB code enabled" OFF
 
 LIGNE 83: !!!!!!
 ----------------
-OPENVDB_USE_DELAYED_LOADING "Build the core OpenVDB library with delayed-loading." ON ==> OFF (Suppr boost)
+OPENVDB_USE_DELAYED_LOADING "Build the core OpenVDB library with delayed-loading." ON
 
 LIGNE 85:
 ---------
@@ -428,20 +421,6 @@ SI PROBLEME
 ===================================================================================
 ANCIEN
 ======
-
-depends=('boost-libs' 'tbb' 'zlib'
-          'blosc' 'glfw-x11' 'glu'
-          'jemalloc' 'imath'
-)
-
-!!! VOIR : cppunit python
-makedepends=('boost' 'mesa' 'doxygen' 'cmake' 'pybind11'
-)
-
-conflicts=('openvdb' 'openvdb-git')
-provides=('openvdb')
-
-
 
 openvdb-git W: Dependency imath included but already satisfied
 

@@ -2,18 +2,18 @@
 
 pkgname=openvdb-jnd
 pkgver=13.0.0.20251104
-pkgrel=2
+pkgrel=1
 _ver_release="13.0.0"
 _name_release="openvdb-${_ver_release}"
 pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
 url='https://www.openvdb.org/'
 arch=('x86_64')
 license=('Apache-2.0')
-depends=('onetbb' 'zlib'
-         'blosc' 'glfw-x11' 'glu'
-         'jemalloc'
+depends=('boost-libs' 'onetbb' 'zlib'
+          'blosc' 'glfw-x11' 'glu'
+          'jemalloc'
 )
-makedepends=('doxygen' 'cmake' 'mesa' 'pybind11'
+makedepends=('doxygen' 'boost' 'cmake' 'mesa' 'pybind11'
 )
 conflicts=('openvdb' 'openvdb-git')
 provides=('openvdb')
@@ -35,7 +35,6 @@ build() {
     -DCMAKE_SKIP_RPATH=ON \
     -DOPENVDB_ENABLE_RPATH=OFF \
     -DUSE_NANOVDB=ON \
-    -DOPENVDB_USE_DELAYED_LOADING=OFF \
     -DUSE_CCACHE=OFF \
     -DOPENVDB_CORE_STATIC=OFF
   
