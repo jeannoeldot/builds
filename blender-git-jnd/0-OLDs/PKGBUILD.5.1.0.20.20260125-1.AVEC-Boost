@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.1.0.22.20260129
+pkgver=5.1.0.20.20260125
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -13,7 +13,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'ffmpeg' 'fftw'
           'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
           'libglvnd' 'glfw' 'libxi'
-          'onetbb' 'draco' 'openxr'
+          'boost-libs' 'onetbb' 'draco' 'openxr'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
           'python-fastjsonschema' 'python-cattrs'
           'llvm-libs'
@@ -31,7 +31,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'manifold-jnd'
           'materialx' 'openusd-jnd'
 )
-makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
+makedepends=('git' 'git-lfs' 'cmake' 'boost' 'mesa' 'llvm'
              'cuda' 'nvidia-utils'
              'wayland-protocols'
              'mold'
@@ -44,7 +44,7 @@ _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "OptiX-9.1-Include.zip"
 )
-sha256sums=('09f3b3f68f8996a7350deed5bccac376f21ce513e7e76ced6d609ce799bab91e'
+sha256sums=('9601316758d0e05309fd3dad7618c3a4c994310e4b400206a8b68918121b1b92'
             'ff2da3939b52673ca9ac976e099dfcbf1ba195af66c2704d21d0eaeafd57ee57'
 )
 
@@ -58,9 +58,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "3f0450f4d9d6"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "595369734923"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1769680336|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1769329571|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {

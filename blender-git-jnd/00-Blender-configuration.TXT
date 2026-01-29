@@ -1,4 +1,117 @@
 
+13) 5.1.0.22.20260129   # AVEC GCC15 PKGBUILD = extra. SANS BOOST
+
+Blender Configuration
+=====================
+
+  Build Options:
+  - WITH_ALEMBIC                        ON
+  - WITH_BULLET                         ON
+  - WITH_CLANG                          OFF
+  - WITH_CYCLES                         ON
+  - WITH_FFTW3                          ON
+  - WITH_FREESTYLE                      ON
+  - WITH_GMP                            ON
+  - WITH_HARU                           ON
+  - WITH_IK_ITASC                       ON
+  - WITH_IK_SOLVER                      ON
+  - WITH_INPUT_NDOF                     OFF
+  - WITH_INPUT_IME                      ON
+  - WITH_INTERNATIONAL                  ON
+  - WITH_MANIFOLD                       ON
+  - WITH_OPENCOLORIO                    ON
+  - WITH_OPENIMAGEDENOISE               ON
+  - WITH_OPENSUBDIV                     ON
+  - WITH_OPENVDB                        ON
+  - WITH_POTRACE                        ON
+  - WITH_PUGIXML                        ON
+  - WITH_QUADRIFLOW                     ON
+  - WITH_TBB                            ON
+  - WITH_USD                            ON
+  - WITH_MATERIALX                      ON
+  - WITH_XR_OPENXR                      ON
+
+  Compiler Options:
+  - WITH_BUILDINFO                      ON
+  - WITH_OPTIMIZED_BUILD_TOOLS          ON
+
+  System Options:
+  - WITH_INSTALL_PORTABLE               OFF
+  - WITH_TBB_MALLOC_PROXY               ON
+  - WITH_MEM_VALGRIND                   OFF
+
+  GHOST Options:
+  - WITH_GHOST_DEBUG                    OFF
+  - WITH_GHOST_SDL                      OFF
+  - WITH_GHOST_X11                      ON
+  - WITH_GHOST_WAYLAND                  ON
+  - WITH_GHOST_XDND                     ON
+  - WITH_X11_XFIXES                     ON
+  - WITH_X11_XINPUT                     ON
+  - WITH_GHOST_WAYLAND_DYNLOAD          ON
+
+  Image Formats:
+  - WITH_IMAGE_CINEON                   ON
+  - WITH_IMAGE_OPENEXR                  ON
+  - WITH_IMAGE_OPENJPEG                 ON
+
+  Audio:
+  - WITH_AUDASPACE                      ON
+  - WITH_RUBBERBAND                     ON
+  - WITH_CODEC_FFMPEG                   ON
+  - WITH_CODEC_SNDFILE                  ON
+  - WITH_COREAUDIO                      OFF
+  - WITH_JACK                           ON
+  - WITH_JACK_DYNLOAD                   ON
+  - WITH_OPENAL                         ON
+  - WITH_PULSEAUDIO                     ON
+  - WITH_PULSEAUDIO_DYNLOAD             ON
+  - WITH_SDL                            OFF
+  - WITH_WASAPI                         OFF
+
+  Python:
+  - WITH_PYTHON_INSTALL                 OFF
+  - WITH_PYTHON_MODULE                  OFF
+  - WITH_PYTHON_SAFETY                  OFF
+
+  Modifiers:
+  - WITH_MOD_FLUID                      ON
+  - WITH_MOD_OCEANSIM                   ON
+  - WITH_MOD_REMESH                     ON
+
+  Rendering:
+  - WITH_HYDRA                          ON
+
+  Rendering (Cycles):
+  - WITH_CYCLES_OSL                     ON
+  - WITH_CYCLES_EMBREE                  ON
+  - WITH_CYCLES_PATH_GUIDING            ON
+  - WITH_CYCLES_DEVICE_OPTIX            ON
+  - WITH_CYCLES_DEVICE_CUDA             ON
+  - WITH_CYCLES_CUDA_BINARIES           ON
+  - WITH_CYCLES_DEVICE_ONEAPI           OFF
+  - WITH_CYCLES_ONEAPI_BINARIES         OFF
+  - WITH_CYCLES_DEVICE_HIP              OFF
+  - WITH_CYCLES_HIP_BINARIES            OFF
+  - WITH_CYCLES_DEVICE_HIPRT            OFF
+
+  Tests:
+  - WITH_GTESTS                         OFF
+  - CYCLES_TEST_DEVICES                 CPU
+  - WITH_CYCLES_TEST_OSL                OFF
+  - WITH_GPU_RENDER_TESTS               OFF
+  - WITH_GPU_BACKEND_TESTS              OFF
+  - WITH_GPU_DRAW_TESTS                 OFF
+  - WITH_GPU_COMPOSITOR_TESTS           OFF
+  - WITH_GPU_MESH_PAINT_TESTS           OFF
+  - WITH_UI_TESTS                       OFF
+  - WITH_UI_TESTS_HEADLESS              ON
+  - WITH_UI_TESTS_VULKAN                OFF
+  - WITH_GPU_RENDER_TESTS_VULKAN        OFF
+  - WITH_LINUX_OFFICIAL_RELEASE_TESTS   OFF
+
+
+
 12) 5.1.0.16.20260111   # AVEC GCC15 PKGBUILD = extra
 
 Blender Configuration
