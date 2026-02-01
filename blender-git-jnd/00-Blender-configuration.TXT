@@ -1,4 +1,16 @@
 
+14) 5.1.0.23.20260201   # AVEC GCC15 PKGBUILD = extra. SANS BOOST
+...
+-- Unable to find LIBDIR: "". system libraries may be used (disable WITH_LIBS_PRECOMPILED to suppress this message).
+
+-- Could NOT find Spacenav (missing: SPACENAV_LIBRARY SPACENAV_INCLUDE_DIR)
+-- SpaceNav not found, disabling WITH_INPUT_NDOF
+
+
+Blender Configuration
+=====================
+idem
+
 13) 5.1.0.22.20260129   # AVEC GCC15 PKGBUILD = extra. SANS BOOST
 
 Blender Configuration
