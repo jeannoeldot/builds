@@ -1,0 +1,73 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openshadinglanguage-jnd
+pkgver=1.15.0.0.20260101
+pkgrel=3
+_name_release="OpenShadingLanguage-1.15.0.0"
+_ver_release="v1.15.0.0"
+pkgdesc="Advanced shading language for production GI renderers"
+arch=('x86_64')
+url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
+license=('BSD-3-Clause')
+depends=('imath' 'freetype2' 'libpng' 'libtiff'
+         'zlib' 'ncurses'
+         'llvm-libs'
+         'qt6-base'
+         'clang'
+         'python' 'pugixml' 'pybind11'
+         'openimageio-jnd' 'fmt'
+)
+makedepends=('cmake' 'llvm'
+             'robin-map'
+             'cuda'
+)
+conflicts=('openshadinglanguage' 'openshadinglanguage-git')
+provides=('openshadinglanguage')
+options=('!debug')
+source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "OptiX-8.0-Include.zip"
+)
+
+sha256sums=('7b70a36ce1818960c5e505707763672b18fbc8780d10e15645819ded8087531a'
+            'ba617fbb61587bac99106dbd6cda5a27c9d178308cc423878ed72b220b8b951c'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+      -Bbuild \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DLLVM_STATIC=OFF \
+      -DOSL_USE_OPTIX=ON \
+      -DOPTIX_INCLUDE_DIR="${srcdir}" \
+      -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
+      -DCUDA_TARGET_ARCH="sm_120" \
+      -DUSE_SIMD=avx2 \
+      -DUSE_CCACHE=OFF
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+
+  DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+
+  # shaders
+  # Ugly hacks /usr/share/OSL/shaders/*.oso
+  for _oso in $(find "${pkgdir}"/usr/share/OSL/shaders/*.oso -type f)
+  do
+    sed -i "s|/build/${pkgname}/src/${_name_release}/src/|/usr/share/OSL/|g" ${_oso}
+    sed -i "s|/build/${pkgname}/src/${_name_release}/build/src/|/usr/share/OSL/|g" ${_oso}
+  done
+
+  # Fix <File> exists in a non-standard directory
+  rm -rf "${pkgdir}"/usr/build-scripts
+  rm -rf "${pkgdir}"/usr/cmake
+}
