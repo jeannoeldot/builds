@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openshadinglanguage-jnd
-pkgver=1.15.0.0.20260101
-pkgrel=2
-_name_release="OpenShadingLanguage-1.15.0.0"
-_ver_release="v1.15.0.0"
+pkgver=1.15.1.0.20260201
+pkgrel=1
+_name_release="OpenShadingLanguage-1.15.1.0"
+_ver_release="v1.15.1.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
@@ -26,7 +26,7 @@ options=('!debug')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
 )
 
-sha256sums=('7b70a36ce1818960c5e505707763672b18fbc8780d10e15645819ded8087531a'
+sha256sums=('c830c2bd95992691bf95871d741a8108c6ddca118278126f5a6bad305b9b7802'
 )
 
 build() {
@@ -38,7 +38,6 @@ build() {
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
-      -DCMAKE_CXX_STANDARD=17 \
       -DLLVM_STATIC=OFF \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
