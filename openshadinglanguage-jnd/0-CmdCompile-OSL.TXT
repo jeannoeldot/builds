@@ -416,10 +416,10 @@ rm -f *~
 ==> WARNING: Package contains reference to $srcdir
 usr/bin/testrender
 usr/bin/testshade
-usr/lib/libtestshade.so.1.15.0
-usr/lib/liboslexec.so.1.15.0
-usr/lib/liboslquery.so.1.15.0
-usr/lib/liboslcomp.so.1.15.0
+usr/lib/libtestshade.so.1.15.1
+usr/lib/liboslexec.so.1.15.1
+usr/lib/liboslquery.so.1.15.1
+usr/lib/liboslcomp.so.1.15.1
 
 namcap openshadinglanguage-jnd-*-x86_64.pkg.tar.*
 

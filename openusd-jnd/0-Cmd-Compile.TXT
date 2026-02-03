@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=25.11.20251024
+pkgrel=6      # rebuild MAJ OIIO 3.1.10.0
 pkgrel=5      # Rebuild SANS boost boost-libs
 pkgrel=4      # REBUILD MAJ python 3.14
 pkgrel=3      # rebuild MAJ OIIO 3.1.9.0
@@ -255,6 +256,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.11.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
+-rw-r--r--  1 jnd users      1555 28 janv. 18:14 usd_noboost.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================
