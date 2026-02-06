@@ -1,4 +1,21 @@
 
+
+1-9-1) OPTIX 9.1.0
+==================
+cd /0-DataLinux/05-builds-dir-git
+
+https://github.com/NVIDIA/optix-dev
+
+https://github.com/NVIDIA/optix-dev/releases
+
+wget -O optix-dev-9.1.0.tar.gz \
+https://github.com/NVIDIA/optix-dev/archive/refs/tags/v9.1.0.tar.gz
+
+sha256sum optix-dev-9.1.0.tar.gz
+3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6
+
+cd
+
 0-9-1) OPTIX 9.1.0
 ==================
 https://developer.nvidia.com/designworks/optix/download

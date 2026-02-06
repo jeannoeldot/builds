@@ -198,7 +198,7 @@ cp -v /0-DataLinux/05-builds-dir-git/blender-git-5.1.0.24.20260203.tar.zst .
 
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/optix-dev-9.1.0.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OptiX-9.1-Include.zip .
 
 sync
 
@@ -214,7 +214,6 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.1.0.24.20260203
-pkgrel=2    # GCC 15 + Idem Arch Extra : OK. Cuda 13.0. Optix-DEV 9.1.0 TAR.GZ  => OK! SANS BOOST
 pkgrel=1    # GCC 15 + Idem Arch Extra : OK. Cuda 13.0. Optix 9.1.0 => OK! SANS BOOST
 
 pkgrel=1    # GCC 15 + Idem Arch Extra : OK. Cuda 13.1. Optix 9.1.0 => PAS OK!
@@ -329,12 +328,12 @@ strip: Unable to recognise the format of the input file `./usr/share/blender/2.9
 SANS PATCH TAR.ZST
 ------------------
 source=("$pkgname-$pkgver.tar.zst"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.zst
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sums=('123...'
             '456...'
@@ -344,14 +343,14 @@ sha256sums=('123...'
 AVEC PATCH TAR.ZST
 ------------------
 source=("$pkgname-$pkgver.tar.zst"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
         "Cycles-Fix-runtime-kernel-compilation-of-OptiX-kernels-with-CUDA-13+_152789.patch"
         "..."
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.zst
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sum Cycles-Fix-runtime-kernel-compilation-of-OptiX-kernels-with-CUDA-13+_152789.patch
 
@@ -697,7 +696,7 @@ source/creator/CMakeLists.txt
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-5.1.0.24.20260203.tar.zst
--rw-r--r--  1 jnd users    59812 15 mars  11:20 optix-dev-9.1.0.tar.gz
+-rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-9.1-Include.zip
 -rw-r--r--  1 jnd users      568 17 déc.  18:47 xxxxxxxxxxxxxx.patch
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 
@@ -812,7 +811,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/blender-git-jnd/PKGBUILD . \
 && cp -v $HOME/05-builds/blender-git-jnd/blender-git-5.1.0.24.20260203.tar.gz . \
-&& cp -v $HOME/05-builds/blender-git-jnd/optix-dev-9.1.0.tar.gz . \
+&& cp -v $HOME/05-builds/blender-git-jnd/OptiX-9.1-Include.zip . \
 && cp -v $HOME/05-builds/blender-git-jnd/blender-openexr3.patch . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/blender-git-jnd \
@@ -926,7 +925,7 @@ $ rm -f *~
 $ rm -f *.log
 $ rm -i blender-git-5.1.0.24.20260203.tar.zst
 !!! OPTIX
-$ rm -i optix-dev-9.1.0.tar.gz
+$ rm -i OptiX-9.1-Include.zip
 
 $ cd && maj-repolocal
 $ sync
@@ -1289,12 +1288,12 @@ cp -v /0-DataLinux/05-builds-dir-git/blender-git-5.1.0.24.20260203.tar.gz .
 SANS PATCH TAR.GZ
 -----------------
 source=("$pkgname-$pkgver.tar.gz"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.gz
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sums=('123...'
             '456...'
@@ -1304,14 +1303,14 @@ sha256sums=('123...'
 AVEC PATCH TAR.GZ
 -----------------
 source=("$pkgname-$pkgver.tar.gz"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
         "118328-openpgl-0.6.0.patch"
         "..."
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.gz
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sum 118328-openpgl-0.6.0.patch
 
@@ -1381,14 +1380,14 @@ SANS PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.gz
 
 sha256sum LibAssetsPublish-5.1.0.24.20260203.zip
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sums=('123...'
             '456...'
@@ -1399,7 +1398,7 @@ AVEC PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
         "LibAssetsPublish-$pkgver.zip"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
         "118328-openpgl-0.6.0.patch"
         "..."
 )
@@ -1408,7 +1407,7 @@ sha256sum blender-git-5.1.0.24.20260203.tar.gz
 
 sha256sum LibAssetsPublish-5.1.0.24.20260203.zip
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sum 118328-openpgl-0.6.0.patch
 
@@ -1735,7 +1734,7 @@ tar -cvzf blender-git-5.1.0.24.20260203.tar.gz --exclude=.git blender
 
 
 -rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-5.1.0.24.20260203.tar.gz
--rw-r--r--  1 jnd users    59812 15 mars  11:20 optix-dev-9.1.0.tar.gz
+-rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-9.1-Include.zip
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 -rw-r--r--  1 jnd users      671 17 avril 12:31 Fix-Erreur-Compile-self-not-a-member-of-tbb_v1_task.patch
 
@@ -1816,14 +1815,14 @@ nanovdb-git-*-any.pkg.tar.*\
 AVEC PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
         "blender-openexr3.patch"
         "blender-oiio-2.3.patch"
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.gz
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sum blender-openexr3.patch
 
@@ -1868,7 +1867,7 @@ AU 05/08/2021: RTX 3080 TI ==> INUTILES ???
 $ ls -la
 ==>
 -rw-r--r--  1 jnd users 62492825 12 mai   11:07 blender-git-5.1.0.24.20260203.tar.gz
--rw-r--r--  1 jnd users    59812 15 mars  11:20 optix-dev-9.1.0.tar.gz
+-rw-r--r--  1 jnd users    59812 15 mars  11:20 OptiX-9.1-Include.zip
 -rw-r--r--  1 jnd users     3765 12 mai   11:31 PKGBUILD
 -rw-r--r--  1 jnd users     1626 28 avril 14:33 blender-openexr3.patch
 -rw-r--r--  1 jnd users      956  6 déc.  12:03 blender-oiio-2.3.patch
@@ -1987,14 +1986,14 @@ AVEC PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
         "fix-gltf-import-python3.9.patch"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.gz
 
 sha256sum fix-gltf-import-python3.9.patch
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sums=('123...'
             '456...'
@@ -2040,14 +2039,14 @@ AVEC PATCH
 ----------
 source=("$pkgname-$pkgver.tar.gz"
         "D8063-cuda11.patch"
-        "optix-dev-9.1.0.tar.gz"
+        "OptiX-9.1-Include.zip"
 )
 
 sha256sum blender-git-5.1.0.24.20260203.tar.gz
 
 sha256sum D8063-cuda11.patch
 
-sha256sum optix-dev-9.1.0.tar.gz
+sha256sum OptiX-9.1-Include.zip
 
 sha256sums=('123...'
             '456...'
