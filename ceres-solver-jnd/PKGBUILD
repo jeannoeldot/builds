@@ -1,0 +1,53 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=ceres-solver-jnd
+pkgver=2.2.0.20231013
+pkgrel=1
+_ver_release="2.2.0"
+_name_release="ceres-solver-${_ver_release}"
+pkgdesc="Solver for nonlinear least squares problems"
+url="http://ceres-solver.org/"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('google-glog' 'suitesparse'
+)
+makedepends=('cmake' 'eigen'
+)
+conflicts=('ceres-solver' 'ceres-solver-git-jnd')
+provides=('ceres-solver')
+options=('!debug')
+source=("ceres-solver-${_ver_release}.tar.gz"
+)
+sha256sums=('12efacfadbfdc1bbfa203c236e96f4d3c210bed96994288b3ff0c8e7c6f350d4'
+)
+
+prepare() {
+  cd ${srcdir}/ceres-solver-${_ver_release}
+  # eigen 5.x compat
+  sed -i "s|Eigen3 3.3|Eigen3|g" CMakeLists.txt
+  sed -i "s|Eigen3 \${CERES_EIGEN_VERSION}|Eigen3|g" cmake/CeresConfig.cmake.in
+}
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DGFLAGS=OFF \
+    -DUSE_CUDA=OFF \
+    -DBUILD_TESTING=OFF \
+    -DBUILD_EXAMPLES=OFF \
+    -DBUILD_BENCHMARKS=OFF \
+    -DBUILD_SHARED_LIBS=ON
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  
+  DESTDIR="${pkgdir}" make -C build install
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

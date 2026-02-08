@@ -1,0 +1,223 @@
+# Le répertoire
+===============
+!!! EN USER
+cd $HOME/05-builds/ceres-solver-jnd
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/ceres-solver/ceres-solver/releases/tag
+==> sandwichmaker tagged this Oct 13, 2023  ==> 20231013
+==> 2.2.0
+==> 2.2.0.20231013
+
+1.3 SOURCES
+==============
+cd /0-DataLinux/05-builds-dir-git
+
+wget -O ceres-solver-2.2.0.tar.gz \
+https://github.com/ceres-solver/ceres-solver/archive/refs/tags/2.2.0.tar.gz
+
+sha256sum ceres-solver-2.2.0.tar.gz
+12efacfadbfdc1bbfa203c236e96f4d3c210bed96994288b3ff0c8e7c6f350d4
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+cd $HOME/05-builds/ceres-solver-jnd
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+cp -v /0-DataLinux/05-builds-dir-git/ceres-solver-2.2.0.tar.gz .
+
+sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=ceres-solver-jnd
+pkgver=2.2.0.20231013
+pkgrel=1
+
+
+!!!!!!
+_ver_release="2.2.0"
+_name_release="ceres-solver-${_ver_release}"
+
+license=('Apache-2.0')
+
+depends=('google-glog' 'suitesparse'
+)
+
+makedepends=('cmake' 'eigen'
+)
+
+conflicts=('ceres-solver' 'ceres-solver-git-jnd')
+provides=('ceres-solver')
+
+options=('!debug')
+
+SANS PATCH
+----------
+sha256sum ceres-solver-2.2.0.tar.gz
+
+source=("ceres-solver-${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf ceres-solver-2.2.0.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/ceres-solver-2.2.0/CMakeLists.txt &
+!!! VOIR
+
+L 491  CMAKE_BUILD_TYPE "Build type" Release
+
+L 119   GFLAGS                ON ==> OFF
+L 120   SUITESPARSE           ON
+
+L 129   USE_CUDA              ON ==> OFF
+L 130   LAPACK                ON
+
+L 140   EIGENSPARSE           ON
+
+L 144   BUILD_TESTING         ON ==> OFF
+L 145   BUILD_DOCUMENTATION   OFF
+L 146   BUILD_EXAMPLES        ON ==> OFF
+L 147   BUILD_BENCHMARKS      ON ==> OFF
+L 148   BUILD_SHARED_LIBS     OFF ==> ON
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 ceres-solver-2.2.0.tar.gz
+-rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/ceres-solver-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/ceres-solver-jnd/ceres-solver-2.2.0.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/ceres-solver-jnd \
+&& cp -v /tmp/build/ceres-solver-jnd-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/ceres-solver-jnd && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 24G
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 24G
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 24G
+
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+==> WARNING: Package contains reference to $srcdir
+usr/lib/libceres.so.2.2.0
+
+namcap ceres-solver-jnd-*-x86_64.pkg.tar.*
+...
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/ceres-solver-jnd-*-x86_64.pkg.tar.*
+
+$ sudo cp -v ceres-solver-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/ceres-solver-jnd-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v ceres-solver-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i ceres-solver-2.2.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!!! PAS OBLIGATOIRE
+====================
+!!! EN ROOT
+# cd
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu ceres-solver-jnd
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd ceres-solver-jnd
+# rm /var/cache/pacman/pkg/ceres-solver-jnd-*
+# LC_ALL=C pacman -S ceres-solver-jnd
+
+
+ANCIEN
+======
+

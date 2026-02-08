@@ -1,0 +1,29 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 2.2.0
+
+
+/!\ /!\ /!\ $HOME/05-builds/ceres-solver-jnd
+
+mkdir /tmp/srcp
+
+cp -v ceres-solver-2.2.0.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf ceres-solver-2.2.0.tar.gz
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+

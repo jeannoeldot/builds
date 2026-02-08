@@ -1,0 +1,85 @@
+
+V 2.2.0
+=======
+==> Starting build()...
+-- The C compiler identification is GNU 15.2.1
+-- The CXX compiler identification is GNU 15.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test HAVE_BIGOBJ
+-- Performing Test HAVE_BIGOBJ - Failed
+-- Looking for pow in m
+-- Looking for pow in m - found
+-- Detected Ceres version: 2.2.0 from /build/ceres-solver-jnd/src/ceres-solver-2.2.0/include/ceres/version.h
+-- Found Eigen version 5.0.1: /usr/share/eigen3/cmake
+-- Enabling use of Eigen as a sparse linear algebra library.
+-- Building without CUDA.
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found LAPACK library: /usr/lib/liblapack.so;/usr/lib/libblas.so
+-- Found CHOLMOD headers in: /usr/include/suitesparse
+-- Found CHOLMOD library: /usr/lib/libcholmod.so
+-- Found SPQR headers in: /usr/include/suitesparse
+-- Found SPQR library: /usr/lib/libspqr.so
+-- Found Config headers in: /usr/include/suitesparse
+-- Found Config library: /usr/lib/libsuitesparseconfig.so
+-- Found AMD headers in: /usr/include/suitesparse
+-- Found AMD library: /usr/lib/libamd.so
+-- Found CAMD headers in: /usr/include/suitesparse
+-- Found CAMD library: /usr/lib/libcamd.so
+-- Found CCOLAMD headers in: /usr/include/suitesparse
+-- Found CCOLAMD library: /usr/lib/libccolamd.so
+-- Found COLAMD headers in: /usr/include/suitesparse
+-- Found COLAMD library: /usr/lib/libcolamd.so
+-- Did not find Intel TBB library, assuming SuiteSparseQR was not compiled with TBB.
+-- Looking for shm_open in rt
+-- Looking for shm_open in rt - found
+-- Adding librt to SuiteSparse_config libraries (required on Linux & Unix [not OSX] if SuiteSparse is compiled with timing).
+-- Could NOT find METIS (missing: METIS_INCLUDE_DIR METIS_LIBRARY)
+-- Found SuiteSparse: /usr/include/suitesparse (found suitable version "7.12.1", minimum required is "4.5.6") found components: CHOLMOD SPQR Config AMD CAMD CCOLAMD COLAMD missing components: Partition
+-- Found SuiteSparse 7.12.1, building with SuiteSparse.
+-- Could NOT find METIS (missing: METIS_INCLUDE_DIR METIS_LIBRARY)
+-- Did not find METIS, disabling Eigen METIS support.
+-- Building without Apple's Accelerate sparse support.
+-- Use of gflags disabled - no tests or tools will be built!
+-- No preference for use of exported glog CMake configuration set, and no hints for include/library directories provided. Defaulting to preferring an installed/exported glog CMake configuration if available.
+-- Found installed version of glog: /usr/lib/cmake/glog
+-- Detected glog version: 0.7.1
+-- Found Glog: glog::glog
+-- Found Google Log (glog). Assuming glog was built with gflags support as gflags was found. This will make gflags a public dependency of Ceres.
+-- Building Ceres as a shared library.
+-- Performing Test CHECK_CXX_FLAG_Wmissing_declarations
+-- Performing Test CHECK_CXX_FLAG_Wmissing_declarations - Success
+-- Performing Test CHECK_CXX_FLAG_Wno_unknown_pragmas
+-- Performing Test CHECK_CXX_FLAG_Wno_unknown_pragmas - Success
+-- Performing Test CHECK_CXX_FLAG_Wno_sign_compare
+-- Performing Test CHECK_CXX_FLAG_Wno_sign_compare - Success
+-- Performing Test CHECK_CXX_FLAG_Wno_unused_parameter
+-- Performing Test CHECK_CXX_FLAG_Wno_unused_parameter - Success
+-- Performing Test CHECK_CXX_FLAG_Wno_missing_field_initializers
+-- Performing Test CHECK_CXX_FLAG_Wno_missing_field_initializers - Success
+-- Creating configured Ceres config.h output directory: /build/ceres-solver-jnd/src/ceres-solver-2.2.0/build/include/ceres/internal
+-- Enabling CERES_USE_EIGEN_SPARSE in Ceres config.h
+-- Enabling CERES_NO_CUDA in Ceres config.h
+-- Enabling CERES_NO_ACCELERATE_SPARSE in Ceres config.h
+-- Enabling CERES_NO_CHOLMOD_PARTITION in Ceres config.h
+-- Enabling CERES_NO_EIGEN_METIS in Ceres config.h
+-- Performing Test CHECK_CXX_FLAG_Wno_missing_declarations
+-- Performing Test CHECK_CXX_FLAG_Wno_missing_declarations - Success
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR - Success
+-- Do not build any example.
+-- Configuring done (1.5s)
