@@ -186,7 +186,7 @@ sync
 
 sha256sum blender-git-5.2.0.0.20260207.tar.zst
 
-4eab006b65cbacacbb1c0426fc6a8038ceeb7e1bdd8bdf4ee02c50793329c2df
+6707d42f8a2ebaae941c3f18883c5c5619467e68c275720c474b89743cd79224
 
 1-7-5) Copie ARCHIVE TAR.GZ / TAR.ZST ds rep compile
 ====================================================
@@ -281,6 +281,10 @@ Add support for Zstandard compression for .blend files
           'zstd'
 
 # NEW DEPS:
+# https://projects.blender.org/blender/blender/commit/18a01ebc6b0dda3fb0372757765391990de45fdb
+# CMake: Remove ceres and eigen from /extern
+    'eigen' 'ceres-solver-jnd'
+
 # Build: library updates for Blender 3.5
 # https://git.blender.org/gitweb/gitweb.cgi/blender.git/commit/388bbc32902d5a66ccc13955b810cef12213aeca
 # git.blender.org - blender.git/commit install deps
@@ -889,15 +893,17 @@ blender-git-jnd W: Unused shared library '/usr/lib/libm.so.6' by file ('usr/bin/
 
 blender-git-jnd W: Dependency included, but may not be needed ('desktop-file-utils')
 blender-git-jnd W: Dependency included, but may not be needed ('shared-mime-info')
+blender-git-jnd W: Dependency included, but may not be needed ('libtiff')
+blender-git-jnd W: Dependency included, but may not be needed ('jack2')
 blender-git-jnd W: Dependency included, but may not be needed ('pipewire-pulse')
+blender-git-jnd W: Dependency included, but may not be needed ('pipewire')
 blender-git-jnd W: Dependency included, but may not be needed ('libglvnd')
 blender-git-jnd W: Dependency included, but may not be needed ('glfw')
 blender-git-jnd W: Dependency included, but may not be needed ('draco')
 blender-git-jnd W: Dependency included, but may not be needed ('python-psutil')
-blender-git-jnd W: Dependency included, but may not be needed ('python-requests')
+blender-git-jnd W: Dependency included, but may not be needed ('pystring')
+blender-git-jnd W: Dependency included, but may not be needed ('python-fastjsonschema')
 blender-git-jnd W: Dependency included, but may not be needed ('llvm-libs')
-blender-git-jnd W: Dependency included, but may not be needed ('clang')
-blender-git-jnd W: Dependency included, but may not be needed ('pugixml')
 blender-git-jnd W: Dependency included, but may not be needed ('libdecor')
 blender-git-jnd W: Dependency included, but may not be needed ('fribidi')
 blender-git-jnd W: Dependency included, but may not be needed ('harfbuzz')
@@ -906,7 +912,7 @@ blender-git-jnd W: Dependency included, but may not be needed ('pybind11')
 blender-git-jnd W: Dependency included, but may not be needed ('vulkan-headers')
 blender-git-jnd W: Dependency included, but may not be needed ('vulkan-driver')
 blender-git-jnd W: Dependency included, but may not be needed ('libdeflate')
-blender-git-jnd W: Dependency included, but may not be needed ('pcre')
+blender-git-jnd W: Dependency included, but may not be needed ('eigen')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS  /00-repolocal

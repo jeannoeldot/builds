@@ -23,7 +23,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
           'opencolorio' 'libdeflate'
           'zstd'
-          'eigen'
+          'eigen' 'ceres-solver-jnd'
           'openimageio-jnd' 'fmt'
           'openshadinglanguage-jnd'
           'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
@@ -45,7 +45,7 @@ _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-9.1.0.tar.gz"
 )
-sha256sums=('4eab006b65cbacacbb1c0426fc6a8038ceeb7e1bdd8bdf4ee02c50793329c2df'
+sha256sums=('6707d42f8a2ebaae941c3f18883c5c5619467e68c275720c474b89743cd79224'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
 )
 
