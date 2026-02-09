@@ -1,0 +1,47 @@
+
+        "Fix-ERROR-flag-logtostderr-was-defined-more-than-once.patch"
+  # Fix ERROR: flag 'logtostderr' was defined more than once ...
+  patch -Np1 -i "${srcdir}/Fix-ERROR-flag-logtostderr-was-defined-more-than-once.patch"
+
+====>
+
+[100%] Linking CXX executable ../../bin/blender
+mold: fatal: library not found: extern_glog
+collect2: erreur: ld a retourné le statut de sortie 1
+make[2]: *** [source/creator/CMakeFiles/blender.dir/build.make:587: bin/blender] Error 1
+make[1]: *** [CMakeFiles/Makefile2:11170: source/creator/CMakeFiles/blender.dir/all] Error 2
+make: *** [Makefile:166: all] Error 2
+make : on quitte le répertoire « /home/jnd/05-builds/blender-git-jnd/src/blender/build »
+
+grep -lR "extern_glog" /0-DataLinux/05-builds-dir-git/blender/
+==============================================================
+/0-DataLinux/05-builds-dir-git/blender/CMakeLists.txt
+/0-DataLinux/05-builds-dir-git/blender/extern/glog/CMakeLists.txt
+
+====>
+option(WITH_SYSTEM_GFLAGS "Use system-wide Gflags instead of a bundled one" OFF)
+option(WITH_SYSTEM_GLOG "Use system-wide Glog instead of a bundled one" OFF)
+====> ON
+====> OK !!!!!!!!!
+
+------------------------------------------------
+┌jnd ( ~ )
+└─> $ blender
+ERROR: flag 'logtostderr' was defined more than once (in files '/usr/src/debug/google-glog/glog-0.7.1/src/flags.cc'
+and 'extern/glog/src/logging.cc').
+
+------------------------------------------
+
+grep -lR "logtostderr" /0-DataLinux/05-builds-dir-git/blender/
+==============================================================
+
+/0-DataLinux/05-builds-dir-git/blender/intern/libmv/intern/logging.cc
+/0-DataLinux/05-builds-dir-git/blender/extern/glog/ChangeLog
+/0-DataLinux/05-builds-dir-git/blender/extern/glog/include/glog/logging.h
+/0-DataLinux/05-builds-dir-git/blender/extern/glog/src/raw_logging.cc
+/0-DataLinux/05-builds-dir-git/blender/extern/glog/src/base/commandlineflags.h
+/0-DataLinux/05-builds-dir-git/blender/extern/glog/src/windows/glog/logging.h
+/0-DataLinux/05-builds-dir-git/blender/extern/glog/src/logging.cc
+
+grep -lR "flags.cc" /0-DataLinux/05-builds-dir-git/blender/
+==============================================================

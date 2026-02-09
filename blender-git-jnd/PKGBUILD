@@ -2,7 +2,7 @@
 
 pkgname=blender-git-jnd
 pkgver=5.2.0.0.20260207
-pkgrel=1
+pkgrel=3
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -80,6 +80,8 @@ build() {
         -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
         -D CYCLES_CUDA_BINARIES_ARCH="sm_120;compute_120" \
         -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-9.1.0" \
+        -D WITH_SYSTEM_GFLAGS=ON \
+        -D WITH_SYSTEM_GLOG=ON \
         -D WITH_DOC_MANPAGE=OFF \
         -D WITH_CYCLES_DEVICE_HIP=OFF \
         -D WITH_CYCLES_DEVICE_HIPRT=OFF \

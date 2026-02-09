@@ -1,0 +1,12 @@
+diff -aur blender/extern/CMakeLists.txt blender.new/extern/CMakeLists.txt
+--- blender/extern/CMakeLists.txt	2026-02-08 11:38:07.000000000 +0100
++++ blender.new/extern/CMakeLists.txt	2026-02-09 14:23:03.167923862 +0100
+@@ -79,7 +79,7 @@
+   if(NOT WITH_SYSTEM_GFLAGS)
+     add_subdirectory(gflags)
+   endif()
+-  add_subdirectory(glog)
++#  add_subdirectory(glog)
+ endif()
+ 
+ if(WITH_GTESTS)

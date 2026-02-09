@@ -173,7 +173,7 @@ head -n 60 blender/source/blender/blenkernel/BKE_blender_version.h | grep VERSIO
 
 1-7-1) FAIRE ARCHIVE TAR.ZST DE BLENDER
 =======================================
-!!! OK  ==> 1.2 Gio
+!!! OK  ==> 1./0-DataLinux/05-builds-dir-git/blender/extern/glog/2 Gio
 tar -I 'zstd -T0 -5' -cvf blender-git-5.2.0.0.20260207.tar.zst --exclude={.git,.gitea,.github,.well-known}  blender
 !!!
 
@@ -214,7 +214,9 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.2.0.0.20260207
-pkgrel=1
+pkgrel=3    # AVEC WITH_SYSTEM_GFLAGS et WITH_SYSTEM_GLOG = ON  => OK!
+pkgrel=2    # PATCH SUPPR /0-DataLinux/05-builds-dir-git/blender/extern/glog/  => NON!
+pkgrel=1    # ERREUR EXECUTION
 
 pkgrel=2    # GCC 15 + Idem Arch Extra : OK. Cuda 13.0. Optix-DEV 9.1.0 TAR.GZ  => OK! SANS BOOST
 pkgrel=1    # GCC 15 + Idem Arch Extra : OK. Cuda 13.0. Optix 9.1.0 => OK! SANS BOOST
@@ -351,7 +353,7 @@ AVEC PATCH TAR.ZST
 ------------------
 source=("$pkgname-$pkgver.tar.zst"
         "optix-dev-9.1.0.tar.gz"
-        "Cycles-Fix-runtime-kernel-compilation-of-OptiX-kernels-with-CUDA-13+_152789.patch"
+        "Fix-ERROR-flag-logtostderr-was-defined-more-than-once.patch"
         "..."
 )
 
@@ -359,7 +361,7 @@ sha256sum blender-git-5.2.0.0.20260207.tar.zst
 
 sha256sum optix-dev-9.1.0.tar.gz
 
-sha256sum Cycles-Fix-runtime-kernel-compilation-of-OptiX-kernels-with-CUDA-13+_152789.patch
+sha256sum Fix-ERROR-flag-logtostderr-was-defined-more-than-once.patch
 
 sha256sums=('123...'
             '456...'

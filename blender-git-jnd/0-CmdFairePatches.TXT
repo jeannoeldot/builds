@@ -28,6 +28,41 @@ sync
 ANCIENS
 ========
 
+1) FIX ERROR: flag 'logtostderr' was defined more than once
+===========================================================
+1-1) MODIFIER extern/CMakeLists.txt
+===================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+sync
+
+cd blender.new/extern
+kwrite CMakeLists.txt
+
+MODIFIER LIGNE 82 :
+  add_subdirectory(glog)
+DEVIENT:
+#  add_subdirectory(glog)
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+rm -f CMakeLists.txt~
+
+cd ../..
+
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-ERROR-flag-logtostderr-was-defined-more-than-once.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/Fix-ERROR-flag-logtostderr-was-defined-more-than-once.patch .
+
+
 1) FIX error: nvcc fatal   : Unsupported gpu architecture 'compute_50'
 ======================================================================
 1-1) MODIFIER blender/intern/cycles/kernel/device/optix/CMakeLists.txt
