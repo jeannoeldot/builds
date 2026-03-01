@@ -215,6 +215,9 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.2.0.4.20260222
+pkgrel=3    # TEST sed CMakeLists.txt: sm_120 compute_120. Cuda 13.1. Optix 9.1.0. MAKEFLAGS="-j1" => PAS OK!
+pkgrel=2    # TEST sed CMakeLists.txt: sm_120 compute_120. Cuda 13.1. Optix 9.1.0. MAKEFLAGS="-j8" => PAS OK!
+
 pkgrel=1
 
 pkgrel=1    # sm_120;compute_120 ==> sm_120. Cuda 13.1. Optix 9.1.0 => PAS OK!
@@ -771,6 +774,26 @@ openvdb-jnd-*-x86_64.pkg.tar.*\
 /tmp/chrootrepo/
 
 
+  NATIVE
+--------
+$ mkdir -p /tmp/buildblender
+$ cd /tmp/buildblender
+$ cp -v $HOME/05-builds/blender-git-jnd/PKGBUILD .
+$ cp -v $HOME/05-builds/blender-git-jnd/blender-git-5.2.0.4.20260222.tar.zst .
+$ cp -v $HOME/05-builds/blender-git-jnd/optix-dev-9.1.0.tar.gz .
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 32G
+OU
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 32G -l logs
+
+$ cd $HOME/05-builds/blender-git-jnd
+
+$ rm -rf /tmp/buildblender
+
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
   NATIVE
 --------
 $ rm -f *~
