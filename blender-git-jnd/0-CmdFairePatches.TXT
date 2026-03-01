@@ -1,18 +1,54 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.2.0.3.20260214
+!!! VERSION = 5.2.0.5.20260301
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.2.0.3.20260214.tar.zst /tmp/srcp/
+cp -v blender-git-5.2.0.5.20260301.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.2.0.3.20260214.tar.zst
+tar -x --zstd -f blender-git-5.2.0.5.20260301.tar.zst
+
+
+1) Fix #155021: Entering edit mode crashes blender
+====================================================
+1-1) MODIFIER source/blender/blenkernel/intern/customdata.cc
+============================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/blenkernel/intern
+kwrite customdata.cc
+
+MODIFIER LIGNE 212 :
+    if (dvert->totweight) {
+
+DEVIENT:
+    if (dvert->totweight > 0) {
+
+
+AJOUTER LIGNE 221 :
+      dvert->totweight = 0;
+
+ENREGISTRER et Quitter Kwrite & EFFACER customdata.cc~
+rm -f customdata.cc~
+
+cd ../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-#155021_Entering-edit-mode-crashes-blender.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/Fix-#155021_Entering-edit-mode-crashes-blender.patch .
 
 
 
@@ -564,11 +600,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.2.0.3.20260214.tar.gz /tmp/srcp/
+cp -v blender-git-5.2.0.5.20260301.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.2.0.3.20260214.tar.gz
+tar -xzf blender-git-5.2.0.5.20260301.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

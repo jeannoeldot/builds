@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.2.0.4.20260222
-pkgrel=3
+pkgver=5.2.0.5.20260301
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -45,15 +45,20 @@ options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-9.1.0.tar.gz"
+        "Fix-#155021_Entering-edit-mode-crashes-blender.patch"
 )
-sha256sums=('fcb3e26bd9308eedd3362046c3496ffd70e94fe71151adef7fe03642a9984682'
+sha256sums=('83241d5ede9f09af8d82bccd921837d539bc1a95bd8562636b3baf0b58a66e07'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
+            '44ff8b7ec5c956cd1121b3552c08ede5aec05d568b7af9edc1d10c3c0b08a04e'
 )
 
 _gitname="blender"
 
 prepare() {
   cd "${_gitname}"
+
+  # Fix #155021: Entering edit mode crashes blender
+  patch -Np1 -i "${srcdir}/Fix-#155021_Entering-edit-mode-crashes-blender.patch"
 
   ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
   ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
@@ -63,9 +68,6 @@ prepare() {
   sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "d7a5d66edcc8"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1771733914|' build_files/cmake/buildinfo.cmake
-
-  # Fix build avec cuda 13.1.0
-  sed -i -e 's|sm_50 sm_52 sm_60 sm_61 sm_70 sm_75 sm_86 sm_89 sm_120 compute_75|sm_120 compute_120|' CMakeLists.txt
 }
 
 _get_pyver() {
@@ -82,6 +84,7 @@ build() {
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D WITH_LINKER_MOLD=ON \
         -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
+        -D CYCLES_CUDA_BINARIES_ARCH="sm_120;compute_120" \
         -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-9.1.0" \
         -D WITH_SYSTEM_GFLAGS=ON \
         -D WITH_SYSTEM_GLOG=ON \
