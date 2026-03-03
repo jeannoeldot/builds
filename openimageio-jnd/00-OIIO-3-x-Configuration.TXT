@@ -1,4 +1,148 @@
 
+V 3.1.11.0
+==========
+==> Starting build()...
+-- The CXX compiler identification is GNU 15.2.1
+-- The C compiler identification is GNU 15.2.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring OpenImageIO 3.1.11.0
+-- CMake 4.2.3
+-- CMake system           = Linux-6.18.13-zen1-1-zen
+-- CMake system name      = Linux
+-- Project source dir     = /build/openimageio-jnd/src/OpenImageIO-3.1.11.0
+-- Project build dir      = /build/openimageio-jnd/src/OpenImageIO-3.1.11.0/build
+-- Project install prefix = /usr
+-- Configuration types    =
+-- Build type             = Release
+-- Supported release      = ON
+-- CMAKE_UNITY_BUILD_MODE =
+-- CMAKE_UNITY_BUILD_BATCH_SIZE =
+-- Outer namespace PROJ_OUTER_NAMESPACE:   OpenImageIO
+-- Inner namespace PROJ_VERSION_NAMESPACE: v3_1
+-- Joint namespace PROJ_NAMESPACE_V:       OpenImageIO_v3_1
+-- CMAKE_CXX_COMPILER     = /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID  = GNU
+-- Building with C++17, downstream minimum C++17
+-- Compiling with SIMD level avx2
+-- clang-format not found.
+--
+-- * Checking for dependencies...
+-- *   - Missing a dependency 'Package'?
+-- *     Try cmake -DPackage_ROOT=path or set environment var Package_ROOT=path
+-- *     For many dependencies, we supply src/build-scripts/build_Package.bash
+-- *   - To exclude an optional dependency (even if found),
+-- *     -DUSE_Package=OFF or set environment var USE_Package=OFF
+--
+-- Found ZLIB 1.3.2
+-- Found Imath 3.2.2
+-- Found OpenEXR 3.4.6
+-- Found libjpeg-turbo 3.1.3
+-- Found libuhdr 1.4.0
+-- Found TIFF 4.7.1
+-- Found JXL 0.11.2
+-- Found pugixml 1.15
+-- Found Python3 3.14.3
+-- Found pybind11 3.0.2
+-- Found PNG 1.6.55
+-- Found Freetype 2.14.1
+-- Found OpenColorIO 2.5.0
+-- OpenCV library not found
+--     Try setting OpenCV_ROOT ?
+-- Could NOT find TBB (missing: TBB_DIR)
+-- TBB was not found
+-- TBB library not found
+--     Try setting TBB_ROOT ?
+-- Could NOT find DCMTK (missing: DCMTK_DIR)
+-- DCMTK was not found
+-- DCMTK library not found
+--     Try setting DCMTK_ROOT ?
+-- Found FFmpeg 8.0
+-- Found GIF 5.2.2
+-- Found Libheif 1.21.2 from CONFIG
+-- Found LibRaw 0.22.0
+-- Found OpenJPEG 2.5.4 from CONFIG
+-- Found openjph 0.26.3
+CMake Warning (dev) at src/cmake/dependency_utils.cmake:361 (set):
+  Cannot set "ENABLE_OpenVDB": current scope has no parent.
+Call Stack (most recent call first):
+  src/cmake/externalpackages.cmake:183 (checked_find_package)
+  CMakeLists.txt:227 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Forcing optional of disabled OpenVDB
+-- Not using OpenVDB -- disabled (because TBB was not found)
+-- Could NOT find Ptex (missing: Ptex_DIR)
+-- Ptex was not found
+-- Ptex library not found
+--     Try setting Ptex_ROOT ?
+--     Maybe this will help:  src/build-scripts/build_Ptex.bash
+-- Ptex library not found
+--     Try setting Ptex_ROOT ?
+--     Maybe this will help:  src/build-scripts/build_Ptex.bash
+-- Found WebP 1.6.0
+-- Forcing optional of disabled R3DSDK
+-- Not using R3DSDK -- disabled
+-- Nuke library not found
+--     Try setting Nuke_ROOT ?
+-- Found BZip2 1.0.8
+-- Found OpenGL
+-- Found Qt6 6.10.2
+-- Found Robinmap
+-- Found fmt 12.1.0
+-- All build dependencies: BZip2 1.0.8;DCMTK NONE;FFmpeg 8.0;fmt 12.1.0;Freetype 2.14.1;GIF 5.2.2;Imath 3.2.2;JXL 0.11.2;Libheif 1.21.2;libjpeg-turbo 3.1.3;LibRaw 0.22.0;libuhdr 1.4.0;OpenColorIO 2.5.0;OpenCV NONE;OpenEXR 3.4.6;OpenGL;OpenJPEG 2.5.4;openjph 0.26.3;PNG 1.6.55;Ptex NONE;Ptex NONE;pugixml 1.15;pybind11 3.0.2;Python3 3.14.3;Qt6 6.10.2;Robinmap;TBB NONE;TIFF 4.7.1;WebP 1.6.0;ZLIB 1.3.2
+CMake Warning at src/dicom.imageio/CMakeLists.txt:10 (message):
+  DICOM plugin will not be built, no DCMTK
+
+
+-- OpenEXR core library will be used by default
+-- OpenEXR core library will be used by default
+--
+-- =========================================================================
+-- = Dependency report                                                     =
+-- =========================================================================
+--
+-- The following dependencies found externally:
+--     BZip2 1.0.8
+--     FFmpeg 8.0
+--     fmt 12.1.0  (REQUIRED)
+--     Freetype 2.14.1
+--     GIF 5.2.2
+--     Imath 3.2.2  (REQUIRED)
+--     JXL 0.11.2
+--     Libheif 1.21.2
+--     libjpeg-turbo 3.1.3
+--     LibRaw 0.22.0
+--     libuhdr 1.4.0
+--     OpenColorIO 2.5.0  (REQUIRED)
+--     OpenEXR 3.4.6  (REQUIRED)
+--     OpenJPEG 2.5.4
+--     openjph 0.26.3
+--     PNG 1.6.55
+--     pugixml 1.15  (REQUIRED)
+--     pybind11 3.0.2  (REQUIRED)
+--     Python3 3.14.3  (REQUIRED)
+--     Qt6 6.10.2
+--     TIFF 4.7.1  (REQUIRED)
+--     WebP 1.6.0
+--     ZLIB 1.3.2  (REQUIRED)
+-- The following dependencies were not found:
+--     DCMTK
+--     Nuke
+--     OpenCV
+--     Ptex
+--     TBB
+--
+-- =========================================================================
+
 V 3.0.6.1
 ==========
 ==> Starting build()...

@@ -2,7 +2,7 @@
 
 pkgname=openimageio-jnd
 pkgver=3.1.11.0.20260301
-pkgrel=1
+pkgrel=2
 _name_release="OpenImageIO-3.1.11.0"
 _ver_release="v3.1.11.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
@@ -14,7 +14,7 @@ depends=('ffmpeg' 'freetype2'
          'giflib' 'libheif'
          'libraw' 'libtiff'
          'libpng' 'libwebp'
-         'opencolorio' 'openexr'
+         'opencolorio' 'openexr' 'openjph'
          'libjpeg-turbo' 'openjpeg2' 'libjxl'
          'libultrahdr'
          'qt6-base'
