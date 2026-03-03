@@ -1,0 +1,46 @@
+diff -aur blender/source/blender/draw/engines/overlay/overlay_instance.cc blender.new/source/blender/draw/engines/overlay/overlay_instance.cc
+--- blender/source/blender/draw/engines/overlay/overlay_instance.cc	2026-03-01 11:09:43.000000000 +0100
++++ blender.new/source/blender/draw/engines/overlay/overlay_instance.cc	2026-03-03 12:04:41.296049088 +0100
+@@ -860,8 +860,7 @@
+     layer.armatures.draw_line(framebuffer, manager, view);
+     layer.sculpts.draw_line(framebuffer, manager, view);
+     layer.grease_pencil.draw_line(framebuffer, manager, view);
+-    /* NOTE: Temporarily moved after grid drawing (See #136764). */
+-    // layer.meshes.draw_line(framebuffer, manager, view);
++    layer.meshes.draw_line(framebuffer, manager, view);
+     layer.curves.draw_line(framebuffer, manager, view);
+   };
+ 
+@@ -954,9 +953,6 @@
+     motion_paths.draw_color_only(resources.overlay_color_only_fb, manager, view);
+     xray_fade.draw_color_only(resources.overlay_color_only_fb, manager, view);
+ 
+-    regular.meshes.draw_line(resources.overlay_line_fb, manager, view);
+-    infront.meshes.draw_line(resources.overlay_line_in_front_fb, manager, view);
+-
+     draw_color_only(regular, resources.overlay_color_only_fb);
+     draw_color_only(infront, resources.overlay_color_only_fb);
+ 
+diff -aur blender/source/blender/draw/engines/overlay/overlay_mesh.hh blender.new/source/blender/draw/engines/overlay/overlay_mesh.hh
+--- blender/source/blender/draw/engines/overlay/overlay_mesh.hh	2026-02-22 10:39:21.000000000 +0100
++++ blender.new/source/blender/draw/engines/overlay/overlay_mesh.hh	2026-03-03 12:13:39.571646861 +0100
+@@ -85,7 +85,7 @@
+    */
+   static constexpr float cage_ndc_offset_ = 0.5f;
+   static constexpr float edge_ndc_offset_ = 1.0f;
+-  static constexpr float vert_ndc_offset_ = 1.5f;
++  static constexpr float vert_ndc_offset_ = 2.0f;
+ 
+   /* TODO(fclem): This is quite wasteful and expensive, prefer in shader Z modification like the
+    * retopology offset. */
+@@ -242,8 +242,8 @@
+       auto &pass = edit_mesh_edges_ps_;
+       pass.init();
+       /* Change first vertex convention to match blender loop structure. */
+-      pass.state_set(DRW_STATE_WRITE_COLOR | DRW_STATE_DEPTH_LESS_EQUAL | DRW_STATE_BLEND_ALPHA |
+-                         DRW_STATE_FIRST_VERTEX_CONVENTION,
++      pass.state_set(DRW_STATE_WRITE_COLOR | DRW_STATE_WRITE_DEPTH | DRW_STATE_DEPTH_LESS_EQUAL |
++                          DRW_STATE_BLEND_ALPHA | DRW_STATE_FIRST_VERTEX_CONVENTION,
+                      state.clipping_plane_count);
+       pass.shader_set(res.shaders->mesh_edit_edge.get());
+       pass.push_constant("do_smooth_wire", do_smooth_wire);

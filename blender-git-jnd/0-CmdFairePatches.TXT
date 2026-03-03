@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.2.0.5.20260301
+!!! VERSION = 5.2.0.5.20260303
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.2.0.5.20260301.tar.zst /tmp/srcp/
+cp -v blender-git-5.2.0.5.20260303.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.2.0.5.20260301.tar.zst
+tar -x --zstd -f blender-git-5.2.0.5.20260303.tar.zst
 
 
 1) Fix #155021: Entering edit mode crashes blender
@@ -50,6 +50,67 @@ cd $HOME/05-builds/blender-git-jnd
 
 mv -vf /tmp/srcp/Fix-#155021_Entering-edit-mode-crashes-blender.patch .
 
+
+2) Fix #154540, #139867: Changes to grid/mesh overlay draw order
+================================================================
+2-1) MODIFIER source/blender/draw/engines/overlay/overlay_instance.cc
+======================================================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+cp -R blender blender.new
+
+cd blender.new/source/blender/draw/engines/overlay
+kwrite overlay_instance.cc
+
+SUPPRIMER LIGNES 863 ET 864 :
+    /* NOTE: Temporarily moved after grid drawing (See #136764). */
+    // layer.meshes.draw_line(framebuffer, manager, view);
+
+AJOUTER LIGNE 863 :
+    layer.meshes.draw_line(framebuffer, manager, view);
+
+
+SUPPRIMER LIGNES 956 A 958 :
+    regular.meshes.draw_line(resources.overlay_line_fb, manager, view);
+    infront.meshes.draw_line(resources.overlay_line_in_front_fb, manager, view);
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER overlay_instance.cc~
+rm -f overlay_instance.cc~
+
+2-2) MODIFIER source/blender/draw/engines/overlay/overlay_mesh.hh
+=================================================================
+kwrite overlay_mesh.hh
+
+MODIFIER LIGNE 88 :
+  static constexpr float vert_ndc_offset_ = 1.5f;
+
+DEVIENT:
+  static constexpr float vert_ndc_offset_ = 2.0f;
+
+
+MODIFIER LIGNES 245 ET 246 :
+      pass.state_set(DRW_STATE_WRITE_COLOR | DRW_STATE_DEPTH_LESS_EQUAL | DRW_STATE_BLEND_ALPHA |
+                         DRW_STATE_FIRST_VERTEX_CONVENTION,
+
+DEVIENNENT:
+      pass.state_set(DRW_STATE_WRITE_COLOR | DRW_STATE_WRITE_DEPTH | DRW_STATE_DEPTH_LESS_EQUAL |
+                          DRW_STATE_BLEND_ALPHA | DRW_STATE_FIRST_VERTEX_CONVENTION,
+
+ENREGISTRER et Quitter Kwrite & EFFACER overlay_mesh.hh~
+rm -f overlay_mesh.hh~
+
+
+cd ../../../../../..
+
+diff -aur blender blender.new
+diff -aur blender blender.new > Fix-#154540-#139867_Changes-to-grid-mesh-overlay-draw-order.patch
+
+rm -rf blender.new
+
+cd $HOME/05-builds/blender-git-jnd
+
+mv -vf /tmp/srcp/Fix-#154540-#139867_Changes-to-grid-mesh-overlay-draw-order.patch .
 
 
 
@@ -600,11 +661,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.2.0.5.20260301.tar.gz /tmp/srcp/
+cp -v blender-git-5.2.0.5.20260303.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.2.0.5.20260301.tar.gz
+tar -xzf blender-git-5.2.0.5.20260303.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
