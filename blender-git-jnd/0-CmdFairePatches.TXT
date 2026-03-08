@@ -1,19 +1,32 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.2.0.5.20260303
+!!! VERSION = 5.2.0.6.20260307
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.2.0.5.20260303.tar.zst /tmp/srcp/
+cp -v blender-git-5.2.0.6.20260307.tar.zst /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -x --zstd -f blender-git-5.2.0.5.20260303.tar.zst
+tar -x --zstd -f blender-git-5.2.0.6.20260307.tar.zst
 
+
+
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
 
 1) Fix #155021: Entering edit mode crashes blender
 ====================================================
@@ -111,19 +124,6 @@ rm -rf blender.new
 cd $HOME/05-builds/blender-git-jnd
 
 mv -vf /tmp/srcp/Fix-#154540-#139867_Changes-to-grid-mesh-overlay-draw-order.patch .
-
-
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1) FIX ERROR: flag 'logtostderr' was defined more than once
 ===========================================================
@@ -661,11 +661,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.2.0.5.20260303.tar.gz /tmp/srcp/
+cp -v blender-git-5.2.0.6.20260307.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.2.0.5.20260303.tar.gz
+tar -xzf blender-git-5.2.0.6.20260307.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
