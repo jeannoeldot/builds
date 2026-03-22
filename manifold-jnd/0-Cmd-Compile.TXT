@@ -6,19 +6,19 @@ cd $HOME/05-builds/manifold-jnd
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/OpenImageDenoise/manifold/releases
-==>   elalish released this on nov 15, 2025  ==> 20251115
-==>  v3.3.2  ==> 3.3.2
-==> 3.3.2.20251115
+==>  pca006132  released this on Feb 27 2026  ==> 20260227
+==>  v3.4.0  ==> 3.4.0
+==> 3.4.0.20260227
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O manifold-3.3.2.tar.gz \
-https://github.com/elalish/manifold/archive/refs/tags/v3.3.2.tar.gz
+wget -O manifold-3.4.0.tar.gz \
+https://github.com/elalish/manifold/archive/refs/tags/v3.4.0.tar.gz
 
-sha256sum manifold-3.3.2.tar.gz
-92a37034c407156f71446f9ca03bd4487adeb1b8246a03d1c047b859b1b9d211
+sha256sum manifold-3.4.0.tar.gz
+7347c78ae9a8f7e7f4f3ad98c73aa657f85cdbd4e48e280764b23e4fdf6b73df
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -26,7 +26,7 @@ cd $HOME/05-builds/manifold-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/manifold-3.3.2.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/manifold-3.4.0.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -39,12 +39,12 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=manifold-jnd
-pkgver=3.3.2.20251115
+pkgver=3.4.0.20260227
 pkgrel=1
 
 
 !!!!!!
-_ver_release="3.3.2"
+_ver_release="3.4.0"
 _name_release="manifold-${_ver_release}"
 
 license=('Apache-2.0')
@@ -62,7 +62,7 @@ options=('!debug')
 
 SANS PATCH
 ----------
-sha256sum manifold-3.3.2.tar.gz
+sha256sum manifold-3.4.0.tar.gz
 
 source=("manifold-${_ver_release}.tar.gz"
 )
@@ -80,16 +80,16 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf manifold-3.3.2.tar.gz -C /tmp/srcp
+tar -xzf manifold-3.4.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/manifold-3.3.2/CMakeLists.txt &
+1) kwrite /tmp/srcp/manifold-3.4.0/CMakeLists.txt &
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/manifold.cmake
 
 L 40  MANIFOLD_CROSS_SECTION  ON ==> OFF
 L 41  MANIFOLD_DEBUG          OFF
 L 42  MANIFOLD_ASSERT         OFF
-L 43  MANIFOLD_STRICT         ON  ?????????
+L 43  MANIFOLD_STRICT         OFF
 L 45  MANIFOLD_DOWNLOADS      ON ==> OFF
 L 49  MANIFOLD_EXPORT         OFF
 L 50  MANIFOLD_PAR            OFF ==> ON
@@ -99,19 +99,19 @@ L 57  MANIFOLD_PYBIND         OFF
 L 60  MANIFOLD_CBIND          ON ==> OFF
 L 68  MANIFOLD_JSBIND         ON ==> OFF
 
-L 82  MANIFOLD_USE_BUILTIN_TBB        OFF
-L 83  MANIFOLD_USE_BUILTIN_CLIPPER2   OFF
-L 84  MANIFOLD_USE_BUILTIN_NANOBIND   OFF
+L 81  MANIFOLD_USE_BUILTIN_TBB        OFF
+L 82  MANIFOLD_USE_BUILTIN_CLIPPER2   OFF
+L 83  MANIFOLD_USE_BUILTIN_NANOBIND   OFF
 
-L 87  CMAKE_BUILD_TYPE "Build type" Release
+L 86  CMAKE_BUILD_TYPE "Build type" Release
 
-L 89  BUILD_SHARED_LIBS "Build shared library" ON
+L 88  BUILD_SHARED_LIBS "Build shared library" ON
 
-L 91  MANIFOLD_FLAGS
+L 90  MANIFOLD_FLAGS
 
-L 94  TRACY_ENABLE            OFF
-L 95  TRACY_MEMORY_USAGE      OFF
-L 96  MANIFOLD_FUZZ           OFF
+L 93  TRACY_ENABLE            OFF
+L 94  TRACY_MEMORY_USAGE      OFF
+L 95  MANIFOLD_FUZZ           OFF
 
 
 rm -rf /tmp/srcp
@@ -121,7 +121,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 manifold-3.3.2.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 manifold-3.4.0.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -140,7 +140,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/manifold-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/manifold-jnd/manifold-3.3.2.tar.gz . \
+&& cp -v $HOME/05-builds/manifold-jnd/manifold-3.4.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/manifold-jnd \
 && cp -v /tmp/build/manifold-jnd-*-x86_64.pkg.tar.* . \
@@ -205,7 +205,7 @@ $ mv -v manifold-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i manifold-3.3.2.tar.gz
+$ rm -i manifold-3.4.0.tar.gz
 
 
 $ cd && maj-repolocal
