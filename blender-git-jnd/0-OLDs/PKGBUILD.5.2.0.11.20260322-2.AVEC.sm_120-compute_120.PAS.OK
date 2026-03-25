@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.2.0.12.20260325
-pkgrel=1
+pkgver=5.2.0.11.20260322
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -46,7 +46,7 @@ _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-9.1.0.tar.gz"
 )
-sha256sums=('211264a373a3bf59d81e8e846202fd2d84626c443504e1e2ddb11b2dcb376710'
+sha256sums=('7534798fa72b32b60a4bdbb3748b9a82ce0c69f71548074a373416e8a6e88a92'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
 )
 
@@ -60,9 +60,9 @@ prepare() {
   #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "1a8e618d990a"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "daf9b2ba6030"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1774431014|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1774135759|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
@@ -74,11 +74,6 @@ build() {
   #export CXXFLAGS=${CXXFLAGS/-Wp,-D_GLIBCXX_ASSERTIONS/}
   #CXXFLAGS+=' --param=max-vartrack-size=640000000'
 
-  # In general, we want to list all real archs (sm_XX) and the latest virtual arch (compute_XX)
-  # for future PTX compatibility.
-  # Valid values can be discovered from nvcc --help
-  local cuda_archs="sm_120;sm_121;compute_121"
-
   cd "${_gitname}"
 
   cmake \
@@ -88,12 +83,11 @@ build() {
         -D CMAKE_INSTALL_PREFIX=/usr \
         -D WITH_LINKER_MOLD=ON \
         -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
-        -D CYCLES_CUDA_BINARIES_ARCH="$cuda_archs" \
+        -D CYCLES_CUDA_BINARIES_ARCH="sm_120;compute_120" \
         -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-9.1.0" \
         -D WITH_CYCLES_PARALLEL_DEVICE_KERNEL_BUILD=ON \
         -D WITH_SYSTEM_GFLAGS=ON \
         -D WITH_SYSTEM_GLOG=ON \
-        -D WITH_LIBS_PRECOMPILED=OFF \
         -D WITH_DOC_MANPAGE=OFF \
         -D WITH_CYCLES_DEVICE_HIP=OFF \
         -D WITH_CYCLES_DEVICE_HIPRT=OFF \
