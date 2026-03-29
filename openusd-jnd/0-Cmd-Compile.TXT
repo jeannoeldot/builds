@@ -17,21 +17,21 @@ cd $HOME/05-builds/openusd-jnd
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==> tallytalwar released this on oct 24, 2025  ==> 20251024
-==> v25.11  ==> 25.11
-==> 25.11.20251024
+==> o2b3d  released this on Feb 24, 2026  ==> 20260224
+==> v26.03  ==> 26.03
+==> 26.03.20260224
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenUSD-v25.11.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v25.11.tar.gz
+wget -O OpenUSD-v26.03.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v26.03.tar.gz
 
 sync
 
-sha256sum OpenUSD-v25.11.tar.gz
-c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667
+sha256sum OpenUSD-v26.03.tar.gz
+590ea75ffa3ac0c35fdd080df04d61a696733b8f3d6a79bdc3f13f8077162d36
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -39,7 +39,7 @@ cd $HOME/05-builds/openusd-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v25.11.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v26.03.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -52,13 +52,14 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=25.11.20251024
+pkgver=26.03.20260224
+pkgrel=1      # v26.03
+
 pkgrel=6      # rebuild MAJ OIIO 3.1.10.0
 pkgrel=5      # Rebuild SANS boost boost-libs
 pkgrel=4      # REBUILD MAJ python 3.14
 pkgrel=3      # rebuild MAJ OIIO 3.1.9.0
 pkgrel=2      # rebuild MAJ openvdb 13.0.0 et opensubdiv 3_7_0
-pkgrel=1      # v25.11
 
 pkgrel=8      # Rebuild maj opencolorio 2.5.0
 pkgrel=7      # rebuild MAJ boost boost-libs 1.89.0
@@ -68,7 +69,7 @@ pkgrel=4      # rebuild MAJ openèxr 3.4
 pkgrel=3      # Rebuild MAJ materialx 1.39.4-1
 pkgrel=2      # Rebuild nouveau PC
 pkgrel=3      # rebuild MAJ OIIO 3.0.8.1. OSD 3.6.1
-pkgrel=2      # v25.11: materialx-jnd ==> materialx (extra)
+pkgrel=2      # v26.03: materialx-jnd ==> materialx (extra)
 pkgrel=3      # rebuild MAJ boost boost-libs 1.88.0 + materialx-jnd
 pkgrel=2      # rebuild MAJ OIIO 3.0.5.0
 pkgrel=1      # v25.02a
@@ -103,7 +104,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="25.11"
+_ver_release="26.03"
 _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
@@ -138,7 +139,7 @@ SANS PATCH
 source=("USD-v${_ver_release}.tar.gz"
 )
 
-sha256sum OpenUSD-v25.11.tar.gz
+sha256sum OpenUSD-v26.03.tar.gz
 
 sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
 )
@@ -149,12 +150,12 @@ source=("OpenUSD-v${_ver_release}.tar.gz"
         "usd_noboost.patch"
 )
 
-sha256sum OpenUSD-v25.11.tar.gz
+sha256sum OpenUSD-v26.03.tar.gz
 
 sha256sum usd_noboost.patch
 
-sha256sums=('c37c633b5037a4552f61574670ecca8836229b78326bd62622f3422671188667'
-            'f3686a5213a6d00b9c4253ce03bf48561bf0d9c664641e409c106def5d226c7d'
+sha256sums=('590ea75ffa3ac0c35fdd080df04d61a696733b8f3d6a79bdc3f13f8077162d36'
+            '1b6cd3ff2b3174f832ad181901634efcb006924f2dcab715334db6b9ac2c2550'
 )
 
 prepare() {
@@ -179,11 +180,11 @@ VOIR :
 
 mkdir /tmp/srcp
 
-tar -xzf OpenUSD-v25.11.tar.gz -C /tmp/srcp
+tar -xzf OpenUSD-v26.03.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenUSD-25.11/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenUSD-26.03/CMakeLists.txt
 
-2) kwrite /tmp/srcp/OpenUSD-25.11/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/OpenUSD-26.03/cmake/defaults/Options.cmake
 
 LIGNE 10  PXR_BUILD_TESTS           ON ==> OFF
 
@@ -236,12 +237,12 @@ LIGNE 147 BUILD_SHARED_LIBS         ON
 LIGNE 148 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/OpenUSD-25.11/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/OpenUSD-26.03/cmake/defaults/ProjectDefaults.cmake
 
 LIGNE 38  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/OpenUSD-25.11/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/OpenUSD-26.03/cmake/defaults/CXXDefaults.cmake
 
 LIGNE 67  PXR_SET_INTERNAL_NAMESPACE
 
@@ -254,7 +255,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.11.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v26.03.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users      1555 28 janv. 18:14 usd_noboost.patch
 
@@ -275,7 +276,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openusd-jnd/PKGBUILD . \
 && cp -v $HOME/05-builds/openusd-jnd/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/openusd-jnd/OpenUSD-v25.11.tar.gz . \
+&& cp -v $HOME/05-builds/openusd-jnd/OpenUSD-v26.03.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openusd-jnd \
 && cp -v /tmp/build/openusd-jnd-*-x86_64.pkg.tar.* . \
@@ -364,7 +365,7 @@ $ mv -v openusd-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenUSD-v25.11.tar.gz
+$ rm -i OpenUSD-v26.03.tar.gz
 
 
 $ cd && maj-repolocal
@@ -455,7 +456,7 @@ openvdb-jnd-*-x86_64.pkg.tar.*\
 /tmp/chrootrepo/
 
 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v25.11.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v26.03.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users       557  3 déc.  14:40 fix-error-m_wait_ctx-was-not-declared.patch
 -rw-r--r--  1 jnd users      1539 15 janv. 14:26 usd-cmake-find-dependency.patch
@@ -480,7 +481,7 @@ $ ls -la
 -rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
 -rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v25.11.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v26.03.tar.gz
 -rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
 -rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
 -rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
@@ -494,7 +495,7 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
-sha256sum OpenUSD-v25.11.tar.gz
+sha256sum OpenUSD-v26.03.tar.gz
 
 sha256sum usd-tbb_part_1.patch
 
@@ -546,7 +547,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum OpenUSD-v25.11.tar.gz
+sha256sum OpenUSD-v26.03.tar.gz
 
 sha256sum blender-usd-diff.patch
 
