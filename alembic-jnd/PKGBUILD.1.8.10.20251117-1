@@ -1,15 +1,15 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=alembic-jnd
-pkgver=1.8.11.20260321
+pkgver=1.8.10.20251117
 pkgrel=1
-_ver_release="1.8.11"
+_ver_release="1.8.10"
 _name_release="alembic-${_ver_release}"
 pkgdesc="An open framework for storing and sharing scene data"
 url="http://www.alembic.io/"
 arch=('x86_64')
 license=('BSD-3-Clause')
-depends=('libgcc' 'libstdc++' 'imath'
+depends=('gcc-libs' 'imath'
 )
 makedepends=('cmake'
 )
@@ -18,7 +18,7 @@ provides=('alembic')
 options=('!debug')
 source=("alembic-${_ver_release}.tar.gz"
 )
-sha256sums=('ab299bb4b1894a6675c73fa29940522b54c81a91b1d691ca3470d86b7345ffce'
+sha256sums=('06c9172faf29e9fdebb7be99621ca18b32b474f8e481238a159c87d16b298553'
 )
 
 build() {
