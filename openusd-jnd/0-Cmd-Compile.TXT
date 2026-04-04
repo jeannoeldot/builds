@@ -31,7 +31,7 @@ https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v26.03.tar.gz
 sync
 
 sha256sum OpenUSD-v26.03.tar.gz
-590ea75ffa3ac0c35fdd080df04d61a696733b8f3d6a79bdc3f13f8077162d36
+==>   590ea75ffa3ac0c35fdd080df04d61a696733b8f3d6a79bdc3f13f8077162d36
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=26.03.20260224
+pkgrel=2      # rebuild MAJ OIIO 3.1.12.0
 pkgrel=1      # v26.03
 
 pkgrel=6      # rebuild MAJ OIIO 3.1.10.0
