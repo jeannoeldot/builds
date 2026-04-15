@@ -1,0 +1,183 @@
+From 0f5fb378036410e64313760c54a804436dace796 Mon Sep 17 00:00:00 2001
+From: Jeroen Bakker <jeroen@blender.org>
+Date: Fri, 10 Apr 2026 12:08:50 +0200
+Subject: [PATCH 1/2] Vulkan: Add argument to force SDR mode selection.
+
+This PR adds a command line argument to force selecting an SDR
+swapchain. `--debug-gpu-force-sdr`.
+---
+ intern/ghost/GHOST_Types.hh              | 8 +++++++-
+ intern/ghost/intern/GHOST_ContextVK.cc   | 7 ++++---
+ source/blender/blenkernel/BKE_global.hh  | 1 +
+ source/blender/gpu/intern/gpu_context.cc | 3 +++
+ source/creator/creator_args.cc           | 9 +++++++++
+ 5 files changed, 24 insertions(+), 4 deletions(-)
+
+diff --git a/intern/ghost/GHOST_Types.hh b/intern/ghost/GHOST_Types.hh
+index 59bdf1d0233..bb27a62e902 100644
+--- a/intern/ghost/GHOST_Types.hh
++++ b/intern/ghost/GHOST_Types.hh
+@@ -103,6 +103,7 @@ enum GHOST_GPUFlags {
+   GHOST_gpuStereoVisual = (1 << 0),
+   GHOST_gpuDebugContext = (1 << 1),
+   GHOST_gpuVSyncIsOverridden = (1 << 2),
++  GHOST_gpuForceSDR = (1 << 3),
+ };
+ 
+ enum GHOST_DialogOptions {
+@@ -818,6 +819,7 @@ enum GHOST_TVSyncModes {
+ struct GHOST_ContextParams {
+   bool is_stereo_visual;
+   bool is_debug;
++  bool force_sdr;
+   GHOST_TVSyncModes vsync;
+ };
+ 
+@@ -825,6 +827,7 @@ struct GHOST_ContextParams {
+   { \
+       /*is_stereo_visual*/ false, \
+       /*is_debug*/ false, \
++      /*force_sdr*/ false, \
+       /*vsync*/ GHOST_kVSyncModeUnset, \
+   }
+ 
+@@ -832,13 +835,16 @@ struct GHOST_ContextParams {
+   { \
+       /*is_stereo_visual*/ false, \
+       /*is_debug*/ (((gpu_settings).flags & GHOST_gpuDebugContext) != 0), \
++      /*force_sdr*/ (((gpu_settings).flags & GHOST_gpuForceSDR) != 0), \
+       /*vsync*/ GHOST_kVSyncModeUnset, \
+   }
+ 
+ #define GHOST_CONTEXT_PARAMS_FROM_GPU_SETTINGS(gpu_settings) \
+   { \
+       /*is_stereo_visual*/ (((gpu_settings).flags & GHOST_gpuStereoVisual) != 0), \
+-      /*is_debug*/ (((gpu_settings).flags & GHOST_gpuDebugContext) != 0), /*vsync*/ \
++      /*is_debug*/ (((gpu_settings).flags & GHOST_gpuDebugContext) != 0), \
++      /*force_sdr*/ (((gpu_settings).flags & GHOST_gpuForceSDR) != 0), \
++      /*vsync*/ \
+       (((gpu_settings).flags & GHOST_gpuVSyncIsOverridden) ? (gpu_settings).vsync : \
+                                                              GHOST_kVSyncModeUnset), \
+   }
+diff --git a/intern/ghost/intern/GHOST_ContextVK.cc b/intern/ghost/intern/GHOST_ContextVK.cc
+index 920ff2443e8..5e9d19a78b5 100644
+--- a/intern/ghost/intern/GHOST_ContextVK.cc
++++ b/intern/ghost/intern/GHOST_ContextVK.cc
+@@ -1571,9 +1571,10 @@ GHOST_TSuccess GHOST_ContextVK::initializeDrawingContext()
+         instance_vk.extensions.enable(VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME);
+         optional_device_extensions.append(VK_EXT_SWAPCHAIN_MAINTENANCE_1_EXTENSION_NAME);
+       }
+-
+-      use_vk_ext_swapchain_colorspace = instance_vk.extensions.enable(
+-          VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME, true);
++      if (!(context_params_.force_sdr)) {
++        use_vk_ext_swapchain_colorspace = instance_vk.extensions.enable(
++            VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME, true);
++      }
+ 
+       required_device_extensions.append(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+     }
+diff --git a/source/blender/blenkernel/BKE_global.hh b/source/blender/blenkernel/BKE_global.hh
+index fcea5556bf2..bd392e95871 100644
+--- a/source/blender/blenkernel/BKE_global.hh
++++ b/source/blender/blenkernel/BKE_global.hh
+@@ -276,6 +276,7 @@ enum {
+ 
+   G_DEBUG_GPU_SHADER_NO_PREPROCESSOR = (1 << 28), /* Disable the preprocessor (implies NO_DCE). */
+   G_DEBUG_GPU_SHADER_NO_DCE = (1 << 29),          /* Disable Dead Code Elimination. */
++  G_DEBUG_GPU_FORCE_SDR = (1 << 30),              /* Force selectin SDR swapchain .*/
+ };
+ 
+ #define G_DEBUG_ALL \
+diff --git a/source/blender/gpu/intern/gpu_context.cc b/source/blender/gpu/intern/gpu_context.cc
+index 5980c308d2a..e66ca61f271 100644
+--- a/source/blender/gpu/intern/gpu_context.cc
++++ b/source/blender/gpu/intern/gpu_context.cc
+@@ -612,6 +612,9 @@ GPUSecondaryContextData GPU_create_secondary_context()
+   if (G.debug & G_DEBUG_GPU) {
+     gpu_settings.flags |= GHOST_gpuDebugContext;
+   }
++  if (G.debug & G_DEBUG_GPU_FORCE_SDR) {
++    gpu_settings.flags |= GHOST_gpuForceSDR;
++  }
+   gpu_settings.preferred_device.index = U.gpu_preferred_index;
+   gpu_settings.preferred_device.vendor_id = U.gpu_preferred_vendor_id;
+   gpu_settings.preferred_device.device_id = U.gpu_preferred_device_id;
+diff --git a/source/creator/creator_args.cc b/source/creator/creator_args.cc
+index 22434e33573..4397a1bda18 100644
+--- a/source/creator/creator_args.cc
++++ b/source/creator/creator_args.cc
+@@ -772,6 +772,7 @@ static void print_help(bArgs *ba, bool all)
+   BLI_args_print_arg_doc(ba, "--debug-wintab");
+   BLI_args_print_arg_doc(ba, "--debug-gpu");
+   BLI_args_print_arg_doc(ba, "--debug-gpu-force-workarounds");
++  BLI_args_print_arg_doc(ba, "--debug-gpu-force-sdr");
+   BLI_args_print_arg_doc(ba, "--debug-gpu-compile-shaders");
+   BLI_args_print_arg_doc(ba, "--debug-gpu-shader-debug-info");
+   BLI_args_print_arg_doc(ba, "--debug-gpu-scope-capture");
+@@ -1435,6 +1436,9 @@ static const char arg_handle_debug_mode_generic_set_doc_depsgraph_uid[] =
+ static const char arg_handle_debug_mode_generic_set_doc_gpu_force_workarounds[] =
+     "\n\t"
+     "Enable workarounds for typical GPU issues and disable all GPU extensions.";
++static const char arg_handle_debug_mode_generic_set_doc_gpu_force_sdr[] =
++    "\n\t"
++    "Force selecting a SDR capable display mode.";
+ static const char arg_handle_debug_mode_generic_set_doc_gpu_force_vulkan_local_read[] =
+     "\n\t"
+     "Force Vulkan dynamic rendering local read when supported by device.";
+@@ -3200,6 +3204,11 @@ void main_args_setup(bContext *C, bArgs *ba, bool all)
+                  "--debug-gpu-vulkan-local-read",
+                  CB_EX(arg_handle_debug_mode_generic_set, gpu_force_vulkan_local_read),
+                  reinterpret_cast<void *>(G_DEBUG_GPU_FORCE_VULKAN_LOCAL_READ));
++    BLI_args_add(ba,
++                 nullptr,
++                 "--debug-gpu-force-sdr",
++                 CB_EX(arg_handle_debug_mode_generic_set, gpu_force_sdr),
++                 reinterpret_cast<void *>(G_DEBUG_GPU_FORCE_SDR));
+   }
+   BLI_args_add(ba, nullptr, "--debug-exit-on-error", CB(arg_handle_debug_exit_on_error), nullptr);
+ 
+-- 
+2.49.1
+
+
+From f272721c7fd14a470313973906f546dc06928c38 Mon Sep 17 00:00:00 2001
+From: Jeroen Bakker <jeroen@blender.org>
+Date: Fri, 10 Apr 2026 12:57:11 +0200
+Subject: [PATCH 2/2] Code style
+
+---
+ intern/ghost/GHOST_Types.hh            | 3 +--
+ intern/ghost/intern/GHOST_ContextVK.cc | 2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/intern/ghost/GHOST_Types.hh b/intern/ghost/GHOST_Types.hh
+index bb27a62e902..72c286b7010 100644
+--- a/intern/ghost/GHOST_Types.hh
++++ b/intern/ghost/GHOST_Types.hh
+@@ -843,8 +843,7 @@ struct GHOST_ContextParams {
+   { \
+       /*is_stereo_visual*/ (((gpu_settings).flags & GHOST_gpuStereoVisual) != 0), \
+       /*is_debug*/ (((gpu_settings).flags & GHOST_gpuDebugContext) != 0), \
+-      /*force_sdr*/ (((gpu_settings).flags & GHOST_gpuForceSDR) != 0), \
+-      /*vsync*/ \
++      /*force_sdr*/ (((gpu_settings).flags & GHOST_gpuForceSDR) != 0), /*vsync*/ \
+       (((gpu_settings).flags & GHOST_gpuVSyncIsOverridden) ? (gpu_settings).vsync : \
+                                                              GHOST_kVSyncModeUnset), \
+   }
+diff --git a/intern/ghost/intern/GHOST_ContextVK.cc b/intern/ghost/intern/GHOST_ContextVK.cc
+index 5e9d19a78b5..f3577b4938b 100644
+--- a/intern/ghost/intern/GHOST_ContextVK.cc
++++ b/intern/ghost/intern/GHOST_ContextVK.cc
+@@ -1571,7 +1571,7 @@ GHOST_TSuccess GHOST_ContextVK::initializeDrawingContext()
+         instance_vk.extensions.enable(VK_KHR_GET_SURFACE_CAPABILITIES_2_EXTENSION_NAME);
+         optional_device_extensions.append(VK_EXT_SWAPCHAIN_MAINTENANCE_1_EXTENSION_NAME);
+       }
+-      if (!(context_params_.force_sdr)) {
++      if (!context_params_.force_sdr) {
+         use_vk_ext_swapchain_colorspace = instance_vk.extensions.enable(
+             VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME, true);
+       }
+-- 
+2.49.1
+
