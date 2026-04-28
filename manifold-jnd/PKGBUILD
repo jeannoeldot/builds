@@ -1,15 +1,15 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=manifold-jnd
-pkgver=3.4.0.20260227
+pkgver=3.4.1.20260324
 pkgrel=1
-_ver_release="3.4.0"
+_ver_release="3.4.1"
 _name_release="manifold-${_ver_release}"
 pkgdesc="Geometry library dedicated to creating and operating on manifold triangle meshes"
 url="https://github.com/elalish/manifold"
 arch=('x86_64')
 license=('Apache-2.0')
-depends=('onetbb'
+depends=('glibc' 'libgcc' 'libstdc++' 'onetbb'
 )
 makedepends=('cmake' 'python'
 )
@@ -19,7 +19,7 @@ provides=('manifold')
 options=('!debug')
 source=("manifold-${_ver_release}.tar.gz"
 )
-sha256sums=('7347c78ae9a8f7e7f4f3ad98c73aa657f85cdbd4e48e280764b23e4fdf6b73df'
+sha256sums=('48cb6f5022c19368b582caf0f346c713740799bf1bc7339b2e9320d0c807053a'
 )
 
 build() {
