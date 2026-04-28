@@ -45,7 +45,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.15.3.0.20260402
-pkgrel=1
+pkgrel=2    # rebuild MAJ OIIO 3.1.12.1
 
 pkgrel=2    # REBUILD MAJ python 3.14
 pkgrel=7    # rebuild MAJ OIIO 3.1.7.0
@@ -87,22 +87,21 @@ options=('!debug')
 !!! LLVM 22.1.2
 ------------------------------------
 $ pacman -Ss llvm | grep extra | grep install
-extra/clang 22.1.2-1 [installé]
-extra/llvm 22.1.2-1 [installé]
-extra/llvm-libs 22.1.2-1 [installé]
+extra/clang 22.1.3-1 [installé]
+extra/llvm 22.1.3-1 [installé]
+extra/llvm-libs 22.1.3-1 [installé]
 
-depends=('openexr' 'freetype2' 'libpng' 'libtiff'
-         'zlib' 'ncurses'
+depends=('libstdc++' 'glibc' 'zlib' 'libgcc'
+         'imath' 'freetype2' 'libpng' 'libtiff'
+         'ncurses'
          'llvm-libs'
          'qt6-base'
          'clang'
          'python' 'pugixml' 'pybind11'
          'openimageio-jnd' 'fmt'
 )
-depends=(... 'python' ...) : /usr/lib/python3.X/site-packages/oslquery.so
-
-makedepends=('cmake' 'llvm' 'robin-map'
-             'cuda'
+makedepends=('cmake' 'llvm'
+             'robin-map'
 )
 
 

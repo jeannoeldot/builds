@@ -2,15 +2,16 @@
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.15.3.0.20260402
-pkgrel=1
+pkgrel=2
 _name_release="OpenShadingLanguage-1.15.3.0"
 _ver_release="v1.15.3.0"
 pkgdesc="Advanced shading language for production GI renderers"
 arch=('x86_64')
 url="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"
 license=('BSD-3-Clause')
-depends=('imath' 'freetype2' 'libpng' 'libtiff'
-         'zlib' 'ncurses'
+depends=('libstdc++' 'glibc' 'zlib' 'libgcc'
+         'imath' 'freetype2' 'libpng' 'libtiff'
+         'ncurses'
          'llvm-libs'
          'qt6-base'
          'clang'
