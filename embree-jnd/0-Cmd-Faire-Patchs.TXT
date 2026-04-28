@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 4.4.0
+!!! VERSION = 4.4.1
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/embree-jnd
 
 mkdir /tmp/srcp
 
-cp -v embree-4.4.0.tar.gz /tmp/srcp/
+cp -v embree-4.4.1.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf embree-4.4.0.tar.gz
+tar -xzf embree-4.4.1.tar.gz
 
 
 
