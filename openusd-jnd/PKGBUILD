@@ -1,15 +1,16 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=26.03.20260224
-pkgrel=2
-_ver_release="26.03"
+pkgver=26.05.20260424
+pkgrel=1
+_ver_release="26.05"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
 arch=('x86_64')
 license=('Apache-2.0')
-depends=('glfw'
+depends=('glibc' 'libgcc' 'libstdc++'
+         'glfw'
          'onetbb'
          'materialx'
          'openexr'
@@ -29,7 +30,7 @@ options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "usd_noboost.patch"
 )
-sha256sums=('590ea75ffa3ac0c35fdd080df04d61a696733b8f3d6a79bdc3f13f8077162d36'
+sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
             '1b6cd3ff2b3174f832ad181901634efcb006924f2dcab715334db6b9ac2c2550'
 )
 

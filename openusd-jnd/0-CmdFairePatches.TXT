@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 26.03
+!!! VERSION = 26.05
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openusd-jnd
 
 mkdir /tmp/srcp
 
-cp -v OpenUSD-v26.03.tar.gz /tmp/srcp/
+cp -v OpenUSD-v26.05.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf OpenUSD-v26.03.tar.gz
+tar -xzf OpenUSD-v26.05.tar.gz
 
 
 !!! VOIR :
@@ -39,13 +39,13 @@ https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f329
 
 https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f3293537a7f91af35b4d/build_files/build_environment/patches/usd_noboost.diff
 
-1) MODIFIER OpenUSD-26.03/cmake/defaults/Packages.cmake
+1) MODIFIER OpenUSD-26.05/cmake/defaults/Packages.cmake
 =======================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R OpenUSD-26.03 OpenUSD-26.03.new
+cp -R OpenUSD-26.05 OpenUSD-26.05.new
 
-cd OpenUSD-26.03.new/cmake/defaults
+cd OpenUSD-26.05.new/cmake/defaults
 kwrite Packages.cmake
 
 COMMENTER LIGNES 23 A 33
@@ -60,10 +60,10 @@ rm -f Packages.cmake~
 
 cd ../../..
 
-diff -aur OpenUSD-26.03 OpenUSD-26.03.new
-diff -aur OpenUSD-26.03 OpenUSD-26.03.new > usd_noboost.patch
+diff -aur OpenUSD-26.05 OpenUSD-26.05.new
+diff -aur OpenUSD-26.05 OpenUSD-26.05.new > usd_noboost.patch
 
-rm -rf OpenUSD-26.03.new
+rm -rf OpenUSD-26.05.new
 
 
 cd $HOME/05-builds/openusd-jnd
