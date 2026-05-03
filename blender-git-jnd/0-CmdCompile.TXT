@@ -209,6 +209,10 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.2.0.24.20260502
+pkgrel=4    # SANS USD : WITH_USD=OFF
+pkgrel=3    # SANS HYDRA : WITH_HYDRA=OFF => PAS OK!
+pkgrel=2    # AVEC CXXFLAGS+=' -Wno-template-body' => PAS OK!
+
 pkgrel=1    # sm_86;sm_120;compute_121. Cuda 13.2.1. Optix 9.1.0 => OK!
 
 pkgrel=1    # sm_120;compute_120 ==> sm_120;sm_121;compute_121. Cuda 13.2.0. Optix 9.1.0 => OK!

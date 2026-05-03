@@ -2,7 +2,7 @@
 
 pkgname=blender-git-jnd
 pkgver=5.2.0.24.20260502
-pkgrel=1
+pkgrel=4
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -74,6 +74,9 @@ build() {
   #export CXXFLAGS=${CXXFLAGS/-Wp,-D_GLIBCXX_ASSERTIONS/}
   #CXXFLAGS+=' --param=max-vartrack-size=640000000'
 
+  ## This should fix 00-ERREURS-COMPILE-hydra
+  #CXXFLAGS+='  -Wno-template-body'
+
   # In general, we want to list all real archs (sm_XX) and the latest virtual arch (compute_XX)
   # for future PTX compatibility.
   # Valid values can be discovered from nvcc --help
@@ -98,6 +101,7 @@ build() {
         -D WITH_SYSTEM_GLOG=ON \
         -D WITH_LIBS_PRECOMPILED=OFF \
         -D WITH_DOC_MANPAGE=OFF \
+        -D WITH_USD=OFF \
         -D WITH_CYCLES_DEVICE_HIP=OFF \
         -D WITH_CYCLES_DEVICE_HIPRT=OFF \
         -D WITH_CYCLES_HIP_BINARIES=OFF \

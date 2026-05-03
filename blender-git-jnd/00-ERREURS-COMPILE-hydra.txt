@@ -1,6 +1,95 @@
 
-[ 81%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/operators/bmo_connect_pair.cc.o
 
+
+
+---------------------------------------------------------------------------------------------------------
+# SANS HYDRA : WITH_HYDRA=OFF ET SANS CXXFLAGS+='  -Wno-template-body'
+
+[ 93%] Building CXX object source/blender/modifiers/CMakeFiles/bf_modifiers.dir/intern/MOD_solidify.cc.o
+
+In file included from /usr/include/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /usr/include/pxr/base/work/workTBB/impl.h:12,
+                 from /usr/include/pxr/base/work/impl.h:10,
+                 from /usr/include/pxr/base/work/dispatcher.h:14,
+                 from /usr/include/pxr/usd/sdf/layer.h:29,
+                 from /usr/include/pxr/usd/usd/schemaRegistry.h:14,
+                 from /usr/include/pxr/usd/usd/primDefinition.h:12,
+                 from /usr/include/pxr/usd/usd/primData.h:16,
+                 from /usr/include/pxr/usd/usd/object.h:15,
+                 from /build/blender-git-jnd/src/blender/source/blender/io/usd/intern/usd_precomp.hh:6,
+                 from /build/blender-git-jnd/src/blender/build/source/blender/io/usd/CMakeFiles/bf_io_usd.dir/cmake_pch.hxx:5,
+                 from <command-line>:
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:73:51: error: expected class-name before ‘{’ token [-Wtemplate-body]
+   73 |     struct _InvokerTaskWrapper : public tbb::task {
+      |                                                   ^
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:80:22: error: ‘task’ in namespace ‘tbb’ does not name a type [-Wtemplate-body]
+   80 |         virtual tbb::task* execute() {
+      |                      ^~~~
+In file included from /usr/include/oneapi/tbb/enumerable_thread_specific.h:37,
+                 from /usr/include/tbb/enumerable_thread_specific.h:17,
+                 from /usr/include/pxr/base/tf/diagnosticMgr.h:30,
+                 from /usr/include/pxr/base/tf/errorMark.h:13,
+                 from /usr/include/pxr/usd/sdf/listProxy.h:19,
+                 from /usr/include/pxr/usd/sdf/listEditorProxy.h:14,
+                 from /usr/include/pxr/usd/sdf/proxyTypes.h:15,
+                 from /usr/include/pxr/usd/sdf/layer.h:21:
+/usr/include/oneapi/tbb/task.h:26:11: note: ‘tbb::v1::task’ declared here
+   26 | namespace task {
+      |           ^~~~
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h: In member function ‘void pxrInternal_v0_26_5__pxrReserved__::WorkImpl_Dispatcher::Run(Callable&&)’:
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:46:9: error: ‘_rootTask’ was not declared in this scope [-Wtemplate-body]
+   46 |         _rootTask->spawn(
+      |  ^~~~~~~~~
+
+[ 93%] Building CXX object source/blender/compositor/CMakeFiles/bf_compositor.dir/intern/domain.cc.o
+
+make[2]: *** [source/blender/io/usd/CMakeFiles/bf_io_usd.dir/build.make:80: source/blender/io/usd/CMakeFiles/bf_io_usd.dir/cmake_pch.hxx.gch] Error 1
+make[1]: *** [CMakeFiles/Makefile2:11015: source/blender/io/usd/CMakeFiles/bf_io_usd.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+
+
+---------------------------------------------------------------------------------------------------------
+AVEC CXXFLAGS+='  -Wno-template-body'
+
+[ 83%] Building CXX object source/blender/render/CMakeFiles/bf_render.dir/intern/render_types.cc.o
+
+In file included from /usr/include/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /usr/include/pxr/base/work/workTBB/impl.h:12,
+                 from /usr/include/pxr/base/work/impl.h:10,
+                 from /usr/include/pxr/base/work/dispatcher.h:14,
+                 from /usr/include/pxr/usd/sdf/layer.h:29,
+                 from /usr/include/pxr/usd/pcp/types.h:13,
+                 from /usr/include/pxr/usd/pcp/node.h:12,
+                 from /usr/include/pxr/usd/usd/editTarget.h:14,
+                 from /usr/include/pxr/usd/usd/stage.h:15,
+                 from /build/blender-git-jnd/src/blender/source/blender/render/hydra/engine.hh:14,
+                 from /build/blender-git-jnd/src/blender/source/blender/render/hydra/engine.cc:5:
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+
+[ 84%] Building CXX object source/blender/editors/sculpt_paint/CMakeFiles/bf_editor_sculpt_paint.dir/mesh/brushes/relax.cc.o
+make[2]: *** [source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/build.make:93: source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/engine.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:9318: source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+[ 87%] Built target bf_blenkernel
+make: *** [Makefile:166: all] Error 2
+
+---------------------------------------------------------------------------------------------------------
+SANS CXXFLAGS+='  -Wno-template-body'
+
+[ 81%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/operators/bmo_connect_pair.cc.o
 
 In file included from /usr/include/pxr/base/work/workTBB/detachedTask_impl.h:11,
                  from /usr/include/pxr/base/work/workTBB/impl.h:12,
