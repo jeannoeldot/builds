@@ -1,0 +1,82 @@
+
+[ 81%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/operators/bmo_connect_pair.cc.o
+
+
+In file included from /usr/include/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /usr/include/pxr/base/work/workTBB/impl.h:12,
+                 from /usr/include/pxr/base/work/impl.h:10,
+                 from /usr/include/pxr/base/work/dispatcher.h:14,
+                 from /usr/include/pxr/usd/sdf/layer.h:29,
+                 from /usr/include/pxr/usd/pcp/types.h:13,
+                 from /usr/include/pxr/usd/pcp/node.h:12,
+                 from /usr/include/pxr/usd/usd/editTarget.h:14,
+                 from /usr/include/pxr/usd/usd/stage.h:15,
+                 from /build/blender-git-jnd/src/blender/source/blender/render/hydra/engine.hh:14,
+                 from /build/blender-git-jnd/src/blender/source/blender/render/hydra/engine.cc:5:
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:73:51: error: expected class-name before ‘{’ token [-Wtemplate-body]
+   73 |     struct _InvokerTaskWrapper : public tbb::task {
+      |                                                   ^
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:80:22: error: ‘task’ in namespace ‘tbb’ does not name a type [-Wtemplate-body]
+   80 |         virtual tbb::task* execute() {
+      |                      ^~~~
+In file included from /usr/include/oneapi/tbb/enumerable_thread_specific.h:37,
+                 from /usr/include/tbb/enumerable_thread_specific.h:17,
+                 from /usr/include/pxr/imaging/hd/renderIndex.h:34,
+                 from /usr/include/pxr/imaging/hd/sceneDelegate.h:18,
+                 from /usr/include/pxr/imaging/hd/task.h:15,
+                 from /usr/include/pxr/imaging/hd/engine.h:14,
+                 from /build/blender-git-jnd/src/blender/source/blender/render/hydra/engine.hh:11:
+/usr/include/oneapi/tbb/task.h:26:11: note: ‘tbb::v1::task’ declared here
+   26 | namespace task {
+      |           ^~~~
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h: In member function ‘void pxrInternal_v0_26_5__pxrReserved__::WorkImpl_Dispatcher::Run(Callable&&)’:
+/usr/include/pxr/base/work/workTBB/dispatcher_impl.h:46:9: error: ‘_rootTask’ was not declared in this scope [-Wtemplate-body]
+   46 |         _rootTask->spawn(
+      |         ^~~~~~~~~
+[ 81%] Building CXX object source/blender/render/CMakeFiles/bf_render.dir/intern/engine.cc.o
+[ 81%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/operators/bmo_create.cc.o
+[ 81%] Building CXX object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/anonymous_attribute_id.cc.o
+[ 81%] Building CXX object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/appdir.cc.o
+[ 81%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/operators/bmo_dissolve.cc.o
+[ 81%] Building CXX object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/armature.cc.o
+[ 81%] Building CXX object source/blender/editors/sculpt_paint/CMakeFiles/bf_editor_sculpt_paint.dir/mesh/brushes/layer.cc.o
+[ 81%] Building CXX object source/blender/editors/sculpt_paint/CMakeFiles/bf_editor_sculpt_paint.dir/mesh/brushes/mask.cc.o
+[ 81%] Building CXX object source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/armature_deform.cc.o
+[ 81%] Building CXX object source/blender/draw/CMakeFiles/bf_draw.dir/intern/mesh_extractors/extract_mesh.cc.o
+In file included from /build/blender-git-jnd/src/blender/source/blender/render/intern/engine.cc:52:
+/build/blender-git-jnd/src/blender/source/blender/render/intern/engine.cc: In function ‘blender::RenderResult* blender::engine_render_create_result(Render*)’:
+/build/blender-git-jnd/src/blender/source/blender/render/intern/render_result.h:143:9: warning: variable ‘nr_’ set but not used [-Wunused-but-set-variable=]
+  143 |     int nr_; \
+      |         ^~~
+/build/blender-git-jnd/src/blender/source/blender/render/intern/engine.cc:987:3: note: in expansion of macro ‘FOREACH_VIEW_LAYER_TO_RENDER_BEGIN’
+  987 |   FOREACH_VIEW_LAYER_TO_RENDER_BEGIN (re, view_layer) {
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/build/blender-git-jnd/src/blender/source/blender/render/intern/engine.cc: In function ‘bool blender::RE_engine_render(Render*, bool)’:
+/build/blender-git-jnd/src/blender/source/blender/render/intern/render_result.h:143:9: warning: variable ‘nr_’ set but not used [-Wunused-but-set-variable=]
+  143 |     int nr_; \
+      |         ^~~
+/build/blender-git-jnd/src/blender/source/blender/render/intern/engine.cc:1095:5: note: in expansion of macro ‘FOREACH_VIEW_LAYER_TO_RENDER_BEGIN’
+ 1095 |     FOREACH_VIEW_LAYER_TO_RENDER_BEGIN (re, view_layer_iter) {
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/build/blender-git-jnd/src/blender/source/blender/render/intern/render_result.h:143:9: warning: variable ‘nr_’ set but not used [-Wunused-but-set-variable=]
+  143 |     int nr_; \
+      |         ^~~
+/build/blender-git-jnd/src/blender/source/blender/render/intern/engine.cc:1120:5: note: in expansion of macro ‘FOREACH_VIEW_LAYER_TO_RENDER_BEGIN’
+ 1120 |     FOREACH_VIEW_LAYER_TO_RENDER_BEGIN (re, view_layer_iter) {
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ 81%] Building CXX object source/blender/bmesh/CMakeFiles/bf_bmesh.dir/operators/bmo_dupe.cc.o
+[ 81%] Building CXX object source/blender/render/CMakeFiles/bf_render.dir/intern/initrender.cc.o
+make[2]: *** [source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/build.make:93: source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/engine.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:9318: source/blender/render/hydra/CMakeFiles/bf_render_hydra.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+...
+
+[ 87%] Built target bf_blenkernel
+make: *** [Makefile:166: all] Error 2
