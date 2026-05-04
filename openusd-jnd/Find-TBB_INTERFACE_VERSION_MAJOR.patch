@@ -1,0 +1,18 @@
+diff -aur OpenUSD-26.05/cmake/modules/FindTBB.cmake OpenUSD-26.05.new/cmake/modules/FindTBB.cmake
+--- OpenUSD-26.05/cmake/modules/FindTBB.cmake	2026-04-24 20:55:54.000000000 +0200
++++ OpenUSD-26.05.new/cmake/modules/FindTBB.cmake	2026-05-04 11:56:28.829203282 +0200
+@@ -216,6 +216,7 @@
+         TBB_VERSION_MINOR "${_tbb_version_file}")
+     string(REGEX REPLACE ".*#define TBB_INTERFACE_VERSION ([0-9]+).*" "\\1"
+         TBB_INTERFACE_VERSION "${_tbb_version_file}")
++    set(TBB_INTERFACE_VERSION_MAJOR "${12}")
+     set(TBB_VERSION "${TBB_VERSION_MAJOR}.${TBB_VERSION_MINOR}")
+   endif()
+ 
+@@ -421,4 +422,4 @@
+   unset(TBB_BUILD_TYPE)
+   unset(TBB_LIB_PATH_SUFFIX)
+   unset(TBB_DEFAULT_SEARCH_DIR)
+-endif()
+\ Pas de fin de ligne à la fin du fichier
++endif()

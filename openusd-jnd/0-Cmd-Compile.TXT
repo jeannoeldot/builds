@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=26.05.20260424
+pkgrel=2      # rebuild AVEC patch TBB_INTERFACE_VERSION_MAJOR dsFindTBB.cmake
 pkgrel=1      # v26.05
 
 pkgrel=2      # rebuild MAJ OIIO 3.1.12.0
@@ -149,14 +150,18 @@ AVEC PATCH
 ----------
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "usd_noboost.patch"
+        "Find-TBB_INTERFACE_VERSION_MAJOR.patch"
 )
 
 sha256sum OpenUSD-v26.05.tar.gz
 
 sha256sum usd_noboost.patch
 
+sha256sum Find-TBB_INTERFACE_VERSION_MAJOR.patch
+
 sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
             '1b6cd3ff2b3174f832ad181901634efcb006924f2dcab715334db6b9ac2c2550'
+            '382f7e3f359340e59c9612a9a36333b53f023ea1c61d3edd084ed9be935bf9b3'
 )
 
 prepare() {
@@ -259,6 +264,7 @@ $ ls -la
 -rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v26.05.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users      1555 28 janv. 18:14 usd_noboost.patch
+-rw-r--r--  1 jnd users       763  4 mai   11:58 Find-TBB_INTERFACE_VERSION_MAJOR.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================

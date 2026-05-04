@@ -71,6 +71,35 @@ cd $HOME/05-builds/openusd-jnd
 mv -vf /tmp/srcp/usd_noboost.patch .
 
 
+2) MODIFIER OpenUSD-26.05/cmake/modules/FindTBB.cmake
+=======================================================
+
+/!\ /!\ /!\ cd /tmp/srcp
+cp -R OpenUSD-26.05 OpenUSD-26.05.new
+
+cd OpenUSD-26.05.new/cmake/modules
+kwrite FindTBB.cmake
+
+AJOUTER LIGNE 219
+    set(TBB_INTERFACE_VERSION_MAJOR "${12}")
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER fichier FindTBB.cmake~
+rm -f FindTBB.cmake~
+
+cd ../../..
+
+diff -aur OpenUSD-26.05 OpenUSD-26.05.new
+diff -aur OpenUSD-26.05 OpenUSD-26.05.new > Find-TBB_INTERFACE_VERSION_MAJOR.patch
+
+rm -rf OpenUSD-26.05.new
+
+
+cd $HOME/05-builds/openusd-jnd
+
+mv -vf /tmp/srcp/Find-TBB_INTERFACE_VERSION_MAJOR.patch .
+
+
 
 
 

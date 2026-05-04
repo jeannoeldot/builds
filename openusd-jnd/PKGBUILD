@@ -2,7 +2,7 @@
 
 pkgname=openusd-jnd
 pkgver=26.05.20260424
-pkgrel=1
+pkgrel=2
 _ver_release="26.05"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
@@ -29,9 +29,11 @@ provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "usd_noboost.patch"
+        "Find-TBB_INTERFACE_VERSION_MAJOR.patch"
 )
 sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
             '1b6cd3ff2b3174f832ad181901634efcb006924f2dcab715334db6b9ac2c2550'
+            '382f7e3f359340e59c9612a9a36333b53f023ea1c61d3edd084ed9be935bf9b3'
 )
 
 prepare() {
@@ -39,6 +41,9 @@ prepare() {
 
   # Sans Boost : Voir blender
   patch -Np1 -i "${srcdir}/usd_noboost.patch"
+
+  # TBB_INTERFACE_VERSION_MAJOR = 12
+  patch -Np1 -i "${srcdir}/Find-TBB_INTERFACE_VERSION_MAJOR.patch"
 
   local _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 

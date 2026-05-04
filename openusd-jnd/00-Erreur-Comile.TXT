@@ -1,0 +1,160 @@
+
+[ 59%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/arrayEditBuilder.cpp.o
+
+In file included from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/impl.h:12,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/build/include/pxr/base/work/impl.h:10,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/threadLimits.cpp:11:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:73:51: error: expected class-name before ‘{’ token [-Wtemplate-body]
+   73 |     struct _InvokerTaskWrapper : public tbb::task {
+      |                                                   ^
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:80:22: error: ‘task’ in namespace ‘tbb’ does not name a type [-Wtemplate-body]
+   80 |         virtual tbb::task* execute() {
+      |                      ^~~~
+In file included from /usr/include/tbb/task.h:17,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:20:
+/usr/include/oneapi/tbb/task.h:26:11: note: ‘tbb::v1::task’ declared here
+   26 | namespace task {
+      |           ^~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h: In member function ‘void pxrInternal_v0_26_5__pxrReserved__::WorkImpl_Dispatcher::Run(Callable&&)’:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:46:9: error: ‘_rootTask’ was not declared in this scope [-Wtemplate-body]
+   46 |         _rootTask->spawn(
+      |         ^~~~~~~~~
+In file included from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/impl.h:12,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/build/include/pxr/base/work/impl.h:10,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/dispatcher.h:14,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/dispatcher.cpp:9:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:73:51: error: expected class-name before ‘{’ token [-Wtemplate-body]
+   73 |     struct _InvokerTaskWrapper : public tbb::task {
+      |                                                   ^
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:80:22: error: ‘task’ in namespace ‘tbb’ does not name a type [-Wtemplate-body]
+   80 |         virtual tbb::task* execute() {
+      |                      ^~~~
+In file included from /usr/include/tbb/task.h:17,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:20:
+/usr/include/oneapi/tbb/task.h:26:11: note: ‘tbb::v1::task’ declared here
+   26 | namespace task {
+      |           ^~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+In file included from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/impl.h:12,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/build/include/pxr/base/work/impl.h:10,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/dispatcher.h:14,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/taskGraph.h:13,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/taskGraph.cpp:7:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:73:51: error: expected class-name before ‘{’ token [-Wtemplate-body]
+   73 |     struct _InvokerTaskWrapper : public tbb::task {
+      |                                                   ^
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:80:22: error: ‘task’ in namespace ‘tbb’ does not name a type [-Wtemplate-body]
+   80 |         virtual tbb::task* execute() {
+      |                      ^~~~
+In file included from /usr/include/tbb/task.h:17,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:20:
+/usr/include/oneapi/tbb/task.h:26:11: note: ‘tbb::v1::task’ declared here
+   26 | namespace task {
+      |           ^~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+In file included from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/impl.h:12,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/build/include/pxr/base/work/impl.h:10,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/dispatcher.h:14,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/taskGraph_defaultImpl.h:13,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/taskGraph_defaultImpl.cpp:7:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:73:51: error: expected class-name before ‘{’ token [-Wtemplate-body]
+   73 |     struct _InvokerTaskWrapper : public tbb::task {
+      |                                                   ^
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:80:22: error: ‘task’ in namespace ‘tbb’ does not name a type [-Wtemplate-body]
+   80 |         virtual tbb::task* execute() {
+      |                      ^~~~
+In file included from /usr/include/tbb/task.h:17,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:20:
+/usr/include/oneapi/tbb/task.h:26:11: note: ‘tbb::v1::task’ declared here
+   26 | namespace task {
+      |           ^~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h: In member function ‘void pxrInternal_v0_26_5__pxrReserved__::WorkImpl_Dispatcher::Run(Callable&&)’:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:46:9: error: ‘_rootTask’ was not declared in this scope [-Wtemplate-body]
+   46 |         _rootTask->spawn(
+      |         ^~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h: In member function ‘void pxrInternal_v0_26_5__pxrReserved__::WorkImpl_Dispatcher::Run(Callable&&)’:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:46:9: error: ‘_rootTask’ was not declared in this scope [-Wtemplate-body]
+   46 |         _rootTask->spawn(
+      |         ^~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h: In member function ‘void pxrInternal_v0_26_5__pxrReserved__::WorkImpl_Dispatcher::Run(Callable&&)’:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:46:9: error: ‘_rootTask’ was not declared in this scope [-Wtemplate-body]
+   46 |         _rootTask->spawn(
+      |         ^~~~~~~~~
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:139: pxr/base/work/CMakeFiles/work.dir/threadLimits.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[ 59%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/arrayEditOps.cpp.o
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:125: pxr/base/work/CMakeFiles/work.dir/taskGraph_defaultImpl.cpp.o] Error 1
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:97: pxr/base/work/CMakeFiles/work.dir/dispatcher.cpp.o] Error 1
+[ 59%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/debugCodes.cpp.o
+[ 59%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/dictionary.cpp.o
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:111: pxr/base/work/CMakeFiles/work.dir/taskGraph.cpp.o] Error 1
+
+[ 59%] Building CXX object pxr/base/vt/CMakeFiles/vt.dir/value.cpp.o
+
+In file included from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/detachedTask_impl.h:11,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/impl.h:12,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/build/include/pxr/base/work/impl.h:10,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/dispatcher.h:14,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/detachedTask.h:15,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/utils.h:14,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/utils.cpp:9:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:73:51: error: expected class-name before ‘{’ token [-Wtemplate-body]
+   73 |     struct _InvokerTaskWrapper : public tbb::task {
+      |                                                   ^
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:80:22: error: ‘task’ in namespace ‘tbb’ does not name a type [-Wtemplate-body]
+   80 |         virtual tbb::task* execute() {
+      |                      ^~~~
+In file included from /usr/include/oneapi/tbb/enumerable_thread_specific.h:37,
+                 from /usr/include/tbb/enumerable_thread_specific.h:17,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/tf/diagnosticMgr.h:30,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/tf/errorMark.h:13,
+                 from /build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/detachedTask.h:13:
+/usr/include/oneapi/tbb/task.h:26:11: note: ‘tbb::v1::task’ declared here
+   26 | namespace task {
+      |           ^~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:91:10: error: ‘task_group_context’ in namespace ‘tbb’ does not name a type
+   91 |     tbb::task_group_context _context;
+      |          ^~~~~~~~~~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:104:10: error: ‘empty_task’ in namespace ‘tbb’ does not name a type
+  104 |     tbb::empty_task* _rootTask;
+      |          ^~~~~~~~~~
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h: In member function ‘void pxrInternal_v0_26_5__pxrReserved__::WorkImpl_Dispatcher::Run(Callable&&)’:
+/build/openusd-jnd/src/OpenUSD-26.05/pxr/base/work/workTBB/dispatcher_impl.h:46:9: error: ‘_rootTask’ was not declared in this scope [-Wtemplate-body]
+   46 |         _rootTask->spawn(
+      |         ^~~~~~~~~
+make[2]: *** [pxr/base/work/CMakeFiles/work.dir/build.make:153: pxr/base/work/CMakeFiles/work.dir/utils.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:3908: pxr/base/work/CMakeFiles/work.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+[ 59%] Built target vt
+
+make: *** [Makefile:136: all] Error 2
+make: Leaving directory '/build/openusd-jnd/src/OpenUSD-26.05/build'
+==> ERROR: A failure occurred in build().
+
