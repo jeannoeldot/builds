@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-jnd
-pkgver=3.1.12.1.20260427
+pkgver=3.1.13.1.20260504
 pkgrel=1
-_name_release="OpenImageIO-3.1.12.1"
-_ver_release="v3.1.12.1"
+_name_release="OpenImageIO-3.1.13.1"
+_ver_release="v3.1.13.1"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -31,7 +31,7 @@ provides=('openimageio')
 options=('!debug')
 source=("OpenImageIO-${_ver_release}.tar.gz"
 )
-sha256sums=('1083e8cd219f02d1d9baeeeb79edcc253cabdf318f57da40895acb2eef557cf9'
+sha256sums=('0fc59b8e2708ded02d3793b8f3331f037ed49bfcde38158f05ac0e876ebb85b7'
 )
 
 build() {
