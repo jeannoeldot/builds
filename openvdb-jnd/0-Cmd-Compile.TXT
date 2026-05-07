@@ -40,6 +40,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openvdb-jnd               # openvdb ds community
 pkgver=13.0.0.20251104
+pkgrel=3          # Rebuild Avec patch pour tbb 2023
 pkgrel=2          # Rebuild SANS boost boost-libs
 
 pkgrel=1
@@ -126,6 +127,26 @@ source=("OpenVDB-v${_ver_release}.tar.gz"
 )
 sha256sums=('... ...'
 )
+
+AVEC PATCH
+----------
+source=("OpenVDB-v${_ver_release}.tar.gz"
+        "openvdb-tbb2023.patch"
+)
+
+sha256sum OpenVDB-v13.0.0.tar.gz
+
+sha256sum openvdb-tbb2023.patch
+
+sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
+            '1b6cd3ff2b3174f832ad181901634efcb006924f2dcab715334db6b9ac2c2550'
+)
+
+prepare() {
+  cd "${_name_release}"
+
+  # Fixe erreur compilation avec tbb : Voir Arch
+  patch -Np1 -i "${srcdir}/openvdb-tbb2023.patch"
 
 
 build() {
@@ -316,6 +337,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1282  9 août  10:20 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenVDB-v13.0.0.tar.gz
+-rw-r--r--  1 jnd users    2011  7 mai   16:40 openvdb-tbb2023.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================

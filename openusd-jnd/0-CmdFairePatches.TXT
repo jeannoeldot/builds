@@ -71,6 +71,18 @@ cd $HOME/05-builds/openusd-jnd
 mv -vf /tmp/srcp/usd_noboost.patch .
 
 
+
+
+99) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
 2) MODIFIER OpenUSD-26.05/cmake/modules/FindTBB.cmake
 =======================================================
 
@@ -101,17 +113,6 @@ mv -vf /tmp/srcp/Find-TBB_INTERFACE_VERSION_MAJOR.patch .
 
 
 
-
-
-99) QUAND PATCHES FINIS
-=======================
-rm -rf /tmp/srcp
-
-sync
-
-=================================================================
-ANCIENS
-========
 
 1)
 https://github.com/PixarAnimationStudios/OpenUSD/pull/3392/files
