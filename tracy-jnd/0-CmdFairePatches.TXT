@@ -1,0 +1,29 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 0.13.1
+
+
+/!\ /!\ /!\ $HOME/05-builds/tracy-jnd
+
+mkdir /tmp/srcp
+
+cp -v tracy-0.13.1.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf tracy-0.13.1.tar.gz
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+

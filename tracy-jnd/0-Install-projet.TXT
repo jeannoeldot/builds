@@ -1,0 +1,55 @@
+
+V 0.13.1
+========
+-- Install configuration: "Release"
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/lib//libTracyClient.so.0.13.1
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/lib//libTracyClient.so
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyC.h
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/Tracy.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyCUDA.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyD3D11.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyD3D12.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyLua.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyMetal.hmm
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyOpenCL.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyOpenGL.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/tracy/TracyVulkan.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/tracy_concurrentqueue.h
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/tracy_rpmalloc.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/tracy_SPSCQueue.h
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyKCore.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyArmCpuTable.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyCallstack.h
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyCallstack.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyCpuid.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyDebug.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyDxt1.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyFastVector.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyLock.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyProfiler.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyRingBuffer.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyScoped.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyStringHelpers.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracySysPower.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracySysTime.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracySysTrace.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/client/TracyThread.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/tracy_lz4.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/tracy_lz4hc.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyAlign.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyAlloc.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyApi.h
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyColor.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyForceInline.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyMutex.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyProtocol.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyQueue.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracySocket.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyStackFrames.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracySystem.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyWinFamily.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/include/tracy/common/TracyYield.hpp
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/lib/cmake/Tracy/TracyTargets.cmake
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/lib/cmake/Tracy/TracyTargets-release.cmake
+-- Installing: /build/tracy-jnd/pkg/tracy-jnd/usr/lib/cmake/Tracy/TracyConfig.cmake
+
