@@ -1,0 +1,10 @@
+
+V 1.1
+=======
+-- Install configuration: "Release"
+-- Installing: /build/meshoptimizer-jnd/pkg/meshoptimizer-jnd/usr/lib/libmeshoptimizer.so
+-- Installing: /build/meshoptimizer-jnd/pkg/meshoptimizer-jnd/usr/include/meshoptimizer.h
+-- Installing: /build/meshoptimizer-jnd/pkg/meshoptimizer-jnd/usr/lib/cmake/meshoptimizer/meshoptimizerTargets.cmake
+-- Installing: /build/meshoptimizer-jnd/pkg/meshoptimizer-jnd/usr/lib/cmake/meshoptimizer/meshoptimizerTargets-release.cmake
+-- Installing: /build/meshoptimizer-jnd/pkg/meshoptimizer-jnd/usr/lib/cmake/meshoptimizer/meshoptimizerConfig.cmake
+-- Installing: /build/meshoptimizer-jnd/pkg/meshoptimizer-jnd/usr/lib/cmake/meshoptimizer/meshoptimizerConfigVersion.cmake

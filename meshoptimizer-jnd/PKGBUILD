@@ -1,0 +1,46 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=meshoptimizer-jnd
+pkgver=1.1.20260402
+pkgrel=1
+_ver_release="1.1"
+_name_release="meshoptimizer-${_ver_release}"
+pkgdesc="Mesh optimization library that makes meshes smaller and faster to render"
+url="https://github.com/zeux/meshoptimizer"
+arch=('x86_64')
+license=('MIT')
+depends=('glibc' 'libgcc' 'libstdc++'
+)
+makedepends=('cmake'
+)
+conflicts=('meshoptimizer')
+provides=('meshoptimizer')
+#options=(staticlibs)
+options=('!debug')
+source=("meshoptimizer-${_ver_release}.tar.gz"
+)
+sha256sums=('b787011f81b4b3069c2f9065b7c191efdd4189a49be32ba5282dd5579f05261a'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DMESHOPT_BUILD_SHARED_LIBS=ON
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  
+  DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+}

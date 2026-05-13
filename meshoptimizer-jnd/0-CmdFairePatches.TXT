@@ -1,0 +1,29 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.1
+
+
+/!\ /!\ /!\ $HOME/05-builds/meshoptimizer-jnd
+
+mkdir /tmp/srcp
+
+cp -v meshoptimizer-1.1.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf meshoptimizer-1.1.tar.gz
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+
