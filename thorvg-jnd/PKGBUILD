@@ -1,0 +1,46 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=thorvg-jnd
+pkgver=1.0.4.20260417
+pkgrel=1
+_ver_release="1.0.4"
+_name_release="thorvg-${_ver_release}"
+pkgdesc="Portable library designed for rendering vector-based scenes and animations, including SVG and Lottie formats"
+url="https://github.com/thorvg/thorvg"
+arch=('x86_64')
+license=('MIT')
+depends=('glibc' 'libgcc' 'libstdc++'
+)
+makedepends=('meson' 'ninja'
+)
+conflicts=('thorvg')
+provides=('thorvg')
+#options=(staticlibs)
+options=('!debug')
+source=("thorvg-${_ver_release}.tar.gz"
+)
+sha256sums=('1a60b794eaac5717ad79d0c7e3d189f46e21d469b3a0013d7804f348fbacdf17'
+)
+
+prepare() {
+  cd "${_name_release}"
+  meson setup builddir --prefix=/usr \
+    -Dloaders=svg \
+    -Dextra= \
+    --reconfigure
+}
+
+build() {
+  cd "${_name_release}"
+
+  ninja -C builddir
+}
+
+package() {
+  cd "${_name_release}"
+  
+  DESTDIR="${pkgdir}" ninja -C builddir install
+
+  # license
+  install -Dm644 LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+}

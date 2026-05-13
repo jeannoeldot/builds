@@ -1,0 +1,48 @@
+
+V 1.0.4
+=======
+thorvg 1.0.4
+
+    Build Type        : debugoptimized
+    Prefix            : /usr
+    File I/O          : YES
+    Multi-Tasking     : YES
+    Partial Rendering : YES
+    SIMD Instruction  : none
+    Log Message       : NO
+    Tests             : NO
+
+  Raster Engine
+    CPU               : YES
+    GL                : NO
+    WebGPU            : NO
+
+  Loader
+    SVG               : YES
+    TTF               : NO
+    LOTTIE            : NO
+    PNG               : NO
+    JPG               : NO
+    WEBP              : NO
+
+  Saver
+    GIF               : NO
+
+  Binding
+    CAPI              : NO
+
+  Tool
+    Svg2Png           : NO
+    Lottie2Gif        : NO
+
+  Extra
+    Lottie Expressions: NO
+    OpenMP            : NO
+    OpenGL Variant    : None
+
+  User defined options
+    extra             :
+    loaders           : svg
+    prefix            : /usr
+
+Found ninja-1.13.2 at /usr/bin/ninja

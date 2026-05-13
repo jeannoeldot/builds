@@ -1,0 +1,29 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 1.0.4
+
+
+/!\ /!\ /!\ $HOME/05-builds/thorvg-jnd
+
+mkdir /tmp/srcp
+
+cp -v thorvg-1.0.4.tar.gz /tmp/srcp/
+
+cd /tmp/srcp
+
+tar -xzf thorvg-1.0.4.tar.gz
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+rm -rf /tmp/srcp
+
+sync
+
+=================================================================
+ANCIENS
+========
+

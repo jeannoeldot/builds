@@ -1,0 +1,11 @@
+
+V 1.0.4
+=======
+ninja: Entering directory `builddir'
+[0/1] Installing files
+Installing src/libthorvg-1.so.1.0.4 to /build/thorvg-jnd/pkg/thorvg-jnd/usr/lib
+Stripping target 'src/libthorvg-1.so.1.0.4'.
+Installing /build/thorvg-jnd/src/thorvg-1.0.4/inc/thorvg.h to /build/thorvg-jnd/pkg/thorvg-jnd/usr/include/thorvg-1
+Installing /build/thorvg-jnd/src/thorvg-1.0.4/builddir/meson-private/thorvg-1.pc to /build/thorvg-jnd/pkg/thorvg-jnd/usr/lib/pkgconfig
+Installing symlink pointing to libthorvg-1.so.1.0.4 to /build/thorvg-jnd/pkg/thorvg-jnd/usr/lib/libthorvg-1.so.1
+Installing symlink pointing to libthorvg-1.so.1 to /build/thorvg-jnd/pkg/thorvg-jnd/usr/lib/libthorvg-1.so
