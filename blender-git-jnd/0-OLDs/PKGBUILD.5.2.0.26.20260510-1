@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.2.0.29.20260516
+pkgver=5.2.0.26.20260510
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -33,8 +33,6 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'openpgl-jnd'
           'manifold-jnd'
           'openusd-jnd' 'materialx'
-          'meshoptimizer-jnd' 'python-tomli-w' 'thorvg-jnd'
-          'tracy-jnd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
              'cuda' 'nvidia-utils'
@@ -48,7 +46,7 @@ _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-9.1.0.tar.gz"
 )
-sha256sums=('0dd536e89f401ae37fadf0acd163d4344abac4e076ed4703a4c71c7556e1af9a'
+sha256sums=('e683a1435de9a3c487f9ebe6cae20cb4204afa886c41bc0c7f53638d2feb0d33'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
 )
 
@@ -57,10 +55,14 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  ## Cycles: Workaround for performance loss with the CUDA 9.0 SDK.
+  ## Commit 1febc858559c054603073301a6c6dae44c737830 du 21/11/2017. Stefan Werner
+  #sed -i -e "s|define CUDA_KERNEL_MAX_REGISTERS 48|define CUDA_KERNEL_MAX_REGISTERS 64|" intern/cycles/kernel/kernels/cuda/kernel_config.h
+
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "795b62d8d14c"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "c6e2bf27a021"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1778932091|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1778413015|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
@@ -68,6 +70,13 @@ _get_pyver() {
 }
 
 build() {
+  ## This should fix #13.
+  #export CXXFLAGS=${CXXFLAGS/-Wp,-D_GLIBCXX_ASSERTIONS/}
+  #CXXFLAGS+=' --param=max-vartrack-size=640000000'
+
+  ## This should fix 00-ERREURS-COMPILE-hydra
+  #CXXFLAGS+='  -Wno-template-body'
+
   # In general, we want to list all real archs (sm_XX) and the latest virtual arch (compute_XX)
   # for future PTX compatibility.
   # Valid values can be discovered from nvcc --help
@@ -88,12 +97,9 @@ build() {
         -D CYCLES_CUDA_BINARIES_ARCH="$cuda_archs" \
         -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-9.1.0" \
         -D WITH_CYCLES_PARALLEL_DEVICE_KERNEL_BUILD=ON \
-        -D WITH_CYCLES_NATIVE_ONLY=ON \
         -D WITH_SYSTEM_GFLAGS=ON \
         -D WITH_SYSTEM_GLOG=ON \
         -D WITH_LIBS_PRECOMPILED=OFF \
-        -D WITH_INPUT_IME=OFF \
-        -D WITH_INPUT_NDOF=OFF \
         -D WITH_DOC_MANPAGE=OFF \
         -D WITH_CYCLES_DEVICE_HIP=OFF \
         -D WITH_CYCLES_DEVICE_HIPRT=OFF \
