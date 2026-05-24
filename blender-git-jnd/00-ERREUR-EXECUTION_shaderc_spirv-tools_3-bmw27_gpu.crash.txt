@@ -1,0 +1,47 @@
+# Blender 5.2.0, Commit date: 2026-05-16 11:48, Hash 795b62d8d14c
+
+# backtrace
+blender(+0x27d5d8d) [0x557822595d8d]
+blender(+0x1a2c390) [0x5578217ec390]
+/usr/lib/libc.so.6(+0x3e8f0) [0x7fb10043e8f0]
+/usr/lib/libSPIRV-Tools-opt.so(+0x5b006) [0x7fb0fe45b006]
+/usr/lib/libSPIRV-Tools-opt.so(_ZNSt17_Function_handlerIFbPKjEZNK8spvtools3opt11Instruction11ForEachInIdERKSt8functionIFvS1_EEEUlS1_E_E9_M_invokeERKSt9_Any_dataOS1_+0x38) [0x7fb0fe453c78]
+/usr/lib/libSPIRV-Tools-opt.so(_ZN8spvtools3opt17AggressiveDCEPass21AddOperandsToWorkListEPKNS0_11InstructionE+0xb5) [0x7fb0fe45ae95]
+/usr/lib/libSPIRV-Tools-opt.so(_ZN8spvtools3opt17AggressiveDCEPass15ProcessWorkListEPNS0_8FunctionE+0x5a) [0x7fb0fe45fd1a]
+/usr/lib/libSPIRV-Tools-opt.so(_ZN8spvtools3opt17AggressiveDCEPass13AggressiveDCEEPNS0_8FunctionE+0xb4) [0x7fb0fe45fec4]
+/usr/lib/libSPIRV-Tools-opt.so(_ZN8spvtools3opt17AggressiveDCEPass11ProcessImplEv+0xd9) [0x7fb0fe461c69]
+/usr/lib/libSPIRV-Tools-opt.so(_ZN8spvtools3opt4Pass3RunEPNS0_9IRContextE+0x2a) [0x7fb0fe59ae7a]
+/usr/lib/libSPIRV-Tools-opt.so(_ZN8spvtools3opt11PassManager3RunEPNS0_9IRContextE+0x15e) [0x7fb0fe59c1fe]
+/usr/lib/libSPIRV-Tools-opt.so(_ZNK8spvtools9Optimizer3RunEPKjmPSt6vectorIjSaIjEEP23spv_optimizer_options_t+0x189) [0x7fb0fe596369]
+/usr/lib/libshaderc_shared.so.1(+0x14f1d) [0x7fb1130fcf1d]
+/usr/lib/libshaderc_shared.so.1(+0x167c9) [0x7fb1130fe7c9]
+/usr/lib/libshaderc_shared.so.1(shaderc_compile_into_spv+0x12) [0x7fb1130ff052]
+blender(+0x2db62bf) [0x557822b762bf]
+blender(+0x2db3133) [0x557822b73133]
+blender(+0x2a667fe) [0x5578228267fe]
+blender(+0x2a709f1) [0x5578228309f1]
+blender(+0x32c77e4) [0x5578230877e4]
+blender(+0x32b6dce) [0x557823076dce]
+blender(+0x316fab0) [0x557822f2fab0]
+blender(+0x31711e8) [0x557822f311e8]
+blender(+0x3172441) [0x557822f32441]
+blender(+0x5882f44) [0x557825642f44]
+blender(+0x4149073) [0x557823f09073]
+blender(+0x2ef24d7) [0x557822cb24d7]
+blender(+0x2ef44b5) [0x557822cb44b5]
+blender(+0x2ee4254) [0x557822ca4254]
+blender(+0x1a26560) [0x5578217e6560]
+/usr/lib/libc.so.6(+0x27741) [0x7fb100427741]
+/usr/lib/libc.so.6(__libc_start_main+0x89) [0x7fb100427879]
+blender(+0x1a25f25) [0x5578217e5f25]
+
+# Python backtrace
+
+=============================================================================
+$ pacman -F libSPIRV-Tools-opt.so
+extra/spirv-tools 1:1.4.335.0-1 (vulkan-devel) [installé: 1:1.4.350.0-1]
+    usr/lib/libSPIRV-Tools-opt.so
+
+$ pacman -F libSPIRV-Tools-opt.so
+extra/spirv-tools 1:1.4.335.0-1 (vulkan-devel) [installé: 1:1.4.350.0-1]
+    usr/lib/libSPIRV-Tools-opt.so
