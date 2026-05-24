@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.2.0.36.20260523
+pkgver=5.2.0.29.20260516
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -34,6 +34,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'manifold-jnd'
           'openusd-jnd' 'materialx'
           'meshoptimizer-jnd' 'python-tomli-w' 'thorvg-jnd'
+          'tracy-jnd'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
              'cuda' 'nvidia-utils'
@@ -47,7 +48,7 @@ _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-9.1.0.tar.gz"
 )
-sha256sums=('e8a9b830e26f8258b5c7db66bf06cb7eb7b846a02a12d1ca4824bd4b8361c78d'
+sha256sums=('0dd536e89f401ae37fadf0acd163d4344abac4e076ed4703a4c71c7556e1af9a'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
 )
 
@@ -57,9 +58,9 @@ prepare() {
   cd "${_gitname}"
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "ca1bf7201043"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "795b62d8d14c"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1779568103|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1778932091|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
