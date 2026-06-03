@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=26.05.20260424
+pkgrel=4      # rebuild MAJ OIIO 3.1.14.0
 pkgrel=3      # rebuild AVEC patch usd-fix-oneapi-tbb.patch
 pkgrel=2      # rebuild AVEC patch TBB_INTERFACE_VERSION_MAJOR dsFindTBB.cmake : PAS OK
 pkgrel=1      # v26.05
