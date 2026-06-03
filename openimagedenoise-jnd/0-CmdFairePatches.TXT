@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 2.4.1.20260114
+!!! VERSION = 2.5.0.20260602
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openimagedenoise-jnd
 
 mkdir /tmp/srcp
 
-cp -v oidn-2.4.1.src.tar.gz /tmp/srcp/
+cp -v oidn-2.5.0.src.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf oidn-2.4.1.src.tar.gz
+tar -xzf oidn-2.5.0.src.tar.gz
 
 
 99) QUAND PATCHES FINIS

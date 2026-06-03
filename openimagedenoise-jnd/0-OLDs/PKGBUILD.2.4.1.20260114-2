@@ -1,15 +1,15 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openimagedenoise-jnd
-pkgver=2.5.0.20260602
-pkgrel=1
-_ver_release="2.5.0"
+pkgver=2.4.1.20260114
+pkgrel=2
+_ver_release="2.4.1"
 _name_release="oidn-${_ver_release}"
 pkgdesc="Intel(R) Open Image Denoise library"
 url="http://www.openimagedenoise.org/"
 arch=('x86_64')
 license=('Apache-2.0')
-depends=('onetbb' 'nvidia-utils' 'glibc' 'libgcc' 'libstdc++'
+depends=('onetbb' 'nvidia-utils'
 )
 makedepends=('cmake' 'python' 'ispc'
               'cuda'
@@ -20,7 +20,7 @@ provides=('openimagedenoise' 'oidn')
 options=('!debug')
 source=("oidn-${_ver_release}.src.tar.gz"
 )
-sha256sums=('96c3a46122759803d5f6701ffba4bef6eac0981dced5279e66f2815e3ed3c2cc'
+sha256sums=('9c7c77ae0d57e004479cddb7aaafd405c2cc745153bed4805413c21be610e17b'
 )
 
 build() {
@@ -43,4 +43,6 @@ package() {
   DESTDIR="${pkgdir}" make -C build install
 
   rm -rf "${pkgdir}"/build
+  # A SUPPRIMER DANS CHROOT
+  rm -rf "${pkgdir}"/home
 }
