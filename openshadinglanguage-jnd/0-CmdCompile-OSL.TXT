@@ -32,8 +32,9 @@ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.15.5.0.tar.gz .
 /!\/!\/!\/!\/!\
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OptiX-8.1-Include.zip .
+cp -v /0-DataLinux/05-builds-dir-git/optix-dev-9.1.0.tar.gz .
 
+sync
 
 1-8) FAIRE PATCH
 ===============================
@@ -45,6 +46,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.15.5.0.20260601
+pkgrel=2    # rebuild AVEC CUDA 13.3.0-1 et OPTIX 9.1.0: COMPILE PAS OK
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ OIIO 3.1.12.1
@@ -110,12 +112,12 @@ makedepends=('cmake' 'llvm'
 2-2) PKGBUILD SANS PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.1-Include.zip"
+        "optix-dev-9.1.0.tar.gz"
 )
 
 sha256sum OpenShadingLanguage-v1.15.5.0.tar.gz
 
-sha256sum OptiX-8.1-Include.zip
+sha256sum optix-dev-9.1.0.tar.gz
 
 sha256sums=(...
          ...
@@ -124,14 +126,14 @@ sha256sums=(...
 2-2) PKGBUILD AVEC PATCH
 ========================
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
-        "OptiX-8.1-Include.zip"
+        "optix-dev-9.1.0.tar.gz"
         "Add-missing-cstdint-include-for-GCC-15.patch"
         "openshadinglanguage-1.14.8-llvm-21.1.3.patch"
 )
 
 sha256sum OpenShadingLanguage-v1.15.5.0.tar.gz
 
-sha256sum OptiX-8.1-Include.zip
+sha256sum optix-dev-9.1.0.tar.gz
 
 sha256sum Add-missing-cstdint-include-for-GCC-15.patch
 
@@ -317,7 +319,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1517 27 déc.  12:05 PKGBUILD
 -rw-r--r--  1 jnd users 12356057 27 déc.  12:01 OpenShadingLanguage-v1.15.5.0.tar.gz
--rw-r--r--  1 jnd users    85220 11 févr. 14:16 OptiX-8.1-Include.zip
+-rw-r--r--  1 jnd users    85220 11 févr. 14:16 optix-dev-9.1.0.tar.gz
 -rw-r--r--  1 jnd users     2787 22 oct.  11:00 openshadinglanguage-1.14.8-llvm-21.1.3.patch
 
 
@@ -457,7 +459,7 @@ $ rm -f *~
 $ rm -f *.log
 $ rm -i OpenShadingLanguage-v1.15.5.0.tar.gz
 !!! OPTIX
-$ rm -i OptiX-8.1-Include.zip
+$ rm -i optix-dev-9.1.0.tar.gz
 
 
 $ cd && maj-repolocal

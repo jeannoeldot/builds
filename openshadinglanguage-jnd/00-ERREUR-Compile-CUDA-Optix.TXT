@@ -1,0 +1,239 @@
+
+===========================================================================================================
+CUDA 13.3.0-1 et OPTIX 9.1.0
+-----------------------------
+[ 73%] Generating optix_grid_renderer.ptx
+[ 73%] Generating optix_raytracer.ptx
+[ 73%] Built target osltoy_autogen_timestamp_deps
+clang++clang++: : warning: CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]
+warning: CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]
+[ 74%] Automatic MOC for target osltoy
+[ 74%] Built target osltoy_autogen
+[ 74%] Generating rend_lib_cuda.bc
+clang++: warning: CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 261; error   : Call to '_optix_get_launch_dimension_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 264; error   : Call to '_optix_get_launch_dimension_y' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 267; error   : Call to '_optix_get_launch_index_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 270; error   : Call to '_optix_get_launch_index_y' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 273; error   : Call to '_optix_get_sbt_data_ptr_64' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 330; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 354; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 376; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 261; error   : Unknown symbol '_optix_get_launch_dimension_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 264; error   : Unknown symbol '_optix_get_launch_dimension_y'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 267; error   : Unknown symbol '_optix_get_launch_index_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 270; error   : Unknown symbol '_optix_get_launch_index_y'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 273; error   : Unknown symbol '_optix_get_sbt_data_ptr_64'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 330; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 354; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testshade/optix_grid_renderer.ptx, line 376; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas fatal   : Ptx assembly aborted due to errors
+make[2]: *** [src/testshade/CMakeFiles/testshade_ptx.dir/build.make:74: src/testshade/optix_grid_renderer.ptx] Error 255
+make[2]: *** Deleting file 'src/testshade/optix_grid_renderer.ptx'
+make[1]: *** [CMakeFiles/Makefile2:1815: src/testshade/CMakeFiles/testshade_ptx.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 75%] Generating rs_simplerend_cuda.bc
+clang++: warning: CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]
+[ 76%] Linking CXX executable ../../bin/llvmutil_test
+[ 76%] Generating linked_rend_lib_testrender.bc, rend_lib_testrender.ptx
+[ 76%] Linking CXX executable ../../bin/accum_test
+[ 77%] Generating rend_lib_cuda.bc.cpp
+[ 77%] Building CXX object src/testrender/CMakeFiles/testrender.dir/shading.cpp.o
+[ 78%] Building CXX object src/testrender/CMakeFiles/testrender.dir/simpleraytracer.cpp.o
+[ 79%] Building CXX object src/testrender/CMakeFiles/testrender.dir/scene.cpp.o
+[ 79%] Linking CXX shared module ../../lib/osl.imageio.so
+[ 79%] Built target llvmutil_test
+[ 79%] Building CXX object src/testrender/CMakeFiles/testrender.dir/bvh.cpp.o
+[ 79%] Built target accum_test
+[ 80%] Generating linked_rend_lib_testrender.bc, rend_lib_testrender.ptx
+[ 81%] Building CXX object src/testrender/CMakeFiles/testrender.dir/testrender.cpp.o
+[ 81%] Building CXX object src/testrender/CMakeFiles/testrender.dir/optixraytracer.cpp.o
+[ 81%] Built target osl.imageio
+[ 81%] Generating rend_lib_cuda.bc.cpp
+[ 82%] Building CXX object src/testrender/CMakeFiles/testrender.dir/rend_lib_cuda.bc.cpp.o
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/src/testrender/optixraytracer.cpp: In member function ‘void OSL::v1_15::OptixRaytracer::processPrintfBuffer(void*, size_t)’:
+/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/src/testrender/optixraytracer.cpp:1178:29: warning: variable ‘i’ set but not used [-Wunused-but-set-variable=]
+ 1178 |                 for (size_t i = 0; !format_end_found; i++) {
+      |                             ^
+[ 83%] Linking CXX executable ../../bin/testrender
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 389; error   : Call to '_optix_get_launch_dimension_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 392; error   : Call to '_optix_get_launch_index_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 395; error   : Call to '_optix_get_launch_index_y' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 389; error   : Unknown symbol '_optix_get_launch_dimension_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 392; error   : Unknown symbol '_optix_get_launch_index_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 395; error   : Unknown symbol '_optix_get_launch_index_y'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 423; error   : Call to '_optix_get_launch_dimension_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 426; error   : Call to '_optix_get_launch_index_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 429; error   : Call to '_optix_get_launch_index_y' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 596; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 423; error   : Unknown symbol '_optix_get_launch_dimension_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 426; error   : Unknown symbol '_optix_get_launch_index_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 429; error   : Unknown symbol '_optix_get_launch_index_y'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 596; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1244; error   : Call to '_optix_read_primitive_idx' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1247; error   : Call to '_optix_get_ray_tmax' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1250; error   : Call to '_optix_get_triangle_barycentrics' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1254; error   : Call to '_optix_set_payload' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1258; error   : Call to '_optix_set_payload' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1262; error   : Call to '_optix_set_payload' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1266; error   : Call to '_optix_set_payload' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1244; error   : Unknown symbol '_optix_read_primitive_idx'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1247; error   : Unknown symbol '_optix_get_ray_tmax'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1250; error   : Unknown symbol '_optix_get_triangle_barycentrics'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1254; error   : Unknown symbol '_optix_set_payload'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1258; error   : Unknown symbol '_optix_set_payload'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1262; error   : Unknown symbol '_optix_set_payload'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1266; error   : Unknown symbol '_optix_set_payload'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1355; error   : Call to '_optix_get_launch_dimension_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1358; error   : Call to '_optix_get_launch_dimension_y' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1517; error   : Call to '_optix_get_launch_index_x' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1520; error   : Call to '_optix_get_launch_index_y' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 2002; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 2019; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 2332; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 3160; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 20397; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 20414; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 21028; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 21045; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 21656; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1355; error   : Unknown symbol '_optix_get_launch_dimension_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1358; error   : Unknown symbol '_optix_get_launch_dimension_y'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1517; error   : Unknown symbol '_optix_get_launch_index_x'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 1520; error   : Unknown symbol '_optix_get_launch_index_y'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 2002; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 2019; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 2332; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 3160; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 20397; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 20414; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 21028; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 21045; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 21656; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 34270; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 34270; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 34392; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 34416; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 34392; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 34416; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 35435; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 35454; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 35786; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 36641; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54129; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54148; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54785; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54804; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 55477; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 35435; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 35454; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 35786; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 36641; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54129; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54148; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54785; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 54804; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 55477; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 112781; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 112800; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 113133; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 113988; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 131479; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 131498; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 132136; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 132155; error   : Call to '_optix_trace_typed_32' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 132828; error   : Call to '_optix_call_direct_callable' requires call prototype
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 112781; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 112800; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 113133; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 113988; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 131479; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 131498; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 132136; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 132155; error   : Unknown symbol '_optix_trace_typed_32'
+ptxas /build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build/src/testrender/optix_raytracer.ptx, line 132828; error   : Unknown symbol '_optix_call_direct_callable'
+ptxas fatal   : Ptx assembly aborted due to errors
+make[2]: *** [src/testrender/CMakeFiles/testrender_ptx.dir/build.make:85: src/testrender/optix_raytracer.ptx] Error 255
+make[2]: *** Deleting file 'src/testrender/optix_raytracer.ptx'
+make[1]: *** [CMakeFiles/Makefile2:1952: src/testrender/CMakeFiles/testrender_ptx.dir/all] Error 2
+[ 83%] Built target testrender
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.15.5.0/build'
+
+===========================================================================================================
+clang++: warning: clang++CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+: clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+clang++: warning: CUDA version is newer than the latest partially supported version 12.8 [-Wunknown-cuda-version]
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from <built-in>:1:
+/usr/lib/clang/20/include/__clang_cuda_runtime_wrapper.h:387:10: fatal error: 'texture_fetch_functions.h' file not found
+  387 | #include "texture_fetch_functions.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1132: src/liboslexec/opmatrix_cuda.bc] Error 1
+make[2]: *** Waiting for unfinished jobs....
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1306: src/liboslexec/optexture_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1248: src/liboslexec/opspline_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1074: src/liboslexec/opcolor_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1016: src/liboslexec/llvm_ops_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1422: src/liboslexec/simplexnoise_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:958: src/liboslexec/gabornoise_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1364: src/liboslexec/pointcloud_cuda.bc] Error 1
+1 error generated when compiling for sm_120.
+make[2]: *** [src/liboslexec/CMakeFiles/oslexec.dir/build.make:1190: src/liboslexec/opnoise_cuda.bc] Error 1
+[ 31%] Linking CXX executable ../../bin/oslnoise_test
+[ 32%] Linking CXX shared library ../../lib/liboslcomp.so
+[ 32%] Linking CXX executable ../../bin/oslinfo
+make[1]: *** [CMakeFiles/Makefile2:1499: src/liboslexec/CMakeFiles/oslexec.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 32%] Built target oslnoise_test
+[ 32%] Built target oslinfo
+[ 32%] Built target oslcomp
+[ 32%] Linking CXX shared module ../../lib/python/site-packages/oslquery.cpython-313-x86_64-linux-gnu.so
+[ 32%] Built target pyoslquery
+make: *** [Makefile:166: all] Error 2
+make: Leaving directory '/build/openshadinglanguage-jnd/src/OpenShadingLanguage-1.14.7.0/build'
