@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=thorvg-jnd
-pkgver=1.0.5.20260515
+pkgver=1.0.6.20260604
 pkgrel=1
-_ver_release="1.0.5"
+_ver_release="1.0.6"
 _name_release="thorvg-${_ver_release}"
 pkgdesc="Portable library designed for rendering vector-based scenes and animations, including SVG and Lottie formats"
 url="https://github.com/thorvg/thorvg"
@@ -19,7 +19,7 @@ provides=('thorvg')
 options=('!debug')
 source=("thorvg-${_ver_release}.tar.gz"
 )
-sha256sums=('e25f23c0698c739affd1a092f77d0e56d4888deafa05da37ba1eb0f3031fa5cc'
+sha256sums=('f9321bd87c3f709c1591424a491cb492be9ef81436427acdc16ff57be7d1bc38'
 )
 
 prepare() {

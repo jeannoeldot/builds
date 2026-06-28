@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 1.0.4
+!!! VERSION = 1.0.6
 
 
 /!\ /!\ /!\ $HOME/05-builds/thorvg-jnd
 
 mkdir /tmp/srcp
 
-cp -v thorvg-1.0.4.tar.gz /tmp/srcp/
+cp -v thorvg-1.0.6.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf thorvg-1.0.4.tar.gz
+tar -xzf thorvg-1.0.6.tar.gz
 
 
 
