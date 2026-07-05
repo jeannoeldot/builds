@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=meshoptimizer-jnd
-pkgver=1.1.20260402
+pkgver=1.2.20260630
 pkgrel=1
-_ver_release="1.1"
+_ver_release="1.2"
 _name_release="meshoptimizer-${_ver_release}"
 pkgdesc="Mesh optimization library that makes meshes smaller and faster to render"
 url="https://github.com/zeux/meshoptimizer"
@@ -19,7 +19,7 @@ provides=('meshoptimizer')
 options=('!debug')
 source=("meshoptimizer-${_ver_release}.tar.gz"
 )
-sha256sums=('b787011f81b4b3069c2f9065b7c191efdd4189a49be32ba5282dd5579f05261a'
+sha256sums=('e40f71b809cdf3361b9a4def85fd44534e8733ce29d4b943c145b76859e4c2b4'
 )
 
 build() {

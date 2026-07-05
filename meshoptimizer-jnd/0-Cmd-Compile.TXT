@@ -6,19 +6,19 @@ cd $HOME/05-builds/meshoptimizer-jnd
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/zeux/meshoptimizer/releases
-==>  zeux  released this on Apr 2, 2026  ==> 20260402
-==>  v1.1  ==> 1.1
-==> 1.1.20260402
+==>  zeux released this on Jun 30, 2026  ==> 20260630
+==>  v1.2  ==> 1.2
+==> 1.2.20260630
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O meshoptimizer-1.1.tar.gz \
-https://github.com/zeux/meshoptimizer/archive/refs/tags/v1.1.tar.gz
+wget -O meshoptimizer-1.2.tar.gz \
+https://github.com/zeux/meshoptimizer/archive/refs/tags/v1.2.tar.gz
 
-sha256sum meshoptimizer-1.1.tar.gz
-==>   b787011f81b4b3069c2f9065b7c191efdd4189a49be32ba5282dd5579f05261a
+sha256sum meshoptimizer-1.2.tar.gz
+==>   e40f71b809cdf3361b9a4def85fd44534e8733ce29d4b943c145b76859e4c2b4
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -26,7 +26,7 @@ cd $HOME/05-builds/meshoptimizer-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/meshoptimizer-1.1.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/meshoptimizer-1.2.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -39,12 +39,12 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=meshoptimizer-jnd
-pkgver=1.1.20260402
+pkgver=1.2.20260630
 pkgrel=1
 
 
 !!!!!!
-_ver_release="1.1"
+_ver_release="1.2"
 _name_release="meshoptimizer-${_ver_release}"
 
 license=('MIT')
@@ -61,7 +61,7 @@ options=('!debug')
 
 SANS PATCH
 ----------
-sha256sum meshoptimizer-1.1.tar.gz
+sha256sum meshoptimizer-1.2.tar.gz
 
 source=("meshoptimizer-${_ver_release}.tar.gz"
 )
@@ -79,9 +79,9 @@ package() {
 ============================
 mkdir /tmp/srcp
 
-tar -xzf meshoptimizer-1.1.tar.gz -C /tmp/srcp
+tar -xzf meshoptimizer-1.2.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/meshoptimizer-1.1/CMakeLists.txt &
+1) kwrite /tmp/srcp/meshoptimizer-1.2/CMakeLists.txt &
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/meshoptimizer.cmake
 
@@ -101,7 +101,7 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 meshoptimizer-1.1.tar.gz
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 meshoptimizer-1.2.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
 
 !!! A MODIFIER SI PAS OK !
@@ -120,7 +120,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/meshoptimizer-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/meshoptimizer-jnd/meshoptimizer-1.1.tar.gz . \
+&& cp -v $HOME/05-builds/meshoptimizer-jnd/meshoptimizer-1.2.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/meshoptimizer-jnd \
 && cp -v /tmp/build/meshoptimizer-jnd-*-x86_64.pkg.tar.* . \
@@ -185,7 +185,7 @@ $ mv -v meshoptimizer-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i meshoptimizer-1.1.tar.gz
+$ rm -i meshoptimizer-1.2.tar.gz
 
 
 $ cd && maj-repolocal
