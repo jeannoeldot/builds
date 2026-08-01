@@ -46,6 +46,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.15.5.0.20260601
+pkgrel=3    # rebuild MAJ OIIO 3.1.16.0
 pkgrel=2    # rebuild MAJ OIIO 3.1.15.0
 
 pkgrel=2    # rebuild AVEC CUDA 13.3.0-1 et OPTIX 9.1.0: COMPILE PAS OK
@@ -93,9 +94,9 @@ options=('!debug')
 !!! LLVM 22.1.2
 ------------------------------------
 $ pacman -Ss llvm | grep extra | grep install
-extra/clang 22.1.6-1 [installé]
-extra/llvm 22.1.6-1 [installé]
-extra/llvm-libs 22.1.6-1 [installé]
+extra/clang 22.1.8-1 [installé]
+extra/llvm 22.1.8-2 [installé]
+extra/llvm-libs 22.1.8-2 [installé]
 
 depends=('libstdc++' 'glibc' 'zlib' 'libgcc'
          'imath' 'freetype2' 'libpng' 'libtiff'
