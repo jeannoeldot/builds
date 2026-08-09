@@ -20,14 +20,17 @@ depends=('libstdc++' 'glibc' 'zlib' 'libgcc'
 )
 makedepends=('cmake' 'llvm'
              'robin-map'
+             'cuda'
 )
 conflicts=('openshadinglanguage' 'openshadinglanguage-git')
 provides=('openshadinglanguage')
 options=('!debug')
 source=("OpenShadingLanguage-${_ver_release}.tar.gz"
+        "optix-dev-9.1.0.tar.gz"
 )
 
 sha256sums=('85b71407ad28c464a7ec5c9dcb33ac67f9e98b92495568549d4b9c138c91a579'
+            '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
 )
 
 build() {
@@ -40,6 +43,10 @@ build() {
       -DCMAKE_INSTALL_LIBDIR=lib \
       -DCMAKE_SKIP_RPATH=ON \
       -DLLVM_STATIC=OFF \
+      -DOSL_USE_OPTIX=ON \
+      -DOPTIX_INCLUDE_DIR="${srcdir}/optix-dev-9.1.0/include" \
+      -DCUDA_HOST_COMPILER="$NVCC_CCBIN" \
+      -DCUDA_TARGET_ARCH="sm_120" \
       -DUSE_SIMD=avx2 \
       -DUSE_CCACHE=OFF
   make -C build

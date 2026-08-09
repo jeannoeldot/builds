@@ -1,5 +1,67 @@
 
 ===========================================================================================================
+OSL 1.15.6.0
+CUDA 13.3.1-1 et OPTIX 9.1.0
+-----------------------------
+[ 73%] Built target osltoy_autogen_timestamp_deps
+clang++clang++: : warning: warning: CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]
+
+[ 73%] Generating rend_lib_cuda.bc
+clang++: warning: CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]
+/usr/include/fmt/format.h(3108): error: no operator "~" matches these operands
+            operand types are: ~ fmt::v12::detail::uint128
+        f.f &= ~(inc - 1);
+               ^
+/usr/include/fmt/format.h(3108): note #3328-D: built-in operator~(<promoted integral>) does not match because argument #1 does not match parameter
+        f.f &= ~(inc - 1);
+               ^
+          detected during:
+            instantiation of "void fmt::v12::detail::format_hexfloat(Float, fmt::v12::format_specs, fmt::v12::detail::buffer<char> &) [with Float=long double, <unnamed>=0]" at line 3501
+            instantiation of "auto fmt::v12::detail::write<Char,OutputIt,T,<unnamed>>(OutputIt, T, fmt::v12::format_specs, fmt::v12::locale_ref)->OutputIt [with Char=char, OutputIt=fmt::v12::basic_appender<char>, T=long double, <unnamed>=0]" at line 3595
+            instantiation of "auto fmt::v12::detail::write<Char,OutputIt,T,<unnamed>>(OutputIt, T)->OutputIt [with Char=char, OutputIt=fmt::v12::basic_appender<char>, T=long double, <unnamed>=0]" at line 3685
+            instantiation of "void fmt::v12::detail::default_arg_formatter<Char>::operator()(T) [with Char=char, T=long double, <unnamed>=0]" at line 2505 of /usr/include/fmt/base.h
+
+1 error detected in the compilation of "cuda/optix_grid_renderer.cu".
+/usr/include/fmt/format.h(3108): error: no operator "~" matches these operands
+            operand types are: ~ fmt::v12::detail::uint128
+        f.f &= ~(inc - 1);
+               ^
+/usr/include/fmt/format.h(3108): note #3328-D: built-in operator~(<promoted integral>) does not match because argument #1 does not match parameter
+        f.f &= ~(inc - 1);
+               ^
+          detected during:
+            instantiation of "void fmt::v12::detail::format_hexfloat(Float, fmt::v12::format_specs, fmt::v12::detail::buffer<char> &) [with Float=long double, <unnamed>=0]" at line 3501
+            instantiation of "auto fmt::v12::detail::write<Char,OutputIt,T,<unnamed>>(OutputIt, T, fmt::v12::format_specs, fmt::v12::locale_ref)->OutputIt [with Char=char, OutputIt=fmt::v12::basic_appender<char>, T=long double, <unnamed>=0]" at line 3595
+            instantiation of "auto fmt::v12::detail::write<Char,OutputIt,T,<unnamed>>(OutputIt, T)->OutputIt [with Char=char, OutputIt=fmt::v12::basic_appender<char>, T=long double, <unnamed>=0]" at line 3685
+            instantiation of "void fmt::v12::detail::default_arg_formatter<Char>::operator()(T) [with Char=char, T=long double, <unnamed>=0]" at line 2505 of /usr/include/fmt/base.h
+
+make[2]: *** [src/testshade/CMakeFiles/testshade_ptx.dir/build.make:74: src/testshade/optix_grid_renderer.ptx] Error 1
+make[1]: *** [CMakeFiles/Makefile2:1815: src/testshade/CMakeFiles/testshade_ptx.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+[ 74%] Generating rs_simplerend_cuda.bc
+clang++: warning: CUDA version is newer than the latest partially supported version 12.9 [-Wunknown-cuda-version]
+1 error detected in the compilation of "cuda/optix_raytracer.cu".
+make[2]: *** [src/testrender/CMakeFiles/testrender_ptx.dir/build.make:85: src/testrender/optix_raytracer.ptx] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[ 75%] Linking CXX executable ../../bin/llvmutil_test
+[ 75%] Generating linked_rend_lib_testrender.bc, rend_lib_testrender.ptx
+[ 75%] Linking CXX executable ../../bin/accum_test
+[ 76%] Generating rend_lib_cuda.bc.cpp
+[ 78%] Building CXX object src/testrender/CMakeFiles/testrender.dir/shading.cpp.o
+[ 78%] Building CXX object src/testrender/CMakeFiles/testrender.dir/bvh.cpp.o
+[ 78%] Building CXX object src/testrender/CMakeFiles/testrender.dir/scene.cpp.o
+[ 78%] Building CXX object src/testrender/CMakeFiles/testrender.dir/simpleraytracer.cpp.o
+[ 78%] Built target llvmutil_test
+[ 79%] Building CXX object src/testrender/CMakeFiles/testrender.dir/testrender.cpp.o
+[ 79%] Linking CXX shared module ../../lib/osl.imageio.so
+[ 79%] Built target accum_test
+make[1]: *** [CMakeFiles/Makefile2:1952: src/testrender/CMakeFiles/testrender_ptx.dir/all] Error 2
+[ 80%] Building CXX object src/testrender/CMakeFiles/testrender.dir/rend_lib_cuda.bc.cpp.o
+[ 81%] Linking CXX executable ../../bin/testrender
+[ 81%] Built target testrender
+make: *** [Makefile:166: all] Error 2
+
+===========================================================================================================
 CUDA 13.3.0-1 et OPTIX 9.1.0
 -----------------------------
 [ 73%] Generating optix_grid_renderer.ptx
