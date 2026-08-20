@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=virtualbox-extension
-pkgver=7.2.14
-_build=174565
+pkgver=7.2.16
+_build=174877
 pkgrel=1
 pkgdesc="Oracle VM VirtualBox Extension Pack"
 arch=('x86_64')
@@ -18,7 +18,7 @@ source=("https://download.virtualbox.org/virtualbox/${pkgver}/Oracle_VirtualBox_
 noextract=("Oracle_VirtualBox_Extension_Pack-${pkgver}.vbox-extpack"
 )
 
-sha256sums=('ce4461de974f041435660751b382f987fece831028a8c98572d668eda2eee96d'
+sha256sums=('d1e268cfa05223fd651703043af09f39dfb90da259ce9ec093d9d9b022f19689'
 )
 
 prepare() {
