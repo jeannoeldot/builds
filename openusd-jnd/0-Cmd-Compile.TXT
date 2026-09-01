@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=26.08.20260720
+pkgrel=2      # rebuild MAJ OIIO 3.1.17.0
 pkgrel=1      # v26.08
 
 pkgrel=7      # Rebuild MAJ materialx 1.39.5
