@@ -17,21 +17,21 @@ cd $HOME/05-builds/openusd-jnd
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/PixarAnimationStudios/USD/releases
-==> tallytalwar released this on Apr 24, 2026  ==> 20260424
-==> v26.05  ==> 26.05
-==> 26.05.20260424
+==> sunyab released this Jul 20, 2026  ==> 20260720
+==> v26.08  ==> 26.08
+==> 26.08.20260720
 
 1.3 SOURCES
 ==============
 cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenUSD-v26.05.tar.gz \
-https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v26.05.tar.gz
+wget -O OpenUSD-v26.08.tar.gz \
+https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v26.08.tar.gz
 
 sync
 
-sha256sum OpenUSD-v26.05.tar.gz
-==>   bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1
+sha256sum OpenUSD-v26.08.tar.gz
+==>   4bccbb95cddda1dbeef2f74a08b9456352f2aa91bfd4578c0c613009c7950149
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -39,7 +39,7 @@ cd $HOME/05-builds/openusd-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v26.05.tar.gz .
+cp -v /0-DataLinux/05-builds-dir-git/OpenUSD-v26.08.tar.gz .
 sync
 
 1-8) FAIRE PATCH
@@ -52,15 +52,15 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=26.05.20260424
+pkgver=26.08.20260720
+pkgrel=1      # v26.08
+
 pkgrel=7      # Rebuild MAJ materialx 1.39.5
 pkgrel=6      # rebuild MAJ OIIO 3.1.16.0
 pkgrel=5      # rebuild MAJ OIIO 3.1.15.0
 pkgrel=4      # rebuild MAJ OIIO 3.1.14.0
 pkgrel=3      # rebuild AVEC patch usd-fix-oneapi-tbb.patch
 pkgrel=2      # rebuild AVEC patch TBB_INTERFACE_VERSION_MAJOR dsFindTBB.cmake : PAS OK
-pkgrel=1      # v26.05
-
 pkgrel=2      # rebuild MAJ OIIO 3.1.12.0
 pkgrel=6      # rebuild MAJ OIIO 3.1.10.0
 pkgrel=5      # Rebuild SANS boost boost-libs
@@ -76,7 +76,7 @@ pkgrel=4      # rebuild MAJ openèxr 3.4
 pkgrel=3      # Rebuild MAJ materialx 1.39.4-1
 pkgrel=2      # Rebuild nouveau PC
 pkgrel=3      # rebuild MAJ OIIO 3.0.8.1. OSD 3.6.1
-pkgrel=2      # v26.05: materialx-jnd ==> materialx (extra)
+pkgrel=2      # v26.08: materialx-jnd ==> materialx (extra)
 pkgrel=3      # rebuild MAJ boost boost-libs 1.88.0 + materialx-jnd
 pkgrel=2      # rebuild MAJ OIIO 3.0.5.0
 pkgrel=1      # v25.02a
@@ -111,7 +111,7 @@ pkgrel=3      # /usr/plugin ==> /usr/share/usd/plugin
 pkgrel=2      # Rebuild suite modifs blender/build_files/build_environment/patches/usd.diff
 
 !!!!!!
-_ver_release="26.05"
+_ver_release="26.08"
 _name_release="OpenUSD-${_ver_release}"
 
 license=('Apache-2.0')
@@ -146,7 +146,7 @@ SANS PATCH
 source=("USD-v${_ver_release}.tar.gz"
 )
 
-sha256sum OpenUSD-v26.05.tar.gz
+sha256sum OpenUSD-v26.08.tar.gz
 
 sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
 )
@@ -155,18 +155,14 @@ AVEC PATCH
 ----------
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "usd_noboost.patch"
-        "usd-fix-oneapi-tbb.patch"
 )
 
-sha256sum OpenUSD-v26.05.tar.gz
+sha256sum OpenUSD-v26.08.tar.gz
 
 sha256sum usd_noboost.patch
 
-sha256sum usd-fix-oneapi-tbb.patch
-
-sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
-            '1b6cd3ff2b3174f832ad181901634efcb006924f2dcab715334db6b9ac2c2550'
-            '39925347a48ac981e50eb16a5f43b9949471c400349e9e9f3d4b9a7e4686665c'
+sha256sums=('4bccbb95cddda1dbeef2f74a08b9456352f2aa91bfd4578c0c613009c7950149'
+            '5c2d5ef31660babc4ae55c79cd5c8b76be0fcb52caae6ebebf587cbd1f8b7475'
 )
 
 prepare() {
@@ -174,9 +170,6 @@ prepare() {
 
   # Sans Boost : Voir blender
   patch -Np1 -i "${srcdir}/usd_noboost.patch"
-
-  # Fixe erreur compilation avec tbb : Voir Arch
-  patch -Np1 -i "${srcdir}/usd-fix-oneapi-tbb.patch"
 
 
 build() {
@@ -193,11 +186,11 @@ VOIR :
 
 mkdir /tmp/srcp
 
-tar -xzf OpenUSD-v26.05.tar.gz -C /tmp/srcp
+tar -xzf OpenUSD-v26.08.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/OpenUSD-26.05/CMakeLists.txt
+1) kwrite /tmp/srcp/OpenUSD-26.08/CMakeLists.txt
 
-2) kwrite /tmp/srcp/OpenUSD-26.05/cmake/defaults/Options.cmake
+2) kwrite /tmp/srcp/OpenUSD-26.08/cmake/defaults/Options.cmake
 
 LIGNE 10  PXR_BUILD_TESTS           ON ==> OFF
 
@@ -209,53 +202,50 @@ LIGNE 14  PXR_BUILD_IMAGING         ON
 
 LIGNE 15  PXR_BUILD_EMBREE_PLUGIN "Build embree imaging plugin" OFF
 LIGNE 16  PXR_BUILD_OPENIMAGEIO_PLUGIN "Build OpenImageIO plugin" OFF ==> ON
-LIGNE 17  PXR_BUILD_OPENCOLORIO_PLUGIN "Build OpenColorIO plugin" OFF
+LIGNE 20  PXR_BUILD_OPENCOLORIO_PLUGIN "Build OpenColorIO plugin" OFF
 
-LIGNE 18  PXR_BUILD_USD_IMAGING     ON
-LIGNE 19  PXR_BUILD_USD_VALIDATION  ON ???
-LIGNE 20  PXR_BUILD_EXEC            OFF
+LIGNE 21  PXR_BUILD_USD_IMAGING     ON
+LIGNE 22  PXR_BUILD_USD_VALIDATION  ON ???
+LIGNE 23  PXR_BUILD_EXEC            ON
 
-LIGNE 21  PXR_BUILD_USDVIEW         ON ==> OFF
+LIGNE 24  PXR_BUILD_USDVIEW         ON ==> OFF
 
-LIGNE 22  PXR_BUILD_ALEMBIC_PLUGIN "Build the Alembic plugin for USD" OFF
-LIGNE 23  PXR_BUILD_DRACO_PLUGIN "Build the Draco plugin for USD" OFF
-LIGNE 24  PXR_BUILD_PRMAN_PLUGIN "Build the PRMan imaging plugin" OFF
+LIGNE 25  PXR_BUILD_ALEMBIC_PLUGIN "Build the Alembic plugin for USD" OFF
+LIGNE 26  PXR_BUILD_DRACO_PLUGIN "Build the Draco plugin for USD" OFF
+LIGNE 27  PXR_BUILD_PRMAN_PLUGIN "Build the PRMan imaging plugin" OFF
 
-LIGNE 25  PXR_ENABLE_MATERIALX_SUPPORT "Enable MaterialX support" OFF ==> ON
+LIGNE 28  PXR_ENABLE_MATERIALX_SUPPORT "Enable MaterialX support" OFF ==> ON
 
-LIGNE 26  PXR_BUILD_DOCUMENTATION "Generate doxygen documentation" OFF
-LIGNE 27  PXR_BUILD_PYTHON_DOCUMENTATION "Generate Python documentation" OFF
-LIGNE 28  PXR_BUILD_HTML_DOCUMENTATION "Generate HTML documentation if PXR_BUILD_DOCUMENTATION is ON" ON
+LIGNE 29  PXR_BUILD_DOCUMENTATION "Generate doxygen documentation" OFF
+LIGNE 30  PXR_BUILD_PYTHON_DOCUMENTATION "Generate Python documentation" OFF
+LIGNE 31  PXR_BUILD_HTML_DOCUMENTATION "Generate HTML documentation if PXR_BUILD_DOCUMENTATION is ON" ON
 
-LIGNE 29  PXR_ENABLE_PYTHON_SUPPORT ON
-LIGNE 30  PXR_USE_DEBUG_PYTHON "Build with debug python" OFF
+LIGNE 32  PXR_ENABLE_PYTHON_SUPPORT ON
+LIGNE 33  PXR_USE_DEBUG_PYTHON "Build with debug python" OFF
 
-LIGNE 31  PXR_ENABLE_HDF5_SUPPORT   OFF
-LIGNE 32  PXR_ENABLE_OSL_SUPPORT "Enable OSL (OpenShadingLanguage) based components" OFF
-LIGNE 33  PXR_ENABLE_PTEX_SUPPORT "Enable Ptex support" OFF
-LIGNE 34  PXR_ENABLE_OPENVDB_SUPPORT "Enable OpenVDB support" OFF ==> ON
+LIGNE 34  PXR_ENABLE_HDF5_SUPPORT   OFF
+LIGNE 35  PXR_ENABLE_OSL_SUPPORT "Enable OSL (OpenShadingLanguage) based components" OFF
+LIGNE 36  PXR_ENABLE_PTEX_SUPPORT "Enable Ptex support" OFF
+LIGNE 37  PXR_ENABLE_OPENVDB_SUPPORT "Enable OpenVDB support" OFF ==> ON
 
-LIGNE 35  PXR_BUILD_MAYAPY_TESTS   OFF
-LIGNE 36  PXR_BUILD_ANIMX_TESTS   OFF
+LIGNE 38  PXR_ENABLE_NAMESPACES     ON ???
 
-LIGNE 37  PXR_ENABLE_NAMESPACES     ON ???
+LIGNE 39  PXR_PREFER_SAFETY_OVER_SPEED  ON
 
-LIGNE 38  PXR_PREFER_SAFETY_OVER_SPEED  ON
+LIGNE 84  PXR_ENABLE_METAL_SUPPORT "Enable Metal based components" "${pxr_enable_metal}" OFF
+LIGNE 85  PXR_ENABLE_VULKAN_SUPPORT "Enable Vulkan based components" OFF
+LIGNE 86  PXR_ENABLE_GL_SUPPORT "Enable OpenGL based components" ON
 
-LIGNE 79  PXR_ENABLE_METAL_SUPPORT "Enable Metal based components" "${pxr_enable_metal}" OFF
-LIGNE 80  PXR_ENABLE_VULKAN_SUPPORT "Enable Vulkan based components" OFF
-LIGNE 81  PXR_ENABLE_GL_SUPPORT "Enable OpenGL based components" ON
-
-LIGNE 147 BUILD_SHARED_LIBS         ON
-LIGNE 148 PXR_BUILD_MONOLITHIC      OFF ==> ON
+LIGNE 167 BUILD_SHARED_LIBS         ON
+LIGNE 168 PXR_BUILD_MONOLITHIC      OFF ==> ON
 
 
-3) kwrite /tmp/srcp/OpenUSD-26.05/cmake/defaults/ProjectDefaults.cmake
+3) kwrite /tmp/srcp/OpenUSD-26.08/cmake/defaults/ProjectDefaults.cmake
 
 LIGNE 38  CMAKE_BUILD_TYPE "Release"
 
 
-4) kwrite /tmp/srcp/OpenUSD-26.05/cmake/defaults/CXXDefaults.cmake
+4) kwrite /tmp/srcp/OpenUSD-26.08/cmake/defaults/CXXDefaults.cmake
 
 LIGNE 67  PXR_SET_INTERNAL_NAMESPACE
 
@@ -268,10 +258,9 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v26.05.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v26.08.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users      1555 28 janv. 18:14 usd_noboost.patch
--rw-r--r--  1 jnd users       763  4 mai   11:58 usd-fix-oneapi-tbb.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -290,7 +279,7 @@ rm -f *~ \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/openusd-jnd/PKGBUILD . \
 && cp -v $HOME/05-builds/openusd-jnd/blender-usd-diff.patch . \
-&& cp -v $HOME/05-builds/openusd-jnd/OpenUSD-v26.05.tar.gz . \
+&& cp -v $HOME/05-builds/openusd-jnd/OpenUSD-v26.08.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/openusd-jnd \
 && cp -v /tmp/build/openusd-jnd-*-x86_64.pkg.tar.* . \
@@ -379,7 +368,7 @@ $ mv -v openusd-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i OpenUSD-v26.05.tar.gz
+$ rm -i OpenUSD-v26.08.tar.gz
 
 
 $ cd && maj-repolocal
@@ -404,6 +393,18 @@ SI PROBLEME
 ========================================================================
 ANCIEN
 ======
+        "usd-fix-oneapi-tbb.patch"
+sha256sum usd-fix-oneapi-tbb.patch
+
+            '39925347a48ac981e50eb16a5f43b9949471c400349e9e9f3d4b9a7e4686665c'
+  # Fixe erreur compilation avec tbb : Voir Arch
+  patch -Np1 -i "${srcdir}/usd-fix-oneapi-tbb.patch"
+
+-rw-r--r--  1 jnd users       763  4 mai   11:58 usd-fix-oneapi-tbb.patch
+
+LIGNE 35  PXR_BUILD_MAYAPY_TESTS   OFF
+LIGNE 36  PXR_BUILD_ANIMX_TESTS   OFF
+
 depends=('boost-libs' 'glfw'
          'onetbb'
          'materialx'
@@ -470,7 +471,7 @@ openvdb-jnd-*-x86_64.pkg.tar.*\
 /tmp/chrootrepo/
 
 
--rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v26.05.tar.gz
+-rw-r--r--  1 jnd users 128144264 14 déc.  11:03 OpenUSD-v26.08.tar.gz
 -rw-r--r--  1 jnd users      3602 14 déc.  11:05 PKGBUILD
 -rw-r--r--  1 jnd users       557  3 déc.  14:40 fix-error-m_wait_ctx-was-not-declared.patch
 -rw-r--r--  1 jnd users      1539 15 janv. 14:26 usd-cmake-find-dependency.patch
@@ -495,7 +496,7 @@ $ ls -la
 -rw-r--r--  1 jnd users     13913 13 août   2023 blender-usd_core_profile-diff.patch
 -rw-r--r--  1 jnd users      1809  5 juin  11:03 blender-usd_metal_edf-diff.patch
 -rw-r--r--  1 jnd users     1435 29 déc.  10:59 PKGBUILD
--rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v26.05.tar.gz
+-rw-r--r--  1 jnd users 37563211 29 déc.  10:50 OpenUSD-v26.08.tar.gz
 -rw-r--r--  1 jnd users     59882  5 juin  18:01 usd-tbb_part_1.patch
 -rw-r--r--  1 jnd users      4520  5 juin  18:22 usd-tbb_part_2.patch
 -rw-r--r--  1 jnd users       784  5 juin  18:34 usd-tbb_part_3.patch
@@ -509,7 +510,7 @@ source=("USD-v${_ver_release}.tar.gz"
         "blender-usd_core_profile-diff.patch"
         "blender-usd_metal_edf-diff.patch"
 )
-sha256sum OpenUSD-v26.05.tar.gz
+sha256sum OpenUSD-v26.08.tar.gz
 
 sha256sum usd-tbb_part_1.patch
 
@@ -561,7 +562,7 @@ source=("USD-v${_ver_release}.tar.gz"
         'blender-usd-diff.patch'
 
 )
-sha256sum OpenUSD-v26.05.tar.gz
+sha256sum OpenUSD-v26.08.tar.gz
 
 sha256sum blender-usd-diff.patch
 

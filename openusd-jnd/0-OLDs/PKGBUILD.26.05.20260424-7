@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=openusd-jnd
-pkgver=26.08.20260720
-pkgrel=1
-_ver_release="26.08"
+pkgver=26.05.20260424
+pkgrel=7
+_ver_release="26.05"
 _name_release="OpenUSD-${_ver_release}"
 pkgdesc="Universal Scene Description"
 url="http://www.openusd.org/"
@@ -29,9 +29,11 @@ provides=('usd' 'openusd')
 options=('!debug')
 source=("OpenUSD-v${_ver_release}.tar.gz"
         "usd_noboost.patch"
+        "usd-fix-oneapi-tbb.patch"
 )
-sha256sums=('4bccbb95cddda1dbeef2f74a08b9456352f2aa91bfd4578c0c613009c7950149'
-            '5c2d5ef31660babc4ae55c79cd5c8b76be0fcb52caae6ebebf587cbd1f8b7475'
+sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
+            '1b6cd3ff2b3174f832ad181901634efcb006924f2dcab715334db6b9ac2c2550'
+            '39925347a48ac981e50eb16a5f43b9949471c400349e9e9f3d4b9a7e4686665c'
 )
 
 prepare() {
@@ -39,6 +41,9 @@ prepare() {
 
   # Sans Boost : Voir blender
   patch -Np1 -i "${srcdir}/usd_noboost.patch"
+
+  # Fixe erreur compilation avec tbb
+  patch -Np1 -i "${srcdir}/usd-fix-oneapi-tbb.patch"
 
   local _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
