@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=tracy-jnd
-pkgver=0.13.1.20251212
+pkgver=0.14.1.20260822
 pkgrel=1
-_ver_release="0.13.1"
+_ver_release="0.14.1"
 _name_release="tracy-${_ver_release}"
 pkgdesc="Real-time, nanosecond resolution frame profiler"
 url="https://github.com/wolfpld/tracy"
@@ -19,7 +19,7 @@ provides=('tracy')
 options=('!debug')
 source=("tracy-${_ver_release}.tar.gz"
 )
-sha256sums=('d4efc50ebcb0bfcfdbba148995aeb75044c0d80f5d91223aebfaa8fa9e563d2b'
+sha256sums=('bf4af567e9c7524d07f3caa745fad02fb33bd5694f11910750382d1efbb251c1'
 )
 
 build() {
