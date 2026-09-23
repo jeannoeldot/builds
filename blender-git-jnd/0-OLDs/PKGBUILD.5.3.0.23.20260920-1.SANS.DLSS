@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.3.0.24.20260923
+pkgver=5.3.0.23.20260920
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -46,11 +46,9 @@ options=('!lto' '!debug')
 _pkgname_git=blender-git
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-9.1.0.tar.gz"
-        "DLSS-git-310.9.1.tar.gz"
 )
-sha256sums=('f954dc318d54a32e840b24f4c62217fbaa858e41ea306610f6959c03d19402c6'
+sha256sums=('2e1bf96d2fedd450eb3194688cd3deaacfadc7ccfbe83970013f8979a76eb9b5'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
-            'effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb'
 )
 
 _gitname="blender"
@@ -88,8 +86,6 @@ build() {
         -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
         -D CYCLES_CUDA_BINARIES_ARCH="$cuda_archs" \
         -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-9.1.0" \
-        -D WITH_DLSS=ON \
-        -D DLSS_SDK_ROOT="${srcdir}/DLSS" \
         -D WITH_CYCLES_PARALLEL_DEVICE_KERNEL_BUILD=ON \
         -D WITH_CYCLES_NATIVE_ONLY=ON \
         -D WITH_SYSTEM_GFLAGS=ON \
@@ -117,7 +113,4 @@ package() {
   # voir Community
   python -m compileall "${pkgdir}/usr/share/blender"
   python -O -m compileall "${pkgdir}/usr/share/blender"
-
-  # NVIDIA DLSS
-  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssd.so.310.9.1" "${pkgdir}/usr/bin/libnvidia-ngx-dlssd.so.310.9.1"
 }

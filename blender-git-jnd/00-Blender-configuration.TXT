@@ -1,3 +1,23 @@
+
+
+
+19) 5.3.0.24.20260923   # AVEC GCC 16.2.1 # AVEC NVIDIA DLSS
+-- Found CUDA: /opt/cuda (found version "13.4")
+-- Found CUDA /opt/cuda/bin/nvcc (13.4)
+-- Performing Test _has_march_native
+-- Performing Test _has_march_native - Success
+-- Found OptiX: /build/blender-git-jnd/src/optix-dev-9.1.0/include (found suitable version "9.1.0", minimum required is "8.0.0")
+-- Found DLSS: /build/blender-git-jnd/src/DLSS/include
+...
+-- Cycles CUDA: Using CUDA toolkit /opt/cuda (version 13.4) for sm_86
+-- Cycles CUDA: Using CUDA toolkit /opt/cuda (version 13.4) for sm_120
+-- Cycles CUDA: Using CUDA toolkit /opt/cuda (version 13.4) for compute_121
+-- Cycles OptiX: Using CUDA toolkit /opt/cuda (version 13.4) for compute_75
+
+Blender Configuration
+=====================
+
+
 18) 5.3.0.23.20260920   # AVEC GCC 16.2.1 # SANS NVIDIA DLSS
 -- Found CUDA: /opt/cuda (found version "13.4")
 -- Found CUDA /opt/cuda/bin/nvcc (13.4)

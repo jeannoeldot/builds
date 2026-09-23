@@ -1,0 +1,63 @@
+
+
+https://github.com/NVIDIA/DLSS
+
+
+1-0-0) DLSS 310.9.1 SDK
+=======================
+$ cd /0-DataLinux/05-builds-dir-git
+
+Vérifier existence rep DLSS :
+-----------------------------------
+$ ls | grep DLSS
+
+!!! SI REP DLSS N'EXISTE PAS
+----------------------------
+
+$ git clone --recurse-submodules https://github.com/NVIDIA/DLSS.git
+
+Clonage dans 'DLSS'...
+remote: Enumerating objects: 1051, done.
+remote: Counting objects: 100% (53/53), done.
+remote: Compressing objects: 100% (26/26), done.
+remote: Total 1051 (delta 37), reused 27 (delta 27), pack-reused 998 (from 2)
+Réception d'objets: 100% (1051/1051), 861.42 MiO | 31.61 MiO/s, fait.
+Résolution des deltas: 100% (638/638), fait.
+Mise à jour des fichiers: 100% (110/110), fait.
+Sous-module 'NVIDIAImageScaling' (https://github.com/NVIDIAGameWorks/NVIDIAImageScaling) enregistré pour le chemin 'NVIDIAImageScaling'
+Clonage dans '/0-DataLinux/05-builds-dir-git/DLSS/NVIDIAImageScaling'...
+remote: Enumerating objects: 744, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 744 (delta 2), reused 2 (delta 2), pack-reused 738 (from 1)
+Réception d'objets: 100% (744/744), 37.67 MiO | 2.82 MiO/s, fait.
+Résolution des deltas: 100% (245/245), fait.
+Chemin de sous-module 'NVIDIAImageScaling' : '35e13ba316c98eeecf16f37eae70ce88019911f6' extrait
+
+
+!!! SI REP DLSS EXISTE
+----------------------
+
+$ cd DLSS
+
+$ git submodule update --init --recursive
+
+$ cd ..
+
+
+!!!!! Vérifier VERSION :
+https://github.com/NVIDIA/DLSS : DLSS 310.9.1 SDK
+
+==> Version = 310.9.1
+
+$ tar -cvzf DLSS-git-310.9.1.tar.gz \
+--exclude={.git,.gitmodules,doc,NVIDIAImageScaling,utils,lib/Linux_aarch64,lib/Linux_x86_64/dev,lib/Windows_aarch64,lib/Windows_arm64ec,lib/Windows_x86_64,*.pdf} \
+DLSS
+
+$ sync
+
+$ sha256sum DLSS-git-310.9.1.tar.gz
+
+==>   effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb
+
+$ cd
