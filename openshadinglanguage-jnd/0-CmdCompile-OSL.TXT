@@ -48,6 +48,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.15.7.0.20260907
+pkgrel=2    # REBUILD MAJ openexr 3.5.0 + openjph 0.32.0
 pkgrel=1
 
 pkgrel=2    # rebuild MAJ OIIO 3.1.17.0
