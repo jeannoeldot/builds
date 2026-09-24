@@ -53,6 +53,7 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=openusd-jnd
 pkgver=26.08.20260720
+pkgrel=3      # REBUILD MAJ openexr 3.5.0 + openjph 0.32.0
 pkgrel=2      # rebuild MAJ OIIO 3.1.17.0
 pkgrel=1      # v26.08
 
@@ -149,7 +150,7 @@ source=("USD-v${_ver_release}.tar.gz"
 
 sha256sum OpenUSD-v26.08.tar.gz
 
-sha256sums=('bf514f62ac9508d3c5b121dc1107f3b29bf3c954473b9b0bf8324b7cf04c64c1'
+sha256sums=('4bccbb95cddda1dbeef2f74a08b9456352f2aa91bfd4578c0c613009c7950149'
 )
 
 AVEC PATCH
