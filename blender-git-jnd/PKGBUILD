@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.3.0.24.20260924
+pkgver=5.3.0.24.20260926
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -43,12 +43,16 @@ makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
 conflicts=('blender')
 provides=('blender')
 options=('!lto' '!debug')
+
 _pkgname_git=blender-git
+_optixver=9.1.0
+_dlssver=310.9.1
+
 source=("$_pkgname_git-$pkgver.tar.zst"
-        "optix-dev-9.1.0.tar.gz"
-        "DLSS-git-310.9.1.tar.gz"
+        "optix-dev-${_optixver}.tar.gz"
+        "DLSS-git-${_dlssver}.tar.gz"
 )
-sha256sums=('e3c42cf6b327214b5e87bbdfb2442d35f8c1d0291b2b4a9a4fffbefb0479d01c'
+sha256sums=('177b3d534410872fc7053f45d0954798e5a11bc81746ba30a8d72ca6893b54bf'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
             'effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb'
 )
@@ -59,9 +63,9 @@ prepare() {
   cd "${_gitname}"
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "0301fc47a65e"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "852006fe9e16"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1790232201|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1790458473|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
@@ -69,13 +73,6 @@ _get_pyver() {
 }
 
 build() {
-  # In general, we want to list all real archs (sm_XX) and the latest virtual arch (compute_XX)
-  # for future PTX compatibility.
-  # Valid values can be discovered from nvcc --help
-  # local cuda_archs="sm_120;compute_120"   ==> PAS OK avec Cuda 13.2.0. Optix 9.1.0
-  # local cuda_archs="sm_120;compute_121"   ==> PAS OK avec Cuda 13.2.0. Optix 9.1.0
-  # local cuda_archs="sm_120;sm_121;compute_121"   ==> OK avec Cuda 13.2.0. Optix 9.1.0
-  # local cuda_archs="sm_120;compute_121"   ==> OK avec Cuda 13.4.2. Optix 9.1.0
   local cuda_archs="sm_120;compute_121"
 
   cd "${_gitname}"
@@ -88,7 +85,7 @@ build() {
         -D WITH_LINKER_MOLD=ON \
         -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
         -D CYCLES_CUDA_BINARIES_ARCH="$cuda_archs" \
-        -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-9.1.0" \
+        -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-${_optixver}" \
         -D WITH_DLSS=ON \
         -D DLSS_SDK_ROOT="${srcdir}/DLSS" \
         -D WITH_CYCLES_PARALLEL_DEVICE_KERNEL_BUILD=ON \
@@ -120,5 +117,5 @@ package() {
   python -O -m compileall "${pkgdir}/usr/share/blender"
 
   # NVIDIA DLSS
-  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssd.so.310.9.1" "${pkgdir}/usr/bin/libnvidia-ngx-dlssd.so.310.9.1"
+  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssd.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlssd.so.${_dlssver}"
 }
