@@ -212,6 +212,7 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.3.0.24.20260926
+pkgrel=2      # MAJ OIIO 3.1.18.0 + MAJ LLVM 23
 pkgrel=1
 
 
@@ -386,9 +387,9 @@ _get_pyver() {   python -c 'import sys; print(str(sys.version_info[0]) + "." + s
 
 !!! VÉRIFIER VERSION LLVM INSTALLÉE
 $ pacman -Ss llvm | grep extra | grep install
-extra/clang 22.1.8-1 [installé]
-extra/llvm 22.1.8-1 [installé]
-extra/llvm-libs 22.1.8-1 [installé]
+extra/clang 23.1.1-1 [installé]
+extra/llvm 23.1.1-1 [installé]
+extra/llvm-libs 23.1.1-1 [installé]
 
 depends=(...
           'llvm-libs'

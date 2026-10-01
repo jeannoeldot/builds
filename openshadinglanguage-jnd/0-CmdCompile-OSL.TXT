@@ -12,31 +12,31 @@ https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/releases
 
 1.3) SOURCES
 ==============
-cd /0-DataLinux/05-builds-dir-git
+$ cd /0-DataLinux/05-builds-dir-git
 
-wget -O OpenShadingLanguage-v1.15.7.0.tar.gz \
+$ wget -O OpenShadingLanguage-v1.15.7.0.tar.gz \
 https://github.com/AcademySoftwareFoundation/OpenShadingLanguage/archive/refs/tags/v1.15.7.0.tar.gz
 
-sync
+$ sync
 
-sha256sum OpenShadingLanguage-v1.15.7.0.tar.gz
+$ sha256sum OpenShadingLanguage-v1.15.7.0.tar.gz
 
 ==>   06a914d67c8c8a0f62e518b14791b1dd044c2421b6259e2de6b4f89d8f1442e0
 
 1-7) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
-cd $HOME/05-builds/openshadinglanguage-jnd
+$ cd $HOME/05-builds/openshadinglanguage-jnd
 
 !!! CONSERVE Release DANS 05-builds-dir-git
 -------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.15.7.0.tar.gz .
+$ cp -v /0-DataLinux/05-builds-dir-git/OpenShadingLanguage-v1.15.7.0.tar.gz .
 
 /!\/!\/!\/!\/!\
 !!! OPTIX CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------------
-cp -v /0-DataLinux/05-builds-dir-git/optix-dev-9.1.0.tar.gz .
+$ cp -v /0-DataLinux/05-builds-dir-git/optix-dev-9.1.0.tar.gz .
 
-sync
+$ sync
 
 1-8) FAIRE PATCH
 ===============================
@@ -48,6 +48,7 @@ VOIR 0-CmdFairePatches.TXT
 
 pkgname=openshadinglanguage-jnd
 pkgver=1.15.7.0.20260907
+pkgrel=3    # rebuild MAJ OIIO 3.1.18.0 + MAJ LLVM 23
 pkgrel=2    # REBUILD MAJ openexr 3.5.0 + openjph 0.32.0
 pkgrel=1
 
@@ -98,9 +99,9 @@ options=('!debug')
 !!! LLVM 22.1.2
 ------------------------------------
 $ pacman -Ss llvm | grep extra | grep install
-extra/clang 22.1.8-1 [installé]
-extra/llvm 22.1.8-2 [installé]
-extra/llvm-libs 22.1.8-2 [installé]
+extra/clang 23.1.1-1 [installé]
+extra/llvm 23.1.1-1 [installé]
+extra/llvm-libs 23.1.1-1 [installé]
 
 depends=('libstdc++' 'glibc' 'zlib' 'libgcc'
          'imath' 'freetype2' 'libpng' 'libtiff'
@@ -122,9 +123,9 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "optix-dev-9.1.0.tar.gz"
 )
 
-sha256sum OpenShadingLanguage-v1.15.7.0.tar.gz
+$ sha256sum OpenShadingLanguage-v1.15.7.0.tar.gz
 
-sha256sum optix-dev-9.1.0.tar.gz
+$ sha256sum optix-dev-9.1.0.tar.gz
 
 sha256sums=(...
          ...
@@ -138,13 +139,13 @@ source=("OpenShadingLanguage-${_ver_release}.tar.gz"
         "openshadinglanguage-1.14.8-llvm-21.1.3.patch"
 )
 
-sha256sum OpenShadingLanguage-v1.15.7.0.tar.gz
+$ sha256sum OpenShadingLanguage-v1.15.7.0.tar.gz
 
-sha256sum optix-dev-9.1.0.tar.gz
+$ sha256sum optix-dev-9.1.0.tar.gz
 
-sha256sum Add-missing-cstdint-include-for-GCC-15.patch
+$ sha256sum Add-missing-cstdint-include-for-GCC-15.patch
 
-sha256sum openshadinglanguage-1.14.8-llvm-21.1.3.patch
+$ sha256sum openshadinglanguage-1.14.8-llvm-21.1.3.patch
 
 sha256sums=('....'
             '....'
@@ -182,9 +183,9 @@ package() {
 
 2-5) VERIFIER CMakeLists.txt
 ============================
-mkdir /tmp/srcp
+$ mkdir /tmp/srcp
 
-tar -xzf OpenShadingLanguage-v1.15.7.0.tar.gz -C /tmp/srcp
+$ tar -xzf OpenShadingLanguage-v1.15.7.0.tar.gz -C /tmp/srcp
 
 1) kwrite /tmp/srcp/OpenShadingLanguage-1.15.7.0/CMakeLists.txt &
 
@@ -317,7 +318,7 @@ LIGNE 69 ET ...
 LIGNE 192
 
 
-rm -rf /tmp/srcp
+$ rm -rf /tmp/srcp
 
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
