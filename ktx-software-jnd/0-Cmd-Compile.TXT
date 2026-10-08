@@ -1,0 +1,242 @@
+# Le répertoire
+===============
+!!! EN USER
+$ cd $HOME/05-builds/ktx-software-jnd
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/KhronosGroup/KTX-Software/releases#release-v4.4.2
+==>  github-actions released this Oct 4, 2025  ==> 20251004
+==>  v4.4.2  ==> 4.4.2
+==> 4.4.2.20251004
+
+1.3 SOURCES
+==============
+$ cd /0-DataLinux/05-builds-dir-git
+
+$ wget -O ktx-software-4.4.2.tar.gz \
+https://github.com/KhronosGroup/KTX-Software/archive/refs/tags/v4.4.2.tar.gz
+
+$ sha256sum ktx-software-4.4.2.tar.gz
+==>   9412cb45045a503005acd47d98f9e8b47154634a50b4df21e17a1dfa8971d323
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+$ cd $HOME/05-builds/ktx-software-jnd
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+$ cp -v /0-DataLinux/05-builds-dir-git/ktx-software-4.4.2.tar.gz .
+
+$ sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=ktx-software-jnd
+pkgver=4.4.2.20251004
+pkgrel=1
+
+
+!!!!!!
+_ver_release="4.4.2"
+_name_release="KTX-Software-${_ver_release}"
+
+license=('Apache-2.0')
+
+depends=('glibc' 'libgcc' 'libstdc++'
+)
+makedepends=('cmake'
+)
+
+conflicts=('ktx-software')
+provides=('ktx-software')
+
+options=('!debug')
+
+SANS PATCH
+----------
+$ sha256sum ktx-software-4.4.2.tar.gz
+
+source=("ktx-software-${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf ktx-software-4.4.2.tar.gz -C /tmp/srcp
+
+1) kwrite /tmp/srcp/KTX-Software-4.4.2/CMakeLists.txt &
+!!! VOIR
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/ktx-software.cmake
+
+LIGNES 42 ET ...
+
+KTX_FEATURE_DOC "Create KTX documentation." OFF
+KTX_FEATURE_JNI "Create Java bindings for libktx." OFF
+KTX_FEATURE_PY "Create Python source distribution." OFF
+KTX_FEATURE_TESTS "Create unit tests." ON   ==> OFF
+KTX_FEATURE_TOOLS_CTS "Enable KTX CLI Tools CTS tests (requires CTS submodule)." OFF
+KTX_FEATURE_ETC_UNPACK "ETC decoding support." ON   ==> OFF
+
+LIGNES 68 ET ...
+
+KTX_FEATURE_KTX1 "Enable KTX 1 support." ON
+KTX_FEATURE_KTX2 "Enable KTX 2 support." ON
+KTX_FEATURE_VK_UPLOAD "Enable Vulkan texture upload." ON
+KTX_FEATURE_GL_UPLOAD "Enable OpenGL texture upload." ON
+
+LIGNES 98 ET ...
+
+KTX_GENERATE_VK_FILES         OFF
+
+LIGNES 200 ET ...
+
+KTX_WERROR "Make all warnings in KTX code into errors." OFF
+
+LIGNES 275 ET ...
+
+BUILD_SHARED_LIBS "Create shared libraries (static otherwise)." ${LIB_TYPE_DEFAULT} ==> ON
+
+LIGNES 1188 ET ...
+    -DASTCENC_ISA_AVX2=OFF
+    -DASTCENC_ISA_SSE41=ON
+	-DASTCENC_ISA_SSE2=OFF
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 ktx-software-4.4.2.tar.gz
+-rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/ktx-software-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/ktx-software-jnd/ktx-software-4.4.2.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/ktx-software-jnd \
+&& cp -v /tmp/build/ktx-software-jnd-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/ktx-software-jnd && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  ORIGINAL
+-----------
+1) Sauvegarde
+$ cp -v $HOME/05-builds//0-copie-fichiers-chroot/makepkg.conf.generic \
+$HOME/05-builds//0-copie-fichiers-chroot/makepkg.conf.generic.original
+2) Initialisation
+$ cp -v $HOME/05-builds//0-copie-fichiers-chroot/makepkg.conf.original \
+$HOME/05-builds//0-copie-fichiers-chroot/makepkg.conf.generic
+
+$ rm -f *~
+$ mkpkg-tmpfs -m generic
+
+
+3) Restauration
+$ cp -v $HOME/05-builds//0-copie-fichiers-chroot/makepkg.conf.generic.original \
+$HOME/05-builds//0-copie-fichiers-chroot/makepkg.conf.generic
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+$ namcap ktx-software-jnd-*-x86_64.pkg.tar.*
+ktx-software-jnd W: Dependency included, but may not be needed ('zlib')
+ktx-software-jnd W: Dependency included, but may not be needed ('libpng')
+ktx-software-jnd W: Dependency included, but may not be needed ('libjpeg-turbo')
+ktx-software-jnd W: Dependency included, but may not be needed ('openexr')
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/ktx-software-jnd-*-x86_64.pkg.tar.*
+
+$ sudo cp -v ktx-software-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/ktx-software-jnd-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v ktx-software-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i ktx-software-4.4.2.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!!! PAS OBLIGATOIRE SI COMPILE ... BLENDER
+============================================
+!!! EN ROOT
+# cd
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu ktx-software-jnd
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd ktx-software-jnd
+# rm /var/cache/pacman/pkg/ktx-software-jnd-*
+# LC_ALL=C pacman -S ktx-software-jnd
+
+
+ANCIEN
+======
+

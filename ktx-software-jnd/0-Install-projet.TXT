@@ -1,0 +1,15 @@
+
+V 4.4.2
+=======
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/lib/libktx.so.0.0.0
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/lib/libktx.so.0
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/include/ktx.h
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/include/ktxvulkan.h
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/lib/libktx.so
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/include/KHR/khr_df.h
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/lib/cmake/ktx/KtxTargets.cmake
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/lib/cmake/ktx/KtxTargets-release.cmake
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/lib/cmake/ktx/KtxConfig.cmake
+-- Installing: /build/ktx-software-jnd/pkg/ktx-software-jnd/usr/lib/cmake/ktx/KtxConfigVersion.cmake

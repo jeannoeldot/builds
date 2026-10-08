@@ -1,0 +1,29 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 4.4.2
+
+
+/!\ /!\ /!\ $HOME/05-builds/ktx-software-jnd
+
+$ mkdir /tmp/srcp
+
+$ cp -v ktx-software-4.4.2.tar.gz /tmp/srcp/
+
+$ cd /tmp/srcp
+
+$ tar -xzf ktx-software-4.4.2.tar.gz
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+$ rm -rf /tmp/srcp
+
+$ sync
+
+=================================================================
+ANCIENS
+========
+

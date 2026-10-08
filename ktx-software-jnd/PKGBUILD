@@ -1,0 +1,60 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=ktx-software-jnd
+pkgver=4.4.2.20251004
+pkgrel=1
+_ver_release="4.4.2"
+_name_release="KTX-Software-${_ver_release}"
+pkgdesc="KTX (Khronos Texture) Library and Tools"
+url="https://github.com/KhronosGroup/KTX-Software"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('glibc' 'libgcc' 'libstdc++'
+         'zlib' 'libpng' 'libjpeg-turbo' 'openexr'
+)
+makedepends=('cmake' 'gcc15' 'zstd'
+)
+conflicts=('ktx-software')
+provides=('ktx-software')
+#options=(staticlibs)
+options=('!debug')
+source=("ktx-software-${_ver_release}.tar.gz"
+)
+sha256sums=('9412cb45045a503005acd47d98f9e8b47154634a50b4df21e17a1dfa8971d323'
+)
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DCMAKE_C_COMPILER=gcc-15 \
+    -DCMAKE_CXX_COMPILER=g++-15 \
+    -DCMAKE_C_FLAGS="${CFLAGS}" \
+    -DCMAKE_CXX_FLAGS="${CXXFLAGS} -msse4.1" \
+    -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}" \
+    -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}" \
+    -DBUILD_SHARED_LIBS=ON \
+    -DKTX_FEATURE_TOOLS=OFF \
+    -DKTX_FEATURE_TESTS=OFF \
+    -DKTX_FEATURE_ETC_UNPACK=OFF \
+    -DASTCENC_ISA_AVX2=OFF \
+    -DASTCENC_ISA_SSE41=ON \
+	-DASTCENC_ISA_SSE2=OFF \
+
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  
+  DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+}
