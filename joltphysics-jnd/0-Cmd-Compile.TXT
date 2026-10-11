@@ -1,0 +1,206 @@
+# Le répertoire
+===============
+!!! EN USER
+$ cd $HOME/05-builds/joltphysics-jnd
+
+1-2) ATTENTION A VERSION ET DATE SUR LE SITE
+============================================
+https://github.com/jrouwe/JoltPhysics/releases
+==> jrouwe released this juil 11, 2026  ==> 20260711
+==>  v5.6.0  ==> 5.6.0
+==> 5.6.0.20260711
+
+1.3 SOURCES
+==============
+$ cd /0-DataLinux/05-builds-dir-git
+
+$ wget -O joltphysics-5.6.0.tar.gz \
+https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.6.0.tar.gz
+
+$ sha256sum joltphysics-5.6.0.tar.gz
+==>   6e069ee0172478cc78182047aac87e5310ba14a67a53348ae14cc37801fd3f8e
+
+1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
+==========================================
+$ cd $HOME/05-builds/joltphysics-jnd
+
+!!! CONSERVE VERSION DANS 05-builds-dir-git
+-------------------------------------------
+$ cp -v /0-DataLinux/05-builds-dir-git/joltphysics-5.6.0.tar.gz .
+
+$ sync
+
+1-8) FAIRE PATCH
+===============================
+voir 0-CmdFairePatches.TXT
+
+
+2-1) MODIFIER LE PKGBUILD
+=========================
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=joltphysics-jnd
+pkgver=5.6.0.20260711
+pkgrel=1
+
+
+!!!!!!
+_ver_release="5.6.0"
+_name_release="JoltPhysics-${_ver_release}"
+
+license=('MIT')
+
+depends=('glibc' 'libgcc' 'libstdc++'
+)
+makedepends=('cmake' 'clang'
+)
+
+conflicts=('joltphysics')
+provides=('joltphysics')
+
+options=('!debug')
+
+SANS PATCH
+----------
+$ sha256sum joltphysics-5.6.0.tar.gz
+
+source=("joltphysics-${_ver_release}.tar.gz"
+)
+sha256sums=('... ...'
+)
+
+build() {
+  cd "${_name_release}"
+
+package() {
+  cd "${_name_release}"
+
+
+2-5) VERIFIER CMakeLists.txt
+============================
+mkdir /tmp/srcp
+
+tar -xzf joltphysics-5.6.0.tar.gz -C /tmp/srcp
+
+1)
+!!! VOIR
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/jolt.cmake
+
+LIGNES 42 ET ...
+
+
+
+rm -rf /tmp/srcp
+
+
+!!! ATTENTION : ATTRIBUTS FICHIERS
+==================================
+$ ls -la
+==> 
+-rw-r--r--  1 jnd users 4210384 21 avril 11:51 joltphysics-5.6.0.tar.gz
+-rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+
+!!! A MODIFIER SI PAS OK !
+===============================
+
+
+3) MAKEPKG DANS TMP EN USER
+====================================
+!!! EN ROOT
+# pacman -Syu
+
+!!! EN USER
+
+rm -f *~ \
+&& rm -rf /tmp/build \
+&& mkdir /tmp/build \
+&& cd /tmp/build \
+&& cp -v $HOME/05-builds/joltphysics-jnd/PKGBUILD . \
+&& cp -v $HOME/05-builds/joltphysics-jnd/joltphysics-5.6.0.tar.gz . \
+&& LC_ALL=C makepkg -s \
+&& cd $HOME/05-builds/joltphysics-jnd \
+&& cp -v /tmp/build/joltphysics-jnd-*-x86_64.pkg.tar.* . \
+&& rm -rf /tmp/build
+
+SI ERREUR :
+------------
+cd $HOME/05-builds/joltphysics-jnd && rm -rf /tmp/build
+
+
+3-1) MAKEPKG TMPFS en CHROOT EN USER
+====================================
+!!! EN USER
+
+$ mkpkg-chroot-repo
+
+  FLOOP
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m floop -g 24G
+
+  FAST
+-------
+$ rm -f *~
+$ mkpkg-tmpfs -m fast -g 24G
+
+  NATIVE
+--------
+$ rm -f *~
+$ mkpkg-tmpfs -m native -g 24G
+
+$ rm -rf /tmp/chrootrepo
+
+4)
+===========================
+# Nettoyage...
+!!! EN USER
+rm -f *~
+
+# Verifications...
+
+$ namcap joltphysics-jnd-*-x86_64.pkg.tar.*
+
+
+# SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
+---------------------------------------------------------------
+$ sudo rm /00-repolocal/joltphysics-jnd-*-x86_64.pkg.tar.*
+
+$ sudo cp -v joltphysics-jnd-*-x86_64.pkg.tar.* /00-repolocal/
+
+# DÉPLACE ET REMPLACE LE PRÉCÉDENT DANS /0-DataLinux/00-repolocal/
+-------------------------------------------------------------------
+$ mv -v /0-DataLinux/00-repolocal/joltphysics-jnd-*-x86_64.pkg.tar.* \
+/0-DataLinux/00-repolocal/pkg-OLD/
+
+$ mv -v joltphysics-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
+
+
+# SUPPRIME FICHIERS *~ ET FICHIER GIT SOURCE
+--------------------------------------------
+$ rm -f *~
+$ rm -f *.log
+$ rm -i joltphysics-5.6.0.tar.gz
+
+
+$ cd && maj-repolocal
+$ sync
+
+!!!! PAS OBLIGATOIRE SI COMPILE ... BLENDER
+============================================
+!!! EN ROOT
+# cd
+# LC_ALL=C pacman -Syu
+
+# LC_ALL=C pacman -Syu joltphysics-jnd
+
+SI PROBLEME
+==============
+!!! EN ROOT
+# LC_ALL=C pacman -Rdd joltphysics-jnd
+# rm /var/cache/pacman/pkg/joltphysics-jnd-*
+# LC_ALL=C pacman -S joltphysics-jnd
+
+
+ANCIEN
+======
+

@@ -1,0 +1,29 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 5.6.0
+
+
+/!\ /!\ /!\ $HOME/05-builds/joltphysics-jnd
+
+$ mkdir /tmp/srcp
+
+$ cp -v joltphysics-5.6.0.tar.gz /tmp/srcp/
+
+$ cd /tmp/srcp
+
+$ tar -xzf joltphysics-5.6.0.tar.gz
+
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+$ rm -rf /tmp/srcp
+
+$ sync
+
+=================================================================
+ANCIENS
+========
+
