@@ -1,3 +1,20 @@
 
 V 5.6.0
 =======
+-- The CXX compiler identification is GNU 16.2.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Interprocedural optimizations are turned on
+-- Could NOT find Vulkan (missing: Vulkan_INCLUDE_DIR) (found version "")
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+CMake Warning (unused-cli):
+  Manually-specified variables were not used by the project:
+
+    CMAKE_DEBUG_POSTFIX
+
+
+-- Build files have been written to: /build/joltphysics-jnd/src/JoltPhysics-5.6.0/Build/build

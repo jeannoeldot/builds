@@ -1,0 +1,111 @@
+
+
+$ cd /home/jnd/99-temp/jolt/JoltPhysics-5.6.0/Build/
+
+JOLT_EXTRA_ARGS=(-DJPH_USE_DX12=OFF
+	  -DJPH_USE_MTL=ON
+	  -DJPH_USE_VK=ON
+)
+
+$ ./cmake_linux_clang_gcc.sh BUILD_TYPE=Release --shared $(JOLT_EXTRA_ARGS)
+bash: JOLT_EXTRA_ARGS: commande introuvable
+No compiler argument, using default COMPILER=clang++
+
+Usage: ./cmake_linux_clang_gcc.sh [BUILD_TYPE] [COMPILER] [--shared] [--postfix-debug] [--env-script=...]
+Build type options: Debug, Release, Distribution, ReleaseUBSAN, ReleaseASAN, ReleaseTSAN, ReleaseCoverage
+Compiler options: clang++, clang++-XX, g++, g++-XX where XX is the version
+
+Generating Makefile for build type "BUILD_TYPE=Release" and compiler "clang++" in folder "Linux_BUILD_TYPE=Release_shared"
+-- The CXX compiler identification is Clang 23.1.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Interprocedural optimizations are turned on
+-- Found Vulkan: /usr/lib/libvulkan.so (found version "1.4.363") found components: glslc glslangValidator
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jnd/99-temp/jolt/JoltPhysics-5.6.0/Build/Linux_BUILD_TYPE=Release_shared
+
+Compile by running:
+cd Linux_BUILD_TYPE=Release_shared && make -j20
+Run tests: ./UnitTests
+
+
+---------------------------------------------------------------------------
+$ cd /home/jnd/99-temp/jolt/JoltPhysics-5.6.0/Build/
+
+$ ./cmake_linux_clang_gcc.sh BUILD_TYPE=Release --shared
+No compiler argument, using default COMPILER=clang++
+
+Usage: ./cmake_linux_clang_gcc.sh [BUILD_TYPE] [COMPILER] [--shared] [--postfix-debug] [--env-script=...]
+Build type options: Debug, Release, Distribution, ReleaseUBSAN, ReleaseASAN, ReleaseTSAN, ReleaseCoverage
+Compiler options: clang++, clang++-XX, g++, g++-XX where XX is the version
+
+Generating Makefile for build type "BUILD_TYPE=Release" and compiler "clang++" in folder "Linux_BUILD_TYPE=Release_shared"
+-- The CXX compiler identification is Clang 23.1.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Interprocedural optimizations are turned on
+-- Found Vulkan: /usr/lib/libvulkan.so (found version "1.4.363") found components: glslc glslangValidator
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jnd/99-temp/jolt/JoltPhysics-5.6.0/Build/Linux_BUILD_TYPE=Release_shared
+
+Compile by running:
+cd Linux_BUILD_TYPE=Release_shared && make -j20
+Run tests: ./UnitTests
+
+
+------------------------------------------------------------------------
+$ cd /home/jnd/99-temp/jolt/JoltPhysics-5.6.0/Build/
+
+$ ./cmake_linux_clang_gcc.sh
+
+No build type argument, using default BUILD_TYPE=Debug
+No compiler argument, using default COMPILER=clang++
+
+Usage: ./cmake_linux_clang_gcc.sh [BUILD_TYPE] [COMPILER] [--shared] [--postfix-debug] [--env-script=...]
+Build type options: Debug, Release, Distribution, ReleaseUBSAN, ReleaseASAN, ReleaseTSAN, ReleaseCoverage
+Compiler options: clang++, clang++-XX, g++, g++-XX where XX is the version
+
+Generating Makefile for build type "Debug" and compiler "clang++" in folder "Linux_Debug"
+-- The CXX compiler identification is Clang 23.1.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Interprocedural optimizations are turned on
+-- Found Vulkan: /usr/lib/libvulkan.so (found version "1.4.363") found components: glslc glslangValidator
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/jnd/99-temp/jolt/JoltPhysics-5.6.0/Build/Linux_Debug
+
+Compile by running:
+cd Linux_Debug && make -j20
+Run tests: ./UnitTests
+
+
+---------------------------------------------------------------------------------------
+$ pacman -F /usr/lib/libvulkan.so
+usr/lib/libvulkan.so appartient à extra/vulkan-icd-loader 1.4.335.0-1
+
+$ pacman -Ss vulkan-icd-loader
+extra/vulkan-icd-loader 1.4.363.0-1 (vulkan-devel) [installé]
+    Vulkan Installable Client Driver (ICD) Loader
+
+
+$ pacman -F /usr/bin/dxc
+usr/bin/dxc appartient à extra/directx-shader-compiler 1.8.2505.1-2
+
+$ pacman -Ss directx-shader-compiler
+extra/directx-shader-compiler 1.10.2605.37-1
+    Compiler for HLSL to DXIL (DirectX Intermediate Language)
+
+
+

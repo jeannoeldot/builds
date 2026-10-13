@@ -52,7 +52,9 @@ license=('MIT')
 
 depends=('glibc' 'libgcc' 'libstdc++'
 )
-makedepends=('cmake' 'clang'
+makedepends=('cmake'
+             'vulkan-icd-loader'
+
 )
 
 conflicts=('joltphysics')
@@ -69,11 +71,31 @@ source=("joltphysics-${_ver_release}.tar.gz"
 sha256sums=('... ...'
 )
 
-build() {
+AVEC PATCH
+----------
+$ sha256sum joltphysics-5.6.0.tar.gz
+
+$ sha256sum jolt_ndebug.diff
+
+source=("joltphysics-${_ver_release}.tar.gz"
+        "jolt_ndebug.diff"
+)
+sha256sums=('123456789'
+            '123456789'
+)
+
+prepare() {
   cd "${_name_release}"
 
+  # Voir blender
+  patch -Np1 -i "${srcdir}/jolt_ndebug.diff"
+
+
+build() {
+  cd "${_name_release}/Build"
+
 package() {
-  cd "${_name_release}"
+  cd "${_name_release}/Build"
 
 
 2-5) VERIFIER CMakeLists.txt
@@ -82,13 +104,37 @@ mkdir /tmp/srcp
 
 tar -xzf joltphysics-5.6.0.tar.gz -C /tmp/srcp
 
-1)
+1) kwrite /tmp/srcp/JoltPhysics-5.6.0/Build/CMakeLists.txt &
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/jolt.cmake
 
-LIGNES 42 ET ...
+09  DOUBLE_PRECISION                      OFF  ==> ON
+21  CROSS_PLATFORM_DETERMINISTIC          OFF  ==> ON
+30  JPH_BUILD_SHARED_LIBS                      ==> ON
+85  DEBUG_RENDERER_IN_DEBUG_AND_RELEASE   ON  ==> OFF
+92  PROFILER_IN_DEBUG_AND_RELEASE         ON  ==> OFF
+119 USE_STATIC_MSVC_RUNTIME_LIBRARY       ON  ==> OFF
 
+121 JPH_USE_DX12                          ON  ==> OFF # DirectX 12
+125 JPH_USE_VK                            ON          # Vulkan
+128 JPH_USE_MTL                           ON  ==> OFF # MTL = Metal = Apple
 
+369 TARGET_UNIT_TESTS                     ON  ==> OFF
+370 TARGET_HELLO_WORLD                    ON  ==> OFF
+371 TARGET_PERFORMANCE_TEST               ON  ==> OFF
+372 TARGET_SAMPLES                        ON  ==> OFF
+373 TARGET_VIEWER                         ON  ==> OFF
+
+$ cat /proc/cpuinfo | grep SSE4_1 SSE4_2 AVX AVX2
+54  USE_SSE4_1                            ON
+55  USE_SSE4_2                            ON
+56  USE_AVX                               ON
+57  USE_AVX2                              ON
+58  USE_AVX512                            ON  ==> OFF
+59  USE_LZCNT                             ON  ==> OFF
+60  USE_TZCNT                             ON  ==> OFF
+61  USE_F16C                              ON  ==> OFF
+62  USE_FMADD                             ON  ==> OFF
 
 rm -rf /tmp/srcp
 
@@ -97,8 +143,9 @@ rm -rf /tmp/srcp
 ==================================
 $ ls -la
 ==> 
--rw-r--r--  1 jnd users 4210384 21 avril 11:51 joltphysics-5.6.0.tar.gz
--rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+-rw-r--r--  1 jnd users     1767 13 oct.  15:02 PKGBUILD
+-rw-r--r--  1 jnd users     4747  8 oct.  15:24 jolt_ndebug.diff
+-rw-r--r--  1 jnd users 19390751 13 oct.  14:10 joltphysics-5.6.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
