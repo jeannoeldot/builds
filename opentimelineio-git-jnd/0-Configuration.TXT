@@ -1,0 +1,41 @@
+
+V 0.19.0
+========
+-- The C compiler identification is GNU 16.2.1
+-- The CXX compiler identification is GNU 16.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Python: /usr/bin/python3.14 (found version "3.14.8") found components: Interpreter Development.Module
+-- Python_INCLUDE_DIRS: /usr/include/python3.14
+-- Python_VERSION: 3.14.8
+-- OTIO Defaulting Python install to /usr/python
+-- Building shared libs
+-- Installing C++ bindings to: /usr
+-- Installing C++ dynamic libraries to: /usr/python/opentimelineio
+--   Not installing header dependencies for C++ (OTIO_DEPENDENCIES_INSTALL=OFF)
+-- Installing Python bindings to: /usr/python
+-- Building C++ with Coverage: OFF
+-- Found Imath 3 at /usr/lib/cmake/Imath/ImathConfig.cmake
+-- Performing Test HAS_FLTO_AUTO
+-- Performing Test HAS_FLTO_AUTO - Success
+-- Found pybind11: /usr/include (found version "3.1.0")
+-- Found pybind11 at /usr/lib/cmake/pybind11/pybind11Config.cmake
+-- Using src/deps/rapidjson by default
+-- Found minizip-ng at /usr/lib/cmake/minizip-ng/minizip-ng-config.cmake
+-- Configuring done (0.5s)
+-- Generating done (0.0s)
+CMake Warning (unused-cli):
+  Manually-specified variables were not used by the project:
+
+    CMAKE_INSTALL_LIBDIR
+
+
+-- Build files have been written to: /build/opentimelineio-git-jnd/src/opentimelineio/build

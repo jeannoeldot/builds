@@ -1,0 +1,72 @@
+FAIRE PATCHS
+====================================
+
+!!! VERSION = 0.19.0.20261014
+
+
+/!\ /!\ /!\ $HOME/05-builds/opentimelineio-git-jnd
+
+$ mkdir /tmp/srcp
+
+$ cp -v opentimelineio-git-0.19.0.20261014.tar.gz /tmp/srcp/
+
+$ cd /tmp/srcp
+
+$ tar -xzf opentimelineio-git-0.19.0.20261014.tar.gz
+
+1) BLENDER DIFF opentimelineio.diff
+====================================================
+1-1) MODIFIER CMakeLists.txt
+============================
+/!\ /!\ /!\ cd /tmp/srcp
+
+$ cp -R opentimelineio opentimelineio.new
+
+$ cd opentimelineio.new
+$ kwrite CMakeLists.txt
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+$ rm -f CMakeLists.txt~
+
+$ cd ..
+
+
+
+
+
+
+$ diff -aur opentimelineio opentimelineio.new
+$ diff -aur opentimelineio opentimelineio.new > Diff-Blender-opentimelineio-diff.patch
+
+$ rm -rf opentimelineio.new
+
+$ cd $HOME/05-builds/opentimelineio-git-jnd
+
+$ mv -vf /tmp/srcp/Diff-Blender-opentimelineio-diff.patch .
+
+
+
+1) BLENDER DIFF opentimelineio_shared-diff
+====================================================
+$ diff -aur opentimelineio opentimelineio.new
+$ diff -aur opentimelineio opentimelineio.new > Diff-Blender-opentimelineio_shared-diff.patch
+
+$ rm -rf opentimelineio.new
+
+$ cd $HOME/05-builds/opentimelineio-git-jnd
+
+$ mv -vf /tmp/srcp/Diff-Blender-opentimelineio_shared-diff.patch .
+
+
+
+5) QUAND PATCHES FINIS
+=======================
+$ rm -rf /tmp/srcp
+
+$ sync
+
+=================================================================
+ANCIENS
+========
+
