@@ -1,0 +1,11 @@
+
+[ 89%] Building CXX object source/blender/gpu/CMakeFiles/bf_gpu.dir/vulkan/vk_image_view.cc.o
+In file included from /build/blender-git-jnd/src/blender/source/blender/io/otio/IO_otio.cc:11:
+/build/blender-git-jnd/src/blender/source/blender/io/otio/importer/otio_import.hh:23:17: error: ‘OPENTIMELINEIO_VERSION_NS’ in namespace ‘opentimelineio’ does not name a type
+   23 | opentimelineio::OPENTIMELINEIO_VERSION_NS::SerializableObject *read_otio_file_with_workarounds(
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+make[2]: *** [source/blender/io/otio/CMakeFiles/bf_io_otio.dir/build.make:79: source/blender/io/otio/CMakeFiles/bf_io_otio.dir/IO_otio.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:11353: source/blender/io/otio/CMakeFiles/bf_io_otio.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+
+make: *** [Makefile:166: all] Error 2

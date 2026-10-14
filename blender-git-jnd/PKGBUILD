@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.3.0.24.20260926
-pkgrel=2
+pkgver=5.4.0.2.20261014
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -16,7 +16,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'libglvnd' 'glfw' 'libxi'
           'onetbb' 'draco' 'openxr'
           'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
-          'python-fastjsonschema' 'python-cattrs'
+          'python-cattrs'
           'llvm-libs'
           'potrace' 'pugixml' 'libharu' 'libepoxy' 'libxkbcommon'
           'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
@@ -33,6 +33,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'manifold-jnd'
           'openusd-jnd' 'materialx'
           'meshoptimizer-jnd' 'python-tomli-w' 'thorvg-jnd'
+          'ktx-software-jnd' 'opentimelineio' 'joltphysics-jnd' 'hwloc' 'rapidjson'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
              'cuda' 'nvidia-utils'
@@ -52,7 +53,7 @@ source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-${_optixver}.tar.gz"
         "DLSS-git-${_dlssver}.tar.gz"
 )
-sha256sums=('177b3d534410872fc7053f45d0954798e5a11bc81746ba30a8d72ca6893b54bf'
+sha256sums=('0a6f629ede982ac74bec864fdf0a982fa343a0f95ffc741d532c85cafff3f9b3'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
             'effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb'
 )
@@ -63,9 +64,9 @@ prepare() {
   cd "${_gitname}"
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "852006fe9e16"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "0245da992a16"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1790458473|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1791969283|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {

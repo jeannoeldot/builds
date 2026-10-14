@@ -1,0 +1,121 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=blender-git-jnd
+pkgver=5.3.0.24.20260926
+pkgrel=2
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('x86_64')
+license=('GPL-3.0-or-later')
+url="https://blender.org/"
+depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
+          'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp' 'libjpeg-turbo'
+          'libgcc' 'libstdc++'
+          'python'
+          'ffmpeg' 'fftw'
+          'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
+          'libglvnd' 'glfw' 'libxi'
+          'onetbb' 'draco' 'openxr'
+          'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
+          'python-fastjsonschema' 'python-cattrs'
+          'llvm-libs'
+          'potrace' 'pugixml' 'libharu' 'libepoxy' 'libxkbcommon'
+          'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
+          'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
+          'opencolorio' 'libdeflate'
+          'zstd'
+          'google-glog' 'gflags'
+          'eigen' 'ceres-solver-jnd'
+          'openimageio-jnd' 'fmt'
+          'openshadinglanguage-jnd'
+          'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
+          'embree-jnd' 'openimagedenoise-jnd'
+          'openpgl-jnd'
+          'manifold-jnd'
+          'openusd-jnd' 'materialx'
+          'meshoptimizer-jnd' 'python-tomli-w' 'thorvg-jnd'
+)
+makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
+             'cuda' 'nvidia-utils'
+             'wayland-protocols'
+             'spirv-headers'
+             'mold'
+)
+conflicts=('blender')
+provides=('blender')
+options=('!lto' '!debug')
+
+_pkgname_git=blender-git
+_optixver=9.1.0
+_dlssver=310.9.1
+
+source=("$_pkgname_git-$pkgver.tar.zst"
+        "optix-dev-${_optixver}.tar.gz"
+        "DLSS-git-${_dlssver}.tar.gz"
+)
+sha256sums=('177b3d534410872fc7053f45d0954798e5a11bc81746ba30a8d72ca6893b54bf'
+            '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
+            'effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb'
+)
+
+_gitname="blender"
+
+prepare() {
+  cd "${_gitname}"
+
+  # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "852006fe9e16"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1790458473|' build_files/cmake/buildinfo.cmake
+}
+
+_get_pyver() {
+  python -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))'
+}
+
+build() {
+  local cuda_archs="sm_120;compute_121"
+
+  cd "${_gitname}"
+
+  cmake \
+        -B build \
+        -C "build_files/cmake/config/blender_release.cmake" \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D WITH_LINKER_MOLD=ON \
+        -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
+        -D CYCLES_CUDA_BINARIES_ARCH="$cuda_archs" \
+        -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-${_optixver}" \
+        -D WITH_DLSS=ON \
+        -D DLSS_SDK_ROOT="${srcdir}/DLSS" \
+        -D WITH_CYCLES_PARALLEL_DEVICE_KERNEL_BUILD=ON \
+        -D WITH_CYCLES_NATIVE_ONLY=ON \
+        -D WITH_SYSTEM_GFLAGS=ON \
+        -D WITH_SYSTEM_GLOG=ON \
+        -D WITH_LIBS_PRECOMPILED=OFF \
+        -D WITH_INPUT_IME=OFF \
+        -D WITH_INPUT_NDOF=OFF \
+        -D WITH_DOC_MANPAGE=OFF \
+        -D WITH_CYCLES_DEVICE_HIP=OFF \
+        -D WITH_CYCLES_DEVICE_HIPRT=OFF \
+        -D WITH_CYCLES_HIP_BINARIES=OFF \
+        -D WITH_CYCLES_DEVICE_ONEAPI=OFF \
+        -D WITH_CYCLES_ONEAPI_BINARIES=OFF \
+        -D PYTHON_VERSION="$(_get_pyver)" \
+        -D WITH_INSTALL_PORTABLE=OFF \
+        -D WITH_PYTHON_INSTALL=OFF
+  make -C build
+}
+
+package() {
+  # Blender
+  cd "${_gitname}"
+  DESTDIR="${pkgdir}" make -C build install
+
+  # voir Community
+  python -m compileall "${pkgdir}/usr/share/blender"
+  python -O -m compileall "${pkgdir}/usr/share/blender"
+
+  # NVIDIA DLSS
+  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssd.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlssd.so.${_dlssver}"
+}
