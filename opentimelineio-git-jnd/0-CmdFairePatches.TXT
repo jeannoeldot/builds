@@ -25,16 +25,59 @@ $ cp -R opentimelineio opentimelineio.new
 $ cd opentimelineio.new
 $ kwrite CMakeLists.txt
 
+REMPLACER LIGNE 106 :
+            set(OTIO_RESOLVED_PYTHON_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/python")
+DEVIENT
+            set(OTIO_RESOLVED_PYTHON_INSTALL_DIR "python")
+
+REMPLACER LIGNE 125 :
+    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib")
+DEVIENT
+    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "lib")
+
+REMPLACER LIGNE 162 :
+set(OTIO_RESOLVED_CXX_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
+DEVIENT
+# Relative destinations keep installed CMake targets relocatable.
+set(OTIO_RESOLVED_CXX_INSTALL_DIR ".")
 
 ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
 $ rm -f CMakeLists.txt~
 
 $ cd ..
 
+1-2) MODIFIER /src/opentime/CMakeLists.txt
+==========================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+$ cd opentimelineio.new/src/opentime
+$ kwrite CMakeLists.txt
+
+AJOUTER LIGNES 56 ET 57
+    # Blender installs C++ libraries separately from the Python extensions.
+    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "lib")
+
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+$ rm -f CMakeLists.txt~
+
+$ cd ../../..
 
 
+1-3) MODIFIER /src/opentimelineio/CMakeLists.txt
+================================================
+/!\ /!\ /!\ cd /tmp/srcp
 
+$ cd opentimelineio.new/src/opentimelineio
+$ kwrite CMakeLists.txt
 
+AJOUTER LIGNES 134 ET 135
+    # Blender installs C++ libraries separately from the Python extensions.
+    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "lib")
+
+ENREGISTRER et Quitter Kwrite & EFFACER CMakeLists.txt~
+$ rm -f CMakeLists.txt~
+
+$ cd ../../..
 
 $ diff -aur opentimelineio opentimelineio.new
 $ diff -aur opentimelineio opentimelineio.new > Diff-Blender-opentimelineio-diff.patch
@@ -47,7 +90,7 @@ $ mv -vf /tmp/srcp/Diff-Blender-opentimelineio-diff.patch .
 
 
 
-1) BLENDER DIFF opentimelineio_shared-diff
+2) BLENDER DIFF opentimelineio_shared-diff
 ====================================================
 $ diff -aur opentimelineio opentimelineio.new
 $ diff -aur opentimelineio opentimelineio.new > Diff-Blender-opentimelineio_shared-diff.patch

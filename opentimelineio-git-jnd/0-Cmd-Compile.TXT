@@ -75,6 +75,9 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=opentimelineio-git-jnd
 pkgver=0.19.0.20261014
+pkgrel=3      # AVEC PATCH Diff-Blender-opentimelineio-diff.patch
+pkgrel=2      # OTIO_PYTHON_INSTALL_DIR="/usr/lib/python$(_get_pyver)/site-packages"
+
 pkgrel=1
 
 
@@ -105,12 +108,12 @@ AVEC PATCH
 ----------
 $ sha256sum opentimelineio-git-0.19.0.20261014.tar.gz
 
-$ sha256sum opentimelineio.diff
+$ sha256sum Diff-Blender-opentimelineio-diff.patch
 
 $ sha256sum opentimelineio_shared.diff
 
 source=("${pkgname}-${pkgver}.tar.gz"
-        "opentimelineio.diff"
+        "Diff-Blender-opentimelineio-diff.patch"
         "opentimelineio_shared.diff"
 )
 sha256sums=('123456789'
@@ -122,7 +125,7 @@ prepare() {
   cd "${_gitname}"
 
   # Voir blender
-  patch -Np1 -i "${srcdir}/opentimelineio.diff"
+  patch -Np1 -i "${srcdir}/Diff-Blender-opentimelineio-diff.patch"
   patch -Np1 -i "${srcdir}/opentimelineio_shared.diff"
 }
 
@@ -146,7 +149,7 @@ $ tar -xzf opentimelineio-git-0.19.0.20261014.tar.gz -C /tmp/srcp
 
 1) kwrite /tmp/srcp/opentimelineio/CMakeLists.txt &
 !!! VOIR
-!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/opentimelineio.cmake
+!!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/opentimelineio.cmake &
 
 LIGNES 42 ET ...
 
@@ -160,7 +163,11 @@ OTIO_FIND_IMATH                "Find Imath using find_package" OFF ==> ON
 OTIO_FIND_PYBIND11             "Find pybind11 using find_package" OFF ==> ON
 OTIO_FIND_RAPIDJSON            "Find RapidJSON using find_package" OFF
 OTIO_FIND_MINIZIP_NG           "Find minizip-ng using find_package" OFF ==> ON
+
+LIGNE 52
 set(OTIO_PYTHON_INSTALL_DIR "" CACHE STRING "Python installation dir (such as the site-packages dir)")
+==> OTIO_PYTHON_INSTALL_DIR="/usr/lib/$(_get_pyver)/site-packages"
+
 
 LIGNES 54 ET ...
 
@@ -182,6 +189,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users    1986 14 oct.  21:25 PKGBUILD
 -rw-r--r--  1 jnd users 1637875 14 oct.  16:06 opentimelineio-git-0.19.0.20261014.tar.gz
+-rw-r--r--  1 jnd users     2738 15 oct.  12:20 Diff-Blender-opentimelineio-diff.patch
 -rw-r--r--  1 jnd users    3880  8 oct.  15:24 opentimelineio.diff
 -rw-r--r--  1 jnd users   52378  8 oct.  15:24 opentimelineio_shared.diff
 
@@ -248,6 +256,9 @@ rm -f *~
 # Verifications...
 
 $ namcap opentimelineio-git-jnd-*-x86_64.pkg.tar.*
+...
+opentimelineio-git-jnd W: Dependency included, but may not be needed ('zlib')
+opentimelineio-git-jnd W: Dependency included, but may not be needed ('python-aaf2')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal

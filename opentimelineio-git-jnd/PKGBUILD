@@ -2,17 +2,17 @@
 
 pkgname=opentimelineio-git-jnd
 pkgver=0.19.0.20261014
-pkgrel=1
+pkgrel=5
 _pkgname_git=opentimelineio-git
 pkgdesc="Open Source API and interchange format for editorial timeline information"
 url="https://github.com/AcademySoftwareFoundation/OpenTimelineIO"
 arch=('x86_64')
 license=('Apache-2.0')
-depends=('glibc' 'libgcc' 'libstdc++' 'zlib'
+depends=('glibc' 'libgcc' 'libstdc++' 'zlib' 'minizip-ng'
          'python'
          'python-aaf2'
 )
-makedepends=('cmake' 'git' 'minizip-ng'
+makedepends=('cmake' 'git'
              'imath' 'pybind11' 'python-build' 'python-installer' 'python-setuptools' 'python-wheel'
 )
 conflicts=('opentimelineio')
@@ -21,24 +21,16 @@ provides=('opentimelineio')
 options=('!debug')
 source=("${_pkgname_git}-${pkgver}.tar.gz"
         "opentimelineio-rapidjson::git+https://github.com/Tencent/rapidjson"
-        "opentimelineio.diff"
+        "Diff-Blender-opentimelineio-diff.patch"
         "opentimelineio_shared.diff"
 )
 sha256sums=('dda65bb2a070ef63ee8cd8f9bb622c9f7dabe4a4b34f58060f75cbcf8b506402'
             'SKIP'
-            'acc4b971d0ef8694d4bf26c75c34c7892b89de3e218d03dbf28d675162b66cb3'
+            '19ca4b11b76de5f467c30e401586ce1b65900097e117a04f39a4ce224e9fa4b5'
             'b49351153bd03960e81985608ca67c7d0b48036b8a8e2774449b411db06e5039'
 )
 
 _gitname="opentimelineio"
-
-# prepare() {
-#   cd "${_gitname}"
-#
-#   # Voir blender
-#   patch -Np1 -i "${srcdir}/opentimelineio.diff"
-#   patch -Np1 -i "${srcdir}/opentimelineio_shared.diff"
-# }
 
 # VOIR https://gitlab.archlinux.org/archlinux/packaging/packages/opentimelineio/-/blob/main/PKGBUILD?ref_type=heads
 prepare() {
@@ -48,6 +40,14 @@ prepare() {
   git -c protocol.file.allow=always submodule update src/deps/rapidjson
 
   sed -e '/cmake/d' -i pyproject.toml
+
+  # Voir blender
+  patch -Np1 -i "${srcdir}/Diff-Blender-opentimelineio-diff.patch"
+#  patch -Np1 -i "${srcdir}/opentimelineio_shared.diff"
+}
+
+_get_pyver() {
+  python -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))'
 }
 
 build() {
@@ -58,10 +58,10 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_SKIP_RPATH=ON \
     -DCMAKE_CXX_STANDARD=17 \
     -DOTIO_PYTHON_INSTALL=ON \
+    -DOTIO_PYTHON_INSTALL_DIR="/usr/lib/python$(_get_pyver)/site-packages" \
     -DOTIO_DEPENDENCIES_INSTALL=OFF \
     -DOTIO_FIND_IMATH=ON \
     -DOTIO_FIND_PYBIND11=ON \
@@ -71,7 +71,7 @@ build() {
 
   make -C build
 
-  python -m build --wheel --no-isolation
+#  python -m build --wheel --no-isolation
 }
 
 package() {
@@ -79,8 +79,8 @@ package() {
   
   DESTDIR="${pkgdir}" make -C build install
 
-  python -m installer --destdir="${pkgdir}" dist/*.whl
-  rm -fr "${pkgdir}"/build
+#  python -m installer --destdir="${pkgdir}" dist/*.whl
+#  rm -fr "${pkgdir}"/build
 
   # license
   install -Dm644 LICENSE.txt "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE

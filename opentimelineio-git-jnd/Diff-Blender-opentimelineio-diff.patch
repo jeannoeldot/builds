@@ -1,0 +1,59 @@
+diff -aur opentimelineio/CMakeLists.txt opentimelineio.new/CMakeLists.txt
+--- opentimelineio/CMakeLists.txt	2026-10-14 15:51:32.000000000 +0200
++++ opentimelineio.new/CMakeLists.txt	2026-10-15 12:08:30.914995629 +0200
+@@ -103,7 +103,7 @@
+         # either python_install or install_prefix have been set
+         if(NOT OTIO_PYTHON_INSTALL_DIR)
+             # CMAKE_INSTALL_PREFIX was set, so install the python components there
+-            set(OTIO_RESOLVED_PYTHON_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/python")
++            set(OTIO_RESOLVED_PYTHON_INSTALL_DIR "python")
+ 
+             # In order to not require setting $PYTHONPATH to point at the .so,
+             # the shared libraries are installed into the python library
+@@ -122,7 +122,7 @@
+     endif()
+ 
+ else()
+-    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib")
++    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "lib")
+     message(STATUS "OTIO C++ installing to ${CMAKE_INSTALL_PREFIX}")
+ endif()
+ 
+@@ -159,7 +159,8 @@
+ #
+ math(EXPR OTIO_SOVERSION "${OTIO_VERSION_MAJOR} * 100 + ${OTIO_VERSION_MINOR}")
+ 
+-set(OTIO_RESOLVED_CXX_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
++# Relative destinations keep installed CMake targets relocatable.
++set(OTIO_RESOLVED_CXX_INSTALL_DIR ".")
+ 
+ if(OTIO_CXX_INSTALL)
+     message(STATUS "Installing C++ bindings to: ${OTIO_RESOLVED_CXX_INSTALL_DIR}")
+diff -aur opentimelineio/src/opentime/CMakeLists.txt opentimelineio.new/src/opentime/CMakeLists.txt
+--- opentimelineio/src/opentime/CMakeLists.txt	2026-10-14 15:51:32.000000000 +0200
++++ opentimelineio.new/src/opentime/CMakeLists.txt	2026-10-15 12:14:22.509544659 +0200
+@@ -53,7 +53,9 @@
+ )
+ 
+ if(OTIO_CXX_INSTALL)
+-    install(FILES ${OPENTIME_HEADER_FILES} 
++    # Blender installs C++ libraries separately from the Python extensions.
++    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "lib")
++    install(FILES ${OPENTIME_HEADER_FILES}
+             DESTINATION "${OTIO_RESOLVED_CXX_INSTALL_DIR}/include/opentime")
+ 
+     install(TARGETS opentime
+diff -aur opentimelineio/src/opentimelineio/CMakeLists.txt opentimelineio.new/src/opentimelineio/CMakeLists.txt
+--- opentimelineio/src/opentimelineio/CMakeLists.txt	2026-10-14 15:51:32.000000000 +0200
++++ opentimelineio.new/src/opentimelineio/CMakeLists.txt	2026-10-15 12:19:36.764137431 +0200
+@@ -131,7 +131,9 @@
+ )
+ 
+ if(OTIO_CXX_INSTALL)
+-    install(FILES ${OPENTIMELINEIO_HEADER_FILES} 
++    # Blender installs C++ libraries separately from the Python extensions.
++    set(OTIO_RESOLVED_CXX_DYLIB_INSTALL_DIR "lib")
++    install(FILES ${OPENTIMELINEIO_HEADER_FILES}
+             DESTINATION "${OTIO_RESOLVED_CXX_INSTALL_DIR}/include/opentimelineio")
+ 
+     set(OPENTIMELINEIO_INCLUDES ${OTIO_RESOLVED_CXX_INSTALL_DIR}/include)
