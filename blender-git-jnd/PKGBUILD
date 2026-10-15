@@ -33,7 +33,7 @@ depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
           'manifold-jnd'
           'openusd-jnd' 'materialx'
           'meshoptimizer-jnd' 'python-tomli-w' 'thorvg-jnd'
-          'ktx-software-jnd' 'opentimelineio' 'joltphysics-jnd' 'hwloc' 'rapidjson'
+          'ktx-software-jnd' 'opentimelineio-git-jnd' 'joltphysics-jnd' 'hwloc' 'rapidjson'
 )
 makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
              'cuda' 'nvidia-utils'

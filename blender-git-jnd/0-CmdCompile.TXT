@@ -245,7 +245,7 @@ Add support for Zstandard compression for .blend files
 # https://projects.blender.org/blender/blender/commit/cd754c5ccc4087773f32c9bbe0b9d5092fdf7540#diff-ade874dce771b1671f09803f4e1a239caf436b21
 New libraries:
 * KTX                   ==> ktx-software-jnd 4.4.2.20251004
-* OpenTimelineIO        ==> Extra : opentimelineio 0.18.1-3
+* OpenTimelineIO        ==> opentimelineio-git-jnd 0.19.0.20261014. Extra : opentimelineio 0.18.1-3 = PAS OK
 * Jolt                  ==> joltphysics-jnd 5.6.0.20260711
 * hwloc                 ==> Extra : hwloc 2.15.0-1
 * RapidJSON             ==> Extra : rapidjson 1.1.0-6
@@ -599,6 +599,7 @@ openimageio-jnd-*-x86_64.pkg.tar.*,\
 openpgl-jnd-*-x86_64.pkg.tar.*,\
 openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
+opentimelineio-git-jnd-*-x86_64.pkg.tar.*,\
 openusd-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*,\
 thorvg-jnd-*-x86_64.pkg.tar.*,\
@@ -628,6 +629,7 @@ openimageio-jnd-*-x86_64.pkg.tar.*,\
 openpgl-jnd-*-x86_64.pkg.tar.*,\
 openshadinglanguage-jnd-*-x86_64.pkg.tar.*,\
 opensubdiv-jnd-*-x86_64.pkg.tar.*,\
+opentimelineio-git-jnd-*-x86_64.pkg.tar.*,\
 openvdb-jnd-*-x86_64.pkg.tar.*,\
 thorvg-jnd-*-x86_64.pkg.tar.*,\
 tracy-jnd-*-x86_64.pkg.tar.*\
@@ -794,22 +796,24 @@ blender-git-jnd W: Dependency included, but may not be needed ('libglvnd')
 blender-git-jnd W: Dependency included, but may not be needed ('glfw')
 blender-git-jnd W: Dependency included, but may not be needed ('python-psutil')
 blender-git-jnd W: Dependency included, but may not be needed ('pystring')
-blender-git-jnd W: Dependency included, but may not be needed ('python-fastjsonschema')
 blender-git-jnd W: Dependency included, but may not be needed ('llvm-libs')
-blender-git-jnd W: Dependency included, but may not be needed ('libdecor')
 blender-git-jnd W: Dependency included, but may not be needed ('fribidi')
 blender-git-jnd W: Dependency included, but may not be needed ('harfbuzz')
 blender-git-jnd W: Dependency included, but may not be needed ('minizip-ng')
 blender-git-jnd W: Dependency included, but may not be needed ('pybind11')
 blender-git-jnd W: Dependency included, but may not be needed ('vulkan-headers')
+blender-git-jnd W: Dependency included, but may not be needed ('vulkan-icd-loader')
 blender-git-jnd W: Dependency included, but may not be needed ('vulkan-driver')
 blender-git-jnd W: Dependency included, but may not be needed ('libdeflate')
 blender-git-jnd W: Dependency included, but may not be needed ('eigen')
 blender-git-jnd W: Dependency included, but may not be needed ('fmt')
-blender-git-jnd W: Dependency included, but may not be needed ('meshoptimizer-jnd')
 blender-git-jnd W: Dependency included, but may not be needed ('python-tomli-w')
 blender-git-jnd W: Dependency included, but may not be needed ('thorvg-jnd')
-blender-git-jnd W: Dependency included, but may not be needed ('tracy-jnd')
+blender-git-jnd W: Dependency included, but may not be needed ('ktx-software-jnd')
+blender-git-jnd W: Dependency included, but may not be needed ('opentimelineio-git-jnd')
+blender-git-jnd W: Dependency included, but may not be needed ('joltphysics-jnd')
+blender-git-jnd W: Dependency included, but may not be needed ('hwloc')
+blender-git-jnd W: Dependency included, but may not be needed ('rapidjson')
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS  /00-repolocal
