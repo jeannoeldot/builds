@@ -40,8 +40,9 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=thorvg-jnd
 pkgver=1.1.3.20261015
-pkgrel=1
+pkgrel=2    # AVEC -Dc_link_args="-Wl,-z,relro,-z,now" -Dcpp_link_args="-Wl,-z,relro,-z,now"
 
+pkgrel=1
 
 !!!!!!
 _ver_release="1.1.3"
@@ -97,7 +98,7 @@ option('loaders'  ==> =svg
 LIGNE 66
 option('extra'  ==> =
 
-rm -rf /tmp/srcp
+$ rm -rf /tmp/srcp
 
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -167,7 +168,6 @@ $ rm -f *~
 # Verifications...
 
 $ namcap thorvg-jnd-*-x86_64.pkg.tar.*
-thorvg-jnd W: ELF file ('usr/lib/libthorvg-1.so.1.1.3') lacks FULL RELRO, check LDFLAGS.
 ...
 
 
@@ -213,4 +213,6 @@ SI PROBLEME
 
 ANCIEN
 ======
+$ namcap thorvg-jnd-*-x86_64.pkg.tar.*
+thorvg-jnd W: ELF file ('usr/lib/libthorvg-1.so.1.1.3') lacks FULL RELRO, check LDFLAGS.
 
