@@ -3,7 +3,7 @@
 https://github.com/NVIDIA/DLSS
 
 
-1-0-0) DLSS 310.9.1 SDK
+1-0-0) DLSS 310.9.16 SDK
 =======================
 $ cd /0-DataLinux/05-builds-dir-git
 
@@ -34,10 +34,6 @@ Réception d'objets: 100% (744/744), 37.67 MiO | 2.82 MiO/s, fait.
 Résolution des deltas: 100% (245/245), fait.
 Chemin de sous-module 'NVIDIAImageScaling' : '35e13ba316c98eeecf16f37eae70ce88019911f6' extrait
 
-
-!!! SI REP DLSS EXISTE
-----------------------
-
 $ cd DLSS
 
 $ git submodule update --init --recursive
@@ -45,19 +41,120 @@ $ git submodule update --init --recursive
 $ cd ..
 
 
+!!! SI REP DLSS EXISTE
+----------------------
+
+$ cd DLSS
+
+$ git pull --rebase origin main
+remote: Enumerating objects: 83, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 83 (delta 0), reused 0 (delta 0), pack-reused 82 (from 1)
+Dépaquetage des objets: 100% (83/83), 174.97 MiO | 12.49 MiO/s, fait.
+Depuis https://github.com/NVIDIA/DLSS
+ * branch            main       -> FETCH_HEAD
+   3749594..9981c63  main       -> origin/main
+Mise à jour 3749594..9981c63
+Mise à jour des fichiers: 100% (71/71), fait.
+Fast-forward
+ include/nvsdk_ngx_defs_dlssg.h                                                            |   6 ++++++
+ lib/Linux_aarch64/dev/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16}   | Bin 60590544 -> 60590544 bytes
+ lib/Linux_aarch64/dev/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16} | Bin 49115408 -> 49115408 bytes
+ lib/Linux_aarch64/dev/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16} | Bin 7219152 -> 7260112 bytes
+ lib/Linux_aarch64/libnvsdk_ngx.a                                                          | Bin 84938 -> 84938 bytes
+ lib/Linux_aarch64/rel/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16}   | Bin 59336544 -> 59336544 bytes
+ lib/Linux_aarch64/rel/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16} | Bin 48115280 -> 48115280 bytes
+ lib/Linux_aarch64/rel/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16} | Bin 7219152 -> 7260112 bytes
+ lib/Linux_x86_64/dev/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16}    | Bin 60610320 -> 60610320 bytes
+ lib/Linux_x86_64/dev/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16}  | Bin 49150616 -> 49150616 bytes
+ lib/Linux_x86_64/dev/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16}  | Bin 7346176 -> 7391232 bytes
+ lib/Linux_x86_64/libnvsdk_ngx.a                                                           | Bin 89002 -> 89002 bytes
+ lib/Linux_x86_64/rel/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16}    | Bin 59481944 -> 59481944 bytes
+ lib/Linux_x86_64/rel/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16}  | Bin 48238232 -> 48238232 bytes
+ lib/Linux_x86_64/rel/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16}  | Bin 7346176 -> 7391232 bytes
+ lib/Windows_aarch64/dev/nvngx_dlss.dll                                                    | Bin 59421808 -> 59421808 bytes
+ lib/Windows_aarch64/dev/nvngx_dlssd.dll                                                   | Bin 93531248 -> 93531248 bytes
+ lib/Windows_aarch64/dev/nvngx_dlssg.dll                                                   | Bin 7963760 -> 8011888 bytes
+ lib/Windows_aarch64/nvsdk_ngx_d.lib                                                       | Bin 2988504 -> 2988480 bytes
+ lib/Windows_aarch64/nvsdk_ngx_d_dbg.lib                                                   | Bin 3046936 -> 3046912 bytes
+ lib/Windows_aarch64/nvsdk_ngx_s.lib                                                       | Bin 2939338 -> 2939314 bytes
+ lib/Windows_aarch64/nvsdk_ngx_s_dbg.lib                                                   | Bin 2994402 -> 2994378 bytes
+ lib/Windows_aarch64/rel/nvngx_dlss.dll                                                    | Bin 58971248 -> 58971248 bytes
+ lib/Windows_aarch64/rel/nvngx_dlssd.dll                                                   | Bin 48345712 -> 48345712 bytes
+ lib/Windows_aarch64/rel/nvngx_dlssg.dll                                                   | Bin 7387248 -> 7431280 bytes
+ lib/Windows_arm64ec/dev/nvngx_dlss.dll                                                    | Bin 59524208 -> 59524208 bytes
+ lib/Windows_arm64ec/dev/nvngx_dlssd.dll                                                   | Bin 48917104 -> 48917104 bytes
+ lib/Windows_arm64ec/dev/nvngx_dlssg.dll                                                   | Bin 8038000 -> 8085104 bytes
+ lib/Windows_arm64ec/nvsdk_ngx_d.lib                                                       | Bin 3227404 -> 3227340 bytes
+ lib/Windows_arm64ec/nvsdk_ngx_d_dbg.lib                                                   | Bin 3291576 -> 3291516 bytes
+ lib/Windows_arm64ec/nvsdk_ngx_s.lib                                                       | Bin 3212532 -> 3212468 bytes
+ lib/Windows_arm64ec/nvsdk_ngx_s_dbg.lib                                                   | Bin 3277726 -> 3277666 bytes
+ lib/Windows_arm64ec/rel/nvngx_dlss.dll                                                    | Bin 59071088 -> 59071088 bytes
+ lib/Windows_arm64ec/rel/nvngx_dlssd.dll                                                   | Bin 48432240 -> 48432240 bytes
+ lib/Windows_arm64ec/rel/nvngx_dlssg.dll                                                   | Bin 7447152 -> 7493232 bytes
+ lib/Windows_x86_64/dev/nvngx_dlss.dll                                                     | Bin 59383920 -> 59383920 bytes
+ lib/Windows_x86_64/dev/nvngx_dlssd.dll                                                    | Bin 93504624 -> 93504624 bytes
+ lib/Windows_x86_64/dev/nvngx_dlssg.dll                                                    | Bin 7997552 -> 8044656 bytes
+ lib/Windows_x86_64/rel/nvngx_dlss.dll                                                     | Bin 58956912 -> 58956912 bytes
+ lib/Windows_x86_64/rel/nvngx_dlssd.dll                                                    | Bin 48343664 -> 48343664 bytes
+ lib/Windows_x86_64/rel/nvngx_dlssg.dll                                                    | Bin 7460976 -> 7506544 bytes
+ lib/Windows_x86_64/vs2012/x64/nvsdk_ngx_d.lib                                             | Bin 4115796 -> 4115728 bytes
+ lib/Windows_x86_64/vs2012/x64/nvsdk_ngx_d_dbg.lib                                         | Bin 4299846 -> 4299786 bytes
+ lib/Windows_x86_64/vs2012/x64/nvsdk_ngx_s.lib                                             | Bin 3917316 -> 3917248 bytes
+ lib/Windows_x86_64/vs2012/x64/nvsdk_ngx_s_dbg.lib                                         | Bin 4105038 -> 4104962 bytes
+ lib/Windows_x86_64/vs2013/x64/nvsdk_ngx_d.lib                                             | Bin 4152264 -> 4152204 bytes
+ lib/Windows_x86_64/vs2013/x64/nvsdk_ngx_d_dbg.lib                                         | Bin 4353234 -> 4353174 bytes
+ lib/Windows_x86_64/vs2013/x64/nvsdk_ngx_s.lib                                             | Bin 3953604 -> 3953532 bytes
+ lib/Windows_x86_64/vs2013/x64/nvsdk_ngx_s_dbg.lib                                         | Bin 4158428 -> 4158348 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_d.lib                                                    | Bin 4090730 -> 4090658 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_d_dbg.lib                                                | Bin 4266608 -> 4266536 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_d_dbg_iterator0.lib                                      | Bin 4111272 -> 4111200 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_d_dbg_iterator1.lib                                      | Bin 4206370 -> 4206298 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_d_iterator1.lib                                          | Bin 4185028 -> 4184956 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_s.lib                                                    | Bin 3782558 -> 3782490 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_s_dbg.lib                                                | Bin 3949484 -> 3949408 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_s_dbg_iterator0.lib                                      | Bin 3803914 -> 3803842 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_s_dbg_iterator1.lib                                      | Bin 3893350 -> 3893278 bytes
+ lib/Windows_x86_64/x64/nvsdk_ngx_s_iterator1.lib                                          | Bin 3872156 -> 3872084 bytes
+ 59 files changed, 6 insertions(+)
+ rename lib/Linux_aarch64/dev/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16} (99%)
+ rename lib/Linux_aarch64/dev/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16} (99%)
+ rename lib/Linux_aarch64/dev/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16} (93%)
+ rename lib/Linux_aarch64/rel/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16} (99%)
+ rename lib/Linux_aarch64/rel/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16} (99%)
+ rename lib/Linux_aarch64/rel/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16} (93%)
+ rename lib/Linux_x86_64/dev/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16} (99%)
+ rename lib/Linux_x86_64/dev/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16} (99%)
+ rename lib/Linux_x86_64/dev/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16} (92%)
+ rename lib/Linux_x86_64/rel/{libnvidia-ngx-dlss.so.310.9.1 => libnvidia-ngx-dlss.so.310.9.16} (99%)
+ rename lib/Linux_x86_64/rel/{libnvidia-ngx-dlssd.so.310.9.1 => libnvidia-ngx-dlssd.so.310.9.16} (99%)
+ rename lib/Linux_x86_64/rel/{libnvidia-ngx-dlssg.so.310.9.1 => libnvidia-ngx-dlssg.so.310.9.16} (92%)
+
+$ git submodule update --init --recursive
+
+$ cd ..
+
+
+
 !!!!! Vérifier VERSION :
-https://github.com/NVIDIA/DLSS : DLSS 310.9.1 SDK
+https://github.com/NVIDIA/DLSS : DLSS 310.9.16 SDK
 
-==> Version = 310.9.1
+==> Version = 310.9.16
 
-$ tar -cvzf DLSS-git-310.9.1.tar.gz \
+$ tar -cvzf DLSS-git-310.9.16.tar.gz \
 --exclude={.git,.gitmodules,doc,NVIDIAImageScaling,utils,lib/Linux_aarch64,lib/Linux_x86_64/dev,lib/Windows_aarch64,lib/Windows_arm64ec,lib/Windows_x86_64,*.pdf} \
 DLSS
 
 $ sync
 
-$ sha256sum DLSS-git-310.9.1.tar.gz
+$ sha256sum DLSS-git-310.9.16.tar.gz
 
-==>   effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb
+==>   d4e37f6615027ddbf6e8398048014cebf2c6d76fd0e230fa42716df67da3886c
 
 $ cd
+
+========================================================================================
+# ANCIEN
+========
+1-0-0) DLSS 310.9.16 SDK
+

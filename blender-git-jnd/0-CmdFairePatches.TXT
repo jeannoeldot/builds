@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.4.0.2.20261014
+!!! VERSION = 5.4.0.3.20261017
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 $ mkdir /tmp/srcp
 
-$ cp -v blender-git-5.4.0.2.20261014.tar.zst /tmp/srcp/
+$ cp -v blender-git-5.4.0.3.20261017.tar.zst /tmp/srcp/
 
 $ cd /tmp/srcp
 
-$ tar -x --zstd -f blender-git-5.4.0.2.20261014.tar.zst
+$ tar -x --zstd -f blender-git-5.4.0.3.20261017.tar.zst
 
 
 
@@ -661,11 +661,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.4.0.2.20261014.tar.gz /tmp/srcp/
+cp -v blender-git-5.4.0.3.20261017.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.4.0.2.20261014.tar.gz
+tar -xzf blender-git-5.4.0.3.20261017.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
