@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=thorvg-jnd
-pkgver=1.1.1.20260820
+pkgver=1.1.3.20261015
 pkgrel=1
-_ver_release="1.1.1"
+_ver_release="1.1.3"
 _name_release="thorvg-${_ver_release}"
 pkgdesc="Portable library designed for rendering vector-based scenes and animations, including SVG and Lottie formats"
 url="https://github.com/thorvg/thorvg"
@@ -19,12 +19,12 @@ provides=('thorvg')
 options=('!debug')
 source=("thorvg-${_ver_release}.tar.gz"
 )
-sha256sums=('59c12500b7c2fc426e89667b3e4f3fdc2ff05a75cc12001a22c5f58fb1cdf592'
+sha256sums=('ba9957aeeadb4151d4486f11c638ae118c00210fa4906daa7b30143aa341e690'
 )
 
 prepare() {
   cd "${_name_release}"
-  meson setup builddir --prefix=/usr \
+  meson setup builddir --prefix=/usr --buildtype=release \
     -Dloaders=svg \
     -Dextra= \
     --reconfigure
