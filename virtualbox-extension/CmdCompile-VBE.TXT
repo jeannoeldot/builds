@@ -1,52 +1,52 @@
 #Le répertoire
 
-cd $HOME/05-builds/virtualbox-extension
+$ cd $HOME/05-builds/virtualbox-extension
 
 https://www.virtualbox.org/wiki/Downloads
 
-VERSION = 7.2.20
-BUILD = 175154
+VERSION = 7.2.22
+BUILD = 175245
 
 1) TÉLÉCHARGER SOURCES
 ======================
 
 1-1) Download snapshot
 ----------------------
-rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
+$ rm -rf /tmp/0-AUR && mkdir /tmp/0-AUR && cd /tmp/0-AUR
 
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/virtualbox-ext-oracle.tar.gz
+$ wget https://aur.archlinux.org/cgit/aur.git/snapshot/virtualbox-ext-oracle.tar.gz
 
-tar -xzf virtualbox-ext-oracle.tar.gz
+$ tar -xzf virtualbox-ext-oracle.tar.gz
 
-cd $HOME/05-builds/virtualbox-extension
+$ cd $HOME/05-builds/virtualbox-extension
 
-mv -vf /tmp/0-AUR/virtualbox-ext-oracle/PKGBUILD .
+$ mv -vf /tmp/0-AUR/virtualbox-ext-oracle/PKGBUILD .
 
-mv -vf /tmp/0-AUR/virtualbox-ext-oracle/virtualbox-ext-oracle.install .
+$ mv -vf /tmp/0-AUR/virtualbox-ext-oracle/virtualbox-ext-oracle.install .
 
 
 1-2) Download source
 ----------------------
-wget https://download.virtualbox.org/virtualbox/7.2.20/Oracle_VirtualBox_Extension_Pack-7.2.20.vbox-extpack
+$ wget https://download.virtualbox.org/virtualbox/7.2.22/Oracle_VirtualBox_Extension_Pack-7.2.22.vbox-extpack
 
-https://www.virtualbox.org/download/hashes/7.2.20/SHA256SUMS
-sha256sum = 0a050da993f2e3cf2e4e9cda2fa8667e44a2b25479b27abd41af6812c1e43591
+https://www.virtualbox.org/download/hashes/7.2.22/SHA256SUMS
+$ sha256sum = cd5fb32cac59157dc361c90be68ccef1404831aac48ec8377569620afbc9d207
 
 2) MODIFIER LE PKGBUILD
 ========================
 # Maintainer: Name <name@fai.com>
 
 pkgname=virtualbox-extension
-pkgver=7.2.20
-_build=175154
+pkgver=7.2.22
+_build=175245
 pkgrel=1
 
 !!! ATTENTION AU N° VERSION !!!!
 source=(... ... ...)
 
 !!! ATTENTION AU N° VERSION !!!!
-sha256sum Oracle_VirtualBox_Extension_Pack-7.2.20-175154.vbox-extpack
-sha256sum Oracle_VirtualBox_Extension_Pack-7.2.20.vbox-extpack
+$ sha256sum Oracle_VirtualBox_Extension_Pack-7.2.22-175245.vbox-extpack
+$ sha256sum Oracle_VirtualBox_Extension_Pack-7.2.22.vbox-extpack
 
 sha256sums=(... ... ...)
 
@@ -56,7 +56,7 @@ sha256sums=(... ... ...)
 $ ls -la
 ==> 
 -rw-r--r--  1 jnd users   909 21 sept. 19:09 PKGBUILD
--rw-r--r--  1 jnd users 21776 21 sept. 19:07 175154175154xxx.vbox-extpack
+-rw-r--r--  1 jnd users 21776 21 sept. 19:07 175245175245xxx.vbox-extpack
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -64,12 +64,12 @@ $ ls -la
 3) MAKEPKG DANS TMP EN USER
 ====================================
 
-rm -f *~ \
+$ rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/virtualbox-extension/PKGBUILD . \
-&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VirtualBox_Extension_Pack-7.2.20.vbox-extpack . \
+&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VirtualBox_Extension_Pack-7.2.22.vbox-extpack . \
 && makepkg -s \
 && cd $HOME/05-builds/virtualbox-extension \
 && cp -v /tmp/build/virtualbox-extension-*-x86_64.pkg.tar.* . \
@@ -77,25 +77,25 @@ rm -f *~ \
 
 !!! SI ERREUR
 ==============
-cd $HOME/05-builds/virtualbox-extension \
+$ cd $HOME/05-builds/virtualbox-extension \
 && rm -rf /tmp/build
 
 
 3) MAKEPKG en USER SUR SSD
 ===========================
-cd $HOME/05-builds/virtualbox-extension
+$ cd $HOME/05-builds/virtualbox-extension
 
-makepkg -s
+$ makepkg -s
 
-makepkg -f
+$ makepkg -f
 
 !!! EN USER
 ============
-rm -f *~
-rm -rf pkg src
+$ rm -f *~
+$ rm -rf pkg src
 
 # Verifications...
-namcap virtualbox-extension-*-x86_64.pkg.tar.*
+$ namcap virtualbox-extension-*-x86_64.pkg.tar.*
 
 
 # SUPPRIME ET REMPLACE LE PRÉCÉDENT DANS /00-repolocal
@@ -115,7 +115,7 @@ $ mv -v virtualbox-extension-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 # SUPPRIME FICHIERS *~ ET FICHIER SOURCE
 --------------------------------------------
 $ rm -f *~
-$ rm -i Oracle_VirtualBox_Extension_Pack-7.2.20.vbox-extpack
+$ rm -i Oracle_VirtualBox_Extension_Pack-7.2.22.vbox-extpack
 $ rm -rf /tmp/0-AUR
 
 
@@ -137,24 +137,24 @@ ANCIENS
 && cp -v $HOME/05-builds/virtualbox-extension/virtualbox-extension.install . \
 
 
-wget https://download.virtualbox.org/virtualbox/7.2.20/Oracle_VM_VirtualBox_Extension_Pack-7.2.20.vbox-extpack
+wget https://download.virtualbox.org/virtualbox/7.2.22/Oracle_VM_VirtualBox_Extension_Pack-7.2.22.vbox-extpack
 
 !!! ATTENTION AU N° VERSION !!!!
-sha256sum Oracle_VM_VirtualBox_Extension_Pack-7.2.20-175154.vbox-extpack
-sha256sum Oracle_VM_VirtualBox_Extension_Pack-7.2.20.vbox-extpack
+sha256sum Oracle_VM_VirtualBox_Extension_Pack-7.2.22-175245.vbox-extpack
+sha256sum Oracle_VM_VirtualBox_Extension_Pack-7.2.22.vbox-extpack
 
-&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VM_VirtualBox_Extension_Pack-7.2.20.vbox-extpack . \
+&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VM_VirtualBox_Extension_Pack-7.2.22.vbox-extpack . \
 
-$ rm -i Oracle_VM_VirtualBox_Extension_Pack-7.2.20.vbox-extpack
+$ rm -i Oracle_VM_VirtualBox_Extension_Pack-7.2.22.vbox-extpack
 
-wget https://download.virtualbox.org/virtualbox/7.2.20/Oracle_VM_VirtualBox_Extension_Pack-7.2.20-175154.vbox-extpack
+wget https://download.virtualbox.org/virtualbox/7.2.22/Oracle_VM_VirtualBox_Extension_Pack-7.2.22-175245.vbox-extpack
 
 rm -f *~ \
 && rm -rf /tmp/build \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/virtualbox-extension/PKGBUILD . \
-&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VM_VirtualBox_Extension_Pack-7.2.20-175154.vbox-extpack . \
+&& cp -v $HOME/05-builds/virtualbox-extension/Oracle_VM_VirtualBox_Extension_Pack-7.2.22-175245.vbox-extpack . \
 && cp -v $HOME/05-builds/virtualbox-extension/virtualbox-extension.install . \
 && makepkg -s \
 && cd $HOME/05-builds/virtualbox-extension \
@@ -162,7 +162,7 @@ rm -f *~ \
 && rm -rf /tmp/build
 
 $ rm -f *~
-$ rm -i Oracle_VM_VirtualBox_Extension_Pack-7.2.20-175154.vbox-extpack
+$ rm -i Oracle_VM_VirtualBox_Extension_Pack-7.2.22-175245.vbox-extpack
 $ rm -rf /tmp/0-AUR
 
 
@@ -170,7 +170,7 @@ sha256sum PUEL
 
 -rw-r--r--  1 jnd users     9324 24 juin  20:13 PUEL
 
-&& cp -v $HOME/05-builds/virtualbox-extension/{PKGBUILD,Oracle_VM_VirtualBox_Extension_Pack-7.2.20-175154.vbox-extpack,virtualbox-extension.install,PUEL} . \
+&& cp -v $HOME/05-builds/virtualbox-extension/{PKGBUILD,Oracle_VM_VirtualBox_Extension_Pack-7.2.22-175245.vbox-extpack,virtualbox-extension.install,PUEL} . \
 
 3) MAKEPKG en CHROOT
 ====================

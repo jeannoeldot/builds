@@ -2,7 +2,7 @@
 
 pkgname=blender-git-jnd
 pkgver=5.4.0.3.20261017
-pkgrel=1
+pkgrel=2
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -74,7 +74,8 @@ _get_pyver() {
 }
 
 build() {
-  local cuda_archs="sm_120;compute_121"
+#  local cuda_archs="sm_120;compute_121"
+  local cuda_archs="sm_120;compute_75"    # TEST pour DLSS
 
   cd "${_gitname}"
 

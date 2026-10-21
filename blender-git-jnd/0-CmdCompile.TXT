@@ -212,6 +212,8 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.4.0.3.20261017
+pkgrel=2    # TEST DLSS AVEC   local cuda_archs="sm_120;compute_75"
+
 pkgrel=1
 
 pkgrel=2      # MAJ OIIO 3.1.18.0 + MAJ LLVM 23
@@ -422,7 +424,8 @@ build() {
   # local cuda_archs="sm_86;sm_120;compute_121"   ==> OK avec Cuda 13.2.1. Optix 9.1.0
   # local cuda_archs="sm_120;compute_121"   ==> OK avec Cuda 13.4.2. Optix 9.1.0
 
-  local cuda_archs="sm_120;compute_121"
+#  local cuda_archs="sm_120;compute_121"
+  local cuda_archs="sm_120;compute_75"    # TEST pour DLSS
 
 
 2-2) VERIFIER blender_release.cmake ET CMakeLists.txt SI MODIFIÉ
