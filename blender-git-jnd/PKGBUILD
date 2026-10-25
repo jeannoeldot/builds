@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.4.0.3.20261022
+pkgver=5.4.0.3.20261025
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -53,7 +53,7 @@ source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-${_optixver}.tar.gz"
         "DLSS-git-${_dlssver}.tar.gz"
 )
-sha256sums=('1770b7819b8580d16581f7c26ba655bc78672651523539da7a78ea41660e722a'
+sha256sums=('f2732058806c69286d7b53c33aec15ff925bd968179b57daf8ad04313fe83fd9'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
             'd4e37f6615027ddbf6e8398048014cebf2c6d76fd0e230fa42716df67da3886c'
 )
@@ -64,9 +64,9 @@ prepare() {
   cd "${_gitname}"
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "7a8f04b3bb5a"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "0d0b51704b28"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1792660412|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1792924285|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
@@ -76,7 +76,7 @@ _get_pyver() {
 build() {
 #  local cuda_archs="sm_120;compute_121"  # DLSS PAS OK
 #  local cuda_archs="sm_120;compute_75"    # TEST pour DLSS   ==> PAS OK
-  local cuda_archs="sm_120;compute_120"    # TEST pour DLSS
+  local cuda_archs="sm_120;compute_120"    # TEST pour DLSS   ==> PAS OK
 
   cd "${_gitname}"
 
@@ -121,4 +121,6 @@ package() {
 
   # NVIDIA DLSS
   install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssd.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlssd.so.${_dlssver}"
+  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlss.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlss.so.${_dlssver}"
+  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssg.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlssg.so.${_dlssver}"
 }
