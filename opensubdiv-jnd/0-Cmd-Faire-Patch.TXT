@@ -1,21 +1,21 @@
 FAIRE PATCHS
 ====================================
 
-cd $HOME/05-builds/opensubdiv-jnd
+$ cd $HOME/05-builds/opensubdiv-jnd
 
-mkdir /tmp/srcp
+$ mkdir /tmp/srcp
 
-cp -v OpenSubdiv-v3_7_0.tar.gz /tmp/srcp/
+$ cp -v OpenSubdiv-v3_8_0.tar.gz /tmp/srcp/
 
-cd /tmp/srcp
+$ cd /tmp/srcp
 
-tar -xzf OpenSubdiv-v3_7_0.tar.gz
+$ tar -xzf OpenSubdiv-v3_8_0.tar.gz
 
 5) QUAND PATCHES FINIS
 =======================
-rm -rf /tmp/srcp
+$ rm -rf /tmp/srcp
 
-sync
+$ sync
 
 =================================================================
 ANCIENS

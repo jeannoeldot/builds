@@ -1,0 +1,23 @@
+
+V 3_8_0
+=======
+-- The C compiler identification is GNU 16.2.1
+-- The CXX compiler identification is GNU 16.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiling OpenSubdiv version v3_8_0
+-- Using cmake version 4.4.4
+-- Found OpenGL: /usr/lib/libOpenGL.so
+-- Found Python: /usr/bin/python3.14 (found version "3.14.8") found components: Interpreter
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /build/opensubdiv-jnd/src/OpenSubdiv-3_8_0/build
+
