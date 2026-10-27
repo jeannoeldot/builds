@@ -1,10 +1,10 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=openimageio-jnd
-pkgver=3.1.18.0.20261001
+pkgver=3.2.1.3.20261015
 pkgrel=1
-_name_release="OpenImageIO-3.1.18.0"
-_ver_release="v3.1.18.0"
+_name_release="OpenImageIO-3.2.1.3"
+_ver_release="v3.2.1.3"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
 arch=('x86_64')
 url="http://www.openimageio.org/"
@@ -20,10 +20,9 @@ depends=('libstdc++' 'glibc' 'zlib' 'libgcc'
          'libultrahdr'
          'qt6-base'
          'python'
-         'pugixml' 'pybind11' 'python-numpy'
-         'fmt'
+         'pugixml'
 )
-makedepends=('cmake' 'mesa'
+makedepends=('cmake' 'mesa' 'fmt' 'nanobind'
              'robin-map'
 )
 conflicts=('openimageio' 'openimageio-git')
@@ -31,7 +30,7 @@ provides=('openimageio')
 options=('!debug')
 source=("OpenImageIO-${_ver_release}.tar.gz"
 )
-sha256sums=('c54c5536c2bfb9abece4a2e1981842a4d7d377eb949b044bbba1d88b8919d9a8'
+sha256sums=('17e374eb3e2167e9eb6d36ab50ed64798a7fc03aeeac1fd52878518772d7f1ea'
 )
 
 build() {

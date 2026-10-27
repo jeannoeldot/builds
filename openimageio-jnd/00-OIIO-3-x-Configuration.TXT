@@ -1,3 +1,158 @@
+V 3.2.1.3
+==========
+-- The CXX compiler identification is GNU 16.2.1
+-- The C compiler identification is GNU 16.2.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring OpenImageIO 3.2.1.3
+-- CMake 4.4.4
+-- CMake system           = Linux-7.2.11-zen1-1-zen
+-- CMake system name      = Linux
+-- Project source dir     = /build/openimageio-jnd/src/OpenImageIO-3.2.1.3
+-- Project build dir      = /build/openimageio-jnd/src/OpenImageIO-3.2.1.3/build
+-- Project install prefix = /usr
+-- Configuration types    =
+-- Build type             = Release
+-- Supported release      = ON
+-- Project is top level   = ON
+-- OIIO_USE_HWY = OFF (Enable experimental Google Highway SIMD optimizations (if Highway is available))
+-- CMAKE_UNITY_BUILD_MODE =
+-- CMAKE_UNITY_BUILD_BATCH_SIZE =
+-- Outer namespace PROJ_OUTER_NAMESPACE:   OpenImageIO
+-- Inner namespace PROJ_VERSION_NAMESPACE: v3_2
+-- Joint namespace PROJ_NAMESPACE_V:       OpenImageIO_v3_2
+-- CMAKE_CXX_COMPILER     = /usr/bin/c++
+-- CMAKE_CXX_COMPILER_ID  = GNU
+-- Building with C++17, downstream minimum C++17
+-- Compiling with SIMD level avx2
+-- clang-format not found.
+-- OIIO_PYTHON_BINDINGS_BACKEND = nanobind (Which Python binding backend(s) to build: nanobind, pybind11, or both)
+--
+-- * Checking for dependencies...
+-- *   - Missing a dependency 'Package'?
+-- *     Try cmake -DPackage_ROOT=path or set environment var Package_ROOT=path
+-- *     For many dependencies, we supply src/build-scripts/build_Package.bash
+-- *   - To exclude an optional dependency (even if found),
+-- *     -DUSE_Package=OFF or set environment var USE_Package=OFF
+--
+-- Found ZLIB 1.3.2
+-- Found Imath 3.2.3
+-- Found OpenEXR 3.5.2 from CONFIG
+-- Found libjpeg-turbo 3.2.0
+-- Found libuhdr 2.0.2
+-- Found libdeflate 1.26
+-- Found zstd 1.5.7
+-- Found WebP 1.6.0
+-- Found TIFF 4.7.2
+-- Found JXL 0.12.0
+-- Found pugixml 1.16 from CONFIG
+-- Found Python3 3.14.8
+-- Found Python: /usr/bin/python3.14 (found suitable exact version "3.14.8") found components: Interpreter Development.Module
+-- Found nanobind 3.1.0 from CONFIG
+-- Found PNG 1.6.59
+-- Found Freetype 2.15.0
+-- Found OpenColorIO 2.6.0
+-- Could NOT find OpenCV (missing: OpenCV_DIR)
+-- OpenCV was not found
+-- OpenCV library not found
+--     Try setting OpenCV_ROOT ?
+-- Could NOT find TBB (missing: TBB_DIR)
+-- TBB was not found
+-- TBB library not found
+--     Try setting TBB_ROOT ?
+-- Could NOT find DCMTK (missing: DCMTK_DIR)
+-- DCMTK was not found
+-- DCMTK library not found
+--     Try setting DCMTK_ROOT ?
+-- Found FFmpeg 8.0
+-- Found GIF 6.1.3
+-- Found Libheif 1.23.6 from CONFIG
+-- Found LibRaw 0.22.3
+-- Found OpenJPEG 2.5.4 from CONFIG
+-- Found openjph 0.32.0
+CMake Warning (author) at src/cmake/dependency_utils.cmake:429 (set):
+  Cannot set "ENABLE_OpenVDB": current scope has no parent.
+Call Stack (most recent call first):
+  src/cmake/externalpackages.cmake:222 (checked_find_package)
+  CMakeLists.txt:232 (include)
+This warning is for project developers.  Use -Wno-author to suppress it.
+
+-- Forcing optional of disabled OpenVDB
+-- Not using OpenVDB -- disabled (because TBB was not found)
+-- Could NOT find Ptex (missing: Ptex_DIR)
+-- Ptex was not found
+-- Ptex library not found
+--     Try setting Ptex_ROOT ?
+--     Maybe this will help:  src/build-scripts/build_Ptex.bash
+-- Ptex library not found
+--     Try setting Ptex_ROOT ?
+--     Maybe this will help:  src/build-scripts/build_Ptex.bash
+-- Forcing optional of disabled R3DSDK
+-- Not using R3DSDK -- disabled
+-- Nuke library not found
+--     Try setting Nuke_ROOT ?
+-- Found BZip2 1.0.8
+-- Found OpenGL
+-- Found Qt6 6.12.0
+-- Found Robinmap 1.4.1 from CONFIG
+-- Found fmt 12.2.0
+-- All build dependencies: BZip2 1.0.8;DCMTK NONE;FFmpeg 8.0;fmt 12.2.0;Freetype 2.15.0;GIF 6.1.3;Imath 3.2.3;JXL 0.12.0;libdeflate 1.26;Libheif 1.23.6;libjpeg-turbo 3.2.0;LibRaw 0.22.3;libuhdr 2.0.2;nanobind 3.1.0;OpenColorIO 2.6.0;OpenCV NONE;OpenEXR 3.5.2;OpenGL;OpenJPEG 2.5.4;openjph 0.32.0;PNG 1.6.59;Ptex NONE;Ptex NONE;pugixml 1.16;Python3 3.14.8;Qt6 6.12.0;Robinmap 1.4.1;TBB NONE;TIFF 4.7.2;WebP 1.6.0;ZLIB 1.3.2;zstd 1.5.7
+CMake Warning at src/dicom.imageio/CMakeLists.txt:10 (message):
+  DICOM plugin will not be built, no DCMTK
+
+
+-- OpenEXR core library will be used by default
+-- OpenEXR core library will be used by default
+--
+-- =========================================================================
+-- = Dependency report                                                     =
+-- =========================================================================
+--
+-- The following dependencies were found externally:
+--     BZip2 1.0.8
+--     FFmpeg 8.0
+--     fmt 12.2.0  (REQUIRED)
+--     Freetype 2.15.0
+--     GIF 6.1.3
+--     Imath 3.2.3  (REQUIRED)
+--     JXL 0.12.0
+--     libdeflate 1.26
+--     Libheif 1.23.6
+--     libjpeg-turbo 3.2.0
+--     LibRaw 0.22.3
+--     libuhdr 2.0.2
+--     nanobind 3.1.0  (REQUIRED)
+--     OpenColorIO 2.6.0  (REQUIRED)
+--     OpenEXR 3.5.2  (REQUIRED)
+--     OpenJPEG 2.5.4
+--     openjph 0.32.0
+--     PNG 1.6.59
+--     pugixml 1.16  (REQUIRED)
+--     Python3 3.14.8  (REQUIRED)
+--     Qt6 6.12.0
+--     Robinmap 1.4.1  (REQUIRED)
+--     TIFF 4.7.2  (REQUIRED)
+--     WebP 1.6.0
+--     ZLIB 1.3.2  (REQUIRED)
+--     zstd 1.5.7
+-- The following dependencies were not found:
+--     DCMTK
+--     Nuke
+--     OpenCV
+--     Ptex
+--     TBB
+--
+-- =========================================================================
+
+
 
 V 3.1.11.0
 ==========

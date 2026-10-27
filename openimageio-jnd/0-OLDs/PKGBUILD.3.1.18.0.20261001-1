@@ -1,0 +1,66 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openimageio-jnd
+pkgver=3.1.18.0.20261001
+pkgrel=1
+_name_release="OpenImageIO-3.1.18.0"
+_ver_release="v3.1.18.0"
+pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
+arch=('x86_64')
+url="http://www.openimageio.org/"
+license=('Apache-2.0')
+# TODO: Consider adding these deps: 'openvdb' 'opentbb' 'ptex' 'opencv'
+depends=('libstdc++' 'glibc' 'zlib' 'libgcc'
+         'ffmpeg' 'freetype2'
+         'giflib' 'libheif'
+         'libraw' 'libtiff'
+         'libpng' 'libwebp'
+         'opencolorio' 'openexr' 'openjph'
+         'libjpeg-turbo' 'openjpeg2' 'libjxl'
+         'libultrahdr'
+         'qt6-base'
+         'python'
+         'pugixml' 'pybind11' 'python-numpy'
+         'fmt'
+)
+makedepends=('cmake' 'mesa'
+             'robin-map'
+)
+conflicts=('openimageio' 'openimageio-git')
+provides=('openimageio')
+options=('!debug')
+source=("OpenImageIO-${_ver_release}.tar.gz"
+)
+sha256sums=('c54c5536c2bfb9abece4a2e1981842a4d7d377eb949b044bbba1d88b8919d9a8'
+)
+
+build() {
+  cd "${_name_release}"
+
+  local python_version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+
+  cmake \
+      -Bbuild \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DCMAKE_SKIP_RPATH=ON \
+      -DOIIO_BUILD_TESTS=OFF \
+      -DINSTALL_FONTS=OFF \
+      -DUSE_CCACHE=OFF \
+      -DUSE_EXTERNAL_PUGIXML=ON \
+      -DUSE_SIMD=avx2 \
+      -DOIIO_INTERNALIZE_FMT=OFF \
+      -DPYTHON_VERSION=$python_version
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+
+  DESTDIR="${pkgdir}" make -C build install
+
+  # license
+  install -Dm644 LICENSE.md "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  install -Dm644 THIRD-PARTY.md "${pkgdir}"/usr/share/licenses/${pkgname}/THIRD-PARTY
+}
