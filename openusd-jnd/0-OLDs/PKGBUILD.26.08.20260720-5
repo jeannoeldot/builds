@@ -1,0 +1,115 @@
+# Maintainer: Moi <name AT fai DOT fr>
+
+pkgname=openusd-jnd
+pkgver=26.08.20260720
+pkgrel=5
+_ver_release="26.08"
+_name_release="OpenUSD-${_ver_release}"
+pkgdesc="Universal Scene Description"
+url="http://www.openusd.org/"
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('glibc' 'libgcc' 'libstdc++'
+         'glfw'
+         'onetbb'
+         'materialx'
+         'openexr'
+         'opencolorio'
+         'opensubdiv-jnd'
+         'openimageio-jnd' 'fmt'
+         'openvdb-jnd'
+         'python'
+         'python-jinja'
+         'jemalloc'
+)
+makedepends=('cmake'
+)
+conflicts=('usd' 'openusd' 'openusd-git')
+provides=('usd' 'openusd')
+options=('!debug')
+source=("OpenUSD-v${_ver_release}.tar.gz"
+        "usd_noboost.patch"
+)
+sha256sums=('4bccbb95cddda1dbeef2f74a08b9456352f2aa91bfd4578c0c613009c7950149'
+            '5c2d5ef31660babc4ae55c79cd5c8b76be0fcb52caae6ebebf587cbd1f8b7475'
+)
+
+prepare() {
+  cd "${_name_release}"
+
+  # Sans Boost : Voir blender
+  patch -Np1 -i "${srcdir}/usd_noboost.patch"
+
+  local _pyver=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+
+  # Change directories to standard
+  sed -i 's|plugin/usd|lib/usd/plugin|g' \
+      cmake/macros/{Private,Public}.cmake
+  sed -i 's|/python|/python'$_pyver'/site-packages|g' \
+      cmake/macros/Private.cmake
+  sed -i 's|lib/python/pxr|/usr/lib/python'$_pyver'/site-packages/pxr|' \
+      cmake/macros/{Private,Public}.cmake pxr/usdImaging/usdviewq/CMakeLists.txt
+
+  sed -i \
+    -e 's|/pxrConfig.cmake|/lib/cmake/pxr/pxrConfig.cmake|g' \
+    -e 's|${CMAKE_INSTALL_PREFIX}|${CMAKE_INSTALL_PREFIX}/lib/cmake/pxr|g' \
+    -e 's|"cmake"|"lib/cmake/pxr"|g' \
+        pxr/CMakeLists.txt
+  sed -i \
+    -e 's|${PXR_CMAKE_DIR}/cmake|${PXR_CMAKE_DIR}|g' \
+    -e 's|${PXR_CMAKE_DIR}/include|/usr/include|g' \
+    -e 's|EXACT COMPONENTS|COMPONENTS|g' \
+        pxr/pxrConfig.cmake.in
+
+  # Further drop shebangs line for some py files
+  sed -r -i '1{/^#!/d}' \
+      pxr/usd/sdr/shaderParserTestUtils.py \
+      pxr/usd/usdUtils/updateSchemaWithSdrNode.py \
+      pxr/usdImaging/usdviewq/usdviewApi.py
+
+  rm -r docs/doxygen/doxygen-awesome-css/
+}
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DPXR_MALLOC_LIBRARY=/usr/lib/libjemalloc.so \
+    -DPXR_BUILD_TESTS=OFF \
+    -DPXR_BUILD_EXAMPLES=OFF \
+    -DPXR_BUILD_TUTORIALS=OFF \
+    -DPXR_BUILD_USD_TOOLS=OFF \
+    -DPXR_BUILD_OPENIMAGEIO_PLUGIN=ON \
+    -DPXR_BUILD_USDVIEW=OFF \
+    -DPXR_ENABLE_MATERIALX_SUPPORT=ON \
+    -DPXR_ENABLE_OPENVDB_SUPPORT=ON \
+    -DBUILD_SHARED_LIBS=ON \
+    -DPXR_BUILD_MONOLITHIC=ON \
+    -DPYTHON_EXECUTABLE=/usr/bin/python \
+    -DPXR_ENABLE_GL_SUPPORT=ON \
+
+  find . -type f -exec sed -i -e 's/\-O3//g' {} \;
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+  DESTDIR="${pkgdir}" make -C build install
+
+  # Preload jemalloc in scripts to prevent python using glibc's malloc
+  for cmd in "$pkgdir/usr/bin/"*; do
+    sed -r -i '1 s|(#!)(.*python.*)|\1/usr/bin/env -S LD_PRELOAD=/usr/lib/libjemalloc.so \2|' "$cmd"
+  done
+
+  sed -i 's|${PXR_CMAKE_DIR}/cmake|${PXR_CMAKE_DIR}|g' \
+    ${pkgdir}/usr/lib/cmake/pxr/pxrConfig.cmake
+  sed -i 's/_IMPORT_PREFIX ""/_IMPORT_PREFIX "\/usr"/' \
+    ${pkgdir}/usr/lib/cmake/pxr/pxrTargets.cmake
+
+  #license
+  install -Dm644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

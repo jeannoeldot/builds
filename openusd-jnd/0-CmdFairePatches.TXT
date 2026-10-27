@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 26.08
+!!! VERSION = 26.11.1
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/openusd-jnd
 
-mkdir /tmp/srcp
+$ mkdir /tmp/srcp
 
-cp -v OpenUSD-v26.08.tar.gz /tmp/srcp/
+$ cp -v OpenUSD-v26.11.1.tar.gz /tmp/srcp/
 
-cd /tmp/srcp
+$ cd /tmp/srcp
 
-tar -xzf OpenUSD-v26.08.tar.gz
+$ tar -xzf OpenUSD-v26.11.1.tar.gz
 
 
 !!! VOIR :
@@ -39,14 +39,14 @@ https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f329
 
 https://projects.blender.org/blender/blender/src/commit/380e9a8ea9ffff46daa6f3293537a7f91af35b4d/build_files/build_environment/patches/usd_noboost.diff
 
-1) MODIFIER OpenUSD-26.08/cmake/defaults/Packages.cmake
-=======================================================
+1) MODIFIER OpenUSD-26.11.1/cmake/defaults/Packages.cmake
+=========================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R OpenUSD-26.08 OpenUSD-26.08.new
+$ cp -R OpenUSD-26.11.1 OpenUSD-26.11.1.new
 
-cd OpenUSD-26.08.new/cmake/defaults
-kwrite Packages.cmake
+$ cd OpenUSD-26.11.1.new/cmake/defaults
+$ kwrite Packages.cmake
 
 COMMENTER LIGNES 23 A 33
 #if(PXR_ENABLE_OPENVDB_SUPPORT)
@@ -56,40 +56,40 @@ COMMENTER LIGNES 23 A 33
 
 
 ENREGISTRER et Quitter Kwrite & EFFACER fichier Packages.cmake~
-rm -f Packages.cmake~
+$ rm -f Packages.cmake~
 
-cd ../../..
+$ cd ../../..
 
-diff -aur OpenUSD-26.08 OpenUSD-26.08.new
-diff -aur OpenUSD-26.08 OpenUSD-26.08.new > usd_noboost.patch
+$ diff -aur OpenUSD-26.11.1 OpenUSD-26.11.1.new
+$ diff -aur OpenUSD-26.11.1 OpenUSD-26.11.1.new > usd_noboost.patch
 
-rm -rf OpenUSD-26.08.new
+$ rm -rf OpenUSD-26.11.1.new
 
 
-cd $HOME/05-builds/openusd-jnd
+$ cd $HOME/05-builds/openusd-jnd
 
-mv -vf /tmp/srcp/usd_noboost.patch .
+$ mv -vf /tmp/srcp/usd_noboost.patch .
 
 
 
 
 99) QUAND PATCHES FINIS
 =======================
-rm -rf /tmp/srcp
+$ rm -rf /tmp/srcp
 
-sync
+$ sync
 
 =================================================================
 ANCIENS
 ========
 
-2) MODIFIER OpenUSD-26.08/cmake/modules/FindTBB.cmake
+2) MODIFIER OpenUSD-26.11.1/cmake/modules/FindTBB.cmake
 =======================================================
 
 /!\ /!\ /!\ cd /tmp/srcp
-cp -R OpenUSD-26.08 OpenUSD-26.08.new
+cp -R OpenUSD-26.11.1 OpenUSD-26.11.1.new
 
-cd OpenUSD-26.08.new/cmake/modules
+cd OpenUSD-26.11.1.new/cmake/modules
 kwrite FindTBB.cmake
 
 AJOUTER LIGNE 219
@@ -101,10 +101,10 @@ rm -f FindTBB.cmake~
 
 cd ../../..
 
-diff -aur OpenUSD-26.08 OpenUSD-26.08.new
-diff -aur OpenUSD-26.08 OpenUSD-26.08.new > Find-TBB_INTERFACE_VERSION_MAJOR.patch
+diff -aur OpenUSD-26.11.1 OpenUSD-26.11.1.new
+diff -aur OpenUSD-26.11.1 OpenUSD-26.11.1.new > Find-TBB_INTERFACE_VERSION_MAJOR.patch
 
-rm -rf OpenUSD-26.08.new
+rm -rf OpenUSD-26.11.1.new
 
 
 cd $HOME/05-builds/openusd-jnd

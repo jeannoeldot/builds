@@ -1,6 +1,6 @@
-diff -aur OpenUSD-26.08/cmake/defaults/Packages.cmake OpenUSD-26.08.new/cmake/defaults/Packages.cmake
---- OpenUSD-26.08/cmake/defaults/Packages.cmake	2026-07-17 22:41:06.000000000 +0200
-+++ OpenUSD-26.08.new/cmake/defaults/Packages.cmake	2026-09-01 10:23:17.443882962 +0200
+diff -aur OpenUSD-26.11.1/cmake/defaults/Packages.cmake OpenUSD-26.11.1.new/cmake/defaults/Packages.cmake
+--- OpenUSD-26.11.1/cmake/defaults/Packages.cmake	2026-10-22 01:33:12.000000000 +0200
++++ OpenUSD-26.11.1.new/cmake/defaults/Packages.cmake	2026-10-27 11:44:04.693445895 +0100
 @@ -20,17 +20,17 @@
  find_package(Threads REQUIRED)
  set(PXR_THREAD_LIBS "${CMAKE_THREAD_LIBS_INIT}")
