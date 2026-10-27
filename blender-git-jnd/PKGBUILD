@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.4.0.3.20261026
+pkgver=5.4.0.3.20261027
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -52,10 +52,12 @@ _dlssver=310.9.16
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-${_optixver}.tar.gz"
         "DLSS-git-${_dlssver}.tar.gz"
+        "blender-usd-26.11.patch"
 )
-sha256sums=('3af2eff07c04cc1602518f08c5e412a91329544407aa728f4b06f7a399d52e52'
+sha256sums=('f28acd920f0bf88dbea606c7ff82d23bef2388f2611a5cdb4c530a586ef75871'
             '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
             'd4e37f6615027ddbf6e8398048014cebf2c6d76fd0e230fa42716df67da3886c'
+            'e909c97e736cc66c1445b2d4db79308e1740b7596564e2ee44765bde188810b5'
 )
 
 _gitname="blender"
@@ -63,10 +65,13 @@ _gitname="blender"
 prepare() {
   cd "${_gitname}"
 
+  # Fix build avec openusd 26.11.1
+  patch -Np1 -i "${srcdir}/blender-usd-26.11.patch"
+
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "e5e39801cadd"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "a02a832d2ec7"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1793008316|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1793111007|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
@@ -74,10 +79,10 @@ _get_pyver() {
 }
 
 build() {
-#  local cuda_archs="sm_120;compute_121"  # DLSS PAS OK
 #  local cuda_archs="sm_120;compute_75"    # TEST pour DLSS   ==> PAS OK
 #  local cuda_archs="sm_120;compute_120"    # TEST pour DLSS   ==> PAS OK
-  local cuda_archs="sm_86;sm_120;compute_121"    # TEST pour DLSS
+#  local cuda_archs="sm_86;sm_120;compute_121"    # TEST pour DLSS   ==> PAS OK
+  local cuda_archs="sm_120;compute_121"  # DLSS PAS OK
 
   cd "${_gitname}"
 
