@@ -1,3 +1,52 @@
+VERSION 14.0.0
+==============
+==> Starting build()...
+-- The CXX compiler identification is GNU 16.2.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Warning (deprecated) at cmake/config/OpenVDBCXX.cmake:32 (message):
+  C++ < 20 is deprecated and will be removed.
+Call Stack (most recent call first):
+  CMakeLists.txt:429 (include)
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "3.0.10")
+-- Configuring for OpenVDB Version 14.0.0
+-- Configuring for OpenVDB ABI Version 14
+-- The C compiler identification is GNU 16.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found TBB: 2023.2.0 (found suitable version "2023.2.0", minimum required is "2021") found components: tbb
+-- Found Zstd: 1.5.7 (found suitable version "1.5.7", minimum required is "1.5.2")
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.3.2", minimum required is "1.2.7")
+-- Found Threads: TRUE
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so
+-- ----------------------------------------------------
+-- --------------- Configuring NanoVDB ----------------
+-- ----------------------------------------------------
+-- Found TBB: 2023.2.0 (found suitable version "2023.2.0", minimum required is "2021") found components: tbb tbbmalloc tbbmalloc_proxy
+-- ----------------------------------------------------
+-- --------- Configuring NanoVDB Cmd Tools ------------
+-- ----------------------------------------------------
+CMake Warning at nanovdb/nanovdb/cmd/CMakeLists.txt:31 (message):
+   - OpenVDB required to build nanovdb_convert. Skipping.
+
+
+
 
 VERSION 12.0.0-1 AVEC nanoVDB
 =============================

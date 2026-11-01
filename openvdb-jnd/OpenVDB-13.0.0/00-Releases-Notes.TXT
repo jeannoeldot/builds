@@ -1,0 +1,32 @@
+VOIR 99-dwl-temp/openvdb-13.1.0.rpm/openvdb-13.1.0-4.fc46.src/openvdb.spec
+
+Version 14.0.0 - October 29, 2026
+
+Build:
+
+OpenVDB:
+nanobind 2.5.0 (makedepends)
+Removed the Log4cplus dependency
+Removed the FindBlosc.cmake module and the BLOSC_ROOT, BLOSC_INCLUDEDIR and BLOSC_LIBRARYDIR inputs. The USE_BLOSC option is deprecated and has no effect.
+Added Zstd as an optional dependency of the OpenVDB core library, with the new USE_ZSTD CMake option (ON by default)
+
+NanoVDB:
+Standalone NanoVDB builds now install headers to the CMAKE_INSTALL_PREFIX include directory instead of /nanovdb.
+
+
+
+Version 13.2.0 - October 26, 2026
+Build:
+
+Removed the OPENVDB_USE_DELAYED_LOADING CMake option.
+OpenVDB no longer requires or links against Boost.
+
+
+Version 13.1.0 - September 16, 2026
+
+Build:
+Added support for building against TBB 2023.
+OPENVDB_X86_INSTRSET to supersede the OPENVDB_SIMD. See the root CMakeLists for all available values.
+
+
+

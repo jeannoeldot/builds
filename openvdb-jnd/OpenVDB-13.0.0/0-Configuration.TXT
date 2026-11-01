@@ -1,0 +1,452 @@
+
+VERSION 12.0.0-1 AVEC nanoVDB
+=============================
+==> Starting build()...
+-- The CXX compiler identification is GNU 14.2.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "2.1.1")
+-- Configuring for OpenVDB Version 12.0.0
+-- Configuring for OpenVDB ABI Version 12
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+CMake Warning (dev) at openvdb/openvdb/CMakeLists.txt:112 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Boost: /usr/lib/cmake/Boost-1.86.0/BoostConfig.cmake (found suitable version "1.86.0", minimum required is "1.80") found components: iostreams
+-- Found TBB: /usr/include (found suitable version "2021.13", minimum required is "2020.3") found components: tbb
+-- Found Blosc: /usr/lib/libblosc.so (found suitable version "1.21.6", minimum required is "1.17.0")
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.3.1", minimum required is "1.2.7")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so
+-- The C compiler identification is GNU 14.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- ----------------------------------------------------
+-- --------------- Configuring NanoVDB ----------------
+-- ----------------------------------------------------
+-- Found TBB: /usr/include (found suitable version "2021.13", minimum required is "2020.3") found components: tbb tbbmalloc tbbmalloc_proxy
+-- ----------------------------------------------------
+-- --------- Configuring NanoVDB Cmd Tools ------------
+-- ----------------------------------------------------
+CMake Warning at nanovdb/nanovdb/cmd/CMakeLists.txt:31 (message):
+   - OpenVDB required to build nanovdb_convert. Skipping.
+
+
+-- Configuring done (0.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /build/openvdb-git/src/openvdb-12.0.0/build
+
+
+
+VERSION 9.0.0-1 AVEC nanoVDB
+============================
+==> Starting build()...
+-- The CXX compiler identification is GNU 11.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.0")
+-- Configuring for OpenVDB Version 9.0.0
+-- Configuring for OpenVDB ABI Version 9
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found Boost: /usr/lib64/cmake/Boost-1.78.0/BoostConfig.cmake (found suitable version "1.78.0", minimum required is "1.70") found components: iostreams system
+-- Found TBB: /usr/include (found suitable version "2021.5", minimum required is "2019.0") found components: tbb
+-- Found Blosc: /usr/lib/libblosc.so (found suitable version "1.21.1", minimum required is "1.5.0")
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.12", minimum required is "1.2.7")
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so
+-- The C compiler identification is GNU 11.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- ----------------------------------------------------
+-- --------------- Configuring NanoVDB ----------------
+-- ----------------------------------------------------
+-- Found TBB: /usr/include (found version "2021.5") found components: tbb tbbmalloc tbbmalloc_proxy
+-- Found Blosc: /usr/lib/libblosc.so (found version "1.21.1")
+-- Found ZLIB: /usr/lib/libz.so (found version "1.2.12")
+-- ----------------------------------------------------
+-- --------- Configuring NanoVDB Cmd Tools ------------
+-- ----------------------------------------------------
+CMake Warning at nanovdb/nanovdb/cmd/CMakeLists.txt:31 (message):
+   - OpenVDB required to build nanovdb_convert. Skipping.
+
+
+
+
+VERSION 9.0.0-1
+===============
+==> Starting build()...
+-- The CXX compiler identification is GNU 11.1.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.0")
+-- Configuring for OpenVDB Version 9.0.0
+-- Configuring for OpenVDB ABI Version 9
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found Boost: /usr/lib64/cmake/Boost-1.76.0/BoostConfig.cmake (found suitable version "1.76.0", minimum required is "1.70") found components: iostreams system
+-- Found TBB: /usr/include (found suitable version "2020.3", minimum required is "2019.0") found components: tbb
+-- Found Blosc: /usr/lib/libblosc.so (found suitable version "1.21.1", minimum required is "1.5.0")
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7")
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openvdb-git/src/openvdb-9.0.0/build
+
+
+
+
+VERSION 7.2.1-1
+===============
+==> Starting build()...
+-- The CXX compiler identification is GNU 10.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.7.3") 
+-- Configuring for OpenVDB Version 7.2.1
+-- Configuring for OpenVDB ABI Version 7
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: Half Iex IexMath IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: IlmImf IlmImfUtil 
+-- Found TBB: /usr/include (found suitable version "2020.3", minimum required is "2017.0") found components: tbb 
+-- Found Blosc: /usr/lib/libblosc.so (found suitable version "1.20.1", minimum required is "1.5.0") 
+CMake Warning at openvdb/openvdb/CMakeLists.txt:87 (message):
+  The version of Blosc located is greater than 1.5.0.  There have been
+  reported issues with using later versions of Blosc with OpenVDB.  OpenVDB
+  has been tested fully against Blosc 1.5.0, it is recommended that you use
+  this version where possible.
+
+
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7") 
+-- Found Boost: /usr/lib64/cmake/Boost-1.75.0/BoostConfig.cmake (found suitable version "1.75.0", minimum required is "1.61") found components: iostreams system 
+-- Looking for C++ include pthread.h
+-- Looking for C++ include pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found Jemalloc: /usr/lib/libjemalloc.so  
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: Half Iex IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.5", minimum required is "2.2") found components: IlmImf 
+-- Found OpenGL: /usr/lib/libOpenGL.so   
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openvdb-git/src/openvdb-7.2.1/build
+
+
+
+VERSION 6.1.0-6
+===============
+==> Starting build()...
+-- The C compiler identification is GNU 9.1.0
+-- The CXX compiler identification is GNU 9.1.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Configuring for OpenVDB Version 6.1.0
+-- Configuring for OpenVDB ABI Version 6
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.6.1") 
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  Half Iex IexMath IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  IlmImf IlmImfUtil 
+-- Found TBB: /usr/include (found suitable version "2019.0", minimum required is "4.4") found components:  tbb 
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7") 
+-- Found Blosc: /usr/lib64/libblosc.so (found suitable version "1.16", minimum required is "1.5") 
+CMake Warning at openvdb/CMakeLists.txt:90 (message):
+  The version of Blosc located is greater than 1.5.  There have been reported
+  issues with using later versions of Blosc with OpenVDB.  OpenVDB has been
+  tested fully against Blosc 1.5, it is recommended that you use this version
+  where possible.
+
+
+-- Boost version: 1.69.0
+-- Found the following Boost libraries:
+--   iostreams
+--   system
+--   regex
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  Half Iex IlmThread 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  IlmImf 
+-- Boost version: 1.69.0
+-- Found the following Boost libraries:
+--   thread
+--   chrono
+--   date_time
+--   atomic
+CMake Warning (dev) at /usr/share/cmake-3.14/Modules/FindOpenGL.cmake:275 (message):
+  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
+  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  FindOpenGL found both a legacy GL library:
+
+    OPENGL_gl_LIBRARY: /usr/lib/libGL.so
+
+  and GLVND libraries for OpenGL and GLX:
+
+    OPENGL_opengl_LIBRARY: /usr/lib/libOpenGL.so
+    OPENGL_glx_LIBRARY: /usr/lib/libGLX.so
+
+  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
+  compatibility with CMake 3.10 and below the legacy GL library will be used.
+Call Stack (most recent call first):
+  openvdb/cmd/CMakeLists.txt:200 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found OpenGL: /usr/lib/libOpenGL.so   
+-- Found glfw3: /usr/lib64/cmake/glfw3 (found suitable version "3.3.0", minimum required is "3.0") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openvdb-git/src/openvdb-6.1.0/build
+
+
+
+
+======================================================================
+VERSION 6.1.0
+=============
+==> Starting build()...
+-- The C compiler identification is GNU 8.3.0
+-- The CXX compiler identification is GNU 8.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Configuring for OpenVDB Version 6.1.0
+-- Configuring for OpenVDB ABI Version 6
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.6.1") 
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  Half Iex IexMath IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  IlmImf IlmImfUtil 
+-- Found TBB: /usr/include (found suitable version "2019.0", minimum required is "4.4") found components:  tbb 
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7") 
+-- Found Blosc: /usr/lib64/libblosc.so (found suitable version "1.16", minimum required is "1.5") 
+CMake Warning at openvdb/CMakeLists.txt:90 (message):
+  The version of Blosc located is greater than 1.5.  There have been reported
+  issues with using later versions of Blosc with OpenVDB.  OpenVDB has been
+  tested fully against Blosc 1.5, it is recommended that you use this version
+  where possible.
+
+
+-- Boost version: 1.69.0
+-- Found the following Boost libraries:
+--   iostreams
+--   system
+--   regex
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/build/src/openvdb-6.1.0/build
+
+
+==> Starting build()...
+-- The C compiler identification is GNU 8.3.0
+-- The CXX compiler identification is GNU 8.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake Build Type: Release
+-- Configuring for OpenVDB Version 6.1.0
+-- Configuring for OpenVDB ABI Version 6
+-- ----------------------------------------------------
+-- ------------- Configuring OpenVDBCore --------------
+-- ----------------------------------------------------
+-- Found PkgConfig: /usr/bin/pkg-config (found version "1.6.1") 
+-- Found IlmBase: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  Half Iex IexMath IlmThread Imath 
+-- Found OpenEXR: /usr/include/OpenEXR (found suitable version "2.3", minimum required is "2.2") found components:  IlmImf IlmImfUtil 
+-- Found TBB: /usr/include (found suitable version "2019.0", minimum required is "4.4") found components:  tbb 
+-- Found ZLIB: /usr/lib/libz.so (found suitable version "1.2.11", minimum required is "1.2.7") 
+-- Found Blosc: /usr/lib64/libblosc.so (found suitable version "1.16", minimum required is "1.5") 
+CMake Warning at openvdb/CMakeLists.txt:90 (message):
+  The version of Blosc located is greater than 1.5.  There have been reported
+  issues with using later versions of Blosc with OpenVDB.  OpenVDB has been
+  tested fully against Blosc 1.5, it is recommended that you use this version
+  where possible.
+
+
+-- Boost version: 1.69.0
+-- Found the following Boost libraries:
+--   iostreams
+--   system
+--   regex
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- ----------------------------------------------------
+-- ----------- Configuring OpenVDBBinaries ------------
+-- ----------------------------------------------------
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BLOSC_LOCATION
+    GLFW3_LOCATION
+    ILMBASE_LOCATION
+    ILMBASE_NAMESPACE_VERSIONING
+    OPENEXR_LOCATION
+    OPENEXR_NAMESPACE_VERSIONING
+    TBB_LOCATION
+    USE_GLFW3
+
+
+-- Build files have been written to: /build/openvdb-git/src/openvdb-6.1.0/build
+
+
+===============================================================================
+==> Starting build()...
+-- The C compiler identification is GNU 7.2.0
+-- The CXX compiler identification is GNU 7.2.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found GLFW3: /usr  
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Boost version: 1.65.1
+-- Found the following Boost libraries:
+--   iostreams
+--   system
+--   thread
+--   regex
+--   chrono
+--   date_time
+--   atomic
+-- Found Blosc: /usr  
+-- Found TBB: /usr  
+-- Found ZLIB: /usr/lib/libz.so (found version "1.2.11") 
+-- Found ILMBase: /usr  
+-- Found OpenEXR: /usr  
+-- Found OpenEXR v2.2 at /usr
+-- Found OpenGL: /usr/lib/libGL.so  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build/openvdb-git/src/openvdb-4.0.2/build

@@ -1,0 +1,58 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=openvdb-jnd
+pkgver=13.0.0.20251104
+pkgrel=3
+_ver_release="13.0.0"
+_name_release="openvdb-${_ver_release}"
+pkgdesc='A large suite of tools for the efficient storage and manipulation of sparse volumetric data discretized on three-dimensional grids'
+url='https://www.openvdb.org/'
+arch=('x86_64')
+license=('Apache-2.0')
+depends=('onetbb' 'zlib'
+         'blosc' 'glfw-x11' 'glu'
+         'jemalloc'
+)
+makedepends=('doxygen' 'cmake' 'mesa' 'pybind11'
+)
+conflicts=('openvdb' 'openvdb-git')
+provides=('openvdb')
+options=('!debug')
+source=("OpenVDB-v${_ver_release}.tar.gz"
+        "openvdb-tbb2023.patch"
+)
+sha256sums=('4d6a91df5f347017496fe8d22c3dbb7c4b5d7289499d4eb4d53dd2c75bb454e1'
+            'fbbe9ff8e9a325dee726f174e3859754fe48b00e5c9dff0e8944c69207225051'
+)
+
+prepare() {
+  cd "${_name_release}"
+
+  # Fixe erreur compilation avec tbb : Voir Arch
+  # https://patch-diff.githubusercontent.com/raw/AcademySoftwareFoundation/openvdb/pull/2200.patch
+  patch -Np1 -i "${srcdir}/openvdb-tbb2023.patch"
+}
+
+build() {
+  cd "${_name_release}"
+
+  cmake \
+    -Bbuild \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS_RELEASE:STRING=-DNDEBUG \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DOPENVDB_ENABLE_RPATH=OFF \
+    -DUSE_NANOVDB=ON \
+    -DOPENVDB_USE_DELAYED_LOADING=OFF \
+    -DUSE_CCACHE=OFF \
+    -DOPENVDB_CORE_STATIC=OFF
+  
+  make -C build
+}
+
+package() {
+  cd "${_name_release}"
+
+  DESTDIR="${pkgdir}" make -C build install
+}
