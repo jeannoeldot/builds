@@ -1,7 +1,7 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.4.0.3.20261027
+pkgver=5.4.0.5.20261101
 pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
@@ -46,17 +46,17 @@ provides=('blender')
 options=('!lto' '!debug')
 
 _pkgname_git=blender-git
-_optixver=9.1.0
-_dlssver=310.9.16
+_optixver=9.0.0
+_dlssver=310.9.1
 
 source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-${_optixver}.tar.gz"
         "DLSS-git-${_dlssver}.tar.gz"
         "blender-usd-26.11.patch"
 )
-sha256sums=('f28acd920f0bf88dbea606c7ff82d23bef2388f2611a5cdb4c530a586ef75871'
-            '3a29b2254107fdfbb5e6bbad3ec154dd682149121f61e9c406607ac7b52a6ba6'
-            'd4e37f6615027ddbf6e8398048014cebf2c6d76fd0e230fa42716df67da3886c'
+sha256sums=('ec7da56b6ed598165f0fda3bede5616f8a824998d9aa58331c8c5e171d279394'
+            '069a5860040ea611e7eb6317f8e3bb0f0d54a5acac744568f7290d7cb8711c05'
+            'effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb'
             'e909c97e736cc66c1445b2d4db79308e1740b7596564e2ee44765bde188810b5'
 )
 
@@ -69,9 +69,9 @@ prepare() {
   patch -Np1 -i "${srcdir}/blender-usd-26.11.patch"
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "a02a832d2ec7"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "656095aa20ba"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1793111007|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1793522597|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
@@ -82,7 +82,8 @@ build() {
 #  local cuda_archs="sm_120;compute_75"    # TEST pour DLSS   ==> PAS OK
 #  local cuda_archs="sm_120;compute_120"    # TEST pour DLSS   ==> PAS OK
 #  local cuda_archs="sm_86;sm_120;compute_121"    # TEST pour DLSS   ==> PAS OK
-  local cuda_archs="sm_120;compute_121"  # DLSS PAS OK
+#  local cuda_archs="sm_120;compute_121"  # TEST pour DLSS   ==> PAS OK
+  local cuda_archs="sm_75;sm_120;compute_75"  # TEST pour DLSS
 
   cd "${_gitname}"
 

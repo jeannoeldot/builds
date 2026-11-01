@@ -1,0 +1,69 @@
+
+/usr/include/oneapi/tbb/parallel_sort.h:145:31: error: no match for call to ‘(const blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)>) (tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type&, const tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type&)’
+  145 |                 return !m_comp(pivot, x);
+      |                         ~~~~~~^~~~~~~~~~
+  • there are 2 candidates
+    /build/blender-git-jnd/src/blender/source/blender/modifiers/intern/MOD_grease_pencil_build.cc:472:44:
+      472 |       distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
+          |                                            ^
+    • candidate 1: ‘bool (*)(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)’ (conversion)
+      /usr/include/oneapi/tbb/parallel_sort.h:145:31:
+        145 |                 return !m_comp(pivot, x);
+            |                         ~~~~~~^~~~~~~~~~
+      • conversion of argument 3 would be ill-formed:
+      • error: binding reference of type ‘blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&’ to ‘const tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type’ {aka ‘const blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair’} discards qualifiers
+    • candidate 2: ‘blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)>’ (near match)
+      /build/blender-git-jnd/src/blender/source/blender/modifiers/intern/MOD_grease_pencil_build.cc:472:43:
+        472 |       distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
+            |                                           ^
+      • conversion of argument 2 would be ill-formed:
+      • error: binding reference of type ‘blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&’ to ‘const tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type’ {aka ‘const blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair’} discards qualifiers
+/usr/include/oneapi/tbb/parallel_sort.h:158:30: error: no match for call to ‘(const blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)>) (const tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type&, tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type&)’
+  158 |                 return m_comp(x, pivot);
+      |                        ~~~~~~^~~~~~~~~~
+  • there are 2 candidates
+    /build/blender-git-jnd/src/blender/source/blender/modifiers/intern/MOD_grease_pencil_build.cc:472:44:
+      472 |       distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
+          |                                            ^
+    • candidate 1: ‘bool (*)(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)’ (conversion)
+      /usr/include/oneapi/tbb/parallel_sort.h:158:30:
+        158 |                 return m_comp(x, pivot);
+            |                        ~~~~~~^~~~~~~~~~
+      • conversion of argument 2 would be ill-formed:
+      • error: binding reference of type ‘blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&’ to ‘const tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type’ {aka ‘const blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair’} discards qualifiers
+    • candidate 2: ‘blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)>’ (near match)
+      /build/blender-git-jnd/src/blender/source/blender/modifiers/intern/MOD_grease_pencil_build.cc:472:43:
+        472 |       distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
+            |                                           ^
+      • conversion of argument 1 would be ill-formed:
+      • error: binding reference of type ‘blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&’ to ‘const tbb::detail::d1::quick_sort_range<blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair*, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::<lambda(blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&, blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair&)> >::value_type’ {aka ‘const blender::reorder_strokes(const bke::CurvesGeometry&, Span<bool>, const Object&, MutableSpan<bool>)::Pair’} discards qualifiers
+make[2]: *** [source/blender/modifiers/CMakeFiles/bf_modifiers.dir/build.make:345: source/blender/modifiers/CMakeFiles/bf_modifiers.dir/intern/MOD_grease_pencil_build.cc.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:10862: source/blender/modifiers/CMakeFiles/bf_modifiers.dir/all] Error 2
+
+/build/blender-git-jnd/src/blender/source/blender/blenkernel/intern/volume_grid_file_cache.cc:99:14: error: no matching function for call to ‘openvdb::v14_0::io::File::open(const bool&)’
+   99 |     file.open(delay_load);
+      |     ~~~~~~~~~^~~~~~~~~~~~
+  • there is 1 candidate
+In file included from /usr/include/openvdb/openvdb.h:16,
+                 from /build/blender-git-jnd/src/blender/source/blender/blenkernel/BKE_volume_openvdb.hh:13,
+                 from /build/blender-git-jnd/src/blender/source/blender/blenkernel/intern/volume_grid_file_cache.cc:12:
+    • candidate 1: ‘bool openvdb::v14_0::io::File::open()’
+      /usr/include/openvdb/io/File.h:61:10:
+         61 |     bool open();
+            |          ^~~~
+      • candidate expects 0 arguments, 1 provided
+/build/blender-git-jnd/src/blender/source/blender/blenkernel/intern/volume_grid_file_cache.cc: In function ‘openvdb::v14_0::GridBase::Ptr blender::bke::volume_grid::file_cache::load_single_grid_from_disk(blender::StringRef, blender::StringRef)’:
+/build/blender-git-jnd/src/blender/source/blender/blenkernel/intern/volume_grid_file_cache.cc:198:12: error: no matching function for call to ‘openvdb::v14_0::io::File::open(const bool&)’
+  198 |   file.open(delay_load);
+      |   ~~~~~~~~~^~~~~~~~~~~~
+  • there is 1 candidate
+    • candidate 1: ‘bool openvdb::v14_0::io::File::open()’
+      /usr/include/openvdb/io/File.h:61:10:
+         61 |     bool open();
+            |          ^~~~
+      • candidate expects 0 arguments, 1 provided
+make[2]: *** [source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/build.make:4083: source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/intern/volume_grid_file_cache.cc.o] Error 1
+
+[ 91%] Built target bf_nodes_geometry
+make[1]: *** [CMakeFiles/Makefile2:9007: source/blender/blenkernel/CMakeFiles/bf_blenkernel.dir/all] Error 2
+make: *** [Makefile:166: all] Error 2
