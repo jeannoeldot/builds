@@ -40,6 +40,8 @@ voir 0-CmdFairePatches.TXT
 
 pkgname=thorvg-jnd
 pkgver=1.1.3.20261015
+pkgrel=3    # AVEC PATCH Diff-Blender-thorvg-diff.patch
+
 pkgrel=2    # AVEC -Dc_link_args="-Wl,-z,relro,-z,now" -Dcpp_link_args="-Wl,-z,relro,-z,now"
 
 pkgrel=1
@@ -68,6 +70,28 @@ source=("thorvg-${_ver_release}.tar.gz"
 )
 sha256sums=('... ...'
 )
+
+AVEC PATCH
+----------
+$ sha256sum thorvg-1.1.3.tar.gz
+
+$ sha256sum Diff-Blender-thorvg-diff.patch
+
+source=("thorvg-${_ver_release}.tar.gz"
+        "Diff-Blender-thorvg-diff.patch"
+)
+sha256sums=('123456789'
+            '123456789'
+)
+
+prepare() {
+  cd "${_name_release}"
+
+  # Voir blender
+  patch -Np1 -i "${srcdir}/Diff-Blender-thorvg-diff.patch"
+
+  ...
+}
 
 prepare() {
   cd "${_name_release}"
@@ -107,6 +131,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users 4210384 21 avril 11:51 thorvg-1.1.3.tar.gz
 -rw-r--r--  1 jnd users     973 21 avril 12:10 PKGBUILD
+-rw-r--r--  1 jnd users     764 22 oct.  11:34 Diff-Blender-thorvg-diff.patch
 
 !!! A MODIFIER SI PAS OK !
 ===============================

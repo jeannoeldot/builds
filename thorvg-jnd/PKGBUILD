@@ -2,7 +2,7 @@
 
 pkgname=thorvg-jnd
 pkgver=1.1.3.20261015
-pkgrel=2
+pkgrel=3
 _ver_release="1.1.3"
 _name_release="thorvg-${_ver_release}"
 pkgdesc="Portable library designed for rendering vector-based scenes and animations, including SVG and Lottie formats"
@@ -18,12 +18,18 @@ provides=('thorvg')
 #options=(staticlibs)
 options=('!debug')
 source=("thorvg-${_ver_release}.tar.gz"
+        "Diff-Blender-thorvg-diff.patch"
 )
 sha256sums=('ba9957aeeadb4151d4486f11c638ae118c00210fa4906daa7b30143aa341e690'
+            'd55f02c7d8a502d1bd20f2f2f69d35c57c93e1a61d774980332f53faf01b8d13'
 )
 
 prepare() {
   cd "${_name_release}"
+
+  # Voir blender
+  patch -Np1 -i "${srcdir}/Diff-Blender-thorvg-diff.patch"
+
   meson setup builddir --prefix=/usr --buildtype=release \
     -Dc_link_args="-Wl,-z,relro,-z,now" \
     -Dcpp_link_args="-Wl,-z,relro,-z,now" \

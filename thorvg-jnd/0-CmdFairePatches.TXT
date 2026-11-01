@@ -6,14 +6,80 @@ FAIRE PATCHS
 
 /!\ /!\ /!\ $HOME/05-builds/thorvg-jnd
 
-mkdir /tmp/srcp
+$ mkdir /tmp/srcp
 
-cp -v thorvg-1.1.3.tar.gz /tmp/srcp/
+$ cp -v thorvg-1.1.3.tar.gz /tmp/srcp/
 
-cd /tmp/srcp
+$ cd /tmp/srcp
 
-tar -xzf thorvg-1.1.3.tar.gz
+$ tar -xzf thorvg-1.1.3.tar.gz
 
+1) BLENDER DIFF thorvg.diff
+====================================================
+1-1) MODIFIER /src/common/tvgCommon.h
+=====================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+$ cp -R thorvg-1.1.3 thorvg-1.1.3.new
+
+$ cd thorvg-1.1.3.new/src/common
+$ kwrite tvgCommon.h
+
+SUPPRIMER LIGNES 66 A 68 :
+void* operator new(std::size_t size);
+void operator delete(void* ptr) noexcept;
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER tvgCommon.h~
+$ rm -f tvgCommon.h~
+
+$ cd ../../..
+
+1-2) MODIFIER /src/renderer/tvgInitializer.cpp
+==============================================
+/!\ /!\ /!\ cd /tmp/srcp
+
+$ cd thorvg-1.1.3.new/src/renderer
+$ kwrite tvgInitializer.cpp
+
+SUPPRIMER LIGNES 141 A 162 :
+void* operator new(std::size_t size)
+{
+    return tvg::malloc(size);
+}
+
+
+void operator delete(void* ptr) noexcept
+{
+    tvg::free(ptr);
+}
+
+
+void* operator new[](std::size_t size)
+{
+    return tvg::malloc(size);
+}
+
+
+void operator delete[](void* ptr) noexcept
+{
+    tvg::free(ptr);
+}
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER tvgInitializer.cpp~
+$ rm -f tvgInitializer.cpp~
+
+$ cd ../../..
+
+$ diff -aur thorvg-1.1.3 thorvg-1.1.3.new
+$ diff -aur thorvg-1.1.3 thorvg-1.1.3.new > Diff-Blender-thorvg-diff.patch
+
+$ rm -rf thorvg-1.1.3.new
+
+$ cd $HOME/05-builds/thorvg-jnd
+
+$ mv -vf /tmp/srcp/Diff-Blender-thorvg-diff.patch .
 
 
 
