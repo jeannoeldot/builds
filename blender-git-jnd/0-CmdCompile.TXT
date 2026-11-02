@@ -212,6 +212,7 @@ voir CmdFairePatches.TXT
 _pkgname_git=blender-git
 pkgname=blender-git-jnd
 pkgver=5.4.0.5.20261101
+pkgrel=2    # Idem 1 + patches
 pkgrel=1    # TEST DLSS AVEC   local cuda_archs="sm_75;sm_120;compute_75"
 
 pkgrel=1    # TEST DLSS AVEC   local cuda_archs="sm_120;compute_120"   ==> PAS OK
@@ -350,6 +351,8 @@ source=("$pkgname-$pkgver.tar.zst"
         "optix-dev-9.0.0.tar.gz"
         "DLSS-git-310.9.1.tar.gz"
         "blender-usd-26.11.patch"
+        "Fix-Build-onetbb-2023.2.0.patch"
+        "Fix-Build-openvdb-14.0.0.patch"
 )
 
 $ sha256sum blender-git-5.4.0.5.20261101.tar.zst
@@ -359,6 +362,10 @@ $ sha256sum optix-dev-9.0.0.tar.gz
 $ sha256sum DLSS-git-310.9.1.tar.gz
 
 $ sha256sum blender-usd-26.11.patch
+
+$ sha256sum Fix-Build-onetbb-2023.2.0.patch
+
+$ sha256sum Fix-Build-openvdb-14.0.0.patch
 
 sha256sums=('123...'
             '456...'
@@ -655,6 +662,8 @@ $ rm -f *~ \
 && cp -v $HOME/05-builds/blender-git-jnd/optix-dev-9.0.0.tar.gz . \
 && cp -v $HOME/05-builds/blender-git-jnd/DLSS-git-310.9.1.tar.gz . \
 && cp -v $HOME/05-builds/blender-git-jnd/blender-usd-26.11.patch . \
+&& cp -v $HOME/05-builds/blender-git-jnd/Fix-Build-onetbb-2023.2.0.patch . \
+&& cp -v $HOME/05-builds/blender-git-jnd/Fix-Build-openvdb-14.0.0.patch . \
 && mkpkg-tmpfs -m native -g 32G \
 && cd $HOME/05-builds/blender-git-jnd \
 && cp -v -f /tmp/buildblender/blender-git-jnd-*-x86_64.pkg.tar.* . \

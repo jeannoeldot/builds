@@ -1,0 +1,12 @@
+diff -aur blender/source/blender/modifiers/intern/MOD_grease_pencil_build.cc blender.new/source/blender/modifiers/intern/MOD_grease_pencil_build.cc
+--- blender/source/blender/modifiers/intern/MOD_grease_pencil_build.cc	2026-05-06 11:25:41.000000000 +0200
++++ blender.new/source/blender/modifiers/intern/MOD_grease_pencil_build.cc	2026-11-02 11:51:06.199839431 +0100
+@@ -469,7 +469,7 @@
+   }
+ 
+   parallel_sort(
+-      distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
++      distances.begin(), distances.end(), [](const Pair &a, const Pair &b) { return a.value < b.value; });
+ 
+   Array<int> new_order(curves.curves_num());
+   for (const int i : curves.curves_range()) {

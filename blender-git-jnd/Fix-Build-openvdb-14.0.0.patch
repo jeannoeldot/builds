@@ -1,0 +1,33 @@
+diff -aur blender/source/blender/blenkernel/intern/volume_grid_file_cache.cc blender.new/source/blender/blenkernel/intern/volume_grid_file_cache.cc
+--- blender/source/blender/blenkernel/intern/volume_grid_file_cache.cc	2026-09-06 11:23:01.000000000 +0200
++++ blender.new/source/blender/blenkernel/intern/volume_grid_file_cache.cc	2026-11-02 12:07:06.034566514 +0100
+@@ -92,11 +92,11 @@
+   try {
+     /* Disable delay loading and file copying, this has poor performance
+      * on network drives. */
+-    const bool delay_load = false;
++    /*const bool delay_load = false;*/
+ #  ifdef OPENVDB_USE_DELAYED_LOADING
+     file.setCopyMaxBytes(0);
+ #  endif
+-    file.open(delay_load);
++    file.open();
+     vdb_grids = *(file.readAllGridMetadata());
+     file_cache.meta_data = *file.getMetadata();
+   }
+@@ -189,13 +189,13 @@
+ {
+   /* Disable delay loading and file copying, this has poor performance
+    * on network drivers. */
+-  const bool delay_load = false;
++    /*const bool delay_load = false;*/
+ 
+   openvdb::io::File file(file_path);
+ #  ifdef OPENVDB_USE_DELAYED_LOADING
+   file.setCopyMaxBytes(0);
+ #  endif
+-  file.open(delay_load);
++  file.open();
+   return file.readGrid(grid_name);
+ }
+ 

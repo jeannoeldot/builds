@@ -14,6 +14,91 @@ $ cd /tmp/srcp
 
 $ tar -x --zstd -f blender-git-5.4.0.5.20261101.tar.zst
 
+1) Fix Build Erreur avec onetbb 2023.2.0
+====================================================
+1-1) MODIFIER source/blender/modifiers/intern/MOD_grease_pencil_build.cc
+========================================================================
+/!\ /!\ /!\ $ cd /tmp/srcp
+
+$ cp -R blender blender.new
+
+$ cd blender.new/source/blender/modifiers/intern
+$ kwrite MOD_grease_pencil_build.cc
+
+MODIFIER LIGNE 472 :
+      distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
+
+DEVIENT:
+      distances.begin(), distances.end(), [](const Pair &a, const Pair &b) { return a.value < b.value; });
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER MOD_grease_pencil_build.cc~
+$ rm -f MOD_grease_pencil_build.cc~
+
+$ cd ../../../../..
+
+$ diff -aur blender blender.new
+$ diff -aur blender blender.new > Fix-Build-onetbb-2023.2.0.patch
+
+$ rm -rf blender.new
+
+$ cd $HOME/05-builds/blender-git-jnd
+
+$ mv -vf /tmp/srcp/Fix-Build-onetbb-2023.2.0.patch .
+
+
+2) Fix Build Erreur avec openvdb 14.0.0
+====================================================
+2-1) MODIFIER source/blender/blenkernel/intern/volume_grid_file_cache.cc
+========================================================================
+/!\ /!\ /!\ $ cd /tmp/srcp
+
+$ cp -R blender blender.new
+
+$ cd blender.new/source/blender/blenkernel/intern
+$ kwrite volume_grid_file_cache.cc
+
+MODIFIER LIGNE 95 :
+    const bool delay_load = false;
+
+DEVIENT:
+    /*const bool delay_load = false;*/
+
+MODIFIER LIGNE 99 :
+    file.open(delay_load);
+
+DEVIENT:
+    file.open();
+
+
+MODIFIER LIGNE 192 :
+    const bool delay_load = false;
+
+DEVIENT:
+  /*const bool delay_load = false;*/
+
+MODIFIER LIGNE 198 :
+    file.open(delay_load);
+
+DEVIENT:
+    file.open();
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER volume_grid_file_cache.cc~
+$ rm -f volume_grid_file_cache.cc~
+
+$ cd ../../../../..
+
+$ diff -aur blender blender.new
+$ diff -aur blender blender.new > Fix-Build-openvdb-14.0.0.patch
+
+$ rm -rf blender.new
+
+$ cd $HOME/05-builds/blender-git-jnd
+
+$ mv -vf /tmp/srcp/Fix-Build-openvdb-14.0.0.patch .
+
+
 
 
 
