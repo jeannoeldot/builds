@@ -2,7 +2,7 @@
 
 pkgname=openimageio-jnd
 pkgver=3.2.2.0.20261028
-pkgrel=1
+pkgrel=2
 _name_release="OpenImageIO-3.2.2.0"
 _ver_release="v3.2.2.0"
 pkgdesc="A library for reading and writing images, including classes, utilities, and applications"
