@@ -1,8 +1,8 @@
 # Maintainer: Name <name@fai.com>
 
 pkgname=blender-git-jnd
-pkgver=5.4.0.5.20261101
-pkgrel=2
+pkgver=5.4.0.6.20261107
+pkgrel=1
 pkgdesc="A fully integrated 3D graphics creation suite"
 arch=('x86_64')
 license=('GPL-3.0-or-later')
@@ -53,14 +53,12 @@ source=("$_pkgname_git-$pkgver.tar.zst"
         "optix-dev-${_optixver}.tar.gz"
         "DLSS-git-${_dlssver}.tar.gz"
         "blender-usd-26.11.patch"
-        "Fix-Build-onetbb-2023.2.0.patch"
         "Fix-Build-openvdb-14.0.0.patch"
 )
-sha256sums=('ec7da56b6ed598165f0fda3bede5616f8a824998d9aa58331c8c5e171d279394'
+sha256sums=('f957a0b46ea36ce011b74d76f882a3ce5fc288611c10910a89b725cfee4510f9'
             '069a5860040ea611e7eb6317f8e3bb0f0d54a5acac744568f7290d7cb8711c05'
             'effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb'
             'e909c97e736cc66c1445b2d4db79308e1740b7596564e2ee44765bde188810b5'
-            '9459d3b10dacb3ddaffca31cb9762b0d03890ebcf7bdfd0421c3dd672f657ac8'
             'bd0a79012301813c141375dc5612b3dfa8a3f0ab8e595a3b17745b978624463d'
 )
 
@@ -72,16 +70,13 @@ prepare() {
   # Fix build avec openusd 26.11.1
   patch -Np1 -i "${srcdir}/blender-usd-26.11.patch"
 
-  # Fix build avec onetbb-2023.2.0
-  patch -Np1 -i "${srcdir}/Fix-Build-onetbb-2023.2.0.patch"
-
   # Fix build avec openvdb-14.0.0
   patch -Np1 -i "${srcdir}/Fix-Build-openvdb-14.0.0.patch"
 
   # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
-  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "656095aa20ba"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9c4fc4363b03"|' build_files/cmake/buildinfo.cmake
   sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
-  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1793522597|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1794082701|' build_files/cmake/buildinfo.cmake
 }
 
 _get_pyver() {
@@ -89,11 +84,7 @@ _get_pyver() {
 }
 
 build() {
-#  local cuda_archs="sm_120;compute_75"    # TEST pour DLSS   ==> PAS OK
-#  local cuda_archs="sm_120;compute_120"    # TEST pour DLSS   ==> PAS OK
-#  local cuda_archs="sm_86;sm_120;compute_121"    # TEST pour DLSS   ==> PAS OK
-#  local cuda_archs="sm_120;compute_121"  # TEST pour DLSS   ==> PAS OK
-  local cuda_archs="sm_75;sm_120;compute_75"  # TEST pour DLSS
+  local cuda_archs="sm_120;compute_120"    # TEST pour DLSS   ==> PAS OK
 
   cd "${_gitname}"
 
@@ -138,7 +129,4 @@ package() {
 
   # NVIDIA DLSS
   install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssd.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlssd.so.${_dlssver}"
-# TEST ==> PAS OK
-#  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlss.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlss.so.${_dlssver}"
-#  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssg.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlssg.so.${_dlssver}"
 }

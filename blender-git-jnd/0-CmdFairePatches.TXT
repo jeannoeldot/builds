@@ -1,51 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.4.0.5.20261101
+!!! VERSION = 5.4.0.6.20261107
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 $ mkdir /tmp/srcp
 
-$ cp -v blender-git-5.4.0.5.20261101.tar.zst /tmp/srcp/
+$ cp -v blender-git-5.4.0.6.20261107.tar.zst /tmp/srcp/
 
 $ cd /tmp/srcp
 
-$ tar -x --zstd -f blender-git-5.4.0.5.20261101.tar.zst
-
-1) Fix Build Erreur avec onetbb 2023.2.0
-====================================================
-1-1) MODIFIER source/blender/modifiers/intern/MOD_grease_pencil_build.cc
-========================================================================
-/!\ /!\ /!\ $ cd /tmp/srcp
-
-$ cp -R blender blender.new
-
-$ cd blender.new/source/blender/modifiers/intern
-$ kwrite MOD_grease_pencil_build.cc
-
-MODIFIER LIGNE 472 :
-      distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
-
-DEVIENT:
-      distances.begin(), distances.end(), [](const Pair &a, const Pair &b) { return a.value < b.value; });
-
-
-ENREGISTRER et Quitter Kwrite & EFFACER MOD_grease_pencil_build.cc~
-$ rm -f MOD_grease_pencil_build.cc~
-
-$ cd ../../../../..
-
-$ diff -aur blender blender.new
-$ diff -aur blender blender.new > Fix-Build-onetbb-2023.2.0.patch
-
-$ rm -rf blender.new
-
-$ cd $HOME/05-builds/blender-git-jnd
-
-$ mv -vf /tmp/srcp/Fix-Build-onetbb-2023.2.0.patch .
-
+$ tar -x --zstd -f blender-git-5.4.0.6.20261107.tar.zst
 
 2) Fix Build Erreur avec openvdb 14.0.0
 ====================================================
@@ -112,6 +79,40 @@ $ sync
 =================================================================
 ANCIENS
 ========
+
+1) Fix Build Erreur avec onetbb 2023.2.0
+====================================================
+1-1) MODIFIER source/blender/modifiers/intern/MOD_grease_pencil_build.cc
+========================================================================
+/!\ /!\ /!\ $ cd /tmp/srcp
+
+$ cp -R blender blender.new
+
+$ cd blender.new/source/blender/modifiers/intern
+$ kwrite MOD_grease_pencil_build.cc
+
+MODIFIER LIGNE 472 :
+      distances.begin(), distances.end(), [](Pair &a, Pair &b) { return a.value < b.value; });
+
+DEVIENT:
+      distances.begin(), distances.end(), [](const Pair &a, const Pair &b) { return a.value < b.value; });
+
+
+ENREGISTRER et Quitter Kwrite & EFFACER MOD_grease_pencil_build.cc~
+$ rm -f MOD_grease_pencil_build.cc~
+
+$ cd ../../../../..
+
+$ diff -aur blender blender.new
+$ diff -aur blender blender.new > Fix-Build-onetbb-2023.2.0.patch
+
+$ rm -rf blender.new
+
+$ cd $HOME/05-builds/blender-git-jnd
+
+$ mv -vf /tmp/srcp/Fix-Build-onetbb-2023.2.0.patch .
+
+
 
 1) Fix #155021: Entering edit mode crashes blender
 ====================================================
@@ -746,11 +747,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.4.0.5.20261101.tar.gz /tmp/srcp/
+cp -v blender-git-5.4.0.6.20261107.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.4.0.5.20261101.tar.gz
+tar -xzf blender-git-5.4.0.6.20261107.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs
