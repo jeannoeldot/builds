@@ -6,19 +6,19 @@ $ cd $HOME/05-builds/joltphysics-jnd
 1-2) ATTENTION A VERSION ET DATE SUR LE SITE
 ============================================
 https://github.com/jrouwe/JoltPhysics/releases
-==> jrouwe released this juil 11, 2026  ==> 20260711
-==>  v5.6.0  ==> 5.6.0
-==> 5.6.0.20260711
+==> jrouwe released this Nov 14, 2026  ==> 20261114
+==>  v5.7.0  ==> 5.7.0
+==> 5.7.0.20261114
 
 1.3 SOURCES
 ==============
 $ cd /0-DataLinux/05-builds-dir-git
 
-$ wget -O joltphysics-5.6.0.tar.gz \
-https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.6.0.tar.gz
+$ wget -O joltphysics-5.7.0.tar.gz \
+https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.7.0.tar.gz
 
-$ sha256sum joltphysics-5.6.0.tar.gz
-==>   6e069ee0172478cc78182047aac87e5310ba14a67a53348ae14cc37801fd3f8e
+$ sha256sum joltphysics-5.7.0.tar.gz
+==>   9a0a405f2375dc4bd9f72486c56e1cbc7794c6a62e42fc48fadea45dfc93dacc
 
 1-7-1) Copie ARCHIVE TAR.GZ ds rep compile
 ==========================================
@@ -26,7 +26,7 @@ $ cd $HOME/05-builds/joltphysics-jnd
 
 !!! CONSERVE VERSION DANS 05-builds-dir-git
 -------------------------------------------
-$ cp -v /0-DataLinux/05-builds-dir-git/joltphysics-5.6.0.tar.gz .
+$ cp -v /0-DataLinux/05-builds-dir-git/joltphysics-5.7.0.tar.gz .
 
 $ sync
 
@@ -40,12 +40,12 @@ voir 0-CmdFairePatches.TXT
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=joltphysics-jnd
-pkgver=5.6.0.20260711
+pkgver=5.7.0.20261114
 pkgrel=1
 
 
 !!!!!!
-_ver_release="5.6.0"
+_ver_release="5.7.0"
 _name_release="JoltPhysics-${_ver_release}"
 
 license=('MIT')
@@ -64,7 +64,7 @@ options=('!debug')
 
 SANS PATCH
 ----------
-$ sha256sum joltphysics-5.6.0.tar.gz
+$ sha256sum joltphysics-5.7.0.tar.gz
 
 source=("joltphysics-${_ver_release}.tar.gz"
 )
@@ -73,7 +73,7 @@ sha256sums=('... ...'
 
 AVEC PATCH
 ----------
-$ sha256sum joltphysics-5.6.0.tar.gz
+$ sha256sum joltphysics-5.7.0.tar.gz
 
 $ sha256sum jolt_ndebug.diff
 
@@ -100,11 +100,11 @@ package() {
 
 2-5) VERIFIER CMakeLists.txt
 ============================
-mkdir /tmp/srcp
+$ mkdir /tmp/srcp
 
-tar -xzf joltphysics-5.6.0.tar.gz -C /tmp/srcp
+$ tar -xzf joltphysics-5.7.0.tar.gz -C /tmp/srcp
 
-1) kwrite /tmp/srcp/JoltPhysics-5.6.0/Build/CMakeLists.txt &
+1) kwrite /tmp/srcp/JoltPhysics-5.7.0/Build/CMakeLists.txt &
 !!! VOIR
 !!! /0-DataLinux/05-builds-dir-git/blender/build_files/build_environment/jolt.cmake
 
@@ -113,17 +113,18 @@ tar -xzf joltphysics-5.6.0.tar.gz -C /tmp/srcp
 30  JPH_BUILD_SHARED_LIBS                      ==> ON
 85  DEBUG_RENDERER_IN_DEBUG_AND_RELEASE   ON  ==> OFF
 92  PROFILER_IN_DEBUG_AND_RELEASE         ON  ==> OFF
-119 USE_STATIC_MSVC_RUNTIME_LIBRARY       ON  ==> OFF
 
-121 JPH_USE_DX12                          ON  ==> OFF # DirectX 12
-125 JPH_USE_VK                            ON          # Vulkan
-128 JPH_USE_MTL                           ON  ==> OFF # MTL = Metal = Apple
+116 USE_STATIC_MSVC_RUNTIME_LIBRARY       ON  ==> OFF
 
-369 TARGET_UNIT_TESTS                     ON  ==> OFF
-370 TARGET_HELLO_WORLD                    ON  ==> OFF
-371 TARGET_PERFORMANCE_TEST               ON  ==> OFF
-372 TARGET_SAMPLES                        ON  ==> OFF
-373 TARGET_VIEWER                         ON  ==> OFF
+119 JPH_USE_DX12                          ON  ==> OFF # DirectX 12
+122 JPH_USE_VK                            ON          # Vulkan
+125 JPH_USE_MTL                           ON  ==> OFF # MTL = Metal = Apple
+
+383 TARGET_UNIT_TESTS                     ON  ==> OFF
+384 TARGET_HELLO_WORLD                    ON  ==> OFF
+385 TARGET_PERFORMANCE_TEST               ON  ==> OFF
+386 TARGET_SAMPLES                        ON  ==> OFF
+387 TARGET_VIEWER                         ON  ==> OFF
 
 $ cat /proc/cpuinfo | grep SSE4_1 SSE4_2 AVX AVX2
 54  USE_SSE4_1                            ON
@@ -136,7 +137,7 @@ $ cat /proc/cpuinfo | grep SSE4_1 SSE4_2 AVX AVX2
 61  USE_F16C                              ON  ==> OFF
 62  USE_FMADD                             ON  ==> OFF
 
-rm -rf /tmp/srcp
+$ rm -rf /tmp/srcp
 
 
 !!! ATTENTION : ATTRIBUTS FICHIERS
@@ -145,7 +146,7 @@ $ ls -la
 ==> 
 -rw-r--r--  1 jnd users     1767 13 oct.  15:02 PKGBUILD
 -rw-r--r--  1 jnd users     4747  8 oct.  15:24 jolt_ndebug.diff
--rw-r--r--  1 jnd users 19390751 13 oct.  14:10 joltphysics-5.6.0.tar.gz
+-rw-r--r--  1 jnd users 19390751 13 oct.  14:10 joltphysics-5.7.0.tar.gz
 
 !!! A MODIFIER SI PAS OK !
 ===============================
@@ -163,7 +164,7 @@ rm -f *~ \
 && mkdir /tmp/build \
 && cd /tmp/build \
 && cp -v $HOME/05-builds/joltphysics-jnd/PKGBUILD . \
-&& cp -v $HOME/05-builds/joltphysics-jnd/joltphysics-5.6.0.tar.gz . \
+&& cp -v $HOME/05-builds/joltphysics-jnd/joltphysics-5.7.0.tar.gz . \
 && LC_ALL=C makepkg -s \
 && cd $HOME/05-builds/joltphysics-jnd \
 && cp -v /tmp/build/joltphysics-jnd-*-x86_64.pkg.tar.* . \
@@ -226,7 +227,7 @@ $ mv -v joltphysics-jnd-*-x86_64.pkg.tar.* /0-DataLinux/00-repolocal/
 --------------------------------------------
 $ rm -f *~
 $ rm -f *.log
-$ rm -i joltphysics-5.6.0.tar.gz
+$ rm -i joltphysics-5.7.0.tar.gz
 
 
 $ cd && maj-repolocal

@@ -1,9 +1,9 @@
 # Maintainer: Moi <name AT fai DOT fr>
 
 pkgname=joltphysics-jnd
-pkgver=5.6.0.20260711
+pkgver=5.7.0.20261114
 pkgrel=1
-_ver_release="5.6.0"
+_ver_release="5.7.0"
 _name_release="JoltPhysics-${_ver_release}"
 pkgdesc="A multi core friendly rigid body physics and collision detection library"
 url="https://github.com/jrouwe/JoltPhysics"
@@ -19,18 +19,9 @@ provides=('joltphysics')
 #options=(staticlibs)
 options=('!debug')
 source=("joltphysics-${_ver_release}.tar.gz"
-        "jolt_ndebug.diff"
 )
-sha256sums=('6e069ee0172478cc78182047aac87e5310ba14a67a53348ae14cc37801fd3f8e'
-            '87ea69d0849c7c157fea3839a3883ed709440a5a5e77f428fecee9deb9eda0d5'
+sha256sums=('9a0a405f2375dc4bd9f72486c56e1cbc7794c6a62e42fc48fadea45dfc93dacc'
 )
-
-prepare() {
-  cd "${_name_release}"
-
-  # Voir blender
-  patch -Np1 -i "${srcdir}/jolt_ndebug.diff"
-}
 
 build() {
   cd "${_name_release}/Build"
