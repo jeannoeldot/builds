@@ -1,16 +1,40 @@
+
+
+
+┌jnd ( ~ )
+└─> $ grep -lR "device.meets_driver_requirement" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/intern/cycles/blender/python.cpp
+
+
+=========================================================================================
+┌jnd ( ~ )
+└─> $ grep -lR "has_dlss_gpu_devices" /0-DataLinux/05-builds-dir-git/blender/
+/0-DataLinux/05-builds-dir-git/blender/intern/cycles/blender/addon/properties.py
+
+LIGNES 1897
+    def has_dlss_gpu_devices(self):
+
+    device.meets_driver_requirement
+
+=========================================================================================
 ┌jnd ( ~ )
 └─> $ grep -lR "DLSS" /0-DataLinux/05-builds-dir-git/blender/
-/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/Modules/FindDLSS.cmake
-
-/0-DataLinux/05-builds-dir-git/blender/build_files/buildbot/config/blender_version.cmake
-/0-DataLinux/05-builds-dir-git/blender/build_files/buildbot/config/blender_linux.cmake
 
 /0-DataLinux/05-builds-dir-git/blender/intern/cycles/blender/addon/properties.py
+
 /0-DataLinux/05-builds-dir-git/blender/intern/cycles/blender/addon/ui.py
 
-/0-DataLinux/05-builds-dir-git/blender/intern/cycles/CMakeLists.txt
+LIGNE 280
+        if effective_preview_denoiser == 'DLSS':
+            if has_dlss_gpu_devices(context):
+                col.prop(cscene, "preview_denoising_upscale_quality", text="Upscale Mode")
+            else:
+                col.label_multiline(
+                    text=rpt_("Requires NVIDIA GPU with compute capability %s and NVIDIA driver version %s or newer.") %
+                    ("7.5", "620"), icon='STATUS_INFO', translate=False)
+            return
 
-/0-DataLinux/05-builds-dir-git/blender/intern/cycles/integrator/CMakeLists.txt
+
 
 /0-DataLinux/05-builds-dir-git/blender/intern/cycles/integrator/path_trace.cpp
 
@@ -48,6 +72,12 @@ INSPECTES
 
 /0-DataLinux/05-builds-dir-git/blender/tests/files/render/openvdb/volume_tricubic_interpolation.blend
 
+/0-DataLinux/05-builds-dir-git/blender/build_files/cmake/Modules/FindDLSS.cmake
+/0-DataLinux/05-builds-dir-git/blender/build_files/buildbot/config/blender_version.cmake
+/0-DataLinux/05-builds-dir-git/blender/build_files/buildbot/config/blender_linux.cmake
+
+
+/0-DataLinux/05-builds-dir-git/blender/intern/cycles/CMakeLists.txt
 
 
 
