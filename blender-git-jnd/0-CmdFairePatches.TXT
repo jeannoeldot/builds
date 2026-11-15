@@ -1,18 +1,18 @@
 FAIRE PATCHS
 ====================================
 
-!!! VERSION = 5.4.0.6.20261107
+!!! VERSION = 5.4.0.6.20261115
 
 
 /!\ /!\ /!\ cd $HOME/05-builds/blender-git-jnd
 
 $ mkdir /tmp/srcp
 
-$ cp -v blender-git-5.4.0.6.20261107.tar.zst /tmp/srcp/
+$ cp -v blender-git-5.4.0.6.20261115.tar.zst /tmp/srcp/
 
 $ cd /tmp/srcp
 
-$ tar -x --zstd -f blender-git-5.4.0.6.20261107.tar.zst
+$ tar -x --zstd -f blender-git-5.4.0.6.20261115.tar.zst
 
 2) Fix Build Erreur avec openvdb 14.0.0
 ====================================================
@@ -747,11 +747,11 @@ mv -vf /tmp/srcp/python312-313.patch .
 
 mkdir /tmp/srcp
 
-cp -v blender-git-5.4.0.6.20261107.tar.gz /tmp/srcp/
+cp -v blender-git-5.4.0.6.20261115.tar.gz /tmp/srcp/
 
 cd /tmp/srcp
 
-tar -xzf blender-git-5.4.0.6.20261107.tar.gz
+tar -xzf blender-git-5.4.0.6.20261115.tar.gz
 
 
 VOIR COMMIT Cycles fp consistency for Apple Silicon CPUs

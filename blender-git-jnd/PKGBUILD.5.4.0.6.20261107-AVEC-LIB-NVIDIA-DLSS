@@ -1,0 +1,132 @@
+# Maintainer: Name <name@fai.com>
+
+pkgname=blender-git-jnd
+pkgver=5.4.0.6.20261107
+pkgrel=1
+pkgdesc="A fully integrated 3D graphics creation suite"
+arch=('x86_64')
+license=('GPL-3.0-or-later')
+url="https://blender.org/"
+depends=('desktop-file-utils' 'hicolor-icon-theme' 'shared-mime-info'
+          'libpng' 'openjpeg2' 'libtiff' 'openexr' 'libwebp' 'libjpeg-turbo'
+          'libgcc' 'libstdc++'
+          'python'
+          'ffmpeg' 'fftw'
+          'openal' 'freetype2' 'libsndfile' 'jack2' 'pipewire-pulse' 'pipewire'
+          'libglvnd' 'glfw' 'libxi'
+          'onetbb' 'draco' 'openxr'
+          'python-numpy' 'python-psutil' 'python-requests' 'python-zstandard' 'pystring'
+          'python-cattrs'
+          'llvm-libs'
+          'potrace' 'pugixml' 'libharu' 'libepoxy' 'libxkbcommon'
+          'fribidi' 'harfbuzz' 'minizip-ng' 'pybind11' 'shaderc'
+          'vulkan-headers' 'vulkan-icd-loader' 'vulkan-driver'
+          'opencolorio' 'libdeflate'
+          'zstd'
+          'google-glog' 'gflags'
+          'eigen' 'ceres-solver-jnd'
+          'openimageio-jnd' 'fmt'
+          'openshadinglanguage-jnd'
+          'opensubdiv-jnd' 'openvdb-jnd' 'alembic-jnd'
+          'embree-jnd' 'openimagedenoise-jnd'
+          'openpgl-jnd'
+          'manifold-jnd'
+          'openusd-jnd' 'materialx'
+          'meshoptimizer-jnd' 'python-tomli-w' 'thorvg-jnd'
+          'ktx-software-jnd' 'opentimelineio-git-jnd' 'joltphysics-jnd' 'hwloc' 'rapidjson'
+)
+makedepends=('git' 'git-lfs' 'cmake' 'mesa' 'llvm'
+             'cuda' 'nvidia-utils'
+             'wayland-protocols'
+             'spirv-headers'
+             'mold'
+)
+conflicts=('blender')
+provides=('blender')
+options=('!lto' '!debug')
+
+_pkgname_git=blender-git
+_optixver=9.0.0
+_dlssver=310.9.1
+
+source=("$_pkgname_git-$pkgver.tar.zst"
+        "optix-dev-${_optixver}.tar.gz"
+        "DLSS-git-${_dlssver}.tar.gz"
+        "blender-usd-26.11.patch"
+        "Fix-Build-openvdb-14.0.0.patch"
+)
+sha256sums=('f957a0b46ea36ce011b74d76f882a3ce5fc288611c10910a89b725cfee4510f9'
+            '069a5860040ea611e7eb6317f8e3bb0f0d54a5acac744568f7290d7cb8711c05'
+            'effcb466b155ad25ad5fb81067cb533a5cb7c6d78843b7bf0260baf378edebfb'
+            'e909c97e736cc66c1445b2d4db79308e1740b7596564e2ee44765bde188810b5'
+            'bd0a79012301813c141375dc5612b3dfa8a3f0ab8e595a3b17745b978624463d'
+)
+
+_gitname="blender"
+
+prepare() {
+  cd "${_gitname}"
+
+  # Fix build avec openusd 26.11.1
+  patch -Np1 -i "${srcdir}/blender-usd-26.11.patch"
+
+  # Fix build avec openvdb-14.0.0
+  patch -Np1 -i "${srcdir}/Fix-Build-openvdb-14.0.0.patch"
+
+  # Buildinfo : Workaround for HASH, BRANCH et COMMIT_TIMESTAMP
+  sed -i -e 's|MY_WC_HASH "unknown"|MY_WC_HASH "9c4fc4363b03"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_BRANCH "unknown"|MY_WC_BRANCH "main"|' build_files/cmake/buildinfo.cmake
+  sed -i -e 's|MY_WC_COMMIT_TIMESTAMP 0|MY_WC_COMMIT_TIMESTAMP 1794082701|' build_files/cmake/buildinfo.cmake
+}
+
+_get_pyver() {
+  python -c 'import sys; print(str(sys.version_info[0]) + "." + str(sys.version_info[1]))'
+}
+
+build() {
+  local cuda_archs="sm_120;compute_120"    # TEST pour DLSS   ==> PAS OK
+
+  cd "${_gitname}"
+
+  cmake \
+        -B build \
+        -C "build_files/cmake/config/blender_release.cmake" \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D WITH_LINKER_MOLD=ON \
+        -D CUDA_HOST_COMPILER="$NVCC_CCBIN" \
+        -D CYCLES_CUDA_BINARIES_ARCH="$cuda_archs" \
+        -D OPTIX_ROOT_DIR="${srcdir}/optix-dev-${_optixver}" \
+        -D WITH_DLSS=ON \
+        -D DLSS_SDK_ROOT="${srcdir}/DLSS" \
+        -D WITH_CYCLES_PARALLEL_DEVICE_KERNEL_BUILD=ON \
+        -D WITH_CYCLES_NATIVE_ONLY=ON \
+        -D WITH_SYSTEM_GFLAGS=ON \
+        -D WITH_SYSTEM_GLOG=ON \
+        -D WITH_LIBS_PRECOMPILED=OFF \
+        -D WITH_INPUT_IME=OFF \
+        -D WITH_INPUT_NDOF=OFF \
+        -D WITH_DOC_MANPAGE=OFF \
+        -D WITH_CYCLES_DEVICE_HIP=OFF \
+        -D WITH_CYCLES_DEVICE_HIPRT=OFF \
+        -D WITH_CYCLES_HIP_BINARIES=OFF \
+        -D WITH_CYCLES_DEVICE_ONEAPI=OFF \
+        -D WITH_CYCLES_ONEAPI_BINARIES=OFF \
+        -D PYTHON_VERSION="$(_get_pyver)" \
+        -D WITH_INSTALL_PORTABLE=OFF \
+        -D WITH_PYTHON_INSTALL=OFF
+  make -C build
+}
+
+package() {
+  # Blender
+  cd "${_gitname}"
+  DESTDIR="${pkgdir}" make -C build install
+
+  # voir Community
+  python -m compileall "${pkgdir}/usr/share/blender"
+  python -O -m compileall "${pkgdir}/usr/share/blender"
+
+  # NVIDIA DLSS
+  install -Dm755 "${srcdir}/DLSS/lib/Linux_x86_64/rel/libnvidia-ngx-dlssd.so.${_dlssver}" "${pkgdir}/usr/bin/libnvidia-ngx-dlssd.so.${_dlssver}"
+}
