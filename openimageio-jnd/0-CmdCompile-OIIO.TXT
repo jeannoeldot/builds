@@ -42,6 +42,7 @@ voir : CmdFairePatches.TXT
 
 pkgname=openimageio-jnd
 pkgver=3.2.2.0.20261028
+pkgrel=3    # REBUILD MAJ libjxl 0.13.0
 pkgrel=2    # REBUILD MAJ openjph 0.33.0
 pkgrel=1    # MAJ + REBUILD MAJ opencolorio 2.6.0
 
